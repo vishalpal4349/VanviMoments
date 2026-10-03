@@ -420,7 +420,7 @@ header{
   content:"✦";position:absolute;right:10px;top:5px;font-size:8px;color:rgba(255,255,255,.78);
   animation:twinkle 1.8s ease-in-out infinite
 }
-.hero .primary:hover{transform:translateY(-3px) scale(1.015);box-shadow:0 18px 38px rgba(238,83,148,.38),0 0 22px rgba(255,113,171,.18),inset 0 1px 0 rgba(255,255,255,.85)}
+.hero .primary:hover{transform:none;box-shadow:0 18px 38px rgba(238,83,148,.38),0 0 22px rgba(255,113,171,.18),inset 0 1px 0 rgba(255,255,255,.85);filter:brightness(1.05)}
 @keyframes twinkle{0%,100%{opacity:.35;transform:scale(.8) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(18deg)}}
 .primary{
   color:#fff;
@@ -431,14 +431,15 @@ header{
   overflow:hidden;
   border-radius: 999px !important;
   box-shadow: var(--vanvi-clay-sm) !important;
-  transition: transform 0.24s cubic-bezier(.34, 1.56, .64, 1), box-shadow 0.24s ease !important;
+  transition: box-shadow 0.24s ease, filter 0.24s ease !important;
 }
 .primary:hover{
-  transform: translateY(-2.5px) scale(1.02) !important;
+  transform: none !important;
   box-shadow: 0 14px 30px -4px rgba(255, 79, 145, 0.45), inset 0 2px 2px rgba(255, 255, 255, 0.8) !important;
+  filter: brightness(1.06) !important;
 }
 .primary:active{
-  transform: translateY(1px) scale(0.97) !important;
+  opacity: 0.92 !important;
   box-shadow: var(--vanvi-clay-pressed) !important;
 }
 .primary:before{
@@ -617,7 +618,7 @@ footer .brand{font-size:20px}footer p{font-size:10px;color:#8a7285;margin-top:8p
  border-radius:17px;font-size:11px;box-shadow:0 10px 25px rgba(230,94,151,.32),0 0 18px rgba(255,120,180,.16);
  border-color:rgba(255,255,255,.75);transform:translateY(-5px)
 }
-.bottom .create:hover{transform:translateY(-7px) scale(1.02)}
+.bottom .create:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(230,94,151,.4)}
 .bottom button br{display:block}
 .hero-quote{
   margin:-17px auto 0;max-width:330px;text-align:center;font-family:Georgia,"Times New Roman",serif;
@@ -904,7 +905,7 @@ footer .brand{font-size:20px}footer p{font-size:10px;color:#8a7285;margin-top:8p
   font-size:19px;font-weight:800;box-shadow:0 7px 18px rgba(91,48,91,.09);
   transition:.22s
 }
-.global-search-btn:hover{transform:translateY(-1px) scale(1.04);box-shadow:0 9px 22px rgba(91,48,91,.14)}
+.global-search-btn:hover{transform:none;box-shadow:0 6px 18px rgba(91,48,91,.14)}
 .global-search-panel{
  position:fixed;inset:0;z-index:600;display:flex;justify-content:center;align-items:flex-start;
  padding:70px 14px 20px;background:rgba(55,32,54,.12);backdrop-filter:blur(7px);
@@ -1579,7 +1580,7 @@ body.drawer-open #mobileMenuBtn{opacity:0!important;pointer-events:none!importan
 .header-mobile-actions{display:flex;align-items:center;gap:6px}
 .header-mini-action,.header-desktop-added{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#745267;background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,245,251,.52));border:1px solid rgba(255,255,255,.92);box-shadow:0 7px 20px rgba(94,48,90,.10),inset 0 1px rgba(255,255,255,.95);backdrop-filter:blur(18px);transition:.25s cubic-bezier(.2,.8,.2,1);font-weight:900}
 .header-mini-action{width:35px;height:35px;border-radius:12px;font-size:14px}.lang-toggle{font-size:8px;width:57px}.premium-mini{color:#8a5b35;background:linear-gradient(135deg,rgba(255,246,226,.94),rgba(255,226,238,.70))}
-.header-mini-action:hover,.header-desktop-added:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 12px 26px rgba(94,48,90,.15),inset 0 1px rgba(255,255,255,.98)}
+.header-mini-action:hover,.header-desktop-added:hover{transform:none;box-shadow:0 8px 20px rgba(94,48,90,.15),inset 0 1px rgba(255,255,255,.98)}
 .desktop-nav .header-desktop-added{padding:9px 12px;border-radius:13px;font-size:10px}
 .menu{position:relative}.menu span{display:block;width:17px;height:2px;margin:4px auto;border-radius:99px;background:linear-gradient(90deg,#ff4f91,#a978ff,#72d6ff);box-shadow:0 0 7px rgba(255,88,150,.25)}
 .hero{background:radial-gradient(circle at 76% 34%,rgba(255,105,166,.13),transparent 25%),radial-gradient(circle at 18% 18%,rgba(255,208,226,.36),transparent 30%)}
@@ -1608,7 +1609,7 @@ body.drawer-open #mobileMenuBtn{opacity:0!important;pointer-events:none!importan
 .live-template-demo{padding-top:18px!important}.phone-screen .demo-heading,.phone-screen .demo-message{transition:opacity .42s ease,transform .55s cubic-bezier(.2,.8,.2,1)!important}
 .slider-control{display:flex;align-items:center;justify-content:center;gap:12px;margin:12px auto 0}
 .slider-control button, .slider-arrow-btn{width:36px;height:36px;border-radius:99px;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1.5px solid rgba(255,120,175,0.38);color:#ff2a7a;font-size:15px;font-weight:900;box-shadow:0 4px 14px rgba(255,42,122,0.15),inset 0 1px 0 #fff;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .22s cubic-bezier(0.16,1,0.3,1);user-select:none}
-.slider-control button:hover, .slider-arrow-btn:hover{background:linear-gradient(135deg,#ff2a7a,#e11d68);color:#fff;border-color:transparent;transform:translateY(-2px) scale(1.08);box-shadow:0 8px 22px rgba(255,42,122,0.35)}
+.slider-control button:hover, .slider-arrow-btn:hover{background:linear-gradient(135deg,#ff2a7a,#e11d68);color:#fff;border-color:transparent;transform:none;box-shadow:0 6px 18px rgba(255,42,122,0.35)}
 .slider-control button:active, .slider-arrow-btn:active{transform:scale(0.92)}
 .slider-control span{font-size:11px;font-weight:800;letter-spacing:.4px;color:#85627a}
 .referral-actions{display:flex;justify-content:center;gap:7px;flex-wrap:wrap}.referral-actions button{min-width:112px!important}
@@ -1704,9 +1705,34 @@ body.drawer-open #mobileMenuBtn{opacity:0!important;pointer-events:none!importan
   -webkit-backdrop-filter: blur(6px);
   color: #fff;
   padding: 2.5px 6.5px;
-  border-radius: 6px;
-  z-index: 3;
   border: 1px solid rgba(255, 255, 255, 0.22);
+}
+.template .thumb .vanvi-brand-corner-badge {
+  position: absolute !important;
+  top: 8px !important;
+  left: 8px !important;
+  z-index: 6 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  padding: 3px 7px 3px 5px !important;
+  border-radius: 999px !important;
+  border: 0.85px solid rgba(255, 120, 175, 0.45) !important;
+  box-shadow: 0 2px 8px rgba(44, 18, 36, 0.12), inset 0 1px 0 #ffffff !important;
+  pointer-events: none !important;
+  max-height: 22px !important;
+}
+.template .thumb .vanvi-brand-corner-badge .brand-badge-img {
+  height: 13px !important;
+  width: auto !important;
+  max-width: 76px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+.template .template-sku-badge {
+  display: none !important;
 }
 .template-tier-badge {
   position: absolute;
@@ -4584,7 +4610,7 @@ html[data-vanvi-theme="dark"] .hero-desc-secondary {
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   font-family: var(--font-sans, sans-serif);
 }
-.btn-showcase-cta:hover { transform: translateY(-1.5px) scale(1.02); filter: brightness(1.08); box-shadow: 0 6px 20px rgba(255, 42, 122, 0.35); }
+.btn-showcase-cta:hover { transform: none; filter: brightness(1.08); box-shadow: 0 6px 20px rgba(255, 42, 122, 0.35); }
 .cta-rose-gold { background: linear-gradient(135deg, #ff2a7a, #d97706); color: #ffffff; }
 .cta-emerald-teal { background: linear-gradient(135deg, #059669, #0284c7); color: #ffffff; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.28); }
 .cta-purple-violet { background: linear-gradient(135deg, #9333ea, #ff2a7a); color: #ffffff; box-shadow: 0 4px 14px rgba(147, 51, 234, 0.28); }
@@ -5253,14 +5279,14 @@ button,
 
 .hero .primary:hover,
 .hero .flow-btn:hover {
-  transform: translateY(-2px) scale(1.02) !important;
-  box-shadow: 0 14px 36px rgba(255, 19, 97, 0.48), 0 0 20px rgba(255, 75, 139, 0.35) !important;
-  filter: brightness(1.04) !important;
+  transform: none !important;
+  box-shadow: 0 12px 36px rgba(255, 19, 97, 0.44), 0 0 20px rgba(255, 75, 139, 0.35) !important;
+  filter: brightness(1.06) !important;
 }
 
 .hero .primary:active,
 .hero .flow-btn:active {
-  transform: scale(0.97) !important;
+  opacity: 0.92 !important;
 }
 
 .hero .secondary {
@@ -5279,7 +5305,7 @@ button,
   border: 1.5px solid rgba(255, 120, 175, 0.45) !important;
   box-shadow: 0 4px 16px rgba(44, 18, 36, 0.05), inset 0 1px 0 #ffffff !important;
   text-decoration: none !important;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: all 0.22s ease !important;
   cursor: pointer !important;
   white-space: nowrap !important;
 }
@@ -5288,12 +5314,12 @@ button,
   background: #ffffff !important;
   color: #ff1361 !important;
   border-color: #ff1361 !important;
-  box-shadow: 0 8px 22px rgba(255, 19, 97, 0.18) !important;
-  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(255, 19, 97, 0.18) !important;
+  transform: none !important;
 }
 
 .hero .secondary:active {
-  transform: scale(0.97) !important;
+  opacity: 0.92 !important;
 }
 
 /* 3. Header Action Buttons (Mobile & Desktop) */
@@ -5301,7 +5327,7 @@ button,
 .global-search-btn,
 .header-mini-action,
 .menu {
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: all 0.22s ease !important;
   cursor: pointer !important;
 }
 
@@ -5310,7 +5336,7 @@ button,
 .header-mini-action:hover {
   border-color: #ff1361 !important;
   color: #ff1361 !important;
-  transform: translateY(-1px) scale(1.05) !important;
+  transform: none !important;
   box-shadow: 0 4px 14px rgba(255, 19, 97, 0.2) !important;
 }
 
@@ -5322,7 +5348,7 @@ button,
 }
 
 .header-mini-action.premium-mini:hover {
-  transform: translateY(-1px) scale(1.06) !important;
+  transform: none !important;
   box-shadow: 0 6px 16px rgba(217, 119, 6, 0.4) !important;
 }
 
@@ -5352,7 +5378,7 @@ button,
   justify-content: center !important;
   gap: 4px !important;
   box-shadow: 0 2px 6px rgba(44, 18, 36, 0.04), inset 0 1px 0 #ffffff !important;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: all 0.2s ease !important;
   white-space: nowrap !important;
 }
 
@@ -5360,7 +5386,7 @@ button,
   background: #ffffff !important;
   color: #ff1361 !important;
   border-color: #ff1361 !important;
-  transform: translateY(-1px) !important;
+  transform: none !important;
   box-shadow: 0 4px 12px rgba(255, 19, 97, 0.18) !important;
 }
 
@@ -5380,13 +5406,13 @@ button,
   justify-content: center !important;
   gap: 4px !important;
   box-shadow: 0 4px 14px rgba(255, 19, 97, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: all 0.2s ease !important;
   white-space: nowrap !important;
 }
 
 .home-btn-make-yours:hover {
-  transform: translateY(-1px) !important;
-  filter: brightness(1.06) !important;
+  transform: none !important;
+  filter: brightness(1.08) !important;
   box-shadow: 0 6px 18px rgba(255, 19, 97, 0.45) !important;
 }
 
@@ -5416,18 +5442,18 @@ button,
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: all 0.2s ease !important;
 }
 
 .slider-arrow-btn:hover {
   background: #fff0f6 !important;
   border-color: #ff1361 !important;
-  transform: scale(1.1) !important;
+  transform: none !important;
   box-shadow: 0 6px 16px rgba(255, 19, 97, 0.25) !important;
 }
 
 .slider-arrow-btn:active {
-  transform: scale(0.94) !important;
+  opacity: 0.9 !important;
 }
 
 /* 6. AI Matcher & Prompt Assist Buttons */
@@ -5445,7 +5471,7 @@ button,
 }
 
 .ai.glass .pill:hover {
-  transform: translateY(-2px) !important;
+  transform: none !important;
   border-color: #ff1361 !important;
   color: #ff1361 !important;
   box-shadow: 0 4px 14px rgba(255, 19, 97, 0.16) !important;
@@ -5472,7 +5498,7 @@ button,
 
 #btnMagicSuggestHome:hover {
   background: linear-gradient(135deg, rgba(255, 19, 97, 0.18), rgba(147, 51, 234, 0.22)) !important;
-  transform: translateY(-1px) !important;
+  transform: none !important;
   box-shadow: 0 4px 12px rgba(255, 19, 97, 0.18) !important;
 }
 
@@ -5494,9 +5520,9 @@ button,
 }
 
 #btnSubmitAiStudio:hover {
-  transform: translateY(-2px) scale(1.02) !important;
+  transform: none !important;
   box-shadow: 0 12px 32px rgba(255, 19, 97, 0.5) !important;
-  filter: brightness(1.05) !important;
+  filter: brightness(1.06) !important;
 }
 
 /* 7. Play & Earn Button */
@@ -6146,6 +6172,9 @@ button,
     <!-- Free 1: Birthday White Bloom -->
     <div class="template" data-category="Birthday" data-name="Birthday White Bloom" data-id="birthday-white-bloom-001" data-price="0" data-tags="free cute birthday light luxury" data-type="Interactive" onclick="window.location.href='preview.html?template=birthday-white-bloom'">
       <div class="thumb">
+        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
+          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
+        </div>
         <span class="template-sku-badge">VM-B00</span>
         <span class="template-tier-badge badge-free">100% Free</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80" alt="Birthday White Bloom" loading="lazy">
@@ -6156,7 +6185,7 @@ button,
         <div class="template-rating-pill"><span class="star-gold">★</span> 4.9 <span style="opacity:0.8; font-size:8.5px;">(420+)</span></div>
         <div class="home-tpl-action-row" onclick="event.stopPropagation();">
           <a href="preview.html?template=birthday-white-bloom" class="home-btn-explore">✦ Explore</a>
-          <a href="builder.html?template=birthday-white-bloom&occasion=Birthday" class="home-btn-make-yours">Make It Yours ✨</a>
+          <a href="builder.html?template=birthday-white-bloom&occasion=Birthday" class="home-btn-make-yours">Create ✨</a>
         </div>
       </div>
     </div>
@@ -6164,6 +6193,9 @@ button,
     <!-- Free 2: Retro Polaroid Wall -->
     <div class="template" data-category="Birthday" data-name="Retro Polaroid Wall" data-id="retro-birthday-polaroid" data-price="0" data-tags="free story birthday vintage" data-type="Story" onclick="window.location.href='preview.html?template=retro-polaroid-wall'">
       <div class="thumb t2">
+        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
+          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
+        </div>
         <span class="template-sku-badge">VM-B07</span>
         <span class="template-tier-badge badge-free">Free Story</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" alt="Retro Polaroid Wall" loading="lazy">
@@ -6174,7 +6206,7 @@ button,
         <div class="template-rating-pill"><span class="star-gold">★</span> 4.9 <span style="opacity:0.8; font-size:8.5px;">(380+)</span></div>
         <div class="home-tpl-action-row" onclick="event.stopPropagation();">
           <a href="preview.html?template=retro-polaroid-wall" class="home-btn-explore">✦ Explore</a>
-          <a href="builder.html?template=retro-polaroid-wall&occasion=Friendship" class="home-btn-make-yours">Make It Yours ✨</a>
+          <a href="builder.html?template=retro-polaroid-wall&occasion=Friendship" class="home-btn-make-yours">Create ✨</a>
         </div>
       </div>
     </div>
@@ -6182,6 +6214,9 @@ button,
     <!-- Free 3: Little Love Story -->
     <div class="template" data-category="Love" data-name="Little Love" data-id="little-love" data-price="0" data-tags="free love romantic story" data-type="Story" onclick="window.location.href='preview.html?template=little-love'">
       <div class="thumb t3">
+        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
+          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
+        </div>
         <span class="template-sku-badge">VM-L01</span>
         <span class="template-tier-badge badge-free">Free Love</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80" alt="Little Love" loading="lazy">
@@ -6192,7 +6227,7 @@ button,
         <div class="template-rating-pill"><span class="star-gold">★</span> 4.8 <span style="opacity:0.8; font-size:8.5px;">(310+)</span></div>
         <div class="home-tpl-action-row" onclick="event.stopPropagation();">
           <a href="preview.html?template=little-love" class="home-btn-explore">✦ Explore</a>
-          <a href="builder.html?template=little-love&occasion=Love" class="home-btn-make-yours">Make It Yours ✨</a>
+          <a href="builder.html?template=little-love&occasion=Love" class="home-btn-make-yours">Create ✨</a>
         </div>
       </div>
     </div>
@@ -6200,6 +6235,9 @@ button,
     <!-- Free 4: The Sincere Letter -->
     <div class="template" data-category="Apology" data-name="The Sincere Letter" data-id="sincere-letter" data-price="0" data-tags="free apology healing heartfelt" data-type="Letter" onclick="window.location.href='preview.html?template=sincere-letter'">
       <div class="thumb t4">
+        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
+          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
+        </div>
         <span class="template-sku-badge">VM-S01</span>
         <span class="template-tier-badge badge-free">Free Healing</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80" alt="The Sincere Letter" loading="lazy">
@@ -6210,7 +6248,7 @@ button,
         <div class="template-rating-pill"><span class="star-gold">★</span> 4.9 <span style="opacity:0.8; font-size:8.5px;">(410+)</span></div>
         <div class="home-tpl-action-row" onclick="event.stopPropagation();">
           <a href="preview.html?template=sincere-letter" class="home-btn-explore">✦ Explore</a>
-          <a href="builder.html?template=sincere-letter&occasion=Apology" class="home-btn-make-yours">Make It Yours ✨</a>
+          <a href="builder.html?template=sincere-letter&occasion=Apology" class="home-btn-make-yours">Create ✨</a>
         </div>
       </div>
     </div>
@@ -6240,6 +6278,9 @@ button,
     <!-- Premium 1: Birthday Wish 01 -->
     <div class="template" data-category="Birthday" data-name="Birthday Wish 01" data-id="birthday-wish-1" data-price="149" data-tags="premium birthday candle interactive bestseller" data-type="Interactive" onclick="window.location.href='preview.html?template=birthday-wish-1'">
       <div class="thumb">
+        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
+          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
+        </div>
         <span class="template-sku-badge">VM-B01</span>
         <span class="template-tier-badge badge-premium">🔥 Bestseller</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=800&q=80" alt="Birthday Wish 01" loading="lazy">
@@ -6250,7 +6291,7 @@ button,
         <div class="template-rating-pill"><span class="star-gold">★</span> 5.0 <span style="opacity:0.8; font-size:8.5px;">(980+)</span></div>
         <div class="home-tpl-action-row" onclick="event.stopPropagation();">
           <a href="preview.html?template=birthday-wish-1" class="home-btn-explore">✦ Explore</a>
-          <a href="builder.html?template=birthday-wish-1&occasion=Birthday" class="home-btn-make-yours">Make It Yours ✨</a>
+          <a href="builder.html?template=birthday-wish-1&occasion=Birthday" class="home-btn-make-yours">Create ✨</a>
         </div>
       </div>
     </div>
@@ -6258,6 +6299,9 @@ button,
     <!-- Premium 2: Midnight 3D Candle -->
     <div class="template" data-category="Birthday" data-name="Midnight 3D Candle" data-id="birthday-3d-candle-surprise" data-price="299" data-tags="ultra birthday 3d candle flagship" data-type="Interactive" onclick="window.location.href='preview.html?template=birthday-3d-candle'">
       <div class="thumb t4">
+        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
+          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
+        </div>
         <span class="template-sku-badge">VM-B03</span>
         <span class="template-tier-badge badge-ultra">👑 Flagship 3D</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80" alt="Midnight 3D Candle" loading="lazy">
@@ -6268,7 +6312,7 @@ button,
         <div class="template-rating-pill"><span class="star-gold">★</span> 5.0 <span style="opacity:0.8; font-size:8.5px;">(1.2k+)</span></div>
         <div class="home-tpl-action-row" onclick="event.stopPropagation();">
           <a href="preview.html?template=birthday-3d-candle" class="home-btn-explore">✦ Explore</a>
-          <a href="builder.html?template=birthday-3d-candle&occasion=Birthday" class="home-btn-make-yours">Make It Yours ✨</a>
+          <a href="builder.html?template=birthday-3d-candle&occasion=Birthday" class="home-btn-make-yours">Create ✨</a>
         </div>
       </div>
     </div>
@@ -6276,6 +6320,9 @@ button,
     <!-- Premium 3: Golden Anniversary -->
     <div class="template" data-category="Anniversary" data-name="Golden Anniversary" data-id="golden-anniversary" data-price="349" data-tags="ultra anniversary luxury gold" data-type="Milestone" onclick="window.location.href='preview.html?template=golden-anniversary'">
       <div class="thumb t1">
+        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
+          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
+        </div>
         <span class="template-sku-badge">VM-A01</span>
         <span class="template-tier-badge badge-ultra">✨ Bespoke Milestone</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Golden Anniversary" loading="lazy">
@@ -6286,7 +6333,7 @@ button,
         <div class="template-rating-pill"><span class="star-gold">★</span> 5.0 <span style="opacity:0.8; font-size:8.5px;">(820+)</span></div>
         <div class="home-tpl-action-row" onclick="event.stopPropagation();">
           <a href="preview.html?template=golden-anniversary" class="home-btn-explore">✦ Explore</a>
-          <a href="builder.html?template=golden-anniversary&occasion=Anniversary" class="home-btn-make-yours">Make It Yours ✨</a>
+          <a href="builder.html?template=golden-anniversary&occasion=Anniversary" class="home-btn-make-yours">Create ✨</a>
         </div>
       </div>
     </div>

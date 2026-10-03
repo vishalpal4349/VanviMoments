@@ -1837,7 +1837,9 @@
       return `
         <article class="vanvi-card ${isLux ? 'is-luxury' : ''}" data-cat="${escapeHtml(catSlug)}" id="card-${t.id}">
           <div class="card-art-box" onclick="window.location.href='preview.html?template=${safeId}'" title="Experience ${escapeHtml(t.name)}">
-            <span class="card-badge-top-left">${escapeHtml(catBadge)}</span>
+            <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
+              <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
+            </div>
             <span class="card-badge-top-right ${isFree ? 'free' : (isLux ? 'luxury' : 'price')}">
               ${isFree ? '🎁 Free' : (isLux ? '✦ Signature' : `₹${p}`)}
             </span>
@@ -1877,7 +1879,7 @@
               </a>
               <a href="builder.html?template=${safeId}&occasion=${safeOccasion}" class="btn-make-yours" title="Create Moment ✦">
                 <span class="btn-text-full">Create Moment ✦</span>
-                <span class="btn-text-short">Create ✦</span>
+                <span class="btn-text-short">Create</span>
               </a>
             </div>
           </div>

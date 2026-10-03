@@ -261,13 +261,13 @@
     .search-filter-row {
       display: flex;
       gap: 10px;
-      align-items: flex-start;
+      align-items: center;
       flex-wrap: wrap;
       margin-bottom: 12px;
     }
     .search-box-wrap {
-      flex: 1;
-      min-width: 250px;
+      flex: 0 1 340px;
+      min-width: 230px;
     }
     .search-box {
       display: flex;
@@ -275,17 +275,18 @@
       background: #ffffff;
       border: 1.5px solid rgba(255, 120, 175, 0.35);
       border-radius: 99px;
-      padding: 6px 14px;
-      box-shadow: 0 4px 16px rgba(44, 18, 36, 0.05);
-      transition: all 0.25s ease;
+      padding: 5px 12px;
+      height: 38px;
+      box-shadow: 0 3px 12px rgba(44, 18, 36, 0.04);
+      transition: all 0.22s ease;
     }
     .search-box:focus-within {
       border-color: #ff2a7a;
-      box-shadow: 0 6px 22px rgba(255, 42, 122, 0.2);
+      box-shadow: 0 5px 18px rgba(255, 42, 122, 0.2);
     }
     .search-icon {
-      font-size: 15px;
-      margin-right: 8px;
+      font-size: 14px;
+      margin-right: 7px;
       color: #ff2a7a;
       display: flex;
       align-items: center;
@@ -295,7 +296,7 @@
       border: none;
       background: transparent;
       outline: none;
-      font-size: 13.5px;
+      font-size: 12.5px;
       font-family: inherit;
       color: var(--text-dark);
     }
@@ -303,10 +304,10 @@
       background: rgba(255, 42, 122, 0.1);
       border: none;
       color: #ff2a7a;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       cursor: pointer;
       display: none;
@@ -321,9 +322,9 @@
     .quick-search-tags-row {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       overflow-x: auto;
-      padding: 6px 2px 2px;
+      padding: 5px 2px 2px;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
     }
@@ -331,8 +332,8 @@
       background: #fff5f8;
       border: 1px solid rgba(255, 120, 175, 0.25);
       border-radius: 99px;
-      padding: 3px 10px;
-      font-size: 11px;
+      padding: 3px 9px;
+      font-size: 10.5px;
       font-weight: 750;
       color: #5c2443;
       cursor: pointer;
@@ -344,11 +345,41 @@
       color: #ffffff;
       border-color: #ff2a7a;
     }
+
+    /* ─── Premium Smart Filter Button ─── */
+    .btn-smart-filter-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #ff2a7a 0%, #e11d68 50%, #9333ea 100%);
+      color: #ffffff !important;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 99px;
+      height: 38px;
+      padding: 0 16px;
+      font-size: 12px;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transition: all 0.22s ease;
+      white-space: nowrap;
+    }
+    .btn-smart-filter-trigger:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 6px 20px rgba(255, 42, 122, 0.46);
+      transform: none !important;
+    }
+    .btn-smart-filter-trigger .sf-badge {
+      font-size: 10px;
+      color: #fde047;
+    }
+
     .btn-sort-select {
       background: #ffffff;
       border: 1.5px solid rgba(255, 120, 175, 0.35);
       border-radius: 99px;
-      padding: 9px 14px;
+      height: 38px;
+      padding: 0 14px;
       font-size: 12px;
       font-weight: 800;
       color: #2c1224;
@@ -362,49 +393,77 @@
       border-color: #ff2a7a;
       box-shadow: 0 4px 14px rgba(255, 42, 122, 0.15);
     }
+
+    /* ─── Colorful Luxury Category Filter Pills ─── */
     .quick-occasions-strip {
       display: flex;
-      gap: 7px;
+      gap: 8px;
       overflow-x: auto;
       padding: 6px 2px 14px;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
     }
     .quick-cat-pill {
-      padding: 7px 14px;
+      padding: 8px 16px;
       border-radius: 99px;
       font-size: 12px;
-      font-weight: 750;
+      font-weight: 800;
       background: #ffffff;
-      border: 1.2px solid rgba(255, 120, 175, 0.25);
+      border: 1.2px solid rgba(255, 120, 175, 0.3);
       color: #3b182f;
       cursor: pointer;
       white-space: nowrap;
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(44, 18, 36, 0.04);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
     .quick-cat-pill:hover {
       border-color: #ff2a7a;
       color: #ff2a7a;
-      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.18);
+      transform: none !important;
     }
     .quick-cat-pill.active {
-      background: linear-gradient(135deg, #ff2a7a, #e11d48);
-      color: #ffffff;
-      border-color: transparent;
-      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.35);
+      background: linear-gradient(135deg, #ff2a7a, #a855f7) !important;
+      color: #ffffff !important;
+      border-color: transparent !important;
+      box-shadow: 0 5px 18px rgba(255, 42, 122, 0.36) !important;
       font-weight: 850;
     }
+    .quick-cat-pill.pill-free.active,
+    .quick-cat-pill[data-cat="free"].active {
+      background: linear-gradient(135deg, #059669, #10b981) !important;
+      box-shadow: 0 5px 18px rgba(16, 185, 129, 0.4) !important;
+    }
     .quick-cat-pill.pill-vip {
-      border-color: rgba(217, 119, 6, 0.35);
+      border-color: rgba(217, 119, 6, 0.38);
       background: #fffcf5;
       color: #b45309;
     }
-    .quick-cat-pill.pill-vip.active {
-      background: linear-gradient(135deg, #d97706, #f59e0b);
-      color: #ffffff;
-      border-color: transparent;
-      box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+    .quick-cat-pill.pill-vip.active,
+    .quick-cat-pill[data-cat="vip"].active {
+      background: linear-gradient(135deg, #d97706, #f59e0b) !important;
+      color: #ffffff !important;
+      border-color: transparent !important;
+      box-shadow: 0 5px 18px rgba(217, 119, 6, 0.4) !important;
+    }
+    .quick-cat-pill[data-cat="birthday"].active {
+      background: linear-gradient(135deg, #ec4899, #f43f5e) !important;
+      box-shadow: 0 5px 18px rgba(244, 63, 94, 0.38) !important;
+    }
+    .quick-cat-pill[data-cat="love"].active {
+      background: linear-gradient(135deg, #e11d48, #be123c) !important;
+      box-shadow: 0 5px 18px rgba(225, 29, 72, 0.38) !important;
+    }
+    .quick-cat-pill[data-cat="anniversary"].active {
+      background: linear-gradient(135deg, #7c3aed, #9333ea) !important;
+      box-shadow: 0 5px 18px rgba(124, 58, 237, 0.38) !important;
+    }
+    .quick-cat-pill[data-cat="ritual"].active {
+      background: linear-gradient(135deg, #ea580c, #f97316) !important;
+      box-shadow: 0 5px 18px rgba(234, 88, 12, 0.38) !important;
     }
 
     .active-filters-row {
@@ -827,6 +886,13 @@
         </div>
       </div>
 
+      <!-- Premium Smart Filter Trigger Button -->
+      <button type="button" class="btn-smart-filter-trigger" id="btnSmartFilterTrigger" onclick="openFilterDrawer()" title="Open Smart Filters">
+        <span class="sf-icon">⚙️</span>
+        <span class="sf-label">Smart Filter</span>
+        <span class="sf-badge">✦</span>
+      </button>
+
       <!-- Smart Sort Dropdown -->
       <div class="sort-select-box">
         <select id="quickSortSelect" class="btn-sort-select" onchange="selectFilter('sort', this.value)" title="Sort templates" aria-label="Sort templates">
@@ -848,20 +914,20 @@
       </div>
     </div>
 
-    <!-- Smart Unified Occasion & Category Filter Strip -->
+    <!-- Smart Unified Occasion & Category Filter Strip (Vibrant & Colorful) -->
     <div class="atelier-filter-hub">
       <nav class="quick-occasions-strip" id="quickOccasionsStrip" aria-label="Smart Categories">
         <button type="button" id="quick-cat-all" class="quick-cat-pill active" data-cat="all" onclick="selectQuickCategory('all')">✨ All Moments</button>
-        <button type="button" id="quick-cat-free" class="quick-cat-pill" data-cat="free" onclick="selectQuickCategory('free')">🎁 100% Free</button>
+        <button type="button" id="quick-cat-free" class="quick-cat-pill pill-free" data-cat="free" onclick="selectQuickCategory('free')">🎁 100% Free</button>
         <button type="button" id="quick-cat-vip" class="quick-cat-pill pill-vip" data-cat="vip" onclick="selectQuickCategory('vip')">👑 Ultra VIP (₹700+)</button>
         <button type="button" id="quick-cat-birthday" class="quick-cat-pill" data-cat="birthday" onclick="selectQuickCategory('birthday')">🎂 Birthday</button>
         <button type="button" id="quick-cat-love" class="quick-cat-pill" data-cat="love" onclick="selectQuickCategory('love')">💖 Love &amp; Romance</button>
         <button type="button" id="quick-cat-anniversary" class="quick-cat-pill" data-cat="anniversary" onclick="selectQuickCategory('anniversary')">💍 Anniversary</button>
         <button type="button" id="quick-cat-magazine" class="quick-cat-pill" data-cat="magazine" onclick="selectQuickCategory('magazine')">📖 E-Magazine</button>
         <button type="button" id="quick-cat-ritual" class="quick-cat-pill" data-cat="ritual" onclick="selectQuickCategory('ritual')">🕯️ 3D Rituals</button>
+        <button type="button" id="quick-cat-letter" class="quick-cat-pill" data-cat="apology" onclick="selectQuickCategory('apology')">💌 Love Letters</button>
         <button type="button" id="quick-cat-friendship" class="quick-cat-pill" data-cat="friendship" onclick="selectQuickCategory('friendship')">👯 Friendship</button>
         <button type="button" id="quick-cat-family" class="quick-cat-pill" data-cat="family" onclick="selectQuickCategory('family')">👨‍👩‍👦 Family</button>
-        <button type="button" id="quick-cat-apology" class="quick-cat-pill" data-cat="apology" onclick="selectQuickCategory('apology')">🕊️ Apology</button>
         <button type="button" id="quick-cat-memories" class="quick-cat-pill" data-cat="memories" onclick="selectQuickCategory('memories')">📸 Memories</button>
       </nav>
     </div>
@@ -1213,7 +1279,9 @@
         return `
           <article class="vanvi-card ${isLux ? 'is-luxury' : ''}" data-cat="${escapeHtml(catSlug)}" id="card-${t.id}">
             <div class="card-art-box" onclick="window.location.href='preview.html?template=${safeId}'" title="Experience ${escapeHtml(t.name)}">
-              <span class="card-badge-top-left">${escapeHtml(catBadge)}</span>
+              <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
+                <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
+              </div>
               <span class="card-badge-top-right ${isFree ? 'free' : (isLux ? 'luxury' : 'price')}">
                 ${isFree ? '🎁 Free' : (isLux ? '✦ Signature' : `₹${p}`)}
               </span>
@@ -1248,7 +1316,7 @@
                 </a>
                 <a href="builder.html?template=${safeId}&occasion=${safeOccasion}" class="btn-make-yours" title="Create Moment ✦">
                   <span class="btn-text-full">Create Moment ✦</span>
-                  <span class="btn-text-short">Create ✦</span>
+                  <span class="btn-text-short">Create</span>
                 </a>
               </div>
             </div>

@@ -206,6 +206,33 @@
   box-shadow: 0 14px 28px -4px rgba(255, 42, 122, 0.28), 0 4px 10px rgba(44, 18, 36, 0.08);
 }
 
+/* Authentic Official Vanvi Moments Brand Badge on Top Corner (Elevates thumbnails, covers external marks) */
+.vanvi-card .vanvi-brand-corner-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 3px 8px 3px 6px;
+  border-radius: 999px;
+  border: 0.85px solid rgba(255, 120, 175, 0.45);
+  box-shadow: 0 2px 8px rgba(44, 18, 36, 0.12), inset 0 1px 0 #ffffff;
+  pointer-events: none;
+  max-height: 24px;
+}
+
+.vanvi-card .vanvi-brand-corner-badge .brand-badge-img {
+  height: 14px;
+  width: auto;
+  max-width: 82px;
+  object-fit: contain;
+  display: block;
+}
+
 /* Top Floating Badges */
 .vanvi-card .card-badge-top-left {
   position: absolute;
@@ -449,12 +476,12 @@
   background: #fff5f8;
   border-color: #ff2a7a;
   color: #ff2a7a;
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 4px 12px rgba(255, 42, 122, 0.18);
+  transform: none;
+  box-shadow: 0 4px 14px rgba(255, 42, 122, 0.22);
 }
 
 .vanvi-card .btn-take-look:active {
-  transform: scale(0.96);
+  opacity: 0.9;
 }
 
 .vanvi-card .btn-make-yours {
@@ -475,7 +502,7 @@
     0 4px 14px rgba(255, 42, 122, 0.32),
     inset 0 1.5px 2px rgba(255, 255, 255, 0.6),
     inset 0 -1.5px 2px rgba(0, 0, 0, 0.12);
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.22s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -491,13 +518,13 @@
 }
 
 .vanvi-card .btn-make-yours:hover {
-  box-shadow: 0 8px 22px rgba(255, 42, 122, 0.45);
-  filter: brightness(1.05);
-  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(255, 42, 122, 0.45);
+  filter: brightness(1.08);
+  transform: none;
 }
 
 .vanvi-card .btn-make-yours:active {
-  transform: scale(0.96);
+  opacity: 0.92;
 }
 
 @keyframes vanviShimmer {
@@ -506,17 +533,27 @@
   100% { background-position: 0% center; }
 }
 
-/* Responsive labels for small phones */
-@media (max-width: 400px) {
-  .vanvi-card .btn-text-full { display: none; }
-  .vanvi-card .btn-text-short { display: inline; }
-  .vanvi-card .card-title { font-size: 13.5px; }
-  .vanvi-card .card-actions-grid { grid-template-columns: 1fr 1fr; }
+/* ─── Responsive & Grid-Specific Button Labels ─── */
+/* 2-Column Template Grids (and whenever 2 cards per row): strictly concise 'Create' to fit smoothly without layout congestion */
+.vanvi-cards-grid:not(.is-magazine-view) .vanvi-card .btn-text-full {
+  display: none !important;
+}
+.vanvi-cards-grid:not(.is-magazine-view) .vanvi-card .btn-text-short {
+  display: inline !important;
 }
 
-@media (min-width: 401px) {
-  .vanvi-card .btn-text-full { display: inline; }
-  .vanvi-card .btn-text-short { display: none; }
+/* 1-Column Magazine / Hero Showcase Views: Generous horizontal room, show full 'Create Moment ✦' */
+.vanvi-cards-grid.is-magazine-view .vanvi-card .btn-text-full {
+  display: inline !important;
+}
+.vanvi-cards-grid.is-magazine-view .vanvi-card .btn-text-short {
+  display: none !important;
+}
+
+/* Fallback for mobile screen dimensions */
+@media (max-width: 639px) {
+  .vanvi-card .btn-text-full { display: none !important; }
+  .vanvi-card .btn-text-short { display: inline !important; }
 }
 
 /* Controlled Video Preview (Optional on supported templates) */
