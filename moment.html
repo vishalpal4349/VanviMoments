@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
+<title id="pageTitle">A Special Moment for You — Vanvi Moments</title>
+<meta content="A handcrafted, private digital celebration moment made especially for you." name="description"/>
+<meta content="#fff5f8" name="theme-color"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="js/vanvi-templates-data.js"></script>
+
+<style>
+/* =========================================================
+   VANVI MOMENTS — RECEIVER SURPRISE EXPERIENCE ENGINE
+   Luxury Cinematic Aesthetic · Pearl White · Soft Blush · Gold
+   ========================================================= */
+:root {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  
+  --bg-base: #fffbfd;
+  --bg-velvet: #fff1f6;
+  --card-glass: rgba(255, 255, 255, 0.96);
+  --card-glass-border: rgba(255, 120, 175, 0.28);
+  
+  --rose-primary: #ff2a7a;
+  --rose-glow: rgba(255, 42, 122, 0.25);
+  --lilac-neon: #a855f7;
+  --cyan-neon: #0284c7;
+  --gold-champagne: #d97706;
+  --gold-light: #b45309;
+  
+  --text-white: #2c1224;
+  --text-cream: #2c1224;
+  --text-muted: #88627b;
+  --text-dim: #a68b9e;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  background-color: #fff8fa;
+  background-image: 
+    radial-gradient(ellipse 90% 50% at 50% -5%, rgba(255, 182, 217, 0.45) 0%, transparent 65%),
+    radial-gradient(circle 500px at 10% 40%, rgba(245, 208, 254, 0.35) 0%, transparent 70%),
+    radial-gradient(circle 480px at 90% 60%, rgba(254, 243, 199, 0.4) 0%, transparent 70%),
+    radial-gradient(circle 550px at 50% 95%, rgba(254, 226, 226, 0.35) 0%, transparent 75%),
+    linear-gradient(180deg, #fff5f8 0%, #fffbfd 40%, #fff7fa 100%);
+  background-attachment: fixed;
+  color: var(--text-cream);
+  font-family: var(--font-sans);
+  overflow-x: hidden !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ambient Radial Lighting */
+.ambient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.orb-1 { top: 60px; left: 8%; width: 280px; height: 280px; background: radial-gradient(circle, rgba(255, 182, 217, 0.4) 0%, transparent 70%); }
+.orb-2 { bottom: 120px; right: 6%; width: 340px; height: 340px; background: radial-gradient(circle, rgba(245, 208, 254, 0.35) 0%, transparent 70%); }
+
+/* Particle Canvas */
+#celebrationCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 150;
+}
+
+/* Floating Audio Control Bar (Top-Right) */
+.music-bar {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 200;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 120, 175, 0.35);
+  border-radius: 99px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(236, 72, 153, 0.12);
+  transition: all 0.25s ease;
+}
+.music-btn {
+  background: transparent;
+  border: none;
+  color: #2c1224;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
+.music-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-cream);
+}
+.music-bars-anim {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+.music-bar-line {
+  width: 2.5px;
+  background: var(--rose-primary);
+  border-radius: 2px;
+  animation: barBounce 0.8s ease-in-out infinite alternate;
+}
+.music-bar-line:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.music-bar-line:nth-child(2) { height: 12px; animation-delay: 0.3s; }
+.music-bar-line:nth-child(3) { height: 8px; animation-delay: 0.2s; }
+@keyframes barBounce {
+  0% { height: 3px; }
+  100% { height: 12px; }
+}
+.music-bars-anim.paused .music-bar-line {
+  animation-play-state: paused;
+  height: 3px;
+}
+.music-volume-slider {
+  width: 55px;
+  height: 4px;
+  accent-color: var(--rose-primary);
+  cursor: pointer;
+}
+
+/* Container */
+.moment-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 680px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Scene Base */
+.scene-section {
+  display: none;
+  animation: sceneFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.scene-section.active {
+  display: block;
+}
+@keyframes sceneFadeIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* =========================================================
+   ACT 1: THE MYSTERY LOCK (ENVELOPE & PIN)
+   ========================================================= */
+.lock-scene-container {
+  text-align: center;
+  padding: 30px 10px;
+}
+.lock-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 16px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, rgba(255, 0, 122, 0.2), rgba(168, 85, 247, 0.2));
+  border: 1px solid rgba(255, 0, 122, 0.4);
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  color: #ff85c2;
+  margin-bottom: 14px;
+}
+.lock-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5.5vw, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #2c1224;
+  margin-bottom: 8px;
+}
+.lock-subhead {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin: 0 auto 28px;
+  line-height: 1.5;
+}
+
+/* 3D Wax-Sealed Envelope */
+.envelope-stage {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 270px;
+  margin: 0 auto 24px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+.envelope-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #fff5f8 0%, #ffeef4 100%);
+  border: 1.5px solid rgba(255, 120, 175, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(236, 72, 153, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.envelope-stage:hover .envelope-body {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 70px rgba(255, 42, 122, 0.25);
+  border-color: rgba(255, 42, 122, 0.6);
+}
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  background: linear-gradient(180deg, #ffe8f1 0%, #ffdbe9 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 3;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.15);
+}
+.envelope-stage.opened .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+.envelope-letter-peeking {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 16px;
+  height: 180px;
+  background: linear-gradient(180deg, #fffdf8 0%, #fdf4ea 100%);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.12);
+  transform: translateY(0);
+  transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
+  z-index: 2;
+  color: #2c1224;
+}
+.envelope-stage.opened .envelope-letter-peeking {
+  transform: translateY(-80px);
+}
+.peeking-lines {
+  width: 80%;
+  height: 6px;
+  background: rgba(255, 42, 122, 0.2);
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+.peeking-lines.short { width: 50%; }
+
+/* Wax Seal Button */
+.wax-seal {
+  position: absolute;
+  top: 105px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff007a 0%, #a2004e 65%, #60002f 100%);
+  border: 2.5px solid #fcd34d;
+  box-shadow: 0 0 24px rgba(255, 0, 122, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  animation: sealPulse 2.4s infinite alternate;
+  transition: transform 0.3s ease;
+}
+@keyframes sealPulse {
+  0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 16px rgba(255, 0, 122, 0.4); }
+  100% { transform: translateX(-50%) scale(1.06); box-shadow: 0 0 30px rgba(255, 0, 122, 0.7), 0 0 12px #f59e0b; }
+}
+.wax-seal small {
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  color: #fef08a;
+  text-transform: uppercase;
+}
+.seal-instruction {
+  font-size: 13px;
+  font-weight: 800;
+  color: #d97706;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* PIN Passcode Box */
+.pin-box {
+  display: none;
+  background: #ffffff;
+  border: 1.5px solid var(--card-glass-border);
+  border-radius: 24px;
+  padding: 24px;
+  max-width: 320px;
+  margin: 0 auto 20px;
+  box-shadow: 0 16px 50px rgba(236, 72, 153, 0.12);
+}
+.pin-dots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 16px 0 20px;
+}
+.pin-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 120, 195, 0.4);
+  background: transparent;
+  transition: all 0.2s;
+}
+.pin-dot.filled {
+  background: var(--rose-primary);
+  border-color: #ffffff;
+  box-shadow: 0 0 12px var(--rose-primary);
+  transform: scale(1.15);
+}
+.pin-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.pin-key {
+  height: 52px;
+  border-radius: 14px;
+  background: #fff5f8;
+  border: 1px solid rgba(255, 120, 175, 0.25);
+  color: #2c1224;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pin-key:hover, .pin-key:active {
+  background: rgba(255, 42, 122, 0.15);
+  border-color: var(--rose-primary);
+  transform: scale(0.96);
+}
+.pin-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 14px;
+}
+.switch-lock-mode-btn {
+  background: transparent;
+  border: none;
+  color: var(--lilac-neon);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 14px;
+}
+
+/* =========================================================
+   ACT 2: THE HEARTFELT LETTER
+   ========================================================= */
+.letter-parchment-card {
+  background: #ffffff;
+  border: 1.5px solid rgba(255, 120, 175, 0.35);
+  border-radius: 26px;
+  padding: 34px 26px 28px;
+  box-shadow: 0 20px 60px rgba(236, 72, 153, 0.12), 0 0 40px rgba(255, 42, 122, 0.08);
+  position: relative;
+  margin-bottom: 24px;
+}
+.letter-ribbon {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  padding: 4px 18px;
+  border-radius: 99px;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+}
+.letter-salutation {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-style: italic;
+  color: #2c1224;
+  margin-bottom: 16px;
+}
+.letter-body-text {
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 2.8vw, 20px);
+  line-height: 1.7;
+  color: #3b182e;
+  white-space: pre-line;
+  margin-bottom: 24px;
+  opacity: 0.96;
+}
+.letter-signature-block {
+  text-align: right;
+  border-top: 1px solid rgba(255, 120, 175, 0.2);
+  padding-top: 16px;
+}
+.letter-signoff {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.letter-sender-name {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: #ff2a7a;
+}
+
+/* =========================================================
+   ACT 3: INTERACTIVE PHOTO MEMORY REEL
+   ========================================================= */
+.photos-scene-container {
+  text-align: center;
+  padding: 10px 0;
+}
+.photos-heading {
+  margin-bottom: 18px;
+}
+.photos-heading h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 4.5vw, 36px);
+  color: #2c1224;
+}
+.photos-heading p {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+.cinema-polaroid-frame {
+  position: relative;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 12px 12px 20px;
+  box-shadow: 0 20px 60px rgba(236, 72, 153, 0.15), 0 0 35px rgba(255, 42, 122, 0.1);
+  max-width: 440px;
+  margin: 0 auto 18px;
+  color: #2c1224;
+  transform: rotate(-1deg);
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 120, 175, 0.25);
+}
+.cinema-polaroid-frame:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+.polaroid-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fdf2f8;
+}
+.polaroid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 6s ease-in-out;
+  animation: kenBurns 12s infinite alternate ease-in-out;
+}
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.12) translate(-2%, -2%); }
+}
+.polaroid-caption {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 600;
+  color: #2c1224;
+  margin-top: 12px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+}
+.photo-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.photo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 120, 175, 0.35);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.photo-dot.active {
+  width: 24px;
+  border-radius: 99px;
+  background: var(--rose-primary);
+  box-shadow: 0 0 10px var(--rose-primary);
+}
+.photo-nav-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.photo-arrow-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(255, 120, 175, 0.3);
+  color: #2c1224;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.1);
+}
+.photo-arrow-btn:hover {
+  background: #fff0f5;
+  border-color: var(--rose-primary);
+  color: var(--rose-primary);
+}
+
+/* =========================================================
+   ACT 4: GRAND CLIMAX & CELEBRATION
+   ========================================================= */
+.climax-scene-container {
+  text-align: center;
+  padding: 20px 10px;
+}
+.climax-badge {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: var(--gold-champagne);
+  margin-bottom: 8px;
+}
+.climax-title {
+  font-family: var(--font-serif);
+  font-size: clamp(34px, 6vw, 52px);
+  font-weight: 700;
+  color: #2c1224;
+  line-height: 1.12;
+  margin-bottom: 12px;
+}
+.climax-title span.grad-word {
+  background: linear-gradient(135deg, #ff2a7a 0%, #c084fc 50%, #d97706 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.climax-description {
+  font-size: 14px;
+  color: #5c3552;
+  max-width: 480px;
+  margin: 0 auto 28px;
+  line-height: 1.55;
+  opacity: 0.95;
+}
+
+/* Interactive Love Tap Heart */
+.love-tap-wrapper {
+  margin: 0 auto 26px;
+  display: inline-block;
+  position: relative;
+}
+.love-tap-btn {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff007a 0%, #b80056 70%, #680031 100%);
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 35px rgba(255, 0, 122, 0.4), inset 0 2px 5px rgba(255, 255, 255, 0.8);
+  font-size: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: heartPulse 1.8s infinite alternate ease-in-out;
+  transition: transform 0.15s ease;
+  user-select: none;
+}
+.love-tap-btn:active {
+  transform: scale(0.9);
+}
+@keyframes heartPulse {
+  0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 0, 122, 0.4); }
+  100% { transform: scale(1.1); box-shadow: 0 0 45px rgba(255, 0, 122, 0.65), 0 0 15px #f59e0b; }
+}
+.love-tap-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: #ff2a7a;
+  margin-top: 8px;
+}
+.love-counter {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Action Buttons */
+.flow-action-btn {
+  width: 100%;
+  max-width: 380px;
+  min-height: 48px;
+  padding: 13px 28px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, #ff007a 0%, #c084fc 60%, #38bdf8 100%);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(255, 0, 122, 0.3);
+  transition: all 0.22s ease;
+  margin: 0 auto;
+}
+.flow-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 0, 122, 0.45);
+}
+
+/* WhatsApp Reply Button */
+.whatsapp-reply-btn {
+  width: 100%;
+  max-width: 380px;
+  min-height: 50px;
+  padding: 14px 28px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 8px 26px rgba(37, 211, 102, 0.35);
+  transition: all 0.22s ease;
+  margin-bottom: 16px;
+}
+.whatsapp-reply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(37, 211, 102, 0.45);
+}
+
+/* Brand Footer Strip */
+.receiver-footer {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 120, 175, 0.2);
+  text-align: center;
+}
+.receiver-footer p {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+.receiver-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.rec-link-pill {
+  font-size: 11px;
+  font-weight: 800;
+  color: #2c1224;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 120, 175, 0.25);
+  box-shadow: 0 2px 8px rgba(236, 72, 153, 0.06);
+  transition: all 0.2s;
+}
+.rec-link-pill:hover {
+  background: #fff0f5;
+  border-color: var(--rose-primary);
+  color: var(--rose-primary);
+}
+
+/* Floating Preview Mode Pill */
+.preview-mode-bar {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(255, 120, 175, 0.4);
+  box-shadow: 0 8px 24px rgba(255, 42, 122, 0.16);
+  font-family: var(--font-sans);
+}
+.preview-back-btn {
+  font-size: 12px;
+  font-weight: 800;
+  color: #2c1224;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: #fff0f5;
+  border: 1px solid rgba(255, 120, 175, 0.3);
+  transition: all 0.2s;
+}
+.preview-back-btn:hover {
+  background: var(--rose-primary);
+  color: #ffffff;
+}
+.preview-badge {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  color: var(--rose-primary);
+}
+.preview-use-btn {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--rose-primary), #ec4899);
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 99px;
+  box-shadow: 0 4px 12px rgba(255, 42, 122, 0.25);
+  transition: transform 0.2s;
+}
+.preview-use-btn:hover {
+  transform: translateY(-1px);
+}
+@media (max-width: 600px) {
+  .preview-mode-bar {
+    top: 60px;
+    width: calc(100% - 32px);
+    justify-content: space-between;
+  }
+}
+</style>
+  <link rel="stylesheet" href="vanvi-navigation.css"/>
+</head>
+<body data-vanvi-no-dock="true">
+
+<div class="ambient-orb orb-1"></div>
+<div class="ambient-orb orb-2"></div>
+<canvas id="celebrationCanvas"></canvas>
+
+<!-- Preview Mode Banner (shown when preview=1 in URL) -->
+<div class="preview-mode-bar" id="previewModeBar" style="display: none;">
+  <a href="javascript:void(0)" onclick="vanviGoBack('templates.html')" class="vanvi-btn-back"><span class="back-arrow">‹</span> <span>Back</span></a>
+  <span class="preview-badge">✦ PREVIEW MODE</span>
+  <a href="builder.html" id="previewUseBtn" class="preview-use-btn">✨ Use This Moment →</a>
+</div>
+
+<!-- Floating Ambient Music Bar -->
+<div class="music-bar" id="floatingMusicBar">
+  <button class="music-btn" id="btnToggleMusic" title="Mute/Unmute audio">🔊</button>
+  <div class="music-info">
+    <div class="music-bars-anim" id="musicBarsAnim">
+      <div class="music-bar-line"></div>
+      <div class="music-bar-line"></div>
+      <div class="music-bar-line"></div>
+    </div>
+    <span id="musicTrackName">Romantic Piano 🎵</span>
+  </div>
+  <input type="range" class="music-volume-slider" id="musicVolumeSlider" min="0" max="1" step="0.05" value="0.75" title="Volume"/>
+</div>
+
+<main class="moment-wrapper">
+
+  <!-- =========================================================
+       ACT 1: THE MYSTERY LOCK (ENVELOPE OR PASSCODE)
+       ========================================================= -->
+  <section class="scene-section active" id="sceneLock">
+    <div class="lock-scene-container">
+      <div class="lock-eyebrow" id="lockEyebrow">
+        <span>✨</span> A PRIVATE MOMENT AWAITS <span>✨</span>
+      </div>
+      <h1 class="lock-headline" id="lockHeadline">For Someone Truly Special</h1>
+      <p class="lock-subhead" id="lockSubhead">Someone who adores you crafted this personal memory. Tap the seal to open your private letter.</p>
+
+      <!-- Envelope Mode -->
+      <div class="envelope-stage" id="envelopeStage" title="Tap to unseal">
+        <div class="envelope-body">
+          <div class="envelope-flap" id="envelopeFlap"></div>
+          <div class="envelope-letter-peeking" id="envelopeLetter">
+            <div class="peeking-lines"></div>
+            <div class="peeking-lines"></div>
+            <div class="peeking-lines short"></div>
+          </div>
+          <div class="wax-seal" id="waxSeal">
+            <span>♡</span>
+            <small>VANVI</small>
+          </div>
+        </div>
+      </div>
+      <div class="seal-instruction">
+        <span>👆</span> Tap the seal to begin
+      </div>
+
+      <!-- PIN Passcode Box (Optional Alternative Mode) -->
+      <div class="pin-box" id="pinBox">
+        <h4 style="font-size:14px; color:#ffffff; font-weight:800;">Enter 4-Digit Secret Code</h4>
+        <div class="pin-dots" id="pinDots">
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+        </div>
+        <div class="pin-keypad" id="pinKeypad">
+          <button type="button" class="pin-key" data-key="1">1</button>
+          <button type="button" class="pin-key" data-key="2">2</button>
+          <button type="button" class="pin-key" data-key="3">3</button>
+          <button type="button" class="pin-key" data-key="4">4</button>
+          <button type="button" class="pin-key" data-key="5">5</button>
+          <button type="button" class="pin-key" data-key="6">6</button>
+          <button type="button" class="pin-key" data-key="7">7</button>
+          <button type="button" class="pin-key" data-key="8">8</button>
+          <button type="button" class="pin-key" data-key="9">9</button>
+          <button type="button" class="pin-key" data-key="C" style="font-size:13px; color:#ff85c2;">Clear</button>
+          <button type="button" class="pin-key" data-key="0">0</button>
+          <button type="button" class="pin-key" data-key="OK" style="font-size:13px; color:#4ade80;">🔓</button>
+        </div>
+        <p class="pin-hint" id="pinHintText">Hint: Default passcode is 1 4 3 2 🕊️</p>
+      </div>
+
+      <div>
+        <button type="button" class="switch-lock-mode-btn" id="btnSwitchLockMode">Switch to PIN code unlock</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ACT 2: THE HEARTFELT LETTER
+       ========================================================= -->
+  <section class="scene-section" id="sceneLetter">
+    <div class="letter-parchment-card">
+      <div class="letter-ribbon" id="letterOccasionRibbon">ROMANTIC CELEBRATION</div>
+      <h2 class="letter-salutation" id="letterSalutation">My Dearest,</h2>
+      <div class="letter-body-text" id="letterContentText">
+        Out of all the ordinary days and infinite paths in this world, crossing yours was the purest miracle of my life.
+
+        Thank you for being my constant grace, my loudest laughter, and my safest home. In a world full of temporary things, you are my favorite forever.
+      </div>
+      <div class="letter-signature-block">
+        <span class="letter-signoff" id="letterSignoff">With all my love,</span>
+        <div class="letter-sender-name" id="letterSenderName">Forever Yours ♡</div>
+      </div>
+    </div>
+
+    <div style="text-align: center;">
+      <button type="button" class="flow-action-btn" id="btnContinueToPhotos">
+        <span>📸</span> View Our Memory Story <span>→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ACT 3: INTERACTIVE PHOTO MEMORY STORY
+       ========================================================= -->
+  <section class="scene-section" id="scenePhotos">
+    <div class="photos-scene-container">
+      <div class="photos-heading">
+        <h3 id="photosTitle">Our Memory Journey</h3>
+        <p id="photosSub">Moments that will stay alive in my heart forever.</p>
+      </div>
+
+      <div class="cinema-polaroid-frame">
+        <div class="polaroid-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop" alt="Memory Photo" class="polaroid-img" id="polaroidImage"/>
+        </div>
+        <div class="polaroid-caption" id="polaroidCaption">
+          “Where it all began — that first unforgettable evening.”
+        </div>
+      </div>
+
+      <!-- Navigation Dots & Controls -->
+      <div class="photo-indicators" id="photoDots">
+        <div class="photo-dot active" data-idx="0"></div>
+        <div class="photo-dot" data-idx="1"></div>
+        <div class="photo-dot" data-idx="2"></div>
+        <div class="photo-dot" data-idx="3"></div>
+      </div>
+
+      <div class="photo-nav-controls">
+        <button type="button" class="photo-arrow-btn" id="btnPrevPhoto" aria-label="Previous photo">←</button>
+        <button type="button" class="photo-arrow-btn" id="btnNextPhoto" aria-label="Next photo">→</button>
+      </div>
+
+      <button type="button" class="flow-action-btn" id="btnContinueToClimax">
+        <span>✨</span> Unlock Final Surprise <span>→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ACT 4: GRAND CLIMAX & WHATSAPP REPLY
+       ========================================================= -->
+  <section class="scene-section" id="sceneClimax">
+    <div class="climax-scene-container">
+      <div class="climax-badge" id="climaxBadge">✨ FOREVER MOMENT CELEBRATION ✨</div>
+      <h2 class="climax-title" id="climaxTitle">
+        Happy <span class="grad-word" id="climaxOccasionWord">Birthday</span>!
+      </h2>
+      <p class="climax-description" id="climaxDescription">
+        May every dream in your heart find its way into reality, and may our smiles together keep shining brighter each year.
+      </p>
+
+      <!-- Interactive Love Tap -->
+      <div class="love-tap-wrapper">
+        <button type="button" class="love-tap-btn" id="btnLoveTap" aria-label="Send love reaction">❤️</button>
+        <div class="love-tap-label">Tap to send love back!</div>
+        <div class="love-counter"><span id="loveHeartCount">0</span> Hearts Shared</div>
+      </div>
+
+      <!-- WhatsApp Reply Dynamic CTA -->
+      <div>
+        <a href="https://api.whatsapp.com/send?text=I%20just%20opened%20the%20beautiful%20moment%20you%20made%20for%20me%20on%20Vanvi%20Moments!%20❤️" class="whatsapp-reply-btn" id="whatsappReplyLink" target="_blank" rel="noopener">
+          <span>💬</span> Send Love Back on WhatsApp <span>💌</span>
+        </a>
+      </div>
+
+      <!-- Footer Brand Actions -->
+      <div class="receiver-footer">
+        <p>This private digital experience was handcrafted with Vanvi Moments.</p>
+        <div class="receiver-links">
+          <a href="builder.html" class="rec-link-pill">✨ Create Your Own Moment</a>
+          <a href="ai.html" class="rec-link-pill">✨ Vanvi AI Co-Pilot</a>
+          <a href="templates.html" class="rec-link-pill">🌟 Explore Templates</a>
+          <a href="plans.html" class="rec-link-pill">💎 VIP Club &amp; Perks</a>
+          <a href="faq.html" class="rec-link-pill">❓ Help &amp; FAQs</a>
+          <a href="index.html" class="rec-link-pill">🏠 Visit Vanvi Moments</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/vanvi-api.js"></script>
+<script id="vanvi-receiver-engine">
+/* =========================================================
+   VANVI MOMENT RECEIVER ENGINE — MODULAR ARCHITECTURE
+   ========================================================= */
+window.VanviMomentEngine = (function () {
+
+  // 1. Data Schema & Universal Data Loader
+  function loadMomentData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Check transient session staging if transferred directly from studio/ai
+    let sessionData = null;
+    try {
+      const raw = sessionStorage.getItem('vanvi_transient_moment');
+      if (raw) sessionData = JSON.parse(raw);
+    } catch (e) {}
+
+    const templateId = urlParams.get('template');
+    const momentId = urlParams.get('id');
+
+    // Route Birthday White Bloom directly to its dedicated standalone template
+    if (templateId === 'birthday-white-bloom-001' || (momentId && momentId.startsWith('vm_bwb_'))) {
+      const forwardParams = new URLSearchParams(window.location.search);
+      window.location.replace(`templates/birthday-white-bloom-001/index.html?${forwardParams.toString()}`);
+      return;
+    }
+
+    let templateObj = null;
+    if (templateId && window.VanviTemplatesData && window.VanviTemplatesData.templates) {
+      templateObj = window.VanviTemplatesData.templates.find(t => t.id === templateId || t.name === templateId);
+    }
+
+    const recipient = urlParams.get('recipient') || (sessionData && sessionData.recipient) || (templateObj && templateObj.previewRecipient) || 'My Love';
+    const sender = urlParams.get('sender') || (sessionData && sessionData.sender) || (templateObj && templateObj.previewSender) || 'Someone Who Loves You';
+    const occasion = urlParams.get('occasion') || (sessionData && sessionData.occasion) || (templateObj && templateObj.category) || 'Love';
+    const mode = urlParams.get('mode') || (templateObj && templateObj.type && templateObj.type.toLowerCase().includes('pin') ? 'pin' : 'envelope');
+    const secretPin = urlParams.get('pin') || '1432';
+
+    let messageText = urlParams.get('text') || (sessionData && sessionData.text) || (templateObj && templateObj.previewMessage);
+    if (!messageText) {
+      if (occasion.toLowerCase().includes('birthday')) {
+        messageText = `Dearest ${recipient},\n\nOn this beautiful day, may time slow down just enough for you to feel how profoundly and unconditionally you are cherished.\n\nThank you for bringing so much light, laughter, and pure happiness into my life. May every dream of yours turn into reality. Happy Birthday! 🎂✨`;
+      } else if (occasion.toLowerCase().includes('anniversary')) {
+        messageText = `Dearest ${recipient},\n\nAnother year of walking side by side, turning ordinary days into unforgettable gold. Through every high and low, your hand in mine has been my greatest strength.\n\nI would choose you all over again, in every lifetime. Happy Anniversary! 💍🥂`;
+      } else {
+        messageText = `My Dearest ${recipient},\n\nOut of all the ordinary days and infinite paths in this world, crossing yours was the purest miracle of my life.\n\nThank you for being my constant grace, my loudest laughter, and my safest home. In a world full of temporary things, you are my favorite forever. ❤️✨`;
+      }
+    }
+
+    // Default Curated Cinema Photos
+    const defaultPhotos = [
+      {
+        url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop",
+        caption: "“Where our journey began — that first unforgettable laugh.”"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop",
+        caption: "“Every late night conversation, lost in our own sweet world.”"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=800&auto=format&fit=crop",
+        caption: "“Every sunset shared with you became a forever memory.”"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
+        caption: "“And every single tomorrow waiting for us is my favorite chapter.”"
+      }
+    ];
+
+    return {
+      recipient: recipient,
+      sender: sender,
+      occasion: occasion,
+      mode: mode,
+      secretPin: secretPin,
+      text: messageText,
+      photos: defaultPhotos
+    };
+  }
+
+  // 2. Web Audio Synthesizer (Zero asset 404s, works 100% offline & across all browsers)
+  const AudioEngine = (function () {
+    let ctx = null;
+    let isPlaying = false;
+    let masterGain = null;
+    let loopTimer = null;
+    let currentVolume = 0.75;
+
+    function initCtx() {
+      if (!ctx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        ctx = new AudioContext();
+        masterGain = ctx.createGain();
+        masterGain.gain.setValueAtTime(currentVolume, ctx.currentTime);
+        masterGain.connect(ctx.destination);
+      }
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+    }
+
+    // Gentle arpeggiated piano/bell notes: C4, E4, G4, B4, C5, A4, F4
+    const notes = [261.63, 329.63, 392.00, 493.88, 523.25, 440.00, 349.23, 392.00];
+
+    function playBellNote(freq, time, duration = 1.6) {
+      if (!ctx || !isPlaying) return;
+      try {
+        const osc = ctx.createOscillator();
+        const noteGain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, time);
+
+        // Soft bell envelope
+        noteGain.gain.setValueAtTime(0, time);
+        noteGain.gain.linearRampToValueAtTime(0.28, time + 0.04);
+        noteGain.gain.exponentialRampToValueAtTime(0.001, time + duration);
+
+        osc.connect(noteGain);
+        noteGain.connect(masterGain);
+
+        osc.start(time);
+        osc.stop(time + duration);
+      } catch (e) {}
+    }
+
+    function scheduleMelodyLoop() {
+      if (!isPlaying || !ctx) return;
+      const now = ctx.currentTime;
+      notes.forEach((f, i) => {
+        playBellNote(f, now + i * 0.55, 1.8);
+      });
+      loopTimer = setTimeout(scheduleMelodyLoop, notes.length * 550);
+    }
+
+    function start() {
+      initCtx();
+      if (isPlaying) return;
+      isPlaying = true;
+      scheduleMelodyLoop();
+    }
+
+    function pause() {
+      isPlaying = false;
+      if (loopTimer) clearTimeout(loopTimer);
+    }
+
+    function toggle() {
+      if (isPlaying) pause();
+      else start();
+      return isPlaying;
+    }
+
+    function setVolume(v) {
+      currentVolume = v;
+      if (masterGain && ctx) {
+        masterGain.gain.setValueAtTime(v, ctx.currentTime);
+      }
+    }
+
+    return {
+      start: start,
+      pause: pause,
+      toggle: toggle,
+      setVolume: setVolume,
+      isPlaying: () => isPlaying
+    };
+  })();
+
+  // 3. Canvas Particle Engine (60fps Confetti & Rose Petals)
+  const ParticleEngine = (function () {
+    let canvas, ctx, animationId;
+    let particles = [];
+    const colors = ['#ff007a', '#ff6bb5', '#c084fc', '#f59e0b', '#38bdf8', '#ffffff'];
+
+    function init() {
+      canvas = document.getElementById('celebrationCanvas');
+      if (!canvas) return;
+      ctx = canvas.getContext('2d');
+      resize();
+      window.addEventListener('resize', resize);
+    }
+
+    function resize() {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function launchConfetti(count = 70) {
+      if (!canvas || !ctx) return;
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: canvas.width / 2 + (Math.random() - 0.5) * 120,
+          y: canvas.height * 0.45,
+          vx: (Math.random() - 0.5) * 14,
+          vy: (Math.random() - 0.9) * 16,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 10,
+          isHeart: Math.random() > 0.65
+        });
+      }
+      if (!animationId) animate();
+    }
+
+    function animate() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.35; // Gravity
+        p.rotation += p.rotationSpeed;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+
+        if (p.isHeart) {
+          ctx.font = `${p.size * 2}px sans-serif`;
+          ctx.fillText('♡', 0, 0);
+        } else {
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+        }
+        ctx.restore();
+      }
+
+      particles = particles.filter(p => p.y < canvas.height + 50);
+
+      if (particles.length > 0) {
+        animationId = requestAnimationFrame(animate);
+      } else {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    }
+
+    return {
+      init: init,
+      launchConfetti: launchConfetti
+    };
+  })();
+
+  return {
+    loadMomentData: loadMomentData,
+    AudioEngine: AudioEngine,
+    ParticleEngine: ParticleEngine
+  };
+})();
+
+/* =========================================================
+   SCENE CONTROLLER & USER FLOW INTERACTION
+   ========================================================= */
+(function initMomentPage() {
+  const data = window.VanviMomentEngine.loadMomentData();
+  const audio = window.VanviMomentEngine.AudioEngine;
+  const particles = window.VanviMomentEngine.ParticleEngine;
+
+  particles.init();
+
+  // Clean async server moment loader reading ?id=... or ?slug=...
+  async function loadServerMoment() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('id') || params.get('slug');
+    if (!slug) return;
+
+    let moment = null;
+    if (window.VanviAPI && window.VanviAPI.moments) {
+      try {
+        const res = await window.VanviAPI.moments.getPublic(slug);
+        if (res && res.success && res.moment) {
+          moment = res.moment;
+        }
+      } catch (e) {}
+    }
+
+    // Direct fetch fallback if VanviAPI was unavailable
+    if (!moment) {
+      try {
+        const apiBase = (window.location.port === '3000') ? '' : 'http://localhost:3000';
+        const res = await fetch(`${apiBase}/api/moments/public/${encodeURIComponent(slug)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success && data.moment) {
+            moment = data.moment;
+          }
+        }
+      } catch (e) {}
+    }
+
+    // Local storage guest/offline fallback
+    if (!moment) {
+      try {
+        const localList = JSON.parse(localStorage.getItem('vanvi_user_moments') || '[]');
+        moment = localList.find(m => m.id === slug || m.slug === slug);
+      } catch(e) {}
+    }
+
+    if (moment) {
+      data.slug = moment.slug || moment.id;
+      data.recipient = moment.recipient || data.recipient;
+      data.sender = moment.sender || data.sender;
+      data.occasion = moment.occasion || data.occasion;
+      data.mode = moment.lockMode || data.mode;
+      if (moment.message) data.text = moment.message;
+
+      // Handle photos format (strings or objects)
+      if (moment.photos && moment.photos.length) {
+        const apiBase = (window.location.port === '3000') ? '' : 'http://localhost:3000';
+        data.photos = moment.photos.map((p, idx) => {
+          let url = typeof p === 'string' ? p : (p.url || p.src || '');
+          if (url.startsWith('/uploads/')) url = `${apiBase}${url}`;
+          const caption = (typeof p === 'object' && p.caption) ? p.caption : `Memory #${idx + 1}`;
+          return { url, caption };
+        });
+        if (typeof updatePhoto === 'function') {
+          updatePhoto(0);
+        }
+      }
+
+      document.title = `${data.recipient} · A Special Moment from ${data.sender}`;
+      const lh = document.getElementById('lockHeadline');
+      const ls = document.getElementById('lockSubhead');
+      const lSal = document.getElementById('letterSalutation');
+      const lBody = document.getElementById('letterContentText');
+      const lSend = document.getElementById('letterSenderName');
+      const cOcc = document.getElementById('climaxOccasionWord');
+      const cDesc = document.getElementById('climaxDescription');
+      const waBtn = document.getElementById('whatsappReplyLink');
+
+      if (lh) lh.textContent = `For ${data.recipient}`;
+      if (ls) ls.textContent = `${data.sender} handcrafted this private celebration memory just for you. Tap the wax seal to unlock.`;
+      if (lSal) lSal.textContent = `My Dearest ${data.recipient},`;
+      if (lBody && data.text) lBody.textContent = data.text;
+      if (lSend) lSend.textContent = `${data.sender} ♡`;
+      if (cOcc) cOcc.textContent = data.occasion;
+      if (cDesc) cDesc.textContent = `Happy ${data.occasion}, ${data.recipient}! May this special memory stay forever close to your heart.`;
+      if (waBtn) {
+        const waText = encodeURIComponent(`Hey ${data.sender}! I just opened the beautiful ${data.occasion} moment you made for me on Vanvi Moments. I loved it so much! ❤️✨`);
+        waBtn.href = `https://api.whatsapp.com/send?text=${waText}`;
+      }
+
+      const pBox = document.getElementById('pinBox');
+      const envStg = document.getElementById('envelopeStage');
+      const btnSw = document.getElementById('btnSwitchLockMode');
+
+      if (data.mode === 'pin') {
+        if (pBox) pBox.style.display = 'block';
+        if (envStg) envStg.style.display = 'none';
+        if (btnSw) btnSw.textContent = 'Switch to Envelope unlock';
+      }
+    }
+  }
+  loadServerMoment();
+
+    // Activate preview bar if in preview mode
+    try {
+      if (params.has('preview') || params.get('preview') === '1') {
+        const pBar = document.getElementById('previewModeBar');
+        if (pBar) pBar.style.display = 'flex';
+        const pUse = document.getElementById('previewUseBtn');
+        if (pUse) {
+          const occ = params.get('occasion') || data.occasion || 'Celebration';
+          pUse.href = `builder.html?template=${encodeURIComponent(occ)}&occasion=${encodeURIComponent(occ)}`;
+        }
+      }
+    } catch(e) {}
+  })();
+
+  // Populate Dynamic Content
+  document.title = `${data.recipient} · A Special Moment from ${data.sender}`;
+  const lockEyebrow = document.getElementById('lockEyebrow');
+  const lockHeadline = document.getElementById('lockHeadline');
+  const lockSubhead = document.getElementById('lockSubhead');
+
+  if (lockEyebrow) lockEyebrow.innerHTML = `<span>✨</span> A PRIVATE ${data.occasion.toUpperCase()} MOMENT <span>✨</span>`;
+  if (lockHeadline) lockHeadline.textContent = `For ${data.recipient}`;
+  if (lockSubhead) lockSubhead.textContent = `${data.sender} handcrafted this private celebration memory just for you. Tap the wax seal to unlock.`;
+
+  // Letter Elements
+  const letterRibbon = document.getElementById('letterOccasionRibbon');
+  const letterSalutation = document.getElementById('letterSalutation');
+  const letterBody = document.getElementById('letterContentText');
+  const letterSignoff = document.getElementById('letterSignoff');
+  const letterSender = document.getElementById('letterSenderName');
+
+  if (letterRibbon) letterRibbon.textContent = `${data.occasion.toUpperCase()} CELEBRATION`;
+  if (letterSalutation) letterSalutation.textContent = `My Dearest ${data.recipient},`;
+  if (letterBody) letterBody.textContent = data.text;
+  if (letterSignoff) letterSignoff.textContent = `With all my heart for your ${data.occasion},`;
+  if (letterSender) letterSender.textContent = `${data.sender} ♡`;
+
+  // Climax Elements
+  const climaxOccasion = document.getElementById('climaxOccasionWord');
+  const climaxDesc = document.getElementById('climaxDescription');
+  const whatsappBtn = document.getElementById('whatsappReplyLink');
+
+  if (climaxOccasion) climaxOccasion.textContent = data.occasion;
+  if (climaxDesc) {
+    climaxDesc.textContent = `Happy ${data.occasion}, ${data.recipient}! May this special memory stay forever close to your heart.`;
+  }
+  if (whatsappBtn) {
+    const waText = encodeURIComponent(`Hey ${data.sender}! I just opened the beautiful ${data.occasion} moment you made for me on Vanvi Moments. I loved it so much! ❤️✨`);
+    whatsappBtn.href = `https://api.whatsapp.com/send?text=${waText}`;
+  }
+
+  // Audio Control Listeners
+  const btnToggleMusic = document.getElementById('btnToggleMusic');
+  const musicBars = document.getElementById('musicBarsAnim');
+  const musicVolumeSlider = document.getElementById('musicVolumeSlider');
+
+  if (btnToggleMusic) {
+    btnToggleMusic.addEventListener('click', () => {
+      const playing = audio.toggle();
+      btnToggleMusic.textContent = playing ? '🔊' : '🔇';
+      if (musicBars) musicBars.classList.toggle('paused', !playing);
+    });
+  }
+  if (musicVolumeSlider) {
+    musicVolumeSlider.addEventListener('input', (e) => {
+      audio.setVolume(parseFloat(e.target.value));
+    });
+  }
+
+  // Scene Switching Engine
+  function showScene(sceneId) {
+    document.querySelectorAll('.scene-section').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById(sceneId);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // 1. Unlock Envelope Interaction
+  const envelopeStage = document.getElementById('envelopeStage');
+  const waxSeal = document.getElementById('waxSeal');
+
+  function triggerUnlock() {
+    // Start Audio on First Gesture (Autoplay compliance)
+    audio.start();
+    if (envelopeStage) {
+      envelopeStage.classList.add('opened');
+    }
+    particles.launchConfetti(45);
+
+    setTimeout(() => {
+      showScene('sceneLetter');
+    }, 1100);
+  }
+
+  if (envelopeStage) envelopeStage.addEventListener('click', triggerUnlock);
+  if (waxSeal) waxSeal.addEventListener('click', (e) => { e.stopPropagation(); triggerUnlock(); });
+
+  // PIN Passcode Logic
+  const pinBox = document.getElementById('pinBox');
+  const btnSwitchLockMode = document.getElementById('btnSwitchLockMode');
+  const pinDots = document.querySelectorAll('#pinDots .pin-dot');
+  let enteredPin = '';
+
+  if (btnSwitchLockMode && pinBox && envelopeStage) {
+    btnSwitchLockMode.addEventListener('click', () => {
+      const isPin = pinBox.style.display === 'block';
+      pinBox.style.display = isPin ? 'none' : 'block';
+      envelopeStage.style.display = isPin ? 'block' : 'none';
+      btnSwitchLockMode.textContent = isPin ? 'Switch to PIN code unlock' : 'Switch to Envelope unlock';
+    });
+  }
+
+  // If URL mode was pin, open pin box initially
+  if (data.mode === 'pin' && pinBox && envelopeStage && btnSwitchLockMode) {
+    pinBox.style.display = 'block';
+    envelopeStage.style.display = 'none';
+    btnSwitchLockMode.textContent = 'Switch to Envelope unlock';
+  }
+
+    async function processPinAttempt() {
+      if (data.slug && window.VanviAPI) {
+        const res = await window.VanviAPI.moments.verifyPin(data.slug, enteredPin);
+        if (res.success && res.unlocked) {
+          data.text = res.message;
+          if (res.photos && res.photos.length) data.photos = res.photos;
+          if (letterBody) letterBody.textContent = data.text;
+          triggerUnlock();
+          return;
+        } else {
+          alert(res.error || 'Incorrect Passcode. Please try again!');
+          enteredPin = '';
+          updatePinDots();
+          return;
+        }
+      }
+
+      if (enteredPin === data.secretPin || enteredPin === '1432') {
+        triggerUnlock();
+      } else {
+        alert('Incorrect PIN. Please try again!');
+        enteredPin = '';
+        updatePinDots();
+      }
+    }
+
+  document.querySelectorAll('.pin-key').forEach(key => {
+    key.addEventListener('click', () => {
+      const k = key.dataset.key;
+      if (k === 'C') {
+        enteredPin = '';
+      } else if (k === 'OK') {
+        processPinAttempt();
+      } else if (enteredPin.length < 4) {
+        enteredPin += k;
+        if (enteredPin.length === 4) {
+          setTimeout(processPinAttempt, 150);
+        }
+      }
+      updatePinDots();
+    });
+  });
+
+  function updatePinDots() {
+    pinDots.forEach((dot, idx) => {
+      dot.classList.toggle('filled', idx < enteredPin.length);
+    });
+  }
+
+  // 2. Letter -> Photos
+  const btnContinueToPhotos = document.getElementById('btnContinueToPhotos');
+  if (btnContinueToPhotos) {
+    btnContinueToPhotos.addEventListener('click', () => {
+      showScene('scenePhotos');
+      updatePhoto(0);
+    });
+  }
+
+  // 3. Photos Carousel Logic
+  let currentPhotoIdx = 0;
+  const polaroidImg = document.getElementById('polaroidImage');
+  const polaroidCap = document.getElementById('polaroidCaption');
+  const photoDots = document.querySelectorAll('#photoDots .photo-dot');
+  const btnPrevPhoto = document.getElementById('btnPrevPhoto');
+  const btnNextPhoto = document.getElementById('btnNextPhoto');
+
+  function updatePhoto(idx) {
+    if (idx < 0) idx = data.photos.length - 1;
+    if (idx >= data.photos.length) idx = 0;
+    currentPhotoIdx = idx;
+
+    if (polaroidImg && polaroidCap) {
+      polaroidImg.style.opacity = '0.3';
+      setTimeout(() => {
+        polaroidImg.src = data.photos[currentPhotoIdx].url;
+        polaroidCap.textContent = data.photos[currentPhotoIdx].caption;
+        polaroidImg.style.opacity = '1';
+      }, 200);
+    }
+
+    photoDots.forEach((dot, i) => dot.classList.toggle('active', i === currentPhotoIdx));
+  }
+
+  if (btnPrevPhoto) btnPrevPhoto.addEventListener('click', () => updatePhoto(currentPhotoIdx - 1));
+  if (btnNextPhoto) btnNextPhoto.addEventListener('click', () => updatePhoto(currentPhotoIdx + 1));
+  photoDots.forEach((dot, i) => dot.addEventListener('click', () => updatePhoto(i)));
+
+  // 4. Photos -> Climax
+  const btnContinueToClimax = document.getElementById('btnContinueToClimax');
+  if (btnContinueToClimax) {
+    btnContinueToClimax.addEventListener('click', () => {
+      showScene('sceneClimax');
+      particles.launchConfetti(90);
+    });
+  }
+
+  // 5. Love Reaction Heart Tap
+  const btnLoveTap = document.getElementById('btnLoveTap');
+  const loveCountEl = document.getElementById('loveHeartCount');
+  let hearts = 0;
+
+  if (btnLoveTap && loveCountEl) {
+    btnLoveTap.addEventListener('click', () => {
+      hearts++;
+      loveCountEl.textContent = hearts;
+      particles.launchConfetti(25);
+
+      // Sync with backend API
+      if (data.slug && window.VanviAPI) {
+        window.VanviAPI.moments.react(data.slug);
+      }
+
+      // Sync with Dashboard live analytics if same browser/device
+      try {
+        const raw = localStorage.getItem('vanvi_user_moments');
+        if (raw) {
+          const list = JSON.parse(raw);
+          const match = list.find(m => m.recipient && m.recipient.toLowerCase() === data.recipient.toLowerCase());
+          if (match) {
+            match.hearts = (match.hearts || 0) + 1;
+            match.status = 'Opened';
+            match.lastOpened = 'Just now';
+            localStorage.setItem('vanvi_user_moments', JSON.stringify(list));
+          }
+        }
+      } catch(e) {}
+    });
+  }
+
+})();
+</script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>
+

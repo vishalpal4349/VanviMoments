@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Brain Test Riddle Vault — Vanvi Moments Games</title>
+  <meta name="description" content="Tricky lateral thinking logic puzzles and brain teasers. Fresh randomized questions on every play to earn Vanvi Coins!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --rose-main: #ff2a7a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --text-dark: #2c1224;
+      --text-muted: #88627b;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #ffeaf3 0%, #fff7fb 35%, #faf5ff 70%, #fff2f7 100%);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 60px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .btn-nav-back {
+      font-size: 12.5px;
+      font-weight: 750;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      padding: 6px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+    .game-arena {
+      flex: 1;
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 16px 14px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .status-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-pink);
+      border-radius: 16px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(255, 60, 130, 0.06);
+    }
+    .hud-pill {
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-rules-pill {
+      background: rgba(255, 42, 122, 0.08);
+      border: 1px solid rgba(255, 42, 122, 0.25);
+      color: var(--rose-main);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+
+    /* Riddle Card */
+    .riddle-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 24px;
+      padding: 24px 20px;
+      width: 100%;
+      box-shadow: 0 12px 36px rgba(100, 50, 90, 0.08);
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .riddle-icon {
+      font-size: 38px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .riddle-text {
+      font-family: var(--font-serif);
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+    .option-btn {
+      background: #fffbfd;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-dark);
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+    .option-btn:hover {
+      border-color: var(--rose-main);
+      background: #fff0f6;
+      transform: translateY(-2px);
+    }
+    .option-btn.correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+    .option-btn.wrong {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(44, 18, 36, 0.6); backdrop-filter: blur(8px);
+      z-index: 200; display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #ffffff; width: 100%; max-width: 420px; border-radius: 24px; padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25); border: 1px solid var(--border-pink); position: relative;
+    }
+    .modal-card h3 { font-family: var(--font-serif); font-size: 22px; color: var(--text-dark); margin-bottom: 12px; }
+    .modal-card ul { padding-left: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <button type="button" class="btn-nav-back" onclick="location.href='games.html'">
+      ‹ Games Arena
+    </button>
+    <div style="font-weight: 850; font-size: 15px; color: var(--rose-main);">
+      🧠 Brain Test Riddles
+    </div>
+    <div style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:800; background:#fffbeb; border:1px solid #fde68a; padding:4px 10px; border-radius:99px; color:#d97706;">
+      🪙 <span id="coinBalanceHUD">0</span>
+    </div>
+  </header>
+
+  <main class="game-arena">
+    <div class="status-hud">
+      <div class="hud-pill">
+        <span>Riddle:</span> <strong id="hudQNum" style="color:var(--rose-main);">1 / 5</strong>
+      </div>
+      <div class="hud-pill">
+        <span>Score:</span> <strong id="hudScore">0</strong>
+      </div>
+      <button type="button" class="btn-rules-pill" onclick="openRules()">📖 Rules</button>
+    </div>
+
+    <!-- Riddle Question Box -->
+    <div class="riddle-card">
+      <div class="riddle-icon" id="riddleIcon">💡</div>
+      <div class="riddle-text" id="riddleText">
+        What has keys but cannot open any door?
+      </div>
+      <div class="options-grid" id="optionsGrid"></div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal-card">
+      <h3>🧠 Brain Test Rules</h3>
+      <ul>
+        <li><strong>Goal:</strong> Crack tricky lateral thinking riddles and clever celebration paradoxes!</li>
+        <li><strong>Randomized Every Game:</strong> Questions are picked from a deep riddle vault with scrambled options so the game is always unique.</li>
+        <li><strong>Reward:</strong> Score 4 or 5 out of 5 to earn <strong>+20 Vanvi Coins 🪙</strong>!</li>
+      </ul>
+      <button type="button" style="width:100%; padding:12px; border-radius:14px; background:var(--rose-gradient); color:#fff; font-weight:850; border:none; cursor:pointer;" onclick="closeRules()">
+        I'm Ready, Challenge Me!
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="winModal">
+    <div class="modal-card" style="text-align:center;">
+      <div style="font-size:42px; margin-bottom:8px;">💡</div>
+      <h3>Mastermind Status!</h3>
+      <div style="font-size:16px; font-weight:850; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:8px 16px; border-radius:12px; margin:12px auto; display:inline-block;">
+        +20 Vanvi Coins Credited 🪙
+      </div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">
+        You solved <strong id="finalScoreText">5/5</strong> tricky riddles with sharp logic!
+      </p>
+      <button type="button" style="width:100%; padding:12px; border-radius:14px; background:var(--rose-gradient); color:#fff; font-weight:850; border:none; cursor:pointer;" onclick="startNewTest()">
+        Play Another Riddle Set →
+      </button>
+    </div>
+  </div>
+
+  <script src="js/vanvi-api.js"></script>
+  <script>
+    (function() {
+      'use strict';
+
+      const RIDDLE_BANK = [
+        { icon: '🎹', q: "What has keys, but no locks; space, but no room; and you can enter, but never go inside?", correct: "A Keyboard", opts: ["A Keyboard", "A Grand Palace", "A Clock", "A Secret Vault"] },
+        { icon: '🕯️', q: "I am tall when I am young, and I am short when I am old. What am I?", correct: "A Candle", opts: ["A Candle", "A Tree", "A Shadow", "A Pencil"] },
+        { icon: '🌊', q: "What has hands and a face, but cannot hold anything or smile?", correct: "A Clock", opts: ["A Clock", "A Mirror", "A Coin", "A Painting"] },
+        { icon: '🪞', q: "What can fill an entire room without taking up any physical space?", correct: "Light", opts: ["Light", "Air", "Water", "Sound"] },
+        { icon: '💌', q: "The more of me you take, the more you leave behind. What am I?", correct: "Footsteps", opts: ["Footsteps", "Memories", "Breaths", "Coins"] },
+        { icon: '💎', q: "What belongs entirely to you, but everyone else uses it much more than you do?", correct: "Your Name", opts: ["Your Name", "Your Phone", "Your Heart", "Your Key"] },
+        { icon: '📦', q: "I have branches, but no fruit, trunk, or leaves. What am I?", correct: "A Bank", opts: ["A Bank", "A River", "A Family Tree", "A Forest"] },
+        { icon: '🎈', q: "What goes up and never comes back down?", correct: "Your Age", opts: ["Your Age", "A Balloon", "A Rocket", "The Sun"] },
+        { icon: '🔒', q: "What can you break without ever picking it up or touching it physically?", correct: "A Promise", opts: ["A Promise", "A Glass", "A Mirror", "A Code"] },
+        { icon: '📖', q: "What has words, but never speaks a sound?", correct: "A Book", opts: ["A Book", "A River", "A Statue", "A Clock"] },
+        { icon: '⚡', q: "I am light as a feather, yet the strongest person cannot hold me for five minutes. What am I?", correct: "Your Breath", opts: ["Your Breath", "A Whisper", "A Tear", "A Spark"] },
+        { icon: '🚪', q: "What gets wetter and wetter the more it dries?", correct: "A Towel", opts: ["A Towel", "A Sponge", "The Cloud", "Soap"] },
+        { icon: '🧭', q: "What runs all around a whole garden, without ever moving?", correct: "A Fence", opts: ["A Fence", "A Hose", "A Dog", "A Breeze"] }
+      ];
+
+      let currentQuestions = [];
+      let currentIdx = 0;
+      let score = 0;
+
+      window.openRules = function() { document.getElementById('rulesModal').classList.add('open'); };
+      window.closeRules = function() { document.getElementById('rulesModal').classList.remove('open'); };
+
+      function updateHUD() {
+        document.getElementById('hudQNum').textContent = `${currentIdx + 1} / 5`;
+        document.getElementById('hudScore').textContent = score;
+        if (window.VanviRewardEngine) {
+          document.getElementById('coinBalanceHUD').textContent = window.VanviRewardEngine.getCoins();
+        }
+      }
+
+      window.startNewTest = function() {
+        document.getElementById('winModal').classList.remove('open');
+        score = 0;
+        currentIdx = 0;
+
+        const shuffled = [...RIDDLE_BANK].sort(() => Math.random() - 0.5);
+        currentQuestions = shuffled.slice(0, 5);
+        renderCurrentQuestion();
+      };
+
+      function renderCurrentQuestion() {
+        updateHUD();
+        const qData = currentQuestions[currentIdx];
+
+        document.getElementById('riddleIcon').textContent = qData.icon;
+        document.getElementById('riddleText').textContent = qData.q;
+
+        const grid = document.getElementById('optionsGrid');
+        grid.innerHTML = '';
+
+        const shuffledOpts = [...qData.opts].sort(() => Math.random() - 0.5);
+
+        shuffledOpts.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'option-btn';
+          btn.innerHTML = `<span>${opt}</span><span>→</span>`;
+          btn.addEventListener('click', () => onAnswer(opt, btn));
+          grid.appendChild(btn);
+        });
+      }
+
+      function onAnswer(selected, btnEl) {
+        const qData = currentQuestions[currentIdx];
+        const allBtns = document.querySelectorAll('.option-btn');
+        allBtns.forEach(b => b.style.pointerEvents = 'none');
+
+        if (selected === qData.correct) {
+          btnEl.classList.add('correct');
+          score++;
+        } else {
+          btnEl.classList.add('wrong');
+          allBtns.forEach(b => {
+            if (b.textContent.includes(qData.correct)) b.classList.add('correct');
+          });
+        }
+
+        setTimeout(() => {
+          currentIdx++;
+          if (currentIdx < 5) {
+            renderCurrentQuestion();
+          } else {
+            finishTest();
+          }
+        }, 1100);
+      }
+
+      function finishTest() {
+        document.getElementById('finalScoreText').textContent = `${score}/5`;
+        if (score >= 4) {
+          if (window.VanviRewardEngine) {
+            window.VanviRewardEngine.addCoins(20, 'Brain Test 4+/5');
+            updateHUD();
+          }
+        }
+        document.getElementById('winModal').classList.add('open');
+      }
+
+      startNewTest();
+    })();
+  </script>
+</body>
+</html>

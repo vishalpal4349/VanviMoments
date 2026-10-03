@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Birthday White Bloom | VanviMoments</title>
+  <meta name="description" content="A dreamy, light luxury digital birthday celebration moment featuring photo memories, interactive candles, and an animated letter.">
+  <meta name="theme-color" content="#fffdf9">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  
+  <!-- Google Fonts: DM Sans & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Standalone Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Floating Gentle Petals -->
+    <div class="petal" style="top:8%;left:6%"></div>
+    <div class="petal" style="top:24%;right:8%"></div>
+    <div class="petal" style="top:62%;left:4%"></div>
+    <div class="petal" style="top:82%;right:11%"></div>
+
+    <!-- Opening Welcome Dialog -->
+    <div id="intro" class="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+      <div class="intro-box glass">
+        <p class="eyebrow">VanviMoments</p>
+        <h1 id="introTitle" class="display">A little birthday magic is waiting…</h1>
+        <button id="skipIntro" class="intro-skip" type="button">Open Moment ✨</button>
+      </div>
+    </div>
+
+    <!-- Reveal Banner -->
+    <div id="revealBanner" class="reveal-banner glass" aria-live="polite">Made especially for you.</div>
+
+    <main>
+      <!-- STAGE 1: Opening Hero -->
+      <section id="openingStage" class="stage" aria-labelledby="heroTitle">
+        <div class="hero">
+          <div class="hero-inner">
+            <div>
+              <p id="heroEyebrow" class="eyebrow">A birthday memory garden</p>
+              <h1 id="heroTitle" class="display">Happy Birthday</h1>
+              <p id="heroCopy" class="hero-copy">Today is a little more special because you exist.</p>
+              <div style="margin-top:28px">
+                <button id="openMoment" class="primary-button" type="button">
+                  <span>Open Your Birthday Moment</span>
+                  <span>✨</span>
+                </button>
+              </div>
+              <div class="sound-control" aria-live="polite">
+                <button id="musicToggle" type="button" aria-label="Toggle background soundtrack">🎵</button>
+                <span id="musicStatus">Sound is ready when you are.</span>
+              </div>
+            </div>
+            
+            <!-- Garden Art Illustration -->
+            <div class="garden-art glass" aria-hidden="true">
+              <div class="orb one"></div>
+              <div class="orb two"></div>
+              <div class="orb three"></div>
+              <div class="flower one"></div>
+              <div class="flower two"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE 2: Full Experience -->
+      <section id="experienceStage" class="stage" hidden aria-labelledby="experienceStart">
+        <!-- Sticky Navigation -->
+        <nav class="experience-nav" aria-label="Birthday experience navigation">
+          <div class="experience-nav-inner">
+            <button id="replayOpening" class="text-button" type="button">← Replay opening</button>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span class="progress-copy">Birthday Celebration</span>
+              <div class="progress-line" aria-hidden="true">
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Gallery Section -->
+        <section class="section" aria-labelledby="experienceStart">
+          <div class="section-heading">
+            <p class="eyebrow">A small collection of joy</p>
+            <h2 id="experienceStart" class="display" tabindex="-1">Little Moments, Big Memories</h2>
+            <p>Tap any memory to linger in the details.</p>
+          </div>
+          <div id="gallery" class="gallery" aria-live="polite"></div>
+        </section>
+
+        <!-- Wax Sealed Letter Section -->
+        <section class="section" aria-labelledby="letterTitle">
+          <div class="letter-wrap glass">
+            <p class="eyebrow">A few words, held close</p>
+            <h2 id="letterTitle" class="display">A Letter For You 💌</h2>
+            <div class="envelope">
+              <button id="letterToggle" class="envelope-toggle" type="button" aria-expanded="false" aria-controls="letterPaper">
+                <span class="seal">✦</span>
+              </button>
+              <article id="letterPaper" class="letter-paper">
+                <p id="letterContent"></p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- Birthday Countdown Section -->
+        <section class="section" aria-labelledby="countdownTitle">
+          <div class="section-heading">
+            <p class="eyebrow">The celebration is here</p>
+            <h2 id="countdownTitle" class="display">Your Special Day</h2>
+          </div>
+          <div class="countdown-grid" aria-live="polite">
+            <div class="count-box glass">
+              <span id="days" class="count-number">00</span>
+              <span class="count-label">Days</span>
+            </div>
+            <div class="count-box glass">
+              <span id="hours" class="count-number">00</span>
+              <span class="count-label">Hours</span>
+            </div>
+            <div class="count-box glass">
+              <span id="minutes" class="count-number">00</span>
+              <span class="count-label">Minutes</span>
+            </div>
+            <div class="count-box glass">
+              <span id="seconds" class="count-number">00</span>
+              <span class="count-label">Seconds</span>
+            </div>
+          </div>
+          <p id="countdownMessage" class="status-message"></p>
+        </section>
+
+        <!-- Interactive Birthday Cake & Candles -->
+        <section class="section" aria-labelledby="cakeTitle">
+          <div class="section-heading">
+            <p class="eyebrow">A tiny ritual for a wonderful year</p>
+            <h2 id="cakeTitle" class="display">Make a wish, softly</h2>
+            <p>Tap each candle to send a little sparkle into the year ahead.</p>
+          </div>
+          <div class="cake-area glass">
+            <div class="cake" aria-label="Interactive birthday cake">
+              <div class="candles">
+                <button class="candle" type="button" aria-label="Extinguish candle 1"></button>
+                <button class="candle" type="button" aria-label="Extinguish candle 2"></button>
+                <button class="candle" type="button" aria-label="Extinguish candle 3"></button>
+                <button class="candle" type="button" aria-label="Extinguish candle 4"></button>
+                <button class="candle" type="button" aria-label="Extinguish candle 5"></button>
+              </div>
+              <div class="icing"></div>
+              <div class="cake-layer layer-two"></div>
+              <div class="cake-layer layer-one"></div>
+              <div class="cake-plate"></div>
+            </div>
+            <p id="wishMessage" class="wish" aria-live="polite"></p>
+            <button id="resetCake" class="reset-button" type="button">✨ Light the candles again</button>
+          </div>
+        </section>
+
+        <!-- Story Memory Timeline Section -->
+        <section class="section" aria-labelledby="timelineTitle">
+          <div class="section-heading">
+            <p class="eyebrow">Every chapter shines</p>
+            <h2 id="timelineTitle" class="display">Our Little Story</h2>
+          </div>
+          <ol id="timeline" class="timeline"></ol>
+        </section>
+
+        <!-- Surprise Drawer Reveal -->
+        <section class="section">
+          <div class="surprise glass">
+            <button id="surpriseToggle" class="primary-button" type="button" aria-expanded="false" aria-controls="surpriseMessage">
+              <span>One More Thing…</span>
+              <span>🎁</span>
+            </button>
+            <div id="surpriseMessage" class="surprise-message"></div>
+          </div>
+        </section>
+
+        <!-- Real Sharing Actions -->
+        <section class="section" aria-labelledby="shareTitle">
+          <div class="section-heading">
+            <p class="eyebrow">Keep the magic moving</p>
+            <h2 id="shareTitle" class="display">Share This Moment</h2>
+          </div>
+          <div class="share-row">
+            <button id="whatsappShare" class="share-button" type="button">💬 WhatsApp</button>
+            <button id="copyShare" class="share-button" type="button">🔗 Copy Link</button>
+            <button id="qrShare" class="share-button" type="button">📱 View QR Code</button>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+          Made with love on <strong style="color:var(--rose-deep)">VanviMoments</strong> ✨
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <!-- Photo Viewer Lightbox Modal -->
+  <div id="lightbox" class="modal" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <div class="modal-panel">
+      <button id="lightboxClose" class="modal-close" type="button" aria-label="Close photo viewer">✕</button>
+      <figure style="margin:0">
+        <img id="lightboxImage" class="lightbox-image" alt="">
+        <figcaption id="lightboxCaption" style="padding:14px 4px;color:var(--muted);text-align:center;font-weight:600"></figcaption>
+      </figure>
+      <div class="modal-nav">
+        <button id="previousPhoto" class="share-button" type="button">← Previous</button>
+        <button id="nextPhoto" class="share-button" type="button">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real Dynamic QR Modal -->
+  <div id="qrModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+    <div class="modal-panel" style="max-width:440px;text-align:center">
+      <button id="qrClose" class="modal-close" type="button" aria-label="Close QR sharing panel">✕</button>
+      <h2 id="qrTitle" class="display" style="font-size:1.8rem;margin:6px 0 14px">Share with QR</h2>
+      <div class="qr-canvas-wrap">
+        <canvas id="qrCanvas"></canvas>
+      </div>
+      <p style="color:var(--muted);line-height:1.6;font-size:0.9rem;margin-bottom:12px">
+        Scan this QR code with any mobile camera to open this private celebration instantly.
+      </p>
+      <p id="qrUrl" style="word-break:break-all;font-size:0.8rem;color:var(--rose-deep);font-weight:600"></p>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Scripts: QR Generator & Template Script -->
+  <script src="assets/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

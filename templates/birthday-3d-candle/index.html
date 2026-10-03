@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Midnight 3D Candle &amp; Memory Trail | Vanvi Moments</title>
+  <meta name="description" content="An interactive birthday keepsake with 3D cake candles, wax-sealed secret letter, and memory polaroid trail.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Audio Controls -->
+  <div class="ambient-audio-bar">
+    <button type="button" class="btn-audio-toggle" id="audioToggleBtn" aria-label="Toggle background music">
+      <span id="audioIcon">🎵</span>
+      <span class="audio-label" id="audioLabel">Play Music</span>
+    </button>
+  </div>
+
+  <main class="experience-container">
+    <!-- STAGE 1: HERO & INTERACTIVE CAKE -->
+    <section class="stage-section" id="stageCake">
+      <div class="eyebrow-pill">✦ A Birthday Keepsake for You</div>
+      <h1 class="celebrant-title" id="celebrantTitle">Happy Birthday, <span class="highlight-name" id="recipientName">My Favorite Person</span> ✨</h1>
+      <p class="celebrant-subtitle" id="celebrantSubtitle">Take a quiet breath, make a heartfelt wish, and tap the candle to blow it out.</p>
+
+      <!-- 3D Interactive Cake -->
+      <div class="cake-stage" id="cakeStage">
+        <div class="cake-plate"></div>
+        <div class="cake-tier cake-tier-bottom"></div>
+        <div class="cake-tier cake-tier-top">
+          <div class="icing-drips">
+            <span class="drip"></span><span class="drip"></span><span class="drip"></span><span class="drip"></span><span class="drip"></span>
+          </div>
+        </div>
+        
+        <!-- Interactive Candle -->
+        <button type="button" class="candle-pod" id="candlePod" aria-label="Tap to blow out candle">
+          <div class="flame-halo" id="flameHalo"></div>
+          <div class="flame" id="candleFlame"></div>
+          <div class="wick"></div>
+          <div class="candle-stick">
+            <div class="candle-stripe"></div>
+          </div>
+        </button>
+
+        <!-- Tap Hint -->
+        <div class="candle-hint" id="candleHint">
+          <span>🕯️ Tap the flame to make a wish</span>
+        </div>
+      </div>
+
+      <!-- Wish Revealed Banner -->
+      <div class="wish-reveal-box" id="wishRevealBox" hidden>
+        <span class="sparkle-icon">✨</span>
+        <h2 class="wish-heading">Your wish has been cast into the stars.</h2>
+        <p class="wish-subtext">May every dream you hold close unfold with grace this year.</p>
+        <a href="#stageLetter" class="scroll-down-btn">
+          <span>Read Your Secret Letter</span>
+          <span class="arrow-down">↓</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- STAGE 2: WAX-SEALED SECRET LETTER -->
+    <section class="stage-section" id="stageLetter">
+      <div class="eyebrow-pill">💌 Confidential &amp; From The Heart</div>
+      <h2 class="section-title">A Few Words, Held Close</h2>
+
+      <div class="envelope-wrapper">
+        <div class="envelope-body" id="envelopeBody">
+          <!-- Flap with Wax Seal -->
+          <div class="envelope-flap" id="envelopeFlap">
+            <button type="button" class="wax-seal" id="waxSealBtn" aria-label="Tap to break wax seal">
+              <span class="seal-ring"></span>
+              <span class="seal-icon">✦</span>
+              <span class="seal-prompt">Tap to Unseal</span>
+            </button>
+          </div>
+
+          <!-- Letter Paper Inside -->
+          <article class="letter-sheet" id="letterSheet">
+            <div class="letter-header">
+              <span class="letter-date" id="letterDate">On your special day</span>
+              <span class="letter-sigil">❦</span>
+            </div>
+            <p class="letter-body-text" id="letterBodyText">
+              Dear, some people make the world brighter just by existing in it. Today is a celebration of all the laughter you bring, the warmth in your voice, and the irreplaceable moments we share. Here is to another beautiful chapter filled with unforgettable memories.
+            </p>
+            <div class="letter-footer">
+              <span class="letter-closing">Forever cherishing you,</span>
+              <strong class="letter-sender" id="senderName">With all my love</strong>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 3: POLAROID MEMORY STACK -->
+    <section class="stage-section" id="stageMemories">
+      <div class="eyebrow-pill">📸 Treasured Memories</div>
+      <h2 class="section-title">A Little Collection of Us</h2>
+
+      <div class="polaroid-stack-row">
+        <figure class="polaroid-card rotate-left">
+          <div class="polaroid-pin">📍</div>
+          <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&auto=format&fit=crop&q=80" alt="Special memory" class="polaroid-img" loading="lazy">
+          <figcaption class="polaroid-caption">That spontaneous night ✦</figcaption>
+        </figure>
+        <figure class="polaroid-card rotate-right">
+          <div class="polaroid-pin">📍</div>
+          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&auto=format&fit=crop&q=80" alt="Birthday joy" class="polaroid-img" loading="lazy">
+          <figcaption class="polaroid-caption">Always laughing together ✨</figcaption>
+        </figure>
+        <figure class="polaroid-card rotate-straight">
+          <div class="polaroid-pin">📍</div>
+          <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&auto=format&fit=crop&q=80" alt="Celebration cake" class="polaroid-img" loading="lazy">
+          <figcaption class="polaroid-caption">Here is to many more 🥂</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FOOTER SIGNATURE -->
+    <footer class="template-footer">
+      <p>Handcrafted with love on <strong style="color:#ff2a7a;">Vanvi Moments</strong> ✨</p>
+    </footer>
+  </main>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+  <script src="../../js/vanvi-api.js"></script>
+  <script src="../../js/template-adapter.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

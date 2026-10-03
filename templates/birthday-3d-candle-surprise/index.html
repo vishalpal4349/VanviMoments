@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Birthday 3D Candle & Polaroid Magic | Vanvi Moments</title>
+  <meta name="description" content="An interactive 3D birthday celebration with candle blow-out, polaroid memory swipe stack, and mystery scratch cards.">
+  <meta name="theme-color" content="#fff5f8">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap-grid.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Template Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Vanvi Luxury Watermark Pill */
+    .vanvi-top-pill {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99999;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 182, 217, 0.45);
+      color: #9d174d;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(255, 71, 126, 0.12);
+      transition: all 0.25s ease;
+      pointer-events: auto;
+    }
+    .vanvi-top-pill:hover {
+      background: rgba(255, 255, 255, 0.98);
+      transform: translateX(-50%) translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 71, 126, 0.2);
+      color: #ff2a7a;
+    }
+    .vanvi-sparkle-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ff477e;
+      box-shadow: 0 0 8px #ff477e;
+      animation: pulseSparkle 1.8s infinite ease-in-out;
+    }
+    @keyframes pulseSparkle {
+      0%, 100% { opacity: 0.6; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.25); }
+    }
+    /* Share Buttons Styling in Finale */
+    .vanvi-share-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+      width: 100%;
+    }
+    .btn-wa-share {
+      background: linear-gradient(135deg, #25D366, #128C7E) !important;
+      color: #fff !important;
+      border: none !important;
+    }
+    .btn-copy-link {
+      background: rgba(255, 255, 255, 0.85) !important;
+      color: #4a2840 !important;
+      border: 1px solid rgba(255, 120, 175, 0.3) !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Vanvi Floating Luxury Watermark -->
+  <a href="../../index.html" class="vanvi-top-pill" title="Vanvi Moments Luxury Celebrations">
+    <span class="vanvi-sparkle-dot"></span>
+    <span>Vanvi Moments ✦</span>
+  </a>
+
+  <!-- Background visual layer -->
+  <img src="image/bg.png" alt="Celebration Background" class="background-image">
+
+  <!-- Global Floating Celebration Balloons & Petals Sky (Always Active Across All Stages) -->
+  <div id="celebrationSky"></div>
+
+  <!-- Decorative corner accents wrapped in viewport-clipped container -->
+  <div class="decor-corner-wrap" style="position:fixed;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:1;">
+    <img src="image/b3.png" alt="Decorative floral accent" class="corner-image bottom-left">
+    <img src="image/b3.png" alt="Decorative floral accent" class="corner-image bottom-left-right">
+    <img src="image/b4.png" alt="Decorative floral accent" class="corner-image-right bottom-right">
+    <img src="image/b6.png" alt="Heart illustration" class="heart1">
+    <img src="image/b5.png" alt="Heart illustration" class="heart2">
+  </div>
+
+  <h1 class="headline">Hey! Beautiful i have surprise for you</h1>
+
+  <!-- Interactive Letter & Envelope Scene Container -->
+  <div id="letterScene">
+    <svg id="theSvg" viewBox="-120 -30 240 180" enable-background="new 0 0 174 148" xml:space="preserve">
+      <defs>
+        <filter id="f" filterUnits="userSpaceOnUse" x="-120" y="-30" width="120%" height="120%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"></feGaussianBlur>
+          <feOffset in="blur" dx="3" dy="5" result="shadow"></feOffset>
+          <feFlood flood-color="rgba(3,0,0,1)" result="color" />
+          <feComposite in="color" in2="shadow" operator="in" />
+          <feComposite in="SourceGraphic" />
+        </filter>
+        <path id="shape" d="M0, 21.054 
+       C0, 21.054 24.618, -15.165 60.750, 8.554 
+       C93.249, 29.888 57.749, 96.888 0, 117.388
+       C-57.749, 96.888  -93.249, 29.888 -60.750, 8.554
+       C-24.618, -15.165  -0, 21.054 -0, 21.054z    
+    " />
+        <path id="partialPath" />
+      </defs>
+      <text dy="-2">
+        <textPath style="font-family: fantasy;" xlink:href="#partialPath" startOffset="12">
+          🌹Happy Birthday
+          🌹.........................................................................................................................................🌹
+          My Girl !🌹
+        </textPath>
+      </text>
+      <use id="useThePath" xlink:href="#partialPath" stroke="white" stroke-width=".5" stroke-opacity=".5" fill="none"
+        style="display:none;" />
+    </svg>
+
+    <div id="castle">
+      <div class="letter">
+        <div class="valentines">
+          <div class="envelope"></div>
+          <div class="front"></div>
+          <div class="card">
+            <div class="text">Happy<br> Birthday<br> Beautiful !</div>
+            <div class="heart"></div>
+          </div>
+          <div class="hearts">
+            <div class="one"></div>
+            <div class="two"></div>
+            <div class="three"></div>
+            <div class="four"></div>
+            <div class="five"></div>
+          </div>
+        </div>
+        <div class="shadow"></div>
+      </div>
+      <div class="envelope-hint"><span>👆 Tap to open letter</span></div>
+    </div>
+
+    <div class="wrapperLetterForm" style="display: none;">
+      <div class="boxLetter">
+        <i class="fa-solid fa-xmark"></i>
+        <div class="formLetter">
+          <div class="heartLetter">
+            <div class="heartLetterItem"></div>
+          </div>
+          <div class="heartLetter">
+            <div class="heartLetterItem"></div>
+          </div>
+          <div class="wrapperLetter">
+            <div class="giftbox">
+              <div class="img">
+                <img src="./image/giftbox.png" alt="Gift">
+              </div>
+            </div>
+            <div class="textLetter">
+              <h2></h2>
+              <p class="contentLetter"></p>
+              <div class="heartAnimation">
+                <img src="./image/heartAnimation.gif" alt="Hearts">
+              </div>
+            </div>
+            <div class="mewmew1">
+              <img src="./image/mewmew.gif" alt="Cute">
+            </div>
+            <div class="mewmew2">
+              <img src="./image/mewmew.gif" alt="Cute">
+            </div>
+            <div class="signature"></div>
+          </div>
+          <button class="letterNextBtn" title="Next Surprise" aria-label="Next Surprise">
+            <span>Next Surprise</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+        <div class="before"></div>
+      </div>
+    </div>
+    <audio id="bgm" src="happybirthday.mp3" preload="auto" loop></audio>
+  </div>
+
+  <!-- ==========================================================
+       BIRTHDAY JOURNEY CONTAINER (CAKE, POLAROIDS, SCRATCH, FINALE)
+       ========================================================== -->
+  <div id="birthdayJourneyContainer" style="display: none;">
+    <div class="journey-backdrop"></div>
+
+    <!-- STAGE 1: Birthday Cake & Candle -->
+    <div id="cakeStage" class="journey-card" style="display: none;">
+      <div class="stage-tag">Step 1 of 4 • Birthday Tradition 🎂</div>
+      <h2 class="stage-title">Make a Birthday Wish! ✨</h2>
+      <p class="stage-subtitle">Tap the candle flame to blow it out and make your wish come true</p>
+      
+      <div class="cake-wrapper-3d" id="interactiveCake">
+        <img src="image/cake_3d.png" alt="Birthday Cake 3D" class="cake-3d-img">
+        <div class="flame-overlay-3d" id="candleFlame"></div>
+        <div class="smoke-3d" id="candleSmoke"></div>
+        <div class="tap-hint-3d" id="cakeTapHint">
+          <span>👆 Tap to blow the candle!</span>
+        </div>
+      </div>
+
+      <div class="wish-celebration-text" id="wishMadeText" style="display: none;">
+        <h3>🎉 Wish Sent to the Universe! 💖</h3>
+        <p>May all your deepest wishes and dreams come true this year!</p>
+      </div>
+
+      <button class="journey-btn" id="toMemoriesBtn" style="display: none;">
+        <span>Our Memories 📸</span> <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
+    <!-- STAGE 2: Polaroid Photo Memories -->
+    <div id="polaroidStage" class="journey-card" style="display: none;">
+      <div class="stage-tag">Step 2 of 4 • Special Memories 📸</div>
+      <h2 class="stage-title">A Reel of Sweet Moments 💖</h2>
+      <p class="stage-subtitle">Special glimpses of the most wonderful person</p>
+      
+      <div class="polaroid-deck" id="polaroidDeck">
+        <div class="polaroid-card active" data-index="0">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="image.jpg" alt="Memory 1">
+          </div>
+          <p class="polaroid-caption">"The smile that makes every single day brighter ✨"</p>
+          <span class="polaroid-tag">#DayOne 🌸</span>
+        </div>
+
+        <div class="polaroid-card" data-index="1">
+          <div class="washi-tape washi-pink"></div>
+          <div class="polaroid-img-wrap">
+            <img src="image/photo_roses.jpg" alt="Memory 2">
+          </div>
+          <p class="polaroid-caption">"More graceful than all the roses in the garden 🌹"</p>
+          <span class="polaroid-tag">#Prettiest 💐</span>
+        </div>
+
+        <div class="polaroid-card" data-index="2">
+          <div class="washi-tape washi-gold"></div>
+          <div class="polaroid-img-wrap">
+            <img src="flower.jpg" alt="Memory 3">
+          </div>
+          <p class="polaroid-caption">"Cozy warmth and peaceful happiness by your side ❄️🔥"</p>
+          <span class="polaroid-tag">#AlwaysWithYou ☕</span>
+        </div>
+
+        <div class="polaroid-card" data-index="3">
+          <div class="washi-tape washi-sparkle"></div>
+          <div class="polaroid-img-wrap">
+            <img src="image/photo_cake.jpg" alt="Memory 4">
+          </div>
+          <p class="polaroid-caption">"Happy Birthday to the most special person in the world! 🎂💖"</p>
+          <span class="polaroid-tag">#BirthdayQueen 👑</span>
+        </div>
+      </div>
+
+      <div class="polaroid-controls">
+        <div class="polaroid-dots" id="polaroidDots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <button class="journey-btn secondary-btn" id="nextPolaroidBtn">
+          <span>Next Memory ➔</span>
+        </button>
+        <button class="journey-btn" id="toScratchBtn" style="display: none;">
+          <span>Birthday Coupons 🎁 ➔</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- STAGE 3: Scratch & Reveal Love Coupons -->
+    <div id="scratchStage" class="journey-card" style="display: none;">
+      <div class="stage-tag">Step 3 of 4 • Birthday Coupons 🎟️</div>
+      <h2 class="stage-title">Tap to Scratch Your Gifts! 🎁</h2>
+      <p class="stage-subtitle">Scratch all 3 cards to claim your birthday presents</p>
+
+      <div class="scratch-grid">
+        <!-- Card 1 -->
+        <div class="scratch-card" id="scratch1" data-revealed="false">
+          <div class="scratch-inner">
+            <div class="scratch-front">
+              <div class="scratch-front-left">
+                <div class="card-icon-wrap">🌟</div>
+                <div>
+                  <h4 class="card-hint-title">Birthday Wish #1</h4>
+                  <div class="card-hint-sub">Mystery Birthday Blessing ✨</div>
+                </div>
+              </div>
+              <div class="scratch-badge">SCRATCH ✦</div>
+            </div>
+            <div class="scratch-back">
+              <div class="scratch-back-tag">🌟 VIP Birthday Wish</div>
+              <h4>Endless Smiles & Joy</h4>
+              <p>"May your year ahead overflow with boundless happiness, radiant health, and 365 days of genuine smiles!"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="scratch-card" id="scratch2" data-revealed="false">
+          <div class="scratch-inner">
+            <div class="scratch-front">
+              <div class="scratch-front-left">
+                <div class="card-icon-wrap">🤝</div>
+                <div>
+                  <h4 class="card-hint-title">Forever Promise #2</h4>
+                  <div class="card-hint-sub">Heartfelt Commitment ❤️</div>
+                </div>
+              </div>
+              <div class="scratch-badge">SCRATCH ✦</div>
+            </div>
+            <div class="scratch-back">
+              <div class="scratch-back-tag">🤝 Lifetime Promise</div>
+              <h4>Always By Your Side</h4>
+              <p>"I promise to always stand beside you, cheer for every dream you chase, and hold your hand through everything."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="scratch-card" id="scratch3" data-revealed="false">
+          <div class="scratch-inner">
+            <div class="scratch-front">
+              <div class="scratch-front-left">
+                <div class="card-icon-wrap">🧸</div>
+                <div>
+                  <h4 class="card-hint-title">Special Voucher #3</h4>
+                  <div class="card-hint-sub">Unlimited Pampering Pass 💖</div>
+                </div>
+              </div>
+              <div class="scratch-badge">SCRATCH ✦</div>
+            </div>
+            <div class="scratch-back">
+              <div class="scratch-back-tag">💖 Exclusive Voucher</div>
+              <h4>Unlimited Pampering Pass</h4>
+              <p>"Lifetime pass for unlimited warm hugs, sweet midnight ice creams, and 100% undivided attention whenever you need!"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="journey-btn" id="toFinaleBtn" style="display: none;">
+        <span>Grand Celebration 🎆 ➔</span>
+      </button>
+    </div>
+
+    <!-- STAGE 4: Grand Finale Celebration -->
+    <div id="finaleStage" class="journey-card" style="display: none;">
+      <div class="stage-tag">Grand Finale 💖</div>
+      <div class="finale-crown">👑✨</div>
+      <h2 class="finale-title">Happy Birthday Beautiful! 🎉</h2>
+      <p class="finale-text">"You make this world a much warmer, kinder, and happier place just by being in it. May today and every day bring you pure joy, immense love, and endless happiness!"</p>
+
+      <div class="floating-hearts-cluster">
+        <span class="cluster-heart">💖</span>
+        <span class="cluster-heart">✨</span>
+        <span class="cluster-heart">🎂</span>
+        <span class="cluster-heart">🌹</span>
+        <span class="cluster-heart">💕</span>
+      </div>
+
+      <div class="finale-actions">
+        <button class="journey-btn" id="replayJourneyBtn">
+          <i class="fa-solid fa-rotate-right"></i> <span>Replay Surprise</span>
+        </button>
+        <button class="journey-btn secondary-btn" id="toggleMusicBtn">
+          <i class="fa-solid fa-music"></i> <span>Music: ON</span>
+        </button>
+      </div>
+
+      <div class="vanvi-share-row">
+        <button class="journey-btn btn-wa-share" id="shareWhatsAppBtn">
+          <i class="fa-brands fa-whatsapp"></i> <span>Share via WhatsApp</span>
+        </button>
+        <button class="journey-btn secondary-btn btn-copy-link" id="copyLinkBtn">
+          <i class="fa-regular fa-copy"></i> <span>Copy Moment Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Preloader -->
+  <div id="pageLoader" class="show">
+    <div class="wrap">
+      <div class="spinner"></div>
+      <div class="text">Loading experience...</div>
+    </div>
+  </div>
+
+  <!-- Interactive Gift Box Component -->
+  <div class="boxgift" id="giftBox">
+    <img src="image/nap.png" alt="Gift Box Lid" class="box-gift lid">
+    <img src="image/hop.png" alt="Gift Box Base" class="box-gift base">
+  </div>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+  
+  <!-- Template Dynamic Controller -->
+  <script src="script.js"></script>
+</body>
+
+</html>

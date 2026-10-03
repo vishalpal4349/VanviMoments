@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Apology Dashboard — A Cute Interactive Sorry | Vanvi Moments</title>
+  <meta name="description" content="A cute, heartwarming interactive apology experience with forgive buttons and love notes on Vanvi Moments.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --soft-rose: #ff758f;
+      --deep-rose: #e63946;
+      --bubble-bg: #fff5f7;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --border-soft: rgba(255, 117, 143, 0.3);
+      --text-main: #331824;
+      --text-dim: #7d5a6b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Fredoka', cursive, sans-serif;
+      background: var(--bubble-bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image:
+        radial-gradient(circle at 10% 15%, rgba(255, 194, 209, 0.45) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(200, 225, 255, 0.4) 0%, transparent 45%),
+        linear-gradient(180deg, #fffafa 0%, #fff0f3 100%);
+      background-attachment: fixed;
+    }
+
+    #heartsCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    .dashboard-wrap {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      padding: 24px 18px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Sound Pill */
+    .apology-sound {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 100;
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      padding: 6px 14px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--deep-rose);
+      box-shadow: 0 4px 14px rgba(230, 57, 70, 0.12);
+    }
+
+    /* Character Emotion Box */
+    .bear-box {
+      width: 140px;
+      height: 140px;
+      margin: 10px auto 14px;
+      background: #fff;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 72px;
+      box-shadow: 0 10px 30px rgba(255, 117, 143, 0.2);
+      border: 3px solid #ffccd5;
+      animation: floatBear 3s ease-in-out infinite;
+      transition: all 0.3s;
+    }
+    @keyframes floatBear {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-8px) scale(1.04); }
+    }
+
+    .sorry-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffe5ec;
+      color: var(--deep-rose);
+      padding: 4px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .sorry-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+    .sorry-subtitle {
+      font-size: 14.5px;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+      line-height: 1.4;
+      padding: 0 10px;
+    }
+
+    /* Interactive Forgive Question Area */
+    .forgive-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 24px;
+      padding: 24px 18px;
+      width: 100%;
+      box-shadow: 0 14px 36px rgba(255, 117, 143, 0.12);
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .forgive-question {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--deep-rose);
+      margin-bottom: 18px;
+    }
+    .forgive-buttons-zone {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      min-height: 60px;
+      position: relative;
+    }
+
+    .btn-yes {
+      padding: 12px 32px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Fredoka', sans-serif;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, #ff4d6d, #e63946);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(230, 57, 70, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-yes:hover { transform: scale(1.08); }
+
+    .btn-no-runaway {
+      padding: 12px 26px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Fredoka', sans-serif;
+      border-radius: 16px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.15s ease-out;
+      user-select: none;
+    }
+
+    /* Apology Vouchers Grid */
+    .vouchers-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 10px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .vouchers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 22px;
+    }
+    .voucher-card {
+      background: #fff;
+      border: 1.5px dashed #ffb3c1;
+      border-radius: 18px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.03);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .voucher-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--deep-rose);
+      box-shadow: 0 10px 24px rgba(230, 57, 70, 0.15);
+    }
+    .voucher-icon { font-size: 32px; margin-bottom: 6px; }
+    .voucher-name { font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+    .voucher-redeem { font-size: 10.5px; font-weight: 700; color: var(--deep-rose); background: #ffe5ec; padding: 2px 8px; border-radius: 99px; display: inline-block; }
+
+    /* Heartfelt Apology Letter */
+    .apology-letter {
+      background: #fffdfa;
+      border: 1px solid #ebd9c8;
+      border-radius: 22px;
+      padding: 24px 20px;
+      width: 100%;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+      text-align: left;
+      position: relative;
+    }
+    .letter-title-sub {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--deep-rose);
+      margin-bottom: 10px;
+    }
+    .letter-content {
+      font-family: 'Caveat', cursive;
+      font-size: 21px;
+      line-height: 1.6;
+      color: #3b1e2b;
+      white-space: pre-wrap;
+    }
+    .letter-from {
+      text-align: right;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--deep-rose);
+      margin-top: 14px;
+    }
+
+    /* Modal on Forgiveness */
+    .success-celebration {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 240, 245, 0.95);
+      backdrop-filter: blur(12px);
+      z-index: 150;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+    .success-celebration.open { display: flex; }
+    .success-box {
+      background: #fff;
+      border-radius: 28px;
+      border: 2px solid #ffccd5;
+      padding: 30px 24px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 20px 50px rgba(230, 57, 70, 0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="heartsCanvas"></canvas>
+
+  <div class="apology-sound" onclick="toggleAudio()">
+    <span>🎵</span>
+    <span id="soundLabel">Play Healing Song</span>
+  </div>
+
+  <audio id="bgAudio" loop preload="auto">
+    <source src="../birthday-3d-candle-surprise/happybirthday.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="dashboard-wrap">
+    
+    <div class="bear-box" id="bearEmoji">🥺</div>
+    <div class="sorry-badge">💌 A Sincere Apology Dashboard</div>
+    <h1 class="sorry-title" id="txtApologyTitle">I'm Really Sorry, Sneha</h1>
+    <p class="sorry-subtitle" id="txtApologySub">
+      I hate seeing you upset, especially when it is because of me. Please accept this little dashboard from my heart.
+    </p>
+
+    <!-- The Forgive Interactive Question -->
+    <div class="forgive-box">
+      <div class="forgive-question">Will you forgive me? 🥺👉👈</div>
+      <div class="forgive-buttons-zone" id="buttonsZone">
+        <button type="button" class="btn-yes" onclick="forgiveSuccess()">YES! ❤️</button>
+        <button type="button" class="btn-no-runaway" id="btnNo" onmouseover="runAwayNo(this)" onclick="runAwayNo(this)">No 😠</button>
+      </div>
+    </div>
+
+    <!-- Apology Coupons -->
+    <div class="vouchers-title">
+      <span>🎟️</span> <span>Redeemable Peace Offerings</span>
+    </div>
+    <div class="vouchers-grid">
+      <div class="voucher-card" onclick="redeemCoupon('1 Long Warm Hug')">
+        <div class="voucher-icon">🫂</div>
+        <div class="voucher-name">1 Long Warm Hug</div>
+        <div class="voucher-redeem">Tap to Redeem</div>
+      </div>
+      <div class="voucher-card" onclick="redeemCoupon('Late Night Ice Cream Treat')">
+        <div class="voucher-icon">🍦</div>
+        <div class="voucher-name">Late Night Ice Cream</div>
+        <div class="voucher-redeem">On Me Anytime</div>
+      </div>
+      <div class="voucher-card" onclick="redeemCoupon('You Are Right Certificate')">
+        <div class="voucher-icon">👑</div>
+        <div class="voucher-name">You Are 100% Right</div>
+        <div class="voucher-redeem">Valid Forever</div>
+      </div>
+      <div class="voucher-card" onclick="redeemCoupon('Listening Without Speaking')">
+        <div class="voucher-icon">👂</div>
+        <div class="voucher-name">1 Hour of Listening</div>
+        <div class="voucher-redeem">Zero Arguments</div>
+      </div>
+    </div>
+
+    <!-- Heartfelt Apology Note -->
+    <div class="apology-letter">
+      <h3 class="letter-title-sub">A Note From My Heart</h3>
+      <p class="letter-content" id="txtApologyNote">
+I am so sorry for hurting you or causing any sadness between us.
+
+You mean the absolute world to me, and nothing is worth losing your smile. I promise to be more patient, listen deeper, and take care of your heart with extra love.
+
+Please forgive me? 💕
+      </p>
+      <div class="letter-from" id="txtSenderSign">— Sincerely Yours, Aarav</div>
+    </div>
+
+  </div>
+
+  <!-- Success Celebration Modal -->
+  <div class="success-celebration" id="successModal">
+    <div class="success-box">
+      <div style="font-size:64px; margin-bottom:12px;">🥰🎉</div>
+      <h2 style="font-size:24px; font-weight:700; color:var(--deep-rose); margin-bottom:8px;">
+        THANK YOU FOR FORGIVING ME!
+      </h2>
+      <p style="font-size:15px; color:var(--text-dim); margin-bottom:20px;">
+        I promise to never take your sweet smile for granted again. Hugs incoming! ❤️
+      </p>
+      <button type="button" class="btn-yes" style="width:100%;" onclick="closeSuccess()">
+        Hug Accepted 🫂
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const recipient = params.get('name') || params.get('recipient') || 'Sneha';
+    const sender = params.get('sender') || 'Aarav';
+    const note = params.get('message') || null;
+
+    if (recipient) {
+      document.getElementById('txtApologyTitle').textContent = `I'm Really Sorry, ${recipient}`;
+    }
+    if (sender) {
+      document.getElementById('txtSenderSign').textContent = `— Sincerely Yours, ${sender}`;
+    }
+    if (note) {
+      document.getElementById('txtApologyNote').textContent = note;
+    }
+
+    let soundOn = false;
+    const audio = document.getElementById('bgAudio');
+    function toggleAudio() {
+      if (!soundOn) {
+        audio.play().then(() => {
+          soundOn = true;
+          document.getElementById('soundLabel').textContent = 'Melody Playing 🎵';
+        }).catch(() => {});
+      } else {
+        audio.pause();
+        soundOn = false;
+        document.getElementById('soundLabel').textContent = 'Play Healing Song';
+      }
+    }
+
+    // Runaway No Button Logic
+    let runawayCount = 0;
+    const runawayMessages = [
+      "Wait! You can't click No! 😜",
+      "Are you sure? Try again 🥺",
+      "Nice try! I ran away! 🏃‍♂️",
+      "No is not an option! 💕",
+      "Just click Yes already! 🥰"
+    ];
+
+    function runAwayNo(btn) {
+      runawayCount++;
+      const zone = document.getElementById('buttonsZone');
+      const maxX = zone.clientWidth - btn.offsetWidth - 20;
+      const maxY = 60;
+      
+      const randomX = (Math.random() - 0.5) * maxX;
+      const randomY = (Math.random() - 0.5) * maxY;
+
+      btn.style.position = 'relative';
+      btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+      
+      const msg = runawayMessages[runawayCount % runawayMessages.length];
+      btn.textContent = msg;
+
+      document.getElementById('bearEmoji').textContent = '😭';
+      setTimeout(() => {
+        document.getElementById('bearEmoji').textContent = '🥺';
+      }, 800);
+    }
+
+    function forgiveSuccess() {
+      if (!soundOn) toggleAudio();
+      document.getElementById('bearEmoji').textContent = '🥰';
+      document.getElementById('successModal').classList.add('open');
+      rainHearts();
+    }
+
+    function closeSuccess() {
+      document.getElementById('successModal').classList.remove('open');
+    }
+
+    function redeemCoupon(title) {
+      alert(`🎉 Coupon Redeemed: "${title}"!\nClaimable anytime in person with ${sender}! ❤️`);
+      rainHearts();
+    }
+
+    // Heart Rain Engine
+    const canvas = document.getElementById('heartsCanvas');
+    const ctx = canvas.getContext('2d');
+    let hearts = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function rainHearts() {
+      const symbols = ['💖', '💕', '🌸', '✨', '🫂', '💌'];
+      for (let i = 0; i < 60; i++) {
+        hearts.push({
+          x: Math.random() * canvas.width,
+          y: -20,
+          vy: Math.random() * 4 + 2,
+          vx: (Math.random() - 0.5) * 2,
+          char: symbols[Math.floor(Math.random() * symbols.length)],
+          size: Math.random() * 18 + 14,
+          alpha: 1
+        });
+      }
+    }
+
+    function heartLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hearts.forEach((h, idx) => {
+        h.y += h.vy;
+        h.x += h.vx;
+        ctx.font = `${h.size}px sans-serif`;
+        ctx.globalAlpha = h.alpha;
+        ctx.fillText(h.char, h.x, h.y);
+        if (h.y > canvas.height) hearts.splice(idx, 1);
+      });
+      requestAnimationFrame(heartLoop);
+    }
+    heartLoop();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Hidden Hearts ✦ Visual Observation Game | Vanvi Moments</title>
+  <meta name="description"
+    content="Discover hidden glowing celestial hearts embedded within the romantic Vanvi tapestry. Beat the timer and earn up to 10 coins.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090614;
+      --card: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --rose: #fb7185;
+      --gold: #f59e0b;
+      --gold-light: #fef3c7;
+      --text: #fdf2f8;
+      --text-muted: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 20%, #200f33 0%, #0d0718 70%, #050209 100%);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      width: 100%;
+      max-width: 650px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      color: #e2e8f0;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .wallet-chip {
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 7px 14px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fde68a;
+    }
+
+    /* Main Container */
+    .main-wrap {
+      width: 100%;
+      max-width: 600px;
+      padding: 0 16px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+      flex: 1;
+    }
+
+    .header-box {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .game-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(251, 113, 133, 0.2), rgba(245, 158, 11, 0.2));
+      border: 1px solid rgba(251, 113, 133, 0.3);
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #fecdd3;
+      margin-bottom: 6px;
+    }
+
+    .title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 40%, #fda4af 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.5px;
+    }
+
+    /* HUD Stats */
+    .hud-bar {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .hud-item {
+      text-align: center;
+    }
+
+    .hud-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .hud-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 1px;
+    }
+
+    .hud-val.time-alert {
+      color: #f43f5e;
+      animation: pulseAlert 0.8s infinite alternate;
+    }
+
+    @keyframes pulseAlert {
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(1.1);
+      }
+    }
+
+    /* Scene Canvas Container */
+    .scene-frame {
+      width: 100%;
+      max-width: 520px;
+      aspect-ratio: 4 / 3;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid var(--glass-border);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(251, 113, 133, 0.15);
+      background: #110d21;
+      cursor: crosshair;
+    }
+
+    /* Background Scene Art (Layered Vector) */
+    .scene-art {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* Hidden Heart Target Item */
+    .hidden-target {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .hidden-target svg {
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s;
+    }
+
+    .hidden-target.found {
+      pointer-events: none;
+      animation: heartFound 0.6s forwards ease-out;
+    }
+
+    @keyframes heartFound {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: translate(-50%, -50%) scale(2.2);
+        filter: drop-shadow(0 0 15px #f43f5e);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(2.6);
+        opacity: 0;
+      }
+    }
+
+    /* Misclick Ripple */
+    .miss-ripple {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #ef4444;
+      background: rgba(239, 68, 68, 0.2);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: rippleAnim 0.4s ease-out forwards;
+      z-index: 20;
+    }
+
+    @keyframes rippleAnim {
+      0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(2.2);
+        opacity: 0;
+      }
+    }
+
+    /* Floating Penalty Text */
+    .penalty-text {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      color: #ef4444;
+      font-weight: 800;
+      font-size: 0.95rem;
+      pointer-events: none;
+      animation: floatUp 0.6s ease-out forwards;
+      z-index: 25;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(-24px);
+      }
+    }
+
+    /* Action Controls */
+    .controls-row {
+      width: 100%;
+      max-width: 520px;
+      margin-top: 14px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 13px;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(225, 29, 72, 0.35);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 8px 25px rgba(225, 29, 72, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      color: #f1f5f9;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    /* Reward Ladder Card */
+    .reward-card {
+      width: 100%;
+      max-width: 520px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-top: 18px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      font-size: 0.82rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .card-row:last-child {
+      border-bottom: none;
+    }
+
+    .card-row.current {
+      color: #fda4af;
+      font-weight: 700;
+    }
+
+    .coin-val {
+      color: #fbbf24;
+      font-weight: 700;
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(145deg, #180f24 0%, #0d0816 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-icon {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .reward-badge {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 12px;
+      border-radius: 14px;
+      color: #fde68a;
+      font-weight: 800;
+      font-size: 1.25rem;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  </style>
+  <link rel="stylesheet" href="vanvi-navigation.css">
+</head>
+
+<body data-vanvi-no-dock="true">
+  <!-- Navigation -->
+  <header class="top-nav">
+    <a href="games.html" class="back-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+      Games Arena
+    </a>
+    <div class="wallet-chip">
+      <span style="font-size: 1.1rem;">🪙</span>
+      <span id="navWalletCoins">0</span>
+    </div>
+  </header>
+
+  <!-- Main Game -->
+  <main class="main-wrap">
+    <div class="header-box">
+      <div class="game-badge">Visual Observation Trial</div>
+      <h1 class="title">Hidden Hearts</h1>
+    </div>
+
+    <!-- HUD Stats -->
+    <div class="hud-bar">
+      <div class="hud-item">
+        <div class="hud-label">Level</div>
+        <div class="hud-val" id="hudLevel">1 / 5</div>
+      </div>
+      <div class="hud-item">
+        <div class="hud-label">Found</div>
+        <div class="hud-val" style="color: #fb7185;"><span id="hudFound">0</span> / <span id="hudTotal">5</span></div>
+      </div>
+      <div class="hud-item">
+        <div class="hud-label">Time Remaining</div>
+        <div class="hud-val" id="hudTimer">45s</div>
+      </div>
+    </div>
+
+    <!-- Scene Container -->
+    <div class="scene-frame" id="sceneFrame" onclick="handleSceneClick(event)">
+      <!-- SVG Romantic Tapestry Scene -->
+      <svg class="scene-art" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#140b28" />
+            <stop offset="60%" stop-color="#2a1240" />
+            <stop offset="100%" stop-color="#45184e" />
+          </linearGradient>
+          <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fdf4ff" stop-opacity="0.9" />
+            <stop offset="40%" stop-color="#f5d0fe" stop-opacity="0.4" />
+            <stop offset="100%" stop-color="#3b0764" stop-opacity="0" />
+          </radialGradient>
+          <linearGradient id="terraceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#2d133f" />
+            <stop offset="100%" stop-color="#12061f" />
+          </linearGradient>
+        </defs>
+
+        <!-- Night Sky Background -->
+        <rect width="800" height="600" fill="url(#skyGrad)" />
+
+        <!-- Celestial Moon -->
+        <circle cx="680" cy="110" r="100" fill="url(#moonGlow)" />
+        <circle cx="680" cy="110" r="42" fill="#fffdfa" filter="drop-shadow(0 0 18px #f5d0fe)" />
+
+        <!-- Distant Castle / Skyline Silhouette -->
+        <path
+          d="M 0,380 L 80,360 L 140,375 L 190,320 L 220,380 L 320,350 L 390,390 L 520,340 L 570,380 L 680,330 L 720,385 L 800,370 L 800,600 L 0,600 Z"
+          fill="#1b0b2e" opacity="0.8" />
+
+        <!-- Romantic Arch & Trellis with Roses -->
+        <path d="M 40,600 Q 40,160 400,160 Q 760,160 760,600 L 730,600 Q 730,190 400,190 Q 70,190 70,600 Z"
+          fill="#2d123b" opacity="0.9" />
+
+        <!-- Fairy Lights Garland -->
+        <path d="M 50,220 Q 200,310 400,240 Q 600,320 750,210" fill="none" stroke="rgba(254,240,138,0.4)"
+          stroke-width="1.5" stroke-dasharray="3, 18" />
+        <!-- Fairy Light Bulbs -->
+        <circle cx="120" cy="255" r="4" fill="#fef08a" filter="drop-shadow(0 0 6px #fef08a)" />
+        <circle cx="210" cy="280" r="4" fill="#fef08a" filter="drop-shadow(0 0 6px #fef08a)" />
+        <circle cx="310" cy="270" r="4" fill="#fef08a" filter="drop-shadow(0 0 6px #fef08a)" />
+        <circle cx="410" cy="245" r="4" fill="#fef08a" filter="drop-shadow(0 0 6px #fef08a)" />
+        <circle cx="510" cy="275" r="4" fill="#fef08a" filter="drop-shadow(0 0 6px #fef08a)" />
+        <circle cx="610" cy="285" r="4" fill="#fef08a" filter="drop-shadow(0 0 6px #fef08a)" />
+        <circle cx="700" cy="245" r="4" fill="#fef08a" filter="drop-shadow(0 0 6px #fef08a)" />
+
+        <!-- Floral Vines & Foliage -->
+        <path d="M 60,320 Q 90,280 120,330 Q 150,300 130,370" fill="none" stroke="#3b1b47" stroke-width="6" />
+        <circle cx="90" cy="290" r="8" fill="#e11d48" opacity="0.75" />
+        <circle cx="125" cy="340" r="7" fill="#fb7185" opacity="0.8" />
+        <circle cx="730" cy="330" r="8" fill="#e11d48" opacity="0.75" />
+        <circle cx="700" cy="360" r="9" fill="#f43f5e" opacity="0.8" />
+
+        <!-- Marble Terrace Balcony -->
+        <rect x="0" y="440" width="800" height="160" fill="url(#terraceGrad)" />
+        <line x1="0" y1="440" x2="800" y2="440" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+
+        <!-- Balcony Railings -->
+        <g stroke="rgba(255,255,255,0.12)" stroke-width="4">
+          <line x1="80" y1="440" x2="80" y2="520" />
+          <line x1="160" y1="440" x2="160" y2="520" />
+          <line x1="240" y1="440" x2="240" y2="520" />
+          <line x1="320" y1="440" x2="320" y2="520" />
+          <line x1="400" y1="440" x2="400" y2="520" />
+          <line x1="480" y1="440" x2="480" y2="520" />
+          <line x1="560" y1="440" x2="560" y2="520" />
+          <line x1="640" y1="440" x2="640" y2="520" />
+          <line x1="720" y1="440" x2="720" y2="520" />
+          <line x1="0" y1="520" x2="800" y2="520" stroke-width="3" />
+        </g>
+
+        <!-- Candle Lantern on Table -->
+        <rect x="360" y="400" width="80" height="60" rx="6" fill="#1b0826" stroke="rgba(255,255,255,0.1)" />
+        <rect x="385" y="360" width="30" height="42" rx="4" fill="rgba(254,240,138,0.25)" stroke="#fbbf24"
+          stroke-width="1.5" />
+        <circle cx="400" cy="385" r="5" fill="#f59e0b" filter="drop-shadow(0 0 8px #fbbf24)" />
+
+        <!-- Champagne Flutes -->
+        <path d="M 445,405 L 452,380 L 458,380 L 465,405 Z M 455,405 L 455,420 M 448,420 L 462,420" stroke="#fde68a"
+          stroke-width="1.5" fill="none" />
+        <path d="M 470,405 L 477,380 L 483,380 L 490,405 Z M 480,405 L 480,420 M 473,420 L 487,420" stroke="#fde68a"
+          stroke-width="1.5" fill="none" />
+      </svg>
+
+      <!-- Target Container (Dynamic hearts placed here) -->
+      <div id="targetsLayer"></div>
+    </div>
+
+    <!-- Action Controls -->
+    <div class="controls-row">
+      <button class="action-btn btn-primary" id="btnStart" onclick="startGame()">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+        Start Search
+      </button>
+      <button class="action-btn btn-secondary" onclick="showRules()">
+        Rules
+      </button>
+    </div>
+
+    <!-- Reward Tiers Card -->
+    <div class="reward-card">
+      <div class="card-header">
+        <span>Skill-Based Reward Tiers</span>
+        <span style="color: #fb7185;">Daily Cap: 25 🪙</span>
+      </div>
+      <div class="card-row" id="tierLvl1">
+        <span>Level 1–2 Cleared</span>
+        <span class="coin-val">+2 Coins</span>
+      </div>
+      <div class="card-row" id="tierLvl3">
+        <span>Level 3–4 Cleared</span>
+        <span class="coin-val">+5 Coins</span>
+      </div>
+      <div class="card-row" id="tierLvl5">
+        <span>Level 5 Cleared (Master)</span>
+        <span class="coin-val">+8 Coins</span>
+      </div>
+      <div class="card-row">
+        <span>Flawless / Perfect Run (No wrong taps)</span>
+        <span class="coin-val">+2 Coins Bonus</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rules Modal -->
+  <div class="modal-backdrop" id="rulesModal">
+    <div class="modal-box">
+      <div class="modal-icon">🔍</div>
+      <h2 class="modal-title">Observation Rules</h2>
+      <p class="modal-desc">
+        1. Scan the romantic scene and tap all hidden hearts before time runs out.<br>
+        2. <strong>Watch out:</strong> Wrong clicks subtract 3 seconds from the clock!<br>
+        3. Objects become smaller and subtler with each level.<br>
+        4. Complete Level 5 with zero misclicks for the full 10-coin payout!
+      </p>
+      <button class="action-btn btn-primary" style="width: 100%;" onclick="closeRules()">
+        I'm Ready
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div class="modal-backdrop" id="resultModal">
+    <div class="modal-box">
+      <div class="modal-icon" id="resIcon">✨</div>
+      <h2 class="modal-title" id="resTitle">Trial Completed</h2>
+      <p class="modal-desc" id="resDesc">You found all hidden hearts with supreme vision!</p>
+      <div class="reward-badge" id="rewardBadge">
+        <span>🪙</span>
+        <span id="resCoinsText">+8 Coins Credited</span>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="action-btn btn-primary" onclick="restart()">
+          Play Again
+        </button>
+        <a href="games.html" class="action-btn btn-secondary" style="text-decoration: none;">
+          Exit
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- AUDIO SYNTHESIS ---
+    let audioCtx = null;
+    function initAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function playTone(freq, duration = 0.18, type = 'sine') {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) { }
+    }
+
+    function playFoundChime() {
+      playTone(587.33, 0.15); // D5
+      setTimeout(() => playTone(880, 0.25), 100); // A5
+    }
+
+    function playWrongBuzzer() {
+      playTone(130, 0.25, 'sawtooth');
+    }
+
+    // --- COIN & WALLET API ---
+    const GAME_ID = 'hidden_hearts';
+    const GAME_TITLE = 'Hidden Hearts';
+    const DAILY_CAP = 25;
+
+    function getTodayKey() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function getTodayEarned() {
+      const today = getTodayKey();
+      const savedDate = localStorage.getItem('vanvi_games_today_date');
+      if (savedDate !== today) {
+        localStorage.setItem('vanvi_games_today_date', today);
+        localStorage.setItem('vanvi_games_today_earned', '0');
+        return 0;
+      }
+      return parseInt(localStorage.getItem('vanvi_games_today_earned') || '0', 10);
+    }
+
+    function syncWallet() {
+      let coins = 0;
+      try {
+        const auth = JSON.parse(localStorage.getItem('vanvi_auth_user') || '{}');
+        coins = auth.coins !== undefined ? auth.coins : parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+      } catch (e) {
+        coins = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+      }
+      const el = document.getElementById('navWalletCoins');
+      if (el) el.textContent = coins;
+    }
+
+    async function awardCoins(amount, levelReached, isPerfect) {
+      if (amount <= 0) return 0;
+      const todayEarned = getTodayEarned();
+      const remainingToday = Math.max(0, DAILY_CAP - todayEarned);
+      const actualAward = Math.min(amount, remainingToday);
+
+      if (actualAward <= 0) return 0;
+
+      // 1. Backend Sync
+      const token = localStorage.getItem('vanvi_auth_token');
+      try {
+        await fetch('/api/coins/game-reward', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+          },
+          body: JSON.stringify({
+            gameId: GAME_ID,
+            gameTitle: GAME_TITLE,
+            coins: actualAward,
+            score: levelReached,
+            perfectRun: isPerfect
+          })
+        });
+      } catch (err) {
+        console.warn('API error, falling back locally', err);
+      }
+
+      // 2. Local Sync
+      const current = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+      const newTotal = current + actualAward;
+      localStorage.setItem('vanvi_user_coins', newTotal.toString());
+      localStorage.setItem('vanvi_games_today_earned', (todayEarned + actualAward).toString());
+
+      try {
+        const auth = JSON.parse(localStorage.getItem('vanvi_auth_user') || '{}');
+        if (auth && typeof auth === 'object') {
+          auth.coins = newTotal;
+          localStorage.setItem('vanvi_auth_user', JSON.stringify(auth));
+        }
+      } catch (e) { }
+
+      syncWallet();
+      return actualAward;
+    }
+
+    // --- GAMEPLAY CONFIGURATION ---
+    // 5 Progressive Levels with carefully placed coordinates (% of frame)
+    const LEVELS = [
+      {
+        level: 1,
+        time: 40,
+        targets: [
+          { x: 18, y: 48, size: 26, opacity: 0.85, rot: 15 },
+          { x: 50, y: 64, size: 26, opacity: 0.85, rot: -10 },
+          { x: 85, y: 35, size: 28, opacity: 0.9, rot: 25 },
+          { x: 26, y: 75, size: 26, opacity: 0.85, rot: 0 },
+          { x: 70, y: 78, size: 26, opacity: 0.85, rot: -20 }
+        ]
+      },
+      {
+        level: 2,
+        time: 35,
+        targets: [
+          { x: 15, y: 55, size: 22, opacity: 0.75, rot: 45 },
+          { x: 38, y: 44, size: 22, opacity: 0.75, rot: -15 },
+          { x: 62, y: 32, size: 22, opacity: 0.75, rot: 10 },
+          { x: 82, y: 58, size: 24, opacity: 0.8, rot: -30 },
+          { x: 52, y: 70, size: 22, opacity: 0.75, rot: 20 },
+          { x: 30, y: 28, size: 22, opacity: 0.75, rot: -5 }
+        ]
+      },
+      {
+        level: 3,
+        time: 32,
+        targets: [
+          { x: 12, y: 40, size: 19, opacity: 0.65, rot: -25 },
+          { x: 28, y: 52, size: 19, opacity: 0.65, rot: 30 },
+          { x: 45, y: 38, size: 19, opacity: 0.65, rot: -40 },
+          { x: 58, y: 68, size: 19, opacity: 0.65, rot: 15 },
+          { x: 74, y: 48, size: 20, opacity: 0.7, rot: -10 },
+          { x: 88, y: 72, size: 19, opacity: 0.65, rot: 35 },
+          { x: 68, y: 22, size: 19, opacity: 0.65, rot: 0 }
+        ]
+      },
+      {
+        level: 4,
+        time: 30,
+        targets: [
+          { x: 10, y: 60, size: 16, opacity: 0.55, rot: 15 },
+          { x: 22, y: 35, size: 16, opacity: 0.55, rot: -45 },
+          { x: 35, y: 62, size: 16, opacity: 0.55, rot: 20 },
+          { x: 48, y: 46, size: 16, opacity: 0.55, rot: -15 },
+          { x: 65, y: 52, size: 16, opacity: 0.55, rot: 30 },
+          { x: 78, y: 38, size: 16, opacity: 0.55, rot: -20 },
+          { x: 85, y: 82, size: 16, opacity: 0.55, rot: 40 },
+          { x: 54, y: 28, size: 16, opacity: 0.55, rot: -35 }
+        ]
+      },
+      {
+        level: 5,
+        time: 28,
+        targets: [
+          { x: 8, y: 42, size: 14, opacity: 0.45, rot: -20 },
+          { x: 19, y: 68, size: 14, opacity: 0.45, rot: 35 },
+          { x: 29, y: 26, size: 14, opacity: 0.45, rot: -10 },
+          { x: 42, y: 58, size: 14, opacity: 0.45, rot: 45 },
+          { x: 56, y: 36, size: 14, opacity: 0.45, rot: -30 },
+          { x: 67, y: 74, size: 14, opacity: 0.45, rot: 25 },
+          { x: 79, y: 44, size: 14, opacity: 0.45, rot: -40 },
+          { x: 91, y: 65, size: 14, opacity: 0.45, rot: 15 },
+          { x: 49, y: 78, size: 14, opacity: 0.45, rot: -15 }
+        ]
+      }
+    ];
+
+    // State
+    let currentLvlIndex = 0;
+    let foundCount = 0;
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let isPlaying = false;
+    let wrongClicksCount = 0;
+    let hasClaimed = false;
+
+    function startGame() {
+      initAudio();
+      currentLvlIndex = 0;
+      wrongClicksCount = 0;
+      hasClaimed = false;
+      document.getElementById('btnStart').style.display = 'none';
+      startLevel(currentLvlIndex);
+    }
+
+    function restart() {
+      closeResult();
+      startGame();
+    }
+
+    function startLevel(lvlIndex) {
+      if (lvlIndex >= LEVELS.length) {
+        // Master Victory!
+        finishRun(true);
+        return;
+      }
+
+      currentLvlIndex = lvlIndex;
+      const lvlData = LEVELS[lvlIndex];
+      foundCount = 0;
+      isPlaying = true;
+      timerSeconds = lvlData.time;
+
+      // Update HUD
+      document.getElementById('hudLevel').textContent = `${lvlData.level} / 5`;
+      document.getElementById('hudFound').textContent = `0`;
+      document.getElementById('hudTotal').textContent = lvlData.targets.length;
+      updateTimerDisplay();
+
+      // Render Targets
+      renderTargets(lvlData.targets);
+
+      // Start Countdown
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timerSeconds--;
+        updateTimerDisplay();
+        if (timerSeconds <= 0) {
+          clearInterval(timerInterval);
+          finishRun(false); // Time out
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const el = document.getElementById('hudTimer');
+      el.textContent = `${Math.max(0, timerSeconds)}s`;
+      if (timerSeconds <= 5) {
+        el.classList.add('time-alert');
+      } else {
+        el.classList.remove('time-alert');
+      }
+    }
+
+    function renderTargets(targets) {
+      const container = document.getElementById('targetsLayer');
+      container.innerHTML = '';
+
+      targets.forEach((tgt, i) => {
+        const div = document.createElement('div');
+        div.className = 'hidden-target';
+        div.style.left = `${tgt.x}%`;
+        div.style.top = `${tgt.y}%`;
+        div.style.width = `${tgt.size}px`;
+        div.style.height = `${tgt.size}px`;
+        div.style.opacity = tgt.opacity;
+        div.style.transform = `translate(-50%, -50%) rotate(${tgt.rot}deg)`;
+
+        // SVG Heart Shape
+        div.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="#fb7185">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        `;
+
+        div.addEventListener('click', (e) => {
+          e.stopPropagation(); // Avoid frame misclick
+          if (!isPlaying) return;
+          if (div.classList.contains('found')) return;
+
+          div.classList.add('found');
+          foundCount++;
+          playFoundChime();
+
+          document.getElementById('hudFound').textContent = foundCount;
+
+          if (foundCount >= targets.length) {
+            // Level cleared!
+            clearInterval(timerInterval);
+            setTimeout(() => {
+              startLevel(currentLvlIndex + 1);
+            }, 600);
+          }
+        });
+
+        container.appendChild(div);
+      });
+    }
+
+    function handleSceneClick(e) {
+      if (!isPlaying) return;
+      // Clicked outside a heart => Penalty
+      wrongClicksCount++;
+      playWrongBuzzer();
+
+      // -3 seconds penalty
+      timerSeconds = Math.max(0, timerSeconds - 3);
+      updateTimerDisplay();
+
+      // Visual Ripple & Penalty text
+      const frame = document.getElementById('sceneFrame');
+      const rect = frame.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const ripple = document.createElement('div');
+      ripple.className = 'miss-ripple';
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      frame.appendChild(ripple);
+
+      const penalty = document.createElement('div');
+      penalty.className = 'penalty-text';
+      penalty.textContent = '-3s';
+      penalty.style.left = `${x}px`;
+      penalty.style.top = `${y}px`;
+      frame.appendChild(penalty);
+
+      setTimeout(() => {
+        ripple.remove();
+        penalty.remove();
+      }, 600);
+
+      if (timerSeconds <= 0) {
+        clearInterval(timerInterval);
+        finishRun(false);
+      }
+    }
+
+    async function finishRun(allCompleted) {
+      isPlaying = false;
+      clearInterval(timerInterval);
+
+      const clearedLevels = allCompleted ? 5 : currentLvlIndex;
+      let reward = 0;
+
+      if (clearedLevels >= 5) {
+        reward = 8;
+      } else if (clearedLevels >= 3) {
+        reward = 5;
+      } else if (clearedLevels >= 1) {
+        reward = 2;
+      }
+
+      const isPerfect = (clearedLevels >= 3) && (wrongClicksCount === 0);
+      if (isPerfect && reward > 0) {
+        reward += 2; // +2 perfect bonus
+      }
+
+      // Max reward 10
+      reward = Math.min(10, reward);
+
+      let credited = 0;
+      if (!hasClaimed && reward > 0) {
+        hasClaimed = true;
+        credited = await awardCoins(reward, clearedLevels, isPerfect);
+      }
+
+      showResult(clearedLevels, credited, isPerfect, allCompleted);
+    }
+
+    function showResult(cleared, credited, isPerfect, allCompleted) {
+      const modal = document.getElementById('resultModal');
+      const icon = document.getElementById('resIcon');
+      const title = document.getElementById('resTitle');
+      const desc = document.getElementById('resDesc');
+      const badge = document.getElementById('rewardBadge');
+      const text = document.getElementById('resCoinsText');
+
+      if (allCompleted) {
+        icon.textContent = '👑';
+        title.textContent = 'Grand Romantic Master!';
+        desc.textContent = `All 5 tiers conquered! You possess razor-sharp celestial vision.`;
+      } else if (cleared >= 3) {
+        icon.textContent = '💖';
+        title.textContent = 'Keen Observer!';
+        desc.textContent = `You cleared ${cleared} levels. Excellent visual perception!`;
+      } else if (cleared >= 1) {
+        icon.textContent = '✨';
+        title.textContent = 'Good Effort!';
+        desc.textContent = `You cleared Level ${cleared}. Sharpen your eyes and conquer higher tiers!`;
+      } else {
+        icon.textContent = '⏳';
+        title.textContent = 'Time Expired';
+        desc.textContent = `Search faster next time to unlock coin rewards!`;
+      }
+
+      if (credited > 0) {
+        badge.style.display = 'flex';
+        text.textContent = `+${credited} Coins Added!${isPerfect ? ' (Includes +2 Flawless Bonus)' : ''}`;
+      } else {
+        const today = getTodayEarned();
+        if (today >= DAILY_CAP) {
+          badge.style.display = 'flex';
+          text.textContent = 'Daily Game Cap (25 🪙) Reached!';
+        } else {
+          badge.style.display = 'none';
+        }
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeResult() {
+      document.getElementById('resultModal').classList.remove('active');
+      document.getElementById('btnStart').style.display = 'flex';
+    }
+
+    function showRules() {
+      document.getElementById('rulesModal').classList.add('active');
+    }
+
+    function closeRules() {
+      document.getElementById('rulesModal').classList.remove('active');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      syncWallet();
+    });
+  </script>
+  <script src="js/vanvi-api.js"></script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Gem Catch — Fast Arcade Skill Game — Vanvi Moments</title>
+  <meta name="description" content="Catch glowing celebration gems, build combos, and avoid penalties in this fast 60fps skill game. Win fixed Vanvi Coins!">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --bg-pearl: #fffbfd;
+      --bg-blush: #fff1f6;
+      --rose-main: #ff2a7a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --gold-main: #d97706;
+      --emerald-main: #10b981;
+      --text-dark: #2c1224;
+      --text-muted: #88627b;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --shadow-card: 0 14px 36px rgba(255, 60, 130, 0.10);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #ffe4ee 0%, #fff2f6 50%, #fdf5f8 100%);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding-bottom: 95px;
+      overflow-x: hidden !important;
+      touch-action: none;
+    }
+
+    /* Top Sticky Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 62px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left, .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-nav-back {
+      border: 1px solid var(--border-pink);
+      background: #ffffff;
+      color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06);
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-nav-back:hover { transform: translateY(-1px); background: #fff0f5; }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+    }
+    .brand-link span { color: var(--rose-main); }
+
+    .wallet-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff8eb;
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #b45309;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.08);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .sound-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid var(--border-pink);
+      background: #ffffff;
+      color: var(--text-dark);
+      font-size: 15px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    /* Game Container */
+    .game-container {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 14px 14px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-title-wrap {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      background: #fff0f6;
+      border: 1px solid var(--border-pink);
+      color: var(--rose-main);
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 4px;
+    }
+    .game-title {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    /* Live HUD Bar */
+    .hud-bar {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+    .hud-stat-box { display: flex; flex-direction: column; gap: 2px; }
+    .hud-label { font-size: 9px; font-weight: 800; text-transform: uppercase; color: var(--text-muted); }
+    .hud-val { font-size: 15px; font-weight: 900; color: var(--text-dark); }
+    .combo-glow { color: #a855f7 !important; text-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
+    .timer-glow { color: var(--rose-main); font-variant-numeric: tabular-nums; }
+    .timer-glow.urgent { color: #dc2626 !important; animation: pulse 0.5s infinite alternate; }
+    @keyframes pulse { from { opacity: 1; } to { opacity: 0.5; } }
+
+    /* Canvas Arena */
+    .canvas-card-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      height: 480px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, #170b1c 0%, #29122c 50%, #15091a 100%);
+      box-shadow: 0 16px 40px rgba(44, 18, 36, 0.28), 0 0 0 1.5px rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+
+    #gameCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      touch-action: none;
+    }
+
+    /* Start / Pause Overlay on Canvas */
+    .canvas-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(23, 11, 28, 0.82);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      z-index: 10;
+      padding: 20px;
+      text-align: center;
+      transition: opacity 0.2s;
+    }
+    .canvas-overlay.hidden { opacity: 0; pointer-events: none; }
+    .overlay-title { font-family: var(--font-serif); font-size: 26px; font-weight: 800; color: #ffffff; }
+    .overlay-sub { font-size: 12px; color: #f2cddf; max-width: 280px; line-height: 1.45; }
+    .btn-play-action {
+      background: var(--rose-gradient);
+      color: #ffffff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.4);
+      transition: all 0.2s;
+    }
+    .btn-play-action:hover { transform: scale(1.05); }
+
+    /* Actions Bar */
+    .actions-row {
+      width: 100%;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-ctrl {
+      flex: 1;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+      padding: 10px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Fixed Rewards Tier Guide */
+    .rewards-card {
+      width: 100%;
+      margin-top: 14px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 12px 14px;
+      font-size: 11.5px;
+    }
+    .rewards-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 6px;
+      text-align: center;
+    }
+    .r-box {
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.2);
+      border-radius: 12px;
+      padding: 6px;
+    }
+    .r-score { font-size: 10px; font-weight: 800; color: var(--text-muted); }
+    .r-coins { font-size: 13px; font-weight: 900; color: var(--gold-main); }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(44, 18, 36, 0.65);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-dialog {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 26px;
+      padding: 26px 20px 20px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(44, 18, 36, 0.25);
+    }
+    .modal-icon { font-size: 38px; margin-bottom: 8px; }
+    .modal-title { font-family: var(--font-serif); font-size: 22px; font-weight: 800; }
+    .modal-desc { font-size: 12px; color: var(--text-muted); margin: 6px 0 16px; }
+
+    .coin-display-box {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+    .coin-val { font-size: 26px; font-weight: 900; color: #b45309; }
+
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 120;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <a href="games.html" class="btn-nav-back" title="Back to Games">
+        <span>‹</span> <span>Games</span>
+      </a>
+      <a href="index.html" class="brand-link" title="Vanvi Moments">
+        💎 Gem <span>Catch</span>
+      </a>
+    </div>
+    <div class="header-right">
+      <button type="button" class="sound-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
+      <a href="rewards.html" class="wallet-pill">
+        <span>🪙</span> <span id="headerCoins">150</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <main class="game-container">
+    <div class="hero-title-wrap">
+      <div class="hero-badge">⚡ 60FPS Arcade Challenge</div>
+      <h1 class="game-title">Gem Catch</h1>
+    </div>
+
+    <!-- HUD -->
+    <section class="hud-bar">
+      <div class="hud-stat-box">
+        <span class="hud-label">Score</span>
+        <span class="hud-val" id="hudScore">0</span>
+      </div>
+      <div class="hud-stat-box">
+        <span class="hud-label">Combo</span>
+        <span class="hud-val combo-glow" id="hudCombo">0x</span>
+      </div>
+      <div class="hud-stat-box">
+        <span class="hud-label">Multiplier</span>
+        <span class="hud-val" id="hudMult">1x</span>
+      </div>
+      <div class="hud-stat-box">
+        <span class="hud-label">Time Left</span>
+        <span class="hud-val timer-glow" id="hudTimer">45s</span>
+      </div>
+    </section>
+
+    <!-- Canvas Arena -->
+    <div class="canvas-card-wrapper">
+      <canvas id="gameCanvas" width="400" height="480"></canvas>
+
+      <!-- Overlay (Start / Pause) -->
+      <div class="canvas-overlay" id="canvasOverlay">
+        <div class="modal-icon">💎</div>
+        <h2 class="overlay-title" id="overlayTitle">Ready to Catch?</h2>
+        <p class="overlay-sub" id="overlaySub">Drag or slide catcher left and right. Catch gems, avoid spiky thorns, and trigger combos!</p>
+        <button type="button" class="btn-play-action" id="btnOverlayAction" onclick="startGame()">
+          ▶ Start Arcade Run
+        </button>
+      </div>
+    </div>
+
+    <!-- Actions Row -->
+    <div class="actions-row">
+      <button type="button" class="btn-ctrl" onclick="togglePauseGame()">
+        <span id="pauseBtnIcon">⏸</span> <span id="pauseBtnText">Pause</span>
+      </button>
+      <button type="button" class="btn-ctrl" onclick="resetGame()">
+        <span>🔄</span> Restart
+      </button>
+    </div>
+
+    <!-- Fixed Rewards Guide -->
+    <aside class="rewards-card">
+      <div style="font-weight: 800; display:flex; justify-content:space-between;">
+        <span>🏆 Fixed Coin Rewards</span>
+        <span style="color:var(--text-muted); font-size:10px;">(Skill Based)</span>
+      </div>
+      <div class="rewards-row">
+        <div class="r-box">
+          <div class="r-score">Score 10–19</div>
+          <div class="r-coins">3 Coins</div>
+        </div>
+        <div class="r-box">
+          <div class="r-score">Score 20–29</div>
+          <div class="r-coins">6 Coins</div>
+        </div>
+        <div class="r-box">
+          <div class="r-score">Score 30+</div>
+          <div class="r-coins">10 Coins</div>
+        </div>
+      </div>
+      <div style="margin-top:6px; font-size:10.5px; color:#88627b;">
+        💎 Normal Gem: <b>+1</b> · ⭐ Rare Gem: <b>+2</b> · 💥 Thorns: <b>-2</b> · Combo 5: <b>+2</b> · Combo 10: <b>+4</b>
+      </div>
+    </aside>
+  </main>
+
+  <!-- GAME OVER / RESULTS MODAL -->
+  <div class="modal-overlay" id="resultModal">
+    <div class="modal-dialog">
+      <div class="modal-icon" id="resultIcon">🎉</div>
+      <h2 class="modal-title" id="resultTitle">Run Finished!</h2>
+      <p class="modal-desc" id="resultDesc">Great reflexes and timing!</p>
+
+      <div class="coin-display-box">
+        <div class="coin-val" id="resultCoinText">+6 🪙</div>
+        <div style="font-size:11px; font-weight:700; color:#92400e;" id="resultTierText">Tier: 20–29 Score</div>
+      </div>
+
+      <div style="display:flex; justify-content:space-around; margin-bottom:16px; font-size:12px;">
+        <div><b>Final Score:</b> <span id="resScore">24</span></div>
+        <div><b>Max Combo:</b> <span id="resCombo">7x</span></div>
+        <div><b>Gems Caught:</b> <span id="resGems">21</span></div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button type="button" class="btn-play-action" onclick="closeModalAndReplay()">Play Again</button>
+        <a href="rewards.html" class="btn-ctrl" style="text-decoration:none;">View Rewards Wallet</a>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Global Bottom Dock -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" id="bottomNavHome">⌂<br/>Home</a>
+    <a href="templates.html" class="nav-btn" id="bottomNavExplore">◌<br/>Explore</a>
+    <a href="builder.html" class="create nav-btn" id="bottomNavCreate">＋<br/>Create</a>
+    <a href="games.html" class="nav-btn active" id="bottomNavGames">🎮<br/>Games</a>
+    <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
+  </nav>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const DAILY_CAP = 25;
+      const STORAGE_COINS = 'vanvi_user_coins';
+      const STORAGE_TODAY_EARNED = 'vanvi_games_today_earned';
+      const STORAGE_TODAY_DATE = 'vanvi_games_today_date';
+      const STORAGE_SOUND = 'vanvi_sound_enabled';
+
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+      const hudScore = document.getElementById('hudScore');
+      const hudCombo = document.getElementById('hudCombo');
+      const hudMult = document.getElementById('hudMult');
+      const hudTimer = document.getElementById('hudTimer');
+      const headerCoins = document.getElementById('headerCoins');
+      const canvasOverlay = document.getElementById('canvasOverlay');
+      const soundBtn = document.getElementById('soundBtn');
+
+      let isSoundMuted = localStorage.getItem(STORAGE_SOUND) === 'false';
+      let isRunning = false;
+      let isPaused = false;
+      let score = 0;
+      let combo = 0;
+      let maxCombo = 0;
+      let gemsCaught = 0;
+      let gameTimer = 45;
+      let timerInterval = null;
+      let animId = null;
+
+      // Catcher State
+      const catcher = {
+        x: 160,
+        y: 430,
+        width: 80,
+        height: 20,
+        speed: 8,
+        color: '#ff2a7a'
+      };
+
+      // Objects & Particles Pool
+      let fallingObjects = [];
+      let particles = [];
+      let floatTexts = [];
+      let lastSpawnTime = 0;
+      let spawnInterval = 650; // ms
+
+      // Web Audio API
+      let audioCtx = null;
+      function playBeep(freq, type, dur) {
+        if (isSoundMuted) return;
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type || 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.linearRampToValueAtTime(0, now + dur);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + dur);
+        } catch(e) {}
+      }
+
+      window.toggleSound = function() {
+        isSoundMuted = !isSoundMuted;
+        localStorage.setItem(STORAGE_SOUND, (!isSoundMuted).toString());
+        soundBtn.textContent = isSoundMuted ? '🔇' : '🔊';
+      };
+
+      // Economy Sync
+      function getTodayKey() {
+        const d = new Date();
+        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      }
+      function getEarnedToday() {
+        const savedDate = localStorage.getItem(STORAGE_TODAY_DATE);
+        const today = getTodayKey();
+        if (savedDate !== today) {
+          localStorage.setItem(STORAGE_TODAY_DATE, today);
+          localStorage.setItem(STORAGE_TODAY_EARNED, '0');
+          return 0;
+        }
+        return parseInt(localStorage.getItem(STORAGE_TODAY_EARNED) || '0', 10);
+      }
+      function addCoins(amt) {
+        const curEarned = getEarnedToday();
+        localStorage.setItem(STORAGE_TODAY_EARNED, (curEarned + amt).toString());
+        const cur = parseInt(localStorage.getItem(STORAGE_COINS) || '150', 10);
+        const total = cur + amt;
+        localStorage.setItem(STORAGE_COINS, total.toString());
+        headerCoins.textContent = total;
+      }
+
+      // Input Listeners: Mouse & Touch
+      function setCatcherPos(clientX) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const targetX = (clientX - rect.left) * scaleX - catcher.width / 2;
+        catcher.x = Math.max(10, Math.min(canvas.width - catcher.width - 10, targetX));
+      }
+
+      canvas.addEventListener('mousemove', (e) => {
+        if (isRunning && !isPaused) setCatcherPos(e.clientX);
+      });
+
+      canvas.addEventListener('touchmove', (e) => {
+        if (isRunning && !isPaused) {
+          e.preventDefault();
+          setCatcherPos(e.touches[0].clientX);
+        }
+      }, { passive: false });
+
+      // Spawn Falling Items
+      function spawnItem() {
+        const rand = Math.random();
+        let type = 'normal'; // 65% normal, 20% rare, 15% penalty
+        if (rand > 0.85) type = 'penalty';
+        else if (rand > 0.65) type = 'rare';
+
+        const size = type === 'rare' ? 24 : 20;
+        const speedBase = 2.4 + (45 - gameTimer) * 0.08; // progressively accelerates
+
+        fallingObjects.push({
+          x: Math.random() * (canvas.width - size * 2) + size,
+          y: -20,
+          size: size,
+          type: type,
+          speed: speedBase + Math.random() * 1.5,
+          rot: Math.random() * Math.PI * 2,
+          vRot: (Math.random() - 0.5) * 0.08
+        });
+      }
+
+      // Main Loop
+      function loop(timestamp) {
+        if (!isRunning || isPaused) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw Ambient Starlight Grid
+        ctx.fillStyle = 'rgba(255, 42, 122, 0.03)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Spawn timer
+        if (timestamp - lastSpawnTime > spawnInterval) {
+          spawnItem();
+          lastSpawnTime = timestamp;
+          spawnInterval = Math.max(320, 650 - (45 - gameTimer) * 7);
+        }
+
+        // Draw Catcher (3D Glass Paddle)
+        const cGrad = ctx.createLinearGradient(catcher.x, catcher.y, catcher.x + catcher.width, catcher.y + catcher.height);
+        cGrad.addColorStop(0, '#ff2a7a');
+        cGrad.addColorStop(0.5, '#f43f5e');
+        cGrad.addColorStop(1, '#d97706');
+        ctx.fillStyle = cGrad;
+        ctx.shadowColor = 'rgba(255, 42, 122, 0.5)';
+        ctx.shadowBlur = 15;
+        ctx.beginPath();
+        ctx.roundRect(catcher.x, catcher.y, catcher.width, catcher.height, 10);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Catcher Glow Rim
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(catcher.x + 2, catcher.y + 2, catcher.width - 4, 4, 3);
+        ctx.stroke();
+
+        // Update & Draw Falling Objects
+        for (let i = fallingObjects.length - 1; i >= 0; i--) {
+          const item = fallingObjects[i];
+          item.y += item.speed;
+          item.rot += item.vRot;
+
+          // Render item
+          ctx.save();
+          ctx.translate(item.x, item.y);
+          ctx.rotate(item.rot);
+
+          if (item.type === 'normal') {
+            // Ruby Diamond
+            ctx.fillStyle = '#ff2a7a';
+            ctx.shadowColor = 'rgba(255, 42, 122, 0.8)';
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            ctx.moveTo(0, -item.size);
+            ctx.lineTo(item.size * 0.8, 0);
+            ctx.lineTo(0, item.size);
+            ctx.lineTo(-item.size * 0.8, 0);
+            ctx.closePath();
+            ctx.fill();
+          } else if (item.type === 'rare') {
+            // Star Gold Gem
+            ctx.fillStyle = '#f59e0b';
+            ctx.shadowColor = 'rgba(245, 158, 11, 0.9)';
+            ctx.shadowBlur = 16;
+            ctx.beginPath();
+            for (let s = 0; s < 5; s++) {
+              ctx.lineTo(Math.cos((18 + s * 72) * Math.PI / 180) * item.size, -Math.sin((18 + s * 72) * Math.PI / 180) * item.size);
+              ctx.lineTo(Math.cos((54 + s * 72) * Math.PI / 180) * (item.size / 2), -Math.sin((54 + s * 72) * Math.PI / 180) * (item.size / 2));
+            }
+            ctx.closePath();
+            ctx.fill();
+          } else {
+            // Spiky Thorn Obstacle
+            ctx.fillStyle = '#991b1b';
+            ctx.shadowColor = 'rgba(220, 38, 38, 0.8)';
+            ctx.shadowBlur = 8;
+            ctx.beginPath();
+            ctx.arc(0, 0, item.size * 0.7, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#f87171';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+          }
+          ctx.restore();
+
+          // Collision Detection with Catcher
+          const collides = (
+            item.y + item.size >= catcher.y &&
+            item.y - item.size <= catcher.y + catcher.height &&
+            item.x + item.size >= catcher.x &&
+            item.x - item.size <= catcher.x + catcher.width
+          );
+
+          if (collides) {
+            handleCatch(item);
+            fallingObjects.splice(i, 1);
+            continue;
+          }
+
+          // Offscreen
+          if (item.y > canvas.height + 30) {
+            if (item.type !== 'penalty') {
+              // Missed gem resets combo
+              combo = 0;
+              hudCombo.textContent = '0x';
+              hudMult.textContent = '1x';
+            }
+            fallingObjects.splice(i, 1);
+          }
+        }
+
+        // Draw Floating Text Notifications
+        for (let t = floatTexts.length - 1; t >= 0; t--) {
+          const ft = floatTexts[t];
+          ft.y += ft.vy;
+          ft.alpha -= 0.025;
+          if (ft.alpha <= 0) {
+            floatTexts.splice(t, 1);
+            continue;
+          }
+          ctx.save();
+          ctx.font = 'bold 15px "Plus Jakarta Sans", sans-serif';
+          ctx.fillStyle = ft.color;
+          ctx.globalAlpha = ft.alpha;
+          ctx.fillText(ft.text, ft.x, ft.y);
+          ctx.restore();
+        }
+
+        // Draw Catch Particles
+        for (let p = particles.length - 1; p >= 0; p--) {
+          const part = particles[p];
+          part.x += part.vx;
+          part.y += part.vy;
+          part.alpha -= 0.03;
+          if (part.alpha <= 0) {
+            particles.splice(p, 1);
+            continue;
+          }
+          ctx.save();
+          ctx.fillStyle = part.color;
+          ctx.globalAlpha = part.alpha;
+          ctx.beginPath();
+          ctx.arc(part.x, part.y, part.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        animId = requestAnimationFrame(loop);
+      }
+
+      function handleCatch(item) {
+        if (item.type === 'normal') {
+          score += 1;
+          combo++;
+          gemsCaught++;
+          playBeep(640, 'sine', 0.08);
+          spawnParticles(item.x, item.y, '#ff2a7a', 8);
+          addFloatText('+1', item.x, item.y, '#ff4f91');
+        } else if (item.type === 'rare') {
+          score += 2;
+          combo++;
+          gemsCaught++;
+          playBeep(880, 'triangle', 0.12);
+          spawnParticles(item.x, item.y, '#f59e0b', 12);
+          addFloatText('+2 Rare!', item.x, item.y, '#fbbf24');
+        } else {
+          // Penalty
+          score = Math.max(0, score - 2);
+          combo = 0;
+          playBeep(180, 'sawtooth', 0.18);
+          spawnParticles(item.x, item.y, '#ef4444', 10);
+          addFloatText('-2 Thorns!', item.x, item.y, '#ef4444');
+          if (navigator.vibrate) navigator.vibrate(70);
+        }
+
+        // Combo Milestones
+        if (combo === 5) {
+          score += 2;
+          playBeep(1040, 'sine', 0.2);
+          addFloatText('COMBO 5! +2', catcher.x + 20, catcher.y - 15, '#c084fc');
+        } else if (combo === 10) {
+          score += 4;
+          playBeep(1200, 'triangle', 0.25);
+          addFloatText('SUPER COMBO 10! +4', catcher.x + 10, catcher.y - 20, '#a855f7');
+        }
+
+        maxCombo = Math.max(maxCombo, combo);
+        hudScore.textContent = score;
+        hudCombo.textContent = `${combo}x`;
+        hudMult.textContent = combo >= 10 ? '3x' : (combo >= 5 ? '2x' : '1x');
+      }
+
+      function spawnParticles(x, y, color, count) {
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: x, y: y,
+            vx: (Math.random() - 0.5) * 6,
+            vy: (Math.random() - 0.5) * 6,
+            size: Math.random() * 3 + 2,
+            color: color,
+            alpha: 1
+          });
+        }
+      }
+
+      function addFloatText(text, x, y, color) {
+        floatTexts.push({ text, x: x - 10, y: y - 5, vy: -1.5, color, alpha: 1 });
+      }
+
+      // Game Controls
+      window.startGame = function() {
+        canvasOverlay.classList.add('hidden');
+        resetGameMetrics();
+        isRunning = true;
+        isPaused = false;
+        lastSpawnTime = performance.now();
+        animId = requestAnimationFrame(loop);
+
+        timerInterval = setInterval(() => {
+          gameTimer--;
+          hudTimer.textContent = `${gameTimer}s`;
+          if (gameTimer <= 8) hudTimer.classList.add('urgent');
+
+          if (gameTimer <= 0) {
+            clearInterval(timerInterval);
+            finishRun();
+          }
+        }, 1000);
+      };
+
+      function resetGameMetrics() {
+        clearInterval(timerInterval);
+        cancelAnimationFrame(animId);
+        score = 0;
+        combo = 0;
+        maxCombo = 0;
+        gemsCaught = 0;
+        gameTimer = 45;
+        fallingObjects = [];
+        particles = [];
+        floatTexts = [];
+        hudScore.textContent = '0';
+        hudCombo.textContent = '0x';
+        hudMult.textContent = '1x';
+        hudTimer.textContent = '45s';
+        hudTimer.classList.remove('urgent');
+      }
+
+      window.resetGame = function() {
+        resetGameMetrics();
+        canvasOverlay.classList.remove('hidden');
+        document.getElementById('overlayTitle').textContent = 'Ready to Catch?';
+        document.getElementById('btnOverlayAction').textContent = '▶ Start Arcade Run';
+      };
+
+      window.togglePauseGame = function() {
+        if (!isRunning) return;
+        isPaused = !isPaused;
+        const icon = document.getElementById('pauseBtnIcon');
+        const text = document.getElementById('pauseBtnText');
+        if (isPaused) {
+          icon.textContent = '▶';
+          text.textContent = 'Resume';
+          canvasOverlay.classList.remove('hidden');
+          document.getElementById('overlayTitle').textContent = 'Game Paused';
+          document.getElementById('btnOverlayAction').textContent = '▶ Resume Run';
+        } else {
+          icon.textContent = '⏸';
+          text.textContent = 'Pause';
+          canvasOverlay.classList.add('hidden');
+          lastSpawnTime = performance.now();
+          animId = requestAnimationFrame(loop);
+        }
+      };
+
+      // Finish Run & Fixed Reward Calculation
+      async function finishRun() {
+        isRunning = false;
+        cancelAnimationFrame(animId);
+
+        // Fixed Reward Formula:
+        // Score 10–19: 3 coins
+        // Score 20–29: 6 coins
+        // Score 30+: 10 coins
+        let wonCoins = 0;
+        let tierLabel = 'Under 10 Score (0 Coins)';
+
+        if (score >= 30) {
+          wonCoins = 10;
+          tierLabel = 'Elite Tier: 30+ Score';
+        } else if (score >= 20) {
+          wonCoins = 6;
+          tierLabel = 'Master Tier: 20–29 Score';
+        } else if (score >= 10) {
+          wonCoins = 3;
+          tierLabel = 'Adept Tier: 10–19 Score';
+        }
+
+        const earned = getEarnedToday();
+        const remCap = Math.max(0, DAILY_CAP - earned);
+        const actualAwarded = Math.min(wonCoins, remCap);
+
+        if (actualAwarded > 0) {
+          addCoins(actualAwarded);
+        }
+
+        // Sync with Backend API
+        try {
+          const token = localStorage.getItem('vanvi_token') || localStorage.getItem('vanvi_auth_token');
+          if (token) {
+            await fetch('/api/coins/game-reward', {
+              method: 'POST',
+              headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                gameId: 'gem-catch',
+                gameTitle: 'Gem Catch Arcade',
+                coins: actualAwarded,
+                score: score
+              })
+            });
+          }
+        } catch(e) {}
+
+        // Populate Modal
+        document.getElementById('resultCoinText').textContent = actualAwarded > 0 ? `+${actualAwarded} 🪙` : `0 🪙 (Daily Cap or <10 Score)`;
+        document.getElementById('resultTierText').textContent = tierLabel;
+        document.getElementById('resScore').textContent = score;
+        document.getElementById('resCombo').textContent = `${maxCombo}x`;
+        document.getElementById('resGems').textContent = gemsCaught;
+
+        document.getElementById('resultModal').classList.add('active');
+      }
+
+      window.closeModalAndReplay = function() {
+        document.getElementById('resultModal').classList.remove('active');
+        startGame();
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        soundBtn.textContent = isSoundMuted ? '🔇' : '🔊';
+        headerCoins.textContent = localStorage.getItem(STORAGE_COINS) || '150';
+      });
+
+    })();
+  </script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

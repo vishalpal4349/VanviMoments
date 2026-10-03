@@ -1,0 +1,981 @@
+/**
+ * VANVI MOMENTS — MASTER TEMPLATE CARDS & DISCOVERY STYLES
+ * High-definition luxury boutique card architecture, centered optical showcases,
+ * ambient blurred aura backing, spring micro-interactions, and responsive breathing room.
+ */
+
+:root {
+  --vm-pearl: #fffbfd;
+  --vm-blush: #fff5f8;
+  --vm-card-bg: #ffffff;
+  --vm-border-silk: rgba(244, 210, 227, 0.6);
+  --vm-border-hover: rgba(255, 42, 122, 0.45);
+  
+  --vm-rose: #ff2a7a;
+  --vm-rose-glow: rgba(255, 42, 122, 0.25);
+  --vm-violet: #7c3aed;
+  --vm-gold: #d97706;
+  --vm-gold-glow: rgba(217, 119, 6, 0.22);
+  --vm-emerald: #059669;
+  
+  --vm-text-dark: #2c1224;
+  --vm-text-muted: #724c65;
+  --vm-text-subtle: #94a3b8;
+  
+  --vm-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --vm-font-serif: 'Cormorant Garamond', Georgia, serif;
+  --vm-font-price: 'Outfit', sans-serif;
+}
+
+/* ─── 1. RESPONSIVE CARD GRID WITH LUXURY BREATHING ROOM ─── */
+.vanvi-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px; /* Generous breathing space between cards */
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 4px 32px;
+}
+
+@media (min-width: 640px) {
+  .vanvi-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 900px) {
+  .vanvi-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .vanvi-cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+  }
+}
+
+/* Magazine Showcase View Toggle (1 Column Editorial) */
+.vanvi-cards-grid.is-magazine-view {
+  grid-template-columns: 1fr !important;
+  max-width: 620px;
+  margin: 0 auto;
+  gap: 28px;
+}
+
+.vanvi-cards-grid.is-magazine-view .vanvi-card {
+  border-radius: 24px;
+  box-shadow: 0 10px 32px rgba(44, 18, 36, 0.08);
+}
+
+.vanvi-cards-grid.is-magazine-view .card-art-box {
+  aspect-ratio: 16 / 9.5;
+  padding: 16px;
+}
+
+.vanvi-cards-grid.is-magazine-view .card-art-img {
+  max-width: 88%;
+  max-height: 88%;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px -4px rgba(44, 18, 36, 0.22);
+}
+
+.vanvi-cards-grid.is-magazine-view .card-body {
+  padding: 18px 20px 22px;
+}
+
+.vanvi-cards-grid.is-magazine-view .card-title {
+  font-size: 1.35rem;
+}
+
+.vanvi-cards-grid.is-magazine-view .card-tagline {
+  font-size: 13px;
+  min-height: auto;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  margin-bottom: 12px;
+}
+
+.vanvi-cards-grid.is-magazine-view .btn-take-look,
+.vanvi-cards-grid.is-magazine-view .btn-make-yours {
+  height: 40px;
+  font-size: 13px;
+  padding: 0 18px;
+}
+
+/* ─── 2. CARD ARCHITECTURE (CLAYLO TACTILE 3D ATELIER) ─── */
+.vanvi-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fffbfd 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 26px; /* Puffy clay curvature */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 
+    inset 0 3px 3.5px rgba(255, 255, 255, 0.98),
+    inset 0 14px 18px -8px rgba(255, 255, 255, 0.90),
+    inset 0 -4.5px 5px -1px rgba(180, 50, 110, 0.12),
+    0 3px 6px rgba(180, 50, 110, 0.06),
+    0 12px 24px -5px rgba(180, 50, 110, 0.08);
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              border-color 0.25s ease;
+  position: relative;
+  will-change: transform, box-shadow;
+}
+
+.vanvi-card:hover {
+  transform: translateY(-5px) scale(1.018);
+  box-shadow: 
+    inset 0 3px 3.5px rgba(255, 255, 255, 1),
+    inset 0 -4.5px 5px -1px rgba(180, 50, 110, 0.14),
+    0 18px 36px -6px rgba(255, 42, 122, 0.22),
+    0 6px 16px rgba(180, 50, 110, 0.10);
+  border-color: rgba(255, 180, 210, 0.85);
+}
+
+.vanvi-card:active {
+  transform: scale(0.975);
+}
+
+/* Luxury / VIP Signature Card Modifier */
+.vanvi-card.is-luxury {
+  border: 1.5px solid rgba(217, 119, 6, 0.45);
+  box-shadow: 
+    0 6px 22px rgba(217, 119, 6, 0.1),
+    inset 0 2px 3px #ffffff,
+    inset 0 -2px 3px rgba(217, 119, 6, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #fffcf5 100%);
+}
+
+.vanvi-card.is-luxury:hover {
+  border-color: rgba(217, 119, 6, 0.75);
+  box-shadow: 
+    0 24px 50px -8px rgba(217, 119, 6, 0.28),
+    0 8px 20px rgba(255, 42, 122, 0.1),
+    inset 0 2px 3px #ffffff;
+}
+
+/* ─── OPTICAL CENTERED ARTWORK SHOWCASE (NO CUTTING OFF!) ─── */
+.vanvi-card .card-art-box {
+  width: 100%;
+  aspect-ratio: 16 / 10.6; /* Balanced showcase ratio */
+  background: radial-gradient(circle at 50% 45%, #fff7fb 0%, #faedf5 100%);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+}
+
+/* Ambient blurred aura behind image - spreads rich occasion colors naturally */
+.vanvi-card .card-art-backdrop {
+  position: absolute;
+  inset: -20px;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  object-fit: cover;
+  filter: blur(24px) saturate(1.4) opacity(0.32);
+  transform: scale(1.15);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* The hero template image: optical centered, uncropped, floating */
+.vanvi-card .card-art-img {
+  position: relative;
+  z-index: 1;
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* 100% ZERO CROPPING! Perfectly centered */
+  border-radius: 9px;
+  box-shadow: 0 8px 18px -4px rgba(44, 18, 36, 0.16), 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.vanvi-card:hover .card-art-img {
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 14px 28px -4px rgba(255, 42, 122, 0.28), 0 4px 10px rgba(44, 18, 36, 0.08);
+}
+
+/* Top Floating Badges */
+.vanvi-card .card-badge-top-left {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(44, 18, 36, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 0.75px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 750;
+  padding: 3px 8px;
+  border-radius: 999px;
+  pointer-events: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: inline-flex;
+  align-items: center;
+  gap: 3.5px;
+  z-index: 2;
+}
+
+.vanvi-card .card-badge-top-right {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 3px 8.5px;
+  border-radius: 999px;
+  pointer-events: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.vanvi-card .card-badge-top-right.free {
+  background: var(--vm-emerald);
+  border: 0.75px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+
+.vanvi-card .card-badge-top-right.price {
+  background: linear-gradient(135deg, #ff2a7a 0%, #7c3aed 100%);
+  border: 0.75px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.vanvi-card .card-badge-top-right.luxury {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  border: 0.75px solid rgba(255, 230, 160, 0.65);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(217, 119, 6, 0.4);
+}
+
+/* Card Body */
+.vanvi-card .card-body {
+  padding: 12px 13px 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .vanvi-card .card-body {
+    padding: 14px 15px 16px;
+  }
+}
+
+/* Cormorant Garamond Editorial Title */
+.vanvi-card .card-title {
+  font-family: var(--vm-font-serif);
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--vm-text-dark);
+  margin-bottom: 3px;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 640px) {
+  .vanvi-card .card-title {
+    font-size: 16.5px;
+  }
+}
+
+/* Delicate Tagline */
+.vanvi-card .card-tagline {
+  font-size: 11px;
+  color: #724c65;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 31px;
+}
+
+@media (min-width: 640px) {
+  .vanvi-card .card-tagline {
+    font-size: 11.5px;
+    min-height: 33px;
+  }
+}
+
+/* Clean Meta Row */
+.vanvi-card .card-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 9px;
+  gap: 6px;
+}
+
+.vanvi-card .card-price-cluster {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.vanvi-card .price-now {
+  font-family: var(--vm-font-price);
+  font-size: 15px;
+  font-weight: 850;
+  color: #ff2a7a;
+  letter-spacing: -0.3px;
+}
+
+.vanvi-card .price-now.free {
+  color: var(--vm-emerald);
+}
+
+.vanvi-card .price-now.luxury {
+  color: var(--vm-gold);
+}
+
+.vanvi-card .price-orig {
+  font-size: 11px;
+  color: var(--vm-text-subtle);
+  text-decoration: line-through;
+}
+
+.vanvi-card .discount-pill {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1.5px 6px;
+  border-radius: 999px;
+  background: #fff0f5;
+  color: #ff2a7a;
+  border: 0.75px solid rgba(255, 42, 122, 0.25);
+}
+
+.vanvi-card.is-luxury .discount-pill {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fde68a;
+}
+
+/* Clean Subtle Status / Guarantee */
+.vanvi-card .card-exp-hint {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.vanvi-card .exp-hint-pill {
+  font-size: 9.5px;
+  font-weight: 750;
+  color: #ff2a7a;
+  background: rgba(255, 42, 122, 0.08);
+  border: 0.75px solid rgba(255, 42, 122, 0.22);
+  padding: 2px 7.5px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3.5px;
+  letter-spacing: 0.1px;
+}
+
+.vanvi-card .card-status-subtle {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #724c65;
+  background: #fff8fb;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 0.75px solid rgba(255, 120, 175, 0.2);
+  flex-shrink: 0;
+}
+
+.vanvi-card .status-dot {
+  color: #ff2a7a;
+  font-size: 9px;
+}
+
+.vanvi-card .status-txt {
+  white-space: nowrap;
+}
+
+/* The Two Action Buttons */
+.vanvi-card .card-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 6px;
+  margin-top: auto;
+  width: 100%;
+}
+
+.vanvi-card .btn-take-look {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.2px solid rgba(228, 196, 214, 0.75);
+  color: #4a1525;
+  font-size: 11.5px;
+  font-weight: 750;
+  text-align: center;
+  height: 34px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 2px 6px rgba(44, 18, 36, 0.04), inset 0 1px 1px #fff;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.vanvi-card .btn-take-look:hover {
+  background: #fff5f8;
+  border-color: #ff2a7a;
+  color: #ff2a7a;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 42, 122, 0.18);
+}
+
+.vanvi-card .btn-take-look:active {
+  transform: scale(0.96);
+}
+
+.vanvi-card .btn-make-yours {
+  background: linear-gradient(135deg, #ff2a7a 0%, #ff4d94 50%, #9353d3 100%);
+  background-size: 200% auto;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff !important;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-align: center;
+  height: 34px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 
+    0 4px 14px rgba(255, 42, 122, 0.32),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.6),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.12);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  animation: vanviShimmer 4s ease infinite;
+}
+
+.vanvi-card.is-luxury .btn-make-yours {
+  background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%);
+  box-shadow: 
+    0 4px 14px rgba(217, 119, 6, 0.35),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.6);
+}
+
+.vanvi-card .btn-make-yours:hover {
+  box-shadow: 0 8px 22px rgba(255, 42, 122, 0.45);
+  filter: brightness(1.05);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.vanvi-card .btn-make-yours:active {
+  transform: scale(0.96);
+}
+
+@keyframes vanviShimmer {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* Responsive labels for small phones */
+@media (max-width: 400px) {
+  .vanvi-card .btn-text-full { display: none; }
+  .vanvi-card .btn-text-short { display: inline; }
+  .vanvi-card .card-title { font-size: 13.5px; }
+  .vanvi-card .card-actions-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 401px) {
+  .vanvi-card .btn-text-full { display: inline; }
+  .vanvi-card .btn-text-short { display: none; }
+}
+
+/* Controlled Video Preview (Optional on supported templates) */
+.vanvi-card .card-art-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 9px;
+}
+
+.vanvi-card:hover .card-art-video {
+  opacity: 1;
+}
+
+/* ─── CATEGORY-SPECIFIC THEME AMBIANCE & EMOTIONAL COLOR GRADING ─── */
+.vanvi-card[data-cat="birthday"] .card-art-box {
+  background: radial-gradient(circle at 50% 45%, #fff8fb 0%, #fae6ef 100%);
+}
+.vanvi-card[data-cat="birthday"] .exp-hint-pill {
+  color: #e11d48;
+  background: rgba(225, 29, 72, 0.08);
+  border-color: rgba(225, 29, 72, 0.22);
+}
+.vanvi-card[data-cat="birthday"]:hover {
+  border-color: rgba(225, 29, 72, 0.4);
+  box-shadow: 0 16px 36px -6px rgba(225, 29, 72, 0.18), 0 4px 12px rgba(44, 18, 36, 0.04);
+}
+
+.vanvi-card[data-cat="love"] .card-art-box {
+  background: radial-gradient(circle at 50% 45%, #fff2f6 0%, #fbd5e5 100%);
+}
+.vanvi-card[data-cat="love"] .card-badge-top-left {
+  background: rgba(158, 26, 56, 0.88);
+}
+.vanvi-card[data-cat="love"] .exp-hint-pill {
+  color: #db2777;
+  background: rgba(219, 39, 119, 0.08);
+  border-color: rgba(219, 39, 119, 0.22);
+}
+.vanvi-card[data-cat="love"]:hover {
+  border-color: rgba(219, 39, 119, 0.4);
+  box-shadow: 0 16px 36px -6px rgba(219, 39, 119, 0.2), 0 4px 12px rgba(44, 18, 36, 0.04);
+}
+
+.vanvi-card[data-cat="anniversary"] .card-art-box {
+  background: radial-gradient(circle at 50% 45%, #fffdf8 0%, #fcf0d5 100%);
+}
+.vanvi-card[data-cat="anniversary"] .card-badge-top-left {
+  background: rgba(146, 64, 14, 0.88);
+}
+.vanvi-card[data-cat="anniversary"] .exp-hint-pill {
+  color: #b45309;
+  background: rgba(217, 119, 6, 0.08);
+  border-color: rgba(217, 119, 6, 0.24);
+}
+.vanvi-card[data-cat="anniversary"]:hover {
+  border-color: rgba(217, 119, 6, 0.45);
+  box-shadow: 0 16px 36px -6px rgba(217, 119, 6, 0.22), 0 4px 12px rgba(44, 18, 36, 0.04);
+}
+
+.vanvi-card[data-cat="friendship"] .card-art-box {
+  background: radial-gradient(circle at 50% 45%, #faf5ff 0%, #ede4fc 100%);
+}
+.vanvi-card[data-cat="friendship"] .card-badge-top-left {
+  background: rgba(109, 40, 217, 0.88);
+}
+.vanvi-card[data-cat="friendship"] .exp-hint-pill {
+  color: #7c3aed;
+  background: rgba(124, 58, 237, 0.08);
+  border-color: rgba(124, 58, 237, 0.22);
+}
+.vanvi-card[data-cat="friendship"]:hover {
+  border-color: rgba(124, 58, 237, 0.4);
+  box-shadow: 0 16px 36px -6px rgba(124, 58, 237, 0.18), 0 4px 12px rgba(44, 18, 36, 0.04);
+}
+
+.vanvi-card[data-cat="family"] .card-art-box {
+  background: radial-gradient(circle at 50% 45%, #fffaf5 0%, #feddc7 100%);
+}
+.vanvi-card[data-cat="family"] .card-badge-top-left {
+  background: rgba(154, 52, 18, 0.88);
+}
+.vanvi-card[data-cat="family"] .exp-hint-pill {
+  color: #c2410c;
+  background: rgba(194, 65, 12, 0.08);
+  border-color: rgba(194, 65, 12, 0.22);
+}
+.vanvi-card[data-cat="family"]:hover {
+  border-color: rgba(194, 65, 12, 0.4);
+  box-shadow: 0 16px 36px -6px rgba(194, 65, 12, 0.18), 0 4px 12px rgba(44, 18, 36, 0.04);
+}
+
+.vanvi-card[data-cat="apology"] .card-art-box {
+  background: radial-gradient(circle at 50% 45%, #f8faff 0%, #e0eaff 100%);
+}
+.vanvi-card[data-cat="apology"] .card-badge-top-left {
+  background: rgba(30, 64, 175, 0.88);
+}
+.vanvi-card[data-cat="apology"] .exp-hint-pill {
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.22);
+}
+.vanvi-card[data-cat="apology"]:hover {
+  border-color: rgba(37, 99, 235, 0.4);
+  box-shadow: 0 16px 36px -6px rgba(37, 99, 235, 0.18), 0 4px 12px rgba(44, 18, 36, 0.04);
+}
+
+.vanvi-card[data-cat="memories"] .card-art-box {
+  background: radial-gradient(circle at 50% 45%, #faf8fc 0%, #ede6f8 100%);
+}
+.vanvi-card[data-cat="memories"] .card-badge-top-left {
+  background: rgba(88, 28, 135, 0.88);
+}
+.vanvi-card[data-cat="memories"] .exp-hint-pill {
+  color: #6b21a8;
+  background: rgba(107, 33, 168, 0.08);
+  border-color: rgba(107, 33, 168, 0.22);
+}
+.vanvi-card[data-cat="memories"]:hover {
+  border-color: rgba(107, 33, 168, 0.4);
+  box-shadow: 0 16px 36px -6px rgba(107, 33, 168, 0.18), 0 4px 12px rgba(44, 18, 36, 0.04);
+}
+
+/* Reduced motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .vanvi-card,
+  .vanvi-card .card-art-img,
+  .vanvi-card .btn-make-yours,
+  .btn-take-look {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ─── 3. SEARCH & FILTER ATELIER CONTROLS ─── */
+.search-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(236, 203, 222, 0.7);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-shadow: 0 4px 16px rgba(44, 18, 36, 0.04);
+  transition: all 0.25s ease;
+  height: 44px;
+}
+
+.search-box:focus-within {
+  border-color: var(--vm-rose);
+  box-shadow: 0 0 0 4px rgba(255, 42, 122, 0.15), 0 8px 24px rgba(255, 42, 122, 0.08);
+  background: #ffffff;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  font-family: var(--vm-font-sans);
+  color: var(--vm-text-dark);
+}
+
+.btn-filter-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 18px;
+  height: 44px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffffff 0%, #fff7fb 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(236, 203, 222, 0.8);
+  cursor: pointer;
+  color: var(--vm-text-dark);
+  font-size: 12.5px;
+  font-weight: 800;
+  box-shadow: 0 4px 16px rgba(44, 18, 36, 0.04);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.btn-filter-trigger:hover,
+.btn-filter-trigger.has-active {
+  border-color: var(--vm-rose);
+  color: var(--vm-rose);
+  background: #fff5f8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 42, 122, 0.2);
+}
+
+.filter-active-count {
+  background: var(--vm-rose);
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 1.5px 6px;
+  border-radius: 999px;
+  display: none;
+}
+
+/* Smart Segmented Filter Tabs: Occasions vs Price */
+.atelier-filter-hub {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.filter-segment-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 0 2px;
+}
+
+.filter-segment-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--vm-text-muted);
+  font-size: 11.5px;
+  font-weight: 750;
+  padding: 5px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4.5px;
+}
+
+.filter-segment-btn:hover {
+  color: var(--vm-rose);
+  background: rgba(255, 42, 122, 0.06);
+}
+
+.filter-segment-btn.active {
+  background: #ffffff;
+  border-color: rgba(228, 196, 214, 0.55);
+  color: var(--vm-rose);
+  box-shadow: 0 3px 8px rgba(44, 18, 36, 0.05);
+}
+
+/* Compact Occasions Horizontal Scroll Strip */
+.quick-occasions-strip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 4px 2px 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.quick-occasions-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-cat-pill {
+  white-space: nowrap;
+  background: #ffffff;
+  border: 1.2px solid rgba(244, 210, 227, 0.75);
+  color: var(--vm-text-dark);
+  font-size: 11.5px;
+  font-weight: 750;
+  padding: 7px 15px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 3px 10px rgba(44, 18, 36, 0.03), inset 0 1.5px 2px #ffffff;
+}
+
+.quick-cat-pill:hover {
+  border-color: var(--vm-rose);
+  color: var(--vm-rose);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(255, 42, 122, 0.16);
+}
+
+.quick-cat-pill:active {
+  transform: scale(0.96);
+}
+
+.quick-cat-pill.active {
+  background: linear-gradient(135deg, var(--vm-rose) 0%, #ff4d94 50%, #9353d3 100%);
+  color: #ffffff !important;
+  border-color: var(--vm-rose);
+  box-shadow: 
+    0 6px 20px rgba(255, 42, 122, 0.35),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.6),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1.5px);
+  font-weight: 800;
+}
+
+/* Secondary Compact Price/Budget Strip */
+.quick-price-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 2px 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.quick-price-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-price-chip {
+  white-space: nowrap;
+  background: #ffffff;
+  border: 1.2px solid rgba(244, 210, 227, 0.75);
+  color: var(--vm-text-dark);
+  font-size: 11px;
+  font-weight: 750;
+  padding: 6.5px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 6px rgba(44, 18, 36, 0.03), inset 0 1px 1px #fff;
+}
+
+.quick-price-chip:hover {
+  border-color: var(--vm-rose);
+  color: var(--vm-rose);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 42, 122, 0.14);
+}
+
+.quick-price-chip:active {
+  transform: scale(0.96);
+}
+
+.quick-price-chip.active {
+  background: linear-gradient(135deg, var(--vm-rose) 0%, #ff4d94 50%, #9353d3 100%);
+  color: #ffffff !important;
+  border-color: var(--vm-rose);
+  box-shadow: 0 6px 18px rgba(255, 42, 122, 0.32), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  font-weight: 800;
+}
+
+/* What You'll Get Cards (for Preview Page) */
+.what-you-get-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.what-you-get-item {
+  background: #ffffff;
+  border: 1px solid rgba(255, 120, 175, 0.25);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: 0 3px 12px rgba(44, 18, 36, 0.04);
+}
+
+.what-you-get-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: #fff1f6;
+  color: var(--vm-rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.what-you-get-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--vm-text-dark);
+  margin-bottom: 2px;
+}
+
+.what-you-get-desc {
+  font-size: 11.5px;
+  color: var(--vm-text-muted);
+  line-height: 1.45;
+}
+
+/* ========================================================
+   Magazine (1-Column Editorial) View Mode
+   ======================================================== */
+.filter-results-grid.is-magazine-view {
+  grid-template-columns: 1fr !important;
+  max-width: 620px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.filter-results-grid.is-magazine-view .vanvi-tmpl-card {
+  border-radius: 20px;
+}
+
+.filter-results-grid.is-magazine-view .card-thumbnail {
+  aspect-ratio: 16 / 10;
+}
+
+.filter-results-grid.is-magazine-view .card-body {
+  padding: 16px 20px 20px;
+}
+
+.filter-results-grid.is-magazine-view .card-title {
+  font-size: 17px;
+}
+
+.filter-results-grid.is-magazine-view .card-description {
+  font-size: 13.5px;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+}
+
+.filter-results-grid.is-magazine-view .card-cta-group {
+  margin-top: 14px;
+}
+
+.filter-results-grid.is-magazine-view .btn-take-look,
+.filter-results-grid.is-magazine-view .btn-make-yours {
+  height: 38px;
+  font-size: 13px;
+}

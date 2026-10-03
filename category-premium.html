@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport" />
+  <title>Vanvi Moments — Ultra VIP Atelier · ₹500 to ₹10,000</title>
+  <meta
+    content="Explore flagship ₹500 to ₹10,000 interactive 3D celebrations or commission a 100% bespoke private universe for ₹1 token booking."
+    name="description" />
+  <meta content="#fff5f8" name="theme-color" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="vanvi-inner-light.css" />
+  <link rel="stylesheet" href="vanvi-navigation.css" />
+  <link rel="stylesheet" href="css/vanvi-template-cards.css" />
+
+  <style>
+    :root {
+      --bg-base: #fffbfd;
+      --bg-card: rgba(255, 255, 255, 0.96);
+      --border-glass: rgba(255, 120, 175, 0.25);
+      --border-gold: rgba(217, 119, 6, 0.35);
+      --rose-primary: #ff2a7a;
+      --rose-deep: #be185d;
+      --gold-champagne: #d97706;
+      --gold-royal: #f59e0b;
+      --lilac-accent: #a855f7;
+      --emerald-green: #059669;
+      --text-dark: #2c1224;
+      --text-muted: #78536d;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      min-height: 100%;
+      background-color: #fff8fa;
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 214, 230, 0.45) 0%, transparent 60%),
+        radial-gradient(circle at 90% 25%, rgba(254, 243, 199, 0.35) 0%, transparent 50%),
+        radial-gradient(circle at 10% 55%, rgba(245, 208, 254, 0.3) 0%, transparent 55%),
+        linear-gradient(180deg, #fff7fa 0%, #fffbfd 40%, #fff9fc 100%);
+      background-attachment: fixed;
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      overflow-x: hidden !important;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Universal Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px clamp(14px, 3vw, 24px);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-glass);
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 900;
+      font-size: clamp(13.5px, 3.6vw, 16px);
+      cursor: pointer !important;
+    }
+
+    .brand-name-lux {
+      background: linear-gradient(135deg, #ff1361 0%, #ff4b8b 35%, #8b5cf6 75%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-tag-royal {
+      font-size: 9.5px;
+      font-weight: 850;
+      padding: 2.5px 8px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: #fff;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.25);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-header-link {
+      font-size: 11.5px;
+      font-weight: 750;
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-glass);
+      transition: all 0.2s;
+    }
+
+    .btn-header-link:hover {
+      color: var(--rose-primary);
+      border-color: var(--rose-primary);
+      background: #ffffff;
+    }
+
+    .btn-header-primary {
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 6.5px 14px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--rose-primary), var(--gold-champagne));
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.28);
+      transition: transform 0.2s;
+    }
+
+    .btn-header-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Breadcrumbs Bar */
+    .breadcrumb-bar {
+      max-width: 1200px;
+      margin: 10px auto 0;
+      padding: 0 clamp(14px, 3vw, 24px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .vanvi-btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border-glass);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .vanvi-btn-back:hover {
+      transform: translateY(-1px);
+      background: #fff0f6;
+      border-color: var(--rose-primary);
+      color: var(--rose-primary);
+    }
+
+    .breadcrumb-trail {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .breadcrumb-trail a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .breadcrumb-trail a:hover {
+      color: var(--rose-primary);
+    }
+
+    /* Hero Section */
+    .hero-ultra {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px clamp(14px, 3vw, 24px) 16px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-eyebrow-royal {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 14px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, rgba(217, 119, 6, 0.12), rgba(255, 42, 122, 0.1));
+      border: 1px solid rgba(217, 119, 6, 0.35);
+      color: #92400e;
+      font-size: 10.5px;
+      font-weight: 850;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero-ultra h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5.2vw, 48px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #2c1224;
+      margin-bottom: 10px;
+    }
+
+    .hero-ultra h1 span {
+      background: linear-gradient(135deg, #ff2a7a 0%, #a855f7 45%, #f59e0b 80%, #d97706 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 10px rgba(255, 42, 122, 0.2));
+    }
+
+    .hero-ultra p {
+      font-size: clamp(13px, 2.4vw, 15px);
+      line-height: 1.5;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 20px;
+    }
+
+    /* Dual Path Fast Selector */
+    .dual-path-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 840px;
+      margin: 0 auto 24px;
+    }
+
+    @media (max-width: 640px) {
+      .dual-path-cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+
+    .path-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-glass);
+      border-radius: 18px;
+      padding: 16px 18px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      box-shadow: 0 4px 16px rgba(255, 56, 128, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .path-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold-royal);
+      box-shadow: 0 10px 24px rgba(217, 119, 6, 0.12);
+    }
+
+    .path-card.bespoke {
+      border-color: rgba(217, 119, 6, 0.45);
+      background: linear-gradient(165deg, #ffffff 60%, #fffcf5 100%);
+    }
+
+    .path-card-badge {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 850;
+      padding: 2.5px 8px;
+      border-radius: 99px;
+      margin-bottom: 6px;
+    }
+
+    .badge-ready {
+      background: #fdf2f8;
+      border: 1px solid #fbcfe8;
+      color: #be185d;
+    }
+
+    .badge-bespoke {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #b45309;
+    }
+
+    .path-card-title {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 700;
+      color: #2c1224;
+      margin-bottom: 3px;
+    }
+
+    .path-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .path-card-cta {
+      font-size: 11.5px;
+      font-weight: 850;
+      color: var(--rose-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .path-card.bespoke .path-card-cta {
+      color: var(--gold-champagne);
+    }
+
+    /* Category Switch Slider */
+    .category-switch-bar {
+      max-width: 1200px;
+      margin: 0 auto 24px;
+      padding: 6px clamp(14px, 3vw, 24px);
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .category-switch-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .switch-pill {
+      font-size: 11.5px;
+      font-weight: 750;
+      padding: 6px 14px;
+      border-radius: 99px;
+      background: #ffffff;
+      border: 1px solid var(--border-glass);
+      color: var(--text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .switch-pill:hover {
+      color: var(--rose-primary);
+      border-color: var(--rose-primary);
+    }
+
+    .switch-pill.active {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+    }
+
+    /* Section Wrap */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto 48px;
+      padding: 0 clamp(12px, 3vw, 20px);
+    }
+
+    .section-head-royal {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 24px;
+    }
+
+    .section-tag-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #d97706;
+      background: #fffbeb;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+      padding: 2.5px 10px;
+      border-radius: 99px;
+      margin-bottom: 6px;
+    }
+
+    .section-head-royal h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 4.2vw, 36px);
+      font-weight: 700;
+      color: #2c1224;
+      line-height: 1.18;
+      margin-bottom: 5px;
+    }
+
+    .section-head-royal h2 span {
+      background: linear-gradient(135deg, #ff2a7a 0%, #a855f7 50%, #f59e0b 85%, #d97706 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-head-royal p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Bespoke Container */
+    .bespoke-container {
+      background: linear-gradient(150deg, #ffffff 0%, #fffcf8 40%, #fff8fb 100%);
+      border: 2px solid rgba(217, 119, 6, 0.35);
+      border-radius: 26px;
+      padding: clamp(16px, 3.5vw, 32px);
+      box-shadow: 0 14px 40px rgba(217, 119, 6, 0.08);
+    }
+
+    /* 3-Step Simple Process Cards */
+    .process-3steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    @media (max-width: 680px) {
+      .process-3steps-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+
+    .step-box {
+      background: #ffffff;
+      border: 1px solid rgba(217, 119, 6, 0.25);
+      border-radius: 16px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s ease;
+    }
+
+    .step-box:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold-royal);
+    }
+
+    .step-num-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2px;
+    }
+
+    .step-box h4 {
+      font-size: 13.5px;
+      font-weight: 850;
+      color: #2c1224;
+    }
+
+    .step-box p {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Bespoke Form Card */
+    .bespoke-form-card {
+      background: #ffffff;
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      border-radius: 22px;
+      padding: clamp(16px, 3vw, 28px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+
+    .form-heading-area {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 20px;
+    }
+
+    .form-heading-area h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 3.5vw, 28px);
+      color: #2c1224;
+      margin-bottom: 4px;
+    }
+
+    .form-heading-area p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #2c1224;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 13px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-glass);
+      background: #ffffff;
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold-royal);
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+    }
+
+    .form-group textarea {
+      min-height: 85px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    /* Interactive Pills in Form */
+    .pill-selector-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 4px;
+    }
+
+    .select-pill-btn {
+      padding: 5px 11px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 750;
+      border: 1px solid var(--border-glass);
+      background: #fffcfd;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .select-pill-btn:hover {
+      border-color: var(--gold-champagne);
+      color: var(--gold-champagne);
+    }
+
+    .select-pill-btn.active {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.25);
+    }
+
+    /* Submit Button */
+    .btn-submit-bespoke {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, #d97706, #f59e0b 50%, #ff2a7a 100%);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 14.5px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(217, 119, 6, 0.3);
+      transition: transform 0.2s ease, filter 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn-submit-bespoke:hover {
+      filter: brightness(1.08);
+      transform: translateY(-2px);
+    }
+
+    /* Confirmation Card */
+    .confirmation-card {
+      display: none;
+      text-align: center;
+      padding: 24px 18px;
+      background: linear-gradient(145deg, #ffffff 0%, #fffdfa 100%);
+      border: 2px solid #059669;
+      border-radius: 22px;
+      box-shadow: 0 12px 35px rgba(5, 150, 105, 0.1);
+      animation: fadeIn 0.35s ease;
+    }
+
+    .confirmation-card.show {
+      display: block;
+    }
+
+    .conf-icon {
+      font-size: 42px;
+      margin-bottom: 6px;
+    }
+
+    .conf-title {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      color: #2c1224;
+      margin-bottom: 4px;
+    }
+
+    .conf-ref-badge {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 14px;
+      font-weight: 900;
+      color: #065f46;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 4px 12px;
+      border-radius: 8px;
+      margin: 8px 0 14px;
+      letter-spacing: 1px;
+    }
+
+    .conf-recap-box {
+      background: #fff;
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      padding: 14px;
+      max-width: 520px;
+      margin: 0 auto 16px;
+      text-align: left;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .btn-wa-concierge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 99px;
+      background: #25D366;
+      color: #ffffff;
+      font-weight: 850;
+      font-size: 13px;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+      transition: transform 0.2s;
+    }
+
+    .btn-wa-concierge:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Floating Panda AI */
+    .panda-float-pill {
+      position: fixed;
+      right: 18px;
+      bottom: 84px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(255, 42, 122, 0.35);
+      padding: 7px 14px 7px 8px;
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.22);
+      text-decoration: none;
+      color: #2c1224;
+      font-size: 12px;
+      font-weight: 800;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .panda-float-pill:hover {
+      transform: translateY(-3px) scale(1.03);
+      border-color: #ff2a7a;
+      box-shadow: 0 12px 30px rgba(255, 42, 122, 0.35);
+    }
+
+    .panda-avatar-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff0f6, #ffe4ef);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 2px 6px rgba(255, 42, 122, 0.18);
+      position: relative;
+    }
+
+    .panda-avatar-box::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border: 1.5px solid #fff;
+      border-radius: 50%;
+    }
+
+    /* Floating Toast */
+    .vanvi-toast {
+      position: fixed;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: rgba(44, 18, 36, 0.95);
+      backdrop-filter: blur(16px);
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 750;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 120, 175, 0.4);
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 9999;
+      white-space: nowrap;
+      max-width: 90vw;
+      text-align: center;
+    }
+
+    .vanvi-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="brand-link" title="Vanvi Moments">
+      <span class="brand-name-lux">VANVI <span style="color:#ff2a7a;">♡</span> MOMENTS</span>
+      <span class="brand-tag-royal">VIP ATELIER</span>
+    </a>
+    <div class="header-actions">
+      <a class="btn-header-link" href="templates.html">All Templates</a>
+      <a class="btn-header-primary" href="#bespokeStudio" onclick="document.getElementById('bespokeStudio').scrollIntoView({behavior:'smooth'})">✨ Custom ₹1</a>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs Bar -->
+  <div class="breadcrumb-bar">
+    <a class="vanvi-btn-back" href="javascript:void(0)" onclick="vanviGoBack('templates.html')">
+      <span>‹</span> <span>Back to Templates</span>
+    </a>
+    <div class="breadcrumb-trail">
+      <a href="index.html">Home</a> / <a href="templates.html">Templates</a> / <span>👑 Ultra VIP (₹500 – ₹10,000)</span>
+    </div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero-ultra">
+    <div class="hero-eyebrow-royal">👑 24K ATELIER · ₹500 TO ₹10,000</div>
+    <h1>Ultra Luxury &amp; <span>Bespoke Moments</span></h1>
+    <p>Choose a ready 3D flagship masterpiece below, or request a 100% custom experience created just for your milestone.</p>
+
+    <!-- Dual Path Fast Selector -->
+    <div class="dual-path-cards">
+      <!-- Path 1 Card -->
+      <div class="path-card" onclick="document.getElementById('premiumCollection').scrollIntoView({behavior:'smooth'})">
+        <div>
+          <span class="path-card-badge badge-ready">✦ Ready Flagships</span>
+          <h3 class="path-card-title">₹500 – ₹10,000 Masterpieces</h3>
+          <p class="path-card-desc">Interactive 3D universes, orchestral soundtracks &amp; secret PIN memory locks.</p>
+        </div>
+        <div class="path-card-cta">Browse VIP Templates (₹500+) ↓</div>
+      </div>
+
+      <!-- Path 2 Card (Bespoke) -->
+      <div class="path-card bespoke" onclick="document.getElementById('bespokeStudio').scrollIntoView({behavior:'smooth'})">
+        <div>
+          <span class="path-card-badge badge-bespoke">👑 100% Custom Made</span>
+          <h3 class="path-card-title">Custom Experience Studio</h3>
+          <p class="path-card-desc">Have a unique dream? Our 3D artists craft it from scratch. Book with just ₹1 token.</p>
+        </div>
+        <div class="path-card-cta">Request Custom Moment (₹1) ↓</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Switch Slider -->
+  <nav class="category-switch-bar" id="categorySlider">
+    <button type="button" class="switch-pill active" onclick="filterVipCards('all', this)">👑 All VIP (₹500–₹10k)</button>
+    <button type="button" class="switch-pill" onclick="filterVipCards('3d', this)">🌌 3D &amp; Universe</button>
+    <button type="button" class="switch-pill" onclick="filterVipCards('wedding', this)">💍 Wedding &amp; Royal</button>
+    <button type="button" class="switch-pill" onclick="filterVipCards('love', this)">❤️ Love &amp; Romance</button>
+    <button type="button" class="switch-pill" onclick="filterVipCards('celebration', this)">🎂 Milestone &amp; Family</button>
+    <button type="button" class="switch-pill" onclick="document.getElementById('bespokeStudio').scrollIntoView({behavior:'smooth'})">✨ Custom Bespoke (₹1)</button>
+  </nav>
+
+  <!-- ============================================================
+     SECTION 1: ₹500+ PREMIUM TEMPLATES GRID (2-per-row on mobile)
+     ============================================================ -->
+  <section class="section-wrap" id="premiumCollection">
+    <div class="section-head-royal">
+      <div class="section-tag-gold">✦ Ready To Personalize</div>
+      <h2>Flagship <span>VIP Collection</span></h2>
+      <p>Instant personal link · 3D animations · Multi-track audio · Secret wax seal</p>
+    </div>
+
+    <!-- Standard .vanvi-cards-grid: 2-columns on mobile, 3-4 on laptop -->
+    <div class="vanvi-cards-grid" id="premiumCardsGrid">
+      <!-- Dynamically filled with .vanvi-card items -->
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 2: BESPOKE ORDER (₹1 TOKEN REQUEST)
+     ============================================================ -->
+  <section class="section-wrap" id="bespokeStudio">
+    <div class="bespoke-container">
+      <div class="section-head-royal">
+        <div class="section-tag-gold">👑 100% Private Custom Surprise</div>
+        <h2>Royal Bespoke Atelier. <span>Handcrafted In 3D.</span></h2>
+        <p>No template limits. Tell us what you imagine — our 3D developers and audio producers build it from scratch.</p>
+      </div>
+
+      <!-- 3-Step Simple Process (Clear & Short) -->
+      <div class="process-3steps-grid">
+        <div class="step-box">
+          <div class="step-num-badge">1</div>
+          <h4>Share Your Idea</h4>
+          <p>Fill the 1-minute form below with your story, songs, names &amp; memories.</p>
+        </div>
+        <div class="step-box">
+          <div class="step-num-badge">2</div>
+          <h4>We Code in 3D</h4>
+          <p>Our lead artist builds your private interactive world with custom animations.</p>
+        </div>
+        <div class="step-box">
+          <div class="step-num-badge">3</div>
+          <h4>Preview &amp; Launch (₹1)</h4>
+          <p>Test your live secret link. Book with ₹1 token now, pay rest only when thrilled!</p>
+        </div>
+      </div>
+
+      <!-- Single Clean Bespoke Order Form -->
+      <div class="bespoke-form-card" id="customFormCard">
+        <div class="form-heading-area">
+          <span class="section-tag-gold">✨ Direct Artist Booking</span>
+          <h3>Tell Us Your Vision</h3>
+          <p>Submit once below. We connect on WhatsApp within 2 hours to confirm your concepts.</p>
+        </div>
+
+        <form id="bespokeRequestForm" novalidate>
+          <div class="form-grid">
+            <!-- 1. Name -->
+            <div class="form-group">
+              <label for="inputName">Your Name *</label>
+              <input type="text" id="inputName" name="name" required placeholder="Enter your full name" autocomplete="name" />
+            </div>
+
+            <!-- 2. WhatsApp Number -->
+            <div class="form-group">
+              <label for="inputContact">WhatsApp Number *</label>
+              <input type="tel" id="inputContact" name="contact" required placeholder="10-digit WhatsApp number" />
+            </div>
+
+            <!-- 3. Occasion -->
+            <div class="form-group">
+              <label for="inputOccasion">Celebration Occasion *</label>
+              <input type="text" id="inputOccasion" name="occasion" required placeholder="Select or type occasion" />
+              <!-- Quick Occasion Pills -->
+              <div class="pill-selector-row">
+                <button type="button" class="select-pill-btn active" onclick="selectOccasionPill(this, 'Birthday')">🎂 Birthday</button>
+                <button type="button" class="select-pill-btn" onclick="selectOccasionPill(this, 'Wedding & Mandap')">💍 Wedding</button>
+                <button type="button" class="select-pill-btn" onclick="selectOccasionPill(this, 'Anniversary')">🥂 Anniversary</button>
+                <button type="button" class="select-pill-btn" onclick="selectOccasionPill(this, 'Love & Proposal')">❤️ Proposal</button>
+                <button type="button" class="select-pill-btn" onclick="selectOccasionPill(this, 'Family Milestone')">🏡 Family</button>
+              </div>
+            </div>
+
+            <!-- 4. Budget Range -->
+            <div class="form-group">
+              <label for="inputBudget">Budget Range</label>
+              <select id="inputBudget" name="budget">
+                <option value="₹500 – ₹1,500">₹500 – ₹1,500 (Classic Custom)</option>
+                <option value="₹1,500 – ₹3,500">₹1,500 – ₹3,500 (Grand 3D Cinema)</option>
+                <option value="₹3,500 – ₹7,500">₹3,500 – ₹7,500 (Spatial Universe)</option>
+                <option value="₹7,500 – ₹10,000+">₹7,500 – ₹10,000+ (Atelier Commission)</option>
+              </select>
+              <!-- Quick Budget Pills -->
+              <div class="pill-selector-row">
+                <button type="button" class="select-pill-btn active" onclick="selectBudgetPill(this, '₹500 – ₹1,500')">₹500–₹1,500</button>
+                <button type="button" class="select-pill-btn" onclick="selectBudgetPill(this, '₹1,500 – ₹3,500')">₹1,500–₹3,500</button>
+                <button type="button" class="select-pill-btn" onclick="selectBudgetPill(this, '₹3,500 – ₹7,500')">₹3,500–₹7,500</button>
+                <button type="button" class="select-pill-btn" onclick="selectBudgetPill(this, '₹7,500 – ₹10,000+')">₹7.5k–₹10k+</button>
+              </div>
+            </div>
+
+            <!-- 5. Expected Date -->
+            <div class="form-group">
+              <label for="inputDate">Target Date (Optional)</label>
+              <input type="date" id="inputDate" name="details" />
+            </div>
+
+            <!-- 6. Story / Ideas -->
+            <div class="form-group full">
+              <label for="inputIdea">Describe Your Dream in Your Own Words *</label>
+              <textarea id="inputIdea" name="idea" required placeholder="Tell us the story, special music, secret codes, surprises, or photos you want included... (Hindi or English both welcome!)"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit-bespoke" id="btnSubmitBespoke">
+            <span>✨ Submit Request · Book with ₹1 Token →</span>
+          </button>
+
+          <div style="text-align:center; margin-top:12px;">
+            <a href="https://wa.me/917631442934?text=Hi%20Vanvi%20Atelier!%20I%20want%20to%20order%20a%20100%25%20Bespoke%20Custom%20Experience"
+              target="_blank" rel="noopener"
+              style="display:inline-flex; align-items:center; gap:6px; color:#059669; font-weight:800; font-size:12px; text-decoration:none; background:#ecfdf5; border:1px solid #a7f3d0; padding:7px 14px; border-radius:99px;">
+              <span>💬 Or Chat Directly on WhatsApp (+91 76314 42934)</span>
+            </a>
+          </div>
+
+          <p style="font-size:10.5px; color:var(--text-muted); text-align:center; margin-top:8px;">
+            🔒 100% Private &amp; Confidential. Pay only ₹1 token now, balance after your full approval.
+          </p>
+        </form>
+
+        <!-- Confirmation Card -->
+        <div class="confirmation-card" id="confirmationCard">
+          <div class="conf-icon">🎉</div>
+          <h3 class="conf-title">Request Received at Vanvi Atelier!</h3>
+          <p style="font-size:13px; color:var(--text-muted); max-width:480px; margin:0 auto 10px;">
+            Our creative director has received your dream vision. We are assigning a 3D designer to your milestone.
+          </p>
+
+          <div>Order Reference ID:</div>
+          <div class="conf-ref-badge" id="confRefBadge">CX-PENDING</div>
+
+          <div class="conf-recap-box" id="confRecapBox">
+            <!-- Filled dynamically -->
+          </div>
+
+          <div style="margin-top:14px;">
+            <a href="https://wa.me/917631442934?text=Hi%20Vanvi%20Atelier!%20I%20just%20submitted%20my%20Bespoke%20Order"
+              target="_blank" rel="noopener" class="btn-wa-concierge" id="btnWhatsAppConnect">
+              <span>💬 Confirm with ₹1 Token on WhatsApp</span>
+            </a>
+          </div>
+
+          <div style="margin-top:14px;">
+            <button type="button" class="btn-header-link" onclick="resetFormView()" style="display:inline-block; padding:7px 16px;">
+              Submit Another Request
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Panda AI Assistant -->
+  <a href="vanvi-assistant.html" class="panda-float-pill" title="Ask Panda AI Assistant">
+    <div class="panda-avatar-box">🐼</div>
+    <span>Ask Panda AI 🐾</span>
+  </a>
+
+  <!-- Floating Toast -->
+  <div class="vanvi-toast" id="vanviToast">✨ Action successful</div>
+
+  <footer>
+    <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:10px 16px; margin-bottom:8px; font-size:12px;">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQs</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="refund.html">Refunds</a>
+    </div>
+    <p>© 2026 Vanvi Moments · Ultra VIP Atelier · <a href="index.html">Home</a> · <a href="templates.html">Templates</a> · <a href="plans.html">VIP Plans</a></p>
+  </footer>
+
+  <!-- Global Bottom Navigation Dock -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" id="bottomNavHome" title="Home">
+      <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1.5 1.5 0 0 1-1.5 1.5H4.5A1.5 1.5 0 0 1 3 20v-9.5z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="templates.html" class="nav-btn" id="bottomNavExplore" title="Explore">
+      <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+      <span>Explore</span>
+    </a>
+    <a href="templates.html" class="create nav-btn" id="bottomNavCreate" title="Templates">
+      <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      <span>Templates</span>
+    </a>
+    <a href="games.html" class="nav-btn" id="bottomNavRewards" title="Rewards">
+      <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      <span>Rewards</span>
+    </a>
+    <a href="profile.html" class="nav-btn" id="bottomNavMe" title="Profile">
+      <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script src="js/vanvi-templates-data.js"></script>
+  <script src="js/vanvi-api.js"></script>
+  <script src="js/vanvi-navigation.js"></script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      let currentVipFilter = 'all';
+
+      // 1. Get templates from master data priced >= 500
+      function getVipTemplates() {
+        if (!window.VanviTemplatesData || !Array.isArray(window.VanviTemplatesData.templates)) return [];
+        return window.VanviTemplatesData.templates.filter(t => Number(t.price || 0) >= 500);
+      }
+
+      // 2. Render VIP cards with standard .vanvi-card architecture
+      window.renderVipCards = function (filter = 'all') {
+        const container = document.getElementById('premiumCardsGrid');
+        if (!container) return;
+
+        let list = getVipTemplates();
+
+        if (filter !== 'all') {
+          list = list.filter(t => {
+            const allTxt = `${t.name || ''} ${t.category || ''} ${t.categorySlug || ''} ${(t.tags || []).join(' ')} ${t.type || ''} ${t.description || ''}`.toLowerCase();
+            if (filter === '3d') return allTxt.includes('3d') || allTxt.includes('spatial') || allTxt.includes('galaxy') || allTxt.includes('universe');
+            if (filter === 'wedding') return allTxt.includes('wedding') || allTxt.includes('mandap') || allTxt.includes('anniversary') || allTxt.includes('palace');
+            if (filter === 'love') return allTxt.includes('love') || allTxt.includes('romance') || allTxt.includes('constellation') || allTxt.includes('proposal');
+            if (filter === 'celebration') return allTxt.includes('celebration') || allTxt.includes('heritage') || allTxt.includes('family') || allTxt.includes('birthday');
+            return true;
+          });
+        }
+
+        // Sort descending by price
+        list.sort((a, b) => Number(b.price || 0) - Number(a.price || 0));
+
+        if (list.length === 0) {
+          container.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 32px 14px; color: var(--text-muted);">
+              <span style="font-size: 32px;">👑</span>
+              <p style="margin-top: 8px; font-weight: 750;">No templates found in this filter.</p>
+              <button type="button" class="btn-header-link" style="margin-top: 10px;" onclick="filterVipCards('all', document.querySelector('.switch-pill'))">Show All VIP</button>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = list.map(t => {
+          const p = Number(t.price || 999);
+          const orig = Number(t.originalPrice || Math.round(p * 2.2));
+          const discount = orig > p ? `${Math.round(((orig - p) / orig) * 100)}% off` : 'VIP';
+          const thumb = t.thumbnail || 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=700&auto=format&fit=crop&q=80';
+          const safeId = encodeURIComponent(t.id);
+          const safeOccasion = encodeURIComponent(t.category || 'Celebration');
+
+          return `
+            <article class="vanvi-card is-luxury" id="card-${t.id}">
+              <div class="card-art-box" onclick="window.location.href='preview.html?template=${safeId}'" title="Experience ${escapeHtml(t.name)}">
+                <span class="card-badge-top-left">${escapeHtml(t.category || 'VIP Atelier')}</span>
+                <span class="card-badge-top-right luxury">₹${p.toLocaleString('en-IN')}</span>
+                <img class="card-art-backdrop" src="${thumb}" alt="" aria-hidden="true" loading="lazy">
+                <img class="card-art-img" src="${thumb}" alt="${escapeHtml(t.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?w=700&auto=format&fit=crop&q=80';">
+              </div>
+
+              <div class="card-body">
+                <div class="card-exp-hint">
+                  <span class="exp-hint-pill">👑 ${escapeHtml(t.type || '3D Universe')}</span>
+                </div>
+                <div class="card-header-meta">
+                  <h3 class="card-title" title="${escapeHtml(t.name)}">${escapeHtml(t.name)}</h3>
+                </div>
+                <p class="card-tagline" title="${escapeHtml(t.description || '')}">${escapeHtml(t.description || 'Exclusive luxury celebration.')}</p>
+
+                <div class="card-meta-row">
+                  <div class="card-price-cluster">
+                    <span class="price-now luxury">₹${p.toLocaleString('en-IN')}</span>
+                    <span class="price-orig">₹${orig.toLocaleString('en-IN')}</span>
+                    <span class="discount-pill">${discount}</span>
+                  </div>
+                  <div class="card-status-subtle">
+                    <span class="status-dot">✦</span>
+                    <span class="status-txt">Lifetime VIP</span>
+                  </div>
+                </div>
+
+                <div class="card-actions-grid">
+                  <a href="preview.html?template=${safeId}" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
+                    <span>Preview 👁️</span>
+                  </a>
+                  <a href="builder.html?template=${safeId}&occasion=${safeOccasion}" class="btn-make-yours" title="Create Moment ✦">
+                    <span class="btn-text-full">Make Yours ✨</span>
+                    <span class="btn-text-short">Make ✨</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+      };
+
+      // 3. Filter VIP cards by slider pill
+      window.filterVipCards = function (filter, btn) {
+        currentVipFilter = filter;
+        document.querySelectorAll('#categorySlider .switch-pill').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        renderVipCards(filter);
+      };
+
+      // 4. Bespoke Form Submission (₹1 Token Booking)
+      const form = document.getElementById('bespokeRequestForm');
+      const confirmCard = document.getElementById('confirmationCard');
+      const submitBtn = document.getElementById('btnSubmitBespoke');
+
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData(form);
+          const payload = Object.fromEntries(formData.entries());
+
+          if (!payload.name || payload.name.trim().length < 2) {
+            showToast('Please enter your full name.');
+            document.getElementById('inputName').focus();
+            return;
+          }
+          if (!payload.contact || payload.contact.trim().length < 8) {
+            showToast('Please enter a valid WhatsApp number.');
+            document.getElementById('inputContact').focus();
+            return;
+          }
+          if (!payload.occasion) {
+            showToast('Please select celebration occasion.');
+            document.getElementById('inputOccasion').focus();
+            return;
+          }
+          if (!payload.idea || payload.idea.trim().length < 5) {
+            showToast('Please describe your idea in a few words.');
+            document.getElementById('inputIdea').focus();
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span>Processing ₹1 Token Request...</span>';
+
+          const reqId = 'CX-' + Date.now().toString(36).toUpperCase();
+
+          // Persist to localStorage
+          try {
+            const existing = JSON.parse(localStorage.getItem('vanvi_custom_requests') || '[]');
+            existing.unshift({
+              id: reqId,
+              ...payload,
+              bookingToken: '₹1 Token',
+              status: 'Submitted',
+              createdAt: new Date().toISOString()
+            });
+            localStorage.setItem('vanvi_custom_requests', JSON.stringify(existing));
+          } catch (err) {}
+
+          // Update Confirmation UI
+          document.getElementById('confRefBadge').textContent = reqId;
+          document.getElementById('confRecapBox').innerHTML = `
+            <div><strong>Creator:</strong> ${escapeHtml(payload.name)}</div>
+            <div><strong>WhatsApp:</strong> ${escapeHtml(payload.contact)}</div>
+            <div><strong>Occasion:</strong> ${escapeHtml(payload.occasion)}</div>
+            <div><strong>Budget Range:</strong> ${escapeHtml(payload.budget || 'Flexible')}</div>
+            <div><strong>Target Date:</strong> ${payload.details ? escapeHtml(payload.details) : 'Flexible'}</div>
+            <div style="margin-top:6px; font-style:italic; color:#6b425b;">"${escapeHtml(payload.idea.slice(0, 140))}${payload.idea.length > 140 ? '...' : ''}"</div>
+          `;
+
+          // Set WhatsApp Concierge Button with ₹1 Token confirmation
+          const waMsg = encodeURIComponent(`Hi Vanvi Atelier! I just requested a Bespoke Custom Experience with ₹1 Token Booking.\n\nOrder ID: ${reqId}\nName: ${payload.name}\nOccasion: ${payload.occasion}\nBudget: ${payload.budget || 'Flexible'}\n\nPlease share the ₹1 payment link & next steps!`);
+          const waBtn = document.getElementById('btnWhatsAppConnect');
+          if (waBtn) waBtn.href = `https://wa.me/917631442934?text=${waMsg}`;
+
+          // Transition views
+          form.style.display = 'none';
+          confirmCard.classList.add('show');
+          confirmCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          showToast('🎉 Your custom request has been received!');
+        });
+      }
+
+      // Helper: Reset form
+      window.resetFormView = function () {
+        if (form && confirmCard) {
+          form.reset();
+          form.style.display = 'block';
+          confirmCard.classList.remove('show');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>✨ Submit Request · Book with ₹1 Token →</span>';
+          form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
+
+      // Helper: Occasion Pill Selector
+      window.selectOccasionPill = function (btn, val) {
+        document.querySelectorAll('#bespokeRequestForm .select-pill-btn').forEach(b => {
+          if (b.parentElement === btn.parentElement) b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        const input = document.getElementById('inputOccasion');
+        if (input) input.value = val;
+      };
+
+      // Helper: Budget Pill Selector
+      window.selectBudgetPill = function (btn, val) {
+        document.querySelectorAll('#bespokeRequestForm .select-pill-btn').forEach(b => {
+          if (b.parentElement === btn.parentElement) b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        const sel = document.getElementById('inputBudget');
+        if (sel) sel.value = val;
+      };
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>"']/g, m => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        })[m]);
+      }
+
+      // Initialize
+      renderVipCards('all');
+
+      // Pre-fill default occasion
+      const occInput = document.getElementById('inputOccasion');
+      if (occInput && !occInput.value) occInput.value = 'Birthday';
+    })();
+
+    function showToast(msg) {
+      const toast = document.getElementById('vanviToast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3200);
+    }
+  </script>
+</body>
+
+</html>

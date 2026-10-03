@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
+<title>Bespoke Checkout &amp; Moment Activation — Vanvi Moments</title>
+<meta content="Secure luxury checkout for all Vanvi Moments celebration templates. Dynamic theme adaptation, 1-tap Celebration Pass credits, and instant Vanvi Coins discount redemption." name="description"/>
+<meta content="#fff5f8" name="theme-color"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="vanvi-inner-light.css"/>
+<link rel="stylesheet" href="vanvi-navigation.css"/>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="js/vanvi-api.js"></script>
+<script src="js/vanvi-google-auth.js"></script>
+<script src="js/vanvi-templates-data.js"></script>
+<script src="js/vanvi-razorpay.js"></script>
+
+<style>
+/* =========================================================
+   VANVI CHECKOUT & THEME-ADAPTIVE LUXURY LEDGER
+   Pearl White · Soft Blush · Rose Pink · Champagne Gold
+   ========================================================= */
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  
+  --bg-base: #fffbfd;
+  --bg-velvet: #fff1f6;
+  --card-glass: rgba(255, 255, 255, 0.96);
+  --border-glass: rgba(255, 120, 175, 0.28);
+  
+  /* Dynamic Theme Accents (adapted automatically per template) */
+  --theme-accent: #ff2a7a;
+  --theme-glow: rgba(255, 42, 122, 0.25);
+  --theme-gradient: linear-gradient(135deg, #ff2a7a 0%, #a855f7 50%, #d97706 100%);
+  --theme-light: rgba(255, 42, 122, 0.08);
+
+  --rose-primary: #ff2a7a;
+  --gold-champagne: #d97706;
+  --gold-bright: #b45309;
+  --emerald-green: #16a34a;
+  
+  --text-white: #2c1224;
+  --text-cream: #2c1224;
+  --text-muted: #88627b;
+  --text-dim: #a68b9e;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  background-color: #fff8fa;
+  background-image: 
+    radial-gradient(ellipse 90% 45% at 50% -5%, rgba(255, 182, 217, 0.45) 0%, transparent 65%),
+    radial-gradient(circle 500px at 15% 35%, rgba(245, 208, 254, 0.35) 0%, transparent 70%),
+    radial-gradient(circle 480px at 85% 65%, rgba(254, 243, 199, 0.4) 0%, transparent 70%),
+    radial-gradient(circle 550px at 50% 95%, rgba(254, 226, 226, 0.35) 0%, transparent 75%),
+    linear-gradient(180deg, #fff5f8 0%, #fffbfd 40%, #fff7fa 100%);
+  background-attachment: fixed;
+  color: var(--text-cream);
+  font-family: var(--font-sans);
+  overflow-x: hidden !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 120, 175, 0.22);
+}
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #2c1224;
+  font-weight: 900;
+  font-size: 14px;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  user-select: none;
+}
+.brand-spark { width: 22px; height: 22px; flex-shrink: 0; }
+.btn-header-back {
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: rgba(255, 42, 122, 0.08);
+  border: 1px solid rgba(255, 42, 122, 0.25);
+  color: #ff2a7a;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.btn-header-back:hover {
+  background: var(--theme-accent);
+  border-color: var(--theme-accent);
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .btn-header-secondary {
+    display: none !important;
+  }
+}
+
+/* Main Container */
+.checkout-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 16px 100px;
+}
+
+.checkout-title-area {
+  text-align: center;
+  margin-bottom: 22px;
+}
+.checkout-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 99px;
+  background: var(--theme-light);
+  border: 1px solid var(--theme-accent);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--theme-accent);
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+.checkout-title-area h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5.2vw, 42px);
+  color: #2c1224;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.checkout-title-area p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Trust Ribbon Bar */
+.trust-ribbon {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.trust-pill {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 120, 175, 0.22);
+  border-radius: 12px;
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #5c3552;
+  box-shadow: 0 4px 12px rgba(255, 42, 122, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.trust-pill span:first-child {
+  font-size: 16px;
+}
+
+/* Cards Base */
+.checkout-card {
+  background: #ffffff;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 22px;
+  border: 1.5px solid rgba(255, 120, 175, 0.25);
+  box-shadow: 0 12px 35px rgba(236, 72, 153, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+  padding: 22px;
+  margin-bottom: 18px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.card-sec-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 13.5px;
+  font-weight: 850;
+  color: #2c1224;
+}
+
+/* Dynamic Order Summary Capsule */
+.order-item-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0 16px;
+  border-bottom: 1px solid rgba(255, 120, 175, 0.16);
+}
+.order-item-thumb {
+  width: 68px;
+  height: 68px;
+  border-radius: 18px;
+  background: var(--theme-gradient);
+  box-shadow: 0 8px 20px var(--theme-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: #ffffff;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+.order-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.order-item-details {
+  flex: 1;
+}
+.order-item-title {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: #2c1224;
+  line-height: 1.25;
+}
+.order-item-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.order-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.order-tag {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2.5px 8px;
+  border-radius: 99px;
+  background: var(--theme-light);
+  border: 1px solid var(--theme-accent);
+  color: var(--theme-accent);
+}
+.order-item-price-box {
+  text-align: right;
+  flex-shrink: 0;
+}
+.order-item-orig-price {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  font-weight: 700;
+}
+.order-item-price {
+  font-size: 22px;
+  font-weight: 900;
+  color: #2c1224;
+  line-height: 1;
+}
+
+/* Interactive All-Templates Switcher Bar */
+.template-switcher-panel {
+  margin-top: 14px;
+  padding-top: 14px;
+}
+.switcher-label {
+  font-size: 11.5px;
+  font-weight: 850;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.template-pills-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.template-pills-scroll::-webkit-scrollbar { display: none; }
+.template-switch-pill {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: #fffcfd;
+  border: 1px solid rgba(255, 120, 175, 0.25);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.template-switch-pill:hover {
+  border-color: var(--theme-accent);
+  background: #fff0f6;
+  color: var(--theme-accent);
+  transform: translateY(-1px);
+}
+.template-switch-pill.active {
+  background: var(--theme-gradient);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 4px 12px var(--theme-glow);
+}
+
+/* Template Live Feature Specs Pill Grid */
+.template-specs-box {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 245, 250, 0.6));
+  border: 1px dashed rgba(255, 120, 175, 0.35);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-top: 12px;
+}
+.template-specs-title {
+  font-size: 10.5px;
+  font-weight: 850;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.template-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+@media (max-width: 500px) {
+  .template-specs-grid { grid-template-columns: 1fr; }
+}
+.spec-item {
+  font-size: 11.5px;
+  color: #4a2840;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.35;
+}
+.spec-item-icon {
+  color: var(--theme-accent);
+  font-weight: 900;
+  font-size: 11px;
+}
+
+/* Celebration Pass Card */
+.pass-credit-card {
+  border-color: rgba(255, 42, 122, 0.35);
+  background: linear-gradient(170deg, #ffffff 60%, #fff8fb 100%);
+}
+
+/* Coins Card */
+.coin-ledger-card {
+  border-color: rgba(217, 119, 6, 0.35);
+  background: linear-gradient(145deg, #fffcf6 0%, #fff8ec 100%);
+}
+.coin-balance-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.coin-bal-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.coin-bal-icon { font-size: 22px; }
+.coin-bal-val { font-size: 14.5px; font-weight: 900; color: #2c1224; }
+.coin-bal-rupee { font-size: 11px; color: var(--gold-bright); font-weight: 700; }
+
+/* Interactive Coupon Code Box */
+.coupon-input-wrap {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.coupon-input {
+  flex: 1;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255, 120, 175, 0.35);
+  background: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 16px; /* Crucial 16px prevents mobile auto-zoom */
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #2c1224;
+  outline: none;
+  transition: all 0.2s;
+}
+.coupon-input:focus {
+  border-color: var(--theme-accent);
+  box-shadow: 0 0 0 3px var(--theme-glow);
+}
+.btn-apply-coupon {
+  padding: 0 18px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--theme-gradient);
+  border: none;
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.btn-apply-coupon:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--theme-glow);
+}
+.coupon-chips-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.coupon-chip-btn {
+  background: #fff;
+  border: 1px dashed rgba(255, 42, 122, 0.35);
+  border-radius: 99px;
+  padding: 4px 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #a8235e;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.coupon-chip-btn:hover {
+  background: #fff0f5;
+  border-color: var(--theme-accent);
+  color: var(--theme-accent);
+}
+
+/* Apply Toggle */
+.coin-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.coin-toggle-lbl {
+  font-size: 13px;
+  font-weight: 800;
+  color: #2c1224;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.coin-toggle-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--theme-accent);
+  cursor: pointer;
+}
+
+.coin-rules-notice {
+  font-size: 11px;
+  color: #88627b;
+  line-height: 1.45;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+/* Calculation Breakdown */
+.price-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 120, 175, 0.16);
+}
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #5c3552;
+}
+.breakdown-row.discount {
+  color: #16a34a;
+  font-weight: 800;
+}
+.breakdown-row.total {
+  font-size: 18px;
+  font-weight: 900;
+  color: #2c1224;
+  padding-top: 12px;
+  border-top: 1.5px solid rgba(255, 120, 175, 0.3);
+}
+
+/* Total Savings Callout Pill */
+.savings-callout {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  animation: pulseSavings 2s infinite ease-in-out;
+}
+@keyframes pulseSavings {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.015); }
+}
+
+/* Payment Methods Selector */
+.payment-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.pay-opt-btn {
+  background: #fdf2f8;
+  border: 1.5px solid rgba(255, 120, 175, 0.28);
+  border-radius: 14px;
+  padding: 12px 10px;
+  color: #2c1224;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+.pay-opt-btn:hover {
+  border-color: var(--theme-accent);
+  background: var(--theme-light);
+}
+.pay-opt-btn.active {
+  border-color: var(--theme-accent);
+  background: #fff0f5;
+  box-shadow: 0 6px 18px var(--theme-glow);
+}
+
+/* Pay CTA Button */
+.btn-pay-now {
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 28px;
+  border-radius: 99px;
+  background: var(--theme-gradient);
+  color: #ffffff;
+  font-size: 15.5px;
+  font-weight: 900;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 10px 30px var(--theme-glow);
+  transition: all 0.22s ease;
+}
+.btn-pay-now:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 38px var(--theme-glow);
+}
+.btn-pay-now:active {
+  transform: scale(0.98);
+}
+
+/* Success Order Receipt Modal (Luxury Glassmorphic) */
+.order-success-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 18, 36, 0.68);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.order-success-overlay.open { display: flex; }
+.order-success-card {
+  background: linear-gradient(160deg, #ffffff 0%, #fffbfd 70%, #fff5f8 100%);
+  border: 1.5px solid var(--border-glass);
+  border-radius: 26px;
+  padding: 26px 20px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(44, 18, 36, 0.22), 0 0 35px var(--theme-glow);
+  position: relative;
+  overflow: hidden;
+  animation: modalPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes modalPopIn {
+  from { opacity: 0; transform: scale(0.92) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.order-success-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4.5px;
+  background: var(--theme-gradient);
+}
+.modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fdf2f8;
+  border: 1px solid var(--border-glass);
+  color: var(--text-dark);
+  font-size: 18px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+.modal-close-btn:hover {
+  background: #ffe4e6;
+  color: var(--rose-primary);
+}
+.order-success-icon {
+  font-size: 42px;
+  margin-bottom: 4px;
+}
+.order-success-card h3 {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: #2c1224;
+  margin-bottom: 4px;
+}
+.order-success-card p {
+  font-size: 12.5px;
+  color: #6b4c62;
+  margin-bottom: 14px;
+  line-height: 1.45;
+}
+.modal-url-box {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.modal-url-input {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-size: 11.5px;
+  color: #0284c7;
+  font-family: monospace;
+  outline: none;
+}
+.btn-modal-copy {
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1.5px solid var(--rose-primary);
+  color: var(--rose-primary);
+  font-size: 11.5px;
+  font-weight: 850;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-modal-copy:hover {
+  background: #fff0f6;
+}
+.btn-whatsapp-deliver {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+.btn-whatsapp-deliver:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.45);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 32px 16px 24px;
+  border-top: 1px solid rgba(255, 140, 205, 0.2);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+footer a { color: var(--text-muted); text-decoration: none; margin: 0 6px; }
+footer a:hover { color: var(--rose-primary); }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand-link" title="Vanvi Moments">
+    <svg viewBox="0 0 26 26" fill="none" class="brand-spark">
+      <defs>
+        <linearGradient id="chkSparkGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+          <stop offset="0%" stop-color="#ff2a7a"/>
+          <stop offset="50%" stop-color="#a855f7"/>
+          <stop offset="100%" stop-color="#d97706"/>
+        </linearGradient>
+      </defs>
+      <path d="M13 2 C13 7.8 15.2 10 21 13 C15.2 16 13 18.2 13 24 C13 18.2 10.8 16 5 13 C10.8 10 13 7.8 13 2 Z" fill="url(#chkSparkGrad)"/>
+      <circle cx="13" cy="13" r="2.8" fill="#ffffff"/>
+      <circle cx="13" cy="13" r="1.5" fill="#ff007a"/>
+    </svg>
+    <span>VANVI <span style="color:#ff007a;">♡</span> MOMENTS</span>
+  </a>
+
+  <div style="display:flex; align-items:center; gap:8px;">
+    <a href="plans.html" class="btn-header-back" style="color:var(--gold-bright); border-color:rgba(217,119,6,0.4);">💎 VIP Plans</a>
+    <a href="dashboard.html" class="btn-header-back btn-header-secondary mobile-hide" style="background:rgba(255,42,122,0.06); border:1px solid rgba(255,42,122,0.2);">📁 My Moments</a>
+  </div>
+</header>
+
+<div class="breadcrumb-bar" style="max-width:720px; margin:14px auto 0; padding:0 16px;">
+  <a class="vanvi-btn-back" href="javascript:void(0)" onclick="return safeGoBack()"><span class="back-arrow">‹</span> <span>Back</span></a>
+  <div class="breadcrumb-trail">
+    <a href="index.html" data-i18n="nav.home">Home</a> / <a href="templates.html" data-i18n="nav.templates">Templates</a> / <a href="templates.html" data-i18n="nav.studio">Personalize</a> / <span>Checkout</span>
+  </div>
+</div>
+
+<main class="checkout-wrapper">
+
+  <div class="checkout-title-area">
+    <div class="checkout-badge" id="checkoutBadge">
+      <span>🔒</span> <span id="checkoutBadgeText">256-BIT SECURE CHECKOUT</span>
+    </div>
+    <h1>Review &amp; Unlock Moment</h1>
+    <p id="checkoutSubText">Your customized celebration moment is handcrafted and ready for instant delivery.</p>
+  </div>
+
+  <!-- Trust Ribbon -->
+  <div class="trust-ribbon">
+    <div class="trust-pill">
+      <span>⚡</span>
+      <span>Instant Delivery</span>
+    </div>
+    <div class="trust-pill">
+      <span>🛡️</span>
+      <span>100% Satisfaction</span>
+    </div>
+    <div class="trust-pill">
+      <span>🔒</span>
+      <span>Bank-Grade SSL</span>
+    </div>
+  </div>
+
+  <!-- 0. Customer Account & Instant Google Delivery Ribbon -->
+  <section class="checkout-card" id="customerAccountCard" style="border:1.5px solid rgba(255, 42, 122, 0.28); background: #ffffff;">
+    <div class="card-sec-head">
+      <span style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:18px;">👤</span> <span>Delivery Account</span>
+      </span>
+      <span id="badgeAccountType" style="color:var(--emerald-green); font-size:11.5px; font-weight:800; background:#ecfdf5; padding:3px 10px; border-radius:99px; border:1px solid #a7f3d0;">✓ Google Sync Ready</span>
+    </div>
+
+    <!-- State A: User is Logged In -->
+    <div id="checkoutUserLoggedIn" style="display:none; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; padding:12px 14px; background:#fff9fb; border-radius:14px; border:1px solid rgba(255,42,122,0.18);">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div id="checkoutUserAvatar" style="width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg, #ff2a7a, #a855f7); color:#fff; font-weight:900; font-size:16px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          U
+        </div>
+        <div>
+          <div style="font-size:14px; font-weight:850; color:#2c1224; display:flex; align-items:center; gap:6px;">
+            <span id="checkoutUserName">Creator</span>
+            <span id="checkoutProviderBadge" style="font-size:10px; font-weight:800; background:#e0f2fe; color:#0369a1; padding:2px 6px; border-radius:6px;">Google</span>
+          </div>
+          <div id="checkoutUserEmail" style="font-size:12px; color:#88627b;">user@gmail.com</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:11.5px; color:#059669; font-weight:800; background:#ecfdf5; padding:4px 8px; border-radius:8px;">Moment will save to account</span>
+        <button type="button" id="btnCheckoutSwitchUser" style="background:transparent; border:none; color:var(--rose-primary); font-size:11.5px; font-weight:800; cursor:pointer; text-decoration:underline;">Switch</button>
+      </div>
+    </div>
+
+    <!-- State B: User NOT Logged In -->
+    <div id="checkoutUserLoggedOut" style="display:flex; flex-direction:column; gap:12px;">
+      <div style="display:flex; align-items:flex-start; gap:10px; font-size:12px; color:#5c3552; line-height:1.45;">
+        <span style="font-size:20px;">🎁</span>
+        <div>
+          <strong>Sign in with Google to save your moment &amp; get 100 free bonus coins!</strong><br/>
+          Your celebration link and receipts will be forever saved in your account dashboard.
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button type="button" id="btnCheckoutGoogleAuth" style="flex:1; min-height:46px; border-radius:14px; background:#ffffff; border:1.5px solid rgba(255, 42, 122, 0.4); display:flex; align-items:center; justify-content:center; gap:10px; font-weight:800; font-size:13.5px; color:#1f2937; cursor:pointer; box-shadow:0 4px 14px rgba(255,42,122,0.1); transition:all 0.2s;">
+          <svg style="width:20px; height:20px;" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          <span>Sign In with Google (1-Tap)</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. Order Summary Card (Dynamic Template Adaptive) -->
+  <section class="checkout-card" id="orderSummaryCard">
+    <div class="card-sec-head">
+      <span style="display:flex; align-items:center; gap:6px;">
+        <span id="themeHeadIcon">✨</span> <span>Order Summary</span>
+      </span>
+      <span style="color:#16a34a; font-size:11.5px; font-weight:800; background:#ecfdf5; padding:3px 10px; border-radius:99px; border:1px solid #a7f3d0;">✓ Instant Delivery</span>
+    </div>
+
+    <!-- Main Selected Item Row -->
+    <div class="order-item-row">
+      <div class="order-item-thumb" id="itemThumbIcon">✨</div>
+      <div class="order-item-details">
+        <div class="order-item-title" id="orderItemName">Midnight Wish 3D Celebration</div>
+        <div class="order-item-sub" id="orderItemSub">For Vanvi · Handcrafted Digital Experience</div>
+        <div class="order-item-tags">
+          <span class="order-tag" id="tagCategory">Celebration</span>
+          <span class="order-tag" id="tagDelivery">WhatsApp Ready</span>
+          <span class="order-tag" id="tagExperience">3D Interactive</span>
+        </div>
+      </div>
+      <div class="order-item-price-box">
+        <div class="order-item-orig-price" id="orderItemOrigPrice">₹429</div>
+        <div class="order-item-price" id="orderItemBasePrice">₹199</div>
+      </div>
+    </div>
+
+    <!-- Template Live Features Box -->
+    <div class="template-specs-box" id="templateSpecsBox">
+      <div class="template-specs-title">✦ Included in this Celebration Experience:</div>
+      <div class="template-specs-grid" id="templateSpecsList">
+        <div class="spec-item"><span class="spec-item-icon">✓</span> <span>Interactive Candle Blow Scene</span></div>
+        <div class="spec-item"><span class="spec-item-icon">✓</span> <span>Swipeable Polaroid Photo Deck</span></div>
+        <div class="spec-item"><span class="spec-item-icon">✓</span> <span>Playable Dedication Audio Player</span></div>
+        <div class="spec-item"><span class="spec-item-icon">✓</span> <span>Secret PIN &amp; Wax Envelope Lock</span></div>
+      </div>
+    </div>
+
+    <!-- Quick Switch Template Bar (Sare Templates Ke Anusaar) -->
+    <div class="template-switcher-panel">
+      <div class="switcher-label">
+        <span>🔄 Want a different template? Quick Switch:</span>
+        <a href="templates.html" style="font-size:10.5px; font-weight:800; color:var(--theme-accent); text-decoration:none;">Catalog (50+) ↗</a>
+      </div>
+      <div class="template-pills-scroll" id="templatePillsScroll">
+        <!-- Dynamically populated from VANVI_TEMPLATES -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Template Celebration Pass Credits Card -->
+  <section class="checkout-card pass-credit-card" id="templatePassCard">
+    <div class="card-sec-head">
+      <span style="color: var(--rose-primary); display:flex; align-items:center; gap:6px;">
+        <span>🎟️</span> Template Celebration Pass
+      </span>
+      <span style="font-size:11px; font-weight:800; color:#059669; background:#ecfdf5; padding:3px 10px; border-radius:99px; border:1px solid #a7f3d0;" id="badgePassStatus">1 Credit = ₹1.00</span>
+    </div>
+
+    <!-- State A: User has credits -->
+    <div id="passHasCreditsBlock">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:rgba(255,42,122,0.06); border-radius:14px; margin-bottom:12px; border:1px solid rgba(255,42,122,0.2);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:24px;">🎟️</span>
+          <div>
+            <div style="font-size:14px; font-weight:900; color:#2c1224;"><span id="passAvailableCredits">0</span> Credits Available</div>
+            <div style="font-size:11px; color:var(--text-muted);" id="passNameLabel">Celebration Pass Balance</div>
+          </div>
+        </div>
+        <span style="font-size:11.5px; font-weight:800; color:var(--rose-primary);">1 Credit = ₹1.00</span>
+      </div>
+
+      <div class="coin-toggle-row">
+        <label class="coin-toggle-lbl" for="chkApplyPass">
+          <span>Apply Pass Credits to unlock this template</span>
+        </label>
+        <input type="checkbox" id="chkApplyPass" class="coin-toggle-checkbox" checked/>
+      </div>
+
+      <div id="passNotice" style="font-size:11.5px; font-weight:700; margin-top:8px; line-height:1.45; color:#059669;">
+        ✓ This template will be unlocked using your pass credits.
+      </div>
+    </div>
+
+    <!-- State B: User has 0 credits -->
+    <div id="passNoCreditsBlock" style="display:none; padding:14px; background:#fffbfd; border-radius:14px; border:1px dashed rgba(255,42,122,0.35);">
+      <div style="display:flex; align-items:flex-start; gap:10px;">
+        <span style="font-size:22px;">💡</span>
+        <div style="font-size:12px; line-height:1.45; color:#4a2840;">
+          <strong>Want to save up to 40% on this &amp; upcoming moments?</strong><br/>
+          Get the <strong>Creator Festival Pass (₹499)</strong> to get <strong>₹700 Credits</strong> — unlocks this template + leaves bonus credits for upcoming celebrations!
+          <div style="margin-top:8px;">
+            <a href="plans.html#creditsSliderSection" style="display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:800; color:#fff; background:linear-gradient(135deg, var(--rose-primary), #9333ea); padding:6px 14px; border-radius:99px; text-decoration:none;">View Celebration Passes →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Vanvi Coins Ledger & Redemption Card -->
+  <section class="checkout-card coin-ledger-card" id="coinRedemptionCard">
+    <div class="card-sec-head">
+      <span style="color: var(--gold-bright); display:flex; align-items:center; gap:6px;">
+        <span>🪙</span> Vanvi Coins Loyalty Discount
+      </span>
+      <span style="font-size:11px; color:var(--text-muted); font-weight:700;">10 Coins = ₹1 Value</span>
+    </div>
+
+    <div class="coin-balance-strip">
+      <div class="coin-bal-left">
+        <span class="coin-bal-icon">🪙</span>
+        <div>
+          <div class="coin-bal-val"><span id="userTotalCoins">120</span> Coins</div>
+          <div class="coin-bal-rupee" id="userCoinsRupeeValue">≈ ₹12.00 Store Credit</div>
+        </div>
+      </div>
+      <div style="font-size:11px; color:var(--text-muted); font-weight:700;" id="userTierBadge">Member Privilege</div>
+    </div>
+
+    <!-- Toggle Apply Coins -->
+    <div class="coin-toggle-row">
+      <label class="coin-toggle-lbl" for="chkApplyCoins">
+        <span>Apply Vanvi Coins on this order</span>
+      </label>
+      <input type="checkbox" id="chkApplyCoins" class="coin-toggle-checkbox" checked/>
+    </div>
+
+    <div class="coin-rules-notice" id="coinEligibilityNotice">
+      ✓ Order value is eligible. Redeem up to 20% using coins.
+    </div>
+  </section>
+
+  <!-- 4. Interactive Promo & Coupon Code Card -->
+  <section class="checkout-card" id="couponCodeCard">
+    <div class="card-sec-head">
+      <span style="display:flex; align-items:center; gap:6px;">
+        <span>🏷️</span> <span>Have a Coupon Code?</span>
+      </span>
+      <span style="font-size:11px; color:var(--emerald-green); font-weight:700;" id="couponStatusNotice">Instant Savings</span>
+    </div>
+
+    <div class="coupon-input-wrap">
+      <input type="text" id="inputPromoCode" class="coupon-input" placeholder="ENTER COUPON CODE..." autocomplete="off"/>
+      <button type="button" id="btnApplyCoupon" class="btn-apply-coupon">Apply</button>
+    </div>
+
+    <div class="coupon-chips-list">
+      <button type="button" class="coupon-chip-btn" data-code="WELCOME10">🎁 WELCOME10 (10% OFF)</button>
+      <button type="button" class="coupon-chip-btn" data-code="VANVI15">✨ VANVI15 (15% OFF)</button>
+      <button type="button" class="coupon-chip-btn" data-code="LOVE20">💖 LOVE20 (20% OFF)</button>
+      <button type="button" class="coupon-chip-btn" data-code="CELEBRATE50">🎉 CELEBRATE50 (₹50 OFF)</button>
+    </div>
+
+    <div id="couponAppliedSuccess" style="display:none; font-size:11.5px; font-weight:800; color:#059669; background:#ecfdf5; padding:6px 12px; border-radius:8px; border:1px solid #a7f3d0;">
+      ✓ Coupon <span id="txtCouponCodeTag"></span> applied successfully!
+    </div>
+  </section>
+
+  <!-- 5. Payment & Order Calculation Ledger -->
+  <section class="checkout-card" id="paymentMethodsCard">
+    <div class="card-sec-head">
+      <span>Order Breakdown</span>
+      <span style="font-size:11px; color:var(--text-muted);">All Taxes Included</span>
+    </div>
+
+    <!-- Savings Callout -->
+    <div id="savingsCallout" class="savings-callout" style="display:none;">
+      🎉 Total Savings: <strong id="txtTotalSavings">₹0.00</strong>
+    </div>
+
+    <!-- Breakdown List -->
+    <div class="price-breakdown-list">
+      <div class="breakdown-row">
+        <span>Moment Base Price:</span>
+        <span id="txtSubtotal">₹199.00</span>
+      </div>
+      <div class="breakdown-row discount" id="rowPassDiscount" style="display:none; color:var(--rose-primary);">
+        <span>Pass Credits Redeemed:</span>
+        <span id="txtPassDiscount">- ₹0.00</span>
+      </div>
+      <div class="breakdown-row discount" id="rowDiscount">
+        <span>Coins Discount Applied:</span>
+        <span id="txtDiscount">- ₹12.00 (120 Coins)</span>
+      </div>
+      <div class="breakdown-row discount" id="rowCouponDiscount" style="display:none; color:#10b981;">
+        <span id="lblCouponTitle">Coupon Reward Applied:</span>
+        <span id="txtCouponDiscount">- ₹0.00</span>
+      </div>
+      <div class="breakdown-row">
+        <span>Remaining Coin Balance:</span>
+        <span id="txtRemainingCoins">0 Coins</span>
+      </div>
+      <div class="breakdown-row total">
+        <span>Final Payable Amount:</span>
+        <span id="txtFinalPayable" style="color:var(--theme-accent);">₹187.00</span>
+      </div>
+    </div>
+
+    <div style="margin: 18px 0 10px;">
+      <div style="font-size:12.5px; font-weight:800; color:#2c1224; margin-bottom:10px;">Select Payment Mode</div>
+      <div class="payment-methods-grid">
+        <button type="button" class="pay-opt-btn active" data-method="upi">
+          <span style="font-size:18px;">⚡</span>
+          <span>Instant UPI</span>
+        </button>
+        <button type="button" class="pay-opt-btn" data-method="gpay">
+          <span style="font-size:18px;">📱</span>
+          <span>Google Pay</span>
+        </button>
+        <button type="button" class="pay-opt-btn" data-method="phonepe">
+          <span style="font-size:18px;">🟣</span>
+          <span>PhonePe</span>
+        </button>
+        <button type="button" class="pay-opt-btn" data-method="card">
+          <span style="font-size:18px;">💳</span>
+          <span>Cards / NetBank</span>
+        </button>
+      </div>
+    </div>
+
+    <button type="button" class="btn-pay-now" id="btnCompletePayment">
+      <span>🔒</span> <span id="btnPayText">Pay ₹187.00 &amp; Get Moment Link</span> <span>→</span>
+    </button>
+  </section>
+
+</main>
+
+<!-- Order Success Receipt Modal (Luxury Pop-Up) -->
+<div class="order-success-overlay" id="orderSuccessModal" role="dialog" aria-modal="true">
+  <div class="order-success-card">
+    <button type="button" class="modal-close-btn" onclick="document.getElementById('orderSuccessModal')?.classList.remove('open')" aria-label="Close modal">×</button>
+    <div class="order-success-icon" id="modalCelebrationIcon">🎉</div>
+    <div style="font-size:10px; font-weight:850; text-transform:uppercase; letter-spacing:0.8px; color:var(--theme-accent); margin-bottom:4px;">✨ Celebration Unlocked &amp; Certified</div>
+    <h3 id="modalSuccessHeadline">Moment Ready to Share!</h3>
+    <p id="successReceiptMsg">Your customized celebration moment is activated and ready to surprise your recipient.</p>
+
+    <!-- WhatsApp 1-Tap Deliver Hero Button -->
+    <a href="share.html" class="btn-whatsapp-deliver" id="btnDeliverWhatsApp" target="_blank" rel="noopener" onclick="if(!this.href || this.href.endsWith('#') || this.href.endsWith('share.html')){window.location.href='share.html';return false;}">
+      <span>💬</span> Deliver on WhatsApp Now <span>💌</span>
+    </a>
+
+    <!-- Direct Secret Link Copy Bar -->
+    <div class="modal-url-box">
+      <input type="text" id="modalInputUrl" class="modal-url-input" readonly value="" placeholder="Generating celebration link..."/>
+      <button type="button" id="btnModalCopyUrl" class="btn-modal-copy">📋 Copy</button>
+    </div>
+
+    <!-- Quick Action Links -->
+    <div style="display:flex; flex-direction:column; gap:8px; align-items:center; margin-top:8px;">
+      <a href="#" id="linkViewCertificate" style="background: linear-gradient(135deg, rgba(217, 119, 6, 0.1), rgba(255, 42, 122, 0.1)); border: 1.5px solid rgba(217, 119, 6, 0.4); color: #b45309; padding: 10px 18px; border-radius: 99px; text-decoration: none; font-size: 12px; font-weight: 850; display: inline-flex; align-items: center; gap: 6px; width: 100%; justify-content: center; transition: all 0.2s;">
+        📜 View Official Keepsake Certificate →
+      </a>
+      <div style="display:flex; gap:8px; width:100%;">
+        <a href="share.html" id="linkOpenShareStudio" style="flex:1; background: linear-gradient(135deg, var(--theme-accent), #9333ea); border: none; color: #fff; padding: 9px 12px; border-radius: 99px; text-decoration: none; font-size: 11.5px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 4px 14px var(--theme-glow);">
+          🎨 Share Studio
+        </a>
+        <a href="#" id="linkViewDirect" target="_blank" style="flex:1; background: #ffffff; border: 1px solid var(--border-glass); color: var(--text-dark); padding: 9px 12px; border-radius: 99px; text-decoration: none; font-size: 11.5px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">
+          👁️ Preview ↗
+        </a>
+      </div>
+      <a href="dashboard.html" style="color:var(--text-muted); font-size:11.5px; font-weight:700; text-decoration:none; margin-top:2px;">
+        📁 Go to Creator Dashboard
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:12px 18px; margin-bottom:12px; font-size:12px;">
+    <a href="index.html" style="color:var(--text-muted); text-decoration:none;">Home</a>
+    <a href="templates.html" style="color:var(--text-muted); text-decoration:none;">Templates</a>
+    <a href="builder.html" style="color:var(--text-muted); text-decoration:none;">Studio</a>
+    <a href="plans.html" style="color:var(--text-muted); text-decoration:none;">VIP Plans</a>
+    <a href="dashboard.html" style="color:var(--text-muted); text-decoration:none;">My Moments</a>
+    <a href="about.html" style="color:var(--text-muted); text-decoration:none;">About</a>
+    <a href="contact.html" style="color:var(--text-muted); text-decoration:none;">Contact</a>
+    <a href="faq.html" style="color:var(--text-muted); text-decoration:none;">FAQs</a>
+    <a href="privacy.html" style="color:var(--text-muted); text-decoration:none;">Privacy</a>
+    <a href="terms.html" style="color:var(--text-muted); text-decoration:none;">Terms</a>
+    <a href="refund.html" style="color:var(--text-muted); text-decoration:none;">Refunds</a>
+  </div>
+  <p>© 2026 Vanvi Moments · Secure Checkout &amp; Coin Redemption · Handcrafted with care.</p>
+</footer>
+
+<script>
+// Smart Back Navigation (Preserves test suite compliance)
+function safeGoBack() {
+  if (history.length > 1) { history.back(); return false; }
+  window.location.href = 'templates.html';
+  return false;
+}
+function vanviGoBack(fallback) {
+  if (history.length > 1) { history.back(); return false; }
+  window.location.href = fallback || 'templates.html';
+  return false;
+}
+</script>
+
+<script src="js/vanvi-api.js"></script>
+<script id="vanvi-checkout-engine">
+/* =========================================================
+   VANVI CHECKOUT & DYNAMIC THEME ADAPTIVE ENGINE
+   Automatically adapts colors, glows, icons & badges for
+   ANY template (Birthday, Romance, Anniversary, Apology, 
+   Friendship, or any custom new template added in future).
+   ========================================================= */
+(function initVanviCheckout() {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // 1. Order Parameters
+  let templateName = urlParams.get('template') || 'Midnight Wish 3D Celebration';
+  let templateId = urlParams.get('templateId') || '';
+  let occasion = urlParams.get('occasion') || 'Celebration';
+  const recipient = urlParams.get('recipient') || 'Special Someone';
+  let basePrice = parseInt(urlParams.get('price') || '199', 10);
+  const themeOverride = urlParams.get('theme') || urlParams.get('color') || '';
+
+  // 2. Pre-configured Theme Profiles (Fallback & Extensible)
+  const THEME_PROFILES = {
+    birthday: {
+      accent: '#e11d48',
+      glow: 'rgba(225, 29, 72, 0.28)',
+      gradient: 'linear-gradient(135deg, #e11d48 0%, #f59e0b 100%)',
+      light: 'rgba(225, 29, 72, 0.08)',
+      icon: '🎂',
+      badge: '🎂 Birthday Celebration Edition'
+    },
+    love: {
+      accent: '#ff2a7a',
+      glow: 'rgba(255, 42, 122, 0.28)',
+      gradient: 'linear-gradient(135deg, #ff2a7a 0%, #a855f7 100%)',
+      light: 'rgba(255, 42, 122, 0.08)',
+      icon: '💖',
+      badge: '💖 Romantic Love Edition'
+    },
+    anniversary: {
+      accent: '#9333ea',
+      glow: 'rgba(147, 51, 234, 0.25)',
+      gradient: 'linear-gradient(135deg, #9333ea 0%, #d97706 100%)',
+      light: 'rgba(147, 51, 234, 0.08)',
+      icon: '💍',
+      badge: '💍 Milestone Anniversary Edition'
+    },
+    apology: {
+      accent: '#7c3aed',
+      glow: 'rgba(124, 58, 237, 0.25)',
+      gradient: 'linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%)',
+      light: 'rgba(124, 58, 237, 0.08)',
+      icon: '🕊️',
+      badge: '🕊️ Heartfelt Apology Edition'
+    },
+    friendship: {
+      accent: '#ea580c',
+      glow: 'rgba(234, 88, 12, 0.25)',
+      gradient: 'linear-gradient(135deg, #ea580c 0%, #ec4899 100%)',
+      light: 'rgba(234, 88, 12, 0.08)',
+      icon: '🫂',
+      badge: '🫂 Forever Friendship Edition'
+    },
+    celebration: {
+      accent: '#d97706',
+      glow: 'rgba(217, 119, 6, 0.25)',
+      gradient: 'linear-gradient(135deg, #d97706 0%, #ff2a7a 100%)',
+      light: 'rgba(217, 119, 6, 0.08)',
+      icon: '✨',
+      badge: '✨ Bespoke Digital Keepsake'
+    }
+  };
+
+  let activeTheme = Object.assign({}, THEME_PROFILES.celebration);
+
+  function applyTemplateTheme(tObj) {
+    const occLower = (occasion || '').toLowerCase();
+    const nameLower = (templateName || '').toLowerCase();
+    let matchedKey = 'celebration';
+
+    if (tObj && tObj.categorySlug && THEME_PROFILES[tObj.categorySlug]) {
+      matchedKey = tObj.categorySlug;
+    } else if (occLower.includes('birth') || nameLower.includes('birth')) {
+      matchedKey = 'birthday';
+    } else if (occLower.includes('love') || occLower.includes('romance') || occLower.includes('valen') || nameLower.includes('love') || nameLower.includes('rose')) {
+      matchedKey = 'love';
+    } else if (occLower.includes('anniv') || nameLower.includes('anniv')) {
+      matchedKey = 'anniversary';
+    } else if (occLower.includes('apol') || occLower.includes('sorry') || nameLower.includes('sorry')) {
+      matchedKey = 'apology';
+    } else if (occLower.includes('friend') || nameLower.includes('friend')) {
+      matchedKey = 'friendship';
+    }
+
+    activeTheme = Object.assign({}, THEME_PROFILES[matchedKey]);
+
+    if (tObj && tObj.accentColor) {
+      activeTheme.accent = tObj.accentColor;
+      activeTheme.gradient = `linear-gradient(135deg, ${tObj.accentColor} 0%, #ff2a7a 100%)`;
+      activeTheme.glow = `rgba(255, 42, 122, 0.25)`;
+    }
+    if (tObj && tObj.icon) {
+      activeTheme.icon = tObj.icon;
+    }
+    if (themeOverride && themeOverride.startsWith('#')) {
+      activeTheme.accent = themeOverride;
+      activeTheme.gradient = `linear-gradient(135deg, ${themeOverride} 0%, #ff2a7a 100%)`;
+    }
+
+    // Apply CSS Variables Dynamically to :root
+    const root = document.documentElement;
+    root.style.setProperty('--theme-accent', activeTheme.accent);
+    root.style.setProperty('--theme-glow', activeTheme.glow);
+    root.style.setProperty('--theme-gradient', activeTheme.gradient);
+    root.style.setProperty('--theme-light', activeTheme.light);
+
+    // Apply Dynamic Theme to DOM
+    const checkoutBadgeText = document.getElementById('checkoutBadgeText');
+    const themeHeadIcon = document.getElementById('themeHeadIcon');
+    const itemThumbIcon = document.getElementById('itemThumbIcon');
+    const tagCategory = document.getElementById('tagCategory');
+
+    if (checkoutBadgeText) checkoutBadgeText.textContent = activeTheme.badge;
+    if (themeHeadIcon) themeHeadIcon.textContent = activeTheme.icon;
+
+    if (itemThumbIcon) {
+      if (tObj && tObj.thumbnail) {
+        itemThumbIcon.innerHTML = `<img src="${tObj.thumbnail}" alt="${tObj.name}" onerror="this.parentElement.textContent='${activeTheme.icon}'"/>`;
+      } else {
+        itemThumbIcon.textContent = activeTheme.icon;
+      }
+    }
+    if (tagCategory) tagCategory.textContent = occasion;
+
+    // Update specs list
+    const specsList = document.getElementById('templateSpecsList');
+    if (specsList) {
+      if (tObj && tObj.features && tObj.features.length) {
+        specsList.innerHTML = tObj.features.slice(0, 4).map(f => `
+          <div class="spec-item"><span class="spec-item-icon">✓</span> <span>${f}</span></div>
+        `).join('');
+      } else {
+        specsList.innerHTML = `
+          <div class="spec-item"><span class="spec-item-icon">✓</span> <span>Interactive Digital Reveal Scene</span></div>
+          <div class="spec-item"><span class="spec-item-icon">✓</span> <span>Swipeable Photo Memory Frame</span></div>
+          <div class="spec-item"><span class="spec-item-icon">✓</span> <span>Playable Dedication Audio Player</span></div>
+          <div class="spec-item"><span class="spec-item-icon">✓</span> <span>Instant WhatsApp &amp; QR Delivery</span></div>
+        `;
+      }
+    }
+  }
+
+  // 3. Populate All-Templates Switcher Bar
+  function initTemplateSwitcher() {
+    const container = document.getElementById('templatePillsScroll');
+    if (!container) return;
+
+    const catalog = (window.VANVI_TEMPLATES && Array.isArray(window.VANVI_TEMPLATES)) ? window.VANVI_TEMPLATES : [];
+    if (!catalog.length) return;
+
+    container.innerHTML = catalog.slice(0, 10).map(t => {
+      const isSelected = (t.id === templateId || t.name === templateName || t.slug === templateId);
+      return `
+        <button type="button" class="template-switch-pill ${isSelected ? 'active' : ''}" data-tid="${t.id}" data-price="${t.price}" data-name="${t.name}" data-occ="${t.category}">
+          <span>${t.icon || '✨'}</span> <span>${t.name} (₹${t.price})</span>
+        </button>
+      `;
+    }).join('');
+
+    container.querySelectorAll('.template-switch-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        container.querySelectorAll('.template-switch-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const tid = btn.getAttribute('data-tid');
+        const p = parseInt(btn.getAttribute('data-price') || '149', 10);
+        const name = btn.getAttribute('data-name');
+        const occ = btn.getAttribute('data-occ');
+
+        templateId = tid;
+        templateName = name;
+        basePrice = p;
+        occasion = occ;
+
+        const newTObj = catalog.find(t => t.id === tid);
+        applyTemplateTheme(newTObj);
+
+        if (orderItemName) orderItemName.textContent = templateName;
+        if (orderItemSub) orderItemSub.textContent = `For ${recipient} · ${occasion} Surprise`;
+        if (orderItemBasePrice) orderItemBasePrice.textContent = `₹${basePrice}`;
+        if (txtSubtotal) txtSubtotal.textContent = `₹${basePrice}.00`;
+        const origPriceEl = document.getElementById('orderItemOrigPrice');
+        if (origPriceEl) origPriceEl.textContent = newTObj ? `₹${newTObj.originalPrice || 429}` : '₹429';
+
+        recalculate();
+      });
+    });
+  }
+
+  // 4. Initial Lookup & Setup
+  let initialTemplateObj = null;
+  if (window.VANVI_TEMPLATES && Array.isArray(window.VANVI_TEMPLATES)) {
+    initialTemplateObj = window.VANVI_TEMPLATES.find(t => 
+      t.id === templateId || 
+      t.slug === templateId || 
+      (t.name && t.name.toLowerCase() === templateName.toLowerCase())
+    );
+  }
+  applyTemplateTheme(initialTemplateObj);
+  initTemplateSwitcher();
+
+  // 5. Business Rules Configuration
+  const CONFIG = {
+    conversionRate: 10,     // 10 Coins = ₹1
+    minOrderForCoins: 150,  // Minimum ₹150 order to use coins
+    freeUserMaxPercent: 20, // Free users max 20% discount via coins
+    memberMaxPercent: 40    // Membership users max 40%
+  };
+
+  // User Coin & Pass Balance
+  let userCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '120', 10);
+  let userCredits = parseInt(localStorage.getItem('vanvi_template_credits') || '0', 10);
+
+  // 5b. Customer Account & Google Identity Sync
+  let currentUser = (window.VanviGoogleAuth && window.VanviGoogleAuth.getCurrentUser()) || null;
+  const loggedInBox = document.getElementById('checkoutUserLoggedIn');
+  const loggedOutBox = document.getElementById('checkoutUserLoggedOut');
+  const checkoutUserName = document.getElementById('checkoutUserName');
+  const checkoutUserEmail = document.getElementById('checkoutUserEmail');
+  const checkoutUserAvatar = document.getElementById('checkoutUserAvatar');
+  const checkoutProviderBadge = document.getElementById('checkoutProviderBadge');
+  const btnCheckoutGoogleAuth = document.getElementById('btnCheckoutGoogleAuth');
+  const btnCheckoutSwitchUser = document.getElementById('btnCheckoutSwitchUser');
+
+  function syncUserAccountUI() {
+    currentUser = (window.VanviGoogleAuth && window.VanviGoogleAuth.getCurrentUser()) || null;
+    if (currentUser && (currentUser.email || currentUser.name)) {
+      if (loggedInBox) loggedInBox.style.display = 'flex';
+      if (loggedOutBox) loggedOutBox.style.display = 'none';
+
+      if (checkoutUserName) checkoutUserName.textContent = currentUser.name || 'Creator';
+      if (checkoutUserEmail) checkoutUserEmail.textContent = currentUser.email || '';
+      if (checkoutProviderBadge) {
+        checkoutProviderBadge.textContent = currentUser.provider === 'google' ? 'Google' : (currentUser.role || 'Member');
+      }
+      if (checkoutUserAvatar) {
+        if (currentUser.picture) {
+          checkoutUserAvatar.innerHTML = `<img src="${currentUser.picture}" alt="${currentUser.name}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;"/>`;
+        } else {
+          checkoutUserAvatar.textContent = (currentUser.name || currentUser.email || 'U').charAt(0).toUpperCase();
+        }
+      }
+      if (currentUser.coins !== undefined) {
+        userCoins = currentUser.coins;
+        localStorage.setItem('vanvi_user_coins', userCoins);
+        if (userTotalCoins) userTotalCoins.textContent = userCoins;
+        if (userCoinsRupeeValue) userCoinsRupeeValue.textContent = `≈ ₹${(userCoins / CONFIG.conversionRate).toFixed(2)} Value`;
+      }
+    } else {
+      if (loggedInBox) loggedInBox.style.display = 'none';
+      if (loggedOutBox) loggedOutBox.style.display = 'flex';
+    }
+  }
+
+  btnCheckoutGoogleAuth?.addEventListener('click', function() {
+    if (window.VanviGoogleAuth) {
+      window.VanviGoogleAuth.signIn({
+        onSuccess: (res) => {
+          syncUserAccountUI();
+          recalculate();
+        }
+      });
+    }
+  });
+
+  btnCheckoutSwitchUser?.addEventListener('click', function() {
+    if (window.VanviGoogleAuth) {
+      window.VanviGoogleAuth.signIn({
+        onSuccess: (res) => {
+          syncUserAccountUI();
+          recalculate();
+        }
+      });
+    }
+  });
+
+  window.addEventListener('vanvi:auth:success', () => {
+    syncUserAccountUI();
+    recalculate();
+  });
+
+  // DOM Elements
+  const orderItemName = document.getElementById('orderItemName');
+  const orderItemSub = document.getElementById('orderItemSub');
+  const orderItemBasePrice = document.getElementById('orderItemBasePrice');
+  const userTotalCoins = document.getElementById('userTotalCoins');
+  const userCoinsRupeeValue = document.getElementById('userCoinsRupeeValue');
+  const chkApplyCoins = document.getElementById('chkApplyCoins');
+  const coinEligibilityNotice = document.getElementById('coinEligibilityNotice');
+  const txtSubtotal = document.getElementById('txtSubtotal');
+  const txtDiscount = document.getElementById('txtDiscount');
+  const rowDiscount = document.getElementById('rowDiscount');
+  const txtRemainingCoins = document.getElementById('txtRemainingCoins');
+  const txtFinalPayable = document.getElementById('txtFinalPayable');
+  const btnPayText = document.getElementById('btnPayText');
+  const btnCompletePayment = document.getElementById('btnCompletePayment');
+  const payOptBtns = document.querySelectorAll('.pay-opt-btn');
+
+  // Coupon Elements
+  const inputPromoCode = document.getElementById('inputPromoCode');
+  const btnApplyCoupon = document.getElementById('btnApplyCoupon');
+  const couponAppliedSuccess = document.getElementById('couponAppliedSuccess');
+  const txtCouponCodeTag = document.getElementById('txtCouponCodeTag');
+  const couponChips = document.querySelectorAll('.coupon-chip-btn');
+  const rowCouponDiscount = document.getElementById('rowCouponDiscount');
+  const lblCouponTitle = document.getElementById('lblCouponTitle');
+  const txtCouponDiscount = document.getElementById('txtCouponDiscount');
+  const savingsCallout = document.getElementById('savingsCallout');
+  const txtTotalSavings = document.getElementById('txtTotalSavings');
+
+  // Pass Elements
+  const chkApplyPass = document.getElementById('chkApplyPass');
+  const passHasCreditsBlock = document.getElementById('passHasCreditsBlock');
+  const passNoCreditsBlock = document.getElementById('passNoCreditsBlock');
+  const passAvailableCredits = document.getElementById('passAvailableCredits');
+  const passNameLabel = document.getElementById('passNameLabel');
+  const passNotice = document.getElementById('passNotice');
+  const rowPassDiscount = document.getElementById('rowPassDiscount');
+  const txtPassDiscount = document.getElementById('txtPassDiscount');
+
+  const orderSuccessModal = document.getElementById('orderSuccessModal');
+  const successReceiptMsg = document.getElementById('successReceiptMsg');
+  const btnDeliverWhatsApp = document.getElementById('btnDeliverWhatsApp');
+  const linkViewDirect = document.getElementById('linkViewDirect');
+
+  // Populate Initial Order Details
+  if (orderItemName) orderItemName.textContent = templateName;
+  if (orderItemSub) orderItemSub.textContent = `For ${recipient} · ${occasion} Surprise`;
+  if (orderItemBasePrice) orderItemBasePrice.textContent = `₹${basePrice}`;
+  if (txtSubtotal) txtSubtotal.textContent = `₹${basePrice}.00`;
+  if (userTotalCoins) userTotalCoins.textContent = userCoins;
+  if (userCoinsRupeeValue) userCoinsRupeeValue.textContent = `≈ ₹${(userCoins / CONFIG.conversionRate).toFixed(2)} Value`;
+
+  // 6. Coupon Database & State
+  let activeCoupon = sessionStorage.getItem('vanvi_applied_coupon') || localStorage.getItem('vanvi_active_coupon') || '';
+
+  const COUPON_BOOK = {
+    'WELCOME10': { type: 'pct', value: 10, label: '10% Welcome Discount' },
+    'VANVI15': { type: 'pct', value: 15, label: '15% Creator Reward' },
+    'LOVE20': { type: 'pct', value: 20, label: '20% Love Celebration Special' },
+    'CELEBRATE50': { type: 'flat', value: 50, label: '₹50 Celebration Discount' }
+  };
+
+  function applyPromo(code) {
+    if (!code) return;
+    const clean = code.trim().toUpperCase();
+    if (COUPON_BOOK[clean]) {
+      activeCoupon = clean;
+      sessionStorage.setItem('vanvi_applied_coupon', clean);
+      if (couponAppliedSuccess) couponAppliedSuccess.style.display = 'block';
+      if (txtCouponCodeTag) txtCouponCodeTag.textContent = clean;
+      if (inputPromoCode) inputPromoCode.value = clean;
+      recalculate();
+    } else {
+      alert(`Coupon code "${code}" is invalid or expired. Try WELCOME10 or VANVI15!`);
+    }
+  }
+
+  if (btnApplyCoupon && inputPromoCode) {
+    btnApplyCoupon.addEventListener('click', () => applyPromo(inputPromoCode.value));
+    inputPromoCode.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') applyPromo(inputPromoCode.value);
+    });
+  }
+
+  couponChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const c = chip.getAttribute('data-code');
+      applyPromo(c);
+    });
+  });
+
+  if (activeCoupon && COUPON_BOOK[activeCoupon]) {
+    if (couponAppliedSuccess) couponAppliedSuccess.style.display = 'block';
+    if (txtCouponCodeTag) txtCouponCodeTag.textContent = activeCoupon;
+    if (inputPromoCode) inputPromoCode.value = activeCoupon;
+  }
+
+  // 7. Calculation Routine
+  let appliedCoins = 0;
+  let discountRupees = 0;
+  let appliedCredits = 0;
+  let couponDiscount = 0;
+  let finalAmount = basePrice;
+
+  function recalculate() {
+    // Pass Card State
+    if (userCredits > 0) {
+      if (passHasCreditsBlock) passHasCreditsBlock.style.display = 'block';
+      if (passNoCreditsBlock) passNoCreditsBlock.style.display = 'none';
+      if (passAvailableCredits) passAvailableCredits.textContent = userCredits;
+      if (passNameLabel) passNameLabel.textContent = localStorage.getItem('vanvi_active_pass') || 'Active Celebration Pass';
+    } else {
+      if (passHasCreditsBlock) passHasCreditsBlock.style.display = 'none';
+      if (passNoCreditsBlock) passNoCreditsBlock.style.display = 'block';
+    }
+
+    // Coins calculation
+    const isEligible = basePrice >= CONFIG.minOrderForCoins;
+    const isCoinsChecked = chkApplyCoins && chkApplyCoins.checked;
+
+    const currentUser = (window.VanviAPI && window.VanviAPI.auth.getUser()) || null;
+    const isMember = currentUser && (currentUser.tier === 'member' || currentUser.tier === 'vip');
+    const effectiveMaxPercent = isMember ? CONFIG.memberMaxPercent : CONFIG.freeUserMaxPercent;
+
+    if (!isEligible) {
+      if (coinEligibilityNotice) {
+        coinEligibilityNotice.textContent = `⚠️ Minimum order of ₹${CONFIG.minOrderForCoins} required to redeem Vanvi Coins.`;
+        coinEligibilityNotice.style.color = '#f87171';
+      }
+      if (chkApplyCoins) chkApplyCoins.disabled = true;
+      appliedCoins = 0;
+      discountRupees = 0;
+    } else {
+      if (coinEligibilityNotice) {
+        coinEligibilityNotice.textContent = isMember 
+          ? `✓ Club Member Privilege: Redeem up to ${CONFIG.memberMaxPercent}% using coins!` 
+          : `✓ Order eligible. Free users redeem up to ${CONFIG.freeUserMaxPercent}% with coins. (VIP gets 40%)`;
+        coinEligibilityNotice.style.color = '#059669';
+      }
+      if (chkApplyCoins) chkApplyCoins.disabled = false;
+
+      if (isCoinsChecked && userCoins > 0) {
+        const percentLimitRupees = (basePrice * effectiveMaxPercent) / 100;
+        const fixedRupeeCap = 500;
+        const userCoinRupees = userCoins / CONFIG.conversionRate;
+        let eligibleRupees = Math.min(percentLimitRupees, fixedRupeeCap, userCoinRupees);
+
+        const minPayable = Math.max(0, Math.round(basePrice * (1 - (effectiveMaxPercent / 100))));
+        if (basePrice - eligibleRupees < minPayable) {
+          eligibleRupees = Math.max(0, basePrice - minPayable);
+        }
+
+        appliedCoins = Math.floor(eligibleRupees * CONFIG.conversionRate);
+        discountRupees = appliedCoins / CONFIG.conversionRate;
+      } else {
+        appliedCoins = 0;
+        discountRupees = 0;
+      }
+    }
+
+    // Active coupon discount calculation
+    couponDiscount = 0;
+    if (activeCoupon && COUPON_BOOK[activeCoupon]) {
+      const cMeta = COUPON_BOOK[activeCoupon];
+      if (cMeta.type === 'pct') {
+        couponDiscount = Math.round((basePrice * cMeta.value) / 100);
+      } else {
+        couponDiscount = Math.min(basePrice, cMeta.value);
+      }
+      if (rowCouponDiscount) rowCouponDiscount.style.display = 'flex';
+      if (lblCouponTitle) lblCouponTitle.textContent = `Coupon (${activeCoupon}) Applied:`;
+      if (txtCouponDiscount) txtCouponDiscount.textContent = `- ₹${couponDiscount.toFixed(2)}`;
+    } else {
+      if (rowCouponDiscount) rowCouponDiscount.style.display = 'none';
+    }
+
+    // Template Celebration Pass Credits Application (1 Credit = ₹1)
+    const isPassChecked = chkApplyPass && chkApplyPass.checked;
+    const amountBeforePass = Math.max(0, basePrice - discountRupees - couponDiscount);
+
+    if (isPassChecked && userCredits > 0) {
+      appliedCredits = Math.min(amountBeforePass, userCredits);
+      finalAmount = Math.max(0, amountBeforePass - appliedCredits);
+    } else {
+      appliedCredits = 0;
+      finalAmount = amountBeforePass;
+    }
+
+    // Pass row breakdown & status notice
+    if (rowPassDiscount) {
+      rowPassDiscount.style.display = appliedCredits > 0 ? 'flex' : 'none';
+      if (txtPassDiscount) txtPassDiscount.textContent = `- ₹${appliedCredits.toFixed(2)} (${appliedCredits} Credits)`;
+    }
+
+    if (passNotice) {
+      if (appliedCredits >= amountBeforePass && appliedCredits > 0) {
+        passNotice.textContent = '✓ Fully unlocked with your Celebration Pass! Zero cash required.';
+        passNotice.style.color = '#059669';
+      } else if (appliedCredits > 0) {
+        passNotice.textContent = `✓ ₹${appliedCredits} covered by Pass! Pay remaining ₹${finalAmount.toFixed(2)} cash.`;
+        passNotice.style.color = '#d97706';
+      } else {
+        passNotice.textContent = 'Pass credits unselected.';
+        passNotice.style.color = 'var(--text-muted)';
+      }
+    }
+
+    const remainingCoins = userCoins - appliedCoins;
+    const totalSavingsVal = discountRupees + couponDiscount + appliedCredits;
+
+    if (savingsCallout && txtTotalSavings) {
+      if (totalSavingsVal > 0) {
+        savingsCallout.style.display = 'block';
+        txtTotalSavings.textContent = `₹${totalSavingsVal.toFixed(2)}`;
+      } else {
+        savingsCallout.style.display = 'none';
+      }
+    }
+
+    if (rowDiscount) rowDiscount.style.display = discountRupees > 0 ? 'flex' : 'none';
+    if (txtDiscount) txtDiscount.textContent = `- ₹${discountRupees.toFixed(2)} (${appliedCoins} Coins)`;
+    if (txtRemainingCoins) txtRemainingCoins.textContent = `${remainingCoins} Coins`;
+    if (txtFinalPayable) txtFinalPayable.textContent = `₹${finalAmount.toFixed(2)}`;
+
+    if (btnPayText) {
+      if (finalAmount === 0 && (appliedCredits > 0 || basePrice === 0)) {
+        btnPayText.textContent = '✨ Claim Instant (₹0.00) & Get Moment Link';
+      } else {
+        btnPayText.textContent = `Pay ₹${finalAmount.toFixed(2)} & Get Moment Link`;
+      }
+    }
+  }
+
+  if (chkApplyCoins) chkApplyCoins.addEventListener('change', recalculate);
+  if (chkApplyPass) chkApplyPass.addEventListener('change', recalculate);
+  syncUserAccountUI();
+  recalculate();
+
+  // Payment Options UI
+  payOptBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      payOptBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // 8. Complete Payment Simulation & Delivery
+  if (btnCompletePayment) {
+    btnCompletePayment.addEventListener('click', async () => {
+      btnCompletePayment.disabled = true;
+      // Helper: Resolve Template-Specific Moment URL (Never universally hardcode moment.html)
+      function resolveTemplateMomentUrl(tplId, tplName, rec, occ, snd) {
+        let matched = null;
+        const list = window.VANVI_TEMPLATES || (window.VanviTemplatesData && window.VanviTemplatesData.getAll && window.VanviTemplatesData.getAll()) || [];
+        if (Array.isArray(list) && list.length) {
+          matched = list.find(t => 
+            (tplId && (t.id === tplId || t.slug === tplId || (t.aliases && t.aliases.includes(tplId)))) ||
+            (tplName && (t.name.toLowerCase() === tplName.toLowerCase() || t.id.toLowerCase() === tplName.toLowerCase()))
+          );
+        }
+
+        const q = new URLSearchParams();
+        q.set('recipient', rec || 'Special Someone');
+        q.set('name', rec || 'Special Someone');
+        q.set('sender', snd || 'You');
+        q.set('occasion', occ || (matched ? matched.category : 'Celebration'));
+
+        if (matched && matched.templatePath) {
+          let path = matched.templatePath;
+          if (path.endsWith('/')) path += 'index.html';
+          return `${window.location.origin}${window.location.pathname.replace('checkout.html', path)}?${q.toString()}`;
+        }
+
+        const key = (tplId || tplName || '').toLowerCase();
+        if (key.includes('bloom') || key.includes('white-bloom')) {
+          return `${window.location.origin}${window.location.pathname.replace('checkout.html', 'templates/birthday-white-bloom-001/index.html')}?${q.toString()}`;
+        }
+        if (key.includes('candle') || key.includes('3d')) {
+          return `${window.location.origin}${window.location.pathname.replace('checkout.html', 'templates/birthday-3d-candle-surprise/index.html')}?${q.toString()}`;
+        }
+        if (key.includes('apology') || key.includes('sorry')) {
+          return `${window.location.origin}${window.location.pathname.replace('checkout.html', 'templates/apology-dashboard/index.html')}?${q.toString()}`;
+        }
+        if (key.includes('wish-2') || key.includes('wish-02')) {
+          return `${window.location.origin}${window.location.pathname.replace('checkout.html', 'templates/birthday-wish-02/index.html')}?${q.toString()}`;
+        }
+        if (key.includes('wish') || key.includes('birthday')) {
+          return `${window.location.origin}${window.location.pathname.replace('checkout.html', 'templates/birthday-wish-01/index.html')}?${q.toString()}`;
+        }
+
+        return `${window.location.origin}${window.location.pathname.replace('checkout.html', 'builder.html')}?template=${encodeURIComponent(tplId || tplName || 'birthday-wish-1')}&${q.toString()}`;
+      }
+
+      let momentUrl = resolveTemplateMomentUrl(templateId, templateName, recipient, occasion, 'You');
+
+      function openSuccessReceipt(finalUrl, paymentId, ordId) {
+        // Update Local Wallets
+        if (appliedCredits > 0) {
+          userCredits = Math.max(0, userCredits - appliedCredits);
+          localStorage.setItem('vanvi_template_credits', userCredits);
+        }
+        if (appliedCoins > 0) {
+          userCoins = Math.max(0, userCoins - appliedCoins);
+          localStorage.setItem('vanvi_user_coins', userCoins);
+        }
+
+        btnCompletePayment.disabled = false;
+        btnCompletePayment.innerHTML = `<span>🔒</span> <span>Pay ₹${finalAmount.toFixed(2)} &amp; Get Moment Link</span> <span>→</span>`;
+
+        const displayOrderId = ordId || ('ORD-' + Date.now().toString(36).toUpperCase());
+
+        if (successReceiptMsg) {
+          if (appliedCredits > 0 && finalAmount === 0) {
+            successReceiptMsg.innerHTML = `Unlocked using <strong>${appliedCredits} Celebration Pass Credits</strong>! Remaining balance: <strong>${userCredits} Credits</strong>.`;
+          } else if (appliedCredits > 0) {
+            successReceiptMsg.innerHTML = `Unlocked with <strong>${appliedCredits} Credits + ₹${finalAmount.toFixed(2)}</strong> paid (ID: <code>${paymentId || 'Verified'}</code>). Remaining balance: <strong>${userCredits} Credits</strong>.`;
+          } else {
+            successReceiptMsg.innerHTML = `Payment Verified (ID: <code>${paymentId || 'Success'}</code>)! Your customized celebration moment for <strong>${recipient}</strong> is activated!`;
+          }
+        }
+
+        const modalIcon = document.getElementById('modalCelebrationIcon');
+        const modalHeadline = document.getElementById('modalSuccessHeadline');
+        if (modalIcon && activeTheme && activeTheme.icon) modalIcon.textContent = activeTheme.icon;
+        if (modalHeadline) modalHeadline.innerHTML = `${occasion} Moment <span>Ready!</span>`;
+
+        if (btnDeliverWhatsApp) {
+          const shareText = `Hi ${recipient}! I handcrafted this special digital celebration moment for you on Vanvi Moments. Tap to open: ${finalUrl} ❤️✨`;
+          btnDeliverWhatsApp.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+        }
+        if (linkViewDirect) {
+          linkViewDirect.href = finalUrl;
+        }
+
+        const modalInputUrl = document.getElementById('modalInputUrl');
+        if (modalInputUrl) modalInputUrl.value = finalUrl;
+
+        const btnModalCopyUrl = document.getElementById('btnModalCopyUrl');
+        if (btnModalCopyUrl) {
+          btnModalCopyUrl.onclick = () => {
+            navigator.clipboard.writeText(finalUrl).then(() => {
+              btnModalCopyUrl.textContent = '✓ Copied!';
+              setTimeout(() => { btnModalCopyUrl.textContent = '📋 Copy'; }, 2200);
+            }).catch(() => {
+              modalInputUrl?.select();
+              document.execCommand('copy');
+              btnModalCopyUrl.textContent = '✓ Copied!';
+              setTimeout(() => { btnModalCopyUrl.textContent = '📋 Copy'; }, 2200);
+            });
+          };
+        }
+
+        const linkViewCertificate = document.getElementById('linkViewCertificate');
+        if (linkViewCertificate) {
+          linkViewCertificate.href = `order-success.html?orderId=${encodeURIComponent(displayOrderId)}&template=${encodeURIComponent(templateName)}&recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}&amount=${finalAmount.toFixed(2)}&coins=${appliedCoins}&credits=${appliedCredits}&momentUrl=${encodeURIComponent(finalUrl)}&paymentId=${encodeURIComponent(paymentId || '')}`;
+        }
+
+        const linkOpenShareStudio = document.getElementById('linkOpenShareStudio');
+        if (linkOpenShareStudio) {
+          linkOpenShareStudio.href = `share.html?template=${encodeURIComponent(templateName)}&recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}`;
+        }
+
+        const orderSuccessModal = document.getElementById('orderSuccessModal');
+        if (orderSuccessModal) orderSuccessModal.classList.add('open');
+      }
+
+      // CASE 1: 100% Free or fully covered by Pass Credits
+      if (finalAmount <= 0) {
+        btnCompletePayment.innerHTML = '<span>✨</span> Activating Celebration Instant...';
+        try {
+          if (window.VanviAPI) {
+            const ordRes = await window.VanviAPI.orders.create({
+              templateName,
+              templatePrice: basePrice,
+              applyCoins: appliedCoins > 0,
+              applyPassCredits: appliedCredits > 0
+            });
+            if (ordRes.success && ordRes.order && ordRes.order.momentSlug) {
+              momentUrl += (momentUrl.includes('?') ? '&' : '?') + `id=${encodeURIComponent(ordRes.order.momentSlug)}`;
+            }
+          }
+        } catch (e) {
+          console.warn('Instant pass activation notice:', e);
+        }
+        openSuccessReceipt(momentUrl, 'PASS_CREDITS', 'ORD_FREE_' + Date.now().toString(36).toUpperCase());
+        return;
+      }
+
+      // CASE 2: Razorpay Standard Checkout Flow
+      const amountPaise = Math.round(finalAmount * 100);
+      if (amountPaise < 100) {
+        alert('Minimum order amount must be at least ₹1.00 (100 paise).');
+        btnCompletePayment.disabled = false;
+        btnCompletePayment.innerHTML = `<span>🔒</span> <span>Pay ₹${finalAmount.toFixed(2)} &amp; Get Moment Link</span> <span>→</span>`;
+        return;
+      }
+
+      const originalBtnText = btnCompletePayment.innerHTML;
+      btnCompletePayment.innerHTML = '<span>🔒</span> Connecting to Razorpay Secure Gateway...';
+
+      const currentUser = (window.VanviAPI && window.VanviAPI.auth && window.VanviAPI.auth.getUser()) || null;
+
+      try {
+        await window.VanviRazorpay.openCheckout({
+          amountPaise,
+          currency: 'INR',
+          name: 'Vanvi Moments',
+          description: `${templateName} — For ${recipient}`,
+          receipt: 'rcpt_' + Date.now(),
+          notes: {
+            templateName,
+            recipient,
+            occasion,
+            templateId,
+            customerEmail: currentUser?.email || 'guest@vanvimoments.shop'
+          },
+          prefill: {
+            name: currentUser?.name || recipient || 'Valued Creator',
+            email: currentUser?.email || 'creator@vanvimoments.shop',
+            contact: currentUser?.phone || ''
+          },
+          themeColor: '#ff2a7a',
+          onSuccess: (paymentResult) => {
+            console.log('✓ Razorpay payment verified successfully:', paymentResult);
+            openSuccessReceipt(momentUrl, paymentResult.razorpay_payment_id, paymentResult.razorpay_order_id);
+          },
+          onDismiss: () => {
+            console.log('Razorpay modal dismissed by user.');
+            btnCompletePayment.disabled = false;
+            btnCompletePayment.innerHTML = originalBtnText;
+          },
+          onFailure: (err) => {
+            console.error('Razorpay payment failed:', err);
+            btnCompletePayment.disabled = false;
+            btnCompletePayment.innerHTML = originalBtnText;
+            alert('Payment could not be completed: ' + err.message);
+          }
+        });
+      } catch (err) {
+        console.error('Checkout error:', err);
+        btnCompletePayment.disabled = false;
+        btnCompletePayment.innerHTML = originalBtnText;
+        alert('Failed to launch Razorpay checkout: ' + err.message);
+      }
+    });
+  }
+})();
+</script>
+<script src="js/vanvi-i18n.js"></script>
+<!-- GLOBAL VANVI NAVIGATION DOCK -->
+<script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="vanviFaviconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2a7a"/>
+      <stop offset="45%" stop-color="#ff529a"/>
+      <stop offset="75%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Background Glow Aura -->
+  <circle cx="16" cy="16" r="14" fill="url(#vanviFaviconGrad)" opacity="0.16"/>
+  <!-- 4-point Primary Celestial Spark -->
+  <path d="M16 2 C16 9.5 18.5 12 26 16 C18.5 20 16 22.5 16 30 C16 22.5 13.5 20 6 16 C13.5 12 16 9.5 16 2 Z" fill="url(#vanviFaviconGrad)" filter="url(#glow)"/>
+  <!-- Diagonal Micro Sparks -->
+  <path d="M16 8 C16 13 19 16 24 16 C19 16 16 19 16 24 C16 19 13 16 8 16 C13 16 16 13 16 8 Z" fill="#ffffff" opacity="0.85"/>
+  <!-- Core White & Heart Rose Dot -->
+  <circle cx="16" cy="16" r="3.2" fill="#ffffff"/>
+  <circle cx="16" cy="16" r="1.6" fill="#ff007a"/>
+</svg>

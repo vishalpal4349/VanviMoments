@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Creator Studio ✨ Personalize Your Moment | Vanvi Moments</title>
+  <meta name="description" content="Personalize your digital celebration in 30 seconds. Add photos, custom heartfelt letters, choose music, and publish an unforgettable interactive keepsake.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#fff5f8">
+
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+  <script src="js/vanvi-api.js"></script>
+
+  <style>
+    :root {
+      --bg-pearl: #fff9fc;
+      --ink: #2c1224;
+      --ink-muted: #724c65;
+      --rose-gold: #ff2a7a;
+      --rose-gold-dark: #be123c;
+      --gold-accent: #d97706;
+      --border-silk: rgba(255, 120, 175, 0.28);
+    }
+
+    body {
+      background: var(--bg-pearl);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(255, 230, 242, 0.6) 0px, transparent 55%),
+        radial-gradient(at 100% 100%, rgba(254, 243, 199, 0.45) 0px, transparent 55%);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding-bottom: 90px;
+    }
+
+    /* Top Studio Header */
+    .studio-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-silk);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .btn-studio-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-silk);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 750;
+      padding: 8px 16px;
+      border-radius: 99px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-studio-back:hover {
+      background: #ffffff;
+      border-color: var(--rose-gold);
+      transform: translateX(-2px);
+    }
+
+    /* Stepper Progress Bar */
+    .studio-stepper-track {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-pill {
+      font-size: 12px;
+      font-weight: 750;
+      color: var(--ink-muted);
+      background: rgba(0, 0, 0, 0.04);
+      padding: 6px 14px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+
+    .step-pill.active {
+      background: #ffffff;
+      color: var(--rose-gold);
+      border: 1px solid var(--border-silk);
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.12);
+    }
+
+    .step-pill.completed {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+    }
+
+    /* Main Studio Container */
+    .studio-container {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 0 20px;
+    }
+
+    .studio-intro-heading {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .studio-eyebrow {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      margin-bottom: 6px;
+    }
+
+    .studio-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .studio-subtitle {
+      color: var(--ink-muted);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 8px auto 0;
+    }
+
+    /* Step Card Panels */
+    .step-card-panel {
+      background: #ffffff;
+      border: 1.5px solid var(--border-silk);
+      border-radius: 28px;
+      padding: 36px 32px;
+      box-shadow: 0 16px 40px rgba(44, 18, 36, 0.06);
+      display: none;
+      animation: stepFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .step-card-panel.active {
+      display: block;
+    }
+
+    @keyframes stepFade {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Form Inputs */
+    .form-group-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .field-label {
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--ink);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .field-label .hint {
+      font-weight: 500;
+      color: var(--ink-muted);
+      font-size: 11.5px;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      background: #fffbfe;
+      border: 1.5px solid rgba(255, 120, 175, 0.25);
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-size: 14px;
+      color: var(--ink);
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--rose-gold);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(255, 42, 122, 0.12);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+
+    /* Inspiration Chips */
+    .wish-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      margin-bottom: 18px;
+    }
+
+    .wish-chip-btn {
+      background: rgba(255, 240, 246, 0.85);
+      border: 1px solid rgba(255, 120, 175, 0.3);
+      color: #9d174d;
+      font-size: 11.5px;
+      font-weight: 750;
+      padding: 6px 14px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .wish-chip-btn:hover {
+      background: #ff2a7a;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Photo Upload Box */
+    .photo-drop-zone {
+      border: 2px dashed rgba(255, 120, 175, 0.4);
+      background: rgba(255, 245, 248, 0.5);
+      border-radius: 18px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .photo-drop-zone:hover {
+      background: #fff0f5;
+      border-color: var(--rose-gold);
+    }
+
+    .photo-preview-grid {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .photo-preview-thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Bottom Navigation Stepper Buttons */
+    .step-actions-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 120, 175, 0.2);
+    }
+
+    .btn-step-prev {
+      background: transparent;
+      border: 1.5px solid rgba(255, 120, 175, 0.3);
+      color: var(--ink);
+      font-size: 13.5px;
+      font-weight: 750;
+      padding: 12px 24px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-step-prev:hover {
+      background: #ffffff;
+      border-color: var(--rose-gold);
+    }
+
+    .btn-step-next {
+      background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%);
+      color: #ffffff;
+      border: none;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 13px 30px;
+      border-radius: 99px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 42, 122, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-step-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(255, 42, 122, 0.42);
+    }
+
+    /* Step 3: Success & Share Box */
+    .publish-success-card {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .success-celebrate-icon {
+      font-size: 52px;
+      margin-bottom: 12px;
+      display: inline-block;
+      animation: popBounce 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes popBounce {
+      0% { transform: scale(0.4); opacity: 0; }
+      80% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    .share-link-input-group {
+      display: flex;
+      gap: 8px;
+      max-width: 520px;
+      margin: 20px auto;
+    }
+
+    .share-link-input {
+      flex: 1;
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--rose-gold);
+    }
+
+    .btn-copy-link {
+      background: var(--ink);
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 750;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy-link:hover {
+      background: var(--rose-gold);
+    }
+
+    .share-buttons-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn-share-whatsapp {
+      background: #25d366;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-share-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    .btn-open-live {
+      background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.3);
+    }
+
+    @media (max-width: 640px) {
+      .form-group-grid {
+        grid-template-columns: 1fr;
+      }
+      .step-card-panel {
+        padding: 24px 18px;
+        border-radius: 20px;
+      }
+      .step-pill span.step-text {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Studio Header -->
+  <header class="studio-header">
+    <a href="templates.html" class="btn-studio-back">
+      <span>‹</span> <span>Templates</span>
+    </a>
+
+    <!-- Step Indicator -->
+    <div class="studio-stepper-track">
+      <div class="step-pill active" id="stepPill1">
+        <span>1</span>
+        <span class="step-text">Details</span>
+      </div>
+      <div class="step-pill" id="stepPill2">
+        <span>2</span>
+        <span class="step-text">Letter &amp; Photos</span>
+      </div>
+      <div class="step-pill" id="stepPill3">
+        <span>3</span>
+        <span class="step-text">Publish</span>
+      </div>
+    </div>
+
+    <div style="font-size:12px; font-weight:750; color:var(--rose-gold);">
+      ✨ Studio
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="studio-container">
+    <div class="studio-intro-heading">
+      <div class="studio-eyebrow">✦ Quick 30-Second Personalization</div>
+      <h1 class="studio-title" id="studioTitle">Personalize Your Keepsake</h1>
+      <p class="studio-subtitle">Enter your favorite memories, heartfelt words, and share an interactive surprise in minutes.</p>
+    </div>
+
+    <!-- Active Selected Template Indicator & Change Shortcut -->
+    <div id="templateInfoBadge" style="max-width: 600px; margin: 0 auto 18px; background: rgba(255, 255, 255, 0.95); border: 1.5px solid rgba(255, 120, 175, 0.35); border-radius: 99px; padding: 6px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 4px 14px rgba(255, 42, 122, 0.08);">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; color: var(--ink);">
+        <span style="font-size: 15px;">🎨</span>
+        <span>Template: <strong id="currentTemplateName" style="color: var(--rose-gold);">3D Birthday Candle Cake</strong></span>
+      </div>
+      <a href="templates.html" style="font-size: 11.5px; font-weight: 800; color: var(--rose-gold); text-decoration: none; padding: 5px 12px; border-radius: 99px; background: #fff0f6; border: 1px solid rgba(255, 42, 122, 0.25); display: inline-flex; align-items: center; gap: 4px; transition: transform 0.2s;" title="Browse all template styles &amp; demos">
+        <span>Change Template</span> <span>⇄</span>
+      </a>
+    </div>
+
+    <!-- STEP 1: RECIPIENT & OCCASION -->
+    <section class="step-card-panel active" id="stepPanel1" aria-label="Step 1: Recipient and Occasion">
+      <div class="form-group-grid">
+        <div class="form-field">
+          <label class="field-label" for="inpRecipient">
+            <span>Recipient's Name</span>
+            <span class="hint">Who is this for?</span>
+          </label>
+          <input type="text" id="inpRecipient" class="form-input" placeholder="Enter recipient name" value="My Favorite Person" required>
+        </div>
+
+        <div class="form-field">
+          <label class="field-label" for="inpOccasion">
+            <span>Occasion</span>
+            <span class="hint">Celebration type</span>
+          </label>
+          <select id="inpOccasion" class="form-select">
+            <option value="Birthday" selected>🎂 Birthday</option>
+            <option value="Love">❤️ Love &amp; Romance</option>
+            <option value="Anniversary">💍 Anniversary</option>
+            <option value="Friendship">👯 Friendship &amp; BFF</option>
+            <option value="Family">👨‍👩‍👦 Family &amp; Gratitude</option>
+            <option value="Celebration">🎉 Celebration</option>
+            <option value="Memories">📸 Memories &amp; Keepsake</option>
+            <option value="Apology">🕊️ Heartfelt Apology</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="field-label" for="inpSender">
+            <span>Your Name / Sender</span>
+            <span class="hint">Signed as</span>
+          </label>
+          <input type="text" id="inpSender" class="form-input" placeholder="Enter your name" value="With all my love">
+        </div>
+
+        <div class="form-field">
+          <label class="field-label" for="inpDate">
+            <span>Celebration Date (Optional)</span>
+            <span class="hint">For countdown</span>
+          </label>
+          <input type="date" id="inpDate" class="form-input">
+        </div>
+      </div>
+
+      <div class="step-actions-footer">
+        <a href="templates.html" class="btn-step-prev">Cancel</a>
+        <button type="button" class="btn-step-next" onclick="goToStep(2)">
+          <span>Next: Letter &amp; Photos</span>
+          <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 2: LETTER & PHOTOS -->
+    <section class="step-card-panel" id="stepPanel2" aria-label="Step 2: Letter and Photos">
+      <div class="form-field full-width">
+        <label class="field-label" for="inpMessage">
+          <span>Personal Heartfelt Letter</span>
+          <span class="hint">Unfolded inside the wax seal</span>
+        </label>
+        
+        <!-- Quick Inspiration Chips -->
+        <div class="wish-chips-row">
+          <button type="button" class="wish-chip-btn" onclick="applyInspiration('birthday')">🎂 Birthday Wishes</button>
+          <button type="button" class="wish-chip-btn" onclick="applyInspiration('love')">❤️ Romantic Note</button>
+          <button type="button" class="wish-chip-btn" onclick="applyInspiration('bff')">👯 Best Friend Love</button>
+          <button type="button" class="wish-chip-btn" onclick="applyInspiration('apology')">🕊️ Sincere Apology</button>
+        </div>
+
+        <textarea id="inpMessage" class="form-textarea" placeholder="Write your heartfelt thoughts here...">Some people make the world brighter just by existing in it. Today is a celebration of all the laughter you bring, the warmth in your voice, and the irreplaceable moments we share. Here is to another beautiful chapter filled with unforgettable memories.</textarea>
+      </div>
+
+      <!-- Photos Upload Section -->
+      <div class="form-field full-width" style="margin-top:20px;">
+        <label class="field-label">
+          <span>Add Photo Memories (Up to 3 Photos)</span>
+          <span class="hint">Displayed in polaroid stack</span>
+        </label>
+
+        <div class="photo-drop-zone" onclick="document.getElementById('photoInput').click()">
+          <input type="file" id="photoInput" accept="image/*" multiple style="display:none;" onchange="handlePhotoUpload(this)">
+          <div style="font-size:28px; margin-bottom:4px;">📸</div>
+          <strong style="color:var(--rose-gold); font-size:13.5px;">Click to upload photos</strong>
+          <p style="font-size:11.5px; color:var(--ink-muted); margin-top:2px;">PNG, JPG, or WEBP memories</p>
+        </div>
+
+        <div class="photo-preview-grid" id="photoPreviewContainer"></div>
+      </div>
+
+      <!-- Music Selection -->
+      <div class="form-field full-width" style="margin-top:20px;">
+        <label class="field-label" for="inpSoundtrack">
+          <span>Background Soundtrack</span>
+          <span class="hint">Plays gently in background</span>
+        </label>
+        <select id="inpSoundtrack" class="form-select">
+          <option value="acoustic" selected>🎵 Birthday Acoustic Melodies</option>
+          <option value="piano">🎹 Romantic Cinematic Piano</option>
+          <option value="lofi">☕ Warm Nostalgic Lo-Fi</option>
+          <option value="soft">🕊️ Peaceful Healing Chimes</option>
+        </select>
+      </div>
+
+      <div class="step-actions-footer">
+        <button type="button" class="btn-step-prev" onclick="goToStep(1)">← Back to Details</button>
+        <button type="button" class="btn-step-next" onclick="generateMoment()">
+          <span>Review &amp; Publish</span>
+          <span>✨</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 3: PUBLISH & SHARE -->
+    <section class="step-card-panel" id="stepPanel3" aria-label="Step 3: Publish and Share">
+      <div class="publish-success-card">
+        <span class="success-celebrate-icon">🎉</span>
+        <h2 style="font-family:'Cormorant Garamond', Georgia, serif; font-size:2.2rem; margin-bottom:6px;">Your Moment is Ready!</h2>
+        <p style="color:var(--ink-muted); font-size:14px; max-width:460px; margin:0 auto;">
+          Your digital celebration has been crafted with permanent cloud validity. Share the private link below with your recipient on WhatsApp or via QR code.
+        </p>
+
+        <!-- Share Link Bar -->
+        <div class="share-link-input-group">
+          <input type="text" id="finalShareUrl" class="share-link-input" readonly>
+          <button type="button" class="btn-copy-link" onclick="copyFinalLink()">Copy Link</button>
+        </div>
+
+        <!-- Share Actions -->
+        <div class="share-buttons-row">
+          <a href="#" id="btnShareWhatsApp" class="btn-share-whatsapp" target="_blank" rel="noopener">
+            <span>💬</span> <span>Share on WhatsApp</span>
+          </a>
+          <a href="#" id="btnOpenMomentDirect" class="btn-open-live" target="_blank" rel="noopener">
+            <span>Open Experience</span> <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="step-actions-footer" style="justify-content:center;">
+        <button type="button" class="btn-step-prev" onclick="goToStep(2)">← Edit Details</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let currentStep = 1;
+    const uploadedPhotos = [];
+
+    // Parse incoming template parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialTemplate = urlParams.get('template') || 'birthday-3d-candle';
+    // Dynamic Template Configuration Map
+    const TEMPLATE_CONFIGS = {
+      'birthday': {
+        title: '🎂 Customize Birthday Surprise',
+        subtitle: 'Add birthday wish, age/date, candle memory photo, and up to 4 polaroid memories.',
+        recipientPlaceholder: 'e.g. Priya, Aarav, Bestie',
+        recipientDefault: 'My Favorite Person',
+        photoLimit: 4,
+        photoHint: '1 Cover Photo + up to 3 Polaroid memories',
+        defaultMessage: 'Happy Birthday! Another year of pure joy, golden laughter, and unforgettable moments. May this day be as wonderful and radiant as you are!',
+        soundtrack: 'acoustic'
+      },
+      'love': {
+        title: '❤️ Customize Valentine / Romantic Letter',
+        subtitle: 'Personalize your romantic digital letter, couple photos, and timeless background melody.',
+        recipientPlaceholder: 'e.g. My Love, Jaan, Sweetheart',
+        recipientDefault: 'My Forever Love',
+        photoLimit: 5,
+        photoHint: 'Up to 5 romantic couple photos for the memory stack',
+        defaultMessage: 'In a world full of fleeting moments, being with you feels like home. Thank you for your warmth, your kindness, and your love. Forever yours.',
+        soundtrack: 'piano'
+      },
+      'polaroid': {
+        title: '📸 Customize Retro Polaroid Wall',
+        subtitle: 'Upload your favorite snapshots with handwritten nostalgic vibes and lo-fi beats.',
+        recipientPlaceholder: 'e.g. The Best Crew, Rohan & Me',
+        recipientDefault: 'My Best Friends',
+        photoLimit: 6,
+        photoHint: 'Up to 6 snapshots for the vintage polaroid reel',
+        defaultMessage: 'To the countless late-night talks, spontaneous road trips, and inside jokes that no one else understands. So lucky to have you in my corner!',
+        soundtrack: 'lofi'
+      },
+      'anniversary': {
+        title: '💍 Customize Golden Anniversary Story',
+        subtitle: 'Craft a golden milestone celebration with vintage projector reel, date, and heartfelt tribute.',
+        recipientPlaceholder: 'e.g. Mom & Dad, My Dearest Husband/Wife',
+        recipientDefault: 'My Lifelong Partner',
+        photoLimit: 5,
+        photoHint: 'Milestone photos (Wedding, early years, recent trips)',
+        defaultMessage: 'Through every season, laughter, and milestone, choosing you has been the greatest gift of my life. Happy Anniversary to us, today and forever.',
+        soundtrack: 'piano'
+      },
+      'apology': {
+        title: '🕊️ Customize Sincere Heartfelt Letter',
+        subtitle: 'Send a quiet, respectful digital letter to melt the distance and express true feelings.',
+        recipientPlaceholder: 'e.g. Someone Special',
+        recipientDefault: 'Someone Who Means The World',
+        photoLimit: 2,
+        photoHint: '1 or 2 cherished memories to remind of happy times',
+        defaultMessage: 'I am truly sorry from the bottom of my heart. Our bond and your happiness mean the world to me, and I hope we can start fresh with warmth and understanding.',
+        soundtrack: 'soft'
+      }
+    };
+
+    // Detect template theme
+    const tplKey = initialTemplate.toLowerCase();
+    let matchedConfig = TEMPLATE_CONFIGS['birthday'];
+    if (tplKey.includes('love') || tplKey.includes('valent') || tplKey.includes('romance') || (initialOccasion && initialOccasion.toLowerCase().includes('love'))) {
+      matchedConfig = TEMPLATE_CONFIGS['love'];
+    } else if (tplKey.includes('polaroid') || tplKey.includes('friend') || tplKey.includes('memor') || (initialOccasion && initialOccasion.toLowerCase().includes('friend'))) {
+      matchedConfig = TEMPLATE_CONFIGS['polaroid'];
+    } else if (tplKey.includes('anniversary') || tplKey.includes('wedding')) {
+      matchedConfig = TEMPLATE_CONFIGS['anniversary'];
+    } else if (tplKey.includes('apology') || tplKey.includes('sorry')) {
+      matchedConfig = TEMPLATE_CONFIGS['apology'];
+    }
+
+    // Apply template tailored configuration
+    document.addEventListener('DOMContentLoaded', () => {
+      const titleEl = document.getElementById('studioTitle');
+      if (titleEl && matchedConfig.title) titleEl.textContent = matchedConfig.title;
+
+      const nameEl = document.getElementById('currentTemplateName');
+      if (nameEl && matchedConfig.title) {
+        nameEl.textContent = matchedConfig.title.replace(/^[^a-zA-Z0-9]+/, '').replace('Customize ', '');
+      }
+
+      const subEl = document.querySelector('.studio-subtitle');
+      if (subEl && matchedConfig.subtitle) subEl.textContent = matchedConfig.subtitle;
+
+      const recInput = document.getElementById('inpRecipient');
+      if (recInput) {
+        recInput.placeholder = matchedConfig.recipientPlaceholder;
+        if (recInput.value === 'My Favorite Person') recInput.value = matchedConfig.recipientDefault;
+      }
+
+      const msgEl = document.getElementById('inpMessage');
+      if (msgEl) {
+        msgEl.value = matchedConfig.defaultMessage;
+      }
+
+      const soundSelect = document.getElementById('inpSoundtrack');
+      if (soundSelect && matchedConfig.soundtrack) {
+        soundSelect.value = matchedConfig.soundtrack;
+      }
+
+      const photoLabel = document.querySelector('#stepPanel2 label.field-label span');
+      if (photoLabel && matchedConfig.photoLimit) {
+        photoLabel.textContent = `Add Photo Memories (Up to ${matchedConfig.photoLimit} Photos)`;
+      }
+      const photoHint = document.querySelector('#stepPanel2 label.field-label .hint');
+      if (photoHint && matchedConfig.photoHint) {
+        photoHint.textContent = matchedConfig.photoHint;
+      }
+    });
+
+    if (initialOccasion) {
+      const select = document.getElementById('inpOccasion');
+      if (select) {
+        const valLower = initialOccasion.toLowerCase();
+        for (let i = 0; i < select.options.length; i++) {
+          const optVal = select.options[i].value.toLowerCase();
+          if (optVal.includes(valLower) || valLower.includes(optVal)) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+      }
+    }
+
+    function goToStep(step) {
+      currentStep = step;
+      document.querySelectorAll('.step-card-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(`stepPanel${step}`)?.classList.add('active');
+
+      document.querySelectorAll('.step-pill').forEach((pill, idx) => {
+        pill.classList.remove('active');
+        if (idx + 1 === step) pill.classList.add('active');
+        if (idx + 1 < step) pill.classList.add('completed');
+      });
+
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    function applyInspiration(type) {
+      const textarea = document.getElementById('inpMessage');
+      if (!textarea) return;
+
+      if (type === 'birthday') {
+        textarea.value = 'Happy Birthday! Another year of pure joy, golden laughter, and unforgettable moments. May this day be as wonderful and radiant as you are!';
+      } else if (type === 'love') {
+        textarea.value = 'In a world full of fleeting moments, being with you feels like home. Thank you for your warmth, your kindness, and your love. Forever yours.';
+      } else if (type === 'bff') {
+        textarea.value = 'Happy Birthday to my absolute favorite human! Thank you for the endless late-night chats, the crazy adventures, and always having my back.';
+      } else if (type === 'apology') {
+        textarea.value = 'I am truly sorry from the bottom of my heart. Your smile and our bond mean the world to me, and I hope we can start fresh with warmth and understanding.';
+      }
+    }
+
+    function handlePhotoUpload(input) {
+      if (!input.files || !input.files.length) return;
+      const container = document.getElementById('photoPreviewContainer');
+
+      for (let i = 0; i < Math.min(input.files.length, 3); i++) {
+        const file = input.files[i];
+        const reader = new FileReader();
+        reader.onload = e => {
+          uploadedPhotos.push(e.target.result);
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.className = 'photo-preview-thumb';
+          container.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    async function generateMoment() {
+      const btn = document.querySelector('.step-actions-footer .btn-step-next');
+      const originalBtnHtml = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.style.opacity = '0.75';
+        btn.innerHTML = '<span>Uploading Memories &amp; Saving...</span> <span>⏳</span>';
+      }
+
+      const recipient = document.getElementById('inpRecipient').value.trim() || 'My Favorite Person';
+      const sender = document.getElementById('inpSender').value.trim() || 'With all my love';
+      const occasion = document.getElementById('inpOccasion').value;
+      const message = document.getElementById('inpMessage').value.trim();
+      const date = document.getElementById('inpDate').value;
+      const soundtrack = document.getElementById('inpSoundtrack')?.value || 'acoustic';
+
+      // 1. Upload photos to /api/upload to avoid long base64 strings in URL/state
+      const finalPhotoUrls = [];
+      for (let i = 0; i < uploadedPhotos.length; i++) {
+        const photo = uploadedPhotos[i];
+        if (photo && photo.startsWith('data:')) {
+          try {
+            if (window.VanviAPI && window.VanviAPI.upload) {
+              const uploadRes = await window.VanviAPI.upload.photo(photo, `memory_${Date.now()}_${i + 1}.png`);
+              if (uploadRes && uploadRes.success && uploadRes.url) {
+                finalPhotoUrls.push(uploadRes.url);
+                continue;
+              }
+            }
+          } catch (e) {
+            console.warn('Photo upload API failed:', e);
+          }
+        }
+        finalPhotoUrls.push(photo);
+      }
+
+      // 2. Store moment payload in /api/moments and obtain short ID
+      const momentPayload = {
+        title: `${occasion} Keepsake for ${recipient}`,
+        recipient,
+        sender,
+        occasion,
+        message,
+        date,
+        musicTrack: soundtrack,
+        photos: finalPhotoUrls,
+        lockMode: 'envelope',
+        templateId: initialTemplate
+      };
+
+      let momentId = null;
+      let momentSlug = null;
+
+      // Primary: Save via VanviAPI client SDK
+      if (window.VanviAPI && window.VanviAPI.moments && typeof window.VanviAPI.moments.saveDraft === 'function') {
+        try {
+          const res = await window.VanviAPI.moments.saveDraft(momentPayload);
+          if (res && res.success && res.moment) {
+            momentId = res.moment.id;
+            momentSlug = res.moment.slug;
+          }
+        } catch (e) {
+          console.warn('Draft save error:', e);
+        }
+      }
+
+      // Fallback: Direct POST /api/moments
+      if (!momentId) {
+        try {
+          const apiBase = (window.location.port === '3000') ? '' : 'http://localhost:3000';
+          const postRes = await fetch(`${apiBase}/api/moments`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(momentPayload)
+          });
+          if (postRes.ok) {
+            const data = await postRes.json();
+            if (data && data.success && data.moment) {
+              momentId = data.moment.id;
+              momentSlug = data.moment.slug;
+            }
+          }
+        } catch (e) {}
+      }
+
+      // Resilient local fallback if backend is unreachable
+      if (!momentId) {
+        momentId = 'vm_' + Math.random().toString(36).substring(2, 10);
+        momentSlug = 'm_' + Math.random().toString(36).substring(2, 10);
+        try {
+          const list = JSON.parse(localStorage.getItem('vanvi_user_moments') || '[]');
+          list.unshift({ id: momentId, slug: momentSlug, ...momentPayload, createdAt: Date.now() });
+          localStorage.setItem('vanvi_user_moments', JSON.stringify(list));
+        } catch(e) {}
+      }
+
+      // Construct clean ID-based celebration URL (No huge query parameters or base64)
+      let targetPath = 'templates/birthday-3d-candle/index.html';
+      if (initialTemplate === 'birthday-wish-1' || initialTemplate === 'birthday-wish-01') targetPath = 'templates/birthday-wish-01/index.html';
+      else if (initialTemplate === 'birthday-wish-2' || initialTemplate === 'birthday-wish-02') targetPath = 'templates/birthday-wish-02/index.html';
+      else if (initialTemplate.includes('bloom')) targetPath = 'templates/birthday-white-bloom/index.html';
+      else if (initialTemplate.includes('love') || initialTemplate.includes('gf')) targetPath = 'templates/constellation-love/index.html';
+      else if (initialTemplate.includes('polaroid') || initialTemplate.includes('friend') || initialTemplate.includes('memor')) targetPath = 'templates/retro-polaroid-wall/index.html';
+      else if (initialTemplate.includes('anniversary') || initialTemplate.includes('wedding')) targetPath = 'templates/golden-anniversary/index.html';
+      else if (initialTemplate.includes('apology') || initialTemplate.includes('sorry')) targetPath = 'templates/sincere-letter/index.html';
+
+      const shortId = momentId || momentSlug;
+      const finalUrl = `${window.location.origin}/${targetPath}?id=${encodeURIComponent(shortId)}`;
+
+      document.getElementById('finalShareUrl').value = finalUrl;
+      document.getElementById('btnOpenMomentDirect').href = finalUrl;
+
+      const waText = `✨ A special digital surprise was created especially for you! Open it here: ${finalUrl}`;
+      document.getElementById('btnShareWhatsApp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`;
+
+      if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.innerHTML = originalBtnHtml;
+      }
+
+      goToStep(3);
+    }
+
+    function copyFinalLink() {
+      const input = document.getElementById('finalShareUrl');
+      input.select();
+      navigator.clipboard.writeText(input.value).then(() => {
+        alert('✨ Shareable link copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>

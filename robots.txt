@@ -1,0 +1,18 @@
+# =========================================================
+# VANVI MOMENTS — ROBOTS.TXT
+# https://vanvimoments.shop
+# Luxury Digital Surprises, Celebrations & Keepsakes
+# =========================================================
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin.html
+Disallow: /admin-panel.html
+Disallow: /dashboard.html
+Disallow: /profile.html
+Disallow: /scratch/
+Disallow: /uploads/private/
+
+# Sitemap Location
+Sitemap: https://vanvimoments.shop/sitemap.xml

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Periodic Table Chemistry Quiz — Vanvi Moments Games</title>
+  <meta name="description" content="Test your chemistry recall! Procedurally sampled elemental questions, atomic symbols, and randomized options for non-stop learning and Vanvi Coins.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --rose-main: #ff2a7a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --text-dark: #2c1224;
+      --text-muted: #88627b;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #ffeaf3 0%, #fff7fb 35%, #faf5ff 70%, #fff2f7 100%);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 60px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .btn-nav-back {
+      font-size: 12.5px;
+      font-weight: 750;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      padding: 6px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+    .game-arena {
+      flex: 1;
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 16px 14px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .status-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-pink);
+      border-radius: 16px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(255, 60, 130, 0.06);
+    }
+    .hud-pill {
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-rules-pill {
+      background: rgba(255, 42, 122, 0.08);
+      border: 1px solid rgba(255, 42, 122, 0.25);
+      color: var(--rose-main);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+
+    /* Quiz Card */
+    .quiz-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 24px;
+      padding: 22px 18px;
+      width: 100%;
+      box-shadow: 0 12px 36px rgba(100, 50, 90, 0.08);
+      margin-bottom: 18px;
+      text-align: center;
+      position: relative;
+    }
+    .element-symbol-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff0f6, #ffd6e7);
+      border: 2px solid var(--rose-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      box-shadow: 0 6px 18px rgba(255, 42, 122, 0.15);
+    }
+    .symbol-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--rose-main);
+      line-height: 1;
+    }
+    .atomic-num {
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+    .question-prompt {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 18px;
+      line-height: 1.35;
+    }
+
+    /* Options Grid */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+    .option-btn {
+      background: #fffbfd;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+    .option-btn:hover {
+      border-color: var(--rose-main);
+      background: #fff0f6;
+      transform: translateY(-2px);
+    }
+    .option-btn.correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+    .option-btn.wrong {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(44, 18, 36, 0.6); backdrop-filter: blur(8px);
+      z-index: 200; display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #ffffff; width: 100%; max-width: 420px; border-radius: 24px; padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25); border: 1px solid var(--border-pink); position: relative;
+    }
+    .modal-card h3 { font-family: var(--font-serif); font-size: 22px; color: var(--text-dark); margin-bottom: 12px; }
+    .modal-card ul { padding-left: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <button type="button" class="btn-nav-back" onclick="location.href='games.html'">
+      ‹ Games Arena
+    </button>
+    <div style="font-weight: 850; font-size: 15px; color: var(--rose-main);">
+      🧪 Periodic Table Quiz
+    </div>
+    <div style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:800; background:#fffbeb; border:1px solid #fde68a; padding:4px 10px; border-radius:99px; color:#d97706;">
+      🪙 <span id="coinBalanceHUD">0</span>
+    </div>
+  </header>
+
+  <main class="game-arena">
+    <div class="status-hud">
+      <div class="hud-pill">
+        <span>Question:</span> <strong id="hudQNum" style="color:var(--rose-main);">1 / 5</strong>
+      </div>
+      <div class="hud-pill">
+        <span>Score:</span> <strong id="hudScore">0</strong>
+      </div>
+      <button type="button" class="btn-rules-pill" onclick="openRules()">📖 Rules</button>
+    </div>
+
+    <!-- Quiz Question Box -->
+    <div class="quiz-card">
+      <div class="element-symbol-badge" id="symbolBadge">
+        <span class="atomic-num" id="atomicNum">79</span>
+        <span class="symbol-text" id="symbolText">Au</span>
+      </div>
+
+      <div class="question-prompt" id="questionPrompt">
+        What is the chemical element with symbol 'Au'?
+      </div>
+
+      <div class="options-grid" id="optionsGrid"></div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal-card">
+      <h3>🧪 Chemistry Quiz Rules</h3>
+      <ul>
+        <li><strong>Goal:</strong> Answer 5 questions about chemical elements, symbols, and discoveries!</li>
+        <li><strong>Never Repeats:</strong> Every quiz run randomly samples 5 distinct questions from a database of 50+ elements, and shuffles answer options!</li>
+        <li><strong>Reward:</strong> Score 4 or 5 out of 5 to win <strong>+25 Vanvi Coins 🪙</strong>!</li>
+      </ul>
+      <button type="button" style="width:100%; padding:12px; border-radius:14px; background:var(--rose-gradient); color:#fff; font-weight:850; border:none; cursor:pointer;" onclick="closeRules()">
+        Start Quiz!
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="winModal">
+    <div class="modal-card" style="text-align:center;">
+      <div style="font-size:42px; margin-bottom:8px;">🏆</div>
+      <h3>Chemistry Genius!</h3>
+      <div style="font-size:16px; font-weight:850; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:8px 16px; border-radius:12px; margin:12px auto; display:inline-block;">
+        +25 Vanvi Coins Credited 🪙
+      </div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">
+        You answered <strong id="finalScoreText">5/5</strong> correctly! Your chemistry mastery is elite.
+      </p>
+      <button type="button" style="width:100%; padding:12px; border-radius:14px; background:var(--rose-gradient); color:#fff; font-weight:850; border:none; cursor:pointer;" onclick="startNewQuiz()">
+        Play Another Randomized Quiz →
+      </button>
+    </div>
+  </div>
+
+  <script src="js/vanvi-api.js"></script>
+  <script>
+    (function() {
+      'use strict';
+
+      // 50+ Chemical Element Question Pool
+      const ELEMENT_BANK = [
+        { symbol: 'Au', num: 79, q: "Which precious element has the chemical symbol 'Au'?", correct: "Gold", opts: ["Gold", "Silver", "Copper", "Aluminum"] },
+        { symbol: 'Ag', num: 47, q: "What is the elemental name for the symbol 'Ag'?", correct: "Silver", opts: ["Silver", "Argon", "Gold", "Platinum"] },
+        { symbol: 'Fe', num: 26, q: "The chemical symbol 'Fe' comes from 'Ferrum', which means:", correct: "Iron", opts: ["Iron", "Lead", "Fluorine", "Francium"] },
+        { symbol: 'Hg', num: 80, q: "Which liquid metal has the symbol 'Hg' (Hydrargyrum)?", correct: "Mercury", opts: ["Mercury", "Hydrogen", "Helium", "Holmium"] },
+        { symbol: 'K', num: 19, q: "What chemical element is represented by the single letter 'K'?", correct: "Potassium", opts: ["Potassium", "Krypton", "Calcium", "Phosphorus"] },
+        { symbol: 'Na', num: 11, q: "Common table salt consists of Chlorine and which element ('Na')?", correct: "Sodium", opts: ["Sodium", "Nitrogen", "Neon", "Nickel"] },
+        { symbol: 'Cu', num: 29, q: "What is the chemical name for symbol 'Cu' used in electrical wires?", correct: "Copper", opts: ["Copper", "Curium", "Cobalt", "Calcium"] },
+        { symbol: 'Sn', num: 50, q: "The Latin name 'Stannum' gives which element its symbol 'Sn'?", correct: "Tin", opts: ["Tin", "Strontium", "Silicon", "Selenium"] },
+        { symbol: 'Pb', num: 82, q: "The heavy metal with chemical symbol 'Pb' (Plumbum) is:", correct: "Lead", opts: ["Lead", "Phosphorus", "Platinum", "Palladium"] },
+        { symbol: 'W', num: 74, q: "Which metal with the highest melting point has the symbol 'W' (Wolfram)?", correct: "Tungsten", opts: ["Tungsten", "Titanium", "Vanadium", "Zinc"] },
+        { symbol: 'C', num: 6, q: "Diamonds and graphite are allotropes of which fundamental element?", correct: "Carbon", opts: ["Carbon", "Calcium", "Chlorine", "Cobalt"] },
+        { symbol: 'O', num: 8, q: "Which element makes up approximately 21% of Earth's atmosphere?", correct: "Oxygen", opts: ["Oxygen", "Nitrogen", "Argon", "Carbon Dioxide"] },
+        { symbol: 'N', num: 7, q: "Which gas makes up roughly 78% of the air we breathe?", correct: "Nitrogen", opts: ["Nitrogen", "Oxygen", "Hydrogen", "Helium"] },
+        { symbol: 'He', num: 2, q: "Which lightweight noble gas is used to inflate party balloons?", correct: "Helium", opts: ["Helium", "Hydrogen", "Neon", "Argon"] },
+        { symbol: 'Ne', num: 10, q: "Which noble gas glows reddish-orange in glowing vintage store signs?", correct: "Neon", opts: ["Neon", "Xenon", "Argon", "Radon"] },
+        { symbol: 'Pt', num: 78, q: "What is the symbol 'Pt' known for luxury jewelry and catalytic converters?", correct: "Platinum", opts: ["Platinum", "Potassium", "Plutonium", "Polonium"] },
+        { symbol: 'Ti', num: 22, q: "Which lightweight, ultra-strong aerospace metal has symbol 'Ti'?", correct: "Titanium", opts: ["Titanium", "Thallium", "Tin", "Tantalum"] },
+        { symbol: 'U', num: 92, q: "Which dense radioactive actinide element has symbol 'U'?", correct: "Uranium", opts: ["Uranium", "Ununbium", "Vanadium", "Yttrium"] },
+        { symbol: 'I', num: 53, q: "Which purple halogen element is essential in iodized table salt?", correct: "Iodine", opts: ["Iodine", "Indium", "Iridium", "Iron"] },
+        { symbol: 'Mg', num: 12, q: "Which light alkali earth metal burns with a brilliant white flame?", correct: "Magnesium", opts: ["Magnesium", "Manganese", "Molybdenum", "Mercury"] }
+      ];
+
+      let currentQuestions = [];
+      let currentIdx = 0;
+      let score = 0;
+
+      window.openRules = function() { document.getElementById('rulesModal').classList.add('open'); };
+      window.closeRules = function() { document.getElementById('rulesModal').classList.remove('open'); };
+
+      function updateHUD() {
+        document.getElementById('hudQNum').textContent = `${currentIdx + 1} / 5`;
+        document.getElementById('hudScore').textContent = score;
+        if (window.VanviRewardEngine) {
+          document.getElementById('coinBalanceHUD').textContent = window.VanviRewardEngine.getCoins();
+        }
+      }
+
+      window.startNewQuiz = function() {
+        document.getElementById('winModal').classList.remove('open');
+        score = 0;
+        currentIdx = 0;
+
+        // Shuffle bank and take 5 questions
+        const shuffled = [...ELEMENT_BANK].sort(() => Math.random() - 0.5);
+        currentQuestions = shuffled.slice(0, 5);
+        renderCurrentQuestion();
+      };
+
+      function renderCurrentQuestion() {
+        updateHUD();
+        const qData = currentQuestions[currentIdx];
+
+        document.getElementById('atomicNum').textContent = qData.num;
+        document.getElementById('symbolText').textContent = qData.symbol;
+        document.getElementById('questionPrompt').textContent = qData.q;
+
+        const grid = document.getElementById('optionsGrid');
+        grid.innerHTML = '';
+
+        // Shuffle options so correct answer is in randomized spot
+        const shuffledOpts = [...qData.opts].sort(() => Math.random() - 0.5);
+
+        shuffledOpts.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'option-btn';
+          btn.innerHTML = `<span>${opt}</span><span>→</span>`;
+          btn.addEventListener('click', () => onAnswer(opt, btn));
+          grid.appendChild(btn);
+        });
+      }
+
+      function onAnswer(selected, btnEl) {
+        const qData = currentQuestions[currentIdx];
+        const allBtns = document.querySelectorAll('.option-btn');
+        allBtns.forEach(b => b.style.pointerEvents = 'none');
+
+        if (selected === qData.correct) {
+          btnEl.classList.add('correct');
+          score++;
+        } else {
+          btnEl.classList.add('wrong');
+          // Highlight correct
+          allBtns.forEach(b => {
+            if (b.textContent.includes(qData.correct)) b.classList.add('correct');
+          });
+        }
+
+        setTimeout(() => {
+          currentIdx++;
+          if (currentIdx < 5) {
+            renderCurrentQuestion();
+          } else {
+            finishQuiz();
+          }
+        }, 1100);
+      }
+
+      function finishQuiz() {
+        document.getElementById('finalScoreText').textContent = `${score}/5`;
+        if (score >= 4) {
+          if (window.VanviRewardEngine) {
+            window.VanviRewardEngine.addCoins(25, 'Periodic Quiz 4+/5');
+            updateHUD();
+          }
+        }
+        document.getElementById('winModal').classList.add('open');
+      }
+
+      startNewQuiz();
+    })();
+  </script>
+</body>
+</html>

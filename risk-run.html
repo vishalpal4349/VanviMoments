@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Risk Run ✦ Vanvi Reflex &amp; Precision Trial</title>
+  <meta name="description" content="Experience Risk Run, the high-stakes precision reflex game for Vanvi Moments. Choose your risk, build streaks, protect your shield, and earn up to 12 coins!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090614;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --pink: #ec4899;
+      --purple: #a855f7;
+      --gold: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.45);
+      --safe-color: #10b981;
+      --pro-color: #8b5cf6;
+      --expert-color: #ef4444;
+      --text: #fdf2f8;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 15%, #240d35 0%, #0c0817 65%, #05030a 100%);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient animated lighting */
+    .ambient-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+      animation: floatPulse 14s infinite alternate ease-in-out;
+    }
+    .glow-1 { width: 340px; height: 340px; background: #ec4899; top: -60px; left: -60px; }
+    .glow-2 { width: 380px; height: 380px; background: #8b5cf6; bottom: -80px; right: -80px; animation-duration: 18s; }
+
+    @keyframes floatPulse {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(40px) scale(1.15); }
+    }
+
+    /* Top Nav */
+    .top-nav {
+      width: 100%;
+      max-width: 600px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      color: #e2e8f0;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .back-btn:hover { background: rgba(255, 255, 255, 0.16); }
+
+    .wallet-chip {
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 7px 14px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fde68a;
+    }
+
+    /* Main Container */
+    .main-wrap {
+      width: 100%;
+      max-width: 520px;
+      padding: 0 16px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+      flex: 1;
+    }
+
+    .game-header {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .game-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(236,72,153,0.2), rgba(168,85,247,0.2));
+      border: 1px solid rgba(236,72,153,0.35);
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #fbcfe8;
+      margin-bottom: 6px;
+    }
+    .game-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 40%, #f472b6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.5px;
+    }
+
+    /* Challenge Mode Selector Pills */
+    .mode-selector {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .mode-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 10px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #cbd5e1;
+    }
+    .mode-btn:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+    .mode-btn.active[data-mode="safe"] {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+    }
+    .mode-btn.active[data-mode="pro"] {
+      border-color: #8b5cf6;
+      background: rgba(139, 92, 246, 0.18);
+      color: #c4b5fd;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
+    }
+    .mode-btn.active[data-mode="expert"] {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.18);
+      color: #fca5a5;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+    }
+    .mode-name {
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .mode-reward {
+      font-size: 0.72rem;
+      margin-top: 3px;
+      color: #fde68a;
+      font-weight: 700;
+    }
+
+    /* HUD Stats Bar */
+    .hud-bar {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    .hud-item {
+      text-align: center;
+    }
+    .hud-lbl {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .hud-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 1px;
+    }
+
+    /* Shield Aura Badge */
+    .shield-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #7dd3fc;
+      opacity: 0.35;
+      transition: all 0.3s;
+    }
+    .shield-badge.shield-ready {
+      opacity: 1;
+      background: rgba(56, 189, 248, 0.3);
+      border-color: #38bdf8;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+      animation: shieldGlow 1.2s infinite alternate;
+    }
+    @keyframes shieldGlow {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.06); }
+    }
+
+    /* Game Play Area Arena */
+    .arena-frame {
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 440px;
+      background: radial-gradient(circle at 50% 50%, #170d24 0%, #0d0614 100%);
+      border: 2px solid var(--glass-border);
+      border-radius: 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(0,0,0,0.5);
+      cursor: crosshair;
+    }
+
+    /* Subtle Cosmic Grid Background */
+    .arena-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    /* Moving Target Element */
+    .moving-target {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.2s ease;
+      will-change: transform, left, top;
+    }
+
+    .moving-target.standard {
+      width: 58px;
+      height: 58px;
+      background: radial-gradient(circle, #f472b6 20%, #db2777 80%);
+      border: 2px solid #fbcfe8;
+      box-shadow: 0 0 20px rgba(244, 114, 182, 0.6);
+    }
+    .moving-target.standard .target-icon {
+      font-size: 1.8rem;
+    }
+
+    /* Rare Golden Stardust Target */
+    .moving-target.stardust {
+      width: 46px;
+      height: 46px;
+      background: radial-gradient(circle, #fde047 20%, #d97706 90%);
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 30px rgba(251, 191, 36, 0.9);
+      animation: pulseStardust 0.7s infinite alternate;
+    }
+    @keyframes pulseStardust {
+      0% { transform: translate(-50%, -50%) scale(0.92); }
+      100% { transform: translate(-50%, -50%) scale(1.12); }
+    }
+
+    .moving-target.hit {
+      animation: targetExplode 0.4s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes targetExplode {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; filter: blur(4px); }
+    }
+
+    /* Overlay Screen (Start / Pause) */
+    .arena-screen {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 6, 18, 0.85);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      z-index: 30;
+      transition: opacity 0.3s;
+    }
+    .arena-screen.hidden {
+      display: none;
+    }
+    .screen-icon {
+      font-size: 3.2rem;
+      margin-bottom: 10px;
+    }
+    .screen-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+    .screen-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      max-width: 320px;
+    }
+
+    /* Floating Feedback */
+    .float-text {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      font-weight: 900;
+      font-size: 1.1rem;
+      pointer-events: none;
+      z-index: 40;
+      animation: floatUp 0.6s ease-out forwards;
+    }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
+      100% { opacity: 0; transform: translate(-50%, -50%) translateY(-28px); }
+    }
+    .float-text.plus { color: #f472b6; }
+    .float-text.bonus { color: #fbbf24; text-shadow: 0 0 10px rgba(251, 191, 36, 0.6); }
+    .float-text.shield { color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.6); }
+    .float-text.miss { color: #ef4444; }
+
+    /* Misclick Ripple */
+    .miss-ring {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid #ef4444;
+      background: rgba(239, 68, 68, 0.15);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: ringSpread 0.4s ease-out forwards;
+      z-index: 35;
+    }
+    @keyframes ringSpread {
+      0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+    }
+
+    /* Action Buttons Row */
+    .action-row {
+      width: 100%;
+      max-width: 440px;
+      margin-top: 14px;
+      display: flex;
+      gap: 12px;
+    }
+    .glow-btn {
+      flex: 1;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-main {
+      background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.35);
+    }
+    .btn-main:hover {
+      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.55);
+      transform: translateY(-1px);
+    }
+    .btn-sub {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      color: #e2e8f0;
+    }
+    .btn-sub:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    /* Info Rules Card */
+    .rules-card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-top: 18px;
+    }
+    .rules-head {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .rule-item {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rule-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Result Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+    .modal-backdrop.active {
+      display: flex;
+      animation: modalPop 0.25s ease-out;
+    }
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.94); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-box {
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(145deg, #180d26 0%, #0d0716 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+    .modal-icon {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+    }
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+    .modal-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .reward-pill {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 12px;
+      border-radius: 14px;
+      color: #fde68a;
+      font-weight: 800;
+      font-size: 1.25rem;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  </style>
+  <link rel="stylesheet" href="vanvi-navigation.css">
+</head>
+<body data-vanvi-no-dock="true">
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Top Bar -->
+  <header class="top-nav">
+    <a href="games.html" class="back-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      Games Arena
+    </a>
+    <div class="wallet-chip">
+      <span style="font-size: 1.1rem;">🪙</span>
+      <span id="navWalletCoins">0</span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-wrap">
+    <div class="game-header">
+      <div class="game-badge">Skill-Based Reflex Trial</div>
+      <h1 class="game-title">Risk Run</h1>
+    </div>
+
+    <!-- 3 Challenge Modes -->
+    <div class="mode-selector">
+      <div class="mode-btn active" data-mode="safe" onclick="setChallengeMode('safe')">
+        <div class="mode-name">🌸 Safe</div>
+        <div class="mode-reward">+3 Coins</div>
+      </div>
+      <div class="mode-btn" data-mode="pro" onclick="setChallengeMode('pro')">
+        <div class="mode-name">💜 Pro</div>
+        <div class="mode-reward">+7 Coins</div>
+      </div>
+      <div class="mode-btn" data-mode="expert" onclick="setChallengeMode('expert')">
+        <div class="mode-name">🔥 Expert</div>
+        <div class="mode-reward">+12 Coins</div>
+      </div>
+    </div>
+
+    <!-- HUD Stats -->
+    <div class="hud-bar">
+      <div class="hud-item">
+        <div class="hud-lbl">Score</div>
+        <div class="hud-val" id="hudScore">0</div>
+      </div>
+      <div class="hud-item">
+        <div class="hud-lbl">Combo</div>
+        <div class="hud-val" style="color: #ec4899;" id="hudCombo">0x</div>
+      </div>
+      <div class="hud-item">
+        <div class="hud-lbl">Shield</div>
+        <div style="margin-top: 4px;">
+          <span class="shield-badge" id="shieldBadge">🛡️ None</span>
+        </div>
+      </div>
+      <div class="hud-item">
+        <div class="hud-lbl">Time</div>
+        <div class="hud-val" id="hudTimer">35s</div>
+      </div>
+    </div>
+
+    <!-- Glass Arena Canvas -->
+    <div class="arena-frame" id="arenaFrame" onclick="handleArenaMiss(event)">
+      <div class="arena-grid"></div>
+
+      <!-- Start / Ready Screen -->
+      <div class="arena-screen" id="arenaScreen">
+        <div class="screen-icon" id="screenIcon">⚡</div>
+        <h2 class="screen-title" id="screenTitle">Safe Challenge</h2>
+        <p class="screen-desc" id="screenDesc">
+          Targets move at steady speed. Score 15+ points within 40s to earn 3 coins!
+        </p>
+        <button class="glow-btn btn-main" style="width: 220px;" onclick="startRun()">
+          Start Challenge
+        </button>
+      </div>
+
+      <!-- Moving Targets Layer -->
+      <div id="targetsLayer"></div>
+    </div>
+
+    <!-- Action Controls -->
+    <div class="action-row">
+      <button class="glow-btn btn-main" id="btnRestart" onclick="resetRun()">
+        <span>🔄</span> Reset Run
+      </button>
+      <button class="glow-btn btn-sub" onclick="showRules()">
+        <span>📜</span> Rules
+      </button>
+    </div>
+
+    <!-- Rules / Economy Guidance -->
+    <div class="rules-card">
+      <div class="rules-head">
+        <span>Transparent Skill Economy</span>
+        <span style="color: #f59e0b;">Daily Cap: 25 🪙</span>
+      </div>
+      <div class="rule-item">
+        <span>🛡️</span>
+        <span><b>Streak Shield:</b> Reach a 5x combo to gain 1 free mistake absorption!</span>
+      </div>
+      <div class="rule-item">
+        <span>⭐</span>
+        <span><b>Golden Stardust:</b> Rapid 1.2s target grants +3 score bonus!</span>
+      </div>
+      <div class="rule-item">
+        <span>⚖️</span>
+        <span><b>Fair Economy:</b> Wallet balance is NEVER wagered. Only unearned run bonuses reset.</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rules Modal -->
+  <div class="modal-backdrop" id="rulesModal">
+    <div class="modal-box">
+      <div class="modal-icon">📖</div>
+      <h2 class="modal-title">Risk Run Guidelines</h2>
+      <p class="modal-desc">
+        1. <strong>Select your Challenge:</strong><br>
+        • 🌸 Safe: 40s, score 15+ = 3 coins.<br>
+        • 💜 Pro: 35s, score 25+ = 7 coins.<br>
+        • 🔥 Expert: 30s, score 35+ = 12 coins.<br><br>
+        2. Tap glowing targets before they relocate.<br>
+        3. Wrong clicks in Pro & Expert reset your unearned streak bonus.<br>
+        4. Earn up to 25 coins daily across all Vanvi celebration games!
+      </p>
+      <button class="glow-btn btn-main" style="width: 100%;" onclick="closeRules()">
+        Understood, Let's Play
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div class="modal-backdrop" id="resultModal">
+    <div class="modal-box">
+      <div class="modal-icon" id="resIcon">🎉</div>
+      <h2 class="modal-title" id="resTitle">Run Completed!</h2>
+      <p class="modal-desc" id="resDesc">Spectacular reaction and precision focus.</p>
+      <div class="reward-pill" id="rewardPill">
+        <span>🪙</span>
+        <span id="resCoinsText">+7 Coins Added</span>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="glow-btn btn-main" onclick="playAgain()">
+          Play Again
+        </button>
+        <a href="games.html" class="glow-btn btn-sub" style="text-decoration: none;">
+          Games Arena
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- AUDIO SYNTHESIS ---
+    let audioCtx = null;
+    function initAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function playTone(freq, duration = 0.15, type = 'sine') {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    function playHitSound() {
+      playTone(660, 0.12, 'triangle');
+    }
+
+    function playBonusSound() {
+      playTone(523.25, 0.1);
+      setTimeout(() => playTone(659.25, 0.1), 80);
+      setTimeout(() => playTone(783.99, 0.2), 160);
+    }
+
+    function playMissSound() {
+      playTone(150, 0.25, 'sawtooth');
+    }
+
+    function playShieldSound() {
+      playTone(880, 0.18, 'sine');
+    }
+
+    // --- REWARDS & WALLET INTEGRATION ---
+    const GAME_ID = 'risk_run';
+    const GAME_TITLE = 'Risk Run';
+    const DAILY_CAP = 25;
+
+    function getTodayKey() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function getTodayEarned() {
+      const today = getTodayKey();
+      const savedDate = localStorage.getItem('vanvi_games_today_date');
+      if (savedDate !== today) {
+        localStorage.setItem('vanvi_games_today_date', today);
+        localStorage.setItem('vanvi_games_today_earned', '0');
+        return 0;
+      }
+      return parseInt(localStorage.getItem('vanvi_games_today_earned') || '0', 10);
+    }
+
+    function syncWallet() {
+      let coins = 0;
+      try {
+        const auth = JSON.parse(localStorage.getItem('vanvi_auth_user') || '{}');
+        coins = auth.coins !== undefined ? auth.coins : parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+      } catch(e) {
+        coins = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+      }
+      const el = document.getElementById('navWalletCoins');
+      if (el) el.textContent = coins;
+    }
+
+    async function awardCoins(amount, score) {
+      if (amount <= 0) return 0;
+      const todayEarned = getTodayEarned();
+      const remainingToday = Math.max(0, DAILY_CAP - todayEarned);
+      const actualAward = Math.min(amount, remainingToday);
+
+      if (actualAward <= 0) return 0;
+
+      // Backend sync
+      const token = localStorage.getItem('vanvi_auth_token') || localStorage.getItem('vanvi_token');
+      try {
+        await fetch('/api/coins/game-reward', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+          },
+          body: JSON.stringify({
+            gameId: GAME_ID,
+            gameTitle: GAME_TITLE,
+            coins: actualAward,
+            score: score,
+            mode: selectedMode
+          })
+        });
+      } catch(err) {}
+
+      // Local ledger sync
+      const current = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+      const newTotal = current + actualAward;
+      localStorage.setItem('vanvi_user_coins', newTotal.toString());
+      localStorage.setItem('vanvi_games_today_earned', (todayEarned + actualAward).toString());
+
+      try {
+        const auth = JSON.parse(localStorage.getItem('vanvi_auth_user') || '{}');
+        if (auth && typeof auth === 'object') {
+          auth.coins = newTotal;
+          localStorage.setItem('vanvi_auth_user', JSON.stringify(auth));
+        }
+      } catch(e) {}
+
+      syncWallet();
+      return actualAward;
+    }
+
+    // --- GAME ENGINE & MODES ---
+    const MODE_CONFIG = {
+      safe: {
+        title: 'Safe Challenge',
+        time: 40,
+        winScore: 15,
+        coins: 3,
+        targetSpeedMs: 1400,
+        stardustChance: 0.15,
+        wrongPenalty: 'minus1',
+        desc: 'Targets move at a steady speed. Score 15+ within 40s to earn 3 fixed coins!'
+      },
+      pro: {
+        title: 'Pro Challenge',
+        time: 35,
+        winScore: 25,
+        coins: 7,
+        targetSpeedMs: 950,
+        stardustChance: 0.25,
+        wrongPenalty: 'resetCombo',
+        desc: 'Faster movement! Wrong tap resets your combo streak. Score 25+ to earn 7 coins!'
+      },
+      expert: {
+        title: 'Expert Challenge',
+        time: 30,
+        winScore: 35,
+        coins: 12,
+        targetSpeedMs: 700,
+        stardustChance: 0.35,
+        wrongPenalty: 'wipeBonus',
+        desc: 'High velocity orbital targets! Score 35+ to earn the maximum 12 coins!'
+      }
+    };
+
+    let selectedMode = 'safe';
+    let isPlaying = false;
+    let score = 0;
+    let combo = 0;
+    let hasShield = false;
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let targetSpawnTimeout = null;
+    let hasClaimed = false;
+
+    function setChallengeMode(mode) {
+      if (isPlaying) return;
+      selectedMode = mode;
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+      });
+
+      const cfg = MODE_CONFIG[mode];
+      document.getElementById('screenTitle').textContent = cfg.title;
+      document.getElementById('screenDesc').textContent = cfg.desc;
+      document.getElementById('hudTimer').textContent = `${cfg.time}s`;
+    }
+
+    function startRun() {
+      initAudio();
+      isPlaying = true;
+      score = 0;
+      combo = 0;
+      hasShield = false;
+      hasClaimed = false;
+
+      const cfg = MODE_CONFIG[selectedMode];
+      timerSeconds = cfg.time;
+
+      document.getElementById('arenaScreen').classList.add('hidden');
+      updateHUD();
+
+      spawnNextTarget();
+
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timerSeconds--;
+        document.getElementById('hudTimer').textContent = `${timerSeconds}s`;
+        if (timerSeconds <= 0) {
+          endRun();
+        }
+      }, 1000);
+    }
+
+    function resetRun() {
+      isPlaying = false;
+      clearInterval(timerInterval);
+      clearTimeout(targetSpawnTimeout);
+      document.getElementById('targetsLayer').innerHTML = '';
+      document.getElementById('arenaScreen').classList.remove('hidden');
+
+      score = 0;
+      combo = 0;
+      hasShield = false;
+      updateHUD();
+    }
+
+    function playAgain() {
+      closeResult();
+      startRun();
+    }
+
+    function updateHUD() {
+      document.getElementById('hudScore').textContent = score;
+      document.getElementById('hudCombo').textContent = `${combo}x`;
+      
+      const shield = document.getElementById('shieldBadge');
+      if (hasShield) {
+        shield.className = 'shield-badge shield-ready';
+        shield.innerHTML = '🛡️ ACTIVE';
+      } else {
+        shield.className = 'shield-badge';
+        shield.innerHTML = '🛡️ None';
+      }
+    }
+
+    function spawnNextTarget() {
+      if (!isPlaying) return;
+
+      const container = document.getElementById('targetsLayer');
+      container.innerHTML = '';
+
+      const cfg = MODE_CONFIG[selectedMode];
+      const isStardust = Math.random() < cfg.stardustChance;
+
+      const target = document.createElement('div');
+      target.className = `moving-target ${isStardust ? 'stardust' : 'standard'}`;
+
+      // Random position inside arena bounds (12% to 88%)
+      const posX = 12 + Math.random() * 76;
+      const posY = 12 + Math.random() * 76;
+      target.style.left = `${posX}%`;
+      target.style.top = `${posY}%`;
+
+      if (isStardust) {
+        target.innerHTML = `<span style="font-size: 1.4rem;">⭐</span>`;
+      } else {
+        target.innerHTML = `<span class="target-icon">✦</span>`;
+      }
+
+      const spawnTime = Date.now();
+      const lifetime = isStardust ? 1200 : cfg.targetSpeedMs;
+
+      target.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!isPlaying) return;
+
+        target.classList.add('hit');
+        const reactionTime = Date.now() - spawnTime;
+
+        if (isStardust) {
+          // Bonus star
+          score += 3;
+          combo++;
+          playBonusSound();
+          spawnFloatText('+3 STAR! ⭐', posX, posY, 'bonus');
+        } else {
+          score += 1;
+          combo++;
+          playHitSound();
+          spawnFloatText('+1', posX, posY, 'plus');
+        }
+
+        // Streak Shield reward every 5 consecutive combos
+        if (combo >= 5 && !hasShield) {
+          hasShield = true;
+          playShieldSound();
+          spawnFloatText('SHIELD READY! 🛡️', 50, 40, 'shield');
+        }
+
+        updateHUD();
+
+        clearTimeout(targetSpawnTimeout);
+        setTimeout(spawnNextTarget, 160);
+      });
+
+      container.appendChild(target);
+
+      targetSpawnTimeout = setTimeout(() => {
+        if (!isPlaying) return;
+        // Target expired naturally without tap => break combo in Pro / Expert
+        if (cfg.wrongPenalty !== 'minus1') {
+          if (hasShield) {
+            hasShield = false;
+            spawnFloatText('SHIELD SAVED! 🛡️', posX, posY, 'shield');
+          } else {
+            combo = 0;
+          }
+        }
+        updateHUD();
+        spawnNextTarget();
+      }, lifetime);
+    }
+
+    function handleArenaMiss(e) {
+      if (!isPlaying) return;
+
+      playMissSound();
+
+      // Check Shield Protection
+      if (hasShield) {
+        hasShield = false;
+        spawnFloatText('SHIELD DEFENDED! 🛡️', 50, 45, 'shield');
+        updateHUD();
+        return;
+      }
+
+      const cfg = MODE_CONFIG[selectedMode];
+      if (cfg.wrongPenalty === 'minus1') {
+        score = Math.max(0, score - 1);
+      } else if (cfg.wrongPenalty === 'resetCombo') {
+        combo = 0;
+        score = Math.max(0, score - 1);
+      } else if (cfg.wrongPenalty === 'wipeBonus') {
+        combo = 0;
+        score = Math.max(0, score - 2);
+      }
+
+      // Visual Ripple & text
+      const frame = document.getElementById('arenaFrame');
+      const rect = frame.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const ring = document.createElement('div');
+      ring.className = 'miss-ring';
+      ring.style.left = `${x}px`;
+      ring.style.top = `${y}px`;
+      frame.appendChild(ring);
+
+      const txt = document.createElement('div');
+      txt.className = 'float-text miss';
+      txt.textContent = 'MISS!';
+      txt.style.left = `${x}px`;
+      txt.style.top = `${y}px`;
+      frame.appendChild(txt);
+
+      setTimeout(() => {
+        ring.remove();
+        txt.remove();
+      }, 500);
+
+      updateHUD();
+    }
+
+    function spawnFloatText(text, posX, posY, type) {
+      const frame = document.getElementById('arenaFrame');
+      const el = document.createElement('div');
+      el.className = `float-text ${type}`;
+      el.textContent = text;
+      el.style.left = `${posX}%`;
+      el.style.top = `${posY}%`;
+      frame.appendChild(el);
+      setTimeout(() => el.remove(), 600);
+    }
+
+    async function endRun() {
+      isPlaying = false;
+      clearInterval(timerInterval);
+      clearTimeout(targetSpawnTimeout);
+      document.getElementById('targetsLayer').innerHTML = '';
+
+      const cfg = MODE_CONFIG[selectedMode];
+      const hasWon = score >= cfg.winScore;
+      let wonCoins = hasWon ? cfg.coins : 0;
+
+      let awarded = 0;
+      if (wonCoins > 0 && !hasClaimed) {
+        hasClaimed = true;
+        awarded = await awardCoins(wonCoins, score);
+      }
+
+      showResult(hasWon, awarded, cfg);
+    }
+
+    function showResult(hasWon, awarded, cfg) {
+      const modal = document.getElementById('resultModal');
+      const icon = document.getElementById('resIcon');
+      const title = document.getElementById('resTitle');
+      const desc = document.getElementById('resDesc');
+      const pill = document.getElementById('rewardPill');
+      const text = document.getElementById('resCoinsText');
+
+      if (hasWon) {
+        icon.textContent = selectedMode === 'expert' ? '👑' : '🎉';
+        title.textContent = `${cfg.title} Conquered!`;
+        desc.textContent = `You scored ${score} points (Target: ${cfg.winScore}+). Supreme reflexes!`;
+        pill.style.display = 'flex';
+        text.textContent = awarded > 0 ? `+${awarded} Coins Credited!` : 'Daily Cap Reached (25 🪙)';
+      } else {
+        icon.textContent = '⚡';
+        title.textContent = 'Run Concluded';
+        desc.textContent = `You scored ${score} points. Need ${cfg.winScore}+ to claim the ${cfg.coins} coins reward.`;
+        pill.style.display = 'none';
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeResult() {
+      document.getElementById('resultModal').classList.remove('active');
+      document.getElementById('arenaScreen').classList.remove('hidden');
+    }
+
+    function showRules() {
+      document.getElementById('rulesModal').classList.add('active');
+    }
+
+    function closeRules() {
+      document.getElementById('rulesModal').classList.remove('active');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      syncWallet();
+    });
+  </script>
+  <script src="js/vanvi-api.js"></script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

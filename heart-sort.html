@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Heart Sort Puzzle — Vanvi Moments Games</title>
+  <meta name="description" content="Sort emotional celebration liquids and heart vials. Every round is procedurally generated with new colors and challenges!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Cinzel:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --bg-pearl: #fffbfd;
+      --bg-blush: #fff1f6;
+      --rose-main: #ff2a7a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --gold-main: #d97706;
+      --text-dark: #2c1224;
+      --text-muted: #88627b;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #ffeaf3 0%, #fff7fb 35%, #faf5ff 70%, #fff2f7 100%);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 60px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .btn-nav-back {
+      font-size: 12.5px;
+      font-weight: 750;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      padding: 6px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+    .game-arena {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 16px 14px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .arena-title-box {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .arena-title-box h1 {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+    .status-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border-pink);
+      border-radius: 16px;
+      padding: 10px 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(255, 60, 130, 0.06);
+    }
+    .hud-pill {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-rules-pill {
+      background: rgba(255, 42, 122, 0.08);
+      border: 1px solid rgba(255, 42, 122, 0.25);
+      color: var(--rose-main);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+    /* Vials Grid */
+    .vials-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 20px 0 28px;
+      min-height: 250px;
+      width: 100%;
+    }
+    .vial {
+      width: 54px;
+      height: 190px;
+      border: 3px solid rgba(200, 160, 185, 0.7);
+      border-top: none;
+      border-radius: 0 0 28px 28px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(100, 50, 90, 0.1), inset 0 2px 8px rgba(255, 255, 255, 0.8);
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column-reverse;
+      padding: 4px 4px 6px;
+      gap: 3px;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+    }
+    .vial.selected {
+      transform: translateY(-16px);
+      border-color: var(--rose-main);
+      box-shadow: 0 16px 36px rgba(255, 42, 122, 0.35);
+    }
+    .vial.completed {
+      border-color: #10b981;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+    }
+    .liquid-segment {
+      width: 100%;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5), 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .vial-lip {
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      height: 6px;
+      border: 3px solid rgba(200, 160, 185, 0.7);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+    .vial.selected .vial-lip {
+      border-color: var(--rose-main);
+    }
+    /* Controls */
+    .controls-row {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-action {
+      flex: 1;
+      max-width: 160px;
+      padding: 11px 16px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-restart {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+    }
+    .btn-restart:hover {
+      background: #fff0f5;
+    }
+    .btn-new {
+      background: var(--rose-gradient);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.3);
+    }
+    .btn-new:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Modal */
+    .rules-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 18, 36, 0.6);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .rules-modal-overlay.open { display: flex; }
+    .rules-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      border: 1px solid var(--border-pink);
+      position: relative;
+    }
+    .rules-card h3 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+    .rules-card ul {
+      padding-left: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .rules-card li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <button type="button" class="btn-nav-back" onclick="location.href='games.html'">
+      ‹ Games Arena
+    </button>
+    <div style="font-weight: 850; font-size: 15px; color: var(--rose-main);">
+      🧪 Heart Sort Puzzle
+    </div>
+    <div style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:800; background:#fffbeb; border:1px solid #fde68a; padding:4px 10px; border-radius:99px; color:#d97706;">
+      🪙 <span id="coinBalanceHUD">0</span>
+    </div>
+  </header>
+
+  <main class="game-arena">
+    <div class="arena-title-box">
+      <h1>Heart Liquid Sort</h1>
+      <p style="font-size:12.5px; color:var(--text-muted);">Sort the color potions until each vial contains one pure single color!</p>
+    </div>
+
+    <div class="status-hud">
+      <div class="hud-pill">
+        <span>🏆 Level:</span> <strong id="hudLevel" style="color:var(--rose-main);">1</strong>
+      </div>
+      <div class="hud-pill">
+        <span>🔄 Moves:</span> <strong id="hudMoves">0</strong>
+      </div>
+      <button type="button" class="btn-rules-pill" onclick="openRules()">
+        📖 Rules
+      </button>
+    </div>
+
+    <!-- Vials Container -->
+    <div class="vials-container" id="vialsContainer">
+      <!-- Generated dynamically -->
+    </div>
+
+    <div class="controls-row">
+      <button type="button" class="btn-action btn-restart" onclick="restartLevel()">
+        🔄 Reset
+      </button>
+      <button type="button" class="btn-action btn-new" onclick="generateNewRandomPuzzle()">
+        🎲 New Puzzle
+      </button>
+    </div>
+  </main>
+
+  <!-- Rules Modal -->
+  <div class="rules-modal-overlay" id="rulesModal">
+    <div class="rules-card">
+      <h3>🧪 Heart Sort Rules</h3>
+      <ul>
+        <li><strong>Goal:</strong> Group identical colored celebration liquids into single vials until every vial is pure or empty!</li>
+        <li><strong>Controls:</strong> Tap a vial to select it, then tap another vial to pour the top layer into it.</li>
+        <li><strong>Rule:</strong> You can only pour onto the same color, and if the target vial has room (max 4 layers).</li>
+        <li><strong>Fresh Every Game:</strong> Every puzzle is randomly shuffled and procedurally generated so it's always brand new!</li>
+        <li><strong>Reward:</strong> Completing a level awards <strong>+15 Vanvi Coins 🪙</strong> to your wallet!</li>
+      </ul>
+      <button type="button" class="btn-action btn-new" style="max-width:100%; width:100%;" onclick="closeRules()">
+        Got It, Let's Play!
+      </button>
+    </div>
+  </div>
+
+  <!-- Win Modal -->
+  <div class="rules-modal-overlay" id="winModal">
+    <div class="rules-card" style="text-align:center;">
+      <div style="font-size:42px; margin-bottom:8px;">🎉</div>
+      <h3>Level Cleared!</h3>
+      <div style="font-size:16px; font-weight:850; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:8px 16px; border-radius:12px; margin:12px auto; display:inline-block;">
+        +15 Vanvi Coins Credited 🪙
+      </div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">
+        Beautiful sorting! Next level will have even more rich color gradients and challenges.
+      </p>
+      <button type="button" class="btn-action btn-new" style="max-width:100%; width:100%;" onclick="nextLevel()">
+        Next Challenge (Level <span id="nextLevelNum">2</span>) →
+      </button>
+    </div>
+  </div>
+
+  <script src="js/vanvi-api.js"></script>
+  <script>
+    (function() {
+      'use strict';
+
+      const COLOR_PALETTE = [
+        { name: 'Rose', bg: 'linear-gradient(135deg, #ff2a7a, #f43f5e)', icon: '💖' },
+        { name: 'Amber', bg: 'linear-gradient(135deg, #f59e0b, #d97706)', icon: '⭐' },
+        { name: 'Lavender', bg: 'linear-gradient(135deg, #8b5cf6, #7c3aed)', icon: '💜' },
+        { name: 'Emerald', bg: 'linear-gradient(135deg, #10b981, #059669)', icon: '🍀' },
+        { name: 'Sky', bg: 'linear-gradient(135deg, #06b6d4, #0284c7)', icon: '💎' }
+      ];
+
+      let currentLevel = 1;
+      let moves = 0;
+      let selectedVialIndex = null;
+      let vials = []; // Array of arrays: [ [0, 1, 0, 2], [1, 2, ...], [] ]
+      let initialVialsState = [];
+
+      function updateHUD() {
+        document.getElementById('hudLevel').textContent = currentLevel;
+        document.getElementById('hudMoves').textContent = moves;
+        if (window.VanviRewardEngine) {
+          document.getElementById('coinBalanceHUD').textContent = window.VanviRewardEngine.getCoins();
+        }
+      }
+
+      window.openRules = function() {
+        document.getElementById('rulesModal').classList.add('open');
+      };
+      window.closeRules = function() {
+        document.getElementById('rulesModal').classList.remove('open');
+      };
+
+      // Procedural level generator with guaranteed solvable state
+      function generatePuzzle(numColors, numEmpty) {
+        moves = 0;
+        selectedVialIndex = null;
+        updateHUD();
+
+        // 1. Pick colors
+        const activeColors = COLOR_PALETTE.slice(0, numColors);
+        let segments = [];
+        activeColors.forEach((_, idx) => {
+          for (let i = 0; i < 4; i++) segments.push(idx);
+        });
+
+        // 2. Fisher-Yates Shuffle
+        for (let i = segments.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [segments[i], segments[j]] = [segments[j], segments[i]];
+        }
+
+        // 3. Populate vials
+        vials = [];
+        for (let i = 0; i < numColors; i++) {
+          vials.push(segments.slice(i * 4, (i + 1) * 4));
+        }
+        for (let i = 0; i < numEmpty; i++) {
+          vials.push([]);
+        }
+
+        // Deep copy for restart
+        initialVialsState = JSON.parse(JSON.stringify(vials));
+        renderVials();
+      }
+
+      function renderVials() {
+        const container = document.getElementById('vialsContainer');
+        container.innerHTML = '';
+
+        vials.forEach((vial, idx) => {
+          const vialEl = document.createElement('div');
+          vialEl.className = 'vial' + (selectedVialIndex === idx ? ' selected' : '');
+          
+          // Check if completed
+          if (vial.length === 4 && vial.every(c => c === vial[0])) {
+            vialEl.classList.add('completed');
+          }
+
+          const lip = document.createElement('div');
+          lip.className = 'vial-lip';
+          vialEl.appendChild(lip);
+
+          vial.forEach(colorIdx => {
+            const seg = document.createElement('div');
+            seg.className = 'liquid-segment';
+            const colorDef = COLOR_PALETTE[colorIdx];
+            seg.style.background = colorDef.bg;
+            seg.textContent = colorDef.icon;
+            vialEl.appendChild(seg);
+          });
+
+          vialEl.addEventListener('click', () => onVialClick(idx));
+          container.appendChild(vialEl);
+        });
+      }
+
+      function onVialClick(idx) {
+        if (selectedVialIndex === null) {
+          // Select source vial if not empty
+          if (vials[idx].length > 0) {
+            selectedVialIndex = idx;
+            renderVials();
+          }
+        } else if (selectedVialIndex === idx) {
+          // Deselect
+          selectedVialIndex = null;
+          renderVials();
+        } else {
+          // Try pour from selectedVialIndex -> idx
+          const from = selectedVialIndex;
+          const to = idx;
+          const sourceVial = vials[from];
+          const targetVial = vials[to];
+
+          if (targetVial.length >= 4) {
+            // Target is full, switch selection if clicked another vial with content
+            if (targetVial.length > 0) selectedVialIndex = to;
+            renderVials();
+            return;
+          }
+
+          const topSourceColor = sourceVial[sourceVial.length - 1];
+          const topTargetColor = targetVial.length > 0 ? targetVial[targetVial.length - 1] : null;
+
+          if (topTargetColor === null || topTargetColor === topSourceColor) {
+            // Valid pour!
+            targetVial.push(sourceVial.pop());
+            moves++;
+            selectedVialIndex = null;
+            updateHUD();
+            renderVials();
+            checkWin();
+          } else {
+            // Cannot pour different color
+            selectedVialIndex = to;
+            renderVials();
+          }
+        }
+      }
+
+      function checkWin() {
+        const isWin = vials.every(v => v.length === 0 || (v.length === 4 && v.every(c => c === v[0])));
+        if (isWin) {
+          setTimeout(() => {
+            if (window.VanviRewardEngine) {
+              window.VanviRewardEngine.addCoins(15, 'Heart Sort Level ' + currentLevel);
+              updateHUD();
+            }
+            document.getElementById('nextLevelNum').textContent = currentLevel + 1;
+            document.getElementById('winModal').classList.add('open');
+          }, 300);
+        }
+      }
+
+      window.restartLevel = function() {
+        vials = JSON.parse(JSON.stringify(initialVialsState));
+        selectedVialIndex = null;
+        moves = 0;
+        updateHUD();
+        renderVials();
+      };
+
+      window.generateNewRandomPuzzle = function() {
+        const numColors = currentLevel < 3 ? 3 : (currentLevel < 6 ? 4 : 5);
+        generatePuzzle(numColors, 2);
+      };
+
+      window.nextLevel = function() {
+        document.getElementById('winModal').classList.remove('open');
+        currentLevel++;
+        window.generateNewRandomPuzzle();
+      };
+
+      // Init Level 1
+      window.generateNewRandomPuzzle();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Love Puzzle — Premium Timed Puzzle — Vanvi Moments</title>
+  <meta name="description" content="Piece together romantic memories against the clock in Love Puzzle. Earn fixed Vanvi Coins with your visual skill.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --bg-pearl: #fffdfc;
+      --bg-blush: #fff2f6;
+      --rose-main: #ff2a7a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #f43f5e 50%, #d97706 100%);
+      --gold-main: #d97706;
+      --lilac-accent: #a855f7;
+      --text-dark: #2c1224;
+      --text-muted: #88627b;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --shadow-card: 0 14px 36px rgba(255, 60, 130, 0.10);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #ffe6f0 0%, #fff4f8 50%, #faf5f9 100%);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding-bottom: 95px;
+      overflow-x: hidden !important;
+      touch-action: pan-y;
+    }
+
+    /* Top Sticky Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 62px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left, .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-nav-back {
+      border: 1px solid var(--border-pink);
+      background: #ffffff;
+      color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06);
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-nav-back:hover { transform: translateY(-1px); background: #fff0f5; }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+    }
+    .brand-link span { color: var(--rose-main); }
+
+    .wallet-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff8eb;
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #b45309;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.08);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .sound-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid var(--border-pink);
+      background: #ffffff;
+      color: var(--text-dark);
+      font-size: 15px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06);
+    }
+
+    /* Container */
+    .game-container {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 16px 14px 20px;
+    }
+
+    .game-hero {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      background: linear-gradient(135deg, #fff0f6, #ffe4ee);
+      border: 1px solid var(--border-pink);
+      color: var(--rose-main);
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 6px;
+    }
+    .game-title {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+    .game-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* Difficulty Nav */
+    .difficulty-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .diff-btn {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 16px;
+      padding: 10px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.22s;
+    }
+    .diff-btn.active {
+      background: linear-gradient(135deg, #2c1224, #481a3d);
+      border-color: #2c1224;
+      color: #ffffff;
+      box-shadow: 0 8px 22px rgba(44, 18, 36, 0.22);
+      transform: translateY(-2px);
+    }
+    .diff-name { font-size: 12.5px; font-weight: 800; }
+    .diff-pieces { font-size: 9.5px; opacity: 0.8; margin-top: 2px; }
+    .diff-reward {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 800;
+      color: var(--gold-main);
+      background: #fff8eb;
+      border: 1px solid rgba(217, 119, 6, 0.3);
+      padding: 1px 6px;
+      border-radius: 99px;
+      margin-top: 4px;
+    }
+    .diff-btn.active .diff-reward {
+      background: #d97706;
+      color: #ffffff;
+      border-color: #d97706;
+    }
+
+    /* Live HUD */
+    .hud-bar {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 10px 16px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-card);
+    }
+    .hud-item { display: flex; flex-direction: column; gap: 2px; }
+    .hud-label { font-size: 9.5px; font-weight: 800; text-transform: uppercase; color: var(--text-muted); }
+    .hud-val { font-size: 16px; font-weight: 900; color: var(--text-dark); display: flex; align-items: center; gap: 4px; }
+    .timer-text { font-variant-numeric: tabular-nums; color: var(--rose-main); }
+    .timer-text.urgent { color: #dc2626 !important; animation: blink 0.6s infinite alternate; }
+    @keyframes blink { from { opacity: 1; } to { opacity: 0.5; } }
+
+    /* Puzzle Arena */
+    .puzzle-arena {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Target Board Frame */
+    .target-board-wrapper {
+      position: relative;
+      width: min(100%, 320px);
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      background: #fdf5f9;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.06), 0 8px 24px rgba(255, 42, 122, 0.12);
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+    }
+
+    /* Board Grid with Slots */
+    .board-grid {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      gap: 2px;
+      padding: 2px;
+      background: rgba(255, 120, 175, 0.15);
+    }
+
+    .board-slot {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px dashed rgba(255, 42, 122, 0.35);
+      border-radius: 8px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      transition: all 0.2s;
+    }
+    .board-slot.hover-over {
+      background: rgba(255, 42, 122, 0.18);
+      border-color: var(--rose-main);
+      transform: scale(0.97);
+    }
+    .board-slot.filled {
+      border: none;
+      background: transparent;
+    }
+    .slot-guide-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: rgba(136, 98, 123, 0.35);
+      pointer-events: none;
+    }
+
+    /* Shuffled Pieces Tray */
+    .pieces-tray {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      min-height: 90px;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    /* Puzzle Piece Component */
+    .puzzle-piece {
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s;
+      position: relative;
+      background-repeat: no-repeat;
+    }
+    .puzzle-piece:active { cursor: grabbing; transform: scale(1.05); }
+    .puzzle-piece.selected {
+      outline: 3px solid var(--rose-main);
+      box-shadow: 0 0 20px rgba(255, 42, 122, 0.6);
+      transform: scale(1.08);
+      z-index: 10;
+    }
+    .puzzle-piece.snapped {
+      cursor: default;
+      box-shadow: none;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      animation: snapSparkle 0.4s ease-out;
+    }
+    @keyframes snapSparkle {
+      0% { transform: scale(1.12); filter: brightness(1.3); }
+      100% { transform: scale(1); filter: brightness(1); }
+    }
+
+    /* Controls Bar */
+    .controls-row {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-action-primary {
+      flex: 1;
+      background: var(--rose-gradient);
+      color: #ffffff;
+      border: none;
+      padding: 12px;
+      border-radius: 16px;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 8px 22px rgba(255, 42, 122, 0.3);
+      transition: all 0.2s;
+    }
+    .btn-action-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(255, 42, 122, 0.4); }
+
+    .btn-action-sec {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+      padding: 11px 16px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Fixed Rewards Guide */
+    .guide-card {
+      margin-top: 16px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 14px;
+      font-size: 11.5px;
+    }
+    .guide-table {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .guide-cell {
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.2);
+      border-radius: 12px;
+      padding: 8px 4px;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(44, 18, 36, 0.65);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-dialog {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 26px;
+      padding: 26px 20px 20px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(44, 18, 36, 0.25);
+    }
+    .modal-icon { font-size: 40px; margin-bottom: 10px; }
+    .modal-title { font-family: var(--font-serif); font-size: 22px; font-weight: 800; }
+    .modal-desc { font-size: 12px; color: var(--text-muted); margin: 6px 0 16px; line-height: 1.4; }
+    .award-pill {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+    .award-coins { font-size: 26px; font-weight: 900; color: #b45309; }
+    .award-sub { font-size: 11px; font-weight: 700; color: #92400e; margin-top: 2px; }
+
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 120;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top App Navigation -->
+  <header class="app-header">
+    <div class="header-left">
+      <a href="games.html" class="btn-nav-back" title="Back to Games">
+        <span>‹</span> <span>Games</span>
+      </a>
+      <a href="index.html" class="brand-link" title="Vanvi Moments">
+        🧩 Love <span>Puzzle</span>
+      </a>
+    </div>
+    <div class="header-right">
+      <button type="button" class="sound-btn" id="soundBtn" onclick="toggleSound()" title="Toggle Sound">🔊</button>
+      <a href="rewards.html" class="wallet-pill" title="View Rewards Wallet">
+        <span>🪙</span> <span id="headerCoins">150</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Game Container -->
+  <main class="game-container">
+
+    <section class="game-hero">
+      <div class="hero-badge">✦ Timed Romantic Challenge</div>
+      <h1 class="game-title">Love Puzzle</h1>
+      <p class="game-subtitle">Drag or tap pieces into place before the countdown ends. Complete under target time for bonus coins!</p>
+    </section>
+
+    <!-- Difficulty Tabs -->
+    <nav class="difficulty-nav">
+      <button type="button" class="diff-btn active" id="btnEasy" onclick="selectDifficulty('easy')">
+        <div class="diff-name">Easy</div>
+        <div class="diff-pieces">3 × 3 (9 Pieces)</div>
+        <div class="diff-reward">+3 🪙</div>
+      </button>
+      <button type="button" class="diff-btn" id="btnHard" onclick="selectDifficulty('hard')">
+        <div class="diff-name">Hard</div>
+        <div class="diff-pieces">4 × 4 (16 Pieces)</div>
+        <div class="diff-reward">+6 🪙</div>
+      </button>
+      <button type="button" class="diff-btn" id="btnExpert" onclick="selectDifficulty('expert')">
+        <div class="diff-name">Expert</div>
+        <div class="diff-pieces">5 × 5 (25 Pieces)</div>
+        <div class="diff-reward">+10 🪙</div>
+      </button>
+    </nav>
+
+    <!-- Live HUD -->
+    <section class="hud-bar">
+      <div class="hud-item">
+        <span class="hud-label">Time Remaining</span>
+        <div class="hud-val">⏱️ <span class="timer-text" id="hudTimer">60s</span></div>
+      </div>
+      <div class="hud-item" style="text-align: center;">
+        <span class="hud-label">Target Time</span>
+        <div class="hud-val">🎯 <span id="hudTarget">45s</span></div>
+      </div>
+      <div class="hud-item" style="text-align: right;">
+        <span class="hud-label">Placed Pieces</span>
+        <div class="hud-val">✨ <span id="hudPlaced">0 / 9</span></div>
+      </div>
+    </section>
+
+    <!-- Puzzle Arena -->
+    <section class="puzzle-arena">
+      <!-- Target Board -->
+      <div class="target-board-wrapper" id="boardWrapper">
+        <div class="board-grid" id="boardGrid">
+          <!-- Slots rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Shuffled Pieces Tray -->
+      <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 4px;">
+        <span style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">
+          Piece Tray (Drag or Tap to Place)
+        </span>
+        <span id="trayCountBadge" style="font-size: 10.5px; font-weight: 800; color: var(--rose-main);">9 Pieces</span>
+      </div>
+      <div class="pieces-tray" id="piecesTray">
+        <!-- Pieces rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Controls Row -->
+    <div class="controls-row">
+      <button type="button" class="btn-action-primary" id="btnRestart" onclick="startNewGame()">
+        <span>🔄</span> Reset &amp; Shuffle
+      </button>
+      <button type="button" class="btn-action-sec" onclick="openPreviewModal()">
+        <span>👁️</span> Reference Image
+      </button>
+    </div>
+
+    <!-- Fixed Rewards Guide -->
+    <aside class="guide-card">
+      <div style="font-weight: 800; display:flex; justify-content:space-between; align-items:center;">
+        <span>🏆 Fixed Skill-Based Rewards</span>
+        <span style="color:var(--text-muted); font-size:10px;">(One per completed puzzle)</span>
+      </div>
+      <div class="guide-table">
+        <div class="guide-cell">
+          <div style="color:var(--text-muted); font-weight:800;">Easy (3×3)</div>
+          <div style="font-weight:900; color:var(--gold-main); font-size:13px; margin-top:2px;">3 Coins</div>
+        </div>
+        <div class="guide-cell">
+          <div style="color:var(--text-muted); font-weight:800;">Hard (4×4)</div>
+          <div style="font-weight:900; color:var(--gold-main); font-size:13px; margin-top:2px;">6 Coins</div>
+        </div>
+        <div class="guide-cell">
+          <div style="color:var(--text-muted); font-weight:800;">Expert (5×5)</div>
+          <div style="font-weight:900; color:var(--gold-main); font-size:13px; margin-top:2px;">10 Coins</div>
+        </div>
+      </div>
+      <div style="margin-top: 8px; color: #9333ea; font-weight: 700; font-size: 11px;">
+        ✨ <b>Under Target Time Bonus:</b> Complete before the target countdown for an extra <b>+2 Coins</b>!
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- VICTORY MODAL -->
+  <div class="modal-overlay" id="victoryModal">
+    <div class="modal-dialog">
+      <div class="modal-icon">🎉</div>
+      <h2 class="modal-title">Love Puzzle Completed!</h2>
+      <p class="modal-desc" id="victoryDesc">Every piece locked perfectly in place!</p>
+
+      <div class="award-pill">
+        <div class="award-coins" id="victoryCoins">+3 🪙</div>
+        <div class="award-sub" id="victorySub">Base: 3 Coins</div>
+      </div>
+
+      <div style="display:flex; justify-content:space-around; margin-bottom:16px; font-size:12px;">
+        <div><b>Time:</b> <span id="victoryTime">24s</span></div>
+        <div><b>Target:</b> <span id="victoryTarget">45s</span></div>
+        <div><b>Bonus:</b> <span id="victoryBonusBadge">✓ +2 Earned</span></div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button type="button" class="btn-action-primary" onclick="advanceDifficulty()">Next Difficulty →</button>
+        <button type="button" class="btn-action-sec" onclick="closeModalsAndRestart()">Play Again</button>
+        <a href="rewards.html" class="btn-action-sec" style="text-decoration:none; justify-content:center;">View Rewards Wallet</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME OVER MODAL -->
+  <div class="modal-overlay" id="gameoverModal">
+    <div class="modal-dialog">
+      <div class="modal-icon">⏳</div>
+      <h2 class="modal-title">Time Expired!</h2>
+      <p class="modal-desc">The clock reached zero before all puzzle pieces could be locked in place.</p>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button type="button" class="btn-action-primary" onclick="closeModalsAndRestart()">Try Again ↺</button>
+        <button type="button" class="btn-action-sec" onclick="closeModals()">Change Level</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERENCE IMAGE MODAL -->
+  <div class="modal-overlay" id="previewModal">
+    <div class="modal-dialog">
+      <h3 style="font-family:var(--font-serif); font-size:18px; margin-bottom:10px;">Reference Artwork</h3>
+      <div style="width:240px; height:240px; margin:0 auto 14px; border-radius:14px; overflow:hidden; border:2px solid var(--border-pink);" id="referenceArtworkContainer"></div>
+      <button type="button" class="btn-action-primary" onclick="closeModals()">Back to Puzzle</button>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Global Bottom Dock -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" id="bottomNavHome">⌂<br/>Home</a>
+    <a href="templates.html" class="nav-btn" id="bottomNavExplore">◌<br/>Explore</a>
+    <a href="builder.html" class="create nav-btn" id="bottomNavCreate">＋<br/>Create</a>
+    <a href="games.html" class="nav-btn active" id="bottomNavGames">🎮<br/>Games</a>
+    <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
+  </nav>
+
+  <!-- Game Logic Script -->
+  <script>
+    (function() {
+      'use strict';
+
+      const DAILY_CAP = 25;
+      const STORAGE_COINS = 'vanvi_user_coins';
+      const STORAGE_TODAY_EARNED = 'vanvi_games_today_earned';
+      const STORAGE_TODAY_DATE = 'vanvi_games_today_date';
+      const STORAGE_SOUND = 'vanvi_sound_enabled';
+
+      const PUZZLE_LEVELS = {
+        easy: { id: 'easy', name: 'Easy', size: 3, timeLimit: 60, targetTime: 40, baseReward: 3 },
+        hard: { id: 'hard', name: 'Hard', size: 4, timeLimit: 90, targetTime: 65, baseReward: 6 },
+        expert: { id: 'expert', name: 'Expert', size: 5, timeLimit: 120, targetTime: 85, baseReward: 10 }
+      };
+
+      let currentDiff = 'easy';
+      let timerRemaining = 60;
+      let timerInterval = null;
+      let gameStartTime = 0;
+      let placedPiecesCount = 0;
+      let totalPieces = 9;
+      let isGameActive = false;
+      let isSoundMuted = localStorage.getItem(STORAGE_SOUND) === 'false';
+      let selectedPieceElement = null;
+      let puzzleArtworkDataUrl = '';
+
+      const boardGrid = document.getElementById('boardGrid');
+      const piecesTray = document.getElementById('piecesTray');
+      const hudTimer = document.getElementById('hudTimer');
+      const hudTarget = document.getElementById('hudTarget');
+      const hudPlaced = document.getElementById('hudPlaced');
+      const trayCountBadge = document.getElementById('trayCountBadge');
+      const headerCoins = document.getElementById('headerCoins');
+      const soundBtn = document.getElementById('soundBtn');
+
+      // 1. Procedural Romantic Artwork Generation on Canvas
+      function generateRomanticArtwork() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 400;
+        canvas.height = 400;
+        const ctx = canvas.getContext('2d');
+
+        // Romantic Twilight Gradient
+        const grad = ctx.createLinearGradient(0, 0, 400, 400);
+        grad.addColorStop(0, '#ff4b8b');
+        grad.addColorStop(0.35, '#c026d3');
+        grad.addColorStop(0.7, '#6366f1');
+        grad.addColorStop(1, '#1e1b4b');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 400, 400);
+
+        // Radiant Moonlight / Glow
+        const moonGrad = ctx.createRadialGradient(200, 160, 10, 200, 160, 120);
+        moonGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+        moonGrad.addColorStop(0.4, 'rgba(255, 230, 245, 0.6)');
+        moonGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = moonGrad;
+        ctx.beginPath();
+        ctx.arc(200, 160, 120, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Starlight Sparkles
+        ctx.fillStyle = '#ffffff';
+        for (let i = 0; i < 35; i++) {
+          const sx = (i * 47) % 380 + 10;
+          const sy = (i * 73) % 240 + 10;
+          const r = (i % 3) + 1.2;
+          ctx.beginPath();
+          ctx.arc(sx, sy, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Heart Floating Silhouette
+        ctx.save();
+        ctx.translate(200, 185);
+        ctx.scale(1.4, 1.4);
+        ctx.fillStyle = 'rgba(255, 42, 122, 0.85)';
+        ctx.shadowColor = 'rgba(255, 42, 122, 0.6)';
+        ctx.shadowBlur = 25;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-25, -25, -50, 0, 0, 45);
+        ctx.bezierCurveTo(50, 0, 25, -25, 0, 0);
+        ctx.fill();
+        ctx.restore();
+
+        // Vanvi Moments Typography Stamp
+        ctx.font = 'bold 22px "Playfair Display", Georgia, serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.shadowColor = 'rgba(0,0,0,0.5)';
+        ctx.shadowBlur = 10;
+        ctx.fillText('Vanvi Moments', 200, 310);
+
+        ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = '#ffd6e7';
+        ctx.fillText('Forever in Every Memory ♡', 200, 335);
+
+        puzzleArtworkDataUrl = canvas.toDataURL('image/png');
+
+        // Reference modal container
+        const refContainer = document.getElementById('referenceArtworkContainer');
+        if (refContainer) {
+          refContainer.style.background = `url("${puzzleArtworkDataUrl}") center/cover no-repeat`;
+        }
+      }
+
+      // Audio Synthesizer
+      let audioCtx = null;
+      function playAudio(type) {
+        if (isSoundMuted) return;
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const now = audioCtx.currentTime;
+
+          if (type === 'snap') {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.frequency.setValueAtTime(600, now);
+            osc.frequency.exponentialRampToValueAtTime(1000, now + 0.1);
+            gain.gain.setValueAtTime(0.2, now);
+            gain.gain.linearRampToValueAtTime(0, now + 0.1);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.1);
+          } else if (type === 'win') {
+            [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.frequency.setValueAtTime(f, now + i * 0.08);
+              gain.gain.setValueAtTime(0.18, now + i * 0.08);
+              gain.gain.linearRampToValueAtTime(0, now + i * 0.08 + 0.3);
+              osc.connect(gain);
+              gain.connect(audioCtx.destination);
+              osc.start(now + i * 0.08);
+              osc.stop(now + i * 0.08 + 0.3);
+            });
+          }
+        } catch(e) {}
+      }
+
+      window.toggleSound = function() {
+        isSoundMuted = !isSoundMuted;
+        localStorage.setItem(STORAGE_SOUND, (!isSoundMuted).toString());
+        soundBtn.textContent = isSoundMuted ? '🔇' : '🔊';
+      };
+
+      // Economy Sync
+      function getTodayKey() {
+        const d = new Date();
+        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      }
+
+      function getEarnedToday() {
+        const savedDate = localStorage.getItem(STORAGE_TODAY_DATE);
+        const today = getTodayKey();
+        if (savedDate !== today) {
+          localStorage.setItem(STORAGE_TODAY_DATE, today);
+          localStorage.setItem(STORAGE_TODAY_EARNED, '0');
+          return 0;
+        }
+        return parseInt(localStorage.getItem(STORAGE_TODAY_EARNED) || '0', 10);
+      }
+
+      function addCoins(won) {
+        const currentEarned = getEarnedToday();
+        localStorage.setItem(STORAGE_TODAY_EARNED, (currentEarned + won).toString());
+        const curBal = parseInt(localStorage.getItem(STORAGE_COINS) || '150', 10);
+        const newBal = curBal + won;
+        localStorage.setItem(STORAGE_COINS, newBal.toString());
+        headerCoins.textContent = newBal;
+      }
+
+      // Initialize Puzzle Board & Pieces
+      function setupPuzzle() {
+        clearInterval(timerInterval);
+        const config = PUZZLE_LEVELS[currentDiff];
+        const size = config.size;
+        totalPieces = size * size;
+        placedPiecesCount = 0;
+        isGameActive = true;
+        selectedPieceElement = null;
+
+        hudTimer.textContent = `${config.timeLimit}s`;
+        hudTimer.classList.remove('urgent');
+        hudTarget.textContent = `${config.targetTime}s`;
+        hudPlaced.textContent = `0 / ${totalPieces}`;
+        trayCountBadge.textContent = `${totalPieces} Pieces`;
+
+        // Configure Grid Columns
+        boardGrid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+        boardGrid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+        boardGrid.innerHTML = '';
+        piecesTray.innerHTML = '';
+
+        // Generate Board Slots
+        for (let i = 0; i < totalPieces; i++) {
+          const slot = document.createElement('div');
+          slot.className = 'board-slot';
+          slot.dataset.slotIndex = i;
+          slot.innerHTML = `<span class="slot-guide-num">${i + 1}</span>`;
+
+          // Tap to drop selected piece
+          slot.addEventListener('click', () => handleSlotClick(slot, i));
+
+          // Drag over / drop support
+          slot.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            if (!slot.classList.contains('filled')) slot.classList.add('hover-over');
+          });
+          slot.addEventListener('dragleave', () => slot.classList.remove('hover-over'));
+          slot.addEventListener('drop', (e) => {
+            e.preventDefault();
+            slot.classList.remove('hover-over');
+            const pieceIdx = e.dataTransfer.getData('text/plain');
+            if (pieceIdx !== undefined && pieceIdx !== '') {
+              const pieceEl = document.getElementById(`piece_${pieceIdx}`);
+              if (pieceEl) placePieceInSlot(pieceEl, parseInt(pieceIdx, 10), slot, i);
+            }
+          });
+
+          boardGrid.appendChild(slot);
+        }
+
+        // Generate Shuffled Pieces
+        const indices = Array.from({ length: totalPieces }, (_, i) => i);
+        // Shuffle
+        for (let i = indices.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [indices[i], indices[j]] = [indices[j], indices[i]];
+        }
+
+        // Board dimension 320px
+        const piecePixelSize = Math.floor(320 / size);
+
+        indices.forEach((pieceIdx) => {
+          const piece = document.createElement('div');
+          piece.className = 'puzzle-piece';
+          piece.id = `piece_${pieceIdx}`;
+          piece.dataset.correctSlot = pieceIdx;
+          piece.style.width = `${piecePixelSize - 4}px`;
+          piece.style.height = `${piecePixelSize - 4}px`;
+          piece.draggable = true;
+
+          // Background slice mapping
+          const row = Math.floor(pieceIdx / size);
+          const col = pieceIdx % size;
+          const bgX = (col / (size - 1)) * 100;
+          const bgY = (row / (size - 1)) * 100;
+
+          piece.style.backgroundImage = `url("${puzzleArtworkDataUrl}")`;
+          piece.style.backgroundSize = `${size * 100}% ${size * 100}%`;
+          piece.style.backgroundPosition = `${bgX}% ${bgY}%`;
+
+          // Drag Events
+          piece.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', pieceIdx);
+            selectPiece(piece);
+          });
+
+          // Tap selection for smooth mobile controls
+          piece.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectPiece(piece);
+          });
+
+          // Mobile Touch Drag & Snap
+          enableTouchDrag(piece, pieceIdx);
+
+          piecesTray.appendChild(piece);
+        });
+
+        // Start Timer
+        startTimer(config.timeLimit);
+      }
+
+      function selectPiece(pieceEl) {
+        if (pieceEl.classList.contains('snapped')) return;
+        document.querySelectorAll('.puzzle-piece').forEach(p => p.classList.remove('selected'));
+        if (selectedPieceElement === pieceEl) {
+          selectedPieceElement = null;
+        } else {
+          selectedPieceElement = pieceEl;
+          pieceEl.classList.add('selected');
+        }
+      }
+
+      function handleSlotClick(slotEl, slotIndex) {
+        if (!selectedPieceElement) return;
+        const correctSlot = parseInt(selectedPieceElement.dataset.correctSlot, 10);
+        placePieceInSlot(selectedPieceElement, correctSlot, slotEl, slotIndex);
+      }
+
+      function placePieceInSlot(pieceEl, pieceIdx, slotEl, slotIndex) {
+        if (slotEl.classList.contains('filled')) return;
+
+        // Check if piece belongs to this slot
+        if (pieceIdx === slotIndex) {
+          // CORRECT MATCH SNAP!
+          playAudio('snap');
+          if (navigator.vibrate) navigator.vibrate(30);
+
+          slotEl.classList.add('filled');
+          slotEl.innerHTML = '';
+          pieceEl.classList.remove('selected');
+          pieceEl.classList.add('snapped');
+          pieceEl.draggable = false;
+          pieceEl.style.width = '100%';
+          pieceEl.style.height = '100%';
+          slotEl.appendChild(pieceEl);
+
+          selectedPieceElement = null;
+          placedPiecesCount++;
+          hudPlaced.textContent = `${placedPiecesCount} / ${totalPieces}`;
+          trayCountBadge.textContent = `${totalPieces - placedPiecesCount} Pieces Left`;
+
+          // Win Check
+          if (placedPiecesCount >= totalPieces) {
+            clearInterval(timerInterval);
+            isGameActive = false;
+            setTimeout(triggerVictory, 400);
+          }
+        } else {
+          // MISMATCH BOUNCE
+          pieceEl.style.transform = 'scale(0.85)';
+          if (navigator.vibrate) navigator.vibrate(60);
+          setTimeout(() => {
+            pieceEl.style.transform = '';
+          }, 200);
+        }
+      }
+
+      // Touch Dragging System with coordinate raycast for Mobile
+      function enableTouchDrag(pieceEl, pieceIdx) {
+        let initialX = 0, initialY = 0;
+        let isDragging = false;
+
+        pieceEl.addEventListener('touchstart', (e) => {
+          if (pieceEl.classList.contains('snapped')) return;
+          const touch = e.touches[0];
+          initialX = touch.clientX;
+          initialY = touch.clientY;
+          isDragging = true;
+          selectPiece(pieceEl);
+        }, { passive: true });
+
+        pieceEl.addEventListener('touchmove', (e) => {
+          if (!isDragging || pieceEl.classList.contains('snapped')) return;
+          e.preventDefault(); // Stop scrolling while dragging puzzle piece
+          const touch = e.touches[0];
+          const dx = touch.clientX - initialX;
+          const dy = touch.clientY - initialY;
+          pieceEl.style.transform = `translate(${dx}px, ${dy}px) scale(1.1)`;
+          pieceEl.style.zIndex = '50';
+        }, { passive: false });
+
+        pieceEl.addEventListener('touchend', (e) => {
+          if (!isDragging || pieceEl.classList.contains('snapped')) return;
+          isDragging = false;
+          pieceEl.style.transform = '';
+          pieceEl.style.zIndex = '';
+
+          const touch = e.changedTouches[0];
+          const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+          const slot = dropTarget ? dropTarget.closest('.board-slot') : null;
+          if (slot) {
+            const slotIndex = parseInt(slot.dataset.slotIndex, 10);
+            placePieceInSlot(pieceEl, pieceIdx, slot, slotIndex);
+          }
+        });
+      }
+
+      // Timer System
+      function startTimer(seconds) {
+        clearInterval(timerInterval);
+        timerRemaining = seconds;
+        gameStartTime = Date.now();
+
+        timerInterval = setInterval(() => {
+          timerRemaining--;
+          hudTimer.textContent = `${timerRemaining}s`;
+
+          if (timerRemaining <= 10) {
+            hudTimer.classList.add('urgent');
+          }
+
+          if (timerRemaining <= 0) {
+            clearInterval(timerInterval);
+            isGameActive = false;
+            triggerGameOver();
+          }
+        }, 1000);
+      }
+
+      // Victory Handler
+      async function triggerVictory() {
+        playAudio('win');
+        triggerConfetti();
+
+        const config = PUZZLE_LEVELS[currentDiff];
+        const elapsedSec = Math.round((Date.now() - gameStartTime) / 1000);
+        const isUnderTarget = elapsedSec <= config.targetTime;
+
+        let wonCoins = config.baseReward + (isUnderTarget ? 2 : 0);
+
+        // Daily cap enforcement
+        const earned = getEarnedToday();
+        const remainingCap = Math.max(0, DAILY_CAP - earned);
+        const actualAwarded = Math.min(wonCoins, remainingCap);
+
+        if (actualAwarded > 0) {
+          addCoins(actualAwarded);
+        }
+
+        // Sync backend
+        try {
+          const token = localStorage.getItem('vanvi_token') || localStorage.getItem('vanvi_auth_token');
+          if (token) {
+            await fetch('/api/coins/game-reward', {
+              method: 'POST',
+              headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                gameId: 'love-puzzle',
+                gameTitle: `Love Puzzle (${config.name})`,
+                coins: actualAwarded,
+                score: Math.max(10, 100 - elapsedSec)
+              })
+            });
+          }
+        } catch(e) {}
+
+        document.getElementById('victoryCoins').textContent = `+${actualAwarded} 🪙`;
+        document.getElementById('victorySub').textContent = `Base: ${config.baseReward} Coins ${isUnderTarget ? '+ 2 Target Bonus ✨' : ''}`;
+        document.getElementById('victoryTime').textContent = `${elapsedSec}s`;
+        document.getElementById('victoryTarget').textContent = `${config.targetTime}s`;
+        document.getElementById('victoryBonusBadge').textContent = isUnderTarget ? '✓ +2 Earned' : 'Missed Target';
+        document.getElementById('victoryBonusBadge').style.color = isUnderTarget ? '#10b981' : '#88627b';
+
+        document.getElementById('victoryModal').classList.add('active');
+      }
+
+      function triggerGameOver() {
+        document.getElementById('gameoverModal').classList.add('active');
+      }
+
+      // Public Controls
+      window.selectDifficulty = function(diff) {
+        if (!PUZZLE_LEVELS[diff]) return;
+        currentDiff = diff;
+        document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+        const activeBtn = document.getElementById(`btn${diff.charAt(0).toUpperCase() + diff.slice(1)}`);
+        if (activeBtn) activeBtn.classList.add('active');
+        setupPuzzle();
+      };
+
+      window.startNewGame = function() {
+        closeModals();
+        setupPuzzle();
+      };
+
+      window.advanceDifficulty = function() {
+        closeModals();
+        if (currentDiff === 'easy') selectDifficulty('hard');
+        else if (currentDiff === 'hard') selectDifficulty('expert');
+        else selectDifficulty('easy');
+      };
+
+      window.closeModalsAndRestart = function() {
+        closeModals();
+        setupPuzzle();
+      };
+
+      window.closeModals = function() {
+        document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+      };
+
+      window.openPreviewModal = function() {
+        document.getElementById('previewModal').classList.add('active');
+      };
+
+      function triggerConfetti() {
+        const canvas = document.getElementById('confettiCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particles = [];
+        const colors = ['#ff2a7a', '#d97706', '#a855f7', '#38bdf8', '#10b981'];
+
+        for (let i = 0; i < 80; i++) {
+          particles.push({
+            x: canvas.width / 2, y: canvas.height / 2,
+            w: Math.random() * 8 + 4, h: Math.random() * 8 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            vx: (Math.random() - 0.5) * 14, vy: (Math.random() - 0.7) * 16,
+            rot: Math.random() * 360, vRot: (Math.random() - 0.5) * 10, alpha: 1
+          });
+        }
+
+        let anim;
+        function render() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          let alive = false;
+          particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy; p.vy += 0.35; p.rot += p.vRot; p.alpha -= 0.015;
+            if (p.alpha > 0) {
+              alive = true;
+              ctx.save();
+              ctx.translate(p.x, p.y);
+              ctx.rotate((p.rot * Math.PI) / 180);
+              ctx.fillStyle = p.color;
+              ctx.globalAlpha = Math.max(0, p.alpha);
+              ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+              ctx.restore();
+            }
+          });
+          if (alive) anim = requestAnimationFrame(render);
+        }
+        cancelAnimationFrame(anim);
+        render();
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        soundBtn.textContent = isSoundMuted ? '🔇' : '🔊';
+        headerCoins.textContent = localStorage.getItem(STORAGE_COINS) || '150';
+        generateRomanticArtwork();
+        setupPuzzle();
+      });
+
+    })();
+  </script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

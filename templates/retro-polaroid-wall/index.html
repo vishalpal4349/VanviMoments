@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Retro Polaroid Memory Wall | Vanvi Moments</title>
+  <meta name="description" content="A vintage retro polaroid memory deck with washi tape, handwritten scribbles, and nostalgic soundtracks.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-cork: #fbf7f4;
+      --card-white: #ffffff;
+      --washi-tape: rgba(255, 182, 193, 0.7);
+      --text-ink: #2b1b24;
+      --text-note: #4a3443;
+      --rose-accent: #ff2a7a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-cork);
+      color: var(--text-ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(254, 240, 245, 0.8) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(240, 245, 255, 0.7) 0%, transparent 45%),
+        linear-gradient(180deg, #faf5f0 0%, #f4ede4 100%);
+      padding-bottom: 50px;
+    }
+    .polaroid-stage {
+      width: 100%;
+      max-width: 480px;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .audio-tag {
+      align-self: flex-end;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 120, 175, 0.3);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 750;
+      color: var(--rose-accent);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      margin-bottom: 20px;
+    }
+    .badge-pill {
+      background: #fff0f5;
+      color: var(--rose-accent);
+      border: 1px solid rgba(255, 42, 122, 0.3);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+    }
+    .wall-title {
+      font-size: 26px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+    .wall-sub {
+      font-size: 13px;
+      color: var(--text-note);
+      text-align: center;
+      max-width: 320px;
+      line-height: 1.45;
+      margin-bottom: 26px;
+    }
+    /* Polaroid Card */
+    .polaroid-frame {
+      width: 100%;
+      max-width: 340px;
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 14px 14px 22px;
+      box-shadow: 0 16px 36px rgba(43, 27, 36, 0.12), 0 2px 8px rgba(0,0,0,0.04);
+      position: relative;
+      transform: rotate(-1.5deg);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .polaroid-frame:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+    /* Tape on top */
+    .washi-tape-strip {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(2deg);
+      width: 90px;
+      height: 24px;
+      background: rgba(255, 182, 193, 0.85);
+      border-left: 2px dashed rgba(255, 255, 255, 0.6);
+      border-right: 2px dashed rgba(255, 255, 255, 0.6);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .photo-area {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #f1e9e3;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .photo-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .handwritten-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      font-weight: 700;
+      color: #3d2334;
+      text-align: center;
+      line-height: 1.25;
+      min-height: 32px;
+    }
+    .polaroid-date {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #947187;
+      text-align: center;
+      margin-top: 4px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    /* Note Card */
+    .letter-note-box {
+      width: 100%;
+      max-width: 340px;
+      margin-top: 24px;
+      background: #fffdfa;
+      border: 1px dashed rgba(255, 120, 175, 0.4);
+      border-radius: 16px;
+      padding: 16px 18px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-note);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+    }
+    .letter-note-box p {
+      margin-bottom: 8px;
+    }
+    .letter-sign {
+      font-weight: 800;
+      color: var(--rose-accent);
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="polaroid-stage">
+    <button type="button" class="audio-tag" onclick="playAcousticChime()">
+      <span>🎵</span> <span>Play Acoustic Nostalgia</span>
+    </button>
+
+    <div class="badge-pill">📸 Retro Keepsake Reel</div>
+    <h1 class="wall-title" id="wallTitle">Retro Polaroid Memories</h1>
+    <p class="wall-sub" id="wallSubtitle">Tap the snapshot to flip through our favorite memories frozen in time.</p>
+
+    <div class="polaroid-frame" onclick="nextPhoto()">
+      <div class="washi-tape-strip"></div>
+      <div class="photo-area">
+        <img id="polaroidImg" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80" alt="Polaroid Memory">
+      </div>
+      <div class="handwritten-caption" id="polaroidCaption">Our Favorite Sunset Together ✨</div>
+      <div class="polaroid-date" id="polaroidDate">EST. 2026 · TAP FOR NEXT</div>
+    </div>
+
+    <div class="letter-note-box">
+      <p id="polaroidNote">
+        “Sometimes I look back at our candid photos and smile thinking about how lucky I am to share these chapters with you.”
+      </p>
+      <div class="letter-sign" id="polaroidSender">— Forever Besties ♡</div>
+    </div>
+  </div>
+
+  <script>
+    const photos = [
+      {
+        url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80',
+        cap: 'Our Favorite Sunset Together ✨',
+        date: 'CHAPTER 01 · SUNSET GLOW'
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&auto=format&fit=crop&q=80',
+        cap: 'Golden Laughs & Coffee Mornings ☕',
+        date: 'CHAPTER 02 · MORNING BREW'
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=800&auto=format&fit=crop&q=80',
+        cap: 'Under the Endless Sky 🌸',
+        date: 'CHAPTER 03 · FOREVER MEMORIES'
+      }
+    ];
+    let photoIdx = 0;
+
+    function nextPhoto() {
+      photoIdx = (photoIdx + 1) % photos.length;
+      document.getElementById('polaroidImg').src = photos[photoIdx].url;
+      document.getElementById('polaroidCaption').textContent = photos[photoIdx].cap;
+      document.getElementById('polaroidDate').textContent = photos[photoIdx].date;
+      playAcousticChime();
+    }
+
+    function playAcousticChime() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const now = ctx.currentTime;
+        [440, 554.37, 659.25].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.15);
+          gain.gain.setValueAtTime(0.06, now + idx * 0.15);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.15 + 0.6);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.15);
+          osc.stop(now + idx * 0.15 + 0.7);
+        });
+      } catch (e) {}
+    }
+
+    // Read URL params
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('recipient')) {
+      document.getElementById('wallTitle').textContent = `Memories with ${params.get('recipient')}`;
+    }
+    if (params.get('text')) {
+      document.getElementById('polaroidNote').textContent = `“${params.get('text')}”`;
+    }
+    if (params.get('sender')) {
+      document.getElementById('polaroidSender').textContent = `— ${params.get('sender')}`;
+    }
+  </script>
+</body>
+</html>

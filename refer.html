@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Refer &amp; Earn — Vanvi Moments</title>
+  <meta name="description" content="Invite friends to celebrate with Vanvi Moments. Give 50 coins, get 100 coins for every friend who creates their first digital celebration moment!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --bg-pearl: #fffbfd;
+      --bg-blush: #fff1f6;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --color-rose: #ff2a7a;
+      --color-rose-deep: #e11d68;
+      --color-gold: #d97706;
+      --color-gold-bright: #f59e0b;
+      --color-emerald: #059669;
+      --color-lilac: #9333ea;
+      --text-dark: #2c1224;
+      --text-muted: #78526d;
+      --text-dim: #a68b9e;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --border-gold: rgba(217, 119, 6, 0.32);
+      --shadow-card: 0 12px 36px rgba(255, 60, 130, 0.08);
+      --shadow-hover: 0 18px 42px rgba(255, 42, 122, 0.16);
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 0%, #ffeaf3 0%, #fff7fb 45%, #f4efff 100%);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      padding-bottom: 110px;
+      overflow-x: hidden !important;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient background orbs */
+    .ambient-glow {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(90px);
+      opacity: 0.35;
+    }
+    .glow-1 { top: -8vw; right: -8vw; width: 44vw; height: 44vw; background: radial-gradient(circle, rgba(255,182,217,0.45) 0%, transparent 65%); }
+    .glow-2 { bottom: 8vh; left: -10vw; width: 48vw; height: 48vw; background: radial-gradient(circle, rgba(245,208,254,0.35) 0%, transparent 70%); }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-pink);
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(232, 79, 147, 0.05);
+      height: 60px;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 900;
+      font-size: clamp(13px, 3.6vw, 15px);
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      white-space: nowrap !important;
+    }
+    .brand-spark { width: 22px; height: 22px; flex-shrink: 0; }
+    .brand-tag {
+      font-size: 9.5px;
+      font-weight: 850;
+      padding: 2.5px 8px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--color-rose), var(--color-gold));
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-header-link {
+      font-size: 11.5px;
+      font-weight: 750;
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-pink);
+      transition: all 0.2s;
+    }
+    .btn-header-link:hover { color: var(--color-rose); border-color: var(--color-rose); background: #ffffff; }
+    .btn-header-primary {
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 6.5px 14px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--color-rose), #9333ea);
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.28);
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .btn-header-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+    @media (max-width: 768px) {
+      header { padding: 8px 12px !important; height: 54px !important; }
+      .header-actions .btn-header-link { display: none !important; }
+      .btn-header-primary { font-size: 11px !important; padding: 5.5px 12px !important; white-space: nowrap !important; }
+    }
+    @media (max-width: 480px) {
+      .brand-tag { display: none !important; }
+    }
+
+    /* Breadcrumbs */
+    .breadcrumb-bar {
+      max-width: 860px;
+      margin: 12px auto 0;
+      padding: 0 clamp(14px, 3vw, 20px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+    .vanvi-btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border-pink);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.05);
+      transition: all 0.2s;
+    }
+    .vanvi-btn-back:hover { background: #fff0f6; border-color: var(--color-rose); color: var(--color-rose); }
+    .breadcrumb-trail { font-size: 11.5px; font-weight: 700; color: var(--text-muted); }
+    .breadcrumb-trail a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb-trail span { color: var(--color-rose); }
+
+    /* Main Container */
+    .refer-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 16px clamp(14px, 3vw, 20px);
+    }
+
+    /* Incoming Friend Referral Greeting Banner (shown if URL has ?ref=...) */
+    .friend-welcome-card {
+      display: none;
+      background: linear-gradient(135deg, rgba(255, 245, 249, 0.98), rgba(254, 243, 199, 0.85));
+      border: 1.5px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 30px rgba(255, 42, 122, 0.08);
+      position: relative;
+      animation: popIn 0.4s ease-out;
+    }
+    @keyframes popIn { 0% { opacity: 0; transform: translateY(-8px); } 100% { opacity: 1; transform: translateY(0); } }
+    .friend-welcome-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .friend-welcome-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ff2a7a, #f59e0b);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.25);
+    }
+    .friend-welcome-text h3 {
+      font-size: 15px;
+      font-weight: 850;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+    .friend-welcome-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .friend-claim-btn {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 99px;
+      background: var(--color-rose);
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    /* Referral Hero Card */
+    .refer-hero {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 26px;
+      padding: clamp(24px, 5vw, 36px) clamp(18px, 4vw, 30px);
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .refer-hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #ff2a7a, #f59e0b, #9333ea, #38bdf8);
+    }
+    .refer-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--color-rose);
+      background: rgba(255, 42, 122, 0.08);
+      border: 1px solid rgba(255, 42, 122, 0.22);
+      border-radius: 99px;
+      padding: 4px 12px;
+      margin-bottom: 12px;
+    }
+    .refer-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 5.5vw, 36px);
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .refer-hero h1 span {
+      background: linear-gradient(135deg, var(--color-rose), #9333ea);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .refer-hero p {
+      font-size: clamp(13px, 2.5vw, 15px);
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    /* Referral Box with Code & Sharing */
+    .refer-share-box {
+      background: linear-gradient(145deg, #fffbfd, #fff4f8);
+      border: 1.5px dashed var(--border-pink);
+      border-radius: 20px;
+      padding: 20px 18px;
+      max-width: 580px;
+      margin: 0 auto 20px;
+    }
+    .share-box-sub {
+      font-size: 11.5px;
+      font-weight: 750;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .code-display-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 14px;
+      padding: 8px 12px;
+      max-width: 380px;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.05);
+    }
+    .code-val {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--color-rose);
+      font-family: monospace;
+    }
+    .btn-copy-code {
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--color-rose), #ec4899);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-copy-code:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    /* Share Channels Grid */
+    .share-channels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    @media (max-width: 480px) {
+      .share-channels-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+      .btn-channel { padding: 9px 4px; font-size: 11px; white-space: nowrap; }
+    }
+    @media (max-width: 350px) {
+      .share-channels-grid { grid-template-columns: 1fr; gap: 6px; }
+    }
+    .btn-channel {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .btn-channel-wa {
+      background: #25d366;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.28);
+    }
+    .btn-channel-wa:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn-channel-insta {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d 50%, #fcb045);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(253, 29, 29, 0.25);
+    }
+    .btn-channel-insta:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn-channel-native {
+      background: #ffffff;
+      border-color: var(--border-pink);
+      color: var(--text-dark);
+    }
+    .btn-channel-native:hover { border-color: var(--color-rose); color: var(--color-rose); transform: translateY(-1px); }
+
+    /* Live Calculator Section */
+    .calc-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 24px;
+      padding: 24px clamp(16px, 4vw, 24px);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card);
+    }
+    .calc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .calc-head h2 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .calc-slider-wrap {
+      margin-bottom: 20px;
+    }
+    .calc-slider-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--text-muted);
+    }
+    .calc-slider {
+      width: 100%;
+      height: 8px;
+      border-radius: 99px;
+      background: #ffe4f0;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      accent-color: var(--color-rose);
+      cursor: pointer;
+    }
+    .calc-results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 580px) {
+      .calc-results-grid { grid-template-columns: 1fr; gap: 8px; }
+    }
+    .calc-result-tile {
+      background: var(--bg-blush);
+      border: 1px solid var(--border-pink);
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+    }
+    .calc-res-num {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--color-rose);
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+    .calc-res-lbl {
+      font-size: 11px;
+      font-weight: 750;
+      color: var(--text-muted);
+    }
+
+    /* 3-Step Journey Grid */
+    .steps-section {
+      margin-bottom: 24px;
+    }
+    .sec-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 680px) {
+      .steps-grid { grid-template-columns: 1fr; gap: 10px; }
+    }
+    .step-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(255, 60, 130, 0.05);
+      position: relative;
+    }
+    .step-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, #fff0f6, #ffe4f0);
+      border: 1px solid var(--border-pink);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+    }
+    .step-card h3 {
+      font-size: 14px;
+      font-weight: 850;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .step-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .step-reward-tag {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 850;
+      background: rgba(255, 42, 122, 0.1);
+      color: var(--color-rose);
+    }
+
+    /* Live Top Referrers Leaderboard */
+    .leaderboard-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 24px;
+      padding: 22px clamp(16px, 4vw, 24px);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card);
+    }
+    .leaderboard-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .leader-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: var(--bg-pearl);
+      border: 1px solid var(--border-pink);
+    }
+    .leader-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .leader-rank {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 900;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+    }
+    .rank-1 { background: #fef08a; border-color: #f59e0b; color: #b45309; }
+    .rank-2 { background: #e2e8f0; border-color: #94a3b8; color: #475569; }
+    .rank-3 { background: #fed7aa; border-color: #f97316; color: #9a3412; }
+    .leader-name { font-size: 13px; font-weight: 800; color: var(--text-dark); }
+    .leader-coins { font-size: 13px; font-weight: 900; color: var(--color-gold); }
+
+    /* Floating Toast */
+    .refer-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: rgba(44, 18, 36, 0.95);
+      backdrop-filter: blur(12px);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.25s ease;
+      z-index: 10000;
+    }
+    .refer-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+      border-top: 1px solid var(--border-pink);
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-muted); text-decoration: none; margin: 0 5px; }
+    footer a:hover { color: var(--color-rose); }
+  </style>
+</head>
+<body class="has-vanvi-dock">
+
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Standard Top Header -->
+  <header>
+    <a href="index.html" class="brand-link" title="Vanvi Moments">
+      <svg class="brand-spark" fill="none" viewBox="0 0 26 26">
+        <defs>
+          <linearGradient id="refSpark" x1="0%" x2="100%" y1="0%" x2="100%">
+            <stop offset="0%" stop-color="#ff2a7a"/>
+            <stop offset="50%" stop-color="#ff7ea5"/>
+            <stop offset="100%" stop-color="#d97706"/>
+          </linearGradient>
+        </defs>
+        <path d="M13 2 C13 7.8 15.2 10 21 13 C15.2 16 13 18.2 13 24 C13 18.2 10.8 16 5 13 C10.8 10 13 7.8 13 2 Z" fill="url(#refSpark)"/>
+        <circle cx="13" cy="13" fill="#ffffff" r="2.8"/>
+        <circle cx="13" cy="13" fill="#ff2a7a" r="1.5"/>
+      </svg>
+      <span>VANVI <span style="color:var(--color-rose);">♡</span> MOMENTS</span>
+      <span class="brand-tag">REFER &amp; EARN</span>
+    </a>
+
+    <div class="header-actions">
+      <a href="templates.html" class="btn-header-link mobile-hide" title="Browse Templates">Templates</a>
+      <a href="rewards.html" class="btn-header-link mobile-hide" title="My Rewards &amp; Wheel">🎁 Rewards</a>
+      <a href="plans.html" class="btn-header-primary" title="VIP Plans">💎 VIP Plans</a>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs Bar -->
+  <div class="breadcrumb-bar">
+    <a class="vanvi-btn-back" href="javascript:void(0)" onclick="safeGoBack()">
+      <span class="back-arrow">‹</span> <span>Back</span>
+    </a>
+    <div class="breadcrumb-trail">
+      <a href="index.html">Home</a> / <a href="rewards.html">Rewards</a> / <span>Refer &amp; Earn</span>
+    </div>
+  </div>
+
+  <main class="refer-wrapper">
+
+    <!-- Incoming Friend Referral Invitation Banner -->
+    <div class="friend-welcome-card" id="friendWelcomeCard">
+      <div class="friend-welcome-row">
+        <div class="friend-welcome-icon">🎁</div>
+        <div class="friend-welcome-text">
+          <h3>Your Friend Invited You to Vanvi Moments!</h3>
+          <p>You have unlocked a <strong>50 Free Coins Welcome Bonus</strong> + ₹20 discount on your first digital celebration moment.</p>
+          <a href="templates.html" class="friend-claim-btn">Claim Gift &amp; Explore Templates →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Referral Hero Card -->
+    <section class="refer-hero">
+      <div class="refer-kicker">✦ Viral Creator Circle ✦</div>
+      <h1>Share Happiness, <span>Earn Free Moments</span></h1>
+      <p>Give your friends 50 celebration coins to start, and receive 100 coins automatically when they craft their first moment. Free forever, unlimited invites!</p>
+
+      <!-- Referral Sharing Box -->
+      <div class="refer-share-box">
+        <div class="share-box-sub">Your Personal Referral Code:</div>
+        <div class="code-display-group">
+          <span class="code-val" id="displayRefCode">VANVI-LOVE-99</span>
+          <button type="button" class="btn-copy-code" onclick="copyRefCode()">Copy</button>
+        </div>
+
+        <div class="share-channels-grid">
+          <a href="#" class="btn-channel btn-channel-wa" onclick="shareWhatsApp(event)">
+            <span>💬</span> WhatsApp
+          </a>
+          <button type="button" class="btn-channel btn-channel-insta" onclick="copyInstagramStory()">
+            <span>📸</span> Instagram Story
+          </button>
+          <button type="button" class="btn-channel btn-channel-native" onclick="shareNative()">
+            <span>🔗</span> Share Link
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Earnings Calculator -->
+    <section class="calc-card">
+      <div class="calc-head">
+        <h2><span>🧮</span> Referral Earnings Calculator</h2>
+        <span style="font-size:11.5px; font-weight:800; color:var(--color-rose);">10 Coins = ₹1.00 Store Credit</span>
+      </div>
+
+      <div class="calc-slider-wrap">
+        <div class="calc-slider-row">
+          <span>Friends you invite:</span>
+          <span id="sliderValLabel" style="font-size:16px; font-weight:900; color:var(--color-rose);">5 Friends</span>
+        </div>
+        <input type="range" min="1" max="50" value="5" class="calc-slider" id="friendsSlider" oninput="updateCalculator(this.value)">
+      </div>
+
+      <div class="calc-results-grid">
+        <div class="calc-result-tile">
+          <div class="calc-res-num" id="calcCoinsEarned">+500 🪙</div>
+          <div class="calc-res-lbl">Vanvi Coins Earned</div>
+        </div>
+        <div class="calc-result-tile">
+          <div class="calc-res-num" id="calcRupeeValue">₹50.00</div>
+          <div class="calc-res-lbl">Free Template Discount</div>
+        </div>
+        <div class="calc-result-tile">
+          <div class="calc-res-num" id="calcFriendsGifted">250 🪙</div>
+          <div class="calc-res-lbl">Gifted to Friends</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3-Step Journey -->
+    <section class="steps-section">
+      <h2 class="sec-title">How It Works (In 3 Simple Steps)</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-badge">💌</div>
+          <h3>1. Send Your Secret Code</h3>
+          <p>Share your link or code with your bestie, sibling, or family member via WhatsApp or social stories.</p>
+          <span class="step-reward-tag">1-Tap Sharing</span>
+        </div>
+
+        <div class="step-card">
+          <div class="step-badge">🌟</div>
+          <h3>2. Friend Joins Free</h3>
+          <p>Your friend receives 50 free celebration coins immediately in their wallet upon visiting.</p>
+          <span class="step-reward-tag">Friend Gets +50 🪙</span>
+        </div>
+
+        <div class="step-card">
+          <div class="step-badge">👑</div>
+          <h3>3. You Unlock +100 Coins</h3>
+          <p>When they publish their first digital keepsake, you instantly receive 100 celebration coins!</p>
+          <span class="step-reward-tag">You Get +100 🪙</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Referrers Leaderboard -->
+    <section class="leaderboard-card">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;">
+        <h2 style="font-family:var(--font-serif); font-size:20px; font-weight:700; color:var(--text-dark); display:flex; align-items:center; gap:6px;">
+          <span>🏆</span> Monthly Creator Leaderboard
+        </h2>
+        <span style="font-size:11px; font-weight:800; color:var(--color-emerald); background:rgba(5,150,105,0.08); padding:3px 8px; border-radius:99px;">● Live Ranking</span>
+      </div>
+
+      <div class="leaderboard-list">
+        <div class="leader-row">
+          <div class="leader-left">
+            <span class="leader-rank rank-1">🥇</span>
+            <div>
+              <div class="leader-name">Vanvi Creator Club</div>
+              <div style="font-size:11px; color:var(--text-muted);">48 Friends Celebrated</div>
+            </div>
+          </div>
+          <div class="leader-coins">4,800 🪙</div>
+        </div>
+
+        <div class="leader-row">
+          <div class="leader-left">
+            <span class="leader-rank rank-2">🥈</span>
+            <div>
+              <div class="leader-name">Pooja Sharma</div>
+              <div style="font-size:11px; color:var(--text-muted);">32 Friends Celebrated</div>
+            </div>
+          </div>
+          <div class="leader-coins">3,200 🪙</div>
+        </div>
+
+        <div class="leader-row">
+          <div class="leader-left">
+            <span class="leader-rank rank-3">🥉</span>
+            <div>
+              <div class="leader-name">Aman V.</div>
+              <div style="font-size:11px; color:var(--text-muted);">26 Friends Celebrated</div>
+            </div>
+          </div>
+          <div class="leader-coins">2,600 🪙</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Toast -->
+  <div class="refer-toast" id="referToast">Copied to clipboard! ✨</div>
+
+  <!-- Global Bottom Navigation Dock -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" id="bottomNavHome" title="Home">⌂<br/>Home</a>
+    <a href="templates.html" class="nav-btn" id="bottomNavExplore" title="Explore">◌<br/>Explore</a>
+    <a href="builder.html" class="create nav-btn" id="bottomNavCreate" title="Create">＋<br/>Create</a>
+    <a href="ai.html" class="nav-btn" id="bottomNavAi" title="AI">✦<br/>AI</a>
+    <a href="profile.html" class="nav-btn active" id="bottomNavMe" title="Profile">👤<br/>Profile</a>
+  </nav>
+  <script src="js/vanvi-api.js"></script>
+  <script src="js/vanvi-navigation.js"></script>
+
+  <footer>
+    <p>© 2026 Vanvi Moments · Handcrafted with love for every emotion</p>
+    <p style="margin-top: 6px;">
+      <a href="index.html">Home</a> · 
+      <a href="templates.html">Templates</a> · 
+      <a href="rewards.html">Rewards</a> · 
+      <a href="plans.html">VIP Plans</a> · 
+      <a href="dashboard.html">My Moments</a> · 
+      <a href="faq.html">FAQs</a>
+    </p>
+  </footer>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // 1. Referral Code resolution
+      let myCode = localStorage.getItem('vanvi_referral_code');
+      if (!myCode) {
+        myCode = 'VANVI-' + Math.floor(1000 + Math.random() * 9000);
+        localStorage.setItem('vanvi_referral_code', myCode);
+      }
+      const codeEl = document.getElementById('displayRefCode');
+      if (codeEl) codeEl.textContent = myCode;
+
+      // 2. Incoming referral link check (?ref=...)
+      const urlParams = new URLSearchParams(window.location.search);
+      const incomingRef = urlParams.get('ref') || urlParams.get('code');
+      if (incomingRef) {
+        const welcomeCard = document.getElementById('friendWelcomeCard');
+        if (welcomeCard) welcomeCard.style.display = 'block';
+        try {
+          localStorage.setItem('vanvi_applied_referral', incomingRef);
+        } catch(e) {}
+      }
+
+      // 3. Calculator
+      window.updateCalculator = function(friends) {
+        document.getElementById('sliderValLabel').textContent = `${friends} ${friends == 1 ? 'Friend' : 'Friends'}`;
+        const coins = friends * 100;
+        const rupee = (coins / 10).toFixed(2);
+        const gifted = friends * 50;
+        document.getElementById('calcCoinsEarned').textContent = `+${coins} 🪙`;
+        document.getElementById('calcRupeeValue').textContent = `₹${rupee}`;
+        document.getElementById('calcFriendsGifted').textContent = `${gifted} 🪙`;
+      };
+
+      // 4. Share Actions
+      const shareUrl = `${window.location.origin}${window.location.pathname}?ref=${myCode}`;
+
+      window.copyRefCode = function() {
+        copyToClipboard(myCode, 'Referral code copied! ✨');
+      };
+
+      window.shareWhatsApp = function(e) {
+        if (e) e.preventDefault();
+        const msg = encodeURIComponent(`Hey! I create magical digital celebration cards on Vanvi Moments ✨ Use my invite code *${myCode}* to get 50 Free Coins & ₹20 welcome discount: ${shareUrl}`);
+        window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+      };
+
+      window.copyInstagramStory = function() {
+        const text = `Crafting surprise moments on Vanvi Moments ✨ Tap my link or use code ${myCode} for 50 Free Coins: ${shareUrl}`;
+        copyToClipboard(text, 'Instagram caption copied! Paste on your story ✨');
+      };
+
+      window.shareNative = function() {
+        if (navigator.share) {
+          navigator.share({
+            title: 'Vanvi Moments — 50 Free Coins Gift',
+            text: `Join Vanvi Moments with my code ${myCode} and get 50 celebration coins:`,
+            url: shareUrl
+          }).catch(() => {});
+        } else {
+          copyToClipboard(shareUrl, 'Referral invite link copied! ✨');
+        }
+      };
+
+      function copyToClipboard(text, successMsg) {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(() => showToast(successMsg));
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand('copy');
+            showToast(successMsg);
+          } catch(e) {
+            prompt('Copy your link:', text);
+          }
+          document.body.removeChild(ta);
+        }
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById('referToast');
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      }
+
+    })();
+
+    function safeGoBack() {
+      if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.host)) {
+        window.history.back();
+      } else {
+        window.location.href = 'rewards.html';
+      }
+    }
+  </script>
+</body>
+</html>

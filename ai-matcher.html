@@ -1,0 +1,2594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Panda AI Matcher — Intelligent Moment Studio</title>
+  <meta name="description" content="Need a suggestion about anything? Try Panda AI Matcher for better suggestions — understands your occasion, relationship, and vibe to recommend the perfect handcrafted digital experience.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+  <script src="js/vanvi-templates-data.js"></script>
+  <script src="js/vanvi-api.js"></script>
+
+  <style>
+    /* ==========================================================================
+       PANDA AI MATCHER — ULTRA-PREMIUM, SIMPLE & INTELLIGENT SYSTEM
+       Pearl White · Ivory · Soft Pink · Rose · Lavender · Champagne Gold
+       ========================================================================== */
+    :root {
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+
+      /* Premium Palettes */
+      --pearl-white: #fffbfd;
+      --ivory-base: #fdfcf9;
+      --blush-100: #fff5f8;
+      --blush-200: #ffe4ee;
+      --blush-300: #ffd1e1;
+      --rose-primary: #ff2a7a;
+      --rose-deep: #e11d48;
+      --rose-glow: rgba(255, 42, 122, 0.25);
+      --deep-plum: #2c1224;
+      --plum-body: #47203a;
+      --plum-muted: #835c75;
+      --plum-dim: #a8899d;
+      --lavender-soft: #c084fc;
+      --lavender-glow: rgba(192, 132, 252, 0.22);
+      --champagne-gold: #d97706;
+      --gold-light: #fef3c7;
+      --gold-glow: rgba(217, 119, 6, 0.2);
+
+      /* Glass & Borders */
+      --card-glass: rgba(255, 255, 255, 0.92);
+      --card-frosted: rgba(255, 245, 250, 0.78);
+      --border-pink: rgba(255, 120, 175, 0.24);
+      --border-pink-strong: rgba(255, 42, 122, 0.38);
+      --border-gold: rgba(217, 119, 6, 0.3);
+      --border-lavender: rgba(192, 132, 252, 0.3);
+
+      /* Shadows */
+      --shadow-sm: 0 4px 14px rgba(44, 18, 36, 0.04);
+      --shadow-card: 0 14px 34px rgba(255, 60, 130, 0.07), 0 4px 12px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 18px 44px rgba(255, 42, 122, 0.15), 0 6px 16px rgba(0, 0, 0, 0.03);
+
+      /* Gradients */
+      --grad-rose: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #e11d48 100%);
+      --grad-aurora: linear-gradient(135deg, #ff2a7a 0%, #a855f7 50%, #38bdf8 100%);
+      --grad-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #b45309 100%);
+      --grad-pearl: linear-gradient(180deg, #fffbfd 0%, #fff2f7 40%, #fdf5f9 100%);
+    }
+
+    @keyframes pandaFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(2deg); }
+    }
+    .panda-mood-pill {
+      font-size: 11px;
+      font-weight: 750;
+      color: #5c3552;
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.35);
+      border-radius: 99px;
+      padding: 5px 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 6px rgba(44, 18, 36, 0.04);
+      white-space: nowrap;
+    }
+    .panda-mood-pill:hover {
+      background: linear-gradient(135deg, #fff0f5, #ffe4ee);
+      border-color: #ff2a7a;
+      color: #ff2a7a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.2);
+    }
+    .panda-mood-pill:active {
+      transform: scale(0.96);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--pearl-white);
+      background-image: 
+        radial-gradient(ellipse 90% 45% at 50% -4%, rgba(255, 182, 217, 0.38) 0%, transparent 65%),
+        radial-gradient(circle 480px at 10% 25%, rgba(245, 208, 254, 0.28) 0%, transparent 70%),
+        radial-gradient(circle 460px at 90% 45%, rgba(254, 243, 199, 0.3) 0%, transparent 70%),
+        var(--grad-pearl);
+      background-attachment: fixed;
+      color: var(--deep-plum);
+      font-family: var(--font-sans);
+      overflow-x: hidden !important;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 110px;
+    }
+
+    /* Ambient Background Lights (Soft & Non-intrusive) */
+    .ambient-glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(80px);
+      opacity: 0.25;
+      transition: all 1s ease;
+    }
+    .ambient-orb-1 {
+      top: -120px;
+      right: -80px;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, #ffa4cb 0%, #ff2a7a 70%);
+    }
+    .ambient-orb-2 {
+      top: 35%;
+      left: -140px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #e9d5ff 0%, #c084fc 70%);
+    }
+
+    /* Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: 60px;
+      padding: 0 clamp(16px, 4vw, 32px);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-pink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 18px rgba(255, 120, 175, 0.05);
+    }
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: var(--deep-plum);
+      font-weight: 900;
+      font-size: 15px;
+    }
+    .brand-spark {
+      width: 24px;
+      height: 24px;
+      display: block;
+      filter: drop-shadow(0 2px 5px rgba(255, 42, 122, 0.3));
+    }
+    .brand-badge-matcher {
+      font-size: 9px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--rose-primary), var(--lavender-soft));
+      color: #fff;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+    .header-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-header-link {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--plum-muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--border-pink);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-header-link:hover {
+      color: var(--rose-primary);
+      background: #ffffff;
+      border-color: var(--rose-primary);
+    }
+    .btn-header-primary {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 99px;
+      background: var(--grad-rose);
+      box-shadow: 0 3px 12px rgba(255, 42, 122, 0.3);
+      transition: transform 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-header-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .header-nav-actions .btn-header-link {
+        display: none !important;
+      }
+      .btn-header-primary {
+        font-size: 11px;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .app-header {
+        height: 52px;
+        padding: 0 10px;
+        gap: 6px;
+      }
+      .brand-link span:not(.brand-badge-matcher) {
+        font-size: clamp(12.5px, 3.6vw, 14px);
+        white-space: nowrap;
+      }
+      .brand-badge-matcher {
+        display: none !important;
+      }
+      .header-nav-actions {
+        gap: 4px;
+        flex-shrink: 0;
+      }
+      .btn-header-primary {
+        font-size: 10.5px;
+        padding: 5px 10px;
+      }
+    }
+
+    /* Sub Navigation / Breadcrumb */
+    .breadcrumb-bar {
+      max-width: 920px;
+      margin: 12px auto 0;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+    .breadcrumb-trail {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--plum-dim);
+    }
+    .breadcrumb-trail a {
+      color: var(--plum-muted);
+      text-decoration: none;
+    }
+    .breadcrumb-trail a:hover {
+      color: var(--rose-primary);
+    }
+    .breadcrumb-trail span {
+      color: var(--rose-primary);
+    }
+
+    /* ==========================================================================
+       HERO & DIRECT NATURAL PLANNING STUDIO
+       ========================================================================== */
+    .matcher-hero {
+      position: relative;
+      z-index: 10;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 16px 16px;
+      text-align: center;
+    }
+    .hero-sparkle-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 42, 122, 0.08);
+      border: 1px solid rgba(255, 42, 122, 0.22);
+      color: var(--rose-primary);
+      padding: 4px 14px;
+      border-radius: 99px;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      backdrop-filter: blur(8px);
+    }
+    .matcher-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5.5vw, 42px);
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--deep-plum);
+      margin-bottom: 8px;
+      letter-spacing: -0.4px;
+    }
+    .matcher-hero h1 .hero-gradient-span {
+      background: linear-gradient(135deg, #ff2a7a 0%, #c084fc 45%, #d97706 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    .matcher-hero p.hero-subhead {
+      font-size: clamp(13px, 2vw, 15px);
+      color: var(--plum-body);
+      max-width: 540px;
+      margin: 0 auto 16px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    /* Direct Input Studio Container */
+    .studio-container {
+      position: relative;
+      z-index: 20;
+      max-width: 760px;
+      margin: 0 auto 32px;
+      padding: 0 16px;
+    }
+    .studio-card {
+      background: var(--card-glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border-pink);
+      border-radius: 24px;
+      padding: clamp(18px, 3.5vw, 28px);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .studio-card:focus-within {
+      border-color: rgba(255, 42, 122, 0.45);
+      box-shadow: 0 16px 40px rgba(255, 42, 122, 0.12);
+    }
+
+    .studio-prompt-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .prompt-title {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 3.2vw, 24px);
+      font-weight: 700;
+      color: var(--deep-plum);
+    }
+    .prompt-sparkle-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--rose-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .natural-textarea {
+      width: 100%;
+      min-height: 96px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1.5px solid var(--border-pink);
+      background: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 14.5px;
+      color: var(--deep-plum);
+      line-height: 1.55;
+      resize: vertical;
+      outline: none;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease;
+    }
+    .natural-textarea:focus {
+      border-color: var(--rose-primary);
+      box-shadow: 0 0 0 3px rgba(255, 42, 122, 0.12);
+    }
+    .natural-textarea::placeholder {
+      color: #bfa1b3;
+      font-style: italic;
+    }
+
+
+    /* Prompt Header Tools */
+    .prompt-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-magic-ai-write {
+      background: linear-gradient(135deg, #fff0f6, #ffe5f0);
+      border: 1px solid var(--border-pink-strong);
+      color: var(--rose-primary);
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3.5px 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.12);
+    }
+    .btn-magic-ai-write:hover {
+      background: var(--rose-primary);
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.25);
+    }
+    .btn-mode-toggle {
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      border-radius: 99px;
+      padding: 3px 9px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--plum-body);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    /* Auto-Detected Parameter Chips (Requirement 4 & 5) */
+    .detected-container {
+      background: rgba(255, 245, 250, 0.65);
+      border: 1px solid rgba(255, 120, 175, 0.22);
+      border-radius: 18px;
+      padding: 12px 14px;
+      margin-top: 4px;
+    }
+    .detected-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .detected-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--plum-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .detected-hint {
+      font-size: 10.5px;
+      color: var(--plum-dim);
+      font-weight: 600;
+    }
+
+    .detected-chips-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .config-chip {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--deep-plum);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(44, 18, 36, 0.03);
+    }
+    .config-chip:hover {
+      border-color: var(--rose-primary);
+      background: #fffbfe;
+      transform: translateY(-1px);
+    }
+    .config-chip.has-custom {
+      border-color: var(--rose-primary);
+      background: #fff3f8;
+      color: var(--rose-primary);
+      font-weight: 800;
+    }
+    .chip-key {
+      color: var(--plum-dim);
+      font-weight: 600;
+      font-size: 10.5px;
+    }
+    .chip-val {
+      color: var(--deep-plum);
+    }
+    .chip-arrow {
+      font-size: 9px;
+      color: var(--plum-dim);
+      margin-left: 2px;
+    }
+
+    /* Popover Dropdown for Chips */
+    .chip-popover {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      z-index: 100;
+      background: #ffffff;
+      border: 1px solid var(--border-pink-strong);
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(44, 18, 36, 0.15);
+      padding: 6px;
+      min-width: 170px;
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      animation: popIn 0.15s ease-out;
+    }
+    .chip-popover.open {
+      display: flex;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(-4px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .popover-item {
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--deep-plum);
+      background: transparent;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s;
+    }
+    .popover-item:hover {
+      background: #fff0f6;
+      color: var(--rose-primary);
+    }
+    .popover-item.active {
+      background: rgba(255, 42, 122, 0.1);
+      color: var(--rose-primary);
+      font-weight: 800;
+    }
+
+    /* Smart Single Follow-Up (Requirement 6) */
+    .smart-followup-card {
+      margin-top: 14px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 250, 0.95));
+      border: 1.5px dashed var(--rose-primary);
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+    .followup-heading {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--rose-primary);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .followup-question {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--deep-plum);
+      margin-bottom: 10px;
+    }
+    .followup-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .btn-followup-opt {
+      padding: 6px 13px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 700;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      color: var(--deep-plum);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-followup-opt:hover {
+      border-color: var(--rose-primary);
+      background: #fff5f8;
+      color: var(--rose-primary);
+      transform: translateY(-1px);
+    }
+
+    /* Run / Recalibrate Action Button */
+    .studio-action-row {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-suggest-now {
+      flex: 1;
+      height: 46px;
+      border-radius: 14px;
+      border: none;
+      background: var(--grad-rose);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(255, 42, 122, 0.32);
+      transition: all 0.2s ease;
+    }
+    .btn-suggest-now:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(255, 42, 122, 0.42);
+    }
+    .btn-suggest-now:active {
+      transform: translateY(0);
+    }
+
+    /* Fast Status Indicator */
+    .status-bar {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--plum-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 4px;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+    }
+
+    /* ==========================================================================
+       PANDA AI SUGGESTS FOR YOU ✦ (Ultra-Luxury & Smooth Soft Experience)
+       ========================================================================== */
+    html {
+      scroll-behavior: smooth;
+    }
+    .suggest-section {
+      max-width: 860px;
+      margin: 0 auto 40px;
+      padding: 0 16px;
+      position: relative;
+      z-index: 20;
+      scroll-margin-top: 80px;
+    }
+
+    /* Live Panda AI Intelligence Box */
+    .panda-live-concept-card {
+      margin-bottom: 22px;
+      padding: 18px 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255, 245, 250, 0.95) 0%, rgba(255, 255, 255, 0.98) 60%, rgba(254, 240, 248, 0.92) 100%);
+      border: 1.5px solid rgba(255, 42, 122, 0.28);
+      box-shadow: 0 10px 30px rgba(255, 42, 122, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .panda-live-concept-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff2a7a, #a855f7, #38bdf8, #ff2a7a);
+      background-size: 300% 100%;
+      animation: pandaBorderFlow 4s linear infinite;
+    }
+    @keyframes pandaBorderFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+    .panda-concept-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .panda-concept-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .panda-badge-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.5px solid rgba(255, 120, 175, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.15);
+      flex-shrink: 0;
+      animation: pandaFloat 3s ease-in-out infinite;
+    }
+    .panda-concept-titles {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .panda-concept-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .panda-name-title {
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--deep-plum);
+      letter-spacing: -0.2px;
+    }
+    .panda-api-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+      font-weight: 700;
+      border: 1px solid rgba(16, 185, 129, 0.28);
+    }
+    .panda-live-pulse-dot {
+      width: 6.5px;
+      height: 6.5px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulseDot 1.8s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .panda-context-echo {
+      font-size: 0.78rem;
+      color: var(--plum-muted);
+      font-weight: 600;
+    }
+    .panda-concept-meta {
+      font-size: 0.76rem;
+      color: var(--rose-primary);
+      font-weight: 700;
+      background: rgba(255, 42, 122, 0.08);
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+    .panda-concept-body {
+      padding: 2px 2px 4px;
+    }
+    .panda-live-idea-text {
+      font-size: 0.94rem;
+      color: var(--plum-body);
+      line-height: 1.6;
+      margin: 0;
+      transition: opacity 0.2s ease;
+    }
+    .panda-thinking-shimmer {
+      display: inline-block;
+      color: var(--plum-muted);
+      font-style: italic;
+      animation: shimmerText 1.5s ease-in-out infinite;
+    }
+    @keyframes shimmerText {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; color: var(--rose-primary); }
+    }
+    .panda-action-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(255, 120, 175, 0.3);
+    }
+    .panda-suggestion-chip {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--plum-body);
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.35);
+      border-radius: 99px;
+      padding: 4px 12px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .panda-suggestion-chip:hover {
+      border-color: var(--rose-primary);
+      background: #fff0f6;
+      color: var(--rose-primary);
+      transform: translateY(-1px);
+    }
+    .suggest-header-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .suggest-title-block h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 4vw, 30px);
+      font-weight: 700;
+      color: var(--deep-plum);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.2px;
+    }
+    .suggest-title-block p {
+      font-size: 12.5px;
+      color: var(--plum-muted);
+      margin-top: 3px;
+      font-weight: 500;
+    }
+    .suggest-count-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--rose-primary);
+      background: linear-gradient(135deg, rgba(255, 42, 122, 0.1), rgba(192, 132, 252, 0.12));
+      padding: 4px 12px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 42, 122, 0.28);
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.08);
+    }
+
+    /* Quick Format Filter Bar */
+    .matcher-category-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      overflow-x: auto;
+      padding: 4px 2px 14px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 2px;
+    }
+    .matcher-category-bar::-webkit-scrollbar {
+      display: none;
+    }
+    .matcher-cat-pill {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--deep-plum);
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.35);
+      border-radius: 999px;
+      padding: 5.5px 12.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(44, 18, 36, 0.04);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+    .matcher-cat-pill:hover {
+      border-color: var(--rose-primary);
+      color: var(--rose-primary);
+      transform: translateY(-1px);
+    }
+    .matcher-cat-pill.active {
+      background: var(--grad-rose);
+      border-color: transparent;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.3);
+    }
+
+    /* Format Tags (Cards, E-Magazine, 3D Rituals, Bespoke) */
+    .rec-format-badge {
+      font-size: 9.5px;
+      font-weight: 850;
+      letter-spacing: 0.4px;
+      padding: 2.5px 8px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .format-card {
+      background: rgba(255, 42, 122, 0.12);
+      color: #e11d48;
+      border: 1px solid rgba(255, 42, 122, 0.28);
+    }
+    .format-mag {
+      background: linear-gradient(135deg, rgba(217, 119, 6, 0.15), rgba(180, 83, 9, 0.12));
+      color: #b45309;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+    }
+    .format-ritual {
+      background: rgba(168, 85, 247, 0.12);
+      color: #7e22ce;
+      border: 1px solid rgba(168, 85, 247, 0.28);
+    }
+    .format-cinema {
+      background: rgba(14, 165, 233, 0.12);
+      color: #0284c7;
+      border: 1px solid rgba(14, 165, 233, 0.28);
+    }
+    .format-vip {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(225, 29, 72, 0.15));
+      color: #b45309;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    /* Ambient aura behind suggestions */
+    .suggest-cards-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+
+    /* Luxury Frosted Recommendation Card */
+    .compact-rec-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 250, 253, 0.92) 50%, rgba(254, 246, 251, 0.9) 100%);
+      border: 1.2px solid rgba(255, 160, 200, 0.38);
+      border-radius: 20px;
+      padding: 16px 18px;
+      box-shadow: 0 10px 30px rgba(75, 20, 50, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 16px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+      overflow: hidden;
+    }
+    .compact-rec-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--rose-primary);
+      box-shadow: 0 18px 42px rgba(255, 42, 122, 0.14), 0 4px 12px rgba(0, 0, 0, 0.03);
+      background: linear-gradient(135deg, #ffffff 0%, #fff8fc 100%);
+    }
+
+    /* #1 Top Pick Highlight & Luxury Border */
+    .compact-rec-card.rec-top-pick {
+      border: 1.5px solid rgba(255, 75, 145, 0.55);
+      box-shadow: 0 14px 38px rgba(255, 42, 122, 0.12), 0 0 20px rgba(255, 190, 220, 0.3);
+    }
+    .compact-rec-card.rec-top-pick::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--grad-rose);
+    }
+    .rec-top-badge {
+      position: absolute;
+      top: 0;
+      right: 20px;
+      background: linear-gradient(135deg, #ff2a7a, #a855f7);
+      color: #ffffff;
+      font-size: 9.5px;
+      font-weight: 850;
+      letter-spacing: 0.5px;
+      padding: 3px 10px 4px;
+      border-radius: 0 0 10px 10px;
+      text-transform: uppercase;
+      box-shadow: 0 3px 10px rgba(255, 42, 122, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Premium / VIP Tier Card Variant */
+    .compact-rec-card.rec-card-premium {
+      background: linear-gradient(135deg, #ffffff 0%, #fffbf2 50%, #fff7eb 100%);
+      border-color: rgba(217, 119, 6, 0.35);
+    }
+    .compact-rec-card.rec-card-premium:hover {
+      border-color: var(--champagne-gold);
+      box-shadow: 0 18px 42px rgba(217, 119, 6, 0.15), 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Soft Preview Pod with Floating Aura */
+    .rec-preview-pod {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fff2f7 0%, #ffe0ed 100%);
+      border: 1px solid rgba(255, 120, 175, 0.35);
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(255, 60, 130, 0.1);
+      position: relative;
+      transition: transform 0.25s ease;
+    }
+    .compact-rec-card:hover .rec-preview-pod {
+      transform: scale(1.05) rotate(-2deg);
+    }
+    .rec-card-premium .rec-preview-pod {
+      background: linear-gradient(135deg, #fef9c3 0%, #fed7aa 100%);
+      border-color: rgba(217, 119, 6, 0.4);
+    }
+
+    /* Details Area */
+    .rec-details {
+      min-width: 0;
+    }
+    .rec-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+    .rec-name {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--deep-plum);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.2px;
+    }
+    .rec-match-score {
+      font-size: 9.5px;
+      font-weight: 850;
+      padding: 2.5px 8px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, rgba(255, 42, 122, 0.12), rgba(244, 63, 94, 0.08));
+      color: var(--rose-primary);
+      border: 1px solid rgba(255, 42, 122, 0.28);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .rec-badge-free {
+      font-size: 9.5px;
+      font-weight: 850;
+      padding: 2.5px 8px;
+      border-radius: 99px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.28);
+    }
+    .rec-badge-premium {
+      font-size: 9.5px;
+      font-weight: 850;
+      padding: 2.5px 8px;
+      border-radius: 99px;
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+      border: 1px solid rgba(217, 119, 6, 0.32);
+    }
+
+    .rec-why {
+      font-size: 12px;
+      color: var(--plum-body);
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .rec-why strong {
+      color: var(--rose-primary);
+      font-weight: 700;
+    }
+
+    /* Key Feature Highlight Badges */
+    .rec-feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .rec-feature-pill {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--plum-muted);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-pink);
+      padding: 1.5px 7px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    /* Actions */
+    .rec-actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+    .btn-rec-preview {
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 750;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      color: var(--deep-plum);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 6px rgba(44, 18, 36, 0.03);
+    }
+    .btn-rec-preview:hover {
+      border-color: var(--rose-primary);
+      color: var(--rose-primary);
+      background: #fff5f8;
+      transform: translateY(-1px);
+    }
+    .btn-rec-customize {
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 850;
+      background: var(--grad-rose);
+      border: none;
+      color: #ffffff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.3);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-rec-customize:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 8px 20px rgba(255, 42, 122, 0.42);
+    }
+    .btn-rec-customize::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+      transform: rotate(30deg);
+      transition: transform 0.6s ease;
+      pointer-events: none;
+    }
+    .btn-rec-customize:hover::after {
+      transform: rotate(30deg) translate(50%, 50%);
+    }
+
+    .btn-rec-fav {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      color: var(--plum-muted);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(44, 18, 36, 0.03);
+      flex-shrink: 0;
+    }
+    .btn-rec-fav:hover {
+      color: var(--rose-primary);
+      border-color: var(--rose-primary);
+      background: #fff0f6;
+      transform: scale(1.08);
+    }
+    .btn-rec-fav.active {
+      color: var(--rose-primary);
+      border-color: var(--rose-primary);
+      background: #ffe4ee;
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 640px) {
+      .compact-rec-card {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto;
+        gap: 10px;
+        padding: 12px 14px;
+      }
+      .rec-actions {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 1fr 34px;
+        gap: 6px;
+        margin-top: 4px;
+      }
+      .btn-rec-preview, .btn-rec-customize {
+        justify-content: center;
+        padding: 8px 6px;
+        font-size: 11px;
+        letter-spacing: -0.2px;
+      }
+    }
+
+    /* Enhanced Score Badge & Archetype */
+    .rec-score-badge {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 2px;
+      background: linear-gradient(135deg, rgba(255, 42, 122, 0.12), rgba(168, 85, 247, 0.12));
+      border: 1px solid rgba(255, 42, 122, 0.3);
+      padding: 2px 7px;
+      border-radius: 99px;
+    }
+    .rec-score-num {
+      font-size: 10.5px;
+      font-weight: 900;
+      color: var(--rose-primary);
+    }
+    .rec-score-sub {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--plum-muted);
+      text-transform: uppercase;
+    }
+    .rec-archetype-pill {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #7e22ce;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      padding: 1.5px 7px;
+      border-radius: 99px;
+      margin-left: 2px;
+    }
+
+    /* Natural Language Tweak Bar (Requirement 9) */
+    .tweak-bar {
+      margin-top: 18px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--border-pink);
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tweak-label {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--plum-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tweak-chip {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--plum-body);
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      border-radius: 99px;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tweak-chip:hover {
+      border-color: var(--rose-primary);
+      color: var(--rose-primary);
+      background: #fff5f8;
+      transform: translateY(-1px);
+    }
+
+    /* Seamless Marketplace Bridge Banner */
+    .marketplace-bridge-card {
+      margin-top: 24px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 246, 0.85));
+      border: 1.5px solid var(--border-pink-strong);
+      border-radius: 20px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: var(--shadow-card);
+      flex-wrap: wrap;
+    }
+    .bridge-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bridge-icon {
+      font-size: 24px;
+    }
+    .bridge-info h4 {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--deep-plum);
+    }
+    .bridge-info p {
+      font-size: 11.5px;
+      color: var(--plum-muted);
+      margin-top: 2px;
+    }
+    .btn-bridge-explore {
+      padding: 9px 18px;
+      border-radius: 99px;
+      background: #ffffff;
+      border: 1px solid var(--rose-primary);
+      color: var(--rose-primary);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.1);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-bridge-explore:hover {
+      background: var(--rose-primary);
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(255, 42, 122, 0.28);
+    }
+
+    /* Reusable Toast */
+    .toast-pill {
+      position: fixed;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(44, 18, 36, 0.92);
+      backdrop-filter: blur(12px);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      z-index: 300;
+    }
+    .toast-pill.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Ambient Soft Glow -->
+  <div class="ambient-glow-orb ambient-orb-1"></div>
+  <div class="ambient-glow-orb ambient-orb-2"></div>
+
+  <!-- Permanent Brand Header -->
+  <header class="app-header">
+    <a href="index.html" class="brand-link" title="Vanvi Moments">
+      <svg class="brand-spark" fill="none" viewBox="0 0 26 26">
+        <defs>
+          <linearGradient id="navSpark" x1="0%" x2="100%" y1="0%" x2="100%">
+            <stop offset="0%" stop-color="#ff2a7a" />
+            <stop offset="50%" stop-color="#ff7ea5" />
+            <stop offset="100%" stop-color="#d97706" />
+          </linearGradient>
+        </defs>
+        <path d="M13 2 C13 7.8 15.2 10 21 13 C15.2 16 13 18.2 13 24 C13 18.2 10.8 16 5 13 C10.8 10 13 7.8 13 2 Z" fill="url(#navSpark)" />
+        <circle cx="13" cy="13" fill="#ffffff" r="2.8" />
+        <circle cx="13" cy="13" fill="#ff2a7a" r="1.5" />
+      </svg>
+      <span>VANVI <span style="color:var(--rose-primary);">♡</span> MOMENTS</span>
+      <span class="brand-badge-matcher" style="display:inline-flex; align-items:center; gap:4px;">🐼 Panda AI Matcher</span>
+    </a>
+
+    <div class="header-nav-actions">
+      <a class="btn-header-link mobile-hide" href="templates.html" title="Browse All Templates">🎨 Templates</a>
+      <a class="btn-header-link mobile-hide" href="dashboard.html" title="My Saved Moments">👤 My Moments</a>
+      <a class="btn-header-primary" href="builder.html" title="Open Customizer Studio">+ Create</a>
+    </div>
+  </header>
+
+  <!-- Navigation Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <a href="javascript:void(0)" class="vanvi-btn-back" onclick="vanviGoBack('ai.html')" id="btnBackNav" title="Back">
+      <span class="back-arrow">‹</span> <span>Back</span>
+    </a>
+    <div class="breadcrumb-trail">
+      <a href="index.html">Home</a> / <span>🐼 Panda AI Matcher</span>
+    </div>
+  </div>
+
+  <!-- Hero Section (Clean & Immediate) -->
+  <section class="matcher-hero">
+    <div style="width: 68px; height: 68px; margin: 0 auto 12px; border-radius: 50%; background: #ffffff; border: 2px solid rgba(255, 120, 175, 0.45); box-shadow: 0 8px 24px rgba(225, 29, 72, 0.2); display: flex; align-items: center; justify-content: center; animation: pandaFloat 3s ease-in-out infinite;">
+      <svg viewBox="0 0 72 72" style="width: 50px; height: 50px;">
+        <circle cx="16" cy="18" r="10" fill="#1e1e24"/>
+        <circle cx="56" cy="18" r="10" fill="#1e1e24"/>
+        <circle cx="16" cy="18" r="5" fill="#ff78af" opacity="0.85"/>
+        <circle cx="56" cy="18" r="5" fill="#ff78af" opacity="0.85"/>
+        <circle cx="36" cy="38" r="26" fill="#ffffff" stroke="#fbcfe8" stroke-width="1.5"/>
+        <ellipse cx="27" cy="35" rx="5" ry="6.5" fill="#1e1e24"/>
+        <ellipse cx="45" cy="35" rx="5" ry="6.5" fill="#1e1e24"/>
+        <circle cx="28" cy="33.5" r="2" fill="#ffffff"/>
+        <circle cx="46" cy="33.5" r="2" fill="#ffffff"/>
+        <ellipse cx="36" cy="42" rx="4" ry="3" fill="#1e1e24"/>
+        <path d="M 33 46 Q 36 48.5 39 46" fill="none" stroke="#ff78af" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="hero-sparkle-pill">
+      <span>🐼</span> PANDA AI MATCHER <span>✨</span>
+    </div>
+    <h1>Need a suggestion? <br><span class="hero-gradient-span">Panda AI Matcher</span></h1>
+    <p class="hero-subhead">
+      Plain words (Hindi or English) in — instant digital cards, 3D rituals, e-magazines &amp; bespoke keepsakes out!
+    </p>
+  </section>
+
+  <!-- Studio Input Card (Simple, Beautiful, Not A Boring Form) -->
+  <section class="studio-container" id="studioContainer">
+    <div class="studio-card">
+      <div class="studio-prompt-label">
+        <span class="prompt-title">Describe your moment</span>
+        <div class="prompt-tools">
+          <button type="button" class="btn-magic-ai-write" id="btnMagicAiWrite" title="Let Panda AI auto-draft a moment">
+            <span>🪄 Auto-Draft</span>
+          </button>
+          <span class="prompt-sparkle-tag" id="aiLiveTag">🐾 Live AI</span>
+        </div>
+      </div>
+
+      <!-- Quick Starter Mood Pills -->
+      <div class="panda-quick-prompts" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+        <button type="button" class="panda-mood-pill" data-prompt="Romantic midnight birthday surprise with 3D candle blowing and heartfelt note">🎂 Birthday</button>
+        <button type="button" class="panda-mood-pill" data-prompt="First wedding anniversary celebration with our journey chapters and song">💍 Anniversary</button>
+        <button type="button" class="panda-mood-pill" data-prompt="Luxury Vogue style couples e-magazine with photo gallery and interview story">📖 E-Magazine</button>
+        <button type="button" class="panda-mood-pill" data-prompt="Heartfelt romantic love letter with wax seal reveal and soft piano melody">💌 Love Card</button>
+        <button type="button" class="panda-mood-pill" data-prompt="Fun trip photo recap for best friends gang with nostalgic polaroids">👥 Besties</button>
+        <button type="button" class="panda-mood-pill" data-prompt="Gentle sincere apology letter to clear misunderstandings">🕊️ Apology</button>
+        <button type="button" class="panda-mood-pill" data-prompt="24K bespoke commission with custom 3D spatial world and wax seal">💎 24K VIP</button>
+      </div>
+
+      <textarea 
+        id="visionInput" 
+        class="natural-textarea" 
+        rows="3" 
+        placeholder="e.g. I want to surprise my best friend on her birthday, cute and emotional..."></textarea>
+
+      <!-- Auto-Detected Options (Requirement 3, 4, 5) -->
+      <div class="detected-container">
+        <div class="detected-header-row">
+          <span class="detected-title"><span>🐼</span> Auto-Detected by Panda AI</span>
+          <span class="detected-hint">Tap any chip to adjust or keep Auto ✦</span>
+        </div>
+
+        <div class="detected-chips-grid">
+          <!-- Occasion Chip -->
+          <div class="config-chip" id="chipOccasion" data-dimension="occasion">
+            <span class="chip-key">Occasion:</span>
+            <span class="chip-val" id="valOccasion">Auto ✦</span>
+            <span class="chip-arrow">▾</span>
+            <div class="chip-popover" id="popOccasion">
+              <button type="button" class="popover-item active" data-val="auto">Auto ✦ (Let Panda AI decide)</button>
+              <button type="button" class="popover-item" data-val="birthday">🎂 Birthday</button>
+              <button type="button" class="popover-item" data-val="love">❤️ Love &amp; Romance</button>
+              <button type="button" class="popover-item" data-val="anniversary">💍 Anniversary</button>
+              <button type="button" class="popover-item" data-val="friendship">👥 Friendship</button>
+              <button type="button" class="popover-item" data-val="memories">📸 Memories &amp; Recap</button>
+              <button type="button" class="popover-item" data-val="apology">💌 Apology</button>
+              <button type="button" class="popover-item" data-val="celebration">✦ Celebration</button>
+              <button type="button" class="popover-item" data-val="family">🏡 Family</button>
+            </div>
+          </div>
+
+          <!-- Relationship Chip -->
+          <div class="config-chip" id="chipRelation" data-dimension="relation">
+            <span class="chip-key">For:</span>
+            <span class="chip-val" id="valRelation">Auto ✦</span>
+            <span class="chip-arrow">▾</span>
+            <div class="chip-popover" id="popRelation">
+              <button type="button" class="popover-item active" data-val="auto">Auto ✦ (Let Vanvi decide)</button>
+              <button type="button" class="popover-item" data-val="friend">Best Friend</button>
+              <button type="button" class="popover-item" data-val="partner">Partner / GF / BF</button>
+              <button type="button" class="popover-item" data-val="spouse">Spouse / Husband / Wife</button>
+              <button type="button" class="popover-item" data-val="family">Parents / Family</button>
+              <button type="button" class="popover-item" data-val="crush">Crush</button>
+              <button type="button" class="popover-item" data-val="self">Myself</button>
+            </div>
+          </div>
+
+          <!-- Emotion / Vibe Chip -->
+          <div class="config-chip" id="chipEmotion" data-dimension="emotion">
+            <span class="chip-key">Vibe:</span>
+            <span class="chip-val" id="valEmotion">Auto ✦</span>
+            <span class="chip-arrow">▾</span>
+            <div class="chip-popover" id="popEmotion">
+              <button type="button" class="popover-item active" data-val="auto">Auto ✦ (Let Vanvi decide)</button>
+              <button type="button" class="popover-item" data-val="cute">Cute &amp; Sweet</button>
+              <button type="button" class="popover-item" data-val="emotional">Deeply Emotional</button>
+              <button type="button" class="popover-item" data-val="romantic">Romantic &amp; Intimate</button>
+              <button type="button" class="popover-item" data-val="playful">Playful &amp; Funny</button>
+              <button type="button" class="popover-item" data-val="cinematic">Cinematic &amp; Grand</button>
+            </div>
+          </div>
+
+          <!-- Desired Experience Chip -->
+          <div class="config-chip" id="chipExperience" data-dimension="experience">
+            <span class="chip-key">Experience:</span>
+            <span class="chip-val" id="valExperience">Auto ✦</span>
+            <span class="chip-arrow">▾</span>
+            <div class="chip-popover" id="popExperience">
+              <button type="button" class="popover-item active" data-val="auto">Auto ✦ (Let Vanvi decide)</button>
+              <button type="button" class="popover-item" data-val="cake">Interactive Candle Blow Cake</button>
+              <button type="button" class="popover-item" data-val="wax">Wax Sealed Letter</button>
+              <button type="button" class="popover-item" data-val="cinema">Cinematic Photo Reel</button>
+              <button type="button" class="popover-item" data-val="polaroid">Vintage Polaroid Wall</button>
+              <button type="button" class="popover-item" data-val="chapters">Storybook Chapters</button>
+            </div>
+          </div>
+
+          <!-- Visual Style Chip -->
+          <div class="config-chip" id="chipStyle" data-dimension="style">
+            <span class="chip-key">Style:</span>
+            <span class="chip-val" id="valStyle">Auto ✦</span>
+            <span class="chip-arrow">▾</span>
+            <div class="chip-popover" id="popStyle">
+              <button type="button" class="popover-item active" data-val="auto">Auto ✦ (Let Vanvi decide)</button>
+              <button type="button" class="popover-item" data-val="pastel">Soft Pastel Bloom</button>
+              <button type="button" class="popover-item" data-val="velvet">Velvet Candlelight</button>
+              <button type="button" class="popover-item" data-val="vintage">Warm Amber Nostalgia</button>
+              <button type="button" class="popover-item" data-val="gold">Royal Champagne Gold</button>
+              <button type="button" class="popover-item" data-val="pearl">Minimal Pearl</button>
+            </div>
+          </div>
+
+          <!-- Tier Chip -->
+          <div class="config-chip" id="chipTier" data-dimension="tier">
+            <span class="chip-key">Tier:</span>
+            <span class="chip-val" id="valTier">Auto ✦</span>
+            <span class="chip-arrow">▾</span>
+            <div class="chip-popover" id="popTier">
+              <button type="button" class="popover-item active" data-val="auto">Auto ✦ (Best Suitable)</button>
+              <button type="button" class="popover-item" data-val="free">100% Free Moments</button>
+              <button type="button" class="popover-item" data-val="premium">Premium Moments</button>
+              <button type="button" class="popover-item" data-val="vip">Ultra VIP Keepsake</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Smart Single Follow-Up -->
+      <div class="smart-followup-card" id="smartFollowupCard">
+        <div class="followup-heading">
+          <span>✦</span> Who is this special moment for?
+        </div>
+        <div class="followup-options" id="followupOptions">
+          <button type="button" class="btn-followup-opt" data-fill="partner">💕 Partner</button>
+          <button type="button" class="btn-followup-opt" data-fill="friend">👯 Bestie</button>
+          <button type="button" class="btn-followup-opt" data-fill="family">🏡 Family</button>
+          <button type="button" class="btn-followup-opt" data-fill="special">🌟 Crush</button>
+          <button type="button" class="btn-followup-opt" data-fill="auto">✦ Auto</button>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="studio-action-row">
+        <button type="button" class="btn-suggest-now" id="btnRecalculate">
+          <span>✦ Match Moments</span>
+        </button>
+        <div class="status-bar">
+          <span class="status-dot"></span>
+          <span id="statusText">🐼 Ready 🐾</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Panda AI Suggests For You ✦ Section -->
+  <section class="suggest-section" id="suggestSection">
+    <div class="suggest-header-row">
+      <div class="suggest-title-block">
+        <h2><span>Panda AI suggests for you</span> <span style="color:var(--rose-primary);">🐾</span></h2>
+        <p id="suggestSubtitle">Bespoke celebration templates handpicked for your story</p>
+      </div>
+      <span class="suggest-count-tag" id="suggestCountTag">4 Recommendations</span>
+    </div>
+
+    <!-- Quick Format Filter Pills (Cards, E-Magazine, 3D Rituals, etc.) -->
+    <div class="matcher-category-bar" id="matcherCatBar">
+      <button type="button" class="matcher-cat-pill active" data-filter="all">✦ All Matches</button>
+      <button type="button" class="matcher-cat-pill" data-filter="card">💌 Digital Cards</button>
+      <button type="button" class="matcher-cat-pill" data-filter="magazine">📖 E-Magazine</button>
+      <button type="button" class="matcher-cat-pill" data-filter="ritual">🎂 3D Rituals</button>
+      <button type="button" class="matcher-cat-pill" data-filter="free">🎁 100% Free</button>
+      <button type="button" class="matcher-cat-pill" data-filter="vip">💎 24K VIP</button>
+    </div>
+
+    <!-- Direct Matched Template Cards (No fluff, directly to moments) -->
+    <div class="suggest-cards-col" id="suggestCardsCol">
+      <!-- Injected by JavaScript -->
+    </div>
+
+    <!-- Natural Tweak Bar (Requirement 9) -->
+    <div class="tweak-bar">
+      <span class="tweak-label">Say it naturally to tweak:</span>
+      <button type="button" class="tweak-chip" data-tweak="emotional">✨ Make it more emotional</button>
+      <button type="button" class="tweak-chip" data-tweak="free">🎁 Show 100% free only</button>
+      <button type="button" class="tweak-chip" data-tweak="cinematic">🎬 More cinematic photo reel</button>
+      <button type="button" class="tweak-chip" data-tweak="candle">🕯️ Interactive candle / wax reveal</button>
+      <button type="button" class="tweak-chip" data-tweak="vip">👑 Show VIP luxury options</button>
+    </div>
+
+    <!-- Connected Marketplace Bridge -->
+    <div class="marketplace-bridge-card" id="marketplaceBridge">
+      <div class="bridge-left">
+        <span class="bridge-icon">🎨</span>
+        <div class="bridge-info">
+          <h4 id="bridgeTitle">Explore more moments in Marketplace</h4>
+          <p id="bridgeDesc">Browse all handcrafted Vanvi celebration templates with your detected context pre-applied.</p>
+        </div>
+      </div>
+      <a href="templates.html" class="btn-bridge-explore" id="btnBridgeExplore">
+        <span>Browse Marketplace →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Reusable Toast Pill -->
+  <div class="toast-pill" id="toastPill">
+    <span id="toastIcon">✨</span>
+    <span id="toastMsg">Saved to favorites</span>
+  </div>
+
+
+  <!-- ==========================================================================
+       PANDA AI MATCHER INTELLIGENCE SCRIPT
+       ========================================================================== -->
+  <script>
+    (function() {
+      'use strict';
+
+      // Elements
+      const visionInput = document.getElementById('visionInput');
+      const btnRecalculate = document.getElementById('btnRecalculate');
+      const statusText = document.getElementById('statusText');
+      const suggestCardsCol = document.getElementById('suggestCardsCol');
+      const suggestSubtitle = document.getElementById('suggestSubtitle');
+      const suggestCountTag = document.getElementById('suggestCountTag');
+      const smartFollowupCard = document.getElementById('smartFollowupCard');
+      const followupOptions = document.getElementById('followupOptions');
+      const tweakChips = document.querySelectorAll('.tweak-chip');
+      const btnBridgeExplore = document.getElementById('btnBridgeExplore');
+      const bridgeTitle = document.getElementById('bridgeTitle');
+
+      // Toast
+      const toastPill = document.getElementById('toastPill');
+      const toastMsg = document.getElementById('toastMsg');
+
+      // Template Registry
+      const allTemplates = (window.VanviTemplatesData && window.VanviTemplatesData.templates) ? window.VanviTemplatesData.templates : [];
+
+      // Current Internal Understanding State
+      let aiState = {
+        queryText: '',
+        occasion: 'auto',       // auto | birthday | love | anniversary | friendship | memories | apology | celebration | family
+        relation: 'auto',       // auto | friend | partner | spouse | family | crush | self
+        emotion: 'auto',        // auto | cute | emotional | romantic | playful | cinematic
+        experience: 'auto',     // auto | cake | wax | cinema | polaroid | chapters
+        style: 'auto',          // auto | pastel | velvet | vintage | gold | pearl
+        tier: 'auto',           // auto | free | premium | vip
+        detectedOccasion: 'birthday',
+        detectedRelation: 'friend',
+        detectedEmotion: 'cute',
+        detectedExperience: 'cake',
+        detectedStyle: 'pastel',
+        detectedTier: 'free',
+        missingCritical: false
+      };
+
+      // 1. Natural Language Intent Analyzer (NLP Engine)
+      function analyzeIntent(text, shouldScroll = false) {
+        const q = (text || '').toLowerCase().trim();
+        aiState.queryText = text;
+
+        let detectedOccasion = 'auto';
+        let detectedRelation = 'auto';
+        let detectedEmotion = 'auto';
+        let detectedExperience = 'auto';
+        let detectedStyle = 'auto';
+        let detectedTier = 'auto';
+
+        // A. Occasion Detection
+        if (/birthday|bday|b'day|cake|candle|born|janamdin/.test(q)) {
+          detectedOccasion = 'birthday';
+        } else if (/anniversary|shaadi|wedding|years together|milestone/.test(q)) {
+          detectedOccasion = 'anniversary';
+        } else if (/proposal|propose|marry|fiance/.test(q)) {
+          detectedOccasion = 'love';
+        } else if (/girlfriend|boyfriend|gf|bf|soulmate|crush|romantic|love|valentine|date/.test(q)) {
+          detectedOccasion = 'love';
+        } else if (/best friend|bestie|bff|friend|dost|yaar|roommate|gang/.test(q)) {
+          detectedOccasion = 'friendship';
+        } else if (/sorry|apolog|forgive|regret|miss you/.test(q)) {
+          detectedOccasion = 'apology';
+        } else if (/trip|vacation|photo|pictures|polaroid|memories|nostalgia|recap|dump|travel|goa/.test(q)) {
+          detectedOccasion = 'memories';
+        } else if (/mom|dad|mother|father|parents|maa|papa|brother|sister|bhai/.test(q)) {
+          detectedOccasion = 'family';
+        } else if (/celebrat|party|victory|graduation|promotion|new job/.test(q)) {
+          detectedOccasion = 'celebration';
+        }
+
+        // B. Relationship Detection
+        if (/best friend|bestie|bff|friend|dost|yaar/.test(q)) {
+          detectedRelation = 'friend';
+        } else if (/girlfriend|boyfriend|gf|bf|crush|date|lover/.test(q)) {
+          detectedRelation = 'partner';
+        } else if (/wife|husband|spouse/.test(q)) {
+          detectedRelation = 'spouse';
+        } else if (/mom|dad|mother|father|parents|maa|papa|brother|sister|family/.test(q)) {
+          detectedRelation = 'family';
+        } else if (/myself|personal|for me/.test(q)) {
+          detectedRelation = 'self';
+        }
+
+        // C. Emotion Detection
+        if (/cute|sweet|soft|adorable|kawaii|blush/.test(q)) {
+          detectedEmotion = 'cute';
+        } else if (/emotional|touching|heartfelt|crying|tearful|deep|poetic|meaningful/.test(q)) {
+          detectedEmotion = 'emotional';
+        } else if (/romantic|intimate|candlelight|passion/.test(q)) {
+          detectedEmotion = 'romantic';
+        } else if (/funny|roast|banter|laugh|meme|joke|crazy|chaos/.test(q)) {
+          detectedEmotion = 'playful';
+        } else if (/cinematic|grand|movie|luxury|epic|spectacular|royal/.test(q)) {
+          detectedEmotion = 'cinematic';
+        }
+
+        // D. Experience Detection
+        if (/cake|candle|blow|firework/.test(q)) {
+          detectedExperience = 'cake';
+        } else if (/letter|wax|seal|scroll|secret words/.test(q)) {
+          detectedExperience = 'wax';
+        } else if (/video|reel|cinema|movie|trailer/.test(q)) {
+          detectedExperience = 'cinema';
+        } else if (/polaroid|corkboard|snapshots|photo dump/.test(q)) {
+          detectedExperience = 'polaroid';
+        } else if (/chapter|timeline|journey|story/.test(q)) {
+          detectedExperience = 'chapters';
+        }
+
+        // E. Visual Style
+        if (/pastel|floral|flower|bloom|blush|soft/.test(q)) {
+          detectedStyle = 'pastel';
+        } else if (/velvet|candle|night|dark|warm romance/.test(q)) {
+          detectedStyle = 'velvet';
+        } else if (/amber|vintage|retro|nostalgic|cork/.test(q)) {
+          detectedStyle = 'vintage';
+        } else if (/gold|luxury|royal|champagne|vip/.test(q)) {
+          detectedStyle = 'gold';
+        }
+
+        // F. Tier Preference
+        if (/free|₹0|zero cost|budget/.test(q)) {
+          detectedTier = 'free';
+        } else if (/vip|luxury|4k|ultra/.test(q)) {
+          detectedTier = 'vip';
+        } else if (/premium|pro/.test(q)) {
+          detectedTier = 'premium';
+        }
+
+        // Fallbacks for detected defaults
+        aiState.detectedOccasion = (detectedOccasion !== 'auto') ? detectedOccasion : 'birthday';
+        aiState.detectedRelation = (detectedRelation !== 'auto') ? detectedRelation : (aiState.detectedOccasion === 'love' ? 'partner' : 'friend');
+        aiState.detectedEmotion = (detectedEmotion !== 'auto') ? detectedEmotion : (aiState.detectedOccasion === 'love' ? 'romantic' : 'cute');
+        aiState.detectedExperience = (detectedExperience !== 'auto') ? detectedExperience : (aiState.detectedOccasion === 'birthday' ? 'cake' : 'wax');
+        aiState.detectedStyle = (detectedStyle !== 'auto') ? detectedStyle : (aiState.detectedOccasion === 'love' ? 'velvet' : 'pastel');
+        aiState.detectedTier = (detectedTier !== 'auto') ? detectedTier : 'free';
+
+        // Check if information is genuinely missing:
+        if (q.length > 2 && q.split(/\s+/).length <= 2 && detectedOccasion === 'auto' && detectedRelation === 'auto') {
+          aiState.missingCritical = true;
+        } else {
+          aiState.missingCritical = false;
+        }
+
+        updateChipVisuals();
+        renderRecommendations();
+
+        const effOccasion = aiState.occasion !== 'auto' ? aiState.occasion : aiState.detectedOccasion;
+        const effRelation = aiState.relation !== 'auto' ? aiState.relation : aiState.detectedRelation;
+        const effEmotion = aiState.emotion !== 'auto' ? aiState.emotion : aiState.detectedEmotion;
+
+        updateLiveAiCard(text, effOccasion, effRelation, effEmotion);
+        fetchLivePandaAiConcept(text, effOccasion, effRelation, effEmotion);
+
+        if (shouldScroll) {
+          scrollToSuggestions(140);
+        }
+      }
+
+      // 2. Chip Visual State & Popover Sync
+      function updateChipVisuals() {
+        const labels = {
+          occasion: {
+            auto: `Auto ✦ (${capitalize(aiState.detectedOccasion)})`,
+            birthday: '🎂 Birthday',
+            love: '❤️ Love & Romance',
+            anniversary: '💍 Anniversary',
+            friendship: '👥 Friendship',
+            memories: '📸 Memories',
+            apology: '💌 Apology',
+            celebration: '✦ Celebration',
+            family: '🏡 Family'
+          },
+          relation: {
+            auto: `Auto ✦ (${capitalize(aiState.detectedRelation)})`,
+            friend: 'Best Friend',
+            partner: 'Romantic Partner',
+            spouse: 'Spouse',
+            family: 'Family / Parents',
+            crush: 'Crush',
+            self: 'Myself'
+          },
+          emotion: {
+            auto: `Auto ✦ (${capitalize(aiState.detectedEmotion)})`,
+            cute: 'Cute & Sweet',
+            emotional: 'Deeply Emotional',
+            romantic: 'Romantic',
+            playful: 'Playful',
+            cinematic: 'Cinematic'
+          },
+          experience: {
+            auto: `Auto ✦ (${capitalize(aiState.detectedExperience)})`,
+            cake: 'Candle Blow Cake',
+            wax: 'Wax Sealed Letter',
+            cinema: 'Cinema Reel',
+            polaroid: 'Polaroid Wall',
+            chapters: 'Storybook'
+          },
+          style: {
+            auto: `Auto ✦ (${capitalize(aiState.detectedStyle)})`,
+            pastel: 'Pastel Bloom',
+            velvet: 'Velvet Candle',
+            vintage: 'Warm Nostalgia',
+            gold: 'Royal Gold',
+            pearl: 'Minimal Pearl'
+          },
+          tier: {
+            auto: `Auto ✦ (Best Fit)`,
+            free: '100% Free',
+            premium: 'Premium',
+            vip: 'Ultra VIP'
+          }
+        };
+
+        const chips = ['occasion', 'relation', 'emotion', 'experience', 'style', 'tier'];
+        chips.forEach(key => {
+          const val = aiState[key];
+          const valEl = document.getElementById(`val${capitalize(key)}`);
+          const chipEl = document.getElementById(`chip${capitalize(key)}`);
+          if (valEl && chipEl) {
+            valEl.textContent = labels[key][val] || val;
+            chipEl.classList.toggle('has-custom', val !== 'auto');
+          }
+        });
+
+        // Show/hide single follow-up card
+        if (smartFollowupCard) {
+          smartFollowupCard.style.display = aiState.missingCritical ? 'block' : 'none';
+        }
+      }
+
+      // 3. Popover Open/Close Logic
+      document.querySelectorAll('.config-chip').forEach(chip => {
+        chip.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const popover = this.querySelector('.chip-popover');
+          const isOpen = popover.classList.contains('open');
+          closeAllPopovers();
+          if (!isOpen) {
+            popover.classList.add('open');
+          }
+        });
+      });
+
+      document.querySelectorAll('.popover-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const chip = this.closest('.config-chip');
+          const dim = chip.dataset.dimension;
+          const val = this.dataset.val;
+
+          // Set state
+          aiState[dim] = val;
+
+          // Update active popover item
+          chip.querySelectorAll('.popover-item').forEach(p => p.classList.remove('active'));
+          this.classList.add('active');
+
+          closeAllPopovers();
+          updateChipVisuals();
+          renderRecommendations();
+          const effOccasion = aiState.occasion !== 'auto' ? aiState.occasion : aiState.detectedOccasion;
+          const effRelation = aiState.relation !== 'auto' ? aiState.relation : aiState.detectedRelation;
+          const effEmotion = aiState.emotion !== 'auto' ? aiState.emotion : aiState.detectedEmotion;
+          fetchLivePandaAiConcept(visionInput ? visionInput.value : '', effOccasion, effRelation, effEmotion);
+          scrollToSuggestions(120);
+
+          showToast(`Set to ${this.textContent.trim()} ✨`);
+        });
+      });
+
+      function closeAllPopovers() {
+        document.querySelectorAll('.chip-popover').forEach(p => p.classList.remove('open'));
+      }
+      document.addEventListener('click', closeAllPopovers);
+
+      // 4. Smart Single Follow-Up Handler
+      if (followupOptions) {
+        followupOptions.querySelectorAll('.btn-followup-opt').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const fill = this.dataset.fill;
+            aiState.relation = fill;
+            aiState.missingCritical = false;
+            updateChipVisuals();
+            renderRecommendations();
+            const effOccasion = aiState.occasion !== 'auto' ? aiState.occasion : aiState.detectedOccasion;
+            const effRelation = aiState.relation !== 'auto' ? aiState.relation : aiState.detectedRelation;
+            const effEmotion = aiState.emotion !== 'auto' ? aiState.emotion : aiState.detectedEmotion;
+            fetchLivePandaAiConcept(visionInput ? visionInput.value : '', effOccasion, effRelation, effEmotion);
+            scrollToSuggestions(120);
+            showToast(`Understood: for ${this.textContent.trim()} ✦`);
+          });
+        });
+      }
+
+      // 5. Intelligent Catalog Recommendation Engine
+      function renderRecommendations() {
+        const effectiveOccasion = (aiState.occasion !== 'auto') ? aiState.occasion : aiState.detectedOccasion;
+        const effectiveRelation = (aiState.relation !== 'auto') ? aiState.relation : aiState.detectedRelation;
+        const effectiveEmotion = (aiState.emotion !== 'auto') ? aiState.emotion : aiState.detectedEmotion;
+        const effectiveExperience = (aiState.experience !== 'auto') ? aiState.experience : aiState.detectedExperience;
+        const effectiveTier = (aiState.tier !== 'auto') ? aiState.tier : aiState.detectedTier;
+
+        // Score all templates
+        const scored = allTemplates.map(t => {
+          let score = 50;
+          const catSlug = (t.categorySlug || '').toLowerCase();
+          const tags = Array.isArray(t.tags) ? t.tags.map(x => String(x).toLowerCase()) : [];
+          const name = t.name.toLowerCase();
+          const desc = (t.description || '').toLowerCase();
+
+          // Occasion match
+          if (catSlug === effectiveOccasion || (t.category || '').toLowerCase().includes(effectiveOccasion)) {
+            score += 35;
+          }
+
+          // Relation match
+          if (effectiveRelation === 'partner' || effectiveRelation === 'spouse') {
+            if (catSlug === 'love' || catSlug === 'anniversary' || tags.includes('romantic')) score += 20;
+          } else if (effectiveRelation === 'friend') {
+            if (catSlug === 'friendship' || catSlug === 'birthday' || tags.includes('cute')) score += 20;
+          } else if (effectiveRelation === 'family') {
+            if (catSlug === 'family' || tags.includes('tribute') || tags.includes('nostalgia')) score += 22;
+          }
+
+          // Emotion match
+          if (effectiveEmotion === 'cute' && (tags.includes('cute') || tags.includes('soft') || tags.includes('floral'))) score += 16;
+          if (effectiveEmotion === 'emotional' && (tags.includes('emotional') || tags.includes('letter'))) score += 18;
+          if (effectiveEmotion === 'romantic' && (tags.includes('romantic') || catSlug === 'love')) score += 18;
+          if (effectiveEmotion === 'playful' && (tags.includes('fun') || tags.includes('funny') || tags.includes('banter'))) score += 20;
+          if (effectiveEmotion === 'cinematic' && (tags.includes('cinema') || name.includes('cinema') || t.price > 0)) score += 20;
+
+          // Experience match
+          if (effectiveExperience === 'cake' && name.includes('cake')) score += 25;
+          if (effectiveExperience === 'wax' && (tags.includes('wax') || name.includes('wax') || name.includes('letter'))) score += 25;
+          if (effectiveExperience === 'cinema' && (tags.includes('cinema') || name.includes('cinema') || name.includes('reel'))) score += 25;
+          if (effectiveExperience === 'polaroid' && name.includes('polaroid')) score += 25;
+          if (effectiveExperience === 'chapters' && (tags.includes('story') || name.includes('timeline'))) score += 22;
+
+          // Tier filter / boost
+          if (effectiveTier === 'free' && t.isFree) score += 20;
+          if (effectiveTier === 'free' && !t.isFree) score -= 30;
+          if (effectiveTier === 'premium' && !t.isFree) score += 20;
+          if (effectiveTier === 'vip' && t.price >= 199) score += 25;
+
+          // Free template fairness (always keep at least one free in top recommendations)
+          if (t.isFree) score += 8;
+
+          // Dynamic Reason Generation from actual template metadata
+          let reason = t.description 
+            ? (t.description.length > 105 ? t.description.slice(0, 105) + '...' : t.description)
+            : `${t.name} experience with interactive reveals and custom soundtrack.`;
+
+          return { template: t, score, reason };
+        });
+
+        // Sort descending
+        scored.sort((a, b) => b.score - a.score);
+
+        // Deduplicate and pick top 4
+        const top = [];
+        const seen = new Set();
+        for (const item of scored) {
+          if (!seen.has(item.template.id)) {
+            seen.add(item.template.id);
+            top.push(item);
+            if (top.length >= 4) break;
+          }
+        }
+
+        renderCompactCards(top, effectiveOccasion);
+      }
+
+      // 6. Render Compact Recommendation Cards (Ultra-Luxury & Smooth Soft Experience)
+      const archetypesMap = {
+        birthday: ['🎂 Midnight Cake Ritual', '🎉 Joyous Milestone', '✨ Nostalgic Tribute', '🧁 Sweet Keepsake'],
+        love: ['💖 Deep Romance Keepsake', '💌 Wax-Sealed Secret', '👑 Proposal Milestone', '✨ Intimate Melody'],
+        anniversary: ['💍 Golden Chapter Milestone', '🥂 Intimate Retrospective', '💎 Forever Keepsake'],
+        memories: ['📸 Vintage Polaroid Scrapbook', '🏖️ Vacation Memory Dump', '🎞️ Nostalgia Reel'],
+        apology: ['🕊️ Gentle Reconciliation', '🌸 Sincere Heartfelt Letter', '💌 Forgiveness Note']
+      };
+
+      function renderCompactCards(items, occasion) {
+        if (!suggestCardsCol) return;
+        suggestCardsCol.innerHTML = '';
+
+        if (suggestSubtitle) {
+          suggestSubtitle.textContent = `Tailored for ${capitalize(occasion)} surprise · ${capitalize(aiState.detectedRelation || 'special someone')}`;
+        }
+        if (suggestCountTag) {
+          suggestCountTag.textContent = `${items.length} Curated Picks`;
+        }
+
+        const matchScores = [99.4, 96.8, 93.2, 89.5];
+        const archList = archetypesMap[occasion] || archetypesMap.birthday;
+
+        window._currentTopItems = items;
+        window._currentOccasion = occasion;
+
+        items.forEach((item, index) => {
+          const t = item.template;
+          const isTopPick = (index === 0);
+          const isPrem = !t.isFree;
+          const isVip = Number(t.price || 0) > 200;
+          const matchPercent = matchScores[index] || 88;
+          const archetype = archList[index % archList.length];
+
+          // Determine specific format badge
+          const nameLower = (t.name || '').toLowerCase();
+          const tagsLower = Array.isArray(t.tags) ? t.tags.map(x => String(x).toLowerCase()) : [];
+          const typeLower = (t.type || '').toLowerCase();
+
+          let formatBadge = '<span class="rec-format-badge format-card">💌 Card</span>';
+          if (nameLower.includes('magazine') || tagsLower.includes('magazine') || typeLower.includes('magazine') || (t.id && t.id.includes('magazine'))) {
+            formatBadge = '<span class="rec-format-badge format-mag">📖 E-Magazine</span>';
+          } else if (nameLower.includes('cake') || nameLower.includes('candle') || tagsLower.includes('3d candle')) {
+            formatBadge = '<span class="rec-format-badge format-ritual">🎂 3D Ritual</span>';
+          } else if (nameLower.includes('cinema') || typeLower.includes('reel')) {
+            formatBadge = '<span class="rec-format-badge format-cinema">🎬 Cinema Reel</span>';
+          } else if (isVip) {
+            formatBadge = '<span class="rec-format-badge format-vip">👑 24K VIP</span>';
+          } else if (t.isFree) {
+            formatBadge = '<span class="rec-format-badge format-card">💌 Digital Card</span>';
+          }
+
+          const badgeHtml = t.isFree 
+            ? `<span class="rec-badge-free">🎁 Free</span>`
+            : `<span class="rec-badge-premium">${isVip ? '👑 VIP' : '✨'} ₹${t.price}</span>`;
+
+          const matchScoreHtml = `
+            <div class="rec-score-badge" title="AI Resonance Score">
+              <span class="rec-score-num">${matchPercent}%</span>
+              <span class="rec-score-sub">Match</span>
+            </div>
+            ${formatBadge}
+            <span class="rec-archetype-pill">${escapeHtml(archetype)}</span>
+          `;
+
+          // Generate dynamic key feature pills (compact)
+          const features = [];
+          if (t.isFree) features.push('<span>🎁 Instant Free</span>');
+          if (nameLower.includes('cake') || t.categorySlug === 'birthday') features.push('<span>🎂 3D Cake Blow</span>');
+          if (tagsLower.includes('wax')) features.push('<span>💌 Wax Seal</span>');
+          if (tagsLower.includes('music') || tagsLower.includes('soundtrack')) features.push('<span>🎵 Soundtrack</span>');
+          features.push('<span>📲 WhatsApp Share</span>');
+
+          const card = document.createElement('article');
+          card.className = `compact-rec-card ${isTopPick ? 'rec-top-pick' : ''} ${isPrem ? 'rec-card-premium' : ''}`;
+          card.style.cursor = 'pointer';
+
+          card.innerHTML = `
+            ${isTopPick ? '<span class="rec-top-badge">👑 #1 Pick</span>' : ''}
+            <a href="builder.html?template=${encodeURIComponent(t.id)}" class="rec-preview-pod" title="Preview ${escapeHtml(t.name)}">
+              <span>${t.icon || '🌸'}</span>
+            </a>
+
+            <div class="rec-details">
+              <div class="rec-title-row">
+                <a href="builder.html?template=${encodeURIComponent(t.id)}" class="rec-name" style="text-decoration:none; color:inherit;" title="Preview ${escapeHtml(t.name)}">${escapeHtml(t.name)}</a>
+                ${matchScoreHtml}
+                ${badgeHtml}
+              </div>
+              <p class="rec-why">${escapeHtml(item.reason)}</p>
+              <div class="rec-feature-tags">
+                ${features.slice(0, 3).map(f => `<span class="rec-feature-pill">${f}</span>`).join('')}
+              </div>
+            </div>
+
+            <div class="rec-actions">
+              <a href="preview.html?template=${encodeURIComponent(t.id)}" class="btn-rec-preview" title="Instant Preview">
+                <span>👁️</span> Preview
+              </a>
+              <a href="builder.html?template=${encodeURIComponent(t.id)}&occasion=${encodeURIComponent(t.category || occasion)}" class="btn-rec-customize" title="Create in Studio">
+                <span>✨</span> Create
+              </a>
+              <button type="button" class="btn-rec-fav" title="Bookmark" onclick="event.stopPropagation(); toggleFav(this, '${encodeURIComponent(t.id)}')">
+                🤍
+              </button>
+            </div>
+          `;
+
+          // Clicking anywhere on card opens the template detail unless clicking Customize or Fav
+          card.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-rec-customize') || e.target.closest('.btn-rec-fav') || e.target.closest('.btn-rec-preview') || e.target.closest('a')) {
+              return;
+            }
+            window.location.href = `builder.html?template=${encodeURIComponent(t.id)}`;
+          });
+          suggestCardsCol.appendChild(card);
+        });
+
+        // Update Marketplace Bridge link and text
+        if (btnBridgeExplore) {
+          btnBridgeExplore.href = `templates.html?from=ai&occasion=${encodeURIComponent(occasion)}`;
+        }
+        // Format filter pill events
+        const catBar = document.getElementById('matcherCatBar');
+        if (catBar && !catBar.dataset.bound) {
+          catBar.dataset.bound = 'true';
+          catBar.querySelectorAll('.matcher-cat-pill').forEach(btn => {
+            btn.addEventListener('click', function() {
+              catBar.querySelectorAll('.matcher-cat-pill').forEach(b => b.classList.remove('active'));
+              this.classList.add('active');
+              const filter = this.getAttribute('data-filter') || 'all';
+              applyFormatFilter(filter);
+            });
+          });
+        }
+
+        saveMatcherContext(occasion);
+      }
+
+      function applyFormatFilter(filter) {
+        if (!window._currentTopItems || !window._currentTopItems.length) return;
+        const effectiveOccasion = (aiState.occasion !== 'auto') ? aiState.occasion : aiState.detectedOccasion;
+        if (filter === 'all') {
+          renderRecommendations();
+          return;
+        }
+
+        const filtered = allTemplates.filter(t => {
+          const nameLower = (t.name || '').toLowerCase();
+          const tagsLower = Array.isArray(t.tags) ? t.tags.map(x => String(x).toLowerCase()) : [];
+          const typeLower = (t.type || '').toLowerCase();
+
+          if (filter === 'card') {
+            return t.categorySlug === 'cards' || typeLower.includes('card') || tagsLower.includes('letter') || nameLower.includes('card') || nameLower.includes('wish');
+          }
+          if (filter === 'magazine') {
+            return nameLower.includes('magazine') || tagsLower.includes('magazine') || typeLower.includes('magazine') || t.id.includes('magazine') || nameLower.includes('polaroid') || nameLower.includes('retro') || nameLower.includes('cinema');
+          }
+          if (filter === 'ritual') {
+            return nameLower.includes('candle') || nameLower.includes('cake') || tagsLower.includes('3d candle') || tagsLower.includes('ritual');
+          }
+          if (filter === 'free') {
+            return t.isFree === true;
+          }
+          if (filter === 'vip') {
+            return Number(t.price || 0) >= 199;
+          }
+          return true;
+        }).map(t => ({
+          template: t,
+          score: 95,
+          reason: t.description || `${t.name} digital keepsake experience.`
+        }));
+
+        if (filtered.length) {
+          renderCompactCards(filtered.slice(0, 4), effectiveOccasion);
+        } else {
+          renderRecommendations();
+        }
+      }
+
+      function saveMatcherContext(occasion) {
+        try {
+          const context = {
+            occasion: occasion,
+            relation: aiState.relation !== 'auto' ? aiState.relation : aiState.detectedRelation,
+            emotion: aiState.emotion !== 'auto' ? aiState.emotion : aiState.detectedEmotion,
+            style: aiState.style !== 'auto' ? aiState.style : aiState.detectedStyle,
+            query: visionInput ? visionInput.value.trim() : '',
+            timestamp: Date.now()
+          };
+          sessionStorage.setItem('vanvi_matcher_context', JSON.stringify(context));
+        } catch(e) {}
+      }
+
+      // Smooth Auto-Scroll To Suggested Experiences
+      function scrollToSuggestions(delay = 140) {
+        setTimeout(() => {
+          const el = document.getElementById('suggestSection');
+          if (!el) return;
+          const header = document.querySelector('.app-header');
+          const headerHeight = header ? header.offsetHeight : 64;
+          const targetY = el.getBoundingClientRect().top + window.pageYOffset - (headerHeight + 20);
+          window.scrollTo({
+            top: Math.max(0, targetY),
+            behavior: 'smooth'
+          });
+        }, delay);
+      }
+
+      // Live Google Gemini & Backend AI Concept Engine
+      let liveAiAbortCtrl = null;
+      let liveConceptTimer = null;
+      async function fetchLivePandaAiConcept(promptText, occasion, relation, emotion) {
+        const ideaTextEl = document.getElementById('pandaLiveIdeaText');
+        const contextEchoEl = document.getElementById('pandaContextEcho');
+        const latencyEl = document.getElementById('pandaApiLatency');
+        const statusLabelEl = document.getElementById('pandaApiStatusLabel');
+        const chipsCol = document.getElementById('pandaQuickSuggestionChips');
+        if (!ideaTextEl) return;
+
+        const occName = capitalize(occasion || 'Birthday');
+        const relName = capitalize(relation || 'Friend');
+        const emoName = capitalize(emotion || 'Heartfelt');
+
+        if (contextEchoEl) {
+          contextEchoEl.textContent = `Occasion: ${occName} · For: ${relName} · Vibe: ${emoName}`;
+        }
+
+        clearTimeout(liveConceptTimer);
+        liveConceptTimer = setTimeout(async () => {
+          if (liveAiAbortCtrl) {
+            try { liveAiAbortCtrl.abort(); } catch(e) {}
+          }
+          liveAiAbortCtrl = new AbortController();
+
+          ideaTextEl.innerHTML = `<span class="panda-thinking-shimmer">🐼 Panda AI is connecting to Gemini 3.1 for ${relName}'s ${occName}...</span>`;
+          if (latencyEl) latencyEl.textContent = '✦ Querying AI...';
+
+          const startTime = Date.now();
+          const queryMsg = promptText && promptText.trim().length > 3
+            ? `Suggest a creative, touching celebration concept for: "${promptText.trim()}". Occasion: ${occName}, Relation: ${relName}, Mood: ${emoName}. Give 2 warm, exciting sentences describing the personalized celebration experience.`
+            : `Suggest a creative digital surprise experience for a ${occName} for ${relName} with a ${emoName} vibe. Give 2 concise sentences.`;
+
+          let reply = '';
+          let suggestions = [];
+          let providerLabel = 'Gemini 3.1 Flash';
+
+          // 1. Try unified VanviAPI
+          if (window.VanviAPI && window.VanviAPI.ai && typeof window.VanviAPI.ai.chat === 'function') {
+            try {
+              const res = await window.VanviAPI.ai.chat({
+                message: queryMsg,
+                userContext: { occasion, relation, emotion }
+              });
+              if (res && res.reply) {
+                reply = res.reply;
+                suggestions = res.suggestions || [];
+                if (res.model) providerLabel = res.model.replace('gemini-', 'Gemini ');
+              }
+            } catch(e) {}
+          }
+
+          // 2. Direct fetch fallback across known endpoints
+          if (!reply) {
+            const endpoints = ['/api/ai/chat', 'http://127.0.0.1:3000/api/ai/chat', 'http://localhost:3000/api/ai/chat'];
+            for (const ep of endpoints) {
+              try {
+                const resp = await fetch(ep, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    message: queryMsg,
+                    userContext: { occasion, relation, emotion }
+                  }),
+                  signal: liveAiAbortCtrl.signal
+                });
+                if (resp.ok) {
+                  const data = await resp.json();
+                  if (data && data.reply) {
+                    reply = data.reply;
+                    suggestions = data.suggestions || [];
+                    if (data.model) providerLabel = data.model.replace('gemini-', 'Gemini ');
+                    break;
+                  }
+                }
+              } catch(e) {
+                if (e.name === 'AbortError') return;
+              }
+            }
+          }
+
+          const elapsed = Date.now() - startTime;
+          if (latencyEl) latencyEl.textContent = `✦ Active (${elapsed}ms)`;
+          if (statusLabelEl) statusLabelEl.textContent = `${providerLabel} Active`;
+
+          if (!reply) {
+            reply = `${relName} ke liye ye ${occName} moment ekdum unforgettable rahega! Ek personalized 3D candle blow card ya wax-sealed memory envelope choose karein, jisme aapka personal heartfelt message aur soundtrack unhe instantly touch kar de. ✨`;
+          }
+
+          ideaTextEl.innerHTML = `<strong>💡 Panda's Creative Vision:</strong> ${escapeHtml(reply)}`;
+
+          if (chipsCol) {
+            if (suggestions && suggestions.length > 0) {
+              chipsCol.style.display = 'flex';
+              chipsCol.innerHTML = suggestions.slice(0, 3).map(s => 
+                `<button type="button" class="panda-suggestion-chip" data-prompt="${escapeHtml(s)}">${escapeHtml(s)}</button>`
+              ).join('');
+              chipsCol.querySelectorAll('.panda-suggestion-chip').forEach(c => {
+                c.addEventListener('click', function() {
+                  const val = this.getAttribute('data-prompt');
+                  if (visionInput && val) {
+                    visionInput.value = val;
+                    analyzeIntent(val, true);
+                    showToast('🐼 Panda AI recalibrated with your choice! 🐾');
+                  }
+                });
+              });
+            } else {
+              chipsCol.style.display = 'none';
+            }
+          }
+        }, 160);
+      }
+
+      // Sleek Live AI Status Badge
+      let aiFetchTimer = null;
+      function updateLiveAiCard(text, occasion, relation, emotion) {
+        const liveTag = document.getElementById('aiLiveTag');
+        if (!liveTag) return;
+        const rel = capitalize(relation || 'Friend');
+        const occ = capitalize(occasion || 'Birthday');
+        liveTag.textContent = `✦ AI: ${occ} · ${rel} · 99.4% Match`;
+      }
+
+      // AI Auto-Write Button Controller
+      function setupAiTools() {
+        const btnMagicAi = document.getElementById('btnMagicAiWrite');
+        if (btnMagicAi) {
+          btnMagicAi.addEventListener('click', function() {
+            btnMagicAi.style.transform = 'scale(0.95)';
+            setTimeout(() => { btnMagicAi.style.transform = ''; }, 200);
+
+            const promptPool = [
+              "Romantic midnight birthday surprise for my girlfriend with candle blowing, private love letter and our favorite song playing softly.",
+              "A joyful 25th wedding anniversary tribute for my parents celebrating 25 years of unconditional love with our family memories.",
+              "Heartfelt Goa trip photo recap for my best friend gang with fun nostalgic polaroid reveals and music.",
+              "An emotional sincere apology letter for someone special to heal our misunderstandings and restart with love.",
+              "Dreamy secret love proposal with interactive wax sealed love envelope and candlelit ambiance."
+            ];
+            const chosen = promptPool[Math.floor(Math.random() * promptPool.length)];
+
+            if (visionInput) {
+              visionInput.value = '';
+              let charIdx = 0;
+              const typeInterval = setInterval(() => {
+                if (charIdx < chosen.length) {
+                  visionInput.value += chosen.charAt(charIdx);
+                  charIdx++;
+                } else {
+                  clearInterval(typeInterval);
+                  analyzeIntent(chosen, true);
+                  showToast('🪄 Panda AI synthesized a heartfelt vision!');
+                }
+              }, 12);
+            }
+          });
+        }
+
+        // Quick Starter Mood Pills
+        document.querySelectorAll('.panda-mood-pill').forEach(pill => {
+          pill.addEventListener('click', function() {
+            const promptText = this.getAttribute('data-prompt') || '';
+            if (visionInput && promptText) {
+              visionInput.value = promptText;
+              analyzeIntent(promptText, true);
+              showToast('🐼 Panda AI matched your prompt! 🐾');
+            }
+          });
+        });
+      }
+
+      // 7. Input Event Listeners (Natural typing with debounce)
+      let inputTimer;
+      if (visionInput) {
+        visionInput.addEventListener('input', function() {
+          if (statusText) statusText.textContent = '🐼 Panda AI is understanding...';
+          clearTimeout(inputTimer);
+          inputTimer = setTimeout(() => {
+            analyzeIntent(visionInput.value, false);
+            if (statusText) statusText.textContent = '🐼 Panda AI Calibrated ✦';
+          }, 350);
+        });
+
+        // Hit Enter to immediately suggest and smoothly auto-scroll
+        visionInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            clearTimeout(inputTimer);
+            analyzeIntent(visionInput.value, true);
+            showToast('🐼 Panda AI matched your prompt! 🐾');
+          }
+        });
+      }
+
+      // Recalculate Button
+      if (btnRecalculate) {
+        btnRecalculate.addEventListener('click', function() {
+          analyzeIntent(visionInput ? visionInput.value : '', true);
+          showToast('Updated bespoke recommendations ✦');
+        });
+      }
+
+      // Natural Tweak Bar Buttons (Requirement 9)
+      tweakChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          const tweak = this.dataset.tweak;
+          if (tweak === 'emotional') {
+            aiState.emotion = 'emotional';
+          } else if (tweak === 'free') {
+            aiState.tier = 'free';
+          } else if (tweak === 'cinematic') {
+            aiState.experience = 'cinema';
+            aiState.emotion = 'cinematic';
+          } else if (tweak === 'candle') {
+            aiState.experience = 'cake';
+          } else if (tweak === 'vip') {
+            aiState.tier = 'vip';
+          }
+          updateChipVisuals();
+          renderRecommendations();
+          scrollToSuggestions(100);
+          showToast(`Adjusted: ${this.textContent.trim()} ✦`);
+        });
+      });
+
+      // Favorites Toggle
+      window.toggleFav = function(btn, rawId) {
+        const id = decodeURIComponent(rawId);
+        try {
+          const favs = JSON.parse(localStorage.getItem('vanvi_favorites') || '[]');
+          const idx = favs.indexOf(id);
+          if (idx === -1) {
+            favs.push(id);
+            localStorage.setItem('vanvi_favorites', JSON.stringify(favs));
+            btn.textContent = '❤️';
+            btn.classList.add('active');
+            showToast('Saved to favorites ❤️');
+          } else {
+            favs.splice(idx, 1);
+            localStorage.setItem('vanvi_favorites', JSON.stringify(favs));
+            btn.textContent = '🤍';
+            btn.classList.remove('active');
+            showToast('Removed from favorites 🤍');
+          }
+        } catch(e) {}
+      };
+
+      function showToast(msg) {
+        if (!toastPill || !toastMsg) return;
+        toastMsg.textContent = msg;
+        toastPill.classList.add('show');
+        setTimeout(() => toastPill.classList.remove('show'), 2000);
+      }
+
+      function capitalize(str) {
+        if (!str) return '';
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/[&<>"']/g, s => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[s]));
+      }
+
+      // Initialize from URL params or default
+      function init() {
+        setupAiTools();
+
+        const params = new URLSearchParams(window.location.search);
+        const queryParam = params.get('prompt') || params.get('q') || params.get('query') || params.get('text');
+        const occasionParam = params.get('occasion');
+
+        let initialText = 'Birthday surprise for my best friend, cute and emotional';
+        if (queryParam) {
+          initialText = queryParam;
+        } else if (occasionParam) {
+          initialText = `${capitalize(occasionParam)} surprise celebration for someone special`;
+        }
+
+        if (occasionParam) {
+          const occClean = occasionParam.toLowerCase().trim();
+          if (['birthday', 'love', 'anniversary', 'friendship', 'apology'].includes(occClean)) {
+            aiState.occasion = occClean;
+          }
+        }
+
+        if (visionInput) {
+          visionInput.value = initialText;
+        }
+        analyzeIntent(initialText);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    })();
+  </script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" name="viewport" />
+  <title>Curated Keepsake Moments ✨ | Vanvi Moments</title>
+  <meta content="Find a moment worth creating. Handcrafted digital celebration keepsakes with interactive candles, wax-sealed letters, and timeless soundtracks. Ready in 30 seconds." name="description" />
+  <link rel="canonical" href="https://vanvimoments.shop/templates.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://vanvimoments.shop/templates.html"/>
+  <meta property="og:title" content="Curated Keepsake Moments ✨ | Vanvi Moments"/>
+  <meta property="og:description" content="Find a moment worth creating. Tap-to-blow 3D candles, secret wax-sealed letters, lifetime validity. Create in 30 seconds."/>
+  <meta property="og:image" content="https://vanvimoments.shop/assets/og-cover.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://vanvimoments.shop/assets/og-cover.jpg"/>
+  <meta content="#fff5f8" name="theme-color" />
+
+  <!-- Google Fonts: Cormorant Garamond (Editorial Serif) + Plus Jakarta Sans (Clean Modern Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="vanvi-inner-light.css" />
+  <link rel="stylesheet" href="vanvi-navigation.css" />
+  <link rel="stylesheet" href="css/vanvi-template-cards.css" />
+
+  <style>
+    :root {
+      --bg-pearl: #fffbfd;
+      --bg-blush: #fff5f8;
+      --card-bg: #ffffff;
+      --border-silk: rgba(255, 120, 175, 0.22);
+      --border-subtle: #f1f5f9;
+      
+      --rose-gold: #ff2a7a;
+      --rose-glow: rgba(255, 42, 122, 0.25);
+      --violet-accent: #7c3aed;
+      --gold-champagne: #d97706;
+      --emerald-free: #059669;
+      
+      --text-dark: #2c1224;
+      --text-muted: #724c65;
+      --text-light: #94a3b8;
+      
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-price: 'Outfit', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      min-height: 100%;
+      background: var(--bg-pearl);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(255, 230, 242, 0.5) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(254, 243, 199, 0.35) 0px, transparent 50%);
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      overflow-x: hidden !important;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 90px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ─── 1. TOP ANNOUNCEMENT TICKER ─── */
+    .top-announcement-bar {
+      background: linear-gradient(90deg, #2c1224 0%, #4a1e38 50%, #2c1224 100%);
+      color: #ffdce8;
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 7px 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      position: sticky;
+      top: 0;
+      z-index: 101;
+      border-bottom: 1px solid rgba(255, 120, 175, 0.2);
+    }
+    .top-announcement-bar span {
+      color: #ff94be;
+    }
+
+    /* ─── 2. FLOATING PILL NAVBAR ─── */
+    .nav-wrapper {
+      position: sticky;
+      top: 30px;
+      z-index: 100;
+      padding: 8px 16px;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .nav-pill-box {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 680px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-silk);
+      border-radius: 99px;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(44, 18, 36, 0.05);
+    }
+    /* Logo MUST remain non-clickable per requirement */
+    .nav-brand-static {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--text-dark);
+      cursor: default;
+      user-select: none;
+      pointer-events: none;
+    }
+    .brand-sparkle-dot {
+      color: var(--rose-gold);
+      font-size: 14px;
+    }
+    .nav-pill-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-link-item {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-link-item:hover {
+      color: var(--rose-gold);
+    }
+    .nav-create-pill {
+      background: linear-gradient(135deg, #ff2a7a 0%, #7c3aed 100%);
+      color: #ffffff !important;
+      font-size: 11.5px;
+      font-weight: 750;
+      padding: 5px 13px;
+      border-radius: 99px;
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-create-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.45);
+    }
+
+    /* ─── 3. PAGE HERO (COMPACT & AIRY) ─── */
+    .page-hero {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 14px 16px 8px;
+    }
+    @media (min-width: 768px) {
+      .page-hero {
+        padding: 20px 20px 10px;
+      }
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--rose-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .hero-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+    .hero-heading em {
+      font-style: italic;
+      color: var(--rose-gold);
+    }
+    .hero-subtitle {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      max-width: 600px;
+      margin-bottom: 10px;
+    }
+
+    /* ─── VANVI PANDA CONCIERGE PILL ─── */
+    .hero-assistant-concierge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 245, 248, 0.94));
+      border: 1px solid rgba(255, 107, 138, 0.22);
+      border-radius: 99px;
+      padding: 5px 14px 5px 8px;
+      margin-bottom: 14px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(255, 107, 138, 0.12), inset 0 1.5px 2px #fff;
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+    }
+    .hero-assistant-concierge:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(255, 107, 138, 0.22), inset 0 1.5px 2px #fff;
+      border-color: rgba(255, 107, 138, 0.45);
+    }
+    .concierge-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+    }
+    .concierge-avatar svg {
+      width: 20px;
+      height: 20px;
+    }
+    .concierge-arrow {
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #ff6b8b, #ff4071);
+      padding: 3px 9px;
+      border-radius: 99px;
+      box-shadow: 0 2px 6px rgba(255, 64, 113, 0.3);
+      letter-spacing: 0.2px;
+    }
+
+    /* ─── 4. SEARCH & FILTER CONTROLS ─── */
+    /* Base styles loaded from css/vanvi-template-cards.css */
+    /* ─── 4. SMART SEARCH & FILTER CONTROLS ─── */
+    .search-filter-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .search-box-wrap {
+      flex: 1;
+      min-width: 250px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border: 1.5px solid rgba(255, 120, 175, 0.35);
+      border-radius: 99px;
+      padding: 6px 14px;
+      box-shadow: 0 4px 16px rgba(44, 18, 36, 0.05);
+      transition: all 0.25s ease;
+    }
+    .search-box:focus-within {
+      border-color: #ff2a7a;
+      box-shadow: 0 6px 22px rgba(255, 42, 122, 0.2);
+    }
+    .search-icon {
+      font-size: 15px;
+      margin-right: 8px;
+      color: #ff2a7a;
+      display: flex;
+      align-items: center;
+    }
+    .search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 13.5px;
+      font-family: inherit;
+      color: var(--text-dark);
+    }
+    .search-clear-btn {
+      background: rgba(255, 42, 122, 0.1);
+      border: none;
+      color: #ff2a7a;
+      font-size: 11px;
+      font-weight: 800;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .search-clear-btn:hover {
+      background: #ff2a7a;
+      color: #ffffff;
+    }
+    .quick-search-tags-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 6px 2px 2px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .quick-tag-chip {
+      background: #fff5f8;
+      border: 1px solid rgba(255, 120, 175, 0.25);
+      border-radius: 99px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 750;
+      color: #5c2443;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .quick-tag-chip:hover {
+      background: #ff2a7a;
+      color: #ffffff;
+      border-color: #ff2a7a;
+    }
+    .btn-sort-select {
+      background: #ffffff;
+      border: 1.5px solid rgba(255, 120, 175, 0.35);
+      border-radius: 99px;
+      padding: 9px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #2c1224;
+      outline: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .btn-sort-select:hover, .btn-sort-select:focus {
+      border-color: #ff2a7a;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.15);
+    }
+    .quick-occasions-strip {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding: 6px 2px 14px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .quick-cat-pill {
+      padding: 7px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 750;
+      background: #ffffff;
+      border: 1.2px solid rgba(255, 120, 175, 0.25);
+      color: #3b182f;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+    .quick-cat-pill:hover {
+      border-color: #ff2a7a;
+      color: #ff2a7a;
+      transform: translateY(-1px);
+    }
+    .quick-cat-pill.active {
+      background: linear-gradient(135deg, #ff2a7a, #e11d48);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.35);
+      font-weight: 850;
+    }
+    .quick-cat-pill.pill-vip {
+      border-color: rgba(217, 119, 6, 0.35);
+      background: #fffcf5;
+      color: #b45309;
+    }
+    .quick-cat-pill.pill-vip.active {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+    }
+
+    .active-filters-row {
+      display: none;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .active-chip-pill {
+      background: #fff0f5;
+      border: 1px solid var(--rose-gold);
+      color: var(--rose-gold);
+      font-size: 11px;
+      font-weight: 750;
+      padding: 4px 10px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .btn-clear-all-chips {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+
+    /* ─── 5. DISCOVERY SECTIONS & OCCASION RAILS ─── */
+    .discovery-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    
+    .occasion-section {
+      margin-bottom: 34px;
+    }
+    .section-header-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding: 0 2px;
+    }
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 750;
+      color: var(--text-dark);
+      letter-spacing: -0.2px;
+    }
+    .section-count-badge {
+      font-size: 11px;
+      font-weight: 750;
+      color: var(--rose-gold);
+      background: rgba(255, 42, 122, 0.08);
+      padding: 2px 7px;
+      border-radius: 99px;
+    }
+    .section-view-all-link {
+      font-size: 12px;
+      font-weight: 750;
+      color: var(--rose-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      transition: transform 0.2s;
+    }
+    .section-view-all-link:hover {
+      transform: translateX(2px);
+    }
+
+/* Rail Carousel (Smooth Horizontal Swipe with Subtle Peek & Edge Mask) */
+    .cards-rail {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 4px 18px;
+      scrollbar-width: none;
+      mask-image: linear-gradient(to right, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    }
+    .cards-rail::-webkit-scrollbar {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      .cards-rail {
+        gap: 20px;
+        mask-image: linear-gradient(to right, black 96%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black 96%, transparent 100%);
+      }
+    }
+    .rail-card-wrapper {
+      flex: 0 0 clamp(240px, 78vw, 270px);
+      width: clamp(240px, 78vw, 270px);
+      scroll-snap-align: start;
+    }
+    @media (min-width: 640px) {
+      .rail-card-wrapper {
+        flex: 0 0 260px;
+        width: 260px;
+      }
+    }
+    @media (min-width: 900px) {
+      .rail-card-wrapper {
+        flex: 0 0 270px;
+        width: 270px;
+      }
+    }
+
+    /* Filter Grid Mode (Shown when searching/filtering) */
+    .filter-results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      padding-bottom: 36px;
+    }
+    @media (min-width: 640px) {
+      .filter-results-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+    @media (min-width: 900px) {
+      .filter-results-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+    }
+    @media (min-width: 1200px) {
+      .filter-results-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 26px;
+      }
+    }
+
+    /* View Mode Switcher on Search Bar */
+    .view-mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(236, 203, 222, 0.8);
+      border-radius: 999px;
+      padding: 3px;
+      box-shadow: 0 4px 16px rgba(44, 18, 36, 0.04);
+      flex-shrink: 0;
+    }
+    .btn-view-mode {
+      background: transparent;
+      border: none;
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--text-muted);
+      padding: 7px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-view-mode:hover {
+      color: var(--rose-gold);
+    }
+    .btn-view-mode.active {
+      background: linear-gradient(135deg, #ff2a7a 0%, #e6005c 100%);
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(255, 42, 122, 0.35);
+    }
+
+    /* Master card styles loaded from css/vanvi-template-cards.css */
+
+    /* ─── 8. SMART FILTER DRAWER (MOBILE BOTTOM SHEET & DESKTOP MODAL) ─── */
+    .filter-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 18, 36, 0.55);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 100000 !important;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      overscroll-behavior-y: contain;
+    }
+    @media (min-width: 640px) {
+      .filter-drawer-backdrop {
+        align-items: center;
+      }
+    }
+    .filter-drawer-content {
+      width: 100%;
+      max-width: 520px;
+      background: #ffffff;
+      border-radius: 24px 24px 0 0;
+      padding: 22px 20px calc(24px + env(safe-area-inset-bottom, 10px));
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+      max-height: 85vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      animation: slideDrawerUp 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 640px) {
+      .filter-drawer-content {
+        border-radius: 24px;
+        animation: scaleDrawer 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+    }
+    @keyframes slideDrawerUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    @keyframes scaleDrawer {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .drawer-title {
+      font-size: 17px;
+      font-weight: 850;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .drawer-close-btn {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .filter-group-heading {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--rose-gold);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .filter-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .filter-pill-opt {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      color: var(--text-dark);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6.5px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+    .filter-pill-opt .opt-count {
+      color: var(--text-light);
+      font-size: 10.5px;
+    }
+    .filter-pill-opt.active {
+      background: #fff0f5;
+      border-color: var(--rose-gold);
+      color: var(--rose-gold);
+      font-weight: 800;
+    }
+    .filter-pill-opt.active .opt-count {
+      color: var(--rose-gold);
+    }
+
+    .drawer-actions-footer {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid #f1f5f9;
+      position: sticky;
+      bottom: 0;
+      background: #ffffff;
+    }
+    .btn-drawer-reset {
+      flex: 1;
+      padding: 11px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .btn-drawer-apply {
+      flex: 2;
+      padding: 11px;
+      background: linear-gradient(135deg, #ff2a7a 0%, #7c3aed 100%);
+      border: none;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.35);
+    }
+
+    /* Empty state */
+    .empty-search-state {
+      text-align: center;
+      padding: 60px 16px;
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 1. Top Announcement Ticker -->
+  <div class="top-announcement-bar">
+    VANVI MOMENTS · <span>HANDCRAFTED DIGITAL KEEPSAKES</span> · CREATE IN 30 SECONDS
+  </div>
+
+  <!-- 2. Floating Navbar -->
+  <div class="nav-wrapper">
+    <div class="nav-pill-box">
+      <!-- Non-clickable brand per global requirement -->
+      <span class="nav-brand-static" title="Vanvi Moments Keepsake Atelier">
+        <span>Vanvi Moments</span><span class="brand-sparkle-dot">✦</span>
+      </span>
+      <div class="nav-pill-actions">
+        <a href="index.html" class="nav-link-item">Home</a>
+        <a href="custom-experience.html" class="nav-link-item">Bespoke</a>
+        <a href="#catalogSection" class="nav-create-pill" onclick="document.getElementById('catalogSection')?.scrollIntoView({behavior:'smooth'});document.getElementById('searchInput')?.focus();return false;">Choose Template ✦</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Page Hero (Refined Emotional Copy) -->
+  <section class="page-hero">
+    <span class="hero-eyebrow">✦ The Keepsake Atelier</span>
+    <h1 class="hero-heading">Find a moment <em>worth creating.</em></h1>
+    <p class="hero-subtitle">
+      Handcrafted celebration keepsakes with tap-to-blow 3D candles, secret wax-sealed letters, and timeless soundtracks. Ready in 30 seconds.
+    </p>
+
+    <!-- Vanvi Baby Panda Concierge Pill -->
+    <a href="vanvi-assistant.html" class="hero-assistant-concierge" id="heroAssistantPill" title="Ask Vanvi AI Assistant for keepsake ideas">
+      <div class="concierge-avatar">
+        <svg viewBox="0 0 72 72">
+          <circle cx="16" cy="18" r="10" fill="#1e1e24"/>
+          <circle cx="56" cy="18" r="10" fill="#1e1e24"/>
+          <circle cx="16" cy="18" r="5" fill="#ff78af" opacity="0.8"/>
+          <circle cx="56" cy="18" r="5" fill="#ff78af" opacity="0.8"/>
+          <circle cx="36" cy="38" r="26" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+          <ellipse cx="27" cy="35" rx="5" ry="6.5" fill="#1e1e24"/>
+          <ellipse cx="45" cy="35" rx="5" ry="6.5" fill="#1e1e24"/>
+          <circle cx="28" cy="33.5" r="2" fill="#ffffff"/>
+          <circle cx="46" cy="33.5" r="2" fill="#ffffff"/>
+          <ellipse cx="36" cy="42" rx="4" ry="3" fill="#1e1e24"/>
+          <path d="M 33 46 Q 36 48.5 39 46" fill="none" stroke="#ff78af" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span style="font-size: 12px; font-weight: 700; color: #1e293b;">Need help picking? <span style="color: #ff4071;">Ask Vanvi AI Panda 🐾</span></span>
+      <span class="concierge-arrow">Ask Now ✦</span>
+    </a>
+
+    <!-- 4. Smart Search & Filter Controls -->
+    <div class="search-filter-row">
+      <div class="search-box-wrap">
+        <div class="search-box" id="searchBoxContainer">
+          <span class="search-icon">🔍</span>
+          <input type="search" id="searchInput" class="search-input" placeholder="Search candles, love letters, songs, birthday, magazine..." aria-label="Search celebration templates" autocomplete="off" />
+          <span id="searchResultPill" style="display:none; font-size:11px; font-weight:800; background:rgba(255,42,122,0.12); color:#ff2a7a; padding:2px 8px; border-radius:99px; white-space:nowrap; margin-right:4px;"></span>
+          <button type="button" id="searchClear" class="search-clear-btn" aria-label="Clear search">✕</button>
+        </div>
+
+        <!-- Smart Instant Quick Searches (Fast, 1-tap shortcuts) -->
+        <div class="quick-search-tags-row" id="quickSearchTagsRow">
+          <span style="font-size:10.5px; font-weight:800; color:var(--text-muted); white-space:nowrap;">⚡ Quick Search:</span>
+          <button type="button" class="quick-tag-chip" onclick="applySearchTag('birthday')">🎂 Birthday</button>
+          <button type="button" class="quick-tag-chip" onclick="applySearchTag('love')">💌 Love Letter</button>
+          <button type="button" class="quick-tag-chip" onclick="applySearchTag('candle')">🕯️ Candle Cake</button>
+          <button type="button" class="quick-tag-chip" onclick="applySearchTag('magazine')">📖 E-Magazine</button>
+          <button type="button" class="quick-tag-chip" onclick="applySearchTag('anniversary')">💍 Anniversary</button>
+          <button type="button" class="quick-tag-chip" onclick="applySearchTag('vip')">👑 ₹700+ VIP</button>
+        </div>
+      </div>
+
+      <!-- Smart Sort Dropdown -->
+      <div class="sort-select-box">
+        <select id="quickSortSelect" class="btn-sort-select" onchange="selectFilter('sort', this.value)" title="Sort templates" aria-label="Sort templates">
+          <option value="recommended">✦ Recommended</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low (₹700+ first)</option>
+          <option value="popular">Most Popular 🔥</option>
+          <option value="newest">Newest Releases</option>
+        </select>
+      </div>
+
+      <div class="view-mode-toggle" id="viewModeToggle" role="group" aria-label="Card View Layout">
+        <button type="button" class="btn-view-mode active" id="btnViewGrid" onclick="switchCardViewMode('grid')" title="2-Column Boutique Grid View">
+          <span>⊞</span>
+        </button>
+        <button type="button" class="btn-view-mode" id="btnViewMag" onclick="switchCardViewMode('magazine')" title="1-Column Full Magazine View">
+          <span>▯</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Smart Unified Occasion & Category Filter Strip -->
+    <div class="atelier-filter-hub">
+      <nav class="quick-occasions-strip" id="quickOccasionsStrip" aria-label="Smart Categories">
+        <button type="button" id="quick-cat-all" class="quick-cat-pill active" data-cat="all" onclick="selectQuickCategory('all')">✨ All Moments</button>
+        <button type="button" id="quick-cat-free" class="quick-cat-pill" data-cat="free" onclick="selectQuickCategory('free')">🎁 100% Free</button>
+        <button type="button" id="quick-cat-vip" class="quick-cat-pill pill-vip" data-cat="vip" onclick="selectQuickCategory('vip')">👑 Ultra VIP (₹700+)</button>
+        <button type="button" id="quick-cat-birthday" class="quick-cat-pill" data-cat="birthday" onclick="selectQuickCategory('birthday')">🎂 Birthday</button>
+        <button type="button" id="quick-cat-love" class="quick-cat-pill" data-cat="love" onclick="selectQuickCategory('love')">💖 Love &amp; Romance</button>
+        <button type="button" id="quick-cat-anniversary" class="quick-cat-pill" data-cat="anniversary" onclick="selectQuickCategory('anniversary')">💍 Anniversary</button>
+        <button type="button" id="quick-cat-magazine" class="quick-cat-pill" data-cat="magazine" onclick="selectQuickCategory('magazine')">📖 E-Magazine</button>
+        <button type="button" id="quick-cat-ritual" class="quick-cat-pill" data-cat="ritual" onclick="selectQuickCategory('ritual')">🕯️ 3D Rituals</button>
+        <button type="button" id="quick-cat-friendship" class="quick-cat-pill" data-cat="friendship" onclick="selectQuickCategory('friendship')">👯 Friendship</button>
+        <button type="button" id="quick-cat-family" class="quick-cat-pill" data-cat="family" onclick="selectQuickCategory('family')">👨‍👩‍👦 Family</button>
+        <button type="button" id="quick-cat-apology" class="quick-cat-pill" data-cat="apology" onclick="selectQuickCategory('apology')">🕊️ Apology</button>
+        <button type="button" id="quick-cat-memories" class="quick-cat-pill" data-cat="memories" onclick="selectQuickCategory('memories')">📸 Memories</button>
+      </nav>
+    </div>
+
+    <!-- Active Filters Removable Chips -->
+    <div class="active-filters-row" id="activeFiltersRow">
+      <div id="activeChipsList" style="display:flex; flex-wrap:wrap; gap:6px;"></div>
+      <button type="button" class="btn-clear-all-chips" onclick="resetAllFilters()">Clear all</button>
+    </div>
+  </section>
+
+  <!-- 5. Main Content Area -->
+  <main class="discovery-container">
+    
+    <!-- 5A. Curated Occasion Rails (Default Discovery View) -->
+    <div id="discoveryRailsView">
+      <!-- Section 1: Featured Moments -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <h2 class="section-title">🌟 Featured Moments</h2>
+            <span class="section-count-badge" id="count-featured">Featured</span>
+          </div>
+          <a href="category-premium.html" class="section-view-all-link">View All →</a>
+        </div>
+        <div class="cards-rail" id="rail-featured"></div>
+      </section>
+
+      <!-- Section 2: Popular Choices -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <h2 class="section-title">🔥 Popular Choices</h2>
+            <span class="section-count-badge" id="count-popular">Popular</span>
+          </div>
+          <a href="templates.html?sort=popular" class="section-view-all-link">View All →</a>
+        </div>
+        <div class="cards-rail" id="rail-popular"></div>
+      </section>
+
+      <!-- Section 3: Birthday Magic -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <h2 class="section-title">🎂 Birthday Magic</h2>
+            <span class="section-count-badge" id="count-birthday">8 Moments</span>
+          </div>
+          <a href="category-birthday.html" class="section-view-all-link">View All →</a>
+        </div>
+        <div class="cards-rail" id="rail-birthday"></div>
+      </section>
+
+      <!-- Section 4: Love & Romance -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <h2 class="section-title">💖 Love &amp; Romance</h2>
+            <span class="section-count-badge" id="count-love">8 Moments</span>
+          </div>
+          <a href="category-love.html" class="section-view-all-link">View All →</a>
+        </div>
+        <div class="cards-rail" id="rail-love"></div>
+      </section>
+
+      <!-- Section 5: Anniversary & Milestones -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <h2 class="section-title">💍 Anniversary &amp; Milestones</h2>
+            <span class="section-count-badge" id="count-anniversary">5 Moments</span>
+          </div>
+          <a href="category-anniversary.html" class="section-view-all-link">View All →</a>
+        </div>
+        <div class="cards-rail" id="rail-anniversary"></div>
+      </section>
+
+      <!-- Section 6: Friendship & Cheers -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <h2 class="section-title">👯 Friendship &amp; Cheers</h2>
+            <span class="section-count-badge" id="count-friendship">3 Moments</span>
+          </div>
+          <a href="category-friendship.html" class="section-view-all-link">View All →</a>
+        </div>
+        <div class="cards-rail" id="rail-friendship"></div>
+      </section>
+
+      <!-- Section 7: Family & Gratitude -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <h2 class="section-title">👨‍👩‍👦 Family &amp; Gratitude</h2>
+            <span class="section-count-badge" id="count-family">3 Moments</span>
+          </div>
+          <a href="category-family.html" class="section-view-all-link">View All →</a>
+        </div>
+        <div class="cards-rail" id="rail-family"></div>
+      </section>
+
+      <!-- Section 8: Memories & Keepsakes -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <h2 class="section-title">📸 Memories &amp; Keepsakes</h2>
+            <span class="section-count-badge" id="count-memories">4 Moments</span>
+          </div>
+          <a href="category-memories.html" class="section-view-all-link">View All →</a>
+        </div>
+        <div class="cards-rail" id="rail-memories"></div>
+      </section>
+
+      <!-- Section 9: Signature Premium Editions -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <h2 class="section-title">👑 VIP Signature Editions</h2>
+            <span class="section-count-badge" id="count-premium">Exclusive</span>
+          </div>
+          <a href="category-premium.html" class="section-view-all-link">View All →</a>
+        </div>
+        <div class="cards-rail" id="rail-premium"></div>
+      </section>
+
+      <!-- Section 10: You Might Also Like / More Templates Worth A Look -->
+      <section class="more-templates-section" id="sectionRecommendations">
+        <div class="recommendation-header">
+          <span class="recommendation-eyebrow">✦ You might also like</span>
+          <h2 class="recommendation-heading">More templates worth a look.</h2>
+          <p class="recommendation-sub">Hand-picked bespoke celebration keepsakes loved by our creators.</p>
+        </div>
+        <div class="recommendations-grid" id="recommendationsContainer"></div>
+      </section>
+    </div>
+
+    <!-- 5B. Filtered Results Grid (Activated on Search / Filters) -->
+    <div id="filterResultsView" style="display: none;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+        <h2 class="section-title" id="filterResultsTitle">Matching Moments</h2>
+        <span class="section-count-badge" id="filterResultsCount">0 Results</span>
+      </div>
+      <div class="filter-results-grid" id="filterGrid"></div>
+    </div>
+
+  </main>
+
+  <!-- 6. Smart Filter Bottom Sheet / Modal -->
+  <div class="filter-drawer-backdrop" id="filterDrawer" onclick="closeFilterDrawer(event)">
+    <div class="filter-drawer-content" onclick="event.stopPropagation();">
+      <div class="drawer-header">
+        <h3 class="drawer-title">
+          <span>⚙️ Filter Keepsakes</span>
+        </h3>
+        <button type="button" class="drawer-close-btn" onclick="closeFilterDrawer()">&times;</button>
+      </div>
+
+      <!-- 1. Category -->
+      <div class="filter-group-heading">
+        <span>Category</span>
+      </div>
+      <div class="filter-pills-row" id="filterCategoryPills">
+        <!-- Dynamically generated with counts -->
+      </div>
+
+      <!-- 2. Price -->
+      <div class="filter-group-heading">
+        <span>Price</span>
+      </div>
+      <div class="filter-pills-row" id="filterPricePills">
+        <button type="button" class="filter-pill-opt active" data-price="all" onclick="selectFilter('price', 'all')">
+          All Prices
+        </button>
+        <button type="button" class="filter-pill-opt" data-price="free" onclick="selectFilter('price', 'free')">
+          🎁 100% Free
+        </button>
+        <button type="button" class="filter-pill-opt" data-price="under99" onclick="selectFilter('price', 'under99')">
+          Under ₹99
+        </button>
+        <button type="button" class="filter-pill-opt" data-price="99to299" onclick="selectFilter('price', '99to299')">
+          ₹99 – ₹299
+        </button>
+        <button type="button" class="filter-pill-opt" data-price="299to499" onclick="selectFilter('price', '299to499')">
+          ₹299 – ₹499
+        </button>
+        <button type="button" class="filter-pill-opt" data-price="499plus" onclick="selectFilter('price', '499plus')">
+          ₹499+
+        </button>
+      </div>
+
+      <!-- 3. Experience -->
+      <div class="filter-group-heading">
+        <span>Experience</span>
+      </div>
+      <div class="filter-pills-row" id="filterExperiencePills">
+        <button type="button" class="filter-pill-opt active" data-exp="all" onclick="selectFilter('experience', 'all')">All Experiences</button>
+        <button type="button" class="filter-pill-opt" data-exp="interactive" onclick="selectFilter('experience', 'interactive')">✨ Interactive</button>
+        <button type="button" class="filter-pill-opt" data-exp="photo" onclick="selectFilter('experience', 'photo')">📸 Photo Story</button>
+        <button type="button" class="filter-pill-opt" data-exp="letter" onclick="selectFilter('experience', 'letter')">💌 Personal Letter</button>
+        <button type="button" class="filter-pill-opt" data-exp="music" onclick="selectFilter('experience', 'music')">🎵 Music Dedication</button>
+        <button type="button" class="filter-pill-opt" data-exp="reveal" onclick="selectFilter('experience', 'reveal')">🎁 Surprise Reveal</button>
+        <button type="button" class="filter-pill-opt" data-exp="gallery" onclick="selectFilter('experience', 'gallery')">🖼️ Gallery</button>
+        <button type="button" class="filter-pill-opt" data-exp="timeline" onclick="selectFilter('experience', 'timeline')">⏳ Timeline</button>
+        <button type="button" class="filter-pill-opt" data-exp="cinematic" onclick="selectFilter('experience', 'cinematic')">🎬 Cinematic</button>
+      </div>
+
+      <!-- 4. Style -->
+      <div class="filter-group-heading">
+        <span>Style</span>
+      </div>
+      <div class="filter-pills-row" id="filterStylePills">
+        <button type="button" class="filter-pill-opt active" data-style="all" onclick="selectFilter('style', 'all')">All Styles</button>
+        <button type="button" class="filter-pill-opt" data-style="cute" onclick="selectFilter('style', 'cute')">Cute</button>
+        <button type="button" class="filter-pill-opt" data-style="elegant" onclick="selectFilter('style', 'elegant')">Elegant</button>
+        <button type="button" class="filter-pill-opt" data-style="romantic" onclick="selectFilter('style', 'romantic')">Romantic</button>
+        <button type="button" class="filter-pill-opt" data-style="minimal" onclick="selectFilter('style', 'minimal')">Minimal</button>
+        <button type="button" class="filter-pill-opt" data-style="cinematic" onclick="selectFilter('style', 'cinematic')">Cinematic</button>
+        <button type="button" class="filter-pill-opt" data-style="premium" onclick="selectFilter('style', 'premium')">Premium</button>
+      </div>
+
+      <!-- 5. Sort -->
+      <div class="filter-group-heading">
+        <span>Sort By</span>
+      </div>
+      <div class="filter-pills-row" id="filterSortPills">
+        <button type="button" class="filter-pill-opt active" data-sort="recommended" onclick="selectFilter('sort', 'recommended')">Recommended</button>
+        <button type="button" class="filter-pill-opt" data-sort="popular" onclick="selectFilter('sort', 'popular')">Popular</button>
+        <button type="button" class="filter-pill-opt" data-sort="newest" onclick="selectFilter('sort', 'newest')">Newest</button>
+        <button type="button" class="filter-pill-opt" data-sort="price-asc" onclick="selectFilter('sort', 'price-asc')">Price: Low to High</button>
+        <button type="button" class="filter-pill-opt" data-sort="price-desc" onclick="selectFilter('sort', 'price-desc')">Price: High to Low</button>
+      </div>
+
+      <!-- Drawer Action Buttons -->
+      <div class="drawer-actions-footer">
+        <button type="button" class="btn-drawer-reset" onclick="resetAllFilters()">Reset All</button>
+        <button type="button" class="btn-drawer-apply" onclick="closeFilterDrawer()">Apply Filters</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/vanvi-i18n.js"></script>
+  <script src="js/vanvi-templates-data.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      // Curated High-Definition Mockup Thumbnails
+      const THUMBNAIL_MAP = {
+        'birthday-wish-1': 'https://cdn.cutiepage.in/static/products/birthday-wish1.jpg',
+        'birthday-wish-2': 'https://cdn.cutiepage.in/static/products/birthday-wish2.jpg',
+        'birthday-gf': 'https://cdn.cutiepage.in/template-seeds/girlfriends-day/cover.png',
+        'netflix-style-story': 'https://cdn.cutiepage.in/template-seeds/netflix-story/cover.webp',
+        'birthday-cinema': 'https://cdn.cutiepage.in/template-seeds/netflix-story/cover.webp',
+        'little-love': 'https://cdn.cutiepage.in/template-seeds/couples-day/cover.webp',
+        'best-friend-chaos': 'https://cdn.cutiepage.in/template-seeds/friendship-day/cover.webp',
+        'birthday-3d-candle': 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&auto=format&fit=crop&q=80',
+        'birthday-white-bloom': 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&auto=format&fit=crop&q=80',
+        'retro-polaroid-wall': 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=80',
+        'golden-anniversary': 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&auto=format&fit=crop&q=80',
+        'sincere-letter': 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80',
+        'apology-dashboard': 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80',
+        'forever-us': 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&auto=format&fit=crop&q=80',
+        'maa-papa-tribute': 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&auto=format&fit=crop&q=80'
+      };
+
+      // Filter State
+      const state = {
+        category: 'all',
+        price: 'all',
+        experience: 'all',
+        style: 'all',
+        sort: 'recommended',
+        search: ''
+      };
+
+      function getTemplates() {
+        if (window.VanviTemplatesData && Array.isArray(window.VanviTemplatesData.templates)) {
+          return window.VanviTemplatesData.templates;
+        }
+        if (Array.isArray(window.VANVI_TEMPLATES)) {
+          return window.VANVI_TEMPLATES;
+        }
+        return [];
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function getThumbnail(t) {
+        if (t.id && THUMBNAIL_MAP[t.id]) return THUMBNAIL_MAP[t.id];
+        if (t.slug && THUMBNAIL_MAP[t.slug]) return THUMBNAIL_MAP[t.slug];
+        if (t.thumbnail && typeof t.thumbnail === 'string' && t.thumbnail.startsWith('http')) {
+          return t.thumbnail;
+        }
+        const cat = (t.categorySlug || t.category || '').toLowerCase();
+        if (cat.includes('love') || cat.includes('anniversary')) return 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80';
+        if (cat.includes('friend')) return 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=80';
+        if (cat.includes('apology')) return 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80';
+        return 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&auto=format&fit=crop&q=80';
+      }
+
+      function getCleanTagline(t) {
+        let tagline = (t.tagline || t.description || '').replace(/^Lifetime validity\s*\+?\s*Make it in just 30 seconds\s*\+?\s*live beautiful QR Code\.\s*/i, '').trim();
+        if (!tagline || tagline.length < 10) {
+          tagline = 'Tap-to-interact celebration keepsake with personal letter and soundtrack.';
+        }
+        return tagline;
+      }
+
+      function getExperienceHint(t) {
+        const allText = `${(t.name||'')} ${(t.type||'')} ${(t.description||'')} ${(t.tags||[]).join(' ')} ${(t.features||[]).join(' ')}`.toLowerCase();
+        if (allText.includes('candle')) return '🕯️ 3D Candle';
+        if (allText.includes('wax') || allText.includes('seal') || allText.includes('letter')) return '💌 Wax Letter';
+        if (allText.includes('polaroid') || allText.includes('photo')) return '📸 Photo Story';
+        if (allText.includes('soundtrack') || allText.includes('music') || allText.includes('song')) return '🎵 Music';
+        if (allText.includes('vow') || allText.includes('wedding')) return '💍 Vows & Story';
+        if (allText.includes('cinema') || allText.includes('film') || allText.includes('reel')) return '🎬 Cinematic';
+        if (allText.includes('puzzle') || allText.includes('game') || allText.includes('runaway')) return '✨ Interactive';
+        if (allText.includes('spark') || allText.includes('diwali') || allText.includes('confetti')) return '🎉 Celebration';
+        if (allText.includes('timeline') || allText.includes('odyssey')) return '⏳ Timeline';
+        return '✨ Keepsake';
+      }
+
+      function createCardHtml(t) {
+        if (window.VanviTemplatesData && typeof window.VanviTemplatesData.renderCard === 'function') {
+          return window.VanviTemplatesData.renderCard(t);
+        }
+
+        const p = Number(t.price || 0);
+        const orig = Number(t.originalPrice || (p > 0 ? Math.round(p * 2.8 / 10) * 10 - 1 : 0));
+        const isFree = t.isFree || p === 0;
+        const isLux = !!t.isLuxury || t.price >= 249;
+        const thumb = getThumbnail(t);
+        const safeId = encodeURIComponent(t.id);
+        const safeOccasion = encodeURIComponent(t.category || 'Celebration');
+        const catSlug = (t.categorySlug || t.category || 'birthday').toLowerCase().replace(/[^a-z0-9]/g, '');
+        const catBadge = getCategoryLabel(t);
+        const expHint = getExperienceHint(t);
+        const tagline = getCleanTagline(t);
+        const discountText = t.discount || (orig > p ? `${Math.round(((orig - p) / orig) * 100)}% off` : '');
+
+        return `
+          <article class="vanvi-card ${isLux ? 'is-luxury' : ''}" data-cat="${escapeHtml(catSlug)}" id="card-${t.id}">
+            <div class="card-art-box" onclick="window.location.href='preview.html?template=${safeId}'" title="Experience ${escapeHtml(t.name)}">
+              <span class="card-badge-top-left">${escapeHtml(catBadge)}</span>
+              <span class="card-badge-top-right ${isFree ? 'free' : (isLux ? 'luxury' : 'price')}">
+                ${isFree ? '🎁 Free' : (isLux ? '✦ Signature' : `₹${p}`)}
+              </span>
+              <img class="card-art-backdrop" src="${thumb}" alt="" aria-hidden="true" loading="lazy">
+              <img class="card-art-img" src="${thumb}" alt="${escapeHtml(t.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?w=700&auto=format&fit=crop&q=80';">
+            </div>
+
+            <div class="card-body">
+              <div class="card-exp-hint">
+                <span class="exp-hint-pill">${escapeHtml(expHint)}</span>
+              </div>
+              <div class="card-header-meta">
+                <h3 class="card-title" title="${escapeHtml(t.name)}">${escapeHtml(t.name)}</h3>
+              </div>
+              <p class="card-tagline" title="${escapeHtml(tagline)}">${escapeHtml(tagline)}</p>
+
+              <div class="card-meta-row">
+                <div class="card-price-cluster">
+                  <span class="price-now ${isFree ? 'free' : (isLux ? 'luxury' : '')}">${isFree ? 'FREE' : `₹${p}`}</span>
+                  ${isFree ? '' : `<span class="price-orig">₹${orig}</span>`}
+                  ${discountText ? `<span class="discount-pill">${discountText}</span>` : ''}
+                </div>
+                <div class="card-status-subtle">
+                  <span class="status-dot">✦</span>
+                  <span class="status-txt">${isFree ? 'Forever Free' : 'Lifetime Access'}</span>
+                </div>
+              </div>
+
+              <div class="card-actions-grid">
+                <a href="preview.html?template=${safeId}" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
+                  <span>Preview</span>
+                </a>
+                <a href="builder.html?template=${safeId}&occasion=${safeOccasion}" class="btn-make-yours" title="Create Moment ✦">
+                  <span class="btn-text-full">Create Moment ✦</span>
+                  <span class="btn-text-short">Create ✦</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      function filterTemplateList(templates) {
+        const term = state.search.toLowerCase().trim();
+
+        let res = templates.filter(t => {
+          // Search term
+          if (term) {
+            const name = (t.name || '').toLowerCase();
+            const desc = (t.description || '').toLowerCase();
+            const cat = (t.category || '').toLowerCase();
+            const tags = Array.isArray(t.tags) ? t.tags.join(' ').toLowerCase() : '';
+            const feats = Array.isArray(t.features) ? t.features.join(' ').toLowerCase() : '';
+            const isMatch = name.includes(term) || desc.includes(term) || cat.includes(term) || tags.includes(term) || feats.includes(term);
+            if (!isMatch) return false;
+          }
+
+          // Category filter
+          if (state.category !== 'all') {
+            const c = (t.categorySlug || t.category || '').toLowerCase();
+            const allTxt = `${(t.name || '')} ${(t.type || '')} ${(t.description || '')} ${(t.features || []).join(' ')} ${(t.tags || []).join(' ')}`.toLowerCase();
+
+            if (state.category === 'vip') {
+              if (Number(t.price || 0) < 700 && (!t.badge || !t.badge.toLowerCase().includes('ultra'))) return false;
+            } else if (state.category === 'magazine') {
+              if (!allTxt.includes('magazine') && !allTxt.includes('vogue') && !allTxt.includes('editorial')) return false;
+            } else if (state.category === 'ritual') {
+              if (!allTxt.includes('candle') && !allTxt.includes('blow') && !allTxt.includes('cake') && !allTxt.includes('wax')) return false;
+            } else if (state.category === 'free') {
+              if (!t.isFree && Number(t.price || 0) > 0) return false;
+            } else if (state.category === 'premium') {
+              if (t.isFree || Number(t.price || 0) === 0) return false;
+            } else if (state.category === 'love') {
+              if (!c.includes('love') && !c.includes('romance')) return false;
+            } else if (state.category === 'anniversary') {
+              if (!c.includes('anniversary') && !c.includes('wedding')) return false;
+            } else if (state.category === 'friendship') {
+              if (!c.includes('friend')) return false;
+            } else if (state.category === 'family') {
+              if (!c.includes('family') && !c.includes('thank')) return false;
+            } else if (state.category === 'apology') {
+              if (!c.includes('apology') && !c.includes('sorry')) return false;
+            } else if (state.category === 'celebration') {
+              if (!c.includes('celebration') && !c.includes('festive') && !c.includes('graduation')) return false;
+            } else if (state.category === 'memories') {
+              if (!c.includes('memor') && !c.includes('timeline') && !c.includes('farewell')) return false;
+            } else if (!c.includes(state.category)) {
+              return false;
+            }
+          }
+
+          // Price filter
+          if (state.price !== 'all') {
+            const p = Number(t.price || 0);
+            if (state.price === 'free' && (!t.isFree && p > 0)) return false;
+            if (state.price === 'under99' && (p >= 99 || (t.isFree || p === 0))) return false;
+            if (state.price === '99to299' && (p < 99 || p > 299)) return false;
+            if (state.price === '299to499' && (p < 299 || p > 499)) return false;
+            if (state.price === '499plus' && p < 499) return false;
+          }
+
+          // Experience filter
+          if (state.experience !== 'all') {
+            const desc = (t.description || '').toLowerCase();
+            const tags = Array.isArray(t.tags) ? t.tags.join(' ').toLowerCase() : '';
+            const feats = Array.isArray(t.features) ? t.features.join(' ').toLowerCase() : '';
+            const allText = `${desc} ${tags} ${feats} ${(t.name || '').toLowerCase()} ${(t.type || '').toLowerCase()}`;
+            
+            if (state.experience === 'interactive') {
+              if (!allText.includes('interactive') && !allText.includes('candle') && !allText.includes('puzzle') && !allText.includes('game') && !allText.includes('runaway')) return false;
+            } else if (state.experience === 'photo') {
+              if (!allText.includes('polaroid') && !allText.includes('photo') && !allText.includes('deck') && !allText.includes('album')) return false;
+            } else if (state.experience === 'letter') {
+              if (!allText.includes('letter') && !allText.includes('wax') && !allText.includes('envelope') && !allText.includes('note')) return false;
+            } else if (state.experience === 'music') {
+              if (!allText.includes('music') && !allText.includes('soundtrack') && !allText.includes('song') && !allText.includes('audio')) return false;
+            } else if (state.experience === 'reveal') {
+              if (!allText.includes('reveal') && !allText.includes('surprise') && !allText.includes('unseal') && !allText.includes('blow')) return false;
+            } else if (state.experience === 'gallery') {
+              if (!allText.includes('gallery') && !allText.includes('polaroid') && !allText.includes('photos') && !allText.includes('album')) return false;
+            } else if (state.experience === 'timeline') {
+              if (!allText.includes('timeline') && !allText.includes('odyssey') && !allText.includes('story') && !allText.includes('chapter')) return false;
+            } else if (state.experience === 'cinematic') {
+              if (!allText.includes('cinematic') && !allText.includes('cinema') && !allText.includes('film') && !allText.includes('heritage')) return false;
+            } else {
+              if (!allText.includes(state.experience)) return false;
+            }
+          }
+
+          // Style filter
+          if (state.style !== 'all') {
+            const style = state.style.toLowerCase();
+            const desc = (t.description || '').toLowerCase();
+            const tags = Array.isArray(t.tags) ? t.tags.join(' ').toLowerCase() : '';
+            const allText = `${desc} ${tags} ${(t.name || '').toLowerCase()} ${(t.tier || '').toLowerCase()}`;
+            
+            if (style === 'cute') {
+              if (!allText.includes('cute') && !allText.includes('chaos') && !allText.includes('sweet') && !allText.includes('friend') && !allText.includes('little')) return false;
+            } else if (style === 'elegant') {
+              if (!allText.includes('elegant') && !allText.includes('bloom') && !allText.includes('rose') && !allText.includes('gold') && !allText.includes('vow')) return false;
+            } else if (style === 'romantic') {
+              if (!allText.includes('romantic') && !allText.includes('love') && !allText.includes('girlfriend') && !allText.includes('proposal') && !allText.includes('constellation')) return false;
+            } else if (style === 'minimal') {
+              if (!allText.includes('minimal') && !allText.includes('letter') && !allText.includes('sincere') && !allText.includes('note') && !allText.includes('clean')) return false;
+            } else if (style === 'cinematic') {
+              if (!allText.includes('cinematic') && !allText.includes('cinema') && !allText.includes('film') && !allText.includes('heritage')) return false;
+            } else if (style === 'premium') {
+              if (!allText.includes('premium') && !allText.includes('signature') && !allText.includes('vip') && !allText.includes('luxury') && !allText.includes('royal')) return false;
+            }
+          }
+
+          return true;
+        });
+
+        // Sorting
+        if (state.sort === 'price-asc') {
+          res.sort((a, b) => Number(a.price || 0) - Number(b.price || 0));
+        } else if (state.sort === 'price-desc') {
+          res.sort((a, b) => Number(b.price || 0) - Number(a.price || 0));
+        } else if (state.sort === 'popular') {
+          res.sort((a, b) => (b.badge ? 1 : 0) - (a.badge ? 1 : 0) || (b.isLuxury ? 1 : 0) - (a.isLuxury ? 1 : 0));
+        } else if (state.sort === 'newest') {
+          res.reverse();
+        }
+
+        return res;
+      }
+
+      function renderDiscoveryRails() {
+        const all = getTemplates();
+
+        const railsConfig = [
+          {
+            railId: 'rail-featured',
+            countId: 'count-featured',
+            filterFn: t => t.tier === 'Premium' || t.badge || (t.tags && t.tags.includes('bestseller')) || Number(t.price || 0) >= 149
+          },
+          {
+            railId: 'rail-popular',
+            countId: 'count-popular',
+            filterFn: t => t.badge || t.isFree || (t.tags && (t.tags.includes('trending') || t.tags.includes('popular')))
+          },
+          {
+            railId: 'rail-birthday',
+            countId: 'count-birthday',
+            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('birthday')
+          },
+          {
+            railId: 'rail-love',
+            countId: 'count-love',
+            filterFn: t => {
+              const c = (t.categorySlug || t.category || '').toLowerCase();
+              return c.includes('love') || c.includes('romance');
+            }
+          },
+          {
+            railId: 'rail-anniversary',
+            countId: 'count-anniversary',
+            filterFn: t => {
+              const c = (t.categorySlug || t.category || '').toLowerCase();
+              return c.includes('anniversary') || c.includes('wedding');
+            }
+          },
+          {
+            railId: 'rail-friendship',
+            countId: 'count-friendship',
+            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('friend')
+          },
+          {
+            railId: 'rail-family',
+            countId: 'count-family',
+            filterFn: t => {
+              const c = (t.categorySlug || t.category || '').toLowerCase();
+              return c.includes('family') || c.includes('thank') || c.includes('maa');
+            }
+          },
+          {
+            railId: 'rail-memories',
+            countId: 'count-memories',
+            filterFn: t => {
+              const c = (t.categorySlug || t.category || '').toLowerCase();
+              return c.includes('memor') || c.includes('timeline') || c.includes('farewell');
+            }
+          },
+          {
+            railId: 'rail-premium',
+            countId: 'count-premium',
+            filterFn: t => Number(t.price || 0) >= 199 || t.tier === 'Signature' || t.isLuxury
+          }
+        ];
+
+        railsConfig.forEach(cfg => {
+          const el = document.getElementById(cfg.railId);
+          const countEl = document.getElementById(cfg.countId);
+          if (!el) return;
+
+          const items = all.filter(cfg.filterFn);
+          if (countEl) countEl.textContent = `${items.length} Moments`;
+
+          el.innerHTML = items.map(t => `
+            <div class="rail-card-wrapper">
+              ${createCardHtml(t)}
+            </div>
+          `).join('');
+        });
+
+        // Render "More templates worth a look" recommendations section
+        if (window.VanviTemplatesData && typeof window.VanviTemplatesData.renderRecommendations === 'function') {
+          window.VanviTemplatesData.renderRecommendations('recommendationsContainer', 'none');
+        }
+      }
+
+      function renderFilteredResults() {
+        const railsView = document.getElementById('discoveryRailsView');
+        const gridView = document.getElementById('filterResultsView');
+        const grid = document.getElementById('filterGrid');
+        const countLabel = document.getElementById('filterResultsCount');
+
+        const all = getTemplates();
+        const filtered = filterTemplateList(all);
+
+        // Check if any filter is active
+        const isFiltering = state.search.trim() !== '' || 
+                            state.category !== 'all' || 
+                            state.price !== 'all' || 
+                            state.experience !== 'all' || 
+                            state.style !== 'all' || 
+                            state.sort !== 'recommended';
+
+        if (!isFiltering) {
+          if (railsView) railsView.style.display = 'block';
+          if (gridView) gridView.style.display = 'none';
+          return;
+        }
+
+        // Show grid view
+        if (railsView) railsView.style.display = 'none';
+        if (gridView) gridView.style.display = 'block';
+
+        const resPill = document.getElementById('searchResultPill');
+        if (resPill) {
+          if (state.search.trim()) {
+            resPill.textContent = `${filtered.length} found`;
+            resPill.style.display = 'inline-block';
+          } else {
+            resPill.style.display = 'none';
+          }
+        }
+
+        if (countLabel) countLabel.textContent = `${filtered.length} Moments`;
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `
+            <div class="empty-search-state">
+              <span style="font-size: 38px; display:block; margin-bottom: 8px;">🕊️</span>
+              <h3 style="font-size: 18px; font-weight:800; margin-bottom: 6px;">No moments found</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Try clearing filters or search another feeling.</p>
+              <button type="button" class="btn-card-create" style="max-width: 170px; margin: 0 auto; display:block;" onclick="resetAllFilters()">Reset Filters</button>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = filtered.map(t => createCardHtml(t)).join('');
+      }
+
+      function updateActiveChipsRow() {
+        const row = document.getElementById('activeFiltersRow');
+        const list = document.getElementById('activeChipsList');
+        const badge = document.getElementById('activeFilterBadge');
+        if (!row || !list) return;
+
+        const chips = [];
+
+        if (state.category !== 'all') {
+          chips.push({ type: 'category', label: `Category: ${state.category.toUpperCase()}` });
+        }
+        if (state.price !== 'all') {
+          chips.push({ type: 'price', label: `Price: ${state.price}` });
+        }
+        if (state.experience !== 'all') {
+          chips.push({ type: 'experience', label: `Exp: ${state.experience}` });
+        }
+        if (state.style !== 'all') {
+          chips.push({ type: 'style', label: `Style: ${state.style}` });
+        }
+        if (state.sort !== 'recommended') {
+          chips.push({ type: 'sort', label: `Sort: ${state.sort}` });
+        }
+        if (state.search.trim()) {
+          chips.push({ type: 'search', label: `Search: "${state.search.trim()}"` });
+        }
+
+        if (badge) {
+          if (chips.length > 0) {
+            badge.textContent = chips.length;
+            badge.style.display = 'inline-block';
+          } else {
+            badge.style.display = 'none';
+          }
+        }
+
+        if (chips.length === 0) {
+          row.style.display = 'none';
+          list.innerHTML = '';
+          return;
+        }
+
+        row.style.display = 'flex';
+        list.innerHTML = chips.map(c => `
+          <button type="button" class="active-chip-pill" onclick="removeSingleFilter('${c.type}')">
+            <span>${escapeHtml(c.label)}</span>
+            <span>✕</span>
+          </button>
+        `).join('');
+      }
+
+      function buildCategoryFilterPills() {
+        const container = document.getElementById('filterCategoryPills');
+        if (!container) return;
+
+        const all = getTemplates();
+        const categories = [
+          { id: 'all', label: 'All Categories' },
+          { id: 'birthday', label: '🎂 Birthday' },
+          { id: 'love', label: '💖 Love' },
+          { id: 'anniversary', label: '💍 Anniversary' },
+          { id: 'friendship', label: '👯 Friendship' },
+          { id: 'family', label: '👨‍👩‍👦 Family' },
+          { id: 'apology', label: '🕊️ Apology' },
+          { id: 'celebration', label: '🎉 Celebration' },
+          { id: 'memories', label: '📸 Memories' },
+          { id: 'free', label: '🎁 100% Free' },
+          { id: 'premium', label: '👑 VIP Signature' }
+        ];
+
+        let html = '';
+        categories.forEach(cat => {
+          let count = 0;
+          if (cat.id === 'all') {
+            count = all.length;
+          } else if (cat.id === 'free') {
+            count = all.filter(t => t.isFree || Number(t.price || 0) === 0).length;
+          } else if (cat.id === 'premium') {
+            count = all.filter(t => !t.isFree && Number(t.price || 0) > 0).length;
+          } else if (cat.id === 'love') {
+            count = all.filter(t => {
+              const c = (t.categorySlug || t.category || '').toLowerCase();
+              return c.includes('love') || c.includes('romance');
+            }).length;
+          } else if (cat.id === 'anniversary') {
+            count = all.filter(t => {
+              const c = (t.categorySlug || t.category || '').toLowerCase();
+              return c.includes('anniversary') || c.includes('wedding');
+            }).length;
+          } else if (cat.id === 'family') {
+            count = all.filter(t => {
+              const c = (t.categorySlug || t.category || '').toLowerCase();
+              return c.includes('family') || c.includes('thank');
+            }).length;
+          } else if (cat.id === 'memories') {
+            count = all.filter(t => {
+              const c = (t.categorySlug || t.category || '').toLowerCase();
+              return c.includes('memor') || c.includes('timeline') || c.includes('farewell');
+            }).length;
+          } else {
+            count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes(cat.id)).length;
+          }
+
+          const isActive = state.category === cat.id ? 'active' : '';
+          html += `
+            <button type="button" class="filter-pill-opt ${isActive}" data-cat="${cat.id}" onclick="selectFilter('category', '${cat.id}')">
+              <span>${cat.label}</span>
+              <span class="opt-count">${count}</span>
+            </button>
+          `;
+        });
+        container.innerHTML = html;
+      }
+
+      // Filter Drawer Handlers
+      window.openFilterDrawer = function () {
+        const drawer = document.getElementById('filterDrawer');
+        if (drawer) drawer.style.display = 'flex';
+      };
+
+      window.closeFilterDrawer = function (e) {
+        if (e && e.target !== e.currentTarget && e.target.className !== 'drawer-close-btn') return;
+        const drawer = document.getElementById('filterDrawer');
+        if (drawer) drawer.style.display = 'none';
+      };
+
+      window.selectFilter = function (type, value) {
+        state[type] = value;
+
+        // Sync quickSortSelect if sort changed
+        if (type === 'sort') {
+          const sortSel = document.getElementById('quickSortSelect');
+          if (sortSel) sortSel.value = value;
+        }
+
+        // Update pill UI
+        const containerMap = {
+          category: 'filterCategoryPills',
+          price: 'filterPricePills',
+          experience: 'filterExperiencePills',
+          style: 'filterStylePills',
+          sort: 'filterSortPills'
+        };
+
+        const container = document.getElementById(containerMap[type]);
+        if (container) {
+          const attr = type === 'category' ? 'data-cat' : (type === 'price' ? 'data-price' : (type === 'experience' ? 'data-exp' : (type === 'style' ? 'data-style' : 'data-sort')));
+          container.querySelectorAll('.filter-pill-opt').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute(attr) === value);
+          });
+        }
+
+        // Sync quick category pills if category changed
+        if (type === 'category') {
+          syncQuickCategoryStrip(value);
+        }
+
+        // Sync quick price chips if price changed
+        if (type === 'price') {
+          syncQuickPriceStrip(value);
+        }
+
+        updateActiveChipsRow();
+        renderFilteredResults();
+      };
+
+      window.applySearchTag = function (tag) {
+        if (tag === 'vip') {
+          selectQuickCategory('vip');
+          return;
+        }
+        const input = document.getElementById('searchInput');
+        if (input) {
+          input.value = tag;
+          state.search = tag;
+          const clear = document.getElementById('searchClear');
+          if (clear) clear.style.display = 'flex';
+          updateActiveChipsRow();
+          renderFilteredResults();
+          const target = document.getElementById('filterResultsView');
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
+
+      window.switchFilterSegment = function (seg) {
+        const occasionsStrip = document.getElementById('quickOccasionsStrip');
+        const priceStrip = document.getElementById('quickPriceStrip');
+        const tabOccasions = document.getElementById('tabOccasions');
+        const tabBudgets = document.getElementById('tabBudgets');
+
+        if (seg === 'budgets') {
+          if (occasionsStrip) occasionsStrip.style.display = 'none';
+          if (priceStrip) priceStrip.style.display = 'flex';
+          if (tabOccasions) tabOccasions.classList.remove('active');
+          if (tabBudgets) tabBudgets.classList.add('active');
+        } else {
+          if (occasionsStrip) occasionsStrip.style.display = 'flex';
+          if (priceStrip) priceStrip.style.display = 'none';
+          if (tabOccasions) tabOccasions.classList.add('active');
+          if (tabBudgets) tabBudgets.classList.remove('active');
+        }
+      };
+
+      window.selectQuickCategory = function (catId) {
+        state.search = '';
+        const input = document.getElementById('searchInput');
+        const clear = document.getElementById('searchClear');
+        const resPill = document.getElementById('searchResultPill');
+        if (input) input.value = '';
+        if (clear) clear.style.display = 'none';
+        if (resPill) resPill.style.display = 'none';
+        selectFilter('category', catId);
+      };
+
+      function syncQuickCategoryStrip(catId) {
+        const strip = document.getElementById('quickOccasionsStrip');
+        if (!strip) return;
+        strip.querySelectorAll('.quick-cat-pill').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.cat === catId);
+        });
+      }
+
+      function syncQuickPriceStrip(priceVal) {
+        const strip = document.getElementById('quickPriceStrip');
+        const dot = document.getElementById('budgetActiveDot');
+        if (dot) dot.style.display = (priceVal && priceVal !== 'all' ? 'inline-block' : 'none');
+        if (!strip) return;
+        strip.querySelectorAll('.quick-price-chip').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.price === priceVal);
+        });
+      }
+
+      window.removeSingleFilter = function (type) {
+        if (type === 'search') {
+          state.search = '';
+          const input = document.getElementById('searchInput');
+          const clear = document.getElementById('searchClear');
+          if (input) input.value = '';
+          if (clear) clear.style.display = 'none';
+        } else if (type === 'sort') {
+          selectFilter('sort', 'recommended');
+        } else {
+          selectFilter(type, 'all');
+        }
+        updateActiveChipsRow();
+        renderFilteredResults();
+      };
+
+      window.resetAllFilters = function () {
+        state.category = 'all';
+        state.price = 'all';
+        state.experience = 'all';
+        state.style = 'all';
+        state.sort = 'recommended';
+        state.search = '';
+
+        const input = document.getElementById('searchInput');
+        const clear = document.getElementById('searchClear');
+        if (input) input.value = '';
+        if (clear) clear.style.display = 'none';
+
+        selectFilter('category', 'all');
+        selectFilter('price', 'all');
+        selectFilter('experience', 'all');
+        selectFilter('style', 'all');
+        selectFilter('sort', 'recommended');
+
+        syncQuickCategoryStrip('all');
+        syncQuickPriceStrip('all');
+
+        closeFilterDrawer();
+        updateActiveChipsRow();
+        renderFilteredResults();
+      };
+
+      // Search Handler (Ultra-Fast 60fps RAF Debounce)
+      const searchInput = document.getElementById('searchInput');
+      const searchClear = document.getElementById('searchClear');
+      let searchRaf = null;
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          state.search = e.target.value;
+          if (searchClear) searchClear.style.display = state.search ? 'block' : 'none';
+          if (searchRaf) cancelAnimationFrame(searchRaf);
+          searchRaf = requestAnimationFrame(() => {
+            updateActiveChipsRow();
+            renderFilteredResults();
+          });
+        });
+      }
+      if (searchClear) {
+        searchClear.addEventListener('click', () => {
+          state.search = '';
+          if (searchInput) searchInput.value = '';
+          searchClear.style.display = 'none';
+          updateActiveChipsRow();
+          renderFilteredResults();
+        });
+      }
+
+      // View Mode Toggle Handler (2-Col Boutique Grid vs 1-Col Luxury Editorial)
+      window.switchCardViewMode = function (mode) {
+        const btnGrid = document.getElementById('btnViewGrid');
+        const btnMag = document.getElementById('btnViewMag');
+        const filterGrid = document.getElementById('filterGrid');
+        const railsView = document.getElementById('discoveryRailsView');
+
+        if (mode === 'magazine') {
+          if (btnGrid) btnGrid.classList.remove('active');
+          if (btnMag) btnMag.classList.add('active');
+          if (filterGrid) filterGrid.classList.add('is-magazine-view');
+          if (railsView) railsView.classList.add('is-magazine-mode');
+          try { localStorage.setItem('vanvi_cards_view_mode', 'magazine'); } catch (e) {}
+        } else {
+          if (btnGrid) btnGrid.classList.add('active');
+          if (btnMag) btnMag.classList.remove('active');
+          if (filterGrid) filterGrid.classList.remove('is-magazine-view');
+          if (railsView) railsView.classList.remove('is-magazine-mode');
+          try { localStorage.setItem('vanvi_cards_view_mode', 'grid'); } catch (e) {}
+        }
+      };
+
+      // Check URL parameters for initial category filter
+      const urlParams = new URLSearchParams(window.location.search);
+      const catParam = urlParams.get('category') || urlParams.get('cat');
+      if (catParam) {
+        state.category = catParam.toLowerCase();
+        syncQuickCategoryStrip(state.category);
+      }
+
+      // Restore saved view mode preference
+      try {
+        const savedView = localStorage.getItem('vanvi_cards_view_mode');
+        if (savedView === 'magazine') {
+          window.switchCardViewMode('magazine');
+        }
+      } catch (e) {}
+
+      // Initialize
+      buildCategoryFilterPills();
+      renderDiscoveryRails();
+      updateActiveChipsRow();
+      renderFilteredResults();
+    })();
+  </script>
+  <script src="js/vanvi-navigation.js"></script>
+
+  <!-- Lenis Smooth Scroll Engine -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script>
+    (function initLenis() {
+      if (typeof Lenis !== 'undefined') {
+        try {
+          const lenis = new Lenis({
+            duration: 1.15,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            orientation: 'vertical'
+          });
+          function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
+          requestAnimationFrame(raf);
+          window.vanviLenis = lenis;
+        } catch (e) {
+          console.warn('Lenis init skipped:', e);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

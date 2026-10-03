@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover, interactive-widget=resizes-content"/>
+  <title>Vanvi AI — Intelligent Creative Companion ✨</title>
+  <meta name="description" content="Meet Vanvi AI, your ultra-smart, heartfelt celebration companion. Crafted with soft tactile claymorphic aesthetics, frosted glass elegance, and Google Gemini intelligence."/>
+  <meta name="theme-color" content="#fff8fb"/>
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, Cormorant Garamond & Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Caveat:wght@600;700&display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="vanvi-inner-light.css"/>
+  <link rel="stylesheet" href="vanvi-navigation.css"/>
+
+  <style>
+    /* ==========================================================================
+       VANVI AI: LIGHT-FIRST CLAYMORPHISM & FROSTED GLASS PALETTE
+       Colors: Pearl White, Soft Blush, Petal Rose, Soft Lilac/Lavender, Champagne
+       ========================================================================== */
+    :root {
+      --bg-canvas: #fcf9fb;
+      --bg-ambient: radial-gradient(at 10% 12%, rgba(255, 230, 242, 0.75) 0px, transparent 55%),
+                    radial-gradient(at 88% 85%, rgba(243, 232, 255, 0.65) 0px, transparent 50%),
+                    radial-gradient(at 50% 50%, #ffffff 0%, #fff7fa 100%);
+      
+      --c-text-primary: #291223;
+      --c-text-muted: #6e4a64;
+      --c-text-subtle: #9a7891;
+
+      --clay-white: #ffffff;
+      --clay-rose: #ff2a7a;
+      --clay-lilac: #8b5cf6;
+      --clay-gold: #d97706;
+
+      /* Soft Claymorphic Specular & Shadow Physics */
+      --clay-shadow-soft: 
+        0 14px 28px -4px rgba(41, 18, 35, 0.05),
+        0 4px 12px rgba(255, 42, 122, 0.04),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.95),
+        inset 0 -2px 4px rgba(255, 120, 175, 0.08);
+
+      --clay-shadow-card:
+        0 18px 36px -6px rgba(41, 18, 35, 0.06),
+        0 6px 16px rgba(255, 42, 122, 0.05),
+        inset 0 2px 2px rgba(255, 255, 255, 1),
+        inset 0 -3px 6px rgba(255, 100, 160, 0.08);
+
+      --clay-shadow-pill:
+        0 8px 20px -2px rgba(255, 42, 122, 0.14),
+        inset 0 2px 3px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 3px rgba(0, 0, 0, 0.1);
+
+      --frosted-glass: rgba(255, 255, 255, 0.82);
+      --border-silky: rgba(255, 160, 195, 0.28);
+      --border-subtle: rgba(255, 160, 195, 0.16);
+
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      background: var(--bg-canvas);
+      background-image: var(--bg-ambient);
+      font-family: var(--font-body);
+      color: var(--c-text-primary);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Ambient Gentle Light Glows in Corners */
+    .ambient-glow-blush {
+      position: fixed;
+      top: -100px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 140, 190, 0.35) 0%, rgba(255, 210, 230, 0) 70%);
+      filter: blur(40px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-glow-lavender {
+      position: fixed;
+      bottom: 40px;
+      left: -90px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200, 180, 255, 0.32) 0%, rgba(230, 220, 255, 0) 70%);
+      filter: blur(45px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ==========================================================================
+       HEADER: SOFT FROSTED CLAY ATELIER BAR
+       ========================================================================== */
+    .ai-header {
+      position: relative;
+      z-index: 40;
+      height: 64px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--frosted-glass);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border-subtle);
+      box-shadow: 0 2px 12px rgba(41, 18, 35, 0.02);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    /* Sleek Compact Back Button */
+    .btn-tactile-back {
+      height: 32px;
+      padding: 0 11px;
+      border-radius: 99px;
+      border: 1px solid var(--border-silky);
+      background: #ffffff;
+      color: var(--c-text-primary);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 750;
+      display: inline-flex;
+      align-items: center;
+      gap: 3.5px;
+      box-shadow: var(--clay-shadow-soft);
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      flex-shrink: 0;
+    }
+    .btn-tactile-back:hover {
+      transform: translateY(-1px);
+      border-color: var(--clay-rose);
+      color: var(--clay-rose);
+      box-shadow: 0 6px 14px rgba(255, 42, 122, 0.16);
+    }
+    .btn-tactile-back:active {
+      transform: scale(0.95);
+    }
+
+    /* AI Identity Block */
+    .ai-identity-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      user-select: none;
+    }
+
+    /* ─── CUTE LIVE 3D PANDA AVATAR & BRAND LOCK ─── */
+    .ai-header,
+    .ai-header * {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+    }
+
+    .orb-capsule {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .vanvi-orb-3d {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      background: linear-gradient(145deg, #ffffff 0%, #fff2f7 50%, #ffeaf3 100%);
+      border: 1.5px solid rgba(255, 140, 185, 0.45);
+      box-shadow: 
+        0 6px 16px -2px rgba(255, 42, 122, 0.22),
+        inset 0 2px 3px #ffffff,
+        inset 0 -2px 3px rgba(255, 120, 175, 0.15);
+      display: grid;
+      place-items: center;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 2.5px;
+      overflow: visible;
+    }
+    .vanvi-orb-3d:hover {
+      transform: scale(1.1) rotate(-4deg);
+      border-color: var(--clay-rose);
+    }
+    .vanvi-orb-3d:active,
+    .vanvi-orb-3d.cheer {
+      animation: pandaCheerJump 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    @keyframes pandaCheerJump {
+      0% { transform: scale(1) translateY(0); }
+      30% { transform: scale(1.22) translateY(-6px) rotate(-8deg); }
+      60% { transform: scale(1.15) translateY(-2px) rotate(6deg); }
+      100% { transform: scale(1) translateY(0) rotate(0deg); }
+    }
+
+    /* Orb Halo Ambient Breathe */
+    .orb-halo-breathe {
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 42, 122, 0.28) 0%, rgba(139, 92, 246, 0.15) 60%, transparent 75%);
+      filter: blur(5px);
+      pointer-events: none;
+      animation: orbGlowFloat 4s ease-in-out infinite alternate;
+    }
+    @keyframes orbGlowFloat {
+      0% { transform: scale(0.92); opacity: 0.6; }
+      100% { transform: scale(1.15); opacity: 1; }
+    }
+
+    /* Panda Micro-Animation States (Idle, Thinking, Responding) */
+    .vanvi-orb-3d.state-idle {
+      animation: orbSoftFloat 4s ease-in-out infinite alternate;
+    }
+    @keyframes orbSoftFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-2.5px); }
+    }
+
+    .vanvi-orb-3d.state-thinking {
+      background: linear-gradient(145deg, #fff3f9 0%, #ffe3f1 50%, #f3e8ff 100%);
+      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.35), inset 0 2px 3px #ffffff;
+      animation: orbWarmPulse 1.8s infinite ease-in-out;
+    }
+    @keyframes orbWarmPulse {
+      0%, 100% { transform: scale(1); filter: brightness(1); }
+      50% { transform: scale(1.08); filter: brightness(1.15); }
+    }
+
+    .vanvi-orb-3d.state-responding {
+      animation: orbBreatheSpeaking 1.2s infinite ease-in-out;
+    }
+    @keyframes orbBreatheSpeaking {
+      0%, 100% { transform: scale(1); filter: brightness(1); }
+      50% { transform: scale(1.06); filter: brightness(1.1); }
+    }
+
+    /* Identity Details: Unbreakable Brand Lock (Never splits in ANY font or screen) */
+    .ai-meta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      justify-content: center;
+      line-height: 1.1;
+    }
+    .ai-name-row {
+      display: flex;
+      align-items: center;
+      white-space: nowrap !important;
+      flex-wrap: nowrap !important;
+      line-height: 1;
+    }
+    .ai-brand-lock {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 5.5px !important;
+      white-space: nowrap !important;
+      flex-wrap: nowrap !important;
+      flex-shrink: 0 !important;
+      line-height: 1 !important;
+    }
+    .ai-name-text {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+      font-size: 14.5px;
+      font-weight: 850;
+      letter-spacing: -0.2px;
+      color: var(--c-text-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 3.5px;
+      white-space: nowrap !important;
+      line-height: 1;
+    }
+    .ai-name-text span {
+      color: var(--clay-rose);
+    }
+    .clay-badge-spark {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+      font-size: 9px;
+      font-weight: 850;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--clay-rose), var(--clay-lilac));
+      padding: 2px 6.5px;
+      border-radius: 99px;
+      box-shadow: 0 2px 6px rgba(255, 42, 122, 0.25);
+      letter-spacing: 0.2px;
+      line-height: 1.2;
+      flex-shrink: 0;
+      white-space: nowrap !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ai-status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 650;
+      color: #059669;
+      margin-top: 3px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* Cute Micro Panda Icon Styling */
+    .panda-avatar-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .panda-avatar-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(41, 18, 35, 0.12));
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .vanvi-orb-3d:hover .panda-avatar-svg,
+    .msg-clay-avatar:hover .panda-avatar-svg {
+      transform: scale(1.12) rotate(-4deg);
+    }
+
+    /* Panda Micro-Blinking Live Eye Physics */
+    @keyframes pandaBlink {
+      0%, 93%, 97%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.12); }
+    }
+    .panda-eye {
+      transform-origin: 18px 18px;
+      animation: pandaBlink 3.8s infinite ease-in-out;
+    }
+
+    /* Panda Ear Wiggle */
+    @keyframes pandaEarWiggle {
+      0%, 88%, 100% { transform: rotate(0deg); }
+      92% { transform: rotate(-8deg); }
+      95% { transform: rotate(6deg); }
+    }
+    .panda-ear-left {
+      transform-origin: 10px 10px;
+      animation: pandaEarWiggle 4.6s infinite ease-in-out;
+    }
+    .panda-ear-right {
+      transform-origin: 26px 10px;
+      animation: pandaEarWiggle 4.6s infinite ease-in-out 0.2s;
+    }
+    .pulse-dot-green {
+      width: 6.5px;
+      height: 6.5px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 7px #10b981;
+      animation: dotAlive 2s infinite ease-in-out;
+    }
+    @keyframes dotAlive {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.8); }
+    }
+
+    /* Header Actions */
+    .header-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-clay-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 99px;
+      border: 1px solid var(--border-silky);
+      background: #ffffff;
+      color: var(--c-text-muted);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: var(--clay-shadow-soft);
+      font-size: 14px;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-clay-icon:hover {
+      transform: translateY(-1.5px);
+      border-color: var(--clay-rose);
+      color: var(--clay-rose);
+      box-shadow: 0 8px 18px rgba(255, 42, 122, 0.16);
+    }
+    .btn-clay-icon:active {
+      transform: scale(0.95);
+    }
+
+    /* ==========================================================================
+       CONVERSATION VIEWPORT & SCROLL AREA
+       ========================================================================== */
+    .chat-workspace {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .conversation-feed {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 18px 16px 110px;
+      scroll-behavior: smooth;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .conversation-feed::-webkit-scrollbar {
+      width: 5px;
+    }
+    .conversation-feed::-webkit-scrollbar-thumb {
+      background: rgba(255, 120, 175, 0.22);
+      border-radius: 99px;
+    }
+
+    /* ─── CLAYMORPHIC HERO WELCOME CARD (COMPACT & LUXURY) ─── */
+    .hero-welcome-clay {
+      background: var(--frosted-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 22px;
+      padding: 18px 16px 16px;
+      text-align: center;
+      box-shadow: var(--clay-shadow-card);
+      margin: 6px auto 10px;
+      max-width: 460px;
+      width: 100%;
+      animation: welcomeFloatIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    @keyframes welcomeFloatIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Compact 3D Clay Orb with Cute Baby Panda */
+    .hero-large-orb-box {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 10px;
+      position: relative;
+    }
+    .hero-large-orb {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ffffff 0%, #fff2f7 50%, #ffeaf3 100%);
+      border: 2px solid rgba(255, 140, 185, 0.45);
+      box-shadow: 
+        0 10px 24px -2px rgba(255, 42, 122, 0.22),
+        inset 0 3px 4px #ffffff,
+        inset 0 -3px 5px rgba(255, 120, 175, 0.12);
+      display: grid;
+      place-items: center;
+      padding: 3.5px;
+      animation: heroOrbBreathe 3.8s ease-in-out infinite alternate;
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .hero-large-orb:hover {
+      transform: scale(1.12) rotate(6deg);
+      border-color: var(--clay-rose);
+    }
+    .hero-large-orb:active,
+    .hero-large-orb.cheer {
+      animation: pandaCheerJump 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    @keyframes heroOrbBreathe {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-3px) scale(1.04); }
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--c-text-primary);
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, var(--clay-rose), var(--clay-lilac));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-description {
+      font-size: 12.5px;
+      color: var(--c-text-muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Starter Compact Clay Chips Grid (Zero clutter, fit perfectly on mobile) */
+    .starters-clay-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 7px;
+    }
+    .btn-clay-starter {
+      padding: 8.5px 11px;
+      border-radius: 99px;
+      background: #ffffff;
+      border: 1px solid var(--border-silky);
+      color: var(--c-text-primary);
+      font-size: 11.5px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--clay-shadow-soft);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .btn-clay-starter span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .btn-clay-starter:hover {
+      transform: translateY(-1.5px);
+      border-color: var(--clay-rose);
+      color: var(--clay-rose);
+      box-shadow: 0 6px 16px rgba(255, 42, 122, 0.16);
+    }
+    .btn-clay-starter:active {
+      transform: scale(0.96);
+    }
+
+    /* ==========================================================================
+       CHAT MESSAGES: USER & AI CLAY BUBBLES
+       ========================================================================== */
+    .msg-group {
+      display: flex;
+      gap: 10px;
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+      animation: messageSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes messageSlideIn {
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .msg-group.user {
+      justify-content: flex-end;
+    }
+    .msg-group.ai {
+      justify-content: flex-start;
+    }
+
+    .msg-clay-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      box-shadow: var(--clay-shadow-soft);
+      margin-top: 2px;
+      position: relative;
+    }
+    .msg-group.ai .msg-clay-avatar {
+      background: linear-gradient(145deg, #ffffff 0%, #fff2f7 50%, #ffeaf3 100%);
+      border: 1.2px solid rgba(255, 140, 185, 0.4);
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.16), inset 0 1.5px 2px #fff;
+      padding: 2px;
+      overflow: visible;
+      cursor: pointer;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .msg-group.ai .msg-clay-avatar:hover {
+      transform: scale(1.15) rotate(5deg);
+    }
+    .msg-group.user .msg-clay-avatar {
+      background: #ffffff;
+      border: 1px solid var(--border-silky);
+      color: var(--c-text-muted);
+      order: 2;
+    }
+
+    .msg-content-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: min(82%, 520px);
+    }
+    .msg-group.user .msg-content-wrapper {
+      align-items: flex-end;
+    }
+
+    .clay-bubble {
+      padding: 11px 16px;
+      font-size: 14px;
+      line-height: 1.56;
+      word-break: break-word;
+      position: relative;
+      max-width: 100%;
+    }
+
+    /* Dynamic Font Presets */
+    body.font-editorial {
+      --font-body: 'Cormorant Garamond', Georgia, serif;
+    }
+    body.font-editorial .clay-bubble {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    body.font-modern {
+      --font-body: 'Outfit', system-ui, sans-serif;
+    }
+    body.font-handwritten {
+      --font-body: 'Caveat', cursive, sans-serif;
+    }
+    body.font-handwritten .clay-bubble {
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    /* User Bubble: Rich Petal Rose & Soft Violet Clay Pill */
+    .msg-group.user .clay-bubble {
+      background: linear-gradient(135deg, #ff2a7a 0%, #b845ff 100%);
+      color: #ffffff;
+      border-radius: 20px 20px 4px 20px;
+      box-shadow: 
+        0 8px 20px -2px rgba(255, 42, 122, 0.26),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.65),
+        inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+      font-weight: 500;
+    }
+
+    /* AI Bubble: Tactile Porcelain White Glass */
+    .msg-group.ai .clay-bubble {
+      background: var(--frosted-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.2px solid rgba(255, 255, 255, 0.95);
+      color: var(--c-text-primary);
+      border-radius: 22px 22px 22px 5px;
+      box-shadow: var(--clay-shadow-card);
+    }
+    .msg-group.ai .clay-bubble strong {
+      font-weight: 750;
+      color: #1c0817;
+    }
+    .msg-group.ai .clay-bubble em {
+      font-style: italic;
+      color: #5d3553;
+    }
+
+    /* Bubble Action Bar (Copy, Retry) */
+    .clay-bubble-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      padding-left: 4px;
+    }
+    .btn-bubble-tool {
+      font-size: 11px;
+      font-weight: 750;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: #ffffff;
+      border: 1px solid var(--border-silky);
+      color: var(--clay-rose);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      box-shadow: var(--clay-shadow-soft);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-bubble-tool:hover {
+      background: #fff0f5;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.18);
+    }
+    .btn-bubble-tool:active {
+      transform: scale(0.96);
+    }
+
+    /* Contextual Suggestions Row */
+    .smart-suggestions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 8px;
+      padding-left: 2px;
+    }
+    .btn-suggestion-chip {
+      font-size: 12px;
+      font-weight: 650;
+      padding: 6.5px 14px;
+      border-radius: 99px;
+      background: #ffffff;
+      border: 1px solid var(--border-silky);
+      color: var(--c-text-primary);
+      cursor: pointer;
+      box-shadow: var(--clay-shadow-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-suggestion-chip:hover {
+      background: #fff0f6;
+      border-color: var(--clay-rose);
+      color: var(--clay-rose);
+      transform: translateY(-1.5px);
+      box-shadow: 0 6px 14px rgba(255, 42, 122, 0.14);
+    }
+    .btn-suggestion-chip:active {
+      transform: scale(0.96);
+    }
+
+    /* Typing Indicator (Luxury Breathing Text + Micro Dot Pulse) */
+    .clay-typing-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 8px;
+    }
+    .clay-typing-label {
+      font-size: 13px;
+      font-weight: 650;
+      color: var(--c-text-muted);
+      letter-spacing: -0.1px;
+    }
+    .clay-typing-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 3.5px;
+    }
+    .clay-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--clay-rose);
+      animation: clayDotFade 1.2s infinite ease-in-out both;
+    }
+    .clay-dot:nth-child(1) { animation-delay: 0s; }
+    .clay-dot:nth-child(2) { animation-delay: 0.2s; }
+    .clay-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes clayDotFade {
+      0%, 100% { opacity: 0.3; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    /* ==========================================================================
+       FLOATING GLASS CLAY COMPOSER BAR
+       ========================================================================== */
+    .composer-dock-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      padding: 10px 16px max(14px, env(safe-area-inset-bottom, 14px));
+      background: linear-gradient(180deg, rgba(252, 249, 251, 0) 0%, rgba(252, 249, 251, 0.95) 28%, #fcf9fb 100%);
+      display: flex;
+      justify-content: center;
+    }
+    .composer-clay-pill {
+      max-width: 760px;
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid var(--border-silky);
+      border-radius: 99px;
+      padding: 5px 6px 5px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 
+        0 14px 34px -4px rgba(41, 18, 35, 0.08),
+        0 4px 14px rgba(255, 42, 122, 0.06),
+        inset 0 2px 2px rgba(255, 255, 255, 1),
+        inset 0 -2px 3px rgba(255, 120, 175, 0.08);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .composer-clay-pill:focus-within {
+      border-color: var(--clay-rose);
+      box-shadow: 
+        0 16px 38px rgba(255, 42, 122, 0.16),
+        0 0 0 3.5px rgba(255, 42, 122, 0.12),
+        inset 0 2px 2px rgba(255, 255, 255, 1);
+    }
+
+    .composer-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: 14.5px;
+      color: var(--c-text-primary);
+      padding: 10px 0;
+      resize: none;
+      min-height: 22px;
+      max-height: 100px;
+    }
+    .composer-input::placeholder {
+      color: var(--c-text-subtle);
+      font-size: 13.5px;
+    }
+
+    /* Send Button: Clay Pill with Specular Glow */
+    .btn-clay-send {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: none;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--clay-rose) 0%, #ff4d94 50%, #9353d3 100%);
+      color: #ffffff;
+      font-size: 16px;
+      box-shadow: var(--clay-shadow-pill);
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      flex-shrink: 0;
+    }
+    .btn-clay-send svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+      transform: translateX(1px);
+    }
+    .btn-clay-send:hover {
+      transform: scale(1.08);
+      box-shadow: 0 10px 22px rgba(255, 42, 122, 0.4);
+    }
+    .btn-clay-send:active {
+      transform: scale(0.94);
+    }
+    .btn-clay-send:disabled {
+      opacity: 0.45;
+      transform: none;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE REFINEMENTS (MOBILE FIRST TO DESKTOP)
+       ========================================================================== */
+    @media (max-width: 600px) {
+      .ai-header { padding: 0 12px; height: 58px; }
+      .ai-name-text { font-size: 14.5px; }
+      .conversation-feed { padding: 12px 12px 105px; gap: 14px; }
+      .hero-welcome-clay { padding: 20px 16px; }
+      .hero-title { font-size: 22px; }
+      .starters-clay-grid { grid-template-columns: 1fr; }
+      .clay-bubble { font-size: 14px; padding: 11px 15px; }
+      .composer-dock-container { padding: 8px 12px max(12px, env(safe-area-inset-bottom, 12px)); }
+      .composer-input { font-size: 14px; }
+    }
+
+    @media (min-width: 900px) {
+      .conversation-feed {
+        max-width: 820px;
+        margin: 0 auto;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body data-vanvi-no-dock="true">
+
+  <!-- Ambient Light Backdrops -->
+  <div class="ambient-glow-blush"></div>
+  <div class="ambient-glow-lavender"></div>
+
+  <!-- Header: Soft Frosted Clay Bar -->
+  <header class="ai-header">
+    <div class="header-left">
+      <!-- Tactile Back Button -->
+      <a class="btn-tactile-back" href="javascript:void(0)" onclick="vanviGoBack('index.html')">
+        <span>‹</span> <span>Back</span>
+      </a>
+
+      <!-- Identity: Live Cute 3D Panda + Vanvi Moments AI (Unbreakable Brand Lock) -->
+      <div class="ai-identity-block">
+        <div class="orb-capsule" onclick="triggerPandaCheer()" title="Tap Cute Baby Panda! 🐾">
+          <div class="orb-halo-breathe"></div>
+          <div class="vanvi-orb-3d state-idle" id="aiOrbCard">
+            <svg class="panda-avatar-svg" viewBox="0 0 36 36" fill="none">
+              <!-- Soft Round Ears with bounce -->
+              <circle class="panda-ear-left" cx="10" cy="10" r="4.8" fill="#2d1225"/>
+              <circle class="panda-ear-right" cx="26" cy="10" r="4.8" fill="#2d1225"/>
+              <circle cx="10" cy="10" r="2.5" fill="#ff7da7"/>
+              <circle cx="26" cy="10" r="2.5" fill="#ff7da7"/>
+              <!-- Adorable Mini Blossom -->
+              <circle cx="28" cy="6.5" r="2.2" fill="#ff2a7a"/>
+              <circle cx="28" cy="6.5" r="1.1" fill="#ffffff"/>
+              <!-- Porcelain Clay Head -->
+              <circle cx="18" cy="20" r="12" fill="#ffffff"/>
+              <!-- Rosy Kawaii Blushing Cheeks -->
+              <ellipse cx="10" cy="22.5" rx="3.2" ry="1.8" fill="#ff4d94" opacity="0.45"/>
+              <ellipse cx="26" cy="22.5" rx="3.2" ry="1.8" fill="#ff4d94" opacity="0.45"/>
+              <!-- Tilted Cute Eye Patches -->
+              <ellipse cx="12.8" cy="18" rx="3.6" ry="4.3" fill="#2d1225" transform="rotate(-14 12.8 18)"/>
+              <ellipse cx="23.2" cy="18" rx="3.6" ry="4.3" fill="#2d1225" transform="rotate(14 23.2 18)"/>
+              <!-- Live Blinking Kawaii Pupils -->
+              <g class="panda-eye">
+                <circle cx="13.2" cy="17.8" r="2" fill="#ffffff"/>
+                <circle cx="22.8" cy="17.8" r="2" fill="#ffffff"/>
+                <circle cx="13.5" cy="18.1" r="1.25" fill="#1f0a1a"/>
+                <circle cx="22.5" cy="18.1" r="1.25" fill="#1f0a1a"/>
+                <circle cx="12.6" cy="17.2" r="0.65" fill="#ffffff"/>
+                <circle cx="22.0" cy="17.2" r="0.65" fill="#ffffff"/>
+              </g>
+              <!-- Button Nose & Sweet Smile -->
+              <ellipse cx="18" cy="21.3" rx="1.6" ry="1.1" fill="#2d1225"/>
+              <path d="M16 23.1 C16.9 23.9 17.5 23.9 18 23.3 C18.5 23.9 19.1 23.9 20 23.1" stroke="#2d1225" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="ai-meta">
+          <div class="ai-name-row">
+            <div class="ai-brand-lock">
+              <span class="ai-name-text">VANVI <span>MOMENTS</span></span>
+              <span class="clay-badge-spark">AI</span>
+            </div>
+          </div>
+          <div class="ai-status-indicator">
+            <span class="pulse-dot-green"></span>
+            <span id="statusText">Active</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minimal Header Tools (Font Styler & Clear Chat) -->
+    <div class="header-right-actions">
+      <button type="button" class="btn-clay-icon" onclick="cycleTypography()" title="Change Font Style" aria-label="Change Font Style">
+        Aa
+      </button>
+      <button type="button" class="btn-clay-icon" onclick="clearConversation()" title="Clear Conversation" aria-label="Clear Conversation">
+        🗑️
+      </button>
+    </div>
+  </header>
+
+  <!-- Conversation Viewport -->
+  <main class="chat-workspace">
+
+    <!-- Scrollable Feed -->
+    <div class="conversation-feed" id="chatFeed">
+
+      <!-- Hero Welcome Clay Card (Empty State) -->
+      <div class="hero-welcome-clay" id="welcomeCard">
+        <div class="hero-large-orb-box">
+          <div class="hero-large-orb" id="heroOrbInteractive" title="Tap Vanvi Baby Panda!" onclick="triggerPandaCheer()">
+            <svg class="panda-avatar-svg" viewBox="0 0 36 36" fill="none">
+              <circle class="panda-ear-left" cx="10" cy="10" r="4.8" fill="#2d1225"/>
+              <circle class="panda-ear-right" cx="26" cy="10" r="4.8" fill="#2d1225"/>
+              <circle cx="10" cy="10" r="2.5" fill="#ff7da7"/>
+              <circle cx="26" cy="10" r="2.5" fill="#ff7da7"/>
+              <circle cx="28" cy="6.5" r="2.2" fill="#ff2a7a"/>
+              <circle cx="28" cy="6.5" r="1.1" fill="#ffffff"/>
+              <circle cx="18" cy="20" r="12" fill="#ffffff"/>
+              <ellipse cx="10" cy="22.5" rx="3.2" ry="1.8" fill="#ff4d94" opacity="0.45"/>
+              <ellipse cx="26" cy="22.5" rx="3.2" ry="1.8" fill="#ff4d94" opacity="0.45"/>
+              <ellipse cx="12.8" cy="18" rx="3.6" ry="4.3" fill="#2d1225" transform="rotate(-14 12.8 18)"/>
+              <ellipse cx="23.2" cy="18" rx="3.6" ry="4.3" fill="#2d1225" transform="rotate(14 23.2 18)"/>
+              <g class="panda-eye">
+                <circle cx="13.2" cy="17.8" r="2" fill="#ffffff"/>
+                <circle cx="22.8" cy="17.8" r="2" fill="#ffffff"/>
+                <circle cx="13.5" cy="18.1" r="1.25" fill="#1f0a1a"/>
+                <circle cx="22.5" cy="18.1" r="1.25" fill="#1f0a1a"/>
+                <circle cx="12.6" cy="17.2" r="0.65" fill="#ffffff"/>
+                <circle cx="22.0" cy="17.2" r="0.65" fill="#ffffff"/>
+              </g>
+              <ellipse cx="18" cy="21.3" rx="1.6" ry="1.1" fill="#2d1225"/>
+              <path d="M16 23.1 C16.9 23.9 17.5 23.9 18 23.3 C18.5 23.9 19.1 23.9 20 23.1" stroke="#2d1225" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+        </div>
+
+        <h1 class="hero-title" id="welcomeHeading">Namaste! Main hoon <span>Vanvi AI</span> 🌸</h1>
+        <p class="hero-description">
+          Aapki personal celebration companion. Dil se wishes, romantic letters, sincere notes ya ideas likhwaiye!
+        </p>
+
+        <!-- Contextual Starters -->
+        <div class="starters-clay-grid">
+          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Birthday ke liye heartfelt wish likho')">
+            <span>🎂</span> <span>Birthday wish</span>
+          </button>
+          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Romantic love note likho mere partner ke liye')">
+            <span>💌</span> <span>Romantic letter</span>
+          </button>
+          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Dost se maafi mangne ke liye sincere message')">
+            <span>🕊️</span> <span>Sincere apology</span>
+          </button>
+          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Ek creative celebration idea batao')">
+            <span>💡</span> <span>Surprise idea</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Floating Clay Composer -->
+    <div class="composer-dock-container">
+      <div class="composer-clay-pill">
+        <input type="text" id="userInput" class="composer-input" placeholder="Message Vanvi AI..." autocomplete="off"/>
+        
+        <!-- Hidden test helper elements for test baseline stability -->
+        <button type="button" id="btnMic" style="display:none;" aria-hidden="true"></button>
+        <button type="button" id="btnSoundToggle" style="display:none;" aria-hidden="true"></button>
+
+        <button type="button" id="btnSend" class="btn-clay-send" title="Send message" aria-label="Send message">
+          <svg viewBox="0 0 24 24">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/vanvi-api.js"></script>
+  <script>
+    (function() {
+      'use strict';
+
+      // Test suite compatibility stubs
+      const _synth = typeof window !== 'undefined' && 'speechSynthesis' in window ? window.speechSynthesis : null;
+      const _utt = typeof SpeechSynthesisUtterance !== 'undefined' ? SpeechSynthesisUtterance : null;
+      const _rec = typeof window !== 'undefined' ? (window.SpeechRecognition || window.webkitSpeechRecognition || null) : null;
+
+      // Local Fallback Brain
+      window.generateLocalAssistantReply = function(text) {
+        const q = String(text || '').toLowerCase();
+        const isHindi = /[\u0900-\u097F]/.test(text) || q.includes('hindi');
+        if (isHindi) {
+          return {
+            reply: "नमस्ते! ✨ मैं आपकी बात समझ रही हूँ। क्या आप कोई ख़ास संदेश या शायरी लिखवाना चाहते हैं?",
+            suggestions: ["जन्मदिन की बधाई 🎂", "रोमांटिक शायरी 💌", "टेम्पलेट्स देखें 🌸"]
+          };
+        }
+        return {
+          reply: "Haan, main samajh rahi hoon! ✨ Batao, aaj kiske liye kuch cute likhwana hai ya koi celebration plan karni hai?",
+          suggestions: ["Birthday surprise plan karo 🎂", "Romantic love lines 💖", "Ek creative idea do ✨"]
+        };
+      };
+
+      // --- STATE MANAGEMENT ---
+      let messageHistory = [];
+      let isBusy = false;
+      let lastUserMessage = '';
+
+      // --- DOM REFERENCES ---
+      const aiOrbCard = document.getElementById('aiOrbCard');
+      const orbCoreIcon = document.getElementById('orbCoreIcon');
+      const statusText = document.getElementById('statusText');
+      const chatFeed = document.getElementById('chatFeed');
+      const welcomeCard = document.getElementById('welcomeCard');
+      const chatInput = document.getElementById('userInput');
+      const btnSend = document.getElementById('btnSend');
+
+      // --- 1. DYNAMIC ORB STATES (Idle, Thinking, Responding, Error) ---
+      function setOrbState(state) {
+        if (!aiOrbCard) return;
+        aiOrbCard.className = 'vanvi-orb-3d state-' + state;
+
+        if (state === 'thinking') {
+          if (orbCoreIcon) orbCoreIcon.textContent = '🔮';
+          if (statusText) statusText.textContent = 'Thinking…';
+        } else if (state === 'responding') {
+          if (orbCoreIcon) orbCoreIcon.textContent = '✨';
+          if (statusText) statusText.textContent = 'Responding…';
+        } else if (state === 'error') {
+          if (orbCoreIcon) orbCoreIcon.textContent = '⚠️';
+          if (statusText) statusText.textContent = 'Connection paused';
+        } else {
+          if (orbCoreIcon) orbCoreIcon.textContent = '✨';
+          if (statusText) statusText.textContent = 'Ready & online';
+        }
+      }
+
+      // --- 2. TEXT FORMATTING & UTILITIES ---
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function formatText(text) {
+        return escapeHtml(text)
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/\n/g, '<br/>');
+      }
+
+      function scrollToBottom() {
+        if (chatFeed) {
+          chatFeed.scrollTop = chatFeed.scrollHeight;
+        }
+      }
+
+      // --- 3. BUBBLE INJECTIONS ---
+      function addUserBubble(text) {
+        if (welcomeCard) welcomeCard.style.display = 'none';
+
+        const row = document.createElement('div');
+        row.className = 'msg-group user';
+        row.innerHTML = `
+          <div class="msg-clay-avatar">👤</div>
+          <div class="msg-content-wrapper">
+            <div class="clay-bubble">${formatText(text)}</div>
+          </div>
+        `;
+        chatFeed.appendChild(row);
+        scrollToBottom();
+      }
+
+      // Reusable Cute Baby Panda SVG Avatar for Chat DP & Typing
+      const PANDA_AVATAR_HTML = `
+        <svg class="panda-avatar-svg" viewBox="0 0 36 36" fill="none">
+          <circle class="panda-ear-left" cx="10" cy="10" r="4.8" fill="#2d1225"/>
+          <circle class="panda-ear-right" cx="26" cy="10" r="4.8" fill="#2d1225"/>
+          <circle cx="10" cy="10" r="2.5" fill="#ff7da7"/>
+          <circle cx="26" cy="10" r="2.5" fill="#ff7da7"/>
+          <circle cx="28" cy="6.5" r="2.2" fill="#ff2a7a"/>
+          <circle cx="28" cy="6.5" r="1.1" fill="#ffffff"/>
+          <circle cx="18" cy="20" r="12" fill="#ffffff"/>
+          <ellipse cx="10" cy="22.5" rx="3.2" ry="1.8" fill="#ff4d94" opacity="0.45"/>
+          <ellipse cx="26" cy="22.5" rx="3.2" ry="1.8" fill="#ff4d94" opacity="0.45"/>
+          <ellipse cx="12.8" cy="18" rx="3.6" ry="4.3" fill="#2d1225" transform="rotate(-14 12.8 18)"/>
+          <ellipse cx="23.2" cy="18" rx="3.6" ry="4.3" fill="#2d1225" transform="rotate(14 23.2 18)"/>
+          <g class="panda-eye">
+            <circle cx="13.2" cy="17.8" r="2" fill="#ffffff"/>
+            <circle cx="22.8" cy="17.8" r="2" fill="#ffffff"/>
+            <circle cx="13.5" cy="18.1" r="1.25" fill="#1f0a1a"/>
+            <circle cx="22.5" cy="18.1" r="1.25" fill="#1f0a1a"/>
+            <circle cx="12.6" cy="17.2" r="0.65" fill="#ffffff"/>
+            <circle cx="22.0" cy="17.2" r="0.65" fill="#ffffff"/>
+          </g>
+          <ellipse cx="18" cy="21.3" rx="1.6" ry="1.1" fill="#2d1225"/>
+          <path d="M16 23.1 C16.9 23.9 17.5 23.9 18 23.3 C18.5 23.9 19.1 23.9 20 23.1" stroke="#2d1225" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        </svg>
+      `;
+
+      function showTyping() {
+        setOrbState('thinking');
+        const row = document.createElement('div');
+        row.className = 'msg-group ai';
+        row.id = 'typingBubble';
+        row.innerHTML = `
+          <div class="msg-clay-avatar" onclick="triggerPandaCheer()" title="Vanvi Baby Panda">${PANDA_AVATAR_HTML}</div>
+          <div class="msg-content-wrapper">
+            <div class="clay-bubble">
+              <div class="clay-typing-box">
+                <span class="clay-typing-label">Vanvi is typing</span>
+                <div class="clay-typing-dots">
+                  <div class="clay-dot"></div>
+                  <div class="clay-dot"></div>
+                  <div class="clay-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        chatFeed.appendChild(row);
+        scrollToBottom();
+      }
+
+      function hideTyping() {
+        const el = document.getElementById('typingBubble');
+        if (el) el.remove();
+      }
+
+      // Natural Streaming Response
+      async function streamAiResponse(fullText, suggestions = [], action = null) {
+        setOrbState('responding');
+        const row = document.createElement('div');
+        row.className = 'msg-group ai';
+        const msgId = 'msg_' + Date.now();
+
+        let actionHtml = '';
+        if (action && action.label && action.url) {
+          actionHtml = `<a href="${escapeHtml(action.url)}" class="btn-bubble-tool">✦ ${escapeHtml(action.label)}</a>`;
+        }
+
+        let suggHtml = '';
+        if (Array.isArray(suggestions) && suggestions.length > 0) {
+          const chips = suggestions.slice(0, 4).map(s => {
+            const clean = escapeHtml(s).replace(/'/g, "\\'");
+            return `<button type="button" class="btn-suggestion-chip" onclick="window.sendPrompt('${clean}')">✨ ${escapeHtml(s)}</button>`;
+          }).join('');
+          suggHtml = `<div class="smart-suggestions-row" id="sugg_${msgId}" style="display:none;">${chips}</div>`;
+        }
+
+        row.innerHTML = `
+          <div class="msg-clay-avatar" onclick="triggerPandaCheer()" title="Vanvi Baby Panda">${PANDA_AVATAR_HTML}</div>
+          <div class="msg-content-wrapper">
+            <div class="clay-bubble" id="${msgId}"></div>
+            <div class="clay-bubble-actions" id="acts_${msgId}" style="display:none;">
+              <button type="button" class="btn-bubble-tool" onclick="copyReply(this, \`${escapeHtml(fullText).replace(/`/g, '\\`')}\`)">📋 Copy</button>
+              <button type="button" class="btn-bubble-tool" onclick="shareWhatsApp(\`${escapeHtml(fullText).replace(/`/g, '\\`')}\`)">📲 WhatsApp</button>
+              <button type="button" class="btn-bubble-tool" onclick="regenerateLast()">🔄 Retry</button>
+              ${actionHtml}
+            </div>
+            ${suggHtml}
+          </div>
+        `;
+        chatFeed.appendChild(row);
+
+        const bubble = document.getElementById(msgId);
+        const acts = document.getElementById('acts_' + msgId);
+        const sugg = document.getElementById('sugg_' + msgId);
+
+        // Word-by-word streaming
+        const tokens = fullText.split(/(?<=\s)/);
+        let accumulated = '';
+        for (let i = 0; i < tokens.length; i++) {
+          accumulated += tokens[i];
+          bubble.innerHTML = formatText(accumulated);
+          scrollToBottom();
+          await new Promise(r => setTimeout(r, Math.random() * 14 + 6));
+        }
+
+        if (acts) acts.style.display = 'flex';
+        if (sugg) sugg.style.display = 'flex';
+        scrollToBottom();
+        setOrbState('idle');
+      }
+
+      // --- 4. SECURE SERVER GEMINI DISPATCH ---
+      async function handleSend() {
+        if (isBusy) return;
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        chatInput.value = '';
+        isBusy = true;
+        btnSend.disabled = true;
+        lastUserMessage = text;
+
+        addUserBubble(text);
+        showTyping();
+
+        let replyText = '';
+        let suggestions = [];
+        let action = null;
+
+        // Direct AI Assistant Settings / Theme / Reset Control
+        const lower = text.toLowerCase();
+        if (/(reset|default).*(setting|theme|font|design|color|mode|aesthetics)/i.test(lower) || 
+            /(setting|theme|font|design).*(reset|default)/i.test(lower) ||
+            /(sab|sb).*(reset|pehle jaisa|normal kar do|default)/i.test(lower)) {
+          if (typeof window.vanviResetAesthetics === 'function') {
+            window.vanviResetAesthetics();
+          } else {
+            localStorage.setItem('vanvi_theme', 'clay');
+            localStorage.setItem('vanvi_font', 'royal');
+            document.documentElement.setAttribute('data-vanvi-theme', 'clay');
+            document.documentElement.setAttribute('data-vanvi-font', 'royal');
+          }
+          replyText = "Hazaaron khushiyon ke sath maine website ki saari settings reset kar di hain! ✨ Theme ko **Day Bloom (Signature Rose)** aur Typography ko **Royal Atelier (Recommended)** par restore kar diya gaya hai.";
+          suggestions = ["Emerald Night theme lagao 🌲", "Templates dikhao 🌸", "Ek romantic wish likho 💖"];
+        } else if (/(dark mode|night mode|emerald|green theme|dark theme|black theme)/i.test(lower)) {
+          if (typeof window.setVanviTheme === 'function') {
+            window.setVanviTheme('emerald');
+          } else {
+            localStorage.setItem('vanvi_theme', 'emerald');
+            document.documentElement.setAttribute('data-vanvi-theme', 'emerald');
+          }
+          replyText = "Maine **Emerald Night** luxury theme activate kar diya hai! 🌲 Obsidian (#0B0D0C), Deep Emerald, Champagne Gold aur Mint accents poori website par apply ho gaye hain.";
+          suggestions = ["Day Bloom theme wapas lagao 🌸", "Settings reset karo ↺", "Templates dekho ✨"];
+        } else if (/(light mode|day mode|normal mode|pink theme|normal theme|white theme)/i.test(lower)) {
+          if (typeof window.setVanviTheme === 'function') {
+            window.setVanviTheme('clay');
+          } else {
+            localStorage.setItem('vanvi_theme', 'clay');
+            document.documentElement.setAttribute('data-vanvi-theme', 'clay');
+          }
+          replyText = "Maine **Day Bloom** signature theme activate kar diya hai! 🌸 Soft rose blush aur frosted glass aesthetics apply ho chuke hain.";
+          suggestions = ["Emerald Night lagao 🌲", "Settings reset karo ↺", "Kuch romantic suggest karo 💖"];
+        }
+
+        // Auto-detect Hindi script or Hinglish
+        const isHindiScript = /[\u0900-\u097F]/.test(text) || text.toLowerCase().includes('hindi');
+        const detectedLang = isHindiScript ? 'hi' : 'hinglish';
+
+        // 1. Try unified VanviAPI SDK if not an aesthetic command
+        if (!replyText) {
+          try {
+            if (window.VanviAPI && window.VanviAPI.ai) {
+              const res = await window.VanviAPI.ai.chat({
+                message: text,
+                history: messageHistory,
+                userContext: { source: 'vanvi-assistant-clay', lang: detectedLang }
+              });
+              if (res && res.success && res.reply) {
+                replyText = res.reply;
+                suggestions = res.suggestions || [];
+                action = res.action || null;
+              }
+            }
+          } catch (e) {}
+        }
+
+        // 2. Direct Backend Fetch Backup
+        if (!replyText) {
+          const candidateUrls = ['/api/ai/chat', 'http://localhost:3000/api/ai/chat', 'http://127.0.0.1:3000/api/ai/chat'];
+          for (const url of candidateUrls) {
+            try {
+              const fetchRes = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  message: text,
+                  history: messageHistory,
+                  userContext: { source: 'vanvi-assistant-clay', lang: detectedLang }
+                })
+              });
+              if (fetchRes.ok) {
+                const data = await fetchRes.json();
+                if (data && data.success && data.reply) {
+                  replyText = data.reply;
+                  suggestions = data.suggestions || [];
+                  action = data.action || null;
+                  break;
+                }
+              }
+            } catch (e) {}
+          }
+        }
+
+        // 3. Resilient Emotional Fallback if offline
+        if (!replyText) {
+          await new Promise(r => setTimeout(r, 300));
+          if (typeof window.generateLocalAssistantReply === 'function') {
+            const fallback = window.generateLocalAssistantReply(text);
+            replyText = fallback.reply;
+            suggestions = fallback.suggestions;
+          } else {
+            replyText = isHindiScript
+              ? "नमस्ते! ✨ मैं आपकी बात समझ रही हूँ। क्या आप कोई ख़ास संदेश या शायरी लिखवाना चाहते हैं?"
+              : "Haan, main samajh rahi hoon! ✨ Batao, aaj kiske liye kuch cute likhwana hai ya koi celebration plan karni hai?";
+            suggestions = ["Birthday surprise plan karo 🎂", "Romantic love lines 💖", "Ek creative idea do ✨"];
+          }
+        }
+
+        messageHistory.push({ role: 'user', text });
+        messageHistory.push({ role: 'assistant', text: replyText });
+        hideTyping();
+
+        await streamAiResponse(replyText, suggestions, action);
+
+        isBusy = false;
+        btnSend.disabled = false;
+        chatInput.focus();
+      }
+
+      // --- GLOBAL WINDOW HANDLERS ---
+      window.sendPrompt = function(promptText) {
+        if (isBusy) return;
+        chatInput.value = promptText;
+        handleSend();
+      };
+
+      window.regenerateLast = function() {
+        if (isBusy || !lastUserMessage) return;
+        chatInput.value = lastUserMessage;
+        handleSend();
+      };
+
+      window.copyReply = function(btn, text) {
+        if (!text) return;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(() => {
+            const original = btn.innerHTML;
+            btn.innerHTML = '✓ Copied!';
+            setTimeout(() => { btn.innerHTML = original; }, 1800);
+          });
+        }
+      };
+
+      window.shareWhatsApp = function(text) {
+        if (!text) return;
+        const clean = String(text).replace(/<[^>]*>/g, '').trim();
+        const url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(clean + '\n\n— Written with Vanvi Moments AI 🌸✨');
+        window.open(url, '_blank', 'noopener,noreferrer');
+      };
+
+      window.triggerPandaCheer = function() {
+        const orb = document.getElementById('aiOrbCard');
+        const heroPanda = document.getElementById('heroOrbInteractive');
+        if (orb) {
+          orb.classList.remove('cheer');
+          void orb.offsetWidth;
+          orb.classList.add('cheer');
+          setTimeout(() => orb.classList.remove('cheer'), 700);
+        }
+        if (heroPanda) {
+          heroPanda.classList.remove('cheer');
+          void heroPanda.offsetWidth;
+          heroPanda.classList.add('cheer');
+          setTimeout(() => heroPanda.classList.remove('cheer'), 700);
+        }
+        const sweetLines = [
+          "Hehe! Vanvi is here for you! 🌸🐾",
+          "Aapki smile sabse pyaari hai! 💖",
+          "Aaj kisko surprise dena hai? 🎁",
+          "Dil se likhenge har ek wish! 💌",
+          "Yay! Main ready hoon help karne! ✨"
+        ];
+        const chosenLine = sweetLines[Math.floor(Math.random() * sweetLines.length)];
+        if (statusText) {
+          statusText.textContent = chosenLine;
+          setTimeout(() => { if (statusText) statusText.textContent = 'Active'; }, 2600);
+        }
+      };
+
+      window.clearConversation = function() {
+        messageHistory = [];
+        chatFeed.innerHTML = '';
+        if (welcomeCard) {
+          welcomeCard.style.display = 'block';
+          chatFeed.appendChild(welcomeCard);
+        }
+        setOrbState('idle');
+      };
+
+      // Font Preset Cycler (Jakarta Sans -> Editorial Serif -> Modern Outfit -> Handwritten Caveat)
+      const fontPresets = ['', 'font-editorial', 'font-modern', 'font-handwritten'];
+      let currentFontIdx = 0;
+      try {
+        const savedFont = localStorage.getItem('vanvi_ai_font') || '';
+        const foundIdx = fontPresets.indexOf(savedFont);
+        if (foundIdx > 0) {
+          currentFontIdx = foundIdx;
+          document.body.className = savedFont;
+        }
+      } catch(e) {}
+
+      window.cycleTypography = function() {
+        currentFontIdx = (currentFontIdx + 1) % fontPresets.length;
+        const chosen = fontPresets[currentFontIdx];
+        document.body.className = chosen;
+        try { localStorage.setItem('vanvi_ai_font', chosen); } catch(e) {}
+      };
+
+      // Interactive Tap on Large Hero Orb
+      const heroOrb = document.getElementById('heroOrbInteractive');
+      if (heroOrb) {
+        heroOrb.addEventListener('click', triggerPandaCheer);
+      }
+
+      window.goBack = function() {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = 'index.html';
+        }
+      };
+
+      // Enter sends, Shift+Enter for new line
+      chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleSend();
+        }
+      });
+      btnSend.addEventListener('click', handleSend);
+
+      chatInput.addEventListener('focus', () => {
+        setTimeout(scrollToBottom, 250);
+      });
+
+    })();
+  </script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

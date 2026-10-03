@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Template Experience &amp; Customizer — Vanvi Moments</title>
+  <meta name="description" content="Preview and customize bespoke interactive digital celebration websites with music, photos, wax seals, and instant QR sharing on Vanvi Moments.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+  <script src="js/vanvi-templates-data.js"></script>
+
+  <style>
+    :root {
+      --primary-accent: #ff2a7a;
+      --primary-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #ff7ea5 100%);
+      --primary-glow: rgba(255, 42, 122, 0.28);
+      --primary-light: #fff0f6;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --border-subtle: rgba(255, 120, 175, 0.24);
+      --text-main: #2b0c20;
+      --text-muted: #7d546e;
+      --gold-star: #f59e0b;
+      --shadow-soft: 0 12px 32px rgba(43, 12, 32, 0.06);
+      --shadow-hover: 0 20px 48px rgba(255, 42, 122, 0.16);
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-num: 'Outfit', sans-serif;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: #fff9fb;
+      background-image: 
+        radial-gradient(ellipse 90% 45% at 50% -5%, rgba(255, 200, 220, 0.35) 0%, transparent 65%),
+        radial-gradient(circle 500px at 10% 40%, rgba(255, 240, 245, 0.6) 0%, transparent 70%),
+        linear-gradient(180deg, #fffbfd 0%, #fff6fa 50%, #fff2f8 100%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden !important;
+      padding-bottom: 120px;
+    }
+
+    /* ─── TOP STICKY NAVBAR ─────────────────────────────────────────── */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-subtle);
+      height: 60px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .nav-left-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .btn-nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 99px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .btn-nav-back:hover { background: var(--primary-light); color: var(--primary-accent); }
+
+    .nav-sku-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: var(--primary-light);
+      color: var(--primary-accent);
+      border: 1px solid var(--border-subtle);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      font-family: var(--font-num);
+    }
+
+    .nav-title-heading {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 220px;
+    }
+
+    .nav-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-circle-action {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      display: grid;
+      place-items: center;
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-circle-action:hover { background: var(--primary-light); color: var(--primary-accent); }
+
+    /* ─── MASTER PAGE CONTAINER ──────────────────────────────────────── */
+    .detail-shell {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    /* ─── TAB SELECTOR: PREVIEW VS CUSTOMIZE ──────────────────────────── */
+    .mode-switch-dock {
+      display: flex;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border-subtle);
+      padding: 6px;
+      border-radius: 18px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+
+    .mode-tab {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 11px 16px;
+      border-radius: 14px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mode-tab.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      box-shadow: 0 6px 20px var(--primary-glow);
+    }
+
+    /* ─── 2-COLUMN HERO SHOWCASE (Vanvi Boutique Architecture) ──────── */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (min-width: 920px) {
+      .showcase-grid {
+        grid-template-columns: 430px 1fr;
+        gap: 40px;
+      }
+      .sticky-phone-col {
+        position: sticky;
+        top: 80px;
+        z-index: 20;
+      }
+    }
+
+    /* ─── REALISTIC IPHONE 15 PRO DEVICE FRAME ───────────────────────── */
+    .device-showcase-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* ─── CLEAN LIVE TEMPLATE PREVIEW CONTAINER (NO PHONE FRAMES) ───── */
+    body.fullscreen-preview-active .vanvi-bottom-dock,
+    body.fullscreen-preview-active nav.bottom,
+    body.fullscreen-preview-active .bottom,
+    body.fullscreen-preview-active header {
+      display: none !important;
+    }
+
+    .device-showcase-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .template-preview-wrapper {
+      width: 100%;
+      max-width: 440px;
+      height: 640px;
+      background: #ffffff;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1.5px solid var(--border-subtle);
+      box-shadow: 
+        0 20px 48px rgba(44, 18, 36, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.05);
+      position: relative;
+      margin: 0 auto;
+      transition: all 0.3s ease;
+    }
+
+    .live-template-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #ffffff;
+    }
+
+    .live-template-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #fff;
+    }
+
+    /* Device Quick Actions Toolbar */
+    .phone-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+      width: 100%;
+    }
+
+    .btn-phone-control {
+      padding: 6px 14px;
+      border-radius: 99px;
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .btn-phone-control:hover { color: var(--primary-accent); border-color: var(--primary-accent); }
+
+    /* ─── TEMPLATE META & BUYING COLUMN ─────────────────────────────── */
+    .template-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-header-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 26px;
+      padding: 26px 22px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .category-sku-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .creator-attribution {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+    }
+    .creator-attribution strong { color: var(--text-main); }
+
+    .main-template-title {
+      font-family: var(--font-serif);
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .rating-social-proof {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .star-icons {
+      color: #f59e0b;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      filter: drop-shadow(0 1px 2px rgba(245, 158, 11, 0.45));
+    }
+
+    /* Price Callout (Vanvi Boutique Value Format) */
+    .price-callout-box {
+      background: #fff8fb;
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .price-main-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .price-current-tag {
+      font-family: var(--font-num);
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--primary-accent);
+    }
+    .price-original-striked {
+      font-family: var(--font-num);
+      font-size: 16px;
+      color: #9ca3af;
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+    .discount-pill-green {
+      background: #ecfdf5;
+      color: #059669;
+      border: 1px solid #a7f3d0;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .badge-free-celebration {
+      background: var(--primary-light);
+      color: var(--primary-accent);
+      border: 1px solid var(--primary-accent);
+      font-size: 13px;
+      font-weight: 900;
+      padding: 5px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .coins-discount-tag {
+      font-size: 12px;
+      color: #b45309;
+      font-weight: 700;
+      background: #fffbeb;
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid #fde68a;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    /* Primary CTA Buttons */
+    .hero-actions-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-primary-make-yours {
+      width: 100%;
+      height: 54px;
+      border-radius: 16px;
+      border: none;
+      background: var(--primary-gradient);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 10px 28px var(--primary-glow);
+      transition: all 0.2s ease;
+    }
+    .btn-primary-make-yours:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px var(--primary-glow);
+    }
+    .btn-primary-make-yours:active { transform: scale(0.98); }
+
+    .btn-secondary-fullscreen {
+      width: 100%;
+      height: 48px;
+      border-radius: 16px;
+      border: 1.5px solid var(--primary-accent);
+      background: #ffffff;
+      color: var(--primary-accent);
+      font-family: var(--font-sans);
+      font-size: 14.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary-fullscreen:hover { background: var(--primary-light); }
+
+    /* ─── VALUE PROPOSITIONS LIST (Vanvi Atelier Formula) ────────────── */
+    .value-props-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .value-prop-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: #442135;
+    }
+    .prop-icon-check {
+      color: #10b981;
+      font-size: 16px;
+      font-weight: 900;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .prop-text strong { color: var(--text-main); }
+
+    /* ─── 30-SECOND CUSTOMIZER ACCORDION STUDIO ───────────────────────── */
+    .customizer-studio-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+      display: none;
+    }
+    .customizer-studio-box.active { display: block; }
+
+    .customizer-header-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .customizer-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    /* Accordion Section Cards */
+    .customizer-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .accordion-card {
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .accordion-card.open {
+      border-color: var(--primary-accent);
+      box-shadow: 0 6px 20px rgba(255, 42, 122, 0.08);
+    }
+
+    .accordion-header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      background: #fff;
+    }
+    .accordion-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .accordion-icon-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+    }
+    .accordion-arrow {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+    .accordion-card.open .accordion-arrow {
+      transform: rotate(180deg);
+      color: var(--primary-accent);
+    }
+
+    .accordion-body {
+      padding: 0 18px 18px;
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+    .accordion-card.open .accordion-body { display: block; }
+
+    /* Form Fields */
+    .field-group {
+      margin-top: 14px;
+    }
+    .field-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+    .field-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .field-input, .field-textarea, .field-select {
+      width: 100%;
+      background: #fff;
+      border: 1.5px solid rgba(200, 160, 180, 0.4);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field-input:focus, .field-textarea:focus, .field-select:focus {
+      border-color: var(--primary-accent);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+    .field-textarea {
+      min-height: 85px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    /* AI Prompt Helpers */
+    .ai-chips-tray {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .ai-chip-btn {
+      background: var(--primary-light);
+      border: 1px solid var(--border-subtle);
+      color: var(--primary-accent);
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .ai-chip-btn:hover { background: #ffe0eb; }
+
+    /* Save & Handoff Actions */
+    .customizer-submit-area {
+      margin-top: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ─── REAL CUSTOMER TESTIMONIALS (Vanvi Moments Verified) ───────── */
+    .reviews-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+      margin-top: 24px;
+    }
+    .reviews-section-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .reviews-score-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .review-bubbles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .review-bubble-card {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+    }
+    .review-stars-row {
+      color: #f59e0b;
+      font-size: 13.5px;
+      margin-bottom: 6px;
+      letter-spacing: 1.5px;
+      filter: drop-shadow(0 1px 2px rgba(245, 158, 11, 0.45));
+    }
+    .review-quote-text { font-size: 13px; line-height: 1.5; color: #432437; margin-bottom: 8px; }
+    .review-author-line { font-size: 12px; font-weight: 800; color: var(--primary-accent); }
+
+    /* ─── UPSELL PACK BANNER (₹999 All-Access Atelier Pack) ──────────── */
+    .all-access-upsell-banner {
+      background: linear-gradient(135deg, #2b0c20 0%, #170410 100%);
+      border: 1px solid rgba(255, 120, 175, 0.4);
+      border-radius: 24px;
+      padding: 22px;
+      color: #ffffff;
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+    }
+    .upsell-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #ffd166; }
+    .upsell-sub { font-size: 13px; color: #f1d5e6; margin-top: 4px; }
+    .btn-upsell-upgrade {
+      background: linear-gradient(135deg, #ffd166, #f59e0b);
+      color: #2b0c20;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 14px;
+      font-weight: 900;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+      transition: all 0.2s;
+    }
+    .btn-upsell-upgrade:hover { transform: scale(1.03); }
+
+    /* ─── FLOATING ACTION DOCK ON MOBILE ─────────────────────────────── */
+    .mobile-floating-dock {
+      position: fixed;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 90;
+      box-shadow: 0 10px 32px rgba(44, 18, 36, 0.15);
+    }
+
+    /* Modal for Shareable Link */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 8, 16, 0.72);
+      backdrop-filter: blur(8px);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #ffffff;
+      border-radius: 28px;
+      max-width: 440px;
+      width: 100%;
+      padding: 26px 22px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+      border: 1px solid var(--border-subtle);
+      animation: popIn 0.25s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .share-link-input-row {
+      display: flex;
+      gap: 6px;
+      margin: 16px 0;
+    }
+    .share-url-box {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 12.5px;
+      background: #f8fafc;
+      color: #334155;
+    }
+    .btn-copy-url {
+      padding: 10px 16px;
+      background: var(--primary-accent);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .btn-whatsapp-direct {
+      width: 100%;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 14.5px;
+      text-decoration: none;
+      margin-bottom: 8px;
+    }
+    .btn-open-direct {
+      width: 100%;
+      height: 46px;
+      border-radius: 14px;
+      border: 1.5px solid var(--primary-accent);
+      background: #fff;
+      color: var(--primary-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .template-preview-wrapper,
+      .phone-mockup-wrapper {
+        width: 100%;
+        max-width: 100%;
+        height: min(580px, 78vh);
+        border-radius: 20px;
+      }
+      .main-template-title { font-size: 24px; }
+      .price-current-tag { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left-group">
+      <a href="templates.html" class="btn-nav-back" title="Back to All Templates">
+        <span>‹</span> <span>Templates</span>
+      </a>
+      <span class="nav-sku-badge" id="navSkuBadge">VM-B01</span>
+      <div class="nav-title-heading" id="navTitle">Birthday Wish 01</div>
+    </div>
+    <div class="nav-actions-group">
+      <a href="templates.html" class="btn-circle-action" title="Template Catalog">🎁</a>
+      <a href="index.html" class="btn-circle-action" title="Home">🏠</a>
+      <button type="button" class="btn-circle-action" onclick="shareCurrentPage()" title="Share">↗️</button>
+    </div>
+  </header>
+
+  <main class="detail-shell">
+
+    <!-- Mode Selector Tabs: Experience Preview vs Make It Yours -->
+    <nav class="mode-switch-dock" aria-label="Template Mode Switcher">
+      <button type="button" class="mode-tab active" id="tabPreviewMode" onclick="switchViewMode('preview')">
+        <span>👁️</span> <span>Live Template Preview</span>
+      </button>
+      <button type="button" class="mode-tab" id="tabCustomizeMode" onclick="switchViewMode('customize')">
+        <span>✨</span> <span>Personalize</span>
+      </button>
+    </nav>
+
+    <!-- 2-Column Showcase Area -->
+    <div class="showcase-grid">
+
+      <!-- LEFT COLUMN: CLEAN LUXURY PREVIEW CONTAINER WITH LIVE IFRAME -->
+      <div class="sticky-phone-col">
+        <div class="device-showcase-box">
+          <div class="template-preview-wrapper" id="phoneMockup">
+            <!-- Real Interactive Live Template Iframe -->
+            <iframe id="templateFrame" class="live-template-iframe" src="about:blank" title="Live Interactive Template Preview" allow="autoplay; microphone"></iframe>
+          </div>
+
+          <!-- Phone Controls Bar -->
+          <div class="phone-controls-row">
+            <button type="button" class="btn-phone-control" onclick="reloadPreview()" title="Reload Preview">
+              <span>🔄</span> Reload
+            </button>
+            <button type="button" class="btn-phone-control" onclick="openFullscreenDemo()" title="Open Full Screen">
+              <span>⛶</span> Full Screen
+            </button>
+            <button type="button" class="btn-phone-control" onclick="copyTemplateLink()" title="Copy Link">
+              <span>🔗</span> Copy Link
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: DETAILS / BUYING OR 30-SECOND STUDIO -->
+      <div class="template-info-col">
+
+        <!-- VIEW A: OVERVIEW & BUYING DETAILS -->
+        <div id="overviewPanel">
+          <section class="info-header-box">
+            <div class="category-sku-row">
+              <span class="nav-sku-badge" id="infoSkuBadge">VM-B01</span>
+              <div class="creator-attribution">
+                <span>By</span> <strong>Vanvi Atelier</strong> <span style="color:#10b981;">✓</span>
+              </div>
+            </div>
+
+            <h1 class="main-template-title" id="infoTitle">Birthday Wish 01</h1>
+
+            <div class="rating-social-proof">
+              <span class="star-icons">★★★★★</span>
+              <strong style="color:var(--text-main);">4.9 / 5.0</strong>
+              <span>· Based on 1,413 happy creators</span>
+            </div>
+
+            <!-- Price & Coins Callout -->
+            <div class="price-callout-box">
+              <div>
+                <div class="price-main-wrap">
+                  <span class="price-current-tag" id="infoPriceNow">₹149</span>
+                  <span class="price-original-striked" id="infoPriceOrig">₹429</span>
+                  <span class="discount-pill-green" id="infoDiscountBadge">65% OFF</span>
+                </div>
+                <div class="coins-discount-tag" id="infoCoinsTag">
+                  🪙 Pay as low as ₹89 using 60 Vanvi Coins
+                </div>
+              </div>
+              <div id="freeBadgeContainer" style="display:none;">
+                <span class="badge-free-celebration">100% FREE</span>
+              </div>
+            </div>
+
+            <!-- Actions Bar -->
+            <div class="hero-actions-container">
+              <button type="button" class="btn-primary-make-yours" id="btnMakeYoursDirect" onclick="switchViewMode('customize')" style="cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%;">
+                <span>✨ Make It Yours (Customize in 30s)</span> <span>→</span>
+              </button>
+            </div>
+
+            <!-- Value Props Checklist -->
+            <div class="value-props-list">
+              <div class="value-prop-item">
+                <span class="prop-icon-check">✓</span>
+                <span class="prop-text"><strong>Instant Personalization</strong> — No design skills needed. Just add photos, names and words, and your moment is ready.</span>
+              </div>
+              <div class="value-prop-item">
+                <span class="prop-icon-check">✓</span>
+                <span class="prop-text"><strong>Fully customisable</strong> — Every photo, name, song and word is yours to personalize.</span>
+              </div>
+              <div class="value-prop-item">
+                <span class="prop-icon-check">✓</span>
+                <span class="prop-text"><strong>Feels expensive &amp; personal</strong> — Crafted and animated by real artists, not a generic Canva graphic.</span>
+              </div>
+              <div class="value-prop-item">
+                <span class="prop-icon-check">✓</span>
+                <span class="prop-text"><strong>Buy once, unlimited edits</strong> — Re-publish anytime without paying extra. All edits update live link.</span>
+              </div>
+              <div class="value-prop-item">
+                <span class="prop-icon-check">✓</span>
+                <span class="prop-text"><strong>Mobile first &amp; password protected</strong> — Beautifully optimized for WhatsApp and private viewing.</span>
+              </div>
+              <div class="value-prop-item">
+                <span class="prop-icon-check">✓</span>
+                <span class="prop-text"><strong>Live beautiful QR Code</strong> — Perfect for printing on greeting cards or gift wraps.</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Customer Ratings & Authentic Reviews -->
+          <section class="reviews-section">
+            <h2 class="reviews-section-title">Ratings &amp; Reviews</h2>
+            <p class="reviews-score-sub">Verified customer feedback for Vanvi digital moments</p>
+
+            <div class="review-bubbles-grid">
+              <div class="review-bubble-card">
+                <div class="review-stars-row">★★★★★</div>
+                <p class="review-quote-text">“Ngl i was sceptical at first but the page turned out so cute 🥹 made one for my gf's bday and she literally cried haha. Worth every rupee!”</p>
+                <div class="review-author-line">— Ishaan S., Verified Buyer</div>
+              </div>
+              <div class="review-bubble-card">
+                <div class="review-stars-row">★★★★★</div>
+                <p class="review-quote-text">“Super easy to use! I was done in like 5 mins. Shared the WhatsApp link at midnight and everyone asked which agency made it 😂”</p>
+                <div class="review-author-line">— Sneha M., Verified Buyer</div>
+              </div>
+              <div class="review-bubble-card">
+                <div class="review-stars-row">★★★★★</div>
+                <p class="review-quote-text">“Made an apology dashboard and she couldn't stop laughing at the runaway No button. Best ₹149 I've spent!”</p>
+                <div class="review-author-line">— Karthik V., Verified Buyer</div>
+              </div>
+              <div class="review-bubble-card">
+                <div class="review-stars-row">★★★★★</div>
+                <p class="review-quote-text">“The QR code on the physical gift box was such a hit. She scanned it and the wax seal opened with our song playing. Magical.”</p>
+                <div class="review-author-line">— Tanvi R., Verified Buyer</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- All Access Pack Upsell -->
+          <div class="all-access-upsell-banner">
+            <div>
+              <div class="upsell-title">👑 Get All Templates at just ₹999 <span style="text-decoration:line-through; font-size:14px; opacity:0.7;">₹3,348</span></div>
+              <div class="upsell-sub">Lifetime access to all 42+ celebration templates + future releases. Works out to ₹24/template.</div>
+            </div>
+            <a href="plans.html" class="btn-upsell-upgrade">Upgrade to Pack →</a>
+          </div>
+        </div>
+
+        <!-- VIEW B: 30-SECOND LIVE CUSTOMIZER STUDIO (/try/ flow) -->
+        <div class="customizer-studio-box" id="customizePanel">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <div>
+              <h2 class="customizer-header-title">✨ Personalize in 30 Seconds</h2>
+              <p class="customizer-subtitle">Edit the fields below. The phone preview updates in real-time!</p>
+            </div>
+            <button type="button" class="btn-nav-back" onclick="switchViewMode('preview')">
+              <span>‹ Overview</span>
+            </button>
+          </div>
+
+          <form id="instantCustomizerForm" onsubmit="event.preventDefault(); handlePublishMoment();">
+            <div class="customizer-accordion">
+              
+              <!-- Accordion 1: Names & Occasion -->
+              <div class="accordion-card open" id="accBasics">
+                <div class="accordion-header" onclick="toggleAccordion('accBasics')">
+                  <div class="accordion-title-group">
+                    <span class="accordion-icon-badge">👤</span>
+                    <span>1. Recipient &amp; Sender Details</span>
+                  </div>
+                  <span class="accordion-arrow">▼</span>
+                </div>
+                <div class="accordion-body">
+                  <div class="field-group">
+                    <label class="field-label" for="inpRecipient">Recipient Name *</label>
+                    <input type="text" class="field-input" id="inpRecipient" placeholder="e.g. Sneha, Aarav, Mom" required maxlength="50" oninput="syncLivePreview()">
+                    <p class="field-hint">The name that appears on the cake, envelope, and letter.</p>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="inpSender">From (Your Name)</label>
+                    <input type="text" class="field-input" id="inpSender" placeholder="e.g. With love, Karan" maxlength="50" oninput="syncLivePreview()">
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="inpDate">Event / Celebration Date</label>
+                    <input type="date" class="field-input" id="inpDate" oninput="syncLivePreview()">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accordion 2: Personal Heartfelt Note -->
+              <div class="accordion-card" id="accLetter">
+                <div class="accordion-header" onclick="toggleAccordion('accLetter')">
+                  <div class="accordion-title-group">
+                    <span class="accordion-icon-badge">💌</span>
+                    <span>2. Personal Letter &amp; Note</span>
+                  </div>
+                  <span class="accordion-arrow">▼</span>
+                </div>
+                <div class="accordion-body">
+                  <div class="field-group">
+                    <label class="field-label" for="inpMessage">Heartfelt Words</label>
+                    <textarea class="field-textarea" id="inpMessage" placeholder="Write something from your heart..." maxlength="500" oninput="syncLivePreview()"></textarea>
+                    
+                    <!-- AI Suggestion Chips -->
+                    <div class="ai-chips-tray">
+                      <span style="font-size:11px; font-weight:800; color:var(--text-muted); align-self:center;">✨ AI Suggestions:</span>
+                      <button type="button" class="ai-chip-btn" onclick="setAiMessage('emotional')">💖 Emotional</button>
+                      <button type="button" class="ai-chip-btn" onclick="setAiMessage('fun')">🎉 Fun &amp; Hype</button>
+                      <button type="button" class="ai-chip-btn" onclick="setAiMessage('sweet')">🌸 Sweet &amp; Short</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accordion 3: Photos & Keepsakes -->
+              <div class="accordion-card" id="accPhotos">
+                <div class="accordion-header" onclick="toggleAccordion('accPhotos')">
+                  <div class="accordion-title-group">
+                    <span class="accordion-icon-badge">📸</span>
+                    <span>3. Photo Memories &amp; Polaroids</span>
+                  </div>
+                  <span class="accordion-arrow">▼</span>
+                </div>
+                <div class="accordion-body">
+                  <p class="field-hint" style="margin-bottom:10px;">Select custom photos to feature inside the polaroid frames.</p>
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div style="border:1.5px dashed var(--border-subtle); border-radius:12px; padding:14px; text-align:center; background:#fffbfd; cursor:pointer;" onclick="document.getElementById('fileUploadInput').click()">
+                      <span style="font-size:24px;">📁</span>
+                      <div style="font-size:12px; font-weight:800; color:var(--primary-accent); margin-top:4px;">Upload Photo</div>
+                      <input type="file" id="fileUploadInput" accept="image/*" style="display:none;" onchange="handlePhotoUpload(this)">
+                    </div>
+                    <div style="border:1px solid var(--border-subtle); border-radius:12px; padding:10px; text-align:center; background:#fff;">
+                      <span style="font-size:11.5px; font-weight:700; color:var(--text-muted);">Curated Gallery Ready</span>
+                      <div style="font-size:11px; color:#10b981; font-weight:800; margin-top:4px;">✓ High-Res Aesthetic Photos</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accordion 4: Soundtrack & Audio Dedication -->
+              <div class="accordion-card" id="accAudio">
+                <div class="accordion-header" onclick="toggleAccordion('accAudio')">
+                  <div class="accordion-title-group">
+                    <span class="accordion-icon-badge">🎵</span>
+                    <span>4. Music &amp; Audio Dedication</span>
+                  </div>
+                  <span class="accordion-arrow">▼</span>
+                </div>
+                <div class="accordion-body">
+                  <div class="field-group">
+                    <label class="field-label" for="selSoundtrack">Select Dedication Song</label>
+                    <select class="field-select" id="selSoundtrack" onchange="syncLivePreview()">
+                      <option value="happybirthday">Happy Birthday Acoustic Celebration</option>
+                      <option value="acoustic-waltz">Floral Acoustic Waltz (Gentle &amp; Warm)</option>
+                      <option value="lofi-love">Lofi Heartbeat Chords (Emotional)</option>
+                      <option value="healing-piano">Cinematic Golden Strings (Grand)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accordion 5: Privacy PIN -->
+              <div class="accordion-card" id="accPrivacy">
+                <div class="accordion-header" onclick="toggleAccordion('accPrivacy')">
+                  <div class="accordion-title-group">
+                    <span class="accordion-icon-badge">🔐</span>
+                    <span>5. Password PIN Protection (Optional)</span>
+                  </div>
+                  <span class="accordion-arrow">▼</span>
+                </div>
+                <div class="accordion-body">
+                  <div class="field-group">
+                    <label class="field-label" for="inpPin">Secret Passcode (Optional)</label>
+                    <input type="text" class="field-input" id="inpPin" placeholder="e.g. 2408 or leave empty for instant reveal" maxlength="8">
+                    <p class="field-hint">If set, recipient must type this PIN to open your gift.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Submit Studio Area -->
+            <div class="customizer-submit-area">
+              <button type="submit" class="btn-primary-make-yours" id="btnPublish">
+                <span>Publish &amp; Get Shareable Link</span> <span>🚀</span>
+              </button>
+              <div style="font-size:12px; font-weight:700; color:var(--text-muted); text-align:center; padding:6px; letter-spacing:0.3px;">
+                ✨ Instant Live Realtime Personalization · Lifetime Validity
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Mobile Floating Action Bar -->
+  <div class="mobile-floating-dock" id="mobileDock">
+    <button type="button" class="btn-primary-make-yours" style="flex:1; height:48px; border-radius:999px; font-size:14.5px; font-weight:850; box-shadow:0 8px 24px rgba(255,42,122,0.4);" onclick="switchViewMode('customize')">
+      <span>✨ Make It Yours</span> <span>→</span>
+    </button>
+  </div>
+
+  <!-- Share & Publish Modal -->
+  <div class="modal-overlay" id="shareModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div style="font-size:52px; margin-bottom:8px;">🎉</div>
+      <h3 style="font-family:var(--font-serif); font-size:22px; font-weight:700; margin-bottom:6px;">Your Moment is Ready!</h3>
+      <p style="font-size:13.5px; color:var(--text-muted); margin-bottom:16px;">
+        Shareable private link generated for <strong id="modalRecipientSpan" style="color:var(--primary-accent);">Aarav</strong>.
+      </p>
+
+      <div class="share-link-input-row">
+        <input type="text" class="share-url-box" id="modalShareUrlInput" readonly>
+        <button type="button" class="btn-copy-url" onclick="copyModalUrl()">Copy</button>
+      </div>
+
+      <a href="share.html" class="btn-whatsapp-direct" id="btnModalWhatsApp" target="_blank">
+        <span>💬</span> <span>Deliver via WhatsApp</span>
+      </a>
+
+      <a href="#" class="btn-open-direct" id="btnModalOpenDirect" target="_blank">
+        <span>👁️</span> <span>Open Live Moment</span>
+      </a>
+
+      <button type="button" onclick="closeShareModal()" style="margin-top:14px; background:transparent; border:none; color:var(--text-muted); font-size:13px; font-weight:700; cursor:pointer;">
+        Close Studio
+      </button>
+    </div>
+  </div>
+
+  <!-- Global Vanvi Bottom Navigation Dock -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" title="Home">⌂<br/>Home</a>
+    <a href="templates.html" class="nav-btn active" title="Explore">◌<br/>Explore</a>
+    <a href="templates.html" class="create nav-btn" title="Templates">＋<br/>Templates</a>
+    <a href="ai.html" class="nav-btn" title="AI">✦<br/>AI</a>
+    <a href="profile.html" class="nav-btn" title="Profile">👤<br/>Profile</a>
+  </nav>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // 1. Resolve Template Data from Master Catalog
+      const urlParams = new URLSearchParams(window.location.search);
+      const requestedId = urlParams.get('template') || urlParams.get('id') || 'birthday-wish-1';
+
+      const allTemplates = (window.VanviTemplatesData && window.VanviTemplatesData.templates) ? window.VanviTemplatesData.templates : [];
+      let template = (window.VanviTemplatesData && window.VanviTemplatesData.getById(requestedId)) || allTemplates.find(t => t.id === requestedId || t.slug === requestedId) || allTemplates[0] || {
+        id: 'birthday-wish-1',
+        name: 'Birthday Wish 01',
+        sku: 'VM-B01',
+        price: 149,
+        originalPrice: 429,
+        isFree: false,
+        templatePath: 'templates/birthday-wish-01/index.html',
+        previewRecipient: 'Aarav',
+        previewSender: 'Sneha',
+        previewMessage: 'Wishing you another 365 days of laughter, golden sunsets, and big dreams. Happy Birthday! 🎂✨'
+      };
+
+      // 2. Populate Header & Metadata
+      document.title = `${template.name} — Vanvi Moments`;
+      document.getElementById('navTitle').textContent = template.name;
+      document.getElementById('infoTitle').textContent = template.name;
+      const sku = template.sku || 'VM-B01';
+      document.getElementById('navSkuBadge').textContent = sku;
+      document.getElementById('infoSkuBadge').textContent = sku;
+
+      // Price Formatting
+      const p = Number(template.price || 0);
+      const isFree = template.isFree || p === 0;
+      if (isFree) {
+        document.getElementById('infoPriceNow').textContent = 'FREE';
+        document.getElementById('infoPriceOrig').style.display = 'none';
+        document.getElementById('infoDiscountBadge').style.display = 'none';
+        document.getElementById('infoCoinsTag').style.display = 'none';
+        document.getElementById('freeBadgeContainer').style.display = 'block';
+      } else {
+        const orig = template.originalPrice || Math.round(p * 2.8);
+        const discountPct = Math.round(((orig - p) / orig) * 100);
+        document.getElementById('infoPriceNow').textContent = `₹${p}`;
+        document.getElementById('infoPriceOrig').textContent = `₹${orig}`;
+        document.getElementById('infoDiscountBadge').textContent = `${discountPct}% OFF`;
+        const coinPrice = Math.max(49, p - 60);
+        document.getElementById('infoCoinsTag').textContent = `🪙 Pay as low as ₹${coinPrice} using 60 Vanvi Coins`;
+      }
+
+      // Initialize Customizer Inputs
+      const defaultRecipient = template.previewRecipient || 'Aarav';
+      const defaultSender = template.previewSender || 'Sneha';
+      const defaultMessage = template.previewMessage || 'Wishing you all the joy and sunshine on your special day! ✨';
+
+      document.getElementById('inpRecipient').value = defaultRecipient;
+      document.getElementById('inpSender').value = defaultSender;
+      document.getElementById('inpMessage').value = defaultMessage;
+      document.getElementById('inpDate').value = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
+
+      const btnMakeYours = document.getElementById('btnMakeYoursDirect');
+      if (btnMakeYours) btnMakeYours.onclick = () => window.switchViewMode('customize');
+      const tabCustMode = document.getElementById('tabCustomizeMode');
+      if (tabCustMode) tabCustMode.onclick = () => window.switchViewMode('customize');
+
+      // 3. Resolve Real Template Path for Iframe
+      function getResolvedTemplateUrl(recipientName, messageText, senderName) {
+        let basePath = template.templatePath || 'templates/birthday-wish-01/index.html';
+        if (basePath.endsWith('/')) basePath += 'index.html';
+        
+        const q = new URLSearchParams();
+        q.set('name', recipientName || defaultRecipient);
+        q.set('recipient', recipientName || defaultRecipient);
+        q.set('sender', senderName || defaultSender);
+        if (messageText) q.set('message', messageText);
+
+        return `${basePath}?${q.toString()}`;
+      }
+
+      // Load Iframe Preview
+      const frame = document.getElementById('templateFrame');
+      frame.src = getResolvedTemplateUrl(defaultRecipient, defaultMessage, defaultSender);
+
+      // 4. Live Sync Preview on Keystrokes
+      let debounceTimer;
+      window.syncLivePreview = function() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          const rec = document.getElementById('inpRecipient').value.trim() || defaultRecipient;
+          const snd = document.getElementById('inpSender').value.trim() || defaultSender;
+          const msg = document.getElementById('inpMessage').value.trim() || defaultMessage;
+          frame.src = getResolvedTemplateUrl(rec, msg, snd);
+        }, 400);
+      };
+
+      // 5. Accordion Toggle
+      window.toggleAccordion = function(id) {
+        const el = document.getElementById(id);
+        const isOpen = el.classList.contains('open');
+        document.querySelectorAll('.accordion-card').forEach(c => c.classList.remove('open'));
+        if (!isOpen) el.classList.add('open');
+      };
+
+      // 6. View Mode Switcher: 'preview' vs 'customize'
+      window.switchViewMode = function(mode) {
+        const tabPrev = document.getElementById('tabPreviewMode');
+        const tabCust = document.getElementById('tabCustomizeMode');
+        const panelOverview = document.getElementById('overviewPanel');
+        const panelCustomize = document.getElementById('customizePanel');
+
+        if (mode === 'customize') {
+          tabPrev.classList.remove('active');
+          tabCust.classList.add('active');
+          panelOverview.style.display = 'none';
+          panelCustomize.classList.add('active');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          tabCust.classList.remove('active');
+          tabPrev.classList.add('active');
+          panelCustomize.classList.remove('active');
+          panelOverview.style.display = 'block';
+        }
+      };
+
+      // If user came via /try/ or with ?mode=customize
+      if (urlParams.get('mode') === 'customize' || urlParams.get('try') === '1') {
+        window.switchViewMode('customize');
+      }
+
+      // 7. Fullscreen Demo Launch
+      window.openFullscreenDemo = function() {
+        const rec = document.getElementById('inpRecipient').value.trim() || defaultRecipient;
+        const snd = document.getElementById('inpSender').value.trim() || defaultSender;
+        const msg = document.getElementById('inpMessage').value.trim() || defaultMessage;
+        const fullUrl = getResolvedTemplateUrl(rec, msg, snd);
+        window.open(fullUrl, '_blank');
+      };
+
+      window.reloadPreview = function() {
+        frame.contentWindow.location.reload();
+      };
+
+      window.copyTemplateLink = function() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          alert('Template link copied to clipboard! 📋');
+        });
+      };
+
+      // 8. AI Suggestions
+      window.setAiMessage = function(tone) {
+        const rec = document.getElementById('inpRecipient').value.trim() || 'my dearest';
+        let note = '';
+        if (tone === 'emotional') {
+          note = `To ${rec}, you are the quiet calm in my storm and the brightest light in my life. Thank you for making every day feel like home. Happy Birthday! 💕✨`;
+        } else if (tone === 'fun') {
+          note = `Happy Birthday to the ultimate legend, ${rec}! May your day be filled with unlimited cake, huge laughs, and zero adulting today! Let's party! 🎉🎂`;
+        } else {
+          note = `Wishing the loveliest person, ${rec}, a day as bright and sweet as your smile. May all your dreams come true this year! 🌸🎂`;
+        }
+        document.getElementById('inpMessage').value = note;
+        syncLivePreview();
+      };
+
+      // 9. Photo Upload Placeholder handler
+      window.handlePhotoUpload = function(input) {
+        if (input.files && input.files[0]) {
+          alert(`📸 Photo "${input.files[0].name}" attached successfully! It will appear in your customized keepsake.`);
+        }
+      };
+
+      // 10. Publish & Share Flow
+      window.handlePublishMoment = function() {
+        const rec = document.getElementById('inpRecipient').value.trim() || defaultRecipient;
+        const snd = document.getElementById('inpSender').value.trim() || defaultSender;
+        const msg = document.getElementById('inpMessage').value.trim() || defaultMessage;
+
+        const liveUrl = new URL(getResolvedTemplateUrl(rec, msg, snd), window.location.href).href;
+        
+        document.getElementById('modalRecipientSpan').textContent = rec;
+        document.getElementById('modalShareUrlInput').value = liveUrl;
+
+        const waText = `Hey ${rec}! ✨ I made a special digital surprise website just for you: ${liveUrl}`;
+        document.getElementById('btnModalWhatsApp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`;
+        document.getElementById('btnModalOpenDirect').href = liveUrl;
+
+        document.getElementById('shareModal').classList.add('open');
+      };
+
+      window.closeShareModal = function() {
+        document.getElementById('shareModal').classList.remove('open');
+      };
+
+      window.copyModalUrl = function() {
+        const urlField = document.getElementById('modalShareUrlInput');
+        navigator.clipboard.writeText(urlField.value).then(() => {
+          alert('Shareable moment link copied to clipboard! 📋');
+        });
+      };
+
+      window.shareCurrentPage = function() {
+        if (navigator.share) {
+          navigator.share({
+            title: template.name,
+            text: `Check out ${template.name} on Vanvi Moments`,
+            url: window.location.href
+          }).catch(() => {});
+        } else {
+          copyTemplateLink();
+        }
+      };
+
+    })();
+  </script>
+</body>
+</html>

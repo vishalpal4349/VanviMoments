@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
+  <title>Privacy Policy ✦ Vanvi Moments</title>
+  <meta name="description" content="Official Privacy Policy of Vanvi Moments. How we protect your heartfelt letters, uploaded memories, and personal privacy."/>
+  <meta name="theme-color" content="#fff5f8"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+
+  <!-- Google Fonts: Plus Jakarta Sans & Cormorant Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="vanvi-inner-light.css"/>
+  <link rel="stylesheet" href="vanvi-navigation.css"/>
+
+  <style>
+    /* =========================================================
+       VANVI MOMENTS — PRIVACY POLICY EXPERIENCE
+       Pearl White · Blush Pink · Rose Gold · Lavender · Neutral Slate
+       Mobile-First · Clean Typography · Zero Overflow
+       ========================================================= */
+    :root {
+      --bg-pearl: #fffdfb;
+      --bg-blush: #fff1f6;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --rose-main: #ff2a7a;
+      --rose-soft: #ff529a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --text-dark: #2c1224;
+      --text-muted: #7b5971;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --shadow-luxury: 0 10px 30px rgba(255, 56, 128, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden !important;
+    }
+
+    body {
+      background-color: #fff9fb;
+      background-image: 
+        radial-gradient(ellipse 90% 45% at 50% -5%, rgba(255, 182, 217, 0.38) 0%, transparent 65%),
+        radial-gradient(circle 480px at 15% 35%, rgba(245, 208, 254, 0.25) 0%, transparent 70%),
+        linear-gradient(180deg, #fff5f8 0%, #fffbfd 40%, #fff8fa 100%);
+      background-attachment: fixed;
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 110px !important;
+    }
+
+    /* Ambient animated stardust glow */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.25;
+      animation: floatPulse 14s infinite alternate ease-in-out;
+    }
+    .orb-1 { width: 280px; height: 280px; background: #ff78a8; top: -40px; left: -40px; }
+    .orb-2 { width: 300px; height: 300px; background: #c084fc; bottom: -60px; right: -60px; }
+
+    @keyframes floatPulse {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(22px) scale(1.08); }
+    }
+
+    /* Header (Brand Only) */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 58px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      user-select: none;
+      cursor: default;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 900;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .brand-spark-icon {
+      font-size: 18px;
+      animation: gentleSpin 6s infinite linear;
+    }
+    @keyframes gentleSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .brand-title {
+      font-size: 13.5px;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+    }
+    .brand-title span { color: var(--rose-main); }
+    .brand-tag {
+      font-size: 9px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 99px;
+      background: rgba(255, 42, 122, 0.1);
+      border: 1px solid rgba(255, 42, 122, 0.3);
+      color: var(--rose-main);
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .header-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 99px;
+      text-decoration: none;
+      background: #fff0f5;
+      border: 1px solid var(--border-pink);
+      color: var(--rose-main);
+      transition: all 0.2s;
+    }
+    .header-btn:hover { background: #ffe4ee; }
+
+    /* Small Floating ‹ Back Button Bar */
+    .nav-breadcrumbs {
+      max-width: 860px;
+      width: 100%;
+      margin: 8px auto 0;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+    .btn-nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border-pink);
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 5px 13px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(255, 42, 122, 0.05);
+      cursor: pointer;
+      transition: all 0.2s;
+      min-height: 32px;
+    }
+    .btn-nav-back:hover {
+      background: #fff0f5;
+      color: var(--rose-main);
+      transform: translateY(-1px);
+    }
+    .luxury-trail-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-pink);
+      padding: 4px 11px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Main Container */
+    .legal-container {
+      max-width: 860px;
+      width: 100%;
+      margin: 12px auto 30px;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      z-index: 10;
+      flex: 1;
+    }
+
+    /* Hero Header */
+    .legal-hero-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 24px;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-luxury);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .legal-hero-card::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--rose-gradient);
+    }
+    .legal-kicker-pill {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #059669;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .legal-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 4.5vw, 38px);
+      line-height: 1.2;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .legal-hero-title span {
+      background: var(--rose-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .legal-hero-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 580px;
+    }
+
+    /* Privacy Highlight Callout */
+    .privacy-highlight-box {
+      background: linear-gradient(135deg, #fff0f5 0%, #fffbfd 100%);
+      border: 1.5px solid rgba(255, 120, 175, 0.35);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .highlight-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.12);
+    }
+    .highlight-text-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+    .highlight-text-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Legal Section Cards */
+    .legal-section-card {
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow-luxury);
+    }
+    .legal-sec-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legal-sec-content {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #3b1931;
+    }
+    .legal-sec-content p {
+      margin-bottom: 10px;
+    }
+    .legal-sec-content p:last-child {
+      margin-bottom: 0;
+    }
+    .legal-list {
+      list-style: none;
+      margin: 10px 0;
+      padding: 0;
+    }
+    .legal-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 6px;
+    }
+    .legal-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--rose-main);
+      font-size: 11px;
+    }
+
+    /* Footer */
+    footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 16px 36px;
+      text-align: center;
+      font-size: 11.5px;
+      color: #a18599;
+      border-top: 1px solid var(--border-pink);
+      width: 100%;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      margin-bottom: 8px;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--rose-main); }
+  </style>
+</head>
+<body>
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+
+  <!-- Top Header (Brand Only) -->
+  <header class="app-header">
+    <a href="index.html" class="header-brand" title="Vanvi Moments">
+      <span class="brand-spark-icon">✨</span>
+      <div class="brand-title">VANVI <span>♡</span> MOMENTS</div>
+      <span class="brand-tag">LEGAL</span>
+    </a>
+
+    <div class="header-actions">
+      <a href="terms.html" class="header-btn" title="Terms of Service">
+        <span>📜</span> Terms
+      </a>
+    </div>
+  </header>
+
+  <!-- Small Floating ‹ Back Button Bar -->
+  <nav class="nav-breadcrumbs" aria-label="Breadcrumb Navigation">
+    <button type="button" class="btn-nav-back" onclick="safeGoBack()">
+      <span style="color:var(--rose-main); font-size:14px; font-weight:900;">‹</span> <span>Back</span>
+    </button>
+    <div class="luxury-trail-chip">
+      <span>🏠 Home</span>
+      <span style="color:rgba(255,42,122,0.4); font-size:9px;">✦</span>
+      <span style="color:var(--rose-main); font-weight:800;">Privacy Policy</span>
+    </div>
+  </nav>
+
+  <!-- Main Legal Container -->
+  <main class="legal-container">
+
+    <!-- Hero Card -->
+    <section class="legal-hero-card">
+      <div class="legal-kicker-pill">
+        <span>🔒</span> Privacy &amp; Data Protection
+      </div>
+      <h1 class="legal-hero-title">
+        Your moments belong to you, <span>and only you.</span>
+      </h1>
+      <p class="legal-hero-desc">
+        At Vanvi Moments, we treat your memories, love letters, and celebrations with the utmost sanctity. Learn how we safeguard your personal data.
+      </p>
+    </section>
+
+    <!-- Highlight Callout -->
+    <div class="privacy-highlight-box">
+      <div class="highlight-icon">🛡️</div>
+      <div>
+        <div class="highlight-text-title">Our Sacred Promise to You</div>
+        <div class="highlight-text-desc">We never sell, rent, or monetize your uploaded photos, private letters, or recipient information to third parties. Ever.</div>
+      </div>
+    </div>
+
+    <!-- Section 1 -->
+    <article class="legal-section-card">
+      <h2 class="legal-sec-title"><span>1.</span> Information We Collect</h2>
+      <div class="legal-sec-content">
+        <p>To help you create and deliver bespoke digital moments, we collect only the necessary details:</p>
+        <ul class="legal-list">
+          <li><strong>Account Data:</strong> Name, email address, and optional WhatsApp phone number when you create an account or edit your profile.</li>
+          <li><strong>Moment Content:</strong> Recipient names, personal heartfelt notes, uploaded photos, and selected celebration music.</li>
+          <li><strong>Transaction Details:</strong> Payment confirmation and coin redemption status (we do not store your raw credit/debit card numbers; payments are secured via Razorpay/UPI gateways).</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- Section 2 -->
+    <article class="legal-section-card">
+      <h2 class="legal-sec-title"><span>2.</span> How Your Moments Are Protected</h2>
+      <div class="legal-sec-content">
+        <p>Every digital celebration moment is protected with end-to-end 256-bit SSL encryption. Moments can be configured with secret 4-digit passcode locks so that only you and your intended recipient can unlock the letter and memories.</p>
+        <p>Moments are accessible exclusively via your generated private URL. We never index private recipient keepsakes on public search engines.</p>
+      </div>
+    </article>
+
+    <!-- Section 3 -->
+    <article class="legal-section-card">
+      <h2 class="legal-sec-title"><span>3.</span> Your Control &amp; Data Rights</h2>
+      <div class="legal-sec-content">
+        <p>You maintain full ownership of your creations. From your <a href="dashboard.html" style="color:var(--rose-main); font-weight:700;">Dashboard</a>, you can review active moments, revoke links, or delete past celebration moments at any time.</p>
+        <p>If you wish to permanently delete your account and all associated data, you can reach out to our concierge team at <a href="mailto:vanvimoments@gmail.com" style="color:var(--rose-main); font-weight:700;">vanvimoments@gmail.com</a>.</p>
+      </div>
+    </article>
+
+    <!-- Section 4 -->
+    <article class="legal-section-card">
+      <h2 class="legal-sec-title"><span>4.</span> Cookies &amp; Local Storage</h2>
+      <div class="legal-sec-content">
+        <p>We use lightweight browser local storage to preserve your ongoing moment drafts, theme preferences, and coin balances so that you never lose your progress while creating.</p>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="templates.html">Templates</a>
+      <a href="builder.html">Studio</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="privacy.html" style="color:var(--rose-main);">Privacy Policy</a>
+    </div>
+    <p>© 2026 Vanvi Moments · All rights reserved.</p>
+  </footer>
+
+  <!-- Global Bottom Navigation Dock -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" id="bottomNavHome">⌂<br/>Home</a>
+    <a href="templates.html" class="nav-btn" id="bottomNavExplore">◌<br/>Explore</a>
+    <a href="builder.html" class="create nav-btn" id="bottomNavCreate">＋<br/>Create</a>
+    <a href="ai.html" class="nav-btn" id="bottomNavAi">✦<br/>AI</a>
+    <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
+  </nav>
+
+  <script src="js/vanvi-navigation.js"></script>
+
+  <script>
+    function safeGoBack() {
+      try {
+        if (window.history && window.history.length > 1 && document.referrer && document.referrer.indexOf(window.location.host) !== -1) {
+          window.history.back();
+        } else if (typeof window.vanviGoBack === 'function') {
+          window.vanviGoBack('index.html');
+        } else {
+          window.location.href = 'index.html';
+        }
+      } catch(e) {
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+</body>
+</html>

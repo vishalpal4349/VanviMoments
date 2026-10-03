@@ -1,0 +1,158 @@
+Created At: 2026-09-22T17:11:27+05:30
+Completed At: 2026-09-22T17:11:27+05:30
+File Path: `file:///c:/Users/RISHU%20KUMARI/VanviMoments/profile.html`
+Total Lines: 436
+Total Bytes: 17966
+Showing lines 1 to 150
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: <!DOCTYPE html>
+2: <html lang="en">
+3: <head>
+4:   <meta charset="UTF-8">
+5:   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+6:   <title>My Profile — Vanvi Moments</title>
+7:   <meta name="description" content="Manage your Vanvi Moments account, creations, favorites, rewards, and membership.">
+8:   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◉</text></svg>">
+9:   <link rel="preconnect" href="https://fonts.googleapis.com">
+10:   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+11:   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+12:   <link rel="stylesheet" href="vanvi-inner-light.css">
+13: 
+14:   <style>
+15:     :root{
+16:       --pearl:#fffdfb; --ivory:#fff8f5; --blush:#ffe8f0; --rose:#d94f7d;
+17:       --rose2:#f28aaa; --lavender:#eee9ff; --blue:#eaf5ff; --gold:#d8b477;
+18:       --ink:#30212a; --muted:#806d77; --line:rgba(111,75,94,.12);
+19:       --glass:rgba(255,255,255,.76); --shadow:0 18px 55px rgba(72,35,55,.10);
+20:       --soft:0 8px 25px rgba(72,35,55,.07);
+21:       --font-sans:'Plus Jakarta Sans',system-ui,sans-serif;
+22:       --font-serif:'Playfair Display',Georgia,serif;
+23:     }
+24: 
+25:     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+26:     html{scroll-behavior:smooth}
+27:     body{
+28:       min-height:100vh; color:var(--ink); font-family:var(--font-sans);
+29:       background:
+30:         radial-gradient(700px 420px at 8% -5%,rgba(242,138,170,.20),transparent 65%),
+31:         radial-gradient(620px 420px at 100% 12%,rgba(184,213,255,.20),transparent 65%),
+32:         radial-gradient(520px 400px at 50% 100%,rgba(223,210,255,.18),transparent 65%),
+33:         linear-gradient(145deg,var(--pearl),var(--ivory));
+34:       overflow-x:hidden; padding-bottom:92px;
+35:     }
+36:     a{text-decoration:none;color:inherit}
+37:     button{font:inherit}
+38:     .app-header{
+39:       position:sticky;top:0;z-index:50;height:68px;padding:0 18px;
+40:       display:flex;align-items:center;justify-content:space-between;
+41:       background:rgba(255,255,255,.72);backdrop-filter:blur(22px);
+42:       -webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--line);
+43:     }
+44:     .header-left,.header-right{display:flex;align-items:center;gap:10px}
+45:     .brand-link{font-weight:800;letter-spacing:-.55px;font-size:17px}
+46:     .brand-mark{
+47:       display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;
+48:       background:linear-gradient(135deg,var(--rose),var(--rose2),#cbb9f7);
+49:       color:#fff;box-shadow:0 7px 18px rgba(217,79,125,.24);font-size:14px
+50:     }
+51:     .brand-link span{color:var(--rose)}
+52:     .icon-btn,.btn-nav-back{
+53:       border:1px solid var(--line);background:rgba(255,255,255,.76);color:var(--ink);
+54:       box-shadow:var(--soft);display:inline-flex;align-items:center;justify-content:center;
+55:       cursor:pointer;transition:.2s ease;
+56:     }
+57:     .btn-nav-back{height:38px;padding:0 12px;border-radius:13px;font-size:12px;font-weight:700;gap:5px}
+58:     .icon-btn{width:38px;height:38px;border-radius:13px;font-size:16px}
+59:     .icon-btn:hover,.btn-nav-back:hover{transform:translateY(-1px);background:#fff}
+60: 
+61:     .profile-container{width:min(100% - 28px,720px);margin:0 auto;padding:26px 0 22px}
+62:     .profile-header-card{
+63:       position:relative;overflow:hidden;text-align:center;padding:32px 22px 24px;
+64:       border:1px solid rgba(255,255,255,.9);border-radius:30px;
+65:       background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(255,246,250,.72));
+66:       box-shadow:var(--shadow);backdrop-filter:blur(18px);
+67:     }
+68:     .profile-header-card:before,.profile-header-card:after{
+69:       content:"";position:absolute;border-radius:50%;filter:blur(3px);pointer-events:none
+70:     }
+71:     .profile-header-card:before{width:190px;height:190px;left:-100px;top:-90px;background:rgba(242,138,170,.18)}
+72:     .profile-header-card:after{width:180px;height:180px;right:-90px;bottom:-100px;background:rgba(203,185,247,.18)}
+73:     .avatar-wrapper{position:relative;width:92px;height:92px;margin:0 auto 15px;z-index:1}
+74:     .avatar-circle{
+75:       width:100%;height:100%;border-radius:30px;display:grid;place-items:center;
+76:       background:linear-gradient(135deg,#d94f7d 0%,#f28aaa 52%,#cbb9f7 100%);
+77:       color:#fff;font-size:31px;font-weight:800;border:4px solid rgba(255,255,255,.95);
+78:       box-shadow:0 14px 32px rgba(217,79,125,.25)
+79:     }
+80:     .avatar-badge{
+81:       position:absolute;right:-3px;bottom:-3px;width:29px;height:29px;border-radius:10px;
+82:       display:grid;place-items:center;background:#fff;border:2px solid #fff;
+83:       box-shadow:0 5px 15px rgba(50,25,40,.14);font-size:13px
+84:     }
+85:     .user-name{font-family:var(--font-serif);font-size:27px;line-height:1.15;margin-bottom:5px}
+86:     .user-phone{font-size:12px;color:var(--muted);word-break:break-word;margin-bottom:13px}
+87:     .tier-badge{
+88:       display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:99px;
+89:       background:linear-gradient(135deg,#fff3d9,#fffaf0);border:1px solid rgba(216,180,119,.38);
+90:       color:#9b6e27;font-size:11px;font-weight:800;letter-spacing:.35px
+91:     }
+92:     .profile-stats{
+93:       position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);
+94:       margin-top:24px;padding-top:20px;border-top:1px solid var(--line);gap:6px
+95:     }
+96:     .stat-box{padding:7px 4px;border-radius:16px;transition:.2s}
+97:     .stat-box:hover{background:rgba(255,255,255,.55)}
+98:     .stat-val{font-size:20px;font-weight:800;color:var(--rose)}
+99:     .stat-lbl{margin-top:3px;font-size:10px;color:var(--muted);font-weight:700}
+100: 
+101:     .menu-group{
+102:       margin-top:17px;border:1px solid rgba(255,255,255,.9);border-radius:23px;
+103:       overflow:hidden;background:rgba(255,255,255,.68);box-shadow:var(--soft);
+104:       backdrop-filter:blur(15px)
+105:     }
+106:     .menu-group-title{
+107:       padding:16px 17px 8px;font-size:10px;text-transform:uppercase;letter-spacing:1.1px;
+108:       color:var(--muted);font-weight:800
+109:     }
+110:     .menu-item{
+111:       display:flex;align-items:center;justify-content:space-between;gap:12px;
+112:       min-height:66px;padding:10px 15px;border-top:1px solid rgba(111,75,94,.07);
+113:       transition:.2s ease
+114:     }
+115:     .menu-item:hover{background:rgba(255,255,255,.72)}
+116:     .menu-left{display:flex;align-items:center;gap:12px;min-width:0}
+117:     .menu-icon{
+118:       flex:0 0 40px;width:40px;height:40px;border-radius:13px;display:grid;place-items:center;
+119:       color:var(--rose);background:linear-gradient(145deg,#fff0f5,#f3edff);
+120:       border:1px solid rgba(217,79,125,.09);font-size:16px
+121:     }
+122:     .menu-text{font-size:13px;font-weight:800;line-height:1.25}
+123:     .menu-sub{font-size:10.5px;color:var(--muted);font-weight:500;margin-top:3px;line-height:1.3}
+124:     .menu-right{display:flex;align-items:center;gap:8px;color:#a7959e;font-size:19px}
+125:     .badge-pill{padding:4px 8px;border-radius:99px;background:#edf9f4;color:#218764;
+126:       border:1px solid #c9ecdf;font-size:9px;font-weight:800;white-space:nowrap}
+127: 
+128:     .btn-signout{
+129:       width:100%;margin-top:17px;padding:13px;border-radius:16px;border:1px solid rgba(217,79,125,.14);
+130:       background:rgba(255,255,255,.65);color:#b64268;font-weight:800;font-size:12px;
+131:       cursor:pointer;box-shadow:var(--soft);transition:.2s
+132:     }
+133:     .btn-signout:hover{background:#fff0f4;transform:translateY(-1px)}
+134: 
+135:     .bottom-dock{
+136:       position:fixed;z-index:90;bottom:10px;left:50%;transform:translateX(-50%);
+137:       width:min(calc(100% - 20px),620px);height:66px;padding:7px 8px;
+138:       display:flex;align-items:center;justify-content:space-around;gap:3px;
+139:       border:1px solid rgba(255,255,255,.95);border-radius:23px;
+140:       background:rgba(255,255,255,.78);backdrop-filter:blur(24px);
+141:       -webkit-backdrop-filter:blur(24px);box-shadow:0 16px 45px rgba(50,25,40,.15)
+142:     }
+143:     .dock-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+144:       color:#8c7882;font-size:9px;font-weight:800;min-width:0}
+145:     .dock-item.active{color:var(--rose)}
+146:     .dock-icon{font-size:17px;line-height:1}
+147:     .dock-fab{
+148:       width:47px;height:47px;flex:0 0 47px;margin-top:-22px;border-radius:17px;
+149:       display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--rose),var(--rose2),#b9a3ef);
+150:       border:3px solid rgba(255,255,255,.95);box-shadow:0 10px 25px rgba(217,79,125,.28);
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.

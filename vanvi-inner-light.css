@@ -1,0 +1,445 @@
+/**
+ * VANVI MOMENTS — PREMIUM SCROLL EXPERIENCE ENHANCEMENTS
+ * Cinematic scroll journey with layered reveals, parallax, and premium animations
+ */
+
+/* Scroll Animation Base Classes */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+.scroll-animate.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animation delay utilities */
+.scroll-stagger-2 { transition-delay: 0.1s !important; }
+.scroll-stagger-3 { transition-delay: 0.2s !important; }
+.scroll-stagger-4 { transition-delay: 0.3s !important; }
+.scroll-stagger-5 { transition-delay: 0.4s !important; }
+.scroll-stagger-6 { transition-delay: 0.5s !important; }
+.scroll-stagger-7 { transition-delay: 0.6s !important; }
+.scroll-stagger-8 { transition-delay: 0.7s !important; }
+.scroll-stagger-9 { transition-delay: 0.8s !important; }
+.scroll-stagger-10 { transition-delay: 0.9s !important; }
+
+/* 3D Depth/Parallax Layers */
+.parallax-layer {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.parallax-depth-1 { transform: translateZ(0px); }
+.parallax-depth-2 { transform: translateZ(10px); }
+.parallax-depth-3 { transform: translateZ(20px); }
+.parallax-depth-4 { transform: translateZ(30px); }
+
+/* Premium Card Lift Effect */
+.card-lift {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card-lift.animate-in {
+  transform: translateY(0) scale(1);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Blur-to-Sharp Transition */
+.blur-sharp {
+  filter: blur(8px);
+  transition: filter 0.8s ease, opacity 0.8s ease;
+}
+
+.blur-sharp.animate-in {
+  filter: blur(0);
+}
+
+/* Background Gradient Shift Sections */
+.bg-shift {
+  transition: background 3s ease, background-position 3s ease;
+}
+
+/* Floating Particles/Glow Effect */
+.floating-particles {
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-particles::before,
+.floating-particles::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-particles::before {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, var(--rose-200) 0%, transparent 70%);
+  animation: floatParticle 6s ease-in-out infinite;
+}
+
+.floating-particles::after {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, var(--lilac-200) 0%, transparent 70%);
+  animation: floatParticle 8s ease-in-out infinite 2s;
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) translateX(15px) scale(1.1);
+  }
+}
+
+/* Premium Scroll Progress Indicator */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--rose-500), var(--lilac-500));
+  transition: width 0.1s ease;
+  border-radius: 2px;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .scroll-animate {
+    transition-duration: 0.6s;
+  }
+  
+  .blur-sharp {
+    transition-duration: 0.6s;
+  }
+  
+  .floating-particles::before,
+  .floating-particles::after {
+    display: none; /* Disable particles on mobile for performance */
+  }
+}
+
+/* Prefers-reduced-motion support */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-animate,
+  .blur-sharp,
+  .card-lift,
+  .bg-shift,
+  .floating-particles::before,
+  .floating-particles::after,
+  .scroll-progress-bar {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .scroll-animate {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .blur-sharp {
+    filter: none !important;
+  }
+}
+
+/* ==========================================================================
+   VANVI MOMENTS — MOBILE SMART SIZING & COMPACT LUXURY DISPLAY (PHONES <= 680px)
+   Keeps laptop & desktop expansive and rich, while phone displays are compact,
+   proportional, non-bulky, and neatly visible with 2 cards side-by-side.
+   ========================================================================== */
+@media (max-width: 680px) {
+  /* 1. Category Grids (2 columns on mobile so cards don't look giant or fill entire screen) */
+  .grid,
+  .category-grid,
+  .premium-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    padding: 8px 10px 48px !important;
+    max-width: 100% !important;
+  }
+
+  /* 2. Standard Category Cards */
+  .card {
+    padding: 10px 8px 12px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 14px rgba(44, 18, 36, 0.06) !important;
+  }
+  .card-head {
+    margin-bottom: 8px !important;
+  }
+  .card-icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 18px !important;
+    border-radius: 10px !important;
+  }
+  .card-badges {
+    gap: 3px !important;
+  }
+  .pill-price {
+    font-size: 11px !important;
+    padding: 2px 7px !important;
+    font-weight: 850 !important;
+  }
+  .pill-sub {
+    font-size: 8px !important;
+    padding: 1px 6px !important;
+  }
+  .card-body h3 {
+    font-size: 13px !important;
+    font-weight: 750 !important;
+    margin-bottom: 3px !important;
+    line-height: 1.22 !important;
+    min-height: 32px !important;
+  }
+  .card-body p {
+    font-size: 10px !important;
+    line-height: 1.35 !important;
+    margin-bottom: 8px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    min-height: 27px !important;
+  }
+  /* Hide noisy feature tags on phone screens so cards remain compact */
+  .features-tags {
+    display: none !important;
+  }
+  .card-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4px !important;
+    margin-top: auto !important;
+  }
+  .btn-preview,
+  .btn-create {
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    padding: 6.5px 2px !important;
+    border-radius: 8px !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+  }
+
+  /* 3. Category Premium / Flagship Cards */
+  .prem-card {
+    padding: 10px 8px 12px !important;
+    border-radius: 16px !important;
+  }
+  .prem-card-head {
+    margin-bottom: 6px !important;
+  }
+  .prem-icon-box {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 18px !important;
+    border-radius: 10px !important;
+  }
+  .prem-price-val {
+    font-size: 14.5px !important;
+  }
+  .prem-price-badge {
+    font-size: 8px !important;
+    padding: 1px 5px !important;
+    margin-top: 1px !important;
+  }
+  .prem-card-body h3 {
+    font-size: 13px !important;
+    line-height: 1.22 !important;
+    margin-bottom: 3px !important;
+  }
+  .prem-card-body p {
+    font-size: 10px !important;
+    line-height: 1.35 !important;
+    margin-bottom: 8px !important;
+    min-height: 26px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .prem-features-list {
+    display: none !important;
+  }
+  .prem-card-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4px !important;
+    margin-top: auto !important;
+  }
+  .btn-prem-preview,
+  .btn-prem-create {
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    padding: 6.5px 2px !important;
+    border-radius: 8px !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+  }
+
+  /* 4. Dual Path & Inspires on Category Premium */
+  .dual-path-cards {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+  }
+  .path-card {
+    padding: 12px 10px !important;
+    border-radius: 14px !important;
+  }
+  .path-card-title {
+    font-size: 14px !important;
+    margin-bottom: 2px !important;
+  }
+  .path-card-desc {
+    font-size: 10.5px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .path-card-cta {
+    font-size: 10px !important;
+  }
+
+  /* 5. Headers, Heroes & Rails on Category Portals */
+  .hero-ultra,
+  .hero,
+  .category-hero {
+    padding: 14px 12px 10px !important;
+    text-align: center !important;
+  }
+  .hero-ultra h1,
+  .hero h1,
+  .category-hero h1 {
+    font-size: 21px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 3px !important;
+  }
+  .hero-ultra p,
+  .hero p,
+  .category-hero p {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 10px !important;
+  }
+  .hero-eyebrow-royal,
+  .hero-badge {
+    font-size: 8.5px !important;
+    padding: 2px 8px !important;
+    margin-bottom: 4px !important;
+  }
+  .category-switch-bar {
+    padding: 4px 10px !important;
+    margin-bottom: 14px !important;
+    gap: 5px !important;
+  }
+  .switch-pill {
+    font-size: 10.5px !important;
+    padding: 4px 10px !important;
+  }
+  .section-head-royal {
+    margin-bottom: 14px !important;
+  }
+  .section-head-royal h2 {
+    font-size: 19px !important;
+    margin-bottom: 3px !important;
+  }
+  .section-head-royal p {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+
+  /* 6. AI Spark Bar */
+  .ai-prompt-bar {
+    padding: 8px 12px !important;
+    margin: 0 10px 14px !important;
+    border-radius: 12px !important;
+  }
+  .ai-prompt-bar span {
+    font-size: 11px !important;
+  }
+  .btn-ai-spark {
+    font-size: 10px !important;
+    padding: 4px 10px !important;
+  }
+}
+
+/* ==========================================================================
+   VANVI x CLAYLO VIBRANT CANDY PALETTE & TACTILE 3D INNER POLISH
+   ========================================================================== */
+
+/* Colorful Candy Chips & Cards for Inner Pages */
+.clay-card-mint {
+  background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%) !important;
+  border: 1.5px solid #bbf7d0 !important;
+  box-shadow: inset 0 2px 3px #fff, 0 8px 24px -4px rgba(22, 101, 52, 0.12) !important;
+}
+
+.clay-card-lavender {
+  background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%) !important;
+  border: 1.5px solid #e9d5ff !important;
+  box-shadow: inset 0 2px 3px #fff, 0 8px 24px -4px rgba(124, 58, 237, 0.12) !important;
+}
+
+.clay-card-rose {
+  background: linear-gradient(180deg, #ffffff 0%, #fff1f2 100%) !important;
+  border: 1.5px solid #fecdd3 !important;
+  box-shadow: inset 0 2px 3px #fff, 0 8px 24px -4px rgba(225, 29, 72, 0.12) !important;
+}
+
+.clay-card-gold {
+  background: linear-gradient(180deg, #ffffff 0%, #fffbeb 100%) !important;
+  border: 1.5px solid #fde68a !important;
+  box-shadow: inset 0 2px 3px #fff, 0 8px 24px -4px rgba(217, 119, 6, 0.12) !important;
+}
+
+.clay-card-sky {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%) !important;
+  border: 1.5px solid #bae6fd !important;
+  box-shadow: inset 0 2px 3px #fff, 0 8px 24px -4px rgba(2, 132, 199, 0.12) !important;
+}
+
+/* 3D Tactile Circular Icon Containers */
+.clay-icon-bubble {
+  width: 44px;
+  height: 44px;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 
+    inset 0 2px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  transition: transform 0.25s cubic-bezier(.34, 1.56, .64, 1) !important;
+}
+.clay-icon-bubble:hover {
+  transform: scale(1.1) rotate(5deg) !important;
+}

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Unlock the Gift — Premium Logic Puzzle — Vanvi Moments</title>
+  <meta name="description" content="Crack progressive logic ciphers and unlock the luxury mystery gift box. Earn fixed Vanvi Coins at milestone levels!">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --bg-pearl: #fffdfc;
+      --bg-blush: #fff1f6;
+      --rose-main: #ff2a7a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --gold-main: #d97706;
+      --emerald-main: #10b981;
+      --text-dark: #2c1224;
+      --text-muted: #88627b;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --shadow-card: 0 14px 36px rgba(255, 60, 130, 0.10);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #ffe4ee 0%, #fff2f6 50%, #fdf5f8 100%);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding-bottom: 95px;
+      overflow-x: hidden !important;
+    }
+
+    /* Top Sticky Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 62px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left, .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-nav-back {
+      border: 1px solid var(--border-pink);
+      background: #ffffff;
+      color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06);
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-nav-back:hover { transform: translateY(-1px); background: #fff0f5; }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+    }
+    .brand-link span { color: var(--rose-main); }
+
+    .wallet-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff8eb;
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #b45309;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.08);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .sound-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid var(--border-pink);
+      background: #ffffff;
+      color: var(--text-dark);
+      font-size: 15px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    /* Container */
+    .game-container {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 16px 14px 20px;
+    }
+
+    .hero-title-wrap {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      background: #fff0f6;
+      border: 1px solid var(--border-pink);
+      color: var(--rose-main);
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 4px;
+    }
+    .game-title {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    /* Milestone Stepper Bar */
+    .milestone-stepper {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-card);
+    }
+    .stepper-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .stepper-track {
+      display: flex;
+      gap: 4px;
+      height: 8px;
+      background: #f1e2eb;
+      border-radius: 99px;
+      overflow: hidden;
+      padding: 1px;
+    }
+    .stepper-step {
+      flex: 1;
+      height: 100%;
+      background: #e2d2dc;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    .stepper-step.completed { background: #10b981; }
+    .stepper-step.active { background: var(--rose-main); }
+
+    /* 3D Virtual Gift Box Stage */
+    .gift-stage-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .gift-box-visual {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 12px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      font-size: 60px;
+      filter: drop-shadow(0 12px 24px rgba(255, 42, 122, 0.25));
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .gift-box-visual.unlocking {
+      animation: giftBounce 0.6s ease-out;
+    }
+    @keyframes giftBounce {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.22) rotate(6deg); }
+      70% { transform: scale(0.95) rotate(-4deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    .tumbler-lock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 99px;
+      background: #fff8eb;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+      color: #b45309;
+      font-size: 11.5px;
+      font-weight: 800;
+    }
+
+    /* Logic Puzzle Clue Box */
+    .puzzle-clue-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 16px rgba(255, 60, 130, 0.05);
+    }
+    .clue-level-tag {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--rose-main);
+      margin-bottom: 4px;
+    }
+    .clue-question {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .clue-display-area {
+      background: #fdf5f9;
+      border: 1.5px dashed var(--border-pink);
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 14px;
+      color: var(--text-dark);
+    }
+
+    /* Answer Choices Grid */
+    .choices-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .choice-btn {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 16px;
+      padding: 12px 10px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 12px rgba(44, 18, 36, 0.04);
+    }
+    .choice-btn:hover {
+      background: #fff0f6;
+      border-color: var(--rose-main);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(255, 42, 122, 0.15);
+    }
+    .choice-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+    .choice-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    /* Fixed Rewards Guide */
+    .rewards-guide {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 12px 14px;
+      font-size: 11.5px;
+    }
+    .milestone-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      text-align: center;
+      margin-top: 6px;
+    }
+    .m-cell {
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.2);
+      border-radius: 12px;
+      padding: 6px 4px;
+    }
+    .m-lvl { font-size: 10px; font-weight: 800; color: var(--text-muted); }
+    .m-coin { font-size: 13px; font-weight: 900; color: var(--gold-main); }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(44, 18, 36, 0.65);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-dialog {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 26px;
+      padding: 26px 20px 20px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(44, 18, 36, 0.25);
+    }
+    .modal-icon { font-size: 40px; margin-bottom: 8px; }
+    .modal-title { font-family: var(--font-serif); font-size: 22px; font-weight: 800; }
+    .modal-desc { font-size: 12px; color: var(--text-muted); margin: 6px 0 16px; }
+
+    .coin-display-box {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+    .coin-val { font-size: 26px; font-weight: 900; color: #b45309; }
+
+    .btn-action-primary {
+      width: 100%;
+      background: var(--rose-gradient);
+      color: #ffffff;
+      border: none;
+      padding: 12px;
+      border-radius: 16px;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 8px 22px rgba(255, 42, 122, 0.3);
+    }
+
+    .btn-action-sec {
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+      padding: 11px;
+      border-radius: 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      margin-top: 8px;
+    }
+
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 120;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <a href="games.html" class="btn-nav-back" title="Back to Games">
+        <span>‹</span> <span>Games</span>
+      </a>
+      <a href="index.html" class="brand-link" title="Vanvi Moments">
+        🎁 Unlock <span>Gift</span>
+      </a>
+    </div>
+    <div class="header-right">
+      <button type="button" class="sound-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
+      <a href="rewards.html" class="wallet-pill">
+        <span>🪙</span> <span id="headerCoins">150</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="game-container">
+    <div class="hero-title-wrap">
+      <div class="hero-badge">✦ Mystery Vault Logic</div>
+      <h1 class="game-title">Unlock the Gift</h1>
+    </div>
+
+    <!-- Stepper Tracker -->
+    <section class="milestone-stepper">
+      <div class="stepper-header">
+        <span>Stage <span id="currentLevelText">1</span> of 10</span>
+        <span id="tierNameBadge" style="color:var(--rose-main);">Level 1–3: Easy</span>
+      </div>
+      <div class="stepper-track" id="stepperTrack">
+        <!-- 10 steps generated -->
+      </div>
+    </section>
+
+    <!-- 3D Virtual Gift Box Stage -->
+    <section class="gift-stage-card">
+      <div class="gift-box-visual" id="giftVisual">🎁</div>
+      <div class="tumbler-lock-badge" id="lockStatusBadge">
+        <span>🔒</span> <span id="lockStatusText">Tumbler Lock 1 Engaged</span>
+      </div>
+      <div style="font-size:11px; color:var(--text-muted); margin-top:6px;">
+        Attempts Remaining: <span id="attemptsText" style="font-weight:800; color:var(--rose-main);">3</span>
+      </div>
+    </section>
+
+    <!-- Logic Puzzle Clue Card -->
+    <section class="puzzle-clue-card">
+      <div class="clue-level-tag" id="clueTag">Question 1 · Pattern Sequence</div>
+      <div class="clue-question" id="clueQuestion">What comes next in the celebration sequence?</div>
+      <div class="clue-display-area" id="clueDisplay">🎂 → 🕯️ → 🎈 → 🎂 → 🕯️ → ?</div>
+
+      <!-- 4 Choices -->
+      <div class="choices-grid" id="choicesGrid">
+        <!-- Generated -->
+      </div>
+    </section>
+
+    <!-- Fixed Rewards Milestone Guide -->
+    <aside class="rewards-guide">
+      <div style="font-weight:800; display:flex; justify-content:space-between;">
+        <span>🏆 Milestone Fixed Rewards</span>
+        <span style="color:var(--text-muted); font-size:10px;">(Verified Complete)</span>
+      </div>
+      <div class="milestone-grid">
+        <div class="m-cell">
+          <div class="m-lvl">Level 3 (Easy)</div>
+          <div class="m-coin">3 Coins</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-lvl">Level 6 (Medium)</div>
+          <div class="m-coin">6 Coins</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-lvl">Level 10 (Master)</div>
+          <div class="m-coin">10 Coins</div>
+        </div>
+      </div>
+      <div style="margin-top:6px; color:#9333ea; font-size:10.5px; font-weight:700;">
+        ✨ <b>Perfect Run Bonus:</b> 0 failed attempts throughout the vault = <b>+3 Coins</b>!
+      </div>
+    </aside>
+  </main>
+
+  <!-- VICTORY / MILESTONE UNLOCK MODAL -->
+  <div class="modal-overlay" id="victoryModal">
+    <div class="modal-dialog">
+      <div class="modal-icon">🎉</div>
+      <h2 class="modal-title" id="vicTitle">Milestone Unlocked!</h2>
+      <p class="modal-desc" id="vicDesc">You solved the logic sequence and cracked the vault!</p>
+
+      <div class="coin-display-box">
+        <div class="coin-val" id="vicCoins">+3 🪙</div>
+        <div style="font-size:11px; font-weight:700; color:#92400e;" id="vicSub">Milestone Reward</div>
+      </div>
+
+      <button type="button" class="btn-action-primary" id="btnContinue" onclick="continueToNextStage()">
+        Continue to Next Stage →
+      </button>
+      <a href="rewards.html" class="btn-action-sec">View Rewards Wallet</a>
+    </div>
+  </div>
+
+  <!-- GAME OVER MODAL -->
+  <div class="modal-overlay" id="gameoverModal">
+    <div class="modal-dialog">
+      <div class="modal-icon">🔒</div>
+      <h2 class="modal-title">Lock Jammed!</h2>
+      <p class="modal-desc">You used all attempts for this stage. Don't worry, the combination resets for a fresh attempt!</p>
+      <button type="button" class="btn-action-primary" onclick="restartFromBeginning()">Restart Vault ↺</button>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Global Bottom Dock -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" id="bottomNavHome">⌂<br/>Home</a>
+    <a href="templates.html" class="nav-btn" id="bottomNavExplore">◌<br/>Explore</a>
+    <a href="builder.html" class="create nav-btn" id="bottomNavCreate">＋<br/>Create</a>
+    <a href="games.html" class="nav-btn active" id="bottomNavGames">🎮<br/>Games</a>
+    <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
+  </nav>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const DAILY_CAP = 25;
+      const STORAGE_COINS = 'vanvi_user_coins';
+      const STORAGE_TODAY_EARNED = 'vanvi_games_today_earned';
+      const STORAGE_TODAY_DATE = 'vanvi_games_today_date';
+      const STORAGE_SOUND = 'vanvi_sound_enabled';
+
+      // 10 Logic Puzzles across 4 difficulty tiers
+      const PUZZLES = [
+        // Level 1 (Easy)
+        {
+          tier: 'Level 1–3: Easy',
+          tag: 'Question 1 · Pattern Sequence',
+          question: 'What comes next in the celebration sequence?',
+          display: '🎂 → 🕯️ → 🎈 → 🎂 → 🕯️ → ?',
+          choices: ['🎈', '🌸', '🎁', '👑'],
+          answer: '🎈'
+        },
+        // Level 2 (Easy)
+        {
+          tier: 'Level 1–3: Easy',
+          tag: 'Question 2 · Color Pattern',
+          question: 'Find the repeating celebration pattern:',
+          display: '🌸 · 👑 · 💖 · 🌸 · 👑 · ?',
+          choices: ['💖', '🎈', '💍', '🎂'],
+          answer: '💖'
+        },
+        // Level 3 (Easy) - Milestone 3
+        {
+          tier: 'Level 1–3: Easy',
+          tag: 'Question 3 · Symbol Math',
+          question: 'If 🎁 + 🎁 = 4, and 🎁 + 💖 = 5, what is 💖?',
+          display: '🎁 = 2  |  🎁 + 💖 = 5  |  💖 = ?',
+          choices: ['3', '2', '4', '1'],
+          answer: '3',
+          milestoneCoins: 3
+        },
+        // Level 4 (Medium)
+        {
+          tier: 'Level 4–6: Medium',
+          tag: 'Question 4 · Number Progression',
+          question: 'Calculate the next number in the doubling progression:',
+          display: '3, 6, 12, 24, ?',
+          choices: ['48', '36', '42', '52'],
+          answer: '48'
+        },
+        // Level 5 (Medium)
+        {
+          tier: 'Level 4–6: Medium',
+          tag: 'Question 5 · Matrix Harmony',
+          question: 'Which symbol completes the celebration pair grid?',
+          display: '[ 🥂  🍾 ]\n[ 💍   ?  ]',
+          choices: ['👑', '💌', '🌸', '🎂'],
+          answer: '👑'
+        },
+        // Level 6 (Medium) - Milestone 6
+        {
+          tier: 'Level 4–6: Medium',
+          tag: 'Question 6 · Word Cipher Value',
+          question: 'If L=12, O=15, V=22, E=5, what is the sum of LOVE?',
+          display: '12 + 15 + 22 + 5 = ?',
+          choices: ['54', '52', '56', '48'],
+          answer: '54',
+          milestoneCoins: 6
+        },
+        // Level 7 (Hard)
+        {
+          tier: 'Level 7–9: Hard',
+          tag: 'Question 7 · Fibonacci Sequence',
+          question: 'Follow the natural growth progression:',
+          display: '1, 1, 2, 3, 5, 8, ?',
+          choices: ['13', '11', '14', '15'],
+          answer: '13'
+        },
+        // Level 8 (Hard)
+        {
+          tier: 'Level 7–9: Hard',
+          tag: 'Question 8 · Mirror Reflection',
+          question: 'VANVI reversed is IVNAV. What is MOMENT reversed?',
+          display: 'M O M E N T  →  ?',
+          choices: ['TNEMOM', 'TNOMEM', 'MEMONT', 'TNEOMM'],
+          answer: 'TNEMOM'
+        },
+        // Level 9 (Hard)
+        {
+          tier: 'Level 7–9: Hard',
+          tag: 'Question 9 · Multi-Symbol Equation',
+          question: 'If 3 Cakes = 15, and Cake + 2 Hearts = 11, what is Heart × Cake?',
+          display: 'Cake = 5  |  Heart = 3  |  Heart × Cake = ?',
+          choices: ['15', '12', '18', '20'],
+          answer: '15'
+        },
+        // Level 10 (Expert) - Grand Milestone 10
+        {
+          tier: 'Level 10: Expert Vault Master',
+          tag: 'Question 10 · Master Vault Cipher',
+          question: 'Sum of the first 5 prime numbers opens the vault (2, 3, 5, 7, 11):',
+          display: '2 + 3 + 5 + 7 + 11 = ?',
+          choices: ['28', '26', '29', '31'],
+          answer: '28',
+          milestoneCoins: 10
+        }
+      ];
+
+      let currentLevelIndex = 0;
+      let attemptsRemaining = 3;
+      let totalFailedAttempts = 0;
+      let awardedMilestones = {};
+      let isSoundMuted = localStorage.getItem(STORAGE_SOUND) === 'false';
+
+      const soundBtn = document.getElementById('soundBtn');
+      const headerCoins = document.getElementById('headerCoins');
+      const currentLevelText = document.getElementById('currentLevelText');
+      const tierNameBadge = document.getElementById('tierNameBadge');
+      const stepperTrack = document.getElementById('stepperTrack');
+      const giftVisual = document.getElementById('giftVisual');
+      const lockStatusText = document.getElementById('lockStatusText');
+      const attemptsText = document.getElementById('attemptsText');
+      const clueTag = document.getElementById('clueTag');
+      const clueQuestion = document.getElementById('clueQuestion');
+      const clueDisplay = document.getElementById('clueDisplay');
+      const choicesGrid = document.getElementById('choicesGrid');
+
+      // Audio Synthesis
+      let audioCtx = null;
+      function playChime(freq, type, dur) {
+        if (isSoundMuted) return;
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type || 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.linearRampToValueAtTime(0, now + dur);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + dur);
+        } catch(e) {}
+      }
+
+      window.toggleSound = function() {
+        isSoundMuted = !isSoundMuted;
+        localStorage.setItem(STORAGE_SOUND, (!isSoundMuted).toString());
+        soundBtn.textContent = isSoundMuted ? '🔇' : '🔊';
+      };
+
+      // Economy Sync
+      function getTodayKey() {
+        const d = new Date();
+        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      }
+      function getEarnedToday() {
+        const savedDate = localStorage.getItem(STORAGE_TODAY_DATE);
+        const today = getTodayKey();
+        if (savedDate !== today) {
+          localStorage.setItem(STORAGE_TODAY_DATE, today);
+          localStorage.setItem(STORAGE_TODAY_EARNED, '0');
+          return 0;
+        }
+        return parseInt(localStorage.getItem(STORAGE_TODAY_EARNED) || '0', 10);
+      }
+      function addCoins(amt) {
+        const curEarned = getEarnedToday();
+        localStorage.setItem(STORAGE_TODAY_EARNED, (curEarned + amt).toString());
+        const cur = parseInt(localStorage.getItem(STORAGE_COINS) || '150', 10);
+        const total = cur + amt;
+        localStorage.setItem(STORAGE_COINS, total.toString());
+        headerCoins.textContent = total;
+      }
+
+      // Initialize Stepper
+      function renderStepper() {
+        stepperTrack.innerHTML = '';
+        for (let i = 0; i < PUZZLES.length; i++) {
+          const step = document.createElement('div');
+          step.className = 'stepper-step';
+          if (i < currentLevelIndex) step.classList.add('completed');
+          else if (i === currentLevelIndex) step.classList.add('active');
+          stepperTrack.appendChild(step);
+        }
+      }
+
+      // Load Question
+      function loadQuestion() {
+        const puzzle = PUZZLES[currentLevelIndex];
+        currentLevelText.textContent = (currentLevelIndex + 1);
+        tierNameBadge.textContent = puzzle.tier;
+        clueTag.textContent = puzzle.tag;
+        clueQuestion.textContent = puzzle.question;
+        clueDisplay.textContent = puzzle.display;
+        lockStatusText.textContent = `Tumbler Lock ${currentLevelIndex + 1} Engaged`;
+        attemptsRemaining = 3;
+        attemptsText.textContent = attemptsRemaining;
+
+        renderStepper();
+
+        // Render Choices
+        choicesGrid.innerHTML = '';
+        puzzle.choices.forEach(choice => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'choice-btn';
+          btn.textContent = choice;
+          btn.addEventListener('click', () => handleChoiceSelection(btn, choice, puzzle.answer));
+          choicesGrid.appendChild(btn);
+        });
+      }
+
+      async function handleChoiceSelection(btnEl, selectedVal, correctVal) {
+        if (selectedVal === correctVal) {
+          // CORRECT ANSWER!
+          playChime(880, 'sine', 0.2);
+          btnEl.classList.add('correct');
+          giftVisual.classList.add('unlocking');
+          setTimeout(() => giftVisual.classList.remove('unlocking'), 600);
+
+          const puzzle = PUZZLES[currentLevelIndex];
+
+          // Check if milestone reward reached
+          if (puzzle.milestoneCoins && !awardedMilestones[currentLevelIndex]) {
+            awardedMilestones[currentLevelIndex] = true;
+            await awardMilestone(puzzle.milestoneCoins, (currentLevelIndex === 9));
+            return;
+          }
+
+          // Advance to next stage
+          setTimeout(() => {
+            currentLevelIndex++;
+            if (currentLevelIndex < PUZZLES.length) {
+              loadQuestion();
+            }
+          }, 450);
+
+        } else {
+          // WRONG ANSWER
+          playChime(220, 'sawtooth', 0.2);
+          btnEl.classList.add('wrong');
+          totalFailedAttempts++;
+          attemptsRemaining--;
+          attemptsText.textContent = attemptsRemaining;
+          if (navigator.vibrate) navigator.vibrate(60);
+
+          if (attemptsRemaining <= 0) {
+            setTimeout(triggerGameOver, 400);
+          }
+        }
+      }
+
+      async function awardMilestone(baseCoins, isFinalLevel) {
+        playChime(1046, 'triangle', 0.4);
+        triggerConfetti();
+
+        const isPerfect = (totalFailedAttempts === 0);
+        let totalCoins = baseCoins + ((isFinalLevel && isPerfect) ? 3 : 0);
+
+        const earned = getEarnedToday();
+        const rem = Math.max(0, DAILY_CAP - earned);
+        const actualWon = Math.min(totalCoins, rem);
+
+        if (actualWon > 0) {
+          addCoins(actualWon);
+        }
+
+        // Sync with API
+        try {
+          const token = localStorage.getItem('vanvi_token') || localStorage.getItem('vanvi_auth_token');
+          if (token) {
+            await fetch('/api/coins/game-reward', {
+              method: 'POST',
+              headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                gameId: 'unlock-gift',
+                gameTitle: `Unlock the Gift (Level ${currentLevelIndex + 1})`,
+                coins: actualWon,
+                score: (currentLevelIndex + 1) * 10
+              })
+            });
+          }
+        } catch(e) {}
+
+        document.getElementById('vicCoins').textContent = `+${actualWon} 🪙`;
+        let subText = `Milestone: Level ${currentLevelIndex + 1} Cleared! (${baseCoins} Coins)`;
+        if (isFinalLevel && isPerfect) subText += ' + 3 Perfect Bonus ✨';
+        document.getElementById('vicSub').textContent = subText;
+
+        const btnCont = document.getElementById('btnContinue');
+        if (isFinalLevel) {
+          btnCont.textContent = '🎉 All 10 Vaults Mastered!';
+          btnCont.onclick = restartFromBeginning;
+        } else {
+          btnCont.textContent = 'Continue to Next Stage →';
+          btnCont.onclick = continueToNextStage;
+        }
+
+        document.getElementById('victoryModal').classList.add('active');
+      }
+
+      window.continueToNextStage = function() {
+        document.getElementById('victoryModal').classList.remove('active');
+        currentLevelIndex++;
+        if (currentLevelIndex < PUZZLES.length) {
+          loadQuestion();
+        }
+      };
+
+      function triggerGameOver() {
+        document.getElementById('gameoverModal').classList.add('active');
+      }
+
+      window.restartFromBeginning = function() {
+        document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+        currentLevelIndex = 0;
+        totalFailedAttempts = 0;
+        awardedMilestones = {};
+        loadQuestion();
+      };
+
+      function triggerConfetti() {
+        const canvas = document.getElementById('confettiCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particles = [];
+        const colors = ['#ff2a7a', '#d97706', '#10b981', '#a855f7', '#38bdf8'];
+        for (let i = 0; i < 70; i++) {
+          particles.push({
+            x: canvas.width / 2, y: canvas.height / 2,
+            w: Math.random() * 8 + 4, h: Math.random() * 8 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            vx: (Math.random() - 0.5) * 14, vy: (Math.random() - 0.7) * 16,
+            rot: Math.random() * 360, vRot: (Math.random() - 0.5) * 10, alpha: 1
+          });
+        }
+        let anim;
+        function render() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          let alive = false;
+          particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy; p.vy += 0.35; p.rot += p.vRot; p.alpha -= 0.015;
+            if (p.alpha > 0) {
+              alive = true;
+              ctx.save();
+              ctx.translate(p.x, p.y);
+              ctx.rotate((p.rot * Math.PI) / 180);
+              ctx.fillStyle = p.color;
+              ctx.globalAlpha = Math.max(0, p.alpha);
+              ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+              ctx.restore();
+            }
+          });
+          if (alive) anim = requestAnimationFrame(render);
+        }
+        cancelAnimationFrame(anim);
+        render();
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        soundBtn.textContent = isSoundMuted ? '🔇' : '🔊';
+        headerCoins.textContent = localStorage.getItem(STORAGE_COINS) || '150';
+        loadQuestion();
+      });
+
+    })();
+  </script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

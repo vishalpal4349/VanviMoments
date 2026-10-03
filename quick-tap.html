@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Quick Tap Challenge — Reaction &amp; Accuracy Game — Vanvi Moments</title>
+  <meta name="description" content="Test your lightning reflexes in Quick Tap Challenge. Tap glowing celebration targets in 30-second rounds to earn fixed Vanvi Coins!">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --bg-pearl: #fffdfc;
+      --bg-blush: #fff1f6;
+      --rose-main: #ff2a7a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --gold-main: #d97706;
+      --emerald-main: #10b981;
+      --text-dark: #2c1224;
+      --text-muted: #88627b;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --shadow-card: 0 14px 36px rgba(255, 60, 130, 0.10);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #ffe4ee 0%, #fff2f6 50%, #fdf5f8 100%);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding-bottom: 95px;
+      overflow-x: hidden !important;
+      touch-action: manipulation;
+    }
+
+    /* Top Sticky App Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 62px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left, .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-nav-back {
+      border: 1px solid var(--border-pink);
+      background: #ffffff;
+      color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06);
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-nav-back:hover { transform: translateY(-1px); background: #fff0f5; }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+    }
+    .brand-link span { color: var(--rose-main); }
+
+    .wallet-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff8eb;
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #b45309;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.08);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .sound-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid var(--border-pink);
+      background: #ffffff;
+      color: var(--text-dark);
+      font-size: 15px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    /* Game Container */
+    .game-container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 14px 14px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-title-wrap {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      background: #fff0f6;
+      border: 1px solid var(--border-pink);
+      color: var(--rose-main);
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 4px;
+    }
+    .game-title {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    /* Live HUD Bar */
+    .hud-bar {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+    .hud-stat { display: flex; flex-direction: column; gap: 2px; }
+    .hud-label { font-size: 9px; font-weight: 800; text-transform: uppercase; color: var(--text-muted); }
+    .hud-val { font-size: 16px; font-weight: 900; color: var(--text-dark); }
+    .timer-text { font-variant-numeric: tabular-nums; color: var(--rose-main); }
+    .timer-text.urgent { color: #dc2626 !important; animation: pulse 0.5s infinite alternate; }
+    @keyframes pulse { from { opacity: 1; } to { opacity: 0.5; } }
+
+    /* Interactive Tap Arena */
+    .arena-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 1 / 1;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 8px;
+      padding: 12px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .arena-cell {
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px dashed rgba(255, 120, 175, 0.25);
+      display: grid;
+      place-items: center;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .arena-cell:active {
+      background: rgba(255, 42, 122, 0.08);
+    }
+
+    /* Target Bubble */
+    .target-bubble {
+      width: 82%;
+      height: 82%;
+      border-radius: 50%;
+      background: var(--rose-gradient);
+      box-shadow: 0 8px 22px rgba(255, 42, 122, 0.45);
+      display: grid;
+      place-items: center;
+      font-size: clamp(20px, 5.5vw, 28px);
+      color: #ffffff;
+      cursor: pointer;
+      animation: spawnPop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      user-select: none;
+    }
+    .target-bubble.fast-hit {
+      animation: hitVanish 0.3s ease-out forwards;
+    }
+    @keyframes spawnPop {
+      0% { transform: scale(0.2); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes hitVanish {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.25); filter: brightness(1.4); }
+      100% { transform: scale(0); opacity: 0; }
+    }
+
+    /* Decoy Target */
+    .target-bubble.decoy {
+      background: linear-gradient(135deg, #1f2937, #374151);
+      box-shadow: 0 8px 22px rgba(31, 41, 55, 0.4);
+    }
+
+    /* Floating Score Popups */
+    .float-feedback {
+      position: absolute;
+      pointer-events: none;
+      font-size: 13px;
+      font-weight: 900;
+      animation: floatFade 0.7s forwards ease-out;
+      z-index: 20;
+    }
+    .float-feedback.plus { color: #10b981; }
+    .float-feedback.fast { color: #d97706; }
+    .float-feedback.minus { color: #ef4444; }
+    @keyframes floatFade {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-24px) scale(1.15); }
+    }
+
+    /* Start / Pause Overlay */
+    .arena-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(44, 18, 36, 0.78);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      z-index: 30;
+      padding: 20px;
+      text-align: center;
+      transition: opacity 0.2s;
+    }
+    .arena-overlay.hidden { opacity: 0; pointer-events: none; }
+    .overlay-title { font-family: var(--font-serif); font-size: 26px; font-weight: 800; color: #ffffff; }
+    .overlay-desc { font-size: 12px; color: #ffd6e7; line-height: 1.45; max-width: 290px; }
+    .btn-play-action {
+      background: var(--rose-gradient);
+      color: #ffffff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.4);
+    }
+
+    /* Controls Bar */
+    .controls-row {
+      width: 100%;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-ctrl {
+      flex: 1;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+      padding: 10px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Rewards Guide Card */
+    .rewards-card {
+      width: 100%;
+      margin-top: 14px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 12px 14px;
+      font-size: 11.5px;
+    }
+    .rewards-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 6px;
+      text-align: center;
+    }
+    .r-box {
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.2);
+      border-radius: 12px;
+      padding: 6px;
+    }
+    .r-score { font-size: 10px; font-weight: 800; color: var(--text-muted); }
+    .r-coins { font-size: 13px; font-weight: 900; color: var(--gold-main); }
+
+    /* Results Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(44, 18, 36, 0.65);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-dialog {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 26px;
+      padding: 26px 20px 20px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(44, 18, 36, 0.25);
+    }
+    .modal-icon { font-size: 38px; margin-bottom: 8px; }
+    .modal-title { font-family: var(--font-serif); font-size: 22px; font-weight: 800; }
+    .modal-desc { font-size: 12px; color: var(--text-muted); margin: 6px 0 16px; }
+
+    .coin-display-box {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+    .coin-val { font-size: 26px; font-weight: 900; color: #b45309; }
+
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 120;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top App Navigation -->
+  <header class="app-header">
+    <div class="header-left">
+      <a href="games.html" class="btn-nav-back" title="Back to Games">
+        <span>‹</span> <span>Games</span>
+      </a>
+      <a href="index.html" class="brand-link" title="Vanvi Moments">
+        ⚡ Quick <span>Tap</span>
+      </a>
+    </div>
+    <div class="header-right">
+      <button type="button" class="sound-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
+      <a href="rewards.html" class="wallet-pill">
+        <span>🪙</span> <span id="headerCoins">150</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <main class="game-container">
+    <div class="hero-title-wrap">
+      <div class="hero-badge">⚡ 30s Reflex Sprint</div>
+      <h1 class="game-title">Quick Tap Challenge</h1>
+    </div>
+
+    <!-- HUD -->
+    <section class="hud-bar">
+      <div class="hud-stat">
+        <span class="hud-label">Score</span>
+        <span class="hud-val" id="hudScore">0</span>
+      </div>
+      <div class="hud-stat">
+        <span class="hud-label">Combo</span>
+        <span class="hud-val" id="hudCombo" style="color:#a855f7;">0x</span>
+      </div>
+      <div class="hud-stat">
+        <span class="hud-label">Accuracy</span>
+        <span class="hud-val" id="hudAccuracy">100%</span>
+      </div>
+      <div class="hud-stat">
+        <span class="hud-label">Time Left</span>
+        <span class="hud-val timer-text" id="hudTimer">30s</span>
+      </div>
+    </section>
+
+    <!-- Tap Arena -->
+    <div class="arena-wrapper" id="arenaWrapper">
+      <!-- 16 Cells rendered dynamically -->
+
+      <!-- Start / Pause Overlay -->
+      <div class="arena-overlay" id="arenaOverlay">
+        <div class="modal-icon">⚡</div>
+        <h2 class="overlay-title" id="overlayTitle">Ready for the Sprint?</h2>
+        <p class="overlay-desc" id="overlayDesc">Tap glowing targets before they vanish. Fast taps under 450ms earn double bonus points!</p>
+        <button type="button" class="btn-play-action" id="btnOverlayPlay" onclick="startRound()">
+          ▶ Start 30s Round
+        </button>
+      </div>
+    </div>
+
+    <!-- Controls Row -->
+    <div class="controls-row">
+      <button type="button" class="btn-ctrl" onclick="togglePause()">
+        <span id="pauseBtnIcon">⏸</span> <span id="pauseBtnText">Pause</span>
+      </button>
+      <button type="button" class="btn-ctrl" onclick="resetRound()">
+        <span>🔄</span> Restart
+      </button>
+    </div>
+
+    <!-- Rewards Guide -->
+    <aside class="rewards-card">
+      <div style="font-weight: 800; display:flex; justify-content:space-between;">
+        <span>🏆 Fixed Coin Rewards</span>
+        <span style="color:var(--text-muted); font-size:10px;">(Skill Thresholds)</span>
+      </div>
+      <div class="rewards-row">
+        <div class="r-box">
+          <div class="r-score">Score 15+</div>
+          <div class="r-coins">3 Coins</div>
+        </div>
+        <div class="r-box">
+          <div class="r-score">Score 25+</div>
+          <div class="r-coins">6 Coins</div>
+        </div>
+        <div class="r-box">
+          <div class="r-score">Score 35+</div>
+          <div class="r-coins">10 Coins</div>
+        </div>
+      </div>
+      <div style="margin-top:6px; font-size:10.5px; color:#88627b;">
+        🎯 Tap: <b>+1</b> · ⚡ Fast Reaction (&lt;450ms): <b>+1 Bonus</b> · ❌ Miss / Wrong: <b>-1</b>
+      </div>
+    </aside>
+  </main>
+
+  <!-- RESULTS MODAL -->
+  <div class="modal-overlay" id="resultModal">
+    <div class="modal-dialog">
+      <div class="modal-icon" id="resIcon">🎉</div>
+      <h2 class="modal-title" id="resTitle">Round Complete!</h2>
+      <p class="modal-desc" id="resDesc">Superb reaction speed and focus!</p>
+
+      <div class="coin-display-box">
+        <div class="coin-val" id="resCoinVal">+6 🪙</div>
+        <div style="font-size:11px; font-weight:700; color:#92400e;" id="resTier">Tier: Score 25+</div>
+      </div>
+
+      <div style="display:flex; justify-content:space-around; margin-bottom:16px; font-size:12px;">
+        <div><b>Score:</b> <span id="mScore">27</span></div>
+        <div><b>Max Combo:</b> <span id="mCombo">9x</span></div>
+        <div><b>Fast Taps:</b> <span id="mFast">14</span></div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button type="button" class="btn-play-action" onclick="closeModalAndReplay()">Play Another Round</button>
+        <a href="rewards.html" class="btn-ctrl" style="text-decoration:none;">View Rewards Wallet</a>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Global Bottom Dock -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" id="bottomNavHome">⌂<br/>Home</a>
+    <a href="templates.html" class="nav-btn" id="bottomNavExplore">◌<br/>Explore</a>
+    <a href="builder.html" class="create nav-btn" id="bottomNavCreate">＋<br/>Create</a>
+    <a href="games.html" class="nav-btn active" id="bottomNavGames">🎮<br/>Games</a>
+    <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
+  </nav>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const DAILY_CAP = 25;
+      const STORAGE_COINS = 'vanvi_user_coins';
+      const STORAGE_TODAY_EARNED = 'vanvi_games_today_earned';
+      const STORAGE_TODAY_DATE = 'vanvi_games_today_date';
+      const STORAGE_SOUND = 'vanvi_sound_enabled';
+
+      const arenaWrapper = document.getElementById('arenaWrapper');
+      const arenaOverlay = document.getElementById('arenaOverlay');
+      const hudScore = document.getElementById('hudScore');
+      const hudCombo = document.getElementById('hudCombo');
+      const hudAccuracy = document.getElementById('hudAccuracy');
+      const hudTimer = document.getElementById('hudTimer');
+      const headerCoins = document.getElementById('headerCoins');
+      const soundBtn = document.getElementById('soundBtn');
+
+      let isSoundMuted = localStorage.getItem(STORAGE_SOUND) === 'false';
+      let isPlaying = false;
+      let isPaused = false;
+      let roundTimer = 30;
+      let score = 0;
+      let combo = 0;
+      let maxCombo = 0;
+      let fastTapsCount = 0;
+      let totalClicks = 0;
+      let successfulHits = 0;
+      let timerInterval = null;
+      let spawnTimeout = null;
+      let activeTarget = null;
+      let cells = [];
+
+      // Audio
+      let audioCtx = null;
+      function playTone(freq, type, dur) {
+        if (isSoundMuted) return;
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type || 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.16, now);
+          gain.gain.linearRampToValueAtTime(0, now + dur);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + dur);
+        } catch(e) {}
+      }
+
+      window.toggleSound = function() {
+        isSoundMuted = !isSoundMuted;
+        localStorage.setItem(STORAGE_SOUND, (!isSoundMuted).toString());
+        soundBtn.textContent = isSoundMuted ? '🔇' : '🔊';
+      };
+
+      // Economy Sync
+      function getTodayKey() {
+        const d = new Date();
+        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      }
+      function getEarnedToday() {
+        const savedDate = localStorage.getItem(STORAGE_TODAY_DATE);
+        const today = getTodayKey();
+        if (savedDate !== today) {
+          localStorage.setItem(STORAGE_TODAY_DATE, today);
+          localStorage.setItem(STORAGE_TODAY_EARNED, '0');
+          return 0;
+        }
+        return parseInt(localStorage.getItem(STORAGE_TODAY_EARNED) || '0', 10);
+      }
+      function addCoins(amt) {
+        const curEarned = getEarnedToday();
+        localStorage.setItem(STORAGE_TODAY_EARNED, (curEarned + amt).toString());
+        const cur = parseInt(localStorage.getItem(STORAGE_COINS) || '150', 10);
+        const total = cur + amt;
+        localStorage.setItem(STORAGE_COINS, total.toString());
+        headerCoins.textContent = total;
+      }
+
+      // Initialize 16 Cells
+      function createGrid() {
+        arenaWrapper.querySelectorAll('.arena-cell').forEach(c => c.remove());
+        cells = [];
+        for (let i = 0; i < 16; i++) {
+          const cell = document.createElement('div');
+          cell.className = 'arena-cell';
+          cell.dataset.index = i;
+          cell.addEventListener('pointerdown', (e) => handleCellMiss(e, cell));
+          arenaWrapper.appendChild(cell);
+          cells.push(cell);
+        }
+      }
+
+      function handleCellMiss(e, cell) {
+        if (!isPlaying || isPaused) return;
+        // If clicking empty cell
+        if (!cell.querySelector('.target-bubble')) {
+          totalClicks++;
+          score = Math.max(0, score - 1);
+          combo = 0;
+          playTone(200, 'sawtooth', 0.15);
+          spawnFeedback('-1 Miss', e.clientX, e.clientY, 'minus');
+          updateHud();
+        }
+      }
+
+      // Target Spawner with progressive acceleration
+      function scheduleNextTarget() {
+        if (!isPlaying || isPaused) return;
+
+        // Lifetime scales from 1200ms down to 600ms as round progresses
+        const progress = (30 - roundTimer) / 30; // 0 to 1
+        const lifetime = Math.max(550, Math.round(1200 - progress * 650));
+        const delay = Math.max(150, Math.round(400 - progress * 250));
+
+        spawnTimeout = setTimeout(() => {
+          spawnTarget(lifetime);
+        }, delay);
+      }
+
+      function spawnTarget(lifetime) {
+        if (!isPlaying || isPaused) return;
+
+        // Clear existing target if missed
+        if (activeTarget) {
+          activeTarget.bubble.remove();
+          score = Math.max(0, score - 1);
+          combo = 0;
+          updateHud();
+          activeTarget = null;
+        }
+
+        const randomIndex = Math.floor(Math.random() * cells.length);
+        const cell = cells[randomIndex];
+
+        const bubble = document.createElement('div');
+        bubble.className = 'target-bubble';
+        const icons = ['🌸', '💖', '✨', '🎂', '👑'];
+        bubble.textContent = icons[Math.floor(Math.random() * icons.length)];
+
+        const spawnTime = performance.now();
+        let wasTapped = false;
+
+        bubble.addEventListener('pointerdown', (e) => {
+          e.stopPropagation(); // Stop propagation to cell
+          if (wasTapped || !isPlaying || isPaused) return;
+          wasTapped = true;
+
+          const reactionTime = performance.now() - spawnTime;
+          handleTargetHit(e, bubble, reactionTime);
+        });
+
+        cell.appendChild(bubble);
+
+        const expireTimer = setTimeout(() => {
+          if (!wasTapped && activeTarget && activeTarget.bubble === bubble) {
+            bubble.remove();
+            activeTarget = null;
+            score = Math.max(0, score - 1);
+            combo = 0;
+            updateHud();
+            scheduleNextTarget();
+          }
+        }, lifetime);
+
+        activeTarget = { bubble, expireTimer };
+      }
+
+      function handleTargetHit(e, bubble, reactionTime) {
+        if (activeTarget) clearTimeout(activeTarget.expireTimer);
+        activeTarget = null;
+        totalClicks++;
+        successfulHits++;
+
+        const isFastReaction = reactionTime < 450;
+        let earnedPoints = 1;
+        if (isFastReaction) {
+          earnedPoints += 1;
+          fastTapsCount++;
+        }
+
+        score += earnedPoints;
+        combo++;
+        maxCombo = Math.max(maxCombo, combo);
+
+        playTone(isFastReaction ? 880 : 640, 'triangle', 0.1);
+        if (navigator.vibrate) navigator.vibrate(isFastReaction ? [25, 30, 25] : 30);
+
+        spawnFeedback(isFastReaction ? '+2 Fast! ⚡' : '+1', e.clientX, e.clientY, isFastReaction ? 'fast' : 'plus');
+
+        bubble.classList.add('fast-hit');
+        setTimeout(() => bubble.remove(), 250);
+
+        updateHud();
+        scheduleNextTarget();
+      }
+
+      function spawnFeedback(text, clientX, clientY, type) {
+        const rect = arenaWrapper.getBoundingClientRect();
+        const fb = document.createElement('div');
+        fb.className = `float-feedback ${type}`;
+        fb.textContent = text;
+        fb.style.left = `${clientX - rect.left - 15}px`;
+        fb.style.top = `${clientY - rect.top - 10}px`;
+        arenaWrapper.appendChild(fb);
+        setTimeout(() => fb.remove(), 700);
+      }
+
+      function updateHud() {
+        hudScore.textContent = score;
+        hudCombo.textContent = `${combo}x`;
+        hudTimer.textContent = `${roundTimer}s`;
+        const acc = totalClicks > 0 ? Math.round((successfulHits / totalClicks) * 100) : 100;
+        hudAccuracy.textContent = `${acc}%`;
+      }
+
+      // Game Lifecycle
+      window.startRound = function() {
+        arenaOverlay.classList.add('hidden');
+        resetMetrics();
+        isPlaying = true;
+        isPaused = false;
+
+        scheduleNextTarget();
+
+        timerInterval = setInterval(() => {
+          roundTimer--;
+          if (roundTimer <= 8) hudTimer.classList.add('urgent');
+
+          updateHud();
+
+          if (roundTimer <= 0) {
+            clearInterval(timerInterval);
+            finishRound();
+          }
+        }, 1000);
+      };
+
+      function resetMetrics() {
+        clearInterval(timerInterval);
+        clearTimeout(spawnTimeout);
+        if (activeTarget) {
+          clearTimeout(activeTarget.expireTimer);
+          activeTarget.bubble.remove();
+          activeTarget = null;
+        }
+        score = 0;
+        combo = 0;
+        maxCombo = 0;
+        fastTapsCount = 0;
+        totalClicks = 0;
+        successfulHits = 0;
+        roundTimer = 30;
+        hudTimer.classList.remove('urgent');
+        updateHud();
+      }
+
+      window.resetRound = function() {
+        resetMetrics();
+        arenaOverlay.classList.remove('hidden');
+        document.getElementById('overlayTitle').textContent = 'Ready for the Sprint?';
+        document.getElementById('btnOverlayPlay').textContent = '▶ Start 30s Round';
+      };
+
+      window.togglePause = function() {
+        if (!isPlaying) return;
+        isPaused = !isPaused;
+        const icon = document.getElementById('pauseBtnIcon');
+        const text = document.getElementById('pauseBtnText');
+        if (isPaused) {
+          icon.textContent = '▶';
+          text.textContent = 'Resume';
+          arenaOverlay.classList.remove('hidden');
+          document.getElementById('overlayTitle').textContent = 'Game Paused';
+          document.getElementById('btnOverlayPlay').textContent = '▶ Resume Sprint';
+        } else {
+          icon.textContent = '⏸';
+          text.textContent = 'Pause';
+          arenaOverlay.classList.add('hidden');
+          scheduleNextTarget();
+        }
+      };
+
+      async function finishRound() {
+        isPlaying = false;
+        clearTimeout(spawnTimeout);
+        if (activeTarget) {
+          activeTarget.bubble.remove();
+          activeTarget = null;
+        }
+
+        // Fixed Reward Formula:
+        // 15+ score = 3 coins
+        // 25+ score = 6 coins
+        // 35+ score = 10 coins
+        let wonCoins = 0;
+        let tierLabel = 'Under 15 Score (0 Coins)';
+
+        if (score >= 35) {
+          wonCoins = 10;
+          tierLabel = 'Elite Master: 35+ Score';
+        } else if (score >= 25) {
+          wonCoins = 6;
+          tierLabel = 'Gold Reflex: 25+ Score';
+        } else if (score >= 15) {
+          wonCoins = 3;
+          tierLabel = 'Silver Sprint: 15+ Score';
+        }
+
+        const earned = getEarnedToday();
+        const remCap = Math.max(0, DAILY_CAP - earned);
+        const actualAwarded = Math.min(wonCoins, remCap);
+
+        if (actualAwarded > 0) {
+          addCoins(actualAwarded);
+        }
+
+        // Backend API sync
+        try {
+          const token = localStorage.getItem('vanvi_token') || localStorage.getItem('vanvi_auth_token');
+          if (token) {
+            await fetch('/api/coins/game-reward', {
+              method: 'POST',
+              headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                gameId: 'quick-tap',
+                gameTitle: 'Quick Tap Challenge',
+                coins: actualAwarded,
+                score: score
+              })
+            });
+          }
+        } catch(e) {}
+
+        // Populate Modal
+        document.getElementById('resCoinVal').textContent = actualAwarded > 0 ? `+${actualAwarded} 🪙` : '0 🪙 (Under 15 / Cap)';
+        document.getElementById('resTier').textContent = tierLabel;
+        document.getElementById('mScore').textContent = score;
+        document.getElementById('mCombo').textContent = `${maxCombo}x`;
+        document.getElementById('mFast').textContent = fastTapsCount;
+
+        document.getElementById('resultModal').classList.add('active');
+      }
+
+      window.closeModalAndReplay = function() {
+        document.getElementById('resultModal').classList.remove('active');
+        startRound();
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        soundBtn.textContent = isSoundMuted ? '🔇' : '🔊';
+        headerCoins.textContent = localStorage.getItem(STORAGE_COINS) || '150';
+        createGrid();
+      });
+
+    })();
+  </script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

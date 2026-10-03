@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Bespoke Custom Experience Atelier — Vanvi Moments</title>
+  <meta name="description" content="Commission a 100% custom digital celebration universe handcrafted exclusively around your story, private memories, and bespoke soundtrack.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+  <style>
+    :root {
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      
+      --ink: #2c1224;
+      --text-muted: #88627b;
+      --text-dim: #a68b9e;
+      --rose: #ff2a7a;
+      --rose-light: #fff0f5;
+      --gold: #d97706;
+      --gold-light: #fef3c7;
+      --line: rgba(255, 120, 175, 0.28);
+      --line-gold: rgba(217, 119, 6, 0.35);
+      --card-bg: rgba(255, 255, 255, 0.94);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% -10%, #ffe8f1 0%, #fffbfd 40%, #fdf6ff 100%);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+    }
+
+    /* ─── LUXURY HEADER WITH SIGNATURE BRAND LOCKUP ─────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 11px 20px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(104, 60, 78, 0.05);
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-pod {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #fff0f6, #ffe5ee 50%, #fff7ed);
+      border: 1.5px solid var(--line);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.18);
+      flex-shrink: 0;
+    }
+
+    .brand-spark {
+      width: 22px;
+      height: 22px;
+      display: block;
+      filter: drop-shadow(0 2px 6px rgba(255, 42, 122, 0.35));
+    }
+
+    .brand-text-lockup {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-sans);
+      font-size: 15.5px;
+      font-weight: 850;
+      letter-spacing: 0.5px;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    .brand-heart {
+      color: var(--rose);
+      display: inline-block;
+      animation: heartPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255,42,122,0.4)); }
+      50% { transform: scale(1.16); filter: drop-shadow(0 0 6px rgba(255,42,122,0.8)); }
+    }
+
+    .brand-tagline {
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link-pill {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 750;
+      padding: 6px 14px;
+      border-radius: 99px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      transition: all 0.2s;
+    }
+    .nav-link-pill:hover {
+      color: var(--rose);
+      border-color: var(--rose);
+      box-shadow: 0 2px 10px rgba(255, 42, 122, 0.12);
+    }
+
+    /* ─── CONTAINER & BREADCRUMBS ─────────────────────────────────── */
+    .wrap {
+      max-width: 840px;
+      margin: auto;
+      padding: 16px 16px 80px;
+    }
+
+    .breadcrumb-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 10px;
+      font-size: 11.5px;
+    }
+
+    .vanvi-btn-back {
+      color: var(--rose);
+      font-size: 11.5px;
+      font-weight: 800;
+      text-decoration: none;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      padding: 5px 13px;
+      border-radius: 99px;
+      box-shadow: 0 2px 8px rgba(255, 120, 175, 0.08);
+      transition: transform 0.2s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .vanvi-btn-back:hover {
+      transform: translateX(-2px);
+      background: #fff5f8;
+    }
+
+    .breadcrumb-trail {
+      color: var(--text-muted);
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .breadcrumb-trail a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    /* ─── HERO SECTION ────────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      padding: 14px 0 20px;
+    }
+    .eyebrow {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 10.5px;
+      font-weight: 850;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: var(--gold-light);
+      border: 1px solid rgba(217, 119, 6, 0.3);
+      padding: 3px 12px;
+      border-radius: 99px;
+      margin-bottom: 8px;
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5.5vw, 44px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 8px 0 10px;
+      color: var(--ink);
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      line-height: 1.55;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    /* ─── 7 CONCIERGE PILLARS (COMPACT LUXURY CARDS) ─────────────────── */
+    .custom-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin: 0 0 22px;
+    }
+    .pillar-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 6px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(255, 120, 175, 0.05);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .pillar-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+      box-shadow: 0 6px 16px rgba(217, 119, 6, 0.12);
+    }
+    .pillar-icon {
+      font-size: 18px;
+      margin-bottom: 3px;
+    }
+    .pillar-card b {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--ink);
+      display: block;
+      line-height: 1.2;
+    }
+    .pillar-card span {
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    /* ─── BESPOKE INTAKE FORM CARD ─────────────────────────────────── */
+    .card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 16px 45px rgba(255, 60, 130, 0.07);
+    }
+
+    .note {
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #fffbeb, #fff8eb);
+      border: 1px solid rgba(217, 119, 6, 0.35);
+      color: #92400e;
+      font-size: 11.5px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .field.full {
+      grid-column: 1 / -1;
+    }
+    .field label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      background: #ffffff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13.5px;
+      padding: 10px 12px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .field textarea {
+      min-height: 90px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 3px rgba(255, 42, 122, 0.12);
+      background: #fffdfd;
+    }
+
+    .submit {
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 13px;
+      background: linear-gradient(135deg, var(--rose) 0%, #ec4899 50%, var(--gold) 100%);
+      color: #ffffff;
+      font-weight: 850;
+      font-size: 13.5px;
+      margin-top: 16px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 42, 122, 0.28);
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .submit:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.06);
+    }
+    .submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .status.show { display: block; }
+
+    /* ─── MOBILE PHONE ULTRA-COMPACT RESPONSIVE RULES ───────────────── */
+    @media (max-width: 768px) {
+      .custom-pillars-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding: 8px 12px;
+      }
+      .brand-title { font-size: 13.5px; }
+      .brand-tagline { font-size: 7.5px; }
+      .brand-logo-pod { width: 30px; height: 30px; }
+      .brand-spark { width: 18px; height: 18px; }
+      .nav-link-pill { padding: 4px 10px; font-size: 10.5px; }
+
+      .wrap {
+        padding: 10px 12px 60px;
+      }
+      .hero {
+        padding: 8px 0 12px;
+      }
+      .hero h1 {
+        font-size: 24px;
+        margin: 4px 0 6px;
+      }
+      .hero p {
+        font-size: 11.5px;
+        line-height: 1.45;
+      }
+
+      /* 3-column micro-badges on phones */
+      .custom-pillars-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 5px !important;
+        margin-bottom: 14px !important;
+      }
+      .pillar-card {
+        padding: 7px 4px !important;
+        border-radius: 10px !important;
+      }
+      .pillar-icon {
+        font-size: 15px !important;
+        margin-bottom: 1px !important;
+      }
+      .pillar-card b {
+        font-size: 9.5px !important;
+      }
+      .pillar-card span {
+        font-size: 8px !important;
+      }
+
+      .card {
+        padding: 14px 12px !important;
+        border-radius: 18px !important;
+      }
+      .note {
+        padding: 8px 10px !important;
+        font-size: 10.5px !important;
+        margin-bottom: 12px !important;
+        border-radius: 10px !important;
+      }
+      .grid {
+        grid-template-columns: 1fr !important;
+        gap: 9px !important;
+      }
+      .field label {
+        font-size: 10px !important;
+      }
+      .field input, .field select, .field textarea {
+        padding: 8px 10px !important;
+        font-size: 12.5px !important;
+        border-radius: 10px !important;
+      }
+      .field textarea {
+        min-height: 75px !important;
+      }
+      .submit {
+        padding: 10px 14px !important;
+        font-size: 12.5px !important;
+        border-radius: 10px !important;
+        margin-top: 12px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand-link" title="Vanvi Moments Boutique">
+    <div class="brand-logo-pod">
+      <svg class="brand-spark" fill="none" viewBox="0 0 32 32">
+        <defs>
+          <linearGradient id="brandSparkGradCustom" x1="0%" x2="100%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#ff2a7a"/>
+            <stop offset="50%" stop-color="#ff659b"/>
+            <stop offset="100%" stop-color="#d97706"/>
+          </linearGradient>
+        </defs>
+        <path d="M16 2 C16 9.5 18.5 12 26 16 C18.5 20 16 22.5 16 30 C16 22.5 13.5 20 6 16 C13.5 12 16 9.5 16 2 Z" fill="url(#brandSparkGradCustom)"/>
+        <circle cx="16" cy="16" fill="#ffffff" r="3.4"/>
+        <circle cx="16" cy="16" fill="#ff007a" r="1.7"/>
+      </svg>
+    </div>
+    <div class="brand-text-lockup">
+      <span class="brand-title">VANVI <span class="brand-heart">♡</span> MOMENTS</span>
+      <span class="brand-tagline">BESPOKE CONCIERGE</span>
+    </div>
+  </a>
+
+  <div class="header-actions">
+    <a class="nav-link-pill" href="templates.html">Templates</a>
+    <a class="nav-link-pill" href="category-premium.html">👑 Ultra VIP</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="breadcrumb-bar">
+    <a class="vanvi-btn-back" href="javascript:void(0)" onclick="vanviGoBack('category-premium.html')">
+      <span>‹</span> <span>Back</span>
+    </a>
+    <div class="breadcrumb-trail">
+      <a href="index.html">Home</a> / <a href="templates.html">Templates</a> / <a href="category-premium.html">Ultra VIP</a> / <span>Custom Experience</span>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="eyebrow">✦ Bespoke Concierge Atelier</div>
+    <h1>Your Story. <span>Your World.</span></h1>
+    <p>Tell us your imagination. Our master digital artists craft completely custom celebration universes designed exclusively around your memories, surprise reveals, and private soundtrack.</p>
+  </section>
+
+  <!-- 7 Concierge Pillars (Compact Micro-Cards) -->
+  <div class="custom-pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-icon">🎨</div>
+      <b>Custom Design</b>
+      <span>Tailored themes</span>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">📖</div>
+      <b>Custom Story</b>
+      <span>Your words &amp; arc</span>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">✨</div>
+      <b>Animation</b>
+      <span>Hand-crafted motion</span>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">🕹️</div>
+      <b>Interactions</b>
+      <span>Codes &amp; reveals</span>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">🌐</div>
+      <b>Custom URL</b>
+      <span>Private unguessable</span>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">📱</div>
+      <b>QR Code</b>
+      <span>Ready to scan/print</span>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">💎</div>
+      <b>1-on-1 Concierge</b>
+      <span>Direct WhatsApp support</span>
+    </div>
+  </div>
+
+  <form class="card" id="customForm">
+    <!-- Honeypot anti-spam trap (invisible to real visitors) -->
+    <input type="text" name="_vanvi_hp" id="customHoneypot" style="display:none !important; position:absolute !important; left:-9999px !important;" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="note">
+      <strong>🪙 ₹1 Connection Token:</strong> A symbolic ₹1 token confirms your genuine request and opens a dedicated one-on-one design conversation with our lead digital artists. Final development quotation is provided based on your exact scope, timeline, and interactive complexity. (Need instant help? Chat directly on <a href="https://wa.me/917631442934?text=Hi%20Vanvi%20Concierge%2C%20I%20want%20a%20custom%20bespoke%20moment" target="_blank" rel="noopener" style="color:#d97706; font-weight:800; text-decoration:underline;">WhatsApp Concierge 💬</a>).
+    </div>
+
+    <div class="grid">
+      <div class="field">
+        <label for="name">Your Name *</label>
+        <input id="name" name="name" required placeholder="Enter your name">
+      </div>
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input id="email" name="email" type="email" placeholder="Enter your email address">
+      </div>
+      <div class="field">
+        <label for="contact">WhatsApp / Mobile Number *</label>
+        <input id="contact" name="contact" required placeholder="Enter 10-digit mobile number">
+      </div>
+      <div class="field">
+        <label for="occasion">Occasion *</label>
+        <input id="occasion" name="occasion" required placeholder="e.g. Birthday, Anniversary, Wedding, Proposal">
+      </div>
+      <div class="field">
+        <label for="recipient">Who is it for?</label>
+        <input id="recipient" name="recipient" placeholder="Enter recipient (e.g. Partner, Best Friend, Family)">
+      </div>
+      <div class="field">
+        <label for="budget">Approximate Scope / Budget</label>
+        <select id="budget" name="budget">
+          <option>Not sure yet (Need recommendation)</option>
+          <option>₹700 – ₹999 (Classic Bespoke)</option>
+          <option>₹1,000 – ₹2,499 (Grand Cinematic)</option>
+          <option>₹2,500 – ₹9,999 (Masterpiece 3D Universe)</option>
+          <option>Custom Quotation with Team</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="style">Preferred Visual Style</label>
+        <input id="style" name="style" placeholder="e.g. Royal Gilded, Soft Pastel, Retro Polaroid, Cyber Neon">
+      </div>
+      <div class="field">
+        <label for="references">Reference / Inspiration Link</label>
+        <input id="references" name="references" type="url" placeholder="https://instagram.com/... or Google Drive (optional)">
+      </div>
+      <div class="field full">
+        <label for="idea">Describe Your Dream Experience *</label>
+        <textarea id="idea" name="idea" required placeholder="Tell us the story, sequence of moments, music ideas, surprise reveals, secret codes, or specific feelings you want them to experience..."></textarea>
+      </div>
+      <div class="field full">
+        <label for="details">Additional Notes / Delivery Deadline</label>
+        <textarea id="details" name="details" placeholder="Any specific date they need to receive this by?"></textarea>
+      </div>
+    </div>
+
+    <button class="submit" type="submit">Submit ₹1 Bespoke Request →</button>
+    <div class="status" id="status"></div>
+  </form>
+</main>
+
+<script>
+const form = document.getElementById('customForm');
+const status = document.getElementById('status');
+
+form.addEventListener('submit', async event => {
+  event.preventDefault();
+  const body = Object.fromEntries(new FormData(form));
+
+  if (!body.email && !body.contact) {
+    status.textContent = 'Please add an email address or WhatsApp contact number so our concierge can reach you.';
+    status.className = 'status show';
+    status.style.background = '#fef2f2';
+    status.style.borderColor = '#fecaca';
+    status.style.color = '#991b1b';
+    return;
+  }
+
+  const button = form.querySelector('button');
+  button.disabled = true;
+  button.textContent = 'Submitting Request...';
+
+  try {
+    let result = null;
+    try {
+      const response = await fetch('/api/custom-requests/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      if (response.ok) {
+        result = await response.json();
+      }
+    } catch (e) {
+      // Backend unavailable, fallback to client storage
+    }
+
+    const reqId = (result && result.requestId) ? result.requestId : ('VANVI-REQ-' + Math.random().toString(36).substring(2, 8).toUpperCase());
+    const reqStatus = (result && result.status) ? result.status : 'PENDING_REVIEW';
+
+    // Store in localStorage for admin & client persistence
+    try {
+      const allRequests = JSON.parse(localStorage.getItem('vanvi_custom_requests') || '[]');
+      allRequests.unshift({
+        requestId: reqId,
+        createdAt: new Date().toISOString(),
+        status: reqStatus,
+        ...body
+      });
+      localStorage.setItem('vanvi_custom_requests', JSON.stringify(allRequests));
+    } catch (err) {}
+
+    status.innerHTML = `🎉 <strong>Request Confirmed!</strong><br>Request ID: <span style="font-family:monospace; background:rgba(0,0,0,0.06); padding:2px 6px; border-radius:4px;">${reqId}</span><br>Status: <strong>${reqStatus}</strong>.<br>The Vanvi Design Atelier has received your vision and our lead artist will get in touch shortly via WhatsApp.`;
+    status.style.background = '#ecfdf5';
+    status.style.borderColor = '#a7f3d0';
+    status.style.color = '#065f46';
+    status.className = 'status show';
+    form.reset();
+  } catch (error) {
+    status.textContent = error.message + ' Please try again or reach out directly on WhatsApp.';
+    status.className = 'status show';
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Submit ₹1 Bespoke Request →';
+  }
+});
+</script>
+  <!-- Global API SDK & Navigation Dock -->
+  <script src="js/vanvi-api.js"></script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

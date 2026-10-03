@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
+  <title>Moment Not Found ✦ 404 | Vanvi Moments</title>
+  <meta name="description" content="Oops, this moment wandered away. Return home to discover and craft unforgettable celebrations."/>
+  <meta name="theme-color" content="#fff5f8"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+
+  <!-- Google Fonts: Plus Jakarta Sans & Cormorant Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="vanvi-inner-light.css"/>
+  <link rel="stylesheet" href="vanvi-navigation.css"/>
+
+  <style>
+    /* =========================================================
+       VANVI MOMENTS — 404 LUXURY ERROR STATE
+       Pearl / Ivory · Blush · Rose · Lavender · Subtle Champagne Gold
+       Mobile-First · Light · Cohesive · Zero Clutter
+       ========================================================= */
+    :root {
+      --bg-pearl: #fffdfb;
+      --bg-blush: #fff1f6;
+      --rose-main: #ff2a7a;
+      --rose-soft: #ff529a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --text-dark: #2c1224;
+      --text-muted: #7b5971;
+      --border-pink: rgba(255, 120, 175, 0.25);
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden !important;
+    }
+
+    body {
+      background-color: #fff9fb;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 182, 217, 0.35) 0%, transparent 65%),
+        radial-gradient(circle 420px at 15% 45%, rgba(245, 208, 254, 0.28) 0%, transparent 70%),
+        radial-gradient(circle 400px at 85% 65%, rgba(224, 242, 254, 0.35) 0%, transparent 70%),
+        radial-gradient(circle 320px at 50% 85%, rgba(254, 243, 199, 0.3) 0%, transparent 70%),
+        linear-gradient(180deg, #fff5f8 0%, #fffbfd 50%, #fff8fa 100%);
+      background-attachment: fixed;
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 95px !important;
+    }
+
+    /* Ambient animated stardust glow */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(75px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.3;
+      animation: floatPulse 12s infinite alternate ease-in-out;
+    }
+    .orb-1 { width: 260px; height: 260px; background: #ff78a8; top: -40px; left: -40px; }
+    .orb-2 { width: 280px; height: 280px; background: #c084fc; bottom: -50px; right: -50px; animation-duration: 16s; }
+
+    @keyframes floatPulse {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(22px) scale(1.08); }
+    }
+
+    /* =========================================================
+       COMPACT HEADER (BRAND ONLY — LOGO CLICK DOES NOTHING)
+       ========================================================= */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 56px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    /* Brand Logo: BRAND ONLY, not a link */
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      user-select: none;
+      cursor: default;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 900;
+      font-size: 14px;
+    }
+    .brand-spark-icon {
+      font-size: 18px;
+      animation: gentleSpin 6s infinite linear;
+    }
+    @keyframes gentleSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .brand-title {
+      font-size: 13.5px;
+      letter-spacing: -0.2px;
+    }
+    .brand-title span { color: var(--rose-main); }
+
+    .header-right-tag {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-pink);
+      padding: 4px 10px;
+      border-radius: 99px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Dedicated Breadcrumbs Bar with Working Back Button */
+    .nav-breadcrumbs {
+      max-width: 720px;
+      width: 100%;
+      margin: 8px auto 0;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+    .btn-nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border-pink);
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 5px 13px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(255, 42, 122, 0.05);
+      cursor: pointer;
+      transition: all 0.2s;
+      min-height: 32px;
+    }
+    .btn-nav-back:hover {
+      background: #fff0f5;
+      color: var(--rose-main);
+      transform: translateY(-1px);
+    }
+    .luxury-trail-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-pink);
+      padding: 4px 11px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       MAIN 404 EXPERIENCE CARD
+       LOST PAGE → BEAUTIFUL EXPERIENCE → EASY WAY BACK
+       ========================================================= */
+    .lost-moment-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px 36px;
+      position: relative;
+      z-index: 10;
+      width: 100%;
+    }
+
+    .lost-moment-card {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 28px;
+      padding: 32px 24px 28px;
+      text-align: center;
+      box-shadow: 0 16px 45px rgba(255, 56, 128, 0.08), 0 2px 10px rgba(0, 0, 0, 0.02);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lost-moment-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--rose-gradient);
+    }
+
+    /* Floating Glass Memory Card Accent (Subtle & Elegant) */
+    .floating-glass-visual {
+      width: 86px;
+      height: 86px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 241, 246, 0.65));
+      border: 1.5px solid rgba(255, 120, 175, 0.4);
+      box-shadow: 
+        0 10px 25px rgba(255, 42, 122, 0.12),
+        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      position: relative;
+      animation: floatGentle 4.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatGentle {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-7px) rotate(2deg); }
+    }
+
+    .visual-spark {
+      font-size: 34px;
+      filter: drop-shadow(0 4px 10px rgba(255, 42, 122, 0.3));
+    }
+
+    .visual-halo {
+      position: absolute;
+      inset: -6px;
+      border-radius: 26px;
+      border: 1px dashed rgba(255, 120, 175, 0.3);
+      pointer-events: none;
+      animation: haloSpin 20s linear infinite;
+    }
+    @keyframes haloSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Small Label */
+    .lost-kicker {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--rose-main);
+      background: #fff0f5;
+      border: 1px solid rgba(255, 42, 122, 0.22);
+      padding: 4px 13px;
+      border-radius: 99px;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Large 404 Headline */
+    .lost-num {
+      font-family: var(--font-serif);
+      font-size: clamp(64px, 15vw, 92px);
+      line-height: 1;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff2a7a 0%, #e11d48 40%, #d97706 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -2px;
+      margin-bottom: 4px;
+      user-select: none;
+    }
+
+    /* Short Message */
+    .lost-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      max-width: 380px;
+      margin-bottom: 24px;
+    }
+
+    /* Compact, Elegant Action Buttons */
+    .lost-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .btn-action-home {
+      flex: 1.2;
+      background: var(--rose-gradient);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 11px 18px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 16px rgba(255, 42, 122, 0.32);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      min-height: 42px;
+    }
+    .btn-action-home:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 42, 122, 0.45);
+    }
+    .btn-action-home:active {
+      transform: translateY(1px);
+    }
+
+    .btn-action-back {
+      flex: 1;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(255, 42, 122, 0.05);
+      transition: all 0.2s;
+      min-height: 42px;
+    }
+    .btn-action-back:hover {
+      background: #fff0f5;
+      color: var(--rose-main);
+      border-color: var(--rose-main);
+      transform: translateY(-1px);
+    }
+    .btn-action-back:active {
+      transform: translateY(1px);
+    }
+
+    /* Small Discovery Footer Links */
+    .lost-secondary-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 120, 175, 0.16);
+      width: 100%;
+    }
+    .lost-sublink {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .lost-sublink:hover {
+      color: var(--rose-main);
+    }
+    .lost-link-divider {
+      color: rgba(255, 120, 175, 0.4);
+      font-size: 9px;
+    }
+
+    /* =========================================================
+       RESPONSIVE ADAPTATIONS
+       320px · 360px · 375px · 390px · 414px · Tablets & Desktops
+       ========================================================= */
+    @media (max-width: 480px) {
+      .lost-moment-card {
+        padding: 24px 18px 22px;
+        border-radius: 24px;
+      }
+      .floating-glass-visual {
+        width: 76px;
+        height: 76px;
+        margin-bottom: 12px;
+      }
+      .visual-spark { font-size: 30px; }
+      .lost-kicker { font-size: 10.5px; }
+      .lost-desc { font-size: 13px; margin-bottom: 20px; }
+      .lost-actions-row {
+        flex-direction: row;
+        gap: 8px;
+      }
+      .btn-action-home, .btn-action-back {
+        font-size: 12px;
+        padding: 10px 12px;
+        min-height: 40px;
+      }
+    }
+
+    @media (max-width: 340px) {
+      .lost-actions-row {
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn-action-home, .btn-action-back {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+
+  <!-- Compact Top Header (Brand Only, No Navigation on Logo) -->
+  <header class="app-header">
+    <a href="index.html" class="header-brand" title="Vanvi Moments">
+      <span class="brand-spark-icon">✨</span>
+      <div class="brand-title">VANVI <span>♡</span> MOMENTS</div>
+    </div>
+
+    <div class="header-right-tag">
+      <span>✦ 404 Not Found</span>
+    </a>
+  </header>
+
+  <!-- Dedicated Breadcrumb Trail with Safe Back Button -->
+  <nav class="nav-breadcrumbs" aria-label="Breadcrumb Navigation">
+    <button type="button" class="btn-nav-back" onclick="safeGoBack()">
+      <span style="color:var(--rose-main); font-size:14px; font-weight:900;">‹</span> <span>Back</span>
+    </button>
+    <div class="luxury-trail-chip">
+      <span>🏠 Home</span>
+      <span style="color:rgba(255,42,122,0.4); font-size:9px;">✦</span>
+      <span>Lost Moment</span>
+    </div>
+  </nav>
+
+  <!-- Main 404 Experience -->
+  <main class="lost-moment-main">
+    <div class="lost-moment-card">
+      
+      <!-- Small Premium Floating Glass Memory Visual -->
+      <div class="floating-glass-visual" aria-hidden="true">
+        <div class="visual-halo"></div>
+        <span class="visual-spark">✨</span>
+      </div>
+
+      <!-- Small Label -->
+      <div class="lost-kicker">
+        <span>✦</span> Oops, this moment wandered away ✦
+      </div>
+
+      <!-- Large 404 -->
+      <h1 class="lost-num">404</h1>
+
+      <!-- Short Message -->
+      <p class="lost-desc">
+        This page couldn’t be found, but your next beautiful moment is still here.
+      </p>
+
+      <!-- Primary & Secondary Compact Buttons -->
+      <div class="lost-actions-row">
+        <a href="index.html" class="btn-action-home" id="btnGoHome">
+          <span>Go Home</span> <span>✨</span>
+        </a>
+        <button type="button" class="btn-action-back" id="btnBack" onclick="safeGoBack()">
+          <span>‹ Back</span>
+        </button>
+      </div>
+
+      <!-- Subtle Discovery Links -->
+      <div class="lost-secondary-links">
+        <a href="templates.html" class="lost-sublink">
+          <span>Explore Templates</span> <span>→</span>
+        </a>
+        <span class="lost-link-divider">✦</span>
+        <a href="ai.html" class="lost-sublink">
+          <span>AI Studio</span> <span>✦</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Global Bottom Dock for Consistency Across Internal Pages -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" id="bottomNavHome">⌂<br/>Home</a>
+    <a href="templates.html" class="nav-btn" id="bottomNavExplore">◌<br/>Explore</a>
+    <a href="builder.html" class="create nav-btn" id="bottomNavCreate">＋<br/>Create</a>
+    <a href="ai.html" class="nav-btn" id="bottomNavAi">✦<br/>AI</a>
+    <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
+  </nav>
+
+  <script src="js/vanvi-navigation.js"></script>
+
+  <script>
+    /**
+     * Smart Back Navigation:
+     * Attempts history.back() if browser history is available,
+     * otherwise safely falls back to index.html.
+     */
+    function safeGoBack() {
+      try {
+        if (window.history && window.history.length > 1 && document.referrer && document.referrer.indexOf(window.location.host) !== -1) {
+          window.history.back();
+        } else if (typeof window.vanviGoBack === 'function') {
+          window.vanviGoBack('index.html');
+        } else {
+          window.location.href = 'index.html';
+        }
+      } catch(e) {
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Golden Anniversary &amp; Milestones | Vanvi Moments</title>
+  <meta name="description" content="A timeless golden cinema anniversary story keepsake with film grain romance, memory chapters, and heartfelt vows.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold-primary: #d97706;
+      --gold-light: #fef3c7;
+      --gold-deep: #92400e;
+      --gold-glow: rgba(217, 119, 6, 0.28);
+      --bg-cream: #fffdfa;
+      --text-dark: #291a10;
+      --text-muted: #785a44;
+      --border-gold: rgba(217, 119, 6, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-cream);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image:
+        radial-gradient(circle at 10% 15%, rgba(254, 243, 199, 0.6) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(255, 237, 213, 0.5) 0%, transparent 45%),
+        linear-gradient(180deg, #fffdfa 0%, #fff8ee 100%);
+      background-attachment: fixed;
+      padding-bottom: 50px;
+    }
+    .anniversary-wrap {
+      width: 100%;
+      max-width: 480px;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .audio-pill {
+      align-self: flex-end;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-gold);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 750;
+      color: var(--gold-deep);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(217, 119, 6, 0.08);
+      margin-bottom: 20px;
+      transition: all 0.2s ease;
+    }
+    .audio-pill:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-primary);
+    }
+    .badge-ribbon {
+      background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px var(--gold-glow);
+    }
+    .main-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 32px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.15;
+      margin-bottom: 6px;
+      color: var(--text-dark);
+    }
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 320px;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+    /* Cinema Frame */
+    .cinema-frame {
+      width: 100%;
+      background: #1c140d;
+      border-radius: 20px;
+      padding: 12px;
+      box-shadow: 0 16px 36px rgba(41, 26, 16, 0.18);
+      border: 1.5px solid rgba(217, 119, 6, 0.4);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cinema-image-holder {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    .cinema-image-holder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: sepia(0.2) contrast(1.05);
+      transition: transform 0.5s ease;
+    }
+    .cinema-frame:hover .cinema-image-holder img {
+      transform: scale(1.03);
+    }
+    .cinema-film-strip {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 4px 0;
+      color: #92755f;
+      font-size: 10px;
+      font-family: monospace;
+      letter-spacing: 1px;
+    }
+    /* Vows & Letter Card */
+    .vows-card {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: 0 10px 28px rgba(217, 119, 6, 0.08);
+      position: relative;
+    }
+    .vows-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--gold-deep);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .vows-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.6;
+      color: #443224;
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+    .vows-signature {
+      font-size: 12px;
+      font-weight: 750;
+      color: var(--gold-deep);
+      text-align: right;
+    }
+    /* Interactive Toast */
+    .milestone-toast {
+      margin-top: 18px;
+      background: rgba(254, 243, 199, 0.85);
+      border: 1px solid rgba(217, 119, 6, 0.35);
+      padding: 10px 16px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-deep);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="anniversary-wrap">
+    <button type="button" class="audio-pill" id="audioToggle" onclick="toggleAudio()">
+      <span>🎵</span> <span id="audioText">Play Cinema Romance</span>
+    </button>
+
+    <div class="badge-ribbon">✦ Milestone Anniversary Keepsake</div>
+    <h1 class="main-title" id="annivTitle">Golden Cinema Anniversary</h1>
+    <p class="subtitle" id="annivSubtitle">To the days that turned into months, and the moments that became a lifetime.</p>
+
+    <div class="cinema-frame">
+      <div class="cinema-image-holder">
+        <img id="annivPhoto" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&auto=format&fit=crop&q=80" alt="Anniversary Moment">
+      </div>
+      <div class="cinema-film-strip">
+        <span>● KODAK GOLD 100</span>
+        <span id="filmDate">YEAR 5 · FOREVER</span>
+        <span>● 24 FPS</span>
+      </div>
+    </div>
+
+    <div class="vows-card">
+      <div class="vows-heading">
+        <span>💍</span> <span>Our Timeless Story</span>
+      </div>
+      <p class="vows-text" id="annivMessage">
+        “Through every season of joy, quiet cup of evening tea, and every shared laugh, choosing you has always been the easiest decision of my life. Happy Anniversary, my love.”
+      </p>
+      <div class="vows-signature" id="annivSender">
+        — Forever &amp; Always Yours
+      </div>
+    </div>
+
+    <div class="milestone-toast">
+      <span>🥂</span> <span>Tap to toast to another 365 days of love</span>
+    </div>
+  </div>
+
+  <script>
+    let isPlaying = false;
+    let audioCtx = null;
+    let osc = null;
+
+    function toggleAudio() {
+      isPlaying = !isPlaying;
+      const text = document.getElementById('audioText');
+      if (isPlaying) {
+        text.textContent = 'Pause Music';
+        playGentleChime();
+      } else {
+        text.textContent = 'Play Cinema Romance';
+      }
+    }
+
+    function playGentleChime() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const now = ctx.currentTime;
+        [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.2);
+          gain.gain.setValueAtTime(0.08, now + idx * 0.2);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.2 + 0.8);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.2);
+          osc.stop(now + idx * 0.2 + 0.9);
+        });
+      } catch (e) {}
+    }
+
+    // Read URL params
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('recipient')) {
+      document.getElementById('annivTitle').textContent = `To ${params.get('recipient')} & Us`;
+    }
+    if (params.get('text')) {
+      document.getElementById('annivMessage').textContent = `“${params.get('text')}”`;
+    }
+    if (params.get('sender')) {
+      document.getElementById('annivSender').textContent = `— ${params.get('sender')}`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Birthday Gift for Girlfriend | Vanvi Moments</title>
+  <meta name="description" content="A romantic, unforgettable birthday celebration experience with photos and heartfelt love messages on Vanvi Moments.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gf-pink: #ff2a7a;
+      --gf-deep: #b3104c;
+      --gf-glow: rgba(255, 42, 122, 0.3);
+      --gf-soft: #fff2f6;
+      --gf-border: rgba(255, 120, 175, 0.35);
+      --gf-text: #2a081a;
+      --gf-muted: #85536e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--gf-soft);
+      color: var(--gf-text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(255, 180, 205, 0.5) 0%, transparent 45%),
+        radial-gradient(circle at 88% 82%, rgba(255, 120, 160, 0.35) 0%, transparent 45%),
+        linear-gradient(180deg, #fff9fb 0%, #fff0f5 100%);
+      background-attachment: fixed;
+    }
+
+    #petalsCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    .gf-container {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      padding: 24px 18px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Sound Bar */
+    .gf-audio-pill {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 100;
+      background: #ffffff;
+      border: 1px solid var(--gf-border);
+      padding: 6px 14px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gf-pink);
+      box-shadow: 0 4px 14px var(--gf-glow);
+    }
+
+    /* Hero */
+    .gf-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffe6ef;
+      color: var(--gf-deep);
+      padding: 4px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      border: 1px solid var(--gf-border);
+    }
+
+    .gf-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gf-text);
+      line-height: 1.2;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .gf-sub {
+      font-size: 14.5px;
+      color: var(--gf-muted);
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    /* Polaroid Stack */
+    .gf-polaroid-card {
+      background: #ffffff;
+      padding: 12px 12px 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 16px 36px rgba(255, 42, 122, 0.12);
+      width: 100%;
+      margin-bottom: 22px;
+      transform: rotate(-1deg);
+      transition: transform 0.25s;
+    }
+    .gf-polaroid-card:hover { transform: rotate(0) scale(1.02); }
+    .gf-polaroid-img {
+      width: 100%;
+      height: 240px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ffd6e0;
+    }
+    .gf-polaroid-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gf-polaroid-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gf-deep);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* Interactive "10 Reasons I Love You" Carousel/Pills */
+    .reasons-box {
+      background: #ffffff;
+      border: 1px solid var(--gf-border);
+      border-radius: 24px;
+      padding: 22px 18px;
+      width: 100%;
+      box-shadow: 0 12px 30px rgba(255, 42, 122, 0.08);
+      margin-bottom: 22px;
+    }
+    .reasons-header {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gf-deep);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .reason-item {
+      background: #fff8fa;
+      border-left: 3.5px solid var(--gf-pink);
+      border-radius: 0 12px 12px 0;
+      padding: 10px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #3b1b2d;
+      margin-bottom: 8px;
+    }
+
+    /* Letter on Pink Parchment */
+    .gf-letter {
+      background: #fffafc;
+      border: 1px dashed rgba(255, 120, 175, 0.6);
+      border-radius: 22px;
+      padding: 24px 20px;
+      width: 100%;
+      box-shadow: 0 12px 32px rgba(255, 42, 122, 0.06);
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .gf-letter-salutation {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gf-deep);
+      margin-bottom: 12px;
+    }
+    .gf-letter-body {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      line-height: 1.6;
+      color: #381223;
+      white-space: pre-wrap;
+    }
+    .gf-letter-sign {
+      text-align: right;
+      font-family: 'Caveat', cursive;
+      font-size: 23px;
+      font-weight: 700;
+      color: var(--gf-pink);
+      margin-top: 16px;
+    }
+
+    /* Action CTA */
+    .btn-gf-celebrate {
+      width: 100%;
+      height: 52px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, #ff2a7a, #c9184a);
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px var(--gf-glow);
+      transition: all 0.2s;
+    }
+    .btn-gf-celebrate:active { transform: scale(0.97); }
+  </style>
+</head>
+<body>
+
+  <canvas id="petalsCanvas"></canvas>
+
+  <div class="gf-audio-pill" onclick="toggleAudio()">
+    <span>🎵</span>
+    <span id="gfAudioTag">Play Song</span>
+  </div>
+
+  <audio id="bgAudio" loop preload="auto">
+    <source src="../birthday-3d-candle-surprise/happybirthday.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="gf-container">
+
+    <div class="gf-badge">💖 Dedicated To My Favorite Person</div>
+    <h1 class="gf-title" id="txtGfHeading">Happy Birthday, My Love!</h1>
+    <p class="gf-sub" id="txtGfSub">
+      A bespoke digital gift celebrating everything that makes you so completely wonderful.
+    </p>
+
+    <!-- Polaroid -->
+    <div class="gf-polaroid-card">
+      <div class="gf-polaroid-img">
+        <img src="../birthday-3d-candle-surprise/image/photo_roses.jpg" alt="To My Girl">
+      </div>
+      <div class="gf-polaroid-caption">You make every ordinary second magical ✨</div>
+    </div>
+
+    <!-- 5 Reasons Why I Adore You -->
+    <div class="reasons-box">
+      <div class="reasons-header">
+        <span>✨</span> <span>A Few Reasons Why I Love You</span>
+      </div>
+      <div class="reason-item">1. The way your eyes light up whenever you laugh from your heart.</div>
+      <div class="reason-item">2. How safe and warm you make me feel, no matter what kind of day it was.</div>
+      <div class="reason-item">3. Your kindness toward little things and the softness of your voice.</div>
+      <div class="reason-item">4. How easily you can turn a rainy day into my favorite memory.</div>
+    </div>
+
+    <!-- Heartfelt Letter -->
+    <div class="gf-letter">
+      <div class="gf-letter-salutation" id="txtSalutation">To My Beautiful Girl,</div>
+      <div class="gf-letter-body" id="txtBody">
+On your birthday, I just want to pause and say thank you for choosing me every single day.
+
+You deserve a lifetime filled with sunflowers, soft breezes, warm coffee, and people who treat your heart with the deepest respect. I promise to always cheer for your dreams and make you smile whenever you need it most.
+
+Happy Birthday, baby! 💕🎂
+      </div>
+      <div class="gf-letter-sign" id="txtSign">— Forever Yours, Karan</div>
+    </div>
+
+    <button type="button" class="btn-gf-celebrate" onclick="celebrateLove()">
+      <span>Shower Confetti &amp; Hearts</span> <span>🎉</span>
+    </button>
+
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const recipient = params.get('name') || params.get('recipient') || 'My Love';
+    const sender = params.get('sender') || 'Forever Yours';
+    const msg = params.get('message') || null;
+
+    if (recipient) {
+      document.getElementById('txtGfHeading').textContent = `Happy Birthday, ${recipient}!`;
+      document.getElementById('txtSalutation').textContent = `To My Beautiful ${recipient},`;
+    }
+    if (sender) {
+      document.getElementById('txtSign').textContent = `— ${sender}`;
+    }
+    if (msg) {
+      document.getElementById('txtBody').textContent = msg;
+    }
+
+    let soundOn = false;
+    const audio = document.getElementById('bgAudio');
+    function toggleAudio() {
+      if (!soundOn) {
+        audio.play().then(() => {
+          soundOn = true;
+          document.getElementById('gfAudioTag').textContent = 'Music Playing 🎵';
+        }).catch(() => {});
+      } else {
+        audio.pause();
+        soundOn = false;
+        document.getElementById('gfAudioTag').textContent = 'Play Song';
+      }
+    }
+
+    // Petals & Hearts engine
+    const canvas = document.getElementById('petalsCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function celebrateLove() {
+      if (!soundOn) toggleAudio();
+      const chars = ['💖', '🌸', '✨', '💕', '🌹'];
+      for (let i = 0; i < 70; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: -20,
+          vy: Math.random() * 3 + 2,
+          vx: (Math.random() - 0.5) * 2,
+          char: chars[Math.floor(Math.random() * chars.length)],
+          size: Math.random() * 16 + 14,
+          alpha: 1
+        });
+      }
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, idx) => {
+        p.y += p.vy;
+        p.x += p.vx;
+        ctx.font = `${p.size}px sans-serif`;
+        ctx.globalAlpha = p.alpha;
+        ctx.fillText(p.char, p.x, p.y);
+        if (p.y > canvas.height) particles.splice(idx, 1);
+      });
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
+</body>
+</html>

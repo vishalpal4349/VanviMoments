@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Jewel Merge 2048 — Vanvi Moments Games</title>
+  <meta name="description" content="Slide and merge rare gemstones to forge the legendary Crown Diamond and earn Vanvi Coins!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --rose-main: #ff2a7a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --text-dark: #2c1224;
+      --text-muted: #88627b;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #ffeaf3 0%, #fff7fb 35%, #faf5ff 70%, #fff2f7 100%);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 60px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .btn-nav-back {
+      font-size: 12.5px;
+      font-weight: 750;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      padding: 6px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+    .game-arena {
+      flex: 1;
+      max-width: 440px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 16px 14px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .status-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-pink);
+      border-radius: 16px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(255, 60, 130, 0.06);
+    }
+    .hud-pill {
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-rules-pill {
+      background: rgba(255, 42, 122, 0.08);
+      border: 1px solid rgba(255, 42, 122, 0.25);
+      color: var(--rose-main);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+
+    /* 4x4 Grid */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 8px;
+      width: min(92vw, 340px);
+      height: min(92vw, 340px);
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 10px;
+      box-shadow: 0 12px 36px rgba(100, 50, 90, 0.1);
+      margin-bottom: 18px;
+      touch-action: none;
+    }
+    .tile {
+      border-radius: 12px;
+      background: rgba(255, 240, 246, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      transition: all 0.15s ease;
+      color: #fff;
+    }
+    .tile.active {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      animation: popTile 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes popTile {
+      0% { transform: scale(0.6); }
+      100% { transform: scale(1); }
+    }
+
+    /* Mobile D-Pad Controls */
+    .dpad-container {
+      display: grid;
+      grid-template-columns: repeat(3, 56px);
+      grid-template-rows: repeat(2, 48px);
+      gap: 6px;
+      margin-top: 10px;
+      justify-content: center;
+    }
+    .dpad-btn {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 14px;
+      font-size: 18px;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(100, 50, 90, 0.08);
+      transition: all 0.15s;
+    }
+    .dpad-btn:active {
+      transform: scale(0.92);
+      background: #fff0f5;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(44, 18, 36, 0.6); backdrop-filter: blur(8px);
+      z-index: 200; display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #ffffff; width: 100%; max-width: 420px; border-radius: 24px; padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25); border: 1px solid var(--border-pink); position: relative;
+    }
+    .modal-card h3 { font-family: var(--font-serif); font-size: 22px; color: var(--text-dark); margin-bottom: 12px; }
+    .modal-card ul { padding-left: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <button type="button" class="btn-nav-back" onclick="location.href='games.html'">
+      ‹ Games Arena
+    </button>
+    <div style="font-weight: 850; font-size: 15px; color: var(--rose-main);">
+      💎 Jewel Merge 2048
+    </div>
+    <div style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:800; background:#fffbeb; border:1px solid #fde68a; padding:4px 10px; border-radius:99px; color:#d97706;">
+      🪙 <span id="coinBalanceHUD">0</span>
+    </div>
+  </header>
+
+  <main class="game-arena">
+    <div class="status-hud">
+      <div class="hud-pill">
+        <span>⭐ Score:</span> <strong id="hudScore" style="color:var(--rose-main);">0</strong>
+      </div>
+      <div class="hud-pill">
+        <span>🎯 Target:</span> <strong>Forge 128 (Ruby)</strong>
+      </div>
+      <button type="button" class="btn-rules-pill" onclick="openRules()">📖 Rules</button>
+    </div>
+
+    <!-- 4x4 Grid -->
+    <div class="grid-container" id="gridContainer"></div>
+
+    <!-- Touch / Click Directional Controls -->
+    <div class="dpad-container">
+      <div style="grid-column: 2;">
+        <button type="button" class="dpad-btn" onclick="move('up')">⬆️</button>
+      </div>
+      <button type="button" class="dpad-btn" style="grid-row: 2; grid-column: 1;" onclick="move('left')">⬅️</button>
+      <button type="button" class="dpad-btn" style="grid-row: 2; grid-column: 2;" onclick="move('down')">⬇️</button>
+      <button type="button" class="dpad-btn" style="grid-row: 2; grid-column: 3;" onclick="move('right')">➡️</button>
+    </div>
+
+    <div style="margin-top:16px;">
+      <button type="button" onclick="initGame()" style="padding:9px 18px; border-radius:12px; background:#fff; border:1.5px solid var(--border-pink); font-weight:800; font-size:12px; cursor:pointer;">
+        🔄 Restart Game
+      </button>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal-card">
+      <h3>💎 Jewel Merge Rules</h3>
+      <ul>
+        <li><strong>Goal:</strong> Merge identical celebration gemstones until you create the 128 Ruby or 256 Crown Jewel!</li>
+        <li><strong>Controls:</strong> Swipe across the board, use arrow keys, or tap the directional buttons.</li>
+        <li><strong>Gem Ladder:</strong> Pearl (2) → Rose Quartz (4) → Amethyst (8) → Sapphire (16) → Emerald (32) → Topaz (64) → Ruby (128)!</li>
+        <li><strong>Reward:</strong> Forging a 128 Ruby awards <strong>+20 Vanvi Coins 🪙</strong>!</li>
+      </ul>
+      <button type="button" style="width:100%; padding:12px; border-radius:14px; background:var(--rose-gradient); color:#fff; font-weight:850; border:none; cursor:pointer;" onclick="closeRules()">
+        Start Merging!
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="winModal">
+    <div class="modal-card" style="text-align:center;">
+      <div style="font-size:42px; margin-bottom:8px;">💎</div>
+      <h3>Rare Gem Forged!</h3>
+      <div style="font-size:16px; font-weight:850; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:8px 16px; border-radius:12px; margin:12px auto; display:inline-block;">
+        +20 Vanvi Coins Credited 🪙
+      </div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">
+        You forged the radiant Ruby gemstone! Keep merging toward the 256 Crown Diamond.
+      </p>
+      <button type="button" style="width:100%; padding:12px; border-radius:14px; background:var(--rose-gradient); color:#fff; font-weight:850; border:none; cursor:pointer;" onclick="continuePlaying()">
+        Keep Merging →
+      </button>
+    </div>
+  </div>
+
+  <script src="js/vanvi-api.js"></script>
+  <script>
+    (function() {
+      'use strict';
+
+      const GEM_LEVELS = {
+        2: { name: 'Pearl', bg: 'linear-gradient(135deg, #cbd5e1, #94a3b8)', icon: '⚪' },
+        4: { name: 'Rose', bg: 'linear-gradient(135deg, #f472b6, #db2777)', icon: '🌸' },
+        8: { name: 'Amethyst', bg: 'linear-gradient(135deg, #a855f7, #7e22ce)', icon: '🔮' },
+        16: { name: 'Sapphire', bg: 'linear-gradient(135deg, #38bdf8, #0284c7)', icon: '💙' },
+        32: { name: 'Emerald', bg: 'linear-gradient(135deg, #34d399, #059669)', icon: '💚' },
+        64: { name: 'Topaz', bg: 'linear-gradient(135deg, #fbbf24, #d97706)', icon: '💛' },
+        128: { name: 'Ruby', bg: 'linear-gradient(135deg, #ef4444, #b91c1c)', icon: '❤️' },
+        256: { name: 'Diamond', bg: 'linear-gradient(135deg, #f43f5e, #8b5cf6)', icon: '👑' },
+      };
+
+      let board = Array(4).fill(null).map(() => Array(4).fill(0));
+      let score = 0;
+      let won = false;
+
+      window.openRules = function() { document.getElementById('rulesModal').classList.add('open'); };
+      window.closeRules = function() { document.getElementById('rulesModal').classList.remove('open'); };
+
+      function updateHUD() {
+        document.getElementById('hudScore').textContent = score;
+        if (window.VanviRewardEngine) {
+          document.getElementById('coinBalanceHUD').textContent = window.VanviRewardEngine.getCoins();
+        }
+      }
+
+      function spawnTile() {
+        const empties = [];
+        for (let r = 0; r < 4; r++) {
+          for (let c = 0; c < 4; c++) {
+            if (board[r][c] === 0) empties.push({ r, c });
+          }
+        }
+        if (empties.length > 0) {
+          const rand = empties[Math.floor(Math.random() * empties.length)];
+          board[rand.r][rand.c] = Math.random() < 0.85 ? 2 : 4;
+        }
+      }
+
+      function renderBoard() {
+        const container = document.getElementById('gridContainer');
+        container.innerHTML = '';
+
+        for (let r = 0; r < 4; r++) {
+          for (let c = 0; c < 4; c++) {
+            const val = board[r][c];
+            const tile = document.createElement('div');
+            tile.className = 'tile' + (val > 0 ? ' active' : '');
+
+            if (val > 0) {
+              const def = GEM_LEVELS[val] || { bg: '#2c1224', icon: '💎' };
+              tile.style.background = def.bg;
+              tile.innerHTML = `<span style="font-size:18px;">${def.icon}</span><span style="font-size:12px; margin-top:2px;">${val}</span>`;
+            }
+            container.appendChild(tile);
+          }
+        }
+      }
+
+      function slideRow(row) {
+        let arr = row.filter(val => val !== 0);
+        for (let i = 0; i < arr.length - 1; i++) {
+          if (arr[i] === arr[i + 1]) {
+            arr[i] *= 2;
+            score += arr[i];
+            arr[i + 1] = 0;
+            if (arr[i] >= 128 && !won) {
+              won = true;
+              if (window.VanviRewardEngine) {
+                window.VanviRewardEngine.addCoins(20, 'Jewel Merge 128');
+                updateHUD();
+              }
+              document.getElementById('winModal').classList.add('open');
+            }
+          }
+        }
+        arr = arr.filter(val => val !== 0);
+        while (arr.length < 4) arr.push(0);
+        return arr;
+      }
+
+      window.move = function(dir) {
+        const prev = JSON.stringify(board);
+
+        if (dir === 'left') {
+          for (let r = 0; r < 4; r++) board[r] = slideRow(board[r]);
+        } else if (dir === 'right') {
+          for (let r = 0; r < 4; r++) board[r] = slideRow(board[r].reverse()).reverse();
+        } else if (dir === 'up') {
+          for (let c = 0; c < 4; c++) {
+            let col = [board[0][c], board[1][c], board[2][c], board[3][c]];
+            col = slideRow(col);
+            for (let r = 0; r < 4; r++) board[r][c] = col[r];
+          }
+        } else if (dir === 'down') {
+          for (let c = 0; c < 4; c++) {
+            let col = [board[3][c], board[2][c], board[1][c], board[0][c]];
+            col = slideRow(col);
+            for (let r = 0; r < 4; r++) board[3 - r][c] = col[r];
+          }
+        }
+
+        if (JSON.stringify(board) !== prev) {
+          spawnTile();
+          renderBoard();
+          updateHUD();
+        }
+      };
+
+      // Swipe support
+      let touchStartX = 0, touchStartY = 0;
+      const grid = document.getElementById('gridContainer');
+      grid.addEventListener('touchstart', e => {
+        if (e.touches && e.touches[0]) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      grid.addEventListener('touchend', e => {
+        if (e.changedTouches && e.changedTouches[0]) {
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          const dy = e.changedTouches[0].clientY - touchStartY;
+          if (Math.abs(dx) > Math.abs(dy)) {
+            if (dx > 30) move('right');
+            else if (dx < -30) move('left');
+          } else {
+            if (dy > 30) move('down');
+            else if (dy < -30) move('up');
+          }
+        }
+      }, { passive: true });
+
+      // Keyboard
+      window.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') move('left');
+        else if (e.key === 'ArrowRight') move('right');
+        else if (e.key === 'ArrowUp') move('up');
+        else if (e.key === 'ArrowDown') move('down');
+      });
+
+      window.initGame = function() {
+        board = Array(4).fill(null).map(() => Array(4).fill(0));
+        score = 0;
+        won = false;
+        spawnTile();
+        spawnTile();
+        renderBoard();
+        updateHUD();
+      };
+
+      window.continuePlaying = function() {
+        document.getElementById('winModal').classList.remove('open');
+      };
+
+      initGame();
+    })();
+  </script>
+</body>
+</html>

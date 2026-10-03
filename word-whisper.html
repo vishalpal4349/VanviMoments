@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Word Whisper 💬 — Heartfelt Word Puzzles — Vanvi Moments</title>
+  <meta name="description" content="Unscramble sweet, romantic words and heartfelt celebration letters to unlock secret love notes and earn Vanvi Coins.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --bg-pearl: #fffbfd;
+      --bg-blush: #fff1f6;
+      --card-glass: rgba(255, 255, 255, 0.96);
+      --rose-primary: #ff2a7a;
+      --rose-soft: #ff529a;
+      --gold-champagne: #d97706;
+      --gold-light: #fef3c7;
+      --lilac-neon: #a855f7;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --text-dark: #2c1224;
+      --text-muted: #88627b;
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #ffe4ee 0%, #fff2f6 50%, #fdf5f8 100%);
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      padding-bottom: 95px;
+      overflow-x: hidden !important;
+    }
+
+    /* Top Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 62px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--text-dark);
+    }
+    .brand-link span { color: var(--rose-primary); }
+
+    .coin-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #b45309;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 99px;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumb-bar {
+      max-width: 580px;
+      margin: 12px auto 0;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .btn-nav-back {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      padding: 6px 14px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-nav-back:hover { color: var(--rose-primary); border-color: var(--rose-primary); }
+
+    /* Hero */
+    .game-hero {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 16px 16px 8px;
+      text-align: center;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 42, 122, 0.1);
+      border: 1px solid rgba(255, 42, 122, 0.25);
+      color: var(--rose-primary);
+      padding: 3px 12px;
+      border-radius: 99px;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 6vw, 34px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, #ff2a7a, #d97706);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+
+    /* Main Puzzle Arena Card */
+    .puzzle-card-container {
+      max-width: 520px;
+      margin: 12px auto;
+      padding: 0 16px;
+    }
+    .puzzle-main-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 26px;
+      padding: 24px 20px;
+      box-shadow: 0 16px 42px rgba(255, 60, 130, 0.08);
+      position: relative;
+      text-align: center;
+    }
+
+    /* Hint Box */
+    .hint-speech-bubble {
+      background: linear-gradient(135deg, #fff7fa 0%, #fffbfd 100%);
+      border: 1px solid rgba(255, 120, 175, 0.3);
+      border-radius: 18px;
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      position: relative;
+    }
+    .hint-badge {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--gold-champagne);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .hint-text {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-style: italic;
+      color: #4a2840;
+      line-height: 1.4;
+    }
+
+    /* Answer Slot Boxes */
+    .slots-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      min-height: 56px;
+      flex-wrap: wrap;
+    }
+    .slot-box {
+      width: 48px;
+      height: 52px;
+      border-radius: 14px;
+      border: 2px dashed rgba(255, 120, 175, 0.4);
+      background: #fffbfe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--rose-primary);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slot-box.filled {
+      border: 2px solid var(--rose-primary);
+      background: #fff0f6;
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.18);
+      transform: translateY(-2px);
+    }
+    .slot-box.correct {
+      border-color: #10b981;
+      background: #ecfdf5;
+      color: #059669;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+    }
+
+    /* Scrambled Letter Tiles Bank */
+    .letters-bank {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .letter-tile {
+      width: 46px;
+      height: 48px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255, 120, 175, 0.3);
+      background: linear-gradient(135deg, #ffffff 0%, #fff4f9 100%);
+      font-size: 20px;
+      font-weight: 850;
+      color: #2c1224;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.08);
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .letter-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(255, 42, 122, 0.2);
+      border-color: var(--rose-primary);
+    }
+    .letter-tile.used {
+      opacity: 0.3;
+      pointer-events: none;
+      transform: scale(0.92);
+      box-shadow: none;
+    }
+
+    /* Actions Bar */
+    .puzzle-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .btn-action-tool {
+      background: #fff5f8;
+      border: 1px solid var(--border-pink);
+      color: var(--text-dark);
+      padding: 8px 16px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 750;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-action-tool:hover { background: #ffe4ee; color: var(--rose-primary); }
+
+    /* Success Note Overlay */
+    .success-note-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 26px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.94);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 40;
+    }
+    .success-note-overlay.show {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+    .success-badge-icon {
+      font-size: 48px;
+      margin-bottom: 8px;
+      animation: heartBeat 1.2s infinite;
+    }
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+    .success-word-revealed {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--rose-primary);
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .success-love-note {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 16px;
+      color: #643853;
+      line-height: 1.5;
+      max-width: 360px;
+      margin-bottom: 16px;
+    }
+    .reward-pill-banner {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #b45309;
+      font-size: 13.5px;
+      font-weight: 850;
+      padding: 8px 18px;
+      border-radius: 99px;
+      margin-bottom: 18px;
+    }
+    .btn-next-word {
+      background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%);
+      color: #ffffff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 99px;
+      font-size: 13.5px;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 42, 122, 0.28);
+      transition: transform 0.2s;
+    }
+    .btn-next-word:hover { transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header">
+    <a href="games.html" class="brand-link">
+      <span>💬</span> VANVI MOMENTS
+    </a>
+    <div class="header-actions">
+      <div class="coin-pill">
+        🪙 <span id="userCoinBalance">50</span> Coins
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumb-bar">
+    <a class="btn-nav-back" href="games.html">
+      <span>‹</span> <span>Back to Games</span>
+    </a>
+    <span style="font-size: 11.5px; color: var(--text-muted);">
+      Word Whisper · Puzzle <span id="puzzleIdxLabel">1</span> of 5
+    </span>
+  </div>
+
+  <!-- Hero Header -->
+  <section class="game-hero">
+    <div class="hero-kicker">✦ SWEET ROMANTIC PUZZLE</div>
+    <h1 class="hero-title">Word <span>Whisper</span></h1>
+    <p class="hero-subtitle">Tap the scattered letter tiles in order to reveal the secret emotional word and unlock heartwarming love notes!</p>
+  </section>
+
+  <!-- Main Game Stage Card -->
+  <main class="puzzle-card-container">
+    <div class="puzzle-main-card">
+      
+      <!-- Poetic Hint Bubble -->
+      <div class="hint-speech-bubble">
+        <div class="hint-badge">💌 The Whisper Clue</div>
+        <p class="hint-text" id="whisperHint">"A promise that defies all distances and stays true through time."</p>
+      </div>
+
+      <!-- Slots to Spell the Word -->
+      <div class="slots-container" id="slotsContainer"></div>
+
+      <!-- Scrambled Letter Tiles -->
+      <div class="letters-bank" id="lettersBank"></div>
+
+      <!-- Bottom Tools -->
+      <div class="puzzle-actions">
+        <button type="button" class="btn-action-tool" id="btnBackspace">
+          <span>⌫</span> Backspace
+        </button>
+        <button type="button" class="btn-action-tool" id="btnShuffle">
+          <span>🔀</span> Shuffle Letters
+        </button>
+      </div>
+
+      <!-- Success Revealed Card Overlay -->
+      <div class="success-note-overlay" id="successNoteOverlay">
+        <div class="success-badge-icon">💖</div>
+        <h2 class="success-word-revealed" id="revealedWordTitle">FOREVER</h2>
+        <p class="success-love-note" id="revealedLoveNote">"In a world where everything changes, you are my one constant forever."</p>
+        <div class="reward-pill-banner" id="rewardPillBanner">
+          🪙 +5 Vanvi Coins Added!
+        </div>
+        <button type="button" class="btn-next-word" id="btnNextWord">Whisper Next Word →</button>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/vanvi-api.js"></script>
+  <script src="js/vanvi-navigation.js"></script>
+  <script>
+    (function() {
+      'use strict';
+
+      const PUZZLES = [
+        {
+          word: "FOREVER",
+          hint: "A promise that defies all distances and stays true through all seasons.",
+          note: "In a world where everything changes, you are my one constant forever.",
+          reward: 5
+        },
+        {
+          word: "CHERISH",
+          hint: "To hold someone deep in your soul with tender care and gratitude.",
+          note: "Every laugh, every glance, every quiet moment with you is something to cherish.",
+          reward: 6
+        },
+        {
+          word: "BELOVED",
+          hint: "The sweetest title for the one whose smile illuminates your universe.",
+          note: "You are dearly loved, cherished beyond words, and forever my safe home.",
+          reward: 6
+        },
+        {
+          word: "SUNSHINE",
+          hint: "What you bring into my mornings even when the skies are gray.",
+          note: "Thank you for being the warmth and gentle light that never fails to heal me.",
+          reward: 7
+        },
+        {
+          word: "PROMISE",
+          hint: "A quiet vow spoken heart-to-heart that time can never fade.",
+          note: "I promise to celebrate your happiness, hold your hands, and walk beside you always.",
+          reward: 8
+        }
+      ];
+
+      let currentIndex = 0;
+      let currentInput = [];
+      let tilesState = []; // { letter, id, used }
+
+      const whisperHint = document.getElementById('whisperHint');
+      const slotsContainer = document.getElementById('slotsContainer');
+      const lettersBank = document.getElementById('lettersBank');
+      const btnBackspace = document.getElementById('btnBackspace');
+      const btnShuffle = document.getElementById('btnShuffle');
+      const successNoteOverlay = document.getElementById('successNoteOverlay');
+      const revealedWordTitle = document.getElementById('revealedWordTitle');
+      const revealedLoveNote = document.getElementById('revealedLoveNote');
+      const rewardPillBanner = document.getElementById('rewardPillBanner');
+      const btnNextWord = document.getElementById('btnNextWord');
+      const puzzleIdxLabel = document.getElementById('puzzleIdxLabel');
+      const userCoinBalance = document.getElementById('userCoinBalance');
+
+      function refreshCoins() {
+        const coins = parseInt(localStorage.getItem('vanvi_coins') || '50', 10);
+        userCoinBalance.textContent = coins;
+      }
+      refreshCoins();
+
+      function loadPuzzle(idx) {
+        currentIndex = idx;
+        const puzzle = PUZZLES[currentIndex];
+        puzzleIdxLabel.textContent = (currentIndex + 1);
+        whisperHint.textContent = `"${puzzle.hint}"`;
+        currentInput = [];
+        successNoteOverlay.classList.remove('show');
+
+        // Prepare Scrambled Letters
+        const chars = puzzle.word.split('');
+        tilesState = chars.map((ch, i) => ({ letter: ch, id: i, used: false }));
+        // Shuffle
+        shuffleTiles();
+
+        renderSlots();
+        renderBank();
+      }
+
+      function shuffleTiles() {
+        for (let i = tilesState.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [tilesState[i], tilesState[j]] = [tilesState[j], tilesState[i]];
+        }
+      }
+
+      function renderSlots() {
+        const puzzle = PUZZLES[currentIndex];
+        slotsContainer.innerHTML = '';
+        for (let i = 0; i < puzzle.word.length; i++) {
+          const slot = document.createElement('div');
+          slot.className = 'slot-box' + (currentInput[i] ? ' filled' : '');
+          slot.textContent = currentInput[i] ? currentInput[i].letter : '';
+          
+          if (currentInput[i]) {
+            slot.addEventListener('click', () => removeInputAt(i));
+          }
+          slotsContainer.appendChild(slot);
+        }
+      }
+
+      function renderBank() {
+        lettersBank.innerHTML = '';
+        tilesState.forEach(tile => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'letter-tile' + (tile.used ? ' used' : '');
+          btn.textContent = tile.letter;
+          btn.addEventListener('click', () => selectTile(tile));
+          lettersBank.appendChild(btn);
+        });
+      }
+
+      function selectTile(tile) {
+        const puzzle = PUZZLES[currentIndex];
+        if (tile.used || currentInput.length >= puzzle.word.length) return;
+
+        tile.used = true;
+        currentInput.push(tile);
+        renderSlots();
+        renderBank();
+
+        checkAnswer();
+      }
+
+      function removeInputAt(index) {
+        if (index < 0 || index >= currentInput.length) return;
+        const removed = currentInput.splice(index, 1)[0];
+        if (removed) {
+          const matched = tilesState.find(t => t.id === removed.id);
+          if (matched) matched.used = false;
+        }
+        renderSlots();
+        renderBank();
+      }
+
+      btnBackspace.addEventListener('click', () => {
+        if (currentInput.length > 0) {
+          removeInputAt(currentInput.length - 1);
+        }
+      });
+
+      btnShuffle.addEventListener('click', () => {
+        shuffleTiles();
+        renderBank();
+      });
+
+      function checkAnswer() {
+        const puzzle = PUZZLES[currentIndex];
+        if (currentInput.length !== puzzle.word.length) return;
+
+        const typed = currentInput.map(i => i.letter).join('');
+        if (typed === puzzle.word) {
+          // Success!
+          document.querySelectorAll('.slot-box').forEach(sb => sb.classList.add('correct'));
+          
+          // Coins
+          const won = puzzle.reward;
+          let currentCoins = parseInt(localStorage.getItem('vanvi_coins') || '50', 10);
+          currentCoins += won;
+          localStorage.setItem('vanvi_coins', currentCoins.toString());
+          refreshCoins();
+
+          if (window.VanviAPI && window.VanviAPI.coins) {
+            try {
+              window.VanviAPI.coins.add({ amount: won, reason: 'Word Whisper ' + puzzle.word });
+            } catch(e) {}
+          }
+
+          setTimeout(() => {
+            revealedWordTitle.textContent = puzzle.word;
+            revealedLoveNote.textContent = `"${puzzle.note}"`;
+            rewardPillBanner.textContent = `🪙 +${won} Vanvi Coins Unlocked!`;
+            successNoteOverlay.classList.add('show');
+          }, 450);
+        } else {
+          // Shake slots
+          slotsContainer.style.transform = 'translateX(-6px)';
+          setTimeout(() => { slotsContainer.style.transform = 'translateX(6px)'; }, 80);
+          setTimeout(() => { slotsContainer.style.transform = 'translateX(0)'; }, 160);
+        }
+      }
+
+      btnNextWord.addEventListener('click', () => {
+        let nextIdx = currentIndex + 1;
+        if (nextIdx >= PUZZLES.length) nextIdx = 0;
+        loadPuzzle(nextIdx);
+      });
+
+      // Init
+      loadPuzzle(0);
+    })();
+  </script>
+</body>
+</html>

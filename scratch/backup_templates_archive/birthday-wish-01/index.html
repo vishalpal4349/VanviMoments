@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Birthday Wish 01 | Vanvi Moments</title>
+  <meta name="description" content="A cheerful, interactive 3D birthday celebration experience with photos, fireworks, and heartfelt greetings.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --accent: #ff4d6d;
+      --accent-deep: #c9184a;
+      --accent-glow: rgba(255, 77, 109, 0.35);
+      --bg-warm: #fff9fb;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --border: rgba(255, 143, 171, 0.35);
+      --text: #2b0918;
+      --text-muted: #794d62;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-warm);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    
+    /* Background Ambience */
+    .bg-blobs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(255, 209, 220, 0.6) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 179, 198, 0.45) 0%, transparent 45%),
+        linear-gradient(180deg, #fff7f9 0%, #fff0f3 100%);
+    }
+
+    /* Floating Particles Canvas */
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* Container */
+    .app-wrap {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      padding: 20px 16px 80px;
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Audio Top Control */
+    .audio-dock {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 90;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.15);
+      transition: all 0.2s;
+    }
+    .audio-dock:hover { transform: scale(1.04); }
+    .music-disc { animation: spin 4s linear infinite; display: inline-block; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* Scene Transitions */
+    .scene-view {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .scene-view.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Scene 1: Intro Envelope / Present */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffe5ec;
+      color: var(--accent-deep);
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* Gift Box Opening Animation */
+    .gift-stage {
+      width: 180px;
+      height: 180px;
+      margin: 15px auto 25px;
+      position: relative;
+      cursor: pointer;
+      perspective: 800px;
+    }
+    .gift-box {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff4d6d, #c9184a);
+      border-radius: 24px;
+      box-shadow: 0 16px 36px rgba(201, 24, 74, 0.32);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border: 2px solid #ff758f;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .gift-box:hover { transform: scale(1.05); }
+    .gift-ribbon-v {
+      position: absolute;
+      top: 0; bottom: 0; width: 34px;
+      background: linear-gradient(90deg, #ffc2d1, #fff, #ffc2d1);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+    .gift-ribbon-h {
+      position: absolute;
+      left: 0; right: 0; height: 34px;
+      background: linear-gradient(180deg, #ffc2d1, #fff, #ffc2d1);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+    .gift-bow {
+      font-size: 58px;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+      animation: bounceBow 2s infinite ease-in-out;
+    }
+    @keyframes bounceBow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+    .tap-hint {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Scene 2: Interactive Cake & Candles */
+    .cake-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 26px 20px;
+      width: 100%;
+      box-shadow: 0 16px 40px rgba(255, 77, 109, 0.12);
+      margin-bottom: 20px;
+    }
+    .cake-art {
+      width: 140px;
+      height: 120px;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+    .cake-base {
+      width: 130px;
+      height: 65px;
+      background: linear-gradient(180deg, #ffb3c1, #ff758f);
+      border-radius: 16px 16px 20px 20px;
+      margin: 0 auto;
+      border: 3px solid #ff4d6d;
+      position: relative;
+      box-shadow: 0 10px 20px rgba(255, 77, 109, 0.25);
+    }
+    .cake-icing {
+      position: absolute;
+      top: -10px;
+      left: 0; right: 0;
+      height: 22px;
+      background: #ffffff;
+      border-radius: 99px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    }
+    .cake-cherries {
+      position: absolute;
+      top: -24px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: space-around;
+      padding: 0 15px;
+    }
+    .candle-stick {
+      width: 10px;
+      height: 32px;
+      background: repeating-linear-gradient(45deg, #fff, #fff 4px, #ff4d6d 4px, #ff4d6d 8px);
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+    }
+    .candle-flame {
+      width: 14px;
+      height: 20px;
+      background: radial-gradient(ellipse at 50% 60%, #fff 0%, #ffbe26 40%, #ff4d00 100%);
+      border-radius: 50% 50% 20% 20%;
+      position: absolute;
+      top: -22px;
+      left: -2px;
+      box-shadow: 0 0 16px rgba(255, 140, 0, 0.9);
+      animation: flameWiggle 0.3s infinite alternate;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .candle-stick.blown .candle-flame {
+      opacity: 0;
+      transform: scale(0.2) translateY(-10px);
+    }
+    @keyframes flameWiggle {
+      0% { transform: rotate(-3deg) scale(1); }
+      100% { transform: rotate(3deg) scale(1.1); }
+    }
+
+    /* Scene 3: Flip Polaroid Memory Stack */
+    .polaroid-deck {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .polaroid-card {
+      background: #ffffff;
+      padding: 12px 12px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+      transform: rotate(-1.5deg);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .polaroid-card:nth-child(even) { transform: rotate(1.5deg); }
+    .polaroid-card:hover { transform: scale(1.02) rotate(0deg); }
+    .polaroid-img-box {
+      width: 100%;
+      height: 220px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ffe5ec;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .polaroid-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .polaroid-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      font-weight: 700;
+      color: #3d1b28;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* Scene 4: Handwritten Letter on Cream Paper */
+    .letter-paper {
+      background: #fffdf8;
+      border: 1px dashed rgba(200, 160, 180, 0.5);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 14px 32px rgba(44, 18, 36, 0.06);
+      width: 100%;
+      text-align: left;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .letter-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-deep);
+      margin-bottom: 12px;
+    }
+    .letter-body {
+      font-family: 'Caveat', cursive;
+      font-size: 21px;
+      line-height: 1.6;
+      color: #3b1828;
+      white-space: pre-wrap;
+    }
+    .letter-signature {
+      text-align: right;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 16px;
+    }
+
+    /* Navigation CTA Buttons */
+    .btn-step {
+      width: 100%;
+      height: 52px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, #ff4d6d, #c9184a);
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px var(--accent-glow);
+      transition: all 0.2s;
+      margin-top: 14px;
+    }
+    .btn-step:active { transform: scale(0.97); }
+
+    .step-dots {
+      display: flex;
+      gap: 6px;
+      margin-top: 18px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      transition: all 0.25s;
+    }
+    .dot.active {
+      width: 24px;
+      border-radius: 99px;
+      background: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-blobs"></div>
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Audio Toggle -->
+  <div class="audio-dock" id="audioDock" onclick="toggleAudio()">
+    <span class="music-disc">🎵</span>
+    <span id="audioLabel">Sound Track</span>
+  </div>
+
+  <audio id="bgAudio" loop preload="auto">
+    <source src="../birthday-3d-candle-surprise/happybirthday.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="app-wrap">
+    
+    <!-- ================= SCENE 1: THE INVITATION & GIFT ================= -->
+    <section class="scene-view active" id="scene1">
+      <div class="hero-badge">✨ An Interactive Birthday Surprise</div>
+      <h1 class="hero-title" id="txtRecipientHero">Happy Birthday!</h1>
+      <p class="hero-sub" id="txtHeroSubtitle">Someone special has made this little corner of the internet just for you.</p>
+
+      <div class="gift-stage" onclick="openGift()">
+        <div class="gift-box">
+          <div class="gift-ribbon-v"></div>
+          <div class="gift-ribbon-h"></div>
+          <div class="gift-bow">🎁</div>
+        </div>
+      </div>
+      <div class="tap-hint">
+        <span>👆 Tap the gift box to unlock surprise</span>
+      </div>
+
+      <button type="button" class="btn-step" onclick="openGift()">
+        <span>Open Your Surprise</span> <span>✨</span>
+      </button>
+
+      <div class="step-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </section>
+
+    <!-- ================= SCENE 2: CAKE CEREMONY ================= -->
+    <section class="scene-view" id="scene2">
+      <div class="hero-badge">🎂 Make A Wish</div>
+      <h2 class="hero-title" style="font-size:26px;">Blow Out The Candles!</h2>
+      <p class="hero-sub">Close your eyes, make a heartfelt wish, and tap the candles to blow them out.</p>
+
+      <div class="cake-container" onclick="blowAllCandles()">
+        <div class="cake-art">
+          <div class="cake-cherries">
+            <div class="candle-stick" id="c1"><div class="candle-flame"></div></div>
+            <div class="candle-stick" id="c2"><div class="candle-flame"></div></div>
+            <div class="candle-stick" id="c3"><div class="candle-flame"></div></div>
+            <div class="candle-stick" id="c4"><div class="candle-flame"></div></div>
+          </div>
+          <div class="cake-base">
+            <div class="cake-icing"></div>
+          </div>
+        </div>
+        <p style="font-size:13px; font-weight:800; color:var(--accent);" id="candleStatus">
+          🕯️ Tap cake to blow candles &amp; ignite fireworks!
+        </p>
+      </div>
+
+      <button type="button" class="btn-step" id="btnCakeNext" onclick="goToScene(3)">
+        <span>Next: Memory Album</span> <span>📸</span>
+      </button>
+
+      <div class="step-dots">
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </section>
+
+    <!-- ================= SCENE 3: POLAROID MEMORY STACK ================= -->
+    <section class="scene-view" id="scene3">
+      <div class="hero-badge">📸 Polaroid Keepsakes</div>
+      <h2 class="hero-title" style="font-size:26px;">Moments We Cherish</h2>
+      <p class="hero-sub">Every picture tells a piece of our story.</p>
+
+      <div class="polaroid-deck" id="polaroidDeck">
+        <div class="polaroid-card">
+          <div class="polaroid-img-box">
+            <img src="../birthday-3d-candle-surprise/image/photo_roses.jpg" alt="Memory 1">
+          </div>
+          <div class="polaroid-caption">Where all the best smiles begin 🌸</div>
+        </div>
+        <div class="polaroid-card">
+          <div class="polaroid-img-box">
+            <img src="../birthday-3d-candle-surprise/image/photo_cake.jpg" alt="Memory 2">
+          </div>
+          <div class="polaroid-caption">Another year more wonderful than the last! ✨</div>
+        </div>
+      </div>
+
+      <button type="button" class="btn-step" onclick="goToScene(4)">
+        <span>Read Your Letter</span> <span>💌</span>
+      </button>
+
+      <div class="step-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+      </div>
+    </section>
+
+    <!-- ================= SCENE 4: HANDWRITTEN LETTER & FINALE ================= -->
+    <section class="scene-view" id="scene4">
+      <div class="hero-badge">💌 From The Heart</div>
+      <h2 class="hero-title" style="font-size:26px;">A Special Letter For You</h2>
+
+      <div class="letter-paper">
+        <h3 class="letter-heading" id="txtLetterHeading">Dearest One,</h3>
+        <p class="letter-body" id="txtLetterBody">
+Wishing you another 365 days of infinite laughter, warm coffee mornings, and dreams coming true.
+
+You bring so much gentleness and magic to everyone around you. May this year shower you with all the peace and success you deserve. Happy Birthday! 🎂✨
+        </p>
+        <div class="letter-signature" id="txtLetterSign">— With all my love, Always</div>
+      </div>
+
+      <button type="button" class="btn-step" onclick="replayAll()">
+        <span>Replay Celebration</span> <span>🔄</span>
+      </button>
+
+      <div class="step-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // URL Params & Customization Synchronization
+    const params = new URLSearchParams(window.location.search);
+    const recipient = params.get('name') || params.get('recipient') || 'Aarav';
+    const sender = params.get('sender') || 'With love, Sneha';
+    const message = params.get('message') || null;
+
+    if (recipient) {
+      document.getElementById('txtRecipientHero').textContent = `Happy Birthday, ${recipient}!`;
+      document.getElementById('txtLetterHeading').textContent = `Dearest ${recipient},`;
+    }
+    if (message) {
+      document.getElementById('txtLetterBody').textContent = message;
+    }
+    if (sender) {
+      document.getElementById('txtLetterSign').textContent = `— ${sender}`;
+    }
+
+    // Audio Handling
+    let isPlaying = false;
+    const audio = document.getElementById('bgAudio');
+    function toggleAudio() {
+      if (!isPlaying) {
+        audio.play().then(() => {
+          isPlaying = true;
+          document.getElementById('audioLabel').textContent = 'Playing 🎵';
+        }).catch(() => {});
+      } else {
+        audio.pause();
+        isPlaying = false;
+        document.getElementById('audioLabel').textContent = 'Sound Off 🔇';
+      }
+    }
+
+    // Scene Navigation
+    function goToScene(n) {
+      document.querySelectorAll('.scene-view').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(`scene${n}`);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      if (n === 2) triggerConfetti();
+      if (n === 4) triggerConfetti();
+    }
+
+    function openGift() {
+      if (!isPlaying) toggleAudio();
+      triggerConfetti();
+      goToScene(2);
+    }
+
+    function blowAllCandles() {
+      document.querySelectorAll('.candle-stick').forEach(c => c.classList.add('blown'));
+      document.getElementById('candleStatus').innerHTML = '🎉 Yay! Wish Made! Confetti Fireworks!';
+      triggerConfetti();
+    }
+
+    function replayAll() {
+      document.querySelectorAll('.candle-stick').forEach(c => c.classList.remove('blown'));
+      document.getElementById('candleStatus').innerHTML = '🕯️ Tap cake to blow candles &amp; ignite fireworks!';
+      goToScene(1);
+    }
+
+    // Confetti Physics Engine
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    let confetti = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function triggerConfetti() {
+      const colors = ['#ff4d6d', '#ff758f', '#ffb3c1', '#ffd166', '#06d6a0', '#118ab2'];
+      for (let i = 0; i < 90; i++) {
+        confetti.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          vx: (Math.random() - 0.5) * 14,
+          vy: (Math.random() - 0.7) * 16,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 8,
+          alpha: 1
+        });
+      }
+    }
+
+    function updateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach((p, idx) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.35; // gravity
+        p.rotation += p.vRot;
+        p.alpha -= 0.009;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        ctx.restore();
+
+        if (p.alpha <= 0 || p.y > canvas.height) {
+          confetti.splice(idx, 1);
+        }
+      });
+      requestAnimationFrame(updateConfetti);
+    }
+    updateConfetti();
+  </script>
+</body>
+</html>

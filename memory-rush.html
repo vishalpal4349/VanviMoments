@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Memory Rush — Premium Skill Game — Vanvi Moments</title>
+  <meta name="description" content="Test your visual recall in Memory Rush! Match celebration symbols, beat the clock, and earn Vanvi Coins with strict daily limits.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+
+  <style>
+    :root {
+      --bg-pearl: #fffbfd;
+      --bg-blush: #fff1f6;
+      --bg-card: rgba(255, 255, 255, 0.94);
+      --rose-main: #ff2a7a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --gold-main: #d97706;
+      --emerald-main: #10b981;
+      --text-dark: #2c1224;
+      --text-muted: #88627b;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --shadow-card: 0 14px 36px rgba(255, 60, 130, 0.10);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #ffe4ee 0%, #fff2f6 50%, #fdf5f8 100%);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding-bottom: 100px;
+      overflow-x: hidden !important;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Top Sticky App Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 62px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left, .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-nav-back {
+      border: 1px solid var(--border-pink);
+      background: #ffffff;
+      color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06);
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-nav-back:hover { transform: translateY(-1px); background: #fff0f5; }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+    }
+    .brand-link span { color: var(--rose-main); }
+
+    .wallet-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff8eb;
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #b45309;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.08);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .wallet-pill:hover { transform: scale(1.03); background: #fef3c7; }
+
+    .sound-toggle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid var(--border-pink);
+      background: #ffffff;
+      color: var(--text-dark);
+      font-size: 15px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06);
+      transition: all 0.2s;
+    }
+    .sound-toggle-btn:hover { background: #fff0f5; }
+
+    /* Main Container */
+    .game-container {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 16px 14px 20px;
+    }
+
+    /* Hero Banner */
+    .game-hero {
+      text-align: center;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .game-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      background: linear-gradient(135deg, #fff0f6, #ffe4ee);
+      border: 1px solid var(--border-pink);
+      color: var(--rose-main);
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 8px;
+    }
+    .game-title {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+    .game-subtitle {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* Daily Cap Indicator Strip */
+    .daily-cap-strip {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-pink);
+      border-radius: 16px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 16px rgba(255, 60, 130, 0.05);
+    }
+    .daily-cap-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .daily-cap-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .daily-cap-sub {
+      font-size: 9.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .daily-cap-bar-wrap {
+      width: 110px;
+      height: 8px;
+      background: #f3e8ee;
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+    }
+    .daily-cap-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #d97706, #10b981);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    /* Difficulty Selector Tabs */
+    .difficulty-nav {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .diff-btn {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 14px;
+      padding: 8px 4px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .diff-btn:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 60, 130, 0.12);
+    }
+    .diff-btn.active {
+      background: linear-gradient(135deg, #2c1224, #441738);
+      border-color: #2c1224;
+      color: #ffffff;
+      box-shadow: 0 8px 22px rgba(44, 18, 36, 0.22);
+      transform: translateY(-2px);
+    }
+    .diff-name {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+    }
+    .diff-grid-spec {
+      font-size: 9px;
+      font-weight: 600;
+      opacity: 0.8;
+      margin-top: 1px;
+    }
+    .diff-reward-badge {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 800;
+      color: var(--gold-main);
+      background: #fff8eb;
+      border: 1px solid rgba(217, 119, 6, 0.3);
+      padding: 1px 6px;
+      border-radius: 99px;
+      margin-top: 4px;
+    }
+    .diff-btn.active .diff-reward-badge {
+      background: #d97706;
+      color: #ffffff;
+      border-color: #d97706;
+    }
+
+    /* Live Game HUD / Metrics Board */
+    .game-hud {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-card);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+    .hud-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .hud-box.center { text-align: center; }
+    .hud-box.right { text-align: right; }
+    .hud-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+    }
+    .hud-value {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .hud-box.center .hud-value { justify-content: center; }
+    .hud-box.right .hud-value { justify-content: flex-end; }
+
+    /* Timer Countdown Ring & Bar */
+    .timer-val {
+      font-variant-numeric: tabular-nums;
+      color: var(--rose-main);
+      transition: color 0.3s;
+    }
+    .timer-val.warning {
+      color: #dc2626 !important;
+      animation: timerBlink 0.6s infinite alternate;
+    }
+    @keyframes timerBlink {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0.6; transform: scale(1.08); }
+    }
+
+    /* Progress & Memorization Bar */
+    .phase-indicator-bar-wrap {
+      background: #f1e2eb;
+      height: 6px;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .phase-indicator-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff2a7a, #d97706);
+      width: 100%;
+      border-radius: 99px;
+      transition: width 0.1s linear;
+    }
+    .phase-status-text {
+      text-align: center;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--rose-main);
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    /* Floating Penalty Floating Animation (-2s) */
+    .penalty-float {
+      position: absolute;
+      top: -10px;
+      right: 20px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #dc2626;
+      pointer-events: none;
+      animation: floatUpFade 0.85s forwards ease-out;
+    }
+    @keyframes floatUpFade {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-24px) scale(1.15); }
+    }
+
+    /* ==========================================================================
+       PREMIUM 3D MEMORY GRID & CARDS
+       ========================================================================== */
+    .cards-board-wrapper {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 26px;
+      padding: 14px;
+      box-shadow: 0 16px 40px rgba(255, 60, 130, 0.08);
+      position: relative;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cards-grid {
+      display: grid;
+      gap: 10px;
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    /* Dynamic Grid Layouts */
+    .grid-2x3 {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+    .grid-3x4 {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+    }
+    .grid-4x4 {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
+    .grid-4x5 {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+    }
+    @media(min-width: 480px) {
+      .grid-4x5 {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+      }
+    }
+
+    /* 3D Flip Card Element */
+    .memory-card {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.45s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.25s ease;
+      border-radius: 18px;
+    }
+
+    .memory-card:active {
+      transform: scale(0.96);
+    }
+
+    .memory-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .memory-card.matched {
+      transform: rotateY(180deg) scale(0.98);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .memory-card.mismatch-shake {
+      animation: mismatchWobble 0.55s ease;
+    }
+
+    @keyframes mismatchWobble {
+      0%, 100% { transform: rotateY(180deg) translateX(0); }
+      20%, 60% { transform: rotateY(180deg) translateX(-6px); }
+      40%, 80% { transform: rotateY(180deg) translateX(6px); }
+    }
+
+    /* Card Faces */
+    .card-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(44, 18, 36, 0.08);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      overflow: hidden;
+    }
+
+    /* Card Back (Hidden State) */
+    .card-back {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 247, 0.85));
+      border: 1.5px solid var(--border-pink);
+      color: var(--rose-main);
+      transform: rotateY(0deg);
+      position: relative;
+    }
+
+    .card-back::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255, 42, 122, 0.28);
+      pointer-events: none;
+    }
+
+    .card-back-icon {
+      font-size: clamp(20px, 4.5vw, 28px);
+      filter: drop-shadow(0 2px 8px rgba(255, 42, 122, 0.25));
+      opacity: 0.9;
+      transition: transform 0.25s ease;
+    }
+    .memory-card:hover .card-back-icon {
+      transform: scale(1.18) rotate(6deg);
+    }
+
+    /* Card Front (Revealed State) */
+    .card-front {
+      background: #ffffff;
+      border: 2px solid rgba(255, 214, 230, 0.9);
+      transform: rotateY(180deg);
+      color: var(--text-dark);
+      padding: 4px;
+    }
+
+    .card-symbol {
+      font-size: clamp(24px, 5.5vw, 36px);
+      line-height: 1;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .card-name-tag {
+      font-size: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 90%;
+    }
+
+    /* Matched State Glamour */
+    .memory-card.matched .card-front {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border-color: #10b981;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+    }
+    .memory-card.matched .card-name-tag {
+      color: #059669;
+    }
+
+    /* Mismatched State */
+    .memory-card.mismatch-shake .card-front {
+      border-color: #ef4444;
+      background: #fef2f2;
+    }
+
+    /* Floating Game Actions */
+    .game-actions-row {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .btn-secondary-action {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.05);
+      transition: all 0.2s;
+    }
+    .btn-secondary-action:hover {
+      background: #fff0f5;
+      transform: translateY(-1px);
+    }
+
+    .btn-start-action {
+      flex: 1;
+      background: var(--rose-gradient);
+      border: none;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 16px;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(255, 42, 122, 0.32);
+      transition: all 0.22s;
+    }
+    .btn-start-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(255, 42, 122, 0.42);
+    }
+
+    /* Fixed Rewards Info Guide Card */
+    .rewards-guide-card {
+      margin-top: 18px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 16px rgba(255, 60, 130, 0.05);
+    }
+    .guide-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .guide-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rewards-table-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+    .table-cell {
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.2);
+      border-radius: 12px;
+      padding: 8px 4px;
+    }
+    .cell-title {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+    .cell-coin {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--gold-main);
+      margin-top: 2px;
+    }
+    .perfect-bonus-note {
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #fdf4ff;
+      border: 1px solid rgba(192, 38, 211, 0.2);
+      color: #9333ea;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ==========================================================================
+       MODALS: VICTORY & GAME OVER
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(44, 18, 36, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-dialog {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 28px;
+      padding: 28px 22px 22px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(44, 18, 36, 0.25);
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .modal-overlay.active .modal-dialog {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-icon-bubble {
+      width: 68px;
+      height: 68px;
+      border-radius: 24px;
+      margin: 0 auto 14px;
+      display: grid;
+      place-items: center;
+      font-size: 32px;
+      background: linear-gradient(135deg, #fff0f6, #ffe4ee);
+      box-shadow: 0 10px 25px rgba(255, 42, 122, 0.18);
+    }
+    .modal-dialog.victory .modal-icon-bubble {
+      background: linear-gradient(135deg, #f0fdf4, #bbf7d0);
+    }
+    .modal-dialog.gameover .modal-icon-bubble {
+      background: linear-gradient(135deg, #fef2f2, #fecaca);
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .modal-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    /* Coin Award Showcase Box */
+    .coin-award-box {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .coin-award-num {
+      font-size: 28px;
+      font-weight: 900;
+      color: #b45309;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .coin-breakdown-sub {
+      font-size: 11px;
+      font-weight: 700;
+      color: #92400e;
+    }
+
+    .modal-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .mstat-box {
+      background: #fdf6fa;
+      border: 1px solid var(--border-pink);
+      border-radius: 14px;
+      padding: 8px 4px;
+    }
+    .mstat-val {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+    .mstat-lbl {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn-modal-primary {
+      background: var(--rose-gradient);
+      color: #ffffff;
+      border: none;
+      padding: 13px;
+      border-radius: 16px;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(255, 42, 122, 0.28);
+      transition: all 0.2s;
+    }
+    .btn-modal-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(255, 42, 122, 0.38);
+    }
+
+    .btn-modal-secondary {
+      background: #ffffff;
+      color: var(--text-dark);
+      border: 1px solid var(--border-pink);
+      padding: 11px;
+      border-radius: 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-modal-secondary:hover { background: #fff0f5; }
+
+    /* Canvas Confetti Layer */
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 120;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top App Navigation -->
+  <header class="app-header">
+    <div class="header-left">
+      <a href="games.html" class="btn-nav-back" title="Back to Games">
+        <span>‹</span> <span>Games</span>
+      </a>
+      <a href="index.html" class="brand-link" title="Vanvi Moments">
+        🧠 Memory <span>Rush</span>
+      </a>
+    </div>
+    <div class="header-right">
+      <button type="button" class="sound-toggle-btn" id="soundToggleBtn" onclick="toggleSound()" title="Toggle Sound">
+        🔊
+      </button>
+      <a href="rewards.html" class="wallet-pill" id="headerWalletPill" title="View Rewards Wallet">
+        <span>🪙</span> <span id="headerCoinBalance">150</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Game Main Screen -->
+  <main class="game-container">
+
+    <!-- Hero Title -->
+    <section class="game-hero">
+      <div class="game-hero-badge">
+        <span>⚡</span> Skill Challenge
+      </div>
+      <h1 class="game-title">Memory Rush</h1>
+      <p class="game-subtitle">Memorize hidden symbols, match pairs before the timer runs out, and claim fixed coin rewards.</p>
+    </section>
+
+    <!-- Daily Earning Cap Indicator -->
+    <div class="daily-cap-strip" id="dailyCapStrip">
+      <div class="daily-cap-left">
+        <div class="daily-cap-label">
+          <span>🪙 Daily Games Cap:</span> <span id="dailyEarnedText">0 / 25 Coins</span>
+        </div>
+        <div class="daily-cap-sub" id="dailyCapSubText">Resets at midnight. Anti-farm system active.</div>
+      </div>
+      <div class="daily-cap-bar-wrap">
+        <div class="daily-cap-bar-fill" id="dailyCapBarFill"></div>
+      </div>
+    </div>
+
+    <!-- Difficulty Selector Tabs -->
+    <nav class="difficulty-nav" role="tablist" aria-label="Select Game Difficulty">
+      <button type="button" class="diff-btn active" id="tabEasy" onclick="selectDifficulty('easy')">
+        <div class="diff-name">Easy</div>
+        <div class="diff-grid-spec">2 × 3 Grid</div>
+        <div class="diff-reward-badge">+2 🪙</div>
+      </button>
+      <button type="button" class="diff-btn" id="tabMedium" onclick="selectDifficulty('medium')">
+        <div class="diff-name">Medium</div>
+        <div class="diff-grid-spec">3 × 4 Grid</div>
+        <div class="diff-reward-badge">+4 🪙</div>
+      </button>
+      <button type="button" class="diff-btn" id="tabHard" onclick="selectDifficulty('hard')">
+        <div class="diff-name">Hard</div>
+        <div class="diff-grid-spec">4 × 4 Grid</div>
+        <div class="diff-reward-badge">+7 🪙</div>
+      </button>
+      <button type="button" class="diff-btn" id="tabExpert" onclick="selectDifficulty('expert')">
+        <div class="diff-name">Expert</div>
+        <div class="diff-grid-spec">4 × 5 Grid</div>
+        <div class="diff-reward-badge">+10 🪙</div>
+      </button>
+    </nav>
+
+    <!-- Live Game HUD -->
+    <section class="game-hud" aria-label="Live Game HUD">
+      <div class="hud-box">
+        <span class="hud-label">Time Left</span>
+        <div class="hud-value" style="position: relative;">
+          <span>⏱️</span> <span class="timer-val" id="hudTimer">30s</span>
+          <div id="penaltyContainer"></div>
+        </div>
+      </div>
+      <div class="hud-box center">
+        <span class="hud-label">Pairs Matched</span>
+        <div class="hud-value">
+          <span>🎯</span> <span id="hudPairs">0 / 3</span>
+        </div>
+      </div>
+      <div class="hud-box right">
+        <span class="hud-label">Mistakes Left</span>
+        <div class="hud-value">
+          <span>💔</span> <span id="hudMistakes">3</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase / Memorization Progress Bar -->
+    <div class="phase-indicator-bar-wrap">
+      <div class="phase-indicator-bar-fill" id="phaseBarFill"></div>
+    </div>
+    <div class="phase-status-text" id="phaseStatusText">
+      Tap "Start Level" to begin memorization!
+    </div>
+
+    <!-- 3D Card Playfield Board -->
+    <section class="cards-board-wrapper" id="boardWrapper" aria-label="Card Matching Board">
+      <div class="cards-grid grid-2x3" id="cardsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Actions Control Bar -->
+    <div class="game-actions-row">
+      <button type="button" class="btn-secondary-action" onclick="openRulesModal()" title="View Rules &amp; Fixed Rewards">
+        <span>ℹ️</span> Rules
+      </button>
+      <button type="button" class="btn-start-action" id="btnMainAction" onclick="handleMainAction()">
+        <span>▶</span> Start Memorization
+      </button>
+      <button type="button" class="btn-secondary-action" onclick="resetCurrentLevel()" title="Restart Level">
+        <span>🔄</span> Reset
+      </button>
+    </div>
+
+    <!-- Fixed Rewards & Rules Guide Table -->
+    <aside class="rewards-guide-card" aria-label="Rewards Information">
+      <div class="guide-header">
+        <div class="guide-title">
+          <span>🏆</span> Fixed Skill-Based Rewards
+        </div>
+        <span style="font-size: 10px; font-weight: 800; color: var(--text-muted);">(No Random Coins)</span>
+      </div>
+      <div class="rewards-table-grid">
+        <div class="table-cell">
+          <div class="cell-title">Easy (2×3)</div>
+          <div class="cell-coin">2 Coins</div>
+        </div>
+        <div class="table-cell">
+          <div class="cell-title">Med (3×4)</div>
+          <div class="cell-coin">4 Coins</div>
+        </div>
+        <div class="table-cell">
+          <div class="cell-title">Hard (4×4)</div>
+          <div class="cell-coin">7 Coins</div>
+        </div>
+        <div class="table-cell">
+          <div class="cell-title">Exp (4×5)</div>
+          <div class="cell-coin">10 Coins</div>
+        </div>
+      </div>
+      <div class="perfect-bonus-note">
+        <span>✨</span> <b>Perfect Run Bonus:</b> Complete without any wrong match for an extra <b>+3 Coins</b>!
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- VICTORY MODAL -->
+  <div class="modal-overlay" id="victoryModal">
+    <div class="modal-dialog victory">
+      <div class="modal-icon-bubble">🎉</div>
+      <h2 class="modal-title">Level Completed!</h2>
+      <p class="modal-desc" id="victorySubtitle">Incredible memory! Your celebration coins have been credited.</p>
+
+      <div class="coin-award-box">
+        <div class="coin-award-num" id="victoryCoinDisplay">
+          <span>+2</span> <span>🪙</span>
+        </div>
+        <div class="coin-breakdown-sub" id="victoryBreakdownSub">Base: 2 Coins</div>
+      </div>
+
+      <div class="modal-stats-row">
+        <div class="mstat-box">
+          <div class="mstat-val" id="victoryTimeTaken">12s</div>
+          <div class="mstat-lbl">Time Taken</div>
+        </div>
+        <div class="mstat-box">
+          <div class="mstat-val" id="victoryMistakesCount">0</div>
+          <div class="mstat-lbl">Mistakes</div>
+        </div>
+        <div class="mstat-box">
+          <div class="mstat-val" id="victoryAccuracy">100%</div>
+          <div class="mstat-lbl">Accuracy</div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-modal-primary" id="btnNextLevel" onclick="advanceNextDifficulty()">
+          Next Difficulty →
+        </button>
+        <button type="button" class="btn-modal-secondary" onclick="closeModalsAndReplay()">
+          Play This Level Again
+        </button>
+        <a href="rewards.html" class="btn-modal-secondary">
+          View Coins in Rewards Ledger
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME OVER MODAL -->
+  <div class="modal-overlay" id="gameoverModal">
+    <div class="modal-dialog gameover">
+      <div class="modal-icon-bubble">⏳</div>
+      <h2 class="modal-title" id="gameoverTitle">Game Over!</h2>
+      <p class="modal-desc" id="gameoverSubtitle">You ran out of time. Don't worry, every try sharpens your memory!</p>
+
+      <div class="modal-stats-row">
+        <div class="mstat-box">
+          <div class="mstat-val" id="gameoverPairsMatched">1 / 3</div>
+          <div class="mstat-lbl">Pairs Found</div>
+        </div>
+        <div class="mstat-box">
+          <div class="mstat-val" id="gameoverMistakes">3</div>
+          <div class="mstat-lbl">Mistakes Made</div>
+        </div>
+        <div class="mstat-box">
+          <div class="mstat-val" id="gameoverDifficulty">Easy</div>
+          <div class="mstat-lbl">Difficulty</div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-modal-primary" onclick="closeModalsAndReplay()">
+          Try Again ↺
+        </button>
+        <button type="button" class="btn-modal-secondary" onclick="closeModals()">
+          Change Difficulty
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RULES MODAL -->
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal-dialog">
+      <div class="modal-icon-bubble">📖</div>
+      <h2 class="modal-title">How to Play</h2>
+      <p class="modal-desc">Master the celebration symbols with pure focus and speed.</p>
+
+      <div style="text-align: left; font-size: 12px; line-height: 1.5; color: var(--text-dark); margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px;">
+        <div><b>1. Memorization Phase:</b> Cards reveal for 1.5s–3.0s. Memorize their exact positions!</div>
+        <div><b>2. Match the Pairs:</b> Tap 2 cards to find matching pairs before the countdown timer hits zero.</div>
+        <div><b>3. Watch Out:</b> Each wrong match deducts <b>1 mistake</b> and <b>-2 seconds</b> from your timer!</div>
+        <div><b>4. Fixed Coin Rewards:</b>
+          <ul style="margin-left: 20px; margin-top: 4px;">
+            <li>Easy (2×3): <b>2 Coins</b></li>
+            <li>Medium (3×4): <b>4 Coins</b></li>
+            <li>Hard (4×4): <b>7 Coins</b></li>
+            <li>Expert (4×5): <b>10 Coins</b></li>
+            <li><b>Perfect Run Bonus:</b> 0 mistakes = <b>+3 Coins</b>!</li>
+          </ul>
+        </div>
+        <div><b>5. Anti-Farm Limit:</b> Maximum 25 coins per day across all celebration games. One reward per completed level.</div>
+      </div>
+
+      <button type="button" class="btn-modal-primary" onclick="closeModals()">
+        Got It, Let's Play!
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Global Navigation Dock -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" id="bottomNavHome" title="Home">⌂<br/>Home</a>
+    <a href="templates.html" class="nav-btn" id="bottomNavExplore" title="Explore">◌<br/>Explore</a>
+    <a href="builder.html" class="create nav-btn" id="bottomNavCreate" title="Create">＋<br/>Create</a>
+    <a href="games.html" class="nav-btn active" id="bottomNavGames" title="Games">🎮<br/>Games</a>
+    <a href="profile.html" class="nav-btn" id="bottomNavMe" title="Profile">👤<br/>Profile</a>
+  </nav>
+
+  <!-- Game Logic Script -->
+  <script>
+    (function() {
+      'use strict';
+
+      // ==========================================================================
+      // CONSTANTS & GAME DIFFICULTY CONFIGURATION
+      // ==========================================================================
+      const DAILY_CAP = 25;
+      const STORAGE_COINS = 'vanvi_user_coins';
+      const STORAGE_TODAY_EARNED = 'vanvi_games_today_earned';
+      const STORAGE_TODAY_DATE = 'vanvi_games_today_date';
+      const STORAGE_UNLOCKED = 'vanvi_unlocked_rewards';
+      const STORAGE_SOUND = 'vanvi_sound_enabled';
+
+      const DIFFICULTY_CONFIG = {
+        easy: {
+          id: 'easy',
+          name: 'Easy',
+          rows: 2,
+          cols: 3,
+          pairs: 3,
+          gridClass: 'grid-2x3',
+          memorizeTimeMs: 3000,
+          playTimeSec: 30,
+          maxMistakes: 3,
+          baseReward: 2
+        },
+        medium: {
+          id: 'medium',
+          name: 'Medium',
+          rows: 3,
+          cols: 4,
+          pairs: 6,
+          gridClass: 'grid-3x4',
+          memorizeTimeMs: 2500,
+          playTimeSec: 45,
+          maxMistakes: 5,
+          baseReward: 4
+        },
+        hard: {
+          id: 'hard',
+          name: 'Hard',
+          rows: 4,
+          cols: 4,
+          pairs: 8,
+          gridClass: 'grid-4x4',
+          memorizeTimeMs: 2000,
+          playTimeSec: 50,
+          maxMistakes: 6,
+          baseReward: 7
+        },
+        expert: {
+          id: 'expert',
+          name: 'Expert',
+          rows: 4,
+          cols: 5,
+          pairs: 10,
+          gridClass: 'grid-4x5',
+          memorizeTimeMs: 1500,
+          playTimeSec: 60,
+          maxMistakes: 7,
+          baseReward: 10
+        }
+      };
+
+      // Curated Festive Celebration Symbols Pool
+      const SYMBOLS_POOL = [
+        { icon: '🎂', name: 'Cake' },
+        { icon: '💍', name: 'Ring' },
+        { icon: '💖', name: 'Heart' },
+        { icon: '🎁', name: 'Gift' },
+        { icon: '🌸', name: 'Bloom' },
+        { icon: '💌', name: 'Letter' },
+        { icon: '👑', name: 'Crown' },
+        { icon: '🥂', name: 'Toast' },
+        { icon: '🎈', name: 'Balloon' },
+        { icon: '🕯️', name: 'Candle' },
+        { icon: '🪄', name: 'Magic' },
+        { icon: '📸', name: 'Photo' }
+      ];
+
+      // ==========================================================================
+      // STATE MANAGEMENT
+      // ==========================================================================
+      let currentDifficulty = 'easy';
+      let gameState = 'idle'; // 'idle' | 'memorizing' | 'playing' | 'gameover' | 'won'
+      let cards = [];
+      let firstFlippedCard = null;
+      let secondFlippedCard = null;
+      let isBoardLocked = false;
+      let pairsMatched = 0;
+      let mistakesMade = 0;
+      let timerSecondsRemaining = 0;
+      let timerInterval = null;
+      let memorizationTimeout = null;
+      let memorizationInterval = null;
+      let levelStartTime = 0;
+      let isSoundMuted = localStorage.getItem(STORAGE_SOUND) === 'false';
+
+      // DOM Elements Cache
+      const cardsGrid = document.getElementById('cardsGrid');
+      const hudTimer = document.getElementById('hudTimer');
+      const hudPairs = document.getElementById('hudPairs');
+      const hudMistakes = document.getElementById('hudMistakes');
+      const phaseBarFill = document.getElementById('phaseBarFill');
+      const phaseStatusText = document.getElementById('phaseStatusText');
+      const btnMainAction = document.getElementById('btnMainAction');
+      const penaltyContainer = document.getElementById('penaltyContainer');
+      const headerCoinBalance = document.getElementById('headerCoinBalance');
+      const dailyEarnedText = document.getElementById('dailyEarnedText');
+      const dailyCapBarFill = document.getElementById('dailyCapBarFill');
+      const soundToggleBtn = document.getElementById('soundToggleBtn');
+
+      // ==========================================================================
+      // SOUND SYNTHESIZER (WEB AUDIO API)
+      // ==========================================================================
+      let audioCtx = null;
+      function playSynth(type) {
+        if (isSoundMuted) return;
+        try {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          const now = audioCtx.currentTime;
+
+          if (type === 'flip') {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(420, now);
+            osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.linearRampToValueAtTime(0, now + 0.08);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.08);
+          } else if (type === 'match') {
+            [523.25, 659.25, 783.99].forEach((freq, i) => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.type = 'triangle';
+              osc.frequency.setValueAtTime(freq, now + i * 0.08);
+              gain.gain.setValueAtTime(0.15, now + i * 0.08);
+              gain.gain.linearRampToValueAtTime(0, now + i * 0.08 + 0.25);
+              osc.connect(gain);
+              gain.connect(audioCtx.destination);
+              osc.start(now + i * 0.08);
+              osc.stop(now + i * 0.08 + 0.25);
+            });
+          } else if (type === 'mismatch') {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(220, now);
+            osc.frequency.linearRampToValueAtTime(140, now + 0.18);
+            gain.gain.setValueAtTime(0.14, now);
+            gain.gain.linearRampToValueAtTime(0, now + 0.18);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.18);
+          } else if (type === 'victory') {
+            [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(freq, now + i * 0.1);
+              gain.gain.setValueAtTime(0.18, now + i * 0.1);
+              gain.gain.linearRampToValueAtTime(0, now + i * 0.1 + 0.4);
+              osc.connect(gain);
+              gain.connect(audioCtx.destination);
+              osc.start(now + i * 0.1);
+              osc.stop(now + i * 0.1 + 0.4);
+            });
+          }
+        } catch(e) {}
+      }
+
+      window.toggleSound = function() {
+        isSoundMuted = !isSoundMuted;
+        localStorage.setItem(STORAGE_SOUND, (!isSoundMuted).toString());
+        soundToggleBtn.textContent = isSoundMuted ? '🔇' : '🔊';
+      };
+
+      // ==========================================================================
+      // COIN & DAILY LIMIT REWARD SYSTEM (CENTRAL COMPATIBILITY)
+      // ==========================================================================
+      function getTodayKey() {
+        const d = new Date();
+        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      }
+
+      function getEarnedToday() {
+        const savedDate = localStorage.getItem(STORAGE_TODAY_DATE);
+        const today = getTodayKey();
+        if (savedDate !== today) {
+          localStorage.setItem(STORAGE_TODAY_DATE, today);
+          localStorage.setItem(STORAGE_TODAY_EARNED, '0');
+          return 0;
+        }
+        return parseInt(localStorage.getItem(STORAGE_TODAY_EARNED) || '0', 10);
+      }
+
+      function addEarnedToday(amt) {
+        const current = getEarnedToday();
+        const updated = current + amt;
+        localStorage.setItem(STORAGE_TODAY_EARNED, updated.toString());
+        return updated;
+      }
+
+      function getUserCoins() {
+        return parseInt(localStorage.getItem(STORAGE_COINS) || '150', 10);
+      }
+
+      function updateUserCoins(newTotal) {
+        localStorage.setItem(STORAGE_COINS, newTotal.toString());
+        
+        // Also update central user object in storage
+        try {
+          const userRaw = localStorage.getItem('vanvi_auth_user') || localStorage.getItem('vanvi_user');
+          if (userRaw) {
+            const userObj = JSON.parse(userRaw);
+            userObj.coins = newTotal;
+            localStorage.setItem('vanvi_auth_user', JSON.stringify(userObj));
+          }
+        } catch(e) {}
+
+        if (headerCoinBalance) headerCoinBalance.textContent = newTotal;
+      }
+
+      function updateDailyCapDisplay() {
+        const earned = getEarnedToday();
+        const pct = Math.min(100, Math.round((earned / DAILY_CAP) * 100));
+        if (dailyEarnedText) dailyEarnedText.textContent = `${earned} / ${DAILY_CAP} Coins`;
+        if (dailyCapBarFill) dailyCapBarFill.style.width = `${pct}%`;
+        if (headerCoinBalance) headerCoinBalance.textContent = getUserCoins();
+
+        const subText = document.getElementById('dailyCapSubText');
+        if (subText) {
+          if (earned >= DAILY_CAP) {
+            subText.textContent = 'Daily cap (25/25) reached. Resets at midnight!';
+            subText.style.color = '#dc2626';
+          } else {
+            subText.textContent = `${DAILY_CAP - earned} coins remaining today. Anti-farm system active.`;
+            subText.style.color = 'var(--text-muted)';
+          }
+        }
+      }
+
+      // ==========================================================================
+      // GAME INITIALIZATION & BOARD SETUP
+      // ==========================================================================
+      window.selectDifficulty = function(diffKey) {
+        if (!DIFFICULTY_CONFIG[diffKey]) return;
+        currentDifficulty = diffKey;
+
+        // Update tab buttons
+        document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.getElementById('tab' + diffKey.charAt(0).toUpperCase() + diffKey.slice(1));
+        if (activeBtn) activeBtn.classList.add('active');
+
+        resetCurrentLevel();
+      };
+
+      function shuffleArray(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function setupBoard() {
+        clearInterval(timerInterval);
+        clearInterval(memorizationInterval);
+        clearTimeout(memorizationTimeout);
+
+        const config = DIFFICULTY_CONFIG[currentDifficulty];
+        gameState = 'idle';
+        pairsMatched = 0;
+        mistakesMade = 0;
+        firstFlippedCard = null;
+        secondFlippedCard = null;
+        isBoardLocked = false;
+        timerSecondsRemaining = config.playTimeSec;
+
+        // Update HUD
+        hudTimer.textContent = `${config.playTimeSec}s`;
+        hudTimer.classList.remove('warning');
+        hudPairs.textContent = `0 / ${config.pairs}`;
+        hudMistakes.textContent = `${config.maxMistakes}`;
+        phaseBarFill.style.width = '100%';
+        phaseStatusText.textContent = `Tap "Start Memorization" (${config.memorizeTimeMs / 1000}s preview)`;
+        btnMainAction.innerHTML = '<span>▶</span> Start Memorization';
+        btnMainAction.disabled = false;
+
+        // Prepare Pairs
+        const shuffledSymbols = shuffleArray(SYMBOLS_POOL).slice(0, config.pairs);
+        const cardPairs = [];
+        shuffledSymbols.forEach((sym, pairIdx) => {
+          cardPairs.push({ id: `p${pairIdx}_a`, pairId: pairIdx, icon: sym.icon, name: sym.name });
+          cardPairs.push({ id: `p${pairIdx}_b`, pairId: pairIdx, icon: sym.icon, name: sym.name });
+        });
+
+        cards = shuffleArray(cardPairs);
+
+        // Render Cards Grid
+        cardsGrid.className = `cards-grid ${config.gridClass}`;
+        cardsGrid.innerHTML = '';
+
+        cards.forEach((card, index) => {
+          const cardEl = document.createElement('div');
+          cardEl.className = 'memory-card';
+          cardEl.dataset.index = index;
+          cardEl.dataset.pairId = card.pairId;
+          cardEl.setAttribute('role', 'button');
+          cardEl.setAttribute('tabindex', '0');
+          cardEl.setAttribute('aria-label', `Card ${index + 1}`);
+
+          cardEl.innerHTML = `
+            <div class="card-face card-back">
+              <span class="card-back-icon">✦</span>
+            </div>
+            <div class="card-face card-front">
+              <span class="card-symbol">${card.icon}</span>
+              <span class="card-name-tag">${card.name}</span>
+            </div>
+          `;
+
+          cardEl.addEventListener('click', () => handleCardClick(cardEl, index));
+          cardEl.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleCardClick(cardEl, index);
+            }
+          });
+
+          cardsGrid.appendChild(cardEl);
+        });
+      }
+
+      // ==========================================================================
+      // GAMEPLAY LIFECYCLE: MEMORIZATION & TIMER
+      // ==========================================================================
+      window.handleMainAction = function() {
+        if (gameState === 'idle') {
+          startMemorizationPhase();
+        } else if (gameState === 'memorizing') {
+          // Allow skip memorization directly to start
+          finishMemorizationAndPlay();
+        }
+      };
+
+      function startMemorizationPhase() {
+        const config = DIFFICULTY_CONFIG[currentDifficulty];
+        gameState = 'memorizing';
+        btnMainAction.innerHTML = '<span>⏩</span> Skip Preview';
+        phaseStatusText.textContent = `Memorize the pairs! (${config.memorizeTimeMs / 1000}s)`;
+        playSynth('flip');
+
+        // Reveal all cards face up
+        const cardElements = cardsGrid.querySelectorAll('.memory-card');
+        cardElements.forEach(card => card.classList.add('flipped'));
+
+        // Animate countdown bar
+        const startTime = Date.now();
+        const duration = config.memorizeTimeMs;
+
+        memorizationInterval = setInterval(() => {
+          const elapsed = Date.now() - startTime;
+          const remainingPct = Math.max(0, 100 - (elapsed / duration) * 100);
+          phaseBarFill.style.width = `${remainingPct}%`;
+
+          const secsLeft = Math.max(0, ((duration - elapsed) / 1000).toFixed(1));
+          phaseStatusText.textContent = `Memorize the pairs! (${secsLeft}s)`;
+
+          if (elapsed >= duration) {
+            finishMemorizationAndPlay();
+          }
+        }, 50);
+      }
+
+      function finishMemorizationAndPlay() {
+        clearInterval(memorizationInterval);
+        clearTimeout(memorizationTimeout);
+
+        const config = DIFFICULTY_CONFIG[currentDifficulty];
+        gameState = 'playing';
+        levelStartTime = Date.now();
+        btnMainAction.innerHTML = '<span>⏸</span> Playing...';
+        btnMainAction.disabled = true;
+        phaseStatusText.textContent = 'Match the cards before time runs out!';
+        phaseBarFill.style.width = '100%';
+        playSynth('flip');
+
+        // Hide all cards
+        const cardElements = cardsGrid.querySelectorAll('.memory-card');
+        cardElements.forEach(card => card.classList.remove('flipped'));
+
+        // Start Play Timer
+        timerSecondsRemaining = config.playTimeSec;
+        startPlayTimer();
+      }
+
+      function startPlayTimer() {
+        clearInterval(timerInterval);
+        const config = DIFFICULTY_CONFIG[currentDifficulty];
+        const totalSec = config.playTimeSec;
+
+        timerInterval = setInterval(() => {
+          timerSecondsRemaining--;
+
+          if (timerSecondsRemaining <= 0) {
+            timerSecondsRemaining = 0;
+            updateHudTimer();
+            clearInterval(timerInterval);
+            triggerGameOver('timeout');
+            return;
+          }
+
+          updateHudTimer();
+
+          // Progress bar reflects time remaining
+          const pct = Math.max(0, (timerSecondsRemaining / totalSec) * 100);
+          phaseBarFill.style.width = `${pct}%`;
+        }, 1000);
+      }
+
+      function updateHudTimer() {
+        hudTimer.textContent = `${timerSecondsRemaining}s`;
+        if (timerSecondsRemaining <= 8) {
+          hudTimer.classList.add('warning');
+        } else {
+          hudTimer.classList.remove('warning');
+        }
+      }
+
+      // ==========================================================================
+      // CARD INTERACTION & MATCHING LOGIC
+      // ==========================================================================
+      function handleCardClick(cardEl, index) {
+        if (gameState !== 'playing') return;
+        if (isBoardLocked) return;
+        if (cardEl.classList.contains('flipped') || cardEl.classList.contains('matched')) return;
+
+        playSynth('flip');
+        if (navigator.vibrate) navigator.vibrate(20);
+
+        cardEl.classList.add('flipped');
+
+        if (!firstFlippedCard) {
+          firstFlippedCard = { el: cardEl, index: index, data: cards[index] };
+          return;
+        }
+
+        // Second Card Flipped
+        secondFlippedCard = { el: cardEl, index: index, data: cards[index] };
+        isBoardLocked = true;
+
+        checkCardMatch();
+      }
+
+      function checkCardMatch() {
+        const isMatch = firstFlippedCard.data.pairId === secondFlippedCard.data.pairId;
+        const config = DIFFICULTY_CONFIG[currentDifficulty];
+
+        if (isMatch) {
+          // MATCH FOUND
+          pairsMatched++;
+          hudPairs.textContent = `${pairsMatched} / ${config.pairs}`;
+          playSynth('match');
+          if (navigator.vibrate) navigator.vibrate([30, 50, 40]);
+
+          firstFlippedCard.el.classList.add('matched');
+          secondFlippedCard.el.classList.add('matched');
+
+          firstFlippedCard = null;
+          secondFlippedCard = null;
+          isBoardLocked = false;
+
+          // Check Win Condition
+          if (pairsMatched >= config.pairs) {
+            clearInterval(timerInterval);
+            setTimeout(triggerVictory, 400);
+          }
+        } else {
+          // WRONG MATCH MISMATCH
+          mistakesMade++;
+          const remainingMistakes = Math.max(0, config.maxMistakes - mistakesMade);
+          hudMistakes.textContent = `${remainingMistakes}`;
+          playSynth('mismatch');
+          if (navigator.vibrate) navigator.vibrate(80);
+
+          // Apply -2 seconds penalty
+          applyTimePenalty(2);
+
+          firstFlippedCard.el.classList.add('mismatch-shake');
+          secondFlippedCard.el.classList.add('mismatch-shake');
+
+          // Check if mistakes limit reached
+          if (remainingMistakes <= 0) {
+            clearInterval(timerInterval);
+            setTimeout(() => triggerGameOver('mistakes'), 600);
+            return;
+          }
+
+          // Unflip after 650ms
+          setTimeout(() => {
+            if (firstFlippedCard && secondFlippedCard) {
+              firstFlippedCard.el.classList.remove('flipped', 'mismatch-shake');
+              secondFlippedCard.el.classList.remove('flipped', 'mismatch-shake');
+              firstFlippedCard = null;
+              secondFlippedCard = null;
+            }
+            isBoardLocked = false;
+          }, 650);
+        }
+      }
+
+      function applyTimePenalty(seconds) {
+        timerSecondsRemaining = Math.max(0, timerSecondsRemaining - seconds);
+        updateHudTimer();
+
+        // Visual floating -2s tag
+        const penaltyEl = document.createElement('span');
+        penaltyEl.className = 'penalty-float';
+        penaltyEl.textContent = `-${seconds}s`;
+        penaltyContainer.appendChild(penaltyEl);
+        setTimeout(() => penaltyEl.remove(), 850);
+      }
+
+      // ==========================================================================
+      // VICTORY & GAME OVER HANDLERS
+      // ==========================================================================
+      async function triggerVictory() {
+        gameState = 'won';
+        playSynth('victory');
+        triggerConfetti();
+
+        const config = DIFFICULTY_CONFIG[currentDifficulty];
+        const timeTaken = Math.round((Date.now() - levelStartTime) / 1000);
+        const isPerfectRun = (mistakesMade === 0);
+
+        // Fixed Reward Calculation
+        let rewardCoins = config.baseReward;
+        let perfectBonus = isPerfectRun ? 3 : 0;
+        let totalCalculatedReward = rewardCoins + perfectBonus;
+
+        // Enforce Daily Cap (Max 25 coins/day)
+        const earnedToday = getEarnedToday();
+        const remainingCap = Math.max(0, DAILY_CAP - earnedToday);
+        const actualAwardedCoins = Math.min(totalCalculatedReward, remainingCap);
+
+        // Record Win locally
+        if (actualAwardedCoins > 0) {
+          addEarnedToday(actualAwardedCoins);
+          const newBal = getUserCoins() + actualAwardedCoins;
+          updateUserCoins(newBal);
+        }
+
+        // Sync with Backend API if user is authenticated
+        try {
+          const token = localStorage.getItem('vanvi_token') || localStorage.getItem('vanvi_auth_token');
+          if (token) {
+            await fetch('/api/coins/game-reward', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                gameId: 'memory-rush',
+                gameTitle: `Memory Rush (${config.name})`,
+                difficulty: currentDifficulty,
+                coins: actualAwardedCoins,
+                score: Math.max(10, 100 - timeTaken * 2)
+              })
+            });
+          }
+        } catch(e) {}
+
+        // Populate Victory Modal
+        document.getElementById('victoryCoinDisplay').innerHTML = `<span>+${actualAwardedCoins}</span> <span>🪙</span>`;
+        
+        let breakdownText = `Base: ${rewardCoins} Coins`;
+        if (isPerfectRun) breakdownText += ` + 3 Perfect Bonus ✨`;
+        if (remainingCap < totalCalculatedReward && remainingCap > 0) {
+          breakdownText += ` (Daily Cap Adjusted)`;
+        } else if (remainingCap <= 0) {
+          breakdownText = `Daily limit reached (25/25) · Great Practice!`;
+        }
+        document.getElementById('victoryBreakdownSub').textContent = breakdownText;
+
+        document.getElementById('victoryTimeTaken').textContent = `${timeTaken}s`;
+        document.getElementById('victoryMistakesCount').textContent = `${mistakesMade}`;
+        
+        const totalAttempts = config.pairs + mistakesMade;
+        const accuracy = Math.round((config.pairs / totalAttempts) * 100) || 100;
+        document.getElementById('victoryAccuracy').textContent = `${accuracy}%`;
+
+        // Advance button setup
+        const btnNext = document.getElementById('btnNextLevel');
+        if (currentDifficulty === 'expert') {
+          btnNext.textContent = '🎉 All Difficulties Mastered!';
+          btnNext.onclick = closeModalsAndReplay;
+        } else {
+          btnNext.textContent = 'Next Difficulty →';
+          btnNext.onclick = advanceNextDifficulty;
+        }
+
+        document.getElementById('victoryModal').classList.add('active');
+        updateDailyCapDisplay();
+      }
+
+      function triggerGameOver(reason) {
+        gameState = 'gameover';
+        playSynth('mismatch');
+
+        const config = DIFFICULTY_CONFIG[currentDifficulty];
+        const titleEl = document.getElementById('gameoverTitle');
+        const subEl = document.getElementById('gameoverSubtitle');
+
+        if (reason === 'timeout') {
+          titleEl.textContent = 'Time Ran Out!';
+          subEl.textContent = 'The countdown clock reached zero before all pairs were matched.';
+        } else {
+          titleEl.textContent = 'Attempt Limit Reached!';
+          subEl.textContent = `You reached the maximum limit of ${config.maxMistakes} mistakes for ${config.name} mode.`;
+        }
+
+        document.getElementById('gameoverPairsMatched').textContent = `${pairsMatched} / ${config.pairs}`;
+        document.getElementById('gameoverMistakes').textContent = `${mistakesMade}`;
+        document.getElementById('gameoverDifficulty').textContent = config.name;
+
+        document.getElementById('gameoverModal').classList.add('active');
+      }
+
+      // ==========================================================================
+      // MODAL CONTROLS & REPLAY
+      // ==========================================================================
+      window.closeModals = function() {
+        document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+      };
+
+      window.closeModalsAndReplay = function() {
+        closeModals();
+        resetCurrentLevel();
+        setTimeout(startMemorizationPhase, 200);
+      };
+
+      window.resetCurrentLevel = function() {
+        closeModals();
+        setupBoard();
+      };
+
+      window.advanceNextDifficulty = function() {
+        closeModals();
+        const order = ['easy', 'medium', 'hard', 'expert'];
+        const currentIdx = order.indexOf(currentDifficulty);
+        if (currentIdx !== -1 && currentIdx < order.length - 1) {
+          selectDifficulty(order[currentIdx + 1]);
+        } else {
+          selectDifficulty('easy');
+        }
+        setTimeout(startMemorizationPhase, 250);
+      };
+
+      window.openRulesModal = function() {
+        document.getElementById('rulesModal').classList.add('active');
+      };
+
+      // ==========================================================================
+      // LIGHTWEIGHT CELEBRATION CONFETTI
+      // ==========================================================================
+      function triggerConfetti() {
+        const canvas = document.getElementById('confettiCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const colors = ['#ff2a7a', '#d97706', '#10b981', '#a855f7', '#38bdf8', '#fbbf24'];
+
+        for (let i = 0; i < 90; i++) {
+          particles.push({
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            w: Math.random() * 8 + 4,
+            h: Math.random() * 8 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            vx: (Math.random() - 0.5) * 14,
+            vy: (Math.random() - 0.7) * 16,
+            rot: Math.random() * 360,
+            vRot: (Math.random() - 0.5) * 10,
+            alpha: 1
+          });
+        }
+
+        let animationFrame;
+        function updateConfetti() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          let alive = false;
+
+          particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.35; // gravity
+            p.rot += p.vRot;
+            p.alpha -= 0.012;
+
+            if (p.alpha > 0) {
+              alive = true;
+              ctx.save();
+              ctx.translate(p.x, p.y);
+              ctx.rotate((p.rot * Math.PI) / 180);
+              ctx.fillStyle = p.color;
+              ctx.globalAlpha = Math.max(0, p.alpha);
+              ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+              ctx.restore();
+            }
+          });
+
+          if (alive) {
+            animationFrame = requestAnimationFrame(updateConfetti);
+          } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          }
+        }
+
+        cancelAnimationFrame(animationFrame);
+        updateConfetti();
+      }
+
+      // ==========================================================================
+      // INITIAL RUN
+      // ==========================================================================
+      document.addEventListener('DOMContentLoaded', () => {
+        soundToggleBtn.textContent = isSoundMuted ? '🔇' : '🔊';
+        updateDailyCapDisplay();
+        setupBoard();
+      });
+
+    })();
+  </script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,872 @@
+<USER_REQUEST>
+VANVIMOMENTS — TEMPLATE #1 REPLACEMENT
+================================================
+
+I am providing:
+
+1. Canva reference:
+https://canva.link/1rmi1prkno030st
+
+2. The attached Canva-generated HTML/code file.
+
+IMPORTANT:
+Use the attached HTML/code as the PRIMARY SOURCE CODE and the Canva link as the VISUAL REFERENCE.
+
+DO NOT publish the Canva design first.
+DO NOT depend on Canva hosting.
+DO NOT keep Canva SDK dependencies in the final production template.
+
+================================================
+MAIN TASK
+================================================
+
+Replace ONLY the existing #1 FREE birthday template:
+
+OLD:
+Soft Birthday / Birthday Bloom
+
+NEW:
+Birthday White Bloom
+
+Template ID:
+birthday-white-bloom-001
+
+Tier:
+Free
+
+Price:
+₹0
+
+Do NOT change or replace other templates.
+
+Do NOT create a second competing birthday template.
+
+The existing #1 free template must become Birthday White Bloom throughout the website.
+
+Update wherever necessary:
+- template data
+- marketplace
+- template card
+- template detail
+- preview
+- customizer/builder
+- publish flow
+- moment page
+- sharing
+- metadata
+- thumbnail/preview references
+- template ID
+
+================================================
+DESIGN
+================================================
+
+Rebuild the design as an ORIGINAL VanviMoments template inspired by the supplied Canva design.
+
+Style:
+
+PURE LIGHT PREMIUM
+CUTE
+SOFT
+ELEGANT
+DREAMY
+BIRTHDAY
+EMOTIONAL
+EXPENSIVE-LOOKING
+
+Main palette:
+
+Pearl White
+Soft Ivory
+Very Light Blush
+Soft Rose
+Very Light Lavender
+Tiny Champagne accent
+
+Keep the design mostly WHITE/LIGHT.
+
+No dark theme.
+No neon.
+No excessive colors.
+No cheap gradients.
+No generic landing-page appearance.
+
+Use:
+- soft glass
+- subtle depth
+- elegant shadows
+- soft glow
+- gentle particles/petals
+- refined typography
+- smooth transitions
+- tasteful micro-interactions
+
+Do NOT overdo 3D.
+
+================================================
+USE THE EXISTING DESIGN INTELLIGENTLY
+================================================
+
+The supplied code already contains useful architecture such as:
+
+templateData
+marketplaceMetadata
+photo gallery
+letter
+countdown
+interactive cake
+timeline
+surprise
+sharing
+VanviMomentsTemplate.update()
+
+Keep good functionality but rebuild/clean it for VanviMoments production.
+
+Remove Canva-specific:
+- SDK scripts
+- Canva bootstrap code
+- Canva editing dependencies
+- unnecessary Tailwind CDN
+- unnecessary development-only source panels
+
+Do not expose developer handoff/source-code UI to normal customers.
+
+================================================
+PRODUCTION TEMPLATE STRUCTURE
+================================================
+
+Create clean reusable files:
+
+templates/
+└── birthday-white-bloom-001/
+    ├── index.html
+    ├── style.css
+    ├── script.js
+    └── assets/
+        ├── images/
+        ├── icons/
+        └── audio/
+
+Keep the template independent and production-ready.
+
+================================================
+TEMPLATE EXPERIENCE
+================================================
+
+Build a complete birthday experience:
+
+1. Elegant opening/loading
+2. Birthday reveal
+3. Recipient name
+4. Beautiful birthday message
+5. Open Moment CTA
+6. Soft visual bloom animation
+7. Photo memories
+8. Letter reveal
+9. Birthday countdown
+10. Interactive cake/candles
+11. Memory timeline
+12. Secret surprise
+13. Final emotional message
+14. Share
+15. Copy Link
+16. WhatsApp
+17. REAL QR generation
+
+Every important interaction must actually work.
+
+No fake buttons.
+
+================================================
+SMART CUSTOMIZATION
+================================================
+
+Build a reusable customization system for this template.
+
+Central data:
+
+templateData = {
+  recipientName,
+  senderName,
+  message,
+  birthdayDate,
+  photos,
+  memories,
+  music,
+  theme
+}
+
+Support:
+
+- recipient name
+- sender name
+- birthday date
+- message
+- photos
+- photo captions
+- memories
+- memory dates
+- music
+- theme
+
+Keep:
+
+window.VanviMomentsTemplate.update(nextData)
+
+or an improved equivalent compatible with the existing VanviMoments architecture.
+
+================================================
+CUSTOMIZER PAGE
+================================================
+
+Create a BEAUTIFUL Birthday White Bloom customizer.
+
+IMPORTANT:
+
+The customizer must NOT look like a generic dashboard.
+
+It must visually belong to Birthday White Bloom.
+
+If the template is:
+
+WHITE + BLUSH + ROSE + LAVENDER
+
+then the customizer should use the SAME visual language.
+
+Customizer:
+
+PEARL WHITE
+SOFT BLUSH
+LIGHT LAVENDER
+ROSE
+TINY CHAMPAGNE
+
+Use:
+- glass panels
+- soft borders
+- premium rounded controls
+- elegant typography
+- subtle glow
+- cute micro-interactions
+
+================================================
+CUSTOMIZER FLOW
+================================================
+
+Make it extremely easy:
+
+STEP 1
+"Who is this moment for?"
+
+Recipient Name
+Sender Name
+
+STEP 2
+"Add your birthday wish"
+
+Message editor
+
+STEP 3
+"Add your memories"
+
+Photo upload
+Photo reorder
+Photo remove
+Caption
+
+STEP 4
+"Tell the story"
+
+Add memory
+Date
+Title
+Description
+Photo
+
+STEP 5
+"Birthday date"
+
+Date/time
+
+STEP 6
+"Sound"
+
+Optional music
+
+STEP 7
+"Preview"
+
+Desktop
+Tablet
+Mobile
+
+STEP 8
+"Create My Moment"
+
+Save
+Publish
+
+Do not overwhelm the user.
+
+================================================
+LIVE PREVIEW
+================================================
+
+Customizer must have LIVE PREVIEW.
+
+When the user changes:
+
+name
+message
+photos
+memories
+date
+music
+
+the preview updates immediately.
+
+No page reload.
+
+Preview must use the REAL Birthday White Bloom template.
+
+Not a fake screenshot.
+
+================================================
+PUBLISH FLOW
+================================================
+
+Complete the full flow:
+
+Template
+↓
+Customize
+↓
+Live Preview
+↓
+Save
+↓
+Publish
+↓
+Generate unique experience ID
+↓
+Generate shareable URL
+↓
+Generate QR
+↓
+Success
+↓
+Share
+
+Example:
+
+/moment/<unique-id>
+
+Each published moment must have separate data.
+
+The same Birthday White Bloom template must be reusable unlimited times.
+
+Example:
+
+Birthday White Bloom #1
+Birthday White Bloom #2
+Birthday White Bloom #3
+
+must never overwrite each other.
+
+================================================
+SHAREABLE EXPERIENCE
+================================================
+
+Published link must open the actual customized birthday experience.
+
+It must work on:
+
+Phone
+Tablet
+Laptop
+Desktop
+
+WhatsApp sharing should generate a clean message.
+
+Copy Link must copy the actual published URL.
+
+QR must be a REAL QR code for the published URL.
+
+Do NOT use the decorative fake QR currently present in the source.
+
+================================================
+RESPONSIVE
+================================================
+
+Perfectly support:
+
+320
+360
+375
+390
+414
+768
+1024
+1280
+1440+
+
+Absolutely NO:
+
+horizontal scrolling
+broken buttons
+overflow
+cropped cards
+broken modals
+overlapping text
+
+Mobile must feel intentionally designed.
+
+Desktop should feel spacious and premium.
+
+================================================
+SMART REUSE
+================================================
+
+Do NOT build this as a one-time page.
+
+The architecture must allow future templates to use the same:
+
+Template Engine
+Customizer
+Preview
+Publish
+Share
+QR
+Experience ID
+Data system
+
+Birthday White Bloom is TEMPLATE #1.
+
+Future templates will plug into the same system.
+
+================================================
+SAFETY / DATA
+================================================
+
+Sanitize user-generated content.
+
+Do not use unsafe innerHTML for user data.
+
+Do not trust frontend data for sensitive operations.
+
+Do not expose API keys.
+
+Do not allow arbitrary script injection through customization.
+
+================================================
+FINAL INTEGRATION
+================================================
+
+Connect Birthday White Bloom correctly with the existing:
+
+templates.html
+template-detail.html
+builder.html/customizer
+preview
+moment
+share
+dashboard
+orders where applicable
+
+Do NOT break other templates.
+
+Do NOT change other template designs.
+
+================================================
+FULL TEST
+================================================
+
+After implementation:
+
+1. Open Templates
+2. Find #1 Free template
+3. Confirm name = Birthday White Bloom
+4. Open detail
+5. Preview
+6. Customize
+7. Change name
+8. Change message
+9. Add photos
+10. Reorder photos
+11. Add memories
+12. Change birthday date
+13. Test music
+14. Test mobile preview
+15. Test desktop preview
+16. Save
+17. Publish
+18. Generate unique URL
+19. Open URL in a new tab
+20. Confirm all customized data is present
+21. Generate QR
+22. Test sharing
+23. Create another Birthday White Bloom
+24. Confirm the first experience remains unchanged
+
+Then test:
+
+320px
+390px
+768px
+1440px
+
+Fix every issue found.
+
+================================================
+FINAL QUALITY STANDARD
+================================================
+
+Do not stop when the page merely works.
+
+It must be:
+
+PREMIUM
+CUTE
+LIGHT
+FAST
+SIMPLE
+RESPONSIVE
+REUSABLE
+CUSTOMIZABLE
+SHAREABLE
+PRODUCTION-READY
+
+Think independently and make smart UX decisions where details are not explicitly specified.
+
+DO NOT modify other templates.
+
+ONLY replace the existing #1 FREE birthday template with:
+
+"Birthday White Bloom"
+
+Complete the entire flow A → Z. fast kro khud se smart tarike se adjust krna fast https://canva.link/1rmi1prkno030st  <!doctype html>
+<html lang="en"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260918-05-13efa67","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YACgEZulLoA,0","Arial Narrow":"YAGyDvJ_4Ts,0","Arial Rounded MT Bold":"YAFcfoaHu-s,0","Arial":"YAGyDvJ_4Ts,0","Avenir Next":"YAFcfmNq6UY,0","Baloo 2":"YADK30bC6HQ,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Broken Glyph":"YADZ-exUkv0,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAFcfvtOAUY,1","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Georgia":"YAGzXkO0pEM,0","Ghost Mono":"YAHQutsX00Q,0","Hanken Grotesk":"YAFcfhwp99E,0","Helvetica Neue":"YAFcf6CtJfI,0","Helvetica":"YAFcf6CtJfI,0","IBM Plex Mono":"YAFdJkmvhGI,0","Impact":"YAFcfnjI7Vk,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YADK3zbC6RM,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Oswald":"YACgEQY10lw,0","Pacifico":"YADLjORQ1u4,0","Phantom Sans":"YAFdJvgJ5TU,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAGvf3_u0_Q,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Source Serif 4":"YACgEfdj394,0","Space Grotesk":"YADZ-dYEmhg,0","Space Mono":"YADW1-vpsoc,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","UV Display":"YAEdVfSSpYo,0","UV Sans":"YAFdJvgJ5TU,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YAD1aFjegN8,0","ui-sans-serif":"YACkoD1yZN0,0"}}');</script><script src="/_sdk/83d6dfdadcd4750a.telemetry_sdk.js" integrity="sha512-XS4Dvzp6vbagZS9vFErihvr8aO3S0tH78KWUefn06fmL4WYqryBtZj/IOLITYj7dFA4gPVvPg1W/JB1DK3uLNQ=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Bloom | VanviMoments</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&amp;display=swap" rel="stylesheet">
+  <style id="package-style">
+:root{--pearl:#fffdf9;--blush:#f9e4e8;--rose:#b95a73;--rose-deep:#84364f;--lavender:#e9e3f5;--champagne:#d8b477;--ink:#402e35;--muted:#745d67;--glass:rgba(255,255,255,.65);--line:rgba(132,54,79,.14);--shadow:0 24px 58px rgba(104,60,78,.14);--safe-x:max(16px,env(safe-area-inset-left));--safe-r:max(16px,env(safe-area-inset-right))}*{box-sizing:border-box}html{scroll-behavior:smooth}body{width:100%;margin:0;overflow-x:hidden;background:radial-gradient(circle at 10% 8%,#fff 0,transparent 31%),linear-gradient(145deg,#fffdfb,#faedf0 47%,#f2edf9);color:var(--ink);font-family:"DM Sans",sans-serif}button,a{font:inherit}button{touch-action:manipulation}button:focus-visible,a:focus-visible,[role=tab]:focus-visible{outline:3px solid var(--champagne);outline-offset:3px}.display{font-family:"Playfair Display",Georgia,serif}.app-shell{width:100%;min-height:100%;overflow:hidden;position:relative}.stage[hidden]{display:none!important}.glass{background:var(--glass);border:1px solid rgba(255,255,255,.85);box-shadow:var(--shadow);backdrop-filter:blur(14px)}.petal{position:absolute;width:13px;height:18px;border-radius:80% 20% 80% 20%;background:rgba(217,147,169,.34);pointer-events:none;animation:drift 12s ease-in-out infinite}.petal:nth-child(2n){background:rgba(194,174,220,.36);animation-duration:15s}.petal:nth-child(3n){background:rgba(221,189,125,.28);animation-duration:18s}@keyframes drift{50%{transform:translate(24px,38px) rotate(70deg)}}.intro{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:24px var(--safe-r) 24px var(--safe-x);background:radial-gradient(circle at center,rgba(255,253,249,.97),rgba(242,231,243,.98));transition:opacity .5s,visibility .5s}.intro.is-hidden{opacity:0;visibility:hidden;pointer-events:none}.intro-box{width:min(100%,450px);padding:clamp(28px,7vw,48px) clamp(20px,5vw,32px);text-align:center;border-radius:32px}.eyebrow{color:var(--rose-deep);font-size:.74rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase}.intro-skip,.text-button{min-height:44px;padding:10px;border:0;background:transparent;color:var(--rose-deep);cursor:pointer;text-decoration:underline;text-underline-offset:4px}.hero{min-height:calc(100 * min(var(--vh,1vh),1vh));display:grid;place-items:center;padding:clamp(74px,10vw,110px) var(--safe-r) clamp(38px,6vw,70px) var(--safe-x);position:relative;isolation:isolate}.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;z-index:-1}.hero:before{width:min(48vw,460px);aspect-ratio:1;background:radial-gradient(circle,rgba(250,202,211,.75),transparent 67%);top:3%;right:-11%}.hero:after{width:min(46vw,410px);aspect-ratio:1;background:radial-gradient(circle,rgba(202,190,231,.62),transparent 68%);left:-13%;bottom:1%}.hero-inner{width:min(100%,1120px);display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);gap:clamp(26px,5vw,64px);align-items:center}.hero h1{font-size:clamp(3rem,8vw,6.4rem);line-height:.96;margin:.65rem 0 1.1rem;overflow-wrap:anywhere}.hero-copy{max-width:550px;font-size:clamp(1rem,2vw,1.24rem);line-height:1.75;color:var(--muted)}.primary-button,.share-button,.modal-button{min-height:48px;padding:13px 20px;border:0;border-radius:999px;cursor:pointer;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--rose),#d68196);box-shadow:0 12px 22px rgba(185,90,115,.24);transition:transform .2s,box-shadow .2s}.primary-button:hover,.share-button:hover,.modal-button:hover{transform:translateY(-2px);box-shadow:0 17px 30px rgba(185,90,115,.3)}.garden-art{min-height:clamp(260px,38vw,430px);position:relative;border-radius:40px;overflow:hidden}.garden-art:before{content:"";position:absolute;inset:12%;border-radius:48% 52% 45% 55%;background:linear-gradient(135deg,rgba(255,255,255,.86),rgba(244,206,217,.46));box-shadow:inset 0 0 36px rgba(255,255,255,.8),0 35px 55px rgba(129,85,114,.14)}.orb{position:absolute;border-radius:50%;background:linear-gradient(145deg,rgba(255,255,255,.91),rgba(242,185,203,.42));box-shadow:inset 8px 8px 20px rgba(255,255,255,.74),12px 20px 32px rgba(122,81,100,.16)}.orb.one{width:36%;aspect-ratio:1;top:16%;left:12%}.orb.two{width:23%;aspect-ratio:1;bottom:18%;right:13%;background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(202,190,231,.55))}.orb.three{width:14%;aspect-ratio:1;top:21%;right:18%}.flower{position:absolute;width:23%;aspect-ratio:1;border-radius:50%;background:conic-gradient(from 30deg,#e9b1c1,#fff5f7,#e5d9f3,#e9b1c1);filter:drop-shadow(0 12px 16px rgba(136,69,94,.16))}.flower:after{content:"";position:absolute;inset:35%;border-radius:50%;background:#d4ad6d}.flower.one{bottom:11%;left:22%;transform:rotate(22deg)}.flower.two{top:14%;right:22%;transform:scale(.67) rotate(74deg)}.sound-control{display:flex;align-items:center;gap:8px;margin-top:22px;color:var(--muted);font-size:.86rem}.sound-control button{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.63);cursor:pointer;color:var(--rose-deep)}.reveal-banner{display:none;position:fixed;left:50%;top:max(18px,env(safe-area-inset-top));transform:translateX(-50%);z-index:80;max-width:calc(100% - 32px);padding:12px 18px;border-radius:999px;color:var(--rose-deep);text-align:center}.reveal-banner.show{display:block;animation:banner .85s ease both}@keyframes banner{from{opacity:0;transform:translate(-50%,-12px) scale(.96)}to{opacity:1;transform:translate(-50%,0) scale(1)}}.experience-nav{position:sticky;top:0;z-index:30;padding:10px var(--safe-r);background:rgba(255,253,249,.72);backdrop-filter:blur(12px);border-bottom:1px solid rgba(132,54,79,.08)}.experience-nav-inner{width:min(100%,1140px);margin:auto;display:flex;justify-content:space-between;align-items:center;gap:14px}.progress-copy{font-size:.8rem;color:var(--muted);font-weight:700}.progress-line{width:clamp(88px,16vw,180px);height:6px;border-radius:99px;background:rgba(185,90,115,.14);overflow:hidden}.progress-line span{display:block;width:38%;height:100%;background:linear-gradient(90deg,var(--rose),var(--champagne))}.section{width:min(100%,1140px);margin:auto;padding:clamp(52px,8vw,92px) var(--safe-r);scroll-margin-top:72px}.section-heading{max-width:670px;margin-bottom:clamp(22px,4vw,34px)}.section-heading h2{font-size:clamp(2.15rem,4.5vw,4rem);line-height:1.04;margin:.4rem 0 .65rem}.section-heading p{margin:0;color:var(--muted);line-height:1.7}.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.5vw,18px)}.gallery[data-count="1"]{grid-template-columns:minmax(0,560px);justify-content:center}.gallery[data-count="2"]{grid-template-columns:repeat(2,minmax(0,420px));justify-content:center}.gallery[data-count="3"] .memory-card:first-child,.gallery[data-count="5"] .memory-card:first-child,.gallery[data-count="7"] .memory-card:first-child{grid-row:span 2}.memory-card{padding:9px;border:0;border-radius:17px;text-align:left;cursor:pointer;background:rgba(255,255,255,.63);box-shadow:var(--shadow);transition:transform .24s}.memory-card:nth-child(2n){transform:rotate(1.1deg)}.memory-card:nth-child(3n){transform:rotate(-.8deg)}.memory-card:hover{transform:translateY(-7px) rotate(0)}.memory-card img{display:block;width:100%;aspect-ratio:1/1.05;object-fit:cover;border-radius:10px;background:linear-gradient(135deg,var(--blush),var(--lavender))}.memory-card span{display:block;padding:10px 6px 4px;color:var(--muted);font-size:.82rem}.gallery-empty{grid-column:1/-1;min-height:250px;padding:22px;border:1px dashed rgba(132,54,79,.25);border-radius:18px;display:grid;place-items:center;text-align:center;color:var(--rose-deep);background:linear-gradient(145deg,rgba(255,255,255,.75),rgba(233,227,245,.55));box-shadow:var(--shadow)}.letter-wrap{max-width:820px;margin:auto;padding:clamp(18px,5vw,45px);border-radius:28px;text-align:center}.envelope{max-width:640px;margin:24px auto 0}.envelope-toggle{width:100%;min-height:180px;position:relative;overflow:hidden;border:0;border-radius:18px;cursor:pointer;background:linear-gradient(145deg,#f4d9df,#e9dcec);box-shadow:0 20px 35px rgba(123,72,92,.18)}.seal{width:52px;height:52px;position:absolute;left:calc(50% - 26px);top:calc(50% - 26px);display:grid;place-items:center;border-radius:50%;color:#fff;background:var(--rose)}.letter-paper{max-height:0;overflow:hidden;opacity:0;text-align:left;background:#fffdf8;border-radius:0 0 18px 18px;transition:max-height .7s,opacity .5s,margin .5s}.letter-paper.open{max-height:700px;margin-top:-15px;padding:clamp(25px,6vw,55px);opacity:1}.letter-paper p{margin:0;line-height:1.85;white-space:pre-line}.countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:760px}.count-box{padding:22px 10px;border-radius:18px;text-align:center}.count-number{display:block;font:600 clamp(2rem,5vw,4.3rem)/1 "Playfair Display",serif;color:var(--rose-deep)}.count-label{color:var(--muted);font-size:.79rem;letter-spacing:.09em;text-transform:uppercase}.status-message{min-height:1.5em;margin-top:18px;color:var(--rose-deep);font-weight:600}.cake-area{display:grid;justify-items:center;gap:20px;padding:30px 10px;border-radius:26px}.cake{position:relative;width:min(290px,88vw);height:230px}.cake-plate{position:absolute;bottom:0;left:4%;width:92%;height:28px;border-radius:50%;background:linear-gradient(#f6e7d4,#d8b477)}.cake-layer{position:absolute;left:12%;width:76%;border-radius:22px 22px 15px 15px;background:linear-gradient(90deg,#f7c8d4,#f1adbf,#f8d7df);box-shadow:inset 0 9px rgba(255,255,255,.38)}.layer-one{bottom:22px;height:65px}.layer-two{bottom:78px;left:19%;width:62%;height:56px}.icing{position:absolute;bottom:125px;left:18%;width:64%;height:24px;border-radius:50%;background:#fff5f1}.candles{position:absolute;left:18%;right:18%;bottom:145px;display:flex;justify-content:space-between;align-items:end}.candle{width:26px;height:65px;border:0;border-radius:8px 8px 4px 4px;cursor:pointer;background:repeating-linear-gradient(90deg,#e990a7 0 5px,#fff5f2 5px 10px);position:relative}.candle:before{content:"";width:12px;height:20px;position:absolute;left:7px;top:-23px;border-radius:50%;background:#ffc969;box-shadow:0 0 18px 7px rgba(255,194,92,.55)}.candle.off:before{opacity:0;transform:scale(.3)}.reset-button{min-height:44px;padding:11px 16px;border:1px solid var(--line);border-radius:999px;cursor:pointer;background:rgba(255,255,255,.65);color:var(--rose-deep)}.wish{min-height:26px;margin:0;color:var(--rose-deep);font-weight:700}.timeline{max-width:800px;margin:auto;padding-left:32px;position:relative}.timeline:before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--champagne),rgba(185,90,115,.1))}.timeline-item{position:relative;padding:0 0 32px 28px;opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}.timeline-item.visible{opacity:1;transform:none}.timeline-item:before{content:"";position:absolute;left:-1px;top:7px;width:14px;height:14px;border:3px solid var(--pearl);border-radius:50%;background:var(--champagne)}.timeline-card{display:grid;grid-template-columns:112px minmax(0,1fr);gap:18px;padding:15px;border-radius:19px}.timeline-card.text-only{grid-template-columns:1fr}.timeline-card img{width:112px;height:112px;object-fit:cover;border-radius:13px;background:var(--blush)}.timeline-date{font-size:.75rem;color:var(--rose-deep);letter-spacing:.12em;font-weight:700;text-transform:uppercase}.timeline-card h3{margin:.3rem 0;font-family:"Playfair Display",serif;font-size:1.35rem}.timeline-card p{margin:0;color:var(--muted);line-height:1.6}.surprise{padding:clamp(34px,7vw,55px) 20px;border-radius:28px;text-align:center}.surprise-message{max-height:0;overflow:hidden;opacity:0;color:var(--rose-deep);font:500 clamp(1.5rem,3vw,2.3rem)/1.35 "Playfair Display",serif;transition:max-height .6s,opacity .6s,margin .6s}.surprise-message.open{max-height:180px;margin-top:24px;opacity:1}.share-row,.source-actions{display:flex;flex-wrap:wrap;gap:11px}.share-button{background:rgba(255,255,255,.72);border:1px solid var(--line);box-shadow:none;color:var(--rose-deep)}.developer-panel{margin-top:18px;padding:clamp(22px,4vw,38px);border-radius:28px}.developer-panel h2{font-size:clamp(2rem,4vw,3.2rem);margin:.4rem 0}.developer-panel p{color:var(--muted);line-height:1.65}.source-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 14px}.source-tab{border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:#fffaf9;color:var(--rose-deep);cursor:pointer;font-weight:700}.source-tab[aria-selected=true]{background:var(--rose);color:#fff}.source-code{width:100%;min-height:310px;resize:vertical;padding:16px;border:1px solid var(--line);border-radius:16px;background:#2e2026;color:#fff8f6;font:13px/1.55 "Courier New",monospace}.handoff-list{padding-left:20px;color:var(--muted);line-height:1.75}.footer{padding:38px var(--safe-r) calc(38px + env(safe-area-inset-bottom));text-align:center;color:var(--muted);font-size:.9rem}.modal{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top)) var(--safe-r) max(16px,env(safe-area-inset-bottom)) var(--safe-x);background:rgba(55,33,42,.56)}.modal.open{display:flex}.modal-panel{width:min(100%,760px);max-height:calc(100 * min(var(--vh,1vh),1vh) - 32px);overflow:auto;position:relative;padding:18px;border-radius:23px;background:#fffdf9;box-shadow:0 30px 70px rgba(30,13,20,.3)}.modal-close{width:44px;height:44px;margin-left:auto;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:#fff;cursor:pointer;color:var(--rose-deep)}.lightbox-image{width:100%;max-height:calc(62 * min(var(--vh,1vh),1vh));object-fit:contain;border-radius:15px;background:var(--blush)}.modal-nav{display:flex;justify-content:space-between;gap:10px;margin-top:12px}.qr-grid{width:160px;height:160px;margin:22px auto;border:10px solid #fff;background-color:#fff;background-image:linear-gradient(90deg,#402e35 18%,transparent 18% 36%,#402e35 36% 47%,transparent 47% 65%,#402e35 65% 77%,transparent 77%),linear-gradient(#402e35 17%,transparent 17% 31%,#402e35 31% 44%,transparent 44% 61%,#402e35 61% 78%,transparent 78%);background-size:26px 26px}.toast{position:fixed;z-index:110;bottom:max(20px,env(safe-area-inset-bottom));left:50%;max-width:calc(100% - 32px);transform:translateX(-50%);padding:12px 18px;border-radius:999px;background:var(--ink);color:#fff;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}@media(max-width:760px){.hero-inner{grid-template-columns:1fr;text-align:center}.hero-copy{margin-inline:auto}.sound-control{justify-content:center}.garden-art{width:min(100%,440px);min-height:270px;margin:auto}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gallery[data-count="1"],.gallery[data-count="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}.gallery[data-count="1"] .memory-card{grid-column:1/-1;width:min(100%,430px);justify-self:center}.gallery[data-count="3"] .memory-card:first-child,.gallery[data-count="5"] .memory-card:first-child,.gallery[data-count="7"] .memory-card:first-child{grid-row:auto}.countdown-grid{gap:8px}.count-box{padding:15px 5px}}@media(max-width:420px){.hero h1{font-size:clamp(2.75rem,14vw,3.5rem)}.timeline{padding-left:22px}.timeline-item{padding-left:20px}.timeline-card{grid-template-columns:78px minmax(0,1fr);gap:12px;padding:11px}.timeline-card img{width:78px;height:78px}.timeline-card.text-only{grid-template-columns:1fr}.count-label{font-size:.66rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.timeline-item{opacity:1;transform:none}}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="/_sdk/8de366929c5f3b48.data_sdk.js" type="text/javascript" integrity="sha512-TyQ8k8cZj66xe/aENmn6RyZpdOFZXbAo5+KBG3PeFM+Q4qMTHU8xAqmq4ADClNfPrstgQYV6OzZHwLTnElzB2g=="></script>
+  <script src="/_sdk/0ddbbee1c66b1212.editing_sdk.js" type="text/javascript" integrity="sha512-HQn5LM1yruQSbY78ATUril6QeOJ9xj7KqO64ltLtb4vBwI5Qv3/tloFFOndBPZTNZoeV5xKzuth5y6FTi9crsg=="></script>
+  <script src="/_sdk/765e1fea0cec97ce.resizing_sdk.js" type="text/javascript" integrity="sha512-IRTJnqww0+HQ5V/LlWEQrlD5SrYHaVvaeVoNe8HYQXoaguzUGheSd9+n9s6WOgaTcEH0g37DuINHZ9aqfzWjlw=="></script>
+ </head>
+ <body data-template-id="__page-root" style="background: linear-gradient(145deg, rgb(255, 253, 251), rgb(250, 237, 240), rgb(242, 237, 249));">
+  <div class="app-shell">
+   <div class="petal" style="top:8%;left:6%"></div>
+   <div class="petal" style="top:24%;right:8%"></div>
+   <div class="petal" style="top:65%;left:4%"></div>
+   <div class="petal" style="top:83%;right:11%"></div>
+   <div id="intro" class="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+    <div class="intro-box glass">
+     <p class="eyebrow">VanviMoments</p>
+     <h1 id="introTitle" class="display"></h1><button id="skipIntro" class="intro-skip" type="button">Skip intro</button>
+    </div>
+   </div>
+   <div id="revealBanner" class="reveal-banner glass" aria-live="polite"></div>
+   <main>
+    <section id="openingStage" class="stage" aria-labelledby="heroTitle">
+     <div class="hero">
+      <div class="hero-inner">
+       <div>
+        <p id="heroEyebrow" class="eyebrow"></p>
+        <h1 id="heroTitle" class="display"></h1>
+        <p id="heroCopy" class="hero-copy"></p>
+        <div style="margin-top:26px">
+         <button id="openMoment" class="primary-button" type="button"></button>
+        </div>
+        <div class="sound-control" aria-live="polite"><button id="musicToggle" type="button" aria-label="Play background music"><i data-lucide="music" aria-hidden="true"></i></button> <span id="musicStatus"></span>
+        </div>
+       </div>
+       <div class="garden-art glass" aria-hidden="true">
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+        <div class="orb three"></div>
+        <div class="flower one"></div>
+        <div class="flower two"></div>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section id="experienceStage" class="stage" hidden="" aria-labelledby="experienceStart">
+     <nav class="experience-nav" aria-label="Birthday experience navigation">
+      <div class="experience-nav-inner"><button id="replayOpening" class="text-button" type="button">Replay opening</button>
+       <div style="display:flex;align-items:center;gap:9px">
+        <span class="progress-copy">Birthday experience</span>
+        <div class="progress-line" aria-hidden="true">
+         <span></span>
+        </div>
+       </div>
+      </div>
+     </nav>
+     <section class="section" aria-labelledby="experienceStart">
+      <div class="section-heading">
+       <p class="eyebrow">A small collection of joy</p>
+       <h2 id="experienceStart" class="display" tabindex="-1">Little Moments, Big Memories</h2>
+       <p>Tap any memory to linger in the details.</p>
+      </div>
+      <div id="gallery" class="gallery" aria-live="polite"></div>
+     </section>
+     <section class="section" aria-labelledby="letterTitle">
+      <div class="letter-wrap glass">
+       <p class="eyebrow">A few words, held close</p>
+       <h2 id="letterTitle" class="display">A Letter For You 💌</h2>
+       <div class="envelope">
+        <button id="letterToggle" class="envelope-toggle" type="button" aria-expanded="false" aria-controls="letterPaper"><span class="seal">✦</span></button>
+        <article id="letterPaper" class="letter-paper">
+         <p id="letterContent"></p>
+        </article>
+       </div>
+      </div>
+     </section>
+     <section class="section" aria-labelledby="countdownTitle">
+      <div class="section-heading">
+       <p class="eyebrow">The celebration is almost here</p>
+       <h2 id="countdownTitle" class="display">Your Special Day</h2>
+      </div>
+      <div class="countdown-grid" aria-live="polite">
+       <div class="count-box glass">
+        <span id="days" class="count-number">--</span><span class="count-label">Days</span>
+       </div>
+       <div class="count-box glass">
+        <span id="hours" class="count-number">--</span><span class="count-label">Hours</span>
+       </div>
+       <div class="count-box glass">
+        <span id="minutes" class="count-number">--</span><span class="count-label">Minutes</span>
+       </div>
+       <div class="count-box glass">
+        <span id="seconds" class="count-number">--</span><span class="count-label">Seconds</span>
+       </div>
+      </div>
+      <p id="countdownMessage" class="status-message"></p>
+     </section>
+     <section class="section" aria-labelledby="cakeTitle">
+      <div class="section-heading">
+       <p class="eyebrow">A tiny ritual for a wonderful year</p>
+       <h2 id="cakeTitle" class="display">Make a wish, softly</h2>
+       <p>Tap each candle to send a little sparkle into the year ahead.</p>
+      </div>
+      <div class="cake-area glass">
+       <div class="cake" aria-label="Interactive birthday cake">
+        <div class="candles">
+         <button class="candle" type="button" aria-label="Extinguish candle 1"></button><button class="candle" type="button" aria-label="Extinguish candle 2"></button><button class="candle" type="button" aria-label="Extinguish candle 3"></button><button class="candle" type="button" aria-label="Extinguish candle 4"></button><button class="candle" type="button" aria-label="Extinguish candle 5"></button>
+        </div>
+        <div class="icing"></div>
+        <div class="cake-layer layer-two"></div>
+        <div class="cake-layer layer-one"></div>
+        <div class="cake-plate"></div>
+       </div>
+       <p id="wishMessage" class="wish" aria-live="polite"></p><button id="resetCake" class="reset-button" type="button">Light the candles again</button>
+      </div>
+     </section>
+     <section class="section" aria-labelledby="timelineTitle">
+      <div class="section-heading">
+       <p class="eyebrow">Every chapter shines</p>
+       <h2 id="timelineTitle" class="display">Our Little Story</h2>
+      </div>
+      <ol id="timeline" class="timeline"></ol>
+     </section>
+     <section class="section">
+      <div class="surprise glass">
+       <button id="surpriseToggle" class="primary-button" type="button" aria-expanded="false" aria-controls="surpriseMessage">One More Thing…</button>
+       <div id="surpriseMessage" class="surprise-message"></div>
+      </div>
+     </section>
+     <section class="section" aria-labelledby="shareTitle">
+      <div class="section-heading">
+       <p class="eyebrow">Keep the magic moving</p>
+       <h2 id="shareTitle" class="display">Share This Moment</h2>
+      </div>
+      <div class="share-row">
+       <button id="whatsappShare" class="share-button" type="button">WhatsApp</button><button id="copyShare" class="share-button" type="button">Copy Link</button><button id="qrShare" class="share-button" type="button">QR</button>
+      </div>
+     </section>
+     <aside class="section" aria-labelledby="sourceTitle">
+      <div class="developer-panel glass">
+       <p class="eyebrow">Developer handoff</p>
+       <h2 id="sourceTitle" class="display">Birthday Bloom source package</h2>
+       <p>This single Canva code page contains an export-ready representation of <strong>birthday-bloom-001/index.html</strong>, <strong>style.css</strong>, <strong>script.js</strong>, and <strong>assets/</strong>. Use the tabs below to copy or download the complete source.</p>
+       <div class="source-tabs" role="tablist" aria-label="Source files"><button class="source-tab" role="tab" aria-selected="true" data-source="index.html" type="button">index.html</button> <button class="source-tab" role="tab" aria-selected="false" data-source="style.css" type="button">style.css</button> <button class="source-tab" role="tab" aria-selected="false" data-source="script.js" type="button">script.js</button> <button class="source-tab" role="tab" aria-selected="false" data-source="assets/" type="button">assets/</button>
+       </div><label for="sourceCode" class="eyebrow">Current file contents</label> <textarea id="sourceCode" class="source-code" readonly="" spellcheck="false"></textarea>
+       <div class="source-actions" style="margin-top:14px">
+        <button id="copySource" class="share-button" type="button">Copy file</button><button id="downloadSource" class="share-button" type="button">Download file</button><button id="downloadAll" class="primary-button" type="button">Download All Source</button>
+       </div>
+       <h3 class="display" style="font-size:1.5rem;margin:30px 0 8px">README — where to personalize</h3>
+       <ul class="handoff-list">
+        <li>Replace recipient name, sender name, message, birthday date, photos, memories, music, theme, and marketplace metadata inside the centralized <code>templateData</code> and <code>marketplaceMetadata</code> objects in <code>script.js</code>.</li>
+        <li>Photos support <code>src</code>, configurable <code>alt</code>, and <code>caption</code>. Use local files such as <code>assets/photo-01.jpg</code> once the package is split onto a filesystem.</li>
+        <li>Place optional soundtrack audio at <code>assets/birthday-song.mp3</code>, then set <code>music.src</code> to that file. Empty music sources are handled gracefully.</li>
+        <li>Use <code>window.VanviMomentsTemplate.update(nextData)</code> to connect a future VanviMoments customizer without replacing the interaction layer.</li>
+        <li>The package can later be split directly into <code>birthday-bloom-001/index.html</code>, <code>birthday-bloom-001/style.css</code>, <code>birthday-bloom-001/script.js</code>, and <code>birthday-bloom-001/assets/</code>.</li>
+       </ul>
+      </div>
+     </aside>
+     <footer class="footer">
+      Made with VanviMoments ✨
+     </footer>
+    </section>
+   </main>
+  </div>
+  <div id="lightbox" class="modal" role="dialog" aria-modal="true" aria-label="Photo viewer">
+   <div class="modal-panel">
+    <button id="lightboxClose" class="modal-close" type="button" aria-label="Close photo viewer">×</button>
+    <figure style="margin:0">
+     <img id="lightboxImage" class="lightbox-image" alt="">
+     <figcaption id="lightboxCaption" style="padding:13px 3px;color:var(--muted)"></figcaption>
+    </figure>
+    <div class="modal-nav">
+     <button id="previousPhoto" class="share-button" type="button">Previous</button><button id="nextPhoto" class="share-button" type="button">Next</button>
+    </div>
+   </div>
+  </div>
+  <div id="qrModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+   <div class="modal-panel" style="max-width:420px;text-align:center">
+    <button id="qrClose" class="modal-close" type="button" aria-label="Close QR sharing panel">×</button>
+    <h2 id="qrTitle" class="display">Share with a QR</h2>
+    <div class="qr-grid" aria-hidden="true"></div>
+    <p style="color:var(--muted);line-height:1.6">Scan this decorative share panel or copy the link below. A platform QR generator can be connected later without changing the experience.</p>
+    <p id="qrUrl" style="word-break:break-all;font-size:.8rem;color:var(--rose-deep)"></p>
+   </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script id="package-script">
+/*
+  birthday-bloom-001/script.js
+  Marketplace name suggestions: Birthday Bloom, Birthday Moonlight
+*/
+const marketplaceMetadata={id:"birthday-bloom-001",name:"Birthday Bloom",nameSuggestions:["Birthday Bloom","Birthday Moonlight"],occasion:"Birthday",tier:"Free",price:"₹0",tags:["Cute","Birthday","Romantic","Emotional","Free"],features:["8 Photo Gallery","Animated Letter","Birthday Countdown","Interactive Cake","Memory Timeline","Secret Reveal","Background Music","Share + QR"]};
+
+let templateData={
+  recipientName:"[NAME]",senderName:"[SENDER NAME]",message:"[PERSONAL MESSAGE]",
+  birthdayDate:"2027-09-19T00:00:00",
+  photos:[
+    {src:"https://images.pexels.com/photos/1116302/pexels-photo-1116302.jpeg?auto=compress&cs=tinysrgb&w=800",alt:"A circle of friends forming a star shape with fingers, symbolizing unity and teamwork.",caption:"The kind of joy that stays."},
+    {src:"https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=800",alt:"A captivating image of a birthday cake adorned with lit sparklers and fresh strawberries.",caption:"A little extra sparkle."},
+    {src:"https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=800",alt:"A romantic couple walks hand in hand on a tropical beach at sunset, enjoying a serene moment together.",caption:"Sunset stories."},
+    {src:"https://images.pexels.com/photos/4609676/pexels-photo-4609676.jpeg?auto=compress&cs=tinysrgb&w=800",alt:"Silhouette of people enjoying a vibrant beach sunset with colorful sky and ocean view.",caption:"Golden hour forever."},
+    {src:"https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=800",alt:"Close-up of a romantic bouquet of pink ranunculus flowers, ideal for weddings.",caption:"Flowers, just because."},
+    {src:"https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800",alt:"Close-up of a barista pouring milk to create latte art in a coffee cup.",caption:"Slow, sweet mornings."},
+    {src:"https://images.pexels.com/photos/1567069/pexels-photo-1567069.jpeg?auto=compress&cs=tinysrgb&w=800",alt:"A couple stargazes under a starry sky in Elkton, VA, capturing the beautiful Milky Way.",caption:"Under the same stars."},
+    {src:"https://images.pexels.com/photos/29978494/pexels-photo-29978494.jpeg?auto=compress&cs=tinysrgb&w=800",alt:"A hand holding a sparkler illuminating the night, surrounded by festive outdoor lights.",caption:"Always worth celebrating."}
+  ],
+  memories:[
+    {date:"The beginning",title:"A bright little spark",text:"The first chapter of a story that keeps becoming more beautiful.",photo:"https://images.pexels.com/photos/1104014/pexels-photo-1104014.jpeg?auto=compress&cs=tinysrgb&w=400",alt:"A cheerful child in a striped sweater jumps into a puddle on a sunny day in Czechia."},
+    {date:"A proud moment",title:"You made it happen",text:"A memory of courage, growth, and everyone cheering you on.",photo:"https://images.pexels.com/photos/1205651/pexels-photo-1205651.jpeg?auto=compress&cs=tinysrgb&w=400",alt:"Group of graduates celebrating by tossing caps into the air during a graduation ceremony."},
+    {date:"More to come",title:"Adventure is calling",text:"For every horizon still waiting for your wonderful energy.",photo:"https://images.pexels.com/photos/691034/pexels-photo-691034.jpeg?auto=compress&cs=tinysrgb&w=400",alt:"Hiker in red standing on a rocky mountain summit enveloped by clouds."}
+  ],
+  music:{enabled:true,src:"",title:"A little soundtrack for this moment"},
+  theme:{pearl:"#fffdf9",blush:"#f9e4e8",rose:"#b95a73",lavender:"#e9e3f5",champagne:"#d8b477"}
+};
+
+const $=id=>document.getElementById(id);
+const safeUrl=value=>/^(https?:\/\/|assets\/)/i.test(String(value||""))?String(value):"";
+const escapeHtml=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+const reducedMotion=()=>window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let activePhoto=0,actualPhotos=[],countdownTimer,timelineObserver,lastFocus,audio;
+
+function toast(message){const node=$("toast");node.textContent=message;node.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>node.classList.remove("show"),2400)}
+function renderHero(){
+  ["pearl","blush","rose","lavender","champagne"].forEach(key=>document.documentElement.style.setProperty(`--${key}`,templateData.theme[key]||""));
+  $("introTitle").textContent="A little birthday magic is waiting…";
+  $("heroEyebrow").textContent="A birthday memory garden";
+  $("heroTitle").textContent=`Happy Birthday, ${templateData.recipientName}`;
+  $("heroCopy").textContent="Today is a little more special because you exist.";
+  $("openMoment").textContent="Open Your Birthday Moment ✨";
+  $("revealBanner").textContent="Made especially for you.";
+  $("musicStatus").textContent="Sound is ready when you are.";
+  $("surpriseMessage").textContent=`May this year bring you more beautiful moments than you can count, ${templateData.recipientName}. 💗`;
+}
+function renderGallery(){
+  const gallery=$("gallery");gallery.replaceChildren();
+  actualPhotos=(Array.isArray(templateData.photos)?templateData.photos:[]).filter(photo=>safeUrl(photo?.src)).slice(0,8);
+  gallery.dataset.count=String(actualPhotos.length);
+  if(!actualPhotos.length){const empty=document.createElement("article");empty.className="gallery-empty";empty.innerHTML="<div><strong>Your memories will bloom here ✨</strong><p style='margin:.7rem 0 0;color:var(--muted)'>Add photos whenever the story is ready to be told.</p></div>";gallery.append(empty);return}
+  actualPhotos.forEach((photo,index)=>{const card=document.createElement("button"),image=document.createElement("img"),caption=document.createElement("span");card.className="memory-card";card.type="button";card.setAttribute("aria-label",`Open photo: ${photo.caption||`Memory ${index+1}`}`);image.loading="lazy";image.src=safeUrl(photo.src);image.alt=photo.alt||"";caption.textContent=photo.caption||"A beautiful memory.";card.append(image,caption);card.addEventListener("click",()=>{showPhoto(index);openModal("lightbox")});gallery.append(card)});
+}
+function renderLetter(){$("letterContent").textContent=`Dear ${templateData.recipientName},\n\n${templateData.message}\n\nWith love,\n${templateData.senderName}`}
+function renderTimeline(){
+  const timeline=$("timeline");timeline.replaceChildren();if(timelineObserver)timelineObserver.disconnect();
+  (Array.isArray(templateData.memories)?templateData.memories:[]).forEach(memory=>{const item=document.createElement("li"),photo=safeUrl(memory.photo),article=document.createElement("article"),copy=document.createElement("div");item.className="timeline-item";article.className=`timeline-card glass ${photo?"":"text-only"}`;if(photo){const image=document.createElement("img");image.loading="lazy";image.src=photo;image.alt=memory.alt||"";article.append(image)}copy.innerHTML=`<span class="timeline-date">${escapeHtml(memory.date)}</span><h3>${escapeHtml(memory.title)}</h3><p>${escapeHtml(memory.text)}</p>`;article.append(copy);item.append(article);timeline.append(item)});
+  if(!("IntersectionObserver" in window)||reducedMotion()){timeline.querySelectorAll(".timeline-item").forEach(item=>item.classList.add("visible"));return}
+  timelineObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");timelineObserver.unobserve(entry.target)}}),{threshold:.12});
+  timeline.querySelectorAll(".timeline-item").forEach(item=>timelineObserver.observe(item));
+}
+function updateCountdown(){
+  const date=new Date(templateData.birthdayDate),ids=["days","hours","minutes","seconds"],message=$("countdownMessage");
+  if(!templateData.birthdayDate||Number.isNaN(date.getTime())){ids.forEach(id=>$(id).textContent="—");message.textContent="Your special day is waiting to be set ✨";return}
+  const now=new Date(),difference=date-now;
+  if(difference<=0||date.toDateString()===now.toDateString()){ids.forEach(id=>$(id).textContent="0");message.textContent=difference<0?"This birthday bloom is a treasured memory ✨":"Today is your day ✨";return}
+  const total=Math.floor(difference/1000),values=[Math.floor(total/86400),Math.floor(total%86400/3600),Math.floor(total%3600/60),total%60];
+  ids.forEach((id,index)=>$(id).textContent=String(values[index]).padStart(2,"0"));message.textContent="";
+}
+function showPhoto(index){if(!actualPhotos.length)return;activePhoto=(index+actualPhotos.length)%actualPhotos.length;const photo=actualPhotos[activePhoto];$("lightboxImage").src=safeUrl(photo.src);$("lightboxImage").alt=photo.alt||"";$("lightboxCaption").textContent=photo.caption||"";$("previousPhoto").disabled=$("nextPhoto").disabled=actualPhotos.length<2}
+function openModal(id){lastFocus=document.activeElement;$(id).classList.add("open");$(id).querySelector("button").focus()}
+function closeModal(id){$(id).classList.remove("open");if(lastFocus)lastFocus.focus()}
+function setStage(stage,{updateHash=true,focus=false}={}){const opening=stage!=="experience";$("openingStage").hidden=!opening;$("experienceStage").hidden=opening;if(updateHash&&location.hash!==`#${opening?"opening":"experience"}`)history.pushState({stage},"",`#${opening?"opening":"experience"}`);if(!opening){window.scrollTo({top:0,behavior:reducedMotion()?"auto":"smooth"});if(focus)setTimeout(()=>$("experienceStart").focus(),reducedMotion()?0:220)}}
+async function copyText(text){try{await navigator.clipboard.writeText(text);return true}catch{const area=document.createElement("textarea");area.value=text;document.body.append(area);area.select();const copied=document.execCommand("copy");area.remove();return copied}}
+function download(name,content,type="text/plain"){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),anchor=document.createElement("a");anchor.href=url;anchor.download=name;document.body.append(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+
+function sourceFiles(){
+  const style=$("package-style").textContent.trim(),script=$("package-script").textContent.trim();
+  const index=document.documentElement.outerHTML.replace(/<style id="package-style">[\s\S]*?<\/style>/,"<link rel=\"stylesheet\" href=\"style.css\">").replace(/<script id="package-script">[\s\S]*?<\/script>/,"<script src=\"script.js\"><\/script>");
+  return {
+    "index.html":index,
+    "style.css":style,
+    "script.js":script,
+    "assets/":"birthday-bloom-001/assets/\n├── photo-01.jpg through photo-08.jpg — replace templateData.photos src values\n├── memory-01.jpg through memory-03.jpg — optional timeline images\n├── birthday-song.mp3 — optional music file; set templateData.music.src to assets/birthday-song.mp3\n└── README.txt — keep original photo alt text and update configurable captions.\n\nNo local assets are required for this preview. The included photos are safe HTTPS placeholders and can be replaced by local assets after export."
+  };
+}
+function bindSources(){
+  let current="index.html";const code=$("sourceCode"),render=()=>{code.value=sourceFiles()[current];document.querySelectorAll(".source-tab").forEach(tab=>tab.setAttribute("aria-selected",String(tab.dataset.source===current)))};
+  document.querySelectorAll(".source-tab").forEach(tab=>tab.addEventListener("click",()=>{current=tab.dataset.source;render()}));
+  $("copySource").addEventListener("click",async()=>toast(await copyText(code.value)?"Source copied ✨":"Could not copy source."));
+  $("downloadSource").addEventListener("click",()=>{download(current==="assets/"?"assets-README.txt":current,code.value);toast("Download started ✨")});
+  $("downloadAll").addEventListener("click",()=>{const files=sourceFiles();Object.entries(files).forEach(([name,content],index)=>setTimeout(()=>download(name==="assets/"?"assets-README.txt":name,content),index*250));toast("Downloading source files individually ✨")});
+  render();
+}
+function bindInteractions(){
+  const dismissIntro=()=>$("intro").classList.add("is-hidden");$("skipIntro").addEventListener("click",dismissIntro);setTimeout(dismissIntro,3300);
+  $("openMoment").addEventListener("click",()=>{$("revealBanner").classList.add("show");setTimeout(()=>{$("revealBanner").classList.remove("show");setStage("experience",{focus:true})},reducedMotion()?0:850)});
+  $("replayOpening").addEventListener("click",()=>setStage("opening",{focus:true}));
+  $("letterToggle").addEventListener("click",event=>{const open=$("letterPaper").classList.toggle("open");event.currentTarget.setAttribute("aria-expanded",String(open))});
+  const candles=[...document.querySelectorAll(".candle")];candles.forEach(candle=>candle.addEventListener("click",()=>{candle.classList.add("off");candle.disabled=true;if(candles.every(item=>item.classList.contains("off")))$("wishMessage").textContent="Make a wish ✨"}));$("resetCake").addEventListener("click",()=>{candles.forEach(candle=>{candle.classList.remove("off");candle.disabled=false});$("wishMessage").textContent=""});
+  $("surpriseToggle").addEventListener("click",event=>{const open=$("surpriseMessage").classList.toggle("open");event.currentTarget.setAttribute("aria-expanded",String(open))});
+  $("musicToggle").addEventListener("click",async()=>{const music=templateData.music;if(!music.enabled){$("musicStatus").textContent="Music is turned off for this moment.";return}if(!safeUrl(music.src)){$("musicStatus").textContent="Add a music file in templateData to play a soundtrack.";return}try{if(!audio){audio=new Audio(safeUrl(music.src));audio.addEventListener("error",()=>{$("musicStatus").textContent="This soundtrack could not be played."})}if(audio.paused){await audio.play();$("musicStatus").textContent=`Playing: ${music.title||"birthday soundtrack"}`}else{audio.pause();$("musicStatus").textContent="Music paused."}}catch{$("musicStatus").textContent="Playback needs a supported audio file and permission."}});
+  $("lightboxClose").addEventListener("click",()=>closeModal("lightbox"));$("previousPhoto").addEventListener("click",()=>showPhoto(activePhoto-1));$("nextPhoto").addEventListener("click",()=>showPhoto(activePhoto+1));
+  const shareText=()=>`A Birthday Bloom moment for ${templateData.recipientName} ✨`;
+  $("whatsappShare").addEventListener("click",()=>window.open(`https://wa.me/?text=${encodeURIComponent(`${shareText()} ${location.href}`)}`,"_blank","noopener,noreferrer"));
+  $("copyShare").addEventListener("click",async()=>toast(await copyText(location.href)?"Link copied ✨":"Could not copy the link."));
+  $("qrShare").addEventListener("click",()=>{$("qrUrl").textContent=location.href;openModal("qrModal")});$("qrClose").addEventListener("click",()=>closeModal("qrModal"));
+  document.querySelectorAll(".modal").forEach(modal=>modal.addEventListener("click",event=>{if(event.target===modal)closeModal(modal.id)}));
+  window.addEventListener("popstate",()=>setStage(location.hash==="#experience"?"experience":"opening",{updateHash:false}));
+  window.addEventListener("hashchange",()=>setStage(location.hash==="#experience"?"experience":"opening",{updateHash:false}));
+  document.addEventListener("keydown",event=>{if(event.key==="Escape"){dismissIntro();document.querySelectorAll(".modal.open").forEach(modal=>closeModal(modal.id))}if($("lightbox").classList.contains("open")&&actualPhotos.length>1){if(event.key==="ArrowLeft")showPhoto(activePhoto-1);if(event.key==="ArrowRight")showPhoto(activePhoto+1)}});
+}
+function renderTemplate(){renderHero();renderGallery();renderLetter();renderTimeline();updateCountdown();clearInterval(countdownTimer);countdownTimer=setInterval(updateCountdown,1000)}
+window.VanviMomentsTemplate={data:templateData,update(nextData={}){templateData={...templateData,...nextData,theme:{...templateData.theme,...(nextData.theme||{})},music:{...templateData.music,...(nextData.music||{})}};this.data=templateData;renderTemplate()}};
+document.addEventListener("DOMContentLoaded",()=>{renderTemplate();bindInteractions();bindSources();setStage(location.hash==="#experience"?"experience":"opening",{updateHash:false});if(window.lucide)lucide.createIcons()});
+  </script>
+ 
+</body></html> 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-20T19:12:19+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\RISHU KUMARI\.continue\config.yaml (LANGUAGE_UNSPECIFIED)
+Cursor is on line: 26
+Other open documents:
+- c:\Users\RISHU KUMARI\VanviMoments\index.html (LANGUAGE_UNSPECIFIED)
+- c:\Users\RISHU KUMARI\VanviMoments\scratch\verify_all_pages.js (LANGUAGE_UNSPECIFIED)
+- c:\Users\RISHU KUMARI\VanviMoments\forgot-password.html (LANGUAGE_UNSPECIFIED)
+- c:\Users\RISHU KUMARI\VanviMoments\login.html (LANGUAGE_UNSPECIFIED)
+- c:\Users\RISHU KUMARI\VanviMoments\signup.html (LANGUAGE_UNSPECIFIED)
+</ADDITIONAL_METADATA>

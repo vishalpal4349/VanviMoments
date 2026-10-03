@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
+<title>Frequently Asked Questions — Vanvi Moments Help Center</title>
+<meta content="Everything you need to know about creating moments, PIN locks, photo uploads, music autoplay, coin discounts, and privacy on Vanvi Moments." name="description"/>
+<meta content="#fff5f8" name="theme-color"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="vanvi-inner-light.css"/>
+<link rel="stylesheet" href="vanvi-navigation.css"/>
+
+<style>
+:root {
+  --bg-base: #fffbfd;
+  --bg-card: #ffffff;
+  --border-glass: rgba(255, 120, 175, 0.25);
+  --border-gold: rgba(217, 119, 6, 0.35);
+  --rose-primary: #ff2a7a;
+  --rose-soft: #ff78c3;
+  --gold-champagne: #d97706;
+  --lilac-neon: #a855f7;
+  --cyan-neon: #0284c7;
+  --text-dark: #2c1224;
+  --text-muted: #78536d;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  background-color: #fff8fa;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(245, 208, 254, 0.35) 0%, transparent 55%),
+    radial-gradient(circle at 90% 45%, rgba(255, 182, 217, 0.3) 0%, transparent 50%),
+    linear-gradient(180deg, #fff5f8 0%, #fffbfd 40%, #fff7fa 100%);
+  background-attachment: fixed;
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+  overflow-x: hidden !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px clamp(14px, 3vw, 24px);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 900;
+  font-size: clamp(13px, 3.6vw, 15px);
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+.brand-spark { width: clamp(20px, 4.2vw, 24px); height: clamp(20px, 4.2vw, 24px); flex-shrink: 0; }
+.brand-tag {
+  font-size: 9.5px;
+  font-weight: 850;
+  padding: 2.5px 8px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, var(--rose-primary), var(--lilac-neon));
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-header-link {
+  font-size: 11.5px;
+  font-weight: 750;
+  color: var(--text-dark);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-glass);
+  transition: all 0.2s;
+}
+.btn-header-link:hover { color: var(--rose-primary); border-color: var(--rose-primary); background: #ffffff; }
+.btn-header-primary {
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 6.5px 14px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, var(--rose-primary), var(--lilac-neon));
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(255, 42, 122, 0.28);
+  transition: transform 0.2s, filter 0.2s;
+}
+.btn-header-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+/* Breadcrumbs Bar */
+.breadcrumb-bar {
+  max-width: 960px;
+  margin: 12px auto 0;
+  padding: 0 clamp(14px, 3vw, 24px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.vanvi-btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: 99px;
+  padding: 5px 12px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--text-dark);
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(255, 42, 122, 0.05);
+  transition: all 0.2s;
+}
+.vanvi-btn-back:hover {
+  transform: translateY(-1px);
+  background: #fff0f6;
+  border-color: var(--rose-primary);
+  color: var(--rose-primary);
+}
+.breadcrumb-trail-luxury {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(255, 245, 250, 0.88));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: 99px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(255, 42, 122, 0.04);
+}
+.breadcrumb-trail-luxury a { color: var(--text-muted); text-decoration: none; }
+.breadcrumb-trail-luxury a:hover { color: var(--rose-primary); }
+.breadcrumb-separator { color: rgba(255, 42, 122, 0.45); font-size: 9px; }
+.breadcrumb-current-badge {
+  background: linear-gradient(135deg, #ff2a7a 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+/* Page Container */
+.page-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px clamp(14px, 3vw, 24px) 80px;
+}
+
+/* Hero */
+.faq-hero {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 28px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  font-size: 11px;
+  font-weight: 850;
+  color: #a855f7;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.faq-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 700;
+  color: #2c1224;
+  line-height: 1.18;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.faq-hero h1 span {
+  background: linear-gradient(135deg, #a855f7 0%, #ff2a7a 60%, #d97706 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.faq-hero p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Search Bar */
+.search-wrapper {
+  position: relative;
+  max-width: 580px;
+  margin: 0 auto 24px;
+}
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid rgba(255, 120, 175, 0.3);
+  border-radius: 99px;
+  padding: 12px 18px 12px 44px;
+  color: #2c1224;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  outline: none;
+  box-shadow: 0 4px 16px rgba(255, 56, 128, 0.05);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus {
+  border-color: var(--rose-primary);
+  box-shadow: 0 0 16px rgba(255, 42, 122, 0.18);
+}
+
+/* Category Filter Pills */
+.filter-pills-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 30px;
+}
+.cat-pill {
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 120, 175, 0.28);
+  color: var(--text-muted);
+  font-size: 11.5px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cat-pill:hover, .cat-pill.active {
+  background: linear-gradient(135deg, rgba(255, 42, 122, 0.12), rgba(168, 85, 247, 0.12));
+  border-color: var(--rose-primary);
+  color: var(--rose-primary);
+}
+
+/* Accordion Container */
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-card {
+  background: #ffffff;
+  border: 1.5px solid var(--border-glass);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(255, 56, 128, 0.04);
+  transition: border-color 0.2s, background 0.2s;
+}
+.faq-card:hover {
+  border-color: rgba(255, 42, 122, 0.35);
+}
+.faq-card.open {
+  border-color: var(--rose-primary);
+  background: #fffbfd;
+}
+
+.faq-header {
+  width: 100%;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  color: #2c1224;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: 850;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  cursor: pointer;
+  text-align: left;
+}
+.faq-topic-tag {
+  font-size: 10px;
+  font-weight: 850;
+  text-transform: uppercase;
+  padding: 2.5px 8px;
+  border-radius: 99px;
+  background: rgba(255, 42, 122, 0.08);
+  color: var(--rose-primary);
+  margin-right: 6px;
+  display: inline-block;
+}
+.faq-toggle-icon {
+  font-size: 15px;
+  color: var(--rose-primary);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.faq-card.open .faq-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.faq-body {
+  display: none;
+  padding: 0 20px 16px;
+  font-size: 13px;
+  color: #5c3552;
+  line-height: 1.6;
+  border-top: 1px solid rgba(255, 120, 175, 0.12);
+  margin-top: 2px;
+  padding-top: 12px;
+}
+.faq-card.open .faq-body {
+  display: block;
+}
+
+.empty-search {
+  text-align: center;
+  padding: 40px 20px;
+  display: none;
+}
+.empty-search h3 { font-size: 17px; color: #2c1224; margin-bottom: 6px; }
+.empty-search p { font-size: 13px; color: var(--text-muted); }
+
+/* Bottom Help CTA */
+.still-need-help {
+  text-align: center;
+  margin-top: 48px;
+  padding: 28px 20px;
+  background: linear-gradient(145deg, #fff0f6 0%, #fffbfd 100%);
+  border: 1.5px dashed rgba(255, 120, 175, 0.4);
+  border-radius: 20px;
+}
+.still-need-help h3 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: #2c1224;
+  margin-bottom: 6px;
+}
+.still-need-help p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.help-btn-row {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn-whatsapp-faq {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 99px;
+  background: #25d366;
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+  transition: transform 0.2s, filter 0.2s;
+}
+.btn-whatsapp-faq:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.btn-contact-support {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--rose-primary), #9333ea);
+  color: #fff;
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 800;
+  padding: 10px 20px;
+  border-radius: 99px;
+  box-shadow: 0 4px 14px rgba(255, 42, 122, 0.3);
+  transition: transform 0.2s;
+}
+.btn-contact-support:hover { transform: translateY(-1px); }
+
+/* Footer */
+footer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+  border-top: 1px solid var(--border-glass);
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+footer a { color: var(--text-muted); text-decoration: none; margin: 0 5px; }
+footer a:hover { color: var(--rose-primary); }
+</style>
+</head>
+<body class="has-vanvi-dock">
+
+<!-- Standardized Header -->
+<header>
+  <a href="index.html" class="brand-link" title="Vanvi Moments">
+    <svg class="brand-spark" fill="none" viewBox="0 0 26 26">
+      <defs>
+        <linearGradient id="faqSpark" x1="0%" x2="100%" y1="0%" y2="100%">
+          <stop offset="0%" stop-color="#ff2a7a"/>
+          <stop offset="35%" stop-color="#c084fc"/>
+          <stop offset="70%" stop-color="#ff6bb5"/>
+          <stop offset="100%" stop-color="#d97706"/>
+        </linearGradient>
+      </defs>
+      <path d="M13 2 C13 7.8 15.2 10 21 13 C15.2 16 13 18.2 13 24 C13 18.2 10.8 16 5 13 C10.8 10 13 7.8 13 2 Z" fill="url(#faqSpark)"/>
+      <circle cx="13" cy="13" fill="#ffffff" r="2.8"/>
+      <circle cx="13" cy="13" fill="#ff007a" r="1.5"/>
+    </svg>
+    <span>VANVI <span style="color:var(--rose-primary);">♡</span> MOMENTS</span>
+    <span class="brand-tag">FAQS</span>
+  </a>
+
+  <div class="header-actions">
+    <a class="btn-header-link mobile-hide" href="contact.html">Support</a>
+    <a class="btn-header-link mobile-hide" href="templates.html">Templates</a>
+    <a class="btn-header-primary" href="builder.html">＋ Create</a>
+  </div>
+</header>
+
+<!-- Breadcrumbs Bar -->
+<div class="breadcrumb-bar">
+  <a class="vanvi-btn-back" href="javascript:void(0)" onclick="safeGoBack()"><span class="back-arrow">‹</span> <span>Back</span></a>
+  <div class="breadcrumb-trail-luxury">
+    <a href="index.html"><span>🏠</span> Home</a>
+    <span class="breadcrumb-separator">✦</span>
+    <span class="breadcrumb-current-badge">💡 Help &amp; FAQs</span>
+  </div>
+</div>
+
+<main class="page-container">
+
+  <section class="faq-hero">
+    <div class="hero-badge">💡 KNOWLEDGE BASE &amp; HELP</div>
+    <h1>Frequently Asked <span>Questions</span></h1>
+    <p>Everything you need to know about crafting moments, PIN lock security, music playback, coin discounts, and privacy guarantees.</p>
+  </section>
+
+  <!-- Search Input -->
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input type="search" id="faqSearchInput" class="search-input" placeholder="Search questions (e.g. PIN, music, refund, coins, free)..." />
+  </div>
+
+  <!-- Filter Pills -->
+  <div class="filter-pills-row" id="filterPillsRow">
+    <button class="cat-pill active" data-cat="all">All Questions</button>
+    <button class="cat-pill" data-cat="creation">Creating &amp; Studio</button>
+    <button class="cat-pill" data-cat="security">PIN &amp; Privacy</button>
+    <button class="cat-pill" data-cat="music">Music &amp; Audio</button>
+    <button class="cat-pill" data-cat="coins">Coins &amp; Discounts</button>
+    <button class="cat-pill" data-cat="membership">VIP Plans</button>
+    <button class="cat-pill" data-cat="payments">Orders &amp; Refunds</button>
+  </div>
+
+  <!-- Accordion List -->
+  <section class="accordion-list" id="faqList">
+
+    <!-- Item 1 -->
+    <article class="faq-card" data-cat="creation">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">Creation</span> How does a Vanvi Moment work?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        A Vanvi Moment is a private, interactive digital experience crafted for someone special. You choose a template, write your personal message (or let Vanvi AI help you), upload your favorite photos, pick an audio track, and set an optional 4-digit PIN lock. Once published, you receive a direct WhatsApp share link and QR code to surprise your recipient.
+      </div>
+    </article>
+
+    <!-- Item 2 -->
+    <article class="faq-card" data-cat="creation">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">Creation</span> Are the 100% Free templates really free forever?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        Yes, absolutely! Templates labeled "100% Free" (like Birthday White Bloom, Diya Sparklers, and Maa &amp; Papa Tribute) cost ₹0 to create, publish, and share. There are zero hidden fees and no credit card is required.
+      </div>
+    </article>
+
+    <!-- Item 3 -->
+    <article class="faq-card" data-cat="security">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">Security</span> What happens if the recipient forgets the 4-digit PIN?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        Don't worry! As the creator, you can view your moment's PIN at any time inside your <a href="dashboard.html" style="color:var(--rose-primary); font-weight:700;">Creator Dashboard</a> under "My Moments". You can also leave an optional helpful hint (e.g., "The day we first met 🕊️") that appears on their unlock screen.
+      </div>
+    </article>
+
+    <!-- Item 4 -->
+    <article class="faq-card" data-cat="security">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">Security</span> Does the recipient need to create an account or download an app?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        No! Your recipient does NOT need an account, app, or login. The moment opens immediately in any standard mobile browser (Chrome, Safari, Firefox, Edge) when they tap your link.
+      </div>
+    </article>
+
+    <!-- Item 5 -->
+    <article class="faq-card" data-cat="security">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">Security</span> Are my uploaded photos and messages private?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        Yes. Moments are published under unique non-guessable identifiers. Only individuals holding the secret URL (and entering the 4-digit PIN if enabled) can access the content. We never sell, index on Google, or monetize your private letters or photos.
+      </div>
+    </article>
+
+    <!-- Item 6 -->
+    <article class="faq-card" data-cat="music">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">Music</span> Will the background soundtrack play automatically on mobile?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        Due to mobile browser autoplay security policies (iOS Safari and Android Chrome), audio initializes seamlessly the moment the recipient interacts with the screen (such as tapping the wax seal or entering the first PIN digit). A persistent floating music bar allows them to mute or adjust the volume at any point.
+      </div>
+    </article>
+
+    <!-- Item 7 -->
+    <article class="faq-card" data-cat="coins">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">Coins</span> How do Vanvi Coins work and how much are they worth?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        <strong>10 Vanvi Coins = ₹1.00 store discount</strong>. You earn coins for free daily via the Fortune Wheel in your Dashboard, during account creation, and through seasonal perks. You can redeem coins at checkout to reduce your payable total (Free creators can discount up to 20%; Club/Annual/Lifetime members can discount up to 40%).
+      </div>
+    </article>
+
+    <!-- Item 8 -->
+    <article class="faq-card" data-cat="membership">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">VIP Plans</span> What is the difference between Free Creator and Vanvi Club?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        Free Creator allows access to free templates, up to 20% coin discounts, and 50MB storage. <strong>Vanvi Club (₹99/mo)</strong> unlocks all premium templates, up to 40% coin redemption, full photo memory reels, secret PIN protection, 2GB cloud vault, and a 1.5x multiplier on daily Fortune Wheel coins.
+      </div>
+    </article>
+
+    <!-- Item 9 -->
+    <article class="faq-card" data-cat="payments">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">Payments</span> What payment methods are supported?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        We support all major Indian digital payment methods including UPI (Google Pay, PhonePe, Paytm, BHIM), Net Banking, Debit Cards, and Credit Cards via authorized bank-grade payment gateways.
+      </div>
+    </article>
+
+    <!-- Item 10 -->
+    <article class="faq-card" data-cat="payments">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">Payments</span> Can I get a refund if something goes wrong?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        Yes. In the rare event of a duplicate charge or server delivery failure where a moment cannot be published, we issue a prompt 100% refund. Any loyalty coins redeemed on an order that is refunded are automatically credited back to your coin wallet. Please review our full <a href="refund.html" style="color:var(--rose-primary); font-weight:700;">Refund &amp; Cancellation Policy</a>.
+      </div>
+    </article>
+
+    <!-- Item 11 -->
+    <article class="faq-card" data-cat="creation">
+      <button class="faq-header" type="button" aria-expanded="false">
+        <span><span class="faq-topic-tag">Creation</span> Can I edit my Moment after publishing it?</span>
+        <span class="faq-toggle-icon">▾</span>
+      </button>
+      <div class="faq-body">
+        Yes! In your <a href="dashboard.html" style="color:var(--rose-primary); font-weight:700;">Creator Dashboard</a> under "My Moments", you can update the message, change the unlock PIN, or adjust settings. Your published URL remains identical so your recipient always sees your latest edits.
+      </div>
+    </article>
+
+  </section>
+
+  <!-- Empty State for Search -->
+  <div class="empty-search" id="faqEmptyState">
+    <h3>No matching answers found</h3>
+    <p>Try searching for a different keyword like "PIN", "music", "coins", or "refund".</p>
+  </div>
+
+  <!-- Contact CTA -->
+  <section class="still-need-help">
+    <h3>Still have a question?</h3>
+    <p>Our concierge team is available 7 days a week on WhatsApp and live email support.</p>
+    <div class="help-btn-row">
+      <a href="https://wa.me/917631442934?text=Hi%20Vanvi%20Support%2C%20I%20need%20help%20with%20my%20moment" target="_blank" rel="noopener" class="btn-whatsapp-faq">💬 Chat on WhatsApp →</a>
+      <a href="contact.html" class="btn-contact-support">Contact Support Team →</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:10px 16px; margin-bottom:10px; font-size:12px;">
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="faq.html" style="color:var(--rose-primary); font-weight:800;">FAQs</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="refund.html">Refunds</a>
+  </div>
+  <p>© 2026 Vanvi Moments · Luxury Digital Celebrations · <a href="index.html">Home</a> · <a href="templates.html">Templates</a> · <a href="ai.html">AI Studio</a> · <a href="dashboard.html">Dashboard</a></p>
+</footer>
+
+<!-- Global Bottom Navigation Dock -->
+<nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+  <a href="index.html" class="nav-btn" id="bottomNavHome" title="Home">⌂<br/>Home</a>
+  <a href="templates.html" class="nav-btn" id="bottomNavExplore" title="Explore">◌<br/>Explore</a>
+  <a href="builder.html" class="create nav-btn" id="bottomNavCreate" title="Create">＋<br/>Create</a>
+  <a href="ai.html" class="nav-btn" id="bottomNavAi" title="AI">✦<br/>AI</a>
+  <a href="profile.html" class="nav-btn active" id="bottomNavMe" title="Profile">👤<br/>Profile</a>
+</nav>
+
+<script src="js/vanvi-navigation.js"></script>
+<script>
+function safeGoBack() {
+  if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.host)) {
+    window.history.back();
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+
+(function() {
+  const cards = document.querySelectorAll('.faq-card');
+  const searchInput = document.getElementById('faqSearchInput');
+  const catPills = document.querySelectorAll('.cat-pill');
+  const emptyState = document.getElementById('faqEmptyState');
+
+  let activeCat = 'all';
+  let searchQuery = '';
+
+  // Accordion toggle
+  cards.forEach(card => {
+    const btn = card.querySelector('.faq-header');
+    btn.addEventListener('click', () => {
+      const isOpen = card.classList.contains('open');
+      cards.forEach(c => {
+        c.classList.remove('open');
+        c.querySelector('.faq-header').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        card.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Filter & Search Logic
+  function applyFilters() {
+    let visibleCount = 0;
+    const q = searchQuery.toLowerCase().trim();
+
+    cards.forEach(card => {
+      const cat = card.dataset.cat;
+      const text = card.textContent.toLowerCase();
+      const matchesCat = (activeCat === 'all' || cat === activeCat);
+      const matchesSearch = (!q || text.includes(q));
+
+      if (matchesCat && matchesSearch) {
+        card.style.display = 'block';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (emptyState) emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
+  // Category Pill Clicks
+  catPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      catPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeCat = pill.dataset.cat;
+      applyFilters();
+    });
+  });
+
+  // Search Input listener
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      applyFilters();
+    });
+  }
+})();
+</script>
+</body>
+</html>

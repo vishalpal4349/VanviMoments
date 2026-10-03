@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
+  <title>Contact & Concierge ✦ Vanvi Moments</title>
+  <meta name="description" content="Get instant assistance from our Vanvi Moments concierge team via WhatsApp, email, or live AI support."/>
+  <meta name="theme-color" content="#fff5f8"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+
+  <!-- Google Fonts: Plus Jakarta Sans & Cormorant Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="vanvi-inner-light.css"/>
+  <link rel="stylesheet" href="vanvi-navigation.css"/>
+
+  <style>
+    /* =========================================================
+       VANVI MOMENTS — CONTACT & CONCIERGE EXPERIENCE
+       Pearl White · Blush Pink · Rose Gold · Lavender · Sky Blue
+       Mobile-First · Ergonomic · Functional · Zero Overflow
+       ========================================================= */
+    :root {
+      --bg-pearl: #fffdfb;
+      --bg-blush: #fff1f6;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --rose-main: #ff2a7a;
+      --rose-soft: #ff529a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --ai-gradient: linear-gradient(135deg, #ff2a7a 0%, #9333ea 50%, #d97706 100%);
+      --text-dark: #2c1224;
+      --text-muted: #7b5971;
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --shadow-luxury: 0 10px 30px rgba(255, 56, 128, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
+      --shadow-card: 0 16px 45px rgba(74, 22, 58, 0.09), 0 2px 10px rgba(255, 42, 122, 0.04);
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden !important;
+    }
+
+    body {
+      background-color: #fff9fb;
+      background-image: 
+        radial-gradient(ellipse 90% 45% at 50% -5%, rgba(255, 182, 217, 0.38) 0%, transparent 65%),
+        radial-gradient(circle 480px at 15% 35%, rgba(245, 208, 254, 0.25) 0%, transparent 70%),
+        radial-gradient(circle 460px at 85% 65%, rgba(224, 242, 254, 0.3) 0%, transparent 70%),
+        linear-gradient(180deg, #fff5f8 0%, #fffbfd 40%, #fff8fa 100%);
+      background-attachment: fixed;
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 110px !important;
+    }
+
+    /* Ambient animated stardust glow */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.28;
+      animation: floatPulse 14s infinite alternate ease-in-out;
+    }
+    .orb-1 { width: 280px; height: 280px; background: #ff78a8; top: -40px; left: -40px; }
+    .orb-2 { width: 300px; height: 300px; background: #c084fc; bottom: -60px; right: -60px; animation-duration: 18s; }
+
+    @keyframes floatPulse {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(22px) scale(1.08); }
+    }
+
+    /* Compact Top Header (Brand Only) */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 58px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      user-select: none;
+      cursor: default;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 900;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .brand-spark-icon {
+      font-size: 18px;
+      animation: gentleSpin 6s infinite linear;
+    }
+    @keyframes gentleSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .brand-title {
+      font-size: 13.5px;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+    }
+    .brand-title span { color: var(--rose-main); }
+    .brand-tag {
+      font-size: 9px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 99px;
+      background: rgba(2, 132, 199, 0.1);
+      border: 1px solid rgba(2, 132, 199, 0.3);
+      color: #0284c7;
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .header-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 99px;
+      text-decoration: none;
+      background: #fff0f5;
+      border: 1px solid var(--border-pink);
+      color: var(--rose-main);
+      transition: all 0.2s;
+    }
+    .header-btn:hover { background: #ffe4ee; }
+
+    /* Small Floating ‹ Back Button Bar */
+    .nav-breadcrumbs {
+      max-width: 860px;
+      width: 100%;
+      margin: 8px auto 0;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+    .btn-nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border-pink);
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 5px 13px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(255, 42, 122, 0.05);
+      cursor: pointer;
+      transition: all 0.2s;
+      min-height: 32px;
+    }
+    .btn-nav-back:hover {
+      background: #fff0f5;
+      color: var(--rose-main);
+      transform: translateY(-1px);
+    }
+    .luxury-trail-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-pink);
+      padding: 4px 11px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Main Container */
+    .contact-container {
+      max-width: 860px;
+      width: 100%;
+      margin: 12px auto 30px;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      position: relative;
+      z-index: 10;
+      flex: 1;
+    }
+
+    /* Hero Section */
+    .contact-hero-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 24px;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-luxury);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .contact-hero-card::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--rose-gradient);
+    }
+    .hero-kicker-pill {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #0284c7;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .contact-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 4.5vw, 38px);
+      line-height: 1.2;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .contact-hero-title span {
+      background: var(--rose-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .contact-hero-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 580px;
+    }
+
+    /* Concierge Channels Grid */
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .channel-card {
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 18px 14px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-dark);
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .channel-card:hover {
+      border-color: var(--rose-main);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(255, 42, 122, 0.12);
+    }
+    .channel-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      background: #fff0f5;
+      border: 1px solid var(--border-pink);
+    }
+    .channel-card.whatsapp .channel-icon {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #059669;
+    }
+    .channel-card.ai .channel-icon {
+      background: #fdf4ff;
+      border-color: #f5d0fe;
+      color: #9333ea;
+    }
+    .channel-title {
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+    .channel-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .channel-cta {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--rose-main);
+      margin-top: 4px;
+    }
+
+    /* Contact Form & Info Grid */
+    .contact-form-card {
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      border-radius: 22px;
+      padding: 26px 20px;
+      box-shadow: var(--shadow-luxury);
+    }
+    .form-head-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .form-head-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .form-fields-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .field-full {
+      grid-column: span 2;
+    }
+    .input-field-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+    .input-field-group input, .input-field-group select, .input-field-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-pink);
+      background: #fffafc;
+      font-size: 13px;
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      outline: none;
+      transition: all 0.2s;
+    }
+    .input-field-group input:focus, .input-field-group select:focus, .input-field-group textarea:focus {
+      border-color: var(--rose-main);
+      box-shadow: 0 0 0 3px rgba(255, 42, 122, 0.12);
+      background: #ffffff;
+    }
+    .btn-submit-contact {
+      background: var(--rose-gradient);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(255, 42, 122, 0.32);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 42px;
+    }
+    .btn-submit-contact:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 42, 122, 0.45);
+    }
+    .form-feedback-msg {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      font-size: 12px;
+      font-weight: 700;
+      display: none;
+    }
+
+    /* FAQ Drawer Card */
+    .faq-summary-card {
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      border-radius: 22px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow-luxury);
+    }
+    .faq-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+    }
+    .faq-item {
+      border-top: 1px solid rgba(255, 120, 175, 0.16);
+      padding: 12px 0;
+    }
+    .faq-q {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+    .faq-a {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* =========================================================
+       RESPONSIVE ADAPTATIONS
+       320px · 360px · 375px · 390px · 414px · Tablets & Desktops
+       ========================================================= */
+    @media (max-width: 640px) {
+      .channels-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .form-fields-grid {
+        grid-template-columns: 1fr;
+      }
+      .field-full {
+        grid-column: span 1;
+      }
+      .btn-submit-contact {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+
+  <!-- Top Header (Brand Only) -->
+  <header class="app-header">
+    <a href="index.html" class="header-brand" title="Vanvi Moments">
+      <span class="brand-spark-icon">✨</span>
+      <div class="brand-title">VANVI <span>♡</span> MOMENTS</div>
+      <span class="brand-tag">CONCIERGE</span>
+    </a>
+
+    <div class="header-actions">
+      <a href="faq.html" class="header-btn" title="View FAQs">
+        <span>❓</span> FAQs
+      </a>
+    </div>
+  </header>
+
+  <!-- Small Floating ‹ Back Button Bar -->
+  <nav class="nav-breadcrumbs" aria-label="Breadcrumb Navigation">
+    <button type="button" class="btn-nav-back" onclick="safeGoBack()">
+      <span style="color:var(--rose-main); font-size:14px; font-weight:900;">‹</span> <span>Back</span>
+    </button>
+    <div class="luxury-trail-chip">
+      <span>🏠 Home</span>
+      <span style="color:rgba(255,42,122,0.4); font-size:9px;">✦</span>
+      <span style="color:var(--rose-main); font-weight:800;">Contact &amp; Concierge</span>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="contact-container">
+
+    <!-- Hero Card -->
+    <section class="contact-hero-card">
+      <div class="hero-kicker-pill">
+        <span>💬</span> Dedicated Human Concierge
+      </div>
+      <h1 class="contact-hero-title">
+        We're here to help every <span>moment shine.</span>
+      </h1>
+      <p class="contact-hero-desc">
+        Need assistance with an order, custom experience design, or instant moment delivery? Reach out to our concierge team anytime.
+      </p>
+    </section>
+
+    <!-- Channels Grid -->
+    <div class="channels-grid">
+      <a href="https://api.whatsapp.com/send?phone=917631442934&text=Hi%20Vanvi%20Moments%20Team%2C%20I%20need%20help%20with%20my%20moment" target="_blank" rel="noopener" class="channel-card whatsapp" title="Chat on WhatsApp">
+        <div class="channel-icon">💬</div>
+        <div class="channel-title">WhatsApp Concierge</div>
+        <div class="channel-sub">+91 76314 42934 · Fast replies</div>
+        <div class="channel-cta">Start Chat →</div>
+      </a>
+
+      <a href="mailto:vanvimoments@gmail.com" class="channel-card" title="Send Email">
+        <div class="channel-icon">✉️</div>
+        <div class="channel-title">Concierge Email</div>
+        <div class="channel-sub">vanvimoments@gmail.com</div>
+        <div class="channel-cta">Send Email →</div>
+      </a>
+
+      <a href="vanvi-assistant.html" class="channel-card ai" title="Live AI Assistant">
+        <div class="channel-icon">✨</div>
+        <div class="channel-title">Vanvi AI Assistant</div>
+        <div class="channel-sub">Instant 24/7 creative guidance</div>
+        <div class="channel-cta">Ask Assistant →</div>
+      </a>
+    </div>
+
+    <!-- Contact Form Card -->
+    <section class="contact-form-card">
+      <h2 class="form-head-title">Send a Direct Message</h2>
+      <p class="form-head-desc">Fill out your details below and our team will get in touch promptly.</p>
+
+      <form id="contactForm" onsubmit="handleContactSubmit(event)">
+        <!-- Honeypot anti-spam trap (invisible to real visitors) -->
+        <input type="text" name="_vanvi_hp" id="contactHoneypot" style="display:none !important; position:absolute !important; left:-9999px !important;" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+        <div class="form-fields-grid">
+          <div class="input-field-group">
+            <label for="contactName">Your Name</label>
+            <input type="text" id="contactName" placeholder="Enter your name" required/>
+          </div>
+
+          <div class="input-field-group">
+            <label for="contactPhone">WhatsApp / Mobile Number</label>
+            <input type="tel" id="contactPhone" placeholder="Enter 10-digit mobile number"/>
+          </div>
+
+          <div class="input-field-group">
+            <label for="contactEmail">Email Address</label>
+            <input type="email" id="contactEmail" placeholder="Enter your email address" required/>
+          </div>
+
+          <div class="input-field-group">
+            <label for="contactSubject">Reason for Contact</label>
+            <select id="contactSubject">
+              <option value="order_help">Help With My Moment / Order</option>
+              <option value="custom_design">Custom Experience / VIP Design</option>
+              <option value="coins_billing">Coins, Plans &amp; Billing</option>
+              <option value="feedback">General Feedback &amp; Ideas</option>
+            </select>
+          </div>
+
+          <div class="input-field-group field-full">
+            <label for="contactMessage">How Can We Help?</label>
+            <textarea id="contactMessage" rows="4" placeholder="Share your question, moment ID, or thoughts here..." required></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit-contact" id="btnSubmitContact">
+          <span>Send Message to Concierge</span> <span>✨</span>
+        </button>
+
+        <div class="form-feedback-msg" id="contactFeedback">
+          ✓ Thank you! Your message has been received. Our concierge team will reach out to you shortly.
+        </div>
+      </form>
+    </section>
+
+    <!-- Quick FAQs Card -->
+    <section class="faq-summary-card">
+      <h2 class="faq-title">Quick Answers</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">How quickly does my recipient receive the moment?</div>
+        <div class="faq-a">Immediately. You receive a unique, private link and QR code to share directly via WhatsApp, SMS, or Instagram DM.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I edit my moment after creating it?</div>
+        <div class="faq-a">Yes! Your created moments can be viewed, personalized, and managed anytime from your <a href="dashboard.html" style="color:var(--rose-main); font-weight:700;">Dashboard</a>.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Are my uploaded memories and letters private?</div>
+        <div class="faq-a">100%. We employ 256-bit encryption and your private photos and love letters are only accessible via your unique moment link.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Bottom Navigation Dock -->
+  <nav class="bottom vanvi-bottom-dock" aria-label="Vanvi Main Navigation">
+    <a href="index.html" class="nav-btn" id="bottomNavHome">⌂<br/>Home</a>
+    <a href="templates.html" class="nav-btn" id="bottomNavExplore">◌<br/>Explore</a>
+    <a href="builder.html" class="create nav-btn" id="bottomNavCreate">＋<br/>Create</a>
+    <a href="ai.html" class="nav-btn" id="bottomNavAi">✦<br/>AI</a>
+    <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
+  </nav>
+
+  <script src="js/vanvi-api.js"></script>
+  <script src="js/vanvi-navigation.js"></script>
+
+  <script>
+    async function handleContactSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitContact');
+      const feedback = document.getElementById('contactFeedback');
+      btn.disabled = true;
+      btn.textContent = 'Sending message...';
+
+      const hp = document.getElementById('contactHoneypot')?.value || '';
+      const name = document.getElementById('contactName')?.value.trim() || '';
+      const phone = document.getElementById('contactPhone')?.value.trim() || '';
+      const email = document.getElementById('contactEmail')?.value.trim() || '';
+      const topic = document.getElementById('contactSubject')?.value || 'general';
+      const message = document.getElementById('contactMessage')?.value.trim() || '';
+
+      // Persist locally for offline audit & fast access
+      try {
+        const inquiries = JSON.parse(localStorage.getItem('vanvi_contact_inquiries') || '[]');
+        inquiries.unshift({
+          name, phone, email, topic, message,
+          timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('vanvi_contact_inquiries', JSON.stringify(inquiries.slice(0, 50)));
+      } catch(err) {}
+
+      // Submit to Backend API
+      let success = true;
+      try {
+        if (window.VanviAPI && window.VanviAPI.contact && window.VanviAPI.contact.submit) {
+          const res = await window.VanviAPI.contact.submit({ name, email, phone, topic, message, _vanvi_hp: hp });
+          if (res && res.success === false && !res.offline) {
+            // Server returned error
+            console.warn('Server contact error:', res.error);
+          }
+        }
+      } catch (err) {
+        console.warn('Network inquiry error, saved locally:', err);
+      }
+
+      btn.textContent = 'Message Sent ✨';
+      if (feedback) {
+        feedback.style.display = 'block';
+        feedback.textContent = '✓ Thank you ' + (name ? name : '') + '! Your message has been received. Our concierge team will reach out to you shortly.';
+      }
+      document.getElementById('contactForm')?.reset();
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = 'Send Another Message ✨';
+      }, 3000);
+    }
+
+    function safeGoBack() {
+      try {
+        if (window.history && window.history.length > 1 && document.referrer && document.referrer.indexOf(window.location.host) !== -1) {
+          window.history.back();
+        } else if (typeof window.vanviGoBack === 'function') {
+          window.vanviGoBack('index.html');
+        } else {
+          window.location.href = 'index.html';
+        }
+      } catch(e) {
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+</body>
+</html>

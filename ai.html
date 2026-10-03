@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
+  <title>Vanvi AI Creative Studio — Tell Vanvi What You Feel</title>
+  <meta name="description" content="Tell Vanvi what you feel. We’ll turn it into a beautiful message and memorable celebration moment."/>
+  <meta name="theme-color" content="#fff5f8"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+
+  <!-- Google Fonts: Plus Jakarta Sans & Cormorant Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="vanvi-inner-light.css"/>
+  <link rel="stylesheet" href="vanvi-navigation.css"/>
+
+  <style>
+    /* =========================================================
+       VANVI AI CREATIVE STUDIO — ULTRA LUXURY & CLEAN DESIGN
+       Pearl White · Soft Blush · Rose Pink · Champagne Gold
+       Fast · Simple · 3-Second Comprehension · Mobile-First
+       ========================================================= */
+    :root {
+      --bg-pearl: #fffbfd;
+      --bg-blush: #fff1f6;
+      --bg-card: rgba(255, 255, 255, 0.96);
+      --bg-glass: rgba(255, 255, 255, 0.88);
+      
+      --rose-main: #ff2a7a;
+      --rose-soft: #ff529a;
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ec4899 50%, #9333ea 100%);
+      --gold-main: #d97706;
+      --gold-light: #fef3c7;
+      --lilac-main: #9333ea;
+      
+      --text-dark: #2c1224;
+      --text-muted: #6f4c66;
+      --text-subtle: #9d7d94;
+      
+      --border-pink: rgba(255, 120, 175, 0.28);
+      --shadow-luxury: 0 12px 35px rgba(255, 56, 128, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02);
+      --shadow-card: 0 14px 40px rgba(74, 22, 58, 0.08);
+      
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden !important;
+    }
+
+    body {
+      background-color: #fff8fa;
+      background-image: 
+        radial-gradient(ellipse 90% 45% at 50% -5%, rgba(255, 182, 217, 0.35) 0%, transparent 65%),
+        radial-gradient(circle 500px at 15% 35%, rgba(245, 208, 254, 0.25) 0%, transparent 70%),
+        radial-gradient(circle 480px at 85% 65%, rgba(254, 243, 199, 0.3) 0%, transparent 70%),
+        linear-gradient(180deg, #fff5f8 0%, #fffbfd 40%, #fff8fa 100%);
+      background-attachment: fixed;
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 110px !important;
+    }
+
+    /* Ambient animated stardust glow */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.25;
+      animation: floatPulse 14s infinite alternate ease-in-out;
+    }
+    .orb-1 { width: 280px; height: 280px; background: #ff78a8; top: -40px; left: -40px; }
+    .orb-2 { width: 300px; height: 300px; background: #c084fc; bottom: -60px; right: -60px; animation-duration: 18s; }
+
+    @keyframes floatPulse {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(25px) scale(1.08); }
+    }
+
+    /* Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-pink);
+      height: 58px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 900;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .brand-spark { width: 22px; height: 22px; flex-shrink: 0; }
+    .ai-badge {
+      font-size: 9px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 99px;
+      background: var(--rose-gradient);
+      color: #fff;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.25);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-header-link {
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 6px 13px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-plans-link {
+      background: rgba(217, 119, 6, 0.08);
+      border: 1px solid rgba(217, 119, 6, 0.3);
+      color: var(--gold-main);
+    }
+    .btn-moments-link {
+      background: rgba(255, 42, 122, 0.08);
+      border: 1px solid rgba(255, 42, 122, 0.25);
+      color: var(--rose-main);
+    }
+
+    @media (max-width: 600px) {
+      .btn-moments-link {
+        display: none !important;
+      }
+    }
+
+    /* Sub-bar / Breadcrumb */
+    .breadcrumb-bar {
+      max-width: 920px;
+      margin: 12px auto 0;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Studio Main Wrapper */
+    .studio-wrapper {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 16px 16px 40px;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* 1. Hero Section */
+    .studio-hero {
+      text-align: center;
+      padding: 18px 10px 22px;
+    }
+    .hero-kicker-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 99px;
+      background: rgba(255, 42, 122, 0.08);
+      border: 1px solid rgba(255, 42, 122, 0.28);
+      color: var(--rose-main);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .studio-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .studio-hero h1 span {
+      background: var(--rose-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .studio-hero p {
+      font-size: clamp(13px, 2.2vw, 15.5px);
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* 2. Realistic 3-Second Flow Showcase Card */
+    .flow-showcase-card {
+      background: linear-gradient(145deg, #ffffff 0%, #fff7fa 100%);
+      border: 1.5px solid rgba(255, 120, 175, 0.32);
+      border-radius: 22px;
+      padding: 18px 20px;
+      box-shadow: 0 10px 30px rgba(255, 42, 122, 0.06);
+      margin-bottom: 24px;
+    }
+    .showcase-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .showcase-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--rose-main);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .showcase-steps-visual {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #9333ea;
+      background: #faf5ff;
+      border: 1px solid #e9d5ff;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .showcase-bubbles-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1.3fr auto 1fr;
+      align-items: center;
+      gap: 8px;
+    }
+    @media (max-width: 768px) {
+      .showcase-bubbles-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .showcase-arrow {
+        display: none !important;
+      }
+    }
+    .showcase-bubble {
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.25);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+    .bubble-user {
+      border-left: 3px solid #3b82f6;
+    }
+    .bubble-ai {
+      border-left: 3px solid var(--rose-main);
+      background: #fffbfe;
+    }
+    .bubble-studio {
+      border-left: 3px solid #10b981;
+      background: #f0fdf4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .bubble-label {
+      font-size: 10px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .bubble-user .bubble-label { color: #2563eb; }
+    .bubble-ai .bubble-label { color: var(--rose-main); }
+    .bubble-studio .bubble-label { color: #059669; }
+    .bubble-quote {
+      font-style: italic;
+      color: var(--text-dark);
+      line-height: 1.45;
+    }
+    .showcase-arrow {
+      font-size: 16px;
+      color: var(--rose-main);
+      font-weight: 900;
+      text-align: center;
+    }
+
+    /* 3. Main Generator Card */
+    .generator-card {
+      background: #ffffff;
+      border: 1.5px solid rgba(255, 120, 175, 0.35);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+    }
+    .generator-head {
+      margin-bottom: 16px;
+    }
+    .generator-head h2 {
+      font-size: 19px;
+      font-weight: 850;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .generator-head p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    /* Large Prompt Input Box (Crucial 16px anti-zoom) */
+    .prompt-textarea {
+      width: 100%;
+      min-height: 110px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1.5px solid rgba(255, 120, 175, 0.35);
+      background: #fffcfd;
+      font-family: var(--font-sans);
+      font-size: 16px !important; /* Prevents auto-zoom on mobile */
+      color: var(--text-dark);
+      line-height: 1.5;
+      resize: vertical;
+      outline: none;
+      transition: all 0.2s ease;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+    .prompt-textarea:focus {
+      border-color: var(--rose-main);
+      box-shadow: 0 0 0 3px rgba(255, 42, 122, 0.15), inset 0 1px 4px rgba(0, 0, 0, 0.02);
+      background: #ffffff;
+    }
+
+    /* Quick Occasion Selection Chips */
+    .chips-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin: 14px 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chips-row {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px;
+    }
+    .chips-row::-webkit-scrollbar { display: none; }
+    .occ-chip-btn {
+      flex: 0 0 auto;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #fff5f8;
+      border: 1.5px solid rgba(255, 120, 175, 0.28);
+      font-size: 12px;
+      font-weight: 750;
+      color: #5c3552;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .occ-chip-btn:hover {
+      border-color: var(--rose-main);
+      color: var(--rose-main);
+      background: #ffffff;
+      transform: translateY(-1px);
+    }
+    .occ-chip-btn.active {
+      background: var(--rose-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.28);
+    }
+
+    /* Generator Controls Grid */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0 18px;
+    }
+    @media (max-width: 600px) {
+      .controls-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .ctrl-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .ctrl-field label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+    .ctrl-input {
+      height: 44px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(255, 120, 175, 0.3);
+      background: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 16px !important;
+      color: var(--text-dark);
+      outline: none;
+      transition: all 0.2s;
+    }
+    .ctrl-input:focus {
+      border-color: var(--rose-main);
+      box-shadow: 0 0 0 3px rgba(255, 42, 122, 0.12);
+    }
+
+    /* Primary CTA Button */
+    .btn-create-ai {
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: var(--rose-gradient);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 900;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 28px rgba(255, 42, 122, 0.35);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-create-ai:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 34px rgba(255, 42, 122, 0.45);
+    }
+    .btn-create-ai:active {
+      transform: scale(0.98);
+    }
+
+    /* 4. Interactive Generated Result Card */
+    .result-card {
+      background: #ffffff;
+      border: 2px solid rgba(255, 42, 122, 0.4);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: 0 16px 45px rgba(255, 42, 122, 0.1);
+      margin-bottom: 34px;
+      position: relative;
+      display: block;
+    }
+    .result-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 850;
+      color: var(--rose-main);
+      background: rgba(255, 42, 122, 0.08);
+      padding: 4px 12px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 42, 122, 0.2);
+    }
+    .result-status-pill {
+      font-size: 11px;
+      font-weight: 700;
+      color: #059669;
+      background: #ecfdf5;
+      padding: 3px 10px;
+      border-radius: 99px;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* Luxury Letter Box */
+    .letter-box {
+      background: linear-gradient(145deg, #fffcfd 0%, #fff7fa 100%);
+      border: 1.5px solid rgba(255, 120, 175, 0.3);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.015);
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .letter-content {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 2.8vw, 19px);
+      line-height: 1.7;
+      color: #2c1224;
+      white-space: pre-line;
+      outline: none;
+      min-height: 140px;
+    }
+    .letter-tip {
+      font-size: 10.5px;
+      color: var(--text-subtle);
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Magic Action Buttons Ribbon */
+    .magic-actions-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .magic-actions-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .magic-btn {
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1.5px solid rgba(255, 120, 175, 0.3);
+      font-size: 12px;
+      font-weight: 750;
+      color: #4a2840;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .magic-btn:hover {
+      background: #fff5f8;
+      border-color: var(--rose-main);
+      color: var(--rose-main);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.15);
+    }
+    .magic-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Language Switcher Ribbon */
+    .lang-switcher-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      background: rgba(255, 42, 122, 0.04);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 42, 122, 0.15);
+    }
+    .lang-switcher-lbl {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #5c3552;
+      margin-right: 4px;
+    }
+    .lang-chip-btn {
+      padding: 5px 12px;
+      border-radius: 99px;
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.25);
+      font-size: 11.5px;
+      font-weight: 750;
+      color: #5c3552;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-chip-btn:hover {
+      border-color: var(--rose-main);
+      color: var(--rose-main);
+    }
+    .lang-chip-btn.active {
+      background: var(--rose-main);
+      color: #ffffff;
+      border-color: var(--rose-main);
+      font-weight: 850;
+    }
+
+    /* Matching Template Recommendation Pill */
+    .template-match-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #fffcf6 0%, #fff7ed 100%);
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+    .match-info-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .match-icon { font-size: 26px; }
+    .match-title {
+      font-size: 13px;
+      font-weight: 850;
+      color: #2c1224;
+    }
+    .match-sub {
+      font-size: 11px;
+      color: var(--gold-main);
+      font-weight: 700;
+    }
+    .btn-preview-match {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--gold-main);
+      background: #ffffff;
+      border: 1px solid rgba(217, 119, 6, 0.35);
+      padding: 6px 14px;
+      border-radius: 99px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .btn-preview-match:hover {
+      background: var(--gold-main);
+      color: #ffffff;
+    }
+
+    /* Big Handoff to Builder Button */
+    .btn-use-moment {
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      font-size: 15.5px;
+      font-weight: 900;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+      transition: all 0.22s ease;
+      text-decoration: none;
+    }
+    .btn-use-moment:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.45);
+    }
+
+    /* 5. Separate Section: Ready-Made Wishes & Shayari Vault */
+    .inspiration-vault-section {
+      background: linear-gradient(160deg, #ffffff 0%, #fffbfd 100%);
+      border: 1.5px solid rgba(255, 120, 175, 0.28);
+      border-radius: 28px;
+      padding: 28px 22px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.03);
+      margin-top: 10px;
+    }
+    .vault-head {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .vault-kicker {
+      font-size: 11px;
+      font-weight: 850;
+      color: var(--lilac-main);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+    .vault-head h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 4.5vw, 34px);
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .vault-head p {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Inspiration Category Tabs */
+    .vault-tabs-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 0 16px;
+      flex-wrap: wrap;
+    }
+    .vault-tab-btn {
+      padding: 7px 16px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1.5px solid rgba(255, 120, 175, 0.28);
+      font-size: 12px;
+      font-weight: 750;
+      color: #5c3552;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      white-space: nowrap;
+    }
+    .vault-tab-btn:hover {
+      border-color: var(--rose-main);
+      color: var(--rose-main);
+      transform: translateY(-1px);
+    }
+    .vault-tab-btn.active {
+      background: var(--rose-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.28);
+      font-weight: 850;
+    }
+
+    /* Cards Grid */
+    .vault-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .vault-card {
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.25);
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s;
+    }
+    .vault-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--rose-main);
+      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.1);
+    }
+    .vault-card-body {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      white-space: pre-line;
+    }
+    .vault-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .vault-tpl-badge {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #9333ea;
+      background: #faf5ff;
+      border: 1px solid #e9d5ff;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .vault-card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: auto;
+    }
+    .btn-vault-load {
+      padding: 7px 10px;
+      border-radius: 10px;
+      background: #fff0f5;
+      border: 1px solid rgba(255, 42, 122, 0.25);
+      color: var(--rose-main);
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .btn-vault-load:hover {
+      background: var(--rose-main);
+      color: #fff;
+    }
+    .btn-vault-use {
+      padding: 7px 10px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--rose-main), #ec4899);
+      border: none;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 850;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.22);
+    }
+    .btn-vault-use:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.32);
+    }
+
+    /* Footer */
+    footer {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 30px 16px 20px;
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-subtle);
+      border-top: 1px solid rgba(255, 120, 175, 0.2);
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 6px;
+    }
+    footer a:hover {
+      color: var(--rose-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <a href="index.html" class="header-brand" title="Vanvi Moments">
+      <svg viewBox="0 0 26 26" fill="none" class="brand-spark">
+        <defs>
+          <linearGradient id="aiSparkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ff2a7a"/>
+            <stop offset="50%" stop-color="#a855f7"/>
+            <stop offset="100%" stop-color="#d97706"/>
+          </linearGradient>
+        </defs>
+        <path d="M13 2 C13 7.8 15.2 10 21 13 C15.2 16 13 18.2 13 24 C13 18.2 10.8 16 5 13 C10.8 10 13 7.8 13 2 Z" fill="url(#aiSparkGrad)"/>
+        <circle cx="13" cy="13" r="2.8" fill="#ffffff"/>
+        <circle cx="13" cy="13" r="1.5" fill="#ff007a"/>
+      </svg>
+      <span class="brand-title">VANVI <span style="color:#ff007a;">♡</span> MOMENTS</span>
+      <span class="ai-badge">AI STUDIO</span>
+    </a>
+
+    <div class="header-actions">
+      <a href="plans.html" class="btn-header-link btn-plans-link">💎 VIP Plans</a>
+      <a href="dashboard.html" class="btn-header-link btn-moments-link mobile-hide">📁 My Moments</a>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs Bar -->
+  <div class="breadcrumb-bar">
+    <a class="vanvi-btn-back" href="javascript:void(0)" onclick="return safeGoBack()">
+      <span class="back-arrow">‹</span> <span>Back</span>
+    </a>
+    <div class="breadcrumb-trail">
+      <a href="index.html">Home</a> / <a href="templates.html">Templates</a> / <span>Vanvi AI Studio</span>
+    </div>
+  </div>
+
+  <main class="studio-wrapper">
+
+    <!-- 1. Hero Section -->
+    <section class="studio-hero">
+      <div class="hero-kicker-pill">
+        <span>✨</span> VANVI AI CREATIVE STUDIO
+      </div>
+      <h1>Tell Vanvi what you feel.</h1>
+      <p>We’ll turn it into a beautiful message and memorable moment.</p>
+    </section>
+
+    <!-- 2. Realistic 3-Second Flow Showcase Card -->
+    <section class="flow-showcase-card">
+      <div class="showcase-head">
+        <div class="showcase-badge">
+          <span>⚡</span> <span>How Vanvi Works (Instant 3-Step Flow):</span>
+        </div>
+        <div class="showcase-steps-visual">
+          <span>Vanvi AI</span> <span>→</span> <span>Beautiful Message</span> <span>→</span> <span>Use in My Moment ✨</span>
+        </div>
+      </div>
+
+      <div class="showcase-bubbles-grid">
+        <!-- Step 1: User -->
+        <div class="showcase-bubble bubble-user">
+          <div class="bubble-label"><span>👤</span> 1. What You Say</div>
+          <div class="bubble-quote">“My best friend’s birthday is coming. Make something emotional and cute.”</div>
+        </div>
+
+        <div class="showcase-arrow">→</div>
+
+        <!-- Step 2: AI Creation -->
+        <div class="showcase-bubble bubble-ai">
+          <div class="bubble-label"><span>✨</span> 2. Vanvi AI Writes</div>
+          <div class="bubble-quote">“Happy Birthday to my favorite human! Another year of belly laughs, midnight secrets, and unshakeable friendship. Cheers to you, bestie! 🎂💖”</div>
+        </div>
+
+        <div class="showcase-arrow">→</div>
+
+        <!-- Step 3: Moment Studio -->
+        <div class="showcase-bubble bubble-studio">
+          <div class="bubble-label"><span>🎨</span> 3. Creation Studio</div>
+          <div style="font-size: 11px; font-weight:700; color:#065f46; line-height:1.4;">
+            ✓ Injected with 1-Tap<br/>
+            ✓ Photos &amp; Music added<br/>
+            ✓ Ready for WhatsApp
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Primary Generator Card -->
+    <section class="generator-card">
+      <div class="generator-head">
+        <h2><span>💌</span> Tell Vanvi What You Want to Say</h2>
+        <p>Type normally in English, Hindi or Hinglish. Vanvi understands your heart.</p>
+      </div>
+
+      <!-- Main Input Textarea -->
+      <textarea 
+        id="aiPromptInput" 
+        class="prompt-textarea" 
+        placeholder="My best friend’s birthday is coming. Make something emotional and cute..."
+        aria-label="Your feeling or prompt for Vanvi AI"
+      ></textarea>
+
+      <!-- Occasion Chips Row -->
+      <div class="chips-label">
+        <span>Quick Occasion Picks:</span>
+        <span style="font-size: 10.5px; color: var(--rose-main);">Tap to apply style</span>
+      </div>
+      <div class="chips-row" id="occasionChipsRow">
+        <button type="button" class="occ-chip-btn active" data-occ="Birthday">🎂 Birthday</button>
+        <button type="button" class="occ-chip-btn" data-occ="Love">💖 Love &amp; Romance</button>
+        <button type="button" class="occ-chip-btn" data-occ="Friendship">🫂 Best Friends</button>
+        <button type="button" class="occ-chip-btn" data-occ="Anniversary">💍 Anniversary</button>
+        <button type="button" class="occ-chip-btn" data-occ="Sorry">💌 Sincere Apology</button>
+        <button type="button" class="occ-chip-btn" data-occ="Thank You">🙏 Heartfelt Thanks</button>
+        <button type="button" class="occ-chip-btn" data-occ="Shayari">✨ Romantic Shayari</button>
+      </div>
+
+      <!-- Controls: Recipient & Tone -->
+      <div class="controls-grid">
+        <div class="ctrl-field">
+          <label for="inputRecipientName">Who is this for? (Optional)</label>
+          <input type="text" id="inputRecipientName" class="ctrl-input" placeholder="Enter recipient name" value="My Special One"/>
+        </div>
+        <div class="ctrl-field">
+          <label for="inputSenderName">From (Your Name)</label>
+          <input type="text" id="inputSenderName" class="ctrl-input" placeholder="Enter your name" value="You"/>
+        </div>
+      </div>
+
+      <!-- Primary CTA -->
+      <button type="button" class="btn-create-ai" id="btnCreateWithVanvi">
+        <span>✨</span> <span>Create with Vanvi AI</span>
+      </button>
+    </section>
+
+    <!-- 4. Single Result Card & Magic Refinements -->
+    <section class="result-card" id="resultCard">
+      <div class="result-head">
+        <div class="result-badge">
+          <span>✨</span> <span id="txtResultOccasion">Birthday</span> Celebration Letter
+        </div>
+        <div class="result-status-pill">
+          ✓ Ready to Personalize &amp; Send
+        </div>
+      </div>
+
+      <!-- Letter Display Box -->
+      <div class="letter-box">
+        <div 
+          id="messageOutput" 
+          class="letter-content" 
+          contenteditable="true" 
+          spellcheck="false"
+          title="Click to edit text directly"
+        >Dearest Diya,
+
+On this day when the world welcomed you, I want time to pause just enough for you to feel how profoundly cherished you are.
+
+Your laughter turns ordinary moments into memories of pure gold. May the coming year bring you peace, boundless joy, and dreams that quietly become reality.
+
+Happy Birthday, with all my love. ✨🎂</div>
+        <div class="letter-tip">
+          <span>✏️</span> <span>Tip: You can click anywhere inside the text to edit or add personal inside jokes!</span>
+        </div>
+      </div>
+
+      <!-- Magic Actions Ribbon -->
+      <div class="magic-actions-label">Magic Actions (1-Tap Refinements):</div>
+      <div class="magic-actions-grid">
+        <button type="button" class="magic-btn" data-action="emotional" id="btnMoreEmotional">
+          <span>💖</span> <span>More Emotional</span>
+        </button>
+        <button type="button" class="magic-btn" data-action="cute" id="btnMoreCute">
+          <span>🌸</span> <span>More Cute</span>
+        </button>
+        <button type="button" class="magic-btn" data-action="cinematic" id="btnCinematic">
+          <span>🎬</span> <span>Cinematic</span>
+        </button>
+        <button type="button" class="magic-btn" data-action="shorter" id="btnShorter">
+          <span>✂️</span> <span>Shorter</span>
+        </button>
+        <button type="button" class="magic-btn" data-action="rewrite" id="btnRewrite">
+          <span>🔄</span> <span>Rewrite</span>
+        </button>
+      </div>
+
+      <!-- Language Switcher Ribbon -->
+      <div class="lang-switcher-row">
+        <span class="lang-switcher-lbl">Language:</span>
+        <button type="button" class="lang-chip-btn active" data-lang="en">🇬🇧 English</button>
+        <button type="button" class="lang-chip-btn" data-lang="hi">🇮🇳 हिंदी (Hindi)</button>
+        <button type="button" class="lang-chip-btn" data-lang="hinglish">🇮🇳 Hinglish</button>
+      </div>
+
+      <!-- Matching Template Recommendation Tag -->
+      <div class="template-match-banner" id="matchBanner">
+        <div class="match-info-left">
+          <div class="match-icon" id="matchIcon">🌸</div>
+          <div>
+            <div class="match-title" id="matchTitle">Pairs with: Birthday White Bloom</div>
+            <div class="match-sub" id="matchSub">Features 3D tap candle blow + wax-sealed envelope</div>
+          </div>
+        </div>
+        <a href="builder.html?template=birthday-white-bloom-001" id="linkMatchPreview" class="btn-preview-match" target="_blank">
+          Preview Template ↗
+        </a>
+      </div>
+
+      <!-- Big Handoff to Builder Button -->
+      <button type="button" class="btn-use-moment" id="btnCreateMyMoment">
+        <span>✨</span> <span>Use in My Moment →</span>
+      </button>
+    </section>
+
+    <!-- 5. Separate Section: Ready-Made Wishes & Shayari Vault -->
+    <section class="inspiration-vault-section" id="vaultSection">
+      <div class="vault-head">
+        <div class="vault-kicker">✦ Curated Inspiration Vault ✦</div>
+        <h2>Need Instant Inspiration?</h2>
+        <p>Pick a ready-made heartfelt message and take it straight into your celebration moment.</p>
+      </div>
+
+      <!-- Inspiration Category Tabs -->
+      <div class="vault-tabs-row" id="vaultTabsRow">
+        <button type="button" class="vault-tab-btn active" data-vault="birthday">🎂 Birthday</button>
+        <button type="button" class="vault-tab-btn" data-vault="love">💖 Love &amp; Romance</button>
+        <button type="button" class="vault-tab-btn" data-vault="friendship">🫂 Friendship</button>
+        <button type="button" class="vault-tab-btn" data-vault="anniversary">💍 Anniversary</button>
+        <button type="button" class="vault-tab-btn" data-vault="sorry">💌 Sorry / Apology</button>
+        <button type="button" class="vault-tab-btn" data-vault="thankyou">🙏 Thank You</button>
+        <button type="button" class="vault-tab-btn" data-vault="shayari">✨ Hindi Shayari</button>
+      </div>
+
+      <!-- Vault Cards Grid -->
+      <div class="vault-cards-grid" id="vaultCardsGrid">
+        <!-- Rendered dynamically by javascript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:12px 18px; margin-bottom:12px;">
+      <a href="index.html">Home</a>
+      <a href="templates.html">Templates</a>
+      <a href="builder.html">Studio</a>
+      <a href="plans.html">VIP Plans</a>
+      <a href="dashboard.html">My Moments</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQs</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+    <p>© 2026 Vanvi Moments · Vanvi AI Creative Studio · Handcrafted with emotion &amp; care.</p>
+  </footer>
+
+  <script>
+    // Navigation Safety Handler
+    function safeGoBack() {
+      if (history.length > 1) { history.back(); return false; }
+      window.location.href = 'index.html';
+      return false;
+    }
+  </script>
+
+  <script src="js/vanvi-api.js"></script>
+  <script id="vanvi-ai-studio-engine">
+  /* =========================================================
+     VANVI AI CREATIVE STUDIO ENGINE
+     Zero lag · Robust API calls with high-quality fallback
+     Magic Actions · Language Switching · Builder Handoff
+     ========================================================= */
+  (function initVanviAiStudio() {
+    // DOM Elements
+    const promptInput = document.getElementById('aiPromptInput');
+    const inputRecipientName = document.getElementById('inputRecipientName');
+    const inputSenderName = document.getElementById('inputSenderName');
+    const btnCreateWithVanvi = document.getElementById('btnCreateWithVanvi');
+    const resultCard = document.getElementById('resultCard');
+    const messageOutput = document.getElementById('messageOutput');
+    const txtResultOccasion = document.getElementById('txtResultOccasion');
+    const btnCreateMyMoment = document.getElementById('btnCreateMyMoment');
+    const occasionChips = document.querySelectorAll('#occasionChipsRow .occ-chip-btn');
+    const magicButtons = document.querySelectorAll('.magic-btn');
+    const langButtons = document.querySelectorAll('.lang-chip-btn');
+    
+    // Match banner elements
+    const matchIcon = document.getElementById('matchIcon');
+    const matchTitle = document.getElementById('matchTitle');
+    const matchSub = document.getElementById('matchSub');
+    const linkMatchPreview = document.getElementById('linkMatchPreview');
+
+    // Inspiration Vault Elements
+    const vaultTabs = document.querySelectorAll('.vault-tab-btn');
+    const vaultCardsGrid = document.getElementById('vaultCardsGrid');
+
+    // State
+    let currentOccasion = 'Birthday';
+    let currentTone = 'emotional';
+    let currentLanguage = 'en';
+    let currentTemplateId = 'birthday-white-bloom-001';
+
+    // 1. Curated Template Matching Map
+    const TEMPLATE_MATCHES = {
+      Birthday: {
+        id: 'birthday-white-bloom-001',
+        title: 'Pairs with: Birthday White Bloom',
+        sub: 'Features 3D tap candle blow + wax-sealed envelope',
+        icon: '🌸',
+        url: 'builder.html?template=birthday-white-bloom-001'
+      },
+      Love: {
+        id: 'love-forever',
+        title: 'Pairs with: Midnight Romance 3D',
+        sub: 'Interactive heartbeat aura & memory reel',
+        icon: '💖',
+        url: 'builder.html?template=love-forever'
+      },
+      Friendship: {
+        id: 'best-friends-forever',
+        title: 'Pairs with: Retro Bestie Memory Wall',
+        sub: 'Cassette soundtrack & photo Polaroid stack',
+        icon: '🫂',
+        url: 'builder.html?template=best-friends-forever'
+      },
+      Anniversary: {
+        id: 'anniversary-golden-bloom',
+        title: 'Pairs with: Golden Milestone 3D',
+        sub: 'Champagne toast countdown & luxury gold seal',
+        icon: '💍',
+        url: 'builder.html?template=anniversary-golden-bloom'
+      },
+      Sorry: {
+        id: 'soft-apology-letter',
+        title: 'Pairs with: Whispering Lilac Envelope',
+        sub: 'Gentle unfolding paper letter with serene melody',
+        icon: '💌',
+        url: 'builder.html?template=soft-apology-letter'
+      },
+      'Thank You': {
+        id: 'gratitude-garden',
+        title: 'Pairs with: Pure Gratitude Bloom',
+        sub: 'Floating blossoms & heartfelt keepsake card',
+        icon: '🙏',
+        url: 'builder.html?template=gratitude-garden'
+      },
+      Shayari: {
+        id: 'urdu-shayari-velvet',
+        title: 'Pairs with: Velvet Royal Shayari',
+        sub: 'Calligraphy parchment & acoustic sitar notes',
+        icon: '✨',
+        url: 'builder.html?template=urdu-shayari-velvet'
+      }
+    };
+
+    function updateMatchBanner(occ) {
+      const match = TEMPLATE_MATCHES[occ] || TEMPLATE_MATCHES.Birthday;
+      currentTemplateId = match.id;
+      if (matchIcon) matchIcon.textContent = match.icon;
+      if (matchTitle) matchTitle.textContent = match.title;
+      if (matchSub) matchSub.textContent = match.sub;
+      if (linkMatchPreview) linkMatchPreview.href = match.url;
+    }
+
+    // 2. High-Quality Offline / Fallback Generator Dictionary
+    const DICTIONARY = {
+      Birthday: {
+        en: {
+          emotional: (rec, sen) => `Dearest ${rec},\n\nOn this day when the world welcomed you, I want time to pause just enough for you to feel how profoundly cherished you are.\n\nYour laughter turns ordinary moments into memories of pure gold. May the coming year shower you with peace, genuine laughter, and dreams that quietly become reality.\n\nHappy Birthday, with all my love. ✨🎂`,
+          cute: (rec, sen) => `Happy, happy birthday to my favorite human, ${rec}! 🎂✨\n\nYou bring so much chaotic sunshine and giggles into my life. Here is to 365 more days of laughing at our own bad jokes, eating cake for breakfast, and making endless cute memories! Stay adorable! 🌸🍰`,
+          cinematic: (rec, sen) => `Scene 1. A quiet night, glowing candles, and a soul meant to shine across galaxies.\n\nHappy Birthday, ${rec}. In the story of our lives, having you by my side is the greatest chapter ever written. May your year be an unforgettable cinematic masterpiece. 🎬🥂`,
+          shorter: (rec, sen) => `To the one who brings magic to every room they step into: Happy Birthday, ${rec}! Wishing you love, laughter, and your biggest dreams. 🎂✨`
+        },
+        hi: {
+          emotional: (rec, sen) => `प्रिय ${rec},\n\nतुम्हारे इस खास जन्मदिन पर दिल से यही दुआ है कि तुम्हारी जिंदगी का हर एक पल खुशियों से महके।\n\nतुम्हारा साथ जिंदगी का सबसे खूबसूरत तोहफा है। भगवान करे तुम्हारे चेहरे की यह प्यारी मुस्कान हमेशा यूं ही चमकती रहे। जन्मदिन की ढेर सारी शुभकामनाएं! 🎂💖`,
+          cute: (rec, sen) => `हैप्पी बर्थडे ${rec}! 🎉🌸\n\nतुम जितनी स्वीट हो, उतनी ही नटखट भी! आज केक पर सिर्फ तुम्हारा हक है। भगवान करे तुम्हारी जिंदगी में कभी मीठे की और खुशियों की कमी न हो! 🍰🎈`,
+          cinematic: (rec, sen) => `तारीखों के इस सफर में, कुछ दिन खास होते हैं। पर जिस दिन तुम इस दुनिया में आए, वो दिन सबसे अनमोल था। जन्मदिन मुबारक हो ${rec}! 🎬✨`,
+          shorter: (rec, sen) => `जन्मदिन की अनमोल शुभकामनाएं ${rec}! आपकी मुस्कान हमेशा सलामत रहे। 🎂✨`
+        },
+        hinglish: {
+          emotional: (rec, sen) => `Dearest ${rec},\n\nTumhari muskaan me ek aisi roshni hai jo kisi bhi udaas din ko roshan kar sakti hai.\n\nHar saal aayega aur jayega, par ye dua hamesha rahegi — tumhari aankhon me khushi ke aage koi aansu na ruke. Happy Birthday, hamesha aise hi chamakte rehna! 💖✨`,
+          cute: (rec, sen) => `Happy Birthday ${rec}! 🎂🍰\n\nTumhare sath waqt kaise nikal jata hai pata hi nahi chalta. Aise hi cute, pagalpanti aur laughter se bhari raho. Cake khilana mat bhoolna! 🌸`,
+          cinematic: (rec, sen) => `Har kahani me ek sabse pyara character hota hai. Hamari zindagi ki kahani me, wo tum ho. Happy Birthday ${rec}! 🎬✨`,
+          shorter: (rec, sen) => `Happy Birthday ${rec}! Keep smiling, keep shining. Hamesha khush raho! 🎂💖`
+        }
+      },
+      Love: {
+        en: {
+          emotional: (rec, sen) => `My beloved ${rec},\n\nIn a world moving too fast, falling in love with you felt like finally learning how to breathe. You are my safe harbor, my favorite laughter, and every quiet thought before sleep.\n\nNo distance or time could ever change what your hand in mine feels like. Here is to all our unspoken glances and every tomorrow we have yet to live. ❤️`,
+          cute: (rec, sen) => `Hey ${rec}! Just a reminder that you are my favorite notification, my sweetest distraction, and the reason my phone battery is always dead. I adore you more than chai on a rainy evening! ☕💕`,
+          cinematic: (rec, sen) => `Out of eight billion souls spinning under the same stars, my heart looked across the crowd and whispered: “There they are.” Forever yours, ${rec}. 🎬✨`,
+          shorter: (rec, sen) => `In a world of temporary things, you are my favorite forever. Love you, ${rec}. 💌✨`
+        },
+        hi: {
+          emotional: (rec, sen) => `मेरे प्रिय ${rec},\n\nतुम सिर्फ मेरा प्यार नहीं, मेरा सुकून हो। तुम्हारे साथ हर एक दिन एक खूबसूरत दुआ की तरह महसूस होता है। जब तक सांसें हैं, मेरा दिल सिर्फ तुम्हारे लिए धड़केगा। ❤️`,
+          cute: (rec, sen) => `सुनो ${rec}, तुम इतनी प्यारी क्यों हो? तुम्हारे बिना एक पल भी अधूरा सा लगता है। हमेशा मेरे साथ रहना! 🌸💕`,
+          cinematic: (rec, sen) => `हजारों चेहरों की भीड़ में, मेरी निगाहें सिर्फ तुम्हें ढूंढती हैं। मोहब्बत की इस दास्तां में, तुम मेरा मुकम्मल जहां हो। ✨💍`,
+          shorter: (rec, sen) => `तुमसे शुरू, तुम पर खत्म मेरी हर बात। बहुत प्यार करता हूँ तुमसे ${rec}। ❤️`
+        },
+        hinglish: {
+          emotional: (rec, sen) => `Mere pyaare ${rec},\n\nTumhare sath waqt kahan guzar jata hai pata hi nahi chalta. Ek cup chai aur tumhari baatein — zindagi me isse pyara lamha aur kuch ho hi nahi sakta.\n\nBas itna kehna tha: I will choose you in every lifetime. Forever and always. 💕`,
+          cute: (rec, sen) => `Hey ${rec}, tum meri favorite ho! Jab tum muskurati ho na, toh sach me mera pura din ban jata hai. Love you so much! 🌸✨`,
+          cinematic: (rec, sen) => `Zindagi ki is bheed me, tum mera sabse khoobsurat ittefaq ho. Hamesha ke liye sirf tumhara, ${sen}. 🎬💖`,
+          shorter: (rec, sen) => `Just you and me against the world. Always loved, ${rec}. 💌`
+        }
+      },
+      Friendship: {
+        en: {
+          emotional: (rec, sen) => `To my partner in crime, ${rec},\n\nFriendship isn't about who you've known the longest. It's about who walked into your life and said, “I'm here for you,” and proved it.\n\nThank you for listening to my rants, keeping my deepest secrets, and being my rock through every storm. You are family to me. 🫂✨`,
+          cute: (rec, sen) => `Bestie ${rec}! We are going to be those weird best friends in the nursing home causing absolute havoc. Thanks for always sharing your snacks and matching my crazy energy! 🍕💖`,
+          cinematic: (rec, sen) => `Two wanderers, one crazy adventure. Through high tides and silent nights, our bond remains unbreakable. Proud to call you my brother/sister in this life. 🎬🥂`,
+          shorter: (rec, sen) => `Real friends are rare, and you are priceless. Grateful for you every day, ${rec}! 🫂`
+        },
+        hi: {
+          emotional: (rec, sen) => `मेरे सच्चे दोस्त ${rec},\n\nदोस्ती का मतलब सिर्फ साथ घूमना नहीं, बल्कि बिना कहे एक दूसरे के दर्द को समझ लेना है। तुमने हर मोड़ पर मेरा साथ निभाया है। तुम्हारी दोस्ती मेरे लिए अनमोल है। 🫂❤️`,
+          cute: (rec, sen) => `अरे दोस्त! तेरे जैसा पागल मिलना मुश्किल ही नहीं नामुमकिन है। पर जो भी है, तू मेरा सबसे प्यारा यार है! 🌸🍕`,
+          cinematic: (rec, sen) => `यारी का यह कारवां जिंदगी भर यूं ही चलता रहेगा। चाहे दुनिया इधर की उधर हो जाए, हमारी दोस्ती हमेशा जिंदा रहेगी। 🎬✨`,
+          shorter: (rec, sen) => `तेरे जैसा यार कहां! हमेशा साथ रहने के लिए शुक्रिया ${rec}। 🫂`
+        },
+        hinglish: {
+          emotional: (rec, sen) => `Dearest ${rec},\n\nZindagi me dost toh bohot aate hain, par tere jaisa koi nahi. Jab bhi koi mushkil aayi, tune bina puche hath tham liya. Thanks for being my real backbone! 🫂✨`,
+          cute: (rec, sen) => `Oye ${rec}! Agar tu pagal nahi hota toh meri life kitni boring hoti! Chal ab jaldi mil, bohot sari baatein karni hain. 🍕`,
+          cinematic: (rec, sen) => `Dosti ki is kahani me har lamha ek blockbuster hai. Yaari hamesha zindabad! 🎬🔥`,
+          shorter: (rec, sen) => `Best friends forever. Zero formalities, pure love! 🫂❤️`
+        }
+      },
+      Anniversary: {
+        en: {
+          emotional: (rec, sen) => `Dearest ${rec},\n\nAnother year of writing our story, chapter by chapter, through gentle mornings and shared challenges.\n\nWhat we share isn't just love — it is trust, patience, and the warmth of always knowing who holds your hand in the dark. Happy Anniversary! 💍🥂`,
+          cute: (rec, sen) => `Happy Anniversary, ${rec}! 365 more days of loving you and not getting tired of your goofy jokes. You’re still my favorite person to annoy! 🥂💕`,
+          cinematic: (rec, sen) => `Seasons change and years roll by, but the promise we made remains golden. Here is to our eternal romance. Happy Anniversary! 🎬💍`,
+          shorter: (rec, sen) => `365 more days of loving you, and I’m ready for a lifetime more. Happy Anniversary, ${rec}! 💍`
+        },
+        hi: {
+          emotional: (rec, sen) => `सालगिरह की ढेरों शुभकामनाएं ${rec}! तुम्हारे साथ बिताया हर एक साल यह साबित करता है कि सच्चे प्यार की कोई सीमा नहीं होती। हम दोनों की यह जोड़ी हमेशा सलामत रहे। 💍🥂`,
+          cute: (rec, sen) => `हैप्पी एनिवर्सरी ${rec}! एक और साल बीत गया तुम्हारे नखरे उठाते हुए! पर सच कहूं, तुमसे ज्यादा प्यारा कोई नहीं। 🌸💕`,
+          cinematic: (rec, sen) => `एक दूजे के वादों से सजी यह दास्तान हर साल और हसीन होती जा रही है। सालगिरह मुबारक हो! 🎬✨`,
+          shorter: (rec, sen) => `सालगिरह मुबारक हो ${rec}! हमेशा यूं ही साथ निभाते रहेंगे। 💍`
+        },
+        hinglish: {
+          emotional: (rec, sen) => `Happy Anniversary ${rec}! Ek aur saal guzar gaya aur hamara bond pehle se bhi gehra ho gaya. Tumhare sath zindagi ka har pal khoobsurat hai. 💍🥂`,
+          cute: (rec, sen) => `Happy Anniversary partner! Ek aur saal jhel liya ek doosre ko, and I still love you the most! 💕`,
+          cinematic: (rec, sen) => `Humari love story kisi film se kam nahi. Happy Anniversary my life! 🎬💍`,
+          shorter: (rec, sen) => `Happy Anniversary ${rec}! Forever and always together. 💍`
+        }
+      },
+      Sorry: {
+        en: {
+          emotional: (rec, sen) => `Dear ${rec},\n\nI am sincerely sorry for hurting you. My intention was never to cause you pain, but I realize my words/actions fell short.\n\nYour happiness and peace matter more to me than my pride. I hope you can find it in your heart to forgive me. I promise to do better. 💌🕊️`,
+          cute: (rec, sen) => `I am so, so sorry, ${rec}! 🥺 Please forgive me? I promise to bring your favorite chocolates and listen to you without interrupting. No more silly fights, deal? 🌸`,
+          cinematic: (rec, sen) => `A silence heavier than words. I stand accountable and genuinely sorry for my mistake. You mean everything to me, ${rec}. 🎬🕊️`,
+          shorter: (rec, sen) => `I'm truly sorry, ${rec}. Please forgive me. You mean the world to me. 💌`
+        },
+        hi: {
+          emotional: (rec, sen) => `प्रिय ${rec},\n\nमेरी किसी बात से अगर तुम्हारा दिल दुखा हो, तो मैं दिल से माफी मांगता हूँ। मेरा मकसद कभी तुम्हें दुख पहुंचाना नहीं था। प्लीज मुझे माफ कर दो। 🕊️`,
+          cute: (rec, sen) => `सॉरी ना ${rec}! 🥺 अब गुस्सा छोड़ भी दो। देखो मैं कान पकड़कर माफी मांग रहा हूँ! 🌸`,
+          cinematic: (rec, sen) => `गलती मेरी थी, और पछतावा भी मेरा। तुम्हारे बिना यह खामोशी सही नहीं जाती। माफ कर दो ${rec}। 🎬`,
+          shorter: (rec, sen) => `दिल से सॉरी ${rec}। प्लीज माफ कर दो। 🕊️`
+        },
+        hinglish: {
+          emotional: (rec, sen) => `I am really sorry ${rec}. Mujhe realize hua ki meri wajah se tum hurt hui. Please forgive me, tum meri priority ho. 🕊️`,
+          cute: (rec, sen) => `Sorry baba! 🥺 Ab smile bhi kardo na. Tum gusse me bilkul achhi nahi lagti. Deal pakki? 🌸`,
+          cinematic: (rec, sen) => `Galti meri thi aur maafi bhi dil se hai. Please forgive me ${rec}. 🎬`,
+          shorter: (rec, sen) => `Truly sorry ${rec}. Give me one chance to fix it. 🕊️`
+        }
+      },
+      'Thank You': {
+        en: {
+          emotional: (rec, sen) => `Dearest ${rec},\n\nSometimes a simple “thank you” feels too quiet for how much gratitude my heart holds for you.\n\nThank you for believing in me when I doubted myself, for your kindness that never expects anything in return, and for simply being you. You are a true blessing. 🙏✨`,
+          cute: (rec, sen) => `Big, giant, squishy THANK YOU to ${rec}! You are a superhero disguised in everyday kindness. You deserve all the good karma and treats in the universe! 🌸🧁`,
+          cinematic: (rec, sen) => `In a noisy world, your quiet kindness was the guiding star. Grateful for your presence in my life, ${rec}. 🎬🙏`,
+          shorter: (rec, sen) => `Thank you for everything, ${rec}. I truly appreciate you from the bottom of my heart! 🙏✨`
+        },
+        hi: {
+          emotional: (rec, sen) => `प्रिय ${rec},\n\nतुमने जिस तरह हर मोड़ पर मेरा साथ दिया है, उसके लिए सिर्फ 'शुक्रिया' कहना काफी नहीं है। तुम्हारा उपकार और प्यार हमेशा मेरे दिल में रहेगा। बहुत-बहुत धन्यवाद! 🙏❤️`,
+          cute: (rec, sen) => `थैंक यू सो मच ${rec}! तुम सच में सबसे बेस्ट हो। तुम्हारे जैसा मददगार इंसान मिलना किस्मत की बात है! 🌸🧁`,
+          cinematic: (rec, sen) => `मुश्किल राहों में जब सबने मुंह फेरा, तब तुम्हारा हाथ था। दिल से धन्यवाद ${rec}! 🎬🙏`,
+          shorter: (rec, sen) => `आपके साथ और प्यार के लिए बहुत-बहुत शुक्रिया ${rec}! 🙏`
+        },
+        hinglish: {
+          emotional: (rec, sen) => `Dearest ${rec}, thank you so much! Tumne jis tarah meri help ki aur support diya, main hamesha yaad rakhunga. You are truly special! 🙏✨`,
+          cute: (rec, sen) => `Thank you ${rec}! Tu na sach me devta manus hai! Dil jeet liya tune. 🌸`,
+          cinematic: (rec, sen) => `Shukriya kehne ke liye shabd kam hain. Dil se aabhar ${rec}! 🎬🙏`,
+          shorter: (rec, sen) => `Thank you for always being there, ${rec}! 🙏`
+        }
+      },
+      Shayari: {
+        en: {
+          emotional: (rec, sen) => `“In the quiet library of my heart,\nevery shelf is filled with your name.\nThrough every season of sun and rain,\nmy soul will choose you just the same.”\n\n— For my dearest ${rec} ✨`,
+          cute: (rec, sen) => `“A cup of warm coffee, a sprinkle of sweet,\nWith you in my life, every day is a treat!” 🌸☕`,
+          cinematic: (rec, sen) => `“Across galaxies of wandering light,\nmy soul recognized your gaze in the night.\nNot by chance, but by written decree,\nyou were crafted by heaven for me.” 🎬✨`,
+          shorter: (rec, sen) => `“Tere aane se mehki hai zindagi meri,\nHar lamha dua hai khushaal ho teri.” ✨`
+        },
+        hi: {
+          emotional: (rec, sen) => `“हजारों चेहरों में बस एक तुम भाए हो,\nखुदा जाने किस सादगी से दिल में समाए हो।\nना कोई तमन्ना है, ना कोई आरजू,\nबस तुम्हारी खुशी में मेरी दुनिया बसाए हो।”\n\n— तुम्हारे लिए, ${rec} 💖✨`,
+          cute: (rec, sen) => `“थोड़ी सी मीठी, थोड़ी सी नादान,\nमेरी प्यारी सी दोस्त, तू है मेरी जान!” 🌸🍰`,
+          cinematic: (rec, sen) => `“तेरी एक नजर से संवर जाती है शाम मेरी,\nतू बन गया है अब तो पहचान मेरी।” 🎬✨`,
+          shorter: (rec, sen) => `“खुदा करे तुम्हारी हर दुआ कबूल हो,\nतुम्हारे कदमों में खुशियों का फूल हो।” 🌸`
+        },
+        hinglish: {
+          emotional: (rec, sen) => `“Teri muskaan se roshan har sawera mera,\nTere bina adhura sa hai basera mera.\nTu khush rahe sada rab se yahi fariyaad hai,\nHar dhadkan me bas tera hi naam aabad hai.”\n\n— For you ${rec} 💖`,
+          cute: (rec, sen) => `“Coffee thandi ho jaye par baatein nahi,\nTere jaisi dost duniya me doosri nahi!” ☕🌸`,
+          cinematic: (rec, sen) => `“Mohabbat ki rahon me tera sath chahiye,\nZindagi bhar ke liye bas tera hath chahiye.” 🎬✨`,
+          shorter: (rec, sen) => `“Har lamha khushaal ho tumhara,\nTum jiyo hazaron saal yahi armaan hamara.” ✨`
+        }
+      }
+    };
+
+    // 3. Inspiration Vault Dataset
+    const VAULT_DATA = {
+      birthday: [
+        {
+          meta: '🌸 Emotional Blessing',
+          tpl: 'Birthday White Bloom',
+          text: `Wishing you another 365 days of quiet laughter, golden sunsets, and big dreams. May your year be as bright and beautiful as your smile. Happy Birthday! 🎂✨`
+        },
+        {
+          meta: '💖 Romantic Birthday',
+          tpl: 'Midnight Wish 3D',
+          text: `Happy Birthday to the one who holds my heart. Meeting you was fate, loving you is home. May every wish you make under the stars tonight come true. 🎂❤️`
+        },
+        {
+          meta: '🫂 Bestie Fun',
+          tpl: 'Birthday White Bloom',
+          text: `Happy Birthday bestie! Thank you for being the person I can call at 2 AM without apologizing. Let’s make this year completely unforgettable! 🍰🎈`
+        }
+      ],
+      love: [
+        {
+          meta: '💌 Heartfelt Promise',
+          tpl: 'Midnight Romance 3D',
+          text: `In a crowded world moving too fast, you are my quiet safe harbor. I love you not just for who you are, but for who I become when I am with you. Forever and always. 💕`
+        },
+        {
+          meta: '☕ Cute Everyday Love',
+          tpl: 'Midnight Romance 3D',
+          text: `You are my favorite notification, my sweetest morning thought, and my cozy evening comfort. Loving you is the easiest thing I have ever done. 🌸`
+        },
+        {
+          meta: '💍 Deep Devotion',
+          tpl: 'Midnight Romance 3D',
+          text: `Every love story is beautiful, but ours is my absolute favorite. With every passing sunrise, my love for you grows deeper. You are my home. ❤️`
+        }
+      ],
+      friendship: [
+        {
+          meta: '🫂 Unshakeable Bond',
+          tpl: 'Best Friends Forever',
+          text: `Real friends don’t count the days, they make every day count. Thank you for standing by me through every high and low. You are irreplaceable. 🫂✨`
+        },
+        {
+          meta: '🍕 Nostalgic Chaos',
+          tpl: 'Best Friends Forever',
+          text: `Cheers to the ridiculous memories, inside jokes no one else understands, and the lifelong friendship we built out of pure chaos! Love you bestie! 🍕`
+        }
+      ],
+      anniversary: [
+        {
+          meta: '🥂 Golden Milestone',
+          tpl: 'Anniversary Golden Bloom',
+          text: `Another year of laughter, shared cups of chai, and choosing each other every single day. Happy Anniversary to the love of my life! 💍🥂`
+        },
+        {
+          meta: '💍 365 Days of Us',
+          tpl: 'Anniversary Golden Bloom',
+          text: `365 more days of loving you, and I’m ready for a lifetime more. Happy Anniversary to my forever partner! 🥂✨`
+        }
+      ],
+      sorry: [
+        {
+          meta: '🕊️ Sincere Forgiveness',
+          tpl: 'Whispering Lilac Letter',
+          text: `I am genuinely sorry for hurting your feelings. My intention was never to cause you pain. Your smile and peace mean everything to me. Please forgive me. 💌`
+        },
+        {
+          meta: '🌸 Heartfelt Reconciliation',
+          tpl: 'Whispering Lilac Letter',
+          text: `I value our bond way too much to let a foolish mistake stand between us. I am truly sorry and promise to listen and do better. 🕊️`
+        }
+      ],
+      thankyou: [
+        {
+          meta: '🙏 Deep Gratitude',
+          tpl: 'Pure Gratitude Bloom',
+          text: `Thank you for believing in me when I doubted myself, for your kindness that asks for nothing in return, and for simply being in my life. You are a true blessing. 🙏✨`
+        }
+      ],
+      shayari: [
+        {
+          meta: '✨ Romantic Urdu/Hindi',
+          tpl: 'Velvet Royal Shayari',
+          text: `“हजारों चेहरों में बस एक तुम भाए हो,\nखुदा जाने किस सादगी से दिल में समाए हो।\nना कोई तमन्ना है, ना कोई आरजू,\nबस तुम्हारी खुशी में मेरी दुनिया बसाए हो।” 💖`
+        },
+        {
+          meta: '🌸 Dosti Shayari',
+          tpl: 'Velvet Royal Shayari',
+          text: `“तेरी दोस्ती ने सिखाया है मुस्कुराना,\nगम के अंधेरों में भी उम्मीद जगाना।\nरहेगी सलामत यह यारी उम्र भर,\nकभी भूल ना पाएंगे तेरा यह याराना।” 🫂`
+        }
+      ]
+    };
+
+    function renderVault(cat) {
+      if (!vaultCardsGrid) return;
+      const list = VAULT_DATA[cat] || VAULT_DATA.birthday;
+      vaultCardsGrid.innerHTML = list.map(item => `
+        <article class="vault-card">
+          <div class="vault-card-meta">
+            <span style="font-size:11px; font-weight:800; color:var(--rose-main);">${escapeHtml(item.meta)}</span>
+            <span class="vault-tpl-badge">🌸 ${escapeHtml(item.tpl)}</span>
+          </div>
+          <div class="vault-card-body">${escapeHtml(item.text)}</div>
+          <div class="vault-card-actions">
+            <button type="button" class="btn-vault-load" onclick="window.loadVaultToPrompt('${encodeURIComponent(item.text)}', '${encodeURIComponent(cat)}')">
+              ✏️ Tweak in AI
+            </button>
+            <button type="button" class="btn-vault-use" onclick="window.useVaultDirectly('${encodeURIComponent(item.text)}', '${encodeURIComponent(cat)}', '${encodeURIComponent(item.tpl)}')">
+              ✨ Use in Studio →
+            </button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // Window helpers for vault
+    window.loadVaultToPrompt = function(encText, encCat) {
+      const text = decodeURIComponent(encText);
+      const cat = decodeURIComponent(encCat);
+      if (promptInput) promptInput.value = text;
+      if (messageOutput) messageOutput.textContent = text;
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    };
+
+    window.useVaultDirectly = function(encText, encCat, encTpl) {
+      const text = decodeURIComponent(encText);
+      const cat = decodeURIComponent(encCat);
+      const tpl = decodeURIComponent(encTpl);
+      const rec = (inputRecipientName && inputRecipientName.value.trim()) || 'My Special One';
+
+      const payload = {
+        recipient: rec,
+        occasion: cat,
+        text: text,
+        templateId: tpl
+      };
+      try {
+        sessionStorage.setItem('vanvi_transient_moment', JSON.stringify(payload));
+      } catch(e) {}
+
+      window.location.href = `builder.html?recipient=${encodeURIComponent(rec)}&occasion=${encodeURIComponent(cat)}&template=${encodeURIComponent(tpl)}`;
+    };
+
+    // 4. Content Generation Engine
+    async function generateContent() {
+      const rawPrompt = (promptInput && promptInput.value.trim()) || '';
+      const recipient = (inputRecipientName && inputRecipientName.value.trim()) || 'Diya';
+      const sender = (inputSenderName && inputSenderName.value.trim()) || 'You';
+
+      btnCreateWithVanvi.disabled = true;
+      btnCreateWithVanvi.innerHTML = '<span>⚡</span> <span>Vanvi is writing your message...</span>';
+
+      let generatedLetter = '';
+
+      // Try Server API first
+      try {
+        const response = await fetch('/api/ai/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt: rawPrompt,
+            occasion: currentOccasion,
+            recipient: recipient,
+            style: currentTone,
+            tone: currentTone,
+            language: currentLanguage
+          })
+        });
+
+        if (response.ok) {
+          const json = await response.json();
+          if (json && json.data && json.data.letter) {
+            generatedLetter = json.data.letter;
+          } else if (json && json.letter) {
+            generatedLetter = json.letter;
+          } else if (json && json.data && json.data.variations) {
+            generatedLetter = json.data.variations[currentTone] || json.data.variations.deep || json.data.variations.short;
+          }
+        }
+      } catch (err) {
+        console.warn('Backend AI call fell back to local emotional generator:', err);
+      }
+
+      // If backend was unreachable or returned empty, use rich client dictionary
+      if (!generatedLetter) {
+        const occDict = DICTIONARY[currentOccasion] || DICTIONARY.Birthday;
+        const langDict = occDict[currentLanguage] || occDict.en;
+        const generatorFn = langDict[currentTone] || langDict.emotional || langDict.deep;
+        if (typeof generatorFn === 'function') {
+          generatedLetter = generatorFn(recipient, sender);
+        } else {
+          generatedLetter = `Dearest ${recipient},\n\nWishing you boundless joy, peace, and endless smiles on your special day. Thank you for being you!\n\nWith love, ${sender} ✨`;
+        }
+      }
+
+      // Update DOM
+      if (messageOutput) {
+        messageOutput.textContent = generatedLetter;
+      }
+      if (txtResultOccasion) {
+        txtResultOccasion.textContent = currentOccasion;
+      }
+      updateMatchBanner(currentOccasion);
+
+      btnCreateWithVanvi.disabled = false;
+      btnCreateWithVanvi.innerHTML = '<span>✨</span> <span>Create with Vanvi AI</span>';
+
+      // Scroll smoothly to result
+      resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // 5. Event Listeners
+    if (btnCreateWithVanvi) {
+      btnCreateWithVanvi.addEventListener('click', generateContent);
+    }
+
+    // Occasion Chips
+    occasionChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        occasionChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentOccasion = chip.getAttribute('data-occ') || 'Birthday';
+        if (txtResultOccasion) txtResultOccasion.textContent = currentOccasion;
+        updateMatchBanner(currentOccasion);
+      });
+    });
+
+    // Magic Actions
+    magicButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.getAttribute('data-action');
+        currentTone = action;
+        generateContent();
+      });
+    });
+
+    // Language Chips
+    langButtons.forEach(chip => {
+      chip.addEventListener('click', () => {
+        langButtons.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentLanguage = chip.getAttribute('data-lang') || 'en';
+        generateContent();
+      });
+    });
+
+    // Vault Tabs
+    vaultTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        vaultTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const cat = tab.getAttribute('data-vault') || 'birthday';
+        renderVault(cat);
+      });
+    });
+
+    // Handoff to Builder
+    if (btnCreateMyMoment) {
+      btnCreateMyMoment.addEventListener('click', () => {
+        const recipient = (inputRecipientName && inputRecipientName.value.trim()) || 'My Special One';
+        const sender = (inputSenderName && inputSenderName.value.trim()) || 'You';
+        const message = (messageOutput && messageOutput.textContent.trim()) || '';
+
+        const payload = {
+          recipient,
+          sender,
+          occasion: currentOccasion,
+          text: message,
+          templateId: currentTemplateId
+        };
+
+        try {
+          sessionStorage.setItem('vanvi_transient_moment', JSON.stringify(payload));
+        } catch(e) {}
+
+        const targetUrl = `builder.html?recipient=${encodeURIComponent(recipient)}&sender=${encodeURIComponent(sender)}&occasion=${encodeURIComponent(currentOccasion)}&template=${encodeURIComponent(currentTemplateId)}`;
+        window.location.href = targetUrl;
+      });
+    }
+
+    // Helper: Escape HTML
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Init Initial Vault
+    renderVault('birthday');
+    updateMatchBanner('Birthday');
+
+  })();
+  </script>
+  <script src="js/vanvi-i18n.js"></script>
+  <!-- GLOBAL VANVI NAVIGATION DOCK -->
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
+  <title>Order Confirmation &amp; Celebration Keepsake — Vanvi Moments</title>
+  <meta content="Your customized digital moment has been successfully published, certified, and is ready to deliver." name="description"/>
+  <meta content="#fff5f8" name="theme-color"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="vanvi-inner-light.css"/>
+  <link rel="stylesheet" href="vanvi-navigation.css"/>
+  <script src="js/vanvi-templates-data.js"></script>
+
+  <style>
+  :root {
+    --bg-base: #fffbfd;
+    --bg-card: #ffffff;
+    --border-glass: rgba(255, 120, 175, 0.25);
+    --border-gold: rgba(217, 119, 6, 0.35);
+    --rose-primary: #ff2a7a;
+    --rose-soft: #ff78c3;
+    --gold-champagne: #d97706;
+    --gold-bright: #b45309;
+    --emerald-green: #10b981;
+    --cyan-neon: #0284c7;
+    --text-dark: #2c1224;
+    --text-white: #2c1224;
+    --text-cream: #2c1224;
+    --text-muted: #88627b;
+    --text-dim: #a68b9e;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+
+    /* Dynamic Theme Variables (overridden dynamically per template/occasion) */
+    --theme-accent: #ff2a7a;
+    --theme-accent-sec: #f59e0b;
+    --theme-glow: rgba(255, 42, 122, 0.25);
+    --theme-gradient: linear-gradient(135deg, #ff2a7a 0%, #f59e0b 100%);
+    --theme-light: rgba(255, 42, 122, 0.08);
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    background-color: #fff8fa;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(255, 42, 122, 0.08) 0%, transparent 55%),
+      radial-gradient(circle at 85% 25%, rgba(254, 243, 199, 0.4) 0%, transparent 50%),
+      radial-gradient(circle at 15% 45%, rgba(245, 208, 254, 0.35) 0%, transparent 60%),
+      linear-gradient(180deg, #fff5f8 0%, #fffbfd 45%, #fff7fa 100%);
+    background-attachment: fixed;
+    color: var(--text-dark);
+    font-family: var(--font-sans);
+    overflow-x: hidden !important;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Confetti Animation Canvas */
+  #confettiCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px clamp(14px, 3vw, 24px);
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-glass);
+  }
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-family: var(--font-serif);
+    font-size: clamp(15px, 4vw, 19px);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+  }
+  .brand-spark {
+    width: clamp(20px, 4.2vw, 24px);
+    height: clamp(20px, 4.2vw, 24px);
+    flex-shrink: 0;
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-header-link {
+    font-size: 11.5px;
+    font-weight: 750;
+    color: var(--text-dark);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--border-glass);
+    transition: all 0.2s;
+  }
+  .btn-header-link:hover {
+    color: var(--rose-primary);
+    border-color: var(--rose-primary);
+    background: #ffffff;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumb-bar {
+    max-width: 860px;
+    margin: 12px auto 0;
+    padding: 0 clamp(14px, 3vw, 20px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .vanvi-btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.90);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border-glass);
+    border-radius: 99px;
+    padding: 5px 12px;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--text-dark);
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(255, 42, 122, 0.05);
+    transition: all 0.2s;
+  }
+  .vanvi-btn-back:hover {
+    transform: translateY(-1px);
+    background: #fff0f6;
+    border-color: var(--rose-primary);
+    color: var(--rose-primary);
+  }
+  .breadcrumb-trail {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+  .breadcrumb-trail a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .breadcrumb-trail a:hover {
+    color: var(--rose-primary);
+  }
+
+  /* Main Container */
+  .page-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px clamp(14px, 3vw, 22px) 80px;
+  }
+
+  /* Success Card Wrapper */
+  .order-card {
+    background: #ffffff;
+    border: 1.5px solid var(--border-glass);
+    border-radius: 26px;
+    padding: clamp(20px, 4vw, 36px) clamp(16px, 3.5vw, 32px);
+    box-shadow: 0 16px 50px rgba(255, 42, 122, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.9);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Top Gold Ribbon Accent */
+  .order-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--theme-gradient);
+  }
+
+  /* Medallion Hero */
+  .status-badge-circle {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    position: relative;
+    box-shadow: 0 10px 30px var(--theme-glow);
+    animation: medallionPulse 2.8s ease-in-out infinite;
+  }
+  @keyframes medallionPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 10px 30px var(--theme-glow); }
+    50% { transform: scale(1.05); box-shadow: 0 16px 40px var(--theme-glow), 0 0 24px rgba(255, 42, 122, 0.2); }
+  }
+  .badge-success-glow {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(34, 197, 94, 0.28));
+    border: 2px solid var(--emerald-green);
+    color: var(--emerald-green);
+  }
+  .badge-pending-glow {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(217, 119, 6, 0.28));
+    border: 2px solid var(--gold-champagne);
+    color: var(--gold-bright);
+  }
+  .badge-failed-glow {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(220, 38, 38, 0.28));
+    border: 2px solid #ef4444;
+    color: #ef4444;
+  }
+
+  /* Occasion Tag Pill */
+  .occasion-pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 13px;
+    border-radius: 99px;
+    background: var(--theme-light);
+    border: 1px solid var(--border-glass);
+    color: var(--theme-accent);
+    font-size: 11px;
+    font-weight: 850;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 8px;
+  }
+
+  .order-title {
+    font-family: var(--font-serif);
+    font-size: clamp(26px, 5vw, 40px);
+    color: var(--text-dark);
+    margin-bottom: 6px;
+    line-height: 1.18;
+    text-align: center;
+  }
+  .order-title span {
+    background: var(--theme-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .order-subtitle {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.5;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ============================================================
+     LUXURY CERTIFICATE & RECEIPT PASS
+     ============================================================ */
+  .keepsake-certificate {
+    background: linear-gradient(145deg, #ffffff 0%, #fffdfa 40%, #fff7fa 100%);
+    border: 1.5px solid rgba(217, 119, 6, 0.35);
+    border-radius: 22px;
+    padding: 22px 20px;
+    margin-bottom: 26px;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(217, 119, 6, 0.06);
+  }
+  .certificate-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-12deg);
+    font-family: var(--font-serif);
+    font-size: clamp(38px, 8vw, 68px);
+    font-weight: 900;
+    color: rgba(255, 42, 122, 0.035);
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .cert-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed rgba(217, 119, 6, 0.28);
+    margin-bottom: 16px;
+  }
+  .cert-title-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cert-stamp-badge {
+    font-size: 10px;
+    font-weight: 850;
+    padding: 3px 9px;
+    border-radius: 99px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #059669;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 20px;
+  }
+  @media (max-width: 640px) {
+    .cert-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+
+  .cert-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .receipt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 120, 175, 0.12);
+    font-size: 13px;
+  }
+  .receipt-row:last-child {
+    border-bottom: none;
+  }
+  .receipt-label {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+  .receipt-value {
+    color: var(--text-dark);
+    font-weight: 800;
+    text-align: right;
+  }
+  .total-highlight {
+    font-size: 19px !important;
+    font-weight: 900 !important;
+    color: var(--gold-bright) !important;
+  }
+
+  /* Cashback Banner */
+  .cashback-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.15));
+    border: 1px dashed rgba(217, 119, 6, 0.4);
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-top: 14px;
+  }
+  .cashback-text {
+    font-size: 11.5px;
+    font-weight: 750;
+    color: #92400e;
+  }
+
+  /* ============================================================
+     DELIVERY ACTION CENTER (MULTI-CHANNEL SHARING)
+     ============================================================ */
+  .delivery-box {
+    background: linear-gradient(145deg, #ffffff 0%, #fffbfd 60%, #fff0f5 100%);
+    border: 1.5px solid rgba(255, 42, 122, 0.28);
+    border-radius: 22px;
+    padding: 24px 20px;
+    margin-bottom: 26px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(255, 42, 122, 0.05);
+  }
+  .delivery-box h3 {
+    font-family: var(--font-serif);
+    font-size: clamp(20px, 3.5vw, 26px);
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+  .delivery-box p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+    line-height: 1.45;
+  }
+
+  /* WhatsApp Hero Button */
+  .btn-share-whatsapp {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 22px;
+    border-radius: 99px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 900;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+    margin-bottom: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-share-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.48);
+  }
+
+  /* URL Copy Capsule */
+  .url-copy-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .url-input {
+    flex: 1;
+    background: #ffffff;
+    border: 1.5px solid var(--border-glass);
+    border-radius: 14px;
+    padding: 11px 14px;
+    color: #0284c7;
+    font-family: monospace;
+    font-size: 12.5px;
+    font-weight: 700;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .url-input:focus {
+    border-color: var(--rose-primary);
+  }
+  .btn-copy-url {
+    background: #ffffff;
+    border: 1.5px solid var(--rose-primary);
+    color: var(--rose-primary);
+    padding: 10px 18px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 850;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-copy-url:hover {
+    background: #fff0f6;
+    transform: translateY(-1px);
+  }
+
+  /* Dual Action Buttons (Share Studio + Recipient Preview) */
+  .share-action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 580px) {
+    .share-action-buttons {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+
+  .btn-action-studio {
+    background: linear-gradient(135deg, var(--rose-primary), #9333ea);
+    color: #ffffff;
+    font-weight: 850;
+    font-size: 13px;
+    padding: 12px 18px;
+    border-radius: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    box-shadow: 0 4px 16px rgba(255, 42, 122, 0.28);
+    transition: transform 0.2s, filter 0.2s;
+  }
+  .btn-action-studio:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+  }
+
+  .btn-view-moment {
+    background: #ffffff;
+    border: 1.5px solid var(--border-glass);
+    color: var(--text-dark);
+    font-weight: 850;
+    font-size: 13px;
+    padding: 12px 18px;
+    border-radius: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+  .btn-view-moment:hover {
+    background: #fff0f6;
+    border-color: var(--rose-primary);
+    color: var(--rose-primary);
+    transform: translateY(-1px);
+  }
+
+  /* QR Code Section */
+  .qr-preview-wrapper {
+    background: #ffffff;
+    border: 1px dashed rgba(217, 119, 6, 0.35);
+    border-radius: 18px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .qr-code-canvas {
+    background: #ffffff;
+    padding: 8px;
+    border-radius: 12px;
+    width: 110px;
+    height: 110px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-glass);
+  }
+  .qr-info-block {
+    text-align: left;
+    max-width: 280px;
+  }
+  .qr-title {
+    font-size: 13px;
+    font-weight: 850;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+  .qr-label {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .btn-download-qr {
+    background: #fffdf9;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+    color: #b45309;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 99px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+  }
+  .btn-download-qr:hover {
+    background: #fffbeb;
+    border-color: var(--gold-champagne);
+  }
+
+  /* Secondary Navigation */
+  .secondary-nav-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .btn-sec-link {
+    background: #ffffff;
+    border: 1.5px solid var(--border-glass);
+    color: var(--text-dark);
+    padding: 9px 18px;
+    border-radius: 99px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 750;
+    transition: all 0.2s;
+  }
+  .btn-sec-link:hover {
+    background: #fff0f6;
+    color: var(--rose-primary);
+    border-color: var(--rose-primary);
+    transform: translateY(-1px);
+  }
+
+  /* Luxury Toast Notification */
+  .vanvi-toast {
+    position: fixed;
+    bottom: 84px;
+    left: 50%;
+    transform: translateX(-50%) translateY(40px);
+    background: rgba(44, 18, 36, 0.95);
+    backdrop-filter: blur(16px);
+    color: #ffffff;
+    padding: 10px 22px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 120, 175, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 9999;
+    white-space: nowrap;
+  }
+  .vanvi-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  /* Footer */
+  footer {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+    border-top: 1px solid var(--border-glass);
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .footer-nav-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-bottom: 10px;
+  }
+  .footer-nav-row a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .footer-nav-row a:hover {
+    color: var(--rose-primary);
+  }
+
+  /* Mobile Tweaks */
+  @media (max-width: 680px) {
+    .page-container {
+      padding: 16px 12px 70px;
+    }
+    .order-card {
+      padding: 20px 14px;
+      border-radius: 20px;
+    }
+    .status-badge-circle {
+      width: 62px;
+      height: 62px;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .order-title {
+      font-size: 24px !important;
+    }
+    .order-subtitle {
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+    .keepsake-certificate {
+      padding: 16px 12px;
+      border-radius: 18px;
+      margin-bottom: 18px;
+    }
+    .delivery-box {
+      padding: 18px 12px;
+      border-radius: 18px;
+      margin-bottom: 18px;
+    }
+    .btn-share-whatsapp {
+      min-height: 48px;
+      font-size: 14px;
+      padding: 12px 18px;
+    }
+    .url-copy-row {
+      flex-direction: column;
+      gap: 6px;
+    }
+    .btn-copy-url {
+      width: 100%;
+      justify-content: center;
+      padding: 10px;
+    }
+    .qr-preview-wrapper {
+      flex-direction: column;
+      text-align: center;
+      padding: 12px;
+    }
+    .qr-info-block {
+      text-align: center;
+    }
+  }
+  </style>
+</head>
+<body class="has-vanvi-dock">
+
+<canvas id="confettiCanvas"></canvas>
+
+<!-- Standardized Header -->
+<header>
+  <a href="index.html" class="brand-link" title="Vanvi Moments">
+    <svg class="brand-spark" fill="none" viewBox="0 0 26 26">
+      <defs>
+        <linearGradient id="succSpark" x1="0%" x2="100%" y1="0%" y2="100%">
+          <stop offset="0%" stop-color="#ff2a7a"/>
+          <stop offset="35%" stop-color="#a855f7"/>
+          <stop offset="70%" stop-color="#38bdf8"/>
+          <stop offset="100%" stop-color="#10b981"/>
+        </linearGradient>
+      </defs>
+      <path d="M13 2 C13 7.8 15.2 10 21 13 C15.2 16 13 18.2 13 24 C13 18.2 10.8 16 5 13 C10.8 10 13 7.8 13 2 Z" fill="url(#succSpark)"/>
+      <circle cx="13" cy="13" fill="#ffffff" r="2.8"/>
+      <circle cx="13" cy="13" fill="#10b981" r="1.5"/>
+    </svg>
+    <span>VANVI <span style="color:var(--rose-primary);">♡</span> MOMENTS</span>
+  </a>
+
+  <div class="header-actions">
+    <a class="btn-header-link" href="templates.html">Templates</a>
+    <a class="btn-header-link" href="dashboard.html">My Moments</a>
+  </div>
+</header>
+
+<!-- Breadcrumbs Bar -->
+<div class="breadcrumb-bar">
+  <a class="vanvi-btn-back" href="javascript:void(0)" onclick="vanviGoBack('dashboard.html')">
+    <span class="back-arrow">‹</span> <span>Back</span>
+  </a>
+  <div class="breadcrumb-trail">
+    <a href="index.html">Home</a> / <a href="dashboard.html">My Moments</a> / <span>Order Status</span>
+  </div>
+</div>
+
+<main class="page-container">
+
+  <!-- Success State Container -->
+  <article class="order-card" id="stateSuccess">
+    <!-- Dynamic Status Medallion -->
+    <div class="status-badge-circle badge-success-glow" id="statusIcon">✓</div>
+
+    <!-- Thematic Occasion Pill -->
+    <div style="text-align:center;">
+      <span class="occasion-pill-tag" id="dynamicOccasionPill">✨ Bespoke Digital Keepsake</span>
+    </div>
+
+    <h1 class="order-title" id="statusHeadline">Moment Ready to <span>Share!</span></h1>
+    <p class="order-subtitle" id="statusMessage">Your payment has been verified and your custom digital celebration moment is activated and ready to unveil.</p>
+
+    <!-- Luxury Keepsake Certificate & Digital Receipt -->
+    <div class="keepsake-certificate">
+      <div class="certificate-watermark">VANVI CERTIFIED</div>
+
+      <div class="cert-header">
+        <div class="cert-title-group">
+          <span style="font-size:16px;">📜</span>
+          <strong style="font-size:12.5px; text-transform:uppercase; letter-spacing:0.8px; color:#92400e;">Official Celebration Pass &amp; Receipt</strong>
+        </div>
+        <span class="cert-stamp-badge" id="certStampBadge">✓ 100% Verified Moment</span>
+      </div>
+
+      <div class="cert-grid">
+        <!-- Left Column: Moment Details -->
+        <div class="cert-col">
+          <div class="receipt-row">
+            <span class="receipt-label">Order Reference</span>
+            <span class="receipt-value" id="valOrderId" style="font-family:monospace; font-size:12px;">ORD-VANVI-1001</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">Template Experience</span>
+            <span class="receipt-value" id="valItemName">Birthday White Bloom</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">Crafted For</span>
+            <span class="receipt-value" id="valRecipient">Someone Special ❤️</span>
+          </div>
+          <div class="receipt-row" id="rowSenderName" style="display:none;">
+            <span class="receipt-label">Sender / Creator</span>
+            <span class="receipt-value" id="valSenderName">You</span>
+          </div>
+        </div>
+
+        <!-- Right Column: Financial & Access Details -->
+        <div class="cert-col">
+          <div class="receipt-row" id="rowCoinsRedeemed" style="display:none;">
+            <span class="receipt-label">Vanvi Coins Redeemed</span>
+            <span class="receipt-value" style="color:#d97706;" id="valCoinsRedeemed">0 Coins</span>
+          </div>
+          <div class="receipt-row" id="rowPassCredits" style="display:none;">
+            <span class="receipt-label">Celebration Pass Credits</span>
+            <span class="receipt-value" style="color:#ff2a7a;" id="valPassCredits">0 Credits</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">Status &amp; Access</span>
+            <span class="receipt-value" style="color:#059669;">Permanent Vault Access</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">Final Amount Paid</span>
+            <span class="receipt-value total-highlight" id="valAmountPaid">₹0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cashback Perks Banner -->
+      <div class="cashback-banner" id="cashbackBanner">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:18px;">🪙</span>
+          <span class="cashback-text"><strong>+10% Order Cashback!</strong> Added bonus coins to your Vanvi Wallet.</span>
+        </div>
+        <a href="plans.html?tab=coins" style="font-size:11px; font-weight:850; color:#b45309; text-decoration:none;">Wallet →</a>
+      </div>
+    </div>
+
+    <!-- Delivery Action Center -->
+    <div class="delivery-box" id="deliveryCenter">
+      <h3>Surprise Your Recipient</h3>
+      <p>Deliver the private celebration link via WhatsApp or copy the secure unboxing URL below.</p>
+
+      <!-- WhatsApp 1-Tap Delivery Hero Button -->
+      <a href="share.html" id="btnShareWhatsApp" class="btn-share-whatsapp" target="_blank" rel="noopener" onclick="if(!this.href || this.href.endsWith('#')){window.location.href='share.html';return false;}">
+        <span>💬</span> Deliver on WhatsApp Now <span>💌</span>
+      </a>
+
+      <!-- URL Copy Bar -->
+      <div class="url-copy-row">
+        <input type="text" id="inputMomentUrl" class="url-input" readonly value="" placeholder="Generating your secure celebration link..."/>
+        <button type="button" id="btnCopyUrl" class="btn-copy-url">
+          <span>📋</span> Copy Link
+        </button>
+      </div>
+
+      <!-- Dual Action Buttons: Share Studio + Recipient Preview -->
+      <div class="share-action-buttons">
+        <a href="share.html" id="btnActionStudio" class="btn-action-studio">
+          <span>🎨</span> Customize in Share Studio →
+        </a>
+        <a href="#" id="btnViewMoment" class="btn-view-moment" target="_blank">
+          <span>👁️</span> Preview as Recipient ↗
+        </a>
+      </div>
+
+      <!-- Live Generated QR Code Canvas -->
+      <div class="qr-preview-wrapper">
+        <canvas id="qrCanvas" class="qr-code-canvas" width="120" height="120"></canvas>
+        <div class="qr-info-block">
+          <div class="qr-title">Instant Phone Scan QR</div>
+          <span class="qr-label">Scan with any phone camera to unlock this celebration instantly.</span>
+          <button type="button" class="btn-download-qr" id="btnDownloadQR">
+            <span>📥</span> Download QR for Gift Card
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Navigation Options -->
+    <div class="secondary-nav-row">
+      <a href="dashboard.html" class="btn-sec-link">📁 Creator Dashboard</a>
+      <a href="templates.html" class="btn-sec-link">🌟 Explore More Templates</a>
+      <a href="templates.html" class="btn-sec-link">+ Choose Template</a>
+    </div>
+  </article>
+
+</main>
+
+<div class="vanvi-toast" id="vanviToast">Link copied to clipboard! ✨</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-nav-row">
+    <a href="index.html">Home</a>
+    <a href="templates.html">Templates</a>
+    <a href="plans.html">VIP Plans</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="faq.html">FAQs</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="refund.html">Refunds</a>
+  </div>
+  <p>© 2026 Vanvi Moments · Luxury Digital Celebrations · Handcrafted with care.</p>
+</footer>
+
+<script>
+(function initOrderSuccess() {
+  'use strict';
+
+  const params = new URLSearchParams(window.location.search);
+  const orderId = params.get('orderId') || params.get('order_id') || 'ORD-' + Date.now().toString(36).toUpperCase();
+  const itemName = params.get('item') || params.get('template') || 'Custom Celebration Moment';
+  const recipient = params.get('recipient') || 'Someone Special';
+  const sender = params.get('sender') || '';
+  const occasion = params.get('occasion') || 'Special';
+  const amount = params.get('amount') || params.get('price') || '0.00';
+  const coins = parseInt(params.get('coins') || '0', 10);
+  const credits = parseInt(params.get('credits') || '0', 10);
+  const status = (params.get('status') || 'paid').toLowerCase();
+
+  // Dynamic Theme Profiles
+  const THEME_PROFILES = {
+    birthday: {
+      accent: '#ff2a7a',
+      accentSec: '#f59e0b',
+      glow: 'rgba(255, 42, 122, 0.28)',
+      gradient: 'linear-gradient(135deg, #ff2a7a 0%, #f59e0b 100%)',
+      light: 'rgba(255, 42, 122, 0.08)',
+      icon: '🎂',
+      badge: '🎂 Birthday Celebration Edition',
+      cheer: 'Birthday Surprise Ready to Reveal!'
+    },
+    love: {
+      accent: '#ff2a7a',
+      accentSec: '#a855f7',
+      glow: 'rgba(255, 42, 122, 0.28)',
+      gradient: 'linear-gradient(135deg, #ff2a7a 0%, #a855f7 100%)',
+      light: 'rgba(255, 42, 122, 0.08)',
+      icon: '💖',
+      badge: '💖 Romantic Love Edition',
+      cheer: 'Love Keepsake Ready to Unveil!'
+    },
+    anniversary: {
+      accent: '#9333ea',
+      accentSec: '#d97706',
+      glow: 'rgba(147, 51, 234, 0.25)',
+      gradient: 'linear-gradient(135deg, #9333ea 0%, #d97706 100%)',
+      light: 'rgba(147, 51, 234, 0.08)',
+      icon: '💍',
+      badge: '💍 Milestone Anniversary Edition',
+      cheer: 'Forever Us Moment Unlocked!'
+    },
+    apology: {
+      accent: '#7c3aed',
+      accentSec: '#06b6d4',
+      glow: 'rgba(124, 58, 237, 0.25)',
+      gradient: 'linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%)',
+      light: 'rgba(124, 58, 237, 0.08)',
+      icon: '🕊️',
+      badge: '🕊️ Heartfelt Apology Edition',
+      cheer: 'From the Heart Peace Letter Ready!'
+    },
+    friendship: {
+      accent: '#ea580c',
+      accentSec: '#ec4899',
+      glow: 'rgba(234, 88, 12, 0.25)',
+      gradient: 'linear-gradient(135deg, #ea580c 0%, #ec4899 100%)',
+      light: 'rgba(234, 88, 12, 0.08)',
+      icon: '🫂',
+      badge: '🫂 Besties & Friendship Edition',
+      cheer: 'Forever Memories Ready to Send!'
+    },
+    celebration: {
+      accent: '#d97706',
+      accentSec: '#ff2a7a',
+      glow: 'rgba(217, 119, 6, 0.25)',
+      gradient: 'linear-gradient(135deg, #d97706 0%, #ff2a7a 100%)',
+      light: 'rgba(217, 119, 6, 0.08)',
+      icon: '✨',
+      badge: '✨ Bespoke Digital Keepsake',
+      cheer: 'Magical Moment Ready to Share!'
+    }
+  };
+
+  // Determine active theme profile
+  const occLower = occasion.toLowerCase();
+  const nameLower = itemName.toLowerCase();
+  let matchedKey = 'celebration';
+  if (occLower.includes('birth') || nameLower.includes('birth')) matchedKey = 'birthday';
+  else if (occLower.includes('love') || occLower.includes('romance') || nameLower.includes('love') || nameLower.includes('valentine')) matchedKey = 'love';
+  else if (occLower.includes('anniv') || nameLower.includes('anniv') || nameLower.includes('wedding')) matchedKey = 'anniversary';
+  else if (occLower.includes('apol') || occLower.includes('sorry') || nameLower.includes('sorry')) matchedKey = 'apology';
+  else if (occLower.includes('friend') || nameLower.includes('friend') || nameLower.includes('bestie')) matchedKey = 'friendship';
+
+  const theme = THEME_PROFILES[matchedKey];
+
+  // Apply Dynamic Theme Variables
+  const root = document.documentElement;
+  root.style.setProperty('--theme-accent', theme.accent);
+  root.style.setProperty('--theme-accent-sec', theme.accentSec);
+  root.style.setProperty('--theme-glow', theme.glow);
+  root.style.setProperty('--theme-gradient', theme.gradient);
+  root.style.setProperty('--theme-light', theme.light);
+
+  const occasionPill = document.getElementById('dynamicOccasionPill');
+  if (occasionPill) occasionPill.textContent = theme.badge;
+
+  // Resolve Moment URL dynamically based on template (Never universally hardcode moment.html)
+  let momentUrl = params.get('momentUrl') || params.get('url');
+  if (!momentUrl) {
+    const tplKey = (params.get('template') || params.get('templateId') || occasion || '').toLowerCase();
+    if (tplKey.includes('bloom') || tplKey.includes('white-bloom')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/birthday-white-bloom-001/index.html')}?recipient=${encodeURIComponent(recipient)}`;
+    } else if (tplKey.includes('candle') || tplKey.includes('3d')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/birthday-3d-candle-surprise/index.html')}?recipient=${encodeURIComponent(recipient)}`;
+    } else if (tplKey.includes('wish-2') || tplKey.includes('wish-02')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/birthday-wish-02/index.html')}?recipient=${encodeURIComponent(recipient)}`;
+    } else if (tplKey.includes('apology') || tplKey.includes('sorry')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/apology-dashboard/index.html')}?recipient=${encodeURIComponent(recipient)}`;
+    } else {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/birthday-wish-01/index.html')}?recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}`;
+    }
+  }
+
+  // DOM Elements
+  const elOrderId = document.getElementById('valOrderId');
+  const elItemName = document.getElementById('valItemName');
+  const elRecipient = document.getElementById('valRecipient');
+  const elAmount = document.getElementById('valAmountPaid');
+  const elCoinsRow = document.getElementById('rowCoinsRedeemed');
+  const elCoinsVal = document.getElementById('valCoinsRedeemed');
+  const elPassRow = document.getElementById('rowPassCredits');
+  const elPassVal = document.getElementById('valPassCredits');
+  const elSenderRow = document.getElementById('rowSenderName');
+  const elSenderVal = document.getElementById('valSenderName');
+  const elUrlInput = document.getElementById('inputMomentUrl');
+  const btnCopy = document.getElementById('btnCopyUrl');
+  const btnWA = document.getElementById('btnShareWhatsApp');
+  const btnView = document.getElementById('btnViewMoment');
+  const btnStudio = document.getElementById('btnActionStudio');
+  const toast = document.getElementById('vanviToast');
+
+  const statusIcon = document.getElementById('statusIcon');
+  const statusHeadline = document.getElementById('statusHeadline');
+  const statusMessage = document.getElementById('statusMessage');
+  const deliveryCenter = document.getElementById('deliveryCenter');
+  const certStamp = document.getElementById('certStampBadge');
+
+  // Handle Non-success states properly (never falsely claim success!)
+  if (status === 'failed') {
+    statusIcon.className = 'status-badge-circle badge-failed-glow';
+    statusIcon.textContent = '✕';
+    statusHeadline.innerHTML = 'Payment <span>Incomplete</span> or Canceled';
+    statusMessage.textContent = 'No funds were charged. Your creation is securely saved as a draft so you can retry checkout anytime.';
+    if (certStamp) {
+      certStamp.textContent = 'Payment Not Processed';
+      certStamp.style.color = '#ef4444';
+      certStamp.style.background = '#fef2f2';
+      certStamp.style.borderColor = '#fecaca';
+    }
+    if (deliveryCenter) deliveryCenter.style.display = 'none';
+  } else if (status === 'pending') {
+    statusIcon.className = 'status-badge-circle badge-pending-glow';
+    statusIcon.textContent = '⏳';
+    statusHeadline.innerHTML = 'Payment Verification <span>In Progress</span>';
+    statusMessage.textContent = 'We are awaiting instant bank confirmation. Your celebration moment will unlock automatically once verified.';
+    if (certStamp) {
+      certStamp.textContent = 'Awaiting Bank Confirmation';
+      certStamp.style.color = '#b45309';
+      certStamp.style.background = '#fffbeb';
+      certStamp.style.borderColor = '#fde68a';
+    }
+    if (deliveryCenter) deliveryCenter.style.display = 'none';
+  } else {
+    // Launch festive confetti for successful orders
+    launchConfetti();
+  }
+
+  // Populate Order Data
+  if (elOrderId) elOrderId.textContent = orderId;
+  if (elItemName) elItemName.textContent = itemName;
+  if (elRecipient) elRecipient.textContent = `${recipient} ❤️`;
+  if (elAmount) elAmount.textContent = `₹${parseFloat(amount).toFixed(2)}`;
+
+  if (sender && elSenderRow && elSenderVal) {
+    elSenderRow.style.display = 'flex';
+    elSenderVal.textContent = sender;
+  }
+
+  if (coins > 0 && elCoinsRow && elCoinsVal) {
+    elCoinsRow.style.display = 'flex';
+    elCoinsVal.textContent = `${coins} Coins (-₹${(coins / 10).toFixed(2)})`;
+  }
+
+  if (credits > 0 && elPassRow && elPassVal) {
+    elPassRow.style.display = 'flex';
+    elPassVal.textContent = `${credits} Credits (-₹${credits}.00)`;
+  }
+
+  if (elUrlInput) elUrlInput.value = momentUrl;
+  if (btnView) btnView.href = momentUrl;
+
+  if (btnStudio) {
+    btnStudio.href = `share.html?template=${encodeURIComponent(itemName)}&recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}`;
+  }
+
+  if (btnWA) {
+    const waText = encodeURIComponent(`Hey ${recipient}! I handcrafted this special digital celebration moment for you on Vanvi Moments. Tap to open and experience the surprise: ${momentUrl} ❤️✨`);
+    btnWA.href = `https://api.whatsapp.com/send?text=${waText}`;
+  }
+
+  // Copy Link with Toast Feedback
+  if (btnCopy) {
+    btnCopy.addEventListener('click', () => {
+      navigator.clipboard.writeText(momentUrl).then(() => {
+        showToast('Link copied to clipboard! ✨');
+      }).catch(() => {
+        elUrlInput.select();
+        document.execCommand('copy');
+        showToast('Link copied! ✨');
+      });
+    });
+  }
+
+  function showToast(msg) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
+  // Draw High-Contrast Visual QR Code on Canvas
+  (function drawMockQRCode() {
+    const canvas = document.getElementById('qrCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const size = canvas.width;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, size, size);
+
+    ctx.fillStyle = '#2c1224';
+    const cell = size / 21;
+
+    function drawFinder(x, y) {
+      ctx.fillRect(x * cell, y * cell, 7 * cell, 7 * cell);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect((x + 1) * cell, (y + 1) * cell, 5 * cell, 5 * cell);
+      ctx.fillStyle = '#2c1224';
+      ctx.fillRect((x + 2) * cell, (y + 2) * cell, 3 * cell, 3 * cell);
+    }
+
+    drawFinder(0, 0);
+    drawFinder(14, 0);
+    drawFinder(0, 14);
+
+    let hash = 0;
+    for (let i = 0; i < momentUrl.length; i++) {
+      hash = ((hash << 5) - hash) + momentUrl.charCodeAt(i);
+      hash |= 0;
+    }
+
+    for (let r = 0; r < 21; r++) {
+      for (let c = 0; c < 21; c++) {
+        const inFinder = (r < 8 && c < 8) || (r < 8 && c > 12) || (r > 12 && c < 8);
+        if (!inFinder) {
+          if (((r * 31 + c * 17 + Math.abs(hash)) % 7) < 3) {
+            ctx.fillRect(c * cell, r * cell, cell, cell);
+          }
+        }
+      }
+    }
+
+    // QR Download Button
+    const btnDownload = document.getElementById('btnDownloadQR');
+    if (btnDownload) {
+      btnDownload.addEventListener('click', () => {
+        try {
+          const link = document.createElement('a');
+          link.download = `VanviMoment-QR-${orderId}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+          showToast('QR Code saved for gift printing! 📥');
+        } catch(e) {}
+      });
+    }
+  })();
+
+  // Lightweight Festive Confetti Engine
+  function launchConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#ff2a7a', '#f59e0b', '#a855f7', '#38bdf8', '#10b981', '#fb7185'];
+    const particles = [];
+
+    for (let i = 0; i < 75; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height * 0.4 - 50,
+        size: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vx: (Math.random() - 0.5) * 3,
+        vy: Math.random() * 3 + 2,
+        rot: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 6,
+        opacity: 1
+      });
+    }
+
+    let frame = 0;
+    function animate() {
+      if (frame > 140) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.rotSpeed;
+        if (frame > 90) p.opacity -= 0.02;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rot * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+        ctx.restore();
+      });
+      frame++;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+})();
+
+function safeGoBack() {
+  if (history.length > 1) { history.back(); return false; }
+  window.location.href = 'dashboard.html';
+  return false;
+}
+function vanviGoBack(fallback) {
+  if (history.length > 1) { history.back(); return false; }
+  window.location.href = fallback || 'dashboard.html';
+  return false;
+}
+</script>
+
+<!-- Global Bottom Navigation Dock -->
+<script src="js/vanvi-navigation.js"></script>
+</body>
+</html>

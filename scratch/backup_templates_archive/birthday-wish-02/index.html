@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Birthday Wish 02 | Vanvi Moments</title>
+  <meta name="description" content="A vintage wax-sealed envelope reveal birthday celebration with music and personal notes on Vanvi Moments.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --wax-red: #9e1a38;
+      --wax-glow: rgba(158, 26, 56, 0.35);
+      --cream-paper: #fffdf7;
+      --cream-border: #f0e6d6;
+      --gold-accent: #d4a373;
+      --text-ink: #2b1810;
+      --text-muted: #7c685b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #faf6f0;
+      color: var(--text-ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(212, 163, 115, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(158, 26, 56, 0.1) 0%, transparent 40%),
+        linear-gradient(180deg, #fdfbf7 0%, #f6f0e6 100%);
+      background-attachment: fixed;
+    }
+
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 200;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      padding: 24px 18px 80px;
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Top Sound Player */
+    .sound-badge {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 90;
+      background: rgba(255, 253, 247, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--cream-border);
+      padding: 6px 14px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--wax-red);
+      box-shadow: 0 4px 16px rgba(158, 26, 56, 0.12);
+    }
+
+    /* Flow Stages */
+    .flow-stage {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 0.4s ease forwards;
+    }
+    .flow-stage.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stage 1: Wax Sealed Envelope */
+    .envelope-box {
+      width: 280px;
+      height: 200px;
+      background: #eddcd2;
+      border-radius: 18px;
+      border: 1px solid #ddb892;
+      box-shadow: 0 20px 40px rgba(100, 70, 50, 0.15);
+      position: relative;
+      margin: 40px auto 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .envelope-box:hover { transform: scale(1.03); }
+    .envelope-flap {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 100px;
+      background: #e6ccb2;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      border-bottom: 1px solid #ddb892;
+    }
+    .wax-crest {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #b91c1c, #7f1d1d);
+      border: 2px solid #fecaca;
+      box-shadow: 0 8px 20px rgba(127, 29, 29, 0.45);
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      color: #ffd700;
+      position: relative;
+      z-index: 5;
+      animation: crestPulse 2.5s infinite ease-in-out;
+      transition: all 0.3s;
+    }
+    @keyframes crestPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* Stage 2: Warm Greeting Card with Dedicated Audio */
+    .greeting-card {
+      background: var(--cream-paper);
+      border: 1px solid var(--cream-border);
+      border-radius: 24px;
+      padding: 26px 20px;
+      width: 100%;
+      box-shadow: 0 16px 40px rgba(100, 70, 50, 0.08);
+      margin-bottom: 20px;
+    }
+    .greeting-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--wax-red);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .greeting-sub {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    /* Stage 3: Pickable Flower Wishes Bouquet */
+    .wishes-tray {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      margin: 18px 0;
+    }
+    .wish-flower-pod {
+      background: #ffffff;
+      border: 1.5px solid var(--cream-border);
+      border-radius: 18px;
+      padding: 16px 8px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      transition: all 0.25s;
+    }
+    .wish-flower-pod:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold-accent);
+      box-shadow: 0 12px 28px rgba(212, 163, 115, 0.2);
+    }
+    .wish-flower-pod.revealed {
+      background: #fffcf2;
+      border-color: var(--wax-red);
+    }
+    .flower-icon { font-size: 38px; margin-bottom: 6px; }
+    .flower-label { font-size: 12px; font-weight: 800; color: var(--text-ink); }
+
+    .revealed-wish-box {
+      background: #fff8f0;
+      border: 1px dashed var(--gold-accent);
+      border-radius: 14px;
+      padding: 14px;
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: #5c3d2e;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    /* Stage 4: Letter on Cream Paper */
+    .letter-parchment {
+      background: #fffdfa;
+      border: 1px solid #ebd9c8;
+      border-radius: 20px;
+      padding: 26px 20px;
+      width: 100%;
+      text-align: left;
+      box-shadow: 0 16px 36px rgba(120, 80, 50, 0.08);
+      position: relative;
+    }
+    .letter-watermark {
+      position: absolute;
+      top: 15px; right: 15px;
+      font-size: 32px;
+      opacity: 0.15;
+    }
+    .letter-salutation {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--wax-red);
+      margin-bottom: 14px;
+    }
+    .letter-text {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      line-height: 1.6;
+      color: #3b2014;
+      white-space: pre-wrap;
+    }
+    .letter-sign-off {
+      text-align: right;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--wax-red);
+      margin-top: 20px;
+    }
+
+    /* Buttons */
+    .btn-wax-cta {
+      width: 100%;
+      height: 52px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, #9e1a38, #7f1d1d);
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px var(--wax-glow);
+      transition: all 0.2s;
+      margin-top: 16px;
+    }
+    .btn-wax-cta:active { transform: scale(0.97); }
+
+    .nav-steps-dock {
+      display: flex;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .step-pill {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ddb892;
+      transition: all 0.25s;
+    }
+    .step-pill.active {
+      width: 24px;
+      border-radius: 99px;
+      background: var(--wax-red);
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <div class="sound-badge" onclick="toggleAudio()">
+    <span>🎵</span>
+    <span id="audioTag">Audio Dedication</span>
+  </div>
+
+  <audio id="ambientTrack" loop preload="auto">
+    <source src="../birthday-3d-candle-surprise/happybirthday.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="app-container">
+
+    <!-- ================= STAGE 1: WAX SEALED ENVELOPE ================= -->
+    <div class="flow-stage active" id="stage1">
+      <div style="font-size:12px; font-weight:800; color:var(--wax-red); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">
+        ✉️ Private Wax-Sealed Surprise
+      </div>
+      <h1 style="font-family:'Playfair Display',serif; font-size:30px; font-weight:700; margin-bottom:6px;" id="txtHeaderRecipient">
+        For Someone Wonderful
+      </h1>
+      <p style="font-size:14px; color:var(--text-muted);">
+        A handcrafted birthday microsite preserved inside this sealed envelope.
+      </p>
+
+      <div class="envelope-box" onclick="breakWaxSeal()">
+        <div class="envelope-flap"></div>
+        <div class="wax-crest" id="waxCrest">
+          <span>💌</span>
+        </div>
+      </div>
+
+      <div style="font-size:13.5px; font-weight:800; color:var(--wax-red);">
+        👆 Tap the royal wax crest to unseal!
+      </div>
+
+      <button type="button" class="btn-wax-cta" onclick="breakWaxSeal()">
+        <span>Break Wax Seal &amp; Open</span> <span>→</span>
+      </button>
+
+      <div class="nav-steps-dock">
+        <span class="step-pill active"></span>
+        <span class="step-pill"></span>
+        <span class="step-pill"></span>
+        <span class="step-pill"></span>
+      </div>
+    </div>
+
+    <!-- ================= STAGE 2: GREETING & POLAROIDS ================= -->
+    <div class="flow-stage" id="stage2">
+      <div class="greeting-card">
+        <h2 class="greeting-title" id="txtGreetingTitle">Happy Birthday! 🎂</h2>
+        <p class="greeting-sub" id="txtGreetingSub">
+          "Today we celebrate the day the world got a whole lot brighter."
+        </p>
+
+        <!-- Polaroid Photo Frame -->
+        <div style="background:#fff; padding:12px 12px 18px; border-radius:14px; border:1px solid #ebd9c8; box-shadow:0 8px 24px rgba(0,0,0,0.06); margin-bottom:14px;">
+          <div style="width:100%; height:230px; border-radius:10px; overflow:hidden; background:#f5ebe0;">
+            <img src="../birthday-3d-candle-surprise/image/photo_cake.jpg" alt="Special Memory" style="width:100%; height:100%; object-fit:cover;">
+          </div>
+          <div style="font-family:'Caveat',cursive; font-size:21px; font-weight:700; color:#4a2c1d; margin-top:10px;">
+            To another year of glowing memories! ✨
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn-wax-cta" onclick="goToStage(3)">
+        <span>Pick 3 Birthday Wishes</span> <span>🌸</span>
+      </button>
+
+      <div class="nav-steps-dock">
+        <span class="step-pill"></span>
+        <span class="step-pill active"></span>
+        <span class="step-pill"></span>
+        <span class="step-pill"></span>
+      </div>
+    </div>
+
+    <!-- ================= STAGE 3: BOUQUET OF 3 PICKABLE WISHES ================= -->
+    <div class="flow-stage" id="stage3">
+      <div style="font-size:12px; font-weight:800; color:var(--wax-red); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">
+        🌸 Pickable Wishes Bouquet
+      </div>
+      <h2 style="font-family:'Playfair Display',serif; font-size:26px; font-weight:700; margin-bottom:6px;">
+        Choose Your Wishes
+      </h2>
+      <p style="font-size:14px; color:var(--text-muted); margin-bottom:16px;">
+        Tap each flower blossom to uncover personal blessings picked just for you.
+      </p>
+
+      <div class="wishes-tray">
+        <div class="wish-flower-pod" onclick="revealWish(1)">
+          <span class="flower-icon">🌷</span>
+          <span class="flower-label">Wish 01</span>
+        </div>
+        <div class="wish-flower-pod" onclick="revealWish(2)">
+          <span class="flower-icon">🌹</span>
+          <span class="flower-label">Wish 02</span>
+        </div>
+        <div class="wish-flower-pod" onclick="revealWish(3)">
+          <span class="flower-icon">🌻</span>
+          <span class="flower-label">Wish 03</span>
+        </div>
+      </div>
+
+      <div class="revealed-wish-box" id="revealedWishText">
+        Tap a flower blossom above to reveal its wish ✨
+      </div>
+
+      <button type="button" class="btn-wax-cta" onclick="goToStage(4)">
+        <span>Read Handwritten Letter</span> <span>💌</span>
+      </button>
+
+      <div class="nav-steps-dock">
+        <span class="step-pill"></span>
+        <span class="step-pill"></span>
+        <span class="step-pill active"></span>
+        <span class="step-pill"></span>
+      </div>
+    </div>
+
+    <!-- ================= STAGE 4: HANDWRITTEN LETTER ON CREAM PAPER ================= -->
+    <div class="flow-stage" id="stage4">
+      <div class="letter-parchment">
+        <div class="letter-watermark">🕯️</div>
+        <h3 class="letter-salutation" id="txtLetterSalutation">Dearest Aarav,</h3>
+        <p class="letter-text" id="txtLetterContent">
+Today is a quiet reminder of how grateful I am to have you in my life.
+
+Through all the ordinary Tuesdays and the extraordinary adventures, your smile makes everything feel right. I hope this year brings you all the peace, huge laughs, and dreams that keep your heart singing.
+
+Thank you for being you. Happy Birthday! 🎂✨
+        </p>
+        <div class="letter-sign-off" id="txtLetterSignOff">— With endless love, Sneha</div>
+      </div>
+
+      <button type="button" class="btn-wax-cta" onclick="goToStage(1)">
+        <span>Replay from Beginning</span> <span>🔄</span>
+      </button>
+
+      <div class="nav-steps-dock">
+        <span class="step-pill"></span>
+        <span class="step-pill"></span>
+        <span class="step-pill"></span>
+        <span class="step-pill active"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const recipient = params.get('name') || params.get('recipient') || 'Aarav';
+    const sender = params.get('sender') || 'Sneha';
+    const message = params.get('message') || null;
+
+    if (recipient) {
+      document.getElementById('txtHeaderRecipient').textContent = `For ${recipient}`;
+      document.getElementById('txtGreetingTitle').textContent = `Happy Birthday, ${recipient}! 🎂`;
+      document.getElementById('txtLetterSalutation').textContent = `Dearest ${recipient},`;
+    }
+    if (message) {
+      document.getElementById('txtLetterContent').textContent = message;
+    }
+    if (sender) {
+      document.getElementById('txtLetterSignOff').textContent = `— With love, ${sender}`;
+    }
+
+    let audioPlaying = false;
+    const audio = document.getElementById('ambientTrack');
+    function toggleAudio() {
+      if (!audioPlaying) {
+        audio.play().then(() => {
+          audioPlaying = true;
+          document.getElementById('audioTag').textContent = 'Melody Playing 🎵';
+        }).catch(() => {});
+      } else {
+        audio.pause();
+        audioPlaying = false;
+        document.getElementById('audioTag').textContent = 'Sound Off 🔇';
+      }
+    }
+
+    function goToStage(n) {
+      document.querySelectorAll('.flow-stage').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(`stage${n}`);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      triggerGoldConfetti();
+    }
+
+    function breakWaxSeal() {
+      if (!audioPlaying) toggleAudio();
+      const crest = document.getElementById('waxCrest');
+      crest.style.transform = 'scale(1.2) rotate(20deg)';
+      crest.style.opacity = '0.7';
+      triggerGoldConfetti();
+      setTimeout(() => goToStage(2), 350);
+    }
+
+    const wishesData = [
+      "“May your year be filled with unexpected miracles and endless laughter.” 🌷",
+      "“May every path you walk lead you closer to your deepest dreams.” 🌹",
+      "“May you always remember how deeply loved and treasured you are.” 🌻"
+    ];
+
+    function revealWish(idx) {
+      document.querySelectorAll('.wish-flower-pod').forEach((el, i) => {
+        if (i === idx - 1) el.classList.add('revealed');
+      });
+      document.getElementById('revealedWishText').innerHTML = wishesData[idx - 1];
+      triggerGoldConfetti();
+    }
+
+    // Gold & Rose Confetti
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    let confetti = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function triggerGoldConfetti() {
+      const colors = ['#d4a373', '#ccd5ae', '#9e1a38', '#fecaca', '#ffd166'];
+      for (let i = 0; i < 70; i++) {
+        confetti.push({
+          x: canvas.width / 2,
+          y: canvas.height / 3,
+          vx: (Math.random() - 0.5) * 12,
+          vy: (Math.random() - 0.7) * 14,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          alpha: 1
+        });
+      }
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach((p, idx) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.3;
+        p.alpha -= 0.01;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        ctx.restore();
+        if (p.alpha <= 0 || p.y > canvas.height) confetti.splice(idx, 1);
+      });
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
+</body>
+</html>

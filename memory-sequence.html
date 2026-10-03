@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Memory Sequence ✦ Premium Vanvi Memory Challenge</title>
+  <meta name="description" content="Reproduce the glowing celestial sequence. A high-stakes futuristic memory trial for Vanvi moments. Earn up to 15 coins!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070913;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --primary: #d946ef;
+      --primary-glow: rgba(217, 70, 239, 0.5);
+      --cyan: #06b6d4;
+      --cyan-glow: rgba(6, 182, 212, 0.5);
+      --gold: #fbbf24;
+      --gold-glow: rgba(251, 191, 36, 0.45);
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --violet: #8b5cf6;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 15%, #1e1136 0%, #080914 65%, #030408 100%);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient animated orbs */
+    .ambient-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+      animation: float 14s infinite alternate ease-in-out;
+    }
+    .glow-1 { width: 340px; height: 340px; background: #c026d3; top: -50px; left: -50px; }
+    .glow-2 { width: 380px; height: 380px; background: #0284c7; bottom: -80px; right: -80px; animation-duration: 18s; }
+
+    @keyframes float {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(40px) scale(1.15); }
+    }
+
+    /* Top Bar */
+    .top-nav {
+      width: 100%;
+      max-width: 600px;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      color: #e2e8f0;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .wallet-chip {
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 7px 14px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fde68a;
+    }
+
+    /* Main Container */
+    .game-container {
+      width: 100%;
+      max-width: 500px;
+      padding: 0 16px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      flex: 1;
+    }
+
+    /* Header */
+    .game-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .game-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(217,70,239,0.2), rgba(6,182,212,0.2));
+      border: 1px solid rgba(217,70,239,0.3);
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #f5d0fe;
+      margin-bottom: 6px;
+    }
+    .game-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 40%, #f0abfc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.5px;
+    }
+
+    /* Status & Stats Board */
+    .stats-card {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      border-radius: 18px;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-lbl {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .stat-val {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 2px;
+    }
+
+    /* Turn Indicator Pill */
+    .turn-status {
+      width: 100%;
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .turn-status.watching {
+      background: rgba(217, 70, 239, 0.15);
+      border-color: rgba(217, 70, 239, 0.4);
+      color: #f5d0fe;
+    }
+    .turn-status.playing {
+      background: rgba(6, 182, 212, 0.18);
+      border-color: rgba(6, 182, 212, 0.5);
+      color: #a5f3fc;
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+    }
+    .pulse-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 10px currentColor;
+      animation: blink 1s infinite alternate;
+    }
+    @keyframes blink {
+      0% { opacity: 0.3; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Symbol Grid Arena */
+    .sequence-grid {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+      perspective: 1000px;
+    }
+
+    .seq-pad {
+      position: relative;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s, border-color 0.2s;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .seq-pad:active {
+      transform: scale(0.94);
+    }
+
+    .seq-pad .pad-icon {
+      font-size: 2.8rem;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+      transition: transform 0.2s;
+    }
+    .seq-pad .pad-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 6px;
+      color: rgba(255, 255, 255, 0.6);
+      transition: color 0.2s;
+    }
+
+    /* Glow Variants */
+    .seq-pad[data-pad="0"] { --theme-color: #ec4899; }
+    .seq-pad[data-pad="1"] { --theme-color: #38bdf8; }
+    .seq-pad[data-pad="2"] { --theme-color: #eab308; }
+    .seq-pad[data-pad="3"] { --theme-color: #10b981; }
+
+    .seq-pad.active {
+      border-color: var(--theme-color) !important;
+      box-shadow: 0 0 35px var(--theme-color), inset 0 0 20px var(--theme-color) !important;
+      background: rgba(255, 255, 255, 0.15) !important;
+      transform: scale(1.03);
+    }
+    .seq-pad.active .pad-icon {
+      transform: scale(1.2);
+    }
+    .seq-pad.active .pad-label {
+      color: #fff;
+    }
+
+    .seq-pad.error-shake {
+      animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+      border-color: #ef4444 !important;
+      background: rgba(239, 68, 68, 0.2) !important;
+      box-shadow: 0 0 30px #ef4444 !important;
+    }
+
+    @keyframes shake {
+      10%, 90% { transform: translate3d(-2px, 0, 0); }
+      20%, 80% { transform: translate3d(4px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+      40%, 60% { transform: translate3d(6px, 0, 0); }
+    }
+
+    /* Sequence Progress Pills */
+    .steps-indicator {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 20px;
+      min-height: 12px;
+      flex-wrap: wrap;
+      max-width: 320px;
+    }
+    .step-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.15);
+      transition: all 0.25s ease;
+    }
+    .step-dot.filled {
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    /* Start / Action Controls */
+    .action-row {
+      width: 100%;
+      max-width: 360px;
+      display: flex;
+      gap: 12px;
+    }
+    .glow-btn {
+      flex: 1;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glow-btn-primary {
+      background: linear-gradient(135deg, #d946ef 0%, #8b5cf6 100%);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(217, 70, 239, 0.35);
+    }
+    .glow-btn-primary:hover {
+      box-shadow: 0 10px 30px rgba(217, 70, 239, 0.55);
+      transform: translateY(-2px);
+    }
+    .glow-btn-primary:active {
+      transform: translateY(0);
+    }
+    .glow-btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      color: #e2e8f0;
+    }
+    .glow-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Reward Ladder Card */
+    .reward-ladder {
+      width: 100%;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-top: 24px;
+    }
+    .ladder-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ladder-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 0.82rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .ladder-row:last-child {
+      border-bottom: none;
+    }
+    .ladder-row.active {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+    .ladder-coins {
+      color: #fbbf24;
+      font-weight: 700;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-card {
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(145deg, #131224 0%, #0c0b16 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 30px 24px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+    .modal-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+    .modal-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .reward-pill {
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      padding: 12px;
+      border-radius: 14px;
+      color: #fde68a;
+      font-weight: 800;
+      font-size: 1.25rem;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  </style>
+  <link rel="stylesheet" href="vanvi-navigation.css">
+</head>
+<body data-vanvi-no-dock="true">
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <a href="games.html" class="back-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      Games Arena
+    </a>
+    <div class="wallet-chip">
+      <span style="font-size: 1.1rem;">🪙</span>
+      <span id="headerCoinCount">0</span>
+    </div>
+  </header>
+
+  <!-- Main Game Container -->
+  <main class="game-container">
+    <div class="game-header">
+      <div class="game-badge">Futuristic Memory Trial</div>
+      <h1 class="game-title">Memory Sequence</h1>
+    </div>
+
+    <!-- Status Stats -->
+    <div class="stats-card">
+      <div class="stat-item">
+        <div class="stat-lbl">Round</div>
+        <div class="stat-val" id="currentRound">1</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-lbl">Sequence</div>
+        <div class="stat-val" id="sequenceLength">1</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-lbl">Max Coins</div>
+        <div class="stat-val" style="color: #fbbf24;">15 🪙</div>
+      </div>
+    </div>
+
+    <!-- Turn Indicator -->
+    <div class="turn-status watching" id="turnIndicator">
+      <div class="pulse-dot"></div>
+      <span id="turnText">Tap "Start Challenge" to begin</span>
+    </div>
+
+    <!-- Step Progress Dots -->
+    <div class="steps-indicator" id="stepDots"></div>
+
+    <!-- 4 High-Tech Glow Pads -->
+    <div class="sequence-grid" id="gridArena">
+      <div class="seq-pad" data-pad="0" id="pad0" onclick="handlePadTap(0)">
+        <span class="pad-icon">💎</span>
+        <span class="pad-label">Sapphire</span>
+      </div>
+      <div class="seq-pad" data-pad="1" id="pad1" onclick="handlePadTap(1)">
+        <span class="pad-icon">🌸</span>
+        <span class="pad-label">Lotus</span>
+      </div>
+      <div class="seq-pad" data-pad="2" id="pad2" onclick="handlePadTap(2)">
+        <span class="pad-icon">👑</span>
+        <span class="pad-label">Crown</span>
+      </div>
+      <div class="seq-pad" data-pad="3" id="pad3" onclick="handlePadTap(3)">
+        <span class="pad-icon">🪄</span>
+        <span class="pad-label">Cosmic</span>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-row">
+      <button class="glow-btn glow-btn-primary" id="startBtn" onclick="startGame()">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        Start Challenge
+      </button>
+      <button class="glow-btn glow-btn-secondary" id="rulesBtn" onclick="showRulesModal()">
+        Rules
+      </button>
+    </div>
+
+    <!-- Reward Ladder Info -->
+    <div class="reward-ladder">
+      <div class="ladder-title">
+        <span>Skill-Based Reward Tiers</span>
+        <span style="color: #38bdf8;">Daily Cap: 25 🪙</span>
+      </div>
+      <div class="ladder-row" id="tier1">
+        <span>Round 3 Cleared</span>
+        <span class="ladder-coins">+5 Coins</span>
+      </div>
+      <div class="ladder-row" id="tier2">
+        <span>Round 5 Cleared</span>
+        <span class="ladder-coins">+8 Coins</span>
+      </div>
+      <div class="ladder-row" id="tier3">
+        <span>Round 7+ Cleared (Master)</span>
+        <span class="ladder-coins">+12 Coins</span>
+      </div>
+      <div class="ladder-row">
+        <span>Perfect Run Bonus (No retries)</span>
+        <span class="ladder-coins">+3 Coins</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rules Modal -->
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal-card">
+      <div class="modal-icon">🧠</div>
+      <h2 class="modal-title">Memory Sequence Rules</h2>
+      <p class="modal-subtitle">
+        1. Watch the celestial symbols glow in order.<br>
+        2. Tap the exact sequence when it is your turn.<br>
+        3. Each cleared round adds one more symbol.<br>
+        4. <strong>One mistake ends the run!</strong><br>
+        5. Clear Round 7 for the maximum 12 coins + 3 perfect bonus.
+      </p>
+      <button class="glow-btn glow-btn-primary" style="width: 100%;" onclick="closeRulesModal()">
+        Got It, Let's Play
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Over / Victory Modal -->
+  <div class="modal-overlay" id="resultModal">
+    <div class="modal-card">
+      <div class="modal-icon" id="resultIcon">🎉</div>
+      <h2 class="modal-title" id="resultTitle">Trial Concluded</h2>
+      <p class="modal-subtitle" id="resultDesc">Round 5 reached! Excellent memory precision.</p>
+      <div class="reward-pill" id="rewardPill">
+        <span>🪙</span>
+        <span id="earnedCoinsText">+8 Coins Added</span>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="glow-btn glow-btn-primary" onclick="restartGame()">
+          Play Again
+        </button>
+        <a href="games.html" class="glow-btn glow-btn-secondary" style="text-decoration:none;">
+          Exit
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- VANVI INTEGRATION & COIN REWARD SYSTEM ---
+    const GAME_ID = 'memory_sequence';
+    const GAME_TITLE = 'Memory Sequence';
+    const DAILY_GAMES_CAP = 25;
+
+    // Web Audio Synthesizer
+    let audioCtx = null;
+    const FREQUENCIES = [329.63, 392.00, 440.00, 523.25]; // E4, G4, A4, C5
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playTone(index, duration = 0.28) {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(FREQUENCIES[index] || 440, audioCtx.currentTime);
+        
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // Fallback or muted
+      }
+    }
+
+    function playErrorTone() {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.35);
+      } catch(e) {}
+    }
+
+    // Daily Cap & Coin Storage Sync
+    function getTodayKey() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function getTodayEarned() {
+      const today = getTodayKey();
+      const savedDate = localStorage.getItem('vanvi_games_today_date');
+      if (savedDate !== today) {
+        localStorage.setItem('vanvi_games_today_date', today);
+        localStorage.setItem('vanvi_games_today_earned', '0');
+        return 0;
+      }
+      return parseInt(localStorage.getItem('vanvi_games_today_earned') || '0', 10);
+    }
+
+    function syncWalletDisplay() {
+      let coins = 0;
+      try {
+        const authUser = JSON.parse(localStorage.getItem('vanvi_auth_user') || '{}');
+        coins = authUser.coins !== undefined ? authUser.coins : parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+      } catch(e) {
+        coins = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+      }
+      const el = document.getElementById('headerCoinCount');
+      if (el) el.textContent = coins;
+    }
+
+    async function awardCoins(requestedCoins, roundReached, isPerfect) {
+      if (requestedCoins <= 0) return 0;
+      
+      const todayEarned = getTodayEarned();
+      const remainingToday = Math.max(0, DAILY_GAMES_CAP - todayEarned);
+      const actualCoins = Math.min(requestedCoins, remainingToday);
+
+      if (actualCoins <= 0) {
+        return 0;
+      }
+
+      // 1. Try Backend API
+      let success = false;
+      const token = localStorage.getItem('vanvi_auth_token');
+      try {
+        const res = await fetch('/api/coins/game-reward', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+          },
+          body: JSON.stringify({
+            gameId: GAME_ID,
+            gameTitle: GAME_TITLE,
+            coins: actualCoins,
+            score: roundReached,
+            perfectRun: isPerfect
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.coinsAwarded !== undefined) {
+            success = true;
+          }
+        }
+      } catch (err) {
+        console.warn('Backend reward endpoint not available, falling back locally', err);
+      }
+
+      // 2. Local Fallback Sync
+      const currentCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+      const newTotal = currentCoins + actualCoins;
+      localStorage.setItem('vanvi_user_coins', newTotal.toString());
+      localStorage.setItem('vanvi_games_today_earned', (todayEarned + actualCoins).toString());
+
+      try {
+        const authUser = JSON.parse(localStorage.getItem('vanvi_auth_user') || '{}');
+        if (authUser && typeof authUser === 'object') {
+          authUser.coins = newTotal;
+          localStorage.setItem('vanvi_auth_user', JSON.stringify(authUser));
+        }
+      } catch(e) {}
+
+      syncWalletDisplay();
+      return actualCoins;
+    }
+
+    // --- GAME ENGINE STATE ---
+    let sequence = [];
+    let playerIndex = 0;
+    let round = 1;
+    let isPlaying = false;
+    let isDisplaying = false;
+    let hasClaimedReward = false;
+    let runMistakes = 0;
+
+    function startGame() {
+      initAudio();
+      sequence = [];
+      round = 1;
+      playerIndex = 0;
+      isPlaying = true;
+      hasClaimedReward = false;
+      runMistakes = 0;
+
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('rulesBtn').style.display = 'none';
+
+      updateStats();
+      nextRound();
+    }
+
+    function restartGame() {
+      closeResultModal();
+      startGame();
+    }
+
+    function nextRound() {
+      playerIndex = 0;
+      // Add random pad (0, 1, 2, or 3)
+      sequence.push(Math.floor(Math.random() * 4));
+      updateStats();
+      renderStepDots();
+      playSequence();
+    }
+
+    function updateStats() {
+      document.getElementById('currentRound').textContent = round;
+      document.getElementById('sequenceLength').textContent = sequence.length;
+
+      // Update ladder highlighting
+      document.getElementById('tier1').classList.toggle('active', round >= 3);
+      document.getElementById('tier2').classList.toggle('active', round >= 5);
+      document.getElementById('tier3').classList.toggle('active', round >= 7);
+    }
+
+    function renderStepDots() {
+      const container = document.getElementById('stepDots');
+      container.innerHTML = '';
+      for (let i = 0; i < sequence.length; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'step-dot' + (i < playerIndex ? ' filled' : '');
+        container.appendChild(dot);
+      }
+    }
+
+    function setTurnState(state) {
+      const indicator = document.getElementById('turnIndicator');
+      const text = document.getElementById('turnText');
+      if (state === 'watching') {
+        indicator.className = 'turn-status watching';
+        text.textContent = `Round ${round} ✦ Observe the sequence`;
+      } else if (state === 'playing') {
+        indicator.className = 'turn-status playing';
+        text.textContent = `Your Turn! Tap ${sequence.length - playerIndex} remaining`;
+      } else if (state === 'over') {
+        indicator.className = 'turn-status';
+        text.textContent = 'Trial Finished';
+      }
+    }
+
+    async function playSequence() {
+      isDisplaying = true;
+      setTurnState('watching');
+
+      // Speed scales up as round increases
+      const flashDuration = Math.max(220, 480 - round * 25);
+      const delayBetween = Math.max(120, 260 - round * 15);
+
+      await new Promise(r => setTimeout(r, 600));
+
+      for (let i = 0; i < sequence.length; i++) {
+        if (!isPlaying) return;
+        const padIndex = sequence[i];
+        highlightPad(padIndex, flashDuration);
+        playTone(padIndex, flashDuration / 1000);
+        await new Promise(r => setTimeout(r, flashDuration + delayBetween));
+      }
+
+      isDisplaying = false;
+      setTurnState('playing');
+    }
+
+    function highlightPad(index, duration = 300) {
+      const pad = document.getElementById(`pad${index}`);
+      if (pad) {
+        pad.classList.add('active');
+        setTimeout(() => {
+          pad.classList.remove('active');
+        }, duration);
+      }
+    }
+
+    async function handlePadTap(index) {
+      if (!isPlaying || isDisplaying) return;
+
+      playTone(index, 0.22);
+      highlightPad(index, 200);
+
+      // Verify input
+      if (index === sequence[playerIndex]) {
+        playerIndex++;
+        renderStepDots();
+
+        // Check if finished current round sequence
+        if (playerIndex === sequence.length) {
+          isDisplaying = true;
+          setTurnState('watching');
+          round++;
+
+          // Small celebration delay before next round
+          await new Promise(r => setTimeout(r, 800));
+          if (isPlaying) {
+            nextRound();
+          }
+        } else {
+          setTurnState('playing');
+        }
+      } else {
+        // Mistake made!
+        runMistakes++;
+        const pad = document.getElementById(`pad${index}`);
+        if (pad) {
+          pad.classList.add('error-shake');
+          setTimeout(() => pad.classList.remove('error-shake'), 400);
+        }
+        playErrorTone();
+        endRun();
+      }
+    }
+
+    async function endRun() {
+      isPlaying = false;
+      setTurnState('over');
+
+      // Calculate reward based on round reached:
+      // Round 3: 5 coins
+      // Round 5: 8 coins
+      // Round 7+: 12 coins
+      // Perfect bonus: +3 coins (if reached at least Round 3 with zero early misses)
+      let reward = 0;
+      const completedRounds = round - 1;
+
+      if (completedRounds >= 7) {
+        reward = 12;
+      } else if (completedRounds >= 5) {
+        reward = 8;
+      } else if (completedRounds >= 3) {
+        reward = 5;
+      }
+
+      const isPerfect = (completedRounds >= 3) && (runMistakes <= 1);
+      if (isPerfect && reward > 0) {
+        reward += 3;
+      }
+
+      // Max reward cap 15
+      reward = Math.min(15, reward);
+
+      let awarded = 0;
+      if (!hasClaimedReward && reward > 0) {
+        hasClaimedReward = true;
+        awarded = await awardCoins(reward, completedRounds, isPerfect);
+      }
+
+      showResultModal(completedRounds, awarded, isPerfect);
+    }
+
+    function showResultModal(completedRounds, awarded, isPerfect) {
+      const modal = document.getElementById('resultModal');
+      const icon = document.getElementById('resultIcon');
+      const title = document.getElementById('resultTitle');
+      const desc = document.getElementById('resultDesc');
+      const rewardPill = document.getElementById('rewardPill');
+      const earnedText = document.getElementById('earnedCoinsText');
+
+      if (completedRounds >= 7) {
+        icon.textContent = '👑';
+        title.textContent = 'Cosmic Memory Master!';
+        desc.textContent = `Incredible focus! You cleared ${completedRounds} rounds with flawless recall!`;
+      } else if (completedRounds >= 3) {
+        icon.textContent = '🌟';
+        title.textContent = 'Impressive Run!';
+        desc.textContent = `You cleared ${completedRounds} consecutive sequences. High tier reflexes!`;
+      } else {
+        icon.textContent = '⚡';
+        title.textContent = 'Run Concluded';
+        desc.textContent = `You cleared ${completedRounds} sequence${completedRounds === 1 ? '' : 's'}. Reach Round 3 to unlock coin rewards!`;
+      }
+
+      if (awarded > 0) {
+        rewardPill.style.display = 'flex';
+        earnedText.textContent = `+${awarded} Coins Credited!${isPerfect ? ' (Includes +3 Perfect Bonus)' : ''}`;
+      } else {
+        const todayEarned = getTodayEarned();
+        if (todayEarned >= DAILY_GAMES_CAP) {
+          rewardPill.style.display = 'flex';
+          earnedText.textContent = 'Daily Game Cap (25 🪙) Reached!';
+        } else {
+          rewardPill.style.display = 'none';
+        }
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeResultModal() {
+      document.getElementById('resultModal').classList.remove('active');
+      document.getElementById('startBtn').style.display = 'flex';
+      document.getElementById('rulesBtn').style.display = 'flex';
+    }
+
+    function showRulesModal() {
+      document.getElementById('rulesModal').classList.add('active');
+    }
+
+    function closeRulesModal() {
+      document.getElementById('rulesModal').classList.remove('active');
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      syncWalletDisplay();
+    });
+  </script>
+  <script src="js/vanvi-api.js"></script>
+  <script src="js/vanvi-navigation.js"></script>
+</body>
+</html>
