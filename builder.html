@@ -840,6 +840,17 @@
       }
 
       // 2. Store moment payload in /api/moments and obtain short ID
+      const custom_data = {
+        recipient,
+        sender,
+        occasion,
+        message,
+        date,
+        musicTrack: soundtrack,
+        photos: finalPhotoUrls,
+        soundtrack
+      };
+
       const momentPayload = {
         title: `${occasion} Keepsake for ${recipient}`,
         recipient,
@@ -850,7 +861,8 @@
         musicTrack: soundtrack,
         photos: finalPhotoUrls,
         lockMode: 'envelope',
-        templateId: initialTemplate
+        templateId: initialTemplate,
+        custom_data
       };
 
       let momentId = null;
@@ -899,15 +911,24 @@
         } catch(e) {}
       }
 
-      // Construct clean ID-based celebration URL (No huge query parameters or base64)
+      // Construct clean ID-based celebration URL (Dynamic Unlimited Template Architecture)
       let targetPath = 'templates/birthday-3d-candle/index.html';
-      if (initialTemplate === 'birthday-wish-1' || initialTemplate === 'birthday-wish-01') targetPath = 'templates/birthday-wish-01/index.html';
-      else if (initialTemplate === 'birthday-wish-2' || initialTemplate === 'birthday-wish-02') targetPath = 'templates/birthday-wish-02/index.html';
-      else if (initialTemplate.includes('bloom')) targetPath = 'templates/birthday-white-bloom/index.html';
-      else if (initialTemplate.includes('love') || initialTemplate.includes('gf')) targetPath = 'templates/constellation-love/index.html';
-      else if (initialTemplate.includes('polaroid') || initialTemplate.includes('friend') || initialTemplate.includes('memor')) targetPath = 'templates/retro-polaroid-wall/index.html';
-      else if (initialTemplate.includes('anniversary') || initialTemplate.includes('wedding')) targetPath = 'templates/golden-anniversary/index.html';
-      else if (initialTemplate.includes('apology') || initialTemplate.includes('sorry')) targetPath = 'templates/sincere-letter/index.html';
+      if (window.VanviTemplatesData && window.VanviTemplatesData.templates) {
+        const tObj = window.VanviTemplatesData.templates.find(t => t.id === initialTemplate || (t.aliases && t.aliases.includes(initialTemplate)));
+        if (tObj && tObj.templatePath) {
+          targetPath = tObj.templatePath.endsWith('index.html') ? tObj.templatePath : `${tObj.templatePath}index.html`;
+        }
+      }
+      if (targetPath === 'templates/birthday-3d-candle/index.html') {
+        if (initialTemplate === 'birthday-wish-1' || initialTemplate === 'birthday-wish-01') targetPath = 'templates/birthday-wish-01/index.html';
+        else if (initialTemplate === 'birthday-wish-2' || initialTemplate === 'birthday-wish-02') targetPath = 'templates/birthday-wish-02/index.html';
+        else if (initialTemplate.includes('surprise')) targetPath = 'templates/birthday-3d-candle-surprise/index.html';
+        else if (initialTemplate.includes('bloom')) targetPath = 'templates/birthday-white-bloom/index.html';
+        else if (initialTemplate.includes('love') || initialTemplate.includes('gf')) targetPath = 'templates/constellation-love/index.html';
+        else if (initialTemplate.includes('polaroid') || initialTemplate.includes('friend') || initialTemplate.includes('memor')) targetPath = 'templates/retro-polaroid-wall/index.html';
+        else if (initialTemplate.includes('anniversary') || initialTemplate.includes('wedding')) targetPath = 'templates/golden-anniversary/index.html';
+        else if (initialTemplate.includes('apology') || initialTemplate.includes('sorry')) targetPath = 'templates/sincere-letter/index.html';
+      }
 
       const shortId = momentId || momentSlug;
       const finalUrl = `${window.location.origin}/${targetPath}?id=${encodeURIComponent(shortId)}`;

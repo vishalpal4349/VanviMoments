@@ -1,0 +1,42 @@
+{
+  "id": "birthday-3d-candle",
+  "name": "Midnight 3D Candle & Memory Trail",
+  "slug": "birthday-3d-candle",
+  "aliases": ["bday-candle-3d", "midnight-cake-surprise"],
+  "category": "Birthday",
+  "categorySlug": "birthday",
+  "price": 129,
+  "isFree": false,
+  "badge": "Interactive 3D",
+  "type": "3D Interactive Cake & Wax Seal",
+  "icon": "🎂",
+  "soundtrack": "Midnight Birthday Acoustic",
+  "tags": ["3d candle", "birthday", "interactive", "wax seal", "polaroid"],
+  "description": "Interactive birthday keepsake featuring 3D cake candles you can blow out, wax-sealed heartfelt letter, and memory polaroid trail.",
+  "builder": {
+    "type": "common",
+    "photoLimit": 3,
+    "hasDate": true,
+    "hasSoundtrack": true
+  },
+  "schema": {
+    "fields": [
+      { "key": "recipientName", "label": "Recipient's Name", "type": "text", "required": true, "default": "My Favorite Person" },
+      { "key": "senderName", "label": "Your Name / Sender", "type": "text", "required": true, "default": "With all my love" },
+      { "key": "letterBodyText", "label": "Personal Heartfelt Letter", "type": "textarea", "required": true },
+      { "key": "celebrationDate", "label": "Birthday Date", "type": "date", "required": false },
+      { "key": "photos", "label": "Polaroid Photos", "type": "photos", "max": 3, "required": false },
+      { "key": "soundtrack", "label": "Soundtrack", "type": "audio", "default": "acoustic" }
+    ]
+  },
+  "custom_data_defaults": {
+    "recipientName": "My Favorite Person",
+    "senderName": "With all my love",
+    "letterBodyText": "Happy Birthday! May your day be filled with warm laughter, sweet surprises, and memories that last a lifetime.",
+    "celebrationDate": "",
+    "photos": [],
+    "soundtrack": "acoustic"
+  },
+  "accentColor": "#ff2a7a",
+  "templatePath": "templates/birthday-3d-candle/index.html"
+}

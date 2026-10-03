@@ -1,0 +1,42 @@
+{
+  "id": "birthday-wish-01",
+  "name": "Birthday Wish 01",
+  "slug": "birthday-wish-01",
+  "aliases": ["birthday-wish-1", "bday-wish-1", "birthday-bloom"],
+  "category": "Birthday",
+  "categorySlug": "birthday",
+  "price": 149,
+  "isFree": false,
+  "badge": "🔥 Bestseller",
+  "type": "Multi-Step Birthday Microsite",
+  "icon": "🎂",
+  "soundtrack": "Birthday Celebration Melody",
+  "tags": ["bestseller", "birthday", "interactive", "candles", "polaroid", "letter"],
+  "description": "A playful multi-step birthday microsite with an intro, interactive celebration scene, flip cards, and final heartfelt letter.",
+  "builder": {
+    "type": "common",
+    "photoLimit": 4,
+    "hasDate": true,
+    "hasSoundtrack": true
+  },
+  "schema": {
+    "fields": [
+      { "key": "recipientName", "label": "Recipient's Name", "type": "text", "required": true, "default": "Aarav" },
+      { "key": "senderName", "label": "Your Name / Sender", "type": "text", "required": true, "default": "With all my love, Sneha" },
+      { "key": "message", "label": "Heartfelt Letter", "type": "textarea", "required": true },
+      { "key": "date", "label": "Celebration Date", "type": "date", "required": false },
+      { "key": "photos", "label": "Photo Memories", "type": "photos", "max": 4, "required": false },
+      { "key": "soundtrack", "label": "Audio Dedication", "type": "audio", "default": "celebration" }
+    ]
+  },
+  "custom_data_defaults": {
+    "recipientName": "Aarav",
+    "senderName": "With all my love, Sneha",
+    "message": "Wishing you another 365 days of laughter, golden sunsets, and big dreams. May your year be as bright and beautiful as your smile. Happy Birthday! 🎂✨",
+    "date": "",
+    "photos": [],
+    "soundtrack": "celebration"
+  },
+  "accentColor": "#ff4d6d",
+  "templatePath": "templates/birthday-wish-01/index.html"
+}

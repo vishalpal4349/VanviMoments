@@ -1,0 +1,42 @@
+{
+  "id": "constellation-love",
+  "name": "Birthday Gift for Girlfriend & Romance",
+  "slug": "constellation-love",
+  "aliases": ["birthday-gf", "girlfriends-day", "birthday-gift-gf"],
+  "category": "Love & Romance",
+  "categorySlug": "love",
+  "price": 149,
+  "isFree": false,
+  "badge": "💖 Most Loved",
+  "type": "Romantic Love Letter & Falling Petals",
+  "icon": "💖",
+  "soundtrack": "Romantic Cinematic Piano",
+  "tags": ["love", "romance", "girlfriend", "petals", "letter", "acoustic"],
+  "description": "An intimate romantic keepsake featuring falling rose petals, customized salutation, emotional love letter, and dedication soundtrack.",
+  "builder": {
+    "type": "common",
+    "photoLimit": 4,
+    "hasDate": true,
+    "hasSoundtrack": true
+  },
+  "schema": {
+    "fields": [
+      { "key": "recipientName", "label": "Girlfriend / Partner's Name", "type": "text", "required": true, "default": "My Love" },
+      { "key": "senderName", "label": "Your Name / Sender", "type": "text", "required": true, "default": "Forever Yours" },
+      { "key": "message", "label": "Secret Love Letter", "type": "textarea", "required": true },
+      { "key": "date", "label": "Special Date", "type": "date", "required": false },
+      { "key": "photos", "label": "Couple Photos", "type": "photos", "max": 4, "required": false },
+      { "key": "soundtrack", "label": "Soundtrack", "type": "audio", "default": "piano" }
+    ]
+  },
+  "custom_data_defaults": {
+    "recipientName": "My Love",
+    "senderName": "Forever Yours",
+    "message": "In a world full of fleeting moments, being with you feels like coming home. Thank you for your warmth, your laughter, and the quiet comfort of your presence. Happy Birthday to the girl who holds my heart. ❤️",
+    "date": "",
+    "photos": [],
+    "soundtrack": "piano"
+  },
+  "accentColor": "#e11d48",
+  "templatePath": "templates/constellation-love/index.html"
+}

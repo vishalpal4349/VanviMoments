@@ -159,6 +159,62 @@
       });
     }
 
+    // Dynamic custom_data Engine (Unlimited & Independent Template Architecture)
+    const customData = moment.custom_data || moment.customData || {};
+    if (typeof customData === 'object' && customData !== null) {
+      const apiBase = getApiBase();
+      Object.keys(customData).forEach(key => {
+        const val = customData[key];
+        if (val === undefined || val === null) return;
+
+        // Try direct ID, prefixed IDs, or data attributes
+        const directEls = document.querySelectorAll(
+          `#${key}, [data-field="${key}"], .field-${key}, #txt_${key}, #inp_${key}`
+        );
+        directEls.forEach(el => {
+          if (el.tagName === 'IMG') {
+            let src = typeof val === 'string' ? val : (val.url || val.src);
+            if (src) {
+              if (src.startsWith('/uploads/')) src = `${apiBase}${src}`;
+              el.src = src;
+            }
+          } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.value = val;
+          } else if (typeof val === 'string' || typeof val === 'number') {
+            el.textContent = val;
+          }
+        });
+
+        // Dynamic photo arrays
+        if (Array.isArray(val) && (key.toLowerCase().includes('photo') || key.toLowerCase().includes('polaroid') || key.toLowerCase().includes('image'))) {
+          const targetImgs = document.querySelectorAll(
+            `.${key}-img, #${key}List img, [data-array="${key}"] img, .memory-polaroid img, .polaroid-deck img`
+          );
+          targetImgs.forEach((img, idx) => {
+            if (val[idx % val.length]) {
+              const item = val[idx % val.length];
+              let src = typeof item === 'string' ? item : (item.url || item.src);
+              if (src) {
+                if (src.startsWith('/uploads/')) src = `${apiBase}${src}`;
+                img.src = src;
+              }
+            }
+          });
+        }
+      });
+    }
+
+    // Attach custom_data to window.vanviActiveMoment
+    moment.custom_data = {
+      recipient,
+      sender,
+      message,
+      occasion,
+      date,
+      photos,
+      ...customData
+    };
+
     // Notify custom listeners
     window.vanviActiveMoment = moment;
     window.dispatchEvent(new CustomEvent('vanvi:momentLoaded', { detail: moment }));

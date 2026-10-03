@@ -283,6 +283,8 @@ const Moments = {
       pinHash: momentData.pinHash || null, // hashed PIN, never plaintext
       pinHint: momentData.pinHint || '',
       theme: momentData.theme || 'Velvet Rose',
+      templateId: momentData.templateId || momentData.template_id || 'birthday-3d-candle',
+      custom_data: momentData.custom_data || momentData.customData || {},
       status: momentData.status || 'draft', // 'draft', 'paid', 'published', 'revoked'
       views: 0,
       hearts: 0,

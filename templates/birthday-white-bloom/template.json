@@ -1,0 +1,43 @@
+{
+  "id": "birthday-white-bloom",
+  "name": "Birthday White Bloom",
+  "slug": "birthday-white-bloom",
+  "aliases": ["birthday-white-bloom-001"],
+  "category": "Birthday",
+  "categorySlug": "birthday",
+  "price": 0,
+  "isFree": true,
+  "badge": "🎁 100% Free",
+  "type": "Floral Digital Garden & Interactive Candle",
+  "icon": "🌸",
+  "soundtrack": "Gentle Ambient Garden Piano",
+  "tags": ["free", "birthday", "bloom", "floral", "candles", "timeline"],
+  "description": "A dreamy, light luxury digital birthday celebration moment featuring photo memories, interactive candles, and an animated letter.",
+  "builder": {
+    "type": "common",
+    "photoLimit": 8,
+    "hasDate": true,
+    "hasTimeline": true,
+    "hasSoundtrack": true
+  },
+  "schema": {
+    "fields": [
+      { "key": "recipientName", "label": "Recipient's Name", "type": "text", "required": true, "default": "My Favorite Person" },
+      { "key": "senderName", "label": "Sender Name", "type": "text", "required": true, "default": "With Love" },
+      { "key": "heroCopy", "label": "Birthday Wish Message", "type": "textarea", "required": true },
+      { "key": "photos", "label": "Photo Memories", "type": "photos", "max": 8, "required": false },
+      { "key": "birthdayDate", "label": "Birthday Date", "type": "date", "required": false },
+      { "key": "soundtrack", "label": "Soundtrack", "type": "audio", "default": "piano" }
+    ]
+  },
+  "custom_data_defaults": {
+    "recipientName": "My Favorite Person",
+    "senderName": "With Love",
+    "heroCopy": "Today is a little more special because you exist. Happy Birthday!",
+    "photos": [],
+    "birthdayDate": "",
+    "soundtrack": "piano"
+  },
+  "accentColor": "#f472b6",
+  "templatePath": "templates/birthday-white-bloom/index.html"
+}

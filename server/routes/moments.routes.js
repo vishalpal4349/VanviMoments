@@ -45,8 +45,10 @@ router.get('/', requireAuth, async (req, res) => {
  */
 router.post(['/', '/draft'], optionalAuth, async (req, res) => {
   try {
-    const { id, title, recipient, sender, occasion, message, photos, musicTrack, lockMode, pin, pinHint, theme } = req.body;
+    const { id, title, recipient, sender, occasion, message, photos, musicTrack, lockMode, pin, pinHint, theme, templateId, template_id, custom_data, customData } = req.body;
     const userId = req.user ? req.user.id : null;
+    const resolvedTemplateId = templateId || template_id || 'birthday-3d-candle';
+    const resolvedCustomData = custom_data || customData || {};
 
     let pinHash = null;
     if (lockMode === 'pin' && pin) {
@@ -71,7 +73,9 @@ router.post(['/', '/draft'], optionalAuth, async (req, res) => {
           lockMode: lockMode || 'envelope',
           pinHash: pinHash || existing.pinHash,
           pinHint: pinHint || existing.pinHint,
-          theme
+          theme,
+          templateId: resolvedTemplateId,
+          custom_data: resolvedCustomData
         });
         return res.json({ success: true, moment: updated });
       }
@@ -93,6 +97,8 @@ router.post(['/', '/draft'], optionalAuth, async (req, res) => {
       pinHash,
       pinHint,
       theme,
+      templateId: resolvedTemplateId,
+      custom_data: resolvedCustomData,
       status: 'draft'
     });
 
@@ -131,15 +137,17 @@ router.get('/public/:slug', async (req, res) => {
       lockMode: moment.lockMode,
       pinHint: moment.pinHint,
       theme: moment.theme,
+      templateId: moment.templateId || moment.template_id || 'birthday-3d-candle',
       musicTrack: moment.musicTrack,
       locked: isPinLocked,
       createdAt: moment.createdAt
     };
 
     if (!isPinLocked) {
-      // Envelope mode: message & photos can be delivered directly
+      // Envelope mode: message, photos & custom_data can be delivered directly
       publicResponse.message = moment.message;
       publicResponse.photos = moment.photos;
+      publicResponse.custom_data = moment.custom_data || moment.customData || {};
     }
 
     return res.json({ success: true, moment: publicResponse });

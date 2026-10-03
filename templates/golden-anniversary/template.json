@@ -1,0 +1,42 @@
+{
+  "id": "golden-anniversary",
+  "name": "Golden Anniversary & Milestones",
+  "slug": "golden-anniversary",
+  "aliases": ["golden-anniversary-walk", "everlasting-vows"],
+  "category": "Anniversary",
+  "categorySlug": "anniversary",
+  "price": 199,
+  "isFree": false,
+  "badge": "👑 Milestone Special",
+  "type": "Golden Frame Keepsake & Vows Tribute",
+  "icon": "💍",
+  "soundtrack": "Golden Anniversary Orchestral Waltz",
+  "tags": ["anniversary", "golden", "wedding", "milestone", "vows", "parents"],
+  "description": "A magnificent tribute to enduring love — featuring champagne gold frames, couple photo spotlights, milestone date, and vows renewal note.",
+  "builder": {
+    "type": "common",
+    "photoLimit": 4,
+    "hasDate": true,
+    "hasSoundtrack": true
+  },
+  "schema": {
+    "fields": [
+      { "key": "coupleNames", "label": "Couple Names", "type": "text", "required": true, "default": "Mom & Dad" },
+      { "key": "senderName", "label": "Sender / Family Names", "type": "text", "required": true, "default": "With all our love, Your Family" },
+      { "key": "message", "label": "Vows Renewal & Tribute Note", "type": "textarea", "required": true },
+      { "key": "anniversaryDate", "label": "Milestone Date & Years", "type": "text", "default": "25 Glorious Years" },
+      { "key": "photos", "label": "Milestone Photos", "type": "photos", "max": 4, "required": false },
+      { "key": "soundtrack", "label": "Soundtrack", "type": "audio", "default": "waltz" }
+    ]
+  },
+  "custom_data_defaults": {
+    "coupleNames": "Mom & Dad",
+    "senderName": "With all our love, Your Family",
+    "message": "Through every season, milestone, and laugh, your love has been a lighthouse for all of us. Wishing you a magnificent Golden Anniversary and countless more years of happiness together.",
+    "anniversaryDate": "25 Glorious Years",
+    "photos": [],
+    "soundtrack": "waltz"
+  },
+  "accentColor": "#d97706",
+  "templatePath": "templates/golden-anniversary/index.html"
+}
