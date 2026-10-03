@@ -82,7 +82,7 @@ app.post('/api/verify-payment', paymentsRoutes.verifyPaymentHandler);
 app.get('/api/payment-config', paymentsRoutes.getConfigHandler);
 
 // Canonical Moment Dynamic Router: /m/:slug (Resolves: slug -> moment -> template_id -> template)
-const { Moments } = require('./db/database');
+const supabaseService = require('./services/supabase.service');
 const fs = require('fs');
 
 app.get('/m/:slug', async (req, res, next) => {
@@ -90,9 +90,9 @@ app.get('/m/:slug', async (req, res, next) => {
     const { slug } = req.params;
     if (!slug) return res.redirect('/templates.html');
 
-    const moment = (await Moments.findBySlug(slug)) || (await Moments.findById(slug));
+    const moment = await supabaseService.getMomentBySlug(slug);
     if (moment) {
-      const templateId = moment.templateId || moment.template_id;
+      const templateId = moment.template_id || moment.templateId;
       if (templateId) {
         const templateHtmlPath = path.join(path.join(__dirname, '..'), 'templates', templateId, 'index.html');
         if (fs.existsSync(templateHtmlPath)) {

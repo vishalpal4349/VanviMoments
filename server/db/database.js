@@ -266,8 +266,8 @@ const Moments = {
   },
 
   async create(momentData) {
-    const id = 'vm_' + crypto.randomBytes(8).toString('hex');
-    const slug = 'm_' + crypto.randomBytes(6).toString('hex'); // unguessable 12-char slug
+    const id = momentData.id || ('vm_' + crypto.randomBytes(8).toString('hex'));
+    const slug = momentData.slug || ('m_' + crypto.randomBytes(6).toString('hex')); // unguessable 12-char slug
     const moment = {
       id,
       slug,
