@@ -685,14 +685,30 @@ footer a:hover { color: var(--rose-primary); }
     </button>
   </div>
 
-  <!-- Interactive QR Code Panel -->
+  <!-- Interactive QR Code Panel (Offline Local VanviQR + Branded Keepsake Card) -->
   <div class="qr-preview-box" id="qrPreviewBox">
-    <div class="qr-title">Instant Camera Scan QR Code</div>
-    <div class="qr-sub">Scan with any phone camera or print on a card to give as a physical surprise.</div>
-    <div class="qr-canvas-holder" id="qrCanvasWrap"></div>
-    <div>
+    <div class="qr-title">Instant Camera Scan &amp; Luxury Keepsake Card</div>
+    <div class="qr-sub">Offline Client-Side QR generation. Scan with any phone camera or print as a physical surprise.</div>
+    
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; margin: 16px 0;">
+      <!-- Standalone QR Canvas Wrap -->
+      <div class="qr-canvas-holder" id="qrCanvasWrap"></div>
+
+      <!-- Luxury Branded Keepsake QR Card Preview -->
+      <div class="branded-card-wrap" style="text-align: center; margin-top: 4px; width: 100%;">
+        <div style="font-size: 11px; font-weight: 800; color: var(--rose-primary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px;">
+          ✦ High-Resolution Branded QR Keepsake Card ✦
+        </div>
+        <canvas id="brandedQrCardCanvas" style="max-width: 100%; height: auto; border-radius: 18px; box-shadow: 0 12px 35px rgba(255, 42, 122, 0.16); border: 1.5px solid rgba(255, 120, 175, 0.35);"></canvas>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
       <a href="javascript:void(0)" class="btn-download-qr" id="btnDownloadQr" onclick="downloadQRCode()">
-        <span>⬇️</span> Download QR Image
+        <span>⬇️</span> Download Standalone QR (PNG)
+      </a>
+      <a href="javascript:void(0)" class="btn-download-qr" id="btnDownloadCard" onclick="downloadBrandedCard()" style="background: linear-gradient(135deg, #ff2a7a, #d97706); color: #fff; border: none; box-shadow: 0 4px 14px rgba(255, 42, 122, 0.3);">
+        <span>✨</span> Download Branded Keepsake Card (PNG)
       </a>
     </div>
   </div>
@@ -735,6 +751,8 @@ footer a:hover { color: var(--rose-primary); }
 </nav>
 
 <script src="js/vanvi-navigation.js"></script>
+<script src="js/vanvi-templates-data.js"></script>
+<script src="js/vanvi-qr.js"></script>
 <script>
 function safeGoBack() {
   if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.host)) {
@@ -844,47 +862,65 @@ function showToast(msg) {
     recipientTag.dataset.custom = 'true';
   }
 
-  // Build Moment Link dynamically from URL or template resolution (Never universally hardcode moment.html)
+  // Resolve moment data and template_id independently (Requirement 4)
+  let momentData = null;
+  let templateId = params.get('template') || params.get('templateId') || '';
+  let slug = params.get('slug') || id;
+  let recipient = recipientParam;
+  let sender = '';
+  let occasion = themeParam || 'Celebration';
+
+  // Check localStorage for moments (Guest & Offline creation)
+  try {
+    const list = JSON.parse(localStorage.getItem('vanvi_user_moments') || '[]');
+    const found = list.find(m => m.id === id || m.slug === slug || (id && m.id && m.id.endsWith(id)));
+    if (found) {
+      momentData = found;
+      templateId = found.templateId || found.template_id || templateId;
+      slug = found.slug || slug;
+      if (!recipient) recipient = found.recipient || recipient;
+      sender = found.sender || sender;
+      occasion = found.occasion || occasion;
+    }
+  } catch(e) {}
+
+  // Canonical Share URL (Requirement 3: https://vanvimoments.shop/m/{slug})
+  const canonicalUrl = `${location.origin}/m/${encodeURIComponent(slug || id || 'celebration')}`;
+
+  // Resolve template name and path dynamically via actual template_id
+  let templateName = 'Dedicated Celebration';
   let targetUrl = params.get('momentUrl') || params.get('url');
+
+  if (templateId && window.VanviTemplatesData && window.VanviTemplatesData.templates) {
+    const tObj = window.VanviTemplatesData.templates.find(t => t.id === templateId || (t.aliases && t.aliases.includes(templateId)));
+    if (tObj) {
+      templateName = tObj.name || templateName;
+      if (!targetUrl && tObj.templatePath) {
+        const pathSuffix = tObj.templatePath.endsWith('index.html') ? tObj.templatePath : `${tObj.templatePath}index.html`;
+        targetUrl = `${location.origin}/${pathSuffix}?id=${encodeURIComponent(id || slug)}&slug=${encodeURIComponent(slug)}`;
+      }
+    }
+  }
+
   if (!targetUrl) {
-    const tplKey = (params.get('template') || params.get('templateId') || themeParam || '').toLowerCase();
-    if (tplKey.includes('bloom') || tplKey.includes('white-bloom')) {
-      targetUrl = location.origin + '/templates/birthday-white-bloom-001/index.html';
-    } else if (tplKey.includes('candle') || tplKey.includes('3d')) {
-      targetUrl = location.origin + '/templates/birthday-3d-candle-surprise/index.html';
-    } else if (tplKey.includes('wish-2') || tplKey.includes('wish-02')) {
-      targetUrl = location.origin + '/templates/birthday-wish-02/index.html';
-    } else if (tplKey.includes('apology')) {
-      targetUrl = location.origin + '/templates/apology-dashboard/index.html';
-    } else {
-      targetUrl = location.origin + '/templates/birthday-wish-01/index.html';
-    }
-    const qParts = [];
-    if (id) qParts.push('id=' + encodeURIComponent(id));
-    if (recipientParam) qParts.push('recipient=' + encodeURIComponent(recipientParam));
-    if (pinParam) qParts.push('pin=' + encodeURIComponent(pinParam));
-    if (qParts.length) targetUrl += '?' + qParts.join('&');
-    if (id && previewTitle) {
-      previewTitle.textContent = `Private Digital Moment #${id}`;
-      previewTitle.dataset.custom = 'true';
-    }
+    targetUrl = canonicalUrl;
   }
 
   if (btnOpen) btnOpen.href = targetUrl;
 
-  // WhatsApp Message
-  const waText = `I created a private, interactive celebration moment just for you! ✨ Tap to open your surprise:\n${targetUrl}`;
+  // WhatsApp Message with canonical link
+  const waText = `I created a private, interactive celebration moment just for you! ✨ Tap to open your surprise:\n${canonicalUrl}`;
   if (btnShareWA) {
     btnShareWA.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`;
   }
 
-  // Copy Link
+  // Copy Link (copies canonical share link)
   if (btnCopyLink) {
     btnCopyLink.addEventListener('click', () => {
-      navigator.clipboard.writeText(targetUrl).then(() => {
+      navigator.clipboard.writeText(canonicalUrl).then(() => {
         showToast('Secret link copied! Paste anywhere to share. ✨');
       }).catch(() => {
-        prompt('Copy your moment link:', targetUrl);
+        prompt('Copy your moment link:', canonicalUrl);
       });
     });
   }
@@ -892,13 +928,22 @@ function showToast(msg) {
   // Instagram Story
   if (btnShareIG) {
     btnShareIG.addEventListener('click', () => {
-      navigator.clipboard.writeText(targetUrl).then(() => {
+      navigator.clipboard.writeText(canonicalUrl).then(() => {
         showToast('Link copied! Open Instagram Story & add the Link Sticker. 📸');
       });
     });
   }
 
-  // QR Toggle
+  // Store active card metadata for download handlers
+  window._activeCardMeta = {
+    url: canonicalUrl,
+    recipient: recipient || 'Someone Special',
+    sender: sender || '',
+    occasion: occasion || 'Celebration',
+    templateName: templateName
+  };
+
+  // QR Toggle & Generation (100% Local via VanviQR)
   let qrGenerated = false;
   if (btnToggleQR && qrBox) {
     btnToggleQR.addEventListener('click', () => {
@@ -910,7 +955,7 @@ function showToast(msg) {
         qrBox.classList.add('open');
         btnToggleQR.innerHTML = '<span>✕</span> Hide QR Code';
         if (!qrGenerated) {
-          generateQRCode(targetUrl);
+          generateQRCode(canonicalUrl);
           qrGenerated = true;
         }
       }
@@ -918,28 +963,41 @@ function showToast(msg) {
   }
 
   function generateQRCode(url) {
-    if (!qrWrap) return;
-    const qrImg = document.createElement('img');
-    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(url)}&color=44-18-36`;
-    qrImg.alt = 'Vanvi Moment QR Code';
-    qrImg.width = 160;
-    qrImg.height = 160;
-    qrImg.style.borderRadius = '12px';
-    qrImg.style.display = 'block';
+    if (!qrWrap || typeof VanviQR === 'undefined') return;
     qrWrap.innerHTML = '';
-    qrWrap.appendChild(qrImg);
+
+    // 1. Standalone Canvas QR
+    const qrCanvas = document.createElement('canvas');
+    qrCanvas.id = 'standaloneQrCanvas';
+    VanviQR.render(qrCanvas, url, { size: 180, dark: '#2c1224', light: '#ffffff' });
+    qrCanvas.style.borderRadius = '14px';
+    qrWrap.appendChild(qrCanvas);
+
+    // 2. High-Res Luxury Branded Card Canvas
+    const cardCanvas = document.getElementById('brandedQrCardCanvas');
+    if (cardCanvas && VanviQR.renderBrandedCard) {
+      VanviQR.renderBrandedCard(cardCanvas, window._activeCardMeta);
+    }
   }
 })();
 
 function downloadQRCode() {
-  const img = document.querySelector('#qrCanvasWrap img');
-  if (img && img.src) {
+  const canvas = document.getElementById('standaloneQrCanvas');
+  if (canvas) {
     const a = document.createElement('a');
-    a.href = img.src;
-    a.download = 'Vanvi-Moment-QR.png';
-    a.target = '_blank';
+    a.href = canvas.toDataURL('image/png');
+    a.download = `VanviMoment-QR-${(window._activeCardMeta && window._activeCardMeta.recipient) || 'Celebration'}.png`;
+    document.body.appendChild(a);
     a.click();
-    showToast('QR Code download started! 📥');
+    setTimeout(() => a.remove(), 100);
+    showToast('Standalone QR downloaded! 📥');
+  }
+}
+
+function downloadBrandedCard() {
+  if (typeof VanviQR !== 'undefined' && VanviQR.downloadCard && window._activeCardMeta) {
+    VanviQR.downloadCard(window._activeCardMeta);
+    showToast('Branded Keepsake QR Card downloaded! ✨');
   }
 }
 </script>

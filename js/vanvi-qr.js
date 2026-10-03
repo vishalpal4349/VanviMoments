@@ -319,7 +319,160 @@
     }
   }
 
+  /**
+   * Export QR Code directly as a PNG Data URL
+   */
+  function qrToDataURL(text, options) {
+    options = options || {};
+    var size = options.size || 240;
+    var canvas = document.createElement('canvas');
+    renderQRCode(canvas, text, options);
+    return canvas.toDataURL('image/png');
+  }
+
+  /**
+   * Render a high-resolution Luxury Branded VanviMoments QR Card
+   * @param {HTMLCanvasElement|string} target Canvas element or canvas ID
+   * @param {object} meta { url, recipient, sender, occasion, templateName }
+   */
+  function renderBrandedCard(target, meta) {
+    meta = meta || {};
+    var canvas = typeof target === 'string' ? document.getElementById(target) : target;
+    if (!canvas) return;
+
+    var width = 640;
+    var height = 820;
+    canvas.width = width;
+    canvas.height = height;
+    canvas.style.width = '320px';
+    canvas.style.height = '410px';
+
+    var ctx = canvas.getContext('2d');
+
+    // 1. Background gradient
+    var bgGrad = ctx.createLinearGradient(0, 0, 0, height);
+    bgGrad.addColorStop(0, '#fff8fa');
+    bgGrad.addColorStop(0.5, '#ffffff');
+    bgGrad.addColorStop(1, '#fff5f8');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, width, height);
+
+    // 2. Outer Luxury Border
+    ctx.strokeStyle = 'rgba(255, 120, 175, 0.45)';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(16, 16, width - 32, height - 32);
+
+    // 3. Inner Gold Accent Frame
+    ctx.strokeStyle = 'rgba(217, 119, 6, 0.35)';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(26, 26, width - 52, height - 52);
+
+    // 4. Header Branding
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#ff2a7a';
+    ctx.font = 'bold 20px "Plus Jakarta Sans", sans-serif';
+    ctx.letterSpacing = '3px';
+    ctx.fillText('VANVI MOMENTS', width / 2, 72);
+
+    ctx.fillStyle = '#78536d';
+    ctx.font = 'italic 16px "Cormorant Garamond", serif';
+    ctx.letterSpacing = '1px';
+    ctx.fillText('A Dedicated Digital Celebration Keepsake', width / 2, 98);
+
+    // 5. Recipient Ribbon
+    var recName = meta.recipient || 'Someone Special';
+    var occName = meta.occasion || 'Celebration';
+    ctx.fillStyle = 'rgba(255, 42, 122, 0.08)';
+    ctx.beginPath();
+    ctx.roundRect((width - 440) / 2, 124, 440, 48, 24);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255, 42, 122, 0.3)';
+    ctx.stroke();
+
+    ctx.fillStyle = '#2c1224';
+    ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
+    ctx.fillText('Prepared for ' + recName + ' ♡', width / 2, 155);
+
+    // 6. Draw QR Code in Center
+    var qrSize = 300;
+    var qrX = (width - qrSize) / 2;
+    var qrY = 196;
+
+    // White backing with shadow
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.roundRect(qrX - 16, qrY - 16, qrSize + 32, qrSize + 32, 20);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255, 120, 175, 0.35)';
+    ctx.stroke();
+
+    // Render QR modules onto offscreen canvas
+    var offCanvas = document.createElement('canvas');
+    renderQRCode(offCanvas, meta.url || 'https://vanvimoments.shop', {
+      size: qrSize,
+      dark: '#2c1224',
+      light: '#ffffff'
+    });
+    ctx.drawImage(offCanvas, qrX, qrY, qrSize, qrSize);
+
+    // 7. Instructions & Call to Action
+    ctx.fillStyle = '#ff2a7a';
+    ctx.font = 'bold 17px "Plus Jakarta Sans", sans-serif';
+    ctx.fillText('📷 Scan with phone camera to open', width / 2, 574);
+
+    // 8. Short URL Pill
+    var displayUrl = meta.url || 'https://vanvimoments.shop';
+    if (displayUrl.length > 46) {
+      displayUrl = displayUrl.replace(/^https?:\/\//, '').substring(0, 44) + '...';
+    }
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+    ctx.beginPath();
+    ctx.roundRect((width - 480) / 2, 604, 480, 40, 20);
+    ctx.fill();
+
+    ctx.fillStyle = '#5c3552';
+    ctx.font = '14px monospace';
+    ctx.fillText(displayUrl, width / 2, 629);
+
+    // 9. Template & Sender Credits
+    if (meta.templateName) {
+      ctx.fillStyle = '#8b5cf6';
+      ctx.font = 'bold 13px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Experience: ' + meta.templateName, width / 2, 678);
+    }
+
+    if (meta.sender) {
+      ctx.fillStyle = '#78536d';
+      ctx.font = 'italic 15px "Cormorant Garamond", serif';
+      ctx.fillText('Created with all my love — ' + meta.sender, width / 2, 706);
+    }
+
+    // 10. Footer Security / Permanent Badge
+    ctx.fillStyle = '#a68b9e';
+    ctx.font = '12px "Plus Jakarta Sans", sans-serif';
+    ctx.fillText('✦ Private Experience · Zero App Download Needed · vanvimoments.shop ✦', width / 2, 770);
+  }
+
+  /**
+   * Trigger download of branded QR card as high-res PNG
+   */
+  function downloadBrandedCard(meta, filename) {
+    var canvas = document.createElement('canvas');
+    renderBrandedCard(canvas, meta);
+    var dataUrl = canvas.toDataURL('image/png');
+    var a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = filename || ('VanviMoments-QR-' + (meta.recipient || 'Moment') + '.png');
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function() { a.remove(); }, 150);
+  }
+
   root.VanviQR = {
-    render: renderQRCode
+    render: renderQRCode,
+    toDataURL: qrToDataURL,
+    renderBrandedCard: renderBrandedCard,
+    downloadCard: downloadBrandedCard
   };
 })(typeof window !== 'undefined' ? window : this);
+

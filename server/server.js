@@ -81,6 +81,35 @@ app.post('/api/create-order', paymentsRoutes.createOrderHandler);
 app.post('/api/verify-payment', paymentsRoutes.verifyPaymentHandler);
 app.get('/api/payment-config', paymentsRoutes.getConfigHandler);
 
+// Canonical Moment Dynamic Router: /m/:slug (Resolves: slug -> moment -> template_id -> template)
+const { Moments } = require('./db/database');
+const fs = require('fs');
+
+app.get('/m/:slug', async (req, res, next) => {
+  try {
+    const { slug } = req.params;
+    if (!slug) return res.redirect('/templates.html');
+
+    const moment = (await Moments.findBySlug(slug)) || (await Moments.findById(slug));
+    if (moment) {
+      const templateId = moment.templateId || moment.template_id;
+      if (templateId) {
+        const templateHtmlPath = path.join(path.join(__dirname, '..'), 'templates', templateId, 'index.html');
+        if (fs.existsSync(templateHtmlPath)) {
+          return res.redirect(`/templates/${encodeURIComponent(templateId)}/index.html?id=${encodeURIComponent(moment.id)}&slug=${encodeURIComponent(moment.slug || slug)}`);
+        }
+      }
+      return res.redirect(`/moment.html?id=${encodeURIComponent(moment.id)}&slug=${encodeURIComponent(moment.slug || slug)}`);
+    }
+
+    // Client-side fallback for offline/guest moments
+    return res.redirect(`/moment.html?slug=${encodeURIComponent(slug)}`);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 // Serve static uploads & frontend files from project root
 const ROOT_DIR = path.join(__dirname, '..');
 const UPLOADS_DIR = path.join(__dirname, '..', 'uploads');
