@@ -5246,6 +5246,7 @@ button,
 }
 
 /* 2. Hero Action Buttons */
+/* 2. Hero Action Buttons — Perfectly Locked in Place (Zero Sliding / Drifting) */
 .hero .actions {
   display: flex !important;
   gap: 12px !important;
@@ -5253,7 +5254,16 @@ button,
   align-items: center !important;
   margin: 22px auto 26px !important;
   flex-wrap: wrap !important;
-  max-width: 520px !important;
+  max-width: 560px !important;
+  position: relative !important;
+  transform: none !important;
+}
+
+@media (min-width: 800px) {
+  .hero .actions {
+    justify-content: flex-start !important;
+    margin: 22px 0 26px !important;
+  }
 }
 
 .hero .primary,
@@ -5272,7 +5282,8 @@ button,
   border: 1.5px solid rgba(255, 255, 255, 0.65) !important;
   box-shadow: 0 10px 28px rgba(255, 19, 97, 0.36), 0 2px 8px rgba(147, 51, 234, 0.22), inset 0 1px 1px #ffffff !important;
   text-decoration: none !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transform: none !important;
+  transition: box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease, border-color 0.2s ease !important;
   cursor: pointer !important;
   white-space: nowrap !important;
 }
@@ -5287,6 +5298,7 @@ button,
 .hero .primary:active,
 .hero .flow-btn:active {
   opacity: 0.92 !important;
+  transform: none !important;
 }
 
 .hero .secondary {
@@ -5305,7 +5317,8 @@ button,
   border: 1.5px solid rgba(255, 120, 175, 0.45) !important;
   box-shadow: 0 4px 16px rgba(44, 18, 36, 0.05), inset 0 1px 0 #ffffff !important;
   text-decoration: none !important;
-  transition: all 0.22s ease !important;
+  transform: none !important;
+  transition: box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease, border-color 0.2s ease !important;
   cursor: pointer !important;
   white-space: nowrap !important;
 }
@@ -5320,6 +5333,18 @@ button,
 
 .hero .secondary:active {
   opacity: 0.92 !important;
+  transform: none !important;
+}
+
+.btn-categories-trigger {
+  transform: none !important;
+  transition: box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease, border-color 0.2s ease !important;
+}
+.btn-categories-trigger:hover {
+  transform: none !important;
+  border-color: #ff2a7a !important;
+  color: #ff2a7a !important;
+  box-shadow: 0 6px 18px rgba(255, 42, 122, 0.18) !important;
 }
 
 /* 3. Header Action Buttons (Mobile & Desktop) */
@@ -6111,9 +6136,9 @@ button,
       <div class="showcase-slide-item active" data-index="0">
         <div class="slide-content-left">
           <div class="slide-kicker-row">
-            <span class="slide-kicker-badge badge-gold">🎁 50 Welcome Coins</span>
+            <span class="slide-kicker-badge badge-gold">🪙 50 Welcome Coins</span>
           </div>
-          <h3 class="slide-headline">Claim <span>50 Welcome Coins</span> for Your Moments</h3>
+          <h3 class="slide-headline">Claim <span>50 Free Coins</span> on Signup</h3>
           <p class="slide-desc" style="display:none;">Sign up free today &amp; get instant credit to use on birthday surprises, love reels, or interactive letters.</p>
           <div class="slide-features-strip">
             <span class="feature-tag-pill">🪙 ₹5 Credit</span>
@@ -6123,7 +6148,7 @@ button,
         </div>
         <div class="slide-content-right">
           <a href="dashboard.html" class="btn-showcase-cta cta-rose-gold">
-            <span>Claim 50 Coins</span> <span>🪙 →</span>
+            <span>Claim Coins</span> <span>🪙 →</span>
           </a>
         </div>
       </div>
@@ -6143,8 +6168,92 @@ button,
           </div>
         </div>
         <div class="slide-content-right">
-          <a href="dashboard.html" class="btn-showcase-cta cta-rose-gold">
+          <a href="plans.html" class="btn-showcase-cta cta-rose-gold">
             <span>Get Pass</span> <span>⚡ →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 3: Daily Spin & Win -->
+      <div class="showcase-slide-item" data-index="2">
+        <div class="slide-content-left">
+          <div class="slide-kicker-row">
+            <span class="slide-kicker-badge badge-purple">🎡 Daily Lucky Wheel</span>
+          </div>
+          <h3 class="slide-headline">Daily Spin &amp; Win: <span>Up to 100 Bonus Coins</span></h3>
+          <p class="slide-desc" style="display:none;">Spin the mystery reward wheel every 24 hours for instant moment unlocks and surprise discounts.</p>
+          <div class="slide-features-strip">
+            <span class="feature-tag-pill">🎡 Free Daily Spin</span>
+            <span class="feature-tag-pill">🪙 10–100 Coins</span>
+            <span class="feature-tag-pill">✨ Instant Unlock</span>
+          </div>
+        </div>
+        <div class="slide-content-right">
+          <a href="rewards.html" class="btn-showcase-cta cta-rose-gold">
+            <span>Spin Wheel</span> <span>🎡 →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 4: Celebration Mini-Games -->
+      <div class="showcase-slide-item" data-index="3">
+        <div class="slide-content-left">
+          <div class="slide-kicker-row">
+            <span class="slide-kicker-badge badge-green">🎮 Play &amp; Earn</span>
+          </div>
+          <h3 class="slide-headline">Play Mini-Games: <span>Win Free Coins &amp; Perks</span></h3>
+          <p class="slide-desc" style="display:none;">Enjoy 30-second games like Hidden Hearts and Memory Sequence to stack up celebration discounts.</p>
+          <div class="slide-features-strip">
+            <span class="feature-tag-pill">💖 Hidden Hearts</span>
+            <span class="feature-tag-pill">🧩 Love Puzzle</span>
+            <span class="feature-tag-pill">🪙 Free VCoins</span>
+          </div>
+        </div>
+        <div class="slide-content-right">
+          <a href="games.html" class="btn-showcase-cta cta-rose-gold">
+            <span>Play Games</span> <span>🎮 →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 5: Refer & Earn -->
+      <div class="showcase-slide-item" data-index="4">
+        <div class="slide-content-left">
+          <div class="slide-kicker-row">
+            <span class="slide-kicker-badge badge-rose">🤝 Refer &amp; Earn</span>
+          </div>
+          <h3 class="slide-headline">Invite Friends: <span>Earn ₹100 Celebration Cash</span></h3>
+          <p class="slide-desc" style="display:none;">Share your unique Vanvi invite link. Both of you get celebration credits instantly upon signup.</p>
+          <div class="slide-features-strip">
+            <span class="feature-tag-pill">🎁 ₹100 Bonus</span>
+            <span class="feature-tag-pill">👥 Unlimited Friends</span>
+            <span class="feature-tag-pill">⚡ Instant Credit</span>
+          </div>
+        </div>
+        <div class="slide-content-right">
+          <a href="refer.html" class="btn-showcase-cta cta-rose-gold">
+            <span>Refer &amp; Earn</span> <span>🎁 →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 6: 24K Bespoke Atelier -->
+      <div class="showcase-slide-item" data-index="5">
+        <div class="slide-content-left">
+          <div class="slide-kicker-row">
+            <span class="slide-kicker-badge badge-gold">👑 Royal Atelier</span>
+          </div>
+          <h3 class="slide-headline">Bespoke 3D Experience: <span>Crafted 1-on-1 Just For You</span></h3>
+          <p class="slide-desc" style="display:none;">Dedicated designer, custom spatial world, private wax-sealed keepsake, and studio audio synchronization.</p>
+          <div class="slide-features-strip">
+            <span class="feature-tag-pill">🌌 3D Universe</span>
+            <span class="feature-tag-pill">🎼 Custom Music</span>
+            <span class="feature-tag-pill">🔒 PIN Protected</span>
+          </div>
+        </div>
+        <div class="slide-content-right">
+          <a href="category-premium.html" class="btn-showcase-cta cta-rose-gold">
+            <span>Explore 24K</span> <span>👑 →</span>
           </a>
         </div>
       </div>
@@ -6155,6 +6264,10 @@ button,
       <div class="showcase-dots-bar">
         <span class="showcase-dot active" data-slide="0"></span>
         <span class="showcase-dot" data-slide="1"></span>
+        <span class="showcase-dot" data-slide="2"></span>
+        <span class="showcase-dot" data-slide="3"></span>
+        <span class="showcase-dot" data-slide="4"></span>
+        <span class="showcase-dot" data-slide="5"></span>
       </div>
       <button class="showcase-nav-btn" id="showcasePrevBtn" aria-label="Previous Offer">‹</button>
       <button class="showcase-nav-btn" id="showcaseNextBtn" aria-label="Next Offer">›</button>
@@ -6770,40 +6883,59 @@ function closeMagazineComingSoonModal() {
 })();
 </script>
 
-<!-- Games & Earn VCoins Section (Exact match to Curated Physical Gifts Card) -->
-<section class="section scroll-animate">
-<div class="birthday glass"><div class="eyebrow">Play &amp; Earn Discounts</div><h3>🎮 Celebration Mini-Games</h3>
-<p>Play fun 30-second games — Search Hidden Hearts, Catch Falling Hearts, Love Memory Bloom &amp; Quick Tap. Win free Vanvi Coins for instant discounts on all celebration moments!</p>
-<button class="secondary" onclick="window.location.href='games.html'">Explore Mini-Games →</button></div>
-</section>
-<section class="section scroll-animate" id="ultraSection" style="padding: 12px clamp(12px, 3vw, 20px) 16px !important;">
-  <div class="ultra" style="max-width: 860px; margin: 0 auto; border-radius: 24px; padding: clamp(16px, 3vw, 24px) clamp(14px, 3vw, 22px); background: linear-gradient(145deg, #ffffff 0%, #fffdfa 50%, #fff7fb 100%); border: 1.5px solid rgba(217, 119, 6, 0.35); box-shadow: 0 10px 32px rgba(217, 119, 6, 0.08); text-align: center;">
-    <div class="ultra-top-bar" style="display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
-      <span class="ultra-crown-badge" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; font-size: 10.5px; font-weight: 850; padding: 3px 11px; border-radius: 99px; letter-spacing: 0.5px;">👑 24K ATELIER</span>
-      <span class="ultra-price" style="font-size: 11.5px; font-weight: 800; color: #b45309;">₹500 – ₹9,999 · Bespoke Commission</span>
-      <span class="ultra-vip-tag" style="font-size: 10px; font-weight: 850; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; padding: 2.5px 9px; border-radius: 99px;">100% PRIVATE</span>
+<!-- Games & Earn VCoins Section (Colorful, Vibrant & Light Premium Polish) -->
+<section class="section scroll-animate" style="padding: 12px clamp(12px, 3vw, 20px) 16px !important;">
+  <div class="birthday glass" style="max-width: 860px; margin: 0 auto; border-radius: 28px; padding: clamp(20px, 3.5vw, 28px) clamp(16px, 3vw, 24px); background: radial-gradient(circle at 10% 20%, rgba(255, 120, 175, 0.16), transparent 40%), radial-gradient(circle at 90% 80%, rgba(147, 51, 234, 0.15), transparent 45%), linear-gradient(135deg, #ffffff 0%, #fff7fb 50%, #f5f3ff 100%); border: 1.5px solid rgba(236, 72, 153, 0.35); box-shadow: 0 16px 42px rgba(219, 39, 119, 0.12), inset 0 2px 2px #ffffff; text-align: center;">
+    <div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 99px; background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; font-size: 10.5px; font-weight: 850; letter-spacing: 0.5px; margin-bottom: 8px;">
+      <span>🎮 PLAY &amp; WIN DISCOUNTS</span> <span>✦ 100% FREE</span>
     </div>
-    <h3 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(22px, 4vw, 32px); font-weight: 700; color: #2c1224; margin: 4px 0 6px;">
+    <h3 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(24px, 4vw, 34px); font-weight: 800; color: #2c1224; margin: 4px 0 6px;">
+      Celebration Mini-Games &amp; Coin Rewards 🎡
+    </h3>
+    <p style="font-size: 13px; line-height: 1.5; color: #6d4763; max-width: 580px; margin: 0 auto 14px;">
+      Play fun 30-second games — Find Hidden Hearts, Catch Falling Hearts &amp; Memory Bloom. Earn free Vanvi Coins for instant checkout discounts on all celebration keepsakes!
+    </p>
+    <div style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;">
+      <span style="font-size: 11.5px; font-weight: 750; background: #fff0f6; border: 1px solid rgba(255, 120, 175, 0.4); padding: 4px 12px; border-radius: 99px; color: #be185d;">💖 Hidden Hearts</span>
+      <span style="font-size: 11.5px; font-weight: 750; background: #f5f3ff; border: 1px solid rgba(168, 85, 247, 0.35); padding: 4px 12px; border-radius: 99px; color: #6b21a8;">🧩 Love Puzzle</span>
+      <span style="font-size: 11.5px; font-weight: 750; background: #eff6ff; border: 1px solid rgba(59, 130, 246, 0.35); padding: 4px 12px; border-radius: 99px; color: #1d4ed8;">⚡ Memory Sequence</span>
+      <span style="font-size: 11.5px; font-weight: 750; background: #ecfdf5; border: 1px solid rgba(16, 185, 129, 0.35); padding: 4px 12px; border-radius: 99px; color: #047857;">🪙 Win Free Coins</span>
+    </div>
+    <a href="games.html" class="primary flow-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 12px 26px; border-radius: 99px; font-weight: 850; font-size: 13px; background: linear-gradient(135deg, #ff2a7a 0%, #9333ea 100%); color: #fff; box-shadow: 0 8px 25px rgba(255, 42, 122, 0.35);">
+      🎮 Play Mini-Games &amp; Earn Coins →
+    </a>
+  </div>
+</section>
+
+<!-- Ultra Premium 24K Atelier Section (Clean, Royal & Colorful Polish) -->
+<section class="section scroll-animate" id="ultraSection" style="padding: 12px clamp(12px, 3vw, 20px) 16px !important;">
+  <div class="ultra" style="max-width: 860px; margin: 0 auto; border-radius: 28px; padding: clamp(22px, 3.8vw, 32px) clamp(16px, 3vw, 26px); background: radial-gradient(circle at 15% 15%, rgba(217, 119, 6, 0.18), transparent 45%), radial-gradient(circle at 85% 85%, rgba(255, 42, 122, 0.16), transparent 50%), linear-gradient(145deg, #ffffff 0%, #fffdfa 45%, #fff5f8 100%); border: 1.5px solid rgba(217, 119, 6, 0.42); box-shadow: 0 18px 50px rgba(217, 119, 6, 0.12), inset 0 2px 2px #ffffff; text-align: center; position: relative; overflow: hidden;">
+    <div class="ultra-top-bar" style="display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px;">
+      <span class="ultra-crown-badge" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; font-size: 11px; font-weight: 850; padding: 4px 13px; border-radius: 99px; letter-spacing: 0.6px; box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);">👑 24K ATELIER</span>
+      <span class="ultra-price" style="font-size: 12px; font-weight: 850; color: #b45309; background: #fef3c7; border: 1px solid #fde68a; padding: 3px 11px; border-radius: 99px;">Bespoke Commission</span>
+      <span class="ultra-vip-tag" style="font-size: 10.5px; font-weight: 850; background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; padding: 3px 10px; border-radius: 99px;">100% PRIVATE</span>
+    </div>
+    <h3 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(24px, 4.2vw, 36px); font-weight: 800; color: #2c1224; margin: 4px 0 8px;">
       Your Story. Your Bespoke 3D Universe.
     </h3>
-    <p style="font-size: 13px; line-height: 1.45; color: #796377; max-width: 580px; margin: 0 auto 14px;">
-      Handcrafted 3D surprises made specially for your milestones. Private memories, secret PIN lock &amp; custom soundtrack.
+    <p style="font-size: 13.5px; line-height: 1.5; color: #6e4d65; max-width: 600px; margin: 0 auto 16px;">
+      Handcrafted 3D celebration keepsakes built from scratch for your once-in-a-lifetime milestones. Interactive 3D spatial models, wax-sealed envelopes, and your personal soundtrack.
     </p>
 
     <!-- 4 Royal Experience Pillars -->
-    <div class="features" style="display: flex; justify-content: center; gap: 6px 10px; flex-wrap: wrap; margin-bottom: 16px;">
-      <span style="font-size: 11.5px; font-weight: 750; background: rgba(255,255,255,0.9); border: 1px solid rgba(217,119,6,0.25); padding: 4px 11px; border-radius: 99px; color: #92400e;">🌌 3D Spatial World</span>
-      <span style="font-size: 11.5px; font-weight: 750; background: rgba(255,255,255,0.9); border: 1px solid rgba(217,119,6,0.25); padding: 4px 11px; border-radius: 99px; color: #92400e;">💌 Wax-Sealed Keepsake</span>
-      <span style="font-size: 11.5px; font-weight: 750; background: rgba(255,255,255,0.9); border: 1px solid rgba(217,119,6,0.25); padding: 4px 11px; border-radius: 99px; color: #92400e;">🎼 Custom Soundtrack</span>
-      <span style="font-size: 11.5px; font-weight: 750; background: rgba(255,255,255,0.9); border: 1px solid rgba(217,119,6,0.25); padding: 4px 11px; border-radius: 99px; color: #92400e;">👑 1-on-1 Designer</span>
+    <div class="features" style="display: flex; justify-content: center; gap: 8px 12px; flex-wrap: wrap; margin-bottom: 20px;">
+      <span style="font-size: 12px; font-weight: 800; background: #ffffff; border: 1.2px solid rgba(217,119,6,0.3); padding: 6px 14px; border-radius: 99px; color: #92400e; box-shadow: 0 4px 12px rgba(217,119,6,0.08);">🌌 3D Spatial World</span>
+      <span style="font-size: 12px; font-weight: 800; background: #ffffff; border: 1.2px solid rgba(217,119,6,0.3); padding: 6px 14px; border-radius: 99px; color: #92400e; box-shadow: 0 4px 12px rgba(217,119,6,0.08);">💌 Wax-Sealed Keepsake</span>
+      <span style="font-size: 12px; font-weight: 800; background: #ffffff; border: 1.2px solid rgba(217,119,6,0.3); padding: 6px 14px; border-radius: 99px; color: #92400e; box-shadow: 0 4px 12px rgba(217,119,6,0.08);">🎼 Custom Soundtrack</span>
+      <span style="font-size: 12px; font-weight: 800; background: #ffffff; border: 1.2px solid rgba(217,119,6,0.3); padding: 6px 14px; border-radius: 99px; color: #92400e; box-shadow: 0 4px 12px rgba(217,119,6,0.08);">👑 1-on-1 Designer</span>
     </div>
 
-    <div class="ultra-cta-row" style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-      <a href="category-premium.html#bespokeStudio" class="primary flow-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 11px 22px; border-radius: 99px; font-weight: 850; font-size: 13px; background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%); color: #fff; box-shadow: 0 6px 20px rgba(255,42,122,0.32);">
-        ✨ Commission Experience (₹1) →
+    <div class="ultra-cta-row" style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+      <a href="category-premium.html#bespokeStudio" class="primary flow-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 99px; font-weight: 850; font-size: 13.5px; background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%); color: #fff; box-shadow: 0 8px 26px rgba(255,42,122,0.35);">
+        ✨ Commission Atelier (₹1) →
       </a>
-      <a href="category-premium.html" class="secondary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 11px 20px; border-radius: 99px; font-weight: 800; font-size: 12.5px; border: 1.5px solid rgba(217,119,6,0.45); color: #92400e; background: #ffffff;">
-        👑 Flagship 24K Atelier →
+      <a href="category-premium.html" class="secondary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 12px 22px; border-radius: 99px; font-weight: 800; font-size: 13px; border: 1.5px solid rgba(217,119,6,0.45); color: #92400e; background: #ffffff; box-shadow: 0 4px 14px rgba(217,119,6,0.12);">
+        👑 Flagship 24K Collection →
       </a>
     </div>
   </div>

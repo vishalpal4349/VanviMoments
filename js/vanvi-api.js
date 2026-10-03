@@ -421,13 +421,40 @@
       }
     },
 
-    // 7. Secure Media Upload
+    // 7. Secure Media Upload (Cloudinary with Local Fallback)
     upload: {
-      async photo(base64Data, originalName) {
+      async getConfig() {
+        return await request('/api/upload/config');
+      },
+
+      async photo(base64Data, originalName, options = {}) {
+        return await this.media({
+          base64Data,
+          originalName,
+          assetType: 'image',
+          templateId: options.templateId || options.template_id,
+          momentId: options.momentId || options.moment_id
+        });
+      },
+
+      async media({ file, base64Data, originalName, templateId, momentId, assetType = 'image', onProgress }) {
+        // If we have base64Data, use standard /api/upload endpoint
+        const payload = {
+          file: base64Data,
+          originalName: originalName || (file ? file.name : `asset_${Date.now()}`),
+          templateId: templateId || null,
+          momentId: momentId || null,
+          assetType: assetType || 'image'
+        };
+
         return await request('/api/upload', {
           method: 'POST',
-          body: { image: base64Data, originalName }
+          body: payload
         });
+      },
+
+      async getAssets(momentId) {
+        return await request(`/api/upload/assets/${encodeURIComponent(momentId)}`);
       }
     },
 

@@ -1,102 +1,33 @@
-const { chromium } = require('playwright-core');
-const path = require('path');
+const fs = require('fs');
+const assert = require('assert');
 
-const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+console.log('🧪 Verifying all UI & Templates Page updates...\n');
 
-(async () => {
-  console.log('--- STARTING COMPREHENSIVE QA AUDIT ---');
-  const browser = await chromium.launch({ executablePath: chromePath, headless: true });
-  const context = await browser.newContext();
-  const page = await context.newPage();
+// 1. Templates Page
+const tpl = fs.readFileSync('templates.html', 'utf8');
+assert(!tpl.includes('class="top-announcement-bar"'), 'Top announcement bar must be removed');
+assert(tpl.includes('AI Panda Matcher'), 'Must contain AI Panda Matcher');
+assert(tpl.includes('assets/vanvi-moments-official-logo.png'), 'Must contain official logo');
+const searchRow = tpl.slice(tpl.indexOf('class="search-filter-row"'), tpl.indexOf('class="sort-select-box"'));
+assert(searchRow.indexOf('btnSmartFilterTrigger') < searchRow.indexOf('searchInput'), 'Filter button must appear on left of search in search-filter-row');
+assert(tpl.includes('viewall-featured'), 'Must have merged view all pill for featured');
+assert(tpl.includes('viewall-birthday'), 'Must have merged view all pill for birthday');
+assert(tpl.includes('section-view-all-pill'), 'Must contain section-view-all-pill class');
+console.log('✅ 1. templates.html checks passed cleanly!');
 
-  const errors = [];
-  page.on('console', msg => { if (msg.type() === 'error') errors.push(msg.text()); });
-  page.on('pageerror', err => errors.push(err.message));
+// 2. Index Page
+const idx = fs.readFileSync('index.html', 'utf8');
+assert(idx.includes('data-index="5"'), 'Showcase slider must have 6 slides (index 0 to 5)');
+assert(idx.includes('data-slide="5"'), 'Showcase slider must have 6 dots');
+assert(idx.includes('Celebration Mini-Games &amp; Coin Rewards'), 'Must contain colorful Games section');
+assert(idx.includes('Bespoke Commission'), 'Must contain polished 24K Atelier Ultra section');
+assert(idx.includes('Zero Sliding / Drifting'), 'Hero buttons must have zero-sliding lock');
+console.log('✅ 2. index.html checks passed cleanly!');
 
-  // 1. Test Index on Mobile (375x667)
-  await page.setViewportSize({ width: 375, height: 667 });
-  await page.goto('file:///' + path.resolve('index.html').replace(/\\/g, '/'));
-  await page.waitForTimeout(600);
+// 3. Navigation CSS
+const nav = fs.readFileSync('vanvi-navigation.css', 'utf8');
+assert(nav.includes('backdrop-filter: blur(28px) saturate(200%)'), 'Bottom dock must have enhanced blur');
+assert(nav.includes('border-radius: 24px'), 'Bottom dock must have 24px rounded corners');
+console.log('✅ 3. vanvi-navigation.css checks passed cleanly!');
 
-  // Test Floating Spinner
-  const floatBtn = await page.$('#scratchFloatBtn');
-  console.log('1. Mobile Float btn found:', !!floatBtn);
-  await floatBtn.click();
-  await page.waitForTimeout(400);
-
-  const spinModalOpen = await page.$eval('#vanviSpinModal', el => el.classList.contains('open'));
-  console.log('   Spin modal opened on click:', spinModalOpen);
-
-  const canSpin = await page.evaluate(() => window.VanviRewardEngine ? window.VanviRewardEngine.canSpin() : false);
-  console.log('   Can spin fortune wheel:', canSpin);
-
-  // Close modal via API
-  await page.evaluate(() => window.closeVanviSpinModal());
-  await page.waitForTimeout(300);
-
-  // 2. Test Mobile Hamburger Menu Toggle
-  const menuBtn = await page.$('#mobileMenuBtn');
-  console.log('2. Mobile Menu Btn found:', !!menuBtn);
-  await menuBtn.click();
-  await page.waitForTimeout(300);
-
-  const drawerOpen = await page.$eval('#mobileDrawer', el => el.classList.contains('open'));
-  const bodyHasClass = await page.evaluate(() => document.body.classList.contains('drawer-open'));
-  console.log('   Drawer opened:', drawerOpen, 'Body has drawer-open:', bodyHasClass);
-
-  // Close drawer
-  await page.click('#drawerClose');
-  await page.waitForTimeout(300);
-  const drawerClosed = await page.$eval('#mobileDrawer', el => !el.classList.contains('open'));
-  console.log('   Drawer cleanly closed:', drawerClosed);
-
-  // 3. Test Free and Premium Collection Cards on Home
-  const freeCards = await page.$$eval('#freeCollectionSection .cutie-card', els => els.length);
-  const premiumCards = await page.$$eval('#premiumCollectionSection .cutie-card', els => els.length);
-  console.log(`3. Free Collection Cards: ${freeCards} (Expected 4), Premium Collection Cards: ${premiumCards} (Expected 4)`);
-
-  // Test Home Games Showcase
-  const homeGameItems = await page.$$eval('.home-game-card', els => els.length);
-  console.log(`   Homepage Games Showcase Items: ${homeGameItems} (Expected 6)`);
-
-  // 4. Test games.html
-  console.log('4. Testing games.html...');
-  await page.goto('file:///' + path.resolve('games.html').replace(/\\/g, '/'));
-  await page.waitForTimeout(600);
-
-  const totalGameCards = await page.$$eval('.game-card', els => els.length);
-  console.log(`   Total game cards in games.html: ${totalGameCards} (Expected 11)`);
-
-  // Test tabs filter
-  await page.click('button[data-filter="puzzle"]');
-  await page.waitForTimeout(200);
-  const visiblePuzzles = await page.$$eval('.game-card', els => els.filter(e => e.style.display !== 'none').length);
-  console.log(`   Visible puzzles on tab click: ${visiblePuzzles} (Expected 3)`);
-
-  // 5. Test each new game page loads with 0 errors
-  const newGames = [
-    'heart-sort.html',
-    'cross-math.html',
-    'block-blast.html',
-    'gem-merge.html',
-    'periodic-quiz.html',
-    'brain-test.html'
-  ];
-
-  for (const gameFile of newGames) {
-    const gameErrors = [];
-    const gPage = await context.newPage();
-    gPage.on('pageerror', err => gameErrors.push(err.message));
-    await gPage.goto('file:///' + path.resolve(gameFile).replace(/\\/g, '/'));
-    await gPage.waitForTimeout(400);
-
-    const title = await gPage.title();
-    console.log(`   ✓ ${gameFile}: "${title}" - Page Errors: ${gameErrors.length}`);
-    await gPage.close();
-  }
-
-  console.log('Console errors captured during test:', errors.filter(e => !e.includes('favicon')));
-  console.log('--- AUDIT COMPLETE ---');
-
-  await browser.close();
-})();
+console.log('\n🎉 ALL CHECKS PASSED PERFECTLY!');

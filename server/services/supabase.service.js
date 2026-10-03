@@ -271,19 +271,72 @@ class SupabaseService {
   // 5. MOMENT ASSETS
   // =========================================================================
   async createMomentAsset(asset) {
+    const assetRecord = {
+      id: asset.id || `ast_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+      moment_id: asset.moment_id || asset.momentId || 'draft',
+      asset_type: asset.asset_type || asset.assetType || 'image',
+      template_id: asset.template_id || asset.templateId || null,
+      storage_path: asset.storage_path || asset.public_id || asset.storagePath || '',
+      public_url: asset.public_url || asset.secure_url || asset.url || '',
+      metadata: asset.metadata || {
+        width: asset.width || null,
+        height: asset.height || null,
+        format: asset.format || null,
+        duration: asset.duration || null,
+        bytes: asset.bytes || null,
+        template_id: asset.template_id || asset.templateId || null,
+        resource_type: asset.resource_type || asset.resourceType || 'image',
+        provider: asset.provider || 'local'
+      },
+      created_at: asset.created_at || new Date().toISOString()
+    };
+
     if (this.isConfigured) {
-      const { data, error } = await this.client.from('moment_assets').insert(asset).select().single();
-      if (!error && data) return data;
+      try {
+        const { data, error } = await this.client.from('moment_assets').insert(assetRecord).select().single();
+        if (!error && data) return data;
+      } catch (e) {
+        console.warn('[SupabaseService] Error saving moment asset:', e.message);
+      }
     }
-    return asset;
+
+    // Local fallback persistence in store.json
+    try {
+      const db = require('../db/database');
+      const store = db.getStore();
+      if (!Array.isArray(store.moment_assets)) {
+        store.moment_assets = [];
+      }
+      store.moment_assets.push(assetRecord);
+      db.saveStore();
+    } catch (e) {
+      console.warn('[SupabaseService] Local asset save fallback error:', e.message);
+    }
+
+    return assetRecord;
   }
 
   async getMomentAssets(momentId) {
     if (this.isConfigured) {
-      const { data, error } = await this.client.from('moment_assets').select('*').eq('moment_id', momentId);
-      if (!error && data) return data;
+      try {
+        const { data, error } = await this.client.from('moment_assets').select('*').eq('moment_id', momentId);
+        if (!error && data && data.length > 0) return data;
+      } catch (e) {
+        console.warn('[SupabaseService] Error fetching moment assets:', e.message);
+      }
     }
-    return [];
+
+    try {
+      const db = require('../db/database');
+      const store = db.getStore();
+      const assets = Array.isArray(store.moment_assets) ? store.moment_assets : [];
+      return assets.filter(a => a.moment_id === momentId).map(a => ({
+        ...a,
+        template_id: a.template_id || (a.metadata && a.metadata.template_id) || null
+      }));
+    } catch (e) {
+      return [];
+    }
   }
 
   // =========================================================================

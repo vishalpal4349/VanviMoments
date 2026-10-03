@@ -789,28 +789,48 @@
       if (!input.files || !input.files.length) return;
       const container = document.getElementById('photoPreviewContainer');
 
-      for (let i = 0; i < Math.min(input.files.length, 3); i++) {
+      for (let i = 0; i < input.files.length; i++) {
         const file = input.files[i];
         const reader = new FileReader();
         reader.onload = e => {
-          uploadedPhotos.push(e.target.result);
+          const photoData = e.target.result;
+          const photoIndex = uploadedPhotos.length;
+          uploadedPhotos.push(photoData);
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'photo-preview-item';
+          wrapper.style.position = 'relative';
+          wrapper.style.display = 'inline-block';
+          wrapper.dataset.index = photoIndex;
+
           const img = document.createElement('img');
-          img.src = e.target.result;
+          img.src = photoData;
           img.className = 'photo-preview-thumb';
-          container.appendChild(img);
+          img.alt = `Memory photo ${photoIndex + 1}`;
+
+          const removeBtn = document.createElement('button');
+          removeBtn.type = 'button';
+          removeBtn.innerHTML = '×';
+          removeBtn.title = 'Remove photo';
+          removeBtn.style.cssText = 'position:absolute; top:-6px; right:-6px; background:#ff2a7a; color:#fff; border:none; border-radius:50%; width:20px; height:20px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.2);';
+          removeBtn.onclick = (ev) => {
+            ev.stopPropagation();
+            uploadedPhotos[photoIndex] = null;
+            wrapper.remove();
+          };
+
+          wrapper.appendChild(img);
+          wrapper.appendChild(removeBtn);
+          container.appendChild(wrapper);
         };
         reader.readAsDataURL(file);
       }
+      input.value = '';
     }
 
     async function generateMoment() {
       const btn = document.querySelector('.step-actions-footer .btn-step-next');
       const originalBtnHtml = btn ? btn.innerHTML : '';
-      if (btn) {
-        btn.disabled = true;
-        btn.style.opacity = '0.75';
-        btn.innerHTML = '<span>Uploading Memories &amp; Saving...</span> <span>⏳</span>';
-      }
 
       const recipient = document.getElementById('inpRecipient').value.trim() || 'My Favorite Person';
       const sender = document.getElementById('inpSender').value.trim() || 'With all my love';
@@ -819,27 +839,52 @@
       const date = document.getElementById('inpDate').value;
       const soundtrack = document.getElementById('inpSoundtrack')?.value || 'acoustic';
 
-      // 1. Upload photos to /api/upload to avoid long base64 strings in URL/state
+      const validPhotos = uploadedPhotos.filter(p => p !== null);
+
+      if (btn) {
+        btn.disabled = true;
+        btn.style.opacity = '0.75';
+        btn.innerHTML = `<span>Uploading Memories (0/${validPhotos.length})...</span> <span>⏳</span>`;
+      }
+
+      // 1. Upload photos to Cloudinary / storage service (storing references, not huge Base64)
       const finalPhotoUrls = [];
-      for (let i = 0; i < uploadedPhotos.length; i++) {
-        const photo = uploadedPhotos[i];
+      const uploadedAssets = [];
+
+      for (let i = 0; i < validPhotos.length; i++) {
+        const photo = validPhotos[i];
+        if (btn) {
+          btn.innerHTML = `<span>Uploading Media (${i + 1}/${validPhotos.length})...</span> <span>⏳</span>`;
+        }
+
         if (photo && photo.startsWith('data:')) {
           try {
             if (window.VanviAPI && window.VanviAPI.upload) {
-              const uploadRes = await window.VanviAPI.upload.photo(photo, `memory_${Date.now()}_${i + 1}.png`);
-              if (uploadRes && uploadRes.success && uploadRes.url) {
-                finalPhotoUrls.push(uploadRes.url);
+              const uploadRes = await window.VanviAPI.upload.photo(photo, `memory_${Date.now()}_${i + 1}.png`, {
+                templateId: currentTemplateId,
+                assetType: 'image'
+              });
+              if (uploadRes && uploadRes.success && (uploadRes.secure_url || uploadRes.url)) {
+                const assetUrl = uploadRes.secure_url || uploadRes.url;
+                finalPhotoUrls.push(assetUrl);
+                uploadedAssets.push({
+                  public_id: uploadRes.public_id || null,
+                  url: assetUrl,
+                  provider: uploadRes.provider || 'local',
+                  resource_type: uploadRes.resource_type || 'image',
+                  format: uploadRes.format || 'png'
+                });
                 continue;
               }
             }
           } catch (e) {
-            console.warn('Photo upload API failed:', e);
+            console.warn('[Builder] Photo upload API failed, retaining local format:', e);
           }
         }
         finalPhotoUrls.push(photo);
       }
 
-      // 2. Store moment payload in /api/moments and obtain short ID
+      // 2. Store moment payload in /api/moments with clean media references
       const custom_data = {
         recipient,
         sender,
@@ -848,6 +893,7 @@
         date,
         musicTrack: soundtrack,
         photos: finalPhotoUrls,
+        assets: uploadedAssets,
         soundtrack
       };
 

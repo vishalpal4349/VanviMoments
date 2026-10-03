@@ -76,32 +76,10 @@
       color: inherit;
     }
 
-    /* ─── 1. TOP ANNOUNCEMENT TICKER ─── */
-    .top-announcement-bar {
-      background: linear-gradient(90deg, #2c1224 0%, #4a1e38 50%, #2c1224 100%);
-      color: #ffdce8;
-      font-size: 11px;
-      font-weight: 750;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      text-align: center;
-      padding: 7px 14px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      position: sticky;
-      top: 0;
-      z-index: 101;
-      border-bottom: 1px solid rgba(255, 120, 175, 0.2);
-    }
-    .top-announcement-bar span {
-      color: #ff94be;
-    }
-
-    /* ─── 2. FLOATING PILL NAVBAR ─── */
+    /* ─── 1. FLOATING PILL NAVBAR ─── */
     .nav-wrapper {
       position: sticky;
-      top: 30px;
+      top: 12px;
       z-index: 100;
       padding: 8px 16px;
       display: flex;
@@ -346,28 +324,33 @@
       border-color: #ff2a7a;
     }
 
-    /* ─── Premium Smart Filter Button ─── */
+    /* ─── Premium Smart Filter Button (Left-Shifted, 3D Clay Tactile) ─── */
     .btn-smart-filter-trigger {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: linear-gradient(135deg, #ff2a7a 0%, #e11d68 50%, #9333ea 100%);
+      background: linear-gradient(135deg, #ff2a7a 0%, #e11d68 45%, #9333ea 100%);
       color: #ffffff !important;
-      border: 1px solid rgba(255, 255, 255, 0.55);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
       border-radius: 99px;
-      height: 38px;
+      height: 40px;
       padding: 0 16px;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 850;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-      transition: all 0.22s ease;
+      box-shadow: 0 5px 16px rgba(255, 42, 122, 0.35), inset 0 2px 2px rgba(255, 255, 255, 0.65), inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+      transition: filter 0.2s ease, box-shadow 0.2s ease;
       white-space: nowrap;
+      user-select: none;
     }
     .btn-smart-filter-trigger:hover {
       filter: brightness(1.08);
-      box-shadow: 0 6px 20px rgba(255, 42, 122, 0.46);
+      box-shadow: 0 8px 22px rgba(255, 42, 122, 0.46), inset 0 2px 2px rgba(255, 255, 255, 0.85);
       transform: none !important;
+    }
+    .btn-smart-filter-trigger:active {
+      opacity: 0.94;
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     .btn-smart-filter-trigger .sf-badge {
       font-size: 10px;
@@ -378,20 +361,20 @@
       background: #ffffff;
       border: 1.5px solid rgba(255, 120, 175, 0.35);
       border-radius: 99px;
-      height: 38px;
+      height: 40px;
       padding: 0 14px;
       font-size: 12px;
       font-weight: 800;
       color: #2c1224;
       outline: none;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 3px 10px rgba(44, 18, 36, 0.05), inset 0 1px 0 #ffffff;
       transition: all 0.2s ease;
       font-family: inherit;
     }
     .btn-sort-select:hover, .btn-sort-select:focus {
       border-color: #ff2a7a;
-      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.15);
+      box-shadow: 0 5px 16px rgba(255, 42, 122, 0.18);
     }
 
     /* ─── Colorful Luxury Category Filter Pills ─── */
@@ -509,42 +492,49 @@
     }
     .section-header-row {
       display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      padding: 0 2px;
-    }
-    .section-title-wrap {
-      display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 0 4px;
     }
     .section-title {
       font-family: var(--font-serif);
-      font-size: 20px;
+      font-size: clamp(17px, 3.8vw, 21px);
       font-weight: 750;
       color: var(--text-dark);
       letter-spacing: -0.2px;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+      min-width: 0;
     }
-    .section-count-badge {
-      font-size: 11px;
-      font-weight: 750;
-      color: var(--rose-gold);
-      background: rgba(255, 42, 122, 0.08);
-      padding: 2px 7px;
+    .section-view-all-pill {
+      flex-shrink: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #ff2a7a;
+      background: #ffffff;
+      padding: 6px 14px;
       border-radius: 99px;
-    }
-    .section-view-all-link {
-      font-size: 12px;
-      font-weight: 750;
-      color: var(--rose-gold);
+      border: 1.2px solid rgba(255, 120, 175, 0.35);
+      box-shadow: 0 3px 10px rgba(255, 42, 122, 0.10), inset 0 1px 0 #ffffff;
       display: inline-flex;
       align-items: center;
-      gap: 3px;
-      transition: transform 0.2s;
+      gap: 4px;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
     }
-    .section-view-all-link:hover {
-      transform: translateX(2px);
+    .section-view-all-pill:hover {
+      background: linear-gradient(135deg, #ff2a7a, #a855f7);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(255, 42, 122, 0.28);
+      transform: translateY(-1px);
     }
 
 /* Rail Carousel (Smooth Horizontal Swipe with Subtle Peek & Edge Mask) */
@@ -815,18 +805,14 @@
 </head>
 
 <body>
-  <!-- 1. Top Announcement Ticker -->
-  <div class="top-announcement-bar">
-    VANVI MOMENTS · <span>HANDCRAFTED DIGITAL KEEPSAKES</span> · CREATE IN 30 SECONDS
-  </div>
-
-  <!-- 2. Floating Navbar -->
+  <!-- 1. Floating Navbar -->
   <div class="nav-wrapper">
     <div class="nav-pill-box">
-      <!-- Non-clickable brand per global requirement -->
-      <span class="nav-brand-static" title="Vanvi Moments Keepsake Atelier">
-        <span>Vanvi Moments</span><span class="brand-sparkle-dot">✦</span>
-      </span>
+      <!-- Branded official logo link -->
+      <a href="index.html" class="nav-brand-static" title="Vanvi Moments Keepsake Atelier" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
+        <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" style="height:32px; width:auto; object-fit:contain; filter:drop-shadow(0 2px 8px rgba(255,42,122,0.28));" />
+        <span style="font-family:'Cormorant Garamond', Georgia, serif; font-size:18px; font-weight:800; color:#2c1224; letter-spacing:-0.3px;">Vanvi Moments<span style="color:#ff2a7a; margin-left:2px;">✦</span></span>
+      </a>
       <div class="nav-pill-actions">
         <a href="index.html" class="nav-link-item">Home</a>
         <a href="custom-experience.html" class="nav-link-item">Bespoke</a>
@@ -835,7 +821,7 @@
     </div>
   </div>
 
-  <!-- 3. Page Hero (Refined Emotional Copy) -->
+  <!-- 2. Page Hero (Refined Emotional Copy) -->
   <section class="page-hero">
     <span class="hero-eyebrow">✦ The Keepsake Atelier</span>
     <h1 class="hero-heading">Find a moment <em>worth creating.</em></h1>
@@ -843,8 +829,8 @@
       Handcrafted celebration keepsakes with tap-to-blow 3D candles, secret wax-sealed letters, and timeless soundtracks. Ready in 30 seconds.
     </p>
 
-    <!-- Vanvi Baby Panda Concierge Pill -->
-    <a href="vanvi-assistant.html" class="hero-assistant-concierge" id="heroAssistantPill" title="Ask Vanvi AI Assistant for keepsake ideas">
+    <!-- AI Panda Matcher Pill -->
+    <a href="ai-matcher.html" class="hero-assistant-concierge" id="heroAssistantPill" title="AI Panda Matcher">
       <div class="concierge-avatar">
         <svg viewBox="0 0 72 72">
           <circle cx="16" cy="18" r="10" fill="#1e1e24"/>
@@ -860,12 +846,19 @@
           <path d="M 33 46 Q 36 48.5 39 46" fill="none" stroke="#ff78af" stroke-width="1.8" stroke-linecap="round"/>
         </svg>
       </div>
-      <span style="font-size: 12px; font-weight: 700; color: #1e293b;">Need help picking? <span style="color: #ff4071;">Ask Vanvi AI Panda 🐾</span></span>
-      <span class="concierge-arrow">Ask Now ✦</span>
+      <span style="font-size: 12.5px; font-weight: 800; color: #1e293b;">AI Panda Matcher <span style="color: #ff2a7a;">✦ Live Match Moments 🐾</span></span>
+      <span class="concierge-arrow">Match Now ✦</span>
     </a>
 
-    <!-- 4. Smart Search & Filter Controls -->
+    <!-- 3. Smart Search & Filter Controls (Filter Shifted to Left) -->
     <div class="search-filter-row">
+      <!-- Premium Smart Filter Trigger Button (Left) -->
+      <button type="button" class="btn-smart-filter-trigger" id="btnSmartFilterTrigger" onclick="openFilterDrawer()" title="Open Smart Filters">
+        <span class="sf-icon">🎛️</span>
+        <span class="sf-label">Filter</span>
+        <span class="sf-badge">✦</span>
+      </button>
+
       <div class="search-box-wrap">
         <div class="search-box" id="searchBoxContainer">
           <span class="search-icon">🔍</span>
@@ -885,13 +878,6 @@
           <button type="button" class="quick-tag-chip" onclick="applySearchTag('vip')">👑 ₹700+ VIP</button>
         </div>
       </div>
-
-      <!-- Premium Smart Filter Trigger Button -->
-      <button type="button" class="btn-smart-filter-trigger" id="btnSmartFilterTrigger" onclick="openFilterDrawer()" title="Open Smart Filters">
-        <span class="sf-icon">⚙️</span>
-        <span class="sf-label">Smart Filter</span>
-        <span class="sf-badge">✦</span>
-      </button>
 
       <!-- Smart Sort Dropdown -->
       <div class="sort-select-box">
@@ -947,11 +933,8 @@
       <!-- Section 1: Featured Moments -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <div class="section-title-wrap">
-            <h2 class="section-title">🌟 Featured Moments</h2>
-            <span class="section-count-badge" id="count-featured">Featured</span>
-          </div>
-          <a href="category-premium.html" class="section-view-all-link">View All →</a>
+          <h2 class="section-title">🌟 Featured Moments</h2>
+          <a href="category-premium.html" class="section-view-all-pill" id="viewall-featured">View All (4) →</a>
         </div>
         <div class="cards-rail" id="rail-featured"></div>
       </section>
@@ -959,11 +942,8 @@
       <!-- Section 2: Popular Choices -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <div class="section-title-wrap">
-            <h2 class="section-title">🔥 Popular Choices</h2>
-            <span class="section-count-badge" id="count-popular">Popular</span>
-          </div>
-          <a href="templates.html?sort=popular" class="section-view-all-link">View All →</a>
+          <h2 class="section-title">🔥 Popular Choices</h2>
+          <a href="templates.html?sort=popular" class="section-view-all-pill" id="viewall-popular">View All (5) →</a>
         </div>
         <div class="cards-rail" id="rail-popular"></div>
       </section>
@@ -971,11 +951,8 @@
       <!-- Section 3: Birthday Magic -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <div class="section-title-wrap">
-            <h2 class="section-title">🎂 Birthday Magic</h2>
-            <span class="section-count-badge" id="count-birthday">8 Moments</span>
-          </div>
-          <a href="category-birthday.html" class="section-view-all-link">View All →</a>
+          <h2 class="section-title">🎂 Birthday Magic</h2>
+          <a href="category-birthday.html" class="section-view-all-pill" id="viewall-birthday">View All (5) →</a>
         </div>
         <div class="cards-rail" id="rail-birthday"></div>
       </section>
@@ -983,11 +960,8 @@
       <!-- Section 4: Love & Romance -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <div class="section-title-wrap">
-            <h2 class="section-title">💖 Love &amp; Romance</h2>
-            <span class="section-count-badge" id="count-love">8 Moments</span>
-          </div>
-          <a href="category-love.html" class="section-view-all-link">View All →</a>
+          <h2 class="section-title">💖 Love &amp; Romance</h2>
+          <a href="category-love.html" class="section-view-all-pill" id="viewall-love">View All (4) →</a>
         </div>
         <div class="cards-rail" id="rail-love"></div>
       </section>
@@ -995,11 +969,8 @@
       <!-- Section 5: Anniversary & Milestones -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <div class="section-title-wrap">
-            <h2 class="section-title">💍 Anniversary &amp; Milestones</h2>
-            <span class="section-count-badge" id="count-anniversary">5 Moments</span>
-          </div>
-          <a href="category-anniversary.html" class="section-view-all-link">View All →</a>
+          <h2 class="section-title">💍 Anniversary &amp; Milestones</h2>
+          <a href="category-anniversary.html" class="section-view-all-pill" id="viewall-anniversary">View All (2) →</a>
         </div>
         <div class="cards-rail" id="rail-anniversary"></div>
       </section>
@@ -1007,11 +978,8 @@
       <!-- Section 6: Friendship & Cheers -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <div class="section-title-wrap">
-            <h2 class="section-title">👯 Friendship &amp; Cheers</h2>
-            <span class="section-count-badge" id="count-friendship">3 Moments</span>
-          </div>
-          <a href="category-friendship.html" class="section-view-all-link">View All →</a>
+          <h2 class="section-title">👯 Friendship &amp; Cheers</h2>
+          <a href="category-friendship.html" class="section-view-all-pill" id="viewall-friendship">View All (2) →</a>
         </div>
         <div class="cards-rail" id="rail-friendship"></div>
       </section>
@@ -1019,11 +987,8 @@
       <!-- Section 7: Family & Gratitude -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <div class="section-title-wrap">
-            <h2 class="section-title">👨‍👩‍👦 Family &amp; Gratitude</h2>
-            <span class="section-count-badge" id="count-family">3 Moments</span>
-          </div>
-          <a href="category-family.html" class="section-view-all-link">View All →</a>
+          <h2 class="section-title">👨‍👩‍👦 Family &amp; Gratitude</h2>
+          <a href="category-family.html" class="section-view-all-pill" id="viewall-family">View All (2) →</a>
         </div>
         <div class="cards-rail" id="rail-family"></div>
       </section>
@@ -1031,11 +996,8 @@
       <!-- Section 8: Memories & Keepsakes -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <div class="section-title-wrap">
-            <h2 class="section-title">📸 Memories &amp; Keepsakes</h2>
-            <span class="section-count-badge" id="count-memories">4 Moments</span>
-          </div>
-          <a href="category-memories.html" class="section-view-all-link">View All →</a>
+          <h2 class="section-title">📸 Memories &amp; Keepsakes</h2>
+          <a href="category-memories.html" class="section-view-all-pill" id="viewall-memories">View All (3) →</a>
         </div>
         <div class="cards-rail" id="rail-memories"></div>
       </section>
@@ -1043,11 +1005,8 @@
       <!-- Section 9: Signature Premium Editions -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <div class="section-title-wrap">
-            <h2 class="section-title">👑 VIP Signature Editions</h2>
-            <span class="section-count-badge" id="count-premium">Exclusive</span>
-          </div>
-          <a href="category-premium.html" class="section-view-all-link">View All →</a>
+          <h2 class="section-title">👑 VIP Signature Editions</h2>
+          <a href="category-premium.html" class="section-view-all-pill" id="viewall-premium">View All (2) →</a>
         </div>
         <div class="cards-rail" id="rail-premium"></div>
       </section>
@@ -1456,22 +1415,22 @@
         const railsConfig = [
           {
             railId: 'rail-featured',
-            countId: 'count-featured',
+            viewAllId: 'viewall-featured',
             filterFn: t => t.tier === 'Premium' || t.badge || (t.tags && t.tags.includes('bestseller')) || Number(t.price || 0) >= 149
           },
           {
             railId: 'rail-popular',
-            countId: 'count-popular',
+            viewAllId: 'viewall-popular',
             filterFn: t => t.badge || t.isFree || (t.tags && (t.tags.includes('trending') || t.tags.includes('popular')))
           },
           {
             railId: 'rail-birthday',
-            countId: 'count-birthday',
+            viewAllId: 'viewall-birthday',
             filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('birthday')
           },
           {
             railId: 'rail-love',
-            countId: 'count-love',
+            viewAllId: 'viewall-love',
             filterFn: t => {
               const c = (t.categorySlug || t.category || '').toLowerCase();
               return c.includes('love') || c.includes('romance');
@@ -1479,7 +1438,7 @@
           },
           {
             railId: 'rail-anniversary',
-            countId: 'count-anniversary',
+            viewAllId: 'viewall-anniversary',
             filterFn: t => {
               const c = (t.categorySlug || t.category || '').toLowerCase();
               return c.includes('anniversary') || c.includes('wedding');
@@ -1487,12 +1446,12 @@
           },
           {
             railId: 'rail-friendship',
-            countId: 'count-friendship',
+            viewAllId: 'viewall-friendship',
             filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('friend')
           },
           {
             railId: 'rail-family',
-            countId: 'count-family',
+            viewAllId: 'viewall-family',
             filterFn: t => {
               const c = (t.categorySlug || t.category || '').toLowerCase();
               return c.includes('family') || c.includes('thank') || c.includes('maa');
@@ -1500,7 +1459,7 @@
           },
           {
             railId: 'rail-memories',
-            countId: 'count-memories',
+            viewAllId: 'viewall-memories',
             filterFn: t => {
               const c = (t.categorySlug || t.category || '').toLowerCase();
               return c.includes('memor') || c.includes('timeline') || c.includes('farewell');
@@ -1508,18 +1467,20 @@
           },
           {
             railId: 'rail-premium',
-            countId: 'count-premium',
+            viewAllId: 'viewall-premium',
             filterFn: t => Number(t.price || 0) >= 199 || t.tier === 'Signature' || t.isLuxury
           }
         ];
 
         railsConfig.forEach(cfg => {
           const el = document.getElementById(cfg.railId);
-          const countEl = document.getElementById(cfg.countId);
+          const viewAllEl = document.getElementById(cfg.viewAllId);
           if (!el) return;
 
           const items = all.filter(cfg.filterFn);
-          if (countEl) countEl.textContent = `${items.length} Moments`;
+          if (viewAllEl) {
+            viewAllEl.innerHTML = `View All (${items.length}) →`;
+          }
 
           el.innerHTML = items.map(t => `
             <div class="rail-card-wrapper">
