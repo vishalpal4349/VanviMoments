@@ -63,7 +63,7 @@ check('Moments search input present (#inputSearchMoments)', html.includes('id="i
 check('Moments dynamic container present (#momentsContainer)', html.includes('id="momentsContainer"'));
 
 // 6. Navigation & Quick Launcher Check
-check('Ask AI link present', html.includes('href="ai.html"'));
+check('Ask AI link present', html.includes('href="ai-matcher.html"'));
 check('Studio link present', html.includes('href="builder.html"'));
 check('Home link present', html.includes('href="index.html"'));
 

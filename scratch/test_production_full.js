@@ -142,10 +142,11 @@ async function runTests() {
     });
     assert(fakeUploadRes.status === 400 && !fakeUploadRes.data.success, 'Corrupted / fake image buffer rejected by magic bytes');
 
-    // Reject file > 5MB
-    const largeBuffer = Buffer.alloc(5.5 * 1024 * 1024);
+    // Reject file > maximum limit
+    const largeBuffer = Buffer.alloc(16 * 1024 * 1024);
+    largeBuffer[0] = 0x89; largeBuffer[1] = 0x50; largeBuffer[2] = 0x4E; largeBuffer[3] = 0x47;
     const validateLarge = validateImageBuffer(largeBuffer, 'image/png');
-    assert(!validateLarge.valid && validateLarge.error.includes('5MB'), 'Storage service enforces 5MB file size limit');
+    assert(!validateLarge.valid && (validateLarge.error.includes('15MB') || validateLarge.error.includes('maximum allowed size')), 'Storage service enforces file size limit');
 
     // -------------------------------------------------------------
     // SUITE 5: Membership System & Tiers

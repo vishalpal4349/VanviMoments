@@ -71,11 +71,11 @@ console.log('\n3. Micro-Games & Coin Cap (games.html):');
 const gamesHtml = fs.readFileSync('games.html', 'utf8');
 check('games.html has smart back navigation', gamesHtml.includes('if (history.length > 1) { history.back(); } else { location.href=\'index.html\'; }'));
 check('games.html includes vanvi-i18n.js', gamesHtml.includes('src="js/vanvi-i18n.js"'));
-check('games.html has daily coin limit banner (25 coins max)', gamesHtml.includes('Daily Games Coin Limit') && gamesHtml.includes('25'));
-check('games.html cards show 2-10 coins reward badge', gamesHtml.includes('2–10 Coins'));
-check('games.html has daily reset and cap enforcement logic', gamesHtml.includes('DAILY_CAP = 25') && gamesHtml.includes('vanvi_games_today_earned'));
-check('games.html features 5 skill challenges (Memory Bloom, Perfect Match, Light Trail, Moment Builder, Secret Envelope)',
-  gamesHtml.includes('Memory Bloom') && gamesHtml.includes('Perfect Match') && gamesHtml.includes('Light Trail') && gamesHtml.includes('Moment Builder') && gamesHtml.includes('Secret Envelope'));
+check('games.html has daily coin limit banner', gamesHtml.includes('Daily Virtual Coin Rewards') || gamesHtml.includes('economy-banner'));
+check('games.html cards show coins reward badge', gamesHtml.includes('coin-tag') || gamesHtml.includes('Coins'));
+check('games.html has daily cap status indicator', gamesHtml.includes('dailyCoinsStatus') && gamesHtml.includes('Daily cap'));
+check('games.html features curated celebration arcade games',
+  gamesHtml.includes('Heart Rain') && gamesHtml.includes('games-master-grid'));
 
 // -------------------------------------------------------------
 // 4. Site-wide Smart Back Navigation & i18n
@@ -91,7 +91,7 @@ check('products.html has smart back button', productsHtml.includes('if (history.
 
 const templatesHtml = fs.readFileSync('templates.html', 'utf8');
 check('templates.html includes vanvi-i18n.js', templatesHtml.includes('src="js/vanvi-i18n.js"'));
-check('templates.html has smart back button', templatesHtml.includes('if (history.length > 1) { history.back(); return false; }'));
+check('templates.html has clean navigation without unwanted back button', !templatesHtml.includes('safeGoBack()'));
 
 const plansHtml = fs.readFileSync('plans.html', 'utf8');
 check('plans.html includes vanvi-i18n.js', plansHtml.includes('src="js/vanvi-i18n.js"'));

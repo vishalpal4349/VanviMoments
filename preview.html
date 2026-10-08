@@ -1,866 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Live Interactive Preview ✨ | Vanvi Moments</title>
-  <meta name="description" content="Experience this digital celebration moment live in real time. Interact with candles, wax seals, and soundtracks before personalizing.">
+  <title id="pageTitle">Live Template Preview | Vanvi Moments</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <meta name="theme-color" content="#fff5f8">
-
-  <!-- Google Fonts: Cormorant Garamond + Plus Jakarta Sans + Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css">
   <link rel="stylesheet" href="vanvi-inner-light.css">
-  <link rel="stylesheet" href="vanvi-navigation.css">
-  <link rel="stylesheet" href="css/vanvi-template-cards.css">
+  <script src="js/vanvi-templates-data.js"></script>
 
   <style>
-    :root {
-      --bg-pearl: #fff9fc;
-      --ink-dark: #2c1224;
-      --ink-muted: #724c65;
-      --rose-gold: #ff2a7a;
-      --rose-glow: rgba(255, 42, 122, 0.28);
-      --gold-accent: #d97706;
-      --border-silk: rgba(255, 120, 175, 0.25);
-    }
-
-    body {
-      background: var(--bg-pearl);
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(255, 230, 242, 0.6) 0px, transparent 55%),
-        radial-gradient(at 100% 100%, rgba(254, 243, 199, 0.45) 0px, transparent 55%);
-      color: var(--ink-dark);
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-      min-height: 100vh;
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
-      padding-bottom: 90px;
+      padding: 0;
     }
 
-    /* Top Navigation Bar */
-    .preview-nav-bar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.85);
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000000;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 100% Full Viewport Native Template Frame - NO FAKE FRAMES OR MOCKUPS */
+    .template-fullscreen-viewport {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      display: block;
+      background: transparent;
+      z-index: 1;
+    }
+
+    /* Minimal Non-Intrusive Floating Top Action Pill */
+    .vanvi-preview-top-dock {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99999;
+      background: rgba(18, 12, 22, 0.85);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border-silk);
-      padding: 12px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+      border-radius: 999px;
+      padding: 5px 8px 5px 14px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .btn-nav-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid var(--border-silk);
-      color: var(--ink-dark);
-      text-decoration: none;
+      gap: 12px;
+      color: #ffffff;
       font-size: 13px;
+      max-width: calc(100vw - 24px);
+      pointer-events: auto;
+      user-select: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .preview-pill-back {
+      color: #f1f5f9;
+      text-decoration: none;
       font-weight: 750;
-      padding: 8px 16px;
-      border-radius: 99px;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    }
-
-    .btn-nav-back:hover {
-      background: #ffffff;
-      border-color: var(--rose-gold);
-      transform: translateX(-2px);
-    }
-
-    .device-switcher-group {
-      display: flex;
-      background: rgba(0, 0, 0, 0.05);
-      padding: 3px;
-      border-radius: 99px;
-      border: 1px solid rgba(255, 120, 175, 0.15);
-    }
-
-    .btn-device {
-      background: transparent;
-      border: none;
-      color: var(--ink-muted);
-      font-size: 12px;
-      font-weight: 750;
-      padding: 6px 14px;
-      border-radius: 99px;
-      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-device.active {
-      background: #ffffff;
-      color: var(--rose-gold);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .btn-reload-frame {
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid var(--border-silk);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-reload-frame:hover {
-      transform: rotate(90deg);
-      border-color: var(--rose-gold);
-    }
-
-    /* Main Split Layout */
-    .preview-layout-wrap {
-      max-width: 1240px;
-      margin: 28px auto;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 48px;
-      align-items: start;
-    }
-
-    /* Left Stage: Realistic Smartphone Chassis */
-    .preview-stage-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .phone-simulator-chassis {
-      width: 380px;
-      height: 740px;
-      background: #1e1e24;
-      border-radius: 52px;
-      padding: 12px;
-      box-shadow: 
-        0 24px 60px -12px rgba(44, 18, 36, 0.35),
-        0 0 0 1px rgba(255, 255, 255, 0.25) inset,
-        0 0 0 4px #2e2832;
-      position: relative;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Desktop Expanded Viewport mode */
-    .phone-simulator-chassis.desktop-mode {
-      width: 100%;
-      max-width: 640px;
-      height: 680px;
-      border-radius: 24px;
-      padding: 8px;
-    }
-
-    .phone-display-screen {
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      border-radius: 42px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .phone-simulator-chassis.desktop-mode .phone-display-screen {
-      border-radius: 18px;
-    }
-
-    .dynamic-island-pod {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 110px;
-      height: 26px;
-      background: #000000;
-      border-radius: 99px;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding-right: 10px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-
-    .phone-simulator-chassis.desktop-mode .dynamic-island-pod {
-      display: none;
-    }
-
-    .camera-lens {
-      width: 9px;
-      height: 9px;
-      background: #111e2e;
-      border-radius: 50%;
-      border: 1px solid #1e293b;
-    }
-
-    .preview-live-iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    .interactive-guide-pill {
-      margin-top: 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid var(--border-silk);
-      padding: 6px 16px;
-      border-radius: 99px;
-      font-size: 11.5px;
-      font-weight: 750;
-      color: var(--rose-gold);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-    }
-
-    /* Right Column: Boutique Details & Buy Box */
-    .preview-details-col {
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      position: sticky;
-      top: 90px;
-    }
-
-    .details-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11.5px;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: var(--rose-gold);
-    }
-
-    .template-main-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(2rem, 3.5vw, 2.7rem);
-      font-weight: 700;
-      line-height: 1.15;
-      color: var(--ink-dark);
-      margin: 0;
-    }
-
-    .template-emotional-desc {
-      color: var(--ink-muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .rating-highlight-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13.5px;
-      font-weight: 750;
-    }
-
-    .star-pod {
-      color: #fbbf24;
-      display: inline-flex;
-      gap: 2px;
-    }
-
-    .review-count-text {
-      color: var(--ink-muted);
-      font-weight: 600;
+      transition: color 0.2s;
+      white-space: nowrap;
       font-size: 12.5px;
     }
-
-    /* Feature Highlights */
-    .feature-checklist-card {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid var(--border-silk);
-      border-radius: 18px;
-      padding: 18px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .preview-pill-back:hover {
+      color: #ff2a7a;
     }
 
-    .feature-point {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13.5px;
+    .preview-pill-sep {
+      width: 1px;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .preview-pill-name {
       font-weight: 600;
-      color: #3b1b32;
-    }
-
-    .feature-point-icon {
-      color: #10b981;
-      font-size: 15px;
-    }
-
-    /* Pricing & Action Box */
-    .pricing-action-card {
-      background: #ffffff;
-      border: 1.5px solid rgba(255, 120, 175, 0.35);
-      border-radius: 22px;
-      padding: 24px;
-      box-shadow: 0 12px 32px rgba(74, 41, 58, 0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .price-value-row {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-    }
-
-    .current-price-val {
-      font-family: 'Outfit', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 850;
-      color: var(--rose-gold);
-    }
-
-    .original-price-val {
-      font-size: 1.1rem;
-      color: #94a3b8;
-      text-decoration: line-through;
-    }
-
-    .discount-ribbon-badge {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #dc2626;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 99px;
-    }
-
-    .pricing-caption {
-      font-size: 12px;
-      color: var(--ink-muted);
-      line-height: 1.5;
-    }
-
-    /* Primary CTA Button with Radiant Hover Shimmer */
-    .btn-make-it-yours {
-      background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 260px;
       color: #ffffff;
-      text-decoration: none;
-      font-size: 15px;
+      font-size: 12.5px;
+    }
+
+    .preview-pill-price {
+      font-weight: 850;
+      color: #ffd8d0;
+      white-space: nowrap;
+      font-size: 12.5px;
+    }
+
+    .preview-pill-cta {
+      background: linear-gradient(135deg, #ff2a7a 0%, #e11d68 100%);
+      color: #ffffff !important;
       font-weight: 800;
-      padding: 16px 28px;
-      border-radius: 99px;
+      font-size: 12px;
+      text-decoration: none;
+      padding: 6px 18px;
+      border-radius: 999px;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.4);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      border: 1px solid rgba(255, 255, 255, 0.4);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.35);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-      letter-spacing: 0.3px;
+    }
+    .preview-pill-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(255, 42, 122, 0.6);
+      background: linear-gradient(135deg, #ff438b 0%, #f01e74 100%);
     }
 
-    .btn-make-it-yours:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 12px 32px rgba(255, 42, 122, 0.45);
-    }
-
-    .btn-make-it-yours::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-      transform: skewX(-20deg);
-      transition: 0.6s ease;
-    }
-
-    .btn-make-it-yours:hover::after {
-      left: 140%;
-    }
-
-    /* Customer Verified Review Quote */
-    .buyer-quote-bubble {
-      background: rgba(255, 245, 248, 0.8);
-      border-left: 3px solid var(--rose-gold);
-      padding: 14px 16px;
-      border-radius: 4px 12px 12px 4px;
-      font-size: 12.5px;
-      color: #4a2840;
-      line-height: 1.5;
-    }
-
-    .buyer-author {
-      font-weight: 750;
-      color: var(--ink-dark);
-      display: block;
-      margin-top: 6px;
-      font-size: 11.5px;
-    }
-
-    /* Mobile Sticky Bottom Dock */
-    .mobile-sticky-dock {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 999;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border-silk);
-      padding: 12px 20px;
-      box-shadow: 0 -8px 24px rgba(44, 18, 36, 0.08);
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .mobile-dock-price {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .mobile-price-amount {
-      font-size: 1.35rem;
-      font-weight: 850;
-      color: var(--rose-gold);
-    }
-
-    .mobile-price-lbl {
-      font-size: 10.5px;
-      color: var(--ink-muted);
-      font-weight: 600;
-    }
-
-    .mobile-dock-btn {
-      background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%);
-      color: #fff;
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 99px;
-      font-weight: 800;
-      font-size: 13.5px;
-      box-shadow: 0 4px 16px rgba(255, 42, 122, 0.35);
-    }
-
-    /* Responsive Breakpoints */
-    @media (max-width: 992px) {
-      .preview-layout-wrap {
-        grid-template-columns: 1fr;
-        gap: 36px;
+    /* Mobile: 100% natural mobile screen with sleek compact pill */
+    @media (max-width: 540px) {
+      .vanvi-preview-top-dock {
+        top: 10px;
+        gap: 8px;
+        padding: 4px 6px 4px 12px;
       }
-      .preview-details-col {
-        position: static;
+      .preview-pill-name {
+        display: none;
+      }
+      .preview-pill-cta {
+        padding: 5px 14px;
+        font-size: 11.5px;
       }
     }
-
-    @media (max-width: 768px) {
-      .preview-layout-wrap {
-        padding: 0 16px;
-        margin: 16px auto;
-      }
-      .phone-simulator-chassis {
-        width: 100%;
-        max-width: 360px;
-        height: 640px;
-      }
-      .mobile-sticky-dock {
-        display: flex;
-      }
-      .pricing-action-card .btn-make-it-yours {
-        display: none; /* Shown in sticky dock */
-      }
-    }
-  </style>
+    body { overflow-x: hidden; }
+</style>
+  <link rel="stylesheet" href="vanvi-navigation.css">
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
-  <header class="preview-nav-bar">
-    <a href="templates.html" class="btn-nav-back" onclick="if(window.history.length>1){window.history.back();return false;}">
-      <span>‹</span> <span>Back to Templates</span>
+  <!-- Minimal Floating Navigation Pill -->
+  <header class="vanvi-preview-top-dock" role="banner" aria-label="Preview Navigation">
+    <a href="templates.html" class="preview-pill-back" title="Back to Templates Catalog">
+      <span>←</span>
+      <span>Catalog</span>
     </a>
-
-    <!-- Device Toggle & Reload Controls -->
-    <div style="display:flex; align-items:center; gap:10px;">
-      <div class="device-switcher-group">
-        <button type="button" class="btn-device active" id="btnPhoneView" onclick="setDeviceView('phone')">
-          <span>📱</span> Phone
-        </button>
-        <button type="button" class="btn-device" id="btnDesktopView" onclick="setDeviceView('desktop')">
-          <span>💻</span> Canvas
-        </button>
-      </div>
-
-      <button type="button" class="btn-reload-frame" onclick="reloadPreviewFrame()" title="Reload live template">
-        <span>🔄</span>
-      </button>
-    </div>
+    <span class="preview-pill-sep"></span>
+    <span class="preview-pill-name" id="previewTitle">Template Preview</span>
+    <span class="preview-pill-price" id="previewPrice"></span>
+    <a href="builder.html" class="preview-pill-cta" id="previewCreateBtn" title="Create with this template">
+      Create
+    </a>
   </header>
 
-  <!-- Main Split Experience Stage -->
-  <main class="preview-layout-wrap">
-    
-    <!-- LEFT: Realistic Phone Simulation Stage -->
-    <section class="preview-stage-col" aria-label="Interactive Template Simulator">
-      <div class="phone-simulator-chassis" id="phoneChassis">
-        <div class="dynamic-island-pod">
-          <span class="camera-lens"></span>
-        </div>
-        <div class="phone-display-screen">
-          <iframe id="previewIframe" class="preview-live-iframe" src="about:blank" title="Live Interactive Template Preview"></iframe>
-        </div>
-      </div>
-      <div class="interactive-guide-pill">
-        <span>💡 Tap candle, wax seal, or music inside to test live interactivity!</span>
-      </div>
-    </section>
+  <!-- 100% Real Template Experience Loaded in Full Viewport -->
+  <iframe src="about:blank" class="template-fullscreen-viewport" id="previewIframe" title="Live Fullscreen Preview"></iframe>
 
-    <!-- RIGHT: Boutique Details & Make Yours Box -->
-    <section class="preview-details-col" aria-label="Template Details and Actions">
-      <div>
-        <span class="details-eyebrow" id="tplSkuBadge">✦ Handcrafted Keepsake</span>
-        <h1 class="template-main-title" id="tplTitle">Midnight 3D Candle &amp; Memory Trail</h1>
-        <p class="template-emotional-desc" id="tplDesc">
-          Make a quiet wish, extinguish the glowing flame, and reveal your handwritten wax-sealed letter paired with treasured polaroid snapshots.
-        </p>
-      </div>
-
-      <div class="rating-highlight-row">
-        <span class="star-pod">★★★★★</span>
-        <span id="tplRating">5.0</span>
-        <span class="review-count-text" id="tplReviewsCount">(1,280+ verified surprises created)</span>
-      </div>
-
-      <!-- What You'll Get Cards (Cutiepage refined luxury inspiration) -->
-      <div class="what-you-get-grid" style="margin: 18px 0 22px;">
-        <div class="what-you-get-item">
-          <div class="what-you-get-icon">⚡</div>
-          <div>
-            <div class="what-you-get-title">Ready in 30 Seconds</div>
-            <div class="what-you-get-desc">No coding or tech skills needed. Simply type names and pick photos.</div>
-          </div>
-        </div>
-        <div class="what-you-get-item">
-          <div class="what-you-get-icon">♾️</div>
-          <div>
-            <div class="what-you-get-title">Buy Once, Lifetime Validity</div>
-            <div class="what-you-get-desc">Your secret moment link stays active forever with unlimited re-edits.</div>
-          </div>
-        </div>
-        <div class="what-you-get-item">
-          <div class="what-you-get-icon">📱</div>
-          <div>
-            <div class="what-you-get-title">Flawless on Every Screen</div>
-            <div class="what-you-get-desc">Custom tuned for iPhone, Android, tablets, and laptops.</div>
-          </div>
-        </div>
-        <div class="what-you-get-item">
-          <div class="what-you-get-icon">🔒</div>
-          <div>
-            <div class="what-you-get-title">Private &amp; Passcode Protected</div>
-            <div class="what-you-get-desc">Keep your intimate memories safe with optional birthday/PIN lock.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pricing & Make Yours Card -->
-      <div class="pricing-action-card">
-        <div class="price-value-row">
-          <span class="current-price-val" id="tplPrice">₹149</span>
-          <span class="original-price-val" id="tplOrigPrice">₹429</span>
-          <span class="discount-ribbon-badge" id="tplDiscount">65% OFF</span>
-        </div>
-        <p class="pricing-caption">
-          One-time payment. Forever valid link. Re-edit names, photos, and messages whenever you like.
-        </p>
-
-        <!-- Primary CTA Button -->
-        <a href="builder.html" class="btn-make-it-yours" id="btnMakeItYours">
-          <span>Make It Yours</span>
-          <span>✨</span>
-        </a>
-      </div>
-
-      <!-- Verified Buyer Review Highlight -->
-      <div class="buyer-quote-bubble" id="buyerQuote">
-        “My girlfriend literally cried when she blew out the candle on her phone and saw our memories. Worth every single rupee!”
-        <span class="buyer-author">— Ishaan R. · Verified Buyer</span>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Section: You Might Also Like / More Templates Worth A Look -->
-  <section class="more-templates-section" id="previewRecommendationsSection" style="max-width: 1200px; margin: 36px auto 48px; padding: 28px 20px;">
-    <div class="recommendation-header">
-      <span class="recommendation-eyebrow">✦ You might also like</span>
-      <h2 class="recommendation-heading">More templates worth a look.</h2>
-      <p class="recommendation-sub">Curated celebration moments from our sister collections.</p>
-    </div>
-    <div class="recommendations-grid" id="previewRecsContainer"></div>
-  </section>
-
-  <!-- Mobile Sticky Bottom Buy Bar -->
-  <aside class="mobile-sticky-dock" aria-label="Quick Action Bar">
-    <div class="mobile-dock-price">
-      <span class="mobile-price-amount" id="mobilePrice">₹149</span>
-      <span class="mobile-price-lbl">Lifetime Access &amp; Edits</span>
-    </div>
-    <a href="builder.html" class="mobile-dock-btn" id="btnMobileMakeItYours">
-      Make It Yours ✨
-    </a>
-  </aside>
-
-  <script src="js/vanvi-templates-data.js"></script>
   <script>
-    // ─── TEMPLATES CATALOG DATA ────────────────────────────────────
-    const TEMPLATES_DATABASE = {
-      'birthday-3d-candle': {
-        name: 'Midnight 3D Candle & Cake',
-        sku: 'VM-B01 · 🎂 Birthday Flagship',
-        category: 'Birthday',
-        price: '₹149',
-        origPrice: '₹429',
-        discount: '65% OFF',
-        rating: '5.0',
-        reviews: '(1,280+ verified surprises created)',
-        desc: 'Make a quiet wish, extinguish the glowing flame, and reveal your handwritten wax-sealed letter paired with treasured polaroid snapshots.',
-        path: 'templates/birthday-3d-candle/index.html?preview=1',
-        quote: '“My girlfriend literally cried when she blew out the candle on her phone and saw our memories. Worth every single rupee!”',
-        author: '— Ishaan R. · Verified Buyer'
-      },
-      'birthday-white-bloom': {
-        name: 'Birthday White Bloom',
-        sku: 'VM-B02 · 🌸 Forever Free',
-        category: 'Birthday',
-        price: '₹0',
-        origPrice: '',
-        discount: '100% Free',
-        rating: '4.9',
-        reviews: '(520+ celebrations)',
-        desc: 'A light luxury birthday garden featuring drifting petals, milestone countdown clock, interactive cake, and an animated letter.',
-        path: 'templates/birthday-white-bloom/index.html?preview=1',
-        quote: '“Created this in 2 minutes for my best friend’s midnight wish. She loved the sweet music and countdown!”',
-        author: '— Sneha K. · Verified Celebration'
-      },
-      'constellation-love': {
-        name: 'Constellation & Wax Seal Vault',
-        sku: 'VM-L01 · ❤️ Romantic Flagship',
-        category: 'Love',
-        price: '₹149',
-        origPrice: '₹429',
-        discount: '65% OFF',
-        rating: '5.0',
-        reviews: '(940+ couples)',
-        desc: 'Deep midnight velvet sky, sparkling constellations, realistic wax-seal crack animation, and private love letters.',
-        path: 'templates/constellation-love/index.html?preview=1',
-        quote: '“Far better than sending a boring card. Unsealing the wax letter gave us both literal chills!”',
-        author: '— Aarav & Meera · Verified Couples'
-      },
-      'retro-polaroid-wall': {
-        name: 'Retro Polaroid Memory Reel',
-        sku: 'VM-F01 · 👯 Friends & Memories',
-        category: 'Friendship',
-        price: '₹149',
-        origPrice: '₹399',
-        discount: '60% OFF',
-        rating: '4.9',
-        reviews: '(680+ memory reels)',
-        desc: 'Vintage aesthetic photo stack with washi tape, handwritten doodles, and soundtrack memories.',
-        path: 'templates/retro-polaroid-wall/index.html?preview=1',
-        quote: '“Shared our college friendship polaroids on our group chat and everyone was obsessed!”',
-        author: '— Tanvi M. · Verified Bestie'
-      },
-      'golden-anniversary': {
-        name: 'Golden Cinema Anniversary Story',
-        sku: 'VM-A01 · 💍 Anniversary Masterpiece',
-        category: 'Anniversary',
-        price: '₹199',
-        origPrice: '₹599',
-        discount: '65% OFF',
-        rating: '5.0',
-        reviews: '(820+ anniversaries)',
-        desc: 'Vintage 8mm projector countdown, nostalgic film grain, love story chapters, and romantic soundtrack.',
-        path: 'templates/golden-anniversary/index.html?preview=1',
-        quote: '“My husband said this was the most thoughtful anniversary surprise I have ever given him.”',
-        author: '— Radhika S. · 5th Anniversary'
-      },
-      'sincere-letter': {
-        name: 'The Sincere Heartfelt Letter',
-        sku: 'VM-S01 · 🕊️ Sincere Healing',
-        category: 'Apology',
-        price: '₹0',
-        origPrice: '',
-        discount: '100% Free',
-        rating: '4.9',
-        reviews: '(410+ apologies resolved)',
-        desc: 'Soft ambient illumination, gentle typewriter text reveal, and sincere heartfelt acoustic melody.',
-        path: 'templates/sincere-letter/index.html?preview=1',
-        quote: '“We were not talking for days. Sending this gently melted the ice between us.”',
-        author: '— Devansh P. · Verified'
-      }
-    };
-
-    // ─── INITIALIZE TEMPLATE VIEW ─────────────────────────────────
-    function initPreviewPage() {
+    (function() {
       const params = new URLSearchParams(window.location.search);
-      let tplId = params.get('template') || params.get('id') || 'birthday-3d-candle';
-      let tpl = null;
+      let tplId = params.get('template') || params.get('id') || params.get('t') || 'birthday-3d-candle';
 
-      // 1. Look up in Master Catalog first
+      // Fallback aliases
+      const aliasMap = {
+        'mandapam-royale': 'temple-royal-wedding',
+        'sacred-temple-wedding': 'temple-royal-wedding',
+        'botanical-blush': 'botanical-blush-wedding',
+        'maison-rose': 'botanical-blush-wedding',
+        'bday-candle-3d': 'birthday-3d-candle',
+        'bday-wish-1': 'birthday-wish-01',
+        'bday-wish-2': 'birthday-wish-02',
+        'love': 'constellation-love',
+        'anniversary': 'golden-anniversary',
+        'polaroid': 'retro-polaroid-wall',
+        'apology': 'sincere-letter',
+        'royal-vivah': 'royal-vivah-palace',
+        'shaadipath-template01': 'royal-vivah-palace',
+        'template01': 'royal-vivah-palace',
+        'vanvi-royal-vivah-01': 'royal-vivah-palace',
+        'royal-palace-heritage': 'royal-vivah-palace',
+        'std-03-mirror-reveal': 'mirror-reveal',
+        'std-03': 'mirror-reveal',
+        'mirror-save-the-date': 'mirror-reveal',
+        'wedding': 'temple-royal-wedding'
+      };
+      if (aliasMap[tplId]) tplId = aliasMap[tplId];
+
+      let name = 'Keepsake Experience';
+      let priceText = '';
+      let targetPath = `templates/${tplId}/index.html?preview=1`;
+
       if (window.VanviTemplatesData && typeof window.VanviTemplatesData.getById === 'function') {
         const found = window.VanviTemplatesData.getById(tplId);
         if (found) {
+          name = found.name;
           const p = Number(found.price || 0);
-          const orig = Number(found.originalPrice || (p > 0 ? Math.round(p * 2.8 / 10) * 10 - 1 : 0));
-          const cat = found.category || 'Celebration';
-          const catSlug = (found.categorySlug || cat).toLowerCase();
-
-          // Select matching interactive simulation path
-          let previewPath = 'templates/birthday-3d-candle/index.html?preview=1';
-          if (found.id === 'birthday-wish-1' || found.id === 'birthday-wish-01') {
-            previewPath = 'templates/birthday-wish-01/index.html?preview=1';
-          } else if (found.id === 'birthday-wish-2' || found.id === 'birthday-wish-02') {
-            previewPath = 'templates/birthday-wish-02/index.html?preview=1';
-          } else if (found.id.includes('bloom') || catSlug.includes('bloom')) {
-            previewPath = 'templates/birthday-white-bloom/index.html?preview=1';
-          } else if (found.id.includes('candle') || catSlug === 'birthday') {
-            previewPath = 'templates/birthday-3d-candle/index.html?preview=1';
-          } else if (catSlug.includes('love') || catSlug.includes('romance') || found.id.includes('gf')) {
-            previewPath = 'templates/constellation-love/index.html?preview=1';
-          } else if (catSlug.includes('anniversary') || found.id.includes('anniversary')) {
-            previewPath = 'templates/golden-anniversary/index.html?preview=1';
-          } else if (catSlug.includes('friend') || catSlug.includes('memor') || found.id.includes('polaroid')) {
-            previewPath = 'templates/retro-polaroid-wall/index.html?preview=1';
-          } else if (catSlug.includes('apology') || found.id.includes('sorry')) {
-            previewPath = 'templates/sincere-letter/index.html?preview=1';
+          priceText = p === 0 ? 'Free' : `₹${p}`;
+          if (found.templatePath) {
+            targetPath = `${found.templatePath}?preview=1`;
           }
-
-          let tagline = (found.tagline || found.description || '').replace(/^Lifetime validity\s*\+?\s*Make it in just 30 seconds\s*\+?\s*live beautiful QR Code\.\s*/i, '').trim();
-
-          tpl = {
-            id: found.id,
-            name: found.name,
-            category: cat,
-            categoryBadge: `${cat} Keepsake`,
-            price: p === 0 ? 'FREE' : `₹${p}`,
-            origPrice: p > 0 ? `₹${orig}` : '',
-            discount: found.discount || (orig > p ? `${Math.round(((orig - p) / orig) * 100)}% OFF` : 'Special Offer'),
-            rating: found.rating || '4.9',
-            reviews: `(${found.reviewsCount || '980'}+ celebrations created)`,
-            path: previewPath,
-            desc: tagline || 'An unforgettable celebration keepsake with personalized letters, photos, and music.',
-            quote: '“Everyone was blown away by this keepsake! The easiest and most meaningful gift I have ever shared.”',
-            author: '— Priya K. · Verified Creator'
-          };
         }
       }
 
-      // 2. Fallback to local database if needed
-      if (!tpl && TEMPLATES_DATABASE[tplId]) {
-        tpl = TEMPLATES_DATABASE[tplId];
-        tpl.categoryBadge = `${tpl.category} Keepsake`;
-      }
+      document.title = `Preview: ${name} | Vanvi Moments`;
+      document.getElementById('previewTitle').textContent = name;
+      document.getElementById('previewPrice').textContent = priceText;
+      document.getElementById('previewCreateBtn').href = `builder.html?template=${encodeURIComponent(tplId)}`;
 
-      // 3. Ultimate default
-      if (!tpl) {
-        tpl = TEMPLATES_DATABASE['birthday-3d-candle'];
-        tpl.categoryBadge = 'Birthday Keepsake';
-      }
-
-      // Update Titles & Details
-      document.title = `${tpl.name} | Live Interactive Preview ✨`;
-      document.getElementById('tplTitle').textContent = tpl.name;
-      document.getElementById('tplSkuBadge').textContent = `✦ ${tpl.categoryBadge || 'Handcrafted Keepsake'}`;
-      document.getElementById('tplDesc').textContent = tpl.desc;
-      document.getElementById('tplPrice').textContent = tpl.price;
-      document.getElementById('mobilePrice').textContent = tpl.price;
-
-      if (tpl.origPrice) {
-        document.getElementById('tplOrigPrice').textContent = tpl.origPrice;
-        document.getElementById('tplOrigPrice').style.display = 'inline';
-      } else {
-        document.getElementById('tplOrigPrice').style.display = 'none';
-      }
-
-      document.getElementById('tplDiscount').textContent = tpl.discount;
-      document.getElementById('tplRating').textContent = tpl.rating;
-      document.getElementById('tplReviewsCount').textContent = tpl.reviews;
-
-      // Buyer Quote
-      const quoteEl = document.getElementById('buyerQuote');
-      if (quoteEl && tpl.quote) {
-        quoteEl.innerHTML = `${tpl.quote} <span class="buyer-author">${tpl.author}</span>`;
-      }
-
-      // Update CTA Links to Builder
-      const builderUrl = `builder.html?template=${encodeURIComponent(tpl.id || tplId)}&occasion=${encodeURIComponent(tpl.category)}`;
-      document.getElementById('btnMakeItYours').href = builderUrl;
-      document.getElementById('btnMobileMakeItYours').href = builderUrl;
-
-      // Load Iframe Preview
       const iframe = document.getElementById('previewIframe');
-      if (iframe) {
-        iframe.src = tpl.path;
-      }
-
-      // Render "You Might Also Like" Recommendations (2-3 items from other categories)
-      if (window.VanviTemplatesData && typeof window.VanviTemplatesData.renderRecommendations === 'function') {
-        window.VanviTemplatesData.renderRecommendations('previewRecsContainer', tpl.category || tplId);
-      }
-    }
-
-    // ─── DEVICE SWITCHER TOGGLE ──────────────────────────────────
-    function setDeviceView(device) {
-      const chassis = document.getElementById('phoneChassis');
-      const btnPhone = document.getElementById('btnPhoneView');
-      const btnDesktop = document.getElementById('btnDesktopView');
-
-      if (device === 'desktop') {
-        chassis.classList.add('desktop-mode');
-        btnDesktop.classList.add('active');
-        btnPhone.classList.remove('active');
-      } else {
-        chassis.classList.remove('desktop-mode');
-        btnPhone.classList.add('active');
-        btnDesktop.classList.remove('active');
-      }
-    }
-
-    function reloadPreviewFrame() {
-      const iframe = document.getElementById('previewIframe');
-      if (iframe && iframe.src) {
-        iframe.src = iframe.src;
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', initPreviewPage);
+      iframe.src = targetPath;
+    })();
   </script>
+  <script src="js/vanvi-navigation.js"></script>
 </body>
 </html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Floating Lotus 3D Wedding Invitation | Priya &amp; Vikram ✦ Vanvi Moments</title>
+  <meta name="description" content="Experience the ultra-luxury 3D Floating Lotus wedding invitation with sacred water ripples, ambient drifting petals, countdown timer, scratch-to-reveal date card, and multi-event itinerary carousel.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Canvas Confetti Library for Celebratory Bursts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- 60FPS Ambient Sacred Water, Floating Lotus & Petal Canvas -->
+  <canvas id="lotusCanvas"></canvas>
+  <div class="lotus-atmosphere"></div>
+
+  <!-- 1. Top VIP Guest Personalized Greeting Bar (Dynamic ?guest= param) -->
+  <header class="top-guest-strip" id="topGuestStrip">
+    <div class="guest-cluster">
+      <span class="lotus-icon-sparkle" aria-hidden="true">🪷</span>
+      <div class="guest-info-block">
+        <span class="guest-sub-tag">Sacred Union Celebration</span>
+        <h2 class="guest-dynamic-name" id="guestNameText">Honored Guest · Family &amp; Friends</h2>
+      </div>
+    </div>
+    <div class="monogram-pill dyn-monogram">#PriVik</div>
+  </header>
+
+  <!-- 2. Cinematic Intro Veil with 3D Lotus Wax Seal Medallion -->
+  <div class="cinematic-intro" id="cinematicIntro">
+    <div class="intro-mandala-bg">
+      <div class="intro-mandala-inner"></div>
+    </div>
+
+    <div class="intro-crest">
+      <span class="intro-om">ॐ</span>
+      <span class="intro-kicker">|| श्री गणेशाय नमः ||</span>
+      <h1 class="intro-couple-names">
+        <span class="dyn-bride">Priya</span> &amp; <span class="dyn-groom">Vikram</span>
+      </h1>
+      <p class="intro-sub">Sacred Wedding Celebration</p>
+    </div>
+
+    <!-- 3D Wax Seal Button -->
+    <button type="button" class="intro-seal-btn" id="introSealBtn" aria-label="Tap Lotus Wax Seal to Open Invitation" title="Tap Lotus Wax Seal to Open Invitation">
+      <span class="seal-lotus-glyph">🪷</span>
+      <span class="seal-monogram-label dyn-monogram">#PriVik</span>
+    </button>
+
+    <div class="intro-tap-guide">
+      <span>✦</span>
+      <span>Tap Wax Seal to Unbox</span>
+      <span>✦</span>
+    </div>
+  </div>
+
+  <!-- Main Scrollable Wedding Flow -->
+  <main class="main-wrapper">
+
+    <!-- 3. Sacred Hero: Together - A New Beginning -->
+    <section class="hero-sacred">
+      <div class="sacred-ganesha-row">
+        <span class="ganesha-symbol">ॐ</span>
+        <span class="ganesha-shloka">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ</span>
+      </div>
+
+      <span class="hero-subtitle-ribbon">Together — A New Beginning</span>
+
+      <h1 class="couple-names-headline">
+        <span class="dyn-bride">Priya</span>
+        <span class="ampersand">&amp;</span>
+        <span class="dyn-groom">Vikram</span>
+      </h1>
+
+      <p class="hero-decree-copy">
+        “Two souls destined to walk together across lifetimes. With the sacred fragrance of fresh lotuses and blessings of our beloved families, we invite you to celebrate our union.”
+      </p>
+    </section>
+
+    <!-- 4. Live Countdown Section -->
+    <section class="countdown-section">
+      <div class="section-header">
+        <span class="section-eyebrow">
+          <span class="eyebrow-line"></span>
+          <span>Auspicious Muhurat</span>
+          <span class="eyebrow-line"></span>
+        </span>
+        <h2 class="section-title">The Countdown to Forever</h2>
+      </div>
+
+      <div class="countdown-grid">
+        <div class="countdown-card">
+          <div class="countdown-digit" id="cdDays">00</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-card">
+          <div class="countdown-digit" id="cdHours">00</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-card">
+          <div class="countdown-digit" id="cdMinutes">00</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-card">
+          <div class="countdown-digit" id="cdSeconds">00</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Our Journey / Storyboard (Vintage Polaroid Cards with 3D Tilt) -->
+    <section class="storyboard-section">
+      <div class="section-header">
+        <span class="section-eyebrow">
+          <span class="eyebrow-line"></span>
+          <span>Chronicles of Love</span>
+          <span class="eyebrow-line"></span>
+        </span>
+        <h2 class="section-title">Our Sacred Journey</h2>
+        <p class="section-sub">From quiet smiles to an eternal promise under the moonlit sky</p>
+      </div>
+
+      <div class="polaroid-deck" id="polaroidCardsDeck">
+        <!-- Rendered dynamically by script.js with fallback -->
+        <div class="polaroid-card" data-tilt>
+          <div class="polaroid-photo-frame">
+            <div class="polaroid-tape-mark"></div>
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&auto=format&fit=crop&q=80" alt="The First Spark" loading="lazy">
+          </div>
+          <div class="polaroid-content">
+            <span class="polaroid-era">Chapter I · 2019</span>
+            <h3 class="polaroid-title">The First Spark</h3>
+            <p class="polaroid-note">A quiet glance across the lake that bloomed into countless whispered conversations.</p>
+          </div>
+        </div>
+
+        <div class="polaroid-card" data-tilt>
+          <div class="polaroid-photo-frame">
+            <div class="polaroid-tape-mark"></div>
+            <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80" alt="The Starlit Promise" loading="lazy">
+          </div>
+          <div class="polaroid-content">
+            <span class="polaroid-era">Chapter II · 2023</span>
+            <h3 class="polaroid-title">The Starlit Promise</h3>
+            <p class="polaroid-note">Beneath the desert stars, two paths intertwined with a gentle promise for life.</p>
+          </div>
+        </div>
+
+        <div class="polaroid-card" data-tilt>
+          <div class="polaroid-photo-frame">
+            <div class="polaroid-tape-mark"></div>
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&auto=format&fit=crop&q=80" alt="She Said Yes" loading="lazy">
+          </div>
+          <div class="polaroid-content">
+            <span class="polaroid-era">Chapter III · Forever</span>
+            <h3 class="polaroid-title">She Said Yes ✦</h3>
+            <p class="polaroid-note">With lotus petals in the wind and blessings of our elders, our forever begins.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Real Gold-Foil Scratch-to-Reveal Date Card -->
+    <section class="scratch-section">
+      <div class="section-header">
+        <span class="section-eyebrow">
+          <span class="eyebrow-line"></span>
+          <span>Auspicious Muhurtham</span>
+          <span class="eyebrow-line"></span>
+        </span>
+        <h2 class="section-title">Scratch to Reveal the Date</h2>
+        <p class="section-sub">Swipe across the 24K gold foil to unlock the sacred muhurat</p>
+      </div>
+
+      <div class="scratch-box-wrapper" id="scratchBoxWrapper">
+        <!-- Revealed Secret Details -->
+        <div class="scratch-revealed-content">
+          <span class="revealed-ring-icon">💍</span>
+          <span class="revealed-muhurat-badge">Auspicious Wedding Muhurat</span>
+          <h3 class="revealed-date-headline dyn-date">Sunday, 15 November 2026</h3>
+          <p class="revealed-muhurat-timing" id="revealedMuhuratTime">Shubh Muhurat: 06:15 PM onwards</p>
+          <p class="revealed-venue-copy dyn-venue">The Oberoi Udaivilas, Udaipur, Rajasthan</p>
+        </div>
+
+        <!-- 24K Metallic Scratch Canvas -->
+        <canvas id="scratchCanvas"></canvas>
+      </div>
+
+      <div class="scratch-instruction">
+        <span>✨ Swipe finger or cursor across gold coat to unlock</span>
+      </div>
+    </section>
+
+    <!-- 7. Multi-Event Itinerary Horizontal Carousel -->
+    <section class="itinerary-section">
+      <div class="section-header">
+        <span class="section-eyebrow">
+          <span class="eyebrow-line"></span>
+          <span>Order of Ceremonies</span>
+          <span class="eyebrow-line"></span>
+        </span>
+        <h2 class="section-title">Wedding Itinerary &amp; Events</h2>
+        <p class="section-sub">A 3-day royal celebration filled with joy, rhythm, and sacred traditions</p>
+      </div>
+
+      <div class="carousel-controls-bar">
+        <button type="button" class="carousel-nav-btn" id="carouselPrevBtn" aria-label="Previous event">‹</button>
+        <button type="button" class="carousel-nav-btn" id="carouselNextBtn" aria-label="Next event">›</button>
+      </div>
+
+      <div class="events-carousel-track" id="eventsCarouselTrack">
+        <!-- Events populated dynamically by script.js -->
+      </div>
+    </section>
+
+    <!-- 8. Interactive Action Suite (4 Quick Actions) -->
+    <section class="action-suite-grid">
+      <!-- Action 1: Save to Calendar -->
+      <button type="button" class="action-card-btn" id="btnSaveCalendar">
+        <div class="action-icon-circle">📅</div>
+        <div>
+          <span class="action-btn-title">Save to Calendar</span>
+          <span class="action-btn-sub">Google Cal &amp; iCal (.ics)</span>
+        </div>
+      </button>
+
+      <!-- Action 2: WhatsApp Community -->
+      <a href="https://chat.whatsapp.com/invite" target="_blank" rel="noopener noreferrer" class="action-card-btn" id="btnWhatsApp">
+        <div class="action-icon-circle">💬</div>
+        <div>
+          <span class="action-btn-title">WhatsApp Community</span>
+          <span class="action-btn-sub">Join Family Updates</span>
+        </div>
+      </a>
+
+      <!-- Action 3: Venue & Directions -->
+      <button type="button" class="action-card-btn" id="btnOpenVenueModal">
+        <div class="action-icon-circle">📍</div>
+        <div>
+          <span class="action-btn-title">Venue &amp; Directions</span>
+          <span class="action-btn-sub">The Oberoi Udaivilas</span>
+        </div>
+      </button>
+
+      <!-- Action 4: Send Blessings -->
+      <button type="button" class="action-card-btn" id="btnScrollToWish">
+        <div class="action-icon-circle">🪷</div>
+        <div>
+          <span class="action-btn-title">Bestow Blessing</span>
+          <span class="action-btn-sub">Blessings Wall &amp; RSVP</span>
+        </div>
+      </button>
+    </section>
+
+    <!-- 9. Blessings Wall & RSVP Guestbook -->
+    <section class="wishes-guestbook-card" id="wishesSection">
+      <div class="section-header">
+        <span class="section-eyebrow">
+          <span class="eyebrow-line"></span>
+          <span>Shower Your Warmth</span>
+          <span class="eyebrow-line"></span>
+        </span>
+        <h2 class="section-title">Blessings Wall &amp; Guestbook</h2>
+      </div>
+
+      <form id="blessingForm">
+        <div class="wish-form-group">
+          <input type="text" id="wishAuthor" class="wish-input-field" placeholder="Your Name &amp; Relation (e.g. Chacha ji / Sharma Family)" required>
+        </div>
+        <div class="wish-form-group">
+          <textarea id="wishText" class="wish-textarea-field" placeholder="Write your heartfelt blessing, warm wishes, or attendance note..." required></textarea>
+        </div>
+        <button type="submit" class="btn-send-blessing">Bestow Blessing Upon Couple ✦</button>
+      </form>
+
+      <div class="blessings-wall-feed" id="blessingsFeed">
+        <div class="blessing-bubble-item">
+          <div class="blessing-bubble-top">
+            <span class="blessing-author-label">Chacha &amp; Chachi ji</span>
+            <span class="blessing-time-ago">Just now</span>
+          </div>
+          <p class="blessing-text-body">May your marriage be blessed with endless happiness, prosperity, and timeless love! Can’t wait to join you in Udaipur for the pheras.</p>
+        </div>
+        <div class="blessing-bubble-item">
+          <div class="blessing-bubble-top">
+            <span class="blessing-author-label">Aarav &amp; Squad</span>
+            <span class="blessing-time-ago">1 hr ago</span>
+          </div>
+          <p class="blessing-text-body">Heartiest congratulations Vikram &amp; Priya! The Sangeet night is going to be unforgettable. Lots of love to both of you!</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 10. Floating Audio Bar (Equalizer Bars + Web Audio Raag Yaman Synth) -->
+  <div class="floating-music-dock" id="musicDock" title="Toggle Sacred Raag Music">
+    <div class="equalizer-bars">
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+    </div>
+    <span class="dock-music-text" id="dockMusicStatus">Play Soundtrack 🎵</span>
+  </div>
+
+  <!-- 11. Venue & Directions Modal -->
+  <div class="modal-layer" id="venueModalLayer">
+    <div class="modal-dialog-box">
+      <button type="button" class="modal-close-cross" id="modalCloseBtn" aria-label="Close modal">✕</button>
+      <div style="text-align:center;">
+        <span style="font-size:28px;">🏰</span>
+        <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--royal-maroon); margin-top:4px;">The Oberoi Udaivilas</h3>
+        <p style="font-size:13px; color:var(--text-muted);">Badi-Gorela-Mulla Talai Rd, Haridas Ji Ki Magri, Udaipur, Rajasthan 313001</p>
+      </div>
+
+      <iframe class="modal-map-frame" id="modalMapIframe" src="https://maps.google.com/maps?q=The+Oberoi+Udaivilas+Udaipur&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Venue Map"></iframe>
+
+      <div style="text-align:center;">
+        <a href="https://maps.google.com/?q=The+Oberoi+Udaivilas+Udaipur" target="_blank" rel="noopener noreferrer" class="btn-send-blessing" style="display:inline-block; text-decoration:none;">
+          Open in Google Maps Navigation ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Script -->
+  <script src="script.js"></script>
+</body>
+</html>

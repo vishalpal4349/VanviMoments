@@ -1,0 +1,270 @@
+/* ==========================================================================
+   VANVI MOMENTS — BIRTHDAY CHAMPAGNE SCRATCH
+   Art Direction: Carbon Black • 24K Brushed Champagne Gold • Glamour Sparkle
+   ========================================================================== */
+
+:root {
+  --bg-black: #0a0a0c;
+  --bg-card: #131317;
+  --gold-champagne: #dfba73;
+  --gold-metallic: #c89b3f;
+  --gold-glow: rgba(223, 186, 115, 0.4);
+  --text-white: #ffffff;
+  --text-muted: #a3a3a8;
+  --border-gold: rgba(223, 186, 115, 0.3);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --font-display: 'Italiana', serif;
+  --font-serif: 'Cinzel Decorative', serif;
+  --font-sans: 'Montserrat', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  background: var(--bg-black);
+  color: var(--text-white);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+.page-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 20px 100px;
+}
+
+/* 1. VIP Black & Gold Entry */
+.vip-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #1e1e24 0%, #0a0a0c 90%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.vip-overlay.opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.vip-badge {
+  border: 1px solid var(--gold-champagne);
+  padding: 6px 18px;
+  border-radius: 99px;
+  color: var(--gold-champagne);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.vip-title {
+  font-family: var(--font-display);
+  font-size: 34px;
+  color: var(--gold-champagne);
+  margin-bottom: 10px;
+}
+
+.btn-vip-enter {
+  background: linear-gradient(135deg, var(--gold-champagne), var(--gold-metallic));
+  color: #0a0a0c;
+  font-weight: 800;
+  padding: 16px 36px;
+  border-radius: 99px;
+  border: 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px var(--gold-glow);
+}
+
+/* 2. Hero */
+.hero-soiree {
+  padding-top: 60px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.guest-name {
+  font-family: var(--font-display);
+  font-size: 52px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--gold-champagne) 60%, var(--gold-metallic) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.soiree-capsules {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.capsule {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--gold-champagne);
+}
+
+/* Card */
+.vip-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: 18px;
+  padding: 30px 24px;
+  margin-top: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+.vip-tag {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold-champagne);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.vip-head {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+/* 7. Interactive Champagne Bottle Pop */
+.champagne-stage {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.bottle-icon {
+  font-size: 64px;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bottle-icon:hover {
+  transform: scale(1.1) rotate(-8deg);
+}
+
+.btn-pop-cork {
+  background: linear-gradient(135deg, var(--gold-champagne), var(--gold-metallic));
+  color: #0a0a0c;
+  font-weight: 800;
+  padding: 12px 28px;
+  border-radius: 99px;
+  border: 0;
+  cursor: pointer;
+  font-size: 13px;
+  margin-top: 16px;
+  box-shadow: 0 6px 20px var(--gold-glow);
+}
+
+/* 8. Gold Foil Scratch Cards */
+.scratch-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.scratch-card-box {
+  position: relative;
+  height: 100px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-gold);
+  background: #1a1a22;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+}
+
+.scratch-secret-content {
+  color: var(--gold-champagne);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+/* 9. Gilded Gallery */
+.gilded-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.gilded-card {
+  aspect-ratio: 4/5;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--gold-champagne);
+}
+
+.gilded-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 15. Toast Countdown */
+.toast-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.toast-cell {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-gold);
+  padding: 12px 6px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.toast-val {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--gold-champagne);
+  font-weight: 700;
+}
+
+.toast-lbl {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .guest-name { font-size: 40px; }
+  .vip-title { font-size: 26px; }
+}

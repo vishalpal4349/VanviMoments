@@ -2,6 +2,7 @@
 
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'bloom';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -23,6 +24,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="vanvi-navigation.css"/>
 <link rel="stylesheet" href="css/vanvi-template-cards.css"/>
+<link rel="stylesheet" href="css/vanvi-global-experience.css"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root {
@@ -312,12 +314,12 @@ header, .page, .glass, .make-format-item, .home-game-card, .compact-ai-concierge
   }
   .home-tpl-action-row {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
     gap: 6px !important;
+    align-items: center !important;
   }
   .home-tpl-action-row a {
-    width: 100% !important;
-    text-align: center !important;
+    width: auto !important;
     box-sizing: border-box !important;
   }
   button, .primary, .secondary, a.primary, a.secondary {
@@ -411,65 +413,308 @@ header{
  padding:13px 17px;border-radius:15px;font-size:13px;font-weight:800;text-decoration:none!important;border-bottom:none!important;
  border:1px solid rgba(255,255,255,.85);transition:.25s;box-shadow:0 10px 25px rgba(110,54,104,.1)
 }
-.hero .primary{
-  padding:15px 22px;border-radius:17px;font-size:13px;
-  background:linear-gradient(135deg,#ff5e9b 0%,#ff79ad 42%,#a877ff 100%);
-  box-shadow:0 13px 32px rgba(238,83,148,.30),0 0 0 1px rgba(255,255,255,.30),inset 0 1px 0 rgba(255,255,255,.75);
-}
-.hero .primary:after{
-  content:"✦";position:absolute;right:10px;top:5px;font-size:8px;color:rgba(255,255,255,.78);
-  animation:twinkle 1.8s ease-in-out infinite
-}
-.hero .primary:hover{transform:none;box-shadow:0 18px 38px rgba(238,83,148,.38),0 0 22px rgba(255,113,171,.18),inset 0 1px 0 rgba(255,255,255,.85);filter:brightness(1.05)}
-@keyframes twinkle{0%,100%{opacity:.35;transform:scale(.8) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(18deg)}}
-.primary{
-  color:#fff;
-  background:linear-gradient(120deg,#ff5f98,#ff8ab8,#a77cff,#ff79ad,#ff5f98);
-  background-size:250% 250%;
-  animation:buttonFlow 6s ease infinite;
-  position:relative;
-  overflow:hidden;
+.hero .primary,
+.primary,
+button.primary,
+a.primary {
+  color: #ffffff !important;
+  background: linear-gradient(125deg, #ff2a7a 0%, #ff4fa1 18%, #9333ea 42%, #38bdf8 65%, #f43f5e 84%, #ff2a7a 100%) !important;
+  background-size: 280% 280% !important;
+  animation: clueButtonFlow 5s ease-in-out infinite !important;
+  position: relative !important;
+  overflow: hidden !important;
   border-radius: 999px !important;
-  box-shadow: var(--vanvi-clay-sm) !important;
-  transition: box-shadow 0.24s ease, filter 0.24s ease !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 
+    0 14px 30px -4px rgba(255, 42, 122, 0.45),
+    0 6px 14px -2px rgba(44, 18, 36, 0.12),
+    inset 0 3.5px 4.5px rgba(255, 255, 255, 0.95),
+    inset 0 -3.5px 5px rgba(180, 18, 60, 0.45) !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, filter 0.2s ease !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 9.5px 20px !important;
+  font-size: 12.5px !important;
+  font-weight: 850 !important;
+  letter-spacing: -0.1px !important;
+  text-shadow: 0 1px 2px rgba(180, 18, 60, 0.4) !important;
 }
-.primary:hover{
-  transform: none !important;
-  box-shadow: 0 14px 30px -4px rgba(255, 79, 145, 0.45), inset 0 2px 2px rgba(255, 255, 255, 0.8) !important;
-  filter: brightness(1.06) !important;
+
+.hero .primary:after,
+.primary:after {
+  content: "✦";
+  position: absolute;
+  right: 12px;
+  top: 7px;
+  font-size: 8.5px;
+  color: rgba(255, 255, 255, 0.9);
+  animation: twinkle 2s ease-in-out infinite;
+  pointer-events: none;
 }
-.primary:active{
-  opacity: 0.92 !important;
-  box-shadow: var(--vanvi-clay-pressed) !important;
+
+.hero .primary:before,
+.primary:before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.4) 50%, transparent 60%);
+  transform: translateX(-35%) rotate(12deg);
+  animation: buttonShine 3.2s ease-in-out infinite;
+  pointer-events: none;
 }
-.primary:before{
-  content:"";
-  position:absolute;
-  inset:-60%;
-  background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.45) 50%,transparent 58%);
-  transform:translateX(-35%) rotate(12deg);
-  animation:buttonShine 3s ease-in-out infinite;
+
+.hero .primary:hover,
+.primary:hover,
+button.primary:hover,
+a.primary:hover {
+  transform: translateY(-3.5px) scale(1.025) !important;
+  box-shadow: 
+    0 18px 38px -4px rgba(255, 42, 122, 0.55),
+    0 8px 18px rgba(44, 18, 36, 0.15),
+    inset 0 4px 5px rgba(255, 255, 255, 1),
+    inset 0 -3px 4px rgba(180, 18, 60, 0.4) !important;
+  filter: brightness(1.08) saturate(1.1) !important;
 }
-.primary:after{
-  content:"";
-  position:absolute;
-  inset:1px;
-  border-radius:999px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.65);
-  pointer-events:none;
+
+.hero .primary:active,
+.primary:active,
+button.primary:active,
+a.primary:active {
+  transform: translateY(2.5px) scale(0.965) !important;
+  box-shadow: 
+    0 3px 8px rgba(255, 42, 122, 0.3),
+    inset 0 3px 6px rgba(0, 0, 0, 0.35) !important;
 }
-.primary>*{position:relative;z-index:2}
-@keyframes buttonFlow{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(18deg); }
 }
-@keyframes buttonShine{
-  0%,45%{transform:translateX(-45%) rotate(12deg)}
-  75%,100%{transform:translateX(45%) rotate(12deg)}
+
+@keyframes clueButtonFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
-.secondary{color:#694b64;background:rgba(255,255,255,.58);backdrop-filter:blur(14px)}
-.primary:hover,.secondary:hover{transform:translateY(-2px);box-shadow:0 15px 30px rgba(110,54,104,.15)}
+
+@keyframes pearlFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes emeraldFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes goldFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes violetFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.primary:after,
+.hero .primary:after {
+  content: "✦";
+  position: absolute;
+  right: 12px;
+  top: 7px;
+  font-size: 8.5px;
+  color: rgba(255, 255, 255, 0.85);
+  animation: twinkle 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.primary > * { position: relative; z-index: 2; }
+
+.secondary,
+.hero .secondary,
+button.secondary,
+a.secondary {
+  color: #9d174d !important;
+  background: linear-gradient(135deg, #fff0f6 0%, #fdf2f8 30%, #f5f3ff 65%, #fce7f3 100%) !important;
+  background-size: 200% 200% !important;
+  animation: pearlFlow 6s ease-in-out infinite !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1.5px solid rgba(244, 114, 182, 0.45) !important;
+  border-radius: 999px !important;
+  box-shadow: 
+    0 8px 18px -4px rgba(244, 63, 94, 0.15),
+    0 3px 8px rgba(44, 18, 36, 0.05),
+    inset 0 1.5px 2px #ffffff,
+    inset 0 -1.5px 2px rgba(255, 120, 175, 0.2) !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, border-color 0.2s ease, color 0.2s ease, filter 0.2s ease !important;
+  padding: 8.5px 18px !important;
+  font-size: 12px !important;
+  font-weight: 850 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+}
+
+.secondary:hover,
+.hero .secondary:hover,
+button.secondary:hover,
+a.secondary:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  border-color: #ff2a7a !important;
+  color: #be185d !important;
+  background: linear-gradient(135deg, #ffe4e6 0%, #fce7f3 35%, #ede9fe 70%, #fbcfe8 100%) !important;
+  box-shadow: 
+    0 12px 24px -4px rgba(255, 42, 122, 0.22),
+    0 4px 10px rgba(44, 18, 36, 0.08),
+    inset 0 2px 3px #ffffff !important;
+  filter: brightness(1.03) !important;
+}
+
+.secondary:active,
+.hero .secondary:active,
+button.secondary:active,
+a.secondary:active {
+  transform: translateY(2px) scale(0.97) !important;
+  box-shadow: 0 2px 6px rgba(44, 18, 36, 0.06), inset 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ─── UNIVERSAL 3D TACTILE CLAY BUTTONS WITH FLOWING INNER GRADIENTS ─── */
+.home-btn-make-yours,
+.btn-showcase-cta.cta-rose-gold,
+.btn-showcase-cta:not(.cta-emerald-teal):not(.cta-purple-violet),
+.drawer-actions .primary,
+.drawer-actions button,
+header nav .primary,
+.flow-btn,
+.ai-mini-btn.active,
+.btn-ai-spark {
+  background: linear-gradient(125deg, #ff2a7a 0%, #ff4fa1 18%, #9333ea 42%, #38bdf8 65%, #f43f5e 84%, #ff2a7a 100%) !important;
+  background-size: 280% 280% !important;
+  animation: clueButtonFlow 5s ease-in-out infinite !important;
+  color: #ffffff !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  border-radius: 999px !important;
+  box-shadow: 
+    0 14px 30px -4px rgba(255, 42, 122, 0.45),
+    0 6px 14px -2px rgba(44, 18, 36, 0.12),
+    inset 0 3.5px 4.5px rgba(255, 255, 255, 0.95),
+    inset 0 -3.5px 5px rgba(180, 18, 60, 0.45) !important;
+  text-shadow: 0 1px 2px rgba(180, 18, 60, 0.4) !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, filter 0.2s ease !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.home-btn-make-yours:hover,
+.btn-showcase-cta:hover,
+.drawer-actions .primary:hover,
+.drawer-actions button:hover,
+header nav .primary:hover,
+.flow-btn:hover,
+.btn-ai-spark:hover {
+  transform: translateY(-3.5px) scale(1.025) !important;
+  box-shadow: 
+    0 18px 38px -4px rgba(255, 42, 122, 0.55),
+    0 8px 18px rgba(44, 18, 36, 0.15),
+    inset 0 4px 5px rgba(255, 255, 255, 1),
+    inset 0 -3px 4px rgba(180, 18, 60, 0.4) !important;
+  filter: brightness(1.08) saturate(1.1) !important;
+}
+
+.home-btn-make-yours:active,
+.btn-showcase-cta:active,
+.drawer-actions .primary:active,
+.drawer-actions button:active,
+header nav .primary:active,
+.flow-btn:active,
+.btn-ai-spark:active {
+  transform: translateY(2.5px) scale(0.965) !important;
+  box-shadow: 
+    0 3px 8px rgba(255, 42, 122, 0.3),
+    inset 0 3px 6px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Secondary & Tactile White Glass Buttons With Flowing Aurora Pearl Sheen */
+.home-btn-explore,
+.btn-categories-trigger,
+.header-mini-action,
+.desktop-profile-btn,
+.desktop-menu-btn,
+.global-search-btn {
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 238, 248, 0.9) 25%, rgba(243, 232, 255, 0.9) 50%, rgba(228, 246, 255, 0.9) 75%, rgba(255, 255, 255, 0.94) 100%) !important;
+  background-size: 280% 280% !important;
+  animation: pearlFlow 6s ease-in-out infinite !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  border-radius: 999px !important;
+  color: #2c1224 !important;
+  box-shadow: 
+    0 10px 24px -4px rgba(44, 18, 36, 0.08),
+    0 4px 10px rgba(255, 42, 122, 0.06),
+    inset 0 2.5px 3.5px #ffffff,
+    inset 0 -2.5px 4px rgba(255, 120, 175, 0.25) !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, border-color 0.2s ease, color 0.2s ease, filter 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+.home-btn-explore:hover,
+.btn-categories-trigger:hover,
+.header-mini-action:hover,
+.desktop-profile-btn:hover,
+.desktop-menu-btn:hover,
+.global-search-btn:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  border-color: #ff2a7a !important;
+  color: #ff2a7a !important;
+  box-shadow: 
+    0 14px 28px -4px rgba(255, 42, 122, 0.22),
+    0 6px 14px rgba(44, 18, 36, 0.08),
+    inset 0 3px 4px #ffffff,
+    inset 0 -2px 3px rgba(255, 42, 122, 0.2) !important;
+  filter: brightness(1.03) !important;
+}
+
+.home-btn-explore:active,
+.btn-categories-trigger:active,
+.header-mini-action:active,
+.desktop-profile-btn:active,
+.desktop-menu-btn:active,
+.global-search-btn:active {
+  transform: translateY(2px) scale(0.97) !important;
+  box-shadow: 0 2px 6px rgba(44, 18, 36, 0.06), inset 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ─── VANVI BLOOM THEME AESTHETIC PALETTE (LUSH ROMANTIC GLOW) ─── */
+html[data-vanvi-theme="bloom"] body,
+html:not([data-vanvi-theme="emerald"]):not([data-vanvi-theme="glass"]) body {
+  background:
+    radial-gradient(ellipse 90% 60% at 10% 8%, rgba(255, 120, 185, 0.38) 0%, transparent 55%),
+    radial-gradient(ellipse 85% 55% at 90% 12%, rgba(254, 215, 170, 0.45) 0%, transparent 52%),
+    radial-gradient(ellipse 80% 50% at 50% 38%, rgba(233, 213, 255, 0.48) 0%, transparent 58%),
+    radial-gradient(ellipse 70% 50% at 20% 75%, rgba(255, 182, 193, 0.35) 0%, transparent 50%),
+    linear-gradient(180deg, #fff7fb 0%, #ffedf5 28%, #fbf0fd 68%, #fff8fc 100%) !important;
+  background-attachment: fixed !important;
+  color: #2c1224 !important;
+}
+
+html[data-vanvi-theme="bloom"] .page,
+html:not([data-vanvi-theme="emerald"]):not([data-vanvi-theme="glass"]) .page {
+  background: transparent !important;
+}
 
 .phone{
  width:210px;height:405px;margin:0 auto;border:7px solid #fff;border-radius:37px;
@@ -660,8 +905,8 @@ footer .brand{font-size:20px}footer p{font-size:10px;color:#8a7285;margin-top:8p
 .tutorial-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}
 .step{padding:9px 5px;border-radius:13px;background:rgba(255,255,255,.52);font-size:9px;font-weight:800;text-align:center;color:#72576d}
 .flow-btn{position:relative;overflow:hidden}
-.flow-btn:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 25%,rgba(255,255,255,.38),transparent 70%);transform:translateX(-100%);animation:buttonFlow 3.2s ease-in-out infinite}
-@keyframes buttonFlow{0%,50%{transform:translateX(-100%)}75%,100%{transform:translateX(100%)}}
+.flow-btn:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 25%,rgba(255,255,255,.38),transparent 70%);transform:translateX(-100%);animation:shimmerSweep 3.2s ease-in-out infinite}
+@keyframes shimmerSweep{0%,50%{transform:translateX(-100%)}75%,100%{transform:translateX(100%)}}
 .locked{position:relative;overflow:hidden}
 .locked:after{content:"🔒 Premium preview";position:absolute;right:9px;top:9px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.72);font-size:8px;font-weight:900;color:#79566e;backdrop-filter:blur(8px)}
 .ultra .eyebrow{color:#8f63bd}.ultra strong{font-size:12px}
@@ -1974,18 +2219,70 @@ header {
   .desktop-nav a {
     white-space: nowrap !important;
     text-decoration: none !important;
-    color: #6e566b !important;
+    color: #5d3d54 !important;
     font-weight: 800 !important;
+    padding: 5px 11px !important;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, 0.68) !important;
+    border: 1px solid rgba(255, 180, 215, 0.35) !important;
+    box-shadow: 0 2px 6px rgba(100, 50, 90, 0.04), inset 0 1px 0 #fff !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .desktop-nav a:hover {
+    background: #ffffff !important;
+    color: #ff2a7a !important;
+    border-color: rgba(255, 42, 122, 0.45) !important;
+    box-shadow: 0 4px 12px rgba(255, 42, 122, 0.16) !important;
+    transform: translateY(-1px) !important;
+  }
+  .desktop-nav .theme-switcher-pill {
+    padding: 5.5px 12px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, rgba(255, 240, 248, 0.95), rgba(255, 255, 255, 0.92)) !important;
+    border: 1.2px solid rgba(255, 120, 175, 0.45) !important;
+    color: #be185d !important;
+    font-weight: 850 !important;
+    font-size: 11px !important;
+    box-shadow: 0 2px 8px rgba(255, 42, 122, 0.08), inset 0 1px 0 #fff !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    white-space: nowrap !important;
+  }
+  .desktop-nav .theme-switcher-pill:hover {
+    background: #ffffff !important;
+    border-color: #ff2a7a !important;
+    box-shadow: 0 4px 14px rgba(255, 42, 122, 0.2) !important;
+    transform: translateY(-1px) !important;
   }
   .desktop-nav button, .desktop-nav .header-desktop-added {
     white-space: nowrap !important;
     transform: none !important;
   }
   .desktop-nav .header-desktop-added {
-    padding: 7px clamp(7px, 0.9vw, 11px) !important;
-    border-radius: 11px !important;
-    font-size: 9.5px !important;
+    padding: 6px clamp(8px, 0.9vw, 12px) !important;
+    border-radius: 999px !important;
+    font-size: 10px !important;
     flex-shrink: 0 !important;
+    border: 1px solid rgba(255, 180, 215, 0.38) !important;
+    background: rgba(255, 255, 255, 0.82) !important;
+    box-shadow: 0 2px 6px rgba(100, 50, 90, 0.05), inset 0 1px 0 #fff !important;
+    transition: all 0.2s ease !important;
+  }
+  .desktop-nav .header-desktop-added:hover {
+    background: #ffffff !important;
+    border-color: #ff2a7a !important;
+    color: #ff2a7a !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(255, 42, 122, 0.15) !important;
+  }
+  .desktop-nav .global-search-btn {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
   }
   .desktop-nav .premium-mini {
     display: inline-flex !important;
@@ -1993,26 +2290,37 @@ header {
     gap: 4px !important;
     color: #8a5b35 !important;
     background: linear-gradient(135deg, rgba(255,246,226,.94), rgba(255,226,238,.70)) !important;
-    border: 1px solid rgba(255,255,255,.9) !important;
-    box-shadow: 0 4px 12px rgba(100,50,90,.06) !important;
-    font-weight: 800 !important;
+    border: 1.2px solid rgba(217, 119, 6, 0.35) !important;
+    box-shadow: 0 3px 10px rgba(217, 119, 6, 0.12), inset 0 1px 0 #fff !important;
+    font-weight: 850 !important;
     text-decoration: none !important;
   }
+  .desktop-nav .premium-mini:hover {
+    background: #ffffff !important;
+    border-color: #d97706 !important;
+    color: #b45309 !important;
+    box-shadow: 0 5px 15px rgba(217, 119, 6, 0.22) !important;
+  }
   .desktop-nav .primary {
-    padding: 8px clamp(10px, 1.2vw, 16px) !important;
+    padding: 8px clamp(11px, 1.2vw, 17px) !important;
     font-size: 11px !important;
+    font-weight: 850 !important;
     flex-shrink: 0 !important;
+    border-radius: 999px !important;
+    box-shadow: 0 4px 14px rgba(255, 42, 122, 0.28) !important;
   }
   .desktop-nav .secondary {
-    padding: 8px clamp(8px, 1vw, 14px) !important;
+    padding: 8px clamp(9px, 1vw, 15px) !important;
     font-size: 11px !important;
+    font-weight: 800 !important;
     flex-shrink: 0 !important;
+    border-radius: 999px !important;
   }
   .desktop-nav .desktop-profile-btn {
     display: inline-flex !important;
     align-items: center !important;
     gap: 4px !important;
-    color: #ff2a7a !important;
+    color: #be185d !important;
     font-weight: 850 !important;
     text-decoration: none !important;
   }
@@ -2131,12 +2439,14 @@ header {
   box-sizing: border-box !important;
   overflow: visible !important;
   margin: 0 !important;
-  padding: 0 !important;
-  min-width: clamp(260px, 32vw, 420px) !important;
-  height: clamp(38px, 3.2vw, 46px) !important;
+  padding: 2px 4px !important;
+  min-width: 0 !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  height: clamp(38px, 3.2vw, 48px) !important;
 }
 
-.word-stage span:not(.w-sparkle):not(.w-em) {
+.word-stage > span {
   grid-area: stack !important;
   position: relative !important;
   display: inline-flex !important;
@@ -2153,7 +2463,9 @@ header {
   font-weight: 700 !important;
   font-size: clamp(17px, 1.8vw, 27px) !important;
   letter-spacing: -0.01em !important;
-  line-height: 1 !important;
+  line-height: 1.25 !important;
+  overflow: visible !important;
+  padding: 2px 6px !important;
 }
 
 
@@ -2166,6 +2478,11 @@ header {
   display: inline-block !important;
   -webkit-text-fill-color: currentColor !important;
   color: inherit !important;
+  animation: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  filter: none !important;
 }
 
 .w-sparkle {
@@ -2242,17 +2559,21 @@ header {
   filter: drop-shadow(0 1px 3px rgba(180, 83, 9, 0.3)) !important;
 }
 
-/* Dedicated Keyframes (12s Total, 3s per slide) */
-.word-stage span:nth-child(1) {
+/* Dedicated Keyframes (12s Total, 3s per slide) — direct children only */
+.word-stage > span.w1,
+.word-stage > span:nth-child(1) {
   animation: wordRotateCinematic1 12s cubic-bezier(0.16, 1, 0.3, 1) infinite !important;
 }
-.word-stage span:nth-child(2) {
+.word-stage > span.w2,
+.word-stage > span:nth-child(2) {
   animation: wordRotateCinematic2 12s cubic-bezier(0.16, 1, 0.3, 1) infinite !important;
 }
-.word-stage span:nth-child(3) {
+.word-stage > span.w3,
+.word-stage > span:nth-child(3) {
   animation: wordRotateCinematic3 12s cubic-bezier(0.16, 1, 0.3, 1) infinite !important;
 }
-.word-stage span:nth-child(4) {
+.word-stage > span.w4,
+.word-stage > span:nth-child(4) {
   animation: wordRotateCinematic4 12s cubic-bezier(0.16, 1, 0.3, 1) infinite !important;
 }
 
@@ -2382,13 +2703,18 @@ html[data-vanvi-theme="dark"] .hero-desc-secondary {
     padding: clamp(7px, 0.75vw, 10px) clamp(18px, 1.8vw, 26px) !important;
   }
   .word-stage {
-    width: clamp(380px, 31vw, 490px) !important;
-    height: clamp(42px, 3.2vw, 50px) !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    height: clamp(42px, 3.2vw, 52px) !important;
+    overflow: visible !important;
   }
-  .word-stage span:not(.w-sparkle):not(.w-em) {
+  .word-stage > span {
     justify-content: flex-start !important;
     text-align: left !important;
     font-size: clamp(21px, 1.7vw, 26px) !important;
+    line-height: 1.25 !important;
+    overflow: visible !important;
+    padding: 2px 6px !important;
   }
   .hero-subtext-block {
     text-align: left !important;
@@ -4610,10 +4936,35 @@ html[data-vanvi-theme="dark"] .hero-desc-secondary {
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   font-family: var(--font-sans, sans-serif);
 }
-.btn-showcase-cta:hover { transform: none; filter: brightness(1.08); box-shadow: 0 6px 20px rgba(255, 42, 122, 0.35); }
-.cta-rose-gold { background: linear-gradient(135deg, #ff2a7a, #d97706); color: #ffffff; }
-.cta-emerald-teal { background: linear-gradient(135deg, #059669, #0284c7); color: #ffffff; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.28); }
-.cta-purple-violet { background: linear-gradient(135deg, #9333ea, #ff2a7a); color: #ffffff; box-shadow: 0 4px 14px rgba(147, 51, 234, 0.28); }
+.btn-showcase-cta:hover { transform: translateY(-2px) scale(1.025); filter: brightness(1.08) saturate(1.08); box-shadow: 0 10px 24px rgba(255, 42, 122, 0.45); }
+.btn-showcase-cta:active { transform: translateY(1.5px) scale(0.97); }
+.cta-rose-gold { 
+  background: linear-gradient(125deg, #ff2a7a 0%, #ff4fa1 20%, #f59e0b 45%, #fbbf24 65%, #ff2a7a 100%) !important; 
+  background-size: 280% 280% !important; 
+  animation: clueButtonFlow 5s ease-in-out infinite !important; 
+  color: #ffffff !important; 
+  border: 1.5px solid rgba(255, 255, 255, 0.95) !important; 
+  box-shadow: 0 8px 20px -2px rgba(255, 42, 122, 0.42), inset 0 2.5px 3px rgba(255, 255, 255, 0.95), inset 0 -2.5px 3px rgba(180, 18, 60, 0.45) !important; 
+  text-shadow: 0 1px 2px rgba(180, 18, 60, 0.4) !important;
+}
+.cta-emerald-teal { 
+  background: linear-gradient(125deg, #059669 0%, #10b981 25%, #0284c7 55%, #06b6d4 75%, #059669 100%) !important; 
+  background-size: 280% 280% !important; 
+  animation: emeraldFlow 5s ease-in-out infinite !important; 
+  color: #ffffff !important; 
+  border: 1.5px solid rgba(255, 255, 255, 0.95) !important; 
+  box-shadow: 0 8px 20px -2px rgba(5, 150, 105, 0.42), inset 0 2.5px 3px rgba(255, 255, 255, 0.95), inset 0 -2.5px 3px rgba(4, 120, 87, 0.45) !important; 
+  text-shadow: 0 1px 2px rgba(4, 120, 87, 0.4) !important;
+}
+.cta-purple-violet { 
+  background: linear-gradient(125deg, #9333ea 0%, #a855f7 25%, #ff2a7a 55%, #7c3aed 75%, #9333ea 100%) !important; 
+  background-size: 280% 280% !important; 
+  animation: violetFlow 5s ease-in-out infinite !important; 
+  color: #ffffff !important; 
+  border: 1.5px solid rgba(255, 255, 255, 0.95) !important; 
+  box-shadow: 0 8px 20px -2px rgba(147, 51, 234, 0.42), inset 0 2.5px 3px rgba(255, 255, 255, 0.95), inset 0 -2.5px 3px rgba(107, 33, 168, 0.45) !important; 
+  text-shadow: 0 1px 2px rgba(107, 33, 168, 0.4) !important;
+}
 
 /* Compact Right Controls */
 .showcase-footer-controls {
@@ -4722,15 +5073,16 @@ html[data-vanvi-theme="dark"] .hero-desc-secondary {
     0 4px 10px rgba(0, 0, 0, 0.04),
     inset 0 2px 2px rgba(255, 255, 255, 0.65),
     inset 0 -2px 3px rgba(0, 0, 0, 0.12) !important;
-  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  transition: box-shadow 0.24s ease, filter 0.24s ease !important;
 }
 
 .hero .primary:hover {
-  transform: translateY(-3px) scale(1.02) !important;
+  transform: none !important;
   box-shadow: 
     0 18px 36px -4px rgba(225, 29, 72, 0.48),
     0 6px 14px rgba(124, 58, 237, 0.15),
     inset 0 2px 2px rgba(255, 255, 255, 0.8) !important;
+  filter: brightness(1.06) !important;
 }
 
 /* 2. Premium Showcase Phone 3D Elevation */
@@ -4807,10 +5159,12 @@ html[data-vanvi-theme="dark"] .hero-desc-secondary {
 /* 5. Fluid Micro-Transitions for All Interactive Tabs & Pills */
 .filter-btn, .filter-chip, .quick-cat-pill {
   border-radius: 99px !important;
-  transition: all 0.24s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 .filter-btn:hover, .filter-chip:hover {
-  transform: translateY(-2px) scale(1.03) !important;
+  transform: none !important;
+  box-shadow: 0 4px 14px rgba(255, 42, 122, 0.22) !important;
+  filter: brightness(1.05) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -4982,7 +5336,7 @@ html[data-vanvi-theme="dark"] header .brand-text-main {
     inset 0 1px 1px #ffffff !important;
   border-color: rgba(244, 63, 94, 0.5) !important;
   color: #e11d48 !important;
-  transform: translateY(-2px) !important;
+  transform: none !important;
 }
 
 .bottom .nav-btn.active::after,
@@ -5012,16 +5366,19 @@ html[data-vanvi-theme="dark"] header .brand-text-main {
   font-weight: 900 !important;
   border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
   box-shadow: 0 8px 24px rgba(255, 42, 122, 0.42), 0 0 16px rgba(255, 91, 151, 0.25) !important;
-  transform: translateY(-6px) !important;
+  transform: none !important;
+  transition: box-shadow 0.2s ease, filter 0.2s ease !important;
 }
 .bottom .create:hover,
 .vanvi-bottom-dock .create:hover {
-  transform: translateY(-8px) scale(1.05) !important;
+  transform: none !important;
   box-shadow: 0 12px 28px rgba(255, 42, 122, 0.5), 0 0 20px rgba(255, 91, 151, 0.35) !important;
+  filter: brightness(1.08) !important;
 }
 .bottom .create:active,
 .vanvi-bottom-dock .create:active {
-  transform: translateY(-3px) scale(0.96) !important;
+  transform: none !important;
+  opacity: 0.92 !important;
 }
 .bottom .create .create-plus,
 .vanvi-bottom-dock .create .create-plus {
@@ -5390,10 +5747,12 @@ button,
   min-height: 32px !important;
   padding: 6px 10px !important;
   border-radius: 99px !important;
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 238, 248, 0.9) 25%, rgba(243, 232, 255, 0.9) 50%, rgba(228, 246, 255, 0.9) 75%, rgba(255, 255, 255, 0.95) 100%) !important;
+  background-size: 280% 280% !important;
+  animation: pearlFlow 6s ease-in-out infinite !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
-  border: 1.5px solid rgba(255, 120, 175, 0.38) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
   color: #2c1224 !important;
   font-size: 11px !important;
   font-weight: 800 !important;
@@ -5402,17 +5761,21 @@ button,
   align-items: center !important;
   justify-content: center !important;
   gap: 4px !important;
-  box-shadow: 0 2px 6px rgba(44, 18, 36, 0.04), inset 0 1px 0 #ffffff !important;
-  transition: all 0.2s ease !important;
+  box-shadow: 0 4px 10px rgba(44, 18, 36, 0.05), inset 0 2px 2.5px #ffffff, inset 0 -1.5px 2px rgba(255, 120, 175, 0.22) !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease !important;
   white-space: nowrap !important;
 }
 
 .home-btn-explore:hover {
   background: #ffffff !important;
-  color: #ff1361 !important;
-  border-color: #ff1361 !important;
-  transform: none !important;
-  box-shadow: 0 4px 12px rgba(255, 19, 97, 0.18) !important;
+  color: #ff2a7a !important;
+  border-color: #ff2a7a !important;
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 6px 14px rgba(255, 42, 122, 0.2), inset 0 2px 2.5px #ffffff !important;
+}
+
+.home-btn-explore:active {
+  transform: translateY(1px) scale(0.97) !important;
 }
 
 .home-btn-make-yours {
@@ -5420,8 +5783,10 @@ button,
   min-height: 32px !important;
   padding: 6px 12px !important;
   border-radius: 99px !important;
-  background: linear-gradient(135deg, #ff1361 0%, #ff4b8b 45%, #f59e0b 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  background: linear-gradient(125deg, #ff2a7a 0%, #ff4fa1 18%, #9333ea 42%, #38bdf8 65%, #f43f5e 84%, #ff2a7a 100%) !important;
+  background-size: 280% 280% !important;
+  animation: clueButtonFlow 5s ease-in-out infinite !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
   color: #ffffff !important;
   font-size: 11px !important;
   font-weight: 850 !important;
@@ -5430,15 +5795,21 @@ button,
   align-items: center !important;
   justify-content: center !important;
   gap: 4px !important;
-  box-shadow: 0 4px 14px rgba(255, 19, 97, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
-  transition: all 0.2s ease !important;
+  box-shadow: 0 6px 16px rgba(255, 42, 122, 0.4), inset 0 2.5px 3px rgba(255, 255, 255, 0.9), inset 0 -2px 3px rgba(180, 18, 60, 0.45) !important;
+  text-shadow: 0 1px 2px rgba(180, 18, 60, 0.4) !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease !important;
   white-space: nowrap !important;
 }
 
 .home-btn-make-yours:hover {
-  transform: none !important;
-  filter: brightness(1.08) !important;
-  box-shadow: 0 6px 18px rgba(255, 19, 97, 0.45) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  filter: brightness(1.08) saturate(1.1) !important;
+  box-shadow: 0 8px 22px rgba(255, 42, 122, 0.52), inset 0 2.5px 3px #ffffff !important;
+}
+
+.home-btn-make-yours:active {
+  transform: translateY(1.5px) scale(0.97) !important;
+  box-shadow: 0 2px 6px rgba(255, 42, 122, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* 5. Slider Controls & Circular Arrow Buttons */
@@ -5528,15 +5899,18 @@ button,
 }
 
 #btnSubmitAiStudio {
-  background: linear-gradient(135deg, #ff1361 0%, #ff4b8b 40%, #9333ea 75%, #f59e0b 100%) !important;
+  background: linear-gradient(125deg, #ff2a7a 0%, #ff4fa1 20%, #9333ea 50%, #38bdf8 75%, #ff2a7a 100%) !important;
+  background-size: 280% 280% !important;
+  animation: clueButtonFlow 5s ease-in-out infinite !important;
   color: #ffffff !important;
   font-size: 13.5px !important;
   font-weight: 850 !important;
   padding: 13px 28px !important;
-  border-radius: 99px !important;
-  box-shadow: 0 8px 24px rgba(255, 19, 97, 0.38) !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
-  transition: all 0.22s ease !important;
+  border-radius: 999px !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 14px 30px -4px rgba(255, 42, 122, 0.45), inset 0 3.5px 4.5px rgba(255, 255, 255, 0.95), inset 0 -3.5px 5px rgba(180, 18, 60, 0.45) !important;
+  text-shadow: 0 1px 2px rgba(180, 18, 60, 0.4) !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, filter 0.2s ease !important;
   cursor: pointer !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -5545,22 +5919,30 @@ button,
 }
 
 #btnSubmitAiStudio:hover {
-  transform: none !important;
-  box-shadow: 0 12px 32px rgba(255, 19, 97, 0.5) !important;
-  filter: brightness(1.06) !important;
+  transform: translateY(-3px) scale(1.025) !important;
+  box-shadow: 0 18px 38px -4px rgba(255, 42, 122, 0.55), inset 0 4px 5px #ffffff !important;
+  filter: brightness(1.08) saturate(1.1) !important;
+}
+
+#btnSubmitAiStudio:active {
+  transform: translateY(2px) scale(0.965) !important;
+  box-shadow: 0 3px 8px rgba(255, 42, 122, 0.3), inset 0 3px 6px rgba(0, 0, 0, 0.35) !important;
 }
 
 /* 7. Play & Earn Button */
 .home-games-btn {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  background: linear-gradient(125deg, #059669 0%, #10b981 30%, #0d9488 60%, #14b8a6 80%, #059669 100%) !important;
+  background-size: 280% 280% !important;
+  animation: emeraldFlow 5s ease-in-out infinite !important;
   color: #ffffff !important;
   font-weight: 850 !important;
   font-size: 12px !important;
-  padding: 9px 18px !important;
-  border-radius: 99px !important;
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.32) !important;
-  border: 1px solid rgba(255, 255, 255, 0.45) !important;
-  transition: all 0.22s ease !important;
+  padding: 9px 20px !important;
+  border-radius: 999px !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 10px 24px -2px rgba(16, 185, 129, 0.42), inset 0 3px 4px rgba(255, 255, 255, 0.95), inset 0 -3px 4px rgba(6, 95, 70, 0.45) !important;
+  text-shadow: 0 1px 2px rgba(6, 95, 70, 0.4) !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, filter 0.2s ease !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 6px !important;
@@ -5568,63 +5950,93 @@ button,
 }
 
 .home-games-btn:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 20px rgba(5, 150, 105, 0.45) !important;
-  filter: brightness(1.05) !important;
+  transform: translateY(-2.5px) scale(1.025) !important;
+  box-shadow: 0 14px 30px -2px rgba(16, 185, 129, 0.52), inset 0 3px 4px #ffffff !important;
+  filter: brightness(1.08) saturate(1.05) !important;
+}
+
+.home-games-btn:active {
+  transform: translateY(2px) scale(0.965) !important;
+  box-shadow: 0 2px 7px rgba(16, 185, 129, 0.3), inset 0 2.5px 5px rgba(0, 0, 0, 0.35) !important;
 }
 
 /* 8. 24K Atelier CTAs */
 #ultraSection .flow-btn {
-  background: linear-gradient(135deg, #ff1361 0%, #d97706 100%) !important;
+  background: linear-gradient(125deg, #f59e0b 0%, #fbbf24 30%, #ec4899 65%, #f59e0b 100%) !important;
+  background-size: 280% 280% !important;
+  animation: goldFlow 5s ease-in-out infinite !important;
   color: #ffffff !important;
-  padding: 11px 22px !important;
-  border-radius: 99px !important;
+  padding: 12px 24px !important;
+  border-radius: 999px !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
   font-weight: 850 !important;
   font-size: 13px !important;
-  box-shadow: 0 6px 20px rgba(255, 19, 97, 0.32) !important;
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
-  transition: all 0.22s ease !important;
+  box-shadow: 0 12px 28px -3px rgba(217, 119, 6, 0.45), inset 0 3.5px 4.5px rgba(255, 255, 255, 0.95), inset 0 -3px 4px rgba(180, 83, 9, 0.45) !important;
+  text-shadow: 0 1px 2px rgba(180, 83, 9, 0.4) !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, filter 0.2s ease !important;
 }
 
 #ultraSection .flow-btn:hover {
-  transform: translateY(-2px) scale(1.02) !important;
-  box-shadow: 0 10px 28px rgba(255, 19, 97, 0.45) !important;
+  transform: translateY(-3px) scale(1.025) !important;
+  box-shadow: 0 16px 36px -3px rgba(217, 119, 6, 0.55), inset 0 4px 5px #ffffff !important;
+  filter: brightness(1.08) saturate(1.1) !important;
+}
+
+#ultraSection .flow-btn:active {
+  transform: translateY(2px) scale(0.965) !important;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3), inset 0 3px 5px rgba(0, 0, 0, 0.35) !important;
 }
 
 #ultraSection .secondary {
-  background: #ffffff !important;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.95) 0%, rgba(254, 243, 199, 0.9) 50%, rgba(255, 255, 255, 0.95) 100%) !important;
   color: #92400e !important;
-  border: 1.5px solid rgba(217, 119, 6, 0.45) !important;
-  padding: 11px 20px !important;
-  border-radius: 99px !important;
-  font-weight: 800 !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  padding: 11px 22px !important;
+  border-radius: 999px !important;
+  font-weight: 850 !important;
   font-size: 12.5px !important;
-  transition: all 0.22s ease !important;
+  box-shadow: 0 10px 24px -4px rgba(217, 119, 6, 0.15), inset 0 2.5px 3.5px #ffffff, inset 0 -2.5px 4px rgba(217, 119, 6, 0.25) !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, filter 0.2s ease !important;
 }
 
 #ultraSection .secondary:hover {
-  transform: translateY(-2px) !important;
-  border-color: #d97706 !important;
-  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.2) !important;
+  transform: translateY(-2.5px) scale(1.02) !important;
+  border-color: #f59e0b !important;
+  color: #b45309 !important;
+  box-shadow: 0 14px 28px rgba(217, 119, 6, 0.24), inset 0 3px 4px #ffffff !important;
+}
+
+#ultraSection .secondary:active {
+  transform: translateY(2px) scale(0.97) !important;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.1), inset 0 2px 4px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* 9. Gift Store CTA Button */
 .birthday button.secondary {
-  background: linear-gradient(135deg, #ff1361 0%, #d97706 100%) !important;
+  background: linear-gradient(125deg, #ff2a7a 0%, #f59e0b 35%, #d97706 70%, #ff2a7a 100%) !important;
+  background-size: 280% 280% !important;
+  animation: clueButtonFlow 5s ease-in-out infinite !important;
   color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
-  border-radius: 99px !important;
-  padding: 11px 24px !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  border-radius: 999px !important;
+  padding: 12px 24px !important;
   font-weight: 850 !important;
   font-size: 13px !important;
-  box-shadow: 0 6px 18px rgba(255, 19, 97, 0.3) !important;
+  box-shadow: 0 12px 26px -3px rgba(255, 42, 122, 0.42), inset 0 3px 4px rgba(255, 255, 255, 0.95), inset 0 -3px 4px rgba(180, 18, 60, 0.45) !important;
+  text-shadow: 0 1px 2px rgba(180, 18, 60, 0.4) !important;
   cursor: pointer !important;
-  transition: all 0.22s ease !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, filter 0.2s ease !important;
 }
 
 .birthday button.secondary:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 10px 24px rgba(255, 19, 97, 0.42) !important;
+  transform: translateY(-3px) scale(1.025) !important;
+  box-shadow: 0 16px 34px -3px rgba(255, 42, 122, 0.52), inset 0 3.5px 4.5px #ffffff !important;
+  filter: brightness(1.08) saturate(1.1) !important;
+}
+
+.birthday button.secondary:active {
+  transform: translateY(2px) scale(0.965) !important;
+  box-shadow: 0 2px 7px rgba(255, 42, 122, 0.3), inset 0 2.5px 5px rgba(0, 0, 0, 0.35) !important;
 }
 
 /* 10. FAQ Accordion Buttons */
@@ -5649,7 +6061,7 @@ button,
 }
 
 .faq.faq-btn:hover {
-  transform: translateY(-1px) !important;
+  transform: none !important;
   border-color: #ff1361 !important;
   box-shadow: 0 8px 22px rgba(255, 19, 97, 0.12) !important;
 }
@@ -5684,9 +6096,9 @@ button,
 /* 11. Cookie Banner Buttons */
 .cookie-banner .btn-essential {
   border-radius: 99px !important;
-  background: #ffffff !important;
-  border: 1.5px solid rgba(255, 120, 175, 0.4) !important;
-  color: #78536d !important;
+  background: linear-gradient(135deg, #fff0f6, #fce7f3) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.45) !important;
+  color: #9d174d !important;
   font-weight: 800 !important;
   padding: 9px 18px !important;
   font-size: 12px !important;
@@ -5695,9 +6107,10 @@ button,
 }
 
 .cookie-banner .btn-essential:hover {
-  background: #fff0f6 !important;
+  background: linear-gradient(135deg, #ffe4e6, #fbcfe8) !important;
   color: #ff1361 !important;
   border-color: #ff1361 !important;
+  transform: none !important;
 }
 
 .cookie-banner .btn-accept {
@@ -5714,7 +6127,7 @@ button,
 }
 
 .cookie-banner .btn-accept:hover {
-  transform: translateY(-1px) !important;
+  transform: none !important;
   box-shadow: 0 6px 18px rgba(255, 19, 97, 0.45) !important;
   filter: brightness(1.05) !important;
 }
@@ -5739,52 +6152,14 @@ button,
 <button aria-label="Close menu" class="drawer-close" id="drawerClose">×</button>
 </div>
 
-<!-- Smart Dual-Currency Wallet Pod in Drawer -->
-<div class="drawer-wallet-card" style="margin: 10px 14px 12px; padding: 12px 14px; background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,245,250,0.92)); border: 1.5px solid rgba(255,120,175,0.35); border-radius: 18px; box-shadow: 0 4px 16px rgba(255,56,128,0.06);">
-  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-    <div style="display:flex; align-items:center; gap:6px;">
-      <span style="font-size:11.5px; font-weight:850; text-transform:uppercase; letter-spacing:0.5px; color:#be185d;">✨ Vanvi Wallet</span>
-    </div>
-    <a href="plans.html" style="font-size:10.5px; font-weight:800; color:#ff2a7a; text-decoration:none; display:inline-flex; align-items:center; gap:3px; background:#fff0f6; padding:3px 8px; border-radius:99px; border:1px solid rgba(255,42,122,0.25);">
-      Top-up / VIP →
-    </a>
-  </div>
-  
-  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-    <!-- Template Credits -->
-    <a href="plans.html?tab=passes" style="text-decoration:none; display:flex; align-items:center; gap:7px; background:#ffffff; border:1px solid rgba(255,42,122,0.22); padding:8px 10px; border-radius:12px; transition:transform 0.15s ease;">
-      <span style="font-size:20px; line-height:1;">🎟️</span>
-      <div style="line-height:1.2;">
-        <span style="font-size:8.5px; font-weight:750; color:#806c80; display:block; text-transform:uppercase;">Credits (1=₹1)</span>
-        <strong id="drawerCreditBalance" style="font-size:14px; font-weight:900; color:#ff2a7a;">0</strong> <small style="font-size:9px; font-weight:700; color:#806c80;">Cr</small>
-      </div>
-    </a>
-
-    <!-- Vanvi Coins -->
-    <a href="plans.html?tab=coins" style="text-decoration:none; display:flex; align-items:center; gap:7px; background:#ffffff; border:1px solid rgba(217,119,6,0.25); padding:8px 10px; border-radius:12px; transition:transform 0.15s ease;">
-      <span style="font-size:20px; line-height:1;">🪙</span>
-      <div style="line-height:1.2;">
-        <span style="font-size:8.5px; font-weight:750; color:#806c80; display:block; text-transform:uppercase;">Coins (10=₹1)</span>
-        <strong id="drawerCoinBalance" style="font-size:14px; font-weight:900; color:#b45309;">120</strong> <small style="font-size:9px; font-weight:700; color:#806c80;">C</small>
-      </div>
-    </a>
-  </div>
-
-  <div style="display:flex; align-items:center; justify-content:space-between; margin-top:8px; padding-top:7px; border-top:1px dashed rgba(255,120,175,0.2); font-size:10px; color:#78526d;">
-    <span>Status: <strong id="drawerTierBadge" style="color:#be185d;">Active Creator</strong></span>
-    <a href="rewards.html" style="color:#059669; font-weight:800; text-decoration:none;">🎁 Free Rewards</a>
-  </div>
-</div>
-
-<nav class="drawer-nav">
+<nav class="drawer-nav" style="padding-top: 6px;">
 <a class="drawer-link" href="#" onclick="event.preventDefault(); document.getElementById('mobileDrawer')?.classList.remove('open'); openStudioSettingsModal();" style="color:#ff2a7a; font-weight:850; background:rgba(255,42,122,0.07); border-radius:12px; border:1px solid rgba(255,42,122,0.22); margin-bottom:4px;">🎨 Studio Aesthetics (Fonts &amp; Dark Mode)</a>
 <a class="drawer-link" href="templates.html">🔍 All Templates &amp; Categories</a>
-<a class="drawer-link" href="templates.html">✨ Create a Moment (Choose Template)</a>
 <a class="drawer-link" href="ai-matcher.html">🐼 Panda AI Matcher</a>
 <a class="drawer-link" href="games.html">🎮 Celebration Mini-Games</a>
 <a class="drawer-link" href="rewards.html">🎁 My Rewards &amp; Coupons</a>
-<a class="drawer-link" href="profile.html">👤 My Profile &amp; Account</a>
 <a class="drawer-link" href="dashboard.html">📁 My Moments &amp; History</a>
+<a class="drawer-link" href="profile.html">👤 My Profile &amp; Account</a>
 <a class="drawer-link" href="category-birthday.html">🎂 Birthday Specials</a>
 <a class="drawer-link" href="category-love.html">❤️ Love &amp; Romance</a>
 <a class="drawer-link" href="category-anniversary.html">💍 Anniversary &amp; Wedding</a>
@@ -5795,10 +6170,8 @@ button,
 <a class="drawer-link" href="category-apology.html">💌 Apology &amp; Sorry</a>
 <a class="drawer-link" href="category-family.html">🏡 Family &amp; Parents</a>
 <a class="drawer-link" href="category-celebration.html">✦ Milestones &amp; Festivals</a>
-<a class="drawer-link" href="ai.html">🤖 Vanvi AI Co-Pilot</a>
 <a class="drawer-link" href="products.html">🎁 Physical Gift Store</a>
 <a class="drawer-link" href="plans.html">🪙 Coins &amp; Wallet</a>
-<a class="drawer-link" href="dashboard.html">🎡 Daily Fortune Wheel</a>
 <a class="drawer-link" href="about.html">✨ About Vanvi Moments</a>
 <a class="drawer-link" href="contact.html">💬 Contact &amp; Support</a>
 <a class="drawer-link" href="faq.html">📚 Help Center &amp; FAQs</a>
@@ -5840,8 +6213,8 @@ button,
   <span class="theme-dot"></span>
   <span id="themeToggleLabel">🎨 Aesthetics</span>
 </button>
-<a href="templates.html">Explore</a><a href="products.html">🎁 Gifts</a><a href="dashboard.html">My Moments</a><a href="ai.html">AI</a>
-<button aria-label="⌕" class="header-desktop-added global-search-btn" title="Search Templates">⌕</button><a aria-label="💎 Premium" class="header-desktop-added premium-mini" href="plans.html">💎 Premium</a><a href="profile.html" class="header-desktop-added desktop-profile-btn" id="desktopProfileBtn" title="My Profile &amp; Account"><span>👤</span> <span>Profile</span></a><button type="button" class="header-desktop-added desktop-menu-btn" id="desktopMenuBtn" aria-label="Open Navigation Menu" title="All Navigation, Wallet &amp; Categories"><span class="hamburger-bars"><span></span><span></span><span></span></span><span>Menu</span></button><a class="secondary" id="loginBtnDesktop" href="login.html">Login</a><button class="primary" onclick="document.getElementById('templateDiscovery')?.scrollIntoView({behavior:'smooth'})">Create Moment</button>
+<a href="templates.html">Explore</a><a href="products.html">🎁 Gifts</a><a href="dashboard.html">My Moments</a><a href="ai-matcher.html">AI</a>
+<button aria-label="⌕" class="header-desktop-added global-search-btn" title="Search Templates">⌕</button><a aria-label="💎 Premium" class="header-desktop-added premium-mini" href="plans.html">💎 Premium</a><a href="profile.html" class="header-desktop-added desktop-profile-btn" id="desktopProfileBtn" title="My Profile &amp; Account"><span>👤</span> <span>Profile</span></a><button type="button" class="header-desktop-added desktop-menu-btn" id="desktopMenuBtn" aria-label="Open Navigation Menu" title="All Navigation, Wallet &amp; Categories"><span class="hamburger-bars"><span></span><span></span><span></span></span><span>Menu</span></button><a class="secondary" id="loginBtnDesktop" href="login.html">Login</a><button class="primary" onclick="window.location.href='ai-matcher.html'">Create Moment</button>
 </nav>
 <div class="header-mobile-actions">
 <button type="button" class="theme-switcher-pill" onclick="openStudioSettingsModal()" title="Studio Aesthetics: Customize Fonts &amp; Dark Mode" style="width:32px; height:32px; min-height:unset; padding:0; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; font-size:13px;">
@@ -5882,7 +6255,7 @@ button,
 <p class="hero-desc-primary">Handcrafted digital keepsakes with interactive candles, secret letters, cherished memories and cinematic sound.</p>
 <p class="hero-desc-secondary"><span class="sub-accent">✦</span> Ready in moments. Made to be remembered.</p>
 </div>
-<div class="actions"><a class="primary flow-btn" href="templates.html" aria-label="Create a moment" style="text-decoration:none!important; border-bottom:none!important;">✨ Create a Moment ✦</a><a class="secondary" href="templates.html" aria-label="Explore templates" style="text-decoration:none!important; border-bottom:none!important;">👑 Explore Templates →</a>
+<div class="actions"><a class="primary flow-btn" href="ai-matcher.html" aria-label="Create a moment" style="text-decoration:none!important; border-bottom:none!important;">✨ Create a Moment ✦</a><a class="secondary" href="templates.html" aria-label="Explore templates" style="text-decoration:none!important; border-bottom:none!important;">👑 Explore Templates →</a>
 <button type="button" class="secondary btn-categories-trigger" onclick="toggleCategoriesMenu()" aria-haspopup="dialog" style="padding:10px 18px; border-radius:99px; font-weight:800; display:inline-flex; align-items:center; gap:6px; cursor:pointer;"><span>📂 Categories</span> <span style="font-size:10px; color:#ff2a7a;">▾</span></button></div>
 <div class="hero-live-ticker">
 <div class="ticker-live-pill"><span class="live-pulse-dot"></span><span>LIVE</span></div>
@@ -5985,11 +6358,15 @@ button,
 </div><div class="hero-quotes"><span class="q1">“Every memory deserves a beautiful place.”</span><span class="q2">“Make it personal. Make it Vanvi.”</span><span class="q3">“A little moment can become a forever memory.”</span></div>
 </section>
 <section class="section scroll-animate">
-<div class="birthday glass">
+<div class="birthday glass" style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;">
+<div style="flex: 1; min-width: 250px;">
 <div class="eyebrow">Your #1 shortcut</div>
-<h3>🎂 Make their birthday unforgettable.</h3>
-<p>Birthday cards, cinema, gifts, stories, puzzles and surprises — all in one place.</p>
-<a href="templates.html?category=birthday" class="primary" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">Create Birthday →</a>
+<h3 style="margin: 2px 0 6px;">🎂 Make their birthday unforgettable.</h3>
+<p style="margin: 0;">Birthday cards, cinema, gifts, stories, puzzles and surprises — all in one place.</p>
+</div>
+<div style="flex-shrink: 0;">
+<a href="templates.html?category=birthday" class="primary flow-btn" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; padding: 9.5px 22px; font-size: 12.5px; border-radius: 99px;">Create Birthday →</a>
+</div>
 </div>
 </section>
 <section class="section scroll-animate premium-divider">
@@ -5999,7 +6376,7 @@ button,
 </section>
 <section class="section scroll-animate compact-ai-concierge-section" style="padding: 10px 16px 14px; max-width: 1140px; margin: 0 auto;">
   <div class="compact-ai-concierge-card" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 245, 250, 0.94) 50%, rgba(253, 242, 248, 0.92) 100%); border: 1.5px solid rgba(255, 120, 175, 0.35); border-radius: 24px; padding: 14px 20px; box-shadow: 0 10px 28px rgba(225, 29, 72, 0.10), inset 0 1.5px 2px #fff; flex-wrap: wrap;">
-    <div style="display: flex; align-items: center; gap: 14px;">
+    <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 250px;">
       <div style="width: 44px; height: 44px; border-radius: 50%; background: #ffffff; border: 1.5px solid rgba(255, 120, 175, 0.4); box-shadow: 0 4px 12px rgba(225, 29, 72, 0.16); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
         <svg viewBox="0 0 72 72" style="width: 32px; height: 32px;">
           <circle cx="16" cy="18" r="10" fill="#1e1e24"/>
@@ -6023,8 +6400,8 @@ button,
         <p style="font-size: 11.5px; color: #78526d; margin: 0;">Try Panda AI Matcher for better suggestions — instantly finds the perfect moment &amp; templates.</p>
       </div>
     </div>
-    <div>
-      <a href="ai-matcher.html" class="primary" style="display: inline-flex; align-items: center; gap: 7px; padding: 10px 22px; font-size: 12.5px; font-weight: 850; border-radius: 99px; text-decoration: none; box-shadow: 0 6px 18px rgba(225, 29, 72, 0.3);">
+    <div style="flex-shrink: 0; margin-left: auto;">
+      <a href="ai-matcher.html" class="primary" style="display: inline-flex; align-items: center; gap: 7px; padding: 9.5px 20px; font-size: 12.5px; font-weight: 850; border-radius: 99px; text-decoration: none; box-shadow: 0 6px 18px rgba(225, 29, 72, 0.3); white-space: nowrap;">
         <span>Try Panda AI Matcher 🐾</span>
         <span style="font-size: 13px;">→</span>
       </a>
@@ -6285,9 +6662,6 @@ button,
     <!-- Free 1: Birthday White Bloom -->
     <div class="template" data-category="Birthday" data-name="Birthday White Bloom" data-id="birthday-white-bloom-001" data-price="0" data-tags="free cute birthday light luxury" data-type="Interactive" onclick="window.location.href='preview.html?template=birthday-white-bloom'">
       <div class="thumb">
-        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
-          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
-        </div>
         <span class="template-sku-badge">VM-B00</span>
         <span class="template-tier-badge badge-free">100% Free</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80" alt="Birthday White Bloom" loading="lazy">
@@ -6306,9 +6680,6 @@ button,
     <!-- Free 2: Retro Polaroid Wall -->
     <div class="template" data-category="Birthday" data-name="Retro Polaroid Wall" data-id="retro-birthday-polaroid" data-price="0" data-tags="free story birthday vintage" data-type="Story" onclick="window.location.href='preview.html?template=retro-polaroid-wall'">
       <div class="thumb t2">
-        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
-          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
-        </div>
         <span class="template-sku-badge">VM-B07</span>
         <span class="template-tier-badge badge-free">Free Story</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" alt="Retro Polaroid Wall" loading="lazy">
@@ -6327,9 +6698,6 @@ button,
     <!-- Free 3: Little Love Story -->
     <div class="template" data-category="Love" data-name="Little Love" data-id="little-love" data-price="0" data-tags="free love romantic story" data-type="Story" onclick="window.location.href='preview.html?template=little-love'">
       <div class="thumb t3">
-        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
-          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
-        </div>
         <span class="template-sku-badge">VM-L01</span>
         <span class="template-tier-badge badge-free">Free Love</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80" alt="Little Love" loading="lazy">
@@ -6348,9 +6716,6 @@ button,
     <!-- Free 4: The Sincere Letter -->
     <div class="template" data-category="Apology" data-name="The Sincere Letter" data-id="sincere-letter" data-price="0" data-tags="free apology healing heartfelt" data-type="Letter" onclick="window.location.href='preview.html?template=sincere-letter'">
       <div class="thumb t4">
-        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
-          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
-        </div>
         <span class="template-sku-badge">VM-S01</span>
         <span class="template-tier-badge badge-free">Free Healing</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80" alt="The Sincere Letter" loading="lazy">
@@ -6391,9 +6756,6 @@ button,
     <!-- Premium 1: Birthday Wish 01 -->
     <div class="template" data-category="Birthday" data-name="Birthday Wish 01" data-id="birthday-wish-1" data-price="149" data-tags="premium birthday candle interactive bestseller" data-type="Interactive" onclick="window.location.href='preview.html?template=birthday-wish-1'">
       <div class="thumb">
-        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
-          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
-        </div>
         <span class="template-sku-badge">VM-B01</span>
         <span class="template-tier-badge badge-premium">🔥 Bestseller</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=800&q=80" alt="Birthday Wish 01" loading="lazy">
@@ -6412,9 +6774,6 @@ button,
     <!-- Premium 2: Midnight 3D Candle -->
     <div class="template" data-category="Birthday" data-name="Midnight 3D Candle" data-id="birthday-3d-candle-surprise" data-price="299" data-tags="ultra birthday 3d candle flagship" data-type="Interactive" onclick="window.location.href='preview.html?template=birthday-3d-candle'">
       <div class="thumb t4">
-        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
-          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
-        </div>
         <span class="template-sku-badge">VM-B03</span>
         <span class="template-tier-badge badge-ultra">👑 Flagship 3D</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80" alt="Midnight 3D Candle" loading="lazy">
@@ -6433,9 +6792,6 @@ button,
     <!-- Premium 3: Golden Anniversary -->
     <div class="template" data-category="Anniversary" data-name="Golden Anniversary" data-id="golden-anniversary" data-price="349" data-tags="ultra anniversary luxury gold" data-type="Milestone" onclick="window.location.href='preview.html?template=golden-anniversary'">
       <div class="thumb t1">
-        <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
-          <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
-        </div>
         <span class="template-sku-badge">VM-A01</span>
         <span class="template-tier-badge badge-ultra">✨ Bespoke Milestone</span>
         <img class="template-real-thumb" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Golden Anniversary" loading="lazy">
@@ -6949,13 +7305,128 @@ function closeMagazineComingSoonModal() {
 <a href="plans.html" class="quick glass" style="text-decoration:none; color:inherit;"><div class="icon">👑</div><strong>Membership</strong><small>Credits & perks</small></a>
 </div></section>
 <section class="section scroll-animate">
-<div class="birthday glass"><div class="eyebrow">Curated gift ideas</div><h3>🎁 Discover Physical Gifts</h3>
-<p>Browse handpicked gifts for birthdays, anniversaries, couples & more. Find the perfect gift on Amazon, Flipkart or Meesho — no subscription needed!</p>
-<button class="secondary" onclick="window.location.href='products.html'">Explore Gift Store →</button></div>
+<div class="birthday glass" style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;">
+  <div style="flex: 1; min-width: 250px;">
+    <div class="eyebrow">Curated gift ideas</div>
+    <h3 style="margin: 2px 0 6px;">🎁 Discover Physical Gifts</h3>
+    <p style="margin: 0;">Browse handpicked gifts for birthdays, anniversaries, couples &amp; more. Find the perfect gift on Amazon, Flipkart or Meesho — no subscription needed!</p>
+  </div>
+  <div style="flex-shrink: 0;">
+    <button class="secondary" onclick="window.location.href='products.html'" style="white-space: nowrap; padding: 9px 20px; font-size: 12px; border-radius: 99px;">Explore Gift Store →</button>
+  </div>
+</div>
 </section>
 <section class="section scroll-animate">
-<div class="section-title"><div class="kicker">Loved moments</div><h3>⭐ Reviews</h3></div>
-<div class="horizontal"><div class="experience glass review-card"><h4>“The live preview made it easy to understand what I was buying.”</h4><p>— Creator feedback · Birthday</p></div><div class="experience glass review-card"><h4>“I could try the look first, then personalize the message.”</h4><p>— Creator feedback · Premium template</p></div><div class="experience glass review-card"><h4>“The templates feel simple to start with but still look polished.”</h4><p>— Creator feedback · First-time user</p></div><div class="experience glass review-card"><h4>“The cinematic style gave my photos a completely different feel.”</h4><p>— Creator feedback · Cinema</p></div><div class="experience glass review-card"><h4>“The AI prompt helped me get started when I had no idea what to write.”</h4><p>— Creator feedback · Vanvi AI</p></div><div class="experience glass review-card"><h4>“The template search is much quicker when I know the occasion.”</h4><p>— Creator feedback · Template discovery</p></div><div class="experience glass review-card"><h4>“Membership credits are easier to understand when the limits are clear.”</h4><p>— Creator feedback · Membership</p></div><div class="experience glass review-card"><h4>“I liked seeing the price before opening the template.”</h4><p>— Creator feedback · Template browsing</p></div></div>
+<div class="section-title"><div class="kicker">Loved moments</div><h3>⭐ Community Reviews</h3><p>Real stories &amp; experiences handcrafted with Vanvi Moments.</p></div>
+<div class="horizontal" style="gap: 14px; padding-bottom: 10px;">
+  <!-- Card 1: Rose Blush -->
+  <div class="experience glass review-card" style="background: linear-gradient(145deg, rgba(255, 240, 246, 0.96) 0%, rgba(255, 228, 238, 0.88) 100%); border: 1.5px solid rgba(244, 114, 182, 0.45); border-radius: 20px; padding: 18px 20px; min-width: 290px; max-width: 330px; box-shadow: 0 10px 24px -4px rgba(244, 63, 94, 0.12), inset 0 1.5px 2px #fff; display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+        <span style="color: #f59e0b; font-size: 14px; letter-spacing: 2px;">★★★★★</span>
+        <span style="font-size: 10px; font-weight: 800; color: #be185d; background: rgba(255, 255, 255, 0.9); padding: 2px 8px; border-radius: 99px; border: 1px solid rgba(244, 114, 182, 0.3);">✓ Verified</span>
+      </div>
+      <h4 style="font-size: 13.5px; font-weight: 750; color: #1e091b; line-height: 1.45; margin: 0 0 12px;">“The live preview made it so easy to see exactly how my birthday gift would look.”</h4>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid rgba(244, 114, 182, 0.25); padding-top: 10px;">
+      <span style="font-size: 18px;">🎂</span>
+      <div>
+        <strong style="font-size: 11.5px; color: #831843; display: block;">Ananya S.</strong>
+        <small style="font-size: 10px; color: #9f1239; font-weight: 600;">Birthday Keepsake</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2: Lavender Dream -->
+  <div class="experience glass review-card" style="background: linear-gradient(145deg, rgba(245, 240, 255, 0.96) 0%, rgba(235, 225, 255, 0.88) 100%); border: 1.5px solid rgba(168, 85, 247, 0.4); border-radius: 20px; padding: 18px 20px; min-width: 290px; max-width: 330px; box-shadow: 0 10px 24px -4px rgba(147, 51, 234, 0.12), inset 0 1.5px 2px #fff; display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+        <span style="color: #f59e0b; font-size: 14px; letter-spacing: 2px;">★★★★★</span>
+        <span style="font-size: 10px; font-weight: 800; color: #7e22ce; background: rgba(255, 255, 255, 0.9); padding: 2px 8px; border-radius: 99px; border: 1px solid rgba(168, 85, 247, 0.3);">✓ Verified</span>
+      </div>
+      <h4 style="font-size: 13.5px; font-weight: 750; color: #1e091b; line-height: 1.45; margin: 0 0 12px;">“I could try the look first, customize the secret note, and send it over WhatsApp instantly.”</h4>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid rgba(168, 85, 247, 0.25); padding-top: 10px;">
+      <span style="font-size: 18px;">💍</span>
+      <div>
+        <strong style="font-size: 11.5px; color: #581c87; display: block;">Rohan &amp; Sneha</strong>
+        <small style="font-size: 10px; color: #6b21a8; font-weight: 600;">Anniversary Story</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3: Champagne Sunset -->
+  <div class="experience glass review-card" style="background: linear-gradient(145deg, rgba(255, 251, 235, 0.96) 0%, rgba(254, 243, 199, 0.88) 100%); border: 1.5px solid rgba(245, 158, 11, 0.4); border-radius: 20px; padding: 18px 20px; min-width: 290px; max-width: 330px; box-shadow: 0 10px 24px -4px rgba(217, 119, 6, 0.12), inset 0 1.5px 2px #fff; display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+        <span style="color: #f59e0b; font-size: 14px; letter-spacing: 2px;">★★★★★</span>
+        <span style="font-size: 10px; font-weight: 800; color: #b45309; background: rgba(255, 255, 255, 0.9); padding: 2px 8px; border-radius: 99px; border: 1px solid rgba(245, 158, 11, 0.3);">✓ VIP Creator</span>
+      </div>
+      <h4 style="font-size: 13.5px; font-weight: 750; color: #1e091b; line-height: 1.45; margin: 0 0 12px;">“The cinematic wax seal &amp; background music gave our anniversary reel a Bollywood feel.”</h4>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid rgba(245, 158, 11, 0.25); padding-top: 10px;">
+      <span style="font-size: 18px;">👑</span>
+      <div>
+        <strong style="font-size: 11.5px; color: #78350f; display: block;">Aditya V.</strong>
+        <small style="font-size: 10px; color: #92400e; font-weight: 600;">Cinema Keepsake</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 4: Sky Lagoon -->
+  <div class="experience glass review-card" style="background: linear-gradient(145deg, rgba(240, 249, 255, 0.96) 0%, rgba(224, 242, 254, 0.88) 100%); border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: 20px; padding: 18px 20px; min-width: 290px; max-width: 330px; box-shadow: 0 10px 24px -4px rgba(2, 132, 199, 0.12), inset 0 1.5px 2px #fff; display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+        <span style="color: #f59e0b; font-size: 14px; letter-spacing: 2px;">★★★★★</span>
+        <span style="font-size: 10px; font-weight: 800; color: #0284c7; background: rgba(255, 255, 255, 0.9); padding: 2px 8px; border-radius: 99px; border: 1px solid rgba(56, 189, 248, 0.3);">✓ Verified</span>
+      </div>
+      <h4 style="font-size: 13.5px; font-weight: 750; color: #1e091b; line-height: 1.45; margin: 0 0 12px;">“The AI prompt helped me instantly write heartfelt wishes when I was completely out of words.”</h4>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid rgba(56, 189, 248, 0.25); padding-top: 10px;">
+      <span style="font-size: 18px;">🐼</span>
+      <div>
+        <strong style="font-size: 11.5px; color: #0c4a6e; display: block;">Kavya M.</strong>
+        <small style="font-size: 10px; color: #0369a1; font-weight: 600;">Panda AI Matcher</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 5: Emerald Mint -->
+  <div class="experience glass review-card" style="background: linear-gradient(145deg, rgba(240, 253, 244, 0.96) 0%, rgba(220, 252, 231, 0.88) 100%); border: 1.5px solid rgba(34, 197, 94, 0.4); border-radius: 20px; padding: 18px 20px; min-width: 290px; max-width: 330px; box-shadow: 0 10px 24px -4px rgba(22, 163, 74, 0.12), inset 0 1.5px 2px #fff; display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+        <span style="color: #f59e0b; font-size: 14px; letter-spacing: 2px;">★★★★★</span>
+        <span style="font-size: 10px; font-weight: 800; color: #15803d; background: rgba(255, 255, 255, 0.9); padding: 2px 8px; border-radius: 99px; border: 1px solid rgba(34, 197, 94, 0.3);">✓ 100% Free</span>
+      </div>
+      <h4 style="font-size: 13.5px; font-weight: 750; color: #1e091b; line-height: 1.45; margin: 0 0 12px;">“The templates feel super smooth to begin with, but look high-end and luxury to the receiver.”</h4>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid rgba(34, 197, 94, 0.25); padding-top: 10px;">
+      <span style="font-size: 18px;">✨</span>
+      <div>
+        <strong style="font-size: 11.5px; color: #14532d; display: block;">Pooja D.</strong>
+        <small style="font-size: 10px; color: #166534; font-weight: 600;">First-time Creator</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 6: Warm Peach -->
+  <div class="experience glass review-card" style="background: linear-gradient(145deg, rgba(255, 247, 237, 0.96) 0%, rgba(254, 215, 170, 0.88) 100%); border: 1.5px solid rgba(251, 146, 60, 0.4); border-radius: 20px; padding: 18px 20px; min-width: 290px; max-width: 330px; box-shadow: 0 10px 24px -4px rgba(234, 88, 12, 0.12), inset 0 1.5px 2px #fff; display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+        <span style="color: #f59e0b; font-size: 14px; letter-spacing: 2px;">★★★★★</span>
+        <span style="font-size: 10px; font-weight: 800; color: #c2410c; background: rgba(255, 255, 255, 0.9); padding: 2px 8px; border-radius: 99px; border: 1px solid rgba(251, 146, 60, 0.3);">✓ Verified</span>
+      </div>
+      <h4 style="font-size: 13.5px; font-weight: 750; color: #1e091b; line-height: 1.45; margin: 0 0 12px;">“The category filters let me find cute friendship cards in under 10 seconds. Loved it!”</h4>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid rgba(251, 146, 60, 0.25); padding-top: 10px;">
+      <span style="font-size: 18px;">👥</span>
+      <div>
+        <strong style="font-size: 11.5px; color: #7c2d12; display: block;">Varun &amp; Friends</strong>
+        <small style="font-size: 10px; color: #9a3412; font-weight: 600;">Besties Card</small>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
 <section class="section scroll-animate" id="faq">
 <div class="section-title"><div class="kicker">Need help?</div><h3>FAQ</h3></div>
@@ -6978,8 +7449,8 @@ function closeMagazineComingSoonModal() {
 <section class="section final-cta scroll-animate"><div class="birthday glass" style="border-radius:24px; text-align:center;"><div class="eyebrow" style="color:#d97706; font-weight:850; letter-spacing:1px;">Made for your moment</div><h3 style="font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(24px,4vw,34px); margin:6px 0 8px;">Ready to create something beautiful?</h3><p style="color:#78536d; font-size:13px; max-width:440px; margin:0 auto 16px;">Choose a template, personalize it in 30 seconds, and share the keepsake forever.</p><div class="actions"><a class="primary flow-btn" href="templates.html" aria-label="Create a moment">✨ Create a Moment ✦</a><a class="secondary" href="templates.html" aria-label="Explore templates">👑 Explore Templates →</a></div></div></section><footer>
 <div class="brand" style="font-weight:900;">VANVI <span style="color:#ff2a7a;">♡</span> MOMENTS</div>
 <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:15px 0 6px">
-<a class="secondary" href="faq.html" style="padding:8px 16px;border-radius:99px;font-size:11.5px;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid rgba(255,120,175,0.35);background:#fff;color:#2c1224;">🆘 FAQs</a>
-<a class="secondary" href="contact.html" style="padding:8px 16px;border-radius:99px;font-size:11.5px;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid rgba(255,120,175,0.35);background:#fff;color:#2c1224;">💬 WhatsApp / Contact</a>
+<a class="secondary" href="faq.html" style="padding:8px 16px;border-radius:99px;font-size:11.5px;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1.5px solid rgba(255,120,175,0.4);background:linear-gradient(135deg, #fff0f6, #f3e8ff);color:#9d174d;box-shadow:0 4px 12px rgba(255,42,122,0.12);">🆘 FAQs</a>
+<a class="secondary" href="contact.html" style="padding:8px 16px;border-radius:99px;font-size:11.5px;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1.5px solid rgba(255,120,175,0.4);background:linear-gradient(135deg, #fff0f6, #f3e8ff);color:#9d174d;box-shadow:0 4px 12px rgba(255,42,122,0.12);">💬 WhatsApp / Contact</a>
 </div>
 <p style="font-size:11.5px;color:#78536d;">Make something they'll remember forever. ❤️</p>
 <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:360px;margin:10px auto 18px;text-align:left">
@@ -7001,8 +7472,8 @@ function closeMagazineComingSoonModal() {
         #VanviMoments   #MakeItMemorable   #MomentsMadeSpecial<br/>
         #BirthdayMoments     #MadeWithVanvi
       </div>
-<p style="margin-bottom:6px;"><a href="templates.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">Templates</a> · <a href="products.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">🎁 Gifts</a> · <a href="builder.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">Studio</a> · <a href="plans.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">💎 VIP Plans</a> · <a href="ai.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">AI Co-Pilot</a> · <a href="dashboard.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">My Moments</a> · <a href="about.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">About</a> · <a href="refund.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">Refunds</a></p>
-<p>© 2026 VanviMoments · <a href="privacy.html" style="color:#806c80;text-decoration:none;">Privacy</a> · <a href="terms.html" style="color:#806c80;text-decoration:none;">Terms</a> · <a href="faq.html" style="color:#806c80;text-decoration:none;">Help</a> · <a href="contact.html" style="color:#806c80;text-decoration:none;">Contact</a> · <a href="refund.html" style="color:#806c80;text-decoration:none;">Refund</a></p>
+<p style="margin-bottom:6px;"><a href="templates.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">Templates</a> · <a href="products.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">🎁 Gifts</a> · <a href="builder.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">Studio</a> · <a href="plans.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">💎 VIP Plans</a> · <a href="ai-matcher.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">AI Co-Pilot</a> · <a href="dashboard.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">My Moments</a> · <a href="about.html" style="color:#d14d86;text-decoration:none;margin:0 5px;font-weight:700;">About</a></p>
+<p>© 2026 VanviMoments · <a href="privacy.html" style="color:#806c80;text-decoration:none;">Privacy</a> · <a href="terms.html" style="color:#806c80;text-decoration:none;">Terms</a> · <a href="faq.html" style="color:#806c80;text-decoration:none;">Help</a> · <a href="contact.html" style="color:#806c80;text-decoration:none;">Contact</a> · <a href="refund.html" style="color:#806c80;text-decoration:none;">Refund Policy</a></p>
 </footer></main>
 </div>
 <style>
@@ -7185,23 +7656,23 @@ function closeMagazineComingSoonModal() {
       <p style="font-size: 12.5px; color: #7a556d; margin: 0;">Tell Vanvi your feeling or pick a quick starter.</p>
     </div>
     <div class="ai-mini-actions" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-      <a href="ai.html?prompt=Write%20something%20deep%20and%20poetic" class="ai-mini-btn" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(255, 0, 122, 0.06); border: 1px solid rgba(255, 0, 122, 0.2); text-decoration: none; color: #1a0820; font-size: 13.5px; font-weight: 700; transition: all 0.2s;">
+      <a href="ai-matcher.html?prompt=Write%20something%20deep%20and%20poetic" class="ai-mini-btn" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(255, 0, 122, 0.06); border: 1px solid rgba(255, 0, 122, 0.2); text-decoration: none; color: #1a0820; font-size: 13.5px; font-weight: 700; transition: all 0.2s;">
         <span style="font-size: 18px;">✍️</span>
         <span style="flex: 1; text-align: left;">Write something</span>
         <span style="color: #ff007a; font-weight: 800;">→</span>
       </a>
-      <a href="ai.html?prompt=Create%20a%20beautiful%20surprise%20moment" class="ai-mini-btn" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(124, 58, 237, 0.06); border: 1px solid rgba(124, 58, 237, 0.2); text-decoration: none; color: #1a0820; font-size: 13.5px; font-weight: 700; transition: all 0.2s;">
+      <a href="ai-matcher.html?prompt=Create%20a%20beautiful%20surprise%20moment" class="ai-mini-btn" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(124, 58, 237, 0.06); border: 1px solid rgba(124, 58, 237, 0.2); text-decoration: none; color: #1a0820; font-size: 13.5px; font-weight: 700; transition: all 0.2s;">
         <span style="font-size: 18px;">✨</span>
         <span style="flex: 1; text-align: left;">Create a Moment</span>
         <span style="color: #7c3aed; font-weight: 800;">→</span>
       </a>
-      <a href="ai.html?prompt=Give%20me%20a%20creative%20and%20unique%20surprise%20idea" class="ai-mini-btn" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.2); text-decoration: none; color: #1a0820; font-size: 13.5px; font-weight: 700; transition: all 0.2s;">
+      <a href="ai-matcher.html?prompt=Give%20me%20a%20creative%20and%20unique%20surprise%20idea" class="ai-mini-btn" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.2); text-decoration: none; color: #1a0820; font-size: 13.5px; font-weight: 700; transition: all 0.2s;">
         <span style="font-size: 18px;">💡</span>
         <span style="flex: 1; text-align: left;">Give me an idea</span>
         <span style="color: #d97706; font-weight: 800;">→</span>
       </a>
     </div>
-    <a href="ai.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 12px 20px; border-radius: 99px; background: linear-gradient(135deg, #ff007a, #7c3aed); color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 800; box-shadow: 0 4px 16px rgba(255, 0, 122, 0.35);">
+    <a href="ai-matcher.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 12px 20px; border-radius: 99px; background: linear-gradient(135deg, #ff007a, #7c3aed); color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 800; box-shadow: 0 4px 16px rgba(255, 0, 122, 0.35);">
       Open Vanvi AI Studio →
     </a>
   </div>
@@ -8669,24 +9140,31 @@ if (window.VanviI18n && typeof window.VanviI18n.setLanguage === 'function') {
       <button type="button" onclick="closeStudioSettingsModal()" style="background:none; border:none; font-size:20px; color:var(--muted, #806c80); cursor:pointer; padding:4px 8px; line-height:1;">✕</button>
     </div>
 
-    <!-- 1. Strict 2-Theme Selection (Day Bloom vs Emerald Night) -->
+    <!-- 1. Strict 3-Theme Selection (Day Bloom vs Emerald Night vs Spatial Glass) -->
     <div style="margin-bottom:18px;">
       <label style="display:block; font-size:11px; font-weight:850; text-transform:uppercase; letter-spacing:0.8px; color:#0F3D32; margin-bottom:8px;">
-        ✦ Appearance Mode (2 Curated Themes)
+        ✦ Appearance Mode (3 Curated Themes)
       </label>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" id="themeModeOptions">
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;" id="themeModeOptions">
         <!-- Day Bloom -->
-        <button type="button" class="studio-opt-btn" data-theme="clay" onclick="setVanviTheme('clay')" style="padding:12px 10px; border-radius:16px; border:1.5px solid rgba(255,120,175,0.35); background:#fff5f9; text-align:center; cursor:pointer; transition:all 0.2s;">
-          <span style="font-size:22px; display:block; margin-bottom:4px;">🌸</span>
-          <b style="font-size:12px; display:block; color:#2c1224;">Day Bloom</b>
-          <span style="font-size:9.5px; color:#806c80;">Signature Rose Blush</span>
+        <button type="button" class="studio-opt-btn" data-theme="clay" onclick="setVanviTheme('clay')" style="padding:10px 6px; border-radius:16px; border:1.5px solid rgba(255,120,175,0.35); background:#fff5f9; text-align:center; cursor:pointer; transition:all 0.2s;">
+          <span style="font-size:20px; display:block; margin-bottom:3px;">🌸</span>
+          <b style="font-size:11px; display:block; color:#2c1224;">Day Bloom</b>
+          <span style="font-size:8.5px; color:#806c80;">Rose Blush</span>
         </button>
 
         <!-- Emerald Night -->
-        <button type="button" class="studio-opt-btn" data-theme="emerald" onclick="setVanviTheme('emerald')" style="padding:12px 10px; border-radius:16px; border:1.5px solid rgba(214,184,120,0.35); background:#0B0D0C; text-align:center; cursor:pointer; transition:all 0.2s;">
-          <span style="font-size:22px; display:block; margin-bottom:4px;">🌲</span>
-          <b style="font-size:12px; display:block; color:#F1F7F4;">Emerald Night</b>
-          <span style="font-size:9.5px; color:#D6B878;">Obsidian &amp; Gold Luxury</span>
+        <button type="button" class="studio-opt-btn" data-theme="emerald" onclick="setVanviTheme('emerald')" style="padding:10px 6px; border-radius:16px; border:1.5px solid rgba(214,184,120,0.35); background:#0B0D0C; text-align:center; cursor:pointer; transition:all 0.2s;">
+          <span style="font-size:20px; display:block; margin-bottom:3px;">🌲</span>
+          <b style="font-size:11px; display:block; color:#F1F7F4;">Night</b>
+          <span style="font-size:8.5px; color:#D6B878;">Emerald Gold</span>
+        </button>
+
+        <!-- Spatial Glass -->
+        <button type="button" class="studio-opt-btn" data-theme="glass" onclick="setVanviTheme('glass')" style="padding:10px 6px; border-radius:16px; border:1.5px solid rgba(56,189,248,0.4); background:rgba(240,248,255,0.85); text-align:center; cursor:pointer; transition:all 0.2s;">
+          <span style="font-size:20px; display:block; margin-bottom:3px;">🫧</span>
+          <b style="font-size:11px; display:block; color:#0f172a;">Spatial Glass</b>
+          <span style="font-size:8.5px; color:#0284c7;">Liquid Frost</span>
         </button>
       </div>
     </div>
@@ -8697,6 +9175,18 @@ if (window.VanviI18n && typeof window.VanviI18n.setLanguage === 'function') {
         ✦ Typography &amp; Font Vibe
       </label>
       <div style="display:flex; flex-direction:column; gap:8px;" id="fontPairingOptions">
+        <!-- Spatial Vision (Recommended for Glass) -->
+        <button type="button" class="studio-font-btn" data-font="spatial" onclick="setVanviFont('spatial')" style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-radius:14px; border:1.5px solid rgba(56,189,248,0.3); background:rgba(255,255,255,0.85); text-align:left; cursor:pointer; transition:all 0.2s;">
+          <div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <b style="font-family:'Plus Jakarta Sans', sans-serif; font-size:15px; color:#0B0D0C; letter-spacing:-0.2px;">Spatial Vision</b>
+              <span style="font-size:9px; background:linear-gradient(135deg, #38bdf8, #0284c7); color:#fff; font-weight:800; padding:1.5px 6px; border-radius:99px;">VisionOS</span>
+            </div>
+            <span style="font-size:10px; color:#52605b;">Plus Jakarta Sans + Outfit · Ultra-Smooth Modern</span>
+          </div>
+          <span class="font-check-mark" style="font-size:16px; color:#18A878; display:none;">✓</span>
+        </button>
+
         <!-- Royal Atelier (Recommended) -->
         <button type="button" class="studio-font-btn" data-font="royal" onclick="setVanviFont('royal')" style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-radius:14px; border:1.5px solid rgba(24,168,120,0.3); background:rgba(241,247,244,0.85); text-align:left; cursor:pointer; transition:all 0.2s;">
           <div>
@@ -8762,7 +9252,14 @@ if (window.VanviI18n && typeof window.VanviI18n.setLanguage === 'function') {
   };
 
   window.setVanviTheme = function(theme) {
-    const finalTheme = (theme === 'dark' || theme === 'night' || theme === 'emerald') ? 'emerald' : 'clay';
+    let finalTheme = 'bloom';
+    if (theme === 'glass' || theme === 'frost' || theme === 'spatial') {
+      finalTheme = 'glass';
+    } else if (theme === 'dark' || theme === 'night' || theme === 'emerald') {
+      finalTheme = 'emerald';
+    } else if (theme === 'clay' || theme === 'bloom') {
+      finalTheme = 'bloom';
+    }
     document.documentElement.setAttribute('data-vanvi-theme', finalTheme);
     try { localStorage.setItem('vanvi_aesthetic_theme', finalTheme); } catch(e) {}
     syncStudioControls();
@@ -8775,10 +9272,29 @@ if (window.VanviI18n && typeof window.VanviI18n.setLanguage === 'function') {
   };
 
   window.toggleVanviTheme = function() {
-    const current = document.documentElement.getAttribute('data-vanvi-theme') || 'clay';
-    const next = (current === 'emerald' || current === 'dark' || current === 'night') ? 'clay' : 'emerald';
+    const current = document.documentElement.getAttribute('data-vanvi-theme') || 'bloom';
+    let next = 'emerald';
+    if (current === 'emerald' || current === 'dark' || current === 'night') {
+      next = 'glass';
+    } else if (current === 'glass') {
+      next = 'bloom';
+    } else {
+      next = 'emerald';
+    }
     setVanviTheme(next);
   };
+
+  // Cross-tab & Cross-frame live synchronization
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'vanvi_aesthetic_theme' && e.newValue) {
+      document.documentElement.setAttribute('data-vanvi-theme', e.newValue);
+      syncStudioControls();
+    }
+    if (e.key === 'vanvi_font_pref' && e.newValue) {
+      document.documentElement.setAttribute('data-vanvi-font', e.newValue);
+      syncStudioControls();
+    }
+  });
 
   // Global Reset Aesthetics to Default (Callable by User and AI Assistant)
   window.vanviResetAesthetics = function() {
@@ -8811,14 +9327,18 @@ if (window.VanviI18n && typeof window.VanviI18n.setLanguage === 'function') {
     const label = document.getElementById('themeToggleLabel');
     const mobileLabel = document.getElementById('themeToggleMobileLabel');
     if (label) {
-      if (currentTheme === 'emerald' || currentTheme === 'dark' || currentTheme === 'night') {
+      if (currentTheme === 'glass') {
+        label.textContent = '🫧 Spatial Glass';
+      } else if (currentTheme === 'emerald' || currentTheme === 'dark' || currentTheme === 'night') {
         label.textContent = '🌲 Emerald Night';
       } else {
         label.textContent = '🌸 Day Bloom';
       }
     }
     if (mobileLabel) {
-      if (currentTheme === 'emerald' || currentTheme === 'dark' || currentTheme === 'night') {
+      if (currentTheme === 'glass') {
+        mobileLabel.textContent = '🫧';
+      } else if (currentTheme === 'emerald' || currentTheme === 'dark' || currentTheme === 'night') {
         mobileLabel.textContent = '🌲';
       } else {
         mobileLabel.textContent = '🌸';
@@ -8828,10 +9348,13 @@ if (window.VanviI18n && typeof window.VanviI18n.setLanguage === 'function') {
     // Modal theme buttons highlight
     document.querySelectorAll('.studio-opt-btn').forEach(btn => {
       const t = btn.getAttribute('data-theme');
-      const isMatched = (t === currentTheme) || (t === 'emerald' && (currentTheme === 'dark' || currentTheme === 'night'));
+      const isMatched = (t === currentTheme) ||
+                        (t === 'clay' && (currentTheme === 'bloom' || currentTheme === 'clay')) ||
+                        (t === 'emerald' && (currentTheme === 'dark' || currentTheme === 'night')) ||
+                        (t === 'glass' && currentTheme === 'glass');
       if (isMatched) {
-        btn.style.borderColor = t === 'emerald' ? '#D6B878' : '#ff2a7a';
-        btn.style.boxShadow = t === 'emerald' ? '0 0 0 2px rgba(214,184,120,0.5)' : '0 0 0 2px rgba(255,42,122,0.25)';
+        btn.style.borderColor = t === 'emerald' ? '#D6B878' : (t === 'glass' ? '#0284c7' : '#ff2a7a');
+        btn.style.boxShadow = t === 'emerald' ? '0 0 0 2px rgba(214,184,120,0.5)' : (t === 'glass' ? '0 0 0 2px rgba(56,189,248,0.45)' : '0 0 0 2px rgba(255,42,122,0.25)');
         btn.style.transform = 'translateY(-1px)';
       } else {
         btn.style.borderColor = 'rgba(214,184,120,0.25)';

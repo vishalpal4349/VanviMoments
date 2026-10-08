@@ -73,7 +73,7 @@ check('Viewport allows user zoom (no user-scalable=no)', vp && !vp[1].includes('
 check('Overflow-x locked (overflow-x: hidden !important)', html.includes('overflow-x: hidden !important;'));
 
 // 9. Navigation links to Studio and Home
-check('Link back to ai.html studio present', html.includes('href="ai.html"'));
+check('Link back to ai-matcher.html studio present', html.includes('href="ai-matcher.html"'));
 check('Link back to index.html home present', html.includes('href="index.html"'));
 
 console.log(`\nResults: ${pass} / ${total} checks passed.`);

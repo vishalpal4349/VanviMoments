@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Vows — 13-Step Guided Studio Builder | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-studio: #0e0508;
+      --bg-panel: #17090e;
+      --bg-card: #200d14;
+      --crimson-accent: #681525;
+      --gold-primary: #c4985a;
+      --gold-light: #e5c490;
+      --text-white: #ffffff;
+      --text-muted: #a38c94;
+      --border-gold: rgba(196, 152, 90, 0.3);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-display: 'Cinzel', serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-studio);
+      color: var(--text-white);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Top Studio Header */
+    .studio-header {
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border-gold);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .studio-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-crown { font-size: 24px; }
+    .logo-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-preview-toggle {
+      background: rgba(196, 152, 90, 0.15);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-light);
+      padding: 8px 16px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-save-publish {
+      background: linear-gradient(135deg, var(--gold-primary), #926c36);
+      color: #000;
+      border: 0;
+      padding: 8px 20px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(196, 152, 90, 0.3);
+    }
+
+    /* Main Split Layout */
+    .studio-body {
+      display: grid;
+      grid-template-columns: 480px 1fr;
+      flex: 1;
+      height: calc(100vh - 65px);
+      overflow: hidden;
+    }
+    @media (max-width: 960px) {
+      .studio-body { grid-template-columns: 1fr; height: auto; }
+      .preview-pane { display: none; }
+    }
+
+    /* Left Control Workspace */
+    .editor-pane {
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border-gold);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    /* Step Navigation Bar */
+    .steps-scroller {
+      display: flex;
+      gap: 8px;
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(196, 152, 90, 0.2);
+      overflow-x: auto;
+      background: var(--bg-card);
+      scrollbar-width: none;
+    }
+    .steps-scroller::-webkit-scrollbar { display: none; }
+    .step-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .step-pill.active {
+      background: var(--gold-primary);
+      color: #000;
+      border-color: var(--gold-light);
+      box-shadow: 0 2px 10px rgba(196, 152, 90, 0.3);
+    }
+
+    /* Step Form Container */
+    .step-content-area {
+      padding: 24px 20px;
+      flex: 1;
+    }
+    .step-view { display: none; }
+    .step-view.active { display: block; }
+
+    .step-heading-wrap {
+      margin-bottom: 20px;
+    }
+    .step-number {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 800;
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: #fff;
+      margin-top: 4px;
+    }
+    .step-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Form Inputs */
+    .input-group {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .input-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+    .input-group input, .input-group select, .input-group textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 12px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+    .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+      border-color: var(--gold-light);
+      box-shadow: 0 0 0 3px rgba(196, 152, 90, 0.2);
+    }
+
+    /* Section Toggle Switch */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      padding: 12px 14px;
+      border-radius: 14px;
+      margin-bottom: 18px;
+    }
+    .toggle-row span {
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .switch-btn {
+      background: #15803d;
+      color: #fff;
+      border: 0;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* Step Navigation Buttons */
+    .step-actions-footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: var(--bg-panel);
+      border-top: 1px solid var(--border-gold);
+    }
+    .btn-prev {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 750;
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .btn-next {
+      background: var(--gold-primary);
+      color: #000;
+      border: 0;
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-weight: 850;
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+
+    /* Right Preview Pane */
+    .preview-pane {
+      background: #090204;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+    }
+    .preview-device-switcher {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      background: var(--bg-card);
+      padding: 4px;
+      border-radius: 99px;
+      border: 1px solid var(--border-gold);
+    }
+    .dev-btn {
+      background: transparent;
+      border: 0;
+      color: var(--text-muted);
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .dev-btn.active {
+      background: var(--gold-primary);
+      color: #000;
+    }
+    .preview-phone-frame {
+      width: 414px;
+      height: 90%;
+      max-height: 820px;
+      border-radius: 36px;
+      border: 4px solid #2e141d;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(196, 152, 90, 0.15);
+      overflow: hidden;
+      background: #000;
+      transition: width 0.3s ease;
+    }
+    .preview-phone-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Studio Header -->
+  <header class="studio-header">
+    <div class="studio-logo">
+      <span class="logo-crown">👑</span>
+      <div>
+        <h1 class="logo-title">Royal Vows — Studio Builder</h1>
+        <span style="font-size: 10px; color: var(--gold-light); letter-spacing: 1px;">13-STEP GUIDED CREATION</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="btn-preview-toggle" onclick="reloadPreviewFrame()">🔄 Sync Preview</button>
+      <button type="button" class="btn-save-publish" onclick="saveAndProceedCheckout()">Publish &amp; Checkout →</button>
+    </div>
+  </header>
+
+  <!-- Studio Workspace -->
+  <main class="studio-body">
+
+    <!-- Left Editor Pane -->
+    <section class="editor-pane">
+      <!-- 13 Step Pills -->
+      <nav class="steps-scroller" id="stepPillsNav">
+        <button type="button" class="step-pill active" onclick="goToStep(1)">1. Mukhya Jaankari</button>
+        <button type="button" class="step-pill" onclick="goToStep(2)">2. Couple</button>
+        <button type="button" class="step-pill" onclick="goToStep(3)">3. Parivaar</button>
+        <button type="button" class="step-pill" onclick="goToStep(4)">4. Love Story</button>
+        <button type="button" class="step-pill" onclick="goToStep(5)">5. Events</button>
+        <button type="button" class="step-pill" onclick="goToStep(6)">6. Gallery</button>
+        <button type="button" class="step-pill" onclick="goToStep(7)">7. Media</button>
+        <button type="button" class="step-pill" onclick="goToStep(8)">8. Venue</button>
+        <button type="button" class="step-pill" onclick="goToStep(9)">9. Guest RSVP</button>
+        <button type="button" class="step-pill" onclick="goToStep(10)">10. Style &amp; Theme</button>
+        <button type="button" class="step-pill" onclick="goToStep(11)">11. Music</button>
+        <button type="button" class="step-pill" onclick="goToStep(12)">12. Preview</button>
+        <button type="button" class="step-pill" onclick="goToStep(13)">13. Publish</button>
+      </nav>
+
+      <!-- Step Content Area -->
+      <div class="step-content-area">
+
+        <!-- STEP 1: Mukhya Jaankari -->
+        <div class="step-view active" id="stepView1">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 01 / 13</span>
+            <h2 class="step-title">Mukhya Jaankari (Basic Info)</h2>
+            <p class="step-desc">Apni shaadi ka title aur shubh muhurtham darj karein.</p>
+          </div>
+          <div class="input-group">
+            <label>Shaadi ki Tareekh (Wedding Date)</label>
+            <input type="text" id="bDate" value="12th December 2026" oninput="syncToPreview()">
+          </div>
+          <div class="input-group">
+            <label>Countdown Ghadi ka Samay (Timer Date &amp; Time)</label>
+            <input type="datetime-local" id="bTarget" value="2026-12-12T18:18" oninput="syncToPreview()">
+          </div>
+          <div class="input-group">
+            <label>Shubh Muhurtham Caption</label>
+            <input type="text" id="bMuhurtham" value="Shubh Muhurtham: 06:18 PM (Godhuli Vela)" oninput="syncToPreview()">
+          </div>
+        </div>
+
+        <!-- STEP 2: Couple ke Naam -->
+        <div class="step-view" id="stepView2">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 02 / 13</span>
+            <h2 class="step-title">Couple ke Naam (Dulha &amp; Dulhan)</h2>
+            <p class="step-desc">Dulhan aur Dulha ke naam aur short parichay.</p>
+          </div>
+          <div class="input-group">
+            <label>Dulhan ka Naam (Bride's First Name)</label>
+            <input type="text" id="bBride" value="Tanya" oninput="syncToPreview()">
+          </div>
+          <div class="input-group">
+            <label>Dulhan ka Poora Naam (Bride's Full Name)</label>
+            <input type="text" id="bBrideFull" value="Tanya Sharma" oninput="syncToPreview()">
+          </div>
+          <div class="input-group">
+            <label>Dulha ka Naam (Groom's First Name)</label>
+            <input type="text" id="bGroom" value="Rohan" oninput="syncToPreview()">
+          </div>
+          <div class="input-group">
+            <label>Dulha ka Poora Naam (Groom's Full Name)</label>
+            <input type="text" id="bGroomFull" value="Rohan Kapoor" oninput="syncToPreview()">
+          </div>
+        </div>
+
+        <!-- STEP 3: Parivaar -->
+        <div class="step-view" id="stepView3">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 03 / 13</span>
+            <h2 class="step-title">Parivaar ke Naam (Family Blessings)</h2>
+            <p class="step-desc">Mata-pita aur parivaar ke aashirwad sandesh.</p>
+          </div>
+          <div class="input-group">
+            <label>Dulhan ke Mata-Pita (Bride's Parents)</label>
+            <input type="text" id="bBrideParents" value="Mr. Rajesh &amp; Mrs. Kavita Sharma" oninput="syncToPreview()">
+          </div>
+          <div class="input-group">
+            <label>Dulha ke Mata-Pita (Groom's Parents)</label>
+            <input type="text" id="bGroomParents" value="Mr. Sanjay &amp; Mrs. Neeta Kapoor" oninput="syncToPreview()">
+          </div>
+        </div>
+
+        <!-- STEP 4: Love Story -->
+        <div class="step-view" id="stepView4">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 04 / 13</span>
+            <h2 class="step-title">Prem Katha (Our Story)</h2>
+            <p class="step-desc">Pehli mulaqaat aur proposal ke yaadon ko sanjoyein.</p>
+          </div>
+          <div class="input-group">
+            <label>Pehli Mulaqaat (First Meeting Story)</label>
+            <textarea rows="3" id="bMeeting">A simple one-hour meeting over adrak chai turned into three hours of endless conversation in Bandra.</textarea>
+          </div>
+          <div class="input-group">
+            <label>Proposal / Shehnaai Moment</label>
+            <textarea rows="3" id="bProposal">On a gentle boat ride across Lake Pichola with palace lights reflecting, Rohan asked the golden question.</textarea>
+          </div>
+        </div>
+
+        <!-- STEP 5: Events -->
+        <div class="step-view" id="stepView5">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 05 / 13</span>
+            <h2 class="step-title">Shaadi ke Karyakram (Events Timeline)</h2>
+            <p class="step-desc">Haldi, Mehendi, Sangeet, Shaadi aur Reception.</p>
+          </div>
+          <div class="toggle-row">
+            <span>Haldi Ceremony Section</span>
+            <button type="button" class="switch-btn">ENABLED</button>
+          </div>
+          <div class="toggle-row">
+            <span>Mehendi Ceremony Section</span>
+            <button type="button" class="switch-btn">ENABLED</button>
+          </div>
+          <div class="toggle-row">
+            <span>Sangeet Night Section</span>
+            <button type="button" class="switch-btn">ENABLED</button>
+          </div>
+          <div class="toggle-row">
+            <span>Sacred Pheras &amp; Wedding</span>
+            <button type="button" class="switch-btn">ENABLED</button>
+          </div>
+          <div class="toggle-row">
+            <span>Imperial Reception Banquet</span>
+            <button type="button" class="switch-btn">ENABLED</button>
+          </div>
+        </div>
+
+        <!-- STEP 6: Gallery -->
+        <div class="step-view" id="stepView6">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 06 / 13</span>
+            <h2 class="step-title">Apni Photos (Photo Gallery)</h2>
+            <p class="step-desc">Couple photos upload aur reorder karein.</p>
+          </div>
+          <div class="input-group">
+            <label>Photo 1 URL</label>
+            <input type="text" value="https://assets.shaadipath.com/templates/template13/assets/gallery/demo_1.webp">
+          </div>
+          <div class="input-group">
+            <label>Photo 2 URL</label>
+            <input type="text" value="https://assets.shaadipath.com/templates/template13/assets/gallery/demo_2.webp">
+          </div>
+          <div class="input-group">
+            <label>Photo 3 URL</label>
+            <input type="text" value="https://assets.shaadipath.com/templates/template13/assets/gallery/demo_3.webp">
+          </div>
+          <div class="input-group">
+            <label>Photo 4 URL</label>
+            <input type="text" value="https://assets.shaadipath.com/templates/template13/assets/gallery/demo_4.webp">
+          </div>
+        </div>
+
+        <!-- STEP 7: Media -->
+        <div class="step-view" id="stepView7">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 07 / 13</span>
+            <h2 class="step-title">Video aur Voice Note (Media)</h2>
+            <p class="step-desc">Cinematic wedding teaser film aur personal audio message.</p>
+          </div>
+          <div class="input-group">
+            <label>Wedding Teaser Video MP4 URL</label>
+            <input type="text" value="https://assets.shaadipath.com/templates/template13/assets/hero/hero.mp4">
+          </div>
+          <div class="input-group">
+            <label>Voice Message Duration</label>
+            <input type="text" value="0:45 seconds">
+          </div>
+        </div>
+
+        <!-- STEP 8: Venue -->
+        <div class="step-view" id="stepView8">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 08 / 13</span>
+            <h2 class="step-title">Palace Venue &amp; Directions</h2>
+            <p class="step-desc">Resort ka pata aur Google Maps link.</p>
+          </div>
+          <div class="input-group">
+            <label>Venue Name &amp; City</label>
+            <input type="text" id="bVenue" value="The Oberoi Udaivilas, Lake Pichola, Udaipur" oninput="syncToPreview()">
+          </div>
+          <div class="input-group">
+            <label>Google Maps Direction URL</label>
+            <input type="text" value="https://maps.google.com/?q=The+Oberoi+Udaivilas+Udaipur">
+          </div>
+        </div>
+
+        <!-- STEP 9: Guest RSVP -->
+        <div class="step-view" id="stepView9">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 09 / 13</span>
+            <h2 class="step-title">Mehmaan RSVP (WhatsApp Integration)</h2>
+            <p class="step-desc">1-Click WhatsApp RSVP number jaha guests confirmation bhejenge.</p>
+          </div>
+          <div class="input-group">
+            <label>Host WhatsApp Number (Country code ke sath, bina + ke)</label>
+            <input type="tel" id="bWhatsapp" value="917631442934" oninput="syncToPreview()">
+          </div>
+        </div>
+
+        <!-- STEP 10: Style & Theme -->
+        <div class="step-view" id="stepView10">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 10 / 13</span>
+            <h2 class="step-title">Rang aur Style (Theme Preset)</h2>
+            <p class="step-desc">Apni pasand ka royal aesthetic chuniye.</p>
+          </div>
+          <div class="input-group">
+            <label>Theme Preset</label>
+            <select id="bTheme">
+              <option value="royal-burgundy" selected>👑 Imperial Burgundy &amp; 24K Gold</option>
+              <option value="emerald-palace">🌿 Emerald Rajputana &amp; Ivory</option>
+              <option value="sapphire-night">💎 Midnight Sapphire &amp; Silver</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- STEP 11: Music -->
+        <div class="step-view" id="stepView11">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 11 / 13</span>
+            <h2 class="step-title">Shehnai aur Sangeet (Soundtrack)</h2>
+            <p class="step-desc">Celebration ka ambient royal background music.</p>
+          </div>
+          <div class="input-group">
+            <label>Soundtrack Selection</label>
+            <select id="bAudio">
+              <option value="shehnai-sitar" selected>🎵 Imperial Shehnai &amp; Sitar Symphony (Default)</option>
+              <option value="vedic-chants">🛕 Auspicious Vedic Nadaswaram Chants</option>
+              <option value="acoustic-piano">🎹 Romantic Acoustic Palace Strings</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- STEP 12: Preview -->
+        <div class="step-view" id="stepView12">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 12 / 13</span>
+            <h2 class="step-title">Sampoorn Live Preview</h2>
+            <p class="step-desc">Mobile screen par scroll karke apni poori website dekhein.</p>
+          </div>
+          <div style="background: var(--bg-card); padding: 16px; border-radius: 14px; border: 1px solid var(--border-gold);">
+            <p style="font-size: 13px; color: var(--gold-light); margin-bottom: 8px;">✨ Sabhi 33 Sections Active Hain:</p>
+            <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+              Curtain Unbox, Falling Petals, Love Story, 5 Ceremonies, Interactive Wax Seal, Voice Note, RSVP, Wishes Wall, aur Calendar Sync.
+            </p>
+          </div>
+        </div>
+
+        <!-- STEP 13: Publish & Checkout -->
+        <div class="step-view" id="stepView13">
+          <div class="step-heading-wrap">
+            <span class="step-number">Step 13 / 13</span>
+            <h2 class="step-title">Prakashan aur Checkout</h2>
+            <p class="step-desc">Apni website ko lifetime validity ke sath live karein.</p>
+          </div>
+          <div style="background: linear-gradient(135deg, #2b060f, #150206); padding: 20px; border-radius: 18px; border: 1.5px solid var(--gold-primary); text-align: center;">
+            <span style="font-size: 28px;">👑</span>
+            <h3 style="font-family: var(--font-display); font-size: 18px; color: var(--gold-light); margin: 6px 0;">Royal Vows Celebration Pass</h3>
+            <p style="font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px;">₹2,499 <span style="font-size: 13px; text-decoration: line-through; color: var(--text-muted);">₹4,999</span></p>
+            <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 16px;">Lifetime Validity • Unlimited Guest RSVPs • Custom Domain Ready</p>
+            <button type="button" class="btn-save-publish" style="width: 100%; padding: 12px;" onclick="saveAndProceedCheckout()">Continue to Checkout &amp; Pay ₹2,499 →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Buttons -->
+      <footer class="step-actions-footer">
+        <button type="button" class="btn-prev" id="btnPrevStep" onclick="prevStep()">← Previous</button>
+        <button type="button" class="btn-next" id="btnNextStep" onclick="nextStep()">Next Step →</button>
+      </footer>
+    </section>
+
+    <!-- Right Live Preview Pane -->
+    <section class="preview-pane">
+      <div class="preview-device-switcher">
+        <button type="button" class="dev-btn active" onclick="setDeviceWidth(414, this)">Mobile (414px)</button>
+        <button type="button" class="dev-btn" onclick="setDeviceWidth(375, this)">Compact (375px)</button>
+        <button type="button" class="dev-btn" onclick="setDeviceWidth(480, this)">Phablet (480px)</button>
+      </div>
+
+      <div class="preview-phone-frame" id="phoneFrame">
+        <iframe src="index.html" id="previewIframe" title="Royal Vows Live Preview"></iframe>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 13;
+
+    function goToStep(step) {
+      if (step < 1 || step > totalSteps) return;
+      currentStep = step;
+
+      // Update pills
+      document.querySelectorAll('.step-pill').forEach((pill, idx) => {
+        pill.classList.toggle('active', idx + 1 === currentStep);
+      });
+
+      // Update views
+      document.querySelectorAll('.step-view').forEach((view, idx) => {
+        view.classList.toggle('active', idx + 1 === currentStep);
+      });
+
+      // Update prev/next buttons
+      document.getElementById('btnPrevStep').style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+      document.getElementById('btnNextStep').textContent = currentStep === totalSteps ? 'Publish Experience ✦' : 'Next Step →';
+
+      // Scroll active pill into view
+      const activePill = document.querySelector('.step-pill.active');
+      if (activePill) activePill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    function nextStep() {
+      if (currentStep === totalSteps) {
+        saveAndProceedCheckout();
+        return;
+      }
+      goToStep(currentStep + 1);
+    }
+
+    function prevStep() {
+      goToStep(currentStep - 1);
+    }
+
+    function setDeviceWidth(w, btn) {
+      document.getElementById('phoneFrame').style.width = w + 'px';
+      document.querySelectorAll('.dev-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function syncToPreview() {
+      const data = {
+        bride: document.getElementById('bBride').value,
+        brideFull: document.getElementById('bBrideFull').value,
+        groom: document.getElementById('bGroom').value,
+        groomFull: document.getElementById('bGroomFull').value,
+        date: document.getElementById('bDate').value,
+        target: document.getElementById('bTarget').value,
+        venue: document.getElementById('bVenue').value,
+        whatsapp: document.getElementById('bWhatsapp').value
+      };
+
+      try {
+        localStorage.setItem('vanvi_royal_wedding_data', JSON.stringify(data));
+      } catch (e) {}
+
+      // Update iframe query parameters
+      const iframe = document.getElementById('previewIframe');
+      const params = new URLSearchParams(data);
+      iframe.src = 'index.html?' + params.toString();
+    }
+
+    function reloadPreviewFrame() {
+      syncToPreview();
+    }
+
+    function saveAndProceedCheckout() {
+      syncToPreview();
+      const checkoutUrl = `../../checkout.html?templateId=vanvi-royal-wedding&price=2499&name=Royal%20Vows%20Wedding%20Experience`;
+      window.location.href = checkoutUrl;
+    }
+  </script>
+</body>
+</html>

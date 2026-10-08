@@ -110,6 +110,19 @@ app.get('/m/:slug', async (req, res, next) => {
 });
 
 
+// Legacy 301 Redirects for Decommissioned Pages (experience.html & ai.html)
+app.get(['/experience.html', '/experience'], (req, res) => {
+  const query = req.url.includes('?') ? req.url.substring(req.url.indexOf('?')) : '';
+  return res.redirect(301, `/moment.html${query}`);
+});
+app.get(['/ai.html', '/ai'], (req, res) => {
+  const query = req.url.includes('?') ? req.url.substring(req.url.indexOf('?')) : '';
+  return res.redirect(301, `/ai-matcher.html${query}`);
+});
+app.get(['/constellation-of-love.html', '/constellation-of-love'], (req, res) => {
+  return res.redirect(301, '/games.html');
+});
+
 // Serve static uploads & frontend files from project root
 const ROOT_DIR = path.join(__dirname, '..');
 const UPLOADS_DIR = path.join(__dirname, '..', 'uploads');

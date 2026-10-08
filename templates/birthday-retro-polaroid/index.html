@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Retro Polaroid — The Nostalgic Scrapbook | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 1. Camera Aperture Intro -->
+  <div class="aperture-overlay" id="aperture-overlay">
+    <div class="camera-lens-graphic">📷</div>
+    <h2 style="font-family: var(--font-serif); font-size: 26px; color: var(--mustard-gold); margin-bottom: 8px;">A ROLL OF MEMORIES</h2>
+    <p style="color: #a8a09b; font-size: 13px; margin-bottom: 24px;">Captured with infinite love for <span class="val-name">Kavya Sharma</span></p>
+    <button class="btn-open-scrapbook" id="btn-open-scrapbook">CLICK SHUTTER TO OPEN 🎞️</button>
+  </div>
+
+  <div class="page-wrapper">
+    <!-- 2. Retro Hero -->
+    <header class="retro-hero">
+      <div class="washi-tape-strip"></div>
+      <h1 class="retro-hero-title val-name">Kavya Sharma</h1>
+      <div class="retro-handwritten">is celebrating another golden chapter! 🎈</div>
+
+      <!-- 3 & 4. Stamps -->
+      <div class="stamp-row">
+        <div class="vintage-stamp">Est. <span class="val-year">2003</span></div>
+        <div class="vintage-stamp">Chapter <span class="val-age">23</span></div>
+        <div class="vintage-stamp">Kodachrome 400</div>
+      </div>
+    </header>
+
+    <!-- 5 & 6. Typewriter Message -->
+    <section class="scrapbook-card">
+      <div class="washi-corner"></div>
+      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--amber-primary); font-weight: 700; margin-bottom: 6px;">PAGE 01 • THE TRIBUTE</div>
+      <h2 style="font-family: var(--font-serif); font-size: 24px; color: var(--sienna-deep); margin-bottom: 14px;">A Letter Typed Just For You</h2>
+      <p class="val-typewriter" style="font-size: 14px; line-height: 1.8; color: #4a403b;">
+        To the girl whose laugh sounds like summer road trips and favorite old songs. May this 23rd year bring you warm coffee, endless vinyl records, and moments you never want to forget.
+      </p>
+      <div style="margin-top: 14px; font-family: var(--font-hand); font-size: 20px; color: var(--amber-primary); text-align: right;">
+        — With love, <span class="val-sender">Rhea, Tara & The Gang</span>
+      </div>
+    </section>
+
+    <!-- 7. Interactive Vinyl Turntable Player -->
+    <section class="scrapbook-card">
+      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--amber-primary); font-weight: 700; margin-bottom: 6px;">PAGE 02 • THE SOUNDTRACK</div>
+      <h2 style="font-family: var(--font-serif); font-size: 24px; color: var(--sienna-deep); margin-bottom: 8px;">The Birthday Turntable</h2>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+        Tap play to drop the needle and spin a warm lo-fi birthday melody.
+      </p>
+
+      <div class="turntable-container">
+        <div class="turntable-deck" id="turntable-deck">
+          <div class="vinyl-disc" id="vinyl-disc">
+            <div class="vinyl-center-label">
+              <span>SIDE A</span>
+              <strong class="val-name" style="font-size: 8px;">Kavya</strong>
+              <span>33 RPM</span>
+            </div>
+          </div>
+          <div class="tonearm"></div>
+        </div>
+
+        <button class="btn-vinyl-play" id="btn-vinyl-toggle">▶ Play Vinyl Record</button>
+      </div>
+    </section>
+
+    <!-- 8. Draggable Polaroid Stack -->
+    <section class="scrapbook-card">
+      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--amber-primary); font-weight: 700; margin-bottom: 6px;">PAGE 03 • POLAROIDS</div>
+      <h2 style="font-family: var(--font-serif); font-size: 24px; color: var(--sienna-deep); margin-bottom: 4px;">Memory Snapshot Stack</h2>
+      <p style="font-size: 12px; color: var(--text-muted);">
+        Touch & drag these photo cards around the scrapbook canvas!
+      </p>
+
+      <div class="polaroid-stage">
+        <div class="polaroid-card" style="top: 20px; left: 15%;">
+          <div class="polaroid-img-box">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Memory 1">
+          </div>
+          <div class="polaroid-caption">Summer Vibes '23 ☀️</div>
+        </div>
+
+        <div class="polaroid-card" style="top: 40px; right: 15%;">
+          <div class="polaroid-img-box">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" alt="Memory 2">
+          </div>
+          <div class="polaroid-caption">Late Night Laughs 🌙</div>
+        </div>
+
+        <div class="polaroid-card" style="top: 70px; left: 30%;">
+          <div class="polaroid-img-box">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80" alt="Memory 3">
+          </div>
+          <div class="polaroid-caption">Forever Bestie 🌸</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Memory Scrapbook Timeline -->
+    <section class="scrapbook-card">
+      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--amber-primary); font-weight: 700; margin-bottom: 6px;">PAGE 04 • TIMELINE</div>
+      <h2 style="font-family: var(--font-serif); font-size: 24px; color: var(--sienna-deep); margin-bottom: 12px;">Memories Clipped on Paper</h2>
+      <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13px;">
+        <div style="padding-left: 12px; border-left: 3px solid var(--amber-primary);">
+          <strong>The First Day We Met:</strong> A sudden burst of rain and sharing an umbrella at the cafe.
+        </div>
+        <div style="padding-left: 12px; border-left: 3px solid var(--mustard-gold);">
+          <strong>The Crazy Road Trip:</strong> Singing 90s songs with windows down until sunrise.
+        </div>
+        <div style="padding-left: 12px; border-left: 3px solid var(--washi-teal);">
+          <strong>Today & Always:</strong> Celebrating your radiant, joyful, genuine heart!
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Cassette Tape Grid -->
+    <section class="scrapbook-card">
+      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--amber-primary); font-weight: 700; margin-bottom: 6px;">PAGE 05 • MIXTAPE</div>
+      <h2 style="font-family: var(--font-serif); font-size: 24px; color: var(--sienna-deep); margin-bottom: 6px;">Favorite Things Mixtape</h2>
+      <div class="cassette-grid">
+        <div class="cassette-item">
+          <div class="cassette-title">📼 Track 01</div>
+          <div>Warm Masala Chai & Old Books</div>
+        </div>
+        <div class="cassette-item">
+          <div class="cassette-title">📼 Track 02</div>
+          <div>Golden Hour Sunset Walks</div>
+        </div>
+        <div class="cassette-item">
+          <div class="cassette-title">📼 Track 03</div>
+          <div>Spontaneous 2 AM Dance Parties</div>
+        </div>
+        <div class="cassette-item">
+          <div class="cassette-title">📼 Track 04</div>
+          <div>Endless Conversations with Chai</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Sticky Notes Wishes -->
+    <section class="scrapbook-card">
+      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--amber-primary); font-weight: 700; margin-bottom: 6px;">PAGE 06 • WISHES</div>
+      <h2 style="font-family: var(--font-serif); font-size: 24px; color: var(--sienna-deep); margin-bottom: 6px;">Wishes on Sticky Notes</h2>
+      <div class="sticky-grid">
+        <div class="sticky-note">
+          "Happy Birthday to my favorite partner-in-crime! Let's conquer this year! - Tara"
+        </div>
+        <div class="sticky-note">
+          "Never change your golden energy and wild smile. Love you tons! - Rhea"
+        </div>
+      </div>
+    </section>
+
+    <!-- 16. Retro Flip Countdown -->
+    <section class="scrapbook-card">
+      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--amber-primary); font-weight: 700; margin-bottom: 6px;">PAGE 07 • COUNTDOWN</div>
+      <h2 style="font-family: var(--font-serif); font-size: 24px; color: var(--sienna-deep); margin-bottom: 12px;">Flip-Clock to Next Birthday</h2>
+      <div class="flip-grid">
+        <div class="flip-box">
+          <div class="flip-val" id="retro-days">0</div>
+          <div class="flip-lbl">Days</div>
+        </div>
+        <div class="flip-box">
+          <div class="flip-val" id="retro-hours">0</div>
+          <div class="flip-lbl">Hours</div>
+        </div>
+        <div class="flip-box">
+          <div class="flip-val" id="retro-mins">0</div>
+          <div class="flip-lbl">Mins</div>
+        </div>
+        <div class="flip-box">
+          <div class="flip-val" id="retro-secs">0</div>
+          <div class="flip-lbl">Secs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 & 18. Share & Footer -->
+    <footer style="text-align: center; margin-top: 40px; font-size: 12px; color: var(--text-muted);">
+      <p>Hand-pasted with love on <a href="../../index.html" style="color: var(--amber-primary); text-decoration: none; font-weight: 700;">Vanvi Moments</a></p>
+      <p style="margin-top: 4px;">Vanvi Vintage Studio • Analog Soul in a Digital Era</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

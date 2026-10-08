@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Floating Lotus 3D Wedding Invite Atelier ✦ Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  
+  <link rel="stylesheet" href="../../vanvi-inner-light.css">
+  <link rel="stylesheet" href="../../vanvi-navigation.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    body {
+      background: #fbf6f0 !important;
+      padding-bottom: 50px;
+    }
+
+    .builder-layout {
+      max-width: 1240px;
+      margin: 20px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 480px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .builder-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Panel */
+    .builder-panel {
+      background: #ffffff;
+      border: 1.5px solid rgba(212, 175, 55, 0.4);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 12px 36px rgba(77, 14, 30, 0.08);
+    }
+
+    .builder-panel-head {
+      border-bottom: 1.5px dashed rgba(244, 170, 184, 0.5);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .builder-main-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--royal-maroon);
+      font-weight: 700;
+    }
+
+    .builder-tabs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+      background: #fdf8f4;
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .b-tab-btn {
+      flex: 1 1 auto;
+      padding: 7px 11px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 750;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .b-tab-btn.active {
+      background: var(--royal-maroon);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(77, 14, 30, 0.25);
+    }
+
+    .form-group-item {
+      margin-bottom: 13px;
+    }
+
+    .form-label-title {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--royal-maroon);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .form-field-input, .form-field-textarea {
+      width: 100%;
+      background: #fdf9f5;
+      border: 1.2px solid rgba(212, 175, 55, 0.35);
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .form-field-input:focus, .form-field-textarea:focus {
+      border-color: var(--gold-24k);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    .form-grid-dual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Guest Link Card */
+    .guest-link-box {
+      background: linear-gradient(135deg, #fffcf8 0%, #fef5ee 100%);
+      border: 1.5px solid var(--gold-24k);
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .guest-link-box-title {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--royal-maroon);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .link-copy-box {
+      background: #ffffff;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #320712;
+      word-break: break-all;
+      margin: 10px 0;
+      max-height: 55px;
+      overflow-y: auto;
+    }
+
+    .link-btns-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-link-action {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 99px;
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: transform 0.2s;
+    }
+
+    .btn-copy-link {
+      background: var(--royal-maroon);
+      color: #ffffff;
+    }
+
+    .btn-share-wa {
+      background: #25d366;
+      color: #ffffff;
+    }
+
+    .quick-preset-chip {
+      background: rgba(244, 170, 184, 0.2);
+      border: 1px solid rgba(244, 170, 184, 0.5);
+      border-radius: 99px;
+      padding: 4px 10px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 750;
+      color: var(--royal-maroon);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .quick-preset-chip:hover {
+      background: var(--royal-maroon);
+      color: #ffffff;
+    }
+
+    /* Right Preview Screen */
+    .preview-panel-wrap {
+      position: sticky;
+      top: 20px;
+      background: #ffffff;
+      border: 1.5px solid rgba(212, 175, 55, 0.4);
+      border-radius: 22px;
+      padding: 14px;
+      box-shadow: 0 16px 40px rgba(77, 14, 30, 0.1);
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 40px);
+    }
+
+    .preview-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 0 4px;
+    }
+
+    .device-switcher-pill {
+      display: flex;
+      gap: 4px;
+      background: #fdf8f4;
+      padding: 3px;
+      border-radius: 99px;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .device-toggle-btn {
+      padding: 4px 10px;
+      border: none;
+      background: transparent;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 750;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .device-toggle-btn.active {
+      background: var(--gold-24k);
+      color: #2e0814;
+      font-weight: 800;
+    }
+
+    .iframe-display-box {
+      flex: 1;
+      width: 100%;
+      background: #fbf6f0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .live-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transition: width 0.3s ease;
+    }
+
+    .live-iframe.mobile-mode {
+      width: 375px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      border-left: 1px solid rgba(212, 175, 55, 0.4);
+      border-right: 1px solid rgba(212, 175, 55, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header style="background:var(--royal-maroon); padding:12px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1.5px solid var(--gold-border);">
+    <a href="../../templates.html" style="color:#ffffff; font-family:var(--font-sans); font-size:12.5px; font-weight:750; text-decoration:none; display:flex; align-items:center; gap:6px;">
+      <span>← Back to Moments</span>
+    </a>
+    <span style="color:var(--gold-bright); font-family:var(--font-serif); font-size:14px; font-weight:700; letter-spacing:1px;">FLOATING LOTUS ATELIER</span>
+    <a href="index.html" target="_blank" style="background:linear-gradient(135deg, #ffd778, #d4af37); color:#320712; padding:6px 14px; border-radius:99px; font-family:var(--font-sans); font-size:11.5px; font-weight:800; text-decoration:none;">
+      Open Full Experience ↗
+    </a>
+  </header>
+
+  <div class="builder-layout">
+
+    <!-- LEFT CUSTOMIZER CONTROLS -->
+    <div class="builder-panel">
+      <div class="builder-panel-head">
+        <h1 class="builder-main-title">Customize Floating Lotus 3D Invite</h1>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Edit couple decree, auspicious date, 5 ceremonies &amp; create bespoke guest links.</p>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="builder-tabs-list">
+        <button type="button" class="b-tab-btn active" onclick="switchAtelierTab('tabCouple')">Couple &amp; Date</button>
+        <button type="button" class="b-tab-btn" onclick="switchAtelierTab('tabPhotos')">Our Story 📸</button>
+        <button type="button" class="b-tab-btn" onclick="switchAtelierTab('tabItinerary')">Itinerary ⏳</button>
+        <button type="button" class="b-tab-btn" onclick="switchAtelierTab('tabVenue')">Venue &amp; Links</button>
+        <button type="button" class="b-tab-btn" onclick="switchAtelierTab('tabGuests')">Guest Links 👑</button>
+      </div>
+
+      <!-- Tab 1: Couple & Date -->
+      <div id="tabCouple">
+        <div class="form-grid-dual">
+          <div class="form-group-item">
+            <label class="form-label-title" for="inputBride">Bride Name</label>
+            <input type="text" id="inputBride" class="form-field-input" value="Priya">
+          </div>
+          <div class="form-group-item">
+            <label class="form-label-title" for="inputGroom">Groom Name</label>
+            <input type="text" id="inputGroom" class="form-field-input" value="Vikram">
+          </div>
+        </div>
+
+        <div class="form-grid-dual">
+          <div class="form-group-item">
+            <label class="form-label-title" for="inputMonogram">Monogram / Hashtag</label>
+            <input type="text" id="inputMonogram" class="form-field-input" value="#PriVik">
+          </div>
+          <div class="form-group-item">
+            <label class="form-label-title" for="inputDate">Wedding Date</label>
+            <input type="text" id="inputDate" class="form-field-input" value="Sunday, 15 November 2026">
+          </div>
+        </div>
+
+        <div class="form-grid-dual">
+          <div class="form-group-item">
+            <label class="form-label-title" for="inputMuhurat">Muhurat Timing</label>
+            <input type="text" id="inputMuhurat" class="form-field-input" value="Shubh Muhurat: 06:15 PM onwards">
+          </div>
+          <div class="form-group-item">
+            <label class="form-label-title" for="inputIsoDate">Countdown Target Date</label>
+            <input type="datetime-local" id="inputIsoDate" class="form-field-input" value="2026-11-15T18:15">
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Story Photos -->
+      <div id="tabPhotos" style="display:none;">
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Customize 3 vintage polaroids with 3D tilt micro-interaction:</p>
+
+        <!-- Polaroid 1 -->
+        <div style="background:#fef7f1; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <strong style="font-size:11.5px; color:var(--royal-maroon);">Polaroid 1 (The First Spark)</strong>
+          <div class="form-group-item" style="margin-top:6px;">
+            <label class="form-label-title" for="p1Url">Image URL</label>
+            <input type="url" id="p1Url" class="form-field-input" value="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&auto=format&fit=crop&q=80">
+          </div>
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="p1Era">Era Tag</label>
+              <input type="text" id="p1Era" class="form-field-input" value="Chapter I · 2019">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="p1Title">Title</label>
+              <input type="text" id="p1Title" class="form-field-input" value="The First Spark">
+            </div>
+          </div>
+          <div class="form-group-item">
+            <label class="form-label-title" for="p1Note">Memory Note</label>
+            <input type="text" id="p1Note" class="form-field-input" value="A quiet glance across the lake that bloomed into countless whispered conversations.">
+          </div>
+        </div>
+
+        <!-- Polaroid 2 -->
+        <div style="background:#fef7f1; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <strong style="font-size:11.5px; color:var(--royal-maroon);">Polaroid 2 (The Starlit Promise)</strong>
+          <div class="form-group-item" style="margin-top:6px;">
+            <label class="form-label-title" for="p2Url">Image URL</label>
+            <input type="url" id="p2Url" class="form-field-input" value="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80">
+          </div>
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="p2Era">Era Tag</label>
+              <input type="text" id="p2Era" class="form-field-input" value="Chapter II · 2023">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="p2Title">Title</label>
+              <input type="text" id="p2Title" class="form-field-input" value="The Starlit Promise">
+            </div>
+          </div>
+          <div class="form-group-item">
+            <label class="form-label-title" for="p2Note">Memory Note</label>
+            <input type="text" id="p2Note" class="form-field-input" value="Beneath the desert stars, two paths intertwined with a gentle promise for life.">
+          </div>
+        </div>
+
+        <!-- Polaroid 3 -->
+        <div style="background:#fef7f1; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25);">
+          <strong style="font-size:11.5px; color:var(--royal-maroon);">Polaroid 3 (She Said Yes)</strong>
+          <div class="form-group-item" style="margin-top:6px;">
+            <label class="form-label-title" for="p3Url">Image URL</label>
+            <input type="url" id="p3Url" class="form-field-input" value="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&auto=format&fit=crop&q=80">
+          </div>
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="p3Era">Era Tag</label>
+              <input type="text" id="p3Era" class="form-field-input" value="Chapter III · Forever">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="p3Title">Title</label>
+              <input type="text" id="p3Title" class="form-field-input" value="She Said Yes ✦">
+            </div>
+          </div>
+          <div class="form-group-item">
+            <label class="form-label-title" for="p3Note">Memory Note</label>
+            <input type="text" id="p3Note" class="form-field-input" value="With lotus petals in the wind and blessings of our elders, our forever begins.">
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Events & Itinerary -->
+      <div id="tabItinerary" style="display:none;">
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Customize multi-event ceremonies:</p>
+
+        <!-- Event 1 -->
+        <div style="background:#fef7f1; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev1Time">Time</label>
+              <input type="text" id="ev1Time" class="form-field-input" value="10:30 AM">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev1Title">Title</label>
+              <input type="text" id="ev1Title" class="form-field-input" value="Mehendi Ki Raat">
+            </div>
+          </div>
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev1Attire">Attire</label>
+              <input type="text" id="ev1Attire" class="form-field-input" value="Vibrant Pastel Greens">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev1Venue">Venue</label>
+              <input type="text" id="ev1Venue" class="form-field-input" value="Courtyard of Fragrance">
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div style="background:#fef7f1; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev2Time">Time</label>
+              <input type="text" id="ev2Time" class="form-field-input" value="03:00 PM">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev2Title">Title</label>
+              <input type="text" id="ev2Title" class="form-field-input" value="Haldi &amp; Phoolon Ki Holi">
+            </div>
+          </div>
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev2Attire">Attire</label>
+              <input type="text" id="ev2Attire" class="form-field-input" value="Sunny Yellow &amp; White">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev2Venue">Venue</label>
+              <input type="text" id="ev2Venue" class="form-field-input" value="Rose Garden Terrace">
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div style="background:#fef7f1; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev3Time">Time</label>
+              <input type="text" id="ev3Time" class="form-field-input" value="07:30 PM">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev3Title">Title</label>
+              <input type="text" id="ev3Title" class="form-field-input" value="Sangeet &amp; Musical Night">
+            </div>
+          </div>
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev3Attire">Attire</label>
+              <input type="text" id="ev3Attire" class="form-field-input" value="Glitz &amp; Shimmering Gold">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev3Venue">Venue</label>
+              <input type="text" id="ev3Venue" class="form-field-input" value="Grand Crystal Ballroom">
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 4 -->
+        <div style="background:#fef7f1; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev4Time">Time</label>
+              <input type="text" id="ev4Time" class="form-field-input" value="06:00 PM">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev4Title">Title</label>
+              <input type="text" id="ev4Title" class="form-field-input" value="Sacred Pheras &amp; Vows">
+            </div>
+          </div>
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev4Attire">Attire</label>
+              <input type="text" id="ev4Attire" class="form-field-input" value="Traditional Imperial Regalia">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev4Venue">Venue</label>
+              <input type="text" id="ev4Venue" class="form-field-input" value="Lotus Lake Mandap">
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 5 -->
+        <div style="background:#fef7f1; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25);">
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev5Time">Time</label>
+              <input type="text" id="ev5Time" class="form-field-input" value="08:30 PM">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev5Title">Title</label>
+              <input type="text" id="ev5Title" class="form-field-input" value="Imperial Reception &amp; Dinner">
+            </div>
+          </div>
+          <div class="form-grid-dual">
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev5Attire">Attire</label>
+              <input type="text" id="ev5Attire" class="form-field-input" value="Royal Evening Black Tie">
+            </div>
+            <div class="form-group-item">
+              <label class="form-label-title" for="ev5Venue">Venue</label>
+              <input type="text" id="ev5Venue" class="form-field-input" value="Royal Palace Lawns">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Venue & Community -->
+      <div id="tabVenue" style="display:none;">
+        <div class="form-group-item">
+          <label class="form-label-title" for="inputVenue">Venue Name</label>
+          <input type="text" id="inputVenue" class="form-field-input" value="The Oberoi Udaivilas">
+        </div>
+        <div class="form-group-item">
+          <label class="form-label-title" for="inputCity">City &amp; State</label>
+          <input type="text" id="inputCity" class="form-field-input" value="Udaipur, Rajasthan">
+        </div>
+        <div class="form-group-item">
+          <label class="form-label-title" for="inputWaGroup">WhatsApp Community Link</label>
+          <input type="url" id="inputWaGroup" class="form-field-input" value="https://chat.whatsapp.com/invite">
+        </div>
+      </div>
+
+      <!-- Tab 5: Guest Links Generator -->
+      <div id="tabGuests" style="display:none;">
+        <div class="form-group-item">
+          <label class="form-label-title" for="inputGuestName">Guest / Family Name</label>
+          <input type="text" id="inputGuestName" class="form-field-input" placeholder="e.g. Chacha Chachi ji / Sharma Parivar / Rohan &amp; Riya" value="Chacha Chachi ji">
+        </div>
+
+        <button type="button" class="btn-send-blessing" onclick="createGuestLink()" style="margin-top:6px;">
+          Generate Personalized Guest Link ✦
+        </button>
+
+        <!-- Result Box -->
+        <div class="guest-link-box" id="guestLinkResultBox">
+          <div class="guest-link-box-title">
+            <span>🪷</span>
+            <span id="guestLinkTitle">Personalized Link for Chacha Chachi ji</span>
+          </div>
+          <p style="font-size:11.5px; color:var(--text-muted);">This link customizes the greeting strip at the very top of the invitation:</p>
+          
+          <div class="link-copy-box" id="generatedLinkBox">
+            index.html?guest=Chacha+Chachi+ji
+          </div>
+
+          <div class="link-btns-row">
+            <button type="button" class="btn-link-action btn-copy-link" onclick="copyGuestInviteLink()">
+              <span>📋 Copy Link</span>
+            </button>
+            <button type="button" class="btn-link-action btn-share-wa" onclick="shareOnWhatsApp()">
+              <span>💬 Send on WhatsApp</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 1-Tap Presets -->
+        <div style="margin-top:16px;">
+          <span class="form-label-title">1-Tap Relative Presets:</span>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;">
+            <button type="button" class="quick-preset-chip" onclick="quickSelectGuest('Chacha Chachi ji')">Chacha Chachi ji</button>
+            <button type="button" class="quick-preset-chip" onclick="quickSelectGuest('Mama Mami ji')">Mama Mami ji</button>
+            <button type="button" class="quick-preset-chip" onclick="quickSelectGuest('Sharma Parivar')">Sharma Parivar</button>
+            <button type="button" class="quick-preset-chip" onclick="quickSelectGuest('Bhaiya &amp; Bhabhi')">Bhaiya &amp; Bhabhi</button>
+            <button type="button" class="quick-preset-chip" onclick="quickSelectGuest('Bestie &amp; Squad')">Bestie &amp; Squad</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Save & Update Preview -->
+      <div style="margin-top:18px; border-top:1px solid #f1ece1; padding-top:14px; display:flex; gap:10px;">
+        <button type="button" class="btn-send-blessing" onclick="saveLotusDraft()" style="flex:1;">
+          Save &amp; Update Live Preview ✦
+        </button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT LIVE PREVIEW SCREEN -->
+    <div class="preview-panel-wrap">
+      <div class="preview-top-bar">
+        <span style="font-family:var(--font-serif); font-size:13px; font-weight:700; color:var(--royal-maroon);">LIVE 60FPS PREVIEW</span>
+        <div class="device-switcher-pill">
+          <button type="button" class="device-toggle-btn active" id="btnDesk" onclick="togglePreviewDevice('desktop')">Desktop</button>
+          <button type="button" class="device-toggle-btn" id="btnMob" onclick="togglePreviewDevice('mobile')">Mobile (375px)</button>
+        </div>
+      </div>
+
+      <div class="iframe-display-box">
+        <iframe src="index.html" class="live-iframe" id="livePreviewIframe" title="Floating Lotus Live Preview"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const tabs = ['tabCouple', 'tabPhotos', 'tabItinerary', 'tabVenue', 'tabGuests'];
+    function switchAtelierTab(tabId) {
+      tabs.forEach((t, idx) => {
+        const el = document.getElementById(t);
+        if (el) el.style.display = t === tabId ? 'block' : 'none';
+        const btns = document.querySelectorAll('.b-tab-btn');
+        if (btns[idx]) {
+          if (t === tabId) btns[idx].classList.add('active');
+          else btns[idx].classList.remove('active');
+        }
+      });
+    }
+
+    function togglePreviewDevice(mode) {
+      const iframe = document.getElementById('livePreviewIframe');
+      const desk = document.getElementById('btnDesk');
+      const mob = document.getElementById('btnMob');
+      if (mode === 'mobile') {
+        iframe.classList.add('mobile-mode');
+        mob.classList.add('active');
+        desk.classList.remove('active');
+      } else {
+        iframe.classList.remove('mobile-mode');
+        desk.classList.add('active');
+        mob.classList.remove('active');
+      }
+    }
+
+    function collectFormConfig() {
+      return {
+        brideName: document.getElementById('inputBride').value.trim() || 'Priya',
+        groomName: document.getElementById('inputGroom').value.trim() || 'Vikram',
+        monogram: document.getElementById('inputMonogram').value.trim() || '#PriVik',
+        dateStr: document.getElementById('inputDate').value.trim() || 'Sunday, 15 November 2026',
+        muhurat: document.getElementById('inputMuhurat').value.trim() || 'Shubh Muhurat: 06:15 PM onwards',
+        targetIsoDate: document.getElementById('inputIsoDate').value || '2026-11-15T18:15:00',
+        venueName: document.getElementById('inputVenue').value.trim() || 'The Oberoi Udaivilas',
+        venueCity: document.getElementById('inputCity').value.trim() || 'Udaipur, Rajasthan',
+        whatsappLink: document.getElementById('inputWaGroup').value.trim() || 'https://chat.whatsapp.com/invite',
+        photos: [
+          {
+            url: document.getElementById('p1Url').value.trim(),
+            era: document.getElementById('p1Era').value.trim(),
+            title: document.getElementById('p1Title').value.trim(),
+            note: document.getElementById('p1Note').value.trim()
+          },
+          {
+            url: document.getElementById('p2Url').value.trim(),
+            era: document.getElementById('p2Era').value.trim(),
+            title: document.getElementById('p2Title').value.trim(),
+            note: document.getElementById('p2Note').value.trim()
+          },
+          {
+            url: document.getElementById('p3Url').value.trim(),
+            era: document.getElementById('p3Era').value.trim(),
+            title: document.getElementById('p3Title').value.trim(),
+            note: document.getElementById('p3Note').value.trim()
+          }
+        ],
+        events: [
+          {
+            icon: '🌿',
+            time: document.getElementById('ev1Time').value.trim(),
+            title: document.getElementById('ev1Title').value.trim(),
+            attire: document.getElementById('ev1Attire').value.trim(),
+            desc: 'Traditional henna adornment, folk music, fresh coconut water, and festive dholak beats.',
+            venue: document.getElementById('ev1Venue').value.trim()
+          },
+          {
+            icon: '🌼',
+            time: document.getElementById('ev2Time').value.trim(),
+            title: document.getElementById('ev2Title').value.trim(),
+            attire: document.getElementById('ev2Attire').value.trim(),
+            desc: 'Sacred turmeric blessings followed by marigold petal showers and playful joyful moments.',
+            venue: document.getElementById('ev2Venue').value.trim()
+          },
+          {
+            icon: '✨',
+            time: document.getElementById('ev3Time').value.trim(),
+            title: document.getElementById('ev3Title').value.trim(),
+            attire: document.getElementById('ev3Attire').value.trim(),
+            desc: 'An evening of Bollywood dances, family musical battles, and acoustic performances by the lake.',
+            venue: document.getElementById('ev3Venue').value.trim()
+          },
+          {
+            icon: '🌸',
+            time: document.getElementById('ev4Time').value.trim(),
+            title: document.getElementById('ev4Title').value.trim(),
+            attire: document.getElementById('ev4Attire').value.trim(),
+            desc: 'Exchange of garlands, sacred Vedic vows around the Agni Kund, and eternal blessings.',
+            venue: document.getElementById('ev4Venue').value.trim()
+          },
+          {
+            icon: '🥂',
+            time: document.getElementById('ev5Time').value.trim(),
+            title: document.getElementById('ev5Title').value.trim(),
+            attire: document.getElementById('ev5Attire').value.trim(),
+            desc: 'Grand royal banquet, live santoor and sitar ensemble, celebratory champagne toast, and desserts.',
+            venue: document.getElementById('ev5Venue').value.trim()
+          }
+        ]
+      };
+    }
+
+    function saveLotusDraft() {
+      const cfg = collectFormConfig();
+      localStorage.setItem('vanvi_floating_lotus_config', JSON.stringify(cfg));
+      
+      const iframe = document.getElementById('livePreviewIframe');
+      iframe.src = `index.html?bride=${encodeURIComponent(cfg.brideName)}&groom=${encodeURIComponent(cfg.groomName)}&monogram=${encodeURIComponent(cfg.monogram)}&date=${encodeURIComponent(cfg.dateStr)}&venue=${encodeURIComponent(cfg.venueName)}&t=${Date.now()}`;
+      
+      alert('✨ Floating Lotus Invite saved and updated in live preview!');
+    }
+
+    function createGuestLink() {
+      const cfg = collectFormConfig();
+      const guest = document.getElementById('inputGuestName').value.trim() || 'Honored Guest';
+      const baseUrl = window.location.href.replace('builder.html', 'index.html').split('?')[0];
+      const guestLink = `${baseUrl}?guest=${encodeURIComponent(guest)}&bride=${encodeURIComponent(cfg.brideName)}&groom=${encodeURIComponent(cfg.groomName)}&monogram=${encodeURIComponent(cfg.monogram)}`;
+      
+      document.getElementById('guestLinkTitle').textContent = `Personalized Link for ${guest}`;
+      document.getElementById('generatedLinkBox').textContent = guestLink;
+      
+      document.getElementById('livePreviewIframe').src = guestLink;
+    }
+
+    function quickSelectGuest(name) {
+      document.getElementById('inputGuestName').value = name;
+      createGuestLink();
+    }
+
+    function copyGuestInviteLink() {
+      const link = document.getElementById('generatedLinkBox').textContent.trim();
+      navigator.clipboard.writeText(link).then(() => {
+        alert('📋 Personalized invite link copied to clipboard!');
+      });
+    }
+
+    function shareOnWhatsApp() {
+      const guest = document.getElementById('inputGuestName').value.trim() || 'Family';
+      const cfg = collectFormConfig();
+      const link = document.getElementById('generatedLinkBox').textContent.trim();
+      const msg = encodeURIComponent(`🪷 Namaste ${guest}! You are cordially invited to celebrate the sacred wedding of ${cfg.brideName} & ${cfg.groomName} on ${cfg.dateStr} at ${cfg.venueName}, ${cfg.venueCity}.\n\nPlease view your personalized 3D Floating Lotus invitation decree here:\n${link}`);
+      window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      createGuestLink();
+    });
+  </script>
+</body>
+</html>

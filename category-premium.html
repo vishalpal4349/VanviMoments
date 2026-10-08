@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport" />
@@ -17,6 +18,7 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="vanvi-inner-light.css" />
   <link rel="stylesheet" href="vanvi-navigation.css" />
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
   <link rel="stylesheet" href="css/vanvi-template-cards.css" />
 
   <style>
@@ -62,6 +64,7 @@
       font-family: var(--font-sans);
       overflow-x: hidden !important;
       -webkit-font-smoothing: antialiased;
+      padding-bottom: 96px;
     }
 
     /* Universal Header */
@@ -253,40 +256,46 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-      max-width: 840px;
+      max-width: 860px;
       margin: 0 auto 24px;
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 680px) {
       .dual-path-cards {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
       }
     }
 
     .path-card {
-      background: #ffffff;
-      border: 1.5px solid var(--border-glass);
-      border-radius: 18px;
-      padding: 16px 18px;
+      background: linear-gradient(145deg, #ffffff 0%, #fffcfd 100%);
+      border: 1.5px solid rgba(255, 120, 175, 0.25);
+      border-radius: 20px;
+      padding: 18px 20px;
       text-align: left;
       cursor: pointer;
-      transition: all 0.22s ease;
-      box-shadow: 0 4px 16px rgba(255, 56, 128, 0.04);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
     .path-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--gold-royal);
-      box-shadow: 0 10px 24px rgba(217, 119, 6, 0.12);
+      transform: translateY(-3px);
+      border-color: var(--rose-primary);
+      box-shadow: 0 14px 34px rgba(255, 42, 122, 0.16);
     }
 
     .path-card.bespoke {
-      border-color: rgba(217, 119, 6, 0.45);
-      background: linear-gradient(165deg, #ffffff 60%, #fffcf5 100%);
+      background: linear-gradient(145deg, #ffffff 40%, #fffdfa 80%, #fff8eb 100%);
+      border: 1.5px solid rgba(217, 119, 6, 0.38);
+      box-shadow: 0 8px 24px rgba(217, 119, 6, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .path-card.bespoke:hover {
+      border-color: #d97706;
+      box-shadow: 0 14px 34px rgba(217, 119, 6, 0.2);
     }
 
     .path-card-badge {
@@ -312,7 +321,7 @@
 
     .path-card-title {
       font-family: var(--font-serif);
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 700;
       color: #2c1224;
       margin-bottom: 3px;
@@ -321,12 +330,12 @@
     .path-card-desc {
       font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.4;
-      margin-bottom: 10px;
+      line-height: 1.45;
+      margin-bottom: 12px;
     }
 
     .path-card-cta {
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 850;
       color: var(--rose-primary);
       display: inline-flex;
@@ -348,6 +357,8 @@
       overflow-x: auto;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+      white-space: nowrap;
     }
 
     .category-switch-bar::-webkit-scrollbar {
@@ -355,29 +366,34 @@
     }
 
     .switch-pill {
-      font-size: 11.5px;
-      font-weight: 750;
-      padding: 6px 14px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 7px 16px;
       border-radius: 99px;
       background: #ffffff;
-      border: 1px solid var(--border-glass);
+      border: 1.5px solid var(--border-glass);
       color: var(--text-muted);
       text-decoration: none;
       white-space: nowrap;
       cursor: pointer;
-      transition: all 0.2s;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .switch-pill:hover {
       color: var(--rose-primary);
       border-color: var(--rose-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 42, 122, 0.12);
     }
 
     .switch-pill.active {
-      background: linear-gradient(135deg, #d97706, #f59e0b);
+      background: linear-gradient(135deg, #d97706, #f59e0b 60%, #ff2a7a 100%);
       color: #ffffff;
       border-color: transparent;
-      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+      box-shadow: 0 5px 16px rgba(217, 119, 6, 0.32);
     }
 
     /* Section Wrap */
@@ -440,7 +456,7 @@
       box-shadow: 0 14px 40px rgba(217, 119, 6, 0.08);
     }
 
-    /* 3-Step Simple Process Cards */
+    /* 3-Step Simple Process Cards - Swipeable on mobile */
     .process-3steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -450,45 +466,57 @@
 
     @media (max-width: 680px) {
       .process-3steps-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        scroll-snap-type: x mandatory;
         gap: 10px;
+        padding-bottom: 6px;
+      }
+      .process-3steps-grid::-webkit-scrollbar { display: none; }
+      .process-3steps-grid .step-box {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
       }
     }
 
     .step-box {
       background: #ffffff;
-      border: 1px solid rgba(217, 119, 6, 0.25);
-      border-radius: 16px;
+      border: 1.5px solid rgba(217, 119, 6, 0.25);
+      border-radius: 18px;
       padding: 16px 14px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 6px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-      transition: transform 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: all 0.22s ease;
     }
 
     .step-box:hover {
       transform: translateY(-2px);
       border-color: var(--gold-royal);
+      box-shadow: 0 8px 20px rgba(217, 119, 6, 0.12);
     }
 
     .step-num-badge {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 99px;
       background: linear-gradient(135deg, #d97706, #f59e0b);
       color: #fff;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 2px;
+      box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
     }
 
     .step-box h4 {
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 850;
       color: #2c1224;
     }
@@ -566,7 +594,7 @@
       background: #ffffff;
       color: var(--text-dark);
       font-family: var(--font-sans);
-      font-size: 13px;
+      font-size: 16px; /* 16px prevents mobile auto-zoom */
       outline: none;
       transition: all 0.2s ease;
     }
@@ -584,37 +612,52 @@
       line-height: 1.45;
     }
 
-    /* Interactive Pills in Form */
+    /* Swipeable Interactive Pills in Form */
     .pill-selector-row {
       display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      scroll-snap-type: x proximity;
+      gap: 6px;
       margin-top: 4px;
+      padding: 4px 2px 6px;
+      white-space: nowrap;
+    }
+    .pill-selector-row::-webkit-scrollbar {
+      display: none;
     }
 
     .select-pill-btn {
-      padding: 5px 11px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      padding: 6px 13px;
       border-radius: 99px;
-      font-size: 11px;
-      font-weight: 750;
-      border: 1px solid var(--border-glass);
+      font-size: 11.5px;
+      font-weight: 800;
+      border: 1.5px solid var(--border-glass);
       background: #fffcfd;
       color: var(--text-dark);
       cursor: pointer;
-      transition: all 0.2s;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .select-pill-btn:hover {
       border-color: var(--gold-champagne);
       color: var(--gold-champagne);
+      transform: translateY(-1px);
     }
 
     .select-pill-btn.active {
-      background: linear-gradient(135deg, #d97706, #f59e0b);
+      background: linear-gradient(135deg, #d97706, #f59e0b 60%, #ff2a7a 100%);
       color: #ffffff;
       border-color: transparent;
-      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.25);
+      box-shadow: 0 3px 10px rgba(217, 119, 6, 0.3);
     }
+
 
     /* Submit Button */
     .btn-submit-bespoke {
@@ -815,10 +858,10 @@
 <body>
 
   <header>
-    <a href="index.html" class="brand-link" title="Vanvi Moments">
-      <span class="brand-name-lux">VANVI <span style="color:#ff2a7a;">♡</span> MOMENTS</span>
-      <span class="brand-tag-royal">VIP ATELIER</span>
-    </a>
+    <a href="index.html" class="brand-link" title="Vanvi Moments Home">
+    <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="header-brand-img" style="height: 32px; width: auto; max-width: 145px; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(255, 42, 122, 0.22));" />
+    <span class="brand-tag-royal">VIP ATELIER</span>
+  </a>
     <div class="header-actions">
       <a class="btn-header-link" href="templates.html">All Templates</a>
       <a class="btn-header-primary" href="#bespokeStudio" onclick="document.getElementById('bespokeStudio').scrollIntoView({behavior:'smooth'})">✨ Custom ₹1</a>
@@ -1092,10 +1135,15 @@
 
       let currentVipFilter = 'all';
 
-      // 1. Get templates from master data priced >= 500
+      // 1. Get templates from master data priced >= 349 or tagged premium/vip/luxury
       function getVipTemplates() {
         if (!window.VanviTemplatesData || !Array.isArray(window.VanviTemplatesData.templates)) return [];
-        return window.VanviTemplatesData.templates.filter(t => Number(t.price || 0) >= 500);
+        return window.VanviTemplatesData.templates.filter(t => 
+          Number(t.price || 0) >= 349 || 
+          (t.tags && (t.tags.includes('premium') || t.tags.includes('luxury') || t.tags.includes('vip') || t.tags.includes('spatial') || t.tags.includes('3d'))) || 
+          t.tier === 'vip' || t.isLuxury || 
+          (t.category && t.category.toLowerCase().includes('premium'))
+        );
       }
 
       // 2. Render VIP cards with standard .vanvi-card architecture
@@ -1169,12 +1217,11 @@
                 </div>
 
                 <div class="card-actions-grid">
-                  <a href="preview.html?template=${safeId}" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
-                    <span>Preview 👁️</span>
+                  <a href="templates/${t.id}/preview.html" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
+                    <span>Preview</span>
                   </a>
-                  <a href="builder.html?template=${safeId}&occasion=${safeOccasion}" class="btn-make-yours" title="Create Moment ✦">
-                    <span class="btn-text-full">Make Yours ✨</span>
-                    <span class="btn-text-short">Make ✨</span>
+                  <a href="builder.html?template=${safeId}&occasion=${safeOccasion}" class="btn-make-yours" title="Create ${escapeHtml(t.name)}">
+                    <span>Create</span>
                   </a>
                 </div>
               </div>

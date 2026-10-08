@@ -1,0 +1,61 @@
+{
+  "id": "royal-udaipur",
+  "name": "The Grand Royal Palace Vivah",
+  "slug": "royal-udaipur",
+  "aliases": [
+    "the-grand-royal-palace-wedding",
+    "royal-palace-wedding",
+    "taj-lake-palace-vivah",
+    "udaipur-royal-wedding"
+  ],
+  "category": "Wedding",
+  "categorySlug": "celebration",
+  "price": 999,
+  "originalPrice": 1499,
+  "isFree": false,
+  "tier": "Royal VIP",
+  "badge": "👑 Royal Heritage",
+  "type": "Palace Heritage Wedding Experience",
+  "icon": "👑",
+  "thumbnail": "assets/templates/royal-palace-wedding.jpg",
+  "soundtrack": "Royal Shehnai Harmony & Sitar Symphony",
+  "tags": [
+    "wedding",
+    "royal",
+    "udaipur",
+    "lake-palace",
+    "heritage",
+    "luxury",
+    "shaadi",
+    "bestseller"
+  ],
+  "description": "India's most regal digital wedding invitation experience. Inspired by the majestic Taj Lake Palace Udaipur with animated palace gates, multi-ceremony itinerary, sacred vows love note, royal photo gallery, interactive RSVP, and shehnai music.",
+  "builder": {
+    "type": "custom",
+    "hasEvents": true,
+    "hasLineage": true,
+    "hasRsvp": true,
+    "hasSoundtrack": true,
+    "builderPath": "templates/royal-udaipur/builder.html"
+  },
+  "schema": {
+    "fields": [
+      { "key": "brideName", "label": "Bride Name", "type": "text", "required": true, "default": "Anushka" },
+      { "key": "groomName", "label": "Groom Name", "type": "text", "required": true, "default": "Virat" },
+      { "key": "weddingDate", "label": "Wedding Date", "type": "date", "required": true, "default": "2026-12-12" },
+      { "key": "venue", "label": "Palace Venue", "type": "text", "required": true, "default": "Taj Lake Palace, Lake Pichola, Udaipur" },
+      { "key": "hashtag", "label": "Wedding Hashtag", "type": "text", "default": "#VirushkaWeds" },
+      { "key": "whatsapp", "label": "RSVP WhatsApp Number", "type": "text", "default": "919999999999" }
+    ]
+  },
+  "custom_data_defaults": {
+    "brideName": "Anushka",
+    "groomName": "Virat",
+    "weddingDate": "2026-12-12",
+    "venue": "Taj Lake Palace, Lake Pichola, Udaipur",
+    "hashtag": "#VirushkaWeds",
+    "whatsapp": "919999999999"
+  },
+  "accentColor": "#d4af37",
+  "templatePath": "templates/royal-udaipur/index.html"
+}

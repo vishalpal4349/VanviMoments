@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Celebration Micro-Games &amp; Unlocks — Vanvi Moments</title>
-  <meta name="description" content="Play skill-based celebration micro-games. Win 2–12 coins per game up to 25 coins daily limit, plus secret discount coupons.">
+  <meta name="description" content="Play skill-based celebration micro-games. Win 2–12 coins per game up to 30 coins daily limit, plus secret discount coupons.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Cinzel:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     :root {
       --bg-pearl: #fffbfd;
       --bg-blush: #fff1f6;
-      --bg-card: rgba(255, 255, 255, 0.94);
+      --bg-card: rgba(255, 255, 255, 0.96);
       --rose-main: #ff2a7a;
       --rose-deep: #e11d68;
-      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #9333ea 100%);
       --gold-main: #d97706;
       --gold-bright: #f59e0b;
       --purple-main: #9333ea;
@@ -27,12 +29,12 @@
       --text-dark: #2c1224;
       --text-body: #4a2840;
       --text-muted: #88627b;
-      --border-pink: rgba(255, 120, 175, 0.28);
+      --border-pink: rgba(255, 120, 175, 0.32);
       --border-gold: rgba(217, 119, 6, 0.35);
-      --shadow-card: 0 10px 30px rgba(255, 60, 130, 0.08), 0 2px 8px rgba(0, 0, 0, 0.03);
-      --shadow-hover: 0 18px 45px rgba(255, 42, 122, 0.18), 0 6px 18px rgba(217, 119, 6, 0.1);
+      --shadow-clay: 0 16px 36px -8px rgba(255, 42, 122, 0.12), 0 4px 14px rgba(44, 18, 36, 0.04), inset 0 2px 3px #ffffff, inset 0 -2px 4px rgba(255, 120, 175, 0.08);
+      --shadow-clay-hover: 0 24px 50px -10px rgba(255, 42, 122, 0.22), 0 8px 24px rgba(147, 51, 234, 0.1), inset 0 2px 3px #ffffff;
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
     }
 
     *, *::before, *::after {
@@ -47,28 +49,52 @@
       font-family: var(--font-sans);
       color: var(--text-dark);
       min-height: 100vh;
-      padding-bottom: 110px;
+      padding-bottom: 120px;
       overflow-x: hidden !important;
       -webkit-font-smoothing: antialiased;
+      position: relative;
     }
 
     a { text-decoration: none; color: inherit; }
 
-    /* ─── APP HEADER ────────────────────────────────────────────── */
+    /* ─── AMBIENT 3D GLOWING ORBS ───────────────────────────────── */
+    .ambient-orbs-wrap {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(85px);
+      opacity: 0.5;
+      animation: floatAmbient 18s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 380px; height: 380px; background: radial-gradient(circle, #ff2a7a 0%, rgba(255, 42, 122, 0) 70%); top: -80px; left: -60px; }
+    .orb-2 { width: 340px; height: 340px; background: radial-gradient(circle, #7c3aed 0%, rgba(124, 58, 237, 0) 70%); top: 35%; right: -60px; animation-delay: -6s; }
+    .orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, #f59e0b 0%, rgba(245, 158, 11, 0) 70%); bottom: 10%; left: 10%; animation-delay: -12s; }
+    @keyframes floatAmbient {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.12); }
+    }
+
+    /* ─── APP HEADER (Single Official Logo + 3D Arcade Badge) ────── */
     .app-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-pink);
-      height: 62px;
+      border-bottom: 1.5px solid var(--border-pink);
+      height: 64px;
       padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 4px 20px rgba(255, 120, 175, 0.06);
+      box-shadow: 0 4px 20px rgba(255, 120, 175, 0.08);
     }
 
     .brand-link {
@@ -76,20 +102,28 @@
       align-items: center;
       gap: 10px;
       text-decoration: none;
-      font-weight: 850;
-      font-size: 16px;
-      letter-spacing: -0.3px;
-      color: var(--text-dark);
+      padding: 4px 0;
+      transition: transform 0.2s ease;
     }
-    .brand-spark-box {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(255, 42, 122, 0.15), rgba(217, 119, 6, 0.15));
-      border: 1px solid rgba(255, 120, 175, 0.4);
-      display: grid;
-      place-items: center;
-      font-size: 18px;
+    .brand-link:hover {
+      transform: translateY(-1px);
+    }
+    .brand-logo-img {
+      height: 32px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(255, 42, 122, 0.2));
+    }
+    .brand-pill-badge {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.8px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ff2a7a, #9333ea);
+      padding: 3px 10px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.35);
     }
 
     .header-actions {
@@ -101,89 +135,104 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #fff0f5;
-      border: 1px solid var(--border-pink);
+      background: linear-gradient(135deg, #fff0f6 0%, #ffd6e6 100%);
+      border: 1.5px solid var(--border-pink);
       color: var(--rose-main);
       font-size: 12.5px;
+      font-weight: 850;
+      padding: 7px 16px;
+      border-radius: 99px;
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.12), inset 0 1px 2px #fff;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .header-rewards-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 18px rgba(255, 42, 122, 0.25);
+      border-color: var(--rose-main);
+    }
+    .lang-toggle {
+      font-size: 11.5px;
       font-weight: 800;
       padding: 6px 14px;
       border-radius: 99px;
-      transition: all 0.2s;
-    }
-    .header-rewards-btn:hover {
-      background: #ffe4ee;
-      transform: translateY(-1px);
-    }
-    .lang-toggle {
-      font-size: 11px;
-      font-weight: 800;
-      padding: 6px 12px;
-      border-radius: 99px;
       background: #ffffff;
       border: 1.5px solid var(--border-pink);
-      color: var(--rose-main);
+      color: var(--text-dark);
       cursor: pointer;
       transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
     .lang-toggle:hover {
       background: #fff5f8;
       border-color: var(--rose-main);
+      color: var(--rose-main);
     }
 
-    /* ─── BREADCRUMB BAR & SMART NAVIGATION ─────────────────────── */
+    /* ─── BREADCRUMB BAR ────────────────────────────────────────── */
     .breadcrumb-bar {
       max-width: 1240px;
-      margin: 12px auto 0;
+      margin: 14px auto 0;
       padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 12px;
+      font-size: 12.5px;
+      position: relative;
+      z-index: 2;
     }
     .btn-nav-back {
-      font-size: 12.5px;
-      font-weight: 750;
-      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-dark);
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      background: transparent;
-      border: none;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid var(--border-pink);
       cursor: pointer;
-      transition: color 0.2s;
-      padding: 4px 8px;
-      border-radius: 8px;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 6px 16px;
+      border-radius: 99px;
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.06);
     }
-    .btn-nav-back:hover { color: var(--rose-main); background: rgba(255,42,122,0.06); }
+    .btn-nav-back:hover {
+      color: var(--rose-main);
+      border-color: var(--rose-main);
+      transform: translateX(-3px);
+      box-shadow: 0 6px 16px rgba(255, 42, 122, 0.15);
+    }
 
-    /* ─── GAMES HERO BANNER ─────────────────────────────────────── */
+    /* ─── COMPACT LUXURY GAMES HERO ─── */
     .games-hero {
       max-width: 1240px;
       margin: 0 auto;
-      padding: 20px 20px 14px;
+      padding: 16px 20px 10px;
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(255, 42, 122, 0.1);
-      border: 1px solid rgba(255, 42, 122, 0.28);
+      background: linear-gradient(135deg, rgba(255, 42, 122, 0.12), rgba(147, 51, 234, 0.12));
+      border: 1.5px solid rgba(255, 42, 122, 0.32);
       color: var(--rose-main);
       padding: 4px 14px;
       border-radius: 99px;
       font-size: 11px;
-      font-weight: 850;
+      font-weight: 900;
       letter-spacing: 0.8px;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.08);
     }
     .games-hero h1 {
       font-family: var(--font-serif);
-      font-size: clamp(26px, 4.5vw, 42px);
-      line-height: 1.2;
+      font-size: clamp(24px, 4.2vw, 38px);
+      line-height: 1.15;
       color: var(--text-dark);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .games-hero h1 span {
       background: var(--rose-gradient);
@@ -192,133 +241,167 @@
       -webkit-text-fill-color: transparent;
     }
     .games-hero p {
-      font-size: 14.5px;
+      font-size: 13.5px;
+      font-weight: 600;
       color: var(--text-muted);
-      max-width: 620px;
+      max-width: 520px;
       margin: 0 auto;
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
-    /* ─── DAILY COIN ECONOMY CARD ───────────────────────────────── */
+    /* ─── SLEEK HUD DAILY COIN ECONOMY BAR ─── */
     .economy-banner {
       max-width: 1240px;
-      margin: 12px auto 22px;
+      margin: 10px auto 18px;
       padding: 0 20px;
+      position: relative;
+      z-index: 2;
     }
     .economy-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 245, 250, 0.9) 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 246, 251, 0.95) 100%);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-radius: 22px;
-      padding: 16px 22px;
+      border-radius: 999px;
+      padding: 10px 20px;
       border: 1.5px solid var(--border-pink);
-      box-shadow: var(--shadow-card);
+      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.08), inset 0 2px 2px #fff;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .economy-head {
-      display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
+      transition: all 0.3s ease;
+    }
+    @media (max-width: 600px) {
+      .economy-card {
+        border-radius: 20px;
+        padding: 12px 16px;
+      }
+    }
+    .economy-card:hover {
+      box-shadow: 0 12px 30px rgba(255, 42, 122, 0.15), inset 0 2px 2px #fff;
+      border-color: rgba(255, 42, 122, 0.45);
     }
     .economy-title {
-      font-size: 14.5px;
+      font-size: 13px;
       font-weight: 850;
       color: var(--text-dark);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      white-space: nowrap;
     }
     .economy-cap-pill {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 850;
       padding: 4px 12px;
       border-radius: 99px;
-      background: #fef3c7;
-      border: 1px solid #fde68a;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border: 1.2px solid #f59e0b;
       color: #92400e;
+      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+      white-space: nowrap;
+    }
+    .wheel-link-btn {
+      font-size: 11.5px;
+      font-weight: 850;
+      color: var(--rose-main);
+      background: linear-gradient(125deg, rgba(255, 255, 255, 0.95), rgba(255, 238, 248, 0.9));
+      border: 1.5px solid rgba(255, 120, 175, 0.35);
+      padding: 5px 14px;
+      border-radius: 99px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.1), inset 0 1px 1px #fff;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .wheel-link-btn:hover {
+      background: var(--rose-main);
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.3);
     }
     .progress-bar-bg {
       width: 100%;
-      height: 9px;
+      height: 8px;
       background: #ffe4ee;
       border-radius: 99px;
       overflow: hidden;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
     }
     .progress-bar-fill {
       height: 100%;
       background: var(--rose-gradient);
       width: 0%;
-      transition: width 0.4s ease;
+      transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
       border-radius: 99px;
-    }
-    .economy-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-      gap: 8px;
+      box-shadow: 0 0 10px rgba(255, 42, 122, 0.5);
     }
 
-    /* ─── PREMIER FLAGSHIP GAME BANNER: RISK RUN ────────────────── */
+    /* ─── PREMIER FLAGSHIP GAME BANNER: HEART RAIN ────────────────── */
     .flagship-banner-section {
       max-width: 1240px;
-      margin: 0 auto 26px;
+      margin: 0 auto 28px;
       padding: 0 20px;
+      position: relative;
+      z-index: 2;
     }
     .flagship-game-card {
-      background: linear-gradient(135deg, #130a20 0%, #250d30 50%, #0d0614 100%);
-      border: 1.5px solid rgba(245, 158, 11, 0.45);
-      border-radius: 26px;
-      padding: 24px;
+      background: linear-gradient(135deg, #2a0e23 0%, #4a1538 50%, #1a0815 100%);
+      border: 2px solid rgba(255, 120, 175, 0.45);
+      border-radius: 30px;
+      padding: 28px;
       color: #ffffff;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 30px rgba(245, 158, 11, 0.15);
+      box-shadow: 
+        0 24px 60px rgba(0, 0, 0, 0.35),
+        0 0 40px rgba(255, 42, 122, 0.22),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
       position: relative;
       overflow: hidden;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 20px;
+      gap: 24px;
       align-items: center;
-      transition: all 0.35s ease;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .flagship-game-card:hover {
-      border-color: #f59e0b;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(245, 158, 11, 0.3);
-      transform: translateY(-3px);
+      border-color: #ff2a7a;
+      box-shadow: 
+        0 30px 70px rgba(0, 0, 0, 0.45),
+        0 0 50px rgba(255, 42, 122, 0.35),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+      transform: translateY(-4px);
     }
     .flagship-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: linear-gradient(135deg, #d97706, #fbbf24);
-      color: #1a0824;
-      font-size: 10.5px;
+      background: linear-gradient(135deg, #ff2a7a, #ff529a);
+      color: #ffffff;
+      font-size: 11px;
       font-weight: 900;
-      padding: 3px 12px;
+      padding: 4px 14px;
       border-radius: 99px;
       letter-spacing: 0.8px;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.4);
     }
     .flagship-title {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: clamp(22px, 3.2vw, 28px);
+      font-family: var(--font-serif);
+      font-size: clamp(23px, 3.4vw, 30px);
       font-weight: 800;
       letter-spacing: 0.5px;
       color: #ffffff;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     .flagship-desc {
-      font-size: 13px;
+      font-size: 13.5px;
       color: #fce7f3;
-      max-width: 580px;
-      line-height: 1.5;
-      margin-bottom: 14px;
+      max-width: 620px;
+      line-height: 1.55;
+      margin-bottom: 16px;
     }
     .flagship-modes {
       display: flex;
@@ -326,144 +409,228 @@
       flex-wrap: wrap;
     }
     .flagship-mode-pill {
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 5px 12px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
+      backdrop-filter: blur(8px);
     }
     .btn-launch-flagship {
-      padding: 14px 28px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
-      color: #1a0824;
-      font-size: 14px;
+      padding: 13px 26px;
+      min-height: 44px;
+      border-radius: 999px;
+      background: linear-gradient(125deg, #ff2a7a 0%, #ff4fa1 18%, #9333ea 42%, #38bdf8 65%, #f43f5e 84%, #ff2a7a 100%) !important;
+      background-size: 280% 280% !important;
+      animation: clueButtonFlow 5s ease-in-out infinite !important;
+      color: #ffffff;
+      font-size: 13.5px;
       font-weight: 900;
+      letter-spacing: 0.2px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      box-shadow: 0 8px 24px rgba(217, 119, 6, 0.4);
-      transition: all 0.25s ease;
+      border: 2px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 0 10px 24px -2px rgba(255, 42, 122, 0.45), inset 0 3px 4px rgba(255, 255, 255, 0.95), inset 0 -3px 4px rgba(180, 18, 60, 0.45) !important;
+      text-shadow: 0 1px 2px rgba(180, 18, 60, 0.4) !important;
+      transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, filter 0.2s ease !important;
       white-space: nowrap;
+      text-decoration: none;
     }
     .btn-launch-flagship:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 12px 32px rgba(245, 158, 11, 0.6);
+      transform: translateY(-2.5px) scale(1.025) !important;
+      box-shadow: 0 14px 30px -2px rgba(255, 42, 122, 0.55), inset 0 3.5px 4.5px #ffffff !important;
+      filter: brightness(1.08) saturate(1.1) !important;
+    }
+    .btn-launch-flagship:active {
+      transform: translateY(2px) scale(0.965) !important;
+      box-shadow: 0 3px 8px rgba(255, 42, 122, 0.3), inset 0 2.5px 5px rgba(0, 0, 0, 0.35) !important;
     }
 
-    @media (max-width: 768px) {
-      .flagship-game-card {
-        grid-template-columns: 1fr;
-      }
-      .btn-launch-flagship {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-
-    /* ─── CATEGORY FILTER TABS ──────────────────────────────────── */
+    /* ─── CATEGORY FILTER TABS (Smooth Touch-Swipeable Dock) ─────── */
     .games-filter-nav {
       max-width: 1240px;
-      margin: 0 auto 18px;
-      padding: 0 20px;
+      margin: 0 auto 24px;
+      padding: 6px 20px 14px;
       display: flex;
-      gap: 8px;
+      gap: 12px;
       overflow-x: auto;
       scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+      position: relative;
+      z-index: 2;
     }
     .games-filter-nav::-webkit-scrollbar { display: none; }
     .game-tab-btn {
-      padding: 8px 18px;
+      padding: 10px 22px;
+      min-height: 44px;
       border-radius: 99px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1.2px solid rgba(255, 120, 175, 0.3);
-      color: var(--text-body);
-      font-size: 12.5px;
-      font-weight: 750;
+      background: linear-gradient(145deg, #ffffff 0%, #fff7fb 100%);
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+      font-size: 13px;
+      font-weight: 850;
       cursor: pointer;
       white-space: nowrap;
-      transition: all 0.2s ease;
+      scroll-snap-align: start;
+      box-shadow: 
+        0 6px 16px rgba(255, 42, 122, 0.08),
+        0 2.5px 0 rgba(255, 120, 175, 0.45),
+        inset 0 1.5px 2px #fff;
+      transform: translateY(-1px);
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .game-tab-btn:hover {
       border-color: var(--rose-main);
       color: var(--rose-main);
-      transform: translateY(-1px);
+      transform: translateY(-3px);
+      box-shadow: 
+        0 10px 22px rgba(255, 42, 122, 0.18),
+        0 3.5px 0 var(--rose-main),
+        inset 0 1.5px 2px #fff;
     }
     .game-tab-btn.active {
-      background: linear-gradient(135deg, var(--rose-main), #ec4899);
-      border-color: transparent;
+      background: linear-gradient(135deg, var(--rose-main) 0%, #ff529a 45%, #9333ea 100%);
+      border-color: rgba(255, 255, 255, 0.4);
       color: #ffffff;
-      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.3);
-      font-weight: 850;
+      box-shadow: 
+        0 8px 22px rgba(255, 42, 122, 0.42),
+        0 3px 0 #9d174d,
+        inset 0 2px 2px rgba(255, 255, 255, 0.85);
+      font-weight: 900;
+      transform: translateY(-2px);
+    }
+    .game-tab-btn:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.25), 0 1px 0 #9d174d;
     }
 
-    /* ─── GAMES GRID (RESPONSIVE PC & MOBILE) ───────────────────── */
+    /* ─── GAMES GRID (Full-Width Symmetrical Auto-Fit Grid) ──────── */
     .games-master-grid {
       max-width: 1240px;
       margin: 0 auto;
       padding: 0 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+      gap: 22px;
+      position: relative;
+      z-index: 2;
+      width: 100%;
     }
 
-    @media (max-width: 768px) {
-      .games-master-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 0 14px;
-      }
-    }
-
-    /* ─── 3D LUXURY GAME CARD ───────────────────────────────────── */
+    /* ─── 3D LUXURY CLAY GAME CARD ──────────────────────────────── */
     .game-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 24px;
-      padding: 20px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 246, 251, 0.96) 100%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 28px;
+      padding: 24px;
       border: 1.5px solid var(--border-pink);
-      box-shadow: var(--shadow-card);
+      box-shadow: var(--shadow-clay);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 14px;
-      transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.22s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.3s ease, border-color 0.3s ease;
       position: relative;
       overflow: hidden;
+      opacity: 0;
+      animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .game-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      background: radial-gradient(circle 240px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 42, 122, 0.14), transparent 70%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+    .game-card:hover::after {
+      opacity: 1;
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .game-card:hover {
-      transform: translateY(-6px);
       border-color: var(--rose-main);
-      box-shadow: var(--shadow-hover);
+      box-shadow: var(--shadow-clay-hover);
       background: #ffffff;
+    }
+
+    /* Interactive 3D Winning Clue Pill */
+    .game-clue-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      color: #831843;
+      background: linear-gradient(135deg, rgba(255, 241, 246, 0.95), rgba(253, 230, 240, 0.9));
+      border: 1px solid rgba(255, 42, 122, 0.22);
+      border-radius: 12px;
+      padding: 7px 12px;
+      line-height: 1.4;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8), 0 2px 6px rgba(255, 42, 122, 0.04);
+      position: relative;
+      z-index: 2;
+      transition: all 0.25s ease;
+    }
+    .game-card:hover .game-clue-pill {
+      border-color: rgba(255, 42, 122, 0.45);
+      background: linear-gradient(135deg, #fff0f5, #ffe4ee);
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.12);
+      transform: translateY(-1px);
+    }
+    .clue-lens-icon {
+      font-size: 13px;
+      display: inline-block;
+      animation: cluePulse 2.4s infinite ease-in-out;
+      flex-shrink: 0;
+    }
+    @keyframes cluePulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(255,42,122,0)); }
+      50% { transform: scale(1.18) rotate(8deg); filter: drop-shadow(0 0 6px rgba(255,42,122,0.5)); }
+    }
+    .clue-content strong {
+      color: var(--rose-main);
+      font-weight: 850;
     }
 
     .game-card-top {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
+      gap: 15px;
     }
     .game-icon-box {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
+      width: 62px;
+      height: 62px;
+      border-radius: 20px;
       display: grid;
       place-items: center;
-      font-size: 28px;
+      font-size: 32px;
       flex-shrink: 0;
       background: linear-gradient(135deg, #fff0f6 0%, #ffd6e6 100%);
-      border: 1px solid rgba(255, 42, 122, 0.25);
-      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.12);
-      transition: transform 0.3s ease;
+      border: 1.5px solid rgba(255, 42, 122, 0.3);
+      box-shadow: 
+        0 6px 16px rgba(255, 42, 122, 0.16),
+        inset 0 2px 3px #ffffff,
+        inset 0 -2px 3px rgba(255, 120, 175, 0.15);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .game-card:hover .game-icon-box {
-      transform: scale(1.1) rotate(-4deg);
+      transform: scale(1.14) rotate(-6deg);
+      border-color: var(--rose-main);
     }
 
     .game-info {
@@ -474,14 +641,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 6px;
-      margin-bottom: 4px;
+      gap: 8px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
     }
     .game-title {
-      font-family: var(--font-serif);
-      font-size: 19px;
-      font-weight: 750;
-      color: var(--text-dark);
+      font-family: var(--font-sans);
+      font-size: 18.5px;
+      font-weight: 850;
+      letter-spacing: -0.3px;
+      color: #1e0918;
       line-height: 1.25;
     }
     .game-rating-tag {
@@ -489,16 +658,17 @@
       font-weight: 850;
       color: #92400e;
       background: #fef3c7;
-      padding: 2px 7px;
-      border-radius: 6px;
+      border: 1px solid #fde68a;
+      padding: 3px 8px;
+      border-radius: 99px;
       white-space: nowrap;
     }
     .game-desc {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.45;
-      margin-bottom: 8px;
-      min-height: 36px;
+      font-size: 13.5px;
+      color: #5c3851;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      min-height: 40px;
     }
 
     .reward-tags-row {
@@ -508,63 +678,96 @@
       flex-wrap: wrap;
     }
     .reward-tag {
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 800;
       color: #059669;
       background: #ecfdf5;
       border: 1px solid #a7f3d0;
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 4px 10px;
+      border-radius: 99px;
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
     }
     .coin-tag {
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 850;
       color: #d97706;
       background: #fffbeb;
       border: 1px solid #fde68a;
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 4px 10px;
+      border-radius: 99px;
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
     }
 
     .game-card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 10px;
-      border-top: 1px dashed rgba(255, 120, 175, 0.25);
+      padding-top: 14px;
+      border-top: 1.5px dashed rgba(255, 120, 175, 0.25);
       gap: 10px;
     }
     .game-difficulty-label {
-      font-size: 11px;
-      font-weight: 750;
-      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 800;
+      color: #7c4d70;
     }
+
+    /* ─── REAL 3D TACTILE CLAY BUTTON ────────────────────────────── */
     .btn-play {
       padding: 9px 20px;
-      min-height: 40px;
-      border-radius: 12px;
-      border: none;
-      background: var(--rose-gradient);
-      color: #ffffff;
+      min-height: 38px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+      background: linear-gradient(125deg, #ff2a7a 0%, #ff4fa1 18%, #9333ea 42%, #38bdf8 65%, #f43f5e 84%, #ff2a7a 100%) !important;
+      background-size: 280% 280% !important;
+      animation: clueButtonFlow 5s ease-in-out infinite !important;
+      color: #ffffff !important;
       font-weight: 850;
       font-size: 12.5px;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.25);
-      white-space: nowrap;
-      transition: all 0.2s ease;
+      box-shadow: 0 8px 18px -2px rgba(255, 42, 122, 0.42), inset 0 2.5px 3px rgba(255, 255, 255, 0.95), inset 0 -2.5px 3.5px rgba(180, 18, 60, 0.45) !important;
+      text-shadow: 0 1px 2px rgba(180, 18, 60, 0.4) !important;
+      transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease, filter 0.2s ease !important;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      text-decoration: none;
+      white-space: nowrap;
     }
     .btn-play:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(255, 42, 122, 0.4);
+      transform: translateY(-2px) scale(1.02) !important;
+      box-shadow: 0 12px 24px -2px rgba(255, 42, 122, 0.52), inset 0 3px 4px #ffffff !important;
+      filter: brightness(1.08) saturate(1.1) !important;
+    }
+    .btn-play:active {
+      transform: translateY(1.5px) scale(0.97) !important;
+      box-shadow: 0 2px 7px rgba(255, 42, 122, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* ─── 3D BOTTOM DOCK ELEVATION ──────────────────────────────── */
+    .vanvi-bottom-dock, .bottom {
+      background: rgba(255, 255, 255, 0.95) !important;
+      border-top: 1.5px solid rgba(255, 120, 175, 0.35) !important;
+      box-shadow: 0 -8px 28px rgba(255, 42, 122, 0.12), 0 -2px 8px rgba(0, 0, 0, 0.04) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+    }
+    .vanvi-bottom-dock .nav-btn.create, .bottom .nav-btn.create {
+      background: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #9333ea 100%) !important;
+      box-shadow: 
+        0 8px 20px rgba(255, 42, 122, 0.45),
+        0 3px 0 #9d174d,
+        inset 0 2px 2px rgba(255, 255, 255, 0.85) !important;
+      border: 1px solid rgba(255, 255, 255, 0.5) !important;
+      transition: all 0.2s ease !important;
+    }
+    .vanvi-bottom-dock .nav-btn.create:hover, .bottom .nav-btn.create:hover {
+      transform: scale(1.05) translateY(-3px) !important;
+      box-shadow: 0 12px 26px rgba(255, 42, 122, 0.6), 0 4px 0 #9d174d !important;
     }
 
     /* ─── IN-PAGE QUICK MODAL ENGINE ────────────────────────────── */
@@ -585,10 +788,10 @@
       background: #ffffff;
       width: 100%;
       max-width: 440px;
-      border-radius: 26px;
-      padding: 24px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-      border: 1px solid var(--border-pink);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+      border: 1.5px solid var(--border-pink);
       position: relative;
       text-align: center;
       animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -601,8 +804,8 @@
       position: absolute;
       top: 14px;
       right: 16px;
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       border: none;
       background: #f3f4f6;
@@ -611,6 +814,11 @@
       display: grid;
       place-items: center;
       color: #666;
+      transition: all 0.2s ease;
+    }
+    .modal-close:hover {
+      background: #ffe4ee;
+      color: var(--rose-main);
     }
     .modal-title {
       font-family: var(--font-serif);
@@ -623,135 +831,211 @@
       color: var(--text-muted);
       margin-bottom: 18px;
     }
-    .memory-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-    .memory-card {
-      aspect-ratio: 1;
-      background: linear-gradient(135deg, #ffeef5 0%, #ffd6e6 100%);
-      border: 1.5px solid var(--border-pink);
-      border-radius: 14px;
-      font-size: 24px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.2s ease;
-    }
-    .memory-card.flipped {
-      background: #fff;
-      border-color: var(--rose-main);
-      box-shadow: 0 4px 10px rgba(255, 42, 122, 0.2);
-    }
-    .scratch-box {
-      width: 100%;
-      height: 150px;
-      background: #fff0f5;
-      border: 2px dashed var(--rose-main);
-      border-radius: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      margin-bottom: 18px;
-      transition: all 0.3s ease;
-    }
-    .win-view { display: none; text-align: center; }
-    .win-view.show { display: block; }
-    .win-icon { font-size: 48px; margin-bottom: 10px; }
-    .coin-award-badge {
-      font-size: 26px;
-      font-weight: 900;
-      color: #d97706;
-      margin-bottom: 10px;
-    }
-    .coupon-reveal-box {
-      background: #fff5f8;
-      border: 2px dashed var(--rose-main);
-      padding: 12px;
-      border-radius: 16px;
-      margin: 12px 0 18px;
-    }
-    .coupon-reveal-code {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      color: var(--rose-main);
+
+    /* ─── RESPONSIVE RULES (MOBILE & TABLET) ─────────────────────── */
+    @media (max-width: 768px) {
+      .app-header {
+        padding: 0 12px;
+        height: 58px;
+      }
+      .brand-logo-img {
+        height: 26px;
+      }
+      .brand-pill-badge {
+        font-size: 9.5px;
+        padding: 2px 7px;
+      }
+      .header-rewards-btn {
+        padding: 5px 12px;
+        font-size: 11.5px;
+      }
+      .breadcrumb-bar {
+        padding: 0 12px;
+        margin-top: 10px;
+      }
+      .games-hero {
+        padding: 16px 12px 10px;
+      }
+      .games-hero h1 {
+        font-size: 24px;
+      }
+      .games-hero p {
+        font-size: 13px;
+      }
+      .economy-banner {
+        padding: 0 12px;
+        margin: 10px auto 18px;
+      }
+      .economy-card {
+        padding: 14px 16px;
+        border-radius: 20px;
+      }
+      .flagship-banner-section {
+        padding: 0 12px;
+        margin-bottom: 20px;
+      }
+      .flagship-game-card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        border-radius: 22px;
+        gap: 16px;
+      }
+      .btn-launch-flagship {
+        width: 100%;
+        justify-content: center;
+        padding: 14px;
+        font-size: 14px;
+      }
+      .games-filter-nav {
+        padding: 4px 12px 14px;
+        margin-bottom: 18px;
+      }
+      .game-tab-btn {
+        padding: 8px 18px;
+        font-size: 12.5px;
+        min-height: 40px;
+      }
+      .games-master-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 12px;
+      }
+      .game-card {
+        border-radius: 26px !important;
+        padding: 20px 18px !important;
+        gap: 14px !important;
+      }
+      .game-icon-box {
+        width: 56px;
+        height: 56px;
+        font-size: 28px;
+        border-radius: 18px;
+      }
+      .game-title {
+        font-size: 18px;
+      }
+      .btn-play {
+        padding: 10px 22px !important;
+        font-size: 13px !important;
+        min-height: 42px !important;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Sticky Header -->
-  <header class="app-header">
+  <!-- Ambient 3D Glowing Orbs -->
+  <div class="ambient-orbs-wrap" aria-hidden="true">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+  </div>
+
+  <!-- Top Sticky Header: Single Pristine Logo + 3D Arcade Badge -->
+  <header class="app-header" role="banner">
     <a href="index.html" class="brand-link" title="Vanvi Moments Boutique">
-      <div class="brand-spark-box">💖</div>
-      <span>VANVI MOMENTS</span>
+      <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="brand-logo-img"/>
+      <span class="brand-pill-badge">Arcade</span>
     </a>
     <div class="header-actions">
       <button type="button" class="lang-toggle" onclick="window.VanviI18n && window.VanviI18n.toggle()">🌐 EN / HI</button>
-      <a href="rewards.html" class="header-rewards-btn">
+      <a href="rewards.html" class="header-rewards-btn" title="View Rewards">
         🎁 <span data-i18n="nav.rewards">Rewards</span> <span id="headerRewardCount">(0 🪙)</span>
       </a>
     </div>
   </header>
 
   <!-- Breadcrumbs & Smart Back Navigation -->
-  <div class="breadcrumb-bar">
+  <nav class="breadcrumb-bar" aria-label="Breadcrumb">
     <button type="button" class="btn-nav-back" onclick="if (history.length > 1) { history.back(); } else { location.href='index.html'; }">
       <span class="back-arrow">‹</span> <span>Back</span>
     </button>
     <div style="font-size: 12px; color: var(--text-muted);">
-      <a href="index.html" style="color:inherit; text-decoration:none;" data-i18n="nav.home">Home</a> / <span style="color:var(--rose-main);" data-i18n="games.title">Games &amp; Arcade</span>
+      <a href="index.html" style="color:inherit; text-decoration:none;" data-i18n="nav.home">Home</a> / <span style="color:var(--rose-main); font-weight:800;" data-i18n="games.title">Games &amp; Arcade</span>
     </div>
-  </div>
+  </nav>
 
   <!-- Hero Section -->
   <section class="games-hero">
     <div class="hero-badge" data-i18n="games.kicker">✦ SIGNATURE CELEBRATION SUITE</div>
-    <h1 data-i18n="games.title">Celebration Micro-Games &amp; <span>Rewards</span></h1>
-    <p data-i18n="games.subtitle">Playful, emotional challenges crafted for celebrations. Earn 2–12 coins per game toward your keepsake discounts!</p>
+    <h1 data-i18n="games.title">Celebration Games &amp; <span>Rewards</span></h1>
+    <p data-i18n="games.subtitle">Play 30s celebration games · Earn coins &amp; unlock keepsakes!</p>
   </section>
 
   <!-- Daily Games Limit & Coins Economy Banner -->
   <div class="economy-banner">
     <div class="economy-card">
-      <div class="economy-head">
-        <div class="economy-title">
-          <span>🪙</span> <span data-i18n="games.daily_cap_title">Daily Games Coin Limit</span>
-        </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span class="economy-cap-pill" id="dailyCoinsStatus">0 / 25 Coins Today</span>
-          <a href="dashboard.html" style="font-size:11.5px; font-weight:800; color:var(--rose-main); background:rgba(255,42,122,0.08); padding:3px 10px; border-radius:99px; text-decoration:none;">🎡 Fortune Wheel →</a>
-        </div>
+      <div class="economy-title">
+        <span>🪙</span> <span data-i18n="games.daily_cap_title">Daily Coin Rewards</span>
       </div>
-      <div class="progress-bar-bg">
+      <div class="progress-bar-bg" style="flex: 1; max-width: 220px; min-width: 100px; margin: 0 4px;">
         <div class="progress-bar-fill" id="dailyCoinsProgressBar"></div>
       </div>
-      <div class="economy-footer">
-        <span id="dailyCapSubText" data-i18n="games.daily_cap_sub">Daily cap: 25 Coins Max · 100% Skill &amp; Emotional Delight (No Gambling)</span>
-        <span id="gamesCountStatus">0/5 Completed</span>
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        <span class="economy-cap-pill" id="dailyCoinsStatus">0 / 30 Coins</span>
+        <a href="dashboard.html" class="wheel-link-btn">🎡 Fortune Wheel →</a>
+        <span id="gamesCountStatus" style="font-weight:850; font-size:11.5px; color:var(--rose-main); background:rgba(255,42,122,0.08); padding:3px 10px; border-radius:99px; border:1px solid rgba(255,42,122,0.2);">12 Games</span>
       </div>
+      <span id="dailyCapSubText" data-i18n="games.daily_cap_sub" style="display:none;">Daily cap: max 30 Virtual Coins · 100% Free, Skill-Based &amp; Non-Cashable</span>
     </div>
   </div>
 
+  <!-- Premier Flagship Game Banner: Heart Rain -->
+  <section class="flagship-banner-section">
+    <div class="flagship-game-card">
+      <div>
+        <div class="flagship-badge">💖 Flagship Daily Game · Relaxing &amp; Fun</div>
+        <h2 class="flagship-title">Heart Rain — Romantic Petal Catch</h2>
+        <p class="flagship-desc">Slide your celebration basket to catch glowing hearts, petals &amp; stars. 30s quick play with daily coin rewards!</p>
+        <div class="flagship-modes">
+          <span class="flagship-mode-pill">⚡ 30s Quick Play</span>
+          <span class="flagship-mode-pill">🪙 Up to +10 Coins</span>
+          <span class="flagship-mode-pill">📱 Touch &amp; Keys</span>
+        </div>
+      </div>
+      <a href="heart-rain.html" class="btn-launch-flagship">Play Heart Rain ➔</a>
+    </div>
+  </section>
+
   <!-- Category Filter Nav -->
-  <nav class="games-filter-nav" id="gamesFilterNav">
-    <button type="button" class="game-tab-btn active" data-filter="all">🌟 All Celebration Games</button>
+  <nav class="games-filter-nav" id="gamesFilterNav" aria-label="Game Categories">
+    <button type="button" class="game-tab-btn active" data-filter="all">🌟 All Games (12)</button>
     <button type="button" class="game-tab-btn" data-filter="love">💖 Hearts &amp; Romance</button>
-    <button type="button" class="game-tab-btn" data-filter="puzzle">🧩 Memory &amp; Puzzles</button>
+    <button type="button" class="game-tab-btn" data-filter="puzzle">🧩 Puzzles &amp; Logic</button>
     <button type="button" class="game-tab-btn" data-filter="reflex">⚡ Speed &amp; Reflex</button>
   </nav>
 
-  <!-- Games Master Grid: 11 Dedicated Games -->
-  <main class="games-master-grid" id="gamesContainer">
+  <!-- Games Master Grid: 12 Curated Dedicated Games -->
+  <main class="games-master-grid" id="gamesContainer" role="main">
 
-    <!-- 1. Heart Sort Puzzle -->
-    <article class="game-card" data-cat="puzzle" id="cardHeartSort">
+    <!-- 1. Heart Rain (Flagship) -->
+    <article class="game-card" data-cat="love" id="cardHeartRain" style="animation-delay: 0.05s;">
+      <div class="game-card-top">
+        <div class="game-icon-box" style="background:linear-gradient(135deg, #fff0f6, #ffd6e7);">💖</div>
+        <div class="game-info">
+          <div class="game-title-row">
+            <h3 class="game-title">Heart Rain Petal Catch</h3>
+            <span class="game-rating-tag">★ 5.0 (Daily Favorite)</span>
+          </div>
+          <div class="game-desc">Catch sweet floating hearts, roses, and lucky stars in your basket. Fast, relaxing, and loved by everyone!</div>
+          <div class="reward-tags-row">
+            <span class="coin-tag">🪙 Up to +10 Coins</span>
+            <span class="reward-tag">🌸 30s Quick Play</span>
+          </div>
+        </div>
+      </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Catch golden hearts for 3× multiplier and dodge obsidian drops!</span>
+      </div>
+      <div class="game-card-footer">
+        <span class="game-difficulty-label">Casual · Touch / Keys</span>
+        <a href="heart-rain.html" class="btn-play">Catch Hearts →</a>
+      </div>
+    </article>
+
+    <!-- 2. Heart Sort Liquid Puzzle -->
+    <article class="game-card" data-cat="puzzle" id="cardHeartSort" style="animation-delay: 0.1s;">
       <div class="game-card-top">
         <div class="game-icon-box" style="background:linear-gradient(135deg, #fff0f6, #ffd6e7);">🧪</div>
         <div class="game-info">
@@ -761,10 +1045,14 @@
           </div>
           <div class="game-desc">Color vial sorting challenge. Pour glowing celebration potions until each glass vial holds pure single-color liquid!</div>
           <div class="reward-tags-row">
-            <span class="coin-tag">🪙 +15 Coins</span>
+            <span class="coin-tag">🪙 Up to +8 Coins</span>
             <span class="reward-tag">🎲 Infinite Shuffles</span>
           </div>
         </div>
+      </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Keep at least one empty vial as a staging buffer to solve hard tiers!</span>
       </div>
       <div class="game-card-footer">
         <span class="game-difficulty-label">Color Logic · Non-Repeating</span>
@@ -772,30 +1060,8 @@
       </div>
     </article>
 
-    <!-- 2. Cross Math Challenge -->
-    <article class="game-card" data-cat="brain" id="cardCrossMath">
-      <div class="game-card-top">
-        <div class="game-icon-box" style="background:linear-gradient(135deg, #f0fdf4, #dcfce7);">🔢</div>
-        <div class="game-info">
-          <div class="game-title-row">
-            <h3 class="game-title">Cross Math Challenge</h3>
-            <span class="game-rating-tag">★ 4.9 (Brain Fitness)</span>
-          </div>
-          <div class="game-desc">Procedural math crossword. Place digit tiles to balance intersecting horizontal and vertical arithmetic equations!</div>
-          <div class="reward-tags-row">
-            <span class="coin-tag">🪙 +20 Coins</span>
-            <span class="reward-tag">🧠 Math Crossword</span>
-          </div>
-        </div>
-      </div>
-      <div class="game-card-footer">
-        <span class="game-difficulty-label">Arithmetic Logic · New Every Game</span>
-        <a href="cross-math.html" class="btn-play">Play Math →</a>
-      </div>
-    </article>
-
     <!-- 3. Block Blast Puzzle -->
-    <article class="game-card" data-cat="puzzle" id="cardBlockBlast">
+    <article class="game-card" data-cat="puzzle" id="cardBlockBlast" style="animation-delay: 0.15s;">
       <div class="game-card-top">
         <div class="game-icon-box" style="background:linear-gradient(135deg, #eff6ff, #dbeafe);">🧩</div>
         <div class="game-info">
@@ -805,10 +1071,14 @@
           </div>
           <div class="game-desc">Place geometric polyomino shapes on an 8x8 grid to blast full rows and columns for sparkling score combos!</div>
           <div class="reward-tags-row">
-            <span class="coin-tag">🪙 +25 Coins</span>
+            <span class="coin-tag">🪙 Up to +10 Coins</span>
             <span class="reward-tag">💥 Line Blast Combo</span>
           </div>
         </div>
+      </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Always reserve a 3×3 center pocket for giant shapes to avoid gridlock!</span>
       </div>
       <div class="game-card-footer">
         <span class="game-difficulty-label">Spatial Strategy · 500 Pts Goal</span>
@@ -817,7 +1087,7 @@
     </article>
 
     <!-- 4. Jewel Merge 2048 -->
-    <article class="game-card" data-cat="puzzle" id="cardJewelMerge">
+    <article class="game-card" data-cat="puzzle" id="cardJewelMerge" style="animation-delay: 0.2s;">
       <div class="game-card-top">
         <div class="game-icon-box" style="background:linear-gradient(135deg, #faf5ff, #f3e8ff);">💎</div>
         <div class="game-info">
@@ -827,10 +1097,14 @@
           </div>
           <div class="game-desc">Swipe and merge rare gemstones from Rose Quartz to Sapphire and forge the legendary 128 Ruby!</div>
           <div class="reward-tags-row">
-            <span class="coin-tag">🪙 +20 Coins</span>
+            <span class="coin-tag">🪙 Up to +8 Coins</span>
             <span class="reward-tag">✨ Gem 2048</span>
           </div>
         </div>
+      </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Keep your highest gem anchored in a corner for cascading merges!</span>
       </div>
       <div class="game-card-footer">
         <span class="game-difficulty-label">Touch / Swipe · 4x4 Grid</span>
@@ -838,140 +1112,34 @@
       </div>
     </article>
 
-    <!-- 5. Periodic Table Chemistry Quiz -->
-    <article class="game-card" data-cat="brain" id="cardPeriodicQuiz">
-      <div class="game-card-top">
-        <div class="game-icon-box" style="background:linear-gradient(135deg, #fffbeb, #fef3c7);">🧪</div>
-        <div class="game-info">
-          <div class="game-title-row">
-            <h3 class="game-title">Periodic Table Quiz</h3>
-            <span class="game-rating-tag">★ 4.9 (Science)</span>
-          </div>
-          <div class="game-desc">Test chemical symbols, elements, and atomic numbers. 50+ question database with scrambled options on every play!</div>
-          <div class="reward-tags-row">
-            <span class="coin-tag">🪙 +25 Coins</span>
-            <span class="reward-tag">🔬 50+ Element Pool</span>
-          </div>
-        </div>
-      </div>
-      <div class="game-card-footer">
-        <span class="game-difficulty-label">Chemistry Trivia · 5 Rounds</span>
-        <a href="periodic-quiz.html" class="btn-play">Play Quiz →</a>
-      </div>
-    </article>
-
-    <!-- 6. Brain Test Riddle Vault -->
-    <article class="game-card" data-cat="brain" id="cardBrainTest">
-      <div class="game-card-top">
-        <div class="game-icon-box" style="background:linear-gradient(135deg, #fdf2f8, #fce7f3);">🧠</div>
-        <div class="game-info">
-          <div class="game-title-row">
-            <h3 class="game-title">Brain Test Riddle Vault</h3>
-            <span class="game-rating-tag">★ 4.9 (Lateral Thinking)</span>
-          </div>
-          <div class="game-desc">Crack tricky lateral thinking riddles and clever brain teasers. Randomized question sets for endless replayability!</div>
-          <div class="reward-tags-row">
-            <span class="coin-tag">🪙 +20 Coins</span>
-            <span class="reward-tag">💡 Riddle Vault</span>
-          </div>
-        </div>
-      </div>
-      <div class="game-card-footer">
-        <span class="game-difficulty-label">Logic &amp; Wit · 5 Questions</span>
-        <a href="brain-test.html" class="btn-play">Play Riddles →</a>
-      </div>
-    </article>
-
-    <!-- 7. Risk Run (Standard Equal Card) -->
-    <article class="game-card" data-cat="reflex" id="cardRiskRun">
-      <div class="game-card-top">
-        <div class="game-icon-box" style="background:linear-gradient(135deg, #fff7ed, #ffedd5);">⚡</div>
-        <div class="game-info">
-          <div class="game-title-row">
-            <h3 class="game-title">Risk Run · Precision Reflex</h3>
-            <span class="game-rating-tag">★ 4.9 (Skill Trial)</span>
-          </div>
-          <div class="game-desc">High-stakes timing and reflex challenge. Tap with laser precision, build your streak multiplier, and protect your shield!</div>
-          <div class="reward-tags-row">
-            <span class="coin-tag">🪙 Up to +12 Coins</span>
-            <span class="reward-tag">🛡️ Streak Shield</span>
-          </div>
-        </div>
-      </div>
-      <div class="game-card-footer">
-        <span class="game-difficulty-label">Safe / Pro / Expert Tiers</span>
-        <a href="risk-run.html" class="btn-play">Play Risk Run →</a>
-      </div>
-    </article>
-
-    <!-- 8. Memory Bloom & Match -->
-    <article class="game-card" data-cat="reflex" id="cardMemoryRush">
+    <!-- 5. Memory Bloom & Match -->
+    <article class="game-card" data-cat="love" id="cardMemoryRush" style="animation-delay: 0.25s;">
       <div class="game-card-top">
         <div class="game-icon-box" style="background:linear-gradient(135deg, #fff0f6, #ffe4ee);">🌸</div>
         <div class="game-info">
           <div class="game-title-row">
             <h3 class="game-title">Memory Bloom &amp; Match</h3>
-            <span class="game-rating-tag">★ 4.9 (High Skill)</span>
+            <span class="game-rating-tag">★ 4.9 (Memory)</span>
           </div>
-          <div class="game-desc">Perfect Match memory challenge. Test your recall across 4 difficulties, flip celebration tiles, and beat the clock!</div>
+          <div class="game-desc">Flip pairs of romantic celebration tokens, discover matching floral symbols, and clear the garden grid!</div>
           <div class="reward-tags-row">
-            <span class="coin-tag">🪙 2–10 Coins</span>
+            <span class="coin-tag">🪙 Up to +8 Coins</span>
             <span class="reward-tag">⚡ 4 Difficulties</span>
           </div>
         </div>
       </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Scan outer borders first to register matching card locations!</span>
+      </div>
       <div class="game-card-footer">
-        <span class="game-difficulty-label">Time Attack · Memory</span>
+        <span class="game-difficulty-label">Visual Recall · Timed</span>
         <a href="memory-rush.html" class="btn-play">Play Match →</a>
       </div>
     </article>
 
-    <!-- 9. Gem Catch Arcade -->
-    <article class="game-card" data-cat="reflex" id="cardGemCatch">
-      <div class="game-card-top">
-        <div class="game-icon-box" style="background:linear-gradient(135deg, #ecfdf5, #d1fae5);">💎</div>
-        <div class="game-info">
-          <div class="game-title-row">
-            <h3 class="game-title">Gem Catch Arcade</h3>
-            <span class="game-rating-tag">★ 4.9 (Fast 60fps)</span>
-          </div>
-          <div class="game-desc">Catch sparkling celebration diamonds and golden stars while dodging obsidian rocks in 60fps arcade rhythm!</div>
-          <div class="reward-tags-row">
-            <span class="coin-tag">🪙 4–10 Coins</span>
-            <span class="reward-tag">⚡ Combo Multipliers</span>
-          </div>
-        </div>
-      </div>
-      <div class="game-card-footer">
-        <span class="game-difficulty-label">Arcade Rhythm · Quick Play</span>
-        <a href="gem-catch.html" class="btn-play">Catch Gems →</a>
-      </div>
-    </article>
-
-    <!-- 10. Quick Tap Reaction -->
-    <article class="game-card" data-cat="reflex" id="cardQuickTap">
-      <div class="game-card-top">
-        <div class="game-icon-box" style="background:linear-gradient(135deg, #fefce8, #fef08a);">⏱️</div>
-        <div class="game-info">
-          <div class="game-title-row">
-            <h3 class="game-title">Quick Tap Reaction</h3>
-            <span class="game-rating-tag">★ 4.9 (Reflex)</span>
-          </div>
-          <div class="game-desc">Measure your reaction speed in milliseconds. Tap only when glowing celebration petals ignite green!</div>
-          <div class="reward-tags-row">
-            <span class="coin-tag">🪙 2–10 Coins</span>
-            <span class="reward-tag">⚡ Sub-200ms Trial</span>
-          </div>
-        </div>
-      </div>
-      <div class="game-card-footer">
-        <span class="game-difficulty-label">Pure Speed · 5 Rounds</span>
-        <a href="quick-tap.html" class="btn-play">Test Reflex →</a>
-      </div>
-    </article>
-
-    <!-- 11. Sound & Sequence Memory -->
-    <article class="game-card" data-cat="reflex" id="cardMemorySequence">
+    <!-- 6. Sound & Sequence Memory -->
+    <article class="game-card" data-cat="puzzle" id="cardMemorySequence" style="animation-delay: 0.3s;">
       <div class="game-card-top">
         <div class="game-icon-box" style="background:linear-gradient(135deg, #f0fdf4, #dcfce7);">🎵</div>
         <div class="game-info">
@@ -981,10 +1149,14 @@
           </div>
           <div class="game-desc">Watch, remember, and replay chime sequence rhythms. How high of a musical melody streak can you master?</div>
           <div class="reward-tags-row">
-            <span class="coin-tag">🪙 3–10 Coins</span>
+            <span class="coin-tag">🪙 Up to +8 Coins</span>
             <span class="reward-tag">🎶 Chime Rhythms</span>
           </div>
         </div>
+      </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Associate musical chimes with numbers (1–4) for longer streaks!</span>
       </div>
       <div class="game-card-footer">
         <span class="game-difficulty-label">Sequential Recall · Streaks</span>
@@ -992,34 +1164,166 @@
       </div>
     </article>
 
-  </main>
-
-  <!-- Quick Play Modal for In-Page Scratch & Match -->
-  <div class="game-modal-backdrop" id="gameModalBackdrop">
-    <div class="game-modal">
-      <button type="button" class="modal-close" onclick="closeGameModal()">&times;</button>
-      
-      <div id="modalPlayView">
-        <h3 class="modal-title" id="modalGameTitle">Instant Scratch Ticket</h3>
-        <p class="modal-subtitle" id="modalGameSub">Swipe or click across the card to reveal your celebration reward!</p>
-        
-        <div class="scratch-box" id="scratchBox" onclick="revealScratchPrize()">
-          <span style="font-size:36px; margin-bottom:6px;">🎟️</span>
-          <strong style="color:var(--rose-main); font-size:14px;">Tap to Scratch Foil ✨</strong>
+    <!-- 7. Quick Tap Reaction -->
+    <article class="game-card" data-cat="reflex" id="cardQuickTap" style="animation-delay: 0.35s;">
+      <div class="game-card-top">
+        <div class="game-icon-box" style="background:linear-gradient(135deg, #fefce8, #fef08a);">⏱️</div>
+        <div class="game-info">
+          <div class="game-title-row">
+            <h3 class="game-title">Quick Tap Reaction</h3>
+            <span class="game-rating-tag">★ 4.9 (Reflex)</span>
+          </div>
+          <div class="game-desc">Measure your reaction speed in milliseconds. Tap only when glowing celebration petals ignite green!</div>
+          <div class="reward-tags-row">
+            <span class="coin-tag">🪙 Up to +8 Coins</span>
+            <span class="reward-tag">⚡ Sub-200ms Trial</span>
+          </div>
         </div>
       </div>
-
-      <div class="win-view" id="modalWinView">
-        <div class="win-icon">🎉</div>
-        <h3 class="modal-title">Congratulations!</h3>
-        <div class="coin-award-badge" id="winCoinBadge">+5 Coins 🪙</div>
-        <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Coins added to your Vanvi Wallet! Redeem them at checkout for up to 40% discount.</p>
-        <button type="button" class="btn-play" onclick="closeGameModal()" style="width:100%; justify-content:center;">Collect &amp; Continue →</button>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Keep your finger resting 2mm above the screen for sub-180ms reflexes!</span>
       </div>
-    </div>
-  </div>
+      <div class="game-card-footer">
+        <span class="game-difficulty-label">Pure Speed · 5 Rounds</span>
+        <a href="quick-tap.html" class="btn-play">Test Reflex →</a>
+      </div>
+    </article>
 
-  <!-- Central Multi-Language Translation Script & API -->
+    <!-- 8. Gem Catch Arcade -->
+    <article class="game-card" data-cat="reflex" id="cardGemCatch" style="animation-delay: 0.4s;">
+      <div class="game-card-top">
+        <div class="game-icon-box" style="background:linear-gradient(135deg, #ecfdf5, #d1fae5);">💎</div>
+        <div class="game-info">
+          <div class="game-title-row">
+            <h3 class="game-title">Gem Catch Arcade</h3>
+            <span class="game-rating-tag">★ 4.9 (Fast 60fps)</span>
+          </div>
+          <div class="game-desc">Catch sparkling celebration diamonds and golden stars while dodging obsidian rocks in 60fps arcade rhythm!</div>
+          <div class="reward-tags-row">
+            <span class="coin-tag">🪙 Up to +8 Coins</span>
+            <span class="reward-tag">⚡ Combo Multipliers</span>
+          </div>
+        </div>
+      </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Golden diamonds give +50pts; swipe smoothly across lane edges!</span>
+      </div>
+      <div class="game-card-footer">
+        <span class="game-difficulty-label">Arcade Rhythm · Quick Play</span>
+        <a href="gem-catch.html" class="btn-play">Catch Gems →</a>
+      </div>
+    </article>
+
+    <!-- 9. Word Whisper 3D -->
+    <article class="game-card" data-cat="puzzle" id="cardWordWhisper" style="animation-delay: 0.45s;">
+      <div class="game-card-top">
+        <div class="game-icon-box" style="background:linear-gradient(135deg, #fdf2f8, #fbcfe8);">💌</div>
+        <div class="game-info">
+          <div class="game-title-row">
+            <h3 class="game-title">Word Whisper 3D</h3>
+            <span class="game-rating-tag">★ 4.9 (Word Clue Hunt)</span>
+          </div>
+          <div class="game-desc">Guess secret romantic celebration words from poetic whispers using 3D tactile letter tiles, color deduction clues, and coin bonuses!</div>
+          <div class="reward-tags-row">
+            <span class="coin-tag">🪙 Up to +6 Coins</span>
+            <span class="reward-tag">💌 Romantic Word Hunt</span>
+          </div>
+        </div>
+      </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Green tiles mean exact spot, gold tiles mean in the word, gray means eliminate!</span>
+      </div>
+      <div class="game-card-footer">
+        <span class="game-difficulty-label">Romantic Wordle · 3D Clay</span>
+        <a href="word-whisper.html" class="btn-play">Play Whisper →</a>
+      </div>
+    </article>
+
+    <!-- 10. Unlock The Gift -->
+    <article class="game-card" data-cat="puzzle" id="cardUnlockGift" style="animation-delay: 0.5s;">
+      <div class="game-card-top">
+        <div class="game-icon-box" style="background:linear-gradient(135deg, #fef3c7, #fde68a);">🎁</div>
+        <div class="game-info">
+          <div class="game-title-row">
+            <h3 class="game-title">Unlock The Gift</h3>
+            <span class="game-rating-tag">★ 4.9 (Logic Cracker)</span>
+          </div>
+          <div class="game-desc">Crack the mystery 3-digit combination lock using clues. Decipher high/low feedback to open surprise celebration rewards!</div>
+          <div class="reward-tags-row">
+            <span class="coin-tag">🪙 Up to +8 Coins</span>
+            <span class="reward-tag">🔐 Mystery Vault</span>
+          </div>
+        </div>
+      </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Use the binary search high/low hints to isolate the code in 4 tries!</span>
+      </div>
+      <div class="game-card-footer">
+        <span class="game-difficulty-label">Deduction Logic · 6 Guesses</span>
+        <a href="unlock-gift.html" class="btn-play">Crack Lock →</a>
+      </div>
+    </article>
+
+    <!-- 11. Cross Math Challenge -->
+    <article class="game-card" data-cat="puzzle" id="cardCrossMath" style="animation-delay: 0.55s;">
+      <div class="game-card-top">
+        <div class="game-icon-box" style="background:linear-gradient(135deg, #f0fdf4, #dcfce7);">🔢</div>
+        <div class="game-info">
+          <div class="game-title-row">
+            <h3 class="game-title">Cross Math Challenge</h3>
+            <span class="game-rating-tag">★ 4.9 (Brain Fitness)</span>
+          </div>
+          <div class="game-desc">Procedural math crossword. Place digit tiles to balance intersecting horizontal and vertical arithmetic equations!</div>
+          <div class="reward-tags-row">
+            <span class="coin-tag">🪙 Up to +8 Coins</span>
+            <span class="reward-tag">🧠 Math Crossword</span>
+          </div>
+        </div>
+      </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Solve multiplication &amp; division equations first before addition!</span>
+      </div>
+      <div class="game-card-footer">
+        <span class="game-difficulty-label">Arithmetic Logic · New Every Game</span>
+        <a href="cross-math.html" class="btn-play">Play Math →</a>
+      </div>
+    </article>
+
+    <!-- 12. Love Puzzle Jigsaw -->
+    <article class="game-card" data-cat="love" id="cardLovePuzzle" style="animation-delay: 0.6s;">
+      <div class="game-card-top">
+        <div class="game-icon-box" style="background:linear-gradient(135deg, #fdf2f8, #fce7f3);">🖼️</div>
+        <div class="game-info">
+          <div class="game-title-row">
+            <h3 class="game-title">Love Puzzle Jigsaw</h3>
+            <span class="game-rating-tag">★ 4.9 (Visual Art)</span>
+          </div>
+          <div class="game-desc">Slide and reconstruct warm aesthetic celebration photo mosaics. Test your spatial visual eye and earn coins!</div>
+          <div class="reward-tags-row">
+            <span class="coin-tag">🪙 Up to +8 Coins</span>
+            <span class="reward-tag">🎨 Visual Jigsaw</span>
+          </div>
+        </div>
+      </div>
+      <div class="game-clue-pill">
+        <span class="clue-lens-icon">🔍</span>
+        <span class="clue-content"><strong>Winning Clue:</strong> Hold "Peek Art" to view the master guide, then lock the corner pieces!</span>
+      </div>
+      <div class="game-card-footer">
+        <span class="game-difficulty-label">Spatial Tiles · 3x3 Grid</span>
+        <a href="love-puzzle.html" class="btn-play">Solve Puzzle →</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Central Game Engine & Multi-Language API -->
+  <script src="js/vanvi-games-engine.js"></script>
   <script src="js/vanvi-i18n.js"></script>
   <script src="js/vanvi-api.js"></script>
 
@@ -1027,44 +1331,24 @@
     (function() {
       'use strict';
 
-      const DAILY_CAP = 25; // 25 coins max per day
-      const STORAGE_TODAY_EARNED = 'vanvi_games_today_earned';
-      const STORAGE_TODAY_DATE = 'vanvi_games_today_date';
-      const STORAGE_COINS = 'vanvi_coins';
-
-      function getTodayKey() {
-        const d = new Date();
-        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-      }
-
-      function getEarnedToday() {
-        const savedDate = localStorage.getItem(STORAGE_TODAY_DATE);
-        const today = getTodayKey();
-        if (savedDate !== today) {
-          localStorage.setItem(STORAGE_TODAY_DATE, today);
-          localStorage.setItem(STORAGE_TODAY_EARNED, '0');
-          return 0;
-        }
-        return parseInt(localStorage.getItem(STORAGE_TODAY_EARNED) || '0', 10);
-      }
-
       function updateDashboardState() {
-        const earned = getEarnedToday();
-        const pct = Math.min(100, Math.round((earned / DAILY_CAP) * 100));
+        const earned = VanviGames.getEarnedToday();
+        const cap = VanviGames.DAILY_CAP; // strictly 30
+        const pct = Math.min(100, Math.round((earned / cap) * 100));
 
         const statusEl = document.getElementById('dailyCoinsStatus');
         const barEl = document.getElementById('dailyCoinsProgressBar');
         const subTextEl = document.getElementById('dailyCapSubText');
         const userCoinBalEl = document.getElementById('headerRewardCount');
 
-        if (statusEl) statusEl.textContent = `${earned} / ${DAILY_CAP} Coins Today`;
+        if (statusEl) statusEl.textContent = `${earned} / ${cap} Coins Today`;
         if (barEl) barEl.style.width = `${pct}%`;
         
-        const totalCoins = parseInt(localStorage.getItem(STORAGE_COINS) || '50', 10);
+        const totalCoins = VanviGames.getTotalCoins();
         if (userCoinBalEl) userCoinBalEl.textContent = `(${totalCoins} 🪙)`;
 
-        if (earned >= DAILY_CAP && subTextEl) {
-          subTextEl.textContent = '🎉 Daily coin cap (25/25) reached! Resets tomorrow at midnight.';
+        if (earned >= cap && subTextEl) {
+          subTextEl.textContent = '🎉 Daily virtual coin cap (30/30) reached! Play on for high scores & fun.';
         }
       }
 
@@ -1088,39 +1372,27 @@
         });
       });
 
-      // Quick scratch modal
-      window.openScratchModal = function() {
-        const modal = document.getElementById('gameModalBackdrop');
-        const playView = document.getElementById('modalPlayView');
-        const winView = document.getElementById('modalWinView');
-        if (playView) playView.style.display = 'block';
-        if (winView) winView.classList.remove('show');
-        if (modal) modal.classList.add('show');
-      };
+      // Dynamic 3D Tilt & Clue Spotlight Tracking
+      gameCards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -6;
+          const rotateY = ((x - centerX) / centerX) * 6;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-8px) scale(1.015)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
 
-      window.closeGameModal = function() {
-        const modal = document.getElementById('gameModalBackdrop');
-        if (modal) modal.classList.remove('show');
-      };
-
-      window.revealScratchPrize = function() {
-        const playView = document.getElementById('modalPlayView');
-        const winView = document.getElementById('modalWinView');
-        
-        // Award 5 coins safely
-        const earned = getEarnedToday();
-        if (earned < DAILY_CAP) {
-          const award = Math.min(5, DAILY_CAP - earned);
-          localStorage.setItem(STORAGE_TODAY_EARNED, String(earned + award));
-          const currentTotal = parseInt(localStorage.getItem(STORAGE_COINS) || '50', 10);
-          localStorage.setItem(STORAGE_COINS, String(currentTotal + award));
-          updateDashboardState();
-        }
-
-        if (playView) playView.style.display = 'none';
-        if (winView) winView.classList.add('show');
-      };
-
+      // Listen for updates from any game
+      window.addEventListener('vanvi_coins_updated', updateDashboardState);
       updateDashboardState();
     })();
   </script>
@@ -1130,11 +1402,10 @@
     <a href="index.html" class="nav-btn" id="bottomNavHome" title="Home">⌂<br/>Home</a>
     <a href="templates.html" class="nav-btn" id="bottomNavExplore" title="Discover">✿<br/>Discover</a>
     <a href="builder.html" class="create nav-btn" id="bottomNavCreate" title="Create">＋<br/>Create</a>
-    <a href="ai.html" class="nav-btn" id="bottomNavAi" title="Vanvi AI">✦<br/>Vanvi AI</a>
+    <a href="ai-matcher.html" class="nav-btn" id="bottomNavAi" title="Vanvi AI">✦<br/>Vanvi AI</a>
     <a href="profile.html" class="nav-btn" id="bottomNavMe" title="Me">♡<br/>Me</a>
   </nav>
 
   <script src="js/vanvi-navigation.js"></script>
-  <!-- References: builder.html · moment.html -->
 </body>
 </html>

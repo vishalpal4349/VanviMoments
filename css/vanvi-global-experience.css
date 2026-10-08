@@ -1,0 +1,629 @@
+/**
+ * VANVI MOMENTS — MASTER ULTRA-PREMIUM DESIGN SYSTEM (v1.8.0)
+ * Universal Mobile-First Cinematic Engine
+ * Designed for 320px, 360px, 375px, 390px, 414px, 768px, 1024px, 1280px, 1440px, 1920px+
+ * Target Feeling: "₹1 Lakh+ Custom Luxury Digital Keepsake Studio"
+ */
+
+/* ─── 1. GLOBAL ROOT DESIGN TOKENS & TYPOGRAPHY ─── */
+:root {
+  /* Viewport Safe Height Variable (Synchronized via JS) */
+  --vanvi-vh: 1vh;
+  --vanvi-real-height: 100vh;
+
+  /* Luxury Font Stacks */
+  --font-editorial-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-modern-sans: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-brand-display: 'Cinzel', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+
+  /* Curated Luxury Jewel Palette */
+  --vanvi-rose: #ff2a7a;
+  --vanvi-rose-vibrant: #ff1268;
+  --vanvi-rose-deep: #be123c;
+  --vanvi-rose-light: #fff0f5;
+  --vanvi-rose-glow: rgba(255, 42, 122, 0.28);
+  
+  --vanvi-gold: #d4af37;
+  --vanvi-gold-bright: #f59e0b;
+  --vanvi-gold-champagne: #d6b878;
+  --vanvi-gold-glow: rgba(214, 184, 120, 0.32);
+  
+  --vanvi-violet: #8b5cf6;
+  --vanvi-violet-glow: rgba(139, 92, 246, 0.25);
+  
+  --vanvi-emerald: #10b981;
+  --vanvi-emerald-vibrant: #18a878;
+  --vanvi-emerald-deep: #0f3d32;
+  --vanvi-cyan: #06b6d4;
+
+  /* Obsidian & Surface Hierarchy */
+  --vanvi-obsidian: #0b070e;
+  --vanvi-obsidian-card: #130a18;
+  --vanvi-pearl: #fff9fc;
+  --vanvi-ink: #2c1224;
+  --vanvi-muted: #806c80;
+
+  /* Frosted Glass & Surface Tokens */
+  --vanvi-glass-light: rgba(255, 255, 255, 0.82);
+  --vanvi-glass-border-light: rgba(255, 180, 210, 0.45);
+  --vanvi-glass-dark: rgba(20, 10, 26, 0.84);
+  --vanvi-glass-border-dark: rgba(255, 120, 175, 0.25);
+  --vanvi-glass-blur: blur(24px) saturate(190%);
+
+  /* Ambient Layered Shadows */
+  --vanvi-shadow-sm: 0 2px 8px rgba(44, 18, 36, 0.05);
+  --vanvi-shadow-md: 0 8px 24px -4px rgba(44, 18, 36, 0.1), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  --vanvi-shadow-lg: 0 20px 48px -10px rgba(44, 18, 36, 0.16), 0 8px 18px -4px rgba(0, 0, 0, 0.06);
+  --vanvi-shadow-glow-rose: 0 0 32px rgba(255, 42, 122, 0.28);
+  --vanvi-shadow-glow-gold: 0 0 32px rgba(214, 184, 120, 0.32);
+  --vanvi-specular-highlight: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+
+  /* Tactile Physics Easings */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── 2. VIEWPORT, OVERFLOW GUARDS & SELECTION ─── */
+html {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip !important;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+::selection {
+  background: rgba(255, 42, 122, 0.28);
+  color: inherit;
+}
+
+/* Luxury Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 120, 175, 0.4);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vanvi-rose);
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  min-height: calc(var(--vanvi-vh, 1vh) * 100);
+  margin: 0;
+  padding: 0;
+  overflow-x: clip !important;
+  font-family: var(--font-modern-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* Ambient Cinematic Lighting Glow */
+body::before {
+  content: "";
+  position: fixed;
+  top: -12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120vw;
+  max-width: 1400px;
+  height: 55vh;
+  background: radial-gradient(ellipse 65% 50% at 50% 20%, rgba(255, 42, 122, 0.09) 0%, rgba(214, 184, 120, 0.05) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.95;
+}
+
+/* ─── 3. BUTTONS — ROCK-SOLID STABILITY & TACTILE PHYSICS ─── */
+/* Prevents any layout jump, text-wrap jitter, or size shifting */
+button,
+.btn,
+a.btn,
+.primary,
+.secondary,
+.cta,
+.btn-create,
+.btn-preview,
+.btn-take-look,
+.btn-make-yours,
+.btn-header-action,
+.btn-header-primary,
+.vanvi-btn-submit,
+.nav-btn,
+.card-btn-preview,
+.card-btn-make {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  line-height: 1.25 !important;
+  font-family: var(--font-modern-sans) !important;
+  letter-spacing: -0.01em !important;
+  font-weight: 600 !important;
+  transition: transform 0.22s var(--ease-smooth),
+              box-shadow 0.24s var(--ease-smooth),
+              background-color 0.2s ease,
+              border-color 0.2s ease,
+              color 0.2s ease,
+              filter 0.2s ease !important;
+}
+
+/* Stable 1–1.5px hover lift maximum — never random shifts or resizes */
+button:hover:not(:disabled):not(.btn-clay-send),
+.btn:hover,
+a.btn:hover,
+.primary:hover,
+.secondary:hover,
+.cta:hover,
+.btn-create:hover,
+.btn-preview:hover,
+.btn-take-look:hover,
+.btn-make-yours:hover,
+.btn-header-action:hover,
+.btn-header-primary:hover,
+.nav-btn:hover,
+.card-btn-preview:hover,
+.card-btn-make:hover {
+  transform: translateY(-1.5px) !important;
+}
+
+/* Tactile Spring Press Physics (0.98 Scale Feedback) */
+button:active:not(:disabled):not(.btn-clay-send),
+.btn:active,
+a.btn:active,
+.primary:active,
+.secondary:active,
+.cta:active,
+.btn-create:active,
+.btn-preview:active,
+.btn-take-look:active,
+.btn-make-yours:active,
+.btn-header-action:active,
+.nav-btn:active,
+.card-btn-preview:active,
+.card-btn-make:active {
+  transform: scale(0.98) translateY(0) !important;
+  transition: transform 0.1s var(--ease-smooth) !important;
+}
+
+/* Disabled State Stability */
+button:disabled,
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Elegant Light Sweep / Gleam Effect on Primary CTAs */
+.primary::before,
+.btn-create::before,
+.btn-make-yours::before,
+.btn-header-primary::before,
+.vanvi-btn-submit::before,
+.btn-gleam::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.38) 50%, transparent 100%);
+  transform: skewX(-22deg);
+  pointer-events: none;
+  z-index: 1;
+  transition: left 0.75s ease;
+}
+.primary:hover::before,
+.btn-create:hover::before,
+.btn-make-yours:hover::before,
+.btn-header-primary:hover::before,
+.vanvi-btn-submit:hover::before,
+.btn-gleam:hover::before {
+  left: 145%;
+}
+
+/* ─── 4. CARDS — TACTILE DEPTH & SPECULAR HIGHLIGHTS ─── */
+.vanvi-luxury-card,
+.card:not([class*="card-"]),
+.template-card,
+.catalog-card,
+.make-card {
+  position: relative !important;
+  box-sizing: border-box !important;
+  border-radius: 20px !important;
+  transition: transform 0.28s var(--ease-smooth),
+              box-shadow 0.28s var(--ease-smooth),
+              border-color 0.24s ease !important;
+  will-change: transform, box-shadow;
+}
+
+/* Subtle Specular Top Highlight Line */
+.vanvi-luxury-card::after,
+.card:not([class*="card-"])::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  height: 1px;
+  background: var(--vanvi-specular-highlight);
+  pointer-events: none;
+  border-radius: 999px;
+  z-index: 2;
+}
+
+/* Smooth Image Container Zoom without Outer Layout Shift */
+.card-art-wrap,
+.card-thumb,
+.card-image-wrap,
+div[class*="image-wrap"],
+div[class*="thumb"] {
+  overflow: hidden !important;
+  border-radius: 16px !important;
+}
+.card-art-img,
+.card-thumb img,
+.card-image-wrap img {
+  transition: transform 0.4s var(--ease-smooth), filter 0.3s ease !important;
+  will-change: transform;
+}
+.vanvi-card:hover .card-art-img,
+.card:hover .card-thumb img,
+.card:hover .card-image-wrap img {
+  transform: scale(1.035) !important;
+}
+
+/* ─── 5. FORMS — LUXURY FOCUS GLOW & STABLE VALIDATION ─── */
+input[type="text"]:not(.composer-input),
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="search"]:not(.composer-input),
+textarea:not(.composer-input),
+select {
+  font-family: var(--font-modern-sans) !important;
+  font-size: 15px !important;
+  border-radius: 14px !important;
+  padding: 12px 16px !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+  outline: none !important;
+}
+input:focus:not(.composer-input),
+textarea:focus:not(.composer-input),
+select:focus {
+  border-color: var(--vanvi-rose) !important;
+  box-shadow: 0 0 0 3.5px rgba(255, 42, 122, 0.18), 0 6px 18px rgba(255, 42, 122, 0.08) !important;
+}
+
+/* Form validation helper containers must have fixed minimum height so error text doesn't cause layout jumps */
+.form-error,
+.validation-msg,
+.field-error,
+.field-hint {
+  min-height: 18px;
+  line-height: 18px;
+  margin-top: 4px;
+}
+
+/* ─── 6. NAVIGATION — COMPACT MOBILE DOCK & DESKTOP PARITY ─── */
+.vanvi-bottom-dock,
+.bottom {
+  max-width: 390px !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  width: calc(100% - 24px) !important;
+  bottom: max(8px, env(safe-area-inset-bottom, 8px)) !important;
+  border-radius: 26px !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  box-shadow: 0 10px 30px rgba(44, 18, 36, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+  z-index: 9999 !important;
+}
+
+/* Body clearance so bottom dock never overlaps footer content (except pages with no dock like AI Assistant/Builder) */
+body:not([data-vanvi-no-dock="true"]) {
+  padding-bottom: calc(64px + env(safe-area-inset-bottom, 10px)) !important;
+}
+
+/* Hide mobile bottom dock on large desktop screens where header handles navigation */
+@media (min-width: 1024px) {
+  .vanvi-bottom-dock,
+  .bottom {
+    display: none !important;
+  }
+  body {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Contextual Back Button */
+.vanvi-btn-back {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 8px 16px !important;
+  border-radius: 999px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: all 0.2s var(--ease-smooth) !important;
+}
+.vanvi-btn-back .back-arrow {
+  transition: transform 0.2s ease !important;
+}
+.vanvi-btn-back:hover .back-arrow {
+  transform: translateX(-2.5px) !important;
+}
+
+/* ─── 7. CINEMATIC ANIMATIONS & SHIMMER LOADERS ─── */
+@keyframes vanviFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes vanviRevealUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes vanviModalIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes vanviShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.vanvi-reveal {
+  animation: vanviRevealUp 0.45s var(--ease-cinematic) forwards;
+}
+
+.vanvi-shimmer-loading {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.3) 25%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0.3) 75%);
+  background-size: 200% 100%;
+  animation: vanviShimmer 1.8s infinite linear;
+}
+
+/* ─── 8. RESPONSIVE BREAKPOINT SYSTEM (MOBILE-PERFECT & DESKTOP PARITY) ─── */
+
+/* [A] Ultra-Compact Screens (320px - 359px: iPhone SE1, Galaxy Fold outer) */
+@media (max-width: 359px) {
+  body {
+    font-size: 13px !important;
+  }
+  h1 {
+    font-size: clamp(20px, 6.5vw, 24px) !important;
+    line-height: 1.2 !important;
+  }
+  h2 {
+    font-size: clamp(16px, 5.5vw, 20px) !important;
+    line-height: 1.25 !important;
+  }
+  .app-header, header {
+    padding: 8px 10px !important;
+  }
+  .brand-title, .brand-text-main {
+    font-size: 13px !important;
+  }
+  .card:not([class*="card-"]), .vanvi-luxury-card, .catalog-card, .make-card {
+    padding: 14px 12px !important;
+    border-radius: 16px !important;
+  }
+  button:not(.vanvi-card *):not(.search-box *):not(.filter-controls-group *):not(.quick-search-tags-row *),
+  .btn, a.btn {
+    min-height: 40px;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  input:not(.search-input), textarea, select:not(.btn-sort-select) {
+    font-size: 16px; /* Prevents unwanted iOS autozoom */
+    padding: 10px 12px;
+  }
+}
+
+/* [B] Standard Compact Mobile (360px - 374px) */
+@media (min-width: 360px) and (max-width: 374px) {
+  .app-header, header {
+    padding: 9px 12px !important;
+  }
+  .card:not([class*="card-"]), .vanvi-luxury-card, .catalog-card, .make-card {
+    padding: 16px 14px !important;
+    border-radius: 18px !important;
+  }
+  input:not(.search-input), textarea, select:not(.btn-sort-select) {
+    font-size: 16px;
+  }
+}
+
+/* [C] Modern Standard Mobile (375px - 389px: iPhone 12/13 Mini, SE2, X) */
+@media (min-width: 375px) and (max-width: 389px) {
+  .app-header, header {
+    padding: 10px 14px !important;
+  }
+  .card:not([class*="card-"]), .vanvi-luxury-card, .catalog-card, .make-card {
+    padding: 18px 16px !important;
+    border-radius: 20px !important;
+  }
+  input:not(.search-input), textarea, select:not(.btn-sort-select) {
+    font-size: 16px;
+  }
+}
+
+/* [D] Flagship Standard Mobile (390px - 479px: iPhone 12/13/14/15/16 Pro, Galaxy S21-S24) */
+@media (min-width: 390px) and (max-width: 479px) {
+  .app-header, header {
+    padding: 11px 16px !important;
+  }
+  .card:not([class*="card-"]), .vanvi-luxury-card, .catalog-card, .make-card {
+    padding: 20px 18px !important;
+    border-radius: 22px !important;
+  }
+  input:not(.search-input), textarea, select:not(.btn-sort-select) {
+    font-size: 16px;
+  }
+}
+
+/* [E] Tablets (768px - 1023px: iPad Mini, iPad Air) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  body {
+    font-size: 14.5px;
+  }
+  .card:not([class*="card-"]), .vanvi-luxury-card, .catalog-card, .make-card {
+    padding: 22px 20px !important;
+  }
+}
+
+/* [F] Laptops & Standard Desktops (1024px - 1439px) */
+@media (min-width: 1024px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+/* [G] Ultra-Wide Displays (1440px - 1920px+) */
+@media (min-width: 1440px) {
+  .page, .main-container, main {
+    max-width: 1380px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* ─── 9. ACCESSIBILITY & PREFERS-REDUCED-MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ─── 12. UNIVERSAL 3D CLAY TACTILE SYSTEM (MASTER v1.8.1) ─── */
+.vanvi-clay-card,
+.clay-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 246, 251, 0.96) 100%) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.32) !important;
+  border-radius: 26px !important;
+  box-shadow: 
+    0 16px 40px -8px rgba(255, 42, 122, 0.12),
+    0 4px 12px rgba(44, 18, 36, 0.03),
+    inset 0 2.5px 3px #ffffff,
+    inset 0 -2.5px 3px rgba(0, 0, 0, 0.02) !important;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease !important;
+}
+
+.vanvi-clay-card:hover,
+.clay-card:hover {
+  transform: translateY(-2.5px) !important;
+  box-shadow: 
+    0 22px 52px -10px rgba(255, 42, 122, 0.18),
+    0 6px 16px rgba(44, 18, 36, 0.05),
+    inset 0 2.5px 3px #ffffff !important;
+}
+
+.vanvi-clay-btn,
+.clay-btn {
+  background: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #9333ea 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.75) !important;
+  border-radius: 99px !important;
+  padding: 10px 22px !important;
+  font-weight: 850 !important;
+  box-shadow: 
+    0 6px 18px rgba(255, 42, 122, 0.32),
+    inset 0 2px 2px rgba(255, 255, 255, 0.75),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.15) !important;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.vanvi-clay-btn:hover,
+.clay-btn:hover {
+  transform: translateY(-1.5px) !important;
+  filter: brightness(1.06) !important;
+  box-shadow: 
+    0 10px 24px rgba(255, 42, 122, 0.42),
+    inset 0 2px 2px rgba(255, 255, 255, 0.85) !important;
+}
+
+.vanvi-clay-btn:active,
+.clay-btn:active {
+  transform: scale(0.97) translateY(0) !important;
+  box-shadow: 
+    0 2px 8px rgba(255, 42, 122, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.vanvi-clay-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 120, 175, 0.35);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #2c1224;
+  box-shadow: 0 3px 10px rgba(44, 18, 36, 0.04), inset 0 1px 1px #fff;
+  transition: all 0.2s ease;
+}
+
+.vanvi-clay-pill:hover {
+  border-color: #ff2a7a;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(255, 42, 122, 0.15);
+}

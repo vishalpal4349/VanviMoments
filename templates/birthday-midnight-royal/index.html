@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Midnight Royal — The Imperial Celebration | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="ember-canvas"></canvas>
+
+  <!-- 1. Gala Curtain Entry -->
+  <div class="curtain-overlay" id="curtain-overlay">
+    <div class="curtain-crest">👑</div>
+    <div class="curtain-title">THE IMPERIAL BIRTHDAY GALA</div>
+    <p class="curtain-sub">An aristocratic digital keepsake prepared for <span class="val-name">Aarav Sharma</span></p>
+    <button class="btn-enter-gala" id="btn-enter-gala">TAP TO ENTER THE GALA ✨</button>
+  </div>
+
+  <div class="page-wrapper">
+    <!-- 2. Hero Section -->
+    <header class="hero-section">
+      <div class="royal-badge">👑 Imperial Edition • Milestone Celebration</div>
+      <div class="royal-monogram val-initial">A</div>
+      <h1 class="hero-title val-name" style="font-family: var(--font-display); font-size: 32px; color: var(--gold-light);">Aarav Sharma</h1>
+      <p class="hero-subtitle">"A soul of timeless nobility, kindness, and eternal light"</p>
+      
+      <!-- 3. Birth Date & 4. Milestone Age -->
+      <div class="meta-capsule-row">
+        <div class="meta-capsule">Date: <strong class="val-date">October 18</strong></div>
+        <div class="meta-capsule">Chapter: <strong class="val-age">25th</strong> Year</div>
+        <div class="meta-capsule">Sign: <strong>Libra / Royal Ascendant</strong></div>
+      </div>
+    </header>
+
+    <!-- 5. Imperial Proclamation & 6. Main Message -->
+    <section class="royal-card">
+      <span class="section-tag">Proclamation</span>
+      <h2 class="section-head">A Royal Birthday Tribute</h2>
+      <p class="val-main-msg" style="font-size: 15px; color: var(--text-secondary); line-height: 1.8;">
+        May your 25th milestone shine with unyielding grandeur, wisdom, and eternal joy. You walk with a rare grace that elevates every soul around you. Today, we celebrate the remarkable legacy you are creating with every passing year.
+      </p>
+    </section>
+
+    <!-- 7. Signature 3D Candle Blow Ceremony -->
+    <section class="royal-card">
+      <span class="section-tag">Signature Ritual</span>
+      <h2 class="section-head">The Royal Candle Ceremony</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+        Make your silent wish for the year ahead and extinguish the midnight flame.
+      </p>
+
+      <div class="candle-stage" id="candle-stage">
+        <div class="cake-stand">
+          <div class="candle-flame"></div>
+          <div class="candle-smoke"></div>
+          <div class="candle-wick"></div>
+          <div class="candle-pillar"></div>
+        </div>
+
+        <div class="blow-controls">
+          <button class="btn-blow" id="btn-blow-candle">
+            <span>💨</span> Make a Wish & Blow Candle
+          </button>
+        </div>
+
+        <div class="wish-unlocked-card" id="wish-unlocked">
+          👑 "Your heartfelt wish has been consecrated to the stars. May abundance and golden joy accompany your footsteps."
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Golden Wax Seal Keepsake Letter -->
+    <section class="royal-card wax-letter-container">
+      <span class="section-tag">Confidential</span>
+      <h2 class="section-head">The Sealed Keepsake Letter</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+        Tap the 24K gold seal to break the imperial wax and unveil the private dedication.
+      </p>
+      
+      <div class="wax-seal-btn" id="wax-seal-btn">👑</div>
+
+      <div class="wax-letter-content" id="wax-letter-content">
+        <div class="parchment-body">
+          <p class="val-letter-text">
+            To our dearest Aarav, through every high and quiet turn, your steadfast loyalty and radiant heart have been our greatest treasure. Here is to your most golden year yet.
+          </p>
+          <div style="margin-top: 16px; font-weight: 700; color: #856328; text-align: right;">
+            — <span class="val-sender">Ananya, Kabir & The Clan</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Royal Photo Gallery -->
+    <section class="royal-card">
+      <span class="section-tag">Imperial Archives</span>
+      <h2 class="section-head">Portraits of Grandeur</h2>
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80" alt="Memory Portrait">
+          <div class="gallery-overlay-tag">The Visionary</div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80" alt="Celebration Portrait">
+          <div class="gallery-overlay-tag">Golden Radiance</div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Joyful Moments">
+          <div class="gallery-overlay-tag">Warm Laughter</div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Royal Milestones">
+          <div class="gallery-overlay-tag">Timeless Grace</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Milestone Timeline -->
+    <section class="royal-card">
+      <span class="section-tag">Chronicle</span>
+      <h2 class="section-head">The Journey Thus Far</h2>
+      <div class="timeline-list">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">Year 0 • The Auspicious Arrival</div>
+          <div class="timeline-desc">A shining light enters the world, bringing boundlessly bright smiles.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">Year 18 • Coming of Age</div>
+          <div class="timeline-desc">Taking on the world with bold courage, unwavering integrity, and grace.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">Year 25 • The Crown Milestone</div>
+          <div class="timeline-desc">Surrounded by family, lifelong friendships, and golden achievements.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Orchestral Soundtrack & Voice Player -->
+    <section class="royal-card">
+      <span class="section-tag">Audio Atmosphere</span>
+      <h2 class="section-head">Imperial Chamber Melody</h2>
+      <div class="audio-player-card" id="audio-player-card">
+        <div class="audio-info">
+          <div class="disc-icon">🎻</div>
+          <div>
+            <div style="font-weight: 700; font-size: 14px; color: var(--gold-light);">Imperial Cello & Strings</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Royal Court Ambient Composition</div>
+          </div>
+        </div>
+        <button class="btn-play-toggle" id="btn-audio-toggle" onclick="this.innerText = this.innerText === '▶' ? '⏸' : '▶'; document.getElementById('audio-player-card').classList.toggle('playing');">▶</button>
+      </div>
+    </section>
+
+    <!-- 12. Aristocratic Wishes Wall -->
+    <section class="royal-card">
+      <span class="section-tag">Guest Register</span>
+      <h2 class="section-head">Noble Blessings & Wishes</h2>
+      <div class="wishes-list" id="wishes-list">
+        <div class="wish-bubble">
+          <div class="wish-author"><span>Kabir Mehta</span><small>Family</small></div>
+          <p>"To the most loyal brother anyone could ask for. Keep ruling your realm with kindness and honor!"</p>
+        </div>
+        <div class="wish-bubble">
+          <div class="wish-author"><span>Ananya Verma</span><small>Best Friend</small></div>
+          <p>"Happy 25th birthday Aarav! Proud of everything you've accomplished and the incredible human you are."</p>
+        </div>
+      </div>
+
+      <form class="wish-input-group" id="wish-form">
+        <input type="text" id="wish-name" placeholder="Your Name or Title" required>
+        <textarea id="wish-msg" rows="2" placeholder="Leave your heartfelt royal birthday blessing..." required></textarea>
+        <button type="submit">Post Imperial Blessing ✍️</button>
+      </form>
+    </section>
+
+    <!-- 13. VIP Crystal Toast -->
+    <section class="royal-card" style="text-align: center;">
+      <span class="section-tag">The Royal Toast</span>
+      <div style="font-size: 40px; margin: 12px 0;">🥂</div>
+      <h2 class="section-head">A Toast to Unwritten Chapters</h2>
+      <p style="font-size: 14px; color: var(--text-secondary); max-width: 480px; margin: 0 auto;">
+        "May your cups always overflow with laughter, your home with peace, and your soul with divine purpose."
+      </p>
+    </section>
+
+    <!-- 14. Five Regal Reasons -->
+    <section class="royal-card">
+      <span class="section-tag">Virtues</span>
+      <h2 class="section-head">5 Regal Reasons You Inspire Us</h2>
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px;">
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 16px; border-radius: 8px; font-size: 13px; border-left: 3px solid var(--gold-primary);">
+          <strong>1. Unwavering Integrity:</strong> You keep your word, no matter the circumstance.
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 16px; border-radius: 8px; font-size: 13px; border-left: 3px solid var(--gold-primary);">
+          <strong>2. Generous Heart:</strong> You celebrate everyone around you before yourself.
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 16px; border-radius: 8px; font-size: 13px; border-left: 3px solid var(--gold-primary);">
+          <strong>3. Quiet Strength:</strong> In stormy days, you are the anchor that keeps everyone grounded.
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 16px; border-radius: 8px; font-size: 13px; border-left: 3px solid var(--gold-primary);">
+          <strong>4. Infectious Laughter:</strong> A presence that instantly lights up any room.
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 12px 16px; border-radius: 8px; font-size: 13px; border-left: 3px solid var(--gold-primary);">
+          <strong>5. Visionary Ambition:</strong> Always building towards a future filled with wonder.
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. Midnight Surprise Box -->
+    <section class="royal-card" style="text-align: center;">
+      <span class="section-tag">Surprise Gift</span>
+      <h2 class="section-head">The Royal Vault</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+        Tap the golden casket to reveal your birthday surprise package.
+      </p>
+      <div id="casket-box" style="font-size: 54px; cursor: pointer; transition: transform 0.3s;" onclick="this.innerHTML = '🎁'; document.getElementById('casket-reveal').style.display = 'block';">
+        🔒
+      </div>
+      <div id="casket-reveal" style="display: none; margin-top: 16px; color: var(--gold-light); font-size: 14px; font-style: italic;">
+        ✨ "A private celebration dinner & weekend retreat awaits you! Check your personal itinerary."
+      </div>
+    </section>
+
+    <!-- 16. Countdown Clock -->
+    <section class="royal-card">
+      <span class="section-tag">Astrological Transit</span>
+      <h2 class="section-head">Midnight Hour Countdown</h2>
+      <div class="countdown-grid">
+        <div class="countdown-box">
+          <span class="countdown-num" id="count-days">0</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="count-hours">0</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="count-mins">0</span>
+          <span class="countdown-label">Mins</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="count-secs">0</span>
+          <span class="countdown-label">Secs</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17. Keepsake QR & Share -->
+    <section class="royal-card">
+      <span class="section-tag">Share The Joy</span>
+      <h2 class="section-head">Preserve & Share This Moment</h2>
+      <p style="font-size: 13px; color: var(--text-secondary);">
+        Send this interactive imperial celebration to friends, family, and loved ones.
+      </p>
+      <div class="share-actions">
+        <a class="btn-share-wa" href="https://api.whatsapp.com/send?text=Check%20out%20this%20Royal%20Birthday%20Celebration%20on%20Vanvi%20Moments!" target="_blank">Share via WhatsApp 💬</a>
+        <button class="btn-copy-link" onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard!');">Copy Link 🔗</button>
+      </div>
+    </section>
+
+    <!-- 18. Atelier Footer -->
+    <footer class="royal-footer">
+      <p>Handcrafted with imperial distinction on <a href="../../index.html">Vanvi Moments</a></p>
+      <p style="margin-top: 4px; font-size: 11px;">Vanvi Atelier • Ultra-Luxury Digital Keepsakes</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,7 +1,24 @@
 /**
  * VANVI MOMENTS — PREMIUM SCROLL EXPERIENCE ENHANCEMENTS
- * Cinematic scroll journey with layered reveals, parallax, and premium animations
+ * Ultra-Premium Romantic Light Palette & Tactile Jewel Micro-Interactions
  */
+
+:root {
+  /* Ultra-Premium Romantic Light System */
+  --vanvi-romantic-pearl: #fff9fc;
+  --vanvi-romantic-blush: #fff0f5;
+  --vanvi-romantic-champagne: #fffbf0;
+  --vanvi-romantic-lavender: #faf5ff;
+  --vanvi-romantic-mint: #f0fdf4;
+  --vanvi-romantic-sky: #f0f9ff;
+  
+  --vanvi-rose-vibrant: #ff2a7a;
+  --vanvi-rose-deep: #e11d48;
+  --vanvi-gold-vibrant: #f59e0b;
+  --vanvi-violet-vibrant: #8b5cf6;
+  --vanvi-emerald-vibrant: #10b981;
+  --vanvi-sky-vibrant: #0284c7;
+}
 
 /* Scroll Animation Base Classes */
 .scroll-animate {
@@ -442,4 +459,1019 @@
 }
 .clay-icon-bubble:hover {
   transform: scale(1.1) rotate(5deg) !important;
+}
+
+/* ==========================================================================
+   VANVI COLORFUL TACTILE JEWEL BUTTON SYSTEM (FAST, SMOOTH, VIBRANT)
+   ========================================================================== */
+
+.btn-jewel-rose,
+.btn-romantic-rose {
+  background: linear-gradient(135deg, #ff2a7a 0%, #ff4d94 50%, #e11d48 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 999px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 16px rgba(255, 42, 122, 0.38), inset 0 1.5px 2px rgba(255, 255, 255, 0.6), inset 0 -2px 0 rgba(190, 18, 60, 0.5) !important;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+.btn-jewel-rose:hover,
+.btn-romantic-rose:hover {
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 8px 24px rgba(255, 42, 122, 0.45), inset 0 1.5px 2px rgba(255, 255, 255, 0.8) !important;
+}
+.btn-jewel-rose:active,
+.btn-romantic-rose:active {
+  transform: scale(0.98) translateY(0) !important;
+  transition: transform 0.1s var(--ease-smooth) !important;
+}
+
+.btn-jewel-gold,
+.btn-romantic-gold {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 999px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 16px rgba(217, 119, 6, 0.38), inset 0 1.5px 2px rgba(255, 255, 255, 0.6), inset 0 -2px 0 rgba(180, 83, 9, 0.5) !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+.btn-jewel-gold:hover,
+.btn-romantic-gold:hover {
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 8px 24px rgba(217, 119, 6, 0.45), inset 0 1.5px 2px rgba(255, 255, 255, 0.8) !important;
+}
+.btn-jewel-gold:active,
+.btn-romantic-gold:active {
+  transform: scale(0.98) translateY(0) !important;
+  transition: transform 0.1s var(--ease-smooth) !important;
+}
+
+.btn-jewel-violet,
+.btn-romantic-lavender {
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #7c3aed 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 999px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.38), inset 0 1.5px 2px rgba(255, 255, 255, 0.6), inset 0 -2px 0 rgba(109, 40, 217, 0.5) !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+.btn-jewel-violet:hover,
+.btn-romantic-lavender:hover {
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.45), inset 0 1.5px 2px rgba(255, 255, 255, 0.8) !important;
+}
+.btn-jewel-violet:active,
+.btn-romantic-lavender:active {
+  transform: scale(0.98) translateY(0) !important;
+  transition: transform 0.1s var(--ease-smooth) !important;
+}
+
+.btn-jewel-mint,
+.btn-romantic-mint {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 999px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.38), inset 0 1.5px 2px rgba(255, 255, 255, 0.6), inset 0 -2px 0 rgba(4, 120, 87, 0.5) !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+.btn-jewel-mint:hover,
+.btn-romantic-mint:hover {
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 8px 24px rgba(5, 150, 105, 0.45), inset 0 1.5px 2px rgba(255, 255, 255, 0.8) !important;
+}
+.btn-jewel-mint:active,
+.btn-romantic-mint:active {
+  transform: scale(0.98) translateY(0) !important;
+  transition: transform 0.1s var(--ease-smooth) !important;
+}
+
+.btn-jewel-sky,
+.btn-romantic-sky {
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 50%, #0284c7 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 999px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.38), inset 0 1.5px 2px rgba(255, 255, 255, 0.6), inset 0 -2px 0 rgba(3, 105, 161, 0.5) !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+.btn-jewel-sky:hover,
+.btn-romantic-sky:hover {
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.45), inset 0 1.5px 2px rgba(255, 255, 255, 0.8) !important;
+}
+.btn-jewel-sky:active,
+.btn-romantic-sky:active {
+  transform: scale(0.98) translateY(0) !important;
+  transition: transform 0.1s var(--ease-smooth) !important;
+}
+
+/* Universal Button Polish across all Inner Pages */
+.btn-preview,
+a.btn-preview,
+.card-btn-preview,
+.btn-take-look {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.38) !important;
+  color: #5c1839 !important;
+  font-weight: 750 !important;
+  box-shadow: 0 3px 8px rgba(44, 18, 36, 0.05), inset 0 1px 0 #ffffff !important;
+  border-radius: 999px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.btn-preview:hover,
+a.btn-preview:hover,
+.card-btn-preview:hover,
+.btn-take-look:hover {
+  background: #fff0f5 !important;
+  color: #ff2a7a !important;
+  border-color: #ff2a7a !important;
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 6px 16px rgba(255, 42, 122, 0.2) !important;
+}
+.btn-preview:active,
+a.btn-preview:active,
+.card-btn-preview:active,
+.btn-take-look:active {
+  transform: scale(0.98) translateY(0) !important;
+  transition: transform 0.1s var(--ease-smooth) !important;
+}
+
+.btn-create,
+a.btn-create,
+.card-btn-make,
+.btn-make-yours,
+.btn-start-rain,
+.btn-action-primary,
+.btn-play-action {
+  background: linear-gradient(135deg, #ff2a7a 0%, #ff4d94 50%, #e11d48 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 999px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 14px rgba(255, 42, 122, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -2px 0 rgba(190, 18, 60, 0.45) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.btn-create:hover,
+a.btn-create:hover,
+.card-btn-make:hover,
+.btn-make-yours:hover,
+.btn-start-rain:hover,
+.btn-action-primary:hover,
+.btn-play-action:hover {
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 8px 22px rgba(255, 42, 122, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+}
+.btn-create:active,
+a.btn-create:active,
+.card-btn-make:active,
+.btn-make-yours:active,
+.btn-start-rain:active,
+.btn-action-primary:active,
+.btn-play-action:active {
+  transform: scale(0.98) translateY(0) !important;
+  transition: transform 0.1s var(--ease-smooth) !important;
+}
+
+/* ==========================================================================
+   GLOBAL 3D CLAYMORPHIC PREMIUM REDESIGN ENGINE (ALL INTERNAL PAGES A–Z)
+   Soft 3D Claymorphism · Deep Shadows · Specular Highlights · Layered Depth
+   Tactile 60fps Micro-Interactions · Pillowy Responsive Surfaces
+   ========================================================================== */
+
+/* 1. Master 3D Clay Canvas for Inner Pages */
+body:not(.homepage-root) {
+  background:
+    radial-gradient(ellipse 90% 60% at 15% 15%, rgba(255, 235, 245, 0.75) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 85% 80%, rgba(254, 243, 199, 0.65) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(243, 232, 255, 0.55) 0%, transparent 55%),
+    linear-gradient(135deg, #fff7fb 0%, #fff1f7 50%, #fdf4ff 100%) !important;
+  background-attachment: fixed !important;
+  color: #2c1224 !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+/* 2. Universal 3D Clay Cards & Containers (All Internal Pages A–Z) */
+body div[class*="card"],
+body section[class*="card"],
+body article[class*="card"],
+body .card,
+body .template-card,
+body .catalog-card,
+body .category-card,
+body .product-card,
+body .plan-card,
+body .pricing-card,
+body .tier-card,
+body .auth-card,
+body .login-card,
+body .signup-card,
+body .auth-box,
+body .dashboard-card,
+body .profile-card,
+body .stat-card,
+body .wallet-card,
+body .order-card,
+body .trust-card,
+body .purchase-card,
+body .deep-details-section,
+body .step-card,
+body .faq-item,
+body .faq-card,
+body .review-item,
+body .review-card,
+body .game-card,
+body .hud-card,
+body .game-wrapper,
+body .score-board,
+body .pod,
+body div[class*="pod"],
+body section[class*="pod"],
+body .tile,
+body div[class*="tile"],
+body .make-card,
+body .about-card,
+body .about-hero-card,
+body .idea-card,
+body .why-section,
+body div[class*="box"]:not(.color-swatch):not(.game-block):not(.cell):not(.cell-block) {
+  background: linear-gradient(145deg, #ffffff 0%, #fff7fb 100%) !important;
+  border-radius: 26px !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 
+    0 18px 38px -6px rgba(255, 42, 122, 0.12),
+    0 6px 16px -2px rgba(44, 18, 36, 0.05),
+    inset 0 3px 4px rgba(255, 255, 255, 0.95),
+    inset 0 -3px 5px rgba(217, 119, 6, 0.06) !important;
+  color: #2c1224 !important;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.28s ease, 
+              border-color 0.2s ease !important;
+}
+
+/* Sleek unboxed layout for internal rows of template cards */
+.vanvi-card .card-art-box,
+.vanvi-card .card-body,
+.vanvi-card .card-exp-hint,
+.vanvi-card .card-header-meta,
+.vanvi-card .card-meta-row,
+.vanvi-card .card-price-cluster,
+.vanvi-card .card-actions-grid {
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  transform: none !important;
+}
+
+body div[class*="card"]:hover,
+body article[class*="card"]:hover,
+body .template-card:hover,
+body .catalog-card:hover,
+body .category-card:hover,
+body .plan-card:hover,
+body .product-card:hover,
+body .game-card:hover,
+body .stat-card:hover {
+  transform: translateY(-4px) scale(1.012) !important;
+  box-shadow: 
+    0 26px 54px -8px rgba(255, 42, 122, 0.20),
+    0 10px 24px -4px rgba(44, 18, 36, 0.08),
+    inset 0 3px 5px #ffffff,
+    inset 0 -3px 6px rgba(217, 119, 6, 0.10) !important;
+  border-color: rgba(255, 255, 255, 1) !important;
+}
+
+/* 3. 3D Clay Tactile Buttons (Primary) */
+.btn-primary,
+.btn-create,
+.btn-header-primary,
+.btn-make-yours,
+.btn-create-moment,
+.btn-buy-now,
+.btn-start-rain,
+.btn-play-action,
+.btn-action-primary,
+button[class*="primary"] {
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #f59e0b 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+  font-weight: 850 !important;
+  box-shadow: 
+    0 10px 24px rgba(255, 42, 122, 0.38),
+    0 3px 8px rgba(0, 0, 0, 0.08),
+    inset 0 2px 2.5px rgba(255, 255, 255, 0.75),
+    inset 0 -2.5px 3.5px rgba(180, 20, 70, 0.35) !important;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.22s ease, 
+              filter 0.2s ease !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  text-decoration: none !important;
+}
+
+.btn-primary:hover,
+.btn-create:hover,
+.btn-header-primary:hover,
+.btn-make-yours:hover,
+.btn-create-moment:hover,
+.btn-buy-now:hover,
+.btn-start-rain:hover,
+.btn-play-action:hover,
+.btn-action-primary:hover,
+button[class*="primary"]:hover {
+  transform: translateY(-2.5px) scale(1.025) !important;
+  box-shadow: 
+    0 16px 34px rgba(255, 42, 122, 0.48),
+    0 4px 10px rgba(0, 0, 0, 0.1),
+    inset 0 2.5px 3px #ffffff,
+    inset 0 -2.5px 4px rgba(180, 20, 70, 0.45) !important;
+  filter: brightness(1.04) !important;
+}
+
+.btn-primary:active,
+.btn-create:active,
+.btn-header-primary:active,
+.btn-make-yours:active,
+.btn-create-moment:active,
+.btn-buy-now:active,
+.btn-start-rain:active,
+.btn-play-action:active,
+.btn-action-primary:active,
+button[class*="primary"]:active {
+  transform: translateY(2px) scale(0.97) !important;
+  box-shadow: 
+    0 4px 12px rgba(255, 42, 122, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* 4. 3D Clay Secondary & Ghost Buttons (Soft White Clay) */
+.btn-secondary,
+.btn-preview,
+.vanvi-btn-back,
+.btn-nav-back,
+.btn-header-action,
+.btn-header-link,
+a.btn-preview,
+.card-btn-preview,
+.btn-take-look {
+  border-radius: 999px !important;
+  background: linear-gradient(145deg, #ffffff 0%, #fff3f8 100%) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.38) !important;
+  color: #ff2a7a !important;
+  font-weight: 750 !important;
+  box-shadow: 
+    0 6px 18px rgba(255, 42, 122, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.03),
+    inset 0 2px 2px #ffffff,
+    inset 0 -2px 3px rgba(255, 120, 175, 0.15) !important;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.22s ease, 
+              background 0.2s ease !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  text-decoration: none !important;
+}
+
+.btn-secondary:hover,
+.btn-preview:hover,
+.vanvi-btn-back:hover,
+.btn-nav-back:hover,
+.btn-header-action:hover,
+.btn-header-link:hover,
+a.btn-preview:hover,
+.card-btn-preview:hover,
+.btn-take-look:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  background: #ffffff !important;
+  border-color: #ff2a7a !important;
+  box-shadow: 
+    0 10px 24px rgba(255, 42, 122, 0.22),
+    0 3px 8px rgba(0, 0, 0, 0.04),
+    inset 0 2px 2px #ffffff,
+    inset 0 -2px 3px rgba(255, 120, 175, 0.2) !important;
+}
+
+.btn-secondary:active,
+.btn-preview:active,
+.vanvi-btn-back:active,
+.btn-nav-back:active,
+.btn-header-action:active,
+.btn-header-link:active,
+a.btn-preview:active,
+.card-btn-preview:active,
+.btn-take-look:active {
+  transform: translateY(1.5px) scale(0.97) !important;
+  box-shadow: 
+    0 3px 8px rgba(255, 42, 122, 0.12),
+    inset 0 2px 4px rgba(255, 120, 175, 0.22) !important;
+}
+
+/* 5. 3D Inset Clay Inputs & Form Controls */
+body input[type="text"],
+body input[type="email"],
+body input[type="password"],
+body input[type="number"],
+body input[type="tel"],
+body input[type="search"],
+body select {
+  border-radius: 999px !important;
+  background: linear-gradient(145deg, #fff7fb 0%, #ffffff 100%) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.32) !important;
+  color: #2c1224 !important;
+  box-shadow: 
+    inset 0 2.5px 4px rgba(44, 18, 36, 0.05),
+    inset 0 -1.5px 2px rgba(255, 255, 255, 0.9),
+    0 4px 12px rgba(255, 120, 175, 0.06) !important;
+  padding: 10px 20px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+body textarea {
+  border-radius: 20px !important;
+  background: linear-gradient(145deg, #fff7fb 0%, #ffffff 100%) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.32) !important;
+  color: #2c1224 !important;
+  box-shadow: 
+    inset 0 2.5px 4px rgba(44, 18, 36, 0.05),
+    inset 0 -1.5px 2px rgba(255, 255, 255, 0.9),
+    0 4px 12px rgba(255, 120, 175, 0.06) !important;
+  padding: 14px 18px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+body input:focus,
+body textarea:focus,
+body select:focus {
+  border-color: #ff2a7a !important;
+  box-shadow: 
+    0 0 0 4px rgba(255, 42, 122, 0.18),
+    inset 0 2px 3px rgba(44, 18, 36, 0.03),
+    inset 0 -1.5px 2px #ffffff !important;
+  outline: none !important;
+}
+
+/* 6. 3D Clay Category Pills & Filter Chips */
+.filter-chip,
+.filter-pill,
+.cat-tab-btn,
+.vanvi-filter-btn,
+.category-pill {
+  border-radius: 999px !important;
+  background: linear-gradient(145deg, #ffffff 0%, #fff4f9 100%) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.32) !important;
+  box-shadow: 
+    0 4px 12px rgba(255, 120, 175, 0.12),
+    inset 0 1.5px 1.5px #ffffff,
+    inset 0 -1.5px 2px rgba(217, 119, 6, 0.08) !important;
+  color: #2c1224 !important;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.22s ease, 
+              border-color 0.2s ease !important;
+}
+
+.filter-chip:hover,
+.filter-pill:hover,
+.cat-tab-btn:hover,
+.vanvi-filter-btn:hover,
+.category-pill:hover {
+  transform: translateY(-2px) scale(1.025) !important;
+  border-color: #ff2a7a !important;
+  color: #ff2a7a !important;
+  box-shadow: 
+    0 8px 20px rgba(255, 42, 122, 0.22),
+    inset 0 1.5px 1.5px #ffffff !important;
+}
+
+.filter-chip.active,
+.filter-pill.active,
+.cat-tab-btn.active,
+.vanvi-filter-btn.active,
+.category-pill.active {
+  background: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #f59e0b 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 
+    0 6px 18px rgba(255, 42, 122, 0.4),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.2) !important;
+  font-weight: 850 !important;
+}
+
+/* 7. 3D Clay Floating Navigation Docks */
+.vanvi-bottom-dock,
+.bottom {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 245, 250, 0.92) 100%) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.45) !important;
+  box-shadow: 
+    0 16px 42px -6px rgba(255, 42, 122, 0.20),
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    inset 0 1.5px 2px #ffffff,
+    inset 0 -2px 3px rgba(217, 119, 6, 0.08) !important;
+  border-radius: 22px !important;
+}
+
+/* 8. 3D Clay Modals, Drawers & Popups */
+.modal-content,
+.studio-panel,
+.modal-card,
+#studioModalContainer,
+div[id*="Modal"] > div {
+  border-radius: 32px !important;
+  background: linear-gradient(145deg, #ffffff 0%, #fff7fb 100%) !important;
+  border: 2.5px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 
+    0 32px 85px rgba(44, 18, 36, 0.24),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 3px 4px rgba(255, 255, 255, 0.95) !important;
+}
+
+/* 9. 3D Floating Badges, Pills & Price Tags */
+.pill,
+.badge,
+.pill-price,
+.card-tag,
+.badge-price,
+.stat-badge {
+  border-radius: 999px !important;
+  box-shadow: 
+    0 3px 8px rgba(44, 18, 36, 0.08),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 10. Universal 3D Responsive Grid System */
+.grid-luxury-catalog,
+.vanvi-cards-grid,
+.catalog-grid,
+.templates-grid,
+.recommendations-grid,
+#recsContainer {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 18px !important;
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding: 16px 20px 48px !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 680px) {
+  .grid-luxury-catalog,
+  .vanvi-cards-grid,
+  .catalog-grid,
+  .templates-grid,
+  .recommendations-grid,
+  #recsContainer {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 22px !important;
+  }
+}
+
+@media (min-width: 960px) {
+  .grid-luxury-catalog,
+  .vanvi-cards-grid,
+  .catalog-grid,
+  .templates-grid,
+  .recommendations-grid,
+  #recsContainer {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 26px !important;
+  }
+}
+
+@media (min-width: 1240px) {
+  .grid-luxury-catalog,
+  .vanvi-cards-grid,
+  .catalog-grid,
+  .templates-grid,
+  .recommendations-grid,
+  #recsContainer {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 28px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-luxury-catalog,
+  .vanvi-cards-grid,
+  .catalog-grid,
+  .templates-grid,
+  .recommendations-grid,
+  #recsContainer {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    padding: 10px 10px 40px !important;
+  }
+}
+
+/* 11. High-Contrast Text Fixes for Day Blossom (Clay) Theme */
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .detail-title,
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .template-title,
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .content-heading,
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .flagship-title,
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .stage-h2,
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .builder-card-title,
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .faq-card-question,
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .faq-title {
+  color: #2c1224 !important;
+}
+
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .flagship-desc,
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .content-lead,
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .spec-label,
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .trust-card p {
+  color: #644a5c !important;
+}
+
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .current-price {
+  color: #d97706 !important;
+}
+
+html:not([data-vanvi-theme="emerald"]) body:not(.homepage-root) .flagship-game-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fff4f9 50%, #fffaf0 100%) !important;
+  border: 2px solid rgba(255, 120, 175, 0.45) !important;
+  box-shadow: 
+    0 20px 48px -6px rgba(255, 42, 122, 0.16),
+    0 6px 16px rgba(44, 18, 36, 0.06),
+    inset 0 3px 4px #ffffff,
+    inset 0 -3px 5px rgba(217, 119, 6, 0.08) !important;
+}
+
+/* 12. Additional Component Polishes (FAQ Accordion, Builders, Game HUDs) */
+.faq-card,
+.faq-item {
+  border-radius: 24px !important;
+  background: linear-gradient(145deg, #ffffff 0%, #fff8fc 100%) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.28) !important;
+  box-shadow: 
+    0 8px 24px -4px rgba(255, 42, 122, 0.08),
+    inset 0 2px 3px #ffffff !important;
+  margin-bottom: 12px !important;
+  overflow: hidden !important;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.faq-card:hover,
+.faq-item:hover {
+  transform: translateY(-2px) !important;
+  border-color: #ff2a7a !important;
+  box-shadow: 
+    0 14px 32px -4px rgba(255, 42, 122, 0.16),
+    inset 0 2px 3px #ffffff !important;
+}
+
+.builder-select-card {
+  border-radius: 28px !important;
+  background: linear-gradient(145deg, #ffffff 0%, #fff7fb 100%) !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 
+    0 18px 40px -6px rgba(255, 42, 122, 0.12),
+    0 6px 16px -2px rgba(44, 18, 36, 0.05),
+    inset 0 3px 4px #ffffff,
+    inset 0 -3px 5px rgba(217, 119, 6, 0.06) !important;
+}
+
+.builder-select-card:hover {
+  transform: translateY(-5px) scale(1.02) !important;
+  border-color: #ff2a7a !important;
+  box-shadow: 
+    0 26px 56px -8px rgba(255, 42, 122, 0.22),
+    inset 0 3px 4px #ffffff !important;
+}
+
+/* Mini Game Canvas & HUD Containers */
+.game-container,
+.game-box,
+.arcade-hud,
+.score-board,
+.game-stage-wrapper {
+  border-radius: 28px !important;
+  background: linear-gradient(145deg, #ffffff 0%, #fff7fb 100%) !important;
+  border: 2px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 
+    0 20px 48px rgba(255, 42, 122, 0.12),
+    0 6px 16px rgba(44, 18, 36, 0.06),
+    inset 0 3px 4px #ffffff,
+    inset 0 -3px 5px rgba(217, 119, 6, 0.08) !important;
+}
+
+/* 13. Comprehensive Theme Adaptations: Emerald Night (3D Obsidian & Gold) */
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) {
+  background: radial-gradient(ellipse 90% 65% at 50% 10%, rgba(15, 61, 50, 0.94) 0%, #0B0D0C 75%) !important;
+  color: #F1F7F4 !important;
+}
+
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) header,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) [class*="header"],
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .rewards-header,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .checkout-header,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .site-header,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .studio-header,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .app-header,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .catalog-header {
+  background: rgba(11, 15, 13, 0.95) !important;
+  border-bottom: 1.5px solid rgba(214, 184, 120, 0.35) !important;
+  color: #F1F7F4 !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.65) !important;
+}
+
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) header .brand-link,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) [class*="header"] .brand-link,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) header .btn-header-link,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) [class*="header"] .btn-header-link,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) header .btn-header-action,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) [class*="header"] .btn-header-action,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .btn-header-back,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .vanvi-btn-back,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .btn-nav-back {
+  background: rgba(20, 32, 26, 0.9) !important;
+  border: 1.5px solid rgba(214, 184, 120, 0.4) !important;
+  color: #F1F7F4 !important;
+}
+
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .vanvi-bottom-dock,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .bottom,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .bottom-dock,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .mobile-dock-nav {
+  background: linear-gradient(145deg, #131d18 0%, #0c120f 100%) !important;
+  border: 1.5px solid rgba(214, 184, 120, 0.42) !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7), inset 0 2px 3px rgba(214, 184, 120, 0.35) !important;
+}
+
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .breadcrumb-trail,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .breadcrumb-bar {
+  color: #A3BFB5 !important;
+}
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .breadcrumb-trail a {
+  color: #D6B878 !important;
+}
+
+html[data-vanvi-theme="emerald"] body div[class*="card"],
+html[data-vanvi-theme="emerald"] body section[class*="card"],
+html[data-vanvi-theme="emerald"] body article[class*="card"],
+html[data-vanvi-theme="emerald"] body .card,
+html[data-vanvi-theme="emerald"] body .vanvi-card,
+html[data-vanvi-theme="emerald"] body .template-card,
+html[data-vanvi-theme="emerald"] body .catalog-card,
+html[data-vanvi-theme="emerald"] body .category-card,
+html[data-vanvi-theme="emerald"] body .faq-card,
+html[data-vanvi-theme="emerald"] body .faq-item,
+html[data-vanvi-theme="emerald"] body .builder-select-card,
+html[data-vanvi-theme="emerald"] body .plan-card,
+html[data-vanvi-theme="emerald"] body .product-card,
+html[data-vanvi-theme="emerald"] body .game-container,
+html[data-vanvi-theme="emerald"] body .flagship-game-card,
+html[data-vanvi-theme="emerald"] body .checkout-card,
+html[data-vanvi-theme="emerald"] body .user-card,
+html[data-vanvi-theme="emerald"] body .rewards-card,
+html[data-vanvi-theme="emerald"] body .coin-hero-card,
+html[data-vanvi-theme="emerald"] body .trust-card,
+html[data-vanvi-theme="emerald"] body .trust-pill,
+html[data-vanvi-theme="emerald"] body .metric-tile,
+html[data-vanvi-theme="emerald"] body .mission-pill,
+html[data-vanvi-theme="emerald"] body .economy-card,
+html[data-vanvi-theme="emerald"] body .plans-stage-pod,
+html[data-vanvi-theme="emerald"] body .converter-clay-card,
+html[data-vanvi-theme="emerald"] body .action-tile,
+html[data-vanvi-theme="emerald"] body .delivery-account-card {
+  background: linear-gradient(145deg, #131d18 0%, #0c120f 100%) !important;
+  border: 1.5px solid rgba(214, 184, 120, 0.42) !important;
+  box-shadow: 
+    0 20px 48px rgba(0, 0, 0, 0.7),
+    inset 0 2px 3px rgba(214, 184, 120, 0.35),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.5) !important;
+  color: #F1F7F4 !important;
+}
+
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .rewards-nav-tabs-wrapper,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .rewards-nav-tabs,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .hub-category-bar,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .category-switch-bar,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .filter-pills-row,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .quick-hub-pill {
+  background: rgba(15, 25, 20, 0.95) !important;
+  border-color: rgba(214, 184, 120, 0.38) !important;
+  color: #F1F7F4 !important;
+}
+
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .detail-title,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .template-title,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .content-heading,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .flagship-title,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .stage-h2,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .builder-card-title,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .faq-card-question,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .faq-title,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .checkout-title-area h1,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .user-details h2,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .metric-val,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .mission-pill strong {
+  color: #F1F7F4 !important;
+}
+
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) p,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .flagship-desc,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .content-lead,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .spec-label,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .trust-card p,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .metric-label,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .mission-pill span,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .checkout-title-area p {
+  color: #A3BFB5 !important;
+}
+
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .current-price,
+html[data-vanvi-theme="emerald"] body:not(.homepage-root) .price-now {
+  color: #D6B878 !important;
+}
+
+html[data-vanvi-theme="emerald"] .btn-primary,
+html[data-vanvi-theme="emerald"] .btn-create,
+html[data-vanvi-theme="emerald"] .btn-header-primary,
+html[data-vanvi-theme="emerald"] .btn-make-yours {
+  background: linear-gradient(135deg, #18A878 0%, #0F3D32 100%) !important;
+  border: 1.5px solid rgba(214, 184, 120, 0.6) !important;
+  box-shadow: 
+    0 8px 22px rgba(24, 168, 120, 0.4),
+    inset 0 2px 2px rgba(214, 184, 120, 0.6) !important;
+  color: #ffffff !important;
+}
+
+/* 14. Comprehensive Theme Adaptations: Spatial Glass (Liquid 3D Frost & Lens) */
+html[data-vanvi-theme="glass"] body:not(.homepage-root) {
+  background: radial-gradient(ellipse 90% 70% at 50% 20%, rgba(255, 230, 245, 0.75) 0%, rgba(243, 232, 255, 0.65) 50%, #faf5f9 100%) !important;
+}
+
+html[data-vanvi-theme="glass"] body:not(.homepage-root) header,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) [class*="header"],
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .rewards-header,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .checkout-header,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .site-header,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .studio-header,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .app-header,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .catalog-header {
+  background: rgba(255, 255, 255, 0.58) !important;
+  backdrop-filter: blur(28px) saturate(1.8) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(1.8) !important;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 8px 30px rgba(44, 18, 36, 0.06) !important;
+  color: #2c1224 !important;
+}
+
+html[data-vanvi-theme="glass"] body:not(.homepage-root) header .brand-link,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) [class*="header"] .brand-link,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) header .btn-header-link,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) [class*="header"] .btn-header-link,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) header .btn-header-action,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) [class*="header"] .btn-header-action,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .btn-header-back,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .vanvi-btn-back,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .btn-nav-back {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  color: #2c1224 !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .vanvi-bottom-dock,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .bottom,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .bottom-dock,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .mobile-dock-nav {
+  background: rgba(255, 255, 255, 0.58) !important;
+  backdrop-filter: blur(28px) saturate(1.8) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(1.8) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 20px 48px rgba(44, 18, 36, 0.12) !important;
+}
+
+html[data-vanvi-theme="glass"] body div[class*="card"],
+html[data-vanvi-theme="glass"] body section[class*="card"],
+html[data-vanvi-theme="glass"] body article[class*="card"],
+html[data-vanvi-theme="glass"] body .card,
+html[data-vanvi-theme="glass"] body .vanvi-card,
+html[data-vanvi-theme="glass"] body .template-card,
+html[data-vanvi-theme="glass"] body .catalog-card,
+html[data-vanvi-theme="glass"] body .category-card,
+html[data-vanvi-theme="glass"] body .faq-card,
+html[data-vanvi-theme="glass"] body .faq-item,
+html[data-vanvi-theme="glass"] body .builder-select-card,
+html[data-vanvi-theme="glass"] body .plan-card,
+html[data-vanvi-theme="glass"] body .product-card,
+html[data-vanvi-theme="glass"] body .game-container,
+html[data-vanvi-theme="glass"] body .flagship-game-card,
+html[data-vanvi-theme="glass"] body .checkout-card,
+html[data-vanvi-theme="glass"] body .user-card,
+html[data-vanvi-theme="glass"] body .rewards-card,
+html[data-vanvi-theme="glass"] body .coin-hero-card,
+html[data-vanvi-theme="glass"] body .trust-card,
+html[data-vanvi-theme="glass"] body .trust-pill,
+html[data-vanvi-theme="glass"] body .metric-tile,
+html[data-vanvi-theme="glass"] body .mission-pill,
+html[data-vanvi-theme="glass"] body .economy-card,
+html[data-vanvi-theme="glass"] body .plans-stage-pod,
+html[data-vanvi-theme="glass"] body .converter-clay-card {
+  background: rgba(255, 255, 255, 0.48) !important;
+  backdrop-filter: blur(28px) saturate(1.8) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(1.8) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 
+    0 24px 60px rgba(44, 18, 36, 0.08),
+    inset 0 2px 3px rgba(255, 255, 255, 0.98),
+    inset 0 -2px 3px rgba(255, 120, 175, 0.1) !important;
+  color: #2c1224 !important;
+}
+
+html[data-vanvi-theme="glass"] body:not(.homepage-root) {
+  color: #2c1224 !important;
+}
+
+html[data-vanvi-theme="glass"] body:not(.homepage-root) h1,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) h2,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) h3,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .hero-heading,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .card-title,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .template-title,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .content-heading,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .metric-val,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .checkout-title-area h1 {
+  color: #2c1224 !important;
+}
+
+html[data-vanvi-theme="glass"] body:not(.homepage-root) p,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .hero-sub,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .card-tagline,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .metric-label,
+html[data-vanvi-theme="glass"] body:not(.homepage-root) .checkout-title-area p {
+  color: #52364c !important;
+}
+
+/* 15. Smooth 60fps Micro-Animations */
+@keyframes vanviClayFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes vanviGlowPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+.vanvi-float-subtle {
+  animation: vanviClayFloat 4s ease-in-out infinite;
+}
+
+/* 16. Comprehensive Theme Adaptations: Bloom Theme (Lush Rose Blush & Flowing Jewel Glow) */
+html[data-vanvi-theme="bloom"] body:not(.homepage-root) {
+  background:
+    radial-gradient(ellipse 90% 60% at 10% 8%, rgba(255, 120, 185, 0.38) 0%, transparent 55%),
+    radial-gradient(ellipse 85% 55% at 90% 12%, rgba(254, 215, 170, 0.45) 0%, transparent 52%),
+    radial-gradient(ellipse 80% 50% at 50% 38%, rgba(233, 213, 255, 0.48) 0%, transparent 58%),
+    radial-gradient(ellipse 70% 50% at 20% 75%, rgba(255, 182, 193, 0.35) 0%, transparent 50%),
+    linear-gradient(180deg, #fff7fb 0%, #ffedf5 28%, #fbf0fd 68%, #fff8fc 100%) !important;
+  background-attachment: fixed !important;
+  color: #2c1224 !important;
+}
+
+html[data-vanvi-theme="bloom"] .btn-primary,
+html[data-vanvi-theme="bloom"] .btn-create,
+html[data-vanvi-theme="bloom"] .btn-make-yours,
+html[data-vanvi-theme="bloom"] .btn-header-primary {
+  background: linear-gradient(135deg, #ff2a7a 0%, #ff4b8b 22%, #9333ea 58%, #ec4899 82%, #ff2a7a 100%) !important;
+  background-size: 260% 260% !important;
+  animation: clueButtonFlow 4.5s ease infinite !important;
+  box-shadow: 0 6px 20px rgba(255, 42, 122, 0.4), 0 2px 8px rgba(147, 51, 234, 0.22), inset 0 1.5px 2px rgba(255, 255, 255, 0.75), inset 0 -1.5px 2px rgba(0, 0, 0, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  color: #ffffff !important;
 }

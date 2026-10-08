@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
   <title>Moment Not Found ✦ 404 | Vanvi Moments</title>
@@ -17,6 +18,7 @@
 
   <link rel="stylesheet" href="vanvi-inner-light.css"/>
   <link rel="stylesheet" href="vanvi-navigation.css"/>
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     /* =========================================================
@@ -103,31 +105,26 @@
       gap: 10px;
     }
 
-    /* Brand Logo: BRAND ONLY, not a link */
+    /* Brand Logo: Clean & Ultra Premium */
     .header-brand {
       display: flex;
       align-items: center;
       gap: 7px;
       user-select: none;
-      cursor: default;
+      cursor: pointer;
       text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 900;
-      font-size: 14px;
     }
-    .brand-spark-icon {
-      font-size: 18px;
-      animation: gentleSpin 6s infinite linear;
+    .header-brand-img {
+      height: 32px;
+      width: auto;
+      max-width: 145px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(255, 42, 122, 0.22));
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    @keyframes gentleSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .header-brand:hover .header-brand-img {
+      transform: scale(1.05);
     }
-    .brand-title {
-      font-size: 13.5px;
-      letter-spacing: -0.2px;
-    }
-    .brand-title span { color: var(--rose-main); }
 
     .header-right-tag {
       font-size: 10px;
@@ -227,19 +224,20 @@
       background: var(--rose-gradient);
     }
 
-    /* Floating Glass Memory Card Accent (Subtle & Elegant) */
+    /* Floating Glass Memory Card Accent with Real Brand Ribbon Logo */
     .floating-glass-visual {
-      width: 86px;
-      height: 86px;
+      width: 140px;
+      height: 76px;
       border-radius: 22px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 241, 246, 0.65));
-      border: 1.5px solid rgba(255, 120, 175, 0.4);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 241, 246, 0.88));
+      border: 1.5px solid rgba(255, 120, 175, 0.45);
       box-shadow: 
-        0 10px 25px rgba(255, 42, 122, 0.12),
-        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+        0 12px 28px rgba(255, 42, 122, 0.16),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.98);
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 6px 14px;
       margin-bottom: 16px;
       position: relative;
       animation: floatGentle 4.5s ease-in-out infinite alternate;
@@ -247,19 +245,21 @@
 
     @keyframes floatGentle {
       0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(-7px) rotate(2deg); }
+      100% { transform: translateY(-7px) rotate(1.5deg); }
     }
 
-    .visual-spark {
-      font-size: 34px;
-      filter: drop-shadow(0 4px 10px rgba(255, 42, 122, 0.3));
+    .card-logo-visual {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 10px rgba(255, 42, 122, 0.25));
     }
 
     .visual-halo {
       position: absolute;
       inset: -6px;
       border-radius: 26px;
-      border: 1px dashed rgba(255, 120, 175, 0.3);
+      border: 1px dashed rgba(255, 120, 175, 0.35);
       pointer-events: none;
       animation: haloSpin 20s linear infinite;
     }
@@ -444,16 +444,15 @@
   <div class="ambient-orb orb-1"></div>
   <div class="ambient-orb orb-2"></div>
 
-  <!-- Compact Top Header (Brand Only, No Navigation on Logo) -->
+  <!-- Compact Top Header (Brand Logo) -->
   <header class="app-header">
-    <a href="index.html" class="header-brand" title="Vanvi Moments">
-      <span class="brand-spark-icon">✨</span>
-      <div class="brand-title">VANVI <span>♡</span> MOMENTS</div>
-    </div>
+    <a href="index.html" class="header-brand" title="Vanvi Moments Home">
+      <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="header-brand-img" />
+    </a>
 
     <div class="header-right-tag">
       <span>✦ 404 Not Found</span>
-    </a>
+    </div>
   </header>
 
   <!-- Dedicated Breadcrumb Trail with Safe Back Button -->
@@ -475,7 +474,7 @@
       <!-- Small Premium Floating Glass Memory Visual -->
       <div class="floating-glass-visual" aria-hidden="true">
         <div class="visual-halo"></div>
-        <span class="visual-spark">✨</span>
+        <span class="visual-lost-motif" style="font-size:32px; filter:drop-shadow(0 4px 8px rgba(255,42,122,0.28));">🕊️</span>
       </div>
 
       <!-- Small Label -->
@@ -507,7 +506,7 @@
           <span>Explore Templates</span> <span>→</span>
         </a>
         <span class="lost-link-divider">✦</span>
-        <a href="ai.html" class="lost-sublink">
+        <a href="ai-matcher.html" class="lost-sublink">
           <span>AI Studio</span> <span>✦</span>
         </a>
       </div>
@@ -520,7 +519,7 @@
     <a href="index.html" class="nav-btn" id="bottomNavHome">⌂<br/>Home</a>
     <a href="templates.html" class="nav-btn" id="bottomNavExplore">◌<br/>Explore</a>
     <a href="builder.html" class="create nav-btn" id="bottomNavCreate">＋<br/>Create</a>
-    <a href="ai.html" class="nav-btn" id="bottomNavAi">✦<br/>AI</a>
+    <a href="ai-matcher.html" class="nav-btn" id="bottomNavAi">✦<br/>AI</a>
     <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
   </nav>
 

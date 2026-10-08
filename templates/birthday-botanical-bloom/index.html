@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Botanical Bloom — Garden of Milestones | Vanvi Moments</title>
+  <meta name="description" content="A lush botanical birthday experience featuring an interactive blooming flower, milestone herbarium, and organic life growth timeline.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="petal-canvas"></canvas>
+
+  <!-- 1. Garden Gate Overlay -->
+  <div class="gate-overlay" id="gate-overlay">
+    <div class="gate-wreath">🌿🌸🌿</div>
+    <h2 style="font-family: var(--font-serif); font-size: 30px; color: var(--petal-pink); margin-bottom: 8px;">THE BOTANICAL SANCTUARY</h2>
+    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 24px;">An organic milestone celebration honoring <span class="val-name">Tara Sen</span></p>
+    <button class="btn-open-garden" id="btn-open-garden">ENTER THE GARDEN 🍃</button>
+  </div>
+
+  <div class="page-wrapper">
+    <!-- 2. Botanical Hero -->
+    <header class="botanical-hero">
+      <div class="hero-pill">🌿 Life in Full Bloom</div>
+      <h1 class="botanical-name val-name">Tara Sen</h1>
+      <p style="font-family: var(--font-serif); font-style: italic; color: var(--petal-pink); font-size: 19px;">
+        "Like wildflowers, you grow wherever light dares to reach"
+      </p>
+
+      <div class="botanical-coords">
+        <div class="coord-tag">Years Blooming: <strong class="val-age">25</strong></div>
+        <div class="coord-tag">Celebration: <strong class="val-date">November 18</strong></div>
+        <div class="coord-tag">Bloom Spirit: <strong>Flora Wildflower</strong></div>
+      </div>
+    </header>
+
+    <!-- 3. Heartfelt Botanical Ode -->
+    <section class="organic-card">
+      <span class="card-tag">Nature's Blessing</span>
+      <h2 class="card-head">To Someone Who Makes Life Blossom</h2>
+      <p class="val-botanical-msg" style="font-size: 15px; color: #e4ebe5; line-height: 1.8;">
+        Like the rarest orchid blooming in morning sunlight, you bring warmth, color, and quiet grace into all of our lives. May your 25th chapter bloom with infinite happiness, deep love, and flourishing dreams!
+      </p>
+      <div style="margin-top: 16px; font-weight: 700; color: var(--sage-accent); text-align: right;">
+        — <span class="val-sender">Reyansh & Your Loving Family</span>
+      </div>
+    </section>
+
+    <!-- 4. Signature Interaction: Tap to Bloom Flower -->
+    <section class="organic-card">
+      <span class="card-tag">Signature Interaction</span>
+      <h2 class="card-head">Bloom Your Birthday Petals</h2>
+      <div class="bloom-stage">
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">
+          Tap the flower bud below to reveal the blossoming petals and fragrance of blessings!
+        </p>
+
+        <div class="flower-container" id="flower-container">
+          <svg class="flower-svg" viewBox="0 0 180 180">
+            <defs>
+              <linearGradient id="petalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fcedec" />
+                <stop offset="60%" stop-color="#f4c2c2" />
+                <stop offset="100%" stop-color="#e07a86" />
+              </linearGradient>
+            </defs>
+            <!-- 8 Petals radiating from center (90, 90) -->
+            <path class="petal petal-1" d="M 90 90 Q 75 40 90 20 Q 105 40 90 90 Z" fill="url(#petalGrad)" />
+            <path class="petal petal-2" d="M 90 90 Q 75 40 90 20 Q 105 40 90 90 Z" fill="url(#petalGrad)" />
+            <path class="petal petal-3" d="M 90 90 Q 75 40 90 20 Q 105 40 90 90 Z" fill="url(#petalGrad)" />
+            <path class="petal petal-4" d="M 90 90 Q 75 40 90 20 Q 105 40 90 90 Z" fill="url(#petalGrad)" />
+            <path class="petal petal-5" d="M 90 90 Q 75 40 90 20 Q 105 40 90 90 Z" fill="url(#petalGrad)" />
+            <path class="petal petal-6" d="M 90 90 Q 75 40 90 20 Q 105 40 90 90 Z" fill="url(#petalGrad)" />
+            <path class="petal petal-7" d="M 90 90 Q 75 40 90 20 Q 105 40 90 90 Z" fill="url(#petalGrad)" />
+            <path class="petal petal-8" d="M 90 90 Q 75 40 90 20 Q 105 40 90 90 Z" fill="url(#petalGrad)" />
+            <!-- Golden Flower Core -->
+            <circle class="flower-core" cx="90" cy="90" r="16" />
+          </svg>
+        </div>
+
+        <button class="btn-bloom" id="btn-bloom">🌸 Tap to Blossom Flower</button>
+        <div id="bloom-wish" style="display: none; margin-top: 14px; color: var(--gold-accent); font-size: 14px; font-style: italic;">
+          ✨ May your life forever bloom with radiant health, joy & laughter!
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Life Milestones Herbarium Timeline -->
+    <section class="organic-card">
+      <span class="card-tag">Growth Herbarium</span>
+      <h2 class="card-head">Milestones in Bloom</h2>
+      <div class="milestones-list">
+        <div class="milestone-item">
+          <div class="milestone-icon">🌱</div>
+          <div>
+            <div class="milestone-title">Roots & Beginnings</div>
+            <div class="milestone-desc val-milestone-1">Planting early seeds of kindness, curiosity, and endless giggles.</div>
+          </div>
+        </div>
+        <div class="milestone-item">
+          <div class="milestone-icon">🌿</div>
+          <div>
+            <div class="milestone-title">Growing Wild & Free</div>
+            <div class="milestone-desc val-milestone-2">Chasing big adventures, university triumphs, and creating golden memories.</div>
+          </div>
+        </div>
+        <div class="milestone-item">
+          <div class="milestone-icon">🌺</div>
+          <div>
+            <div class="milestone-title">Blossoming Radiance</div>
+            <div class="milestone-desc val-milestone-3">Stepping into your 25th solar blossom with confidence, wisdom, and grace.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Pressed Flower Herbarium Gallery -->
+    <section class="organic-card">
+      <span class="card-tag">Pressed Keepsakes</span>
+      <h2 class="card-head">Garden Memories Gallery</h2>
+      <div class="herbarium-gallery">
+        <div class="herbarium-photo-frame">
+          <div class="herbarium-tape"></div>
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80" alt="Garden Memory 1">
+        </div>
+        <div class="herbarium-photo-frame">
+          <div class="herbarium-tape"></div>
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" alt="Garden Memory 2">
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Secret Seed Envelope -->
+    <section class="organic-card">
+      <span class="card-tag">Golden Keepsake</span>
+      <h2 class="card-head">Secret Flower Seed Wish</h2>
+      <div class="seed-envelope">
+        <p style="font-size: 13px; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;">
+          💌 A botanical wish sealed for your soul:
+        </p>
+        <p style="font-style: italic; color: var(--gold-accent); font-size: 14px;">
+          "Wherever you wander, may your path be lined with blooming jasmine, gentle breezes, and unwavering love."
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. Birthday Countdown Timer -->
+    <section class="organic-card">
+      <span class="card-tag">Seasonal Transition</span>
+      <h2 class="card-head">Next Garden Solar Return</h2>
+      <div class="clock-grid">
+        <div class="clock-cell">
+          <div class="clock-val" id="bloom-days">0</div>
+          <div class="clock-lbl">Days</div>
+        </div>
+        <div class="clock-cell">
+          <div class="clock-val" id="bloom-hours">0</div>
+          <div class="clock-lbl">Hours</div>
+        </div>
+        <div class="clock-cell">
+          <div class="clock-val" id="bloom-mins">0</div>
+          <div class="clock-lbl">Mins</div>
+        </div>
+        <div class="clock-cell">
+          <div class="clock-val" id="bloom-secs">0</div>
+          <div class="clock-lbl">Secs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. WhatsApp Share & Footer -->
+    <section class="organic-card" style="text-align: center;">
+      <span class="card-tag">Share Joy</span>
+      <h2 class="card-head">Send This Garden Keepsake</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+        Share this private botanical birthday microsite with friends & family on WhatsApp!
+      </p>
+      <a href="https://api.whatsapp.com/send?text=Happy%20Birthday%20Tara!%20Check%20out%20your%20Botanical%20Bloom%20gift:%20" target="_blank" rel="noopener" class="btn-share-garden" id="btn-share">
+        Share on WhatsApp 🌿✨
+      </a>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

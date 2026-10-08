@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Royal Wedding Invitation | Shreya & Aayush ✦ Vanvi Moments</title>
+  <meta name="description" content="Experience the ultra-luxury royal wedding celebration of Shreya & Aayush with interactive 3D envelope wax seal, scratch date reveal, and live itinerary.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Floating Mandala Corner Motifs -->
+  <svg class="royal-corner top-left" viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="1.5">
+    <path d="M 0 0 L 70 0 Q 70 30 100 30 L 100 0 M 0 0 L 0 70 Q 30 70 30 100 L 0 100"/>
+    <circle cx="25" cy="25" r="14" stroke-dasharray="3,3"/>
+    <circle cx="25" cy="25" r="4" fill="#d4af37"/>
+  </svg>
+  <svg class="royal-corner top-right" viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="1.5">
+    <path d="M 0 0 L 70 0 Q 70 30 100 30 L 100 0 M 0 0 L 0 70 Q 30 70 30 100 L 0 100"/>
+    <circle cx="25" cy="25" r="14" stroke-dasharray="3,3"/>
+    <circle cx="25" cy="25" r="4" fill="#d4af37"/>
+  </svg>
+
+  <!-- 1. Top VIP Guest Personalized Welcome Bar (Dynamic ?guest= param) -->
+  <header class="guest-welcome-header" id="guestWelcomeHeader">
+    <div class="guest-greeting-cluster">
+      <span class="guest-royal-crown" aria-hidden="true">👑</span>
+      <div class="guest-tag-wrap">
+        <span class="guest-honor-badge">Honored Guest</span>
+        <h2 class="guest-name-dynamic" id="guestNameDisplay">Welcome, Chacha Chachi ji</h2>
+      </div>
+    </div>
+    <div class="header-monogram-pill" id="headerMonogramPill">#Shaya</div>
+  </header>
+
+  <main>
+    <!-- 2. Sacred Invocation & Couple Crest -->
+    <section class="royal-hero-section">
+      <div class="ganesha-invocation">
+        <span class="ganesha-symbol">ॐ</span>
+        <span class="invocation-text">|| श्री गणेशाय नमः ||</span>
+      </div>
+
+      <div class="couple-names-crest">
+        <h1 class="couple-title-main" id="coupleTitleMain">
+          <span id="brideNameDisplay">Shreya</span>
+          <span class="couple-title-ampersand">&amp;</span>
+          <span id="groomNameDisplay">Aayush</span>
+        </h1>
+        <p class="couple-tagline-sub" id="weddingSubtitle">Cordially Invite You To Celebrate Their Union</p>
+      </div>
+    </section>
+
+    <!-- 3. 3D Royal Envelope & Wax Seal Showcase -->
+    <section class="envelope-showcase-container">
+      <div class="envelope-wrapper" id="envelopeWrapper">
+        
+        <!-- Golden Sparkle Canvas -->
+        <canvas id="sparkleCanvas"></canvas>
+
+        <!-- The 3D Envelope Body -->
+        <div class="envelope-body">
+          <div class="envelope-texture"></div>
+
+          <!-- Inside Letter Sheet (Slides Up on Seal Tap) -->
+          <article class="invitation-letter-sheet" id="invitationLetterSheet">
+            <div class="letter-ornate-header">
+              <span class="letter-palace-icon">🏰</span>
+              <h2 class="letter-title">The Royal Decree</h2>
+              <p style="font-size:11px; color:var(--text-gold); font-family:var(--font-sans); text-transform:uppercase; letter-spacing:1px; margin-top:2px;">Udaipur Palace Celebration</p>
+            </div>
+
+            <p class="letter-body-copy" id="invitationLetterBody">
+              “Two souls, two families, united by destiny under the palace moonlight. We request the honor of your presence and blessings as we embark on this sacred journey of love and togetherness.”
+            </p>
+
+            <div class="letter-couple-crests">
+              <div class="crest-col">
+                <span class="crest-name" id="brideFamilyName">D/o Mr. &amp; Mrs. Sharma</span>
+                <span class="crest-parents">Jaipur Heritage</span>
+              </div>
+              <span style="color:var(--gold-foil); font-size:16px;">✦</span>
+              <div class="crest-col">
+                <span class="crest-name" id="groomFamilyName">S/o Mr. &amp; Mrs. Verma</span>
+                <span class="crest-parents">Delhi Royals</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Envelope Triangular Folds -->
+          <div class="envelope-fold-left"></div>
+          <div class="envelope-fold-right"></div>
+          <div class="envelope-fold-bottom"></div>
+          <div class="envelope-flap-top" id="envelopeFlapTop"></div>
+
+          <!-- 3D Golden Wax Seal Button -->
+          <button type="button" class="envelope-seal-button" id="envelopeSealBtn" title="Tap Wax Seal to Open Invitation" aria-label="Tap wax seal to open invitation">
+            <span class="seal-monogram-text" id="sealMonogramText">#Shaya</span>
+            <span class="seal-tap-hint">Tap to Unseal ✦</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Interactive Storyboard: Our Story Polaroid Cards with 3D Tilt -->
+    <section class="storyboard-section">
+      <div class="section-royal-heading">
+        <span class="section-kicker">Chronicles of Destiny</span>
+        <h2 class="section-main-title">Our Storyboard</h2>
+        <div class="section-royal-divider"></div>
+      </div>
+
+      <div class="polaroid-cards-deck" id="polaroidsDeck">
+        
+        <!-- Polaroid 1 -->
+        <div class="polaroid-card" data-tilt>
+          <div class="polaroid-photo-frame">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&auto=format&fit=crop&q=80" alt="Childhood & First Sight" class="polaroid-img" loading="lazy">
+          </div>
+          <div class="polaroid-caption-box">
+            <span class="polaroid-era-tag">Chapter I · 2018</span>
+            <h3 class="polaroid-headline">The First Glimpse</h3>
+            <p class="polaroid-note">A serendipitous laugh across a coffee table that turned ordinary moments into poetry.</p>
+          </div>
+        </div>
+
+        <!-- Polaroid 2 -->
+        <div class="polaroid-card" data-tilt>
+          <div class="polaroid-photo-frame">
+            <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80" alt="Growing Together" class="polaroid-img" loading="lazy">
+          </div>
+          <div class="polaroid-caption-box">
+            <span class="polaroid-era-tag">Chapter II · 2022</span>
+            <h3 class="polaroid-headline">The Midnight Vow</h3>
+            <p class="polaroid-note">Under the starlit sky of Udaipur, a promise made for eternity with whispered laughter.</p>
+          </div>
+        </div>
+
+        <!-- Polaroid 3 -->
+        <div class="polaroid-card" data-tilt>
+          <div class="polaroid-photo-frame">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&auto=format&fit=crop&q=80" alt="The Royal Engagement" class="polaroid-img" loading="lazy">
+          </div>
+          <div class="polaroid-caption-box">
+            <span class="polaroid-era-tag">Chapter III · Forever</span>
+            <h3 class="polaroid-headline">She Said Yes ✦</h3>
+            <p class="polaroid-note">Surrounded by family, blessings, and marigold petals, our forever officially begins.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. Scratch-to-Reveal Date -->
+    <section class="scratch-reveal-container">
+      <div class="section-royal-heading">
+        <span class="section-kicker">Auspicious Muhurtham</span>
+        <h2 class="section-main-title">Scratch to Reveal the Date</h2>
+        <div class="section-royal-divider"></div>
+      </div>
+
+      <div class="scratch-card-box" id="scratchCardBox">
+        <!-- Secret Revealed Content -->
+        <div class="scratch-secret-content">
+          <span class="secret-ring-icon">💍</span>
+          <span class="secret-muhurtham-label">Save The Sacred Date</span>
+          <h3 class="secret-date-display" id="revealedDateText">Saturday, 12 December 2026</h3>
+          <p class="secret-location-label" id="revealedLocationText">The Oberoi Udaivilas · Udaipur, Rajasthan</p>
+        </div>
+
+        <!-- Golden Canvas Scratch Coat -->
+        <canvas id="scratchCanvas"></canvas>
+      </div>
+
+      <div class="scratch-instruction-pill">
+        <span>✨ Swipe finger or cursor across gold coat to unlock</span>
+      </div>
+    </section>
+
+    <!-- 6. Evening Itinerary & Schedule -->
+    <section class="itinerary-section">
+      <div class="section-royal-heading">
+        <span class="section-kicker">Order of Festivities</span>
+        <h2 class="section-main-title">Evening Itinerary</h2>
+        <div class="section-royal-divider"></div>
+      </div>
+
+      <div class="timeline-track-wrap" id="timelineTrackWrap">
+        
+        <div class="timeline-event-card">
+          <div class="timeline-node-dot"></div>
+          <div class="event-card-header">
+            <span class="event-time-badge">06:30 PM</span>
+            <span class="event-attire-pill">Traditional Regal</span>
+          </div>
+          <h3 class="event-title">Swagat &amp; Royal Welcome</h3>
+          <p class="event-desc">Dhol welcome procession with rose petal showers and welcome champagne at the Palace Courtyard.</p>
+        </div>
+
+        <div class="timeline-event-card">
+          <div class="timeline-node-dot"></div>
+          <div class="event-card-header">
+            <span class="event-time-badge">08:00 PM</span>
+            <span class="event-attire-pill">Glitz &amp; Sangeet</span>
+          </div>
+          <h3 class="event-title">Sangeet &amp; Musical Symphony</h3>
+          <p class="event-desc">Choreographed family performances, musical showdowns, and couple waltz by the lake.</p>
+        </div>
+
+        <div class="timeline-event-card">
+          <div class="timeline-node-dot"></div>
+          <div class="event-card-header">
+            <span class="event-time-badge">09:30 PM</span>
+            <span class="event-attire-pill">Imperial Gold</span>
+          </div>
+          <h3 class="event-title">Ring Ceremony &amp; Vows</h3>
+          <p class="event-desc">Exchange of rings and sacred promises accompanied by live classical sitar and fireworks.</p>
+        </div>
+
+        <div class="timeline-event-card">
+          <div class="timeline-node-dot"></div>
+          <div class="event-card-header">
+            <span class="event-time-badge">10:30 PM</span>
+            <span class="event-attire-pill">Feast &amp; Joy</span>
+          </div>
+          <h3 class="event-title">Shahi Dawat (Grand Banquet)</h3>
+          <p class="event-desc">Authentic royal Rajasthani and global gourmet banquet with acoustic dessert lounge.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. Action Suite: 4 Action Buttons -->
+    <section class="action-suite-section">
+      <div class="action-buttons-grid">
+        
+        <!-- Action 1: Save to Calendar -->
+        <button type="button" class="btn-royal-action" id="btnSaveCalendar">
+          <div class="action-icon-pod">📅</div>
+          <div>
+            <span class="action-title">Save to Calendar</span>
+            <span class="action-sub">Google Cal &amp; iCal (.ics)</span>
+          </div>
+        </button>
+
+        <!-- Action 2: WhatsApp Family Group -->
+        <a href="https://chat.whatsapp.com/invite" target="_blank" rel="noopener noreferrer" class="btn-royal-action btn-whatsapp" id="btnWhatsAppGroup">
+          <div class="action-icon-pod">💬</div>
+          <div>
+            <span class="action-title">WhatsApp Group</span>
+            <span class="action-sub">Join Family Updates</span>
+          </div>
+        </a>
+
+        <!-- Action 3: Venue & Directions -->
+        <button type="button" class="btn-royal-action" id="btnVenueDirections">
+          <div class="action-icon-pod">📍</div>
+          <div>
+            <span class="action-title">Venue &amp; Directions</span>
+            <span class="action-sub">The Oberoi Udaivilas</span>
+          </div>
+        </button>
+
+        <!-- Action 4: Send a Wish -->
+        <button type="button" class="btn-royal-action" id="btnScrollToWish">
+          <div class="action-icon-pod">💌</div>
+          <div>
+            <span class="action-title">Send a Wish</span>
+            <span class="action-sub">Blessings Wall</span>
+          </div>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- 8. 'Send a Wish' Blessing Guestbook -->
+    <section class="wishes-guestbook-section" id="wishesSection">
+      <div class="section-royal-heading">
+        <span class="section-kicker">Shower Your Love</span>
+        <h2 class="section-main-title">Blessings Wall</h2>
+        <div class="section-royal-divider"></div>
+      </div>
+
+      <div class="wishes-card-surface">
+        <form id="blessingForm">
+          <div class="wish-input-group">
+            <input type="text" id="wishAuthorInput" class="wish-input" placeholder="Your Name (e.g. Chacha ji / Priya)" required>
+          </div>
+          <div class="wish-input-group">
+            <textarea id="wishMessageInput" class="wish-textarea" placeholder="Write your heartfelt blessing or warm wishes for the couple..." required></textarea>
+          </div>
+          <button type="submit" class="btn-send-blessing">Bestow Blessing ✦</button>
+        </form>
+
+        <div class="blessings-wall-feed" id="blessingsWallFeed">
+          <!-- Seed Blessings -->
+          <div class="blessing-bubble">
+            <div class="blessing-author-row">
+              <span class="blessing-author">Chacha &amp; Chachi ji</span>
+              <span class="blessing-timestamp">Just now</span>
+            </div>
+            <p style="color:#4a1525;">May your union be filled with boundless joy, prosperity, and timeless love! Can’t wait to celebrate in Udaipur.</p>
+          </div>
+          <div class="blessing-bubble">
+            <div class="blessing-author-row">
+              <span class="blessing-author">Rohan &amp; Family</span>
+              <span class="blessing-timestamp">2 hrs ago</span>
+            </div>
+            <p style="color:#4a1525;">Heartiest congratulations Shreya and Aayush! The most graceful couple ever. Lots of love!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 9. Floating Audio Bar (Frequency Equalizer Bars + Chime) -->
+  <div class="floating-audio-bar" id="floatingAudioBar" title="Toggle Royal Sitar & Flute Soundtrack">
+    <div class="audio-equalizer" id="audioEqualizer">
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+    </div>
+    <div class="audio-meta-text">
+      <span class="audio-title-lbl" id="soundtrackTitle">Royal Courtyard Sitar</span>
+      <span class="audio-status-lbl" id="soundtrackStatus">Tap to Play 🎵</span>
+    </div>
+    <span class="audio-play-icon" id="audioPlayIcon">▶</span>
+  </div>
+
+  <!-- 10. Venue Modal -->
+  <div class="modal-overlay" id="venueModal">
+    <div class="modal-card-box">
+      <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">✕</button>
+      <div style="text-align:center;">
+        <span style="font-size:26px;">🏰</span>
+        <h3 style="font-family:var(--font-serif); font-size:18px; color:var(--royal-crimson); margin-top:4px;" id="modalVenueTitle">The Oberoi Udaivilas</h3>
+        <p style="font-size:12.5px; color:var(--text-muted);" id="modalVenueAddress">Badi-Gorela-Mulla Talai Rd, Haridas Ji Ki Magri, Udaipur, Rajasthan 313001</p>
+      </div>
+
+      <iframe class="venue-map-iframe" id="venueMapIframe" src="https://maps.google.com/maps?q=The+Oberoi+Udaivilas+Udaipur&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Venue Map"></iframe>
+
+      <div style="display:flex; gap:10px; margin-top:12px;">
+        <a href="https://maps.google.com/?q=The+Oberoi+Udaivilas+Udaipur" target="_blank" rel="noopener noreferrer" class="btn-royal-action" style="flex:1; justify-content:center; text-align:center; background:var(--royal-crimson); color:#ffffff; border-color:transparent;">
+          <span>Open Google Maps ↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core JavaScript -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ─── 1. DYNAMIC CONFIGURATION & GUEST QUERY PARAM ───
+      const urlParams = new URLSearchParams(window.location.search);
+      const guestParam = urlParams.get('guest');
+
+      // Load optional builder configuration from localStorage
+      let customConfig = {};
+      try {
+        const stored = localStorage.getItem('vanvi_royal_invite_config');
+        if (stored) customConfig = JSON.parse(stored);
+      } catch (e) {}
+
+      // Fallback defaults
+      const config = {
+        brideName: urlParams.get('bride') || customConfig.brideName || 'Shreya',
+        groomName: urlParams.get('groom') || customConfig.groomName || 'Aayush',
+        monogram: urlParams.get('monogram') || customConfig.monogram || '#Shaya',
+        dateStr: urlParams.get('date') || customConfig.dateStr || 'Saturday, 12 December 2026',
+        isoDate: customConfig.isoDate || '2026-12-12',
+        venueName: urlParams.get('venue') || customConfig.venueName || 'The Oberoi Udaivilas',
+        venueCity: customConfig.venueCity || 'Udaipur, Rajasthan',
+        whatsappLink: customConfig.whatsappLink || 'https://chat.whatsapp.com/invite',
+        guestGreeting: guestParam 
+          ? `Welcome, ${decodeURIComponent(guestParam)}` 
+          : (customConfig.defaultGuest ? `Welcome, ${customConfig.defaultGuest}` : 'Welcome, Honored Guest')
+      };
+
+      // Populate dynamic DOM fields
+      const guestEl = document.getElementById('guestNameDisplay');
+      if (guestEl) guestEl.textContent = config.guestGreeting;
+
+      const monoPill = document.getElementById('headerMonogramPill');
+      const sealMono = document.getElementById('sealMonogramText');
+      if (monoPill) monoPill.textContent = config.monogram;
+      if (sealMono) sealMono.textContent = config.monogram;
+
+      const brideEl = document.getElementById('brideNameDisplay');
+      const groomEl = document.getElementById('groomNameDisplay');
+      if (brideEl) brideEl.textContent = config.brideName;
+      if (groomEl) groomEl.textContent = config.groomName;
+
+      const dateEl = document.getElementById('revealedDateText');
+      if (dateEl) dateEl.textContent = config.dateStr;
+
+      const locEl = document.getElementById('revealedLocationText');
+      if (locEl) locEl.textContent = `${config.venueName} · ${config.venueCity}`;
+
+      const waBtn = document.getElementById('btnWhatsAppGroup');
+      if (waBtn && config.whatsappLink) waBtn.href = config.whatsappLink;
+
+      // Dynamic Letter Body
+      if (customConfig.letterBody) {
+        const letterEl = document.getElementById('invitationLetterBody');
+        if (letterEl) letterEl.textContent = `“${customConfig.letterBody}”`;
+      }
+
+      // Dynamic Storyboard Photos
+      if (customConfig.photos && Array.isArray(customConfig.photos) && customConfig.photos.length > 0) {
+        const cards = document.querySelectorAll('.polaroid-card');
+        customConfig.photos.forEach((p, idx) => {
+          if (cards[idx]) {
+            if (p.img) {
+              const imgEl = cards[idx].querySelector('.polaroid-img');
+              if (imgEl) imgEl.src = p.img;
+            }
+            if (p.era) {
+              const eraEl = cards[idx].querySelector('.polaroid-era-tag');
+              if (eraEl) eraEl.textContent = p.era;
+            }
+            if (p.title) {
+              const headEl = cards[idx].querySelector('.polaroid-headline');
+              if (headEl) headEl.textContent = p.title;
+            }
+            if (p.desc) {
+              const descEl = cards[idx].querySelector('.polaroid-note');
+              if (descEl) descEl.textContent = p.desc;
+            }
+          }
+        });
+      }
+
+      // Dynamic Itinerary Timeline
+      if (customConfig.itinerary && Array.isArray(customConfig.itinerary) && customConfig.itinerary.length > 0) {
+        const timelineWrap = document.getElementById('timelineTrackWrap');
+        if (timelineWrap) {
+          timelineWrap.innerHTML = customConfig.itinerary.map(item => `
+            <div class="timeline-event-card">
+              <div class="timeline-node-dot"></div>
+              <div class="event-card-header">
+                <span class="event-time-badge">${escapeHtml(item.time || '')}</span>
+                <span class="event-attire-pill">${escapeHtml(item.attire || 'Regal Attire')}</span>
+              </div>
+              <h3 class="event-title">${escapeHtml(item.title || '')}</h3>
+              <p class="event-desc">${escapeHtml(item.desc || '')}</p>
+            </div>
+          `).join('');
+        }
+      }
+
+      // ─── 2. WEB AUDIO API SYNTHESIZER (ROYAL SITAR / FLUTE CHORDS) ───
+      let audioCtx = null;
+      let isPlaying = false;
+      let synthInterval = null;
+
+      function playRoyalChordNote(freq, delay = 0, duration = 1.8) {
+        if (!audioCtx) return;
+        setTimeout(() => {
+          try {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle'; // Warm, resonant string timbre
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+            gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.15);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+          } catch (e) {}
+        }, delay * 1000);
+      }
+
+      function startRoyalMusic() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) audioCtx = new AudioContext();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        isPlaying = true;
+        updateAudioBarUI();
+
+        // Raag Yaman / Royal celebration scale chord loop (D, F#, A, C#, E)
+        const scale = [293.66, 369.99, 440.00, 554.37, 587.33, 739.99];
+        function playChimeSequence() {
+          if (!isPlaying) return;
+          playRoyalChordNote(scale[0], 0, 2.5);
+          playRoyalChordNote(scale[1], 0.3, 2.2);
+          playRoyalChordNote(scale[2], 0.6, 2.0);
+          playRoyalChordNote(scale[3], 0.9, 2.4);
+          playRoyalChordNote(scale[4], 1.4, 2.8);
+        }
+
+        playChimeSequence();
+        clearInterval(synthInterval);
+        synthInterval = setInterval(playChimeSequence, 4000);
+      }
+
+      function stopRoyalMusic() {
+        isPlaying = false;
+        clearInterval(synthInterval);
+        updateAudioBarUI();
+      }
+
+      function updateAudioBarUI() {
+        const bar = document.getElementById('floatingAudioBar');
+        const statusLbl = document.getElementById('soundtrackStatus');
+        const playIcon = document.getElementById('audioPlayIcon');
+        if (!bar) return;
+
+        if (isPlaying) {
+          bar.classList.add('is-playing');
+          if (statusLbl) statusLbl.textContent = 'Playing ✦';
+          if (playIcon) playIcon.textContent = '⏸';
+        } else {
+          bar.classList.remove('is-playing');
+          if (statusLbl) statusLbl.textContent = 'Tap to Play 🎵';
+          if (playIcon) playIcon.textContent = '▶';
+        }
+      }
+
+      const audioBar = document.getElementById('floatingAudioBar');
+      if (audioBar) {
+        audioBar.addEventListener('click', () => {
+          if (isPlaying) stopRoyalMusic();
+          else startRoyalMusic();
+        });
+      }
+
+      // ─── 3. 3D ROYAL ENVELOPE WAX SEAL INTERACTION ───
+      const sealBtn = document.getElementById('envelopeSealBtn');
+      const envWrapper = document.getElementById('envelopeWrapper');
+      const sparkleCanvas = document.getElementById('sparkleCanvas');
+
+      if (sealBtn && envWrapper) {
+        sealBtn.addEventListener('click', () => {
+          // 1. Play royal music on first user tap
+          if (!isPlaying) startRoyalMusic();
+
+          // 2. Burst golden sparkles on canvas
+          fireCanvasSparkles();
+
+          // 3. Flip flap & slide letter
+          envWrapper.classList.add('is-open');
+
+          // 4. Also trigger celebratory confetti
+          if (typeof confetti === 'function') {
+            confetti({
+              particleCount: 45,
+              spread: 70,
+              origin: { y: 0.6 },
+              colors: ['#d4af37', '#ffd700', '#f9eed3', '#5e0d1d']
+            });
+          }
+        });
+      }
+
+      function fireCanvasSparkles() {
+        if (!sparkleCanvas) return;
+        const rect = sparkleCanvas.getBoundingClientRect();
+        sparkleCanvas.width = rect.width;
+        sparkleCanvas.height = rect.height;
+        const ctx = sparkleCanvas.getContext('2d');
+        if (!ctx) return;
+
+        const particles = [];
+        const count = 50;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 2 + Math.random() * 5;
+          particles.push({
+            x: cx,
+            y: cy,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            radius: 2 + Math.random() * 3,
+            alpha: 1,
+            color: ['#f7e09e', '#d4af37', '#ffffff', '#ffd978'][Math.floor(Math.random() * 4)]
+          });
+        }
+
+        let animFrame;
+        function render() {
+          ctx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+          let alive = false;
+          particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.alpha -= 0.025;
+            if (p.alpha > 0) {
+              alive = true;
+              ctx.save();
+              ctx.globalAlpha = p.alpha;
+              ctx.fillStyle = p.color;
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+              ctx.fill();
+              ctx.restore();
+            }
+          });
+          if (alive) animFrame = requestAnimationFrame(render);
+          else ctx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+        }
+        render();
+      }
+
+      // ─── 4. SCRATCH-TO-REVEAL WEDDING DATE ───
+      const scratchCanvas = document.getElementById('scratchCanvas');
+      if (scratchCanvas) {
+        const ctx = scratchCanvas.getContext('2d');
+        let isDrawing = false;
+        let isRevealed = false;
+
+        function initScratchCoat() {
+          const rect = scratchCanvas.getBoundingClientRect();
+          scratchCanvas.width = rect.width;
+          scratchCanvas.height = rect.height;
+
+          // Paint royal metallic gold coat with texture
+          const grad = ctx.createLinearGradient(0, 0, scratchCanvas.width, scratchCanvas.height);
+          grad.addColorStop(0, '#d4af37');
+          grad.addColorStop(0.3, '#f9eed3');
+          grad.addColorStop(0.6, '#b58a22');
+          grad.addColorStop(1, '#e5b95c');
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
+
+          // Add elegant watermark text
+          ctx.font = 'bold 15px Cinzel, serif';
+          ctx.fillStyle = '#4a1525';
+          ctx.textAlign = 'center';
+          ctx.fillText('✦ SCRATCH TO REVEAL DATE ✦', scratchCanvas.width / 2, scratchCanvas.height / 2 + 5);
+        }
+
+        setTimeout(initScratchCoat, 200);
+        window.addEventListener('resize', () => {
+          if (!isRevealed) initScratchCoat();
+        });
+
+        function scratch(x, y) {
+          if (isRevealed) return;
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(x, y, 26, 0, Math.PI * 2);
+          ctx.fill();
+
+          checkScratchPercentage();
+        }
+
+        function checkScratchPercentage() {
+          if (isRevealed) return;
+          try {
+            const imgData = ctx.getImageData(0, 0, scratchCanvas.width, scratchCanvas.height);
+            let clearPixels = 0;
+            const total = imgData.data.length / 4;
+            // Sample every 16th pixel for speed
+            for (let i = 3; i < imgData.data.length; i += 64) {
+              if (imgData.data[i] === 0) clearPixels++;
+            }
+            const ratio = clearPixels / (total / 16);
+            if (ratio > 0.4) {
+              isRevealed = true;
+              scratchCanvas.style.transition = 'opacity 0.6s ease';
+              scratchCanvas.style.opacity = '0';
+              setTimeout(() => { scratchCanvas.style.display = 'none'; }, 600);
+
+              // Cannon Confetti!
+              if (typeof confetti === 'function') {
+                confetti({
+                  particleCount: 80,
+                  spread: 90,
+                  origin: { y: 0.7 },
+                  colors: ['#d4af37', '#e11d48', '#f59e0b', '#ffffff']
+                });
+              }
+            }
+          } catch (e) {}
+        }
+
+        function getPos(e) {
+          const rect = scratchCanvas.getBoundingClientRect();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          return {
+            x: clientX - rect.left,
+            y: clientY - rect.top
+          };
+        }
+
+        scratchCanvas.addEventListener('mousedown', (e) => { isDrawing = true; const p = getPos(e); scratch(p.x, p.y); });
+        scratchCanvas.addEventListener('mousemove', (e) => { if (isDrawing) { const p = getPos(e); scratch(p.x, p.y); } });
+        window.addEventListener('mouseup', () => { isDrawing = false; });
+
+        scratchCanvas.addEventListener('touchstart', (e) => { isDrawing = true; const p = getPos(e); scratch(p.x, p.y); }, { passive: true });
+        scratchCanvas.addEventListener('touchmove', (e) => { if (isDrawing) { const p = getPos(e); scratch(p.x, p.y); } }, { passive: true });
+        window.addEventListener('touchend', () => { isDrawing = false; });
+      }
+
+      // ─── 5. STORYBOARD POLAROID 3D TILT EFFECT ───
+      document.querySelectorAll('.polaroid-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `perspective(800px) rotateX(${(-y * 12).toFixed(1)}deg) rotateY(${(x * 14).toFixed(1)}deg) scale(1.03)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+
+      // ─── 6. ACTION SUITE HANDLERS ───
+      // Save to Calendar (.ics & Google Calendar)
+      const calBtn = document.getElementById('btnSaveCalendar');
+      if (calBtn) {
+        calBtn.addEventListener('click', () => {
+          const title = encodeURIComponent(`${config.brideName} & ${config.groomName}'s Royal Wedding`);
+          const location = encodeURIComponent(`${config.venueName}, ${config.venueCity}`);
+          const details = encodeURIComponent(`You are cordially invited to celebrate the union of ${config.brideName} & ${config.groomName}.`);
+          
+          // Construct Google Calendar Link
+          const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261212T130000Z/20261212T183000Z&details=${details}&location=${location}`;
+          
+          // Generate downloadable .ics file
+          const icsData = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Vanvi Moments//Royal Shaadi Invite//EN',
+            'BEGIN:VEVENT',
+            `SUMMARY:${decodeURIComponent(title)}`,
+            `DESCRIPTION:${decodeURIComponent(details)}`,
+            `LOCATION:${decodeURIComponent(location)}`,
+            'DTSTART:20261212T130000Z',
+            'DTEND:20261212T183000Z',
+            'STATUS:CONFIRMED',
+            'END:VEVENT',
+            'END:VCALENDAR'
+          ].join('\r\n');
+
+          const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.setAttribute('download', `${config.monogram.replace('#','')}-Wedding.ics`);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          // Also open Google Calendar tab as user convenience
+          window.open(gCalUrl, '_blank');
+        });
+      }
+
+      // Venue & Directions Modal
+      const venueBtn = document.getElementById('btnVenueDirections');
+      const venueModal = document.getElementById('venueModal');
+      const modalClose = document.getElementById('modalCloseBtn');
+
+      if (venueBtn && venueModal) {
+        venueBtn.addEventListener('click', () => { venueModal.classList.add('active'); });
+      }
+      if (modalClose && venueModal) {
+        modalClose.addEventListener('click', () => { venueModal.classList.remove('active'); });
+      }
+      if (venueModal) {
+        venueModal.addEventListener('click', (e) => {
+          if (e.target === venueModal) venueModal.classList.remove('active');
+        });
+      }
+
+      // Scroll to wish
+      const wishBtn = document.getElementById('btnScrollToWish');
+      if (wishBtn) {
+        wishBtn.addEventListener('click', () => {
+          document.getElementById('wishesSection')?.scrollIntoView({ behavior: 'smooth' });
+          document.getElementById('wishAuthorInput')?.focus();
+        });
+      }
+
+      // ─── 7. SEND A WISH GUESTBOOK FORM ───
+      const blessingForm = document.getElementById('blessingForm');
+      const blessingsWall = document.getElementById('blessingsWallFeed');
+      if (blessingForm && blessingsWall) {
+        blessingForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const author = document.getElementById('wishAuthorInput').value.trim();
+          const msg = document.getElementById('wishMessageInput').value.trim();
+          if (!author || !msg) return;
+
+          const bubble = document.createElement('div');
+          bubble.className = 'blessing-bubble';
+          bubble.innerHTML = `
+            <div class="blessing-author-row">
+              <span class="blessing-author">${escapeHtml(author)}</span>
+              <span class="blessing-timestamp">Just now</span>
+            </div>
+            <p style="color:#4a1525;">${escapeHtml(msg)}</p>
+          `;
+          blessingsWall.prepend(bubble);
+          blessingForm.reset();
+
+          if (typeof confetti === 'function') {
+            confetti({ particleCount: 35, spread: 60, origin: { y: 0.8 }, colors: ['#d4af37', '#e11d48'] });
+          }
+        });
+      }
+
+      function escapeHtml(str) {
+        return String(str).replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+      }
+
+    })();
+  </script>
+</body>
+</html>

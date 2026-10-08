@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Golden Anniversary Studio | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/vanvi-global-experience.css">
+  <link rel="stylesheet" href="../../css/vanvi-custom-builder.css">
+  <script src="../../js/vanvi-api.js"></script>
+  <script src="../../js/vanvi-builder-core.js"></script>
+</head>
+<body>
+  <header class="builder-topbar">
+    <div class="builder-brand-group">
+      <a href="../../index.html#template-world" class="btn-builder-back">← Template World</a>
+      <div class="builder-template-meta">
+        <span class="builder-template-icon">👑</span>
+        <div>
+          <div class="builder-template-name">Golden Anniversary 24K Studio</div>
+          <span class="builder-template-badge">24K Gold Timeline</span>
+        </div>
+      </div>
+    </div>
+    <div class="builder-actions-top">
+      <button id="btnSaveMomentTop" class="builder-save-btn">
+        <span>✨</span> <span>Publish Keepsake</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="builder-layout">
+    <section class="builder-form-pane">
+      <div class="builder-hero-intro">
+        <div class="builder-eyebrow">24K Royal Milestone Studio</div>
+        <h1 class="builder-title">Honor Decades of Undying Love & Partnership</h1>
+        <p class="builder-desc">A lavish golden reel celebrating wedding milestones, vows, treasured anniversary photographs, and orchestral grandeur.</p>
+      </div>
+
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">💍</span> The Golden Couple</div>
+        
+        <div class="form-group">
+          <label class="form-label" for="inpCouple">Couple's Names</label>
+          <input type="text" id="inpCouple" class="form-input" value="Arthur & Eleanor">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpSender">Dedicated By</label>
+          <input type="text" id="inpSender" class="form-input" value="Your Loving Children & Family">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpDate">Wedding / Milestone Date</label>
+          <input type="date" id="inpDate" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Milestone Jubilee</label>
+          <div class="chips-grid" id="milestonePicker">
+            <div class="chip-option" data-tier="silver">
+              <span class="chip-icon">🥈</span>
+              <span>25th Silver</span>
+            </div>
+            <div class="chip-option selected" data-tier="gold">
+              <span class="chip-icon">👑</span>
+              <span>50th Golden</span>
+            </div>
+            <div class="chip-option" data-tier="diamond">
+              <span class="chip-icon">💎</span>
+              <span>60th Diamond</span>
+            </div>
+            <div class="chip-option" data-tier="bespoke">
+              <span class="chip-icon">✨</span>
+              <span>Custom Year</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">📜</span> Golden Vow Renewal Letter</div>
+        <div class="form-group">
+          <label class="form-label" for="inpMessage">Anniversary Tribute & Message</label>
+          <textarea id="inpMessage" class="form-textarea" rows="4">Through every storm, sunrise, and gentle evening, your love has been a timeless beacon for our entire family. May your golden journey shine brighter with every passing year.</textarea>
+        </div>
+      </div>
+
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">🖼️</span> Golden Timeline Photos</div>
+        <div class="photo-uploader-grid" id="photoGrid">
+          <div class="photo-slot" onclick="triggerUpload(0)"><span style="font-size: 20px;">➕</span><span style="font-size: 11px; margin-top: 4px; font-weight: 700;">Wedding Day</span></div>
+          <div class="photo-slot" onclick="triggerUpload(1)"><span style="font-size: 20px;">➕</span><span style="font-size: 11px; margin-top: 4px; font-weight: 700;">Through Years</span></div>
+          <div class="photo-slot" onclick="triggerUpload(2)"><span style="font-size: 20px;">➕</span><span style="font-size: 11px; margin-top: 4px; font-weight: 700;">Golden Present</span></div>
+        </div>
+        <input type="file" id="hiddenPhotoInput" accept="image/*" style="display: none;">
+      </div>
+
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">🎻</span> Orchestral Romance</div>
+        <div class="chips-grid" id="soundtrackPicker">
+          <div class="chip-option selected" data-track="orchestral-strings">
+            <span class="chip-icon">🎻</span>
+            <span>Golden Strings</span>
+          </div>
+          <div class="chip-option" data-track="piano-waltz">
+            <span class="chip-icon">🎹</span>
+            <span>Royal Waltz</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="builder-preview-pane">
+      <div class="preview-toolbar">
+        <div class="preview-title"><span class="preview-pulse"></span><span>Live Interactive Preview</span></div>
+        <div class="device-switcher">
+          <button class="device-btn active" id="btnDeviceMobile">📱 Mobile</button>
+          <button class="device-btn" id="btnDeviceDesktop">💻 Desktop</button>
+        </div>
+      </div>
+      <div class="preview-frame-container mobile-mode" id="previewContainer">
+        <iframe id="previewFrame" class="preview-iframe" src="index.html" title="Live Template Preview"></iframe>
+      </div>
+    </aside>
+  </main>
+
+  <div class="builder-modal-overlay" id="celebrationModal">
+    <div class="builder-modal-card">
+      <div class="modal-icon-badge">👑</div>
+      <h2 class="modal-title">Golden Anniversary Keepsake Ready!</h2>
+      <p class="modal-subtitle">Your 24K milestone tribute is published and preserved forever.</p>
+      
+      <div class="share-link-box">
+        <input type="text" id="shareUrlInput" class="share-link-input" readonly>
+        <button class="share-copy-btn" id="btnCopyShareUrl">📋 Copy</button>
+      </div>
+
+      <div class="modal-actions-grid">
+        <a id="btnModalOpenExp" href="#" class="btn-open-experience" target="_blank"><span>✨</span> Open Final Experience</a>
+        <a id="btnModalWhatsApp" href="#" class="btn-share-whatsapp" target="_blank"><span>💬</span> Share via WhatsApp</a>
+        <button class="btn-close-modal" onclick="closeCelebrationModal()">Close & Keep Editing</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentPhotos = [];
+    let currentPhotoSlotIndex = 0;
+    const TEMPLATE_ID = 'golden-anniversary';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await VanviBuilderCore.init({ templateId: TEMPLATE_ID });
+
+      const data = VanviBuilderCore.customData;
+      if (data.coupleNames) document.getElementById('inpCouple').value = data.coupleNames;
+      if (data.senderName) document.getElementById('inpSender').value = data.senderName;
+      if (data.message) document.getElementById('inpMessage').value = data.message;
+      if (data.anniversaryDate) document.getElementById('inpDate').value = data.anniversaryDate;
+      if (data.photos && Array.isArray(data.photos)) {
+        currentPhotos = data.photos;
+        renderPhotos();
+      }
+
+      const previewFrame = document.getElementById('previewFrame');
+      VanviBuilderCore.attachPreview(previewFrame);
+
+      const syncInputs = () => {
+        const payload = {
+          coupleNames: document.getElementById('inpCouple').value,
+          recipientName: document.getElementById('inpCouple').value,
+          senderName: document.getElementById('inpSender').value,
+          message: document.getElementById('inpMessage').value,
+          anniversaryDate: document.getElementById('inpDate').value,
+          photos: currentPhotos,
+          milestoneTier: document.querySelector('#milestonePicker .chip-option.selected')?.dataset.tier || 'gold',
+          soundtrack: document.querySelector('#soundtrackPicker .chip-option.selected')?.dataset.track || 'orchestral-strings'
+        };
+
+        VanviBuilderCore.update(payload);
+        if (previewFrame && previewFrame.contentWindow) {
+          previewFrame.contentWindow.postMessage({
+            type: 'VANVI_LIVE_PREVIEW_SYNC',
+            recipient: payload.coupleNames,
+            sender: payload.senderName,
+            message: payload.message,
+            photos: payload.photos,
+            customData: payload
+          }, '*');
+        }
+      };
+
+      document.querySelectorAll('#inpCouple, #inpSender, #inpMessage, #inpDate').forEach(el => {
+        el.addEventListener('input', syncInputs);
+      });
+
+      document.querySelectorAll('#milestonePicker .chip-option, #soundtrackPicker .chip-option').forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          const parent = chip.closest('.chips-grid');
+          parent.querySelectorAll('.chip-option').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          syncInputs();
+        });
+      });
+
+      document.getElementById('btnDeviceMobile').addEventListener('click', () => {
+        document.getElementById('btnDeviceMobile').classList.add('active');
+        document.getElementById('btnDeviceDesktop').classList.remove('active');
+        document.getElementById('previewContainer').classList.add('mobile-mode');
+      });
+
+      document.getElementById('btnDeviceDesktop').addEventListener('click', () => {
+        document.getElementById('btnDeviceDesktop').classList.add('active');
+        document.getElementById('btnDeviceMobile').classList.remove('active');
+        document.getElementById('previewContainer').classList.remove('mobile-mode');
+      });
+
+      document.getElementById('btnSaveMomentTop').addEventListener('click', handlePublish);
+
+      document.getElementById('btnCopyShareUrl').addEventListener('click', () => {
+        const input = document.getElementById('shareUrlInput');
+        navigator.clipboard.writeText(input.value).then(() => {
+          document.getElementById('btnCopyShareUrl').textContent = '✓ Copied!';
+          setTimeout(() => { document.getElementById('btnCopyShareUrl').textContent = '📋 Copy'; }, 2000);
+        });
+      });
+
+      document.getElementById('hiddenPhotoInput').addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+          const uploaded = await VanviBuilderCore.uploadMedia(file, { assetType: 'golden_photo' });
+          const url = uploaded.url || uploaded;
+          currentPhotos[currentPhotoSlotIndex] = url;
+          renderPhotos();
+          syncInputs();
+        } catch (err) {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            currentPhotos[currentPhotoSlotIndex] = ev.target.result;
+            renderPhotos();
+            syncInputs();
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+
+    function triggerUpload(index) {
+      currentPhotoSlotIndex = index;
+      document.getElementById('hiddenPhotoInput').click();
+    }
+
+    function removePhoto(index, e) {
+      if (e) e.stopPropagation();
+      currentPhotos.splice(index, 1);
+      renderPhotos();
+      VanviBuilderCore.set('photos', currentPhotos);
+    }
+
+    function renderPhotos() {
+      const grid = document.getElementById('photoGrid');
+      grid.innerHTML = '';
+      for (let i = 0; i < 3; i++) {
+        const photo = currentPhotos[i];
+        if (photo) {
+          grid.innerHTML += `
+            <div class="photo-slot">
+              <img src="${photo}" alt="Anniversary ${i + 1}">
+              <button class="remove-photo-btn" onclick="removePhoto(${i}, event)">×</button>
+            </div>
+          `;
+        } else {
+          grid.innerHTML += `
+            <div class="photo-slot" onclick="triggerUpload(${i})">
+              <span style="font-size: 20px;">➕</span>
+              <span style="font-size: 11px; margin-top: 4px; font-weight: 700;">Add Photo ${i + 1}</span>
+            </div>
+          `;
+        }
+      }
+    }
+
+    async function handlePublish() {
+      const btn = document.getElementById('btnSaveMomentTop');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span>⏳</span> <span>Publishing...</span>';
+      btn.disabled = true;
+
+      try {
+        const saved = await VanviBuilderCore.saveMoment({
+          title: `Golden Anniversary for ${VanviBuilderCore.get('coupleNames') || 'Beloved Couple'}`,
+          recipientName: VanviBuilderCore.get('coupleNames') || 'Beloved Couple',
+          occasion: 'Golden Anniversary'
+        });
+
+        const shareUrl = saved.shareUrl || saved.experienceUrl || `${window.location.origin}/moment.html?id=${saved.id}&template=${TEMPLATE_ID}`;
+        document.getElementById('shareUrlInput').value = shareUrl;
+        document.getElementById('btnModalOpenExp').href = shareUrl;
+        document.getElementById('btnModalWhatsApp').href = `https://wa.me/?text=${encodeURIComponent(`👑 An unforgettable Golden Anniversary tribute: ${shareUrl}`)}`;
+        
+        document.getElementById('celebrationModal').classList.add('active');
+      } catch (err) {
+        alert('Could not publish: ' + err.message);
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    function closeCelebrationModal() {
+      document.getElementById('celebrationModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

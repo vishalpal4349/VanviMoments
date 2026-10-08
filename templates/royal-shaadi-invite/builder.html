@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Royal Shaadi Invite Customizer ✦ Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  
+  <link rel="stylesheet" href="../../vanvi-inner-light.css">
+  <link rel="stylesheet" href="../../vanvi-navigation.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    body {
+      background: #fbf7ee !important;
+      padding-bottom: 50px;
+    }
+
+    .builder-layout {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .builder-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Form Panel */
+    .builder-panel {
+      background: #ffffff;
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 12px 36px rgba(58, 8, 18, 0.08);
+    }
+
+    .builder-header {
+      border-bottom: 1.5px dashed rgba(212, 175, 55, 0.35);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .builder-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--royal-crimson);
+      font-weight: 700;
+    }
+
+    .builder-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 18px;
+      background: #fdfaf2;
+      padding: 4px;
+      border-radius: 99px;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .b-tab-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 99px;
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 750;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .b-tab-btn.active {
+      background: var(--royal-crimson);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(94, 13, 29, 0.25);
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--royal-crimson);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .b-input, .b-select, .b-textarea {
+      width: 100%;
+      background: #fbf7ee;
+      border: 1.2px solid rgba(212, 175, 55, 0.35);
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .b-input:focus, .b-textarea:focus {
+      border-color: var(--gold-foil);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* VIP Guest Links Card */
+    .guest-link-generator-box {
+      background: linear-gradient(135deg, #fffcf5 0%, #fdf5e2 100%);
+      border: 1.5px solid var(--gold-foil);
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 18px;
+    }
+
+    .guest-box-title {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--royal-crimson);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .generated-link-display {
+      background: #ffffff;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #3b0812;
+      word-break: break-all;
+      margin: 10px 0;
+      max-height: 60px;
+      overflow-y: auto;
+    }
+
+    .link-actions-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-b-action {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 99px;
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-copy {
+      background: var(--royal-crimson);
+      color: #ffffff;
+    }
+
+    .btn-wa-share {
+      background: #25d366;
+      color: #ffffff;
+    }
+
+    .btn-b-action:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Right Preview Screen */
+    .preview-panel {
+      position: sticky;
+      top: 20px;
+      background: #ffffff;
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      border-radius: 22px;
+      padding: 14px;
+      box-shadow: 0 16px 40px rgba(58, 8, 18, 0.1);
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 40px);
+    }
+
+    .preview-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 0 4px;
+    }
+
+    .preview-device-toggle {
+      display: flex;
+      gap: 4px;
+      background: #fdfaf2;
+      padding: 3px;
+      border-radius: 99px;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .device-btn {
+      padding: 4px 10px;
+      border: none;
+      background: transparent;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 750;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .device-btn.active {
+      background: var(--gold-foil);
+      color: #3b0912;
+      font-weight: 800;
+    }
+
+    .preview-frame-wrap {
+      flex: 1;
+      width: 100%;
+      background: #fcf9f2;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transition: width 0.3s ease;
+    }
+
+    .preview-iframe.mobile-view {
+      width: 375px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      border-left: 1px solid rgba(212, 175, 55, 0.4);
+      border-right: 1px solid rgba(212, 175, 55, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header style="background:var(--royal-crimson); padding:12px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1.5px solid var(--gold-border);">
+    <a href="../../templates.html" style="color:#ffffff; font-family:var(--font-sans); font-size:12.5px; font-weight:750; text-decoration:none; display:flex; align-items:center; gap:6px;">
+      <span>← Back to Moments</span>
+    </a>
+    <span style="color:var(--gold-light); font-family:var(--font-serif); font-size:14px; font-weight:700; letter-spacing:1px;">ROYAL SHAADI INVITE ATELIER</span>
+    <a href="index.html" target="_blank" style="background:var(--gold-metallic); color:#3b0912; padding:6px 14px; border-radius:99px; font-family:var(--font-sans); font-size:11.5px; font-weight:800; text-decoration:none;">
+      Open Full Invite ↗
+    </a>
+  </header>
+
+  <div class="builder-layout">
+    
+    <!-- LEFT CONTROLS -->
+    <div class="builder-panel">
+      <div class="builder-header">
+        <h1 class="builder-title">Customize Royal Invite</h1>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Personalize couple decree, itinerary &amp; generate bespoke guest links.</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="builder-tabs" style="flex-wrap: wrap;">
+        <button type="button" class="b-tab-btn active" onclick="switchTab('tabCouple')">Couple &amp; Date</button>
+        <button type="button" class="b-tab-btn" onclick="switchTab('tabPhotos')">Photos 📸</button>
+        <button type="button" class="b-tab-btn" onclick="switchTab('tabItinerary')">Itinerary ⏳</button>
+        <button type="button" class="b-tab-btn" onclick="switchTab('tabVenue')">Venue &amp; Links</button>
+        <button type="button" class="b-tab-btn" onclick="switchTab('tabGuests')">Guest Links 👑</button>
+      </div>
+
+      <!-- Tab 1: Couple & Date -->
+      <div id="tabCouple">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="inputBride">Bride Name</label>
+            <input type="text" id="inputBride" class="b-input" value="Shreya">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inputGroom">Groom Name</label>
+            <input type="text" id="inputGroom" class="b-input" value="Aayush">
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="inputMonogram">Monogram / Hashtag</label>
+            <input type="text" id="inputMonogram" class="b-input" value="#Shaya">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inputDate">Wedding Date</label>
+            <input type="text" id="inputDate" class="b-input" value="Saturday, 12 December 2026">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inputLetterText">Royal Decree Invitation Text</label>
+          <textarea id="inputLetterText" class="b-textarea" rows="3">Two souls, two families, united by destiny under the palace moonlight. We request the honor of your presence and blessings as we embark on this sacred journey of love and togetherness.</textarea>
+        </div>
+      </div>
+
+      <!-- Tab 2: Story Photos -->
+      <div id="tabPhotos" style="display:none;">
+        <div style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Customize the 3 vintage polaroid cards with 3D photo tilt micro-interaction:</div>
+        
+        <!-- Polaroid 1 -->
+        <div style="background:#fdfaf2; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <strong style="font-size:11.5px; color:var(--royal-crimson);">Polaroid 1 (Childhood / First Sight)</strong>
+          <div class="form-group" style="margin-top:6px;">
+            <label class="form-label" for="photo1Url">Image URL</label>
+            <input type="url" id="photo1Url" class="b-input" value="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&auto=format&fit=crop&q=80">
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="photo1Era">Era Tag</label>
+              <input type="text" id="photo1Era" class="b-input" value="Chapter I · 2018">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="photo1Title">Title</label>
+              <input type="text" id="photo1Title" class="b-input" value="The First Glimpse">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="photo1Desc">Memory Note</label>
+            <input type="text" id="photo1Desc" class="b-input" value="A serendipitous laugh across a coffee table that turned ordinary moments into poetry.">
+          </div>
+        </div>
+
+        <!-- Polaroid 2 -->
+        <div style="background:#fdfaf2; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <strong style="font-size:11.5px; color:var(--royal-crimson);">Polaroid 2 (Growing Together)</strong>
+          <div class="form-group" style="margin-top:6px;">
+            <label class="form-label" for="photo2Url">Image URL</label>
+            <input type="url" id="photo2Url" class="b-input" value="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80">
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="photo2Era">Era Tag</label>
+              <input type="text" id="photo2Era" class="b-input" value="Chapter II · 2022">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="photo2Title">Title</label>
+              <input type="text" id="photo2Title" class="b-input" value="The Midnight Vow">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="photo2Desc">Memory Note</label>
+            <input type="text" id="photo2Desc" class="b-input" value="Under the starlit sky of Udaipur, a promise made for eternity with whispered laughter.">
+          </div>
+        </div>
+
+        <!-- Polaroid 3 -->
+        <div style="background:#fdfaf2; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25);">
+          <strong style="font-size:11.5px; color:var(--royal-crimson);">Polaroid 3 (Engagement / Forever)</strong>
+          <div class="form-group" style="margin-top:6px;">
+            <label class="form-label" for="photo3Url">Image URL</label>
+            <input type="url" id="photo3Url" class="b-input" value="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&auto=format&fit=crop&q=80">
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="photo3Era">Era Tag</label>
+              <input type="text" id="photo3Era" class="b-input" value="Chapter III · Forever">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="photo3Title">Title</label>
+              <input type="text" id="photo3Title" class="b-input" value="She Said Yes ✦">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="photo3Desc">Memory Note</label>
+            <input type="text" id="photo3Desc" class="b-input" value="Surrounded by family, blessings, and marigold petals, our forever officially begins.">
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Evening Itinerary -->
+      <div id="tabItinerary" style="display:none;">
+        <div style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Customize celebration timeline events:</div>
+
+        <!-- Event 1 -->
+        <div style="background:#fdfaf2; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="itin1Time">Time</label>
+              <input type="text" id="itin1Time" class="b-input" value="06:30 PM">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="itin1Attire">Attire Theme</label>
+              <input type="text" id="itin1Attire" class="b-input" value="Traditional Regal">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="itin1Title">Title</label>
+            <input type="text" id="itin1Title" class="b-input" value="Swagat &amp; Royal Welcome">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="itin1Desc">Details</label>
+            <input type="text" id="itin1Desc" class="b-input" value="Dhol welcome procession with rose petal showers and welcome champagne at the Palace Courtyard.">
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div style="background:#fdfaf2; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="itin2Time">Time</label>
+              <input type="text" id="itin2Time" class="b-input" value="08:00 PM">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="itin2Attire">Attire Theme</label>
+              <input type="text" id="itin2Attire" class="b-input" value="Glitz &amp; Sangeet">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="itin2Title">Title</label>
+            <input type="text" id="itin2Title" class="b-input" value="Sangeet &amp; Musical Symphony">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="itin2Desc">Details</label>
+            <input type="text" id="itin2Desc" class="b-input" value="Choreographed family performances, musical showdowns, and couple waltz by the lake.">
+          </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div style="background:#fdfaf2; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25); margin-bottom:10px;">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="itin3Time">Time</label>
+              <input type="text" id="itin3Time" class="b-input" value="09:30 PM">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="itin3Attire">Attire Theme</label>
+              <input type="text" id="itin3Attire" class="b-input" value="Imperial Gold">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="itin3Title">Title</label>
+            <input type="text" id="itin3Title" class="b-input" value="Ring Ceremony &amp; Vows">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="itin3Desc">Details</label>
+            <input type="text" id="itin3Desc" class="b-input" value="Exchange of rings and sacred promises accompanied by live classical sitar and fireworks.">
+          </div>
+        </div>
+
+        <!-- Event 4 -->
+        <div style="background:#fdfaf2; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.25);">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="itin4Time">Time</label>
+              <input type="text" id="itin4Time" class="b-input" value="10:30 PM">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="itin4Attire">Attire Theme</label>
+              <input type="text" id="itin4Attire" class="b-input" value="Feast &amp; Joy">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="itin4Title">Title</label>
+            <input type="text" id="itin4Title" class="b-input" value="Shahi Dawat (Grand Banquet)">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="itin4Desc">Details</label>
+            <input type="text" id="itin4Desc" class="b-input" value="Authentic royal Rajasthani and global gourmet banquet with acoustic dessert lounge.">
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Venue & Links -->
+      <div id="tabVenue" style="display:none;">
+        <div class="form-group">
+          <label class="form-label" for="inputVenue">Venue Name</label>
+          <input type="text" id="inputVenue" class="b-input" value="The Oberoi Udaivilas">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inputCity">City &amp; State</label>
+          <input type="text" id="inputCity" class="b-input" value="Udaipur, Rajasthan">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inputWaGroup">WhatsApp Family Group Link</label>
+          <input type="url" id="inputWaGroup" class="b-input" value="https://chat.whatsapp.com/invite">
+        </div>
+      </div>
+
+      <!-- Tab 5: Personalized Guest Links Generator -->
+      <div id="tabGuests" style="display:none;">
+        <div class="form-group">
+          <label class="form-label" for="inputGuestName">Guest / Family Name</label>
+          <input type="text" id="inputGuestName" class="b-input" placeholder="e.g. Chacha Chachi ji / Sharma Family / Rohan &amp; Riya" value="Chacha Chachi ji">
+        </div>
+
+        <button type="button" class="btn-send-blessing" onclick="generateGuestLink()" style="margin-top:6px;">
+          Generate Personalized Guest Link ✦
+        </button>
+
+        <!-- Result Box -->
+        <div class="guest-link-generator-box" id="guestLinkResultBox">
+          <div class="guest-box-title">
+            <span>👑</span>
+            <span id="guestLinkTitle">Personalized Link for Chacha Chachi ji</span>
+          </div>
+          <p style="font-size:11.5px; color:var(--text-muted);">This link dynamically personalizes the greeting bar at the top of the invite:</p>
+          
+          <div class="generated-link-display" id="generatedLinkDisplay">
+            index.html?guest=Chacha+Chachi+ji
+          </div>
+
+          <div class="link-actions-row">
+            <button type="button" class="btn-b-action btn-copy" onclick="copyGuestLink()">
+              <span>📋 Copy Link</span>
+            </button>
+            <button type="button" class="btn-b-action btn-wa-share" onclick="shareOnWhatsApp()">
+              <span>💬 Send on WhatsApp</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Batch Presets -->
+        <div style="margin-top:16px;">
+          <span class="form-label">1-Tap Relative Presets:</span>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;">
+            <button type="button" class="quick-tag-chip" onclick="quickGuest('Chacha Chachi ji')">Chacha Chachi ji</button>
+            <button type="button" class="quick-tag-chip" onclick="quickGuest('Mama Mami ji')">Mama Mami ji</button>
+            <button type="button" class="quick-tag-chip" onclick="quickGuest('Sharma Family')">Sharma Family</button>
+            <button type="button" class="quick-tag-chip" onclick="quickGuest('Bhaiya &amp; Bhabhi')">Bhaiya &amp; Bhabhi</button>
+            <button type="button" class="quick-tag-chip" onclick="quickGuest('Bestie &amp; Squad')">Bestie &amp; Squad</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; border-top:1px solid #f1ece1; padding-top:14px; display:flex; gap:10px;">
+        <button type="button" class="btn-send-blessing" onclick="saveConfiguration()" style="flex:1;">
+          Save &amp; Update Preview ✦
+        </button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT PREVIEW SCREEN -->
+    <div class="preview-panel">
+      <div class="preview-toolbar">
+        <span style="font-family:var(--font-serif); font-size:13px; font-weight:700; color:var(--royal-crimson);">LIVE PREVIEW</span>
+        <div class="preview-device-toggle">
+          <button type="button" class="device-btn active" id="btnDeviceDesktop" onclick="setDevice('desktop')">Desktop</button>
+          <button type="button" class="device-btn" id="btnDeviceMobile" onclick="setDevice('mobile')">Mobile (375px)</button>
+        </div>
+      </div>
+
+      <div class="preview-frame-wrap">
+        <iframe src="index.html" class="preview-iframe" id="previewIframe" title="Royal Wedding Invite Preview"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const tabs = ['tabCouple', 'tabPhotos', 'tabItinerary', 'tabVenue', 'tabGuests'];
+    function switchTab(tabId) {
+      tabs.forEach((t, idx) => {
+        const el = document.getElementById(t);
+        if (el) el.style.display = t === tabId ? 'block' : 'none';
+        const tabBtns = document.querySelectorAll('.b-tab-btn');
+        if (tabBtns[idx]) {
+          if (t === tabId) tabBtns[idx].classList.add('active');
+          else tabBtns[idx].classList.remove('active');
+        }
+      });
+    }
+
+    function setDevice(device) {
+      const iframe = document.getElementById('previewIframe');
+      const btnDesk = document.getElementById('btnDeviceDesktop');
+      const btnMob = document.getElementById('btnDeviceMobile');
+
+      if (device === 'mobile') {
+        iframe.classList.add('mobile-view');
+        btnMob.classList.add('active');
+        btnDesk.classList.remove('active');
+      } else {
+        iframe.classList.remove('mobile-view');
+        btnDesk.classList.add('active');
+        btnMob.classList.remove('active');
+      }
+    }
+
+    function getFormConfig() {
+      return {
+        brideName: document.getElementById('inputBride').value.trim() || 'Shreya',
+        groomName: document.getElementById('inputGroom').value.trim() || 'Aayush',
+        monogram: document.getElementById('inputMonogram').value.trim() || '#Shaya',
+        dateStr: document.getElementById('inputDate').value.trim() || 'Saturday, 12 December 2026',
+        letterBody: document.getElementById('inputLetterText').value.trim(),
+        venueName: document.getElementById('inputVenue').value.trim() || 'The Oberoi Udaivilas',
+        venueCity: document.getElementById('inputCity').value.trim() || 'Udaipur, Rajasthan',
+        whatsappLink: document.getElementById('inputWaGroup').value.trim() || 'https://chat.whatsapp.com/invite',
+        photos: [
+          {
+            img: document.getElementById('photo1Url').value.trim(),
+            era: document.getElementById('photo1Era').value.trim(),
+            title: document.getElementById('photo1Title').value.trim(),
+            desc: document.getElementById('photo1Desc').value.trim()
+          },
+          {
+            img: document.getElementById('photo2Url').value.trim(),
+            era: document.getElementById('photo2Era').value.trim(),
+            title: document.getElementById('photo2Title').value.trim(),
+            desc: document.getElementById('photo2Desc').value.trim()
+          },
+          {
+            img: document.getElementById('photo3Url').value.trim(),
+            era: document.getElementById('photo3Era').value.trim(),
+            title: document.getElementById('photo3Title').value.trim(),
+            desc: document.getElementById('photo3Desc').value.trim()
+          }
+        ],
+        itinerary: [
+          {
+            time: document.getElementById('itin1Time').value.trim(),
+            attire: document.getElementById('itin1Attire').value.trim(),
+            title: document.getElementById('itin1Title').value.trim(),
+            desc: document.getElementById('itin1Desc').value.trim()
+          },
+          {
+            time: document.getElementById('itin2Time').value.trim(),
+            attire: document.getElementById('itin2Attire').value.trim(),
+            title: document.getElementById('itin2Title').value.trim(),
+            desc: document.getElementById('itin2Desc').value.trim()
+          },
+          {
+            time: document.getElementById('itin3Time').value.trim(),
+            attire: document.getElementById('itin3Attire').value.trim(),
+            title: document.getElementById('itin3Title').value.trim(),
+            desc: document.getElementById('itin3Desc').value.trim()
+          },
+          {
+            time: document.getElementById('itin4Time').value.trim(),
+            attire: document.getElementById('itin4Attire').value.trim(),
+            title: document.getElementById('itin4Title').value.trim(),
+            desc: document.getElementById('itin4Desc').value.trim()
+          }
+        ]
+      };
+    }
+
+    function saveConfiguration() {
+      const cfg = getFormConfig();
+      localStorage.setItem('vanvi_royal_invite_config', JSON.stringify(cfg));
+      
+      const iframe = document.getElementById('previewIframe');
+      iframe.src = `index.html?bride=${encodeURIComponent(cfg.brideName)}&groom=${encodeURIComponent(cfg.groomName)}&monogram=${encodeURIComponent(cfg.monogram)}&date=${encodeURIComponent(cfg.dateStr)}&venue=${encodeURIComponent(cfg.venueName)}`;
+      
+      alert('✨ Royal Invite updated in live preview!');
+    }
+
+    function generateGuestLink() {
+      const cfg = getFormConfig();
+      const guest = document.getElementById('inputGuestName').value.trim() || 'Honored Guest';
+      const baseUrl = window.location.href.replace('builder.html', 'index.html').split('?')[0];
+      const guestLink = `${baseUrl}?guest=${encodeURIComponent(guest)}&bride=${encodeURIComponent(cfg.brideName)}&groom=${encodeURIComponent(cfg.groomName)}&monogram=${encodeURIComponent(cfg.monogram)}`;
+      
+      document.getElementById('guestLinkTitle').textContent = `Personalized Link for ${guest}`;
+      document.getElementById('generatedLinkDisplay').textContent = guestLink;
+      
+      // Update iframe with guest link
+      document.getElementById('previewIframe').src = guestLink;
+    }
+
+    function quickGuest(name) {
+      document.getElementById('inputGuestName').value = name;
+      generateGuestLink();
+    }
+
+    function copyGuestLink() {
+      const link = document.getElementById('generatedLinkDisplay').textContent.trim();
+      navigator.clipboard.writeText(link).then(() => {
+        alert('📋 Personalized invite link copied to clipboard!');
+      });
+    }
+
+    function shareOnWhatsApp() {
+      const guest = document.getElementById('inputGuestName').value.trim() || 'Family';
+      const cfg = getFormConfig();
+      const link = document.getElementById('generatedLinkDisplay').textContent.trim();
+      const msg = encodeURIComponent(`🌸 Namaste ${guest}! You are cordially invited to celebrate the royal wedding of ${cfg.brideName} & ${cfg.groomName} on ${cfg.dateStr} at ${cfg.venueName}, ${cfg.venueCity}.\n\nPlease view your personalized royal decree here:\n${link}`);
+      window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+    }
+
+    // Auto-init guest link
+    window.addEventListener('DOMContentLoaded', () => {
+      generateGuestLink();
+    });
+  </script>
+</body>
+</html>

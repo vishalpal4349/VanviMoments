@@ -1,9 +1,12 @@
 const fs = require('fs');
+const c = fs.readFileSync('js/vanvi-templates-data.js', 'utf8');
 
-const files = fs.readdirSync('.').filter(f => f.startsWith('category-') && f.endsWith('.html'));
-files.forEach(f => {
-  const content = fs.readFileSync(f, 'utf8');
-  const matchGrid = content.match(/<main class=["']grid["'] id=["']([^"']+)["']>/);
-  const matchCat = content.match(/getByCategory\(['"]([^'"]+)['"]\)/);
-  console.log(f, 'Grid ID:', matchGrid ? matchGrid[1] : 'none', '| Category:', matchCat ? matchCat[1] : 'none');
+// evaluate in sandbox or extract
+const window = {};
+eval(c);
+
+const cats = ['birthday', 'love', 'anniversary', 'friendship', 'memories', 'apology', 'family', 'celebration', 'free', 'premium'];
+cats.forEach(cat => {
+  const items = window.VanviTemplatesData.getByCategory(cat);
+  console.log(`${cat}: ${items.length} templates`);
 });

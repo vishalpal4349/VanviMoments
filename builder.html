@@ -1,21 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Creator Studio ✨ Personalize Your Moment | Vanvi Moments</title>
-  <meta name="description" content="Personalize your digital celebration in 30 seconds. Add photos, custom heartfelt letters, choose music, and publish an unforgettable interactive keepsake.">
+  <title>Creator Studio ✨ Choose Your Experience Builder | Vanvi Moments</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta name="theme-color" content="#fff5f8">
-
-  <!-- Premium Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css">
+  <script src="js/vanvi-global-experience.js" defer></script>
   <script src="js/vanvi-api.js"></script>
+  <script src="js/vanvi-i18n.js"></script>
+  <script src="js/vanvi-builder-core.js"></script>
+  <script src="js/vanvi-templates-data.js"></script>
+  <script>
+    function safeGoBack() {
+      if (history.length > 1) { history.back(); return false; }
+      window.location.href = 'index.html';
+      return false;
+    }
+  </script>
+
+  <script>
+    // Universal Dynamic Template Router: Dispatches directly into template's own bespoke builder
+    // Supports templateId resolution and custom_data payload synchronization
+    (async function() {
+      const params = new URLSearchParams(window.location.search);
+      let t = params.get('template') || params.get('t');
+      const momentId = params.get('id') || params.get('moment') || params.get('slug');
+
+      // Resolve from moment ID if template param not explicit
+      if (!t && momentId) {
+        try {
+          if (window.VanviAPI && window.VanviAPI.moments) {
+            const m = await window.VanviAPI.moments.getPublic(momentId);
+            if (m && (m.template_id || m.templateId)) {
+              t = m.template_id || m.templateId;
+            }
+          }
+        } catch(e) {}
+
+        if (!t) {
+          try {
+            const list = JSON.parse(localStorage.getItem('vanvi_user_moments') || '[]');
+            const found = list.find(m => m.id === momentId || m.slug === momentId);
+            if (found && (found.template_id || found.templateId)) {
+              t = found.template_id || found.templateId;
+            }
+          } catch(e) {}
+        }
+      }
+
+      // If a template is specified or resolved, instantly route to its bespoke personal builder!
+      if (t) {
+        // Alias mapping
+        const map = {
+          'cute-pastel-birthday': 'templates/cute-pastel-birthday/builder.html',
+          'cute-pastel': 'templates/cute-pastel-birthday/builder.html',
+          'pastel-birthday': 'templates/cute-pastel-birthday/builder.html',
+          'birthday-3d-candle': 'templates/birthday-3d-candle/builder.html',
+          'bday-candle-3d': 'templates/birthday-3d-candle/builder.html',
+          'birthday-3d-candle-surprise': 'templates/birthday-3d-candle-surprise/builder.html',
+          'surprise': 'templates/birthday-3d-candle-surprise/builder.html',
+          'birthday-white-bloom': 'templates/birthday-white-bloom/builder.html',
+          'bloom': 'templates/birthday-white-bloom/builder.html',
+          'birthday-wish-01': 'templates/birthday-wish-01/builder.html',
+          'birthday-wish-1': 'templates/birthday-wish-01/builder.html',
+          'birthday-wish-02': 'templates/birthday-wish-02/builder.html',
+          'birthday-wish-2': 'templates/birthday-wish-02/builder.html',
+          'constellation-love': 'templates/constellation-love/builder.html',
+          'love': 'templates/constellation-love/builder.html',
+          'golden-anniversary': 'templates/golden-anniversary/builder.html',
+          'anniversary': 'templates/golden-anniversary/builder.html',
+          'retro-polaroid-wall': 'templates/retro-polaroid-wall/builder.html',
+          'polaroid': 'templates/retro-polaroid-wall/builder.html',
+          'sincere-letter': 'templates/sincere-letter/builder.html',
+          'apology': 'templates/sincere-letter/builder.html',
+          'temple-royal-wedding': 'templates/temple-royal-wedding/builder.html',
+          'mandapam-royale': 'templates/temple-royal-wedding/builder.html',
+          'botanical-blush-wedding': 'templates/botanical-blush-wedding/builder.html',
+          'botanical-blush': 'templates/botanical-blush-wedding/builder.html',
+          'maison-rose': 'templates/botanical-blush-wedding/builder.html',
+          'botanical-wedding': 'templates/botanical-blush-wedding/builder.html',
+          'romantic-rose-wedding': 'templates/botanical-blush-wedding/builder.html',
+          'royal-vivah-palace': 'templates/royal-vivah-palace/builder.html',
+          'royal-vivah': 'templates/royal-vivah-palace/builder.html',
+          'shaadipath-template01': 'templates/royal-vivah-palace/builder.html',
+          'vanvi-royal-vivah-01': 'templates/royal-vivah-palace/builder.html',
+          'royal-palace-heritage': 'templates/royal-vivah-palace/builder.html',
+          'template01': 'templates/royal-vivah-palace/builder.html',
+          'mirror-reveal': 'templates/mirror-reveal/builder.html',
+          'std-03-mirror-reveal': 'templates/mirror-reveal/builder.html',
+          'std-03': 'templates/mirror-reveal/builder.html',
+          'mirror-save-the-date': 'templates/mirror-reveal/builder.html',
+          'wedding': 'templates/temple-royal-wedding/builder.html'
+        };
+
+        const targetBuilder = map[t] || `templates/${encodeURIComponent(t)}/builder.html`;
+        window.location.replace(targetBuilder + window.location.search);
+      }
+    })();
+  </script>
 
   <style>
     :root {
@@ -23,9 +113,12 @@
       --ink: #2c1224;
       --ink-muted: #724c65;
       --rose-gold: #ff2a7a;
-      --rose-gold-dark: #be123c;
-      --gold-accent: #d97706;
       --border-silk: rgba(255, 120, 175, 0.28);
+    }
+
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden !important;
     }
 
     body {
@@ -40,12 +133,11 @@
       padding-bottom: 90px;
     }
 
-    /* Top Studio Header */
     .studio-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border-silk);
@@ -53,14 +145,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
     }
 
     .btn-studio-back {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(255, 255, 255, 0.9);
+      background: #ffffff;
       border: 1px solid var(--border-silk);
       color: var(--ink);
       text-decoration: none;
@@ -72,935 +163,333 @@
     }
 
     .btn-studio-back:hover {
-      background: #ffffff;
-      border-color: var(--rose-gold);
-      transform: translateX(-2px);
+      background: var(--rose-gold);
+      color: #fff;
     }
 
-    /* Stepper Progress Bar */
-    .studio-stepper-track {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .step-pill {
-      font-size: 12px;
-      font-weight: 750;
-      color: var(--ink-muted);
-      background: rgba(0, 0, 0, 0.04);
-      padding: 6px 14px;
-      border-radius: 99px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.25s ease;
-    }
-
-    .step-pill.active {
-      background: #ffffff;
-      color: var(--rose-gold);
-      border: 1px solid var(--border-silk);
-      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.12);
-    }
-
-    .step-pill.completed {
-      background: rgba(16, 185, 129, 0.1);
-      color: #059669;
-    }
-
-    /* Main Studio Container */
-    .studio-container {
-      max-width: 900px;
-      margin: 32px auto;
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
       padding: 0 20px;
     }
 
-    .studio-intro-heading {
+    .hero-text {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 36px;
     }
 
-    .studio-eyebrow {
-      font-size: 11.5px;
+    .eyebrow {
+      font-size: 12px;
       font-weight: 800;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: var(--rose-gold);
-      margin-bottom: 6px;
     }
 
-    .studio-title {
+    .title {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-size: clamp(2.2rem, 4vw, 3rem);
       font-weight: 700;
       color: var(--ink);
-      line-height: 1.2;
+      margin-top: 6px;
     }
 
-    .studio-subtitle {
+    .subtitle {
       color: var(--ink-muted);
-      font-size: 1rem;
-      max-width: 520px;
-      margin: 8px auto 0;
+      font-size: 15px;
+      max-width: 580px;
+      margin: 10px auto 0;
+      line-height: 1.5;
     }
 
-    /* Step Card Panels */
-    .step-card-panel {
-      background: #ffffff;
-      border: 1.5px solid var(--border-silk);
-      border-radius: 28px;
-      padding: 36px 32px;
-      box-shadow: 0 16px 40px rgba(44, 18, 36, 0.06);
-      display: none;
-      animation: stepFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .step-card-panel.active {
-      display: block;
-    }
-
-    @keyframes stepFade {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Form Inputs */
-    .form-group-grid {
+    .builders-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
     }
 
-    .form-field {
+    .builder-select-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border-silk);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(255, 42, 122, 0.08);
       display: flex;
       flex-direction: column;
-      gap: 8px;
-    }
-
-    .form-field.full-width {
-      grid-column: 1 / -1;
-    }
-
-    .field-label {
-      font-size: 13px;
-      font-weight: 750;
-      color: var(--ink);
-      display: flex;
       justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      color: inherit;
     }
 
-    .field-label .hint {
-      font-weight: 500;
-      color: var(--ink-muted);
-      font-size: 11.5px;
-    }
-
-    .form-input, .form-textarea, .form-select {
-      background: #fffbfe;
-      border: 1.5px solid rgba(255, 120, 175, 0.25);
-      border-radius: 14px;
-      padding: 13px 16px;
-      font-size: 14px;
-      color: var(--ink);
-      font-family: inherit;
-      outline: none;
-      transition: all 0.2s ease;
-    }
-
-    .form-input:focus, .form-textarea:focus, .form-select:focus {
+    .builder-select-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(255, 42, 122, 0.16);
       border-color: var(--rose-gold);
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(255, 42, 122, 0.12);
     }
 
-    .form-textarea {
-      resize: vertical;
-      min-height: 120px;
-      line-height: 1.6;
-    }
-
-    /* Inspiration Chips */
-    .wish-chips-row {
+    .card-top {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-      margin-bottom: 18px;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
     }
 
-    .wish-chip-btn {
-      background: rgba(255, 240, 246, 0.85);
+    .card-icon {
+      font-size: 32px;
+      background: #fff5f8;
+      border-radius: 16px;
+      padding: 10px;
       border: 1px solid rgba(255, 120, 175, 0.3);
-      color: #9d174d;
-      font-size: 11.5px;
-      font-weight: 750;
-      padding: 6px 14px;
-      border-radius: 99px;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      line-height: 1;
     }
 
-    .wish-chip-btn:hover {
-      background: #ff2a7a;
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    /* Photo Upload Box */
-    .photo-drop-zone {
-      border: 2px dashed rgba(255, 120, 175, 0.4);
-      background: rgba(255, 245, 248, 0.5);
-      border-radius: 18px;
-      padding: 24px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .photo-drop-zone:hover {
-      background: #fff0f5;
-      border-color: var(--rose-gold);
-    }
-
-    .photo-preview-grid {
-      display: flex;
-      gap: 12px;
-      margin-top: 14px;
-      flex-wrap: wrap;
-    }
-
-    .photo-preview-thumb {
-      width: 80px;
-      height: 80px;
-      border-radius: 12px;
-      object-fit: cover;
-      border: 2px solid #ffffff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    /* Bottom Navigation Stepper Buttons */
-    .step-actions-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 32px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 120, 175, 0.2);
-    }
-
-    .btn-step-prev {
-      background: transparent;
-      border: 1.5px solid rgba(255, 120, 175, 0.3);
+    .card-name {
+      font-size: 17px;
+      font-weight: 800;
       color: var(--ink);
-      font-size: 13.5px;
-      font-weight: 750;
-      padding: 12px 24px;
-      border-radius: 99px;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      line-height: 1.3;
     }
 
-    .btn-step-prev:hover {
-      background: #ffffff;
-      border-color: var(--rose-gold);
-    }
-
-    .btn-step-next {
-      background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%);
-      color: #ffffff;
-      border: none;
-      font-size: 14px;
-      font-weight: 800;
-      padding: 13px 30px;
-      border-radius: 99px;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(255, 42, 122, 0.3);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-step-next:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 26px rgba(255, 42, 122, 0.42);
-    }
-
-    /* Step 3: Success & Share Box */
-    .publish-success-card {
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    .success-celebrate-icon {
-      font-size: 52px;
-      margin-bottom: 12px;
+    .card-badge {
       display: inline-block;
-      animation: popBounce 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes popBounce {
-      0% { transform: scale(0.4); opacity: 0; }
-      80% { transform: scale(1.15); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-
-    .share-link-input-group {
-      display: flex;
-      gap: 8px;
-      max-width: 520px;
-      margin: 20px auto;
-    }
-
-    .share-link-input {
-      flex: 1;
-      background: #f8fafc;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-size: 13.5px;
-      font-weight: 600;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 99px;
+      background: rgba(255, 42, 122, 0.1);
       color: var(--rose-gold);
+      margin-top: 4px;
     }
 
-    .btn-copy-link {
-      background: var(--ink);
-      color: #ffffff;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 12px;
-      font-weight: 750;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 0.2s ease;
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
     }
 
-    .btn-copy-link:hover {
-      background: var(--rose-gold);
-    }
-
-    .share-buttons-row {
-      display: flex;
-      gap: 12px;
+    .btn-enter-builder {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 24px;
-    }
-
-    .btn-share-whatsapp {
-      background: #25d366;
+      gap: 6px;
+      background: linear-gradient(125deg, #ff2a7a 0%, #ff4fa1 18%, #9333ea 42%, #38bdf8 65%, #f43f5e 84%, #ff2a7a 100%) !important;
+      background-size: 280% 280% !important;
+      animation: clueButtonFlow 5s ease-in-out infinite !important;
       color: #ffffff;
-      text-decoration: none;
-      padding: 12px 24px;
+      font-size: 13.5px;
+      font-weight: 850;
+      padding: 11px 22px;
       border-radius: 99px;
-      font-weight: 800;
-      font-size: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 10px 24px -2px rgba(255, 42, 122, 0.42), inset 0 3px 4px rgba(255, 255, 255, 0.95), inset 0 -3px 4px rgba(180, 18, 60, 0.45);
+      text-shadow: 0 1px 2px rgba(180, 18, 60, 0.4);
+      transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease;
     }
-
-    .btn-share-whatsapp:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    .btn-enter-builder:hover {
+      transform: translateY(-2.5px) scale(1.025);
+      box-shadow: 0 14px 30px -2px rgba(255, 42, 122, 0.55), inset 0 3.5px 4.5px #ffffff;
     }
-
-    .btn-open-live {
-      background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%);
-      color: #ffffff;
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 99px;
-      font-weight: 800;
-      font-size: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.3);
+    .btn-enter-builder:active {
+      transform: translateY(2px) scale(0.965);
+      box-shadow: 0 2px 7px rgba(255, 42, 122, 0.3), inset 0 2.5px 5px rgba(0, 0, 0, 0.35);
     }
-
-    @media (max-width: 640px) {
-      .form-group-grid {
-        grid-template-columns: 1fr;
-      }
-      .step-card-panel {
-        padding: 24px 18px;
-        border-radius: 20px;
-      }
-      .step-pill span.step-text {
-        display: none;
-      }
+    @keyframes clueButtonFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-  </style>
+    body { overflow-x: hidden; }
+</style>
 </head>
 <body>
-
-  <!-- Studio Header -->
   <header class="studio-header">
-    <a href="templates.html" class="btn-studio-back">
-      <span>‹</span> <span>Templates</span>
-    </a>
-
-    <!-- Step Indicator -->
-    <div class="studio-stepper-track">
-      <div class="step-pill active" id="stepPill1">
-        <span>1</span>
-        <span class="step-text">Details</span>
-      </div>
-      <div class="step-pill" id="stepPill2">
-        <span>2</span>
-        <span class="step-text">Letter &amp; Photos</span>
-      </div>
-      <div class="step-pill" id="stepPill3">
-        <span>3</span>
-        <span class="step-text">Publish</span>
-      </div>
-    </div>
-
-    <div style="font-size:12px; font-weight:750; color:var(--rose-gold);">
-      ✨ Studio
-    </div>
-  </header>
-
-  <!-- Main Container -->
-  <main class="studio-container">
-    <div class="studio-intro-heading">
-      <div class="studio-eyebrow">✦ Quick 30-Second Personalization</div>
-      <h1 class="studio-title" id="studioTitle">Personalize Your Keepsake</h1>
-      <p class="studio-subtitle">Enter your favorite memories, heartfelt words, and share an interactive surprise in minutes.</p>
-    </div>
-
-    <!-- Active Selected Template Indicator & Change Shortcut -->
-    <div id="templateInfoBadge" style="max-width: 600px; margin: 0 auto 18px; background: rgba(255, 255, 255, 0.95); border: 1.5px solid rgba(255, 120, 175, 0.35); border-radius: 99px; padding: 6px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 4px 14px rgba(255, 42, 122, 0.08);">
-      <div style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; color: var(--ink);">
-        <span style="font-size: 15px;">🎨</span>
-        <span>Template: <strong id="currentTemplateName" style="color: var(--rose-gold);">3D Birthday Candle Cake</strong></span>
-      </div>
-      <a href="templates.html" style="font-size: 11.5px; font-weight: 800; color: var(--rose-gold); text-decoration: none; padding: 5px 12px; border-radius: 99px; background: #fff0f6; border: 1px solid rgba(255, 42, 122, 0.25); display: inline-flex; align-items: center; gap: 4px; transition: transform 0.2s;" title="Browse all template styles &amp; demos">
-        <span>Change Template</span> <span>⇄</span>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="index.html#template-world" class="btn-studio-back" onclick="return safeGoBack()">← Back to World</a>
+      <a href="index.html" title="Vanvi Moments Home" style="display:inline-flex; align-items:center;">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" style="height:30px; width:auto; max-width:130px; object-fit:contain; filter:drop-shadow(0 2px 6px rgba(255,42,122,0.22));" />
       </a>
     </div>
+    <div style="font-weight: 800; font-size: 14px; color: var(--rose-gold);">✨ Creator Studio Dispatcher</div>
+  </header>
 
-    <!-- STEP 1: RECIPIENT & OCCASION -->
-    <section class="step-card-panel active" id="stepPanel1" aria-label="Step 1: Recipient and Occasion">
-      <div class="form-group-grid">
-        <div class="form-field">
-          <label class="field-label" for="inpRecipient">
-            <span>Recipient's Name</span>
-            <span class="hint">Who is this for?</span>
-          </label>
-          <input type="text" id="inpRecipient" class="form-input" placeholder="Enter recipient name" value="My Favorite Person" required>
+  <main class="container">
+    <div class="hero-text">
+      <div class="eyebrow">Bespoke Creator Experiences</div>
+      <h1 class="title">Choose Your Celebration Studio</h1>
+      <p class="subtitle">Every template at Vanvi Moments features its own personal interactive builder crafted specifically for its animations, music, and interactions.</p>
+    </div>
+
+    <div class="builders-grid">
+      <!-- 1 -->
+      <a href="templates/birthday-3d-candle/builder.html" class="builder-select-card">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">🎂</span>
+            <div>
+              <div class="card-name">Midnight 3D Candle</div>
+              <span class="card-badge">Blowable Candle & Wax Letter</span>
+            </div>
+          </div>
+          <p class="card-desc">Interactive 3D cake candles you can blow out, wax-sealed heartfelt letter, and glowing polaroid memory carousel.</p>
         </div>
+        <div class="btn-enter-builder"><span>Launch Builder</span> <span>→</span></div>
+      </a>
 
-        <div class="form-field">
-          <label class="field-label" for="inpOccasion">
-            <span>Occasion</span>
-            <span class="hint">Celebration type</span>
-          </label>
-          <select id="inpOccasion" class="form-select">
-            <option value="Birthday" selected>🎂 Birthday</option>
-            <option value="Love">❤️ Love &amp; Romance</option>
-            <option value="Anniversary">💍 Anniversary</option>
-            <option value="Friendship">👯 Friendship &amp; BFF</option>
-            <option value="Family">👨‍👩‍👦 Family &amp; Gratitude</option>
-            <option value="Celebration">🎉 Celebration</option>
-            <option value="Memories">📸 Memories &amp; Keepsake</option>
-            <option value="Apology">🕊️ Heartfelt Apology</option>
-          </select>
+      <!-- 2 -->
+      <a href="templates/birthday-3d-candle-surprise/builder.html" class="builder-select-card">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">🎁</span>
+            <div>
+              <div class="card-name">Surprise Box & 3D Candle</div>
+              <span class="card-badge">Exploding Box & Scratch Cards</span>
+            </div>
+          </div>
+          <p class="card-desc">Exploding gift box reveal, floating balloons, interactive scratch-to-reveal wish cards, and party music.</p>
         </div>
+        <div class="btn-enter-builder"><span>Launch Builder</span> <span>→</span></div>
+      </a>
 
-        <div class="form-field">
-          <label class="field-label" for="inpSender">
-            <span>Your Name / Sender</span>
-            <span class="hint">Signed as</span>
-          </label>
-          <input type="text" id="inpSender" class="form-input" placeholder="Enter your name" value="With all my love">
+      <!-- 3 -->
+      <a href="templates/birthday-white-bloom/builder.html" class="builder-select-card">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">🌸</span>
+            <div>
+              <div class="card-name">Birthday White Bloom</div>
+              <span class="card-badge">Botanical Petal Bloom</span>
+            </div>
+          </div>
+          <p class="card-desc">Delicate floral petals bloom softly across the screen, revealing poetic calligraphy and cherished photos.</p>
         </div>
+        <div class="btn-enter-builder"><span>Launch Builder</span> <span>→</span></div>
+      </a>
 
-        <div class="form-field">
-          <label class="field-label" for="inpDate">
-            <span>Celebration Date (Optional)</span>
-            <span class="hint">For countdown</span>
-          </label>
-          <input type="date" id="inpDate" class="form-input">
+      <!-- 4 -->
+      <a href="templates/birthday-wish-01/builder.html" class="builder-select-card">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">🎉</span>
+            <div>
+              <div class="card-name">Birthday Wish 01</div>
+              <span class="card-badge">Cake Cutting & Confetti</span>
+            </div>
+          </div>
+          <p class="card-desc">Slice the birthday cake with an interactive knife, blast vibrant confetti, and celebrate with party anthems.</p>
         </div>
-      </div>
+        <div class="btn-enter-builder"><span>Launch Builder</span> <span>→</span></div>
+      </a>
 
-      <div class="step-actions-footer">
-        <a href="templates.html" class="btn-step-prev">Cancel</a>
-        <button type="button" class="btn-step-next" onclick="goToStep(2)">
-          <span>Next: Letter &amp; Photos</span>
-          <span>→</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- STEP 2: LETTER & PHOTOS -->
-    <section class="step-card-panel" id="stepPanel2" aria-label="Step 2: Letter and Photos">
-      <div class="form-field full-width">
-        <label class="field-label" for="inpMessage">
-          <span>Personal Heartfelt Letter</span>
-          <span class="hint">Unfolded inside the wax seal</span>
-        </label>
-        
-        <!-- Quick Inspiration Chips -->
-        <div class="wish-chips-row">
-          <button type="button" class="wish-chip-btn" onclick="applyInspiration('birthday')">🎂 Birthday Wishes</button>
-          <button type="button" class="wish-chip-btn" onclick="applyInspiration('love')">❤️ Romantic Note</button>
-          <button type="button" class="wish-chip-btn" onclick="applyInspiration('bff')">👯 Best Friend Love</button>
-          <button type="button" class="wish-chip-btn" onclick="applyInspiration('apology')">🕊️ Sincere Apology</button>
+      <!-- 5 -->
+      <a href="templates/birthday-wish-02/builder.html" class="builder-select-card">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">⚡</span>
+            <div>
+              <div class="card-name">Birthday Wish 02</div>
+              <span class="card-badge">Cyber Neon Trails</span>
+            </div>
+          </div>
+          <p class="card-desc">Electric cyber glow, interactive pickable wishes, memory reels, and high-energy synth pulses.</p>
         </div>
+        <div class="btn-enter-builder"><span>Launch Builder</span> <span>→</span></div>
+      </a>
 
-        <textarea id="inpMessage" class="form-textarea" placeholder="Write your heartfelt thoughts here...">Some people make the world brighter just by existing in it. Today is a celebration of all the laughter you bring, the warmth in your voice, and the irreplaceable moments we share. Here is to another beautiful chapter filled with unforgettable memories.</textarea>
-      </div>
-
-      <!-- Photos Upload Section -->
-      <div class="form-field full-width" style="margin-top:20px;">
-        <label class="field-label">
-          <span>Add Photo Memories (Up to 3 Photos)</span>
-          <span class="hint">Displayed in polaroid stack</span>
-        </label>
-
-        <div class="photo-drop-zone" onclick="document.getElementById('photoInput').click()">
-          <input type="file" id="photoInput" accept="image/*" multiple style="display:none;" onchange="handlePhotoUpload(this)">
-          <div style="font-size:28px; margin-bottom:4px;">📸</div>
-          <strong style="color:var(--rose-gold); font-size:13.5px;">Click to upload photos</strong>
-          <p style="font-size:11.5px; color:var(--ink-muted); margin-top:2px;">PNG, JPG, or WEBP memories</p>
+      <!-- 6 -->
+      <a href="templates/constellation-love/builder.html" class="builder-select-card">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">🌌</span>
+            <div>
+              <div class="card-name">Constellation Love</div>
+              <span class="card-badge">Star Map & Cosmic Orbit</span>
+            </div>
+          </div>
+          <p class="card-desc">Align the stars from your anniversary date into glowing constellations, couple memories, and eternal love letters.</p>
         </div>
+        <div class="btn-enter-builder"><span>Launch Builder</span> <span>→</span></div>
+      </a>
 
-        <div class="photo-preview-grid" id="photoPreviewContainer"></div>
-      </div>
-
-      <!-- Music Selection -->
-      <div class="form-field full-width" style="margin-top:20px;">
-        <label class="field-label" for="inpSoundtrack">
-          <span>Background Soundtrack</span>
-          <span class="hint">Plays gently in background</span>
-        </label>
-        <select id="inpSoundtrack" class="form-select">
-          <option value="acoustic" selected>🎵 Birthday Acoustic Melodies</option>
-          <option value="piano">🎹 Romantic Cinematic Piano</option>
-          <option value="lofi">☕ Warm Nostalgic Lo-Fi</option>
-          <option value="soft">🕊️ Peaceful Healing Chimes</option>
-        </select>
-      </div>
-
-      <div class="step-actions-footer">
-        <button type="button" class="btn-step-prev" onclick="goToStep(1)">← Back to Details</button>
-        <button type="button" class="btn-step-next" onclick="generateMoment()">
-          <span>Review &amp; Publish</span>
-          <span>✨</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- STEP 3: PUBLISH & SHARE -->
-    <section class="step-card-panel" id="stepPanel3" aria-label="Step 3: Publish and Share">
-      <div class="publish-success-card">
-        <span class="success-celebrate-icon">🎉</span>
-        <h2 style="font-family:'Cormorant Garamond', Georgia, serif; font-size:2.2rem; margin-bottom:6px;">Your Moment is Ready!</h2>
-        <p style="color:var(--ink-muted); font-size:14px; max-width:460px; margin:0 auto;">
-          Your digital celebration has been crafted with permanent cloud validity. Share the private link below with your recipient on WhatsApp or via QR code.
-        </p>
-
-        <!-- Share Link Bar -->
-        <div class="share-link-input-group">
-          <input type="text" id="finalShareUrl" class="share-link-input" readonly>
-          <button type="button" class="btn-copy-link" onclick="copyFinalLink()">Copy Link</button>
+      <!-- 7 -->
+      <a href="templates/golden-anniversary/builder.html" class="builder-select-card">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">👑</span>
+            <div>
+              <div class="card-name">Golden Anniversary</div>
+              <span class="card-badge">24K Gold Timeline</span>
+            </div>
+          </div>
+          <p class="card-desc">Royal golden timeline commemorating wedding milestones, vows renewal letter, and orchestral romance.</p>
         </div>
+        <div class="btn-enter-builder"><span>Launch Builder</span> <span>→</span></div>
+      </a>
 
-        <!-- Share Actions -->
-        <div class="share-buttons-row">
-          <a href="#" id="btnShareWhatsApp" class="btn-share-whatsapp" target="_blank" rel="noopener">
-            <span>💬</span> <span>Share on WhatsApp</span>
-          </a>
-          <a href="#" id="btnOpenMomentDirect" class="btn-open-live" target="_blank" rel="noopener">
-            <span>Open Experience</span> <span>→</span>
-          </a>
+      <!-- 8 -->
+      <a href="templates/retro-polaroid-wall/builder.html" class="builder-select-card">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">📷</span>
+            <div>
+              <div class="card-name">Retro Polaroid Wall</div>
+              <span class="card-badge">Vinyl & Washi Tape Wall</span>
+            </div>
+          </div>
+          <p class="card-desc">Vintage scrapbook wall with authentic washi tape, handwritten marker notes, and warm vinyl sound.</p>
         </div>
-      </div>
+        <div class="btn-enter-builder"><span>Launch Builder</span> <span>→</span></div>
+      </a>
 
-      <div class="step-actions-footer" style="justify-content:center;">
-        <button type="button" class="btn-step-prev" onclick="goToStep(2)">← Edit Details</button>
-      </div>
-    </section>
+      <!-- 9 -->
+      <a href="templates/sincere-letter/builder.html" class="builder-select-card">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">💌</span>
+            <div>
+              <div class="card-name">Sincere Letter & Wax Seal</div>
+              <span class="card-badge">Vintage Wax Seal</span>
+            </div>
+          </div>
+          <p class="card-desc">Vintage parchment with customizable wax seal stamp initials, typewriter textures, and reflective piano sound.</p>
+        </div>
+        <div class="btn-enter-builder"><span>Launch Builder</span> <span>→</span></div>
+      </a>
+
+      <!-- 10: Temple Royale — Sacred Vows -->
+      <a href="templates/temple-royal-wedding/builder.html" class="builder-select-card" style="border: 1.5px solid rgba(212, 175, 55, 0.45); box-shadow: 0 4px 20px rgba(184, 134, 11, 0.12);">
+        <div>
+          <div class="card-top">
+            <span class="card-icon" style="background: linear-gradient(135deg, #d4af37, #996515); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">🛕</span>
+            <div>
+              <div class="card-name">Temple Royale — Sacred Vows</div>
+              <span class="card-badge" style="background: linear-gradient(135deg, #d4af37, #996515); color: #000;">👑 Royal Heritage</span>
+            </div>
+          </div>
+          <p class="card-desc">Sacred temple wedding experience with celestial sky-blue gopuram, toranam mandapam, auspicious muhurtham schedule, and WhatsApp RSVP.</p>
+        </div>
+        <div class="btn-enter-builder" style="background: linear-gradient(135deg, #490c17, #220309); color: #fff;"><span>Launch Studio</span> <span>→</span></div>
+      </a>
+
+      <!-- 11: Maison Rose — Eternal Invitation (Botanical Blush Wedding) -->
+      <a href="templates/botanical-blush-wedding/builder.html" class="builder-select-card" style="border: 1.5px solid rgba(216, 168, 146, 0.55); box-shadow: 0 4px 20px rgba(139, 58, 74, 0.12);">
+        <div>
+          <div class="card-top">
+            <span class="card-icon" style="background: linear-gradient(135deg, #d8a892, #8b3a4a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">🌸</span>
+            <div>
+              <div class="card-name">Maison Rose — Eternal Invitation</div>
+              <span class="card-badge" style="background: linear-gradient(135deg, #d8a892, #8b3a4a); color: #fff;">🌸 Modern Romance</span>
+            </div>
+          </div>
+          <p class="card-desc">Cinematic botanical blush wedding invitation with interactive Scratch-to-Reveal secret love note, editorial timeline, and rose garden aesthetics.</p>
+        </div>
+        <div class="btn-enter-builder" style="background: linear-gradient(135deg, #8b3a4a, #6b2232); color: #fff;"><span>Launch Studio</span> <span>→</span></div>
+      </a>
+    </div>
   </main>
-
-  <script>
-    let currentStep = 1;
-    const uploadedPhotos = [];
-
-    // Parse incoming template parameter
-    const urlParams = new URLSearchParams(window.location.search);
-    const initialTemplate = urlParams.get('template') || 'birthday-3d-candle';
-    // Dynamic Template Configuration Map
-    const TEMPLATE_CONFIGS = {
-      'birthday': {
-        title: '🎂 Customize Birthday Surprise',
-        subtitle: 'Add birthday wish, age/date, candle memory photo, and up to 4 polaroid memories.',
-        recipientPlaceholder: 'e.g. Priya, Aarav, Bestie',
-        recipientDefault: 'My Favorite Person',
-        photoLimit: 4,
-        photoHint: '1 Cover Photo + up to 3 Polaroid memories',
-        defaultMessage: 'Happy Birthday! Another year of pure joy, golden laughter, and unforgettable moments. May this day be as wonderful and radiant as you are!',
-        soundtrack: 'acoustic'
-      },
-      'love': {
-        title: '❤️ Customize Valentine / Romantic Letter',
-        subtitle: 'Personalize your romantic digital letter, couple photos, and timeless background melody.',
-        recipientPlaceholder: 'e.g. My Love, Jaan, Sweetheart',
-        recipientDefault: 'My Forever Love',
-        photoLimit: 5,
-        photoHint: 'Up to 5 romantic couple photos for the memory stack',
-        defaultMessage: 'In a world full of fleeting moments, being with you feels like home. Thank you for your warmth, your kindness, and your love. Forever yours.',
-        soundtrack: 'piano'
-      },
-      'polaroid': {
-        title: '📸 Customize Retro Polaroid Wall',
-        subtitle: 'Upload your favorite snapshots with handwritten nostalgic vibes and lo-fi beats.',
-        recipientPlaceholder: 'e.g. The Best Crew, Rohan & Me',
-        recipientDefault: 'My Best Friends',
-        photoLimit: 6,
-        photoHint: 'Up to 6 snapshots for the vintage polaroid reel',
-        defaultMessage: 'To the countless late-night talks, spontaneous road trips, and inside jokes that no one else understands. So lucky to have you in my corner!',
-        soundtrack: 'lofi'
-      },
-      'anniversary': {
-        title: '💍 Customize Golden Anniversary Story',
-        subtitle: 'Craft a golden milestone celebration with vintage projector reel, date, and heartfelt tribute.',
-        recipientPlaceholder: 'e.g. Mom & Dad, My Dearest Husband/Wife',
-        recipientDefault: 'My Lifelong Partner',
-        photoLimit: 5,
-        photoHint: 'Milestone photos (Wedding, early years, recent trips)',
-        defaultMessage: 'Through every season, laughter, and milestone, choosing you has been the greatest gift of my life. Happy Anniversary to us, today and forever.',
-        soundtrack: 'piano'
-      },
-      'apology': {
-        title: '🕊️ Customize Sincere Heartfelt Letter',
-        subtitle: 'Send a quiet, respectful digital letter to melt the distance and express true feelings.',
-        recipientPlaceholder: 'e.g. Someone Special',
-        recipientDefault: 'Someone Who Means The World',
-        photoLimit: 2,
-        photoHint: '1 or 2 cherished memories to remind of happy times',
-        defaultMessage: 'I am truly sorry from the bottom of my heart. Our bond and your happiness mean the world to me, and I hope we can start fresh with warmth and understanding.',
-        soundtrack: 'soft'
-      }
-    };
-
-    // Detect template theme
-    const tplKey = initialTemplate.toLowerCase();
-    let matchedConfig = TEMPLATE_CONFIGS['birthday'];
-    if (tplKey.includes('love') || tplKey.includes('valent') || tplKey.includes('romance') || (initialOccasion && initialOccasion.toLowerCase().includes('love'))) {
-      matchedConfig = TEMPLATE_CONFIGS['love'];
-    } else if (tplKey.includes('polaroid') || tplKey.includes('friend') || tplKey.includes('memor') || (initialOccasion && initialOccasion.toLowerCase().includes('friend'))) {
-      matchedConfig = TEMPLATE_CONFIGS['polaroid'];
-    } else if (tplKey.includes('anniversary') || tplKey.includes('wedding')) {
-      matchedConfig = TEMPLATE_CONFIGS['anniversary'];
-    } else if (tplKey.includes('apology') || tplKey.includes('sorry')) {
-      matchedConfig = TEMPLATE_CONFIGS['apology'];
-    }
-
-    // Apply template tailored configuration
-    document.addEventListener('DOMContentLoaded', () => {
-      const titleEl = document.getElementById('studioTitle');
-      if (titleEl && matchedConfig.title) titleEl.textContent = matchedConfig.title;
-
-      const nameEl = document.getElementById('currentTemplateName');
-      if (nameEl && matchedConfig.title) {
-        nameEl.textContent = matchedConfig.title.replace(/^[^a-zA-Z0-9]+/, '').replace('Customize ', '');
-      }
-
-      const subEl = document.querySelector('.studio-subtitle');
-      if (subEl && matchedConfig.subtitle) subEl.textContent = matchedConfig.subtitle;
-
-      const recInput = document.getElementById('inpRecipient');
-      if (recInput) {
-        recInput.placeholder = matchedConfig.recipientPlaceholder;
-        if (recInput.value === 'My Favorite Person') recInput.value = matchedConfig.recipientDefault;
-      }
-
-      const msgEl = document.getElementById('inpMessage');
-      if (msgEl) {
-        msgEl.value = matchedConfig.defaultMessage;
-      }
-
-      const soundSelect = document.getElementById('inpSoundtrack');
-      if (soundSelect && matchedConfig.soundtrack) {
-        soundSelect.value = matchedConfig.soundtrack;
-      }
-
-      const photoLabel = document.querySelector('#stepPanel2 label.field-label span');
-      if (photoLabel && matchedConfig.photoLimit) {
-        photoLabel.textContent = `Add Photo Memories (Up to ${matchedConfig.photoLimit} Photos)`;
-      }
-      const photoHint = document.querySelector('#stepPanel2 label.field-label .hint');
-      if (photoHint && matchedConfig.photoHint) {
-        photoHint.textContent = matchedConfig.photoHint;
-      }
-    });
-
-    if (initialOccasion) {
-      const select = document.getElementById('inpOccasion');
-      if (select) {
-        const valLower = initialOccasion.toLowerCase();
-        for (let i = 0; i < select.options.length; i++) {
-          const optVal = select.options[i].value.toLowerCase();
-          if (optVal.includes(valLower) || valLower.includes(optVal)) {
-            select.selectedIndex = i;
-            break;
-          }
-        }
-      }
-    }
-
-    function goToStep(step) {
-      currentStep = step;
-      document.querySelectorAll('.step-card-panel').forEach(p => p.classList.remove('active'));
-      document.getElementById(`stepPanel${step}`)?.classList.add('active');
-
-      document.querySelectorAll('.step-pill').forEach((pill, idx) => {
-        pill.classList.remove('active');
-        if (idx + 1 === step) pill.classList.add('active');
-        if (idx + 1 < step) pill.classList.add('completed');
-      });
-
-      window.scrollTo({ top: 120, behavior: 'smooth' });
-    }
-
-    function applyInspiration(type) {
-      const textarea = document.getElementById('inpMessage');
-      if (!textarea) return;
-
-      if (type === 'birthday') {
-        textarea.value = 'Happy Birthday! Another year of pure joy, golden laughter, and unforgettable moments. May this day be as wonderful and radiant as you are!';
-      } else if (type === 'love') {
-        textarea.value = 'In a world full of fleeting moments, being with you feels like home. Thank you for your warmth, your kindness, and your love. Forever yours.';
-      } else if (type === 'bff') {
-        textarea.value = 'Happy Birthday to my absolute favorite human! Thank you for the endless late-night chats, the crazy adventures, and always having my back.';
-      } else if (type === 'apology') {
-        textarea.value = 'I am truly sorry from the bottom of my heart. Your smile and our bond mean the world to me, and I hope we can start fresh with warmth and understanding.';
-      }
-    }
-
-    function handlePhotoUpload(input) {
-      if (!input.files || !input.files.length) return;
-      const container = document.getElementById('photoPreviewContainer');
-
-      for (let i = 0; i < input.files.length; i++) {
-        const file = input.files[i];
-        const reader = new FileReader();
-        reader.onload = e => {
-          const photoData = e.target.result;
-          const photoIndex = uploadedPhotos.length;
-          uploadedPhotos.push(photoData);
-
-          const wrapper = document.createElement('div');
-          wrapper.className = 'photo-preview-item';
-          wrapper.style.position = 'relative';
-          wrapper.style.display = 'inline-block';
-          wrapper.dataset.index = photoIndex;
-
-          const img = document.createElement('img');
-          img.src = photoData;
-          img.className = 'photo-preview-thumb';
-          img.alt = `Memory photo ${photoIndex + 1}`;
-
-          const removeBtn = document.createElement('button');
-          removeBtn.type = 'button';
-          removeBtn.innerHTML = '×';
-          removeBtn.title = 'Remove photo';
-          removeBtn.style.cssText = 'position:absolute; top:-6px; right:-6px; background:#ff2a7a; color:#fff; border:none; border-radius:50%; width:20px; height:20px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.2);';
-          removeBtn.onclick = (ev) => {
-            ev.stopPropagation();
-            uploadedPhotos[photoIndex] = null;
-            wrapper.remove();
-          };
-
-          wrapper.appendChild(img);
-          wrapper.appendChild(removeBtn);
-          container.appendChild(wrapper);
-        };
-        reader.readAsDataURL(file);
-      }
-      input.value = '';
-    }
-
-    async function generateMoment() {
-      const btn = document.querySelector('.step-actions-footer .btn-step-next');
-      const originalBtnHtml = btn ? btn.innerHTML : '';
-
-      const recipient = document.getElementById('inpRecipient').value.trim() || 'My Favorite Person';
-      const sender = document.getElementById('inpSender').value.trim() || 'With all my love';
-      const occasion = document.getElementById('inpOccasion').value;
-      const message = document.getElementById('inpMessage').value.trim();
-      const date = document.getElementById('inpDate').value;
-      const soundtrack = document.getElementById('inpSoundtrack')?.value || 'acoustic';
-
-      const validPhotos = uploadedPhotos.filter(p => p !== null);
-
-      if (btn) {
-        btn.disabled = true;
-        btn.style.opacity = '0.75';
-        btn.innerHTML = `<span>Uploading Memories (0/${validPhotos.length})...</span> <span>⏳</span>`;
-      }
-
-      // 1. Upload photos to Cloudinary / storage service (storing references, not huge Base64)
-      const finalPhotoUrls = [];
-      const uploadedAssets = [];
-
-      for (let i = 0; i < validPhotos.length; i++) {
-        const photo = validPhotos[i];
-        if (btn) {
-          btn.innerHTML = `<span>Uploading Media (${i + 1}/${validPhotos.length})...</span> <span>⏳</span>`;
-        }
-
-        if (photo && photo.startsWith('data:')) {
-          try {
-            if (window.VanviAPI && window.VanviAPI.upload) {
-              const uploadRes = await window.VanviAPI.upload.photo(photo, `memory_${Date.now()}_${i + 1}.png`, {
-                templateId: currentTemplateId,
-                assetType: 'image'
-              });
-              if (uploadRes && uploadRes.success && (uploadRes.secure_url || uploadRes.url)) {
-                const assetUrl = uploadRes.secure_url || uploadRes.url;
-                finalPhotoUrls.push(assetUrl);
-                uploadedAssets.push({
-                  public_id: uploadRes.public_id || null,
-                  url: assetUrl,
-                  provider: uploadRes.provider || 'local',
-                  resource_type: uploadRes.resource_type || 'image',
-                  format: uploadRes.format || 'png'
-                });
-                continue;
-              }
-            }
-          } catch (e) {
-            console.warn('[Builder] Photo upload API failed, retaining local format:', e);
-          }
-        }
-        finalPhotoUrls.push(photo);
-      }
-
-      // 2. Store moment payload in /api/moments with clean media references
-      const custom_data = {
-        recipient,
-        sender,
-        occasion,
-        message,
-        date,
-        musicTrack: soundtrack,
-        photos: finalPhotoUrls,
-        assets: uploadedAssets,
-        soundtrack
-      };
-
-      const momentPayload = {
-        title: `${occasion} Keepsake for ${recipient}`,
-        recipient,
-        sender,
-        occasion,
-        message,
-        date,
-        musicTrack: soundtrack,
-        photos: finalPhotoUrls,
-        lockMode: 'envelope',
-        templateId: initialTemplate,
-        custom_data
-      };
-
-      let momentId = null;
-      let momentSlug = null;
-
-      // Primary: Save via VanviAPI client SDK
-      if (window.VanviAPI && window.VanviAPI.moments && typeof window.VanviAPI.moments.saveDraft === 'function') {
-        try {
-          const res = await window.VanviAPI.moments.saveDraft(momentPayload);
-          if (res && res.success && res.moment) {
-            momentId = res.moment.id;
-            momentSlug = res.moment.slug;
-          }
-        } catch (e) {
-          console.warn('Draft save error:', e);
-        }
-      }
-
-      // Fallback: Direct POST /api/moments
-      if (!momentId) {
-        try {
-          const apiBase = (window.location.port === '3000') ? '' : 'http://localhost:3000';
-          const postRes = await fetch(`${apiBase}/api/moments`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(momentPayload)
-          });
-          if (postRes.ok) {
-            const data = await postRes.json();
-            if (data && data.success && data.moment) {
-              momentId = data.moment.id;
-              momentSlug = data.moment.slug;
-            }
-          }
-        } catch (e) {}
-      }
-
-      // Resilient local fallback if backend is unreachable
-      if (!momentId) {
-        momentId = 'vm_' + Math.random().toString(36).substring(2, 10);
-        momentSlug = 'm_' + Math.random().toString(36).substring(2, 10);
-        try {
-          const list = JSON.parse(localStorage.getItem('vanvi_user_moments') || '[]');
-          list.unshift({ id: momentId, slug: momentSlug, ...momentPayload, createdAt: Date.now() });
-          localStorage.setItem('vanvi_user_moments', JSON.stringify(list));
-        } catch(e) {}
-      }
-
-      // Construct clean ID-based celebration URL (Dynamic Unlimited Template Architecture)
-      let targetPath = 'templates/birthday-3d-candle/index.html';
-      if (window.VanviTemplatesData && window.VanviTemplatesData.templates) {
-        const tObj = window.VanviTemplatesData.templates.find(t => t.id === initialTemplate || (t.aliases && t.aliases.includes(initialTemplate)));
-        if (tObj && tObj.templatePath) {
-          targetPath = tObj.templatePath.endsWith('index.html') ? tObj.templatePath : `${tObj.templatePath}index.html`;
-        }
-      }
-      if (targetPath === 'templates/birthday-3d-candle/index.html') {
-        if (initialTemplate === 'birthday-wish-1' || initialTemplate === 'birthday-wish-01') targetPath = 'templates/birthday-wish-01/index.html';
-        else if (initialTemplate === 'birthday-wish-2' || initialTemplate === 'birthday-wish-02') targetPath = 'templates/birthday-wish-02/index.html';
-        else if (initialTemplate.includes('surprise')) targetPath = 'templates/birthday-3d-candle-surprise/index.html';
-        else if (initialTemplate.includes('bloom')) targetPath = 'templates/birthday-white-bloom/index.html';
-        else if (initialTemplate.includes('love') || initialTemplate.includes('gf')) targetPath = 'templates/constellation-love/index.html';
-        else if (initialTemplate.includes('polaroid') || initialTemplate.includes('friend') || initialTemplate.includes('memor')) targetPath = 'templates/retro-polaroid-wall/index.html';
-        else if (initialTemplate.includes('anniversary') || initialTemplate.includes('wedding')) targetPath = 'templates/golden-anniversary/index.html';
-        else if (initialTemplate.includes('apology') || initialTemplate.includes('sorry')) targetPath = 'templates/sincere-letter/index.html';
-      }
-
-      const shortId = momentId || momentSlug;
-      const finalUrl = `${window.location.origin}/${targetPath}?id=${encodeURIComponent(shortId)}`;
-
-      document.getElementById('finalShareUrl').value = finalUrl;
-      document.getElementById('btnOpenMomentDirect').href = finalUrl;
-
-      const waText = `✨ A special digital surprise was created especially for you! Open it here: ${finalUrl}`;
-      document.getElementById('btnShareWhatsApp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`;
-
-      if (btn) {
-        btn.disabled = false;
-        btn.style.opacity = '1';
-        btn.innerHTML = originalBtnHtml;
-      }
-
-      goToStep(3);
-    }
-
-    function copyFinalLink() {
-      const input = document.getElementById('finalShareUrl');
-      input.select();
-      navigator.clipboard.writeText(input.value).then(() => {
-        alert('✨ Shareable link copied to clipboard!');
-      });
-    }
-  </script>
+  <script src="js/vanvi-navigation.js"></script>
 </body>
 </html>

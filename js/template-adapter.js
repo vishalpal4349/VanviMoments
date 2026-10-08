@@ -7,6 +7,23 @@
 (function(window) {
   'use strict';
 
+  // Automatically inherit Global Premium Web Experience
+  (function ensureGlobalExperience() {
+    if (typeof document === 'undefined') return;
+    if (document.getElementById('vanvi-global-experience-css')) return;
+    const pathname = window.location.pathname.replace(/\\/g, '/');
+    let prefix = '../../';
+    if (pathname.includes('/templates/')) {
+      const parts = pathname.split('/templates/')[1].split('/').filter(Boolean);
+      prefix = '../'.repeat(parts.length);
+    }
+    const link = document.createElement('link');
+    link.id = 'vanvi-global-experience-css';
+    link.rel = 'stylesheet';
+    link.href = prefix + 'css/vanvi-global-experience.css';
+    document.head.appendChild(link);
+  })();
+
   // Get current API base
   function getApiBase() {
     if (typeof window !== 'undefined' && window.location) {
@@ -63,6 +80,17 @@
 
   async function applyMomentDataToDOM() {
     const params = new URLSearchParams(window.location.search);
+
+    // Immediate watermark removal if purchased parameter is present
+    if (params.get('purchased') === 'true') {
+      const wm = document.getElementById('demoWatermarkBadge');
+      if (wm) {
+        wm.hidden = true;
+        wm.style.display = 'none';
+        try { wm.remove(); } catch(e) {}
+      }
+    }
+
     const momentId = params.get('id') || params.get('slug');
     if (!momentId) return;
 
@@ -202,6 +230,22 @@
           });
         }
       });
+    }
+
+    // Automatic Watermark Control (Vanvi Verified Purchase Entitlement)
+    const isPurchased = Boolean(
+      moment.status === 'published' || 
+      moment.status === 'paid' || 
+      moment.isPurchased === true ||
+      params.get('purchased') === 'true'
+    );
+    if (isPurchased) {
+      const wm = document.getElementById('demoWatermarkBadge');
+      if (wm) {
+        wm.hidden = true;
+        wm.style.display = 'none';
+        try { wm.remove(); } catch(e) {}
+      }
     }
 
     // Attach custom_data to window.vanviActiveMoment

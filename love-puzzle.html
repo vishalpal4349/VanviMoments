@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Love Puzzle — Premium Timed Puzzle — Vanvi Moments</title>
@@ -11,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     :root {
@@ -204,6 +206,137 @@
       background: #d97706;
       color: #ffffff;
       border-color: #d97706;
+    }
+
+    /* Artwork Gallery Strip */
+    .artwork-selector-strip {
+      width: 100%;
+      margin-bottom: 12px;
+    }
+    .strip-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .artwork-carousel {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 4px 2px;
+      justify-content: center;
+    }
+    .artwork-carousel::-webkit-scrollbar { display: none; }
+    .art-thumb-btn {
+      flex: 0 0 auto;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 12px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 3px 0 #ebd8e3;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .art-thumb-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 0 #ebd8e3;
+      border-color: var(--rose-main);
+    }
+    .art-thumb-btn.active {
+      background: linear-gradient(135deg, #2c1224, #521943);
+      border-color: #2c1224;
+      color: #ffffff;
+      box-shadow: 0 1px 0 #2c1224;
+      transform: translateY(2px);
+    }
+    .art-thumb-icon { font-size: 14px; }
+    .art-thumb-title { font-size: 11.5px; font-weight: 800; }
+
+    /* Mode Pill Switcher */
+    .mode-switch-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .mode-pill {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 850;
+      color: var(--text-dark);
+      cursor: pointer;
+      box-shadow: 0 3px 0 #ebd8e3;
+      transition: all 0.2s;
+    }
+    .mode-pill.active {
+      background: var(--rose-gradient);
+      border-color: var(--rose-main);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(255, 42, 122, 0.3);
+      transform: translateY(1px);
+    }
+
+    /* Peek Overlay */
+    .peek-artwork-overlay {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 30;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+      border-radius: 14px;
+    }
+    .peek-artwork-overlay.visible {
+      opacity: 1;
+    }
+
+    /* Slider Mode Tile Component */
+    .slider-tile {
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      cursor: pointer;
+      position: relative;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 2px 4px;
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s;
+    }
+    .slider-tile:hover {
+      transform: scale(0.98);
+      filter: brightness(1.05);
+    }
+    .slider-tile:active {
+      transform: scale(0.94);
+    }
+    .slider-tile-num {
+      font-size: 9px;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 4px;
+      padding: 1px 3px;
+      pointer-events: none;
+    }
+    .slider-blank-tile {
+      background: rgba(255, 120, 175, 0.12);
+      border: 1.5px dashed rgba(255, 42, 122, 0.3);
+      border-radius: 8px;
     }
 
     /* Live HUD */
@@ -453,14 +586,16 @@
       <a href="games.html" class="btn-nav-back" title="Back to Games">
         <span>‹</span> <span>Games</span>
       </a>
-      <a href="index.html" class="brand-link" title="Vanvi Moments">
-        🧩 Love <span>Puzzle</span>
+      <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" style="height:34px; width:auto; max-width:130px; object-fit:contain;">
+        <span style="background:rgba(255,42,122,0.1); border:1px solid rgba(255,42,122,0.25); color:var(--rose-main); font-size:10px; font-weight:900; letter-spacing:0.8px; padding:2px 7px; border-radius:6px; text-transform:uppercase;">PUZZLE</span>
       </a>
     </div>
     <div class="header-right">
+      <button type="button" class="btn-nav-back" onclick="openLovePuzzleRules()" style="margin-right:6px;">📖 Rules</button>
       <button type="button" class="sound-btn" id="soundBtn" onclick="toggleSound()" title="Toggle Sound">🔊</button>
       <a href="rewards.html" class="wallet-pill" title="View Rewards Wallet">
-        <span>🪙</span> <span id="headerCoins">150</span>
+        <span>🪙</span> <span id="headerCoins">50</span>
       </a>
     </div>
   </header>
@@ -479,19 +614,56 @@
       <button type="button" class="diff-btn active" id="btnEasy" onclick="selectDifficulty('easy')">
         <div class="diff-name">Easy</div>
         <div class="diff-pieces">3 × 3 (9 Pieces)</div>
-        <div class="diff-reward">+3 🪙</div>
+        <div class="diff-reward">+2 🪙</div>
       </button>
       <button type="button" class="diff-btn" id="btnHard" onclick="selectDifficulty('hard')">
         <div class="diff-name">Hard</div>
         <div class="diff-pieces">4 × 4 (16 Pieces)</div>
-        <div class="diff-reward">+6 🪙</div>
+        <div class="diff-reward">+4 🪙</div>
       </button>
       <button type="button" class="diff-btn" id="btnExpert" onclick="selectDifficulty('expert')">
         <div class="diff-name">Expert</div>
         <div class="diff-pieces">5 × 5 (25 Pieces)</div>
-        <div class="diff-reward">+10 🪙</div>
+        <div class="diff-reward">+6 🪙</div>
       </button>
     </nav>
+
+    <!-- Celebration Artwork Gallery -->
+    <div class="artwork-selector-strip">
+      <div class="strip-label">Select Artwork Theme:</div>
+      <div class="artwork-carousel">
+        <button type="button" class="art-thumb-btn active" id="artThumb_twilight" onclick="selectArtwork('twilight')">
+          <span class="art-thumb-icon">💖</span>
+          <span class="art-thumb-title">Twilight</span>
+        </button>
+        <button type="button" class="art-thumb-btn" id="artThumb_roses" onclick="selectArtwork('roses')">
+          <span class="art-thumb-icon">🌹</span>
+          <span class="art-thumb-title">Roses</span>
+        </button>
+        <button type="button" class="art-thumb-btn" id="artThumb_lanterns" onclick="selectArtwork('lanterns')">
+          <span class="art-thumb-icon">🏮</span>
+          <span class="art-thumb-title">Lanterns</span>
+        </button>
+        <button type="button" class="art-thumb-btn" id="artThumb_constellation" onclick="selectArtwork('constellation')">
+          <span class="art-thumb-icon">✨</span>
+          <span class="art-thumb-title">Cosmic</span>
+        </button>
+        <button type="button" class="art-thumb-btn" id="artThumb_beach" onclick="selectArtwork('beach')">
+          <span class="art-thumb-icon">🏖️</span>
+          <span class="art-thumb-title">Sunset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Puzzle Mode Selector -->
+    <div class="mode-switch-wrap">
+      <button type="button" class="mode-pill active" id="modeJigsaw" onclick="switchPuzzleMode('jigsaw')">
+        🧩 Jigsaw Snap
+      </button>
+      <button type="button" class="mode-pill" id="modeSlider" onclick="switchPuzzleMode('slider')">
+        🔲 Slide &amp; Solve
+      </button>
+    </div>
 
     <!-- Live HUD -->
     <section class="hud-bar">
@@ -504,7 +676,7 @@
         <div class="hud-val">🎯 <span id="hudTarget">45s</span></div>
       </div>
       <div class="hud-item" style="text-align: right;">
-        <span class="hud-label">Placed Pieces</span>
+        <span class="hud-label" id="hudPlacedLabel">Placed Pieces</span>
         <div class="hud-val">✨ <span id="hudPlaced">0 / 9</span></div>
       </div>
     </section>
@@ -513,30 +685,36 @@
     <section class="puzzle-arena">
       <!-- Target Board -->
       <div class="target-board-wrapper" id="boardWrapper">
+        <div class="peek-artwork-overlay" id="peekOverlay"></div>
         <div class="board-grid" id="boardGrid">
           <!-- Slots rendered dynamically -->
         </div>
       </div>
 
-      <!-- Shuffled Pieces Tray -->
-      <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 4px;">
-        <span style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">
-          Piece Tray (Drag or Tap to Place)
-        </span>
-        <span id="trayCountBadge" style="font-size: 10.5px; font-weight: 800; color: var(--rose-main);">9 Pieces</span>
-      </div>
-      <div class="pieces-tray" id="piecesTray">
-        <!-- Pieces rendered dynamically -->
+      <!-- Shuffled Pieces Tray (for Jigsaw Mode) -->
+      <div id="trayContainer" style="width: 100%;">
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 4px; margin-bottom: 6px;">
+          <span style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">
+            Piece Tray (Drag or Tap to Place)
+          </span>
+          <span id="trayCountBadge" style="font-size: 10.5px; font-weight: 800; color: var(--rose-main);">9 Pieces</span>
+        </div>
+        <div class="pieces-tray" id="piecesTray">
+          <!-- Pieces rendered dynamically -->
+        </div>
       </div>
     </section>
 
     <!-- Controls Row -->
     <div class="controls-row">
       <button type="button" class="btn-action-primary" id="btnRestart" onclick="startNewGame()">
-        <span>🔄</span> Reset &amp; Shuffle
+        <span>🔄</span> Shuffle &amp; Play
+      </button>
+      <button type="button" class="btn-action-sec" id="btnHoldPeek" onpointerdown="showQuickPeek()" onpointerup="hideQuickPeek()" onpointerleave="hideQuickPeek()">
+        <span>👁️</span> Peek Art
       </button>
       <button type="button" class="btn-action-sec" onclick="openPreviewModal()">
-        <span>👁️</span> Reference Image
+        <span>🖼️</span> Preview
       </button>
     </div>
 
@@ -627,23 +805,248 @@
   </nav>
 
   <!-- Game Logic Script -->
+  <script src="js/vanvi-games-engine.js"></script>
   <script>
     (function() {
       'use strict';
 
-      const DAILY_CAP = 25;
+      const DAILY_CAP = (window.VanviGames && window.VanviGames.DAILY_CAP) || 30;
       const STORAGE_COINS = 'vanvi_user_coins';
       const STORAGE_TODAY_EARNED = 'vanvi_games_today_earned';
       const STORAGE_TODAY_DATE = 'vanvi_games_today_date';
       const STORAGE_SOUND = 'vanvi_sound_enabled';
 
+      window.openLovePuzzleRules = function() {
+        if (window.VanviGames) {
+          VanviGames.showRulesModal('Love Puzzle Jigsaw 🖼️', [
+            'Drag or tap puzzle tiles to reconstruct the celebration artwork.',
+            'Place all tiles on the board grid before the timer runs out.',
+            'Finish before the target time to score bonus coins!',
+            'Earn virtual Vanvi Coins toward gift unlocks (Daily Limit: max 30 coins).'
+          ]);
+        }
+      };
+
       const PUZZLE_LEVELS = {
-        easy: { id: 'easy', name: 'Easy', size: 3, timeLimit: 60, targetTime: 40, baseReward: 3 },
-        hard: { id: 'hard', name: 'Hard', size: 4, timeLimit: 90, targetTime: 65, baseReward: 6 },
-        expert: { id: 'expert', name: 'Expert', size: 5, timeLimit: 120, targetTime: 85, baseReward: 10 }
+        easy: { id: 'easy', name: 'Easy', size: 3, timeLimit: 60, targetTime: 40, baseReward: 2 },
+        hard: { id: 'hard', name: 'Hard', size: 4, timeLimit: 90, targetTime: 65, baseReward: 4 },
+        expert: { id: 'expert', name: 'Expert', size: 5, timeLimit: 120, targetTime: 85, baseReward: 6 }
+      };
+
+      const ARTWORKS = {
+        twilight: {
+          name: 'Romantic Twilight',
+          icon: '💖',
+          draw: (ctx) => {
+            const grad = ctx.createLinearGradient(0, 0, 400, 400);
+            grad.addColorStop(0, '#ff4b8b');
+            grad.addColorStop(0.35, '#c026d3');
+            grad.addColorStop(0.7, '#6366f1');
+            grad.addColorStop(1, '#1e1b4b');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 400, 400);
+
+            const moonGrad = ctx.createRadialGradient(200, 160, 10, 200, 160, 120);
+            moonGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+            moonGrad.addColorStop(0.4, 'rgba(255, 230, 245, 0.6)');
+            moonGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = moonGrad;
+            ctx.beginPath();
+            ctx.arc(200, 160, 120, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#ffffff';
+            for (let i = 0; i < 35; i++) {
+              const sx = (i * 47) % 380 + 10;
+              const sy = (i * 73) % 240 + 10;
+              ctx.beginPath();
+              ctx.arc(sx, sy, (i % 3) + 1.2, 0, Math.PI * 2);
+              ctx.fill();
+            }
+
+            ctx.save();
+            ctx.translate(200, 185);
+            ctx.scale(1.4, 1.4);
+            ctx.fillStyle = 'rgba(255, 42, 122, 0.85)';
+            ctx.shadowColor = 'rgba(255, 42, 122, 0.6)';
+            ctx.shadowBlur = 25;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.bezierCurveTo(-25, -25, -50, 0, 0, 45);
+            ctx.bezierCurveTo(50, 0, 25, -25, 0, 0);
+            ctx.fill();
+            ctx.restore();
+
+            ctx.font = 'bold 22px "Playfair Display", Georgia, serif';
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.shadowColor = 'rgba(0,0,0,0.5)';
+            ctx.shadowBlur = 10;
+            ctx.fillText('Vanvi Moments', 200, 310);
+            ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
+            ctx.fillStyle = '#ffd6e7';
+            ctx.fillText('Forever in Every Memory ♡', 200, 335);
+          }
+        },
+        roses: {
+          name: 'Golden Rose Garden',
+          icon: '🌹',
+          draw: (ctx) => {
+            const grad = ctx.createLinearGradient(0, 0, 400, 400);
+            grad.addColorStop(0, '#f59e0b');
+            grad.addColorStop(0.35, '#e11d48');
+            grad.addColorStop(0.75, '#831843');
+            grad.addColorStop(1, '#2c0a1a');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 400, 400);
+
+            // Sun disk
+            ctx.fillStyle = 'rgba(254, 240, 138, 0.9)';
+            ctx.beginPath();
+            ctx.arc(200, 140, 60, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Rose petals
+            for (let i = 0; i < 7; i++) {
+              const rx = 40 + i * 52;
+              const ry = 270 + (i % 2) * 24;
+              ctx.fillStyle = (i % 2 === 0) ? '#ff2a7a' : '#fda4af';
+              ctx.beginPath();
+              ctx.arc(rx, ry, 22, 0, Math.PI * 2);
+              ctx.fill();
+            }
+
+            ctx.font = 'bold 22px "Playfair Display", Georgia, serif';
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.shadowColor = 'rgba(0,0,0,0.6)';
+            ctx.shadowBlur = 10;
+            ctx.fillText('Rose Radiance', 200, 190);
+            ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
+            ctx.fillStyle = '#fef08a';
+            ctx.fillText('Pure Affection & Grace 🌹', 200, 215);
+          }
+        },
+        lanterns: {
+          name: 'Festival Sky Lanterns',
+          icon: '🏮',
+          draw: (ctx) => {
+            const grad = ctx.createLinearGradient(0, 0, 400, 400);
+            grad.addColorStop(0, '#0f172a');
+            grad.addColorStop(0.5, '#1e1b4b');
+            grad.addColorStop(1, '#3b0764');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 400, 400);
+
+            const lanterns = [
+              { x: 120, y: 150, r: 24 },
+              { x: 200, y: 100, r: 30 },
+              { x: 280, y: 160, r: 24 },
+              { x: 70, y: 250, r: 18 },
+              { x: 330, y: 230, r: 20 }
+            ];
+            lanterns.forEach(l => {
+              const rad = ctx.createRadialGradient(l.x, l.y, 2, l.x, l.y, l.r * 1.5);
+              rad.addColorStop(0, '#fef08a');
+              rad.addColorStop(0.5, '#f59e0b');
+              rad.addColorStop(1, 'rgba(245, 158, 11, 0)');
+              ctx.fillStyle = rad;
+              ctx.beginPath();
+              ctx.arc(l.x, l.y, l.r * 1.5, 0, Math.PI * 2);
+              ctx.fill();
+
+              ctx.fillStyle = '#fbbf24';
+              ctx.fillRect(l.x - l.r * 0.4, l.y - l.r * 0.6, l.r * 0.8, l.r * 1.2);
+            });
+
+            ctx.font = 'bold 22px "Playfair Display", Georgia, serif';
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.shadowColor = 'rgba(0,0,0,0.6)';
+            ctx.shadowBlur = 10;
+            ctx.fillText('Celebration Wishes', 200, 310);
+            ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
+            ctx.fillStyle = '#fde68a';
+            ctx.fillText('May Every Dream Take Flight ✨', 200, 335);
+          }
+        },
+        constellation: {
+          name: 'Constellation of Souls',
+          icon: '✨',
+          draw: (ctx) => {
+            const grad = ctx.createRadialGradient(200, 200, 20, 200, 200, 260);
+            grad.addColorStop(0, '#312e81');
+            grad.addColorStop(0.6, '#1e1b4b');
+            grad.addColorStop(1, '#090514');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 400, 400);
+
+            ctx.strokeStyle = 'rgba(192, 132, 252, 0.65)';
+            ctx.lineWidth = 2;
+            const pts = [
+              [90, 180], [150, 120], [200, 170], [250, 120], [310, 180], [200, 280], [90, 180]
+            ];
+            ctx.beginPath();
+            ctx.moveTo(pts[0][0], pts[0][1]);
+            pts.forEach(p => ctx.lineTo(p[0], p[1]));
+            ctx.stroke();
+
+            pts.forEach(p => {
+              ctx.fillStyle = '#ffffff';
+              ctx.beginPath();
+              ctx.arc(p[0], p[1], 4.5, 0, Math.PI * 2);
+              ctx.fill();
+            });
+
+            ctx.font = 'bold 22px "Playfair Display", Georgia, serif';
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.shadowColor = 'rgba(0,0,0,0.6)';
+            ctx.shadowBlur = 10;
+            ctx.fillText('Twin Stars', 200, 325);
+            ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
+            ctx.fillStyle = '#c084fc';
+            ctx.fillText('Bound by Destiny Across Galaxies 🌌', 200, 350);
+          }
+        },
+        beach: {
+          name: 'Sunset Beach Silhouette',
+          icon: '🏖️',
+          draw: (ctx) => {
+            const grad = ctx.createLinearGradient(0, 0, 0, 400);
+            grad.addColorStop(0, '#f97316');
+            grad.addColorStop(0.4, '#ec4899');
+            grad.addColorStop(0.7, '#6366f1');
+            grad.addColorStop(1, '#1e1b4b');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 400, 400);
+
+            // Sun
+            ctx.fillStyle = 'rgba(254, 240, 138, 0.9)';
+            ctx.beginPath();
+            ctx.arc(200, 200, 50, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Sea
+            ctx.fillStyle = 'rgba(30, 27, 75, 0.7)';
+            ctx.fillRect(0, 220, 400, 180);
+
+            ctx.font = 'bold 22px "Playfair Display", Georgia, serif';
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.shadowColor = 'rgba(0,0,0,0.6)';
+            ctx.shadowBlur = 10;
+            ctx.fillText('Golden Serenade', 200, 330);
+            ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
+            ctx.fillStyle = '#fde68a';
+            ctx.fillText('Sunsets fade, memories stay forever 🌅', 200, 355);
+          }
+        }
       };
 
       let currentDiff = 'easy';
+      let currentArtwork = 'twilight';
+      let currentPuzzleMode = 'jigsaw'; // 'jigsaw' | 'slider'
       let timerRemaining = 60;
       let timerInterval = null;
       let gameStartTime = 0;
@@ -653,87 +1056,71 @@
       let isSoundMuted = localStorage.getItem(STORAGE_SOUND) === 'false';
       let selectedPieceElement = null;
       let puzzleArtworkDataUrl = '';
+      let sliderTiles = []; // Array of length totalPieces
+      let sliderMoves = 0;
 
       const boardGrid = document.getElementById('boardGrid');
       const piecesTray = document.getElementById('piecesTray');
+      const trayContainer = document.getElementById('trayContainer');
+      const peekOverlay = document.getElementById('peekOverlay');
       const hudTimer = document.getElementById('hudTimer');
       const hudTarget = document.getElementById('hudTarget');
       const hudPlaced = document.getElementById('hudPlaced');
+      const hudPlacedLabel = document.getElementById('hudPlacedLabel');
       const trayCountBadge = document.getElementById('trayCountBadge');
       const headerCoins = document.getElementById('headerCoins');
       const soundBtn = document.getElementById('soundBtn');
 
-      // 1. Procedural Romantic Artwork Generation on Canvas
-      function generateRomanticArtwork() {
+      function generateCurrentArtwork() {
         const canvas = document.createElement('canvas');
         canvas.width = 400;
         canvas.height = 400;
         const ctx = canvas.getContext('2d');
 
-        // Romantic Twilight Gradient
-        const grad = ctx.createLinearGradient(0, 0, 400, 400);
-        grad.addColorStop(0, '#ff4b8b');
-        grad.addColorStop(0.35, '#c026d3');
-        grad.addColorStop(0.7, '#6366f1');
-        grad.addColorStop(1, '#1e1b4b');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, 400, 400);
-
-        // Radiant Moonlight / Glow
-        const moonGrad = ctx.createRadialGradient(200, 160, 10, 200, 160, 120);
-        moonGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
-        moonGrad.addColorStop(0.4, 'rgba(255, 230, 245, 0.6)');
-        moonGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        ctx.fillStyle = moonGrad;
-        ctx.beginPath();
-        ctx.arc(200, 160, 120, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Starlight Sparkles
-        ctx.fillStyle = '#ffffff';
-        for (let i = 0; i < 35; i++) {
-          const sx = (i * 47) % 380 + 10;
-          const sy = (i * 73) % 240 + 10;
-          const r = (i % 3) + 1.2;
-          ctx.beginPath();
-          ctx.arc(sx, sy, r, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        // Heart Floating Silhouette
-        ctx.save();
-        ctx.translate(200, 185);
-        ctx.scale(1.4, 1.4);
-        ctx.fillStyle = 'rgba(255, 42, 122, 0.85)';
-        ctx.shadowColor = 'rgba(255, 42, 122, 0.6)';
-        ctx.shadowBlur = 25;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.bezierCurveTo(-25, -25, -50, 0, 0, 45);
-        ctx.bezierCurveTo(50, 0, 25, -25, 0, 0);
-        ctx.fill();
-        ctx.restore();
-
-        // Vanvi Moments Typography Stamp
-        ctx.font = 'bold 22px "Playfair Display", Georgia, serif';
-        ctx.fillStyle = '#ffffff';
-        ctx.textAlign = 'center';
-        ctx.shadowColor = 'rgba(0,0,0,0.5)';
-        ctx.shadowBlur = 10;
-        ctx.fillText('Vanvi Moments', 200, 310);
-
-        ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
-        ctx.fillStyle = '#ffd6e7';
-        ctx.fillText('Forever in Every Memory ♡', 200, 335);
+        const art = ARTWORKS[currentArtwork] || ARTWORKS.twilight;
+        art.draw(ctx);
 
         puzzleArtworkDataUrl = canvas.toDataURL('image/png');
 
-        // Reference modal container
         const refContainer = document.getElementById('referenceArtworkContainer');
         if (refContainer) {
           refContainer.style.background = `url("${puzzleArtworkDataUrl}") center/cover no-repeat`;
         }
+        if (peekOverlay) {
+          peekOverlay.style.backgroundImage = `url("${puzzleArtworkDataUrl}")`;
+        }
       }
+
+      window.selectArtwork = function(artKey) {
+        if (!ARTWORKS[artKey]) return;
+        currentArtwork = artKey;
+        document.querySelectorAll('.art-thumb-btn').forEach(b => b.classList.remove('active'));
+        const activeBtn = document.getElementById('artThumb_' + artKey);
+        if (activeBtn) activeBtn.classList.add('active');
+        generateCurrentArtwork();
+        setupPuzzle();
+      };
+
+      window.switchPuzzleMode = function(modeKey) {
+        if (modeKey !== 'jigsaw' && modeKey !== 'slider') return;
+        currentPuzzleMode = modeKey;
+        document.getElementById('modeJigsaw').classList.toggle('active', modeKey === 'jigsaw');
+        document.getElementById('modeSlider').classList.toggle('active', modeKey === 'slider');
+        if (trayContainer) {
+          trayContainer.style.display = modeKey === 'jigsaw' ? 'block' : 'none';
+        }
+        if (hudPlacedLabel) {
+          hudPlacedLabel.textContent = modeKey === 'jigsaw' ? 'Placed Pieces' : 'Slider Moves';
+        }
+        setupPuzzle();
+      };
+
+      window.showQuickPeek = function() {
+        if (peekOverlay) peekOverlay.classList.add('visible');
+      };
+      window.hideQuickPeek = function() {
+        if (peekOverlay) peekOverlay.classList.remove('visible');
+      };
 
       // Audio Synthesizer
       let audioCtx = null;
@@ -755,6 +1142,17 @@
             gain.connect(audioCtx.destination);
             osc.start(now);
             osc.stop(now + 0.1);
+          } else if (type === 'slide') {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.frequency.setValueAtTime(440, now);
+            osc.frequency.linearRampToValueAtTime(560, now + 0.08);
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.linearRampToValueAtTime(0, now + 0.08);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.08);
           } else if (type === 'win') {
             [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
               const osc = audioCtx.createOscillator();
@@ -810,19 +1208,31 @@
         const size = config.size;
         totalPieces = size * size;
         placedPiecesCount = 0;
+        sliderMoves = 0;
         isGameActive = true;
         selectedPieceElement = null;
 
         hudTimer.textContent = `${config.timeLimit}s`;
         hudTimer.classList.remove('urgent');
         hudTarget.textContent = `${config.targetTime}s`;
-        hudPlaced.textContent = `0 / ${totalPieces}`;
-        trayCountBadge.textContent = `${totalPieces} Pieces`;
 
-        // Configure Grid Columns
         boardGrid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
         boardGrid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
         boardGrid.innerHTML = '';
+
+        if (currentPuzzleMode === 'slider') {
+          setupSliderMode(size);
+        } else {
+          setupJigsawMode(size);
+        }
+
+        startTimer(config.timeLimit);
+      }
+
+      // --- 1. JIGSAW SNAP MODE ---
+      function setupJigsawMode(size) {
+        hudPlaced.textContent = `0 / ${totalPieces}`;
+        trayCountBadge.textContent = `${totalPieces} Pieces`;
         piecesTray.innerHTML = '';
 
         // Generate Board Slots
@@ -832,10 +1242,8 @@
           slot.dataset.slotIndex = i;
           slot.innerHTML = `<span class="slot-guide-num">${i + 1}</span>`;
 
-          // Tap to drop selected piece
           slot.addEventListener('click', () => handleSlotClick(slot, i));
 
-          // Drag over / drop support
           slot.addEventListener('dragover', (e) => {
             e.preventDefault();
             if (!slot.classList.contains('filled')) slot.classList.add('hover-over');
@@ -856,13 +1264,11 @@
 
         // Generate Shuffled Pieces
         const indices = Array.from({ length: totalPieces }, (_, i) => i);
-        // Shuffle
         for (let i = indices.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [indices[i], indices[j]] = [indices[j], indices[i]];
         }
 
-        // Board dimension 320px
         const piecePixelSize = Math.floor(320 / size);
 
         indices.forEach((pieceIdx) => {
@@ -874,7 +1280,6 @@
           piece.style.height = `${piecePixelSize - 4}px`;
           piece.draggable = true;
 
-          // Background slice mapping
           const row = Math.floor(pieceIdx / size);
           const col = pieceIdx % size;
           const bgX = (col / (size - 1)) * 100;
@@ -884,27 +1289,136 @@
           piece.style.backgroundSize = `${size * 100}% ${size * 100}%`;
           piece.style.backgroundPosition = `${bgX}% ${bgY}%`;
 
-          // Drag Events
           piece.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('text/plain', pieceIdx);
             selectPiece(piece);
           });
 
-          // Tap selection for smooth mobile controls
           piece.addEventListener('click', (e) => {
             e.stopPropagation();
             selectPiece(piece);
           });
 
-          // Mobile Touch Drag & Snap
           enableTouchDrag(piece, pieceIdx);
-
           piecesTray.appendChild(piece);
         });
-
-        // Start Timer
-        startTimer(config.timeLimit);
       }
+
+      // --- 2. SLIDER TILE MODE (Classic 15/8 Slide & Solve) ---
+      function setupSliderMode(size) {
+        hudPlaced.textContent = `0 Moves`;
+        sliderTiles = Array.from({ length: totalPieces }, (_, i) => i);
+        const blankTileVal = totalPieces - 1;
+
+        // Shuffle by making valid moves from solved state so it's 100% solvable
+        let blankPos = totalPieces - 1;
+        const numShuffles = size * size * 15;
+        for (let s = 0; s < numShuffles; s++) {
+          const neighbors = getValidSliderNeighbors(blankPos, size);
+          const pick = neighbors[Math.floor(Math.random() * neighbors.length)];
+          [sliderTiles[blankPos], sliderTiles[pick]] = [sliderTiles[pick], sliderTiles[blankPos]];
+          blankPos = pick;
+        }
+
+        renderSliderBoard(size);
+      }
+
+      function getValidSliderNeighbors(pos, size) {
+        const neighbors = [];
+        const r = Math.floor(pos / size);
+        const c = pos % size;
+        if (r > 0) neighbors.push(pos - size); // Up
+        if (r < size - 1) neighbors.push(pos + size); // Down
+        if (c > 0) neighbors.push(pos - 1); // Left
+        if (c < size - 1) neighbors.push(pos + 1); // Right
+        return neighbors;
+      }
+
+      function renderSliderBoard(size) {
+        boardGrid.innerHTML = '';
+        const blankTileVal = totalPieces - 1;
+
+        sliderTiles.forEach((tileIdx, boardPos) => {
+          const cell = document.createElement('div');
+          if (tileIdx === blankTileVal) {
+            cell.className = 'slider-blank-tile';
+          } else {
+            cell.className = 'slider-tile';
+            const row = Math.floor(tileIdx / size);
+            const col = tileIdx % size;
+            const bgX = (col / (size - 1)) * 100;
+            const bgY = (row / (size - 1)) * 100;
+
+            cell.style.backgroundImage = `url("${puzzleArtworkDataUrl}")`;
+            cell.style.backgroundSize = `${size * 100}% ${size * 100}%`;
+            cell.style.backgroundPosition = `${bgX}% ${bgY}%`;
+            cell.innerHTML = `<span class="slider-tile-num">${tileIdx + 1}</span>`;
+
+            cell.addEventListener('click', () => handleSliderTileClick(boardPos, size));
+          }
+          boardGrid.appendChild(cell);
+        });
+      }
+
+      function handleSliderTileClick(clickedPos, size) {
+        if (!isGameActive) return;
+        const blankTileVal = totalPieces - 1;
+        const blankPos = sliderTiles.indexOf(blankTileVal);
+        const neighbors = getValidSliderNeighbors(blankPos, size);
+
+        if (neighbors.includes(clickedPos)) {
+          // Swap clicked tile with blank
+          [sliderTiles[blankPos], sliderTiles[clickedPos]] = [sliderTiles[clickedPos], sliderTiles[blankPos]];
+          sliderMoves++;
+          playAudio('slide');
+          if (navigator.vibrate) navigator.vibrate(20);
+          hudPlaced.textContent = `${sliderMoves} Moves`;
+
+          renderSliderBoard(size);
+
+          // Check if solved
+          const isSolved = sliderTiles.every((val, idx) => val === idx);
+          if (isSolved) {
+            clearInterval(timerInterval);
+            isGameActive = false;
+            // Reveal full picture
+            renderFullBoardImage();
+            setTimeout(triggerVictory, 350);
+          }
+        }
+      }
+
+      function renderFullBoardImage() {
+        boardGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; grid-row: 1 / -1; width:100%; height:100%; border-radius:14px; background: url('${puzzleArtworkDataUrl}') center/cover no-repeat; animation: snapSparkle 0.6s ease-out;"></div>
+        `;
+      }
+
+      // Slider Keyboard arrow keys support
+      window.addEventListener('keydown', (e) => {
+        if (currentPuzzleMode !== 'slider' || !isGameActive) return;
+        const config = PUZZLE_LEVELS[currentDiff];
+        const size = config.size;
+        const blankPos = sliderTiles.indexOf(totalPieces - 1);
+        const r = Math.floor(blankPos / size);
+        const c = blankPos % size;
+
+        let targetPos = -1;
+        if (['ArrowUp', 'KeyW'].includes(e.code) && r < size - 1) {
+          targetPos = blankPos + size; // Move bottom tile UP into blank
+        } else if (['ArrowDown', 'KeyS'].includes(e.code) && r > 0) {
+          targetPos = blankPos - size; // Move top tile DOWN into blank
+        } else if (['ArrowLeft', 'KeyA'].includes(e.code) && c < size - 1) {
+          targetPos = blankPos + 1; // Move right tile LEFT into blank
+        } else if (['ArrowRight', 'KeyD'].includes(e.code) && c > 0) {
+          targetPos = blankPos - 1; // Move left tile RIGHT into blank
+        }
+
+        if (targetPos >= 0) {
+          e.preventDefault();
+          handleSliderTileClick(targetPos, size);
+        }
+      });
 
       function selectPiece(pieceEl) {
         if (pieceEl.classList.contains('snapped')) return;
@@ -1036,12 +1550,16 @@
         let wonCoins = config.baseReward + (isUnderTarget ? 2 : 0);
 
         // Daily cap enforcement
-        const earned = getEarnedToday();
-        const remainingCap = Math.max(0, DAILY_CAP - earned);
-        const actualAwarded = Math.min(wonCoins, remainingCap);
-
-        if (actualAwarded > 0) {
-          addCoins(actualAwarded);
+        let actualAwarded = 0;
+        if (wonCoins > 0 && window.VanviGames) {
+          const res = VanviGames.awardCoins(wonCoins, `Love Puzzle (${config.name})`);
+          actualAwarded = res.awarded;
+          headerCoins.textContent = res.totalCoins;
+        } else {
+          const earned = getEarnedToday();
+          const remainingCap = Math.max(0, DAILY_CAP - earned);
+          actualAwarded = Math.min(wonCoins, remainingCap);
+          if (actualAwarded > 0) addCoins(actualAwarded);
         }
 
         // Sync backend
@@ -1155,7 +1673,7 @@
       document.addEventListener('DOMContentLoaded', () => {
         soundBtn.textContent = isSoundMuted ? '🔇' : '🔊';
         headerCoins.textContent = localStorage.getItem(STORAGE_COINS) || '150';
-        generateRomanticArtwork();
+        generateCurrentArtwork();
         setupPuzzle();
       });
 

@@ -1,0 +1,141 @@
+{
+  "id": "temple-royal-wedding",
+  "name": "Temple Royale — Sacred Vows",
+  "slug": "temple-royal-wedding",
+  "aliases": [
+    "mandapam-royale",
+    "sacred-temple-wedding",
+    "temple-wedding-sacred-vows"
+  ],
+  "category": "Wedding",
+  "categorySlug": "wedding",
+  "price": 999,
+  "originalPrice": 2999,
+  "isFree": false,
+  "badge": "👑 Royal Heritage",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "Sacred Temple Royal Wedding Keepsake",
+  "icon": "🛕",
+  "soundtrack": "Sacred Nadaswaram & Shehnai Temple Melody",
+  "tags": [
+    "wedding",
+    "temple",
+    "royal",
+    "traditional",
+    "indian",
+    "mandapam",
+    "sacred-vows",
+    "hindu",
+    "south-indian",
+    "vip",
+    "bestseller"
+  ],
+  "description": "A majestic royal temple wedding celebration inspired by sacred Vedic & Dravidian temple architecture — featuring celestial sky-blue opening, grand gopuram silhouettes, sacred toranam mandapam, auspicious muhurtham timeline, interactive photo magic, live countdown, and WhatsApp RSVP.",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 6,
+    "hasDate": true,
+    "hasSoundtrack": true,
+    "builderPath": "templates/temple-royal-wedding/builder.html"
+  },
+  "schema": {
+    "fields": [
+      {
+        "key": "groomName",
+        "label": "Groom's Name",
+        "type": "text",
+        "required": true,
+        "default": "Vivan"
+      },
+      {
+        "key": "brideName",
+        "label": "Bride's Name",
+        "type": "text",
+        "required": true,
+        "default": "Divya"
+      },
+      {
+        "key": "weddingDate",
+        "label": "Wedding Date",
+        "type": "text",
+        "required": true,
+        "default": "13 July 2027"
+      },
+      {
+        "key": "muhurthamTime",
+        "label": "Auspicious Muhurtham Timing",
+        "type": "text",
+        "default": "9:15 AM – 10:45 AM"
+      },
+      {
+        "key": "city",
+        "label": "City / Destination",
+        "type": "text",
+        "default": "Bengaluru, India"
+      },
+      {
+        "key": "venue",
+        "label": "Temple / Mandapam Venue",
+        "type": "text",
+        "default": "Sri Venkateshwara Heritage Temple & Kalyana Mandapam, Palace Grounds, Bengaluru"
+      },
+      {
+        "key": "invitationMessage",
+        "label": "Sacred Invitation Message",
+        "type": "textarea",
+        "default": "With the divine grace of the Almighty and the heartfelt blessings of our beloved elders, we joyfully invite you and your family to celebrate the sacred wedding vows uniting Divya & Vivan in holy matrimony."
+      },
+      {
+        "key": "familyDedication",
+        "label": "Family Dedication / Cordially Invited By",
+        "type": "text",
+        "default": "The Iyer & Sharma Families"
+      },
+      {
+        "key": "whatsappPhone",
+        "label": "WhatsApp RSVP Number",
+        "type": "text",
+        "default": "+919876543210"
+      },
+      {
+        "key": "mapsUrl",
+        "label": "Google Maps Link",
+        "type": "text",
+        "default": "https://maps.google.com/?q=Palace+Grounds+Bengaluru"
+      }
+    ]
+  },
+  "custom_data_defaults": {
+    "groomName": "Vivan",
+    "brideName": "Divya",
+    "coupleNames": "Vivan & Divya",
+    "recipient": "Vivan & Divya",
+    "sender": "The Iyer & Sharma Families",
+    "weddingDate": "13 July 2027",
+    "muhurthamTime": "9:15 AM – 10:45 AM",
+    "city": "Bengaluru, India",
+    "venue": "Sri Venkateshwara Heritage Temple & Kalyana Mandapam, Palace Grounds, Bengaluru",
+    "invitationMessage": "With the divine grace of the Almighty and the heartfelt blessings of our beloved elders, we joyfully invite you and your family to celebrate the sacred wedding vows uniting Divya & Vivan in holy matrimony.",
+    "familyDedication": "The Iyer & Sharma Families",
+    "whatsappPhone": "+919876543210",
+    "mapsUrl": "https://maps.google.com/?q=Palace+Grounds+Bengaluru",
+    "hashtag": "#DivyaWedsVivan",
+    "dressCode": "Traditional Silk / Festive Sherwani",
+    "parking": "Complimentary Valet Parking Available at Main Gopuram Gate",
+    "loveVerse": "Two souls, one sacred vow, a lifetime of mornings.",
+    "tags": ["Classical Romantics", "Chai Addicts", "Temple Heritage Dreamers", "Forever & Always"],
+    "soundtrack": "temple-melody",
+    "photos": [
+      "assets/temple-couple-portrait.jpg",
+      "assets/temple-gallery-steps.jpg",
+      "assets/temple-gallery-rings.jpg",
+      "assets/temple-bride-divya.jpg",
+      "assets/temple-groom-vivan.jpg",
+      "assets/temple-mandap-portal.jpg"
+    ]
+  },
+  "accentColor": "#b45309",
+  "templatePath": "templates/temple-royal-wedding/index.html",
+  "previewPath": "templates/temple-royal-wedding/preview.html"
+}

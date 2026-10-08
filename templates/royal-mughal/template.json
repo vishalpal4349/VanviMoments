@@ -1,0 +1,66 @@
+{
+  "id": "royal-mughal",
+  "name": "Royal Mughal — Sheesh Mahal",
+  "slug": "royal-mughal",
+  "category": "Wedding",
+  "categorySlug": "wedding",
+  "price": 2999,
+  "originalPrice": 5999,
+  "isFree": false,
+  "badge": "👑 Mughal Splendour",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "Royal Mughal — Sheesh Mahal Digital Keepsake",
+  "icon": "🕌",
+  "tags": [
+    "wedding",
+    "luxury",
+    "digital-invitation",
+    "royal-mughal",
+    "rsvp",
+    "events"
+  ],
+  "description": "Intricate Sheesh Mahal jaali lattice motifs, deep peacock teal and imperial ruby accents with royal sitar melodies.",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 8,
+    "hasDate": true,
+    "hasSoundtrack": true,
+    "builderPath": "templates/vanvi-royal-wedding/builder.html",
+    "previewPath": "templates/royal-mughal/index.html"
+  },
+  "schema": {
+    "fields": [
+      {
+        "key": "bride",
+        "label": "Bride Name",
+        "type": "text",
+        "default": "Tanya"
+      },
+      {
+        "key": "groom",
+        "label": "Groom Name",
+        "type": "text",
+        "default": "Rohan"
+      },
+      {
+        "key": "date",
+        "label": "Wedding Date",
+        "type": "text",
+        "default": "12th December 2026"
+      },
+      {
+        "key": "venue",
+        "label": "Venue",
+        "type": "text",
+        "default": "The Grand Palace Grounds"
+      },
+      {
+        "key": "whatsapp",
+        "label": "WhatsApp RSVP",
+        "type": "tel",
+        "default": "917631442934"
+      }
+    ]
+  }
+}

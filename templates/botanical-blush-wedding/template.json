@@ -1,0 +1,182 @@
+{
+  "id": "botanical-blush-wedding",
+  "name": "Maison Rose — Eternal Invitation",
+  "slug": "botanical-blush-wedding",
+  "aliases": [
+    "botanical-blush",
+    "maison-rose",
+    "botanical-wedding",
+    "romantic-rose-wedding"
+  ],
+  "category": "Wedding",
+  "categorySlug": "wedding",
+  "price": 1999,
+  "originalPrice": 3999,
+  "isFree": false,
+  "badge": "🌸 Modern Romance",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "Botanical Blush Cinematic Wedding Keepsake",
+  "icon": "🌸",
+  "soundtrack": "Acoustic Rose Romance Melody",
+  "tags": [
+    "wedding",
+    "botanical",
+    "blush",
+    "romantic",
+    "editorial",
+    "cinematic",
+    "scratch-card",
+    "rose-garden",
+    "modern",
+    "luxury",
+    "bestseller"
+  ],
+  "description": "An ethereal botanical blush wedding celebration crafted with warm cream undertones, soft dusty peach, delicate floral borders, interactive Scratch-to-Reveal secret love note, editorial timeline, photo gallery lightbox, and one-tap WhatsApp RSVP.",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 6,
+    "hasDate": true,
+    "hasSoundtrack": true,
+    "builderPath": "templates/botanical-blush-wedding/builder.html"
+  },
+  "schema": {
+    "fields": [
+      {
+        "key": "groomName",
+        "label": "Groom's Name",
+        "type": "text",
+        "required": true,
+        "default": "Vivan"
+      },
+      {
+        "key": "brideName",
+        "label": "Bride's Name",
+        "type": "text",
+        "required": true,
+        "default": "Divya"
+      },
+      {
+        "key": "weddingDate",
+        "label": "Wedding Date",
+        "type": "text",
+        "required": true,
+        "default": "30 November 2027"
+      },
+      {
+        "key": "invitationHeading",
+        "label": "Invitation Heading",
+        "type": "text",
+        "default": "Together with our families"
+      },
+      {
+        "key": "invitationMessage",
+        "label": "Invitation Message",
+        "type": "textarea",
+        "default": "We request the honour of your presence as we exchange vows and begin our new chapter together under the blooming canopy of roses."
+      },
+      {
+        "key": "storyHeading",
+        "label": "Story Heading",
+        "type": "text",
+        "default": "Our Love Story"
+      },
+      {
+        "key": "storyContent",
+        "label": "Story Content",
+        "type": "textarea",
+        "default": "Two paths crossed on a quiet rainy afternoon in Bengaluru, blossoming into an eternal companionship filled with gentle laughter, shared sunsets, and timeless promises."
+      },
+      {
+        "key": "specialMemory",
+        "label": "Special Memory / First Chapter",
+        "type": "text",
+        "default": "Under the misty canopy of Cubbon Park, a simple coffee turned into seven hours of talking about everything and nothing at all."
+      },
+      {
+        "key": "scratchMessage",
+        "label": "Scratch Card Secret Message",
+        "type": "textarea",
+        "default": "Some stories are written in the stars. Ours begins with you. Thank you for walking this sacred path beside us."
+      },
+      {
+        "key": "city",
+        "label": "City / Destination",
+        "type": "text",
+        "default": "Bengaluru, Karnataka"
+      },
+      {
+        "key": "venue",
+        "label": "Venue Name & Address",
+        "type": "text",
+        "default": "The Glasshouse Pavilion & Rose Garden, Cubbon Park Road, Bengaluru"
+      },
+      {
+        "key": "mapsUrl",
+        "label": "Google Maps Link",
+        "type": "text",
+        "default": "https://maps.google.com/?q=The+Glass+House+Bengaluru"
+      },
+      {
+        "key": "whatsappPhone",
+        "label": "WhatsApp RSVP Number",
+        "type": "text",
+        "default": "+919876543210"
+      }
+    ]
+  },
+  "custom_data_defaults": {
+    "groomName": "Vivan",
+    "brideName": "Divya",
+    "coupleNames": "Vivan & Divya",
+    "recipient": "Vivan & Divya",
+    "sender": "The Verma & Kapoor Families",
+    "weddingDate": "30 November 2027",
+    "invitationHeading": "Together with our families",
+    "invitationMessage": "We request the honour of your presence as we exchange vows and begin our new chapter together under the blooming canopy of roses.",
+    "storyHeading": "Our Love Story",
+    "storyContent": "Two paths crossed on a quiet rainy afternoon in Bengaluru, blossoming into an eternal companionship filled with gentle laughter, shared sunsets, and timeless promises.",
+    "specialMemory": "Under the misty canopy of Cubbon Park, a simple coffee turned into seven hours of talking about everything and nothing at all.",
+    "scratchMessage": "Some stories are written in the stars. Ours begins with you. Thank you for walking this sacred path beside us.",
+    "city": "Bengaluru, Karnataka",
+    "venue": "The Glasshouse Pavilion & Rose Garden, Cubbon Park Road, Bengaluru",
+    "mapsUrl": "https://maps.google.com/?q=The+Glass+House+Bengaluru",
+    "whatsappPhone": "+919876543210",
+    "soundtrack": "botanical-blush-melody",
+    "timeline": [
+      {
+        "time": "10:00 AM",
+        "date": "30 Nov 2027",
+        "title": "Guest Arrival & Welcome Spritz",
+        "desc": "Gathering amidst soft morning flute melodies and blooming blush roses."
+      },
+      {
+        "time": "10:30 AM",
+        "date": "30 Nov 2027",
+        "title": "Sacred Wedding Ceremony & Vows",
+        "desc": "The exchange of garlands and eternal vows in the glass pavilion."
+      },
+      {
+        "time": "1:00 PM",
+        "date": "30 Nov 2027",
+        "title": "Artisanal Feast & Garden High Tea",
+        "desc": "A celebration of gourmet delicacies, live acoustic strings, and sweet toasts."
+      },
+      {
+        "time": "7:30 PM",
+        "date": "02 Dec 2027",
+        "title": "The Grand Starlit Reception",
+        "desc": "An evening of candlelit banquet, celebratory dancing, and champagne under the stars."
+      }
+    ],
+    "photos": [
+      "assets/botanical-hero-couple.jpg",
+      "assets/botanical-story-walk.jpg",
+      "assets/botanical-venue-mandap.jpg",
+      "assets/botanical-rings.jpg"
+    ]
+  },
+  "accentColor": "#8b3a4a",
+  "templatePath": "templates/botanical-blush-wedding/index.html",
+  "previewPath": "templates/botanical-blush-wedding/preview.html"
+}

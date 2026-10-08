@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Unlock the Gift — Premium Logic Puzzle — Vanvi Moments</title>
@@ -11,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     :root {
@@ -433,14 +435,16 @@
       <a href="games.html" class="btn-nav-back" title="Back to Games">
         <span>‹</span> <span>Games</span>
       </a>
-      <a href="index.html" class="brand-link" title="Vanvi Moments">
-        🎁 Unlock <span>Gift</span>
+      <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" style="height:34px; width:auto; max-width:130px; object-fit:contain;">
+        <span style="background:rgba(255,42,122,0.1); border:1px solid rgba(255,42,122,0.25); color:var(--rose-main); font-size:10px; font-weight:900; letter-spacing:0.8px; padding:2px 7px; border-radius:6px; text-transform:uppercase;">GIFT</span>
       </a>
     </div>
     <div class="header-right">
+      <button type="button" class="btn-nav-back" onclick="openUnlockGiftRules()" style="margin-right:6px;">📖 Rules</button>
       <button type="button" class="sound-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
       <a href="rewards.html" class="wallet-pill">
-        <span>🪙</span> <span id="headerCoins">150</span>
+        <span>🪙</span> <span id="headerCoins">50</span>
       </a>
     </div>
   </header>
@@ -551,15 +555,27 @@
     <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
   </nav>
 
+  <script src="js/vanvi-games-engine.js"></script>
   <script>
     (function() {
       'use strict';
 
-      const DAILY_CAP = 25;
+      const DAILY_CAP = (window.VanviGames && window.VanviGames.DAILY_CAP) || 30;
       const STORAGE_COINS = 'vanvi_user_coins';
       const STORAGE_TODAY_EARNED = 'vanvi_games_today_earned';
       const STORAGE_TODAY_DATE = 'vanvi_games_today_date';
       const STORAGE_SOUND = 'vanvi_sound_enabled';
+
+      window.openUnlockGiftRules = function() {
+        if (window.VanviGames) {
+          VanviGames.showRulesModal('Unlock The Gift 🎁', [
+            'Inspect the mystery celebration clue and logic sequence.',
+            'Choose the correct code among the 4 choices.',
+            'You have 3 attempts per riddle.',
+            'Crack the vaults to earn virtual Vanvi Coins (Daily Limit: max 30 coins).'
+          ]);
+        }
+      };
 
       // 10 Logic Puzzles across 4 difficulty tiers
       const PUZZLES = [
@@ -813,12 +829,16 @@
         const isPerfect = (totalFailedAttempts === 0);
         let totalCoins = baseCoins + ((isFinalLevel && isPerfect) ? 3 : 0);
 
-        const earned = getEarnedToday();
-        const rem = Math.max(0, DAILY_CAP - earned);
-        const actualWon = Math.min(totalCoins, rem);
-
-        if (actualWon > 0) {
-          addCoins(actualWon);
+        let actualWon = 0;
+        if (totalCoins > 0 && window.VanviGames) {
+          const res = VanviGames.awardCoins(totalCoins, `Unlock the Gift (Level ${currentLevelIndex + 1})`);
+          actualWon = res.awarded;
+          headerCoins.textContent = res.totalCoins;
+        } else {
+          const earned = getEarnedToday();
+          const rem = Math.max(0, DAILY_CAP - earned);
+          actualWon = Math.min(totalCoins, rem);
+          if (actualWon > 0) addCoins(actualWon);
         }
 
         // Sync with API

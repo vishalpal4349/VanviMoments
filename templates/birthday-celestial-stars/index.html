@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Celestial Stars — The Cosmic Solar Return | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="star-canvas"></canvas>
+
+  <!-- 1. Nebula Portal Overlay -->
+  <div class="portal-overlay" id="portal-overlay">
+    <div class="portal-orb">✨</div>
+    <h2 style="font-family: var(--font-serif); font-size: 28px; color: var(--starlight-silver); margin-bottom: 8px;">THE CELESTIAL VAULT</h2>
+    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 24px;">An astrological solar celebration for <span class="val-name">Mira Kapoor</span></p>
+    <button class="btn-open-portal" id="btn-open-portal">ENTER THE COSMOS 🌌</button>
+  </div>
+
+  <div class="page-wrapper">
+    <!-- 2. Cosmic Hero -->
+    <header class="celestial-hero">
+      <div class="hero-pill">✨ Solar Return Celebration</div>
+      <h1 class="cosmic-name val-name">Mira Kapoor</h1>
+      <p style="font-family: var(--font-serif); font-style: italic; color: var(--starlight-cyan); font-size: 18px;">
+        "Stardust formed into human form, walking this earth with beauty"
+      </p>
+
+      <!-- 3 & 4. Coordinates & Orbits -->
+      <div class="cosmic-coords">
+        <div class="coord-tag">Solar Orbits: <strong class="val-age">24</strong></div>
+        <div class="coord-tag">Zodiac: <strong class="val-zodiac">Scorpio / Orion</strong></div>
+        <div class="coord-tag">Constellation: <strong>Cygnus Bright</strong></div>
+      </div>
+    </header>
+
+    <!-- 5 & 6. Main Starlight Message -->
+    <section class="cosmic-card">
+      <span class="cosmic-tag">Astral Decree</span>
+      <h2 class="cosmic-head">The Cosmos on Your Day</h2>
+      <p class="val-cosmic-msg" style="font-size: 15px; color: var(--starlight-silver); line-height: 1.8;">
+        In a cosmos of 200 billion galaxies and trillions of stars, your existence is the most extraordinary miracle. Happy 24th Solar Return to a soul made entirely of starlight.
+      </p>
+      <div style="margin-top: 16px; font-weight: 700; color: var(--starlight-cyan); text-align: right;">
+        — <span class="val-sender">Dev & The Cosmos Collective</span>
+      </div>
+    </section>
+
+    <!-- 7. Interactive Constellation Canvas -->
+    <section class="cosmic-card">
+      <span class="cosmic-tag">Interactive Starmap</span>
+      <h2 class="cosmic-head">Your Birthday Constellation</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;" id="constellation-status">
+        Tap the stars below to trace your birthday constellation!
+      </p>
+      <div class="constellation-wrapper">
+        <canvas id="constellation-canvas"></canvas>
+      </div>
+    </section>
+
+    <!-- 8. Shooting Star Wishing Well -->
+    <section class="cosmic-card">
+      <span class="cosmic-tag">Cosmic Wishing Well</span>
+      <h2 class="cosmic-head">Catch a Meteor & Make a Wish</h2>
+      <div class="wishing-well-box">
+        <p style="font-size: 13px; color: var(--starlight-silver); margin-bottom: 16px;">
+          When a meteor streaks through the atmosphere, hold your deepest hope in mind and release it into the heavens.
+        </p>
+        <button class="btn-catch-star" id="btn-catch-star">🌠 Catch Shooting Star & Wish</button>
+        <div id="wish-banner" style="display: none; margin-top: 14px; color: var(--supernova-gold); font-size: 13px; font-style: italic;">
+          ✨ Your wish is orbiting through eternity. May the universe conspire to bring it to life!
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Star Cluster Gallery -->
+    <section class="cosmic-card">
+      <span class="cosmic-tag">Galactic Moments</span>
+      <h2 class="cosmic-head">Portraits in Starlight</h2>
+      <div class="star-gallery">
+        <div class="star-gallery-card">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" alt="Nebula 1">
+        </div>
+        <div class="star-gallery-card">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Nebula 2">
+        </div>
+      </div>
+    </section>
+
+    <!-- 16. Countdown Clock -->
+    <section class="cosmic-card">
+      <span class="cosmic-tag">Solar Transit</span>
+      <h2 class="cosmic-head">Next Solar Orbit Return</h2>
+      <div class="cosmic-clock-grid">
+        <div class="clock-cell">
+          <div class="clock-val" id="cel-days">0</div>
+          <div class="clock-lbl">Days</div>
+        </div>
+        <div class="clock-cell">
+          <div class="clock-val" id="cel-hours">0</div>
+          <div class="clock-lbl">Hours</div>
+        </div>
+        <div class="clock-cell">
+          <div class="clock-val" id="cel-mins">0</div>
+          <div class="clock-lbl">Mins</div>
+        </div>
+        <div class="clock-cell">
+          <div class="clock-val" id="cel-secs">0</div>
+          <div class="clock-lbl">Secs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18. Footer -->
+    <footer style="text-align: center; margin-top: 40px; font-size: 12px; color: var(--text-muted);">
+      <p>Inscribed upon the cosmos via <a href="../../index.html" style="color: var(--starlight-cyan); text-decoration: none;">Vanvi Moments</a></p>
+      <p style="margin-top: 4px;">Vanvi Celestial Studio • Infinite Digital Keepsakes</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

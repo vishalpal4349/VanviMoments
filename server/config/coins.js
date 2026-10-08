@@ -82,6 +82,10 @@ const COIN_CONFIG = {
     'cinema-3d': 299,
     'vip-luxury': 499,
     'wedding-royal': 999,
+    'the-grand-royal-palace-wedding': 999,
+    'royal-udaipur': 999,
+    'mirror-reveal': 999,
+    'temple-grandeur': 999,
     'milestone-odyssey': 1000
   }
 };

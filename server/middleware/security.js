@@ -96,7 +96,8 @@ function sanitizeBody(req, res, next) {
 function securityHeaders(req, res, next) {
   // Core security headers
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  const isFramable = req.path && (req.path.startsWith('/templates/') || req.path.startsWith('/m/'));
+  res.setHeader('X-Frame-Options', isFramable ? 'SAMEORIGIN' : 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', "geolocation=(), microphone=(), camera=(), payment=()");
@@ -114,7 +115,7 @@ function securityHeaders(req, res, next) {
   res.setHeader(
     'Content-Security-Policy',
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://accounts.google.com/gsi/client https://fonts.googleapis.com https://checkout.razorpay.com https://*.razorpay.com https://cdn.razorpay.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://ajax.googleapis.com; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://accounts.google.com/gsi/client https://fonts.googleapis.com https://checkout.razorpay.com https://*.razorpay.com https://cdn.razorpay.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://ajax.googleapis.com https://unpkg.com; " +
     "style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; " +
     "font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com https://cdnjs.cloudflare.com data:; " +
     "img-src 'self' data: blob: https: res.cloudinary.com https://lh3.googleusercontent.com https://images.unsplash.com https://m.media-amazon.com; " +

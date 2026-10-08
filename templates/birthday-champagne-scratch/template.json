@@ -1,0 +1,108 @@
+{
+  "id": "birthday-champagne-scratch",
+  "name": "Champagne & Gold — The VIP Soirée",
+  "slug": "birthday-champagne-scratch",
+  "category": "Birthday",
+  "categorySlug": "birthday",
+  "price": 499,
+  "originalPrice": 1499,
+  "isFree": false,
+  "badge": "🍾 VIP Soirée Edition",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "High-Luxe 18-Section Champagne & Metallic Scratch Experience",
+  "icon": "🍾",
+  "soundtrack": "Upbeat Sophisticated Lounge Jazz & Crystal Toast",
+  "tags": [
+    "birthday",
+    "champagne",
+    "scratch-card",
+    "gold-foil",
+    "vip",
+    "black-tie",
+    "cork-pop",
+    "luxury"
+  ],
+  "description": "Vanvi Moments Ultra-Glamour VIP Edition: 18-section black-tie birthday celebration featuring an interactive popping champagne bottle with golden bubbles, 3 metallic gold scratch-off cards revealing secret wishes, and crystal toast countdowns.",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 8,
+    "hasDate": true,
+    "hasSoundtrack": true,
+    "builderPath": "templates/birthday-champagne-scratch/builder.html",
+    "previewPath": "templates/birthday-champagne-scratch/preview.html"
+  },
+  "sections": [
+    "vip-envelope-entry",
+    "embossed-gold-hero",
+    "soiree-date-details",
+    "vintage-aged-seal",
+    "host-sparkling-toast",
+    "high-luxe-main-message",
+    "interactive-champagne-pop",
+    "gold-foil-scratch-cards",
+    "gilded-frame-gallery",
+    "tasting-menu-timeline",
+    "vip-playlist-player",
+    "gold-trimmed-wishes",
+    "pure-gold-reasons",
+    "golden-vault-box",
+    "champagne-toast-countdown",
+    "vip-dresscode-concierge",
+    "golden-ticket-share",
+    "grand-finale-seal"
+  ],
+  "schema": {
+    "fields": [
+      {
+        "key": "name",
+        "label": "VIP Birthday Guest of Honor",
+        "type": "text",
+        "required": true,
+        "default": "Rhea Singhania"
+      },
+      {
+        "key": "age",
+        "label": "Vintage Age",
+        "type": "number",
+        "required": true,
+        "default": 28
+      },
+      {
+        "key": "birthDate",
+        "label": "Celebration Evening",
+        "type": "text",
+        "required": true,
+        "default": "December 22"
+      },
+      {
+        "key": "mainMessage",
+        "label": "Main VIP Tribute",
+        "type": "textarea",
+        "required": true,
+        "default": "To the woman who commands every room with grace, style, and effortless brilliance. Vintage 1998, aged to absolute perfection. Tonight, we clink crystal and celebrate you!"
+      },
+      {
+        "key": "scratchWish",
+        "label": "Secret Scratch-Off Wish",
+        "type": "text",
+        "required": true,
+        "default": "May your wildest dreams become your everyday reality!"
+      },
+      {
+        "key": "scratchGift",
+        "label": "Secret Scratch-Off Gift / Reveal",
+        "type": "text",
+        "required": true,
+        "default": "VIP Spa Day & Luxury Dinner on us!"
+      },
+      {
+        "key": "sender",
+        "label": "Host / Sender Name(s)",
+        "type": "text",
+        "required": true,
+        "default": "Aditya & The Inner Circle"
+      }
+    ]
+  }
+}

@@ -2,7 +2,10 @@
   "id": "birthday-wish-02",
   "name": "Birthday Wish 02",
   "slug": "birthday-wish-02",
-  "aliases": ["birthday-wish-2", "bday-wish-2"],
+  "aliases": [
+    "birthday-wish-2",
+    "bday-wish-2"
+  ],
   "category": "Birthday",
   "categorySlug": "birthday",
   "price": 149,
@@ -11,22 +14,64 @@
   "type": "Wax Seal & Wishes Bouquet",
   "icon": "💌",
   "soundtrack": "Warm Acoustic Dedication",
-  "tags": ["wax seal", "birthday", "luxury", "polaroids", "wishes bouquet", "trending"],
+  "tags": [
+    "wax seal",
+    "birthday",
+    "luxury",
+    "polaroids",
+    "wishes bouquet",
+    "trending"
+  ],
   "description": "A refined birthday microsite — wax-sealed envelope, greeting card with playable music, polaroid photo album, bouquet of pickable wishes, and handwritten letter.",
   "builder": {
-    "type": "common",
+    "type": "custom",
     "photoLimit": 4,
     "hasPickableWishes": true,
-    "hasSoundtrack": true
+    "hasSoundtrack": true,
+    "builderPath": "templates/birthday-wish-02/builder.html"
   },
   "schema": {
     "fields": [
-      { "key": "recipientName", "label": "Recipient's Name", "type": "text", "required": true, "default": "Aarav" },
-      { "key": "senderName", "label": "Sender Name", "type": "text", "required": true, "default": "Sneha" },
-      { "key": "message", "label": "Heartfelt Letter", "type": "textarea", "required": true },
-      { "key": "photos", "label": "Polaroid Photos", "type": "photos", "max": 4, "required": false },
-      { "key": "pickableWishes", "label": "3 Birthday Wishes", "type": "list", "max": 3, "required": false },
-      { "key": "soundtrack", "label": "Soundtrack", "type": "audio", "default": "acoustic" }
+      {
+        "key": "recipientName",
+        "label": "Recipient's Name",
+        "type": "text",
+        "required": true,
+        "default": "Aarav"
+      },
+      {
+        "key": "senderName",
+        "label": "Sender Name",
+        "type": "text",
+        "required": true,
+        "default": "Sneha"
+      },
+      {
+        "key": "message",
+        "label": "Heartfelt Letter",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "photos",
+        "label": "Polaroid Photos",
+        "type": "photos",
+        "max": 4,
+        "required": false
+      },
+      {
+        "key": "pickableWishes",
+        "label": "3 Birthday Wishes",
+        "type": "list",
+        "max": 3,
+        "required": false
+      },
+      {
+        "key": "soundtrack",
+        "label": "Soundtrack",
+        "type": "audio",
+        "default": "acoustic"
+      }
     ]
   },
   "custom_data_defaults": {
@@ -34,7 +79,11 @@
     "senderName": "Sneha",
     "message": "Today is a quiet reminder of how grateful I am to have you in my life. Through all the ordinary Tuesdays and extraordinary adventures, your smile makes everything feel right. Happy Birthday! 🎂✨",
     "photos": [],
-    "pickableWishes": ["Endless Happiness & Warmth", "Success in Every Venture", "Lifelong Health & Joy"],
+    "pickableWishes": [
+      "Endless Happiness & Warmth",
+      "Success in Every Venture",
+      "Lifelong Health & Joy"
+    ],
     "soundtrack": "acoustic"
   },
   "accentColor": "#9e1a38",

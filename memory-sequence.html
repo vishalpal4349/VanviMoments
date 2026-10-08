@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -9,22 +10,26 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vanvi-inner-light.css">
+  <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
   <style>
     :root {
-      --bg: #070913;
-      --card-bg: rgba(255, 255, 255, 0.04);
-      --glass-border: rgba(255, 255, 255, 0.12);
+      --bg: #fffbfd;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --glass-border: rgba(255, 120, 175, 0.32);
       --primary: #d946ef;
-      --primary-glow: rgba(217, 70, 239, 0.5);
+      --primary-glow: rgba(217, 70, 239, 0.4);
       --cyan: #06b6d4;
-      --cyan-glow: rgba(6, 182, 212, 0.5);
-      --gold: #fbbf24;
-      --gold-glow: rgba(251, 191, 36, 0.45);
+      --cyan-glow: rgba(6, 182, 212, 0.4);
+      --gold: #d97706;
+      --gold-glow: rgba(217, 119, 6, 0.35);
       --emerald: #10b981;
-      --rose: #f43f5e;
+      --rose: #ff2a7a;
       --violet: #8b5cf6;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
+      --text: #2c1224;
+      --text-muted: #88627b;
+      --border-pink: rgba(255, 120, 175, 0.32);
     }
 
     * {
@@ -37,7 +42,7 @@
     }
 
     body {
-      background: radial-gradient(circle at 50% 15%, #1e1136 0%, #080914 65%, #030408 100%);
+      background: radial-gradient(circle at 50% 0%, #ffe4ee 0%, #fff2f6 45%, #fdf5f8 100%);
       color: var(--text);
       font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
@@ -81,31 +86,33 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--glass-border);
-      color: #e2e8f0;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
       text-decoration: none;
       padding: 8px 14px;
       border-radius: 99px;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 750;
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06);
       transition: all 0.2s;
     }
     .back-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
+      background: #fff0f5;
+      transform: translateY(-1px);
     }
     .wallet-chip {
-      background: rgba(251, 191, 36, 0.12);
-      border: 1px solid rgba(251, 191, 36, 0.3);
+      background: #fff8eb;
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
       padding: 7px 14px;
       border-radius: 99px;
       display: flex;
       align-items: center;
       gap: 8px;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 0.85rem;
-      color: #fde68a;
+      color: #b45309;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.08);
     }
 
     /* Main Container */
@@ -128,85 +135,85 @@
     }
     .game-badge {
       display: inline-block;
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(217,70,239,0.2), rgba(6,182,212,0.2));
-      border: 1px solid rgba(217,70,239,0.3);
-      font-size: 0.72rem;
-      letter-spacing: 2px;
+      background: linear-gradient(90deg, rgba(217,70,239,0.12), rgba(255,42,122,0.12));
+      border: 1.5px solid rgba(217,70,239,0.3);
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      font-weight: 800;
-      color: #f5d0fe;
-      margin-bottom: 6px;
+      font-weight: 850;
+      color: #c026d3;
+      margin-bottom: 8px;
     }
     .game-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1.85rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #ffffff 40%, #f0abfc 100%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #2c1224 0%, #ff2a7a 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: 0.5px;
+      letter-spacing: -0.5px;
     }
 
     /* Status & Stats Board */
     .stats-card {
       width: 100%;
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(16px);
-      border-radius: 18px;
-      padding: 12px 18px;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 14px 20px;
       display: flex;
       justify-content: space-around;
       align-items: center;
       margin-bottom: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 10px 25px rgba(255, 42, 122, 0.08);
     }
     .stat-item {
       text-align: center;
     }
     .stat-lbl {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-weight: 700;
+      font-weight: 800;
     }
     .stat-val {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #fff;
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--text-dark);
       margin-top: 2px;
     }
 
     /* Turn Indicator Pill */
     .turn-status {
       width: 100%;
-      padding: 10px 16px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 11px 18px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
       margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.06);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .turn-status.watching {
-      background: rgba(217, 70, 239, 0.15);
-      border-color: rgba(217, 70, 239, 0.4);
-      color: #f5d0fe;
+      background: #fff1f6;
+      border-color: rgba(255, 42, 122, 0.35);
+      color: #be185d;
     }
     .turn-status.playing {
-      background: rgba(6, 182, 212, 0.18);
-      border-color: rgba(6, 182, 212, 0.5);
-      color: #a5f3fc;
+      background: #ecfeff;
+      border-color: #06b6d4;
+      color: #0e7490;
       box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
     }
     .pulse-dot {
@@ -222,50 +229,53 @@
       100% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* Symbol Grid Arena */
+    /* Symbol Grid Arena - Adaptive for all screen sizes */
     .sequence-grid {
       width: 100%;
-      max-width: 360px;
+      max-width: min(340px, 82vw);
       aspect-ratio: 1;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 22px;
+      gap: clamp(10px, 3.2vw, 16px);
+      margin: 0 auto 18px;
       perspective: 1000px;
     }
 
     .seq-pad {
       position: relative;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1.5px solid var(--glass-border);
-      backdrop-filter: blur(12px);
+      border-radius: clamp(16px, 4vw, 24px);
+      background: #ffffff;
+      border: 2px solid var(--border-pink);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       overflow: hidden;
+      aspect-ratio: 1;
+      padding: 8px;
       transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s, border-color 0.2s;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: 0 6px 0 #ecd5e3, 0 12px 24px rgba(255, 42, 122, 0.08);
+      touch-action: manipulation;
     }
 
     .seq-pad:active {
-      transform: scale(0.94);
+      transform: translateY(3px) scale(0.96);
+      box-shadow: 0 2px 0 #ecd5e3, 0 4px 10px rgba(255, 42, 122, 0.12);
     }
 
     .seq-pad .pad-icon {
-      font-size: 2.8rem;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+      font-size: clamp(2rem, 8vw, 2.7rem);
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));
       transition: transform 0.2s;
     }
     .seq-pad .pad-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 1px;
+      font-size: clamp(0.68rem, 2.5vw, 0.78rem);
+      font-weight: 850;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
-      margin-top: 6px;
-      color: rgba(255, 255, 255, 0.6);
+      margin-top: 4px;
+      color: var(--text-muted);
       transition: color 0.2s;
     }
 
@@ -278,21 +288,22 @@
     .seq-pad.active {
       border-color: var(--theme-color) !important;
       box-shadow: 0 0 35px var(--theme-color), inset 0 0 20px var(--theme-color) !important;
-      background: rgba(255, 255, 255, 0.15) !important;
+      background: rgba(255, 255, 255, 0.95) !important;
       transform: scale(1.03);
     }
     .seq-pad.active .pad-icon {
       transform: scale(1.2);
     }
     .seq-pad.active .pad-label {
-      color: #fff;
+      color: var(--theme-color);
+      font-weight: 900;
     }
 
     .seq-pad.error-shake {
       animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
       border-color: #ef4444 !important;
-      background: rgba(239, 68, 68, 0.2) !important;
-      box-shadow: 0 0 30px #ef4444 !important;
+      background: rgba(239, 68, 68, 0.1) !important;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.6) !important;
     }
 
     @keyframes shake {
@@ -307,7 +318,7 @@
       display: flex;
       gap: 6px;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       min-height: 12px;
       flex-wrap: wrap;
       max-width: 320px;
@@ -316,12 +327,39 @@
       width: 10px;
       height: 10px;
       border-radius: 99px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 120, 175, 0.25);
       transition: all 0.25s ease;
     }
     .step-dot.filled {
-      background: var(--cyan);
-      box-shadow: 0 0 10px var(--cyan-glow);
+      background: #06b6d4;
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+    }
+
+    /* Signature 3D Winning Clue Pill */
+    .game-clue-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      color: #831843;
+      background: linear-gradient(135deg, rgba(255, 241, 246, 0.96), rgba(253, 230, 240, 0.92));
+      border: 1.2px solid rgba(255, 42, 122, 0.25);
+      border-radius: 999px;
+      padding: 6px 16px;
+      margin-bottom: 16px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.08), inset 0 1px 2px #ffffff;
+      text-align: left;
+    }
+    .clue-lens-icon { font-size: 13px; flex-shrink: 0; }
+    .clue-content { line-height: 1.35; flex: 1; font-weight: 650; }
+
+    /* Animated flowing gradient for Option #4 3D tactile buttons */
+    @keyframes clueButtonFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /* Start / Action Controls */
@@ -330,58 +368,72 @@
       max-width: 360px;
       display: flex;
       gap: 12px;
+      margin-bottom: 12px;
     }
     .glow-btn {
       flex: 1;
-      padding: 14px 20px;
-      border-radius: 14px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      border: none;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 850;
+      letter-spacing: 0.3px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, filter 0.2s;
     }
     .glow-btn-primary {
-      background: linear-gradient(135deg, #d946ef 0%, #8b5cf6 100%);
-      color: #fff;
-      box-shadow: 0 8px 24px rgba(217, 70, 239, 0.35);
+      background: linear-gradient(125deg, #ff2a7a 0%, #ff4fa1 18%, #9333ea 42%, #38bdf8 65%, #f43f5e 84%, #ff2a7a 100%) !important;
+      background-size: 280% 280% !important;
+      animation: clueButtonFlow 5s ease-in-out infinite !important;
+      color: #fff !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 0 8px 20px -2px rgba(255, 42, 122, 0.45), inset 0 2.5px 3px rgba(255, 255, 255, 0.95), inset 0 -2.5px 3.5px rgba(180, 18, 60, 0.45) !important;
+      text-shadow: 0 1px 2px rgba(180, 18, 60, 0.4) !important;
     }
     .glow-btn-primary:hover {
-      box-shadow: 0 10px 30px rgba(217, 70, 239, 0.55);
-      transform: translateY(-2px);
+      box-shadow: 0 12px 26px -2px rgba(255, 42, 122, 0.55), inset 0 3px 4px #ffffff !important;
+      transform: translateY(-2px) scale(1.02) !important;
+      filter: brightness(1.08) !important;
     }
     .glow-btn-primary:active {
-      transform: translateY(0);
+      transform: translateY(2px) scale(0.98) !important;
+      box-shadow: 0 4px 10px rgba(255, 42, 122, 0.3) !important;
     }
     .glow-btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--glass-border);
-      color: #e2e8f0;
+      background: linear-gradient(135deg, #ffffff 0%, #fff0f6 100%) !important;
+      border: 1.5px solid var(--border-pink) !important;
+      color: var(--rose-main) !important;
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.1), inset 0 2px 2px #fff !important;
     }
     .glow-btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: #ffffff !important;
+      transform: translateY(-2px) scale(1.02) !important;
+      border-color: var(--rose-main) !important;
+      box-shadow: 0 6px 16px rgba(255, 42, 122, 0.2) !important;
+    }
+    .glow-btn-secondary:active {
+      transform: translateY(2px) scale(0.98) !important;
     }
 
     /* Reward Ladder Card */
     .reward-ladder {
       width: 100%;
       max-width: 400px;
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 14px 18px;
-      margin-top: 24px;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 16px 20px;
+      margin-top: 20px;
+      box-shadow: 0 10px 25px rgba(255, 42, 122, 0.06);
     }
     .ladder-title {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-weight: 800;
+      letter-spacing: 1.2px;
+      font-weight: 850;
       color: var(--text-muted);
       margin-bottom: 10px;
       display: flex;
@@ -391,82 +443,130 @@
     .ladder-row {
       display: flex;
       justify-content: space-between;
-      padding: 6px 0;
-      font-size: 0.82rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 8px 0;
+      font-size: 0.85rem;
+      font-weight: 750;
+      color: var(--text-dark);
+      border-bottom: 1px solid #fce7f3;
     }
     .ladder-row:last-child {
       border-bottom: none;
     }
     .ladder-row.active {
-      color: #38bdf8;
-      font-weight: 700;
+      color: #be185d;
+      font-weight: 850;
     }
     .ladder-coins {
-      color: #fbbf24;
-      font-weight: 700;
+      color: #d97706;
+      font-weight: 900;
     }
 
-    /* Modals */
+    /* Modals - Luxury Pearl Glassmorphism */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(14px);
+      background: rgba(44, 18, 36, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 100;
-      padding: 20px;
+      z-index: 1000;
+      padding: 18px;
     }
     .modal-overlay.active {
       display: flex;
-      animation: fadeIn 0.3s ease;
+      animation: fadeInModal 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
+    @keyframes fadeInModal {
+      from { opacity: 0; transform: scale(0.94); }
       to { opacity: 1; transform: scale(1); }
     }
     .modal-card {
       width: 100%;
-      max-width: 420px;
-      background: linear-gradient(145deg, #131224 0%, #0c0b16 100%);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      padding: 30px 24px;
+      max-width: 400px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 246, 251, 0.96) 100%);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 28px;
+      padding: 30px 22px;
       text-align: center;
       position: relative;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      box-shadow: 0 24px 60px rgba(255, 42, 122, 0.18), inset 0 2px 2px #ffffff;
+      color: var(--text);
     }
     .modal-icon {
-      font-size: 3.5rem;
-      margin-bottom: 12px;
+      font-size: 3.2rem;
+      margin-bottom: 10px;
       display: inline-block;
+      filter: drop-shadow(0 4px 10px rgba(255, 42, 122, 0.2));
     }
     .modal-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1.6rem;
-      margin-bottom: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 850;
+      color: var(--text);
+      margin-bottom: 6px;
     }
     .modal-subtitle {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
       line-height: 1.5;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .reward-pill {
-      background: rgba(251, 191, 36, 0.15);
-      border: 1px solid rgba(251, 191, 36, 0.4);
-      padding: 12px;
-      border-radius: 14px;
-      color: #fde68a;
-      font-weight: 800;
-      font-size: 1.25rem;
-      margin-bottom: 22px;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border: 1.5px solid #f59e0b;
+      padding: 10px 18px;
+      border-radius: 999px;
+      color: #92400e;
+      font-weight: 850;
+      font-size: 1.05rem;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+    }
+    .modal-btn-primary {
+      width: 100%;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: linear-gradient(125deg, #ff2a7a 0%, #ff4fa1 18%, #9333ea 42%, #38bdf8 65%, #f43f5e 84%, #ff2a7a 100%) !important;
+      background-size: 280% 280% !important;
+      animation: clueButtonFlow 5s ease-in-out infinite !important;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 850;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      cursor: pointer;
+      box-shadow: 0 8px 20px -2px rgba(255, 42, 122, 0.45), inset 0 2.5px 3px rgba(255, 255, 255, 0.95), inset 0 -2.5px 3.5px rgba(180, 18, 60, 0.45);
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+    }
+    .modal-btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 26px -2px rgba(255, 42, 122, 0.55), inset 0 3px 4px #ffffff;
+    }
+    .modal-btn-primary:active {
+      transform: translateY(2px) scale(0.98);
+    }
+    .modal-btn-secondary {
+      width: 100%;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+    }
+    .modal-btn-secondary:hover {
+      background: #fff5f8;
+      border-color: var(--rose-main);
+      color: var(--rose-main);
     }
   </style>
   <link rel="stylesheet" href="vanvi-navigation.css">
@@ -477,10 +577,16 @@
 
   <!-- Top Navigation -->
   <header class="top-nav">
-    <a href="games.html" class="back-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
-      Games Arena
-    </a>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <a href="games.html" class="back-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+        <span>Games</span>
+      </a>
+      <a href="index.html" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" style="height:36px; width:auto; max-width:140px; object-fit:contain; filter:brightness(1.2);">
+        <span style="background:rgba(217,70,239,0.18); border:1px solid rgba(217,70,239,0.4); color:#f472b6; font-size:10px; font-weight:900; letter-spacing:0.8px; padding:3px 8px; border-radius:8px; text-transform:uppercase;">SEQUENCE</span>
+      </a>
+    </div>
     <div class="wallet-chip">
       <span style="font-size: 1.1rem;">🪙</span>
       <span id="headerCoinCount">0</span>
@@ -508,6 +614,12 @@
         <div class="stat-lbl">Max Coins</div>
         <div class="stat-val" style="color: #fbbf24;">15 🪙</div>
       </div>
+    </div>
+
+    <!-- Signature 3D Winning Clue Pill -->
+    <div class="game-clue-pill">
+      <span class="clue-lens-icon">🔍</span>
+      <span class="clue-content"><strong>Winning Clue:</strong> Speak chime names out loud (💎 Sapphire, 🌸 Lotus, 👑 Crown, 🪄 Cosmic) to master Round 7+!</span>
     </div>
 
     <!-- Turn Indicator -->
@@ -554,18 +666,22 @@
     <div class="reward-ladder">
       <div class="ladder-title">
         <span>Skill-Based Reward Tiers</span>
-        <span style="color: #38bdf8;">Daily Cap: 25 🪙</span>
+        <span style="color: #38bdf8;">Daily Cap: 30 🪙</span>
+      </div>
+      <div class="ladder-row" id="tier0">
+        <span>Round 1–2 (Warmup / Easy)</span>
+        <span class="ladder-coins">+2 Coins</span>
       </div>
       <div class="ladder-row" id="tier1">
-        <span>Round 3 Cleared</span>
+        <span>Round 3–4 (Medium)</span>
         <span class="ladder-coins">+5 Coins</span>
       </div>
       <div class="ladder-row" id="tier2">
-        <span>Round 5 Cleared</span>
+        <span>Round 5–6 (Hard)</span>
         <span class="ladder-coins">+8 Coins</span>
       </div>
       <div class="ladder-row" id="tier3">
-        <span>Round 7+ Cleared (Master)</span>
+        <span>Round 7+ (Master Streak)</span>
         <span class="ladder-coins">+12 Coins</span>
       </div>
       <div class="ladder-row">
@@ -573,52 +689,46 @@
         <span class="ladder-coins">+3 Coins</span>
       </div>
     </div>
+
+    <!-- Result Modal -->
+    <div class="modal-overlay" id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+      <div class="modal-card">
+        <div class="modal-icon" id="resultIcon">🌟</div>
+        <h2 class="modal-title" id="resultTitle">Trial Concluded</h2>
+        <p class="modal-subtitle" id="resultDesc">Great recall focus in the celestial memory trial!</p>
+        <div class="reward-pill" id="rewardPill">
+          <span>🪙</span> <span id="earnedCoinsText">+5 Coins Credited!</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <button type="button" class="modal-btn-primary" onclick="restartGame()">Play Again ➔</button>
+          <button type="button" class="modal-btn-secondary" onclick="location.href='games.html'">Return to Arcade</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rules Modal Fallback -->
+    <div class="modal-overlay" id="rulesModal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+      <div class="modal-card">
+        <div class="modal-icon">🎵</div>
+        <h2 class="modal-title" id="rulesTitle">How to Play</h2>
+        <p class="modal-subtitle" style="text-align:left; font-size:12.5px; line-height:1.6; margin-bottom:18px;">
+          1. Watch the celestial symbols glow and chime in sequence.<br>
+          2. Tap the pads in the exact same sequence when your turn begins.<br>
+          3. Each cleared round adds +1 symbol to the melody.<br>
+          4. One mistake ends the run.<br>
+          5. Clear Round 3+ to claim coins (Daily cap: 30 🪙).
+        </p>
+        <button type="button" class="modal-btn-primary" onclick="closeRulesModal()">Got It!</button>
+      </div>
+    </div>
   </main>
 
-  <!-- Rules Modal -->
-  <div class="modal-overlay" id="rulesModal">
-    <div class="modal-card">
-      <div class="modal-icon">🧠</div>
-      <h2 class="modal-title">Memory Sequence Rules</h2>
-      <p class="modal-subtitle">
-        1. Watch the celestial symbols glow in order.<br>
-        2. Tap the exact sequence when it is your turn.<br>
-        3. Each cleared round adds one more symbol.<br>
-        4. <strong>One mistake ends the run!</strong><br>
-        5. Clear Round 7 for the maximum 12 coins + 3 perfect bonus.
-      </p>
-      <button class="glow-btn glow-btn-primary" style="width: 100%;" onclick="closeRulesModal()">
-        Got It, Let's Play
-      </button>
-    </div>
-  </div>
-
-  <!-- Game Over / Victory Modal -->
-  <div class="modal-overlay" id="resultModal">
-    <div class="modal-card">
-      <div class="modal-icon" id="resultIcon">🎉</div>
-      <h2 class="modal-title" id="resultTitle">Trial Concluded</h2>
-      <p class="modal-subtitle" id="resultDesc">Round 5 reached! Excellent memory precision.</p>
-      <div class="reward-pill" id="rewardPill">
-        <span>🪙</span>
-        <span id="earnedCoinsText">+8 Coins Added</span>
-      </div>
-      <div style="display: flex; gap: 10px;">
-        <button class="glow-btn glow-btn-primary" onclick="restartGame()">
-          Play Again
-        </button>
-        <a href="games.html" class="glow-btn glow-btn-secondary" style="text-decoration:none;">
-          Exit
-        </a>
-      </div>
-    </div>
-  </div>
-
+  <script src="js/vanvi-games-engine.js"></script>
   <script>
     // --- VANVI INTEGRATION & COIN REWARD SYSTEM ---
     const GAME_ID = 'memory_sequence';
     const GAME_TITLE = 'Memory Sequence';
-    const DAILY_GAMES_CAP = 25;
+    const DAILY_GAMES_CAP = (window.VanviGames && window.VanviGames.DAILY_CAP) || 30;
 
     // Web Audio Synthesizer
     let audioCtx = null;
@@ -737,10 +847,14 @@
       }
 
       // 2. Local Fallback Sync
-      const currentCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
-      const newTotal = currentCoins + actualCoins;
-      localStorage.setItem('vanvi_user_coins', newTotal.toString());
-      localStorage.setItem('vanvi_games_today_earned', (todayEarned + actualCoins).toString());
+      if (window.VanviGames) {
+        VanviGames.awardCoins(actualCoins, GAME_TITLE);
+      } else {
+        const currentCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+        const newTotal = currentCoins + actualCoins;
+        localStorage.setItem('vanvi_user_coins', newTotal.toString());
+        localStorage.setItem('vanvi_games_today_earned', (todayEarned + actualCoins).toString());
+      }
 
       try {
         const authUser = JSON.parse(localStorage.getItem('vanvi_auth_user') || '{}');
@@ -798,9 +912,10 @@
       document.getElementById('sequenceLength').textContent = sequence.length;
 
       // Update ladder highlighting
-      document.getElementById('tier1').classList.toggle('active', round >= 3);
-      document.getElementById('tier2').classList.toggle('active', round >= 5);
-      document.getElementById('tier3').classList.toggle('active', round >= 7);
+      const t0 = document.getElementById('tier0'); if (t0) t0.classList.toggle('active', round >= 1);
+      const t1 = document.getElementById('tier1'); if (t1) t1.classList.toggle('active', round >= 3);
+      const t2 = document.getElementById('tier2'); if (t2) t2.classList.toggle('active', round >= 5);
+      const t3 = document.getElementById('tier3'); if (t3) t3.classList.toggle('active', round >= 7);
     }
 
     function renderStepDots() {
@@ -916,6 +1031,8 @@
         reward = 8;
       } else if (completedRounds >= 3) {
         reward = 5;
+      } else if (completedRounds >= 1) {
+        reward = 2;
       }
 
       const isPerfect = (completedRounds >= 3) && (runMistakes <= 1);
@@ -964,7 +1081,7 @@
         const todayEarned = getTodayEarned();
         if (todayEarned >= DAILY_GAMES_CAP) {
           rewardPill.style.display = 'flex';
-          earnedText.textContent = 'Daily Game Cap (25 🪙) Reached!';
+          earnedText.textContent = `Daily Game Cap (${DAILY_GAMES_CAP} 🪙) Reached!`;
         } else {
           rewardPill.style.display = 'none';
         }
@@ -980,7 +1097,17 @@
     }
 
     function showRulesModal() {
-      document.getElementById('rulesModal').classList.add('active');
+      if (window.VanviGames) {
+        VanviGames.showRulesModal('Sound & Sequence Memory 🎵', [
+          'Watch the celestial symbols glow and chime in sequence.',
+          'Tap the pads in the identical sequence when your turn starts.',
+          'Each round successfully cleared extends the melody by 1 symbol.',
+          'One wrong note ends your trial.',
+          'Clear Round 3+ to claim virtual Vanvi Coins (Daily Limit: max 30 coins).'
+        ]);
+      } else {
+        document.getElementById('rulesModal').classList.add('active');
+      }
     }
 
     function closeRulesModal() {

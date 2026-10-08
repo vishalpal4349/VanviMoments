@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Vivan & Divya — Maison Rose Wedding Invitation</title>
+  <meta name="description" content="A cinematic botanical blush wedding celebration uniting Vivan & Divya. 30 November 2027, The Glasshouse Pavilion, Bengaluru.">
+  <meta name="theme-color" content="#fcf5f1">
+
+  <!-- Google Fonts: Playfair Display + Cormorant Garamond + Plus Jakarta Sans + Alex Brush -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VANVI MOMENTS — BOTANICAL BLUSH THEME
+       Palette: Dusty Peach, Warm Cream, Soft Rose, Muted Burgundy, Rose Gold
+       ========================================================================== */
+    :root {
+      --bg-cream: #faf4ef;
+      --bg-blush: #fcf5f1;
+      --bg-soft-card: rgba(255, 255, 255, 0.85);
+      --border-rose: rgba(214, 159, 159, 0.45);
+      --border-rose-gold: #d8a892;
+      --accent-burgundy: #8b3a4a;
+      --accent-deep-rose: #a74e5e;
+      --accent-dusty-rose: #c98888;
+      --accent-soft-gold: #cba36f;
+      --text-dark: #2c2124;
+      --text-muted: #6b555b;
+      --text-subtle: #8f757c;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-script: 'Alex Brush', cursive;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --shadow-soft: 0 10px 30px -8px rgba(139, 58, 74, 0.08);
+      --shadow-hover: 0 16px 40px -10px rgba(139, 58, 74, 0.16);
+      --container-max: 680px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-cream);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      background: radial-gradient(circle at 15% 10%, #fff7f4 0%, #faf3ee 45%, #f6ece6 100%);
+      line-height: 1.65;
+      font-size: 15px;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Ambient Botanical Grain & Petal Layer */
+    #petalCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 15;
+    }
+
+    /* Top Floating Watermark / Status Badge */
+    .vanvi-watermark-pill {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-rose);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-burgundy);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 18px rgba(139, 58, 74, 0.08);
+      transition: opacity 0.3s ease;
+    }
+    .vanvi-watermark-pill span.dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-burgundy);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* Floating Music Pill Control */
+    .floating-audio-control {
+      position: fixed;
+      bottom: 22px;
+      right: 20px;
+      z-index: 70;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 8px 15px 8px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-rose-gold);
+      box-shadow: 0 8px 24px rgba(139, 58, 74, 0.14);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      user-select: none;
+    }
+    .floating-audio-control:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(139, 58, 74, 0.22);
+      border-color: var(--accent-burgundy);
+    }
+    .music-disk-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f3dfd6, #e7c2b3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--accent-burgundy);
+      transition: transform 0.4s ease;
+      flex-shrink: 0;
+    }
+    .floating-audio-control.is-playing .music-disk-icon {
+      animation: rotateMusic 6s linear infinite;
+    }
+    @keyframes rotateMusic {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .music-label-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .music-label-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--accent-burgundy);
+      white-space: nowrap;
+    }
+    .music-label-status {
+      font-size: 9.5px;
+      color: var(--text-subtle);
+      white-space: nowrap;
+    }
+
+    /* Container wrapper */
+    .botanical-app-container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 20px 80px;
+      position: relative;
+      z-index: 20;
+    }
+
+    /* Typography & Decorative Dividers */
+    .font-serif { font-family: var(--font-serif); }
+    .font-display { font-family: var(--font-display); }
+    .font-script { font-family: var(--font-script); }
+
+    .botanical-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 28px auto;
+      max-width: 280px;
+      opacity: 0.85;
+    }
+    .botanical-divider .line {
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--border-rose-gold), transparent);
+    }
+    .botanical-divider svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--accent-burgundy);
+      opacity: 0.8;
+    }
+
+    /* Subtle Botanical Border Corners */
+    .botanical-frame-card {
+      position: relative;
+      background: var(--bg-soft-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-rose);
+      box-shadow: var(--shadow-soft);
+      padding: 34px 26px;
+      margin-bottom: 36px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .botanical-frame-card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+    .corner-stem {
+      position: absolute;
+      width: 52px;
+      height: 52px;
+      pointer-events: none;
+      opacity: 0.45;
+      fill: none;
+      stroke: var(--accent-burgundy);
+      stroke-width: 1.2;
+    }
+    .corner-tl { top: 12px; left: 12px; }
+    .corner-tr { top: 12px; right: 12px; transform: scaleX(-1); }
+    .corner-bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
+    .corner-br { bottom: 12px; right: 12px; transform: scale(-1); }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      padding-top: 68px;
+      text-align: center;
+      position: relative;
+    }
+    .hero-pretitle {
+      font-size: 11.5px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent-burgundy);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .hero-couple-names {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--accent-burgundy);
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+    }
+    .hero-ampersand {
+      font-family: var(--font-script);
+      font-size: 46px;
+      color: var(--accent-dusty-rose);
+      display: inline-block;
+      margin: 0 4px;
+      transform: translateY(2px);
+    }
+    .hero-invitation-subtext {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* Arched Couple Portrait with Fine Botanical Ring */
+    .hero-portrait-frame {
+      position: relative;
+      width: 260px;
+      height: 350px;
+      margin: 0 auto 28px;
+      border-radius: 140px 140px 24px 24px;
+      padding: 8px;
+      background: linear-gradient(145deg, #fcedeb, #ebd5cd, #fcf4f0);
+      box-shadow: 0 16px 36px rgba(139, 58, 74, 0.12);
+    }
+    .hero-portrait-frame::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 144px 144px 28px 28px;
+      border: 1px dashed rgba(203, 163, 111, 0.5);
+      pointer-events: none;
+    }
+    .hero-portrait-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 132px 132px 18px 18px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .hero-portrait-frame:hover .hero-portrait-img {
+      transform: scale(1.04);
+    }
+    .hero-badge-date-pill {
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-rose-gold);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-burgundy);
+      box-shadow: 0 6px 16px rgba(139, 58, 74, 0.1);
+      white-space: nowrap;
+    }
+
+    .hero-location-line {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 24px;
+    }
+
+    /* ==========================================================================
+       SECTION HEADINGS
+       ========================================================================== */
+    .section-header {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .section-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--accent-dusty-rose);
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--accent-burgundy);
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    .section-desc {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 8px auto 0;
+      font-weight: 300;
+    }
+
+    /* ==========================================================================
+       THE INVITATION LETTER
+       ========================================================================== */
+    .invitation-letter-text {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      line-height: 1.85;
+      text-align: center;
+      color: var(--text-dark);
+      margin: 18px auto;
+      max-width: 540px;
+    }
+    .invitation-parents {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      text-align: center;
+      margin-top: 20px;
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       OUR STORY & MEMORY
+       ========================================================================== */
+    .story-media-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+      height: 280px;
+      box-shadow: 0 10px 24px rgba(139, 58, 74, 0.1);
+    }
+    .story-media-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .story-media-card:hover .story-media-img {
+      transform: scale(1.03);
+    }
+    .story-narrative {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .memory-quote-box {
+      background: rgba(246, 236, 230, 0.65);
+      border-left: 3px solid var(--accent-burgundy);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 16px 20px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--accent-burgundy);
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+    .memory-quote-tag {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-subtle);
+      margin-bottom: 6px;
+      display: block;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       SCRATCH-TO-REVEAL INTERACTIVE CARD (Primary Highlight)
+       ========================================================================== */
+    .scratch-card-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      height: 220px;
+      margin: 18px auto 8px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(139, 58, 74, 0.12);
+      border: 1px solid var(--border-rose-gold);
+      background: #fffdfb;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    /* Hidden Layer underneath */
+    .scratch-secret-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 26px;
+      text-align: center;
+      background: radial-gradient(circle at center, #fff8f5 0%, #faeee8 100%);
+      z-index: 1;
+    }
+    .scratch-secret-icon {
+      font-size: 26px;
+      margin-bottom: 8px;
+      color: var(--accent-burgundy);
+      animation: floatHeart 2.5s ease-in-out infinite;
+    }
+    @keyframes floatHeart {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .scratch-secret-text {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--accent-burgundy);
+      font-weight: 500;
+    }
+    .scratch-secret-author {
+      margin-top: 10px;
+      font-family: var(--font-script);
+      font-size: 24px;
+      color: var(--accent-dusty-rose);
+    }
+
+    /* Scratch Canvas overlay */
+    #scratchCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      cursor: crosshair;
+      touch-action: none;
+      transition: opacity 0.6s ease;
+    }
+    .scratch-hint-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 11.5px;
+      color: var(--text-subtle);
+      padding: 0 4px;
+    }
+    .scratch-reset-btn {
+      background: none;
+      border: none;
+      font-size: 11.5px;
+      color: var(--accent-burgundy);
+      cursor: pointer;
+      text-decoration: underline;
+      font-weight: 500;
+      padding: 2px 6px;
+    }
+    .scratch-reset-btn:hover {
+      color: var(--accent-deep-rose);
+    }
+
+    /* ==========================================================================
+       PROGRAM TIMELINE (Editorial & Refined)
+       ========================================================================== */
+    .timeline-container {
+      position: relative;
+      padding: 10px 0 10px 30px;
+      margin-top: 20px;
+    }
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      bottom: 20px;
+      left: 11px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--border-rose-gold), rgba(216, 168, 146, 0.2));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .timeline-item:last-child {
+      margin-bottom: 8px;
+    }
+    .timeline-node-flower {
+      position: absolute;
+      left: -30px;
+      top: 2px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1.5px solid var(--accent-burgundy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--accent-burgundy);
+      box-shadow: 0 2px 8px rgba(139, 58, 74, 0.12);
+    }
+    .timeline-time-badge {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-burgundy);
+      background: rgba(246, 236, 230, 0.8);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--text-dark);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .timeline-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       GALLERY (Varied Editorial Composition)
+       ========================================================================== */
+    .botanical-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(139, 58, 74, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: #fff;
+    }
+    .gallery-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(139, 58, 74, 0.15);
+    }
+    .gallery-item.span-2 {
+      grid-column: span 2;
+      height: 240px;
+    }
+    .gallery-item.tall {
+      height: 230px;
+    }
+    .gallery-item.square {
+      height: 180px;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-overlay-hint {
+      position: absolute;
+      inset: 0;
+      background: rgba(139, 58, 74, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      color: #fff;
+      font-size: 20px;
+    }
+    .gallery-item:hover .gallery-overlay-hint {
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       VENUE & LOCATION
+       ========================================================================== */
+    .venue-image-wrap {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 230px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .venue-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .venue-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--accent-burgundy);
+      font-weight: 600;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    .venue-city {
+      font-size: 13px;
+      color: var(--text-subtle);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .venue-address {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 440px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+    }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-botanical {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      cursor: pointer;
+      border: none;
+    }
+    .btn-botanical-primary {
+      background: var(--accent-burgundy);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(139, 58, 74, 0.24);
+    }
+    .btn-botanical-primary:hover {
+      background: #732a38;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(139, 58, 74, 0.32);
+      color: #fff;
+    }
+    .btn-botanical-outline {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--accent-burgundy);
+      border: 1px solid var(--border-rose-gold);
+    }
+    .btn-botanical-outline:hover {
+      background: #fff;
+      border-color: var(--accent-burgundy);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       GUEST BLESSINGS & RSVP
+       ========================================================================== */
+    .rsvp-form-card {
+      margin-top: 14px;
+    }
+    .rsvp-input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-rose);
+      background: rgba(255, 255, 255, 0.9);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .rsvp-input:focus {
+      border-color: var(--accent-burgundy);
+    }
+    textarea.rsvp-input {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    /* Interactive guest list */
+    .guest-wishes-list {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 260px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .guest-wish-item {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid var(--accent-dusty-rose);
+      font-size: 13px;
+    }
+    .guest-wish-name {
+      font-weight: 600;
+      color: var(--accent-burgundy);
+      margin-bottom: 2px;
+    }
+    .guest-wish-msg {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Footer message */
+    .botanical-footer {
+      text-align: center;
+      padding-top: 20px;
+      padding-bottom: 30px;
+    }
+    .footer-seal {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      border: 1px solid var(--border-rose-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-burgundy);
+      font-size: 18px;
+    }
+    .footer-signature {
+      font-family: var(--font-script);
+      font-size: 34px;
+      color: var(--accent-burgundy);
+      margin-bottom: 4px;
+    }
+    .footer-date {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
+    .footer-brand {
+      margin-top: 18px;
+      font-size: 11px;
+      color: var(--text-subtle);
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       LIGHTBOX MODAL
+       ========================================================================== */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 33, 36, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox-modal.active {
+      display: flex;
+    }
+    .lightbox-content {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 80vh;
+      display: block;
+      object-fit: contain;
+    }
+    .lightbox-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+      transition: background 0.2s;
+    }
+    .lightbox-close-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE ADJUSTMENTS
+       ========================================================================== */
+    @media (max-width: 480px) {
+      .botanical-app-container {
+        padding: 0 16px 80px;
+      }
+      .hero-couple-names {
+        font-size: 34px;
+      }
+      .hero-portrait-frame {
+        width: 220px;
+        height: 290px;
+      }
+      .botanical-frame-card {
+        padding: 26px 18px;
+        margin-bottom: 26px;
+      }
+      .section-title {
+        font-size: 26px;
+      }
+      .scratch-card-wrapper {
+        height: 200px;
+      }
+      .scratch-secret-text {
+        font-size: 14px;
+      }
+      .btn-row {
+        flex-direction: column;
+      }
+      .btn-botanical {
+        width: 100%;
+      }
+      .botanical-gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery-item.span-2,
+      .gallery-item.tall,
+      .gallery-item.square {
+        height: 210px;
+      }
+    }
+
+    /* Accessibility reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Petal Ambient Canvas -->
+  <canvas id="petalCanvas"></canvas>
+
+  <!-- Watermark Pill (Hidden when purchased) -->
+  <div id="demoWatermarkBadge" class="vanvi-watermark-pill">
+    <span class="dot"></span>
+    <span id="watermarkText">Vanvi Moments • Demo</span>
+  </div>
+
+  <!-- Floating Audio Player -->
+  <div id="floatingAudioPill" class="floating-audio-control" title="Toggle Wedding Soundtrack" aria-label="Toggle Soundtrack">
+    <div class="music-disk-icon">🌸</div>
+    <div class="music-label-wrap">
+      <span class="music-label-title" id="audioTrackTitle">Rose Romance</span>
+      <span class="music-label-status" id="audioTrackStatus">Tap to Play</span>
+    </div>
+    <audio id="weddingMelody" preload="metadata" loop>
+      <source src="assets/botanical-blush-melody.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- Main Container -->
+  <div class="botanical-app-container">
+
+    <!-- 1. HERO SECTION -->
+    <header class="hero-section" id="heroSection">
+      <p class="hero-pretitle" id="heroPretitle">Maison Rose • Wedding Invitation</p>
+      
+      <h1 class="hero-couple-names" id="heroCoupleNames">
+        <span id="heroGroom">Vivan</span>
+        <span class="hero-ampersand">&amp;</span>
+        <span id="heroBride">Divya</span>
+      </h1>
+
+      <p class="hero-invitation-subtext" id="heroSubtitle">
+        Invite you to celebrate their eternal union
+      </p>
+
+      <!-- Arch Portrait Frame -->
+      <div class="hero-portrait-frame">
+        <div class="hero-portrait-inner">
+          <img id="heroPortraitImg" class="hero-portrait-img" src="assets/botanical-hero-couple.jpg" alt="Vivan and Divya — Couple Portrait" loading="eager">
+        </div>
+        <div class="hero-badge-date-pill" id="heroDateBadge">
+          30 November 2027
+        </div>
+      </div>
+
+      <p class="hero-location-line" id="heroLocationLine">
+        Bengaluru, Karnataka
+      </p>
+
+      <!-- Botanical Divider -->
+      <div class="botanical-divider">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C13 5 16 8 19 9C16 10 13 13 12 16C11 13 8 10 5 9C8 8 11 5 12 2Z"/>
+        </svg>
+        <span class="line"></span>
+      </div>
+    </header>
+
+    <!-- 2. INVITATION LETTER -->
+    <section class="botanical-frame-card" id="invitationSection">
+      <!-- Botanical corner SVGs -->
+      <svg class="corner-stem corner-tl" viewBox="0 0 40 40"><path d="M4 36 C4 18, 18 4, 36 4 M12 12 C18 16, 22 24, 24 32 M16 4 C24 8, 28 14, 32 20"/></svg>
+      <svg class="corner-stem corner-tr" viewBox="0 0 40 40"><path d="M4 36 C4 18, 18 4, 36 4 M12 12 C18 16, 22 24, 24 32 M16 4 C24 8, 28 14, 32 20"/></svg>
+      <svg class="corner-stem corner-bl" viewBox="0 0 40 40"><path d="M4 36 C4 18, 18 4, 36 4 M12 12 C18 16, 22 24, 24 32 M16 4 C24 8, 28 14, 32 20"/></svg>
+      <svg class="corner-stem corner-br" viewBox="0 0 40 40"><path d="M4 36 C4 18, 18 4, 36 4 M12 12 C18 16, 22 24, 24 32 M16 4 C24 8, 28 14, 32 20"/></svg>
+
+      <div class="section-header">
+        <span class="section-kicker">Together With Families</span>
+        <h2 class="section-title" id="invitationHeading">With Joyful Hearts</h2>
+      </div>
+
+      <p class="invitation-letter-text" id="invitationMessage">
+        We request the honour of your presence as we exchange vows and begin our new chapter together under the blooming canopy of roses. Your blessings and warmth will grace our union with joy that lasts a lifetime.
+      </p>
+
+      <div class="botanical-divider" style="margin: 18px auto 10px;">
+        <span class="line"></span>
+        <span style="font-size: 14px; color: var(--accent-dusty-rose);">❦</span>
+        <span class="line"></span>
+      </div>
+
+      <p class="invitation-parents" id="invitationFamily">
+        The Verma &amp; Kapoor Families
+      </p>
+    </section>
+
+    <!-- 3. OUR STORY & MEMORY -->
+    <section class="botanical-frame-card" id="storySection">
+      <div class="section-header">
+        <span class="section-kicker">A Sweet Journey</span>
+        <h2 class="section-title" id="storyHeading">Our Love Story</h2>
+      </div>
+
+      <div class="story-media-card">
+        <img id="storyMediaImg" class="story-media-img" src="assets/botanical-story-walk.jpg" alt="Vivan & Divya walking in the rose garden" loading="lazy">
+      </div>
+
+      <p class="story-narrative" id="storyContent">
+        Two paths crossed on a quiet rainy afternoon in Bengaluru, blossoming into an eternal companionship filled with gentle laughter, shared sunsets, and timeless promises. Through every season, our love found its deepest root in friendship.
+      </p>
+
+      <div class="memory-quote-box">
+        <span class="memory-quote-tag">First Chapter Memory</span>
+        <p id="specialMemory">
+          "Under the misty canopy of Cubbon Park, a simple coffee turned into seven hours of talking about everything and nothing at all. That was the day forever began."
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. SCRATCH-TO-REVEAL SECRET LOVE NOTE (Signature Interaction) -->
+    <section class="botanical-frame-card" id="scratchSection">
+      <div class="section-header">
+        <span class="section-kicker">An Intimate Keepsake</span>
+        <h2 class="section-title">Scratch to Reveal</h2>
+        <p class="section-desc">Gently rub the rose-gold seal with your fingertip or cursor to reveal our secret note to you.</p>
+      </div>
+
+      <div class="scratch-card-wrapper" id="scratchCardWrapper">
+        <!-- Secret content revealed under scratch layer -->
+        <div class="scratch-secret-content">
+          <div class="scratch-secret-icon">💌</div>
+          <p class="scratch-secret-text" id="scratchMessageText">
+            "Some stories are written in the stars. Ours begins with you. Thank you for walking this sacred path beside us."
+          </p>
+          <div class="scratch-secret-author" id="scratchSecretAuthor">Vivan &amp; Divya</div>
+        </div>
+
+        <!-- Canvas foil overlay -->
+        <canvas id="scratchCanvas"></canvas>
+      </div>
+
+      <div class="scratch-hint-bar">
+        <span id="scratchProgress">Scratched: 0%</span>
+        <button type="button" class="scratch-reset-btn" id="resetScratchBtn">Cover Again ↺</button>
+      </div>
+    </section>
+
+    <!-- 5. WEDDING TIMELINE -->
+    <section class="botanical-frame-card" id="timelineSection">
+      <div class="section-header">
+        <span class="section-kicker">Celebration Flow</span>
+        <h2 class="section-title">Order of Events</h2>
+        <p class="section-desc">Join us across every magical chapter of our union.</p>
+      </div>
+
+      <div class="timeline-container" id="timelineList">
+        <!-- Event 1 -->
+        <div class="timeline-item">
+          <div class="timeline-node-flower">✦</div>
+          <span class="timeline-time-badge">30 Nov 2027 • 10:00 AM</span>
+          <h3 class="timeline-title">Guest Arrival &amp; Welcome Spritz</h3>
+          <p class="timeline-desc">Gathering amidst soft morning flute melodies and blooming blush roses.</p>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="timeline-item">
+          <div class="timeline-node-flower">❦</div>
+          <span class="timeline-time-badge">30 Nov 2027 • 10:30 AM</span>
+          <h3 class="timeline-title">Sacred Wedding Ceremony &amp; Vows</h3>
+          <p class="timeline-desc">The exchange of garlands and eternal vows in the glass pavilion.</p>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="timeline-item">
+          <div class="timeline-node-flower">☕</div>
+          <span class="timeline-time-badge">30 Nov 2027 • 1:00 PM</span>
+          <h3 class="timeline-title">Artisanal Feast &amp; Garden High Tea</h3>
+          <p class="timeline-desc">A celebration of gourmet delicacies, live acoustic strings, and sweet toasts.</p>
+        </div>
+
+        <!-- Event 4 -->
+        <div class="timeline-item">
+          <div class="timeline-node-flower">✨</div>
+          <span class="timeline-time-badge">02 Dec 2027 • 7:30 PM</span>
+          <h3 class="timeline-title">The Grand Starlit Reception</h3>
+          <p class="timeline-desc">An evening of candlelit banquet, celebratory dancing, and champagne under the stars.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. EDITORIAL GALLERY -->
+    <section class="botanical-frame-card" id="gallerySection">
+      <div class="section-header">
+        <span class="section-kicker">Photographic Memories</span>
+        <h2 class="section-title">Captured in Time</h2>
+        <p class="section-desc">Glimpses of quiet smiles, stolen glances, and cherished details.</p>
+      </div>
+
+      <div class="botanical-gallery-grid" id="galleryGrid">
+        <div class="gallery-item span-2" onclick="openLightbox(0)">
+          <img src="assets/botanical-hero-couple.jpg" alt="Vivan & Divya" loading="lazy">
+          <div class="gallery-overlay-hint">🔍</div>
+        </div>
+        <div class="gallery-item tall" onclick="openLightbox(1)">
+          <img src="assets/botanical-story-walk.jpg" alt="Garden stroll" loading="lazy">
+          <div class="gallery-overlay-hint">🔍</div>
+        </div>
+        <div class="gallery-item tall" onclick="openLightbox(2)">
+          <img src="assets/botanical-venue-mandap.jpg" alt="Floral mandap & venue" loading="lazy">
+          <div class="gallery-overlay-hint">🔍</div>
+        </div>
+        <div class="gallery-item span-2 square" onclick="openLightbox(3)">
+          <img src="assets/botanical-rings.jpg" alt="Sacred wedding rings on rose petal" loading="lazy">
+          <div class="gallery-overlay-hint">🔍</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. VENUE & DESTINATION -->
+    <section class="botanical-frame-card" id="venueSection">
+      <div class="section-header">
+        <span class="section-kicker">The Destination</span>
+        <h2 class="section-title">Where Vows Bloom</h2>
+      </div>
+
+      <div class="venue-image-wrap">
+        <img id="venueMediaImg" src="assets/botanical-venue-mandap.jpg" alt="The Glasshouse Pavilion & Rose Garden" loading="lazy">
+      </div>
+
+      <h3 class="venue-name" id="venueName">The Glasshouse Pavilion &amp; Rose Garden</h3>
+      <p class="venue-city" id="venueCity">Bengaluru, Karnataka</p>
+      <p class="venue-address" id="venueAddress">
+        Cubbon Park Road, Sampangi Rama Nagara, Bengaluru, Karnataka 560001
+      </p>
+
+      <div class="btn-row">
+        <a id="venueMapsLink" href="https://maps.google.com/?q=The+Glass+House+Bengaluru" target="_blank" rel="noopener noreferrer" class="btn-botanical btn-botanical-primary">
+          <span>📍</span> Open in Google Maps
+        </a>
+        <button type="button" class="btn-botanical btn-botanical-outline" id="saveDateCalendarBtn">
+          <span>📅</span> Save to Calendar
+        </button>
+      </div>
+    </section>
+
+    <!-- 8. RSVP & BLESSINGS WALL -->
+    <section class="botanical-frame-card rsvp-form-card" id="rsvpSection">
+      <div class="section-header">
+        <span class="section-kicker">Share Your Love</span>
+        <h2 class="section-title">Blessings &amp; RSVP</h2>
+        <p class="section-desc">Kindly confirm your presence and leave a sweet note for the couple.</p>
+      </div>
+
+      <form id="wishesForm" onsubmit="handleSendBlessing(event)">
+        <input type="text" id="guestNameInput" class="rsvp-input" placeholder="Your Name or Family Name" required>
+        <textarea id="guestMessageInput" class="rsvp-input" placeholder="Write a warm blessing or congratulations..." required></textarea>
+        
+        <div class="btn-row" style="margin-top: 6px;">
+          <button type="submit" class="btn-botanical btn-botanical-primary" style="flex: 1;">
+            <span>💌</span> Send Blessing
+          </button>
+          <a id="whatsappRsvpLink" href="https://wa.me/919876543210?text=Dear%20Vivan%20and%20Divya%2C%20we%20are%20delighted%20to%20attend%20your%20wedding!" target="_blank" rel="noopener noreferrer" class="btn-botanical btn-botanical-outline" style="flex: 1;">
+            <span>💬</span> WhatsApp RSVP
+          </a>
+        </div>
+      </form>
+
+      <!-- Real-time dynamic blessings list -->
+      <div class="guest-wishes-list" id="guestWishesList">
+        <div class="guest-wish-item">
+          <div class="guest-wish-name">Aarav &amp; Meera Sharma</div>
+          <div class="guest-wish-msg">"May your bond be as timeless and fragrant as blooming blush roses. Counting down to celebrate with you!"</div>
+        </div>
+        <div class="guest-wish-item">
+          <div class="guest-wish-name">Dr. Rajesh &amp; Sunita Verma</div>
+          <div class="guest-wish-msg">"Wishing dearest Divya and Vivan a lifetime of happiness, laughter, and blessed togetherness."</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FOOTER -->
+    <footer class="botanical-footer">
+      <div class="footer-seal">❦</div>
+      <div class="footer-signature" id="footerCoupleNames">Vivan &amp; Divya</div>
+      <p class="footer-date" id="footerDate">30 November 2027 • Bengaluru</p>
+      <p class="footer-brand">Vanvi Moments • Botanical Blush Keepsake</p>
+    </footer>
+
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox(event)">
+    <button class="lightbox-close-btn" onclick="closeLightboxDirect()">✕</button>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <img id="lightboxImg" class="lightbox-img" src="" alt="Enlarged gallery photo">
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT: Logic, Canvas Scratch Interaction, Floating Petals, Preview Sync -->
+  <script>
+    /* ==========================================================================
+       DATA STORE & DEFAULT STATE
+       ========================================================================== */
+    const state = {
+      groomName: 'Vivan',
+      brideName: 'Divya',
+      coupleNames: 'Vivan & Divya',
+      weddingDate: '30 November 2027',
+      invitationHeading: 'With Joyful Hearts',
+      invitationMessage: 'We request the honour of your presence as we exchange vows and begin our new chapter together under the blooming canopy of roses. Your blessings and warmth will grace our union with joy that lasts a lifetime.',
+      invitationFamily: 'The Verma & Kapoor Families',
+      storyHeading: 'Our Love Story',
+      storyContent: 'Two paths crossed on a quiet rainy afternoon in Bengaluru, blossoming into an eternal companionship filled with gentle laughter, shared sunsets, and timeless promises. Through every season, our love found its deepest root in friendship.',
+      specialMemory: '"Under the misty canopy of Cubbon Park, a simple coffee turned into seven hours of talking about everything and nothing at all. That was the day forever began."',
+      scratchMessage: 'Some stories are written in the stars. Ours begins with you. Thank you for walking this sacred path beside us.',
+      venueName: 'The Glasshouse Pavilion & Rose Garden',
+      venueCity: 'Bengaluru, Karnataka',
+      venueAddress: 'Cubbon Park Road, Sampangi Rama Nagara, Bengaluru, Karnataka 560001',
+      mapsUrl: 'https://maps.google.com/?q=The+Glass+House+Bengaluru',
+      whatsappPhone: '+919876543210',
+      isPurchased: false,
+      gallery: [
+        'assets/botanical-hero-couple.jpg',
+        'assets/botanical-story-walk.jpg',
+        'assets/botanical-venue-mandap.jpg',
+        'assets/botanical-rings.jpg'
+      ]
+    };
+
+    // Check URL parameters for purchased or customization params
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('purchased') === 'true') {
+      state.isPurchased = true;
+      const watermark = document.getElementById('demoWatermarkBadge');
+      if (watermark) watermark.style.display = 'none';
+    }
+
+    /* ==========================================================================
+       DOM SYNC HELPER
+       ========================================================================== */
+    function renderState() {
+      // Groom & Bride
+      const groomEl = document.getElementById('heroGroom');
+      const brideEl = document.getElementById('heroBride');
+      if (groomEl) groomEl.textContent = state.groomName;
+      if (brideEl) brideEl.textContent = state.brideName;
+
+      const coupleStr = `${state.groomName} & ${state.brideName}`;
+      const footerCouple = document.getElementById('footerCoupleNames');
+      if (footerCouple) footerCouple.textContent = coupleStr;
+      const secretAuthor = document.getElementById('scratchSecretAuthor');
+      if (secretAuthor) secretAuthor.textContent = coupleStr;
+
+      // Dates
+      const dateBadge = document.getElementById('heroDateBadge');
+      if (dateBadge) dateBadge.textContent = state.weddingDate;
+      const footerDate = document.getElementById('footerDate');
+      if (footerDate) footerDate.textContent = `${state.weddingDate} • ${state.venueCity}`;
+
+      // Invitation
+      const invHead = document.getElementById('invitationHeading');
+      if (invHead) invHead.textContent = state.invitationHeading;
+      const invMsg = document.getElementById('invitationMessage');
+      if (invMsg) invMsg.textContent = state.invitationMessage;
+      const invFam = document.getElementById('invitationFamily');
+      if (invFam) invFam.textContent = state.invitationFamily;
+
+      // Story
+      const storyHead = document.getElementById('storyHeading');
+      if (storyHead) storyHead.textContent = state.storyHeading;
+      const storyText = document.getElementById('storyContent');
+      if (storyText) storyText.textContent = state.storyContent;
+      const memoryEl = document.getElementById('specialMemory');
+      if (memoryEl) memoryEl.textContent = state.specialMemory;
+
+      // Scratch message
+      const scratchEl = document.getElementById('scratchMessageText');
+      if (scratchEl) scratchEl.textContent = state.scratchMessage;
+
+      // Venue
+      const vName = document.getElementById('venueName');
+      if (vName) vName.textContent = state.venueName;
+      const vCity = document.getElementById('venueCity');
+      if (vCity) vCity.textContent = state.venueCity;
+      const vAddr = document.getElementById('venueAddress');
+      if (vAddr) vAddr.textContent = state.venueAddress;
+      const heroLoc = document.getElementById('heroLocationLine');
+      if (heroLoc) heroLoc.textContent = state.venueCity;
+
+      // Links
+      const mapsLink = document.getElementById('venueMapsLink');
+      if (mapsLink) mapsLink.href = state.mapsUrl;
+
+      const waLink = document.getElementById('whatsappRsvpLink');
+      if (waLink) {
+        const cleanPhone = state.whatsappPhone.replace(/[^0-9]/g, '');
+        waLink.href = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Dear ${state.groomName} & ${state.brideName}, we are delighted to accept your gracious wedding invitation!`)}`;
+      }
+    }
+
+    /* ==========================================================================
+       SCRATCH-TO-REVEAL CARD IMPLEMENTATION
+       ========================================================================== */
+    const canvas = document.getElementById('scratchCanvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    let isDrawing = false;
+    let isRevealed = false;
+    let totalPixels = 0;
+
+    function initScratchCard() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+
+      totalPixels = rect.width * rect.height;
+      isRevealed = false;
+      canvas.style.opacity = '1';
+      document.getElementById('scratchProgress').textContent = 'Scratched: 0%';
+
+      // Draw elegant Rose-Gold Foil gradient overlay
+      const grad = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+      grad.addColorStop(0, '#e8cbbf');
+      grad.addColorStop(0.3, '#f5e4dd');
+      grad.addColorStop(0.5, '#deb5a5');
+      grad.addColorStop(0.7, '#f7e8e2');
+      grad.addColorStop(1, '#c99684');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, rect.width, rect.height);
+
+      // Fine ornamental dashed border on foil
+      ctx.strokeStyle = '#c48f7d';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(10, 10, rect.width - 20, rect.height - 20);
+
+      // Foil text invitation
+      ctx.fillStyle = '#6b3642';
+      ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.letterSpacing = '2px';
+      ctx.fillText('✨ SCRATCH GENTLY TO REVEAL ✨', rect.width / 2, rect.height / 2 - 12);
+
+      ctx.fillStyle = '#8f5360';
+      ctx.font = 'italic 12px "Playfair Display", serif';
+      ctx.fillText('A secret note from the couple', rect.width / 2, rect.height / 2 + 12);
+
+      // Little flower glyph
+      ctx.font = '16px serif';
+      ctx.fillText('🌸', rect.width / 2, rect.height / 2 + 36);
+    }
+
+    function getScratchPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function scratch(e) {
+      if (!isDrawing || isRevealed) return;
+      const pos = getScratchPos(e);
+
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, 22, 0, Math.PI * 2, false);
+      ctx.fill();
+
+      checkScratchPercentage();
+    }
+
+    let checkThrottle = 0;
+    function checkScratchPercentage() {
+      const now = Date.now();
+      if (now - checkThrottle < 120) return;
+      checkThrottle = now;
+
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const w = Math.floor(rect.width * dpr);
+      const h = Math.floor(rect.height * dpr);
+
+      try {
+        const imgData = ctx.getImageData(0, 0, w, h);
+        const data = imgData.data;
+        let transparentPixels = 0;
+        const step = 32; // sampling step for speed
+        for (let i = 3; i < data.length; i += 4 * step) {
+          if (data[i] === 0) {
+            transparentPixels += step;
+          }
+        }
+        const pct = Math.min(100, Math.round((transparentPixels / (w * h)) * 100));
+        document.getElementById('scratchProgress').textContent = `Scratched: ${pct}%`;
+
+        // Once 42% is scratched, smoothly clear foil
+        if (pct >= 42 && !isRevealed) {
+          isRevealed = true;
+          canvas.style.opacity = '0';
+          document.getElementById('scratchProgress').textContent = 'Revealed with Love! 💖';
+          triggerBlossomConfetti();
+        }
+      } catch (err) {
+        // Fallback for security contexts if any
+      }
+    }
+
+    // Event listeners for scratch canvas
+    canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
+    canvas.addEventListener('mousemove', scratch);
+    window.addEventListener('mouseup', () => { isDrawing = false; });
+
+    canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, { passive: true });
+    canvas.addEventListener('touchmove', scratch, { passive: true });
+    window.addEventListener('touchend', () => { isDrawing = false; });
+
+    document.getElementById('resetScratchBtn').addEventListener('click', () => {
+      ctx.globalCompositeOperation = 'source-over';
+      initScratchCard();
+    });
+
+    // Blossom confetti celebration on reveal
+    function triggerBlossomConfetti() {
+      for (let i = 0; i < 28; i++) {
+        const petal = document.createElement('div');
+        petal.innerHTML = '🌸';
+        petal.style.position = 'fixed';
+        petal.style.left = `${Math.random() * 80 + 10}vw`;
+        petal.style.top = '30vh';
+        petal.style.fontSize = `${Math.random() * 16 + 14}px`;
+        petal.style.pointerEvents = 'none';
+        petal.style.zIndex = '99';
+        petal.style.transition = 'all 1.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+        document.body.appendChild(petal);
+
+        requestAnimationFrame(() => {
+          petal.style.transform = `translate(${Math.random() * 160 - 80}px, ${Math.random() * 260 + 80}px) rotate(${Math.random() * 360}deg)`;
+          petal.style.opacity = '0';
+        });
+
+        setTimeout(() => {
+          petal.remove();
+        }, 1700);
+      }
+    }
+
+    /* ==========================================================================
+       FLOATING PETAL AMBIENT CANVAS
+       ========================================================================== */
+    const petalCanvas = document.getElementById('petalCanvas');
+    const petalCtx = petalCanvas.getContext('2d');
+    let petals = [];
+
+    function resizePetalCanvas() {
+      petalCanvas.width = window.innerWidth;
+      petalCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizePetalCanvas);
+    resizePetalCanvas();
+
+    function createPetals() {
+      petals = [];
+      const count = window.innerWidth < 480 ? 16 : 28;
+      for (let i = 0; i < count; i++) {
+        petals.push({
+          x: Math.random() * petalCanvas.width,
+          y: Math.random() * petalCanvas.height,
+          radiusX: Math.random() * 7 + 4,
+          radiusY: Math.random() * 12 + 6,
+          rotation: Math.random() * Math.PI,
+          speedY: Math.random() * 0.8 + 0.35,
+          speedX: Math.random() * 0.5 - 0.25,
+          rotSpeed: Math.random() * 0.02 - 0.01,
+          opacity: Math.random() * 0.45 + 0.25
+        });
+      }
+    }
+    createPetals();
+
+    function drawPetals() {
+      petalCtx.clearRect(0, 0, petalCanvas.width, petalCanvas.height);
+      petals.forEach(p => {
+        petalCtx.save();
+        petalCtx.translate(p.x, p.y);
+        petalCtx.rotate(p.rotation);
+        petalCtx.beginPath();
+        petalCtx.ellipse(0, 0, p.radiusX, p.radiusY, 0, 0, Math.PI * 2);
+        petalCtx.fillStyle = `rgba(235, 185, 185, ${p.opacity})`;
+        petalCtx.fill();
+        petalCtx.restore();
+
+        p.y += p.speedY;
+        p.x += p.speedX;
+        p.rotation += p.rotSpeed;
+
+        if (p.y > petalCanvas.height + 20) {
+          p.y = -20;
+          p.x = Math.random() * petalCanvas.width;
+        }
+      });
+      requestAnimationFrame(drawPetals);
+    }
+    drawPetals();
+
+    /* ==========================================================================
+       FLOATING AUDIO PLAYER
+       ========================================================================== */
+    const audioPill = document.getElementById('floatingAudioPill');
+    const audioEl = document.getElementById('weddingMelody');
+    const audioStatus = document.getElementById('audioTrackStatus');
+
+    audioPill.addEventListener('click', () => {
+      if (audioEl.paused) {
+        audioEl.play().then(() => {
+          audioPill.classList.add('is-playing');
+          audioStatus.textContent = 'Playing';
+        }).catch(() => {
+          audioStatus.textContent = 'Tap to allow';
+        });
+      } else {
+        audioEl.pause();
+        audioPill.classList.remove('is-playing');
+        audioStatus.textContent = 'Paused';
+      }
+    });
+
+    /* ==========================================================================
+       CALENDAR (.ICS) DOWNLOAD
+       ========================================================================== */
+    document.getElementById('saveDateCalendarBtn').addEventListener('click', () => {
+      const icsData = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Vanvi Moments//Botanical Blush Wedding//EN',
+        'BEGIN:VEVENT',
+        'UID:' + Date.now() + '@vanvimoments.com',
+        'DTSTAMP:20271130T043000Z',
+        'DTSTART:20271130T050000Z',
+        'DTEND:20271130T090000Z',
+        'SUMMARY:' + state.groomName + ' & ' + state.brideName + ' Wedding Ceremony',
+        'DESCRIPTION:Sacred wedding ceremony and vows at ' + state.venueName,
+        'LOCATION:' + state.venueAddress,
+        'STATUS:CONFIRMED',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', `${state.groomName}_and_${state.brideName}_Wedding.ics`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    /* ==========================================================================
+       GUEST BLESSINGS FORM (Local persistence)
+       ========================================================================== */
+    function handleSendBlessing(e) {
+      e.preventDefault();
+      const name = document.getElementById('guestNameInput').value.trim();
+      const msg = document.getElementById('guestMessageInput').value.trim();
+      if (!name || !msg) return;
+
+      const list = document.getElementById('guestWishesList');
+      const item = document.createElement('div');
+      item.className = 'guest-wish-item';
+      item.innerHTML = `<div class="guest-wish-name">${escapeHtml(name)}</div><div class="guest-wish-msg">"${escapeHtml(msg)}"</div>`;
+      list.prepend(item);
+
+      document.getElementById('guestNameInput').value = '';
+      document.getElementById('guestMessageInput').value = '';
+
+      alert('Thank you! Your heartfelt blessing has been shared with Vivan & Divya. 🌸');
+    }
+
+    function escapeHtml(text) {
+      const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    /* ==========================================================================
+       GALLERY LIGHTBOX
+       ========================================================================== */
+    const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    function openLightbox(index) {
+      const imgSources = state.gallery;
+      if (imgSources[index]) {
+        lightboxImg.src = imgSources[index];
+        lightboxModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeLightbox(e) {
+      lightboxModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightboxDirect() {
+      lightboxModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    /* ==========================================================================
+       POSTMESSAGE & LIVE PREVIEW SYNC FOR BUILDER
+       ========================================================================== */
+    window.addEventListener('message', (event) => {
+      if (!event.data) return;
+      const data = event.data;
+
+      // Handle standard sync or VANVI_LIVE_PREVIEW_SYNC
+      if (data.type === 'VANVI_LIVE_PREVIEW_SYNC' || data.type === 'UPDATE_TEMPLATE_DATA') {
+        const payload = data.payload || data.data || {};
+        Object.assign(state, payload);
+        renderState();
+      } else if (data.type === 'VANVI_TOGGLE_SOUND') {
+        const audio = document.getElementById('weddingMelody');
+        const pill = document.getElementById('floatingAudioPill');
+        const status = document.getElementById('audioTrackStatus');
+        if (data.muted) {
+          audio.pause();
+          if (pill) pill.classList.remove('is-playing');
+          if (status) status.textContent = 'Muted';
+        } else {
+          audio.play().then(() => {
+            if (pill) pill.classList.add('is-playing');
+            if (status) status.textContent = 'Playing';
+          }).catch(() => {});
+        }
+      }
+    });
+
+    // Initial render
+    window.addEventListener('load', () => {
+      renderState();
+      setTimeout(initScratchCard, 200);
+    });
+    window.addEventListener('resize', () => {
+      if (!isRevealed) {
+        initScratchCard();
+      }
+    });
+  </script>
+</body>
+</html>

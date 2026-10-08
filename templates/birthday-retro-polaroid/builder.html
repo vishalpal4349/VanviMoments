@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro Polaroid Studio | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #1c1a19; color: #fff; font-family: 'Space Grotesk', sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
+    .top-bar { background: #262321; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .studio-grid { display: grid; grid-template-columns: 460px 1fr; flex: 1; height: calc(100vh - 60px); }
+    @media (max-width: 900px) { .studio-grid { grid-template-columns: 1fr; } .preview-pane { display: none; } }
+    .editor-pane { background: #211e1c; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; }
+    .step-box { background: #2b2825; border-radius: 8px; padding: 16px; border: 1px solid rgba(255,255,255,0.06); }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 11px; color: #bbb; margin-bottom: 4px; }
+    .form-group input, .form-group textarea { width: 100%; background: #171514; border: 1px solid #443e39; color: #fff; padding: 10px; border-radius: 6px; font-family: inherit; font-size: 13px; }
+    .preview-pane { background: #141211; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .preview-frame { width: 375px; height: 90vh; border: 8px solid #2b2825; border-radius: 36px; overflow: hidden; }
+    .preview-frame iframe { width: 100%; height: 100%; border: 0; }
+    .btn-save { background: #d97736; color: #fff; border: 0; padding: 12px; font-weight: 700; border-radius: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div style="font-family: 'DM Serif Display', serif; color: #dca535; font-size: 18px;">🎞️ Retro Polaroid Studio</div>
+    <div style="font-size: 12px; color: #bbb;">Live Sync Active</div>
+  </div>
+  <div class="studio-grid">
+    <div class="editor-pane">
+      <div class="step-box">
+        <h3 style="color: #dca535; font-size: 14px; margin-bottom: 10px;">1. Birthday Person Info</h3>
+        <div class="form-group">
+          <label>Birthday person ka naam</label>
+          <input type="text" id="inp-name" value="Kavya Sharma" oninput="syncData()">
+        </div>
+        <div class="form-group">
+          <label>Milestone Age</label>
+          <input type="number" id="inp-age" value="23" oninput="syncData()">
+        </div>
+        <div class="form-group">
+          <label>Birth Year</label>
+          <input type="number" id="inp-year" value="2003" oninput="syncData()">
+        </div>
+      </div>
+
+      <div class="step-box">
+        <h3 style="color: #dca535; font-size: 14px; margin-bottom: 10px;">2. Typewriter Message</h3>
+        <div class="form-group">
+          <label>Apni heartfelt memory likhein</label>
+          <textarea id="inp-msg" rows="3" oninput="syncData()">To the girl whose laugh sounds like summer road trips and favorite old songs. May this 23rd year bring you warm coffee, endless vinyl records, and moments you never want to forget.</textarea>
+        </div>
+        <div class="form-group">
+          <label>Sender Name</label>
+          <input type="text" id="inp-sender" value="Rhea, Tara & The Gang" oninput="syncData()">
+        </div>
+      </div>
+
+      <button class="btn-save" onclick="window.open('index.html', '_blank')">Save & Preview Fullscreen ↗</button>
+    </div>
+
+    <div class="preview-pane">
+      <div class="preview-frame">
+        <iframe src="index.html" id="preview-iframe"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function syncData() {
+      const data = {
+        name: document.getElementById('inp-name').value,
+        age: document.getElementById('inp-age').value,
+        birthYear: document.getElementById('inp-year').value,
+        mainMessage: document.getElementById('inp-msg').value,
+        sender: document.getElementById('inp-sender').value
+      };
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage({ type: 'VANVI_UPDATE_DATA', payload: data }, '*');
+      }
+      localStorage.setItem('vanvi_retro_polaroid_draft', JSON.stringify(data));
+    }
+  </script>
+</body>
+</html>

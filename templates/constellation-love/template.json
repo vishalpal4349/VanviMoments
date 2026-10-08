@@ -2,7 +2,11 @@
   "id": "constellation-love",
   "name": "Birthday Gift for Girlfriend & Romance",
   "slug": "constellation-love",
-  "aliases": ["birthday-gf", "girlfriends-day", "birthday-gift-gf"],
+  "aliases": [
+    "birthday-gf",
+    "girlfriends-day",
+    "birthday-gift-gf"
+  ],
   "category": "Love & Romance",
   "categorySlug": "love",
   "price": 149,
@@ -11,22 +15,63 @@
   "type": "Romantic Love Letter & Falling Petals",
   "icon": "💖",
   "soundtrack": "Romantic Cinematic Piano",
-  "tags": ["love", "romance", "girlfriend", "petals", "letter", "acoustic"],
+  "tags": [
+    "love",
+    "romance",
+    "girlfriend",
+    "petals",
+    "letter",
+    "acoustic"
+  ],
   "description": "An intimate romantic keepsake featuring falling rose petals, customized salutation, emotional love letter, and dedication soundtrack.",
   "builder": {
-    "type": "common",
+    "type": "custom",
     "photoLimit": 4,
     "hasDate": true,
-    "hasSoundtrack": true
+    "hasSoundtrack": true,
+    "builderPath": "templates/constellation-love/builder.html"
   },
   "schema": {
     "fields": [
-      { "key": "recipientName", "label": "Girlfriend / Partner's Name", "type": "text", "required": true, "default": "My Love" },
-      { "key": "senderName", "label": "Your Name / Sender", "type": "text", "required": true, "default": "Forever Yours" },
-      { "key": "message", "label": "Secret Love Letter", "type": "textarea", "required": true },
-      { "key": "date", "label": "Special Date", "type": "date", "required": false },
-      { "key": "photos", "label": "Couple Photos", "type": "photos", "max": 4, "required": false },
-      { "key": "soundtrack", "label": "Soundtrack", "type": "audio", "default": "piano" }
+      {
+        "key": "recipientName",
+        "label": "Girlfriend / Partner's Name",
+        "type": "text",
+        "required": true,
+        "default": "My Love"
+      },
+      {
+        "key": "senderName",
+        "label": "Your Name / Sender",
+        "type": "text",
+        "required": true,
+        "default": "Forever Yours"
+      },
+      {
+        "key": "message",
+        "label": "Secret Love Letter",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "date",
+        "label": "Special Date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "photos",
+        "label": "Couple Photos",
+        "type": "photos",
+        "max": 4,
+        "required": false
+      },
+      {
+        "key": "soundtrack",
+        "label": "Soundtrack",
+        "type": "audio",
+        "default": "piano"
+      }
     ]
   },
   "custom_data_defaults": {

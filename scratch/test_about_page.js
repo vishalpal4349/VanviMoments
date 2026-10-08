@@ -41,7 +41,7 @@ http.get('http://localhost:5500/about.html', (res) => {
       // 5. Vanvi AI section
       ['Vanvi AI Title', data.includes('Meet Vanvi AI Studio')],
       ['Vanvi AI Description', data.includes('Tell Vanvi what you have in mind')],
-      ['Link to ai.html', data.includes('href="ai.html"')],
+      ['Link to ai-matcher.html', data.includes('href="ai-matcher.html"')],
 
       // 6. Why Vanvi
       ['Why VanviMoments Title', data.includes('Why VanviMoments')],

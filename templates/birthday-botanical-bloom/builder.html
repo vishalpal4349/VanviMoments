@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Botanical Bloom Studio | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0f1d14; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
+    .top-bar { background: #182e21; border-bottom: 1px solid rgba(163, 201, 168, 0.3); padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .studio-grid { display: grid; grid-template-columns: 460px 1fr; flex: 1; height: calc(100vh - 60px); }
+    @media (max-width: 900px) { .studio-grid { grid-template-columns: 1fr; } .preview-pane { display: none; } }
+    .editor-pane { background: #13241a; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; }
+    .step-box { background: #1b3123; border-radius: 12px; padding: 16px; border: 1px solid rgba(163, 201, 168, 0.2); }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 11px; color: #a3c9a8; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input, .form-group textarea { width: 100%; background: #0f1d14; border: 1px solid rgba(163, 201, 168, 0.4); color: #fff; padding: 10px; border-radius: 6px; font-family: inherit; font-size: 13px; }
+    .preview-pane { background: #080f0a; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .preview-frame { width: 375px; height: 90vh; border: 8px solid #1f3d2b; border-radius: 36px; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); }
+    .preview-frame iframe { width: 100%; height: 100%; border: 0; }
+    .btn-save { background: linear-gradient(135deg, #a3c9a8, #699971); color: #0c1810; border: 0; padding: 14px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div style="font-family: 'Cormorant Garamond', serif; color: #a3c9a8; font-size: 22px;">🌸 Botanical Bloom Studio</div>
+    <div style="font-size: 12px; color: #b5c7ba;">Real-Time Sync Active</div>
+  </div>
+  <div class="studio-grid">
+    <div class="editor-pane">
+      <div class="step-box">
+        <h3 style="color: #f4c2c2; font-size: 14px; margin-bottom: 12px;">1. Birthday Person Identity</h3>
+        <div class="form-group">
+          <label>Birthday Person Name</label>
+          <input type="text" id="inp-name" value="Tara Sen" oninput="syncData()">
+        </div>
+        <div class="form-group">
+          <label>Years in Full Bloom (Age)</label>
+          <input type="number" id="inp-age" value="25" oninput="syncData()">
+        </div>
+        <div class="form-group">
+          <label>Celebration Date</label>
+          <input type="text" id="inp-date" value="November 18" oninput="syncData()">
+        </div>
+      </div>
+
+      <div class="step-box">
+        <h3 style="color: #f4c2c2; font-size: 14px; margin-bottom: 12px;">2. Main Birthday Ode</h3>
+        <div class="form-group">
+          <label>Heartfelt Ode Message</label>
+          <textarea id="inp-msg" rows="3" oninput="syncData()">Like the rarest orchid blooming in morning sunlight, you bring warmth, color, and quiet grace into all of our lives. May your 25th chapter bloom with infinite happiness, deep love, and flourishing dreams!</textarea>
+        </div>
+        <div class="form-group">
+          <label>Sender / Loved Ones Name</label>
+          <input type="text" id="inp-sender" value="Reyansh & Your Loving Family" oninput="syncData()">
+        </div>
+      </div>
+
+      <div class="step-box">
+        <h3 style="color: #f4c2c2; font-size: 14px; margin-bottom: 12px;">3. Life Growth Milestones</h3>
+        <div class="form-group">
+          <label>Milestone 1 — Roots</label>
+          <input type="text" id="inp-m1" value="Planting early seeds of kindness, curiosity, and endless giggles." oninput="syncData()">
+        </div>
+        <div class="form-group">
+          <label>Milestone 2 — Growing Wild</label>
+          <input type="text" id="inp-m2" value="Chasing big adventures, university triumphs, and creating golden memories." oninput="syncData()">
+        </div>
+        <div class="form-group">
+          <label>Milestone 3 — Blossoming Grace</label>
+          <input type="text" id="inp-m3" value="Stepping into your 25th solar blossom with confidence, wisdom, and grace." oninput="syncData()">
+        </div>
+      </div>
+
+      <a href="index.html" target="_blank" class="btn-save">Save & Launch Garden Sanctuary ↗</a>
+    </div>
+
+    <div class="preview-pane">
+      <div class="preview-frame">
+        <iframe src="index.html" id="preview-iframe"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function syncData() {
+      const data = {
+        name: document.getElementById('inp-name').value,
+        age: document.getElementById('inp-age').value,
+        birthDate: document.getElementById('inp-date').value,
+        mainMessage: document.getElementById('inp-msg').value,
+        milestone1: document.getElementById('inp-m1').value,
+        milestone2: document.getElementById('inp-m2').value,
+        milestone3: document.getElementById('inp-m3').value,
+        sender: document.getElementById('inp-sender').value
+      };
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage({ type: 'VANVI_UPDATE_DATA', payload: data }, '*');
+      }
+      localStorage.setItem('vanvi_botanical_draft', JSON.stringify(data));
+    }
+  </script>
+</body>
+</html>

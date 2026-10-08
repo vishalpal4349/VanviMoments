@@ -1,0 +1,278 @@
+/* ==========================================================================
+   VANVI MOMENTS — BIRTHDAY CELESTIAL STARS
+   Art Direction: Deep Void Obsidian • Nebula Violet • Starlight Silver • Stardust
+   ========================================================================== */
+
+:root {
+  --bg-cosmos: #050512;
+  --bg-card: rgba(15, 17, 38, 0.7);
+  --nebula-purple: #7c3aed;
+  --nebula-blue: #4338ca;
+  --starlight-cyan: #38bdf8;
+  --starlight-silver: #e2e8f0;
+  --supernova-gold: #facc15;
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-cosmic: rgba(124, 58, 237, 0.35);
+  --border-glass: rgba(255, 255, 255, 0.1);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Syne', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  background: var(--bg-cosmos);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+#star-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.page-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 20px 100px;
+}
+
+/* 1. Nebula Portal Overlay */
+.portal-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #1e1035 0%, #050512 80%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.portal-overlay.opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.portal-orb {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e0e7ff 0%, #7c3aed 50%, #1e1b4b 100%);
+  box-shadow: 0 0 50px rgba(124, 58, 237, 0.8);
+  margin-bottom: 24px;
+  animation: floatOrb 4s infinite ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.5)); }
+  50% { transform: translateY(-10px) scale(1.06); filter: drop-shadow(0 0 50px rgba(124, 58, 237, 0.8)); }
+}
+
+.btn-open-portal {
+  background: linear-gradient(135deg, var(--starlight-cyan), var(--nebula-purple));
+  color: #fff;
+  border: 0;
+  font-weight: 700;
+  padding: 16px 36px;
+  border-radius: 99px;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.5);
+  font-size: 14px;
+}
+
+/* 2. Hero Section */
+.celestial-hero {
+  padding-top: 60px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.hero-pill {
+  display: inline-block;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid var(--border-cosmic);
+  color: var(--starlight-cyan);
+  padding: 6px 18px;
+  border-radius: 99px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.cosmic-name {
+  font-family: var(--font-serif);
+  font-size: 52px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, var(--starlight-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.cosmic-coords {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.coord-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.coord-tag strong { color: var(--starlight-silver); }
+
+/* Cosmic Card */
+.cosmic-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  padding: 30px 24px;
+  margin-top: 30px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.cosmic-tag {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--starlight-cyan);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.cosmic-head {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+/* 7. Interactive Constellation Canvas */
+.constellation-wrapper {
+  background: radial-gradient(circle at center, #110e2e 0%, #050512 100%);
+  border-radius: 16px;
+  border: 1px solid var(--border-cosmic);
+  padding: 16px;
+  text-align: center;
+  margin-top: 14px;
+}
+
+#constellation-canvas {
+  width: 100%;
+  height: 240px;
+  border-radius: 12px;
+  display: block;
+  cursor: crosshair;
+}
+
+/* 8. Shooting Star Wishing Well */
+.wishing-well-box {
+  text-align: center;
+  padding: 24px 16px;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px dashed var(--border-cosmic);
+  border-radius: 16px;
+  margin-top: 16px;
+}
+
+.btn-catch-star {
+  background: linear-gradient(135deg, var(--supernova-gold), #eab308);
+  color: #050512;
+  font-weight: 800;
+  padding: 14px 30px;
+  border-radius: 99px;
+  border: 0;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 6px 20px rgba(250, 204, 21, 0.4);
+}
+
+/* 10. Star Cluster Gallery */
+.star-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.star-gallery-card {
+  position: relative;
+  aspect-ratio: 1/1;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border-glass);
+}
+
+.star-gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.star-gallery-card:hover img {
+  transform: scale(1.08);
+}
+
+/* 16. Countdown Clock */
+.cosmic-clock-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.clock-cell {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  padding: 12px 6px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.clock-val {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--starlight-cyan);
+}
+
+.clock-lbl {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .cosmic-name { font-size: 40px; }
+  .cosmic-head { font-size: 22px; }
+}

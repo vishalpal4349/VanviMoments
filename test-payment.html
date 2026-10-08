@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Razorpay ₹1 Live Test — Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Razorpay Official Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    :root {
+      --bg: #0f050b;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-border: rgba(255, 120, 175, 0.25);
+      --primary: #ff2a7a;
+      --primary-glow: rgba(255, 42, 122, 0.35);
+      --gold: #f59e0b;
+      --text: #ffffff;
+      --muted: #a38c9c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .test-box {
+      width: 100%;
+      max-width: 480px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 32px 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px var(--primary-glow);
+      text-align: center;
+      position: relative;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    p.sub {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .amount-display {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .amount-val {
+      font-size: 44px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .amount-val span.curr {
+      font-size: 26px;
+      color: var(--primary);
+    }
+    .amount-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.5px;
+    }
+    .btn-pay {
+      width: 100%;
+      background: linear-gradient(135deg, #ff2a7a, #e11d48);
+      color: #fff;
+      border: 0;
+      padding: 16px;
+      border-radius: 99px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 10px 24px var(--primary-glow);
+      transition: all 0.25s ease;
+    }
+    .btn-pay:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px var(--primary-glow);
+    }
+    .btn-pay:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .alt-link {
+      margin-top: 18px;
+      display: inline-block;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .alt-link:hover {
+      color: #fff;
+    }
+    .log-box {
+      margin-top: 24px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: left;
+      font-family: monospace;
+      font-size: 11.5px;
+      color: #6ee7b7;
+      max-height: 180px;
+      overflow-y: auto;
+      display: none;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="test-box">
+    <div class="badge">⚡ LIVE RAZORPAY TEST</div>
+    <h1>Test Payment ₹1.00</h1>
+    <p class="sub">Razorpay Standard Checkout verification test. Click below to launch the payment modal.</p>
+
+    <div class="amount-display">
+      <div class="amount-val">
+        <span class="curr">₹</span>1.00
+      </div>
+      <div class="amount-sub">100 PAISE · TEST TRANSACTION</div>
+    </div>
+
+    <button id="btnPay" class="btn-pay" onclick="startOneRupeePayment()">
+      <span>🔒</span> <span>Pay ₹1.00 via Razorpay</span> <span>→</span>
+    </button>
+
+    <div id="logBox" class="log-box"></div>
+
+    <a href="checkout.html?template=1%20Rupee%20Live%20Test&price=1" class="alt-link">
+      Or Test Full Vanvi Checkout Page (₹1) →
+    </a>
+  </div>
+
+  <script>
+    function log(msg) {
+      const b = document.getElementById('logBox');
+      b.style.display = 'block';
+      b.textContent += msg + '\n';
+      b.scrollTop = b.scrollHeight;
+    }
+
+    async function startOneRupeePayment() {
+      const btn = document.getElementById('btnPay');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳</span> Connecting to Razorpay...';
+      log('1. Initiating order for ₹1.00 (100 paise)...');
+
+      try {
+        // Step 1: Create Order on Backend
+        const createRes = await fetch('/api/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount: 100, // 100 paise = ₹1.00
+            currency: 'INR',
+            receipt: 'rcpt_1rs_' + Date.now(),
+            notes: { test: '1 Rupee Razorpay Standard Checkout Test' }
+          })
+        });
+
+        const orderData = await createRes.json();
+        if (!createRes.ok || !orderData.order_id) {
+          throw new Error(orderData.error || 'Failed to generate order ID');
+        }
+
+        log(`✓ Order Created: ${orderData.order_id}`);
+        log('2. Opening Razorpay modal...');
+
+        // Step 2: Open Razorpay Standard Checkout Modal
+        const options = {
+          key: orderData.key_id,
+          amount: orderData.amount,
+          currency: orderData.currency || 'INR',
+          name: 'Vanvi Moments',
+          description: '₹1.00 Live Test Payment',
+          image: 'assets/favicon.svg',
+          order_id: orderData.order_id,
+          prefill: {
+            name: 'Vanvi Tester',
+            email: 'test@vanvimoments.shop',
+            contact: '9999999999'
+          },
+          theme: {
+            color: '#ff2a7a'
+          },
+          handler: async function (response) {
+            log(`✓ Payment Received: ${response.razorpay_payment_id}`);
+            log('3. Verifying signature on server...');
+
+            // Step 3: Verify Signature on Backend
+            const verifyRes = await fetch('/api/verify-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature
+              })
+            });
+
+            const verifyData = await verifyRes.json();
+            if (verifyRes.ok && verifyData.success) {
+              log('🎉 SIGNATURE VERIFIED! Payment Successful!');
+              btn.innerHTML = '<span>✓</span> <span>Payment Complete!</span>';
+              btn.style.background = '#10b981';
+            } else {
+              log('❌ Signature verification failed: ' + (verifyData.error || 'Mismatch'));
+              btn.disabled = false;
+              btn.innerHTML = originalText;
+            }
+          },
+          modal: {
+            ondismiss: function () {
+              log('⚠️ Modal closed by user.');
+              btn.disabled = false;
+              btn.innerHTML = originalText;
+            }
+          }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function (resp) {
+          log('❌ Payment failed: ' + (resp.error ? resp.error.description : 'Unknown'));
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        });
+
+        rzp.open();
+      } catch (err) {
+        log('❌ Error: ' + err.message);
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    }
+  </script>
+</body>
+</html>

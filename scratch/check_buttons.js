@@ -1,14 +1,24 @@
 const fs = require('fs');
+const files = fs.readdirSync('.').filter(f => f.endsWith('.html'));
 
-const content = fs.readFileSync('index.html', 'utf8');
+let buttonCount = 0;
+let inlineTransformCount = 0;
+const problematicButtons = [];
 
-const regex = /<(button|a)[^>]*?(class="[^"]*"|id="[^"]*")[^>]*?>/g;
-let match;
-let i = 0;
-while ((match = regex.exec(content)) !== null) {
-  const str = match[0];
-  if (str.includes('btn') || str.includes('button') || str.includes('primary') || str.includes('secondary') || match[1] === 'button') {
-    i++;
-    console.log(`${i}. [${match[1]}] ${str}`);
-  }
+files.forEach(f => {
+  const content = fs.readFileSync(f, 'utf8');
+  const buttons = content.match(/<(button|a)[^>]*class=["'][^"']*(btn|primary|cta)[^"']*["'][^>]*>/gi) || [];
+  buttonCount += buttons.length;
+  buttons.forEach(b => {
+    if (b.includes('translate') || b.includes('transform')) {
+      inlineTransformCount++;
+      problematicButtons.push({ file: f, tag: b.slice(0, 100) });
+    }
+  });
+});
+
+console.log('Total button/CTA matches:', buttonCount);
+console.log('Inline transform count:', inlineTransformCount);
+if (problematicButtons.length > 0) {
+  console.log('Sample problematic buttons:', problematicButtons.slice(0, 5));
 }

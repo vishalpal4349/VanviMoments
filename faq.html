@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
@@ -12,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="vanvi-inner-light.css"/>
 <link rel="stylesheet" href="vanvi-navigation.css"/>
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
 <style>
 :root {
@@ -249,7 +251,7 @@ header {
   padding: 12px 18px 12px 44px;
   color: #2c1224;
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 16px; /* 16px prevents mobile auto-zoom */
   outline: none;
   box-shadow: 0 4px 16px rgba(255, 56, 128, 0.05);
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -259,30 +261,49 @@ header {
   box-shadow: 0 0 16px rgba(255, 42, 122, 0.18);
 }
 
-/* Category Filter Pills */
+/* Category Filter Pills - Swipeable on mobile */
 .filter-pills-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 30px;
+  justify-content: flex-start;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  gap: 8px;
+  padding: 6px 2px 14px;
+  margin-bottom: 24px;
+  white-space: nowrap;
+}
+.filter-pills-row::-webkit-scrollbar {
+  display: none;
 }
 .cat-pill {
-  padding: 6px 14px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  padding: 8px 16px;
   border-radius: 99px;
   background: #ffffff;
-  border: 1px solid rgba(255, 120, 175, 0.28);
-  color: var(--text-muted);
-  font-size: 11.5px;
-  font-weight: 750;
+  border: 1.5px solid rgba(255, 120, 175, 0.28);
+  color: var(--text-dark);
+  font-size: 12px;
+  font-weight: 800;
   cursor: pointer;
-  transition: all 0.2s;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(255, 42, 122, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.cat-pill:hover, .cat-pill.active {
-  background: linear-gradient(135deg, rgba(255, 42, 122, 0.12), rgba(168, 85, 247, 0.12));
+.cat-pill:hover {
+  transform: translateY(-2px);
   border-color: var(--rose-primary);
   color: var(--rose-primary);
+  box-shadow: 0 6px 16px rgba(255, 42, 122, 0.15);
+}
+.cat-pill.active {
+  background: linear-gradient(135deg, var(--rose-primary) 0%, #a855f7 100%) !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(255, 42, 122, 0.32) !important;
 }
 
 /* Accordion Container */
@@ -294,66 +315,89 @@ header {
 
 .faq-card {
   background: #ffffff;
-  border: 1.5px solid var(--border-glass);
-  border-radius: 18px;
+  border: 1.5px solid rgba(255, 120, 175, 0.24);
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(255, 56, 128, 0.04);
-  transition: border-color 0.2s, background 0.2s;
+  box-shadow: 0 6px 18px rgba(255, 42, 122, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .faq-card:hover {
-  border-color: rgba(255, 42, 122, 0.35);
+  transform: translateY(-2px);
+  border-color: var(--rose-primary);
+  box-shadow: 0 10px 28px rgba(255, 42, 122, 0.12);
 }
 .faq-card.open {
   border-color: var(--rose-primary);
-  background: #fffbfd;
+  background: linear-gradient(145deg, #ffffff 0%, #fffcfd 100%);
+  box-shadow: 0 10px 30px rgba(255, 42, 122, 0.14);
 }
 
 .faq-header {
   width: 100%;
-  padding: 16px 20px;
+  padding: 16px 18px;
   background: transparent;
   border: none;
   color: #2c1224;
   font-family: var(--font-sans);
-  font-size: 14.5px;
-  font-weight: 850;
+  font-size: clamp(14px, 3.8vw, 16px);
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
   cursor: pointer;
   text-align: left;
+  line-height: 1.35;
 }
 .faq-topic-tag {
   font-size: 10px;
   font-weight: 850;
   text-transform: uppercase;
-  padding: 2.5px 8px;
+  letter-spacing: 0.5px;
+  padding: 3px 9px;
   border-radius: 99px;
-  background: rgba(255, 42, 122, 0.08);
+  background: rgba(255, 42, 122, 0.1);
+  border: 1px solid rgba(255, 42, 122, 0.25);
   color: var(--rose-primary);
   margin-right: 6px;
   display: inline-block;
+  vertical-align: middle;
 }
+[data-cat="creation"] .faq-topic-tag { background: #fff0f6; border-color: #fbcfe8; color: #be185d; }
+[data-cat="security"] .faq-topic-tag { background: #f5f3ff; border-color: #ddd6fe; color: #7c3aed; }
+[data-cat="music"] .faq-topic-tag { background: #f0f9ff; border-color: #bae6fd; color: #0284c7; }
+[data-cat="coins"] .faq-topic-tag { background: #fffbeb; border-color: #fde68a; color: #b45309; }
+[data-cat="membership"] .faq-topic-tag { background: #faf5ff; border-color: #e9d5ff; color: #9333ea; }
+[data-cat="payments"] .faq-topic-tag { background: #ecfdf5; border-color: #a7f3d0; color: #059669; }
+
 .faq-toggle-icon {
-  font-size: 15px;
+  font-size: 17px;
   color: var(--rose-primary);
-  transition: transform 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff5f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .faq-card.open .faq-toggle-icon {
   transform: rotate(180deg);
+  background: var(--rose-primary);
+  color: #fff;
 }
 
 .faq-body {
   display: none;
-  padding: 0 20px 16px;
-  font-size: 13px;
-  color: #5c3552;
+  padding: 0 18px 18px;
+  font-size: 13.5px;
+  color: #4a2840;
   line-height: 1.6;
-  border-top: 1px solid rgba(255, 120, 175, 0.12);
+  border-top: 1px solid rgba(255, 120, 175, 0.14);
   margin-top: 2px;
-  padding-top: 12px;
+  padding-top: 14px;
 }
 .faq-card.open .faq-body {
   display: block;
@@ -442,21 +486,8 @@ footer a:hover { color: var(--rose-primary); }
 
 <!-- Standardized Header -->
 <header>
-  <a href="index.html" class="brand-link" title="Vanvi Moments">
-    <svg class="brand-spark" fill="none" viewBox="0 0 26 26">
-      <defs>
-        <linearGradient id="faqSpark" x1="0%" x2="100%" y1="0%" y2="100%">
-          <stop offset="0%" stop-color="#ff2a7a"/>
-          <stop offset="35%" stop-color="#c084fc"/>
-          <stop offset="70%" stop-color="#ff6bb5"/>
-          <stop offset="100%" stop-color="#d97706"/>
-        </linearGradient>
-      </defs>
-      <path d="M13 2 C13 7.8 15.2 10 21 13 C15.2 16 13 18.2 13 24 C13 18.2 10.8 16 5 13 C10.8 10 13 7.8 13 2 Z" fill="url(#faqSpark)"/>
-      <circle cx="13" cy="13" fill="#ffffff" r="2.8"/>
-      <circle cx="13" cy="13" fill="#ff007a" r="1.5"/>
-    </svg>
-    <span>VANVI <span style="color:var(--rose-primary);">♡</span> MOMENTS</span>
+  <a href="index.html" class="brand-link" title="Vanvi Moments Home">
+    <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="header-brand-img" style="height: 35px; width: auto; max-width: 155px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(255, 42, 122, 0.22));" />
     <span class="brand-tag">FAQS</span>
   </a>
 
@@ -639,7 +670,7 @@ footer a:hover { color: var(--rose-primary); }
     <h3>Still have a question?</h3>
     <p>Our concierge team is available 7 days a week on WhatsApp and live email support.</p>
     <div class="help-btn-row">
-      <a href="https://wa.me/917631442934?text=Hi%20Vanvi%20Support%2C%20I%20need%20help%20with%20my%20moment" target="_blank" rel="noopener" class="btn-whatsapp-faq">💬 Chat on WhatsApp →</a>
+      <a href="https://wa.me/917631442934?text=Hi%20Vanvi%20Support%2C%20I%20need%20help%20with%20my%20moment" target="_blank" rel="noopener" class="btn-whatsapp-faq">💬 WhatsApp (+91 76314 42934) →</a>
       <a href="contact.html" class="btn-contact-support">Contact Support Team →</a>
     </div>
   </section>
@@ -656,7 +687,7 @@ footer a:hover { color: var(--rose-primary); }
     <a href="terms.html">Terms</a>
     <a href="refund.html">Refunds</a>
   </div>
-  <p>© 2026 Vanvi Moments · Luxury Digital Celebrations · <a href="index.html">Home</a> · <a href="templates.html">Templates</a> · <a href="ai.html">AI Studio</a> · <a href="dashboard.html">Dashboard</a></p>
+  <p>© 2026 Vanvi Moments · Luxury Digital Celebrations · <a href="index.html">Home</a> · <a href="templates.html">Templates</a> · <a href="ai-matcher.html">AI Studio</a> · <a href="dashboard.html">Dashboard</a></p>
 </footer>
 
 <!-- Global Bottom Navigation Dock -->
@@ -664,7 +695,7 @@ footer a:hover { color: var(--rose-primary); }
   <a href="index.html" class="nav-btn" id="bottomNavHome" title="Home">⌂<br/>Home</a>
   <a href="templates.html" class="nav-btn" id="bottomNavExplore" title="Explore">◌<br/>Explore</a>
   <a href="builder.html" class="create nav-btn" id="bottomNavCreate" title="Create">＋<br/>Create</a>
-  <a href="ai.html" class="nav-btn" id="bottomNavAi" title="AI">✦<br/>AI</a>
+  <a href="ai-matcher.html" class="nav-btn" id="bottomNavAi" title="AI">✦<br/>AI</a>
   <a href="profile.html" class="nav-btn active" id="bottomNavMe" title="Profile">👤<br/>Profile</a>
 </nav>
 

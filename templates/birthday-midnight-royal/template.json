@@ -1,0 +1,115 @@
+{
+  "id": "birthday-midnight-royal",
+  "name": "Midnight Royal — The Imperial Celebration",
+  "slug": "birthday-midnight-royal",
+  "category": "Birthday",
+  "categorySlug": "birthday",
+  "price": 499,
+  "originalPrice": 1499,
+  "isFree": false,
+  "badge": "👑 Imperial Flagship",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "Ultra-Luxury 18-Section Digital Birthday Experience",
+  "icon": "👑",
+  "soundtrack": "Imperial Midnight Cello & Orchestral String Symphony",
+  "tags": [
+    "birthday",
+    "royal",
+    "candle-blow",
+    "wax-seal",
+    "midnight",
+    "luxury",
+    "particles",
+    "voice-note"
+  ],
+  "description": "Vanvi Moments Imperial Flagship: 18-section royal midnight birthday experience with 3D interactive candle blow ceremony, cracked golden wax seal keepsake letter, royal milestone timeline, crystal champagne toast, floating golden ember particles, and custom voice dedication.",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 8,
+    "hasDate": true,
+    "hasSoundtrack": true,
+    "builderPath": "templates/birthday-midnight-royal/builder.html",
+    "previewPath": "templates/birthday-midnight-royal/preview.html"
+  },
+  "sections": [
+    "gala-curtain-entry",
+    "gilded-monogram-name",
+    "birth-date-astrology",
+    "milestone-crown-badge",
+    "imperial-welcome",
+    "main-emotional-message",
+    "interactive-3d-candle",
+    "wax-seal-letter",
+    "royal-photo-gallery",
+    "milestone-timeline",
+    "orchestral-soundtrack",
+    "aristocratic-wishes-wall",
+    "vip-crystal-toast",
+    "five-regal-reasons",
+    "midnight-surprise-box",
+    "countdown-timer",
+    "keepsake-qr-share",
+    "atelier-signature-footer"
+  ],
+  "schema": {
+    "fields": [
+      {
+        "key": "name",
+        "label": "Birthday Person Name",
+        "type": "text",
+        "required": true,
+        "default": "Aarav Sharma"
+      },
+      {
+        "key": "nickname",
+        "label": "Royal Title or Pet Name",
+        "type": "text",
+        "required": false,
+        "default": "Prince Aarav"
+      },
+      {
+        "key": "age",
+        "label": "Milestone Age",
+        "type": "number",
+        "required": true,
+        "default": 25
+      },
+      {
+        "key": "birthDate",
+        "label": "Birth Date",
+        "type": "text",
+        "required": true,
+        "default": "18th October"
+      },
+      {
+        "key": "targetDate",
+        "label": "Countdown Timestamp",
+        "type": "datetime-local",
+        "required": true,
+        "default": "2026-10-18T00:00"
+      },
+      {
+        "key": "mainMessage",
+        "label": "Main Birthday Ode",
+        "type": "textarea",
+        "required": true,
+        "default": "May your 25th milestone shine with unyielding grandeur, wisdom, and eternal joy. You walk with a rare grace that elevates every soul around you."
+      },
+      {
+        "key": "letterText",
+        "label": "Wax Seal Keepsake Letter",
+        "type": "textarea",
+        "required": true,
+        "default": "To our dearest Aarav, through every high and quiet turn, your steadfast loyalty and radiant heart have been our greatest treasure. Here is to your most golden year yet."
+      },
+      {
+        "key": "sender",
+        "label": "Sender Name(s)",
+        "type": "text",
+        "required": true,
+        "default": "Ananya, Kabir & The Clan"
+      }
+    ]
+  }
+}

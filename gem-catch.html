@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Gem Catch — Fast Arcade Skill Game — Vanvi Moments</title>
@@ -11,33 +12,57 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     :root {
       --bg-pearl: #fffbfd;
       --bg-blush: #fff1f6;
       --rose-main: #ff2a7a;
-      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 45%, #9333ea 100%);
       --gold-main: #d97706;
       --emerald-main: #10b981;
       --text-dark: #2c1224;
       --text-muted: #88627b;
-      --border-pink: rgba(255, 120, 175, 0.28);
-      --shadow-card: 0 14px 36px rgba(255, 60, 130, 0.10);
+      --border-pink: rgba(255, 120, 175, 0.32);
+      --shadow-clay: 0 16px 36px -8px rgba(255, 42, 122, 0.14), 0 4px 14px rgba(44, 18, 36, 0.04), inset 0 2px 3px #ffffff;
       --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
       --font-serif: 'Playfair Display', Georgia, serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: radial-gradient(circle at 50% 0%, #ffe4ee 0%, #fff2f6 50%, #fdf5f8 100%);
+      background: radial-gradient(circle at 50% 0%, #ffe4ee 0%, #fff2f6 45%, #fdf5f8 100%);
       font-family: var(--font-sans);
       color: var(--text-dark);
       min-height: 100vh;
-      padding-bottom: 95px;
+      padding-bottom: 110px;
       overflow-x: hidden !important;
-      touch-action: none;
+      touch-action: manipulation;
+      position: relative;
+    }
+
+    /* Ambient 3D Glowing Orbs */
+    .ambient-orbs-wrap {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(85px);
+      opacity: 0.45;
+      animation: floatAmbient 18s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 360px; height: 360px; background: radial-gradient(circle, #ff2a7a 0%, rgba(255, 42, 122, 0) 70%); top: -60px; left: -60px; }
+    .orb-2 { width: 320px; height: 320px; background: radial-gradient(circle, #7c3aed 0%, rgba(124, 58, 237, 0) 70%); top: 35%; right: -60px; animation-delay: -6s; }
+    @keyframes floatAmbient {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, 25px) scale(1.1); }
     }
 
     /* Top Sticky Header */
@@ -45,15 +70,16 @@
       position: sticky;
       top: 0;
       z-index: 60;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border-pink);
-      height: 62px;
+      border-bottom: 1.5px solid var(--border-pink);
+      height: 64px;
       padding: 0 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(255, 120, 175, 0.08);
     }
 
     .header-left, .header-right {
@@ -63,73 +89,97 @@
     }
 
     .btn-nav-back {
-      border: 1px solid var(--border-pink);
+      border: 1.5px solid var(--border-pink);
       background: #ffffff;
       color: var(--text-dark);
-      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06);
-      height: 36px;
-      padding: 0 12px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-nav-back:hover { transform: translateY(-1px); background: #fff0f5; }
-
-    .brand-link {
+      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06), inset 0 1px 2px #fff;
+      height: 40px;
+      padding: 0 14px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 800;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      cursor: pointer;
       text-decoration: none;
-      font-weight: 900;
-      font-size: 16px;
-      letter-spacing: -0.5px;
-      color: var(--text-dark);
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .brand-link span { color: var(--rose-main); }
+    .btn-nav-back:hover { 
+      transform: translateY(-2px); 
+      border-color: var(--rose-main); 
+      color: var(--rose-main);
+      box-shadow: 0 6px 16px rgba(255, 42, 122, 0.16);
+    }
+
+    .brand-logo-img {
+      height: 30px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(255, 42, 122, 0.2));
+    }
+    .brand-pill-badge {
+      font-size: 10.5px;
+      font-weight: 850;
+      letter-spacing: 0.8px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ff2a7a, #9333ea);
+      padding: 3px 9px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(255, 42, 122, 0.35);
+    }
 
     .wallet-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      background: #fff8eb;
+      gap: 6px;
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
       border: 1.5px solid rgba(217, 119, 6, 0.35);
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 99px;
-      font-size: 12px;
-      font-weight: 800;
-      color: #b45309;
-      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.08);
+      font-size: 13px;
+      font-weight: 900;
+      color: #92400e;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.12), inset 0 1px 2px #fff;
       cursor: pointer;
       text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .wallet-pill:hover {
+      transform: translateY(-1px) scale(1.02);
+      border-color: #d97706;
     }
 
     .sound-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      border: 1px solid var(--border-pink);
+      width: 40px;
+      height: 40px;
+      border-radius: 99px;
+      border: 1.5px solid var(--border-pink);
       background: #ffffff;
       color: var(--text-dark);
-      font-size: 15px;
+      font-size: 16px;
       display: grid;
       place-items: center;
       cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s;
+    }
+    .sound-btn:hover {
+      transform: scale(1.05);
+      border-color: var(--rose-main);
     }
 
     /* Game Container */
     .game-container {
-      max-width: 540px;
+      max-width: 520px;
       margin: 0 auto;
-      padding: 14px 14px 20px;
+      padding: 16px 14px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-title-wrap {
@@ -139,44 +189,130 @@
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 10.5px;
-      font-weight: 800;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      background: #fff0f6;
-      border: 1px solid var(--border-pink);
+      background: linear-gradient(135deg, rgba(255, 42, 122, 0.12), rgba(147, 51, 234, 0.12));
+      border: 1.5px solid rgba(255, 42, 122, 0.32);
       color: var(--rose-main);
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 99px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
     .game-title {
       font-family: var(--font-serif);
-      font-size: 26px;
+      font-size: clamp(24px, 4vw, 30px);
       font-weight: 800;
       color: var(--text-dark);
+    }
+
+    /* Visual Rules Card (Clear & Easy to Understand) */
+    .visual-rules-card {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 246, 251, 0.95));
+      border: 1.5px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.06), inset 0 1px 2px #fff;
+    }
+    .rules-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 12.5px;
+      font-weight: 850;
+      color: var(--text-dark);
+    }
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+    @media (max-width: 440px) {
+      .rules-grid {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        scroll-snap-type: x proximity;
+        gap: 6px;
+        padding-bottom: 2px;
+      }
+      .rules-grid::-webkit-scrollbar { display: none; }
+      .rule-item {
+        flex: 1 0 76px;
+        scroll-snap-align: start;
+        white-space: nowrap;
+      }
+    }
+    .rule-item {
+      background: #ffffff;
+      border: 1px solid rgba(255, 120, 175, 0.25);
+      border-radius: 12px;
+      padding: 6px 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .rule-icon { font-size: 18px; }
+    .rule-name { font-size: clamp(9px, 2.4vw, 10.5px); font-weight: 800; color: var(--text-dark); white-space: nowrap; }
+    .rule-effect { font-size: clamp(9.5px, 2.5vw, 11px); font-weight: 900; white-space: nowrap; }
+    .effect-pos { color: #059669; }
+    .effect-gold { color: #d97706; }
+    .effect-neg { color: #dc2626; }
+    .effect-combo { color: #9333ea; }
+
+    /* Live Wave Status Pill */
+    .wave-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 99px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      font-size: 11px;
+      font-weight: 850;
+      margin-bottom: 8px;
+      transition: all 0.3s ease;
+    }
+    .wave-status-pill.wave-hard {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: #b91c1c;
+      animation: pulseWave 1s infinite alternate;
+    }
+    @keyframes pulseWave {
+      from { transform: scale(1); }
+      to { transform: scale(1.04); }
     }
 
     /* Live HUD Bar */
     .hud-bar {
       width: 100%;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(14px);
       border: 1.5px solid var(--border-pink);
-      border-radius: 18px;
-      padding: 10px 14px;
-      margin-bottom: 10px;
+      border-radius: 20px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+      gap: 4px;
       text-align: center;
-      box-shadow: var(--shadow-card);
+      box-shadow: var(--shadow-clay);
     }
     .hud-stat-box { display: flex; flex-direction: column; gap: 2px; }
-    .hud-label { font-size: 9px; font-weight: 800; text-transform: uppercase; color: var(--text-muted); }
-    .hud-val { font-size: 15px; font-weight: 900; color: var(--text-dark); }
-    .combo-glow { color: #a855f7 !important; text-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
+    .hud-label { font-size: clamp(8.5px, 2.3vw, 10px); font-weight: 850; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    .hud-val { font-size: clamp(14px, 3.8vw, 17px); font-weight: 900; color: var(--text-dark); white-space: nowrap; }
+    .combo-glow { color: #9333ea !important; text-shadow: 0 0 10px rgba(147, 51, 234, 0.4); }
     .timer-glow { color: var(--rose-main); font-variant-numeric: tabular-nums; }
     .timer-glow.urgent { color: #dc2626 !important; animation: pulse 0.5s infinite alternate; }
     @keyframes pulse { from { opacity: 1; } to { opacity: 0.5; } }
@@ -187,9 +323,12 @@
       width: 100%;
       max-width: 480px;
       height: 480px;
-      border-radius: 24px;
-      background: linear-gradient(180deg, #170b1c 0%, #29122c 50%, #15091a 100%);
-      box-shadow: 0 16px 40px rgba(44, 18, 36, 0.28), 0 0 0 1.5px rgba(255, 255, 255, 0.15);
+      border-radius: 26px;
+      background: linear-gradient(180deg, #130718 0%, #260f2b 50%, #110517 100%);
+      box-shadow: 
+        0 20px 50px rgba(44, 18, 36, 0.35),
+        0 0 0 2px rgba(255, 120, 175, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
       overflow: hidden;
       display: grid;
       place-items: center;
@@ -200,40 +339,86 @@
       height: 100%;
       display: block;
       touch-action: none;
+      cursor: crosshair;
     }
 
     /* Start / Pause Overlay on Canvas */
     .canvas-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(23, 11, 28, 0.82);
-      backdrop-filter: blur(8px);
+      background: rgba(19, 7, 24, 0.88);
+      backdrop-filter: blur(10px);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 14px;
       z-index: 10;
-      padding: 20px;
+      padding: 24px;
       text-align: center;
-      transition: opacity 0.2s;
+      transition: opacity 0.25s;
     }
     .canvas-overlay.hidden { opacity: 0; pointer-events: none; }
     .overlay-title { font-family: var(--font-serif); font-size: 26px; font-weight: 800; color: #ffffff; }
-    .overlay-sub { font-size: 12px; color: #f2cddf; max-width: 280px; line-height: 1.45; }
+    .overlay-sub { font-size: 13px; color: #fce7f3; max-width: 320px; line-height: 1.5; }
+    
+    /* 3D Tactile Play Action Button */
     .btn-play-action {
-      background: var(--rose-gradient);
+      background: linear-gradient(135deg, #ff2a7a 0%, #ff529a 45%, #9333ea 100%);
       color: #ffffff;
-      border: none;
-      padding: 12px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 14px 34px;
       border-radius: 99px;
-      font-size: 14px;
-      font-weight: 800;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
       cursor: pointer;
-      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.4);
-      transition: all 0.2s;
+      box-shadow: 
+        0 10px 24px -2px rgba(255, 42, 122, 0.5),
+        0 4px 0 #9d174d,
+        inset 0 2px 2px rgba(255, 255, 255, 0.85);
+      transform: translateY(-2px);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .btn-play-action:hover { transform: scale(1.05); }
+    .btn-play-action:hover { 
+      transform: translateY(-4px) scale(1.04); 
+      box-shadow: 0 16px 36px rgba(255, 42, 122, 0.65), 0 5px 0 #9d174d;
+    }
+    .btn-play-action:active {
+      transform: translateY(2px) scale(0.97);
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.4), 0 1px 0 #9d174d;
+    }
+
+    /* On-Screen Mobile Touch Steer Row */
+    .steer-row {
+      width: 100%;
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .btn-steer {
+      min-height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #ffffff 0%, #fff0f6 100%);
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+      font-size: 14px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.08), 0 2.5px 0 rgba(255, 120, 175, 0.4), inset 0 1.5px 2px #fff;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .btn-steer:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 6px rgba(255, 42, 122, 0.15), 0 0.5px 0 rgba(255, 120, 175, 0.4);
+      background: #ffe4ee;
+    }
 
     /* Actions Bar */
     .actions-row {
@@ -249,48 +434,87 @@
       border: 1.5px solid var(--border-pink);
       color: var(--text-dark);
       padding: 10px;
-      border-radius: 14px;
-      font-size: 12px;
-      font-weight: 800;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 850;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 2px 0 rgba(255, 120, 175, 0.35);
+      transition: all 0.2s ease;
+    }
+    .btn-ctrl:hover {
+      transform: translateY(-1px);
+      border-color: var(--rose-main);
+      color: var(--rose-main);
+    }
+    .btn-ctrl:active {
+      transform: translateY(1px);
     }
 
-    /* Fixed Rewards Tier Guide */
+    /* Tiered Rewards Guide (Harder = More Coins) */
     .rewards-card {
       width: 100%;
       margin-top: 14px;
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid var(--border-pink);
-      border-radius: 18px;
-      padding: 12px 14px;
-      font-size: 11.5px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-clay);
+    }
+    .rewards-head {
+      font-weight: 850;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
     }
     .rewards-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 6px;
-      margin-top: 6px;
       text-align: center;
     }
-    .r-box {
-      background: #ffffff;
-      border: 1px solid rgba(255, 120, 175, 0.2);
-      border-radius: 12px;
-      padding: 6px;
+    @media (max-width: 440px) {
+      .rewards-row {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        scroll-snap-type: x proximity;
+        gap: 6px;
+        padding-bottom: 2px;
+      }
+      .rewards-row::-webkit-scrollbar { display: none; }
+      .r-box {
+        flex: 1 0 84px;
+        scroll-snap-align: start;
+        white-space: nowrap;
+      }
     }
-    .r-score { font-size: 10px; font-weight: 800; color: var(--text-muted); }
-    .r-coins { font-size: 13px; font-weight: 900; color: var(--gold-main); }
+    .r-box {
+      background: linear-gradient(145deg, #ffffff 0%, #fff7fb 100%);
+      border: 1px solid rgba(255, 120, 175, 0.25);
+      border-radius: 14px;
+      padding: 8px 4px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+    .r-score { font-size: clamp(9px, 2.3vw, 10.5px); font-weight: 800; color: var(--text-muted); white-space: nowrap; }
+    .r-coins { font-size: clamp(12px, 3.2vw, 14px); font-weight: 900; color: var(--gold-main); white-space: nowrap; }
+    .r-box.highlight {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
 
     /* Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: rgba(44, 18, 36, 0.65);
+      background: rgba(44, 18, 36, 0.7);
       backdrop-filter: blur(10px);
       display: grid;
       place-items: center;
@@ -303,25 +527,26 @@
     .modal-dialog {
       background: #ffffff;
       border: 1.5px solid var(--border-pink);
-      border-radius: 26px;
-      padding: 26px 20px 20px;
-      max-width: 380px;
+      border-radius: 28px;
+      padding: 28px 22px 22px;
+      max-width: 400px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 25px 60px rgba(44, 18, 36, 0.25);
+      box-shadow: 0 25px 60px rgba(44, 18, 36, 0.3);
     }
-    .modal-icon { font-size: 38px; margin-bottom: 8px; }
-    .modal-title { font-family: var(--font-serif); font-size: 22px; font-weight: 800; }
-    .modal-desc { font-size: 12px; color: var(--text-muted); margin: 6px 0 16px; }
+    .modal-icon { font-size: 42px; margin-bottom: 8px; }
+    .modal-title { font-family: var(--font-serif); font-size: 24px; font-weight: 800; }
+    .modal-desc { font-size: 13px; color: var(--text-muted); margin: 6px 0 16px; }
 
     .coin-display-box {
       background: linear-gradient(135deg, #fffbeb, #fef3c7);
-      border: 1.5px solid rgba(217, 119, 6, 0.35);
-      border-radius: 16px;
-      padding: 12px;
-      margin-bottom: 14px;
+      border: 1.5px solid rgba(217, 119, 6, 0.4);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(217, 119, 6, 0.15);
     }
-    .coin-val { font-size: 26px; font-weight: 900; color: #b45309; }
+    .coin-val { font-size: 28px; font-weight: 900; color: #b45309; }
 
     #confettiCanvas {
       position: fixed;
@@ -335,33 +560,76 @@
 </head>
 <body>
 
-  <!-- App Header -->
-  <header class="app-header">
+  <!-- Ambient 3D Glowing Orbs -->
+  <div class="ambient-orbs-wrap" aria-hidden="true">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+  </div>
+
+  <!-- App Header with Single Pristine Logo -->
+  <header class="app-header" role="banner">
     <div class="header-left">
-      <a href="games.html" class="btn-nav-back" title="Back to Games">
+      <a href="games.html" class="btn-nav-back" title="Back to Games Hub">
         <span>‹</span> <span>Games</span>
       </a>
-      <a href="index.html" class="brand-link" title="Vanvi Moments">
-        💎 Gem <span>Catch</span>
+      <a href="index.html" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="brand-logo-img"/>
+        <span class="brand-pill-badge">Gem Catch</span>
       </a>
     </div>
     <div class="header-right">
-      <button type="button" class="sound-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
-      <a href="rewards.html" class="wallet-pill">
-        <span>🪙</span> <span id="headerCoins">150</span>
+      <button type="button" class="btn-nav-back" onclick="openGemCatchRules()">📖 Rules</button>
+      <button type="button" class="sound-btn" id="soundBtn" onclick="toggleSound()" title="Sound Effects">🔊</button>
+      <a href="rewards.html" class="wallet-pill" title="View Coins Wallet">
+        <span>🪙</span> <span id="headerCoins">50</span>
       </a>
     </div>
   </header>
 
   <!-- Container -->
-  <main class="game-container">
+  <main class="game-container" role="main">
     <div class="hero-title-wrap">
-      <div class="hero-badge">⚡ 60FPS Arcade Challenge</div>
-      <h1 class="game-title">Gem Catch</h1>
+      <div class="hero-badge">⚡ 60FPS Dynamic Arcade</div>
+      <h1 class="game-title">Gem Catch Arcade</h1>
+    </div>
+
+    <!-- Clear Visual Quick-Rules Card -->
+    <section class="visual-rules-card" aria-label="Game Rules">
+      <div class="rules-header">
+        <span>🎯 How to Play &amp; Win</span>
+        <span style="font-size:11px; color:var(--rose-main);">Drag or use Left/Right Keys</span>
+      </div>
+      <div class="rules-grid">
+        <div class="rule-item">
+          <span class="rule-icon">💎</span>
+          <span class="rule-name">Pink Gem</span>
+          <span class="rule-effect effect-pos">+1 Point</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">⭐</span>
+          <span class="rule-name">Star Gem</span>
+          <span class="rule-effect effect-gold">+3 Points</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">💣</span>
+          <span class="rule-name">Thorn Bomb</span>
+          <span class="rule-effect effect-neg">-3 Points</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">🔥</span>
+          <span class="rule-name">5x Combo</span>
+          <span class="rule-effect effect-combo">2x Multiplier</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Wave Pill -->
+    <div class="wave-status-pill" id="wavePill">
+      <span>🌊</span> <span id="waveText">Wave 1: Warmup Breeze (0–15s)</span>
     </div>
 
     <!-- HUD -->
-    <section class="hud-bar">
+    <section class="hud-bar" aria-label="Game Stats">
       <div class="hud-stat-box">
         <span class="hud-label">Score</span>
         <span class="hud-val" id="hudScore">0</span>
@@ -388,11 +656,21 @@
       <div class="canvas-overlay" id="canvasOverlay">
         <div class="modal-icon">💎</div>
         <h2 class="overlay-title" id="overlayTitle">Ready to Catch?</h2>
-        <p class="overlay-sub" id="overlaySub">Drag or slide catcher left and right. Catch gems, avoid spiky thorns, and trigger combos!</p>
+        <p class="overlay-sub" id="overlaySub">Drag the catcher or tap Arrow keys. Catch gems, avoid spiky bombs, and trigger multiplier streaks!</p>
         <button type="button" class="btn-play-action" id="btnOverlayAction" onclick="startGame()">
           ▶ Start Arcade Run
         </button>
       </div>
+    </div>
+
+    <!-- On-Screen Left/Right Steering Buttons for Mobile -->
+    <div class="steer-row">
+      <button type="button" class="btn-steer" id="btnSteerLeft">
+        <span>◀</span> Slide Left
+      </button>
+      <button type="button" class="btn-steer" id="btnSteerRight">
+        Slide Right <span>▶</span>
+      </button>
     </div>
 
     <!-- Actions Row -->
@@ -405,28 +683,29 @@
       </button>
     </div>
 
-    <!-- Fixed Rewards Guide -->
+    <!-- Tiered Rewards Guide: Harder Score = More Coins -->
     <aside class="rewards-card">
-      <div style="font-weight: 800; display:flex; justify-content:space-between;">
-        <span>🏆 Fixed Coin Rewards</span>
-        <span style="color:var(--text-muted); font-size:10px;">(Skill Based)</span>
+      <div class="rewards-head">
+        <span>🏆 Tiered Coin Rewards (Skill Based)</span>
+        <span style="color:#059669; font-size:11px; font-weight:800;">Harder = More Coins!</span>
       </div>
       <div class="rewards-row">
         <div class="r-box">
-          <div class="r-score">Score 10–19</div>
-          <div class="r-coins">3 Coins</div>
+          <div class="r-score">Easy (10–19)</div>
+          <div class="r-coins">+2 🪙</div>
         </div>
         <div class="r-box">
-          <div class="r-score">Score 20–29</div>
-          <div class="r-coins">6 Coins</div>
+          <div class="r-score">Medium (20–29)</div>
+          <div class="r-coins">+5 🪙</div>
         </div>
         <div class="r-box">
-          <div class="r-score">Score 30+</div>
-          <div class="r-coins">10 Coins</div>
+          <div class="r-score">Hard (30–44)</div>
+          <div class="r-coins">+8 🪙</div>
         </div>
-      </div>
-      <div style="margin-top:6px; font-size:10.5px; color:#88627b;">
-        💎 Normal Gem: <b>+1</b> · ⭐ Rare Gem: <b>+2</b> · 💥 Thorns: <b>-2</b> · Combo 5: <b>+2</b> · Combo 10: <b>+4</b>
+        <div class="r-box highlight">
+          <div class="r-score">Master (45+)</div>
+          <div class="r-coins">+12 🪙</div>
+        </div>
       </div>
     </aside>
   </main>
@@ -439,14 +718,14 @@
       <p class="modal-desc" id="resultDesc">Great reflexes and timing!</p>
 
       <div class="coin-display-box">
-        <div class="coin-val" id="resultCoinText">+6 🪙</div>
-        <div style="font-size:11px; font-weight:700; color:#92400e;" id="resultTierText">Tier: 20–29 Score</div>
+        <div class="coin-val" id="resultCoinText">+8 🪙</div>
+        <div style="font-size:12px; font-weight:800; color:#92400e;" id="resultTierText">Tier: Hard (30–44 Score)</div>
       </div>
 
-      <div style="display:flex; justify-content:space-around; margin-bottom:16px; font-size:12px;">
-        <div><b>Final Score:</b> <span id="resScore">24</span></div>
-        <div><b>Max Combo:</b> <span id="resCombo">7x</span></div>
-        <div><b>Gems Caught:</b> <span id="resGems">21</span></div>
+      <div style="display:flex; justify-content:space-around; margin-bottom:16px; font-size:12.5px;">
+        <div><b>Final Score:</b> <span id="resScore">32</span></div>
+        <div><b>Max Combo:</b> <span id="resCombo">8x</span></div>
+        <div><b>Gems:</b> <span id="resGems">26</span></div>
       </div>
 
       <div style="display:flex; flex-direction:column; gap:8px;">
@@ -467,15 +746,28 @@
     <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
   </nav>
 
+  <script src="js/vanvi-games-engine.js"></script>
   <script>
     (function() {
       'use strict';
 
-      const DAILY_CAP = 25;
+      const DAILY_CAP = (window.VanviGames && window.VanviGames.DAILY_CAP) || 30;
       const STORAGE_COINS = 'vanvi_user_coins';
       const STORAGE_TODAY_EARNED = 'vanvi_games_today_earned';
       const STORAGE_TODAY_DATE = 'vanvi_games_today_date';
       const STORAGE_SOUND = 'vanvi_sound_enabled';
+
+      window.openGemCatchRules = function() {
+        if (window.VanviGames) {
+          VanviGames.showRulesModal('Gem Catch Arcade Rules 💎', [
+            'Slide your gem tray using finger drag, steer buttons, or Left/Right Arrow keys.',
+            'Catch Pink Gems (+1 pt) & Gold Stars (+3 pts).',
+            'AVOID Thorn Bombs! They subtract 3 points and wipe out your combo streak.',
+            'Maintain a streak: 5x combo gives 2x score multiplier, 10x combo gives 3x score multiplier!',
+            'Tiered Coins: Score 10–19 = 2 Coins · 20–29 = 5 Coins · 30–44 = 8 Coins · 45+ = 12 Coins (Daily Cap: 30 Coins).'
+          ]);
+        }
+      };
 
       const canvas = document.getElementById('gameCanvas');
       const ctx = canvas.getContext('2d');
@@ -486,6 +778,8 @@
       const headerCoins = document.getElementById('headerCoins');
       const canvasOverlay = document.getElementById('canvasOverlay');
       const soundBtn = document.getElementById('soundBtn');
+      const wavePill = document.getElementById('wavePill');
+      const waveText = document.getElementById('waveText');
 
       let isSoundMuted = localStorage.getItem(STORAGE_SOUND) === 'false';
       let isRunning = false;
@@ -504,7 +798,7 @@
         y: 430,
         width: 80,
         height: 20,
-        speed: 8,
+        speed: 12,
         color: '#ff2a7a'
       };
 
@@ -513,7 +807,10 @@
       let particles = [];
       let floatTexts = [];
       let lastSpawnTime = 0;
-      let spawnInterval = 650; // ms
+      let spawnInterval = 600; // ms
+
+      // Keyboard & Steering state
+      const keysPressed = {};
 
       // Web Audio API
       let audioCtx = null;
@@ -527,7 +824,7 @@
           const gain = audioCtx.createGain();
           osc.type = type || 'sine';
           osc.frequency.setValueAtTime(freq, now);
-          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.setValueAtTime(0.12, now);
           gain.gain.linearRampToValueAtTime(0, now + dur);
           osc.connect(gain);
           gain.connect(audioCtx.destination);
@@ -566,7 +863,7 @@
         headerCoins.textContent = total;
       }
 
-      // Input Listeners: Mouse & Touch
+      // Input Listeners: Mouse, Touch & Keyboard
       function setCatcherPos(clientX) {
         const rect = canvas.getBoundingClientRect();
         const scaleX = canvas.width / rect.width;
@@ -585,69 +882,147 @@
         }
       }, { passive: false });
 
-      // Spawn Falling Items
-      function spawnItem() {
-        const rand = Math.random();
-        let type = 'normal'; // 65% normal, 20% rare, 15% penalty
-        if (rand > 0.85) type = 'penalty';
-        else if (rand > 0.65) type = 'rare';
+      // Keyboard Controls
+      window.addEventListener('keydown', (e) => {
+        if (['ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD'].includes(e.code)) {
+          keysPressed[e.code] = true;
+        }
+      });
+      window.addEventListener('keyup', (e) => {
+        if (['ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD'].includes(e.code)) {
+          keysPressed[e.code] = false;
+        }
+      });
 
-        const size = type === 'rare' ? 24 : 20;
-        const speedBase = 2.4 + (45 - gameTimer) * 0.08; // progressively accelerates
+      // Steer button listeners for mobile
+      let steerInterval = null;
+      function startSteer(dir) {
+        if (steerInterval) clearInterval(steerInterval);
+        steerInterval = setInterval(() => {
+          catcher.x = Math.max(10, Math.min(canvas.width - catcher.width - 10, catcher.x + dir * catcher.speed));
+        }, 20);
+      }
+      function stopSteer() {
+        if (steerInterval) { clearInterval(steerInterval); steerInterval = null; }
+      }
+
+      const btnLeft = document.getElementById('btnSteerLeft');
+      const btnRight = document.getElementById('btnSteerRight');
+      if (btnLeft && btnRight) {
+        btnLeft.addEventListener('pointerdown', (e) => { e.preventDefault(); startSteer(-1); });
+        btnLeft.addEventListener('pointerup', stopSteer);
+        btnLeft.addEventListener('pointerleave', stopSteer);
+
+        btnRight.addEventListener('pointerdown', (e) => { e.preventDefault(); startSteer(1); });
+        btnRight.addEventListener('pointerup', stopSteer);
+        btnRight.addEventListener('pointerleave', stopSteer);
+      }
+
+      // Dynamic Pattern Spawn Engine
+      function spawnItem() {
+        const elapsed = 45 - gameTimer;
+        let penaltyProb = 0.15;
+        let rareProb = 0.20;
+        let speedMultiplier = 1;
+
+        // Wave Pacing
+        if (elapsed > 30) {
+          // Wave 3: Chaos Rush (Hard)
+          penaltyProb = 0.28;
+          rareProb = 0.25;
+          speedMultiplier = 1.6;
+        } else if (elapsed > 15) {
+          // Wave 2: Gem Cascade (Medium)
+          penaltyProb = 0.20;
+          rareProb = 0.22;
+          speedMultiplier = 1.3;
+        }
+
+        const rand = Math.random();
+        let type = 'normal';
+        if (rand < penaltyProb) type = 'penalty';
+        else if (rand < penaltyProb + rareProb) type = 'rare';
+
+        const size = type === 'rare' ? 24 : (type === 'penalty' ? 22 : 20);
+        const speedBase = (2.6 + elapsed * 0.08) * speedMultiplier;
+
+        // Dynamic zig-zag horizontal drift for hard mode
+        const drift = elapsed > 15 ? (Math.random() - 0.5) * 2.2 : 0;
 
         fallingObjects.push({
           x: Math.random() * (canvas.width - size * 2) + size,
-          y: -20,
+          y: -25,
           size: size,
           type: type,
-          speed: speedBase + Math.random() * 1.5,
+          speed: speedBase + Math.random() * 1.4,
+          drift: drift,
           rot: Math.random() * Math.PI * 2,
-          vRot: (Math.random() - 0.5) * 0.08
+          vRot: (Math.random() - 0.5) * 0.1
         });
       }
 
-      // Main Loop
+      // Main Game Loop (60 FPS)
       function loop(timestamp) {
         if (!isRunning || isPaused) return;
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Draw Ambient Starlight Grid
-        ctx.fillStyle = 'rgba(255, 42, 122, 0.03)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Spawn timer
-        if (timestamp - lastSpawnTime > spawnInterval) {
-          spawnItem();
-          lastSpawnTime = timestamp;
-          spawnInterval = Math.max(320, 650 - (45 - gameTimer) * 7);
+        // Update keyboard position
+        if (keysPressed['ArrowLeft'] || keysPressed['KeyA']) {
+          catcher.x = Math.max(10, catcher.x - catcher.speed);
+        }
+        if (keysPressed['ArrowRight'] || keysPressed['KeyD']) {
+          catcher.x = Math.min(canvas.width - catcher.width - 10, catcher.x + catcher.speed);
         }
 
-        // Draw Catcher (3D Glass Paddle)
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw Ambient Star Particles
+        ctx.fillStyle = 'rgba(255, 42, 122, 0.04)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Dynamic Wave Spawn Timing
+        const elapsed = 45 - gameTimer;
+        const currentInterval = elapsed > 30 ? 320 : (elapsed > 15 ? 450 : 600);
+
+        if (timestamp - lastSpawnTime > currentInterval) {
+          spawnItem();
+          // Occasional double spawn in Wave 2 & 3
+          if (elapsed > 20 && Math.random() < 0.35) {
+            spawnItem();
+          }
+          lastSpawnTime = timestamp;
+        }
+
+        // Draw Catcher (3D Tactile Clay Paddle)
         const cGrad = ctx.createLinearGradient(catcher.x, catcher.y, catcher.x + catcher.width, catcher.y + catcher.height);
         cGrad.addColorStop(0, '#ff2a7a');
         cGrad.addColorStop(0.5, '#f43f5e');
-        cGrad.addColorStop(1, '#d97706');
+        cGrad.addColorStop(1, '#9333ea');
         ctx.fillStyle = cGrad;
-        ctx.shadowColor = 'rgba(255, 42, 122, 0.5)';
-        ctx.shadowBlur = 15;
+        ctx.shadowColor = 'rgba(255, 42, 122, 0.6)';
+        ctx.shadowBlur = 16;
         ctx.beginPath();
-        ctx.roundRect(catcher.x, catcher.y, catcher.width, catcher.height, 10);
+        ctx.roundRect(catcher.x, catcher.y, catcher.width, catcher.height, 12);
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        // Catcher Glow Rim
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
-        ctx.lineWidth = 2;
+        // Specular highlight on top edge
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+        ctx.lineWidth = 2.5;
         ctx.beginPath();
-        ctx.roundRect(catcher.x + 2, catcher.y + 2, catcher.width - 4, 4, 3);
+        ctx.roundRect(catcher.x + 3, catcher.y + 2, catcher.width - 6, 3, 2);
         ctx.stroke();
 
         // Update & Draw Falling Objects
         for (let i = fallingObjects.length - 1; i >= 0; i--) {
           const item = fallingObjects[i];
           item.y += item.speed;
+          item.x += item.drift;
           item.rot += item.vRot;
+
+          // Bounce off left/right borders
+          if (item.x < item.size || item.x > canvas.width - item.size) {
+            item.drift *= -1;
+          }
 
           // Render item
           ctx.save();
@@ -655,40 +1030,55 @@
           ctx.rotate(item.rot);
 
           if (item.type === 'normal') {
-            // Ruby Diamond
+            // Ruby Gem
             ctx.fillStyle = '#ff2a7a';
-            ctx.shadowColor = 'rgba(255, 42, 122, 0.8)';
-            ctx.shadowBlur = 10;
+            ctx.shadowColor = 'rgba(255, 42, 122, 0.9)';
+            ctx.shadowBlur = 12;
             ctx.beginPath();
             ctx.moveTo(0, -item.size);
-            ctx.lineTo(item.size * 0.8, 0);
+            ctx.lineTo(item.size * 0.85, 0);
             ctx.lineTo(0, item.size);
-            ctx.lineTo(-item.size * 0.8, 0);
+            ctx.lineTo(-item.size * 0.85, 0);
             ctx.closePath();
             ctx.fill();
+
+            // Diamond Facet highlight
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
           } else if (item.type === 'rare') {
-            // Star Gold Gem
+            // Golden Star Gem
             ctx.fillStyle = '#f59e0b';
-            ctx.shadowColor = 'rgba(245, 158, 11, 0.9)';
-            ctx.shadowBlur = 16;
+            ctx.shadowColor = 'rgba(245, 158, 11, 0.95)';
+            ctx.shadowBlur = 18;
             ctx.beginPath();
             for (let s = 0; s < 5; s++) {
               ctx.lineTo(Math.cos((18 + s * 72) * Math.PI / 180) * item.size, -Math.sin((18 + s * 72) * Math.PI / 180) * item.size);
-              ctx.lineTo(Math.cos((54 + s * 72) * Math.PI / 180) * (item.size / 2), -Math.sin((54 + s * 72) * Math.PI / 180) * (item.size / 2));
+              ctx.lineTo(Math.cos((54 + s * 72) * Math.PI / 180) * (item.size / 2.2), -Math.sin((54 + s * 72) * Math.PI / 180) * (item.size / 2.2));
             }
             ctx.closePath();
             ctx.fill();
+            ctx.strokeStyle = '#fef08a';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
           } else {
-            // Spiky Thorn Obstacle
-            ctx.fillStyle = '#991b1b';
-            ctx.shadowColor = 'rgba(220, 38, 38, 0.8)';
-            ctx.shadowBlur = 8;
+            // Obsidian Thorn Bomb
+            ctx.fillStyle = '#1e1b4b';
+            ctx.shadowColor = 'rgba(220, 38, 38, 0.85)';
+            ctx.shadowBlur = 12;
             ctx.beginPath();
-            ctx.arc(0, 0, item.size * 0.7, 0, Math.PI * 2);
+            ctx.arc(0, 0, item.size * 0.75, 0, Math.PI * 2);
             ctx.fill();
-            ctx.strokeStyle = '#f87171';
+            ctx.strokeStyle = '#ef4444';
             ctx.lineWidth = 3;
             ctx.stroke();
+
+            // Spikes
+            ctx.fillStyle = '#dc2626';
+            for (let sp = 0; sp < 4; sp++) {
+              const ang = sp * (Math.PI / 2);
+              ctx.fillRect(Math.cos(ang) * (item.size * 0.7), Math.sin(ang) * (item.size * 0.7), 4, 4);
+            }
           }
           ctx.restore();
 
@@ -709,7 +1099,6 @@
           // Offscreen
           if (item.y > canvas.height + 30) {
             if (item.type !== 'penalty') {
-              // Missed gem resets combo
               combo = 0;
               hudCombo.textContent = '0x';
               hudMult.textContent = '1x';
@@ -728,7 +1117,7 @@
             continue;
           }
           ctx.save();
-          ctx.font = 'bold 15px "Plus Jakarta Sans", sans-serif';
+          ctx.font = 'bold 16px "Plus Jakarta Sans", sans-serif';
           ctx.fillStyle = ft.color;
           ctx.globalAlpha = ft.alpha;
           ctx.fillText(ft.text, ft.x, ft.y);
@@ -740,7 +1129,7 @@
           const part = particles[p];
           part.x += part.vx;
           part.y += part.vy;
-          part.alpha -= 0.03;
+          part.alpha -= 0.035;
           if (part.alpha <= 0) {
             particles.splice(p, 1);
             continue;
@@ -758,39 +1147,39 @@
       }
 
       function handleCatch(item) {
+        const mult = combo >= 10 ? 3 : (combo >= 5 ? 2 : 1);
+
         if (item.type === 'normal') {
-          score += 1;
+          score += (1 * mult);
           combo++;
           gemsCaught++;
           playBeep(640, 'sine', 0.08);
           spawnParticles(item.x, item.y, '#ff2a7a', 8);
-          addFloatText('+1', item.x, item.y, '#ff4f91');
+          addFloatText(`+${1 * mult}`, item.x, item.y, '#ff4f91');
         } else if (item.type === 'rare') {
-          score += 2;
+          score += (3 * mult);
           combo++;
           gemsCaught++;
           playBeep(880, 'triangle', 0.12);
-          spawnParticles(item.x, item.y, '#f59e0b', 12);
-          addFloatText('+2 Rare!', item.x, item.y, '#fbbf24');
+          spawnParticles(item.x, item.y, '#f59e0b', 14);
+          addFloatText(`+${3 * mult} Star!`, item.x, item.y, '#fbbf24');
         } else {
-          // Penalty
-          score = Math.max(0, score - 2);
+          // Penalty Bomb
+          score = Math.max(0, score - 3);
           combo = 0;
-          playBeep(180, 'sawtooth', 0.18);
-          spawnParticles(item.x, item.y, '#ef4444', 10);
-          addFloatText('-2 Thorns!', item.x, item.y, '#ef4444');
-          if (navigator.vibrate) navigator.vibrate(70);
+          playBeep(160, 'sawtooth', 0.2);
+          spawnParticles(item.x, item.y, '#ef4444', 12);
+          addFloatText('-3 Bomb!', item.x, item.y, '#ef4444');
+          if (navigator.vibrate) navigator.vibrate(80);
         }
 
         // Combo Milestones
         if (combo === 5) {
-          score += 2;
           playBeep(1040, 'sine', 0.2);
-          addFloatText('COMBO 5! +2', catcher.x + 20, catcher.y - 15, '#c084fc');
+          addFloatText('COMBO 5! 2x Mult 🔥', catcher.x + 10, catcher.y - 18, '#c084fc');
         } else if (combo === 10) {
-          score += 4;
           playBeep(1200, 'triangle', 0.25);
-          addFloatText('SUPER COMBO 10! +4', catcher.x + 10, catcher.y - 20, '#a855f7');
+          addFloatText('SUPER COMBO 10! 3x Mult ⚡', catcher.x + 5, catcher.y - 24, '#a855f7');
         }
 
         maxCombo = Math.max(maxCombo, combo);
@@ -813,7 +1202,7 @@
       }
 
       function addFloatText(text, x, y, color) {
-        floatTexts.push({ text, x: x - 10, y: y - 5, vy: -1.5, color, alpha: 1 });
+        floatTexts.push({ text, x: x - 15, y: y - 8, vy: -1.6, color, alpha: 1 });
       }
 
       // Game Controls
@@ -829,6 +1218,19 @@
           gameTimer--;
           hudTimer.textContent = `${gameTimer}s`;
           if (gameTimer <= 8) hudTimer.classList.add('urgent');
+
+          // Wave Status Updates
+          const elapsed = 45 - gameTimer;
+          if (elapsed > 30) {
+            wavePill.className = 'wave-status-pill wave-hard';
+            waveText.textContent = '🔥 Wave 3: Chaos Rush! Bombs & Speed!';
+          } else if (elapsed > 15) {
+            wavePill.className = 'wave-status-pill';
+            waveText.textContent = '⚡ Wave 2: Gem Cascade! Wind Drift!';
+          } else {
+            wavePill.className = 'wave-status-pill';
+            waveText.textContent = '🌊 Wave 1: Warmup Breeze (0–15s)';
+          }
 
           if (gameTimer <= 0) {
             clearInterval(timerInterval);
@@ -853,6 +1255,8 @@
         hudMult.textContent = '1x';
         hudTimer.textContent = '45s';
         hudTimer.classList.remove('urgent');
+        wavePill.className = 'wave-status-pill';
+        waveText.textContent = '🌊 Wave 1: Warmup Breeze (0–15s)';
       }
 
       window.resetGame = function() {
@@ -882,62 +1286,64 @@
         }
       };
 
-      // Finish Run & Fixed Reward Calculation
+      // Finish Run & Tiered Rewards (Harder = Higher Coins)
       async function finishRun() {
         isRunning = false;
         cancelAnimationFrame(animId);
 
-        // Fixed Reward Formula:
-        // Score 10–19: 3 coins
-        // Score 20–29: 6 coins
-        // Score 30+: 10 coins
+        // Tiered Reward Formula:
+        // Score 45+: 12 Coins (Master Tier)
+        // Score 30–44: 8 Coins (Hard Tier)
+        // Score 20–29: 5 Coins (Medium Tier)
+        // Score 10–19: 2 Coins (Easy Tier)
         let wonCoins = 0;
         let tierLabel = 'Under 10 Score (0 Coins)';
 
-        if (score >= 30) {
-          wonCoins = 10;
-          tierLabel = 'Elite Tier: 30+ Score';
+        if (score >= 45) {
+          wonCoins = 12;
+          tierLabel = 'Master Tier: 45+ Score (+12 Coins)';
+        } else if (score >= 30) {
+          wonCoins = 8;
+          tierLabel = 'Hard Tier: 30–44 Score (+8 Coins)';
         } else if (score >= 20) {
-          wonCoins = 6;
-          tierLabel = 'Master Tier: 20–29 Score';
+          wonCoins = 5;
+          tierLabel = 'Medium Tier: 20–29 Score (+5 Coins)';
         } else if (score >= 10) {
-          wonCoins = 3;
-          tierLabel = 'Adept Tier: 10–19 Score';
+          wonCoins = 2;
+          tierLabel = 'Easy Tier: 10–19 Score (+2 Coins)';
         }
 
-        const earned = getEarnedToday();
-        const remCap = Math.max(0, DAILY_CAP - earned);
-        const actualAwarded = Math.min(wonCoins, remCap);
-
-        if (actualAwarded > 0) {
-          addCoins(actualAwarded);
+        let actualAwarded = 0;
+        if (wonCoins > 0 && window.VanviGames) {
+          const res = VanviGames.awardCoins(wonCoins, 'Gem Catch Arcade');
+          actualAwarded = res.awarded;
+          headerCoins.textContent = res.totalCoins;
+        } else {
+          const earned = getEarnedToday();
+          const remCap = Math.max(0, DAILY_CAP - earned);
+          actualAwarded = Math.min(wonCoins, remCap);
+          if (actualAwarded > 0) addCoins(actualAwarded);
         }
 
-        // Sync with Backend API
-        try {
-          const token = localStorage.getItem('vanvi_token') || localStorage.getItem('vanvi_auth_token');
-          if (token) {
-            await fetch('/api/coins/game-reward', {
-              method: 'POST',
-              headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                gameId: 'gem-catch',
-                gameTitle: 'Gem Catch Arcade',
-                coins: actualAwarded,
-                score: score
-              })
-            });
-          }
-        } catch(e) {}
-
-        // Populate Modal
-        document.getElementById('resultCoinText').textContent = actualAwarded > 0 ? `+${actualAwarded} 🪙` : `0 🪙 (Daily Cap or <10 Score)`;
-        document.getElementById('resultTierText').textContent = tierLabel;
-        document.getElementById('resScore').textContent = score;
-        document.getElementById('resCombo').textContent = `${maxCombo}x`;
-        document.getElementById('resGems').textContent = gemsCaught;
-
-        document.getElementById('resultModal').classList.add('active');
+        // Show standardized result modal
+        if (window.VanviGames) {
+          VanviGames.showResultModal({
+            title: score >= 30 ? 'Arcade Gem Master! 💎' : 'Run Complete! ✨',
+            score: `${score} Pts (${gemsCaught} Gems, ${maxCombo}x Streak)`,
+            scoreLabel: tierLabel,
+            coinsAwarded: actualAwarded,
+            isSuccess: score >= 10,
+            restartText: 'Catch More Gems 🔄',
+            onRestart: startGame
+          });
+        } else {
+          document.getElementById('resultCoinText').textContent = actualAwarded > 0 ? `+${actualAwarded} 🪙` : `0 🪙 (Daily Cap or <10 Score)`;
+          document.getElementById('resultTierText').textContent = tierLabel;
+          document.getElementById('resScore').textContent = score;
+          document.getElementById('resCombo').textContent = `${maxCombo}x`;
+          document.getElementById('resGems').textContent = gemsCaught;
+          document.getElementById('resultModal').classList.add('active');
+        }
       }
 
       window.closeModalAndReplay = function() {
@@ -947,7 +1353,7 @@
 
       document.addEventListener('DOMContentLoaded', () => {
         soundBtn.textContent = isSoundMuted ? '🔇' : '🔊';
-        headerCoins.textContent = localStorage.getItem(STORAGE_COINS) || '150';
+        headerCoins.textContent = localStorage.getItem(STORAGE_COINS) || '50';
       });
 
     })();

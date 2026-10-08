@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -11,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     :root {
@@ -98,72 +100,104 @@
       cursor: pointer;
     }
 
-    /* 8x8 Grid */
+    /* 3D HARD POLISH 8x8 Grid */
     .blast-board {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
       grid-template-rows: repeat(8, 1fr);
-      gap: 5px;
+      gap: 6px;
       width: min(92vw, 360px);
       height: min(92vw, 360px);
-      background: rgba(255, 255, 255, 0.88);
-      border: 2px solid var(--border-pink);
-      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 245, 250, 0.95));
+      border: 2px solid rgba(255, 120, 175, 0.45);
+      border-radius: 22px;
       padding: 10px;
-      box-shadow: 0 12px 36px rgba(100, 50, 90, 0.1);
-      margin-bottom: 18px;
+      box-shadow: 
+        0 20px 45px -10px rgba(100, 40, 80, 0.16),
+        0 0 0 1px rgba(255, 255, 255, 0.9),
+        inset 0 2px 4px rgba(255, 255, 255, 0.9);
+      margin-bottom: 14px;
+      touch-action: none;
     }
     .blast-cell {
-      background: rgba(255, 240, 246, 0.5);
-      border-radius: 6px;
-      transition: background 0.15s ease, transform 0.2s ease;
+      background: rgba(255, 238, 246, 0.65);
+      border: 1px solid rgba(255, 180, 210, 0.35);
+      border-radius: 8px;
+      transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
       cursor: pointer;
+      position: relative;
+      box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.8), 0 2px 4px rgba(44, 18, 36, 0.04);
     }
     .blast-cell.filled {
-      background: linear-gradient(135deg, #ff2a7a, #e11d68);
-      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 2px 6px rgba(255, 42, 122, 0.35);
+      background: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      border-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 
+        inset 0 2.5px 3px rgba(255, 255, 255, 0.85),
+        inset 0 -2.5px 3px rgba(160, 20, 80, 0.35),
+        0 4px 10px rgba(255, 42, 122, 0.35);
+      transform: scale(0.98);
     }
     .blast-cell.hover-preview {
-      background: rgba(255, 42, 122, 0.35) !important;
+      background: linear-gradient(135deg, rgba(255, 42, 122, 0.45), rgba(217, 119, 6, 0.45)) !important;
+      border-color: #ff2a7a !important;
+      box-shadow: 0 0 12px rgba(255, 42, 122, 0.5), inset 0 0 6px #fff !important;
+      transform: scale(1.04);
+    }
+    .blast-cell.hover-invalid {
+      background: rgba(239, 68, 68, 0.3) !important;
+      border-color: #ef4444 !important;
     }
     .blast-cell.clearing {
-      animation: cellBlast 0.35s ease forwards;
+      animation: cellBlast 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     @keyframes cellBlast {
-      0% { transform: scale(1); filter: brightness(2); }
-      50% { transform: scale(1.2); opacity: 0.8; }
+      0% { transform: scale(1); filter: brightness(2.5); box-shadow: 0 0 20px #ff2a7a; }
+      40% { transform: scale(1.25); opacity: 0.9; }
       100% { transform: scale(0); opacity: 0; }
     }
 
-    /* 3 Pieces Spawn Rack */
+    /* 3 Pieces Spawn Rack (Swipeable & Draggable) */
     .pieces-rack {
       display: flex;
       justify-content: center;
       gap: 12px;
       width: 100%;
-      min-height: 90px;
+      min-height: 94px;
       margin-bottom: 16px;
+      touch-action: none;
     }
     .piece-box {
       flex: 1;
       max-width: 110px;
-      height: 90px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1.5px solid var(--border-pink);
-      border-radius: 16px;
+      height: 94px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 248, 252, 0.95));
+      border: 1.5px solid rgba(255, 120, 175, 0.35);
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(100, 50, 90, 0.06);
-      transition: all 0.2s ease;
+      cursor: grab;
+      box-shadow: 
+        0 6px 16px rgba(100, 50, 90, 0.06),
+        inset 0 2px 2px #fff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
       position: relative;
+      touch-action: none;
+      user-select: none;
+    }
+    .piece-box:active {
+      cursor: grabbing;
     }
     .piece-box.selected {
       border-color: var(--rose-main);
       transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(255, 42, 122, 0.3);
+      box-shadow: 0 10px 26px rgba(255, 42, 122, 0.32), inset 0 2px 2px #fff;
       background: #fff0f6;
+    }
+    .piece-box.dragging {
+      opacity: 0.35;
+      transform: scale(0.95);
+      border-style: dashed;
     }
     .piece-box.used {
       opacity: 0.2;
@@ -172,17 +206,65 @@
     }
     .mini-grid {
       display: grid;
-      gap: 3px;
+      gap: 3.5px;
+      pointer-events: none;
     }
     .mini-cell {
-      width: 14px;
-      height: 14px;
-      border-radius: 3px;
+      width: 15px;
+      height: 15px;
+      border-radius: 4px;
       background: transparent;
     }
     .mini-cell.on {
+      background: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.7), 0 2px 4px rgba(44, 18, 36, 0.15);
+    }
+
+    /* Floating Drag Ghost (Follows Touch / Cursor) */
+    .blast-drag-ghost {
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      display: none;
+      transform: translate(-50%, -50%);
+      filter: drop-shadow(0 14px 28px rgba(255, 42, 122, 0.45));
+      transition: transform 0.05s linear;
+    }
+    .blast-drag-ghost .mini-grid {
+      gap: 5px;
+    }
+    .blast-drag-ghost .mini-cell.on {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
       background: linear-gradient(135deg, #ff2a7a, #d97706);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      box-shadow: inset 0 2.5px 3px rgba(255, 255, 255, 0.8), 0 4px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    /* 3D Push Button Styling */
+    .btn-3d-tactile {
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffffff, #fff0f6);
+      border: 1.5px solid rgba(255, 120, 175, 0.4);
+      color: var(--text-dark);
+      font-weight: 850;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 4px 0 rgba(217, 70, 120, 0.4), 0 8px 16px rgba(44, 18, 36, 0.06);
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-3d-tactile:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 5px 0 rgba(217, 70, 120, 0.45), 0 10px 20px rgba(255, 42, 122, 0.15);
+      border-color: var(--rose-main);
+    }
+    .btn-3d-tactile:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 rgba(217, 70, 120, 0.4), 0 2px 6px rgba(44, 18, 36, 0.08);
     }
 
     /* Modal */
@@ -197,23 +279,27 @@
     }
     .modal-card h3 { font-family: var(--font-serif); font-size: 22px; color: var(--text-dark); margin-bottom: 12px; }
     .modal-card ul { padding-left: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
-  </style>
+    body { overflow-x: hidden; }
+</style>
 </head>
 <body>
 
   <header class="app-header">
-    <button type="button" class="btn-nav-back" onclick="location.href='games.html'">
-      ‹ Games Arena
-    </button>
-    <div style="font-weight: 850; font-size: 15px; color: var(--rose-main);">
-      🧩 Block Blast
+    <div style="display:flex; align-items:center; gap:8px;">
+      <a href="games.html" class="btn-nav-back" style="text-decoration:none;">
+        ‹ Games
+      </a>
+      <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" style="height:34px; width:auto; max-width:130px; object-fit:contain;">
+        <span style="background:rgba(255,42,122,0.1); border:1px solid rgba(255,42,122,0.25); color:var(--rose-main); font-size:10px; font-weight:900; letter-spacing:0.8px; padding:2px 7px; border-radius:6px; text-transform:uppercase;">BLAST</span>
+      </a>
     </div>
     <div style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:800; background:#fffbeb; border:1px solid #fde68a; padding:4px 10px; border-radius:99px; color:#d97706;">
       🪙 <span id="coinBalanceHUD">0</span>
     </div>
   </header>
 
-  <main class="game-arena">
+  <main class="game-arena" style="padding-bottom:110px;">
     <div class="status-hud">
       <div class="hud-pill">
         <span>⭐ Score:</span> <strong id="hudScore" style="color:var(--rose-main);">0</strong>
@@ -235,10 +321,13 @@
     <div class="pieces-rack" id="piecesRack"></div>
 
     <div style="display:flex; gap:10px; width:100%; justify-content:center;">
-      <button type="button" onclick="resetGame()" style="padding:10px 20px; border-radius:12px; background:#fff; border:1.5px solid var(--border-pink); font-weight:800; font-size:12.5px; cursor:pointer;">
+      <button type="button" onclick="resetGame()" class="btn-3d-tactile">
         🔄 Restart Grid
       </button>
     </div>
+
+    <!-- Floating Drag Ghost for Swipeable Blocks -->
+    <div id="blastDragGhost" class="blast-drag-ghost"></div>
   </main>
 
   <!-- Rules Modal -->
@@ -275,6 +364,7 @@
     </div>
   </div>
 
+  <script src="js/vanvi-games-engine.js"></script>
   <script src="js/vanvi-api.js"></script>
   <script>
     (function() {
@@ -299,13 +389,43 @@
       let rackPieces = [];
       let rewarded = false;
 
-      window.openRules = function() { document.getElementById('rulesModal').classList.add('open'); };
-      window.closeRules = function() { document.getElementById('rulesModal').classList.remove('open'); };
+      // Audio feedback synth
+      let audioCtx = null;
+      function playTone(freq, type = 'sine', duration = 0.1) {
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch (e) {}
+      }
+
+      window.openRules = function() {
+        VanviGames.showRulesModal('Block Blast Puzzle 🧩', [
+          'Tap one of the 3 polyomino shapes at the bottom, then tap on the 8x8 grid to place it.',
+          'Fill an entire row or column to trigger a sparkling blast and clear board space.',
+          'Reach 500 points to claim virtual Vanvi Coins (Daily Limit: max 30 coins).',
+          'Plan your spatial layout carefully to avoid getting blocked!'
+        ]);
+      };
+      window.closeRules = function() {
+        VanviGames.closeRulesModal();
+      };
 
       function updateHUD() {
-        document.getElementById('hudScore').textContent = score;
-        if (window.VanviRewardEngine) {
-          document.getElementById('coinBalanceHUD').textContent = window.VanviRewardEngine.getCoins();
+        const scoreEl = document.getElementById('hudScore');
+        const coinEl = document.getElementById('coinBalanceHUD');
+        if (scoreEl) scoreEl.textContent = score;
+        if (coinEl && window.VanviGames) {
+          coinEl.textContent = VanviGames.getTotalCoins();
         }
       }
 
@@ -334,6 +454,129 @@
         }
       }
 
+      let isDragging = false;
+      let draggedPieceIdx = null;
+      let dragStartX = 0;
+      let dragStartY = 0;
+      let hasDragged = false;
+      let hoveredTarget = null;
+
+      function getCellFromPoint(clientX, clientY) {
+        const boardEl = document.getElementById('blastBoard');
+        if (!boardEl) return null;
+        const rect = boardEl.getBoundingClientRect();
+        if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) {
+          return null;
+        }
+        const cellWidth = rect.width / 8;
+        const cellHeight = rect.height / 8;
+        const c = Math.floor((clientX - rect.left) / cellWidth);
+        const r = Math.floor((clientY - rect.top) / cellHeight);
+        if (r >= 0 && r < 8 && c >= 0 && c < 8) {
+          return { r, c };
+        }
+        return null;
+      }
+
+      function clearPreviews() {
+        document.querySelectorAll('.blast-cell.hover-preview, .blast-cell.hover-invalid').forEach(el => {
+          el.classList.remove('hover-preview', 'hover-invalid');
+        });
+      }
+
+      function updateDragPreview(piece, target) {
+        clearPreviews();
+        if (!target || !piece) return;
+        const valid = canPlace(piece.shape, target.r, target.c);
+        for (let pr = 0; pr < piece.shape.length; pr++) {
+          for (let pc = 0; pc < piece.shape[0].length; pc++) {
+            if (piece.shape[pr][pc]) {
+              const br = target.r + pr;
+              const bc = target.c + pc;
+              if (br < 8 && bc < 8) {
+                const cellEl = document.querySelector(`.blast-cell[data-r="${br}"][data-c="${bc}"]`);
+                if (cellEl) {
+                  cellEl.classList.add(valid ? 'hover-preview' : 'hover-invalid');
+                }
+              }
+            }
+          }
+        }
+      }
+
+      function populateGhost(shape) {
+        const ghost = document.getElementById('blastDragGhost');
+        if (!ghost) return;
+        ghost.innerHTML = '';
+        const mini = document.createElement('div');
+        mini.className = 'mini-grid';
+        mini.style.gridTemplateRows = `repeat(${shape.length}, 32px)`;
+        mini.style.gridTemplateColumns = `repeat(${shape[0].length}, 32px)`;
+
+        shape.forEach(row => {
+          row.forEach(val => {
+            const mc = document.createElement('div');
+            mc.className = 'mini-cell' + (val ? ' on' : '');
+            mini.appendChild(mc);
+          });
+        });
+        ghost.appendChild(mini);
+      }
+
+      function placePieceAt(pieceIdx, r, c) {
+        const piece = rackPieces[pieceIdx];
+        if (!piece || piece.used) return false;
+
+        if (canPlace(piece.shape, r, c)) {
+          // Place piece
+          for (let pr = 0; pr < piece.shape.length; pr++) {
+            for (let pc = 0; pc < piece.shape[0].length; pc++) {
+              if (piece.shape[pr][pc]) {
+                board[r + pr][c + pc] = 1;
+                score += 10;
+              }
+            }
+          }
+          piece.used = true;
+          selectedPieceIdx = null;
+
+          playTone(520, 'triangle', 0.12);
+          if (navigator.vibrate) navigator.vibrate(25);
+
+          // Clear lines
+          clearLines();
+
+          // Check if all 3 pieces used
+          if (rackPieces.every(p => p.used)) {
+            spawnRackPieces();
+          } else {
+            renderRack();
+          }
+
+          renderBoard();
+          updateHUD();
+
+          if (score >= 500 && !rewarded) {
+            rewarded = true;
+            playTone(880, 'sine', 0.4);
+            const awardRes = VanviGames.awardCoins(10, 'Block Blast 500 Pts');
+            updateHUD();
+
+            VanviGames.showResultModal({
+              title: '500 Points Blasted! 💥',
+              score: `${score} Points`,
+              scoreLabel: 'Spatial Mastery',
+              coinsAwarded: awardRes.awarded,
+              isSuccess: true,
+              restartText: 'Keep Blasting (Endless) ➔',
+              onRestart: window.continueEndless
+            });
+          }
+          return true;
+        }
+        return false;
+      }
+
       function renderRack() {
         const rack = document.getElementById('piecesRack');
         rack.innerHTML = '';
@@ -341,12 +584,13 @@
         rackPieces.forEach((p, idx) => {
           const box = document.createElement('div');
           box.className = 'piece-box' + (p.used ? ' used' : '') + (selectedPieceIdx === idx ? ' selected' : '');
+          box.dataset.pieceIdx = idx;
           
           if (!p.used) {
             const mini = document.createElement('div');
             mini.className = 'mini-grid';
-            mini.style.gridTemplateRows = `repeat(${p.shape.length}, 14px)`;
-            mini.style.gridTemplateColumns = `repeat(${p.shape[0].length}, 14px)`;
+            mini.style.gridTemplateRows = `repeat(${p.shape.length}, 15px)`;
+            mini.style.gridTemplateColumns = `repeat(${p.shape[0].length}, 15px)`;
 
             p.shape.forEach(row => {
               row.forEach(val => {
@@ -357,9 +601,75 @@
             });
             box.appendChild(mini);
 
-            box.addEventListener('click', () => {
-              selectedPieceIdx = selectedPieceIdx === idx ? null : idx;
-              renderRack();
+            // Pointer & Touch Swipeable Drag-and-Drop
+            box.addEventListener('pointerdown', (e) => {
+              if (p.used) return;
+              e.preventDefault();
+              isDragging = true;
+              draggedPieceIdx = idx;
+              dragStartX = e.clientX;
+              dragStartY = e.clientY;
+              hasDragged = false;
+              hoveredTarget = null;
+
+              populateGhost(p.shape);
+              const ghost = document.getElementById('blastDragGhost');
+              if (ghost) {
+                ghost.style.display = 'block';
+                ghost.style.left = `${e.clientX}px`;
+                ghost.style.top = `${e.clientY - 60}px`;
+              }
+              box.classList.add('dragging');
+              playTone(400, 'sine', 0.06);
+
+              function onPointerMove(moveEvent) {
+                if (!isDragging) return;
+                const dx = moveEvent.clientX - dragStartX;
+                const dy = moveEvent.clientY - dragStartY;
+                if (Math.hypot(dx, dy) > 8) hasDragged = true;
+
+                const fingerYOffset = 60;
+                const checkX = moveEvent.clientX;
+                const checkY = moveEvent.clientY - fingerYOffset;
+
+                if (ghost) {
+                  ghost.style.left = `${checkX}px`;
+                  ghost.style.top = `${checkY}px`;
+                }
+
+                hoveredTarget = getCellFromPoint(checkX, checkY);
+                updateDragPreview(rackPieces[draggedPieceIdx], hoveredTarget);
+              }
+
+              function onPointerUp(upEvent) {
+                window.removeEventListener('pointermove', onPointerMove);
+                window.removeEventListener('pointerup', onPointerUp);
+                window.removeEventListener('pointercancel', onPointerUp);
+
+                clearPreviews();
+                if (ghost) ghost.style.display = 'none';
+                box.classList.remove('dragging');
+
+                if (hasDragged && hoveredTarget) {
+                  const placed = placePieceAt(draggedPieceIdx, hoveredTarget.r, hoveredTarget.c);
+                  if (!placed) {
+                    playTone(220, 'sawtooth', 0.1);
+                  }
+                } else if (!hasDragged) {
+                  // Fallback: tap-to-select
+                  selectedPieceIdx = selectedPieceIdx === idx ? null : idx;
+                  playTone(selectedPieceIdx !== null ? 500 : 350, 'sine', 0.05);
+                  renderRack();
+                }
+
+                isDragging = false;
+                draggedPieceIdx = null;
+                hoveredTarget = null;
+              }
+
+              window.addEventListener('pointermove', onPointerMove, { passive: false });
+              window.addEventListener('pointerup', onPointerUp);
+              window.addEventListener('pointercancel', onPointerUp);
             });
           }
           rack.appendChild(box);
@@ -381,44 +691,7 @@
 
       function onBoardCellClick(r, c) {
         if (selectedPieceIdx === null) return;
-        const piece = rackPieces[selectedPieceIdx];
-        if (!piece || piece.used) return;
-
-        if (canPlace(piece.shape, r, c)) {
-          // Place piece
-          for (let pr = 0; pr < piece.shape.length; pr++) {
-            for (let pc = 0; pc < piece.shape[0].length; pc++) {
-              if (piece.shape[pr][pc]) {
-                board[r + pr][c + pc] = 1;
-                score += 10;
-              }
-            }
-          }
-          piece.used = true;
-          selectedPieceIdx = null;
-
-          // Clear lines
-          clearLines();
-
-          // Check if all 3 pieces used
-          if (rackPieces.every(p => p.used)) {
-            spawnRackPieces();
-          } else {
-            renderRack();
-          }
-
-          renderBoard();
-          updateHUD();
-
-          if (score >= 500 && !rewarded) {
-            rewarded = true;
-            if (window.VanviRewardEngine) {
-              window.VanviRewardEngine.addCoins(25, 'Block Blast 500 Pts');
-              updateHUD();
-            }
-            document.getElementById('winModal').classList.add('open');
-          }
-        }
+        placePieceAt(selectedPieceIdx, r, c);
       }
 
       function clearLines() {
@@ -439,11 +712,23 @@
         const clearedLines = rowsToClear.length + colsToClear.length;
         if (clearedLines > 0) {
           score += clearedLines * 100;
+          playTone(720, 'sine', 0.25);
+          if (clearedLines > 1) {
+            setTimeout(() => playTone(960, 'triangle', 0.3), 120);
+          }
           rowsToClear.forEach(r => {
-            for (let c = 0; c < 8; c++) board[r][c] = 0;
+            for (let c = 0; c < 8; c++) {
+              board[r][c] = 0;
+              const cell = document.querySelector(`.blast-cell[data-r="${r}"][data-c="${c}"]`);
+              if (cell) cell.classList.add('clearing');
+            }
           });
           colsToClear.forEach(c => {
-            for (let r = 0; r < 8; r++) board[r][c] = 0;
+            for (let r = 0; r < 8; r++) {
+              board[r][c] = 0;
+              const cell = document.querySelector(`.blast-cell[data-r="${r}"][data-c="${c}"]`);
+              if (cell) cell.classList.add('clearing');
+            }
           });
         }
       }
@@ -465,5 +750,6 @@
       window.resetGame();
     })();
   </script>
+  <script src="js/vanvi-navigation.js"></script>
 </body>
 </html>

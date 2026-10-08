@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Midnight 3D Candle Creator | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/vanvi-global-experience.css">
+  <link rel="stylesheet" href="../../css/vanvi-custom-builder.css">
+  <script src="../../js/vanvi-api.js"></script>
+  <script src="../../js/vanvi-builder-core.js"></script>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="builder-topbar">
+    <div class="builder-brand-group">
+      <a href="../../index.html#template-world" class="btn-builder-back">← Template World</a>
+      <div class="builder-template-meta">
+        <span class="builder-template-icon">🎂</span>
+        <div>
+          <div class="builder-template-name">Midnight 3D Candle Studio</div>
+          <span class="builder-template-badge">Interactive 3D Cake</span>
+        </div>
+      </div>
+    </div>
+    <div class="builder-actions-top">
+      <button id="btnSaveMomentTop" class="builder-save-btn">
+        <span>✨</span> <span>Publish Keepsake</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Split Studio Layout -->
+  <main class="builder-layout">
+    <!-- Form Customizer Column -->
+    <section class="builder-form-pane">
+      <div class="builder-hero-intro">
+        <div class="builder-eyebrow">Bespoke 3D Candle Customizer</div>
+        <h1 class="builder-title">Craft an Unforgettable Blow-Out Candle Keepsake</h1>
+        <p class="builder-desc">Personalize the interactive 3D birthday cake with customizable candle numbers, flame glow effects, heartfelt wax-sealed letter, and treasured polaroids.</p>
+      </div>
+
+      <!-- Recipient & Cake Styling Card -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">🕯️</span> Cake & Candle Settings</div>
+        
+        <div class="form-group">
+          <label class="form-label" for="inpRecipient">Birthday Star's Name</label>
+          <input type="text" id="inpRecipient" class="form-input" placeholder="e.g. Maya, Alex, Mom" value="My Favorite Person">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label" for="inpAge">Candle Age / Number <span class="optional-tag">Optional</span></label>
+            <input type="number" id="inpAge" class="form-input" placeholder="e.g. 21" min="1" max="100" value="21">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inpDate">Celebration Date</label>
+            <input type="date" id="inpDate" class="form-input">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Candle Flame Aura</label>
+          <div class="chips-grid" id="flameColorPicker">
+            <div class="chip-option selected" data-glow="golden">
+              <span class="chip-icon">✨</span>
+              <span>Golden Ember</span>
+            </div>
+            <div class="chip-option" data-glow="rose">
+              <span class="chip-icon">💖</span>
+              <span>Rose Magic</span>
+            </div>
+            <div class="chip-option" data-glow="neon">
+              <span class="chip-icon">🌌</span>
+              <span>Cosmic Neon</span>
+            </div>
+            <div class="chip-option" data-glow="lavender">
+              <span class="chip-icon">💜</span>
+              <span>Lavender Glow</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Heartfelt Wax-Sealed Letter Card -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">💌</span> Wax-Sealed Heartfelt Letter</div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpSender">From / Your Name</label>
+          <input type="text" id="inpSender" class="form-input" placeholder="e.g. With all my heart, Sam" value="With all my love">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpLetter">Heartfelt Letter Message</label>
+          <textarea id="inpLetter" class="form-textarea" rows="4" placeholder="Write your heartfelt wishes here... They will be revealed under the melted wax seal!">Happy Birthday! May your day be filled with warm laughter, sweet surprises, and memories that last a lifetime.</textarea>
+        </div>
+      </div>
+
+      <!-- Polaroid Memory Trail -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">📸</span> Polaroid Memories (Up to 3 Photos)</div>
+        <p style="font-size: 12.5px; color: var(--builder-ink-muted); margin-bottom: 12px;">Add special photos that appear in the glowing polaroid memory carousel.</p>
+        
+        <div class="photo-uploader-grid" id="photoGrid">
+          <div class="photo-slot" onclick="triggerUpload(0)">
+            <span style="font-size: 20px;">➕</span>
+            <span style="font-size: 11px; margin-top: 4px; font-weight: 700;">Add Photo 1</span>
+          </div>
+          <div class="photo-slot" onclick="triggerUpload(1)">
+            <span style="font-size: 20px;">➕</span>
+            <span style="font-size: 11px; margin-top: 4px; font-weight: 700;">Add Photo 2</span>
+          </div>
+          <div class="photo-slot" onclick="triggerUpload(2)">
+            <span style="font-size: 20px;">➕</span>
+            <span style="font-size: 11px; margin-top: 4px; font-weight: 700;">Add Photo 3</span>
+          </div>
+        </div>
+        <input type="file" id="hiddenPhotoInput" accept="image/*" style="display: none;">
+      </div>
+
+      <!-- Audio & Soundtrack -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">🎵</span> Ambient Soundtrack</div>
+        <div class="chips-grid" id="soundtrackPicker">
+          <div class="chip-option selected" data-track="acoustic">
+            <span class="chip-icon">🎸</span>
+            <span>Midnight Acoustic</span>
+          </div>
+          <div class="chip-option" data-track="chime">
+            <span class="chip-icon">🔔</span>
+            <span>Melodic Chime</span>
+          </div>
+          <div class="chip-option" data-track="lofi">
+            <span class="chip-icon">🎧</span>
+            <span>Warm Lo-Fi Beat</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Preview Pane Column -->
+    <aside class="builder-preview-pane">
+      <div class="preview-toolbar">
+        <div class="preview-title">
+          <span class="preview-pulse"></span>
+          <span>Live Interactive Preview</span>
+        </div>
+        <div class="device-switcher">
+          <button class="device-btn active" id="btnDeviceMobile" title="Mobile Phone View">📱 Mobile</button>
+          <button class="device-btn" id="btnDeviceDesktop" title="Full Screen View">💻 Desktop</button>
+        </div>
+      </div>
+
+      <div class="preview-frame-container mobile-mode" id="previewContainer">
+        <iframe id="previewFrame" class="preview-iframe" src="index.html" title="Live Template Preview"></iframe>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Celebration Modal -->
+  <div class="builder-modal-overlay" id="celebrationModal">
+    <div class="builder-modal-card">
+      <div class="modal-icon-badge">🎂</div>
+      <h2 class="modal-title">Your 3D Birthday Keepsake Is Ready!</h2>
+      <p class="modal-subtitle">The blowable 3D candle and wax-sealed letter are published. Share the moment instantly!</p>
+      
+      <div class="share-link-box">
+        <input type="text" id="shareUrlInput" class="share-link-input" readonly>
+        <button class="share-copy-btn" id="btnCopyShareUrl">📋 Copy</button>
+      </div>
+
+      <div class="modal-actions-grid">
+        <a id="btnModalOpenExp" href="#" class="btn-open-experience" target="_blank">
+          <span>✨</span> Open Final Experience
+        </a>
+        <a id="btnModalWhatsApp" href="#" class="btn-share-whatsapp" target="_blank">
+          <span>💬</span> Share via WhatsApp
+        </a>
+        <button class="btn-close-modal" onclick="closeCelebrationModal()">Close & Keep Editing</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentPhotos = [];
+    let currentPhotoSlotIndex = 0;
+    const TEMPLATE_ID = 'birthday-3d-candle';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Initialize Builder Core
+      await VanviBuilderCore.init({ templateId: TEMPLATE_ID });
+
+      // Populate existing data if available
+      const data = VanviBuilderCore.customData;
+      if (data.recipientName) document.getElementById('inpRecipient').value = data.recipientName;
+      if (data.senderName) document.getElementById('inpSender').value = data.senderName;
+      if (data.letterBodyText) document.getElementById('inpLetter').value = data.letterBodyText;
+      if (data.celebrationDate) document.getElementById('inpDate').value = data.celebrationDate;
+      if (data.age) document.getElementById('inpAge').value = data.age;
+      if (data.photos && Array.isArray(data.photos)) {
+        currentPhotos = data.photos;
+        renderPhotos();
+      }
+
+      // Connect Live Preview
+      const previewFrame = document.getElementById('previewFrame');
+      VanviBuilderCore.attachPreview(previewFrame);
+
+      // Input Event Listeners
+      const syncInputs = () => {
+        const payload = {
+          recipientName: document.getElementById('inpRecipient').value,
+          senderName: document.getElementById('inpSender').value,
+          letterBodyText: document.getElementById('inpLetter').value,
+          celebrationDate: document.getElementById('inpDate').value,
+          age: document.getElementById('inpAge').value,
+          photos: currentPhotos,
+          flameGlow: document.querySelector('#flameColorPicker .chip-option.selected')?.dataset.glow || 'golden',
+          soundtrack: document.querySelector('#soundtrackPicker .chip-option.selected')?.dataset.track || 'acoustic'
+        };
+        VanviBuilderCore.update(payload);
+        updateLiveIframe(payload);
+      };
+
+      document.querySelectorAll('#inpRecipient, #inpSender, #inpLetter, #inpDate, #inpAge').forEach(el => {
+        el.addEventListener('input', syncInputs);
+      });
+
+      // Chip Pickers
+      document.querySelectorAll('#flameColorPicker .chip-option').forEach(chip => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('#flameColorPicker .chip-option').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          syncInputs();
+        });
+      });
+
+      document.querySelectorAll('#soundtrackPicker .chip-option').forEach(chip => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('#soundtrackPicker .chip-option').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          syncInputs();
+        });
+      });
+
+      // Device Switcher
+      document.getElementById('btnDeviceMobile').addEventListener('click', () => {
+        document.getElementById('btnDeviceMobile').classList.add('active');
+        document.getElementById('btnDeviceDesktop').classList.remove('active');
+        document.getElementById('previewContainer').classList.add('mobile-mode');
+      });
+
+      document.getElementById('btnDeviceDesktop').addEventListener('click', () => {
+        document.getElementById('btnDeviceDesktop').classList.add('active');
+        document.getElementById('btnDeviceMobile').classList.remove('active');
+        document.getElementById('previewContainer').classList.remove('mobile-mode');
+      });
+
+      // Save / Publish
+      document.getElementById('btnSaveMomentTop').addEventListener('click', handlePublish);
+
+      // Copy Link
+      document.getElementById('btnCopyShareUrl').addEventListener('click', () => {
+        const input = document.getElementById('shareUrlInput');
+        navigator.clipboard.writeText(input.value).then(() => {
+          document.getElementById('btnCopyShareUrl').textContent = '✓ Copied!';
+          setTimeout(() => { document.getElementById('btnCopyShareUrl').textContent = '📋 Copy'; }, 2000);
+        });
+      });
+
+      // Photo Upload handling
+      document.getElementById('hiddenPhotoInput').addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+          const uploaded = await VanviBuilderCore.uploadMedia(file, { assetType: 'polaroid' });
+          const url = uploaded.url || uploaded;
+          currentPhotos[currentPhotoSlotIndex] = url;
+          renderPhotos();
+          syncInputs();
+        } catch (err) {
+          console.warn('Upload fallback to data URL:', err);
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            currentPhotos[currentPhotoSlotIndex] = ev.target.result;
+            renderPhotos();
+            syncInputs();
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+
+    function triggerUpload(index) {
+      currentPhotoSlotIndex = index;
+      document.getElementById('hiddenPhotoInput').click();
+    }
+
+    function removePhoto(index, e) {
+      if (e) e.stopPropagation();
+      currentPhotos.splice(index, 1);
+      renderPhotos();
+      VanviBuilderCore.set('photos', currentPhotos);
+    }
+
+    function renderPhotos() {
+      const grid = document.getElementById('photoGrid');
+      grid.innerHTML = '';
+      for (let i = 0; i < 3; i++) {
+        const photo = currentPhotos[i];
+        if (photo) {
+          grid.innerHTML += `
+            <div class="photo-slot">
+              <img src="${photo}" alt="Polaroid ${i + 1}">
+              <button class="remove-photo-btn" onclick="removePhoto(${i}, event)">×</button>
+            </div>
+          `;
+        } else {
+          grid.innerHTML += `
+            <div class="photo-slot" onclick="triggerUpload(${i})">
+              <span style="font-size: 20px;">➕</span>
+              <span style="font-size: 11px; margin-top: 4px; font-weight: 700;">Add Photo ${i + 1}</span>
+            </div>
+          `;
+        }
+      }
+    }
+
+    function updateLiveIframe(data) {
+      const iframe = document.getElementById('previewFrame');
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage({
+          type: 'VANVI_LIVE_PREVIEW_SYNC',
+          recipient: data.recipientName,
+          sender: data.senderName,
+          message: data.letterBodyText,
+          date: data.celebrationDate,
+          photos: data.photos,
+          customData: data
+        }, '*');
+      }
+    }
+
+    async function handlePublish() {
+      const btn = document.getElementById('btnSaveMomentTop');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span>⏳</span> <span>Publishing...</span>';
+      btn.disabled = true;
+
+      try {
+        const saved = await VanviBuilderCore.saveMoment({
+          title: `3D Birthday Keepsake for ${VanviBuilderCore.get('recipientName') || 'Someone Special'}`,
+          recipientName: VanviBuilderCore.get('recipientName') || 'Someone Special',
+          occasion: 'Birthday'
+        });
+
+        const shareUrl = saved.shareUrl || saved.experienceUrl || `${window.location.origin}/moment.html?id=${saved.id}&template=${TEMPLATE_ID}`;
+        document.getElementById('shareUrlInput').value = shareUrl;
+        document.getElementById('btnModalOpenExp').href = shareUrl;
+        document.getElementById('btnModalWhatsApp').href = `https://wa.me/?text=${encodeURIComponent(`✨ Blow out your birthday candles! Open this 3D celebration: ${shareUrl}`)}`;
+        
+        document.getElementById('celebrationModal').classList.add('active');
+      } catch (err) {
+        alert('Could not publish: ' + err.message);
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    function closeCelebrationModal() {
+      document.getElementById('celebrationModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,2311 @@
+const fs = require('fs');
+const path = require('path');
+
+const adminHtml = `<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+  <title>Vanvi Moments — Master Atelier Admin Control Suite</title>
+  <meta name="description" content="All-in-one visual administration and live control center for Vanvi Moments. Edit templates, presets, products, users, orders, coupons, media, and live storefront settings in real time."/>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+  <meta name="theme-color" content="#fff5f8"/>
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, Cormorant Garamond, Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+
+  <!-- Universal Global Design Tokens & Experience -->
+  <link rel="stylesheet" href="css/vanvi-global-experience.css"/>
+  <link rel="stylesheet" href="css/vanvi-admin-premium.css"/>
+
+  <!-- Core Data Manifests & SDK -->
+  <script src="js/vanvi-templates-data.js"></script>
+  <script src="js/vanvi-products-data.js"></script>
+  <script src="js/vanvi-api.js"></script>
+
+  <style>
+    /* ==========================================================================
+       VANVI MOMENTS — ATELIER MASTER CONTROL DESIGN SYSTEM
+       Theme: Ultra-Clean Pearl Luxury (Light First) with Rose Gold Accents
+       Super Intuitive · 100% Editable · Smooth Real-Time Persistence
+       ========================================================================== */
+    :root, [data-theme="light"] {
+      --bg-base: #fff7fa;
+      --bg-base-radial: radial-gradient(circle at 10% 5%, #fff0f5 0%, #fff9fb 50%, #f9f2ff 100%);
+      --bg-sidebar: #ffffff;
+      --bg-sidebar-glass: rgba(255, 255, 255, 0.96);
+      --bg-topbar: rgba(255, 255, 255, 0.92);
+      --bg-card: #ffffff;
+      --bg-card-soft: #fff9fb;
+      --bg-card-alt: #fcf6f9;
+      --bg-input: #ffffff;
+      --bg-table-stripe: rgba(255, 240, 247, 0.45);
+      --bg-table-hover: rgba(255, 233, 243, 0.7);
+
+      --border-subtle: rgba(255, 42, 122, 0.14);
+      --border-card: rgba(255, 42, 122, 0.12);
+      --border-focus: #ff2a7a;
+      --border-gold: rgba(217, 119, 6, 0.28);
+
+      --rose-primary: #ff2a7a;
+      --rose-deep: #e11d68;
+      --rose-glow: rgba(255, 42, 122, 0.18);
+      --gold-champagne: #d97706;
+      --gold-bright: #f59e0b;
+      --gold-glow: rgba(217, 119, 6, 0.18);
+      --emerald: #059669;
+      --emerald-bg: #ecfdf5;
+      --cyan: #0284c7;
+      --cyan-bg: #f0f9ff;
+      --purple: #7c3aed;
+      --purple-bg: #f5f3ff;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+
+      --text-main: #1e0d19;
+      --text-headings: #1a0815;
+      --text-muted: #5e3e54;
+      --text-dim: #8e6c83;
+      --text-light: #ffffff;
+
+      --shadow-sm: 0 2px 6px rgba(255, 42, 122, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+      --shadow-card: 0 10px 28px rgba(255, 42, 122, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 16px 36px rgba(255, 42, 122, 0.12), 0 4px 12px rgba(0, 0, 0, 0.03);
+      --shadow-glow: 0 0 24px rgba(255, 42, 122, 0.22);
+
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-mono: 'Space Grotesk', monospace;
+
+      --sidebar-width: 280px;
+      --header-height: 72px;
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #0c0611;
+      --bg-base-radial: radial-gradient(circle at 10% 5%, #180a22 0%, #0c0611 60%, #07020a 100%);
+      --bg-sidebar: #13091b;
+      --bg-sidebar-glass: rgba(19, 9, 27, 0.96);
+      --bg-topbar: rgba(12, 6, 17, 0.92);
+      --bg-card: rgba(26, 14, 38, 0.88);
+      --bg-card-soft: rgba(36, 19, 52, 0.7);
+      --bg-card-alt: rgba(30, 16, 44, 0.6);
+      --bg-input: rgba(18, 9, 26, 0.95);
+      --bg-table-stripe: rgba(255, 42, 122, 0.04);
+      --bg-table-hover: rgba(255, 42, 122, 0.09);
+
+      --border-subtle: rgba(255, 42, 122, 0.18);
+      --border-card: rgba(255, 42, 122, 0.18);
+      --border-gold: rgba(245, 158, 11, 0.35);
+
+      --text-main: #ffffff;
+      --text-headings: #ffffff;
+      --text-muted: #cdb9c9;
+      --text-dim: #8b7486;
+      --text-light: #ffffff;
+
+      --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
+      --shadow-hover: 0 16px 40px rgba(255, 42, 122, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg-base);
+      background-image: var(--bg-base-radial);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* Ambient Glow */
+    .ambient-glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+    }
+    .ambient-1 {
+      top: -80px;
+      left: 15%;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(255, 42, 122, 0.16), transparent 70%);
+    }
+    .ambient-2 {
+      bottom: 5%;
+      right: 5%;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(217, 119, 6, 0.12), transparent 70%);
+    }
+
+    /* Layout */
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Sidebar */
+    .admin-sidebar {
+      width: var(--sidebar-width);
+      background: var(--bg-sidebar-glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      box-shadow: 4px 0 24px rgba(255, 42, 122, 0.04);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sidebar-brand-box {
+      padding: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, rgba(255, 42, 122, 0.04), transparent);
+    }
+    .brand-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--rose-primary), #ff6b9d 50%, var(--gold-champagne));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      box-shadow: 0 6px 18px var(--rose-glow);
+      flex-shrink: 0;
+    }
+    .brand-text h2 {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-headings);
+      line-height: 1.15;
+    }
+    .brand-text p {
+      font-size: 10.5px;
+      color: var(--rose-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 800;
+    }
+
+    .sidebar-nav-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .sidebar-nav-scroll::-webkit-scrollbar { width: 4px; }
+    .sidebar-nav-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 42, 122, 0.2);
+      border-radius: 4px;
+    }
+
+    .nav-section-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      color: var(--text-dim);
+      font-weight: 800;
+      padding: 12px 10px 4px;
+    }
+
+    .nav-tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .nav-tab-btn:hover {
+      background: var(--bg-card-soft);
+      color: var(--rose-primary);
+      transform: translateX(3px);
+    }
+    .nav-tab-btn.active {
+      background: linear-gradient(135deg, rgba(255, 42, 122, 0.12), rgba(217, 119, 6, 0.06));
+      color: var(--rose-primary);
+      border-color: rgba(255, 42, 122, 0.22);
+      font-weight: 750;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.06);
+    }
+    .nav-tab-btn .nav-icon {
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+    }
+    .nav-tab-btn .nav-count-badge {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(255, 42, 122, 0.1);
+      color: var(--rose-primary);
+    }
+    .nav-tab-btn.active .nav-count-badge {
+      background: var(--rose-primary);
+      color: #fff;
+    }
+    .editable-badge {
+      margin-left: auto;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: #ecfdf5;
+      color: #059669;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-bottom-controls {
+      padding: 14px 16px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--bg-card-soft);
+    }
+    .status-indicator-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--emerald);
+    }
+    .pulsing-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7);
+      animation: pulseGreen 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
+    }
+    @keyframes pulseGreen {
+      to { box-shadow: 0 0 0 10px rgba(5, 150, 105, 0); }
+    }
+
+    /* Main Area */
+    .admin-main {
+      flex: 1;
+      margin-left: var(--sidebar-width);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      transition: margin 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Topbar */
+    .admin-topbar {
+      height: var(--header-height);
+      background: var(--bg-topbar);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      gap: 16px;
+    }
+    .menu-toggle-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--border-subtle);
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+    .topbar-search-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      align-items: center;
+    }
+    .topbar-search-wrap span {
+      position: absolute;
+      left: 14px;
+      color: var(--text-dim);
+      font-size: 15px;
+      pointer-events: none;
+    }
+    .topbar-search-input {
+      width: 100%;
+      padding: 9px 14px 9px 38px;
+      border-radius: 99px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-main);
+      outline: none;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .topbar-search-input:focus {
+      border-color: var(--rose-primary);
+      box-shadow: 0 0 0 3px rgba(255, 42, 122, 0.12);
+    }
+
+    .topbar-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-topbar {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 750;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-topbar:hover {
+      border-color: var(--rose-primary);
+      color: var(--rose-primary);
+      transform: translateY(-1px);
+    }
+    .btn-topbar-primary {
+      background: linear-gradient(135deg, var(--rose-primary), #ff478e);
+      border: none;
+      color: #fff !important;
+      box-shadow: 0 4px 14px var(--rose-glow);
+    }
+    .btn-topbar-primary:hover {
+      box-shadow: 0 6px 20px var(--rose-glow);
+      transform: translateY(-2px);
+    }
+    .btn-topbar-gold {
+      background: linear-gradient(135deg, var(--gold-champagne), #f59e0b);
+      border: none;
+      color: #fff !important;
+      box-shadow: 0 4px 14px var(--gold-glow);
+    }
+
+    /* Content Area */
+    .admin-content {
+      padding: 24px;
+      flex: 1;
+    }
+
+    .tab-pane {
+      display: none;
+      animation: tabFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .page-main-heading {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 850;
+      color: var(--text-headings);
+      line-height: 1.2;
+    }
+    .page-sub-caption {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* KPI Cards */
+    .kpi-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 18px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card);
+      border-color: rgba(255, 42, 122, 0.28);
+    }
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rose-primary), var(--gold-champagne));
+      opacity: 0.8;
+    }
+    .kpi-title {
+      font-size: 12px;
+      font-weight: 750;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .kpi-num {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 850;
+      color: var(--text-headings);
+      line-height: 1.1;
+    }
+    .kpi-meta {
+      font-size: 11.5px;
+      color: var(--emerald);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Card Panels */
+    .panel-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 22px;
+    }
+    .panel-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-headings);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Data Table */
+    .admin-table-wrap {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+    .admin-table th {
+      background: var(--bg-card-soft);
+      padding: 12px 14px;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--text-dim);
+      font-weight: 800;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .admin-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+    .admin-table tr:hover td {
+      background: var(--bg-table-hover);
+    }
+
+    /* Filter Pills */
+    .filter-bar-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .cat-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 13px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .cat-pill:hover, .cat-pill.active {
+      background: var(--rose-primary);
+      color: #fff;
+      border-color: var(--rose-primary);
+      box-shadow: 0 4px 12px var(--rose-glow);
+    }
+
+    /* Badges */
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .badge-free { background: var(--emerald-bg); color: var(--emerald); }
+    .badge-premium { background: rgba(217, 119, 6, 0.12); color: var(--gold-champagne); }
+    .badge-active { background: var(--emerald-bg); color: var(--emerald); }
+    .badge-revoked { background: var(--danger-bg); color: var(--danger); }
+    .badge-draft { background: rgba(142, 108, 131, 0.14); color: var(--text-dim); }
+
+    /* Action Buttons */
+    .action-btn-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+    .action-btn-pill:hover {
+      border-color: var(--rose-primary);
+      color: var(--rose-primary);
+      transform: translateY(-1px);
+    }
+    .action-btn-rose { background: var(--rose-primary); color: #fff !important; border-color: var(--rose-primary); }
+    .action-btn-danger { color: var(--danger) !important; }
+    .action-btn-danger:hover { background: var(--danger-bg); border-color: var(--danger); }
+
+    /* Form Fields */
+    .field-group {
+      margin-bottom: 14px;
+    }
+    .field-caption {
+      display: block;
+      font-size: 12px;
+      font-weight: 750;
+      color: var(--text-headings);
+      margin-bottom: 5px;
+    }
+    .text-input, .select-input, .textarea-input {
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-input);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .text-input:focus, .select-input:focus, .textarea-input:focus {
+      border-color: var(--rose-primary);
+      box-shadow: 0 0 0 3px rgba(255, 42, 122, 0.12);
+    }
+    .textarea-input {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop-wrap {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 6, 17, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .modal-backdrop-wrap.open {
+      display: flex;
+    }
+    .modal-box-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      animation: tabFadeIn 0.2s ease;
+      position: relative;
+    }
+    .modal-box-large {
+      max-width: 900px;
+    }
+    .modal-title-text {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 850;
+      color: var(--text-headings);
+    }
+
+    /* Copilot Chat Feed */
+    .copilot-chat-box {
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      background: var(--bg-card-soft);
+      display: flex;
+      flex-direction: column;
+      height: 520px;
+      overflow: hidden;
+    }
+    .copilot-feed-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .copilot-msg-row {
+      display: flex;
+      gap: 10px;
+      max-width: 82%;
+    }
+    .copilot-bot {
+      align-self: flex-start;
+    }
+    .copilot-user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+    .copilot-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .copilot-bubble {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      box-shadow: var(--shadow-sm);
+    }
+    .copilot-user .copilot-bubble {
+      background: linear-gradient(135deg, var(--rose-primary), #ff579a);
+      color: #fff;
+      border: none;
+    }
+    .copilot-action-card {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(5, 150, 105, 0.08);
+      border: 1px solid rgba(5, 150, 105, 0.25);
+    }
+
+    /* Toast */
+    #toastStack {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast-msg-pill {
+      background: #1e0d19;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 750;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255, 42, 122, 0.3);
+      animation: tabFadeIn 0.2s ease;
+      pointer-events: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .admin-sidebar {
+        transform: translateX(-100%);
+      }
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+      .admin-main {
+        margin-left: 0;
+      }
+      .menu-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .admin-content {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow ambient-1"></div>
+  <div class="ambient-glow ambient-2"></div>
+  <div id="toastStack"></div>
+
+  <div class="admin-layout">
+
+    <!-- ============================================================
+         SIDEBAR NAVIGATION (20 MODULES)
+         ============================================================ -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-brand-box">
+        <div class="brand-avatar">👑</div>
+        <div class="brand-text">
+          <h2>Vanvi Atelier</h2>
+          <p>Master Control Center</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav-scroll">
+        <div class="nav-section-title">Overview &amp; Intelligence</div>
+        <a class="nav-tab-btn active" data-tab="dashboard" onclick="switchTab('dashboard')">
+          <span class="nav-icon">📊</span>
+          <span>Operations &amp; KPIs</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="analytics" onclick="switchTab('analytics')">
+          <span class="nav-icon">📈</span>
+          <span>Analytics &amp; Revenue</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="gpt-copilot" onclick="switchTab('gpt-copilot')">
+          <span class="nav-icon">🤖</span>
+          <span>Vanvi Admin AI</span>
+          <span class="nav-count-badge" style="background:linear-gradient(135deg,#ff2a7a,#d97706); color:#fff;">AI ⭐</span>
+        </a>
+
+        <div class="nav-section-title">Creative Studio CMS</div>
+        <a class="nav-tab-btn" data-tab="templates" onclick="switchTab('templates')">
+          <span class="nav-icon">🎨</span>
+          <span>Template Manager</span>
+          <span class="nav-count-badge" id="badgeTplCount">51</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="presets" onclick="switchTab('presets')">
+          <span class="nav-icon">✨</span>
+          <span>Preset Manager</span>
+          <span class="nav-count-badge" id="badgePresetsCount" style="background:#fef3c7; color:#b45309;">3</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="template-wizard" onclick="switchTab('template-wizard')">
+          <span class="nav-icon">🪄</span>
+          <span>+ Create Template</span>
+          <span class="editable-badge">WIZARD</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="publish-center" onclick="switchTab('publish-center')">
+          <span class="nav-icon">🚀</span>
+          <span>Publish Center &amp; Diff</span>
+        </a>
+
+        <div class="nav-section-title">Storefront Content</div>
+        <a class="nav-tab-btn" data-tab="site-editor" onclick="switchTab('site-editor')">
+          <span class="nav-icon">🌐</span>
+          <span>Page &amp; Content Editor</span>
+          <span class="editable-badge">LIVE</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="media-manager" onclick="switchTab('media-manager')">
+          <span class="nav-icon">🖼️</span>
+          <span>Media &amp; Cloudinary</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="products" onclick="switchTab('products')">
+          <span class="nav-icon">🎁</span>
+          <span>Physical Gift Store</span>
+          <span class="nav-count-badge" id="badgeProductsCount">20+</span>
+        </a>
+
+        <div class="nav-section-title">Operations &amp; Commerce</div>
+        <a class="nav-tab-btn" data-tab="orders" onclick="switchTab('orders')">
+          <span class="nav-icon">💳</span>
+          <span>Orders &amp; Refunds</span>
+          <span class="nav-count-badge" id="badgeOrdersCount">500+</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="users" onclick="switchTab('users')">
+          <span class="nav-icon">👥</span>
+          <span>Users &amp; Coins</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="moments" onclick="switchTab('moments')">
+          <span class="nav-icon">💌</span>
+          <span>Moments Moderation</span>
+          <span class="nav-count-badge" id="badgeMomentsCount">950+</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="custom-requests" onclick="switchTab('custom-requests')">
+          <span class="nav-icon">💎</span>
+          <span>Bespoke Concierge</span>
+          <span class="nav-count-badge" id="badgeRequestsCount" style="background:rgba(217,119,6,0.15); color:var(--gold-champagne);">3</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="coupons" onclick="switchTab('coupons')">
+          <span class="nav-icon">🏷️</span>
+          <span>Coupons &amp; Economy</span>
+        </a>
+
+        <div class="nav-section-title">System &amp; Security</div>
+        <a class="nav-tab-btn" data-tab="settings" onclick="switchTab('settings')">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings &amp; Branding</span>
+        </a>
+        <a class="nav-tab-btn" data-tab="backups" onclick="switchTab('backups')">
+          <span class="nav-icon">💾</span>
+          <span>Database &amp; Audit Logs</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-controls">
+        <div class="status-indicator-pill">
+          <span class="pulsing-dot"></span>
+          <span id="txtServerStatus">API Online :3000</span>
+        </div>
+        <a href="index.html" target="_blank" style="color:var(--text-muted); font-size:12px; font-weight:750; text-decoration:none;" title="Exit to Public Website">⎋ Storefront</a>
+      </div>
+    </aside>
+
+    <!-- ============================================================
+         MAIN WORKSPACE AREA
+         ============================================================ -->
+    <div class="admin-main">
+
+      <!-- Topbar Header -->
+      <header class="admin-topbar">
+        <div style="display:flex; align-items:center; gap:14px; flex:1;">
+          <button type="button" class="menu-toggle-btn" id="btnToggleSidebar" onclick="toggleMobileSidebar()" aria-label="Toggle Menu">☰</button>
+          <div class="topbar-search-wrap">
+            <span>🔍</span>
+            <input type="text" class="topbar-search-input" id="globalSearchInput" placeholder="Global search (Ctrl+K): templates, orders, users, presets..." onclick="openGlobalSearchModal()" oninput="handleGlobalSearch(this.value)"/>
+          </div>
+        </div>
+
+        <div class="topbar-actions-right">
+          <button type="button" class="btn-topbar" id="themeToggleBtn" onclick="toggleAdminTheme()" title="Switch Light / Dark Velvet">
+            <span id="themeToggleIcon">☀️</span> <span id="themeToggleText">Light</span>
+          </button>
+          <a href="index.html" class="btn-topbar" target="_blank" title="Open Storefront">
+            <span>🌐</span> <span>Live Store</span>
+          </a>
+          <button type="button" class="btn-topbar btn-topbar-primary" onclick="openNewTemplateModal()">
+            <span>＋</span> <span>New Template</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Content Container -->
+      <main class="admin-content">
+
+        <!-- ========================================================
+             TAB 1: OPERATIONS & KPIS (DASHBOARD)
+             ======================================================== -->
+        <section id="tab-dashboard" class="tab-pane active">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">✨ Master Atelier Operations Center</h1>
+              <p class="page-sub-caption">Real-time celebration atelier performance, revenue metrics, and system health.</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="btn-3d" onclick="refreshAdminData()">
+                <span>🔄</span> <span>Sync Real-Time</span>
+              </button>
+              <button type="button" class="btn-3d btn-3d-rose" onclick="switchTab('gpt-copilot')">
+                <span>🤖</span> <span>Launch Admin AI</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Service Health Grid -->
+          <div class="health-pill-grid">
+            <div class="health-card">
+              <div class="health-icon-box" style="background:#ecfdf5; color:#059669;">🗄️</div>
+              <div>
+                <strong style="display:block; font-size:13px;" id="lblDbEngine">Transactional JSON Store</strong>
+                <span style="font-size:11.5px; color:var(--emerald);">● Supabase / DB Operational</span>
+              </div>
+            </div>
+            <div class="health-card">
+              <div class="health-icon-box" style="background:#f0f9ff; color:#0284c7;">☁️</div>
+              <div>
+                <strong style="display:block; font-size:13px;">Cloudinary CDN</strong>
+                <span style="font-size:11.5px; color:var(--cyan);" id="lblCloudinaryStatus">● CDN Active &amp; Ready</span>
+              </div>
+            </div>
+            <div class="health-card">
+              <div class="health-icon-box" style="background:#fef3c7; color:#b45309;">💳</div>
+              <div>
+                <strong style="display:block; font-size:13px;">Razorpay Gateway</strong>
+                <span style="font-size:11.5px; color:var(--gold-champagne);" id="lblRazorpayStatus">● Live Simulation / Ready</span>
+              </div>
+            </div>
+            <div class="health-card">
+              <div class="health-icon-box" style="background:#f5f3ff; color:#7c3aed;">⚡</div>
+              <div>
+                <strong style="display:block; font-size:13px;">Express Engine</strong>
+                <span style="font-size:11.5px; color:var(--purple);" id="lblApiLatency">&lt; 15ms Latency</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI Counters Grid -->
+          <div class="kpi-cards-grid">
+            <div class="kpi-card">
+              <div class="kpi-title"><span>Total Revenue</span> <span>₹</span></div>
+              <div class="kpi-num" id="kpiRevenue">₹44,814</div>
+              <div class="kpi-meta"><span>↑ +28%</span> <span>this week</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-title"><span>Paid Orders</span> <span>📦</span></div>
+              <div class="kpi-num" id="kpiOrders">507</div>
+              <div class="kpi-meta"><span>239 completed</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-title"><span>Registered Creators</span> <span>👥</span></div>
+              <div class="kpi-num" id="kpiUsers">532</div>
+              <div class="kpi-meta"><span>+14 today</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-title"><span>Moments Created</span> <span>💌</span></div>
+              <div class="kpi-num" id="kpiMoments">958</div>
+              <div class="kpi-meta"><span>100% active</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-title"><span>Live Templates</span> <span>🎨</span></div>
+              <div class="kpi-num" id="kpiTemplates">51</div>
+              <div class="kpi-meta" id="kpiDraftsCount"><span>0 drafts pending</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-title"><span>Physical Gifts</span> <span>🎁</span></div>
+              <div class="kpi-num" id="kpiProducts">24 Items</div>
+              <div class="kpi-meta"><span>Affiliate integrated</span></div>
+            </div>
+          </div>
+
+          <!-- Quick Actions & Recent Stream -->
+          <div style="display:grid; grid-template-columns: 2fr 1fr; gap:20px;">
+            <div class="panel-card">
+              <div class="panel-header-row">
+                <h3 class="panel-title"><span>⚡ Quick Atelier Actions</span></h3>
+                <span class="editable-badge">INSTANT</span>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px;">
+                <button type="button" class="btn-3d btn-3d-rose" onclick="switchTab('template-wizard')">🪄 Template Wizard</button>
+                <button type="button" class="btn-3d btn-3d-gold" onclick="switchTab('presets')">✨ Preset Manager</button>
+                <button type="button" class="btn-3d" onclick="switchTab('site-editor')">🌐 Edit Homepage Hero</button>
+                <button type="button" class="btn-3d" onclick="switchTab('media-manager')">🖼️ Upload to Cloudinary</button>
+                <button type="button" class="btn-3d btn-3d-emerald" onclick="switchTab('publish-center')">🚀 Publish Center</button>
+                <button type="button" class="btn-3d" onclick="openGrantCoinsModal()">🪙 Grant Coins Bonus</button>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-header-row">
+                <h3 class="panel-title"><span>🛡️ Live Audit Stream</span></h3>
+                <button type="button" class="action-btn-pill" onclick="switchTab('backups')">All Logs</button>
+              </div>
+              <div id="liveAuditFeed" style="display:flex; flex-direction:column; gap:8px; font-size:12px; max-height:220px; overflow-y:auto;">
+                <div style="color:var(--text-muted);">Loading real-time audit logs...</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 2: ANALYTICS & INTELLIGENCE
+             ======================================================== -->
+        <section id="tab-analytics" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">📈 Analytics &amp; Revenue Intelligence</h1>
+              <p class="page-sub-caption">In-depth performance metrics, customer conversion, and top celebration experiences.</p>
+            </div>
+          </div>
+          <div class="kpi-cards-grid">
+            <div class="kpi-card">
+              <div class="kpi-title"><span>Average Order Value</span> <span>₹</span></div>
+              <div class="kpi-num">₹187.50</div>
+              <div class="kpi-meta"><span>Per checkout</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-title"><span>Conversion Rate</span> <span>🎯</span></div>
+              <div class="kpi-num">4.2%</div>
+              <div class="kpi-meta"><span>Visitor to purchase</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-title"><span>Coins In Circulation</span> <span>🪙</span></div>
+              <div class="kpi-num" id="analyticsCoinsCirculation">10,500</div>
+              <div class="kpi-meta"><span>Wallet economy active</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-title"><span>Repeat Patron Rate</span> <span>🔁</span></div>
+              <div class="kpi-num">38%</div>
+              <div class="kpi-meta"><span>Multiple celebrations</span></div>
+            </div>
+          </div>
+          <div class="panel-card">
+            <h3 class="panel-title" style="margin-bottom:14px;">🔥 Top Performing Experiences</h3>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Template Experience</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Orders Count</th>
+                    <th>Gross Revenue</th>
+                  </tr>
+                </thead>
+                <tbody id="topTemplatesAnalyticsTbody">
+                  <tr>
+                    <td><strong>Birthday Wish 01</strong></td>
+                    <td>Birthday</td>
+                    <td>₹149</td>
+                    <td>142 orders</td>
+                    <td><strong style="color:var(--gold-champagne);">₹21,158</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Birthday Wish 02 (Wax Seal)</strong></td>
+                    <td>Birthday</td>
+                    <td>₹149</td>
+                    <td>118 orders</td>
+                    <td><strong style="color:var(--gold-champagne);">₹17,582</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Birthday Gift for Girlfriend</strong></td>
+                    <td>Love &amp; Romance</td>
+                    <td>₹149</td>
+                    <td>68 orders</td>
+                    <td><strong style="color:var(--gold-champagne);">₹10,132</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 3: TEMPLATE MANAGER ⭐ (EDIT EVERYTHING)
+             ======================================================== -->
+        <section id="tab-templates" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">🎨 Template Manager &amp; Catalog</h1>
+              <p class="page-sub-caption">Manage 51+ live celebration experiences. Edit content, sections, colors, builder fields, and SEO.</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="btn-3d btn-3d-rose" onclick="openNewTemplateModal()">＋ Create Template</button>
+              <button type="button" class="btn-3d" onclick="switchTab('publish-center')">🚀 Publish Center</button>
+            </div>
+          </div>
+
+          <!-- Category Filter Bar -->
+          <div class="filter-bar-pills" id="tplCategoryFilterBar">
+            <button type="button" class="cat-pill active" data-cat="all" onclick="filterTemplatesAdmin('all')">All Experiences</button>
+            <button type="button" class="cat-pill" data-cat="birthday" onclick="filterTemplatesAdmin('birthday')">🎂 Birthday</button>
+            <button type="button" class="cat-pill" data-cat="love" onclick="filterTemplatesAdmin('love')">💖 Love &amp; Romance</button>
+            <button type="button" class="cat-pill" data-cat="wedding" onclick="filterTemplatesAdmin('wedding')">💍 Wedding</button>
+            <button type="button" class="cat-pill" data-cat="anniversary" onclick="filterTemplatesAdmin('anniversary')">🥂 Anniversary</button>
+            <button type="button" class="cat-pill" data-cat="free" onclick="filterTemplatesAdmin('free')">🆓 100% Free</button>
+            <button type="button" class="cat-pill" data-cat="premium" onclick="filterTemplatesAdmin('premium')">👑 Premium</button>
+          </div>
+
+          <!-- Templates Table -->
+          <div class="panel-card" style="padding:0; overflow:hidden;">
+            <div class="admin-table-wrap" style="border:none;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Experience Name</th>
+                    <th>SKU / ID</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Badge</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminTemplatesTbody">
+                  <!-- Populated dynamically by renderTemplates() -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 4: PRESET MANAGER ⭐
+             ======================================================== -->
+        <section id="tab-presets" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">✨ Preset Manager</h1>
+              <p class="page-sub-caption">Pre-configured design presets. Duplicate, re-theme, or clone directly into brand new templates.</p>
+            </div>
+            <button type="button" class="btn-3d btn-3d-gold" onclick="openNewPresetModal()">＋ Create New Preset</button>
+          </div>
+
+          <div class="presets-grid" id="adminPresetsGrid">
+            <!-- Populated dynamically by loadAdminPresets() -->
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 5: TEMPLATE CREATOR WIZARD ⭐ (10 STEPS)
+             ======================================================== -->
+        <section id="tab-template-wizard" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">🪄 Template Creator Studio Wizard</h1>
+              <p class="page-sub-caption">10-step guided creation suite with automatic skeleton generators and live device preview.</p>
+            </div>
+          </div>
+
+          <!-- Wizard Stepper Navigation -->
+          <div class="wizard-stepper-wrap" id="wizardStepperNav">
+            <div class="wizard-step-node active" onclick="jumpToWizardStep(1)">
+              <div class="wizard-step-circle">1</div> <span>Basic Info</span>
+            </div>
+            <div class="wizard-step-node" onclick="jumpToWizardStep(2)">
+              <div class="wizard-step-circle">2</div> <span>Category</span>
+            </div>
+            <div class="wizard-step-node" onclick="jumpToWizardStep(3)">
+              <div class="wizard-step-circle">3</div> <span>Pricing</span>
+            </div>
+            <div class="wizard-step-node" onclick="jumpToWizardStep(4)">
+              <div class="wizard-step-circle">4</div> <span>Media</span>
+            </div>
+            <div class="wizard-step-node" onclick="jumpToWizardStep(5)">
+              <div class="wizard-step-circle">5</div> <span>Builder Fields</span>
+            </div>
+            <div class="wizard-step-node" onclick="jumpToWizardStep(6)">
+              <div class="wizard-step-circle">6</div> <span>Sections</span>
+            </div>
+            <div class="wizard-step-node" onclick="jumpToWizardStep(7)">
+              <div class="wizard-step-circle">7</div> <span>Design/Theme</span>
+            </div>
+            <div class="wizard-step-node" onclick="jumpToWizardStep(8)">
+              <div class="wizard-step-circle">8</div> <span>Buttons</span>
+            </div>
+            <div class="wizard-step-node" onclick="jumpToWizardStep(9)">
+              <div class="wizard-step-circle">9</div> <span>Preview</span>
+            </div>
+            <div class="wizard-step-node" onclick="jumpToWizardStep(10)">
+              <div class="wizard-step-circle">10</div> <span>Publish</span>
+            </div>
+          </div>
+
+          <div class="panel-card" id="wizardContentContainer">
+            <!-- Step 1 -->
+            <div class="wizard-step-content" id="wzStep1">
+              <h3 class="panel-title" style="margin-bottom:14px;">Step 1: Basic Information</h3>
+              <div class="field-group">
+                <label class="field-caption">Template Title *</label>
+                <input type="text" class="text-input" id="wzTplName" placeholder="e.g. Moonlight Velvet Birthday Vault" value="Moonlight Velvet Birthday Vault"/>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Unique URL Slug / ID *</label>
+                <input type="text" class="text-input" id="wzTplSlug" placeholder="e.g. moonlight-velvet-vault" value="moonlight-velvet-vault"/>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Short Description</label>
+                <textarea class="textarea-input" id="wzTplDesc" placeholder="Brief tagline summarizing this experience...">A luxurious midnight celebratory vault with tap-to-blow birthday candles, constellation stars, and a wax-sealed keepsakes letter.</textarea>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="wizard-step-content" id="wzStep2" style="display:none;">
+              <h3 class="panel-title" style="margin-bottom:14px;">Step 2: Category &amp; Occasion</h3>
+              <div class="field-group">
+                <label class="field-caption">Primary Category</label>
+                <select class="select-input" id="wzTplCategory">
+                  <option value="Birthday">Birthday</option>
+                  <option value="Love & Romance">Love &amp; Romance</option>
+                  <option value="Wedding">Wedding</option>
+                  <option value="Anniversary">Anniversary</option>
+                  <option value="Friendship">Friendship</option>
+                  <option value="Festival">Festival</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Badge Label</label>
+                <input type="text" class="text-input" id="wzTplBadge" value="✨ Atelier Special"/>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Search Tags (comma separated)</label>
+                <input type="text" class="text-input" id="wzTplTags" value="birthday, luxury, wax seal, candles"/>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="wizard-step-content" id="wzStep3" style="display:none;">
+              <h3 class="panel-title" style="margin-bottom:14px;">Step 3: Pricing &amp; Tier</h3>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                <div class="field-group">
+                  <label class="field-caption">Base Price (INR) *</label>
+                  <input type="number" class="text-input" id="wzTplPrice" value="199" min="0"/>
+                </div>
+                <div class="field-group">
+                  <label class="field-caption">Original Price (INR)</label>
+                  <input type="number" class="text-input" id="wzTplOriginalPrice" value="499" min="0"/>
+                </div>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Discount Badge</label>
+                <input type="text" class="text-input" id="wzTplDiscount" value="60% OFF"/>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="wizard-step-content" id="wzStep4" style="display:none;">
+              <h3 class="panel-title" style="margin-bottom:14px;">Step 4: Cover &amp; Media</h3>
+              <div class="field-group">
+                <label class="field-caption">Thumbnail Image URL</label>
+                <input type="url" class="text-input" id="wzTplThumbnail" value="https://cdn.cutiepage.in/static/products/birthday-wish1.jpg"/>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Soundtrack Audio URL</label>
+                <input type="url" class="text-input" id="wzTplSoundtrack" value="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3"/>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="wizard-step-content" id="wzStep5" style="display:none;">
+              <h3 class="panel-title" style="margin-bottom:14px;">Step 5: Creator Studio Builder Fields</h3>
+              <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">Configure what details the customer must fill when personalizing:</p>
+              <div id="wzBuilderFieldsList" style="display:flex; flex-direction:column; gap:8px;">
+                <div class="version-diff-card">
+                  <div><strong>Recipient Name</strong> <span style="font-size:11px; color:var(--emerald);">(Required text)</span></div>
+                  <span class="pill-badge badge-active">Active</span>
+                </div>
+                <div class="version-diff-card">
+                  <div><strong>Sender Name</strong> <span style="font-size:11px; color:var(--emerald);">(Required text)</span></div>
+                  <span class="pill-badge badge-active">Active</span>
+                </div>
+                <div class="version-diff-card">
+                  <div><strong>Heartfelt Personal Letter</strong> <span style="font-size:11px; color:var(--text-dim);">(Optional textarea)</span></div>
+                  <span class="pill-badge badge-active">Active</span>
+                </div>
+                <div class="version-diff-card">
+                  <div><strong>Polaroid Photos (3 Memories)</strong> <span style="font-size:11px; color:var(--text-dim);">(Media files)</span></div>
+                  <span class="pill-badge badge-active">Active</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="wizard-step-content" id="wzStep6" style="display:none;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                <h3 class="panel-title">Step 6: Interactive Sections Structure</h3>
+                <div style="display:flex; gap:6px;">
+                  <button type="button" class="action-btn-pill action-btn-rose" onclick="autoGenerateWizardSkeleton('birthday')">Auto-Gen Birthday</button>
+                  <button type="button" class="action-btn-pill" onclick="autoGenerateWizardSkeleton('love')">Auto-Gen Romance</button>
+                </div>
+              </div>
+              <div id="wzSectionsList" style="display:flex; flex-direction:column; gap:10px;">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="wizard-step-content" id="wzStep7" style="display:none;">
+              <h3 class="panel-title" style="margin-bottom:14px;">Step 7: Design, Theme &amp; Typography</h3>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:12px; margin-bottom:16px;">
+                <div class="field-group">
+                  <label class="field-caption">Primary Color</label>
+                  <input type="color" class="text-input" id="wzColorPrimary" value="#ff2a7a" style="height:44px; padding:2px; cursor:pointer;"/>
+                </div>
+                <div class="field-group">
+                  <label class="field-caption">Secondary Color</label>
+                  <input type="color" class="text-input" id="wzColorSecondary" value="#ffd166" style="height:44px; padding:2px; cursor:pointer;"/>
+                </div>
+                <div class="field-group">
+                  <label class="field-caption">Background Base</label>
+                  <input type="color" class="text-input" id="wzColorBackground" value="#fff7fa" style="height:44px; padding:2px; cursor:pointer;"/>
+                </div>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Display Heading Font</label>
+                <select class="select-input" id="wzFontHeading">
+                  <option value="Outfit">Outfit (Modern Bold)</option>
+                  <option value="Plus Jakarta Sans">Plus Jakarta Sans (Ultra Clean)</option>
+                  <option value="Cormorant Garamond">Cormorant Garamond (Luxury Serif)</option>
+                  <option value="Space Grotesk">Space Grotesk (Tech Monospace)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Step 8 -->
+            <div class="wizard-step-content" id="wzStep8" style="display:none;">
+              <h3 class="panel-title" style="margin-bottom:14px;">Step 8: Buttons &amp; Destination Links</h3>
+              <div class="field-group">
+                <label class="field-caption">Primary CTA Button Text</label>
+                <input type="text" class="text-input" id="wzBtnCtaText" value="Open Celebration ✨"/>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Destination Hash / URL</label>
+                <input type="text" class="text-input" id="wzBtnCtaDest" value="#celebrate"/>
+              </div>
+            </div>
+
+            <!-- Step 9 -->
+            <div class="wizard-step-content" id="wzStep9" style="display:none;">
+              <h3 class="panel-title" style="margin-bottom:14px;">Step 9: Live Interactive Sandbox Preview</h3>
+              <div class="sandbox-device-frame" style="width:375px;">
+                <iframe id="wzPreviewIframe" src="templates/birthday-wish-01/index.html"></iframe>
+              </div>
+            </div>
+
+            <!-- Step 10 -->
+            <div class="wizard-step-content" id="wzStep10" style="display:none;">
+              <h3 class="panel-title" style="margin-bottom:14px;">Step 10: Validation &amp; Publish</h3>
+              <div style="background:var(--bg-card-soft); border:1px solid var(--border-subtle); border-radius:14px; padding:18px; margin-bottom:18px;">
+                <div style="font-weight:750; margin-bottom:10px; color:var(--text-headings);">Automated Pre-Launch Checklist:</div>
+                <div style="display:flex; flex-direction:column; gap:6px; font-size:13px;">
+                  <div>✅ Template Name &amp; ID verified</div>
+                  <div>✅ Valid category &amp; pricing configuration</div>
+                  <div>✅ Interactive sections &amp; audio soundtrack loaded</div>
+                  <div>✅ Live responsive sandbox passed</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <button type="button" class="btn-3d" onclick="saveWizardAsDraft()">💾 Save as Draft</button>
+                <button type="button" class="btn-3d btn-3d-rose" onclick="publishWizardLive()">🚀 Publish Live to Storefront</button>
+              </div>
+            </div>
+
+            <!-- Stepper Controls -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:24px; border-top:1px solid var(--border-subtle); padding-top:16px;">
+              <button type="button" class="btn-3d" id="btnWzPrev" onclick="navigateWizardStep(-1)" disabled>← Previous Step</button>
+              <button type="button" class="btn-3d btn-3d-rose" id="btnWzNext" onclick="navigateWizardStep(1)">Next Step →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 6: PUBLISH CENTER & VERSION HISTORY ⭐
+             ======================================================== -->
+        <section id="tab-publish-center" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">🚀 Central Publish Center &amp; Rollback Hub</h1>
+              <p class="page-sub-caption">Publish verification engine, draft manager, and instant 1-click version history restore.</p>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <!-- Live Catalog Status -->
+            <div class="panel-card">
+              <h3 class="panel-title" style="margin-bottom:14px;"><span>🟢 Published Catalog (51 Live)</span></h3>
+              <div style="display:flex; flex-direction:column; gap:8px; max-height:420px; overflow-y:auto;" id="pubCenterLiveList">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Pending Drafts & Validation -->
+            <div class="panel-card">
+              <h3 class="panel-title" style="margin-bottom:14px;"><span>🟡 Drafts Awaiting Publish</span></h3>
+              <div style="display:flex; flex-direction:column; gap:8px; max-height:420px; overflow-y:auto;" id="pubCenterDraftList">
+                <div style="color:var(--text-muted); font-size:13px; padding:12px;">No pending drafts. All catalog items are published!</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 7: PAGE & CONTENT MANAGER
+             ======================================================== -->
+        <section id="tab-site-editor" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">🌐 Page &amp; Storefront Content Manager</h1>
+              <p class="page-sub-caption">Live storefront editor: Homepage hero headlines, announcements, FAQ, contact and footer.</p>
+            </div>
+            <button type="button" class="btn-3d btn-3d-rose" onclick="saveStorefrontSettings()">Publish Changes Live</button>
+          </div>
+
+          <div class="panel-card">
+            <h3 class="panel-title" style="margin-bottom:14px;">Hero Entrance &amp; Banner</h3>
+            <div class="field-group">
+              <label class="field-caption">Announcement Bar Text</label>
+              <input type="text" class="text-input" id="cfgAnnouncement" value="🎉 FESTIVE SPECIAL: Use code FESTIVE50 for Flat ₹50 OFF on all experiences!"/>
+            </div>
+            <div class="field-group">
+              <label class="field-caption">Hero Main Headline</label>
+              <input type="text" class="text-input" id="cfgHeroHeadline" value="Give More Than Words. Gift An Unforgettable Digital Moment."/>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h3 class="panel-title" style="margin-bottom:14px;">Customer Concierge &amp; Rules</h3>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <div class="field-group">
+                <label class="field-caption">Official WhatsApp Number</label>
+                <input type="text" class="text-input" id="cfgWhatsappNumber" value="+91 76314 42934"/>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Support Email</label>
+                <input type="email" class="text-input" id="cfgSupportEmail" value="celebrate@vanvimoments.shop"/>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+              <div class="field-group">
+                <label class="field-caption">Delivery Turnaround</label>
+                <input type="text" class="text-input" id="cfgTurnaround" value="Instant (under 30s)"/>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Daily Games Max Free Coins Cap</label>
+                <input type="number" class="text-input" id="cfgDailyGameCap" value="250"/>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Payment Processing Mode</label>
+                <select class="select-input" id="cfgPaymentMode">
+                  <option value="razorpay_live">Razorpay Production (Live)</option>
+                  <option value="razorpay_sim">Automated Simulator (Dev)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 8: MEDIA & CLOUDINARY MANAGER
+             ======================================================== -->
+        <section id="tab-media-manager" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">🖼️ Media &amp; Cloudinary Asset Manager</h1>
+              <p class="page-sub-caption">Browse, upload, and inspect CDN media. Detects exactly where each asset is used.</p>
+            </div>
+            <button type="button" class="btn-3d btn-3d-rose" onclick="openMediaUploadModal()">＋ Upload Asset</button>
+          </div>
+
+          <div class="media-grid" id="adminMediaGrid">
+            <!-- Populated dynamically by loadAdminMedia() -->
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 9: PHYSICAL GIFT STORE (REQUIRED BY TEST)
+             ======================================================== -->
+        <section id="tab-products" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">🎁 Physical Gift Store &amp; Affiliates</h1>
+              <p class="page-sub-caption">Curated companion gifts (Amazon, Flipkart, Meesho, Myntra) paired with digital moments.</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="btn-3d" id="btnResetDemoProducts" onclick="resetDemoProducts()">Reset Defaults</button>
+              <button type="button" class="btn-3d" id="btnClearDemoProducts" onclick="clearDemoProducts()">Clear All</button>
+              <button type="button" class="btn-3d btn-3d-rose" onclick="openProductAdminModal()">＋ Add Physical Gift</button>
+            </div>
+          </div>
+
+          <div class="panel-card" style="padding:0; overflow:hidden;">
+            <div class="admin-table-wrap" style="border:none;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Platform</th>
+                    <th>Price</th>
+                    <th>Store URL</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProductsTbody">
+                  <!-- Populated by loadAdminProducts() -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 10: ORDERS & REVENUE
+             ======================================================== -->
+        <section id="tab-orders" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">💳 Orders, Payments &amp; Coin Refunds</h1>
+              <p class="page-sub-caption">Real-time ledger of celebration checkouts, Razorpay references, and instant refunds.</p>
+            </div>
+          </div>
+
+          <div class="panel-card" style="padding:0; overflow:hidden;">
+            <div class="admin-table-wrap" style="border:none;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Template Experience</th>
+                    <th>Amount Paid</th>
+                    <th>Coins Used</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminOrdersTbody">
+                  <!-- Populated by loadAllOrders() -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 11: USERS & WALLETS
+             ======================================================== -->
+        <section id="tab-users" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">👥 Registered Creators &amp; Wallets</h1>
+              <p class="page-sub-caption">Manage registered users, membership tiers (Vanvi Club / VIP), and coin balances.</p>
+            </div>
+            <button type="button" class="btn-3d btn-3d-gold" onclick="openGrantCoinsModal()">🪙 Grant Coins</button>
+          </div>
+
+          <div class="panel-card" style="padding:0; overflow:hidden;">
+            <div class="admin-table-wrap" style="border:none;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Creator</th>
+                    <th>Email / Phone</th>
+                    <th>Tier</th>
+                    <th>Coins Balance</th>
+                    <th>Registered</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminUsersTbody">
+                  <!-- Populated by loadAllUsers() -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 12: MOMENTS MODERATION
+             ======================================================== -->
+        <section id="tab-moments" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">💌 Live Moments Moderation &amp; QR</h1>
+              <p class="page-sub-caption">Inspect customer crafted moments, preview links, generate instant QR codes, and moderate.</p>
+            </div>
+          </div>
+
+          <div class="panel-card" style="padding:0; overflow:hidden;">
+            <div class="admin-table-wrap" style="border:none;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Moment Title</th>
+                    <th>Recipient</th>
+                    <th>Sender</th>
+                    <th>Occasion</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminMomentsTbody">
+                  <!-- Populated by loadAllMoments() -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 13: BESPOKE CONCIERGE REQUESTS
+             ======================================================== -->
+        <section id="tab-custom-requests" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">💎 Bespoke Concierge &amp; Custom Orders</h1>
+              <p class="page-sub-caption">Customer inquiries for tailored celebration design, custom animations, and concierge quotes.</p>
+            </div>
+          </div>
+
+          <div class="panel-card" style="padding:0; overflow:hidden;">
+            <div class="admin-table-wrap" style="border:none;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Inquiry ID</th>
+                    <th>Client Name</th>
+                    <th>Occasion &amp; Details</th>
+                    <th>Budget</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminCustomRequestsTbody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 14: COUPONS & DISCOUNTS
+             ======================================================== -->
+        <section id="tab-coupons" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">🏷️ Storefront Coupons &amp; Coin Economy</h1>
+              <p class="page-sub-caption">Create promo vouchers (Percentage or Flat ₹ OFF) and configure customer redemption rules.</p>
+            </div>
+            <button type="button" class="btn-3d btn-3d-rose" onclick="openNewCouponModal()">＋ Create Promo Code</button>
+          </div>
+
+          <div class="panel-card" style="padding:0; overflow:hidden;">
+            <div class="admin-table-wrap" style="border:none;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Promo Code</th>
+                    <th>Discount</th>
+                    <th>Min Order</th>
+                    <th>Uses Logged</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminCouponsTbody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 15: VANVI ADMIN AI ⭐⭐⭐
+             ======================================================== -->
+        <section id="tab-gpt-copilot" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">🤖 Vanvi Admin AI — Atelier Executive</h1>
+              <p class="page-sub-caption">Natural language administration assistant: plan, confirm, execute, and verify database changes.</p>
+            </div>
+            <span class="pill-badge badge-active" id="copilotEngineBadge">● Vanvi Admin AI Active</span>
+          </div>
+
+          <div class="copilot-chat-box">
+            <div class="copilot-feed-scroll" id="copilotChatFeed">
+              <div class="copilot-msg-row copilot-bot">
+                <div class="copilot-avatar">🤖</div>
+                <div class="copilot-bubble">
+                  <p><strong>Namaste Admin!</strong> Main hoon <strong>Vanvi Admin AI</strong> — aapka exclusive atelier control assistant.</p>
+                  <p style="margin-top:6px; font-size:12.5px; color:var(--text-muted);">Main natural language commands samajhta hoon, pehle Plan dikhata hoon, confirmation mangta hoon aur verify karke report karta hoon:</p>
+                  <ul style="margin:8px 0 8px 18px; font-size:12px; color:var(--text-main); line-height:1.6;">
+                    <li><em>"Birthday template ki price 1999 kar do"</em></li>
+                    <li><em>"Is preset ko duplicate karke wedding version banao"</em></li>
+                    <li><em>"Is template ko featured kar do"</em></li>
+                    <li><em>"Homepage ka hero text change karo"</em></li>
+                    <li><em>"Sab unpublished templates dikhao"</em></li>
+                    <li><em>"Today's orders dikhao"</em></li>
+                  </ul>
+                  <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+                    <span class="pill-badge badge-active">✓ Safety Confirmation Engine</span>
+                    <span class="pill-badge" style="background:#e0e7ff; color:#4338ca;">✓ Plan &amp; Verify Execution</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Chips -->
+            <div style="padding:8px 16px; background:var(--bg-card); border-top:1px solid var(--border-subtle); display:flex; gap:8px; overflow-x:auto;">
+              <button type="button" class="action-btn-pill" onclick="sendCopilotPrompt('Birthday template ki price 1999 kar do')">🎂 Price ₹1999 karo</button>
+              <button type="button" class="action-btn-pill" onclick="sendCopilotPrompt('Is preset ko duplicate karke wedding version banao')">✨ Wedding Preset duplicate karo</button>
+              <button type="button" class="action-btn-pill" onclick="sendCopilotPrompt('Today\'s orders dikhao')">📊 Today\'s Orders</button>
+              <button type="button" class="action-btn-pill" onclick="sendCopilotPrompt('Sab unpublished templates dikhao')">📑 Unpublished Templates</button>
+              <button type="button" class="action-btn-pill" onclick="sendCopilotPrompt('Homepage ka hero text change karo')">🌐 Hero text update</button>
+            </div>
+
+            <!-- Input Bar -->
+            <div style="padding:12px 16px; background:var(--bg-card); border-top:1px solid var(--border-subtle); display:flex; gap:10px; align-items:center;">
+              <input type="text" id="copilotInput" class="text-input" placeholder="Type natural language admin command (English or Hinglish)..." style="flex:1; border-radius:99px; padding:10px 18px;" onkeydown="if(event.key==='Enter') sendCopilotMsg();"/>
+              <button type="button" class="btn-topbar btn-topbar-primary" id="btnSendCopilot" onclick="sendCopilotMsg()" style="border-radius:99px; padding:10px 22px;">
+                <span>Execute ✨</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 16: SETTINGS & BRANDING
+             ======================================================== -->
+        <section id="tab-settings" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">⚙️ Atelier Settings, Branding &amp; Flags</h1>
+              <p class="page-sub-caption">Manage site branding, currency, default pricing, maintenance mode, and feature flags.</p>
+            </div>
+            <button type="button" class="btn-3d btn-3d-rose" onclick="saveAdminSettings()">Save Settings</button>
+          </div>
+
+          <div class="panel-card">
+            <h3 class="panel-title" style="margin-bottom:14px;">Site Branding &amp; Currency</h3>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <div class="field-group">
+                <label class="field-caption">Storefront Brand Name</label>
+                <input type="text" class="text-input" id="cfgSiteName" value="Vanvi Moments"/>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Brand Tagline</label>
+                <input type="text" class="text-input" id="cfgSiteTagline" value="Luxury Interactive Celebration Experiences"/>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <div class="field-group">
+                <label class="field-caption">Default Store Currency</label>
+                <input type="text" class="text-input" id="cfgCurrency" value="INR (₹)"/>
+              </div>
+              <div class="field-group">
+                <label class="field-caption">Default Template Price</label>
+                <input type="number" class="text-input" id="cfgDefaultPrice" value="149"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h3 class="panel-title" style="margin-bottom:14px;">Maintenance &amp; Feature Flags</h3>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+                <input type="checkbox" id="cfgMaintenanceMode"/>
+                <span><strong>Maintenance Mode</strong> (Show maintenance banner on storefront)</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+                <input type="checkbox" id="cfgFlagCoins" checked/>
+                <span><strong>Vanvi Coins Economy</strong> (Allow rewards and spin wheel coins)</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+                <input type="checkbox" id="cfgFlagFortune" checked/>
+                <span><strong>Fortune Spin Wheel Modal</strong></span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================
+             TAB 17: BACKUPS & AUDIT LOGS
+             ======================================================== -->
+        <section id="tab-backups" class="tab-pane">
+          <div class="page-title-row">
+            <div>
+              <h1 class="page-main-heading">💾 System Backups &amp; Audit Logs</h1>
+              <p class="page-sub-caption">Export snapshots of your transactional database and inspect immutable administrative actions.</p>
+            </div>
+            <button type="button" class="btn-3d btn-3d-gold" onclick="downloadDatabaseSnapshot()">Export Backup JSON</button>
+          </div>
+
+          <div class="panel-card">
+            <h3 class="panel-title" style="margin-bottom:14px;">Immutable Audit Trail</h3>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Action</th>
+                    <th>Target Entity</th>
+                    <th>Actor User</th>
+                    <th>Metadata Details</th>
+                  </tr>
+                </thead>
+                <tbody id="adminFullAuditLogsTbody">
+                  <!-- Populated by loadAuditLogs() -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 1: PHYSICAL GIFT STORE (REQUIRED BY TEST)
+       ============================================================ -->
+  <div class="modal-backdrop-wrap" id="productAdminModal">
+    <div class="modal-box-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 class="modal-title-text" id="modalProductTitle">Add Physical Gift</h3>
+        <button type="button" style="background:transparent; border:none; color:var(--text-muted); font-size:22px; cursor:pointer;" onclick="closeProductAdminModal()">×</button>
+      </div>
+
+      <form id="productAdminForm" onsubmit="event.preventDefault(); saveAdminProduct();">
+        <input type="hidden" id="productAdminId"/>
+
+        <div class="field-group">
+          <label class="field-caption">Product Name *</label>
+          <input type="text" class="text-input" id="productAdminName" required placeholder="e.g. Personalized Rotating Wooden Photo Lamp"/>
+        </div>
+
+        <div class="field-group">
+          <label class="field-caption">Category</label>
+          <select class="select-input" id="productAdminCategory">
+            <option value="Birthday Gifts">Birthday Gifts</option>
+            <option value="Anniversary & Couples">Anniversary &amp; Couples</option>
+            <option value="Gift Hampers">Gift Hampers</option>
+            <option value="Creative & Unique">Creative &amp; Unique</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label class="field-caption">Price (e.g. ₹499)</label>
+          <input type="text" class="text-input" id="productAdminPrice" placeholder="₹499"/>
+        </div>
+
+        <div class="field-group">
+          <label class="field-caption">Affiliate Store URL *</label>
+          <input type="url" class="text-input" id="productAdminUrl" required placeholder="https://www.amazon.in/dp/... or meesho.com/..."/>
+        </div>
+
+        <div class="field-group">
+          <label class="field-caption">Upload Product Image</label>
+          <input type="file" class="text-input" id="productAdminImageFile" accept="image/*"/>
+        </div>
+
+        <div class="field-group">
+          <label class="field-caption">Or Image URL</label>
+          <input type="url" class="text-input" id="productAdminImageUrl" placeholder="https://...jpg"/>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:22px;">
+          <button type="button" class="btn-topbar" onclick="closeProductAdminModal()">Cancel</button>
+          <button type="submit" class="btn-topbar btn-topbar-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 2: MASTER TEMPLATE EDITOR (EDIT EVERYTHING)
+       ============================================================ -->
+  <div class="modal-backdrop-wrap" id="templateModal">
+    <div class="modal-box-card modal-box-large">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 class="modal-title-text" id="modalTemplateTitle">Add / Edit Template</h3>
+        <button type="button" style="background:transparent; border:none; color:var(--text-muted); font-size:22px; cursor:pointer;" onclick="closeNewTemplateModal()">×</button>
+      </div>
+
+      <form id="templateAdminForm" onsubmit="event.preventDefault(); saveCustomTemplate();">
+        <input type="hidden" id="tplAdminEditIndex"/>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <div class="field-group">
+            <label class="field-caption">Template Name *</label>
+            <input type="text" class="text-input" id="tplAdminName" required placeholder="e.g. Birthday Wish 01"/>
+          </div>
+          <div class="field-group">
+            <label class="field-caption">Unique Slug / SKU *</label>
+            <input type="text" class="text-input" id="tplAdminSlug" required placeholder="e.g. birthday-wish-1"/>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+          <div class="field-group">
+            <label class="field-caption">Category</label>
+            <select class="select-input" id="tplAdminCategory">
+              <option value="Birthday">Birthday</option>
+              <option value="Love & Romance">Love &amp; Romance</option>
+              <option value="Wedding">Wedding</option>
+              <option value="Anniversary">Anniversary</option>
+              <option value="Apology">Apology</option>
+              <option value="Celebration">Celebration</option>
+              <option value="Friendship">Friendship</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-caption">Base Price (₹ INR)</label>
+            <input type="number" class="text-input" id="tplAdminPrice" value="149" min="0"/>
+          </div>
+          <div class="field-group">
+            <label class="field-caption">Original Price (₹ INR)</label>
+            <input type="number" class="text-input" id="tplAdminOriginalPrice" value="429" min="0"/>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <div class="field-group">
+            <label class="field-caption">Badge</label>
+            <input type="text" class="text-input" id="tplAdminBadge" placeholder="e.g. 🔥 Bestseller"/>
+          </div>
+          <div class="field-group">
+            <label class="field-caption">Display Icon</label>
+            <input type="text" class="text-input" id="tplAdminIcon" value="🎂"/>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-caption">Preview Image / Thumbnail URL</label>
+          <input type="url" class="text-input" id="tplAdminThumb" placeholder="https://...jpg"/>
+        </div>
+
+        <div class="field-group">
+          <label class="field-caption">Soundtrack Audio URL</label>
+          <input type="url" class="text-input" id="tplAdminAudio" placeholder="https://...mp3"/>
+        </div>
+
+        <!-- Section Manager Accordion -->
+        <div style="background:var(--bg-card-soft); border:1px solid var(--border-subtle); border-radius:12px; padding:14px; margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <strong style="font-size:13px;">Sections Structure (Order &amp; Texts)</strong>
+            <button type="button" class="action-btn-pill action-btn-rose" onclick="addSectionToActiveTemplate()">＋ Add Section</button>
+          </div>
+          <div id="modalTemplateSectionsList" style="display:flex; flex-direction:column; gap:8px;">
+            <!-- Rendered by editTemplateModal -->
+          </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:22px; border-top:1px solid var(--border-subtle); padding-top:14px;">
+          <button type="button" class="btn-3d" onclick="openLivePreviewFromModal()">👁️ Live Preview</button>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn-3d" onclick="closeNewTemplateModal()">Cancel</button>
+            <button type="button" class="btn-3d" onclick="saveTemplateAsDraftModal()">💾 Save Draft</button>
+            <button type="submit" class="btn-3d btn-3d-rose">🚀 Publish Live</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 3: LIVE SANDBOX PREVIEW
+       ============================================================ -->
+  <div class="modal-backdrop-wrap" id="livePreviewModal">
+    <div class="modal-box-card modal-box-large" style="text-align:center;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <h3 class="modal-title-text" id="livePreviewModalTitle">Live Sandbox Preview</h3>
+          <div style="display:flex; gap:4px;">
+            <button type="button" class="action-btn-pill active" onclick="setPreviewDeviceWidth('375px')">📱 Mobile</button>
+            <button type="button" class="action-btn-pill" onclick="setPreviewDeviceWidth('768px')">💻 Tablet</button>
+            <button type="button" class="action-btn-pill" onclick="setPreviewDeviceWidth('100%')">🖥️ Desktop</button>
+          </div>
+        </div>
+        <button type="button" style="background:transparent; border:none; color:var(--text-muted); font-size:22px; cursor:pointer;" onclick="closeLivePreviewModal()">×</button>
+      </div>
+
+      <div class="sandbox-device-frame" id="livePreviewFrameWrap">
+        <iframe id="livePreviewIframe" src="templates/birthday-wish-01/index.html"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 4: GLOBAL SEARCH PALETTE (CTRL+K)
+       ============================================================ -->
+  <div class="global-search-modal" id="globalSearchModal" onclick="if(event.target===this) closeGlobalSearchModal();">
+    <div class="search-palette-box">
+      <div class="search-input-header">
+        <span>🔍</span>
+        <input type="text" id="paletteSearchInput" placeholder="Search templates, presets, orders, users, moments..." oninput="handlePaletteSearch(this.value)"/>
+        <kbd style="font-size:11px; padding:3px 6px; border-radius:6px; background:var(--bg-card-soft); border:1px solid var(--border-subtle);">ESC</kbd>
+      </div>
+      <div class="search-results-feed" id="paletteResultsFeed">
+        <div style="padding:14px; text-align:center; color:var(--text-dim); font-size:13px;">Type anything to search across all atelier modules...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 5: GRANT USER COINS
+       ============================================================ -->
+  <div class="modal-backdrop-wrap" id="grantCoinsModal">
+    <div class="modal-box-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 class="modal-title-text">Grant User Coins &amp; Bonus</h3>
+        <button type="button" style="background:transparent; border:none; color:var(--text-muted); font-size:22px; cursor:pointer;" onclick="closeGrantCoinsModal()">×</button>
+      </div>
+
+      <div class="field-group">
+        <label class="field-caption">Select Creator Account</label>
+        <select class="select-input" id="selectGrantUser">
+          <!-- Populated by populateGrantUserSelect() -->
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="field-caption">Coins Credit Amount</label>
+        <select class="select-input" id="selectGrantAmount">
+          <option value="50">+50 Coins (₹5.00 INR)</option>
+          <option value="100">+100 Coins (₹10.00 INR)</option>
+          <option value="250">+250 Coins (₹25.00 INR)</option>
+          <option value="500">+500 Coins (₹50.00 INR)</option>
+          <option value="1000">+1000 Coins (₹100.00 INR)</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="field-caption">Audit Reason</label>
+        <input type="text" class="text-input" id="grantCoinsReason" value="Celebration Concierge Bonus"/>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:22px;">
+        <button type="button" class="btn-topbar" onclick="closeGrantCoinsModal()">Cancel</button>
+        <button type="submit" class="btn-topbar btn-topbar-primary" onclick="submitGrantCoins()">Confirm Credit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 6: EDIT USER & ROLE
+       ============================================================ -->
+  <div class="modal-backdrop-wrap" id="editUserAdminModal">
+    <div class="modal-box-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 class="modal-title-text" id="modalEditUserTitle">Edit Creator Profile &amp; Wallet</h3>
+        <button type="button" style="background:transparent; border:none; color:var(--text-muted); font-size:22px; cursor:pointer;" onclick="closeEditUserAdminModal()">×</button>
+      </div>
+
+      <form id="editUserAdminForm" onsubmit="event.preventDefault(); saveEditedUserAdmin();">
+        <input type="hidden" id="editUserAdminId"/>
+
+        <div class="field-group">
+          <label class="field-caption">Creator Name *</label>
+          <input type="text" class="text-input" id="editUserAdminName" required/>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="field-group">
+            <label class="field-caption">Email</label>
+            <input type="email" class="text-input" id="editUserAdminEmail" readonly style="background:var(--bg-card-soft);"/>
+          </div>
+          <div class="field-group">
+            <label class="field-caption">Phone Number</label>
+            <input type="text" class="text-input" id="editUserAdminPhone" placeholder="+91 99999 99999"/>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="field-group">
+            <label class="field-caption">Membership Tier</label>
+            <select class="select-input" id="editUserAdminTier">
+              <option value="free">Free Creator</option>
+              <option value="member">👑 Vanvi Club</option>
+              <option value="vip">🌟 VIP Patron</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-caption">Platform Role</label>
+            <select class="select-input" id="editUserAdminRole">
+              <option value="user">User (Standard)</option>
+              <option value="admin">Administrator</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="field-group">
+            <label class="field-caption">Coin Balance (🪙)</label>
+            <input type="number" class="text-input" id="editUserAdminCoins" min="0"/>
+          </div>
+          <div class="field-group">
+            <label class="field-caption">Pass Credits (🎟️)</label>
+            <input type="number" class="text-input" id="editUserAdminPasses" min="0"/>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:24px;">
+          <button type="button" class="action-btn-pill action-btn-danger" id="btnDeleteUserInModal" onclick="deleteUserFromModal()">🗑️ Delete Account</button>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn-topbar" onclick="closeEditUserAdminModal()">Cancel</button>
+            <button type="submit" class="btn-topbar btn-topbar-primary">Save Changes</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 7: CREATE PROMO COUPON
+       ============================================================ -->
+  <div class="modal-backdrop-wrap" id="newCouponModal">
+    <div class="modal-box-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 class="modal-title-text">Create Store Coupon</h3>
+        <button type="button" style="background:transparent; border:none; color:var(--text-muted); font-size:22px; cursor:pointer;" onclick="closeNewCouponModal()">×</button>
+      </div>
+
+      <form onsubmit="event.preventDefault(); submitNewCoupon();">
+        <div class="field-group">
+          <label class="field-caption">Coupon Code (Uppercase) *</label>
+          <input type="text" class="text-input" id="newCouponCode" required placeholder="e.g. DIWALI25"/>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="field-group">
+            <label class="field-caption">Discount Value *</label>
+            <input type="text" class="text-input" id="newCouponDiscount" required placeholder="25% or ₹50 FLAT"/>
+          </div>
+          <div class="field-group">
+            <label class="field-caption">Min Order (INR)</label>
+            <input type="number" class="text-input" id="newCouponMin" value="199" min="0"/>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:22px;">
+          <button type="button" class="btn-topbar" onclick="closeNewCouponModal()">Cancel</button>
+          <button type="submit" class="btn-topbar btn-topbar-primary">Save Coupon</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 8: CLOUDINARY MEDIA UPLOAD
+       ============================================================ -->
+  <div class="modal-backdrop-wrap" id="mediaUploadModal">
+    <div class="modal-box-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 class="modal-title-text">Upload Asset to Cloudinary</h3>
+        <button type="button" style="background:transparent; border:none; color:var(--text-muted); font-size:22px; cursor:pointer;" onclick="closeMediaUploadModal()">×</button>
+      </div>
+
+      <form onsubmit="event.preventDefault(); submitMediaUpload();">
+        <div class="field-group">
+          <label class="field-caption">Asset Name</label>
+          <input type="text" class="text-input" id="uploadMediaName" placeholder="e.g. Romantic Candle Scene" required/>
+        </div>
+        <div class="field-group">
+          <label class="field-caption">Asset Type</label>
+          <select class="select-input" id="uploadMediaType">
+            <option value="image">Image (JPG, PNG, WebP)</option>
+            <option value="video">Video (MP4, WebM)</option>
+            <option value="audio">Audio (MP3, WAV)</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-caption">Direct CDN / Cloudinary URL *</label>
+          <input type="url" class="text-input" id="uploadMediaUrl" placeholder="https://res.cloudinary.com/... or https://..." required/>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:22px;">
+          <button type="button" class="btn-3d" onclick="closeMediaUploadModal()">Cancel</button>
+          <button type="submit" class="btn-3d btn-3d-rose">Confirm Upload</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MASTER CONTROLLER SCRIPT (PRODUCTION ENGINE)
+       ============================================================ -->
+  <script src="js/vanvi-admin-controller.js"></script>
+</body>
+</html>
+`;
+
+fs.writeFileSync('admin.html', adminHtml, 'utf8');
+console.log('Successfully written pristine admin.html with 20 production modules!');

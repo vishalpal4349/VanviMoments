@@ -293,6 +293,27 @@ const Moments = {
     };
     store.moments.push(moment);
     saveStore();
+
+    // Asynchronously synchronize moment to Supabase
+    try {
+      const supabaseService = require('../services/supabase.service');
+      if (supabaseService.isConfigured && supabaseService.client) {
+        supabaseService.client.from('moments').upsert({
+          id: moment.id,
+          slug: moment.slug,
+          user_id: moment.userId || null,
+          template_id: moment.templateId || 'common',
+          custom_data: moment.custom_data || {},
+          status: moment.status || 'draft',
+          views: moment.views || 0,
+          hearts: moment.hearts || 0
+        }).then(({ error }) => {
+          if (error) console.warn('[Supabase Sync] Note: moments sync deferred:', error.message);
+          else console.log(`[Supabase Sync] ✓ Moment ${moment.id} persisted to Supabase!`);
+        }).catch(err => console.warn('[Supabase Sync] moments.upsert exception:', err.message));
+      }
+    } catch (e) {}
+
     return moment;
   },
 
@@ -301,6 +322,25 @@ const Moments = {
     if (idx === -1) return null;
     store.moments[idx] = { ...store.moments[idx], ...updates, updatedAt: Date.now() };
     saveStore();
+
+    // Asynchronously sync update to Supabase
+    try {
+      const supabaseService = require('../services/supabase.service');
+      if (supabaseService.isConfigured && supabaseService.client) {
+        const updatePayload = {
+          updated_at: new Date().toISOString()
+        };
+        if (updates.status) updatePayload.status = updates.status;
+        if (updates.custom_data) updatePayload.custom_data = updates.custom_data;
+        if (updates.views !== undefined) updatePayload.views = updates.views;
+        if (updates.hearts !== undefined) updatePayload.hearts = updates.hearts;
+
+        supabaseService.client.from('moments').update(updatePayload).eq('id', id).then(({ error }) => {
+          if (error) console.warn('[Supabase Sync] Note: moments.update deferred:', error.message);
+        }).catch(() => {});
+      }
+    } catch (e) {}
+
     return store.moments[idx];
   },
 
@@ -383,6 +423,37 @@ const Orders = {
     };
     store.orders.push(order);
     saveStore();
+
+    // Asynchronously synchronize order to Supabase
+    try {
+      const supabaseService = require('../services/supabase.service');
+      if (supabaseService.isConfigured && supabaseService.client) {
+        supabaseService.client.from('orders').insert({
+          id: order.id,
+          user_id: order.userId || null,
+          moment_id: order.momentId || null,
+          template_name: order.templateName,
+          base_price: Number(order.basePrice || 0),
+          coins_used: Number(order.coinsUsed || 0),
+          discount_inr: Number(order.discountINR || 0),
+          final_amount_inr: Number(order.finalAmountINR || 0),
+          currency: order.currency || 'INR',
+          gateway: order.gateway || 'razorpay',
+          gateway_order_id: order.gatewayOrderId,
+          status: order.status || 'pending',
+          created_at: new Date(order.createdAt).toISOString()
+        }).then(({ error }) => {
+          if (error) {
+            console.warn('[Supabase Sync] Note: orders table sync deferred:', error.message);
+          } else {
+            console.log(`[Supabase Sync] ✓ Order ${order.id} persisted to Supabase!`);
+          }
+        }).catch(err => {
+          console.warn('[Supabase Sync] orders.insert exception:', err.message);
+        });
+      }
+    } catch (e) {}
+
     return order;
   },
 
@@ -393,6 +464,40 @@ const Orders = {
     order.paidAt = Date.now();
     order.paymentDetails = paymentDetails;
     saveStore();
+
+    // Asynchronously update order to paid in Supabase
+    try {
+      const supabaseService = require('../services/supabase.service');
+      if (supabaseService.isConfigured && supabaseService.client) {
+        supabaseService.client.from('orders').update({
+          status: 'paid',
+          paid_at: new Date(order.paidAt).toISOString()
+        }).eq('id', id).then(({ error }) => {
+          if (error) {
+            console.warn('[Supabase Sync] Note: order paid status sync deferred:', error.message);
+          } else {
+            console.log(`[Supabase Sync] ✓ Order ${id} marked paid in Supabase!`);
+          }
+        }).catch(err => {
+          console.warn('[Supabase Sync] orders.update exception:', err.message);
+        });
+
+        // Also record to payments table if available
+        supabaseService.client.from('payments').insert({
+          id: 'pay_' + crypto.randomBytes(8).toString('hex'),
+          order_id: id,
+          gateway: order.gateway || 'razorpay',
+          gateway_payment_id: paymentDetails.paymentId || 'pay_confirmed',
+          amount: Number(order.finalAmountINR || 0),
+          currency: order.currency || 'INR',
+          status: 'captured',
+          created_at: new Date().toISOString()
+        }).then(({ error }) => {
+          if (error) console.warn('[Supabase Sync] Note: payments record deferred:', error.message);
+        }).catch(() => {});
+      }
+    } catch (e) {}
+
     return order;
   },
 

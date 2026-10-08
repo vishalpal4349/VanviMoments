@@ -14,6 +14,17 @@ router.use(requireAuth, requireAdmin);
 router.get('/overview', async (req, res) => {
   try {
     const metrics = await AnalyticsEvents.getMetrics();
+    const { adminCmsService } = require('../services/admin-cms.service');
+    const health = await adminCmsService.getHealthStatus();
+    const tplSummary = adminCmsService.listTemplates({ limit: 1000 });
+    const presets = adminCmsService.listPresets();
+
+    metrics.templatesCount = tplSummary.counts.total;
+    metrics.publishedTemplatesCount = tplSummary.counts.published;
+    metrics.draftTemplatesCount = tplSummary.counts.draft;
+    metrics.presetsCount = presets.length;
+    metrics.systemHealth = health;
+
     return res.json({ success: true, metrics });
   } catch (err) {
     console.error('Admin overview error:', err);
@@ -231,27 +242,313 @@ router.post('/custom-requests/:id/status', async (req, res) => {
 });
 
 /**
- * POST /api/admin/copilot
- * Autonomous Admin Copilot powered by OpenAI GPT
+ * POST /api/admin/copilot & POST /api/admin/ai/command
+ * Vanvi Admin AI Executive Operations
  */
-router.post('/copilot', async (req, res) => {
+const copilotHandler = async (req, res) => {
   try {
-    const { message, history, apiKey } = req.body;
-    if (!message || typeof message !== 'string') {
-      return res.status(400).json({ success: false, error: 'Message is required.' });
+    const { message, history, apiKey, confirmed, pendingAction } = req.body;
+    if (!message && !pendingAction) {
+      return res.status(400).json({ success: false, error: 'Message or pendingAction is required.' });
     }
 
     const { chatAdminCopilot } = require('../services/admin-copilot.service');
     const result = await chatAdminCopilot({
-      message,
+      message: message || '',
       history,
-      apiKey: apiKey || req.headers['x-openai-key']
+      apiKey: apiKey || req.headers['x-openai-key'],
+      confirmed: !!confirmed,
+      pendingAction: pendingAction || null
     });
 
     return res.json(result);
   } catch (err) {
-    console.error('Admin Copilot error:', err);
-    return res.status(500).json({ success: false, error: err.message || 'Copilot execution failed' });
+    console.error('Admin AI command error:', err);
+    return res.status(500).json({ success: false, error: err.message || 'Vanvi Admin AI execution failed' });
+  }
+};
+
+router.post('/copilot', copilotHandler);
+router.post('/ai/command', copilotHandler);
+
+// =========================================================================
+// TEMPLATE MANAGER & CREATOR WIZARD
+// =========================================================================
+
+const { adminCmsService } = require('../services/admin-cms.service');
+
+router.get('/templates', (req, res) => {
+  try {
+    const result = adminCmsService.listTemplates({
+      search: req.query.search,
+      category: req.query.category,
+      status: req.query.status,
+      limit: parseInt(req.query.limit, 10) || 100,
+      offset: parseInt(req.query.offset, 10) || 0
+    });
+    return res.json({ success: true, ...result });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+router.get('/templates/:id', (req, res) => {
+  try {
+    const template = adminCmsService.getTemplate(req.params.id);
+    if (!template) return res.status(404).json({ success: false, error: 'Template not found.' });
+    return res.json({ success: true, template });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+router.post('/templates', async (req, res) => {
+  try {
+    const created = await adminCmsService.createTemplate(req.body, req.user.id);
+    return res.status(201).json({ success: true, template: created });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+router.put('/templates/:id', async (req, res) => {
+  try {
+    const updated = await adminCmsService.updateTemplate(req.params.id, req.body, req.user.id);
+    return res.json({ success: true, template: updated });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+router.post('/templates/:id/draft', async (req, res) => {
+  try {
+    const draftPayload = req.body && req.body.draftData !== undefined ? req.body.draftData : req.body;
+    const result = await adminCmsService.saveTemplateDraft(req.params.id, draftPayload, req.user.id);
+    return res.json({ success: true, ...result });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+router.post('/templates/:id/publish', async (req, res) => {
+  try {
+    const result = await adminCmsService.publishTemplate(req.params.id, req.user.id);
+    if (!result.success) return res.status(422).json(result);
+    return res.json(result);
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+router.post('/templates/:id/unpublish', async (req, res) => {
+  try {
+    const result = await adminCmsService.unpublishTemplate(req.params.id, req.user.id);
+    return res.json(result);
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+router.delete('/templates/:id', async (req, res) => {
+  try {
+    const result = await adminCmsService.deleteTemplate(req.params.id, req.user.id);
+    return res.json(result);
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+router.get('/templates/:id/versions', (req, res) => {
+  try {
+    const template = adminCmsService.getTemplate(req.params.id);
+    if (!template) return res.status(404).json({ success: false, error: 'Template not found.' });
+    return res.json({ success: true, versions: template.versionHistory || [] });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+router.post('/templates/:id/rollback', async (req, res) => {
+  try {
+    const version = req.body.version || req.body.versionId;
+    if (!version) return res.status(400).json({ success: false, error: 'Target version required.' });
+    const result = await adminCmsService.rollbackTemplate(req.params.id, version, req.user.id);
+    return res.json(result);
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+// =========================================================================
+// PRESET MANAGER
+// =========================================================================
+
+router.get('/presets', (req, res) => {
+  try {
+    const presets = adminCmsService.listPresets();
+    return res.json({ success: true, presets });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+router.post('/presets', async (req, res) => {
+  try {
+    const preset = await adminCmsService.savePreset(req.body, req.user.id);
+    return res.status(201).json({ success: true, preset });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+router.post('/presets/:id/duplicate', async (req, res) => {
+  try {
+    const duplicated = await adminCmsService.duplicatePreset(req.params.id, req.user.id);
+    return res.json({ success: true, preset: duplicated });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+const handleClonePreset = async (req, res) => {
+  try {
+    const overrides = { ...req.body };
+    if (overrides.newTemplateName && !overrides.name) {
+      overrides.name = overrides.newTemplateName;
+    }
+    const template = await adminCmsService.clonePresetToTemplate(req.params.id, overrides, req.user.id);
+    return res.json({ success: true, template });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+};
+router.post('/presets/:id/clone-to-template', handleClonePreset);
+router.post('/presets/:id/clone-template', handleClonePreset);
+
+router.delete('/presets/:id', async (req, res) => {
+  try {
+    const result = await adminCmsService.deletePreset(req.params.id, req.user.id);
+    return res.json(result);
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+// =========================================================================
+// CONTENT & PAGE MANAGER
+// =========================================================================
+
+router.get('/content', (req, res) => {
+  try {
+    const content = adminCmsService.getSiteContent();
+    return res.json({ success: true, content });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+const handleUpdateContent = async (req, res) => {
+  try {
+    const content = await adminCmsService.updateSiteContent(req.body, req.user.id);
+    return res.json({ success: true, content, message: 'Storefront content updated & live!' });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+};
+
+router.post('/content', handleUpdateContent);
+router.put('/content', handleUpdateContent);
+
+router.post('/content/rollback', async (req, res) => {
+  try {
+    const { versionId } = req.body;
+    if (!versionId) return res.status(400).json({ success: false, error: 'Version ID required.' });
+    const content = await adminCmsService.rollbackSiteContent(versionId, req.user.id);
+    return res.json({ success: true, content, message: 'Storefront content restored.' });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+// =========================================================================
+// MEDIA MANAGER (CLOUDINARY & USAGE CHECK)
+// =========================================================================
+
+router.get('/media', (req, res) => {
+  try {
+    const result = adminCmsService.listMedia({
+      type: req.query.type,
+      search: req.query.search,
+      limit: parseInt(req.query.limit, 10) || 50,
+      offset: parseInt(req.query.offset, 10) || 0
+    });
+    return res.json({ success: true, ...result });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+router.post('/media/upload', async (req, res) => {
+  try {
+    const asset = await adminCmsService.uploadMedia(req.body, req.user.id);
+    return res.status(201).json({ success: true, asset });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+router.post('/media/check-usage', (req, res) => {
+  try {
+    const { url } = req.body;
+    const usage = adminCmsService.checkMediaUsage(url);
+    return res.json({ success: true, usage });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+router.delete('/media/:id', async (req, res) => {
+  try {
+    const force = req.query.force === 'true';
+    const result = await adminCmsService.deleteMedia(req.params.id, force, req.user.id);
+    if (!result.success) return res.status(409).json(result);
+    return res.json(result);
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+// =========================================================================
+// SETTINGS & SYSTEM HEALTH
+// =========================================================================
+
+router.get('/settings', (req, res) => {
+  try {
+    const settings = adminCmsService.getSettings();
+    return res.json({ success: true, settings });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+const handleUpdateSettings = async (req, res) => {
+  try {
+    const settings = await adminCmsService.updateSettings(req.body, req.user.id);
+    return res.json({ success: true, settings, message: 'Settings saved.' });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+};
+
+router.post('/settings', handleUpdateSettings);
+router.put('/settings', handleUpdateSettings);
+
+router.get('/health', async (req, res) => {
+  try {
+    const health = await adminCmsService.getHealthStatus();
+    return res.json({ success: true, health });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
   }
 });
 

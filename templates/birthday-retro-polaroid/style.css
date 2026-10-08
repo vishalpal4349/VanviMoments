@@ -1,0 +1,410 @@
+/* ==========================================================================
+   VANVI MOMENTS — BIRTHDAY RETRO POLAROID
+   Art Direction: 70s/80s Nostalgia • Kodachrome Amber • Washi Tape • Vinyl Groove
+   ========================================================================== */
+
+:root {
+  --bg-paper: #f7f3ea;
+  --bg-card: #ffffff;
+  --bg-dark-slate: #1f1d1b;
+  --amber-primary: #d97736;
+  --mustard-gold: #dca535;
+  --sienna-deep: #78351b;
+  --washi-teal: #6ba292;
+  --washi-pink: #d98282;
+  --text-dark: #2c2523;
+  --text-muted: #756a64;
+  --border-paper: rgba(44, 37, 35, 0.12);
+  --shadow-polaroid: 0 10px 25px rgba(44, 37, 35, 0.15), 0 2px 6px rgba(44, 37, 35, 0.08);
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-hand: 'Caveat', cursive;
+  --font-mono: 'Space Grotesk', -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--bg-paper);
+  color: var(--text-dark);
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Subtle Film Grain Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 0);
+  background-size: 8px 8px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.page-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 0 18px 90px;
+}
+
+/* 1. Camera Aperture Cover */
+.aperture-overlay {
+  position: fixed;
+  inset: 0;
+  background: #171514;
+  color: #fff;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  transition: opacity 0.7s ease, visibility 0.7s;
+}
+
+.aperture-overlay.opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.camera-lens-graphic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 8px solid #332f2c;
+  background: radial-gradient(circle at 40% 40%, #443e39 0%, #171514 80%);
+  box-shadow: 0 0 40px rgba(217, 119, 54, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+
+.btn-open-scrapbook {
+  background: var(--amber-primary);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 99px;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(217, 119, 54, 0.4);
+  font-size: 14px;
+}
+
+/* 2. Hero Section */
+.retro-hero {
+  padding-top: 50px;
+  padding-bottom: 30px;
+  text-align: center;
+  position: relative;
+}
+
+.washi-tape-strip {
+  width: 110px;
+  height: 24px;
+  background: rgba(107, 162, 146, 0.75);
+  margin: 0 auto 16px;
+  transform: rotate(-3deg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-left: 2px dashed rgba(255,255,255,0.4);
+  border-right: 2px dashed rgba(255,255,255,0.4);
+}
+
+.retro-hero-title {
+  font-family: var(--font-serif);
+  font-size: 38px;
+  color: var(--sienna-deep);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.retro-handwritten {
+  font-family: var(--font-hand);
+  font-size: 26px;
+  color: var(--amber-primary);
+  margin-bottom: 16px;
+}
+
+/* 3 & 4. Badges */
+.stamp-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.vintage-stamp {
+  border: 2px dashed var(--amber-primary);
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sienna-deep);
+  background: rgba(217, 119, 54, 0.08);
+  border-radius: 4px;
+  transform: rotate(2deg);
+}
+
+/* Scrapbook Card Container */
+.scrapbook-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 28px 22px;
+  margin-top: 28px;
+  box-shadow: var(--shadow-polaroid);
+  position: relative;
+  border: 1px solid var(--border-paper);
+}
+
+.washi-corner {
+  position: absolute;
+  top: -10px;
+  right: 24px;
+  width: 70px;
+  height: 20px;
+  background: rgba(217, 130, 130, 0.7);
+  transform: rotate(4deg);
+  border-left: 1px dashed rgba(255,255,255,0.5);
+  border-right: 1px dashed rgba(255,255,255,0.5);
+}
+
+/* 7. Interactive Vinyl Turntable */
+.turntable-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.turntable-deck {
+  width: 260px;
+  height: 260px;
+  background: #2b2825;
+  border-radius: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.3), inset 0 2px 6px rgba(255,255,255,0.1);
+  margin-bottom: 20px;
+}
+
+.vinyl-disc {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #1a1816 0%, #0d0c0a 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(0,0,0,0.8);
+  transition: transform 0.3s;
+  animation: spinVinyl 6s linear infinite paused;
+}
+
+.vinyl-disc.spinning {
+  animation-play-state: running;
+}
+
+@keyframes spinVinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinyl-center-label {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--mustard-gold) 0%, var(--amber-primary) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 0 6px rgba(0,0,0,0.5);
+}
+
+.tonearm {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 20px;
+  height: 90px;
+  border-right: 4px solid #c2b8ad;
+  border-bottom: 4px solid #c2b8ad;
+  border-radius: 0 0 8px 0;
+  transform-origin: top right;
+  transform: rotate(-15deg);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+.turntable-deck.playing .tonearm {
+  transform: rotate(22deg);
+}
+
+.btn-vinyl-play {
+  background: var(--amber-primary);
+  color: #fff;
+  border: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 99px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(217, 119, 54, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 8. Draggable Polaroid Stack */
+.polaroid-stage {
+  position: relative;
+  min-height: 380px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.polaroid-card {
+  position: absolute;
+  width: 230px;
+  background: #fff;
+  padding: 12px 12px 28px;
+  box-shadow: var(--shadow-polaroid);
+  border-radius: 2px;
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  touch-action: none;
+}
+
+.polaroid-card:active {
+  cursor: grabbing;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.polaroid-img-box {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: #eee;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.polaroid-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.polaroid-caption {
+  font-family: var(--font-hand);
+  font-size: 20px;
+  color: #332f2c;
+  text-align: center;
+}
+
+/* 10. Cassette Grid */
+.cassette-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.cassette-item {
+  background: #231f1d;
+  color: #f7f3ea;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 11px;
+}
+
+.cassette-title {
+  color: var(--mustard-gold);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* 12. Sticky Notes Wishes */
+.sticky-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.sticky-note {
+  background: #fff9d6;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  font-family: var(--font-hand);
+  font-size: 18px;
+  color: #383127;
+  transform: rotate(-2deg);
+}
+
+.sticky-note:nth-child(2) {
+  background: #e2f0d9;
+  transform: rotate(2deg);
+}
+
+/* 16. Retro Flip Countdown */
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.flip-box {
+  background: #231f1d;
+  color: #fff;
+  padding: 12px 6px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.flip-val {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--mustard-gold);
+}
+
+.flip-lbl {
+  font-size: 9px;
+  color: #999;
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .retro-hero-title { font-size: 30px; }
+  .polaroid-card { width: 200px; }
+  .turntable-deck { width: 220px; height: 220px; }
+  .vinyl-disc { width: 190px; height: 190px; }
+}

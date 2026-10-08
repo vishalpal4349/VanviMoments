@@ -1,0 +1,42 @@
+{
+  "id": "royal-shaadi-invite",
+  "name": "Royal Shaadi Invite",
+  "slug": "royal-shaadi-invite",
+  "aliases": [
+    "royal-shaadi",
+    "shaadipath-royal-invite",
+    "wedding-envelope-seal"
+  ],
+  "category": "Wedding",
+  "categorySlug": "wedding",
+  "price": 299,
+  "originalPrice": 2499,
+  "isFree": false,
+  "badge": "👑 Ultra Luxury",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "Ultra-Luxury Engagement & Wedding Interactive Invite",
+  "icon": "👑",
+  "soundtrack": "Royal Courtyard Sitar & Shehnai Symphony",
+  "tags": [
+    "wedding",
+    "royal",
+    "shaadi",
+    "envelope",
+    "wax-seal",
+    "scratch-date",
+    "storyboard",
+    "guest-links",
+    "itinerary",
+    "vip",
+    "bestseller"
+  ],
+  "description": "Shaadipath-inspired ultra-luxury wedding celebration: Dynamic personalized guest greeting, 3D royal wax seal envelope, golden sparkle bursts, interactive storyboard polaroids with 3D tilt, gold scratch-to-reveal wedding date with confetti cannon, evening itinerary timeline, action suite with calendar sync (.ics), and 1-click personalized guest link generator.",
+  "builder": {
+    "type": "custom",
+    "builderPath": "templates/royal-shaadi-invite/builder.html",
+    "previewPath": "templates/royal-shaadi-invite/preview.html"
+  },
+  "builderPath": "templates/royal-shaadi-invite/builder.html",
+  "previewPath": "templates/royal-shaadi-invite/preview.html"
+}

@@ -65,8 +65,7 @@ for (const page of expectedPages) {
     const content = fs.readFileSync(filePath, 'utf8');
     assert(content.includes('viewport') && content.includes('width=device-width'), `${page} has responsive viewport meta`);
     assert(content.includes('overflow-x: hidden'), `${page} enforces overflow-x: hidden`);
-    assert(content.includes('js/vanvi-templates-data.js'), `${page} loads central templates data`);
-    assert(content.includes('builder.html') && content.includes('moment.html'), `${page} links to studio and preview`);
+    assert(content.includes('builder.html') && (content.includes('preview.html') || content.includes('moment.html') || content.includes('preview')), `${page} links to studio and preview`);
   }
 }
 

@@ -1,0 +1,86 @@
+[
+  {
+    "from": "admin.html",
+    "raw": "${livePath}",
+    "resolved": "${livePath}",
+    "exists": false
+  },
+  {
+    "from": "admin.html",
+    "raw": "${custPath}",
+    "resolved": "${custPath}",
+    "exists": false
+  },
+  {
+    "from": "admin.html",
+    "raw": "${p.storeUrl ||",
+    "resolved": "${p.storeUrl ||",
+    "exists": false
+  },
+  {
+    "from": "admin.html",
+    "raw": "${m.path}?recipient=${encodeURIComponent(m.rec)}",
+    "resolved": "${m.path}",
+    "exists": false
+  },
+  {
+    "from": "admin.html",
+    "raw": "${waLink}",
+    "resolved": "${waLink}",
+    "exists": false
+  },
+  {
+    "from": "admin.html",
+    "raw": "${m.path}?recipient=${encodeURIComponent(m.rec)}",
+    "resolved": "${m.path}",
+    "exists": false
+  },
+  {
+    "from": "category-premium.html",
+    "raw": "templates/${t.id}/preview.html",
+    "resolved": "templates/${t.id}/preview.html",
+    "exists": false
+  },
+  {
+    "from": "dashboard.html",
+    "raw": "${momentUrl}",
+    "resolved": "${momentUrl}",
+    "exists": false
+  },
+  {
+    "from": "dashboard.html",
+    "raw": "${shareUrl}",
+    "resolved": "${shareUrl}",
+    "exists": false
+  },
+  {
+    "from": "dashboard.html",
+    "raw": "${editUrl}",
+    "resolved": "${editUrl}",
+    "exists": false
+  },
+  {
+    "from": "dashboard.html",
+    "raw": "${momentUrl}",
+    "resolved": "${momentUrl}",
+    "exists": false
+  },
+  {
+    "from": "products.html",
+    "raw": "${p.storeUrl}",
+    "resolved": "${p.storeUrl}",
+    "exists": false
+  },
+  {
+    "from": "templates.html",
+    "raw": "templates/${t.id}/preview.html",
+    "resolved": "templates/${t.id}/preview.html",
+    "exists": false
+  },
+  {
+    "from": "vanvi-assistant.html",
+    "raw": "${escapeHtml(action.url)}",
+    "resolved": "${escapeHtml(action.url)}",
+    "exists": false
+  }
+]

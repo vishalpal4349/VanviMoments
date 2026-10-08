@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
@@ -162,14 +163,14 @@ html, body {
 }
 </style>
   <link rel="stylesheet" href="vanvi-navigation.css"/>
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
   <link rel="stylesheet" href="css/vanvi-template-cards.css">
 </head>
 <body>
 
 <header>
-  <a href="index.html" class="brand-link" title="Vanvi Moments">
-    <span style="font-size: 20px;">🎁</span>
-    <span>VANVI <span style="color:var(--emerald);">♡</span> MOMENTS</span>
+  <a href="index.html" class="brand-link" title="Vanvi Moments Home">
+    <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="header-brand-img" style="height: 32px; width: auto; max-width: 145px; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(255, 42, 122, 0.22));" />
     <span class="brand-tag">FREE</span>
   </a>
   <div class="header-actions">
@@ -209,7 +210,7 @@ html, body {
   <a class="switch-pill" href="templates.html">🌟 All Templates</a>
 </nav>
 
-<main class="grid-luxury-catalog" id="freeGrid">
+<main class="grid-luxury-catalog vanvi-cards-grid" id="freeGrid">
   <!-- Rendered dynamically from VanviTemplatesData -->
 </main>
 
@@ -233,7 +234,7 @@ html, body {
     <a href="terms.html">Terms</a>
     <a href="refund.html">Refunds</a>
   </div>
-  <p>© 2026 Vanvi Moments · 100% Free Moments · <a href="index.html">Home</a> · <a href="templates.html">Templates</a> · <a href="builder.html">Studio</a> · <a href="plans.html">VIP Plans</a> · <a href="ai.html">AI Co-Pilot</a> · <a href="dashboard.html">My Moments</a></p>
+  <p>© 2026 Vanvi Moments · 100% Free Moments · <a href="index.html">Home</a> · <a href="templates.html">Templates</a> · <a href="builder.html">Studio</a> · <a href="plans.html">VIP Plans</a> · <a href="ai-matcher.html">AI Co-Pilot</a> · <a href="dashboard.html">My Moments</a></p>
 <!-- References: builder.html � moment.html -->
 </footer>
 
@@ -258,7 +259,7 @@ html, body {
     <a href="index.html" class="nav-btn " id="bottomNavHome" title="Home">⌂<br/>Home</a>
     <a href="templates.html" class="nav-btn active" id="bottomNavExplore" title="Explore">◌<br/>Explore</a>
     <a href="builder.html" class="create nav-btn " id="bottomNavCreate" title="Create">＋<br/>Create</a>
-    <a href="ai.html" class="nav-btn " id="bottomNavAi" title="AI">✦<br/>AI</a>
+    <a href="ai-matcher.html" class="nav-btn " id="bottomNavAi" title="AI">✦<br/>AI</a>
     <a href="profile.html" class="nav-btn " id="bottomNavMe" title="Profile">👤<br/>Profile</a>
   </nav>
   <script src="js/vanvi-navigation.js"></script>

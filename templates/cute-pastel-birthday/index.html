@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="rose">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Happy Birthday Aaradhya ✨ | Cute Pastel Birthday — Vanvi Moments</title>
+  <meta name="description" content="A dreamy, ultra-premium pastel digital birthday celebration keepsake featuring 3D gift opening, cake wish, polaroid memory deck, and music.">
+  <meta name="theme-color" content="#ffe8f2">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+  <!-- Google Fonts: Caveat (Cute Script), Playfair Display (Serif), Plus Jakarta Sans (Modern Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Template Master Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Decorative Canvases -->
+  <canvas id="ambientCanvas" aria-hidden="true"></canvas>
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- Dark Dimmer for Cake Wish -->
+  <div id="wishScreenDim" class="wish-screen-dim" aria-hidden="true"></div>
+
+  <!-- SECTION 0: INTRO / 1.2s LUXURY LOADER -->
+  <div id="introLoader" class="intro-loader-overlay" role="dialog" aria-modal="true" aria-label="Preparing birthday moment">
+    <div class="intro-sparkle-logo" aria-hidden="true">🌸</div>
+    <div class="intro-brand-title">VANVI MOMENTS</div>
+    <div class="intro-tagline">Something sweet &amp; beautiful is waiting for you... ✨</div>
+    <div class="intro-progress-bar" aria-hidden="true">
+      <div class="intro-progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- SECTION 11: FLOATING CUTE VINYL MUSIC PLAYER (Fixed Bottom Right) -->
+  <div id="floatingMusicWidget" class="floating-music-widget" role="button" tabindex="0" aria-label="Toggle background birthday music">
+    <div id="miniVinylDisc" class="mini-vinyl-disc" aria-hidden="true">🎵</div>
+    <div class="music-widget-info">
+      <span class="music-widget-title">Birthday Melody</span>
+      <span id="musicWidgetStatus" class="music-widget-status">Tap to Play</span>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN LIGHTBOX MODAL -->
+  <div id="lightboxModal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+    <div class="lightbox-content">
+      <button id="lightboxClose" class="lightbox-close" type="button" aria-label="Close photo lightbox">✕</button>
+      <img id="lightboxImg" src="assets/hero-cover.jpg" alt="Enlarged Memory Photo" class="lightbox-img">
+      <div id="lightboxCaption" class="gallery-caption-bar" style="position:relative; margin-top:8px; border-radius:12px;"></div>
+    </div>
+  </div>
+
+  <!-- TOAST FEEDBACK NOTIFICATION -->
+  <div id="vanviToast" class="vanvi-toast" role="status" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       MAIN EXPERIENCE WRAPPER
+       ======================================================================== -->
+  <main class="gift-app-container">
+
+    <!-- -------------------------------------------------------------
+         SECTION 1 — HERO SECTION
+         ------------------------------------------------------------- -->
+    <header id="heroSection" class="hero-section">
+      <div class="hero-balloons-cluster" aria-hidden="true">
+        <div class="balloon-item b-pink"></div>
+        <div class="balloon-item b-lavender"></div>
+        <div class="balloon-item b-peach"></div>
+        <div class="balloon-item b-blue"></div>
+      </div>
+
+      <div class="clay-card hero-card">
+        <img src="assets/hero-cover.jpg" alt="Aaradhya Birthday Cover" class="hero-mascot-img">
+        <div class="hero-bday-tag">✨ Happy Birthday ✨</div>
+        <h1 id="heroRecipientName" class="hero-recipient-name">Aaradhya</h1>
+        <p id="heroSubtitle" class="hero-emotional-subtitle">
+          Someone very special deserves a day as magical, sweet, and lovely as their heart ✨
+        </p>
+        <div>
+          <a href="#giftSection" class="btn-tactile-primary">
+            <span>Open Your Surprise</span>
+            <span>🎁</span>
+          </a>
+        </div>
+        <div class="hero-scroll-cue" aria-hidden="true">
+          <span>Scroll to celebrate</span>
+          <span>↓</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- -------------------------------------------------------------
+         SECTION 2 — 3D GIFT REVEAL
+         ------------------------------------------------------------- -->
+    <section id="giftSection" class="gift-section" aria-labelledby="giftTitle">
+      <div class="clay-card gift-card">
+        <div class="section-badge-pill">Chapter 01 • Surprise Box</div>
+        <h2 id="giftTitle" class="section-title">A Gift Box For You</h2>
+        <p class="section-subtitle">A luxury digital surprise box tied with satin ribbon. Tap or unwrap to reveal what is inside!</p>
+
+        <div id="giftBoxWrap" class="gift-box-wrapper" role="button" tabindex="0" aria-label="Tap to open 3D gift box">
+          <div class="gift-box-3d-scene">
+            <!-- Radiant Golden Light Rays on Opening -->
+            <div class="gift-light-burst" aria-hidden="true"></div>
+
+            <!-- Floating Celebration Sparks & Confetti -->
+            <div class="gift-floating-sparks" aria-hidden="true">
+              <span class="g-spark g-s1">✨</span>
+              <span class="g-spark g-s2">💖</span>
+              <span class="g-spark g-s3">⭐</span>
+              <span class="g-spark g-s4">🎉</span>
+              <span class="g-spark g-s5">🌸</span>
+            </div>
+
+            <!-- Elevated Keepsake Token -->
+            <div class="gift-surprise-token" aria-hidden="true">
+              <span class="token-icon">🎁</span>
+              <span class="token-text">Surprise!</span>
+            </div>
+
+            <!-- 3D Gift Lid & Ribbon Bow Assembly -->
+            <div class="gift-lid-assembly" aria-hidden="true">
+              <div class="gift-ribbon-bow">🎀</div>
+              <div class="gift-tag-pendant" id="giftTagRecipient">For Aaradhya ✨</div>
+            </div>
+
+            <!-- 3D Gift Box Base Image -->
+            <img src="assets/gift-box.jpg" alt="3D Glossy Gift Box" class="gift-box-img">
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:8px;">
+          <button id="btnOpenGift" type="button" class="btn-tactile-primary">
+            <span>Unwrap Surprise</span>
+            <span>✨</span>
+          </button>
+          <button id="btnRewrapGift" type="button" class="btn-tactile-secondary" style="display:none;">
+            <span>🎀 Rewrap Gift</span>
+          </button>
+        </div>
+
+        <div id="giftRevealed" class="gift-revealed-content">
+          <div style="font-size:26px; margin-bottom:8px;">🎉 ✨ 🌸</div>
+          <h3 style="font-family:var(--font-serif); font-size:20px; color:var(--theme-text-main); margin-bottom:8px;">Your Special Celebration Begins Here!</h3>
+          <p style="font-size:14px; color:var(--theme-text-muted); line-height:1.6;">
+            Every single heartbeat today is dedicated to celebrating the wonder that you are. Keep scrolling to discover your milestone countdown, 3D birthday cake, memories, and heartfelt love letter!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------
+         SECTION 3 — BIRTHDAY COUNTDOWN
+         ------------------------------------------------------------- -->
+    <section id="countdownSection" class="countdown-section" aria-labelledby="countdownSectionTitle">
+      <div class="clay-card countdown-card">
+        <div class="section-badge-pill">Chapter 02 • Countdown</div>
+        <h2 id="countdownSectionTitle" class="section-title">The Celebration Countdown</h2>
+        <p class="section-subtitle">Ticking down every single magical second to your birthday milestone.</p>
+
+        <div class="countdown-grid" role="timer" aria-label="Birthday countdown timer">
+          <div class="countdown-pill">
+            <div id="cdDays" class="countdown-num">00</div>
+            <div class="countdown-lbl">Days</div>
+          </div>
+          <div class="countdown-pill">
+            <div id="cdHours" class="countdown-num">00</div>
+            <div class="countdown-lbl">Hours</div>
+          </div>
+          <div class="countdown-pill">
+            <div id="cdMins" class="countdown-num">00</div>
+            <div class="countdown-lbl">Mins</div>
+          </div>
+          <div class="countdown-pill">
+            <div id="cdSecs" class="countdown-num">00</div>
+            <div class="countdown-lbl">Secs</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------
+         SECTION 4 — CAKE CELEBRATION (Make a Wish)
+         ------------------------------------------------------------- -->
+    <section id="cakeSection" class="cake-section" aria-labelledby="cakeTitle">
+      <div class="clay-card cake-card">
+        <div class="section-badge-pill">Chapter 03 • Birthday Cake</div>
+        <h2 id="cakeTitle" class="section-title">Make A Heartfelt Wish</h2>
+        <p class="section-subtitle">Close your eyes, hold your deepest dream close to your heart, and blow out the candles!</p>
+
+        <div id="cakeStage" class="cake-stage">
+          <!-- Ambient 3D Pedestal Glow -->
+          <div class="cake-pedestal-glow" aria-hidden="true"></div>
+
+          <!-- Realistic 3D Animated Candles Array -->
+          <div class="cake-candles-array" id="cakeCandlesArray" aria-hidden="true">
+            <div class="cake-candle candle-1">
+              <div class="candle-flame-wrapper">
+                <div class="candle-smoke"></div>
+                <div class="candle-flame"></div>
+                <div class="candle-glow-aura"></div>
+              </div>
+              <div class="candle-wick"></div>
+              <div class="candle-body"></div>
+            </div>
+            <div class="cake-candle candle-2">
+              <div class="candle-flame-wrapper">
+                <div class="candle-smoke"></div>
+                <div class="candle-flame"></div>
+                <div class="candle-glow-aura"></div>
+              </div>
+              <div class="candle-wick"></div>
+              <div class="candle-body"></div>
+            </div>
+            <div class="cake-candle candle-3">
+              <div class="candle-flame-wrapper">
+                <div class="candle-smoke"></div>
+                <div class="candle-flame"></div>
+                <div class="candle-glow-aura"></div>
+              </div>
+              <div class="candle-wick"></div>
+              <div class="candle-body"></div>
+            </div>
+          </div>
+
+          <!-- Floating Sugar Sparkles & Petals -->
+          <div class="cake-floating-sparkles" aria-hidden="true">
+            <span class="c-spark cs-1">✨</span>
+            <span class="c-spark cs-2">🌸</span>
+            <span class="c-spark cs-3">⭐</span>
+          </div>
+
+          <!-- Wish Sealed Glowing Badge -->
+          <div class="cake-wish-badge" id="cakeWishBadge" aria-hidden="true">
+            <span>🎂 Wish Sealed in the Stars! 🌟</span>
+          </div>
+
+          <!-- 3D Cake Body -->
+          <div class="cake-3d-wrapper">
+            <img src="assets/cake.jpg" alt="Aesthetic Two-tier Birthday Cake with Candles" class="cake-img">
+          </div>
+        </div>
+
+        <p id="wishStatusText" style="font-size:13.5px; color:var(--theme-text-muted); margin-bottom:16px;">
+          🕯️ Tap the button to extinguish the candles and make your wish!
+        </p>
+
+        <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+          <button id="btnMakeWish" type="button" class="btn-tactile-primary">
+            <span>Make A Wish ✨</span>
+          </button>
+          <button id="btnRelightCake" type="button" class="btn-tactile-secondary" style="display:none;">
+            <span>🕯️ Relight Candles</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------
+         SECTIONS 5 & 6 — PHOTO MEMORY INTRO & CINEMATIC GALLERY
+         ------------------------------------------------------------- -->
+    <section id="gallerySection" class="gallery-section" aria-labelledby="galleryTitle">
+      <div class="clay-card gallery-card">
+        <div class="section-badge-pill">Chapter 04 • Polaroid Album</div>
+        <h2 id="galleryTitle" class="section-title">Little Moments, Big Memories</h2>
+        <p class="section-subtitle">A curated snapshot gallery of golden smiles, laughter, and timeless celebrations.</p>
+
+        <!-- Hero Spotlight Photo -->
+        <div id="galleryHeroWrapper" class="gallery-hero-wrapper" role="button" tabindex="0" aria-label="View spotlight photo">
+          <img id="galleryHeroImg" src="assets/hero-cover.jpg" alt="Spotlight Birthday Memory" class="gallery-hero-img">
+          <div id="galleryHeroCaption" class="gallery-caption-bar">The Sweetest Birthday Girl ✨</div>
+        </div>
+
+        <!-- Polaroid Deck Grid -->
+        <div id="polaroidGrid" class="polaroid-grid">
+          <!-- Dynamically populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------
+         SECTION 7 — MEMORY TIMELINE
+         ------------------------------------------------------------- -->
+    <section id="timelineSection" class="timeline-section" aria-labelledby="timelineTitle">
+      <div class="clay-card timeline-card">
+        <div class="section-badge-pill">Chapter 05 • Our Story</div>
+        <h2 id="timelineTitle" class="section-title">Our Beautiful Journey</h2>
+        <p class="section-subtitle">Milestones, quiet moments, and adventures that will forever belong to us.</p>
+
+        <div id="timelineTrack" class="timeline-track">
+          <!-- Dynamically populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------
+         SECTION 8 — BIRTHDAY LETTER (Royal Envelope)
+         ------------------------------------------------------------- -->
+    <section id="letterSection" class="letter-section" aria-labelledby="letterTitle">
+      <div class="clay-card letter-card">
+        <div class="section-badge-pill">Chapter 06 • Personal Letter</div>
+        <h2 id="letterTitle" class="section-title">A Letter From The Heart</h2>
+        <p class="section-subtitle">Words written just for you, sealed with warmth and tenderness.</p>
+
+        <div class="envelope-wrapper">
+          <div id="envelopeBox" class="envelope-box" role="button" tabindex="0" aria-label="Tap to open royal letter envelope">
+            <div class="envelope-seal" aria-hidden="true">💌</div>
+            <div style="font-family:var(--font-serif); font-size:17px; font-weight:800; color:var(--theme-text-main); margin-bottom:4px;">
+              For Aaradhya's Eyes Only
+            </div>
+            <div style="font-size:12.5px; color:var(--theme-text-muted);">Tap seal or click below to unseal envelope</div>
+          </div>
+        </div>
+
+        <button id="btnReadLetter" type="button" class="btn-tactile-primary">
+          <span>Read Your Letter 💌</span>
+        </button>
+
+        <div id="letterPaper" class="letter-paper-content">
+          <div class="letter-paper-header">Dearest Aaradhya,</div>
+          <div id="letterBody" class="letter-paper-body">
+            Wishing you the happiest, most magical birthday in the entire world! You bring so much light, comfort, and spontaneous joy into everyone's life.
+
+            Thank you for every late-night conversation, every shared dessert, and every gentle memory we have collected. May this upcoming year be packed with dream accomplishments, peaceful mornings, and endless reasons to smile.
+
+            Keep shining as radiantly as you always do. Here's to celebrating you today and always! 🌸💖
+          </div>
+          <div id="letterSignature" class="letter-paper-signature">With love, Riya</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------
+         SECTION 9 — SPECIAL MEMORIES CARDS
+         ------------------------------------------------------------- -->
+    <section id="memoriesSection" class="memories-section" aria-labelledby="memoriesTitle">
+      <div class="clay-card" style="padding:28px 18px;">
+        <div class="section-badge-pill">Chapter 07 • Golden Keepsakes</div>
+        <h2 id="memoriesTitle" class="section-title">Things That Make You Special</h2>
+        <p class="section-subtitle">A few gentle reminders of all the reasons you are cherished so deeply.</p>
+
+        <div id="memoriesGrid" class="memories-grid">
+          <!-- Dynamically populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------
+         SECTION 10 — SURPRISE REVEAL
+         ------------------------------------------------------------- -->
+    <section id="surpriseSection" class="surprise-section" aria-labelledby="surpriseTitleSection">
+      <div class="surprise-card-frosted">
+        <div class="section-badge-pill" style="border-color:var(--theme-gold); color:var(--theme-gold);">Chapter 08 • Mystery</div>
+        <h2 id="surpriseTitleSection" class="section-title">There's One More Thing...</h2>
+        <p class="section-subtitle">A special secret prepared just for this celebration moment.</p>
+
+        <button id="btnRevealSurprise" type="button" class="btn-tactile-primary" style="background:linear-gradient(135deg, #f59e0b, #ec4899) !important;">
+          <span>Reveal Surprise 🎁</span>
+        </button>
+
+        <div id="surpriseHidden" class="surprise-hidden-message">
+          <div style="font-size:32px; margin-bottom:8px;">🌸 ✈️ 🥂</div>
+          <h3 id="surpriseTitle" style="font-family:var(--font-serif); font-size:20px; color:var(--theme-text-main); margin-bottom:8px;">
+            One Last Sweet Surprise ✈️🌸
+          </h3>
+          <p id="surpriseText" style="font-size:14px; color:var(--theme-text-muted); line-height:1.6;">
+            Pack your favorite pastel dress! You are officially treated to a weekend spa retreat &amp; cozy high-tea celebration with your favorite people.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------
+         SECTION 13 & 14 — FINAL BIRTHDAY MESSAGE & CELEBRATION
+         ------------------------------------------------------------- -->
+    <section id="finalMessageSection" class="final-message-section" aria-labelledby="finalHeading">
+      <div class="clay-card final-card">
+        <div class="section-badge-pill">Grand Finale</div>
+        <h2 id="finalHeading" class="final-chapter-title">May Your Next Chapter Be Beautiful</h2>
+        <div id="finalRecipientName" class="final-recipient-name">Aaradhya</div>
+        <p id="finalMessageText" class="final-message-text">
+          May every step you take this year be sprinkled with sunshine, deep peace, laughter, and beautiful blessings. Happy Birthday! ✨🌸
+        </p>
+
+        <button id="btnCelebrateAgain" type="button" class="btn-tactile-primary">
+          <span>Celebrate Again ✨</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------
+         SECTION 15 — SHARE & HIGH-RES QR
+         ------------------------------------------------------------- -->
+    <section id="shareSection" class="share-section" aria-labelledby="shareHeading">
+      <div class="clay-card share-card">
+        <div class="section-badge-pill">Keepsake Actions</div>
+        <h2 id="shareHeading" class="section-title">Share This Moment</h2>
+        <p class="section-subtitle">Share this personalized keepsake with friends or scan the instant QR code.</p>
+
+        <div class="share-action-grid">
+          <button id="btnCopyLink" type="button" class="share-pill-btn">
+            <span>🔗</span>
+            <span>Copy Link</span>
+          </button>
+          <button id="btnShareWhatsapp" type="button" class="share-pill-btn share-pill-whatsapp">
+            <span>💬</span>
+            <span>WhatsApp</span>
+          </button>
+          <button id="btnWebShare" type="button" class="share-pill-btn">
+            <span>📤</span>
+            <span>Share</span>
+          </button>
+        </div>
+
+        <div class="qr-box-wrap">
+          <div id="shareQrCanvas"></div>
+          <span style="font-size:11.5px; font-weight:800; color:var(--theme-text-muted); text-transform:uppercase; letter-spacing:0.8px;">
+            Scan to open instant keepsake
+          </span>
+        </div>
+
+        <div style="margin-top:24px;">
+          <button id="btnCustomizeAgain" type="button" class="btn-tactile-secondary">
+            <span>✏️ Customize This Moment</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- High-Res QR Code Engine -->
+  <script src="assets/qrcode.min.js"></script>
+  <!-- Template Interactive Engine -->
+  <script src="script.js"></script>
+</body>
+</html>

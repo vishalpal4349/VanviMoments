@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Temple Royale Wedding Builder | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/vanvi-global-experience.css">
+  <link rel="stylesheet" href="../../css/vanvi-custom-builder.css">
+
+  <script src="../../js/vanvi-api.js"></script>
+  <script src="../../js/vanvi-builder-core.js"></script>
+
+  <style>
+    :root {
+      --gold-primary: #d4af37;
+      --gold-deep: #b8860b;
+      --maroon-royal: #490c17;
+      --temple-cream: #fdfbf7;
+      --temple-border: rgba(212, 175, 55, 0.28);
+    }
+
+    body {
+      background: #fbf9f5;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      margin: 0;
+      color: #1a0820;
+    }
+
+    /* Topbar */
+    .builder-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--temple-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .builder-brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-builder-back {
+      text-decoration: none;
+      color: #555;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 99px;
+      background: #f4ece4;
+      transition: all 0.2s;
+    }
+    .btn-builder-back:hover {
+      background: #ebd8c8;
+      color: #111;
+    }
+
+    .temple-crest-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(184, 134, 11, 0.35);
+    }
+
+    .builder-template-name {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #2c1224;
+      letter-spacing: 0.5px;
+    }
+
+    .builder-price-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      font-size: 12px;
+      font-weight: 800;
+      color: #92400e;
+    }
+    .builder-price-pill s {
+      color: #b45309;
+      font-weight: 500;
+      font-size: 11px;
+    }
+
+    /* Main Grid Layout */
+    .shaadi-builder-container {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      height: calc(100vh - 65px);
+      overflow: hidden;
+    }
+    @media (max-width: 1024px) {
+      .shaadi-builder-container {
+        grid-template-columns: 1fr;
+        height: auto;
+        overflow: visible;
+      }
+    }
+
+    /* Sidebar / Form Pane */
+    .builder-form-pane {
+      background: #ffffff;
+      border-right: 1px solid var(--temple-border);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Tab Navigation */
+    .shaadi-tab-bar {
+      display: flex;
+      overflow-x: auto;
+      gap: 6px;
+      padding: 12px 16px;
+      background: #fcf9f5;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      scrollbar-width: none;
+    }
+    .shaadi-tab-bar::-webkit-scrollbar { display: none; }
+
+    .shaadi-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 99px;
+      border: 1px solid #e7ded5;
+      background: #ffffff;
+      color: #555;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .shaadi-tab-btn:hover {
+      border-color: #d4af37;
+      color: #2c1224;
+    }
+    .shaadi-tab-btn.active {
+      background: linear-gradient(135deg, #d4af37, #b8860b);
+      color: #ffffff;
+      border-color: #b8860b;
+      box-shadow: 0 4px 10px rgba(184, 134, 11, 0.28);
+    }
+
+    /* Tab Content Area */
+    .shaadi-tab-content-wrapper {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+    }
+
+    .tab-section {
+      display: none;
+    }
+    .tab-section.active {
+      display: block;
+      animation: fadeInTab 0.25s ease-out;
+    }
+    @keyframes fadeInTab {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-headline {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #2c1224;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-subcaption {
+      font-size: 12.5px;
+      color: #777;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    /* Form Components */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .form-label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #724c65;
+      margin-bottom: 6px;
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid #e2d7cc;
+      background: #fdfcf9;
+      color: #2c1224;
+      font-family: inherit;
+      font-size: 13.5px;
+      transition: all 0.2s;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none;
+      border-color: #d4af37;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+      background: #ffffff;
+    }
+
+    /* Switch Button for Name Order */
+    .btn-switch-order {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 99px;
+      background: #fdf3e7;
+      border: 1px solid #d4af37;
+      color: #92400e;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: all 0.2s;
+    }
+    .btn-switch-order:hover {
+      background: #faebd7;
+      transform: translateY(-1px);
+    }
+
+    /* Event Node Card in Builder */
+    .event-card-item {
+      background: #fdfcf9;
+      border: 1px solid #ebd9c8;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      transition: all 0.2s;
+    }
+    .event-card-item:hover {
+      border-color: #d4af37;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.12);
+    }
+    .event-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .event-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #490c17;
+    }
+    .btn-remove-event {
+      background: none;
+      border: none;
+      color: #dc2626;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    .btn-add-event {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 14px;
+      border: 2px dashed #d4af37;
+      background: #fffdfa;
+      color: #92400e;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-add-event:hover {
+      background: #fdf3e7;
+    }
+
+    /* Personality Tags Chip Cloud */
+    .tags-cloud-editor {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 99px;
+      background: #f7eedf;
+      border: 1px solid #ebd9c8;
+      font-size: 12px;
+      font-weight: 600;
+      color: #490c17;
+    }
+    .tag-chip-remove {
+      cursor: pointer;
+      font-weight: 800;
+      color: #999;
+    }
+    .tag-chip-remove:hover { color: #dc2626; }
+
+    /* Photo Upload Grid */
+    .photo-slots-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .photo-slot-card {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: 14px;
+      border: 2px dashed #d4af37;
+      background: #fefdfb;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .photo-slot-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .photo-slot-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      transition: opacity 0.2s;
+    }
+    .photo-slot-card:hover .photo-slot-overlay {
+      opacity: 1;
+    }
+
+    /* Preview Pane */
+    .builder-preview-pane {
+      background: #1a0820;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+    .preview-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: rgba(30, 10, 36, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+    .preview-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      display: inline-block;
+      margin-right: 8px;
+      animation: pulseGreen 2s infinite;
+    }
+    @keyframes pulseGreen {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+    .device-switcher {
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px;
+      border-radius: 99px;
+    }
+    .device-btn {
+      background: none;
+      border: none;
+      color: #ccc;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .device-btn.active {
+      background: #d4af37;
+      color: #1a0820;
+    }
+
+    .preview-iframe-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .preview-frame {
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      transition: all 0.3s ease;
+      background: #fff;
+    }
+    .preview-frame.mobile {
+      width: 390px;
+      height: 780px;
+      max-height: 90%;
+    }
+    .preview-frame.desktop {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    /* Modal */
+    .builder-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 7, 20, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .builder-modal-overlay.active {
+      display: flex;
+    }
+    .builder-modal-card {
+      background: #ffffff;
+      border-radius: 24px;
+      max-width: 480px;
+      width: 100%;
+      padding: 32px 28px;
+      text-align: center;
+      border: 1px solid var(--gold-primary);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="builder-topbar">
+    <div class="builder-brand-group">
+      <a href="../../templates.html" class="btn-builder-back">← Template World</a>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="temple-crest-icon">🛕</div>
+        <div>
+          <div class="builder-template-name">Temple Royale Studio</div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-top: 2px;">
+            <span class="builder-price-pill"><s>₹2,999</s> ₹999 ONE-TIME</span>
+            <span style="font-size: 11px; font-weight: 700; color: #10b981;">67% OFF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button type="button" id="btnSaveMomentTop" class="builder-save-btn" style="background: linear-gradient(135deg, #d4af37, #b8860b); color: #fff; border: none; padding: 10px 22px; border-radius: 99px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 14px rgba(184, 134, 11, 0.4); font-size: 13.5px;">
+        <span>✨</span> <span>Publish Keepsake</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="shaadi-builder-container">
+
+    <!-- Sidebar Form Controls -->
+    <section class="builder-form-pane">
+
+      <!-- Navigation Tabs (ShaadiPath Inspired) -->
+      <nav class="shaadi-tab-bar" id="tabBar">
+        <button type="button" class="shaadi-tab-btn active" data-tab="essentials">👑 Couple</button>
+        <button type="button" class="shaadi-tab-btn" data-tab="invitation">📜 Patrika</button>
+        <button type="button" class="shaadi-tab-btn" data-tab="events">🛕 Events</button>
+        <button type="button" class="shaadi-tab-btn" data-tab="story">💖 Journey</button>
+        <button type="button" class="shaadi-tab-btn" data-tab="gallery">📸 Photos</button>
+        <button type="button" class="shaadi-tab-btn" data-tab="info">🏷️ Info</button>
+        <button type="button" class="shaadi-tab-btn" data-tab="rsvp">💬 RSVP</button>
+        <button type="button" class="shaadi-tab-btn" data-tab="music">🎵 Music</button>
+      </nav>
+
+      <!-- Content Area -->
+      <div class="shaadi-tab-content-wrapper">
+
+        <!-- 1. TAB: ESSENTIALS (THE COUPLE) -->
+        <div class="tab-section active" id="sec-essentials">
+          <div class="section-headline">👑 The Sacred Couple</div>
+          <div class="section-subcaption">Enter bride and groom names, wedding dates, and choose your display order.</div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Bride's Name</label>
+              <input type="text" id="inpBride" class="form-input" value="Divya" placeholder="e.g. Divya">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Groom's Name</label>
+              <input type="text" id="inpGroom" class="form-input" value="Vivan" placeholder="e.g. Vivan">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Name Display Order</label>
+            <div style="display: flex; align-items: center; justify-content: space-between; background: #fbf7f0; padding: 8px 14px; border-radius: 12px; border: 1px solid #ebd9c8;">
+              <span id="displayOrderLabel" style="font-weight: 700; color: #490c17; font-size: 13.5px;">Divya &amp; Vivan (Bride first)</span>
+              <button type="button" class="btn-switch-order" id="btnSwitchNameOrder">⇄ Switch Order</button>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Wedding Date</label>
+              <input type="text" id="inpDate" class="form-input" value="13 July 2027">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Auspicious Muhurtham</label>
+              <input type="text" id="inpMuhurtham" class="form-input" value="9:15 AM – 10:45 AM">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">City &amp; State</label>
+              <input type="text" id="inpCity" class="form-input" value="Bengaluru, India">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Wedding Hashtag</label>
+              <input type="text" id="inpHashtag" class="form-input" value="#DivyaWedsVivan" placeholder="#YourHashtag">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Temple / Kalyana Mandapam Venue</label>
+            <input type="text" id="inpVenue" class="form-input" value="Sri Venkateshwara Heritage Temple & Kalyana Mandapam, Palace Grounds, Bengaluru">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Google Maps Directions URL</label>
+            <input type="url" id="inpMapsUrl" class="form-input" value="https://maps.google.com/?q=Palace+Grounds+Bengaluru">
+          </div>
+        </div>
+
+        <!-- 2. TAB: INVITATION (SACRED PATRIKA & PARENTS) -->
+        <div class="tab-section" id="sec-invitation">
+          <div class="section-headline">📜 Sacred Vedic Patrika</div>
+          <div class="section-subcaption">Blessing shloka, divine invitation letter, and family dedication.</div>
+
+          <div class="form-group">
+            <label class="form-label">Divine Blessing Header</label>
+            <input type="text" id="inpBlessing" class="form-input" value="With the blessings of the divine and the love of our families">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Formal Sacred Invitation Letter</label>
+            <textarea id="inpInvitation" class="form-textarea" rows="4">With the divine grace of the Almighty and the heartfelt blessings of our beloved parents and elders, we joyfully invite you and your family to celebrate the sacred wedding vows uniting Divya & Vivan in holy matrimony.</textarea>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Bride's Parents</label>
+              <input type="text" id="inpBrideParents" class="form-input" value="Smt. Radhika & Sri Raman Sharma" placeholder="Mr. & Mrs. Sharma">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Groom's Parents</label>
+              <input type="text" id="inpGroomParents" class="form-input" value="Smt. Meenakshi & Sri Narayanan Iyer" placeholder="Mr. & Mrs. Iyer">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Grandparents Blessing (Optional)</label>
+            <input type="text" id="inpGrandparents" class="form-input" value="Late Smt. Janaki & Sri Venkataraman Iyer" placeholder="Grandparents names">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Cordially Invited By (Family Names)</label>
+            <input type="text" id="inpFamily" class="form-input" value="The Iyer & Sharma Families">
+          </div>
+        </div>
+
+        <!-- 3. TAB: EVENTS (MULTI-EVENT ITINERARY) -->
+        <div class="tab-section" id="sec-events">
+          <div class="section-headline">🛕 Multi-Event Itinerary</div>
+          <div class="section-subcaption">Add and configure ceremonies with dates, times, venues, and Google Maps links.</div>
+
+          <div id="eventsListContainer">
+            <!-- Event cards generated by JS -->
+          </div>
+
+          <button type="button" class="btn-add-event" id="btnAddEvent">
+            <span>➕</span> Add New Ceremony
+          </button>
+        </div>
+
+        <!-- 4. TAB: STORY (OUR JOURNEY & TAGS) -->
+        <div class="tab-section" id="sec-story">
+          <div class="section-headline">💖 Meet the Couple &amp; Journey</div>
+          <div class="section-subcaption">Theatrical curtain reveal story, romantic verse, and couple tags.</div>
+
+          <div class="form-group">
+            <label class="form-label">Romantic Verse / Storyline</label>
+            <textarea id="inpLoveVerse" class="form-textarea" rows="3">Two souls, one sacred vow, a lifetime of mornings. From temple bells to forever.</textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Couple Personality Tags</label>
+            <div class="tags-cloud-editor" id="tagsCloud">
+              <!-- Dynamically populated tags -->
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="inpNewTag" class="form-input" placeholder="Add custom tag (e.g. Chai Addicts)...">
+              <button type="button" id="btnAddTag" class="btn-switch-order" style="white-space: nowrap;">+ Add</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Bride's Heritage &amp; Bio</label>
+            <textarea id="inpBrideBio" class="form-textarea" rows="2">Classical Bharatanatyam artist and architect of serene spaces. Doting daughter of Smt. Radhika & Sri Raman Sharma.</textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Groom's Heritage &amp; Bio</label>
+            <textarea id="inpGroomBio" class="form-textarea" rows="2">Tech innovator and passionate Carnatic music aficionado. Beloved son of Smt. Meenakshi & Sri Narayanan Iyer.</textarea>
+          </div>
+        </div>
+
+        <!-- 5. TAB: GALLERY (SACRED PHOTOGRAPHS) -->
+        <div class="tab-section" id="sec-gallery">
+          <div class="section-headline">📸 Sacred Moments Photographs</div>
+          <div class="section-subcaption">Curate 4 high-resolution wedding portraits for the royal photo gallery.</div>
+
+          <div class="photo-slots-grid" id="photoSlotsGrid">
+            <!-- 4 slots populated by JS -->
+          </div>
+          <input type="file" id="hiddenPhotoInput" accept="image/*" style="display: none;">
+        </div>
+
+        <!-- 6. TAB: INFO (THINGS TO KNOW) -->
+        <div class="tab-section" id="sec-info">
+          <div class="section-headline">🏷️ Things to Know (Guest Guide)</div>
+          <div class="section-subcaption">Provide helpful attire, parking, and etiquette guidelines for your guests.</div>
+
+          <div class="form-group">
+            <label class="form-label">Dress Code</label>
+            <input type="text" id="inpDressCode" class="form-input" value="Traditional South Indian Silk & Festive Royal Sherwani">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Parking &amp; Valet Details</label>
+            <input type="text" id="inpParking" class="form-input" value="Complimentary Valet Parking available at Main Gopuram Gate">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Instagram / Social Link</label>
+            <input type="text" id="inpInstagram" class="form-input" value="@DivyaAndVivan2027">
+          </div>
+        </div>
+
+        <!-- 7. TAB: RSVP & CALENDAR -->
+        <div class="tab-section" id="sec-rsvp">
+          <div class="section-headline">💬 WhatsApp RSVP &amp; Calendar</div>
+          <div class="section-subcaption">Configure direct guest attendance confirmation and Save The Date buttons.</div>
+
+          <div class="form-group">
+            <label class="form-label">RSVP Heading</label>
+            <input type="text" id="inpRsvpHeading" class="form-input" value="Will you join our celebration?">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Invitation Subtext</label>
+            <textarea id="inpRsvpSub" class="form-textarea" rows="3">We have reserved a sacred seat for you and your family. Bless us with your auspicious presence as we embark on this holy journey together.</textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">WhatsApp RSVP Phone Number</label>
+            <input type="tel" id="inpWhatsapp" class="form-input" value="+919876543210" placeholder="+919876543210">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">RSVP Button Text</label>
+            <input type="text" id="inpRsvpBtnText" class="form-input" value="Yes, I'll be there ✨">
+          </div>
+        </div>
+
+        <!-- 8. TAB: MUSIC -->
+        <div class="tab-section" id="sec-music">
+          <div class="section-headline">🎵 Temple Ambient Music</div>
+          <div class="section-subcaption">Select the divine acoustic background score for your invitation.</div>
+
+          <div style="display: grid; gap: 10px;" id="musicTrackList">
+            <label style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; border: 1px solid #d4af37; background: #fffdfa; cursor: pointer;">
+              <input type="radio" name="soundtrackOption" value="sacred-nadaswaram" checked>
+              <div>
+                <strong style="color: #490c17;">🛕 Sacred Nadaswaram &amp; Shehnai</strong>
+                <div style="font-size: 12px; color: #777;">Traditional temple wedding melody with auspicious bells</div>
+              </div>
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; border: 1px solid #ebd9c8; background: #ffffff; cursor: pointer;">
+              <input type="radio" name="soundtrackOption" value="carnatic-flute">
+              <div>
+                <strong style="color: #490c17;">🪈 Divine Carnatic Bamboo Flute</strong>
+                <div style="font-size: 12px; color: #777;">Serene, soothing melody composed in Kalyani raga</div>
+              </div>
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; border: 1px solid #ebd9c8; background: #ffffff; cursor: pointer;">
+              <input type="radio" name="soundtrackOption" value="sitar-raga">
+              <div>
+                <strong style="color: #490c17;">🪕 Auspicious Royal Sitar Raga</strong>
+                <div style="font-size: 12px; color: #777;">Majestic royal heritage strings with subtle tabla beats</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Live Interactive Preview Pane -->
+    <aside class="builder-preview-pane">
+      <div class="preview-toolbar">
+        <div>
+          <span class="preview-pulse"></span>
+          <span style="font-weight: 700; font-size: 13.5px;">Live Sacred Interactive Preview</span>
+        </div>
+        <div class="device-switcher">
+          <button type="button" class="device-btn active" id="btnDeviceMobile">📱 Mobile</button>
+          <button type="button" class="device-btn" id="btnDeviceDesktop">💻 Desktop</button>
+        </div>
+      </div>
+
+      <div class="preview-iframe-container" id="previewIframeContainer">
+        <iframe id="previewFrame" class="preview-frame mobile" src="index.html" title="Temple Royale Live Interactive Preview"></iframe>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Celebration Modal -->
+  <div class="builder-modal-overlay" id="celebrationModal">
+    <div class="builder-modal-card">
+      <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #d4af37, #b8860b); display: flex; align-items: center; justify-content: center; font-size: 26px; color: #fff; margin: 0 auto 16px;">🛕</div>
+      <h2 style="font-family: 'Cinzel', serif; font-size: 20px; color: #2c1224; margin-bottom: 8px;">Temple Royale Invitation Published!</h2>
+      <p style="font-size: 13.5px; color: #666; margin-bottom: 20px;">Your sacred royal temple wedding invitation is live and ready to be shared with your loved ones.</p>
+
+      <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+        <input type="text" id="shareUrlInput" class="form-input" readonly style="font-size: 12px; font-weight: 600;">
+        <button type="button" id="btnCopyShareUrl" style="padding: 0 18px; border-radius: 12px; background: #d4af37; color: #fff; border: none; font-weight: 700; cursor: pointer; white-space: nowrap;">📋 Copy</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a id="btnModalOpenExp" href="#" class="btn-builder-save" target="_blank" style="text-decoration: none; padding: 12px; border-radius: 12px; background: #2c1224; color: #fff; font-weight: 700; font-size: 14px;">✨ Open Final Experience</a>
+        <a id="btnModalWhatsApp" href="#" target="_blank" style="text-decoration: none; padding: 12px; border-radius: 12px; background: #25d366; color: #fff; font-weight: 700; font-size: 14px;">💬 Share via WhatsApp</a>
+        <button type="button" onclick="closeCelebrationModal()" style="background: none; border: none; color: #888; font-size: 13px; font-weight: 600; cursor: pointer; padding: 6px;">Close &amp; Keep Editing</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TEMPLATE_ID = 'temple-royal-wedding';
+
+    let currentOrderBrideFirst = true;
+    let currentTags = ['Classical Romantics', 'Chai Addicts', 'Temple Heritage Dreamers', 'Forever & Always'];
+    let currentPhotos = [
+      'assets/temple-couple-portrait.jpg',
+      'assets/temple-gallery-steps.jpg',
+      'assets/temple-gallery-rings.jpg',
+      'assets/temple-bride-divya.jpg'
+    ];
+    let currentEvents = [
+      {
+        id: 'mehendi',
+        icon: '🪷',
+        name: 'Mehendi & Henna Artistry',
+        date: '11 July 2027',
+        time: '2:00 PM onwards',
+        venue: 'Garden Pavilion, Palace Grounds',
+        desc: 'Intricate henna designs, Carnatic folk melodies, and fragrant jasmine garlands.',
+        mapsUrl: 'https://maps.google.com/?q=Palace+Grounds+Bengaluru'
+      },
+      {
+        id: 'haldi',
+        icon: '🌼',
+        name: 'Mangala Snanam & Haldi',
+        date: '12 July 2027',
+        time: '9:30 AM',
+        venue: 'Crystal Courtyard',
+        desc: 'Golden saffron turmeric paste, Vedic chants, and family laughter under the morning sun.',
+        mapsUrl: 'https://maps.google.com/?q=Palace+Grounds+Bengaluru'
+      },
+      {
+        id: 'sangeet',
+        icon: '🎶',
+        name: 'Royal Sangeet & Musical Evening',
+        date: '12 July 2027',
+        time: '7:00 PM',
+        venue: 'The Grand Ballroom',
+        desc: 'An evening of celebration, classical dances, family performances, and exquisite feast.',
+        mapsUrl: 'https://maps.google.com/?q=Palace+Grounds+Bengaluru'
+      },
+      {
+        id: 'muhurtham',
+        icon: '🛕',
+        name: 'Sacred Muhurtham & Saptapadi',
+        date: '13 July 2027',
+        time: '9:15 AM – 10:45 AM',
+        venue: 'Sri Venkateshwara Heritage Temple Mandapam',
+        desc: 'Seven sacred steps around the holy agni, tying of the sacred mangalsutra, uniting for lifetimes.',
+        mapsUrl: 'https://maps.google.com/?q=Palace+Grounds+Bengaluru',
+        isHero: true
+      },
+      {
+        id: 'reception',
+        icon: '🥂',
+        name: 'Grand Royal Wedding Reception',
+        date: '13 July 2027',
+        time: '7:00 PM onwards',
+        venue: 'The Palace Royal Lawns',
+        desc: 'Blessings, dinner banquet, and celebrating the beginning of our forever together.',
+        mapsUrl: 'https://maps.google.com/?q=Palace+Grounds+Bengaluru'
+      }
+    ];
+
+    let activePhotoIndex = 0;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Initialize VanviBuilderCore
+      await VanviBuilderCore.init({ templateId: TEMPLATE_ID });
+
+      const savedData = VanviBuilderCore.customData || {};
+      if (savedData.brideName) document.getElementById('inpBride').value = savedData.brideName;
+      if (savedData.groomName) document.getElementById('inpGroom').value = savedData.groomName;
+      if (savedData.weddingDate) document.getElementById('inpDate').value = savedData.weddingDate;
+      if (savedData.muhurthamTime) document.getElementById('inpMuhurtham').value = savedData.muhurthamTime;
+      if (savedData.city) document.getElementById('inpCity').value = savedData.city;
+      if (savedData.venue) document.getElementById('inpVenue').value = savedData.venue;
+      if (savedData.hashtag) document.getElementById('inpHashtag').value = savedData.hashtag;
+      if (savedData.mapsUrl) document.getElementById('inpMapsUrl').value = savedData.mapsUrl;
+      if (savedData.invitationMessage) document.getElementById('inpInvitation').value = savedData.invitationMessage;
+      if (savedData.familyDedication) document.getElementById('inpFamily').value = savedData.familyDedication;
+      if (savedData.whatsappPhone) document.getElementById('inpWhatsapp').value = savedData.whatsappPhone;
+      if (savedData.tags && Array.isArray(savedData.tags)) currentTags = savedData.tags;
+      if (savedData.photos && Array.isArray(savedData.photos)) currentPhotos = savedData.photos;
+      if (savedData.events && Array.isArray(savedData.events)) currentEvents = savedData.events;
+
+      // Setup UI
+      setupTabs();
+      setupDeviceSwitcher();
+      renderTags();
+      renderEvents();
+      renderPhotos();
+
+      const previewFrame = document.getElementById('previewFrame');
+      VanviBuilderCore.attachPreview(previewFrame);
+
+      // Name order toggle
+      document.getElementById('btnSwitchNameOrder').addEventListener('click', () => {
+        currentOrderBrideFirst = !currentOrderBrideFirst;
+        const b = document.getElementById('inpBride').value.trim() || 'Divya';
+        const g = document.getElementById('inpGroom').value.trim() || 'Vivan';
+        document.getElementById('displayOrderLabel').textContent = currentOrderBrideFirst 
+          ? `${b} & ${g} (Bride first)` 
+          : `${g} & ${b} (Groom first)`;
+        syncToPreview();
+      });
+
+      // Global Live Sync
+      const allInputs = document.querySelectorAll('.form-input, .form-textarea, .form-select');
+      allInputs.forEach(inp => {
+        inp.addEventListener('input', syncToPreview);
+      });
+
+      // Music radio buttons
+      document.querySelectorAll('input[name="soundtrackOption"]').forEach(r => {
+        r.addEventListener('change', syncToPreview);
+      });
+
+      // Publish / Save Keepsake Button
+      document.getElementById('btnSaveMomentTop').addEventListener('click', async () => {
+        const btn = document.getElementById('btnSaveMomentTop');
+        btn.disabled = true;
+        btn.innerHTML = '<span>⏳</span> <span>Saving...</span>';
+
+        try {
+          const payload = buildPayload();
+          const saved = await VanviBuilderCore.save(payload);
+
+          // Canonical redirect / share modal
+          const shareUrl = saved.shareUrl || saved.experienceUrl || `${window.location.origin}/moment.html?id=${saved.id}&template=${TEMPLATE_ID}`;
+          document.getElementById('shareUrlInput').value = shareUrl;
+          document.getElementById('btnModalOpenExp').href = shareUrl;
+          document.getElementById('btnModalWhatsApp').href = `https://wa.me/?text=${encodeURIComponent(`✨ Discover our sacred royal temple wedding invitation: ${shareUrl}`)}`;
+          document.getElementById('celebrationModal').classList.add('active');
+        } catch (err) {
+          alert('Could not save: ' + (err.message || 'Please check connection'));
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = '<span>✨</span> <span>Publish Keepsake</span>';
+        }
+      });
+
+      // Copy Share Link
+      document.getElementById('btnCopyShareUrl').addEventListener('click', () => {
+        const inp = document.getElementById('shareUrlInput');
+        navigator.clipboard.writeText(inp.value).then(() => {
+          document.getElementById('btnCopyShareUrl').textContent = '✓ Copied!';
+          setTimeout(() => { document.getElementById('btnCopyShareUrl').textContent = '📋 Copy'; }, 2000);
+        });
+      });
+
+      // Initial Sync
+      setTimeout(syncToPreview, 500);
+    });
+
+    /* ==========================================================================
+       BUILD PAYLOAD & SYNC
+       ========================================================================== */
+    function buildPayload() {
+      const bride = document.getElementById('inpBride').value.trim() || 'Divya';
+      const groom = document.getElementById('inpGroom').value.trim() || 'Vivan';
+      const coupleNames = currentOrderBrideFirst ? `${bride} & ${groom}` : `${groom} & ${bride}`;
+
+      return {
+        brideName: bride,
+        groomName: groom,
+        coupleNames: coupleNames,
+        recipient: coupleNames,
+        sender: document.getElementById('inpFamily').value.trim() || 'The Iyer & Sharma Families',
+        weddingDate: document.getElementById('inpDate').value.trim() || '13 July 2027',
+        muhurthamTime: document.getElementById('inpMuhurtham').value.trim() || '9:15 AM – 10:45 AM',
+        city: document.getElementById('inpCity').value.trim() || 'Bengaluru, India',
+        venue: document.getElementById('inpVenue').value.trim() || 'Sri Venkateshwara Heritage Temple & Kalyana Mandapam, Palace Grounds, Bengaluru',
+        hashtag: document.getElementById('inpHashtag').value.trim() || '#DivyaWedsVivan',
+        mapsUrl: document.getElementById('inpMapsUrl').value.trim() || 'https://maps.google.com/?q=Palace+Grounds+Bengaluru',
+        blessing: document.getElementById('inpBlessing').value.trim(),
+        invitationMessage: document.getElementById('inpInvitation').value.trim(),
+        brideParents: document.getElementById('inpBrideParents').value.trim(),
+        groomParents: document.getElementById('inpGroomParents').value.trim(),
+        grandparents: document.getElementById('inpGrandparents').value.trim(),
+        familyDedication: document.getElementById('inpFamily').value.trim(),
+        loveVerse: document.getElementById('inpLoveVerse').value.trim(),
+        tags: currentTags,
+        brideBio: document.getElementById('inpBrideBio').value.trim(),
+        groomBio: document.getElementById('inpGroomBio').value.trim(),
+        events: currentEvents,
+        photos: currentPhotos,
+        dressCode: document.getElementById('inpDressCode').value.trim(),
+        parking: document.getElementById('inpParking').value.trim(),
+        instagram: document.getElementById('inpInstagram').value.trim(),
+        rsvpHeading: document.getElementById('inpRsvpHeading').value.trim(),
+        rsvpSubtext: document.getElementById('inpRsvpSub').value.trim(),
+        whatsappPhone: document.getElementById('inpWhatsapp').value.trim(),
+        rsvpBtnText: document.getElementById('inpRsvpBtnText').value.trim(),
+        soundtrack: document.querySelector('input[name="soundtrackOption"]:checked')?.value || 'sacred-nadaswaram'
+      };
+    }
+
+    function syncToPreview() {
+      const payload = buildPayload();
+      VanviBuilderCore.update(payload);
+
+      const previewFrame = document.getElementById('previewFrame');
+      if (previewFrame && previewFrame.contentWindow) {
+        previewFrame.contentWindow.postMessage({
+          type: 'VANVI_LIVE_PREVIEW_SYNC',
+          recipient: payload.coupleNames,
+          sender: payload.familyDedication,
+          message: payload.invitationMessage,
+          photos: payload.photos,
+          customData: payload
+        }, '*');
+      }
+    }
+
+    /* ==========================================================================
+       TABS NAVIGATION
+       ========================================================================== */
+    function setupTabs() {
+      const tabs = document.querySelectorAll('.shaadi-tab-btn');
+      tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          btn.classList.add('active');
+
+          const target = btn.dataset.tab;
+          document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
+          const activeSec = document.getElementById(`sec-${target}`);
+          if (activeSec) activeSec.classList.add('active');
+        });
+      });
+    }
+
+    /* ==========================================================================
+       DEVICE SWITCHER
+       ========================================================================== */
+    function setupDeviceSwitcher() {
+      const btnMob = document.getElementById('btnDeviceMobile');
+      const btnDesk = document.getElementById('btnDeviceDesktop');
+      const frame = document.getElementById('previewFrame');
+
+      btnMob.addEventListener('click', () => {
+        btnMob.classList.add('active');
+        btnDesk.classList.remove('active');
+        frame.className = 'preview-frame mobile';
+      });
+
+      btnDesk.addEventListener('click', () => {
+        btnDesk.classList.add('active');
+        btnMob.classList.remove('active');
+        frame.className = 'preview-frame desktop';
+      });
+    }
+
+    /* ==========================================================================
+       PERSONALITY TAGS MANAGER
+       ========================================================================== */
+    function renderTags() {
+      const container = document.getElementById('tagsCloud');
+      container.innerHTML = '';
+      currentTags.forEach((tag, idx) => {
+        const chip = document.createElement('span');
+        chip.className = 'tag-chip';
+        chip.innerHTML = `${tag} <span class="tag-chip-remove" onclick="removeTag(${idx})">×</span>`;
+        container.appendChild(chip);
+      });
+    }
+
+    window.removeTag = function(idx) {
+      currentTags.splice(idx, 1);
+      renderTags();
+      syncToPreview();
+    };
+
+    document.getElementById('btnAddTag').addEventListener('click', () => {
+      const inp = document.getElementById('inpNewTag');
+      const val = inp.value.trim();
+      if (val && !currentTags.includes(val)) {
+        currentTags.push(val);
+        inp.value = '';
+        renderTags();
+        syncToPreview();
+      }
+    });
+
+    /* ==========================================================================
+       EVENTS MANAGER
+       ========================================================================== */
+    function renderEvents() {
+      const container = document.getElementById('eventsListContainer');
+      container.innerHTML = '';
+
+      currentEvents.forEach((ev, idx) => {
+        const card = document.createElement('div');
+        card.className = 'event-card-item';
+        card.innerHTML = `
+          <div class="event-card-header">
+            <span class="event-card-badge"><span>${ev.icon || '🛕'}</span> ${ev.name}</span>
+            <button type="button" class="btn-remove-event" onclick="removeEvent(${idx})">Delete</button>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom:8px;">
+              <label class="form-label" style="font-size:10px;">Ceremony Name</label>
+              <input type="text" class="form-input" value="${ev.name}" onchange="updateEvent(${idx}, 'name', this.value)">
+            </div>
+            <div class="form-group" style="margin-bottom:8px;">
+              <label class="form-label" style="font-size:10px;">Date &amp; Time</label>
+              <input type="text" class="form-input" value="${ev.date} · ${ev.time}" onchange="updateEventDateTime(${idx}, this.value)">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:8px;">
+            <label class="form-label" style="font-size:10px;">Venue &amp; Description</label>
+            <input type="text" class="form-input" value="${ev.venue}" onchange="updateEvent(${idx}, 'venue', this.value)" placeholder="Venue name">
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label" style="font-size:10px;">Google Maps Link</label>
+            <input type="url" class="form-input" value="${ev.mapsUrl || ''}" onchange="updateEvent(${idx}, 'mapsUrl', this.value)" placeholder="https://maps.google.com/...">
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.updateEvent = function(idx, key, val) {
+      if (currentEvents[idx]) {
+        currentEvents[idx][key] = val;
+        syncToPreview();
+      }
+    };
+
+    window.updateEventDateTime = function(idx, val) {
+      if (currentEvents[idx]) {
+        const parts = val.split('·');
+        currentEvents[idx].date = (parts[0] || '').trim();
+        currentEvents[idx].time = (parts[1] || '').trim();
+        syncToPreview();
+      }
+    };
+
+    window.removeEvent = function(idx) {
+      if (currentEvents.length <= 1) {
+        alert('Keep at least one ceremony event.');
+        return;
+      }
+      currentEvents.splice(idx, 1);
+      renderEvents();
+      syncToPreview();
+    };
+
+    document.getElementById('btnAddEvent').addEventListener('click', () => {
+      currentEvents.push({
+        id: 'ceremony-' + Date.now(),
+        icon: '🪷',
+        name: 'New Auspicious Rite',
+        date: '13 July 2027',
+        time: '6:00 PM',
+        venue: 'Temple Grounds',
+        desc: 'Sacred blessings and gathering of near and dear ones.',
+        mapsUrl: 'https://maps.google.com/?q=Bengaluru'
+      });
+      renderEvents();
+      syncToPreview();
+    });
+
+    /* ==========================================================================
+       PHOTOS GALLERY MANAGER
+       ========================================================================== */
+    function renderPhotos() {
+      const grid = document.getElementById('photoSlotsGrid');
+      grid.innerHTML = '';
+
+      for (let i = 0; i < 4; i++) {
+        const p = currentPhotos[i] || 'assets/temple-couple-portrait.jpg';
+        const card = document.createElement('div');
+        card.className = 'photo-slot-card';
+        card.innerHTML = `
+          <img src="${p}" alt="Photo ${i + 1}">
+          <div class="photo-slot-overlay">📷 Click to Change</div>
+        `;
+        card.addEventListener('click', () => {
+          activePhotoIndex = i;
+          document.getElementById('hiddenPhotoInput').click();
+        });
+        grid.appendChild(card);
+      }
+    }
+
+    // Local file upload handling
+    document.getElementById('hiddenPhotoInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        currentPhotos[activePhotoIndex] = evt.target.result;
+        renderPhotos();
+        syncToPreview();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function closeCelebrationModal() {
+      document.getElementById('celebrationModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

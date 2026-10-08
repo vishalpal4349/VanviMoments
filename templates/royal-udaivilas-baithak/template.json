@@ -1,0 +1,81 @@
+{
+  "id": "royal-udaivilas-baithak",
+  "name": "The Royal Udaivilas Baithak",
+  "slug": "royal-udaivilas-baithak",
+  "aliases": [
+    "udaivilas-baithak",
+    "royal-baithak-wedding",
+    "shaadipath-baithak"
+  ],
+  "category": "Wedding",
+  "categorySlug": "wedding",
+  "price": 1499,
+  "originalPrice": 3999,
+  "isFree": false,
+  "badge": "👑 Imperial Flagship",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "Imperial Royal Baithak Wedding Invitation",
+  "icon": "👑",
+  "soundtrack": "Imperial Sitar & Shehnai Courtyard Melody",
+  "tags": [
+    "wedding",
+    "royal",
+    "udaivilas",
+    "palace",
+    "baithak",
+    "curtain-reveal",
+    "screen-bloom",
+    "whatsapp-rsvp",
+    "multi-event",
+    "petals",
+    "bestseller"
+  ],
+  "description": "ShaadiPath-inspired imperial palace baithak: velvet crimson curtain opening, golden candle screen-bloom, falling rose petal physics, multi-event ceremony schedule, Google & Apple Calendar sync, and 1-click WhatsApp RSVP integration.",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 4,
+    "hasDate": true,
+    "hasSoundtrack": true,
+    "previewPath": "templates/royal-udaivilas-baithak/index.html"
+  },
+  "schema": {
+    "fields": [
+      {
+        "key": "groomName",
+        "label": "Groom's Name",
+        "type": "text",
+        "required": true,
+        "default": "Rohan"
+      },
+      {
+        "key": "brideName",
+        "label": "Bride's Name",
+        "type": "text",
+        "required": true,
+        "default": "Tanya"
+      },
+      {
+        "key": "weddingDate",
+        "label": "Wedding Date",
+        "type": "date",
+        "required": true,
+        "default": "2026-12-12"
+      },
+      {
+        "key": "venue",
+        "label": "Wedding Venue",
+        "type": "text",
+        "required": true,
+        "default": "The Oberoi Udaivilas, Udaipur"
+      },
+      {
+        "key": "hostWhatsApp",
+        "label": "Host WhatsApp (for RSVPs)",
+        "type": "tel",
+        "required": true,
+        "default": "917631442934"
+      }
+    ]
+  }
+}

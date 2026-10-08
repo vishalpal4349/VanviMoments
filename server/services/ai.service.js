@@ -992,7 +992,7 @@ function generateAssistantHumanReply({ message = '', history = [], userContext =
         `Hello there! My name is **Vanvi**! 💖🌸 I am your personal celebration companion, digital best friend, and creative co-pilot for Vanvi Moments.\n\nWhether you need heartfelt birthday poetry, a secret PIN memory link, order status, or a physical gift idea from Amazon/Flipkart — I am here to make every moment magical! Ask me anything! ✨` :
         `Aww, mera naam **Vanvi** hai! 💖🌸 Main aapki personal AI celebration companion, digital best friend, aur secret surprise planner hoon!\n\nMain yahan aapke har special lamhe ko — chahe birthday countdown ho, romantic confession note, secret PIN surprise, ya anniversary timeline — ultra-cinematic aur memorable banane ke liye hoon! 🥰 Kuch bhi pucho ya share karo, I'm all ears! ✨`,
       suggestions: ["Ek cute shayari sunao 💌", "Top templates dikhao 👑", "Free me kaise banaye? 🎁"],
-      action: { label: "🎨 Vanvi Creative Studio", url: "ai.html" }
+      action: { label: "🎨 Vanvi AI Matcher", url: "ai-matcher.html" }
     };
   }
 
@@ -1201,7 +1201,7 @@ function generateAssistantHumanReply({ message = '', history = [], userContext =
         `Yeh lines dil ko chhoo lengi: ✨💌\n\n*“Waqt ke panno par yaadein likhte rahenge,\nhar mod par aapki muskaan ki dua karenge,\nchahe doori kitni bhi ho faaslon ki,\nhum hamesha dil ke kareeb rahenge!”* 💫`
       ]),
       suggestions: ["Ise English me convert karo 🇬🇧", "Short 1-line quote chahiye ✨", "Studio me customize karein 🎨"],
-      action: { label: "🎨 Open Vanvi AI Studio", url: "ai.html" }
+      action: { label: "🎨 Open Vanvi AI Matcher", url: "ai-matcher.html" }
     };
   }
 

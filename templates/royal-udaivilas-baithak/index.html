@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>The Royal Udaivilas Baithak — Tanya &amp; Rohan's Wedding</title>
+  <meta name="description" content="Join us in celebrating the holy matrimony of Tanya & Rohan at The Oberoi Udaivilas, Udaipur. View events, maps, dress code and RSVP.">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <meta name="theme-color" content="#540e1b">
+
+  <!-- Premium Typography: Cinzel, Cormorant Garamond, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="intro-active">
+
+<!-- DESKTOP AMBIENT BACKDROP & 9:16 PHONE WRAPPER -->
+<div id="device-frame">
+
+  <!-- 1. MANDALA PRELOADER -->
+  <div id="preloader" class="preloader">
+    <div class="pl-content">
+      <div class="pl-mandala-wrap">
+        <svg class="pl-mandala" viewBox="0 0 120 120" width="80" height="80">
+          <circle class="pl-m-ring" cx="60" cy="60" r="50" fill="none" stroke="#c4985a" stroke-width="1.2"/>
+          <circle class="pl-m-ring" cx="60" cy="60" r="36" fill="none" stroke="#c4985a" stroke-width="0.8"/>
+          <g class="pl-m-petals">
+            <ellipse cx="60" cy="18" rx="4" ry="11" fill="#c4985a" opacity="0.35" transform="rotate(0 60 60)"/>
+            <ellipse cx="60" cy="18" rx="4" ry="11" fill="#c4985a" opacity="0.35" transform="rotate(45 60 60)"/>
+            <ellipse cx="60" cy="18" rx="4" ry="11" fill="#c4985a" opacity="0.35" transform="rotate(90 60 60)"/>
+            <ellipse cx="60" cy="18" rx="4" ry="11" fill="#c4985a" opacity="0.35" transform="rotate(135 60 60)"/>
+            <ellipse cx="60" cy="18" rx="4" ry="11" fill="#c4985a" opacity="0.35" transform="rotate(180 60 60)"/>
+            <ellipse cx="60" cy="18" rx="4" ry="11" fill="#c4985a" opacity="0.35" transform="rotate(225 60 60)"/>
+            <ellipse cx="60" cy="18" rx="4" ry="11" fill="#c4985a" opacity="0.35" transform="rotate(270 60 60)"/>
+            <ellipse cx="60" cy="18" rx="4" ry="11" fill="#c4985a" opacity="0.35" transform="rotate(315 60 60)"/>
+          </g>
+          <circle cx="60" cy="60" r="4" fill="#c4985a"/>
+        </svg>
+      </div>
+      <div class="pl-names">
+        <span class="pl-n1">Tanya</span>
+        <span class="pl-weds">&amp;</span>
+        <span class="pl-n2">Rohan</span>
+      </div>
+      <span class="pl-date">12 December 2026 • Udaipur</span>
+    </div>
+  </div>
+
+  <!-- 2. TAP-TO-BEGIN CINEMATIC INTRO SCREEN (SHAADIPATH-INSPIRED) -->
+  <section class="intro" id="intro" role="button" tabindex="0" onclick="beginExperience()" aria-label="Tap to begin the celebration">
+    <div class="intro-bg-curtains"></div>
+    <div class="intro-gold-arch">
+      <div class="royal-crest-icon">👑</div>
+      <h2 class="intro-title">The Royal Wedding Baithak</h2>
+      <p class="intro-names-sub">Tanya &amp; Rohan</p>
+      <div class="intro-tap-hint">
+        <span class="tap-pulse-ring"></span>
+        <span class="tap-hint-text">Tap to Open Celebration ✦</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Candle Bloom Golden Transition Overlay -->
+  <div class="screen-bloom" id="screenBloom"></div>
+
+  <!-- FLOATING ROYAL MUSIC TOGGLE -->
+  <audio id="bgMusic" loop preload="none">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3" type="audio/mpeg">
+  </audio>
+  <button type="button" class="music-pill-btn" id="musicBtn" onclick="toggleAudio()" aria-label="Toggle Music">
+    <span id="musicIcon">🔔</span> <span id="musicLabel">Music</span>
+  </button>
+
+  <!-- FALLING ROSE PETALS CANVAS -->
+  <canvas id="petalCanvas" class="petal-canvas"></canvas>
+
+  <!-- 3. MAIN INVITATION EXPERIENCE -->
+  <main class="page-content" id="pageContent">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-palace-backdrop"></div>
+      
+      <div class="hero-center-box">
+        <div class="hero-eyebrow">✦ Imperial Wedding Invitation ✦</div>
+        <h1 class="hero-couple-names">
+          <span id="heroBride">Tanya</span>
+          <span class="hero-amp">&amp;</span>
+          <span id="heroGroom">Rohan</span>
+        </h1>
+        <div class="hero-gold-divider"></div>
+        <div class="hero-meta-date" id="heroDate">Saturday, 12th December 2026</div>
+        <div class="hero-meta-venue" id="heroVenue">The Oberoi Udaivilas, Lake Pichola, Udaipur</div>
+        
+        <!-- Live Countdown Timer -->
+        <div class="countdown-bar" id="countdownBar">
+          <div class="time-pod"><b id="cdDays">00</b><span>Days</span></div>
+          <div class="time-sep">:</div>
+          <div class="time-pod"><b id="cdHours">00</b><span>Hours</span></div>
+          <div class="time-sep">:</div>
+          <div class="time-pod"><b id="cdMins">00</b><span>Mins</span></div>
+          <div class="time-sep">:</div>
+          <div class="time-pod"><b id="cdSecs">00</b><span>Secs</span></div>
+        </div>
+      </div>
+
+      <a class="hero-scroll-cue" href="#invite" aria-label="Scroll down">
+        <span>Scroll to Open</span>
+        <div class="chevron-arrow"></div>
+      </a>
+    </section>
+
+    <!-- AUSPICIOUS ROYAL DECREE / INVITATION CARD -->
+    <section class="section-card invite-section" id="invite">
+      <div class="ganesha-crest">
+        <svg viewBox="0 0 100 100" width="56" height="56" class="ganesha-svg">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#c4985a" stroke-width="1.5"/>
+          <path d="M50 20 Q56 34 50 48 Q44 60 50 78 Q54 62 60 48" fill="none" stroke="#c4985a" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="43" cy="38" r="2.5" fill="#c4985a"/>
+          <path d="M42 28 Q50 30 58 28" fill="none" stroke="#c4985a" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <div class="shubh-blessing">॥ श्री गणेशाय नमः ॥</div>
+      <div class="blessing-sub">With the divine blessings of our beloved grandparents &amp; families</div>
+
+      <div class="families-block">
+        <div class="fam-col">
+          <div class="fam-role">Bride's Proud Parents</div>
+          <div class="fam-names">Mr. Rajesh &amp; Mrs. Kavita Sharma</div>
+        </div>
+        <div class="fam-amp">&amp;</div>
+        <div class="fam-col">
+          <div class="fam-role">Groom's Proud Parents</div>
+          <div class="fam-names">Mr. Sanjay &amp; Mrs. Neeta Kapoor</div>
+        </div>
+      </div>
+
+      <div class="invite-decree-text">
+        request the honour of your gracious presence and warm blessings as our children begin their sacred journey of eternal love and togetherness.
+      </div>
+    </section>
+
+    <!-- MULTI-EVENT CELEBRATION TIMELINE -->
+    <section class="section-card events-section" id="events">
+      <div class="section-title-wrap">
+        <span class="sub-label">Celebration Itinerary</span>
+        <h2 class="section-heading">Sacred Ceremonies</h2>
+        <div class="gold-line"></div>
+      </div>
+
+      <!-- Event 1: Haldi & Mehendi -->
+      <div class="event-card">
+        <div class="event-header">
+          <div class="event-icon">🌼</div>
+          <div>
+            <h3 class="event-name">Haldi &amp; Mehendi</h3>
+            <span class="event-time">11 Dec 2026 • 10:00 AM Onwards</span>
+          </div>
+        </div>
+        <div class="event-venue">📍 The Lotus Courtyard, Udaivilas</div>
+        <p class="event-desc">A morning painted in sunshine, marigolds, and laughter. Wear your favorite shades of yellow, mustard, and ivory.</p>
+        <div class="event-actions">
+          <a href="https://maps.google.com/?q=The+Oberoi+Udaivilas+Udaipur" target="_blank" rel="noopener" class="event-btn">🗺️ Venue Map</a>
+          <a href="#" onclick="addToGoogleCalendar('Haldi & Mehendi', '20261211T043000Z', '20261211T083000Z', 'The Lotus Courtyard, Udaivilas'); return false;" class="event-btn btn-cal">📅 Add to Calendar</a>
+        </div>
+      </div>
+
+      <!-- Event 2: Sangeet Night -->
+      <div class="event-card">
+        <div class="event-header">
+          <div class="event-icon">✨</div>
+          <div>
+            <h3 class="event-name">The Royal Sangeet</h3>
+            <span class="event-time">11 Dec 2026 • 07:00 PM Onwards</span>
+          </div>
+        </div>
+        <div class="event-venue">📍 The Royal Ballroom, Udaivilas</div>
+        <p class="event-desc">Old classics, high beats, and dancing under the stars. Dress in radiant jewel tones and bring your dancing shoes.</p>
+        <div class="event-actions">
+          <a href="https://maps.google.com/?q=The+Oberoi+Udaivilas+Udaipur" target="_blank" rel="noopener" class="event-btn">🗺️ Venue Map</a>
+          <a href="#" onclick="addToGoogleCalendar('Royal Sangeet', '20261211T133000Z', '20261211T183000Z', 'The Royal Ballroom, Udaivilas'); return false;" class="event-btn btn-cal">📅 Add to Calendar</a>
+        </div>
+      </div>
+
+      <!-- Event 3: The Wedding & Pheras -->
+      <div class="event-card highlight-event">
+        <div class="event-header">
+          <div class="event-icon">🪷</div>
+          <div>
+            <h3 class="event-name">The Sacred Pheras &amp; Wedding</h3>
+            <span class="event-time">12 Dec 2026 • 06:00 PM (Sunset Mandap)</span>
+          </div>
+        </div>
+        <div class="event-venue">📍 The Lakeside Mandap, Lake Pichola</div>
+        <p class="event-desc">As twilight settles over the lake, join us for the sacred pheras, followed by dinner and a lifetime of new beginnings. Traditional royal attire.</p>
+        <div class="event-actions">
+          <a href="https://maps.google.com/?q=The+Oberoi+Udaivilas+Udaipur" target="_blank" rel="noopener" class="event-btn">🗺️ Venue Map</a>
+          <a href="#" onclick="addToGoogleCalendar('Tanya & Rohan Wedding', '20261212T123000Z', '20261212T183000Z', 'The Lakeside Mandap, Udaipur'); return false;" class="event-btn btn-cal">📅 Add to Calendar</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR LOVE STORY SECTION -->
+    <section class="section-card story-section" id="story">
+      <div class="section-title-wrap">
+        <span class="sub-label">A Chapter in Eternity</span>
+        <h2 class="section-heading">Our Story</h2>
+        <div class="gold-line"></div>
+      </div>
+      <div class="story-quote-card">
+        <p class="story-text">
+          "It began with a shared cup of chai and a conversation neither of us wanted to end. Somewhere between long evening walks, little adventures, and making each other laugh, we found our favorite place — beside each other. Now, with full hearts and our dearest family around us, we are ready for forever."
+        </p>
+        <span class="story-sig">— Tanya &amp; Rohan</span>
+      </div>
+    </section>
+
+    <!-- CURATED PHOTO GALLERY -->
+    <section class="section-card gallery-section" id="gallery">
+      <div class="section-title-wrap">
+        <span class="sub-label">Keepsake Moments</span>
+        <h2 class="section-heading">Captured Memories</h2>
+        <div class="gold-line"></div>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="https://assets.shaadipath.com/templates/template13/assets/gallery/demo_1.webp" alt="Couple Moment 1" onerror="this.src='../../assets/favicon.svg'">
+        </div>
+        <div class="gallery-card">
+          <img src="https://assets.shaadipath.com/templates/template13/assets/gallery/demo_2.webp" alt="Couple Moment 2" onerror="this.src='../../assets/favicon.svg'">
+        </div>
+        <div class="gallery-card">
+          <img src="https://assets.shaadipath.com/templates/template13/assets/gallery/demo_3.webp" alt="Couple Moment 3" onerror="this.src='../../assets/favicon.svg'">
+        </div>
+        <div class="gallery-card">
+          <img src="https://assets.shaadipath.com/templates/template13/assets/gallery/demo_4.webp" alt="Couple Moment 4" onerror="this.src='../../assets/favicon.svg'">
+        </div>
+      </div>
+    </section>
+
+    <!-- THINGS TO KNOW (GUEST CONCIERGE) -->
+    <section class="section-card concierge-section" id="thingsToKnow">
+      <div class="section-title-wrap">
+        <span class="sub-label">Guest Guide</span>
+        <h2 class="section-heading">Things to Know</h2>
+        <div class="gold-line"></div>
+      </div>
+      <div class="concierge-list">
+        <div class="concierge-item">
+          <div class="concierge-icon">👗</div>
+          <div>
+            <b>Dress for Celebration</b>
+            <p>Festive Indian wear, a touch of color, and something you can dance in. Haldi: Yellow/Ivory; Sangeet: Jewel Tones; Wedding: Traditional Royal.</p>
+          </div>
+        </div>
+        <div class="concierge-item">
+          <div class="concierge-icon">🏰</div>
+          <div>
+            <b>Meet Us in Udaipur</b>
+            <p>The Oberoi Udaivilas, on the banks of Lake Pichola. Follow the flowers and the sound of shehnai celebration.</p>
+          </div>
+        </div>
+        <div class="concierge-item">
+          <div class="concierge-icon">🏨</div>
+          <div>
+            <b>Make Yourself at Home</b>
+            <p>For room arrangements and arrival transport assistance, please contact our family helpdesk: +91 76314 42934.</p>
+          </div>
+        </div>
+        <div class="concierge-item">
+          <div class="concierge-icon">🎁</div>
+          <div>
+            <b>Your Presence is Our Present</b>
+            <p>Bring your warm blessings, your stories, and your brightest smiles. Having you celebrate with us is everything.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1-CLICK WHATSAPP RSVP SECTION (SHAADIPATH-INSPIRED) -->
+    <section class="section-card rsvp-section" id="rsvp">
+      <div class="rsvp-gold-crest">💌</div>
+      <h2 class="rsvp-heading">Will You Join Us?</h2>
+      <p class="rsvp-subtext">
+        Under the courtyard lights, surrounded by the people we love — that's how we want our forever to begin. We have saved a seat for you.
+      </p>
+
+      <div class="rsvp-interactive-box">
+        <div class="rsvp-field">
+          <label for="guestName">Your Full Name:</label>
+          <input type="text" id="guestName" placeholder="Enter guest name">
+        </div>
+        <div class="rsvp-field">
+          <label for="guestCount">Number of Attendees:</label>
+          <select id="guestCount">
+            <option value="1">Just Me (1 Person)</option>
+            <option value="2" selected>Couple (2 Persons)</option>
+            <option value="3">Family (3 Persons)</option>
+            <option value="4">Family (4+ Persons)</option>
+          </select>
+        </div>
+        <button type="button" class="btn-whatsapp-rsvp" onclick="submitWhatsAppRSVP()">
+          <span>💬 Yes, I'll Be There (Send on WhatsApp)</span>
+        </button>
+      </div>
+      <div class="rsvp-note">Directly notifies the bride &amp; groom on WhatsApp</div>
+    </section>
+
+    <!-- LUXURY FOOTER BRAND -->
+    <footer class="invite-footer">
+      <div class="footer-crest">VANVI ATELIER • BESPOKE WEDDING INVITATION</div>
+      <p>Crafted with love for Tanya &amp; Rohan's Sacred Celebration</p>
+      <a href="../../index.html" class="vanvi-backlink">Create Your Own Luxury Website with Vanvi Moments ↗</a>
+    </footer>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

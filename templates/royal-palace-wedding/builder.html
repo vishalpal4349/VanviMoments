@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Vanvi Moments — Royal Wedding Experience Builder</title>
+  
+  <!-- Royal Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script type="module" crossorigin src="./assets/builder-BCDYOB-e.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/templateConfig-B2Sxi0wV.js">
+  <link rel="stylesheet" crossorigin href="./assets/builder-BUn2Yy5D.css">
+</head>
+<body class="builder-body">
+
+  <!-- Top Navigation Header -->
+  <header class="builder-header">
+    <div class="bh-left">
+      <a href="./index.html" class="bh-back-link" title="Return to invitation">← Back to Invitation</a>
+      <div class="bh-brand">
+        <span class="bh-title">VANVI MOMENTS</span>
+        <span class="bh-subtitle">Royal Palace Wedding Studio</span>
+      </div>
+    </div>
+
+    <div class="bh-center">
+      <!-- Device Preview Toggles -->
+      <div class="device-switcher" id="deviceSwitcher">
+        <button class="dev-btn active" data-view="mobile" title="Mobile View (390px)">📱 Mobile</button>
+        <button class="dev-btn" data-view="tablet" title="Tablet View (768px)">📟 Tablet</button>
+        <button class="dev-btn" data-view="desktop" title="Full Desktop View">💻 Desktop</button>
+      </div>
+    </div>
+
+    <div class="bh-right">
+      <button class="btn-preset" id="loadVirushkaBtn" title="Load Anushka & Virat Sample Data">✨ Load Sample Preset</button>
+      <button class="btn-preset" id="saveAndLaunchBtn" title="Test Preview With Your Data">👁️ Live Preview</button>
+      <a href="../../checkout.html?templateId=the-grand-royal-palace-wedding&price=999" class="btn-save-primary" id="proceedCheckoutBtn" style="background:linear-gradient(135deg, #d4af37, #b8860b); color:#0d1b3e; font-weight:800; text-decoration:none; padding:9px 18px; border-radius:99px; display:inline-flex; align-items:center; gap:6px; font-size:12px; letter-spacing:0.02em; box-shadow:0 4px 14px rgba(212,175,55,0.35);">👑 Publish & Activate (₹999)</a>
+    </div>
+  </header>
+
+  <!-- Main Builder Studio Split Screen -->
+  <div class="builder-layout">
+    
+    <!-- LEFT SIDEBAR: CONFIGURATION PANELS -->
+    <aside class="builder-sidebar">
+      <!-- Tabs Navigation -->
+      <nav class="builder-tabs" id="builderTabs">
+        <button class="tab-btn active" data-tab="couple">💑 Couple</button>
+        <button class="tab-btn" data-tab="lineage">👑 Family</button>
+        <button class="tab-btn" data-tab="letter">📜 Love Note</button>
+        <button class="tab-btn" data-tab="events">🎉 Events</button>
+        <button class="tab-btn" data-tab="story">📖 Story</button>
+        <button class="tab-btn" data-tab="gallery">📸 Photos</button>
+        <button class="tab-btn" data-tab="logistics">📋 Logistics</button>
+        <button class="tab-btn" data-tab="theme">🎨 Palette</button>
+      </nav>
+
+      <!-- TAB CONTENT: COUPLE -->
+      <section class="tab-panel active" id="tab-couple">
+        <h3 class="panel-heading">Couple Information</h3>
+        <p class="panel-desc">Customize the bride and groom names, wedding date, and royal venue.</p>
+
+        <div class="form-group">
+          <label>Bride's First Name</label>
+          <input type="text" id="inpBride" value="Anushka" placeholder="e.g. Anushka">
+        </div>
+
+        <div class="form-group">
+          <label>Groom's First Name</label>
+          <input type="text" id="inpGroom" value="Virat" placeholder="e.g. Virat">
+        </div>
+
+        <div class="form-group">
+          <label>Couple Monogram</label>
+          <input type="text" id="inpMonogram" value="V&A" placeholder="e.g. V&A">
+        </div>
+
+        <div class="form-group">
+          <label>Wedding Date</label>
+          <input type="date" id="inpDate" value="2026-12-12">
+        </div>
+
+        <div class="form-group">
+          <label>Royal Venue & Palace</label>
+          <input type="text" id="inpVenue" value="Taj Lake Palace, Lake Pichola, Udaipur" placeholder="Venue name">
+        </div>
+
+        <div class="form-group">
+          <label>Official Hashtag</label>
+          <input type="text" id="inpHashtag" value="#VirushkaWeds" placeholder="#Hashtag">
+        </div>
+
+        <div class="form-group">
+          <label>WhatsApp RSVP Number (with Country Code)</label>
+          <input type="text" id="inpWhatsapp" value="919999999999" placeholder="e.g. 919999999999">
+        </div>
+      </section>
+
+      <!-- TAB CONTENT: FAMILY & LINEAGE -->
+      <section class="tab-panel" id="tab-lineage">
+        <h3 class="panel-heading">Family &amp; Ancestral Lineage</h3>
+        <p class="panel-desc">Bestow sacred family blessings on the parchment invitation card.</p>
+
+        <div class="form-group">
+          <label>Divine Blessing Lead Text</label>
+          <textarea id="inpBlessing" rows="2">With the divine blessings of Almighty & our loving ancestors</textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Bride's Parents</label>
+          <input type="text" id="inpBrideParents" value="Col. Ajay Kumar & Ashima Sharma">
+        </div>
+
+        <div class="form-group">
+          <label>Bride's Grandparents Blessing</label>
+          <input type="text" id="inpBrideGp" value="Late Shri Ram Gopal Sharma & Smt. Shanti Devi">
+        </div>
+
+        <div class="form-group">
+          <label>Groom's Parents</label>
+          <input type="text" id="inpGroomParents" value="Late Prem & Mrs. Saroj Kohli">
+        </div>
+
+        <div class="form-group">
+          <label>Groom's Grandparents Blessing</label>
+          <input type="text" id="inpGroomGp" value="Late Shri J.N. Kohli & Smt. Pushpa Kohli">
+        </div>
+      </section>
+
+      <!-- TAB CONTENT: LOVE NOTE / PARCHMENT LETTER -->
+      <section class="tab-panel" id="tab-letter">
+        <h3 class="panel-heading">Parchment Love Note (V&amp;A)</h3>
+        <p class="panel-desc">An intimate note from the couple welcoming family &amp; friends.</p>
+
+        <div class="form-group">
+          <label>Letter Salutation</label>
+          <input type="text" id="inpSalutation" value="To Our Cherished Families & Friends,">
+        </div>
+
+        <div class="form-group">
+          <label>Heartfelt Note Body</label>
+          <textarea id="inpLetterBody" rows="5">Love isn't merely found in grand gestures; it lives quietly in shared smiles, late-night conversations over steaming chai, and unwavering faith in each other. As we take our sacred seven pheras under the starlit sky of Lake Pichola, having your presence and heartfelt blessings means the entire world to us.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Closing Line</label>
+          <input type="text" id="inpClosing" value="With Eternal Love & Gratitude">
+        </div>
+
+        <div class="form-group">
+          <label>Signed Names</label>
+          <input type="text" id="inpSignature" value="Virat & Anushka ❤️">
+        </div>
+      </section>
+
+      <!-- TAB CONTENT: EVENTS -->
+      <section class="tab-panel" id="tab-events">
+        <div class="panel-top-row">
+          <h3 class="panel-heading">Celebration Ceremonies</h3>
+          <button class="btn-add-event" id="btnAddEvent">+ Add Event</button>
+        </div>
+        <p class="panel-desc">These events connect along the royal drawn path.</p>
+
+        <div class="events-editor-list" id="eventsEditorList">
+          <!-- Injected via JavaScript -->
+        </div>
+      </section>
+
+      <!-- TAB CONTENT: OUR STORY -->
+      <section class="tab-panel" id="tab-story">
+        <h3 class="panel-heading">Curtain Reveal Story</h3>
+        <p class="panel-desc">The sanctuary revealed as the ruby velvet curtains part.</p>
+
+        <div class="form-group">
+          <label>Emotional Verse / Quote</label>
+          <textarea id="inpStoryVerse" rows="3">From a quiet shampoo commercial set to a lifetime of adventures and unconditional love.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Tags (comma separated)</label>
+          <input type="text" id="inpStoryTags" value="Hopeless Romantics, Chai & Conversations, Soulmates, Forever & Always">
+        </div>
+      </section>
+
+      <!-- TAB CONTENT: GALLERY PHOTOS -->
+      <section class="tab-panel" id="tab-gallery">
+        <h3 class="panel-heading">Captured Moments Gallery</h3>
+        <p class="panel-desc">Provide high-resolution portrait URLs for the editorial grid.</p>
+
+        <div class="form-group">
+          <label>Photo 1 (Tall Feature Image)</label>
+          <input type="url" id="inpPhoto0" value="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop">
+        </div>
+
+        <div class="form-group">
+          <label>Photo 2</label>
+          <input type="url" id="inpPhoto1" value="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop">
+        </div>
+
+        <div class="form-group">
+          <label>Photo 3</label>
+          <input type="url" id="inpPhoto2" value="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop">
+        </div>
+
+        <div class="form-group">
+          <label>Photo 4</label>
+          <input type="url" id="inpPhoto3" value="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=1200&auto=format&fit=crop">
+        </div>
+      </section>
+
+      <!-- TAB CONTENT: LOGISTICS & SHAGUN -->
+      <section class="tab-panel" id="tab-logistics">
+        <h3 class="panel-heading">Logistics &amp; Royal Shagun</h3>
+        <p class="panel-desc">Guest logistics tiles and optional digital shagun UPI details.</p>
+
+        <div class="form-group">
+          <label>Dress Code Description</label>
+          <input type="text" id="inpDressCode" value="Indian Royal Festive (Handloom silks & pastels)">
+        </div>
+
+        <div class="form-group">
+          <label>Valet / Parking Details</label>
+          <input type="text" id="inpParking" value="Private Boat Transfers from Rameshwar Ghat">
+        </div>
+
+        <div class="form-group">
+          <label>Digital Shagun UPI ID</label>
+          <input type="text" id="inpUpi" value="virat.anushka@okhdfcbank">
+        </div>
+      </section>
+
+      <!-- TAB CONTENT: PALETTE & THEME -->
+      <section class="tab-panel" id="tab-theme">
+        <h3 class="panel-heading">Heritage Color Palette</h3>
+        <p class="panel-desc">Select the royal atmosphere for the wedding invitation.</p>
+
+        <div class="theme-picker-grid">
+          <label class="theme-card">
+            <input type="radio" name="builderTheme" value="royal-mewar" checked>
+            <div class="theme-preview-box mewar-box">
+              <span class="tb-gold"></span>
+              <span class="tb-ruby"></span>
+            </div>
+            <span class="theme-name">Royal Mewar (Navy &amp; Gold)</span>
+          </label>
+
+          <label class="theme-card">
+            <input type="radio" name="builderTheme" value="udaipur-pearl">
+            <div class="theme-preview-box pearl-box">
+              <span class="tb-ivory"></span>
+              <span class="tb-rose"></span>
+            </div>
+            <span class="theme-name">Udaipur Pearl (Silk &amp; Rose)</span>
+          </label>
+
+          <label class="theme-card">
+            <input type="radio" name="builderTheme" value="jaipur-sunset">
+            <div class="theme-preview-box sunset-box">
+              <span class="tb-amber"></span>
+              <span class="tb-terra"></span>
+            </div>
+            <span class="theme-name">Jaipur Sunset (Terracotta &amp; Amber)</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Sidebar Action Buttons -->
+      <div class="sidebar-footer">
+        <button class="btn-sidebar-reset" id="btnResetConfig">↺ Reset</button>
+        <button class="btn-sidebar-apply" id="btnApplyPreview">Apply to Preview ⚡</button>
+      </div>
+    </aside>
+
+    <!-- RIGHT STAGE: INTERACTIVE LIVE PREVIEW IFRAME -->
+    <main class="builder-stage">
+      <div class="preview-frame-container mobile-view" id="previewContainer">
+        <div class="mockup-bezel">
+          <div class="bezel-notch"></div>
+          <iframe id="previewIframe" src="./index.html" frameborder="0"></iframe>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Toast Hub -->
+  <div class="toast-hub" id="builderToastHub"></div>
+
+</body>
+</html>

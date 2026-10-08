@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Quick Tap Challenge — Reaction &amp; Accuracy Game — Vanvi Moments</title>
@@ -11,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     :root {
@@ -404,14 +406,16 @@
       <a href="games.html" class="btn-nav-back" title="Back to Games">
         <span>‹</span> <span>Games</span>
       </a>
-      <a href="index.html" class="brand-link" title="Vanvi Moments">
-        ⚡ Quick <span>Tap</span>
+      <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" style="height:34px; width:auto; max-width:130px; object-fit:contain;">
+        <span style="background:rgba(255,42,122,0.1); border:1px solid rgba(255,42,122,0.25); color:var(--rose-main); font-size:10px; font-weight:900; letter-spacing:0.8px; padding:2px 7px; border-radius:6px; text-transform:uppercase;">TAP</span>
       </a>
     </div>
     <div class="header-right">
+      <button type="button" class="btn-nav-back" onclick="openQuickTapRules()" style="margin-right:6px;">📖 Rules</button>
       <button type="button" class="sound-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
       <a href="rewards.html" class="wallet-pill">
-        <span>🪙</span> <span id="headerCoins">150</span>
+        <span>🪙</span> <span id="headerCoins">50</span>
       </a>
     </div>
   </header>
@@ -530,15 +534,27 @@
     <a href="profile.html" class="nav-btn" id="bottomNavMe">👤<br/>Profile</a>
   </nav>
 
+  <script src="js/vanvi-games-engine.js"></script>
   <script>
     (function() {
       'use strict';
 
-      const DAILY_CAP = 25;
+      const DAILY_CAP = (window.VanviGames && window.VanviGames.DAILY_CAP) || 30;
       const STORAGE_COINS = 'vanvi_user_coins';
       const STORAGE_TODAY_EARNED = 'vanvi_games_today_earned';
       const STORAGE_TODAY_DATE = 'vanvi_games_today_date';
       const STORAGE_SOUND = 'vanvi_sound_enabled';
+
+      window.openQuickTapRules = function() {
+        if (window.VanviGames) {
+          VanviGames.showRulesModal('Quick Tap Reaction ⚡', [
+            'Tap glowing celebration bubbles as fast as you can before they disappear.',
+            'Fast taps under 450ms score bonus combo points.',
+            'Tapping empty squares or missing reduces your score by 1 point.',
+            'Score 15+ to unlock virtual Vanvi Coins (Daily Limit: max 30 coins).'
+          ]);
+        }
+      };
 
       const arenaWrapper = document.getElementById('arenaWrapper');
       const arenaOverlay = document.getElementById('arenaOverlay');
@@ -845,39 +861,37 @@
           tierLabel = 'Silver Sprint: 15+ Score';
         }
 
-        const earned = getEarnedToday();
-        const remCap = Math.max(0, DAILY_CAP - earned);
-        const actualAwarded = Math.min(wonCoins, remCap);
-
-        if (actualAwarded > 0) {
-          addCoins(actualAwarded);
+        let actualAwarded = 0;
+        if (wonCoins > 0 && window.VanviGames) {
+          const res = VanviGames.awardCoins(wonCoins, 'Quick Tap Challenge');
+          actualAwarded = res.awarded;
+          headerCoins.textContent = res.totalCoins;
+        } else {
+          const earned = getEarnedToday();
+          const remCap = Math.max(0, DAILY_CAP - earned);
+          actualAwarded = Math.min(wonCoins, remCap);
+          if (actualAwarded > 0) addCoins(actualAwarded);
         }
 
-        // Backend API sync
-        try {
-          const token = localStorage.getItem('vanvi_token') || localStorage.getItem('vanvi_auth_token');
-          if (token) {
-            await fetch('/api/coins/game-reward', {
-              method: 'POST',
-              headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                gameId: 'quick-tap',
-                gameTitle: 'Quick Tap Challenge',
-                coins: actualAwarded,
-                score: score
-              })
-            });
-          }
-        } catch(e) {}
-
-        // Populate Modal
-        document.getElementById('resCoinVal').textContent = actualAwarded > 0 ? `+${actualAwarded} 🪙` : '0 🪙 (Under 15 / Cap)';
-        document.getElementById('resTier').textContent = tierLabel;
-        document.getElementById('mScore').textContent = score;
-        document.getElementById('mCombo').textContent = `${maxCombo}x`;
-        document.getElementById('mFast').textContent = fastTapsCount;
-
-        document.getElementById('resultModal').classList.add('active');
+        // Show standardized result modal
+        if (window.VanviGames) {
+          VanviGames.showResultModal({
+            title: score >= 25 ? 'Lightning Fast Reflexes! ⚡' : 'Sprint Complete! ✨',
+            score: `${score} Pts (${tierLabel})`,
+            scoreLabel: 'Final Score',
+            coinsAwarded: actualAwarded,
+            isSuccess: score >= 15,
+            restartText: 'Play Another Round 🔄',
+            onRestart: startRound
+          });
+        } else {
+          document.getElementById('resCoinVal').textContent = actualAwarded > 0 ? `+${actualAwarded} 🪙` : '0 🪙 (Under 15 / Cap)';
+          document.getElementById('resTier').textContent = tierLabel;
+          document.getElementById('mScore').textContent = score;
+          document.getElementById('mCombo').textContent = `${maxCombo}x`;
+          document.getElementById('mFast').textContent = fastTapsCount;
+          document.getElementById('resultModal').classList.add('active');
+        }
       }
 
       window.closeModalAndReplay = function() {

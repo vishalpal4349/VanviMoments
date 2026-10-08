@@ -3,7 +3,7 @@ const path = require('path');
 
 const suites = [
   { name: 'Homepage (index.html regressions)', script: 'scratch/test_suite.js' },
-  { name: 'Vanvi AI Co-Pilot (ai.html)', script: 'scratch/test_ai.js' },
+  { name: 'Vanvi AI Template Matcher (ai-matcher.html)', script: 'scratch/test_ai.js' },
   { name: 'Creator Studio (builder.html)', script: 'scratch/test_builder.js' },
   { name: 'Checkout & Coin Redemption (checkout.html)', script: 'scratch/test_checkout.js' },
   { name: 'Recipient Experience (moment.html)', script: 'scratch/test_moment.js' },

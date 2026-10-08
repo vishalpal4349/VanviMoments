@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
@@ -10,6 +11,9 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="vanvi-inner-light.css"/>
+<link rel="stylesheet" href="css/vanvi-global-experience.css"/>
+<script src="js/vanvi-global-experience.js" defer></script>
 <script src="js/vanvi-templates-data.js"></script>
 
 <style>
@@ -990,7 +994,7 @@ html, body {
         <p>This private digital experience was handcrafted with Vanvi Moments.</p>
         <div class="receiver-links">
           <a href="builder.html" class="rec-link-pill">✨ Create Your Own Moment</a>
-          <a href="ai.html" class="rec-link-pill">✨ Vanvi AI Co-Pilot</a>
+          <a href="ai-matcher.html" class="rec-link-pill">✨ Vanvi AI Co-Pilot</a>
           <a href="templates.html" class="rec-link-pill">🌟 Explore Templates</a>
           <a href="plans.html" class="rec-link-pill">💎 VIP Club &amp; Perks</a>
           <a href="faq.html" class="rec-link-pill">❓ Help &amp; FAQs</a>
@@ -1366,17 +1370,17 @@ window.VanviMomentEngine = (function () {
 
     // Activate preview bar if in preview mode
     try {
-      if (params.has('preview') || params.get('preview') === '1') {
+      const pageParams = new URLSearchParams(window.location.search);
+      if (pageParams.has('preview') || pageParams.get('preview') === '1') {
         const pBar = document.getElementById('previewModeBar');
         if (pBar) pBar.style.display = 'flex';
         const pUse = document.getElementById('previewUseBtn');
         if (pUse) {
-          const occ = params.get('occasion') || data.occasion || 'Celebration';
+          const occ = pageParams.get('occasion') || data.occasion || 'Celebration';
           pUse.href = `builder.html?template=${encodeURIComponent(occ)}&occasion=${encodeURIComponent(occ)}`;
         }
       }
     } catch(e) {}
-  })();
 
   // Populate Dynamic Content
   document.title = `${data.recipient} · A Special Moment from ${data.sender}`;

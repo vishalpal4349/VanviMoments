@@ -1,0 +1,139 @@
+{
+  "id": "cute-pastel-birthday",
+  "name": "Cute Pastel Birthday",
+  "slug": "cute-pastel-birthday",
+  "aliases": [
+    "cute-pastel-bday",
+    "pastel-birthday",
+    "cute-birthday-01"
+  ],
+  "category": "Birthday",
+  "categorySlug": "birthday",
+  "categoryName": "Birthday",
+  "price": 29,
+  "originalPrice": 149,
+  "isFree": false,
+  "tier": "Premium",
+  "badge": "✨ #1 Bestseller",
+  "type": "Dreamy Pastel Celebration & 15 Interactive Chapters",
+  "icon": "🎂",
+  "thumbnail": "assets/cute-pastel-birthday-thumb.jpg",
+  "soundtrack": "Sweet Celebration Melodies",
+  "tags": [
+    "bestseller",
+    "birthday",
+    "cute",
+    "pastel",
+    "dreamy",
+    "3d cake",
+    "gift reveal",
+    "polaroid",
+    "timeline",
+    "letter",
+    "music player",
+    "qr code"
+  ],
+  "description": "An ultra-premium, emotional, cinematic birthday experience with 3D gift reveal, interactive cake wish, memory timeline, wax letter, music player, photo gallery, and celebratory confetti.",
+  "features": [
+    "Cinematic Pastel Sky Hero & Floating Balloons",
+    "Interactive 3D Gift Box Reveal & Confetti",
+    "Live Birthday Countdown Timer",
+    "Interactive 3D Cake & Tap-to-Blow Candles",
+    "Little Moments Big Memories Photo Intro",
+    "Cinematic Photo Gallery with Fullscreen Lightbox",
+    "Our Beautiful Journey Scroll Timeline",
+    "Royal Wax-Sealed Birthday Letter Reveal",
+    "3D Special Memories Cards Deck",
+    "Mystery Surprise Reveal Card",
+    "Floating Cute Vinyl Record Music Player",
+    "Ambient Floating Petals & Sparkle Canvas",
+    "May Your Next Chapter Be Beautiful Final Chapter",
+    "Celebrate Again Confetti & Balloon Burst",
+    "Instant WhatsApp Share & High-Res QR Code"
+  ],
+  "customizableFields": [
+    "Recipient Name",
+    "Sender Name",
+    "Birthday Date",
+    "Main Hero Message",
+    "Heartfelt Letter",
+    "Surprise Message",
+    "Photo Memories (5-15 Photos)",
+    "6 Pastel Color Themes",
+    "Soundtrack Dedication",
+    "Memory Timeline Milestones"
+  ],
+  "previewOccasion": "Birthday",
+  "previewRecipient": "Aaradhya",
+  "previewSender": "From Riya",
+  "previewMessage": "May your special day be filled with warm sunshine, endless laughter, and all the sweet magic in the universe. Happy Birthday! 🎂✨",
+  "accentColor": "#ff78c3",
+  "templatePath": "templates/cute-pastel-birthday/index.html",
+  "previewPath": "templates/cute-pastel-birthday/preview.html",
+  "builderPath": "templates/cute-pastel-birthday/builder.html",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 15,
+    "hasDate": true,
+    "hasTimeline": true,
+    "hasSoundtrack": true,
+    "hasThemes": true,
+    "builderPath": "templates/cute-pastel-birthday/builder.html"
+  },
+  "schema": {
+    "fields": [
+      {
+        "key": "recipientName",
+        "label": "Celebrant's Name",
+        "type": "text",
+        "required": true,
+        "default": "Aaradhya"
+      },
+      {
+        "key": "senderName",
+        "label": "Sender Name / Signature",
+        "type": "text",
+        "required": true,
+        "default": "From Riya"
+      },
+      {
+        "key": "birthdayDate",
+        "label": "Celebration Date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "heroCopy",
+        "label": "Hero Tagline",
+        "type": "text",
+        "default": "You make the world brighter!"
+      },
+      {
+        "key": "letterMessage",
+        "label": "Birthday Letter Body",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "surpriseMessage",
+        "label": "Secret Surprise Message",
+        "type": "textarea",
+        "default": "You are truly one of a kind. Keep shining your beautiful light everywhere you go!"
+      },
+      {
+        "key": "theme",
+        "label": "Pastel Color Theme",
+        "type": "select",
+        "options": ["rose", "lavender", "peach", "blue", "cotton-candy", "cream"],
+        "default": "rose"
+      },
+      {
+        "key": "photos",
+        "label": "Photo Memories",
+        "type": "photos",
+        "min": 5,
+        "max": 15
+      }
+    ]
+  }
+}

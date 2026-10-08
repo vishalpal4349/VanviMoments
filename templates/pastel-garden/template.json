@@ -1,0 +1,66 @@
+{
+  "id": "pastel-garden",
+  "name": "Pastel Garden — English Meadows",
+  "slug": "pastel-garden",
+  "category": "Wedding",
+  "categorySlug": "wedding",
+  "price": 1999,
+  "originalPrice": 3999,
+  "isFree": false,
+  "badge": "🌸 English Bloom",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "Pastel Garden — English Meadows Digital Keepsake",
+  "icon": "🌿",
+  "tags": [
+    "wedding",
+    "luxury",
+    "digital-invitation",
+    "pastel-garden",
+    "rsvp",
+    "events"
+  ],
+  "description": "Delicate peach petals, soft sage foliage, deckled paper edges, and romantic acoustic courtyard melodies.",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 8,
+    "hasDate": true,
+    "hasSoundtrack": true,
+    "builderPath": "templates/vanvi-royal-wedding/builder.html",
+    "previewPath": "templates/pastel-garden/index.html"
+  },
+  "schema": {
+    "fields": [
+      {
+        "key": "bride",
+        "label": "Bride Name",
+        "type": "text",
+        "default": "Tanya"
+      },
+      {
+        "key": "groom",
+        "label": "Groom Name",
+        "type": "text",
+        "default": "Rohan"
+      },
+      {
+        "key": "date",
+        "label": "Wedding Date",
+        "type": "text",
+        "default": "12th December 2026"
+      },
+      {
+        "key": "venue",
+        "label": "Venue",
+        "type": "text",
+        "default": "The Grand Palace Grounds"
+      },
+      {
+        "key": "whatsapp",
+        "label": "WhatsApp RSVP",
+        "type": "tel",
+        "default": "917631442934"
+      }
+    ]
+  }
+}

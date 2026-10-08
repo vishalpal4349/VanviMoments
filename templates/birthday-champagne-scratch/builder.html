@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Champagne & Gold Studio | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0a0a0c; color: #fff; font-family: 'Montserrat', sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
+    .top-bar { background: #131317; border-bottom: 1px solid rgba(223, 186, 115, 0.3); padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .studio-grid { display: grid; grid-template-columns: 460px 1fr; flex: 1; height: calc(100vh - 60px); }
+    @media (max-width: 900px) { .studio-grid { grid-template-columns: 1fr; } .preview-pane { display: none; } }
+    .editor-pane { background: #0e0e12; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; }
+    .step-box { background: #18181f; border-radius: 10px; padding: 16px; border: 1px solid rgba(223, 186, 115, 0.2); }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 11px; color: #a3a3a8; margin-bottom: 4px; }
+    .form-group input, .form-group textarea { width: 100%; background: #0a0a0c; border: 1px solid rgba(223, 186, 115, 0.4); color: #fff; padding: 10px; border-radius: 6px; font-family: inherit; font-size: 13px; }
+    .preview-pane { background: #050507; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .preview-frame { width: 375px; height: 90vh; border: 8px solid #22222b; border-radius: 36px; overflow: hidden; }
+    .preview-frame iframe { width: 100%; height: 100%; border: 0; }
+    .btn-save { background: linear-gradient(135deg, #dfba73, #c89b3f); color: #0a0a0c; border: 0; padding: 12px; font-weight: 800; border-radius: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div style="font-family: 'Italiana', serif; color: #dfba73; font-size: 20px;">🍾 Champagne & Gold Studio</div>
+    <div style="font-size: 12px; color: #a3a3a8;">Live Sync Active</div>
+  </div>
+  <div class="studio-grid">
+    <div class="editor-pane">
+      <div class="step-box">
+        <h3 style="color: #dfba73; font-size: 14px; margin-bottom: 10px;">1. VIP Guest Info</h3>
+        <div class="form-group">
+          <label>Birthday person ka naam</label>
+          <input type="text" id="inp-name" value="Rhea Singhania" oninput="syncData()">
+        </div>
+        <div class="form-group">
+          <label>Vintage Age</label>
+          <input type="number" id="inp-age" value="28" oninput="syncData()">
+        </div>
+      </div>
+
+      <div class="step-box">
+        <h3 style="color: #dfba73; font-size: 14px; margin-bottom: 10px;">2. Main VIP Toast</h3>
+        <div class="form-group">
+          <label>Main toast tribute</label>
+          <textarea id="inp-msg" rows="3" oninput="syncData()">To the woman who commands every room with grace, style, and effortless brilliance. Vintage 1998, aged to absolute perfection. Tonight, we clink crystal and celebrate you!</textarea>
+        </div>
+      </div>
+
+      <div class="step-box">
+        <h3 style="color: #dfba73; font-size: 14px; margin-bottom: 10px;">3. Scratch Card Surprises</h3>
+        <div class="form-group">
+          <label>Scratch Card 1: Secret Wish</label>
+          <input type="text" id="inp-wish" value="May your wildest dreams become your everyday reality!" oninput="syncData()">
+        </div>
+        <div class="form-group">
+          <label>Scratch Card 2: Surprise Gift</label>
+          <input type="text" id="inp-gift" value="VIP Spa Day & Luxury Dinner on us!" oninput="syncData()">
+        </div>
+        <div class="form-group">
+          <label>Sender / Host Name</label>
+          <input type="text" id="inp-sender" value="Aditya & The Inner Circle" oninput="syncData()">
+        </div>
+      </div>
+
+      <button class="btn-save" onclick="window.open('index.html', '_blank')">Save & Preview Soirée ↗</button>
+    </div>
+
+    <div class="preview-pane">
+      <div class="preview-frame">
+        <iframe src="index.html" id="preview-iframe"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function syncData() {
+      const data = {
+        name: document.getElementById('inp-name').value,
+        age: document.getElementById('inp-age').value,
+        mainMessage: document.getElementById('inp-msg').value,
+        scratchWish: document.getElementById('inp-wish').value,
+        scratchGift: document.getElementById('inp-gift').value,
+        sender: document.getElementById('inp-sender').value
+      };
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage({ type: 'VANVI_UPDATE_DATA', payload: data }, '*');
+      }
+      localStorage.setItem('vanvi_champagne_draft', JSON.stringify(data));
+    }
+  </script>
+</body>
+</html>

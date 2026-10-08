@@ -125,4 +125,30 @@ router.get('/assets/:momentId', async (req, res) => {
   }
 });
 
+/**
+ * POST /api/upload/assets/register
+ * Record a direct-uploaded Cloudinary asset into Supabase / local registry
+ */
+router.post('/assets/register', async (req, res) => {
+  try {
+    const { momentId, templateId, assetType, publicId, secureUrl, url, bytes, format, width, height } = req.body || {};
+    const recorded = await supabaseService.createMomentAsset({
+      moment_id: momentId || 'draft',
+      template_id: templateId || null,
+      asset_type: assetType || 'image',
+      storage_path: publicId || '',
+      public_url: secureUrl || url || '',
+      width,
+      height,
+      format,
+      bytes,
+      provider: 'cloudinary'
+    });
+    return res.json({ success: true, asset: recorded });
+  } catch (err) {
+    console.warn('[UploadRoutes] Register asset warning:', err.message);
+    return res.status(200).json({ success: true, registered: false });
+  }
+});
+
 module.exports = router;

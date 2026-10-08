@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Royal Shaadi Invite — Live Experience | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../css/vanvi-template-cards.css">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #24050b;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    #templatePreviewFrame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Floating Pill Dock */
+    .preview-floating-pill-dock {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(36, 5, 11, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .pill-back-btn, .pill-cta-create, .pill-toggle-drawer {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 750;
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      padding: 6px 12px;
+    }
+
+    .pill-back-btn {
+      color: #f9eed3;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .pill-back-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+    }
+
+    .pill-cta-create {
+      background: linear-gradient(135deg, #d4af37 0%, #aa771c 100%);
+      color: #24050b;
+      font-weight: 850;
+      box-shadow: 0 3px 12px rgba(212, 175, 55, 0.35);
+    }
+    .pill-cta-create:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+    }
+
+    .pill-toggle-drawer {
+      background: rgba(212, 175, 55, 0.15);
+      color: #d4af37;
+    }
+    .pill-toggle-drawer:hover {
+      background: rgba(212, 175, 55, 0.28);
+    }
+
+    /* Bottom Micro-Details Drawer */
+    .preview-micro-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(36, 5, 11, 0.95);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid rgba(212, 175, 55, 0.35);
+      z-index: 9999;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 16px 20px 22px;
+      color: #ffffff;
+      max-height: 40vh;
+      overflow-y: auto;
+    }
+    .preview-micro-drawer.open {
+      transform: translateY(0);
+    }
+
+    .drawer-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Pill Dock -->
+  <div class="preview-floating-pill-dock">
+    <a href="../../templates.html" class="pill-back-btn">
+      <span>← Moments</span>
+    </a>
+    <button type="button" class="pill-toggle-drawer" id="toggleDrawerBtn">
+      <span>ℹ️ Details</span>
+    </button>
+    <a href="builder.html" class="pill-cta-create">
+      <span>Customize &amp; Send ✦</span>
+    </a>
+  </div>
+
+  <!-- Fullscreen Experience iFrame -->
+  <iframe src="index.html" id="templatePreviewFrame" title="Royal Shaadi Invite Live Preview"></iframe>
+
+  <!-- Micro Details Drawer -->
+  <aside class="preview-micro-drawer" id="microDrawer">
+    <div class="drawer-inner">
+      <div class="drawer-head">
+        <div>
+          <h3 style="font-size:15px; font-weight:800; color:#d4af37;">Royal Shaadi Invite 👑</h3>
+          <p style="font-size:11px; color:#f3e5ab;">Ultra-Luxury Interactive Engagement &amp; Wedding Keepsake</p>
+        </div>
+        <button type="button" id="closeDrawerBtn" style="background:none; border:none; color:#ffffff; font-size:16px; cursor:pointer;">✕</button>
+      </div>
+
+      <p style="font-size:12px; line-height:1.45; color:#e2d9cb;">
+        Includes 3D Royal Wax Seal Envelope, Canvas Sparkles, Storyboard with 3D Tilt Polaroids, Scratch-to-Reveal Date, Evening Itinerary, Calendar Sync (.ics), WhatsApp Group Invites, and Personalized Guest Link Generator.
+      </p>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+        <span style="font-size:18px; font-weight:850; color:#d4af37;">₹299 <span style="font-size:11px; text-decoration:line-through; opacity:0.6;">₹2,499</span></span>
+        <a href="builder.html" class="pill-cta-create" style="padding:8px 18px;">Personalize Now ✦</a>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleDrawerBtn');
+    const closeBtn = document.getElementById('closeDrawerBtn');
+    const drawer = document.getElementById('microDrawer');
+
+    toggleBtn.addEventListener('click', () => drawer.classList.toggle('open'));
+    closeBtn.addEventListener('click', () => drawer.classList.remove('open'));
+  </script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
@@ -12,6 +13,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="vanvi-inner-light.css"/>
 <link rel="stylesheet" href="vanvi-navigation.css"/>
+<link rel="stylesheet" href="css/vanvi-global-experience.css"/>
+<script src="js/vanvi-global-experience.js" defer></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="js/vanvi-api.js"></script>
 <script src="js/vanvi-google-auth.js"></script>
@@ -609,11 +612,11 @@ header {
   transition: all 0.22s ease;
 }
 .btn-pay-now:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1.5px);
   box-shadow: 0 14px 38px var(--theme-glow);
 }
 .btn-pay-now:active {
-  transform: scale(0.98);
+  transform: scale(0.98) translateY(0);
 }
 
 /* Success Order Receipt Modal (Luxury Glassmorphic) */
@@ -746,8 +749,11 @@ header {
   transition: all 0.2s ease;
 }
 .btn-whatsapp-deliver:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1.5px);
   box-shadow: 0 12px 30px rgba(37, 211, 102, 0.45);
+}
+.btn-whatsapp-deliver:active {
+  transform: scale(0.98) translateY(0);
 }
 
 /* Footer */
@@ -765,20 +771,9 @@ footer a:hover { color: var(--rose-primary); }
 <body>
 
 <header>
-  <a href="index.html" class="brand-link" title="Vanvi Moments">
-    <svg viewBox="0 0 26 26" fill="none" class="brand-spark">
-      <defs>
-        <linearGradient id="chkSparkGrad" x1="0%" x2="100%" y1="0%" y2="100%">
-          <stop offset="0%" stop-color="#ff2a7a"/>
-          <stop offset="50%" stop-color="#a855f7"/>
-          <stop offset="100%" stop-color="#d97706"/>
-        </linearGradient>
-      </defs>
-      <path d="M13 2 C13 7.8 15.2 10 21 13 C15.2 16 13 18.2 13 24 C13 18.2 10.8 16 5 13 C10.8 10 13 7.8 13 2 Z" fill="url(#chkSparkGrad)"/>
-      <circle cx="13" cy="13" r="2.8" fill="#ffffff"/>
-      <circle cx="13" cy="13" r="1.5" fill="#ff007a"/>
-    </svg>
-    <span>VANVI <span style="color:#ff007a;">♡</span> MOMENTS</span>
+  <a href="index.html" class="brand-link" title="Vanvi Moments Home">
+    <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="header-brand-img" style="height: 32px; width: auto; max-width: 145px; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(255, 42, 122, 0.22));" />
+    <span class="chk-badge" style="font-size: 10px; font-weight: 850; color: #ff2a7a; background: #fff0f5; padding: 2px 8px; border-radius: 99px; border: 1px solid rgba(255,42,122,0.25);">CHECKOUT</span>
   </a>
 
   <div style="display:flex; align-items:center; gap:8px;">
@@ -1121,6 +1116,9 @@ footer a:hover { color: var(--rose-primary); }
 
     <!-- Quick Action Links -->
     <div style="display:flex; flex-direction:column; gap:8px; align-items:center; margin-top:8px;">
+      <a href="#" id="linkCustomizeInBuilder" style="background: linear-gradient(135deg, #ff2a7a 0%, #be123c 100%); color: #fff; padding: 12px 20px; border-radius: 99px; text-decoration: none; font-size: 13.5px; font-weight: 850; display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: center; box-shadow: 0 6px 18px rgba(255, 42, 122, 0.35); margin-bottom: 4px;">
+        🎨 Personalize in Template Studio →
+      </a>
       <a href="#" id="linkViewCertificate" style="background: linear-gradient(135deg, rgba(217, 119, 6, 0.1), rgba(255, 42, 122, 0.1)); border: 1.5px solid rgba(217, 119, 6, 0.4); color: #b45309; padding: 10px 18px; border-radius: 99px; text-decoration: none; font-size: 12px; font-weight: 850; display: inline-flex; align-items: center; gap: 6px; width: 100%; justify-content: center; transition: all 0.2s;">
         📜 View Official Keepsake Certificate →
       </a>
@@ -1188,6 +1186,16 @@ function vanviGoBack(fallback) {
   const recipient = urlParams.get('recipient') || 'Special Someone';
   let basePrice = parseInt(urlParams.get('price') || '199', 10);
   const themeOverride = urlParams.get('theme') || urlParams.get('color') || '';
+
+  // Auto-resolve template details from central Vanvi Registry if templateId is provided
+  if (templateId && window.VANVI_TEMPLATES && Array.isArray(window.VANVI_TEMPLATES)) {
+    const found = window.VANVI_TEMPLATES.find(t => t.id === templateId || t.slug === templateId || (t.aliases && t.aliases.includes(templateId)));
+    if (found) {
+      if (!urlParams.get('template')) templateName = found.name;
+      if (!urlParams.get('price') && found.price) basePrice = found.price;
+      if (!urlParams.get('occasion') && (found.previewOccasion || found.category)) occasion = found.previewOccasion || found.category;
+    }
+  }
 
   // 2. Pre-configured Theme Profiles (Fallback & Extensible)
   const THEME_PROFILES = {
@@ -1373,8 +1381,21 @@ function vanviGoBack(fallback) {
     initialTemplateObj = window.VANVI_TEMPLATES.find(t => 
       t.id === templateId || 
       t.slug === templateId || 
-      (t.name && t.name.toLowerCase() === templateName.toLowerCase())
+      (t.name && t.name.toLowerCase() === templateName.toLowerCase()) ||
+      t.id === templateName ||
+      t.slug === templateName ||
+      (t.aliases && (t.aliases.includes(templateId) || t.aliases.includes(templateName)))
     );
+    if (initialTemplateObj) {
+      templateId = initialTemplateObj.id;
+      templateName = initialTemplateObj.name;
+      if (!urlParams.get('price')) {
+        basePrice = initialTemplateObj.price;
+      }
+      if (!urlParams.get('occasion')) {
+        occasion = initialTemplateObj.category || 'Birthday';
+      }
+    }
   }
   applyTemplateTheme(initialTemplateObj);
   initTemplateSwitcher();
@@ -1814,6 +1835,11 @@ function vanviGoBack(fallback) {
         const linkViewCertificate = document.getElementById('linkViewCertificate');
         if (linkViewCertificate) {
           linkViewCertificate.href = `order-success.html?orderId=${encodeURIComponent(displayOrderId)}&template=${encodeURIComponent(templateName)}&recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}&amount=${finalAmount.toFixed(2)}&coins=${appliedCoins}&credits=${appliedCredits}&momentUrl=${encodeURIComponent(finalUrl)}&paymentId=${encodeURIComponent(paymentId || '')}`;
+        }
+
+        const linkCustomizeInBuilder = document.getElementById('linkCustomizeInBuilder');
+        if (linkCustomizeInBuilder) {
+          linkCustomizeInBuilder.href = `builder.html?template=${encodeURIComponent(templateId)}&orderId=${encodeURIComponent(displayOrderId)}&recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}`;
         }
 
         const linkOpenShareStudio = document.getElementById('linkOpenShareStudio');

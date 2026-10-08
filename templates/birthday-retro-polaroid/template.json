@@ -1,0 +1,108 @@
+{
+  "id": "birthday-retro-polaroid",
+  "name": "Retro Polaroid — The Nostalgic Scrapbook",
+  "slug": "birthday-retro-polaroid",
+  "category": "Birthday",
+  "categorySlug": "birthday",
+  "price": 299,
+  "originalPrice": 799,
+  "isFree": false,
+  "badge": "🎞️ Retro Bestseller",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "Nostalgic 18-Section Digital Scrapbook & Vinyl Experience",
+  "icon": "🎞️",
+  "soundtrack": "Warm Lo-Fi Acoustic Vinyl Melody with Vinyl Crackle",
+  "tags": [
+    "birthday",
+    "retro",
+    "polaroid",
+    "vinyl-player",
+    "draggable",
+    "scrapbook",
+    "nostalgia",
+    "lofi"
+  ],
+  "description": "Vanvi Moments Vintage Edition: 18-section retro scrapbook birthday celebration featuring an interactive spinning vinyl turntable with tonearm, touch-draggable polaroid memory cards, washi tape paper clippings, and heartfelt typewriter notes.",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 10,
+    "hasDate": true,
+    "hasSoundtrack": true,
+    "builderPath": "templates/birthday-retro-polaroid/builder.html",
+    "previewPath": "templates/birthday-retro-polaroid/preview.html"
+  },
+  "sections": [
+    "camera-aperture-entry",
+    "retro-handwritten-hero",
+    "birth-calendar-stamp",
+    "polaroid-age-badge",
+    "scrapbook-welcome",
+    "typewriter-main-message",
+    "interactive-vinyl-turntable",
+    "draggable-polaroid-stack",
+    "scrapbook-memory-timeline",
+    "favorite-cassettes-grid",
+    "polaroid-reel-gallery",
+    "sticky-notes-wishes",
+    "nostalgia-quote-banner",
+    "scratch-postage-stamp",
+    "mixtape-tracklist",
+    "retro-flip-countdown",
+    "keepsake-badge-share",
+    "artisan-scrapbook-footer"
+  ],
+  "schema": {
+    "fields": [
+      {
+        "key": "name",
+        "label": "Birthday Person Name",
+        "type": "text",
+        "required": true,
+        "default": "Kavya Sharma"
+      },
+      {
+        "key": "nickname",
+        "label": "Nickname / Retro Pet Name",
+        "type": "text",
+        "required": false,
+        "default": "Kavu"
+      },
+      {
+        "key": "age",
+        "label": "Milestone Age",
+        "type": "number",
+        "required": true,
+        "default": 23
+      },
+      {
+        "key": "birthYear",
+        "label": "Birth Year",
+        "type": "number",
+        "required": true,
+        "default": 2003
+      },
+      {
+        "key": "birthDate",
+        "label": "Birthday Date",
+        "type": "text",
+        "required": true,
+        "default": "July 14"
+      },
+      {
+        "key": "mainMessage",
+        "label": "Typewriter Birthday Letter",
+        "type": "textarea",
+        "required": true,
+        "default": "To the girl whose laugh sounds like summer road trips and favorite old songs. May this 23rd year bring you warm coffee, endless vinyl records, and moments you never want to forget."
+      },
+      {
+        "key": "sender",
+        "label": "Sender Name(s)",
+        "type": "text",
+        "required": true,
+        "default": "Rhea, Tara & The Gang"
+      }
+    ]
+  }
+}

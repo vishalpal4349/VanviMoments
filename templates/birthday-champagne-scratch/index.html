@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Champagne & Gold — The VIP Soirée | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 1. VIP Black & Gold Entry -->
+  <div class="vip-overlay" id="vip-overlay">
+    <div class="vip-badge">VIP INVITATION ONLY</div>
+    <h2 class="vip-title">THE CHAMPAGNE SOIRÉE</h2>
+    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 24px;">An exclusive black-tie digital toast for <span class="val-name">Rhea Singhania</span></p>
+    <button class="btn-vip-enter" id="btn-vip-enter">UNVEIL THE SOIRÉE 🍾</button>
+  </div>
+
+  <div class="page-wrapper">
+    <!-- 2. Hero -->
+    <header class="hero-soiree">
+      <div style="font-size: 11px; letter-spacing: 2px; color: var(--gold-champagne); font-weight: 700; margin-bottom: 12px;">BLACK TIE CELEBRATION</div>
+      <h1 class="guest-name val-name">Rhea Singhania</h1>
+      <p style="font-family: var(--font-display); font-size: 18px; color: var(--gold-champagne);">
+        "Pure Radiance • Unapologetic Elegance • Golden Energy"
+      </p>
+
+      <!-- 3 & 4. Capsules -->
+      <div class="soiree-capsules">
+        <div class="capsule">Vintage: <strong class="val-age">28</strong> Years</div>
+        <div class="capsule">Status: <strong>Aged to Perfection</strong></div>
+        <div class="capsule">Date: <strong>December 22</strong></div>
+      </div>
+    </header>
+
+    <!-- 5 & 6. Main VIP Message -->
+    <section class="vip-card">
+      <span class="vip-tag">The Toast</span>
+      <h2 class="vip-head">To the Guest of Honor</h2>
+      <p class="val-vip-msg" style="font-size: 15px; color: #ddd; line-height: 1.8;">
+        To the woman who commands every room with grace, style, and effortless brilliance. Vintage 1998, aged to absolute perfection. Tonight, we clink crystal and celebrate you!
+      </p>
+      <div style="margin-top: 14px; font-weight: 700; color: var(--gold-champagne); text-align: right;">
+        — <span class="val-sender">Aditya & The Inner Circle</span>
+      </div>
+    </section>
+
+    <!-- 7. Interactive Champagne Bottle Pop -->
+    <section class="vip-card champagne-stage">
+      <span class="vip-tag">Interactive Celebration</span>
+      <h2 class="vip-head">Pop the Golden Champagne</h2>
+      <div class="bottle-icon" id="champagne-bottle">🍾</div>
+      <div>
+        <button class="btn-pop-cork" id="btn-pop-cork">Pop The Golden Cork! 🥂</button>
+      </div>
+    </section>
+
+    <!-- 8. Gold Foil Scratch Cards -->
+    <section class="vip-card">
+      <span class="vip-tag">Interactive Scratch-Off</span>
+      <h2 class="vip-head">Gold Foil Secret Revelations</h2>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+        Use your finger or mouse to scratch off the 24K gold foil and unlock secrets!
+      </p>
+
+      <div class="scratch-grid">
+        <!-- Card 1 -->
+        <div class="scratch-card-box">
+          <div class="scratch-secret-content" id="scratch-wish-text">
+            ✨ "May your wildest dreams become your everyday reality!"
+          </div>
+          <canvas class="scratch-canvas"></canvas>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="scratch-card-box">
+          <div class="scratch-secret-content" id="scratch-gift-text">
+            🎁 "VIP Spa Day & Luxury Dinner on us!"
+          </div>
+          <canvas class="scratch-canvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Gilded Gallery -->
+    <section class="vip-card">
+      <span class="vip-tag">VIP Portfolio</span>
+      <h2 class="vip-head">Gilded Highlights</h2>
+      <div class="gilded-gallery">
+        <div class="gilded-card">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="VIP 1">
+        </div>
+        <div class="gilded-card">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" alt="VIP 2">
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. Toast Countdown -->
+    <section class="vip-card">
+      <span class="vip-tag">Midnight Toast</span>
+      <h2 class="vip-head">Countdown to the Clinking Flutes</h2>
+      <div class="toast-grid">
+        <div class="toast-cell">
+          <div class="toast-val" id="toast-days">0</div>
+          <div class="toast-lbl">Days</div>
+        </div>
+        <div class="toast-cell">
+          <div class="toast-val" id="toast-hours">0</div>
+          <div class="toast-lbl">Hours</div>
+        </div>
+        <div class="toast-cell">
+          <div class="toast-val" id="toast-mins">0</div>
+          <div class="toast-lbl">Mins</div>
+        </div>
+        <div class="toast-cell">
+          <div class="toast-val" id="toast-secs">0</div>
+          <div class="toast-lbl">Secs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18. Footer -->
+    <footer style="text-align: center; margin-top: 40px; font-size: 12px; color: var(--text-muted);">
+      <p>Curated for VIP distinction on <a href="../../index.html" style="color: var(--gold-champagne); text-decoration: none;">Vanvi Moments</a></p>
+      <p style="margin-top: 4px;">Vanvi Haute Joaillerie & Keepsakes</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

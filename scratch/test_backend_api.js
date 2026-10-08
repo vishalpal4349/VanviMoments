@@ -150,13 +150,18 @@ server.listen(PORT, async () => {
 
     // 13. Payment Verification & Moment Publish
     const orderId = orderCreate.data.order.id;
+    const testSecret = process.env.RAZORPAY_KEY_SECRET;
+    const testSig = testSecret
+      ? require('crypto').createHmac('sha256', testSecret).update(`${orderCreate.data.order.gatewayOrderId}|pay_test_123`).digest('hex')
+      : 'simulated_sig';
+
     const paymentVerify = await api('/api/payments/verify', {
       method: 'POST',
       token,
       body: {
         orderId,
         paymentId: 'pay_test_123',
-        signature: 'simulated_sig',
+        signature: testSig,
         momentData: {
           recipient: 'Sneha',
           sender: 'Karan',

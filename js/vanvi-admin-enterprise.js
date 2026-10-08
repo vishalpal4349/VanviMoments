@@ -296,8 +296,9 @@
       conversion: '3.4%'
     };
 
-    // Attempt real overview data from VanviAPI
-    if (window.VanviAPI && window.VanviAPI.admin) {
+    // Attempt real overview data from VanviAPI if authenticated
+    const hasAuth = !!(localStorage.getItem('vanvi_auth_token') || localStorage.getItem('vanvi_token') || localStorage.getItem('vanvi_admin_token') || localStorage.getItem('vanvi_admin_key'));
+    if (hasAuth && window.VanviAPI && window.VanviAPI.admin) {
       try {
         const res = await window.VanviAPI.admin.getOverview();
         if (res.success && res.metrics) {

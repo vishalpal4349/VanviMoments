@@ -1,42 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Jewel Merge 2048 — Vanvi Moments Games</title>
-  <meta name="description" content="Slide and merge rare gemstones to forge the legendary Crown Diamond and earn Vanvi Coins!">
+  <meta name="description" content="Slide and merge rare celebration gemstones to forge the legendary Crown Diamond. Easy, Medium, Hard and Master levels with tiered Vanvi Coins!">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     :root {
       --rose-main: #ff2a7a;
+      --rose-dark: #e11d48;
       --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #d97706 100%);
+      --clay-bg: radial-gradient(circle at 50% 0%, #ffeef6 0%, #fff7fb 35%, #faf5ff 70%, #fff0f6 100%);
       --text-dark: #2c1224;
       --text-muted: #88627b;
       --border-pink: rgba(255, 120, 175, 0.28);
       --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-tile: 'Outfit', sans-serif;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
     body {
-      background: radial-gradient(circle at 50% 0%, #ffeaf3 0%, #fff7fb 35%, #faf5ff 70%, #fff2f7 100%);
+      background: var(--clay-bg);
       font-family: var(--font-sans);
       color: var(--text-dark);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       user-select: none;
+      overflow-x: hidden;
     }
+
+    /* ─── APP HEADER ─── */
     .app-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-pink);
       height: 60px;
@@ -44,242 +59,899 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(255, 42, 122, 0.05);
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .btn-nav-back {
       font-size: 12.5px;
-      font-weight: 750;
+      font-weight: 800;
       color: var(--text-muted);
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       background: #ffffff;
       border: 1px solid var(--border-pink);
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 99px;
       cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
+    .btn-nav-back:hover {
+      color: var(--rose-main);
+      border-color: var(--rose-main);
+      transform: translateX(-2px);
+    }
+    .header-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .brand-logo-img {
+      height: 34px;
+      width: auto;
+      max-width: 130px;
+      object-fit: contain;
+      display: block;
+    }
+    .badge-chip {
+      background: linear-gradient(135deg, rgba(255, 42, 122, 0.12), rgba(217, 119, 6, 0.12));
+      border: 1px solid rgba(255, 42, 122, 0.3);
+      color: var(--rose-main);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wallet-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff8eb;
+      border: 1.5px solid rgba(217, 119, 6, 0.35);
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #b45309;
+      box-shadow: 0 4px 10px rgba(217, 119, 6, 0.08);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .wallet-pill:hover { transform: scale(1.03); background: #fef3c7; }
+
+    /* ─── MAIN ARENA ─── */
     .game-arena {
       flex: 1;
       max-width: 440px;
       margin: 0 auto;
       width: 100%;
-      padding: 16px 14px 40px;
+      padding: 12px 14px 110px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
+    /* ─── DIFFICULTY TABS (3D Clay) ─── */
+    .difficulty-dock {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    @media (max-width: 400px) {
+      .difficulty-dock {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        scroll-snap-type: x proximity;
+        gap: 6px;
+        padding-bottom: 4px;
+      }
+      .difficulty-dock::-webkit-scrollbar { display: none; }
+      .diff-tab {
+        flex: 1 0 84px;
+        scroll-snap-align: start;
+      }
+    }
+    .diff-tab {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 12px;
+      padding: 6px 4px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 3px 0 #ebd8e3, 0 4px 10px rgba(44, 18, 36, 0.05);
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+    .diff-tab:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 0 #ebd8e3, 0 8px 14px rgba(44, 18, 36, 0.08);
+      border-color: var(--rose-main);
+    }
+    .diff-tab.active {
+      background: linear-gradient(135deg, #2c1224 0%, #521943 100%);
+      border-color: #2c1224;
+      color: #ffffff;
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #2c1224, 0 4px 12px rgba(44, 18, 36, 0.25);
+    }
+    .diff-tab-title {
+      font-size: 10.5px;
+      font-weight: 850;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .diff-tab-target {
+      font-size: 8.5px;
+      opacity: 0.85;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .diff-tab-coin {
+      font-size: 9px;
+      font-weight: 850;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #b45309;
+      padding: 1px 5px;
+      border-radius: 99px;
+      margin-top: 1px;
+      white-space: nowrap;
+    }
+    .diff-tab.active .diff-tab-coin {
+      background: #f59e0b;
+      border-color: #f59e0b;
+      color: #ffffff;
+    }
+
+    /* ─── STATUS HUD ─── */
     .status-hud {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid var(--border-pink);
-      border-radius: 16px;
-      padding: 10px 14px;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 16px rgba(255, 60, 130, 0.06);
+      background: rgba(255, 255, 255, 0.94);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 14px;
+      padding: 6px 12px;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 14px rgba(255, 60, 130, 0.05);
     }
-    .hud-pill {
-      font-size: 12px;
+    .hud-stat-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .hud-label {
+      font-size: 10px;
       font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .hud-val {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--text-dark);
+      font-family: var(--font-tile);
+    }
+    .hud-target-badge {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-    }
-    .btn-rules-pill {
       background: rgba(255, 42, 122, 0.08);
       border: 1px solid rgba(255, 42, 122, 0.25);
       color: var(--rose-main);
+      padding: 4px 10px;
+      border-radius: 99px;
       font-size: 11.5px;
-      font-weight: 800;
+      font-weight: 850;
+    }
+    .btn-toggle-guide {
+      background: #ffffff;
+      border: 1px solid var(--border-pink);
+      color: var(--rose-main);
+      font-size: 11px;
+      font-weight: 850;
       padding: 5px 12px;
       border-radius: 99px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn-toggle-guide:hover {
+      background: #fff0f6;
+      border-color: var(--rose-main);
     }
 
-    /* 4x4 Grid */
+    /* ─── TARGET PROGRESS BAR ─── */
+    .target-progress-wrap {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-pink);
+      border-radius: 12px;
+      padding: 4px 10px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+    }
+    .progress-bar-outer {
+      flex: 1;
+      height: 7px;
+      background: #fce7f3;
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background: linear-gradient(90deg, #ff2a7a, #d97706);
+      border-radius: 99px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    /* ─── VISUAL EVOLUTION LADDER (Direct on Screen) ─── */
+    .evolution-guide-card {
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      border-radius: 14px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 14px rgba(255, 60, 130, 0.05);
+      transition: all 0.3s ease;
+    }
+    .evolution-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .evolution-title {
+      font-size: 11.5px;
+      font-weight: 850;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .evolution-sub {
+      font-size: 9.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Swipeable Gem Track */
+    .gem-ladder-track {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      scroll-snap-type: x proximity;
+      padding: 2px 2px 4px;
+    }
+    .gem-ladder-track::-webkit-scrollbar { display: none; }
+    .ladder-gem {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      background: #fdf4f8;
+      border: 1.5px solid #f9d2e5;
+      border-radius: 10px;
+      padding: 4px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+      min-width: 48px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .ladder-gem.active-highest {
+      background: #fff0f6;
+      border-color: #ff2a7a;
+      box-shadow: 0 0 12px rgba(255, 42, 122, 0.35);
+      transform: scale(1.05);
+    }
+    .ladder-gem.is-goal {
+      border: 1.5px dashed #d97706;
+      background: #fffbeb;
+    }
+    .ladder-gem-icon { font-size: 18px; line-height: 1; }
+    .ladder-gem-val { font-size: 11px; font-weight: 900; color: var(--text-dark); font-family: var(--font-tile); }
+    .ladder-gem-name { font-size: 8.5px; font-weight: 750; color: var(--text-muted); white-space: nowrap; }
+    .ladder-gem-tag {
+      position: absolute;
+      top: -6px;
+      right: -4px;
+      font-size: 7.5px;
+      font-weight: 900;
+      background: #ff2a7a;
+      color: #fff;
+      padding: 1px 4px;
+      border-radius: 99px;
+      text-transform: uppercase;
+    }
+
+    /* Quick Fusion Cheatsheet */
+    .fusion-cheatsheet {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border-pink);
+    }
+    .fusion-chip {
+      background: #fff9fc;
+      border: 1px solid rgba(255, 120, 175, 0.22);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 10.5px;
+      font-weight: 750;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ─── 4x4 GRID CONTAINER ─── */
+    .grid-board-card {
+      position: relative;
+      width: min(84vw, 290px);
+      height: min(84vw, 290px);
+      background: rgba(255, 255, 255, 0.9);
+      border: 2.5px solid var(--border-pink);
+      border-radius: 20px;
+      padding: 6px;
+      box-shadow: 
+        0 14px 32px rgba(100, 50, 90, 0.1),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8);
+      margin-bottom: 10px;
+      touch-action: none;
+    }
     .grid-container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       grid-template-rows: repeat(4, 1fr);
       gap: 8px;
-      width: min(92vw, 340px);
-      height: min(92vw, 340px);
-      background: rgba(255, 255, 255, 0.85);
-      border: 2px solid var(--border-pink);
-      border-radius: 20px;
-      padding: 10px;
-      box-shadow: 0 12px 36px rgba(100, 50, 90, 0.1);
-      margin-bottom: 18px;
-      touch-action: none;
+      width: 100%;
+      height: 100%;
     }
     .tile {
-      border-radius: 12px;
-      background: rgba(255, 240, 246, 0.4);
+      border-radius: 14px;
+      background: rgba(255, 240, 246, 0.45);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-family: 'Outfit', sans-serif;
-      font-size: 17px;
-      font-weight: 900;
-      transition: all 0.15s ease;
-      color: #fff;
+      font-family: var(--font-tile);
+      transition: all 0.1s cubic-bezier(0.2, 0.9, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4);
     }
     .tile.active {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      animation: popTile 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), inset 0 2px 3px rgba(255, 255, 255, 0.35);
+      animation: popTile 0.15s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @keyframes popTile {
-      0% { transform: scale(0.6); }
-      100% { transform: scale(1); }
+      0% { transform: scale(0.65); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .tile-icon { font-size: 19px; line-height: 1; }
+    .tile-val { font-size: 13px; font-weight: 900; margin-top: 2px; line-height: 1; }
+    .tile-name { font-size: 7.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3px; opacity: 0.9; margin-top: 1px; }
+
+    /* Floating Point Notifications */
+    .floating-toast {
+      position: absolute;
+      font-family: var(--font-tile);
+      font-weight: 900;
+      color: #ff2a7a;
+      pointer-events: none;
+      animation: floatUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      z-index: 20;
+      font-size: 14px;
+      text-shadow: 0 2px 4px rgba(255, 255, 255, 0.9);
+    }
+    @keyframes floatUp {
+      0% { transform: translate(-50%, 0) scale(0.8); opacity: 1; }
+      100% { transform: translate(-50%, -35px) scale(1.15); opacity: 0; }
     }
 
-    /* Mobile D-Pad Controls */
+    /* Beginner Quick Tip Banner */
+    .quick-tip-banner {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255, 42, 122, 0.08), rgba(217, 119, 6, 0.08));
+      border: 1px dashed var(--border-pink);
+      border-radius: 12px;
+      padding: 6px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-dark);
+      animation: softPulse 3s infinite ease-in-out;
+    }
+    .tip-icon { font-size: 15px; }
+    .tip-text strong { color: var(--rose-main); }
+    @keyframes softPulse {
+      0%, 100% { border-color: var(--border-pink); }
+      50% { border-color: rgba(255, 42, 122, 0.6); }
+    }
+
+    /* ─── 3D CLAY D-PAD & ACTION CONTROLS ─── */
+    .controls-zone {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
     .dpad-container {
       display: grid;
       grid-template-columns: repeat(3, 56px);
-      grid-template-rows: repeat(2, 48px);
-      gap: 6px;
-      margin-top: 10px;
+      grid-template-rows: repeat(2, 44px);
+      gap: 8px;
       justify-content: center;
     }
     .dpad-btn {
-      background: #ffffff;
+      background: linear-gradient(180deg, #ffffff 0%, #fff7fb 100%);
       border: 1.5px solid var(--border-pink);
       border-radius: 14px;
-      font-size: 18px;
-      color: var(--text-dark);
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--rose-main);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 10px rgba(100, 50, 90, 0.08);
-      transition: all 0.15s;
+      box-shadow: 0 4px 0 #ebd8e3, 0 6px 14px rgba(255, 42, 122, 0.08);
+      transition: all 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .dpad-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #ebd8e3, 0 8px 16px rgba(255, 42, 122, 0.15);
+      border-color: var(--rose-main);
     }
     .dpad-btn:active {
-      transform: scale(0.92);
-      background: #fff0f5;
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #ebd8e3, 0 2px 6px rgba(255, 42, 122, 0.1);
+      background: #ffeef6;
     }
 
-    /* Modal */
+    .action-buttons-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-action-clay {
+      padding: 9px 18px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      font-weight: 800;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--text-dark);
+      box-shadow: 0 3px 0 #ebd8e3, 0 6px 12px rgba(100, 50, 90, 0.06);
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-action-clay:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 0 #ebd8e3, 0 8px 16px rgba(100, 50, 90, 0.1);
+      background: #fff0f5;
+      border-color: var(--rose-main);
+    }
+    .btn-action-clay:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #ebd8e3;
+    }
+    .btn-action-clay:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: 0 2px 0 #ebd8e3;
+    }
+
+    /* ─── MODAL OVERLAYS ─── */
     .modal-overlay {
-      position: fixed; inset: 0; background: rgba(44, 18, 36, 0.6); backdrop-filter: blur(8px);
+      position: fixed; inset: 0; background: rgba(44, 18, 36, 0.65); backdrop-filter: blur(8px);
       z-index: 200; display: none; align-items: center; justify-content: center; padding: 16px;
     }
     .modal-overlay.open { display: flex; }
     .modal-card {
       background: #ffffff; width: 100%; max-width: 420px; border-radius: 24px; padding: 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.25); border: 1px solid var(--border-pink); position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25); border: 1.5px solid var(--border-pink); position: relative;
     }
-    .modal-card h3 { font-family: var(--font-serif); font-size: 22px; color: var(--text-dark); margin-bottom: 12px; }
+    .modal-card h3 { font-family: var(--font-serif); font-size: 24px; color: var(--text-dark); margin-bottom: 10px; }
     .modal-card ul { padding-left: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+    .modal-card li { margin-bottom: 6px; }
   </style>
 </head>
 <body>
 
+  <!-- App Header -->
   <header class="app-header">
-    <button type="button" class="btn-nav-back" onclick="location.href='games.html'">
-      ‹ Games Arena
-    </button>
-    <div style="font-weight: 850; font-size: 15px; color: var(--rose-main);">
-      💎 Jewel Merge 2048
+    <div class="header-left">
+      <a href="games.html" class="btn-nav-back">
+        ‹ Games
+      </a>
+      <a href="index.html" class="header-brand">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="brand-logo-img">
+        <span class="badge-chip">MERGE 2048</span>
+      </a>
     </div>
-    <div style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:800; background:#fffbeb; border:1px solid #fde68a; padding:4px 10px; border-radius:99px; color:#d97706;">
-      🪙 <span id="coinBalanceHUD">0</span>
+    <div class="header-right">
+      <a href="rewards.html" class="wallet-pill" title="Vanvi Coin Balance">
+        🪙 <span id="coinBalanceHUD">0</span>
+      </a>
+      <button type="button" class="btn-toggle-guide" onclick="openRules()" title="Full Rules & Guide">
+        📖 Guide
+      </button>
     </div>
   </header>
 
+  <!-- Main Game Arena -->
   <main class="game-arena">
-    <div class="status-hud">
-      <div class="hud-pill">
-        <span>⭐ Score:</span> <strong id="hudScore" style="color:var(--rose-main);">0</strong>
-      </div>
-      <div class="hud-pill">
-        <span>🎯 Target:</span> <strong>Forge 128 (Ruby)</strong>
-      </div>
-      <button type="button" class="btn-rules-pill" onclick="openRules()">📖 Rules</button>
-    </div>
 
-    <!-- 4x4 Grid -->
-    <div class="grid-container" id="gridContainer"></div>
-
-    <!-- Touch / Click Directional Controls -->
-    <div class="dpad-container">
-      <div style="grid-column: 2;">
-        <button type="button" class="dpad-btn" onclick="move('up')">⬆️</button>
-      </div>
-      <button type="button" class="dpad-btn" style="grid-row: 2; grid-column: 1;" onclick="move('left')">⬅️</button>
-      <button type="button" class="dpad-btn" style="grid-row: 2; grid-column: 2;" onclick="move('down')">⬇️</button>
-      <button type="button" class="dpad-btn" style="grid-row: 2; grid-column: 3;" onclick="move('right')">➡️</button>
-    </div>
-
-    <div style="margin-top:16px;">
-      <button type="button" onclick="initGame()" style="padding:9px 18px; border-radius:12px; background:#fff; border:1.5px solid var(--border-pink); font-weight:800; font-size:12px; cursor:pointer;">
-        🔄 Restart Game
+    <!-- Difficulty Tabs -->
+    <div class="difficulty-dock">
+      <button type="button" class="diff-tab active" id="tabEasy" onclick="setDifficulty('easy')">
+        <span class="diff-tab-title">🟢 Easy</span>
+        <span class="diff-tab-target">Emerald 💚 (32)</span>
+        <span class="diff-tab-coin">+2 Coins 🪙</span>
+      </button>
+      <button type="button" class="diff-tab" id="tabMedium" onclick="setDifficulty('medium')">
+        <span class="diff-tab-title">🟡 Medium</span>
+        <span class="diff-tab-target">Ruby ❤️ (128)</span>
+        <span class="diff-tab-coin">+4 Coins 🪙</span>
+      </button>
+      <button type="button" class="diff-tab" id="tabHard" onclick="setDifficulty('hard')">
+        <span class="diff-tab-title">🔴 Hard</span>
+        <span class="diff-tab-target">Diamond 👑 (256)</span>
+        <span class="diff-tab-coin">+6 Coins 🪙</span>
+      </button>
+      <button type="button" class="diff-tab" id="tabMaster" onclick="setDifficulty('master')">
+        <span class="diff-tab-title">🌟 Master</span>
+        <span class="diff-tab-target">Crown 🌟 (512)</span>
+        <span class="diff-tab-coin">+8 Coins 🪙</span>
       </button>
     </div>
+
+    <!-- Beginner Quick Tip Banner -->
+    <div class="quick-tip-banner" id="quickTipBanner">
+      <span class="tip-icon">💡</span>
+      <span class="tip-text"><strong>Easy Rule:</strong> Slide matching gems together! ⚪+⚪=🌸, 🌸+🌸=🔮. Reach target to win!</span>
+    </div>
+
+    <!-- Status HUD -->
+    <div class="status-hud">
+      <div class="hud-stat-col">
+        <span class="hud-label">Score</span>
+        <span class="hud-val" id="hudScore" style="color:var(--rose-main);">0</span>
+      </div>
+      <div class="hud-target-badge" id="hudTargetPill">
+        <span>🎯 Target:</span> <strong id="hudTargetName">Emerald 💚 (32)</strong>
+      </div>
+      <div class="hud-stat-col" style="text-align:right;">
+        <span class="hud-label">Best</span>
+        <span class="hud-val" id="hudBestScore">0</span>
+      </div>
+    </div>
+
+    <!-- Target Progress Bar -->
+    <div class="target-progress-wrap">
+      <span>Target Progress:</span>
+      <div class="progress-bar-outer">
+        <div class="progress-bar-inner" id="targetProgressBar"></div>
+      </div>
+      <span id="targetProgressPercent" style="color:var(--rose-main);">0%</span>
+    </div>
+
+    <!-- Visual Gem Evolution Guide Card (On-Screen for Easy Understanding) -->
+    <section class="evolution-guide-card" id="evolutionGuideCard">
+      <div class="evolution-header">
+        <div class="evolution-title">
+          <span>💎 Gem Evolution Ladder</span>
+          <span style="font-size:10px; font-weight:700; color:var(--rose-main); background:rgba(255,42,122,0.1); padding:1px 6px; border-radius:99px;">Swipe ➔</span>
+        </div>
+        <button type="button" style="background:none; border:none; font-size:11px; font-weight:800; color:var(--text-muted); cursor:pointer;" onclick="toggleFusionChips()" id="btnToggleChips">
+          📐 Show Formulas ▼
+        </button>
+      </div>
+
+      <!-- Touch-Scrollable Gem Track -->
+      <div class="gem-ladder-track" id="gemLadderTrack">
+        <div class="ladder-gem" id="ladderGem2">
+          <span class="ladder-gem-icon">⚪</span>
+          <span class="ladder-gem-val">2</span>
+          <span class="ladder-gem-name">Pearl</span>
+        </div>
+        <div class="ladder-gem" id="ladderGem4">
+          <span class="ladder-gem-icon">🌸</span>
+          <span class="ladder-gem-val">4</span>
+          <span class="ladder-gem-name">Rose</span>
+        </div>
+        <div class="ladder-gem" id="ladderGem8">
+          <span class="ladder-gem-icon">🔮</span>
+          <span class="ladder-gem-val">8</span>
+          <span class="ladder-gem-name">Amethyst</span>
+        </div>
+        <div class="ladder-gem" id="ladderGem16">
+          <span class="ladder-gem-icon">💙</span>
+          <span class="ladder-gem-val">16</span>
+          <span class="ladder-gem-name">Sapphire</span>
+        </div>
+        <div class="ladder-gem" id="ladderGem32">
+          <span class="ladder-gem-icon">💚</span>
+          <span class="ladder-gem-val">32</span>
+          <span class="ladder-gem-name">Emerald</span>
+          <span class="ladder-gem-tag">+2🪙</span>
+        </div>
+        <div class="ladder-gem is-goal" id="ladderGem64">
+          <span class="ladder-gem-icon">💛</span>
+          <span class="ladder-gem-val">64</span>
+          <span class="ladder-gem-name">Topaz</span>
+          <span class="ladder-gem-tag" style="background:#d97706;">EASY GOAL</span>
+        </div>
+        <div class="ladder-gem" id="ladderGem128">
+          <span class="ladder-gem-icon">❤️</span>
+          <span class="ladder-gem-val">128</span>
+          <span class="ladder-gem-name">Ruby</span>
+          <span class="ladder-gem-tag" style="background:#ef4444;">MED GOAL</span>
+        </div>
+        <div class="ladder-gem" id="ladderGem256">
+          <span class="ladder-gem-icon">👑</span>
+          <span class="ladder-gem-val">256</span>
+          <span class="ladder-gem-name">Diamond</span>
+          <span class="ladder-gem-tag" style="background:#8b5cf6;">HARD GOAL</span>
+        </div>
+        <div class="ladder-gem" id="ladderGem512">
+          <span class="ladder-gem-icon">🌟</span>
+          <span class="ladder-gem-val">512</span>
+          <span class="ladder-gem-name">Crown</span>
+          <span class="ladder-gem-tag" style="background:#f59e0b;">MASTER</span>
+        </div>
+      </div>
+
+      <!-- Quick Fusion Formulas (collapsible) -->
+      <div class="fusion-cheatsheet" id="fusionCheatsheet" style="display:none;">
+        <div class="fusion-chip">⚪+⚪ ➔ 🌸 (2+2 = 4)</div>
+        <div class="fusion-chip">🌸+🌸 ➔ 🔮 (4+4 = 8)</div>
+        <div class="fusion-chip">🔮+🔮 ➔ 💙 (8+8 = 16)</div>
+        <div class="fusion-chip">💙+💙 ➔ 💚 (16+16 = 32)</div>
+        <div class="fusion-chip">💚+💚 ➔ 💛 (32+32 = 64)</div>
+        <div class="fusion-chip">💛+💛 ➔ ❤️ (64+64 = 128)</div>
+      </div>
+    </section>
+
+    <!-- 4x4 Grid Board -->
+    <div class="grid-board-card" id="boardCard">
+      <div class="grid-container" id="gridContainer"></div>
+    </div>
+
+    <!-- Directional 3D Clay Controls -->
+    <div class="controls-zone">
+      <div class="dpad-container">
+        <div style="grid-column: 2;">
+          <button type="button" class="dpad-btn" onclick="move('up')" title="Slide Up">⬆️</button>
+        </div>
+        <button type="button" class="dpad-btn" style="grid-row: 2; grid-column: 1;" onclick="move('left')" title="Slide Left">⬅️</button>
+        <button type="button" class="dpad-btn" style="grid-row: 2; grid-column: 2;" onclick="move('down')" title="Slide Down">⬇️</button>
+        <button type="button" class="dpad-btn" style="grid-row: 2; grid-column: 3;" onclick="move('right')" title="Slide Right">➡️</button>
+      </div>
+
+      <!-- Action Buttons Row -->
+      <div class="action-buttons-row">
+        <button type="button" class="btn-action-clay" id="btnUndo" onclick="undoMove()" disabled>
+          ↩️ Undo Move
+        </button>
+        <button type="button" class="btn-action-clay" onclick="initGame()">
+          🔄 Restart
+        </button>
+      </div>
+    </div>
+
   </main>
 
-  <div class="modal-overlay" id="rulesModal">
-    <div class="modal-card">
-      <h3>💎 Jewel Merge Rules</h3>
-      <ul>
-        <li><strong>Goal:</strong> Merge identical celebration gemstones until you create the 128 Ruby or 256 Crown Jewel!</li>
-        <li><strong>Controls:</strong> Swipe across the board, use arrow keys, or tap the directional buttons.</li>
-        <li><strong>Gem Ladder:</strong> Pearl (2) → Rose Quartz (4) → Amethyst (8) → Sapphire (16) → Emerald (32) → Topaz (64) → Ruby (128)!</li>
-        <li><strong>Reward:</strong> Forging a 128 Ruby awards <strong>+20 Vanvi Coins 🪙</strong>!</li>
-      </ul>
-      <button type="button" style="width:100%; padding:12px; border-radius:14px; background:var(--rose-gradient); color:#fff; font-weight:850; border:none; cursor:pointer;" onclick="closeRules()">
-        Start Merging!
-      </button>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="winModal">
-    <div class="modal-card" style="text-align:center;">
-      <div style="font-size:42px; margin-bottom:8px;">💎</div>
-      <h3>Rare Gem Forged!</h3>
-      <div style="font-size:16px; font-weight:850; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:8px 16px; border-radius:12px; margin:12px auto; display:inline-block;">
-        +20 Vanvi Coins Credited 🪙
-      </div>
-      <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">
-        You forged the radiant Ruby gemstone! Keep merging toward the 256 Crown Diamond.
-      </p>
-      <button type="button" style="width:100%; padding:12px; border-radius:14px; background:var(--rose-gradient); color:#fff; font-weight:850; border:none; cursor:pointer;" onclick="continuePlaying()">
-        Keep Merging →
-      </button>
-    </div>
-  </div>
-
+  <script src="js/vanvi-games-engine.js"></script>
   <script src="js/vanvi-api.js"></script>
   <script>
     (function() {
       'use strict';
 
+      // ─── GEM THEME PALETTE ───
       const GEM_LEVELS = {
-        2: { name: 'Pearl', bg: 'linear-gradient(135deg, #cbd5e1, #94a3b8)', icon: '⚪' },
-        4: { name: 'Rose', bg: 'linear-gradient(135deg, #f472b6, #db2777)', icon: '🌸' },
-        8: { name: 'Amethyst', bg: 'linear-gradient(135deg, #a855f7, #7e22ce)', icon: '🔮' },
-        16: { name: 'Sapphire', bg: 'linear-gradient(135deg, #38bdf8, #0284c7)', icon: '💙' },
-        32: { name: 'Emerald', bg: 'linear-gradient(135deg, #34d399, #059669)', icon: '💚' },
-        64: { name: 'Topaz', bg: 'linear-gradient(135deg, #fbbf24, #d97706)', icon: '💛' },
-        128: { name: 'Ruby', bg: 'linear-gradient(135deg, #ef4444, #b91c1c)', icon: '❤️' },
-        256: { name: 'Diamond', bg: 'linear-gradient(135deg, #f43f5e, #8b5cf6)', icon: '👑' },
+        2:    { name: 'Pearl',    bg: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)', color: '#334155', icon: '⚪' },
+        4:    { name: 'Rose',     bg: 'linear-gradient(135deg, #fbcfe8 0%, #f472b6 100%)', color: '#831843', icon: '🌸' },
+        8:    { name: 'Amethyst', bg: 'linear-gradient(135deg, #d8b4fe 0%, #a855f7 100%)', color: '#ffffff', icon: '🔮' },
+        16:   { name: 'Sapphire', bg: 'linear-gradient(135deg, #7dd3fc 0%, #0284c7 100%)', color: '#ffffff', icon: '💙' },
+        32:   { name: 'Emerald',  bg: 'linear-gradient(135deg, #6ee7b7 0%, #059669 100%)', color: '#ffffff', icon: '💚' },
+        64:   { name: 'Topaz',    bg: 'linear-gradient(135deg, #fcd34d 0%, #d97706 100%)', color: '#ffffff', icon: '💛' },
+        128:  { name: 'Ruby',     bg: 'linear-gradient(135deg, #f87171 0%, #dc2626 100%)', color: '#ffffff', icon: '❤️' },
+        256:  { name: 'Diamond',  bg: 'linear-gradient(135deg, #f43f5e 0%, #8b5cf6 100%)', color: '#ffffff', icon: '👑' },
+        512:  { name: 'Crown',    bg: 'linear-gradient(135deg, #fbbf24 0%, #b45309 100%)', color: '#ffffff', icon: '🌟' },
+        1024: { name: 'Celestial',bg: 'linear-gradient(135deg, #38bdf8 0%, #6366f1 100%)', color: '#ffffff', icon: '✨' },
+        2048: { name: 'Vanvi',    bg: 'linear-gradient(135deg, #ff2a7a 0%, #fbbf24 100%)', color: '#ffffff', icon: '💖' }
       };
 
-      let board = Array(4).fill(null).map(() => Array(4).fill(0));
-      let score = 0;
-      let won = false;
+      // ─── DIFFICULTY PRESETS & BALANCED COINS ───
+      const DIFFICULTIES = {
+        easy: {
+          name: 'Easy',
+          targetVal: 32,
+          targetName: 'Emerald 💚 (32)',
+          targetReward: 2,
+          startSpawnProb4: 0.40,
+          desc: 'Target Emerald 💚 (32) for +2 Vanvi Coins 🪙'
+        },
+        medium: {
+          name: 'Medium',
+          targetVal: 128,
+          targetName: 'Ruby ❤️ (128)',
+          targetReward: 4,
+          startSpawnProb4: 0.20,
+          desc: 'Target Ruby ❤️ (128) for +4 Vanvi Coins 🪙'
+        },
+        hard: {
+          name: 'Hard',
+          targetVal: 256,
+          targetName: 'Diamond 👑 (256)',
+          targetReward: 6,
+          startSpawnProb4: 0.10,
+          desc: 'Target Diamond 👑 (256) for +6 Vanvi Coins 🪙'
+        },
+        master: {
+          name: 'Master',
+          targetVal: 512,
+          targetName: 'Crown 🌟 (512)',
+          targetReward: 8,
+          startSpawnProb4: 0.05,
+          desc: 'Target Crown Jewel 🌟 (512) for +8 Vanvi Coins 🪙'
+        }
+      };
 
-      window.openRules = function() { document.getElementById('rulesModal').classList.add('open'); };
-      window.closeRules = function() { document.getElementById('rulesModal').classList.remove('open'); };
+      let currentDiff = 'easy';
+      let board = Array(4).fill(null).map(() => Array(4).fill(0));
+      let previousState = null;
+      let score = 0;
+      let bestScore = parseInt(localStorage.getItem('vanvi_gem_merge_best') || '0', 10);
+      let targetWon = false;
+      let achievedMilestones = new Set();
+
+      // ─── DIFFICULTY SELECTOR ───
+      window.setDifficulty = function(diffKey) {
+        if (!DIFFICULTIES[diffKey]) return;
+        currentDiff = diffKey;
+
+        // Update active tab UI
+        ['tabEasy', 'tabMedium', 'tabHard', 'tabMaster'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.classList.remove('active');
+        });
+        const activeTab = document.getElementById(
+          diffKey === 'easy' ? 'tabEasy' :
+          diffKey === 'medium' ? 'tabMedium' :
+          diffKey === 'hard' ? 'tabHard' : 'tabMaster'
+        );
+        if (activeTab) activeTab.classList.add('active');
+
+        // Update target badge
+        const diff = DIFFICULTIES[currentDiff];
+        const targetNameEl = document.getElementById('hudTargetName');
+        if (targetNameEl) targetNameEl.textContent = diff.targetName;
+
+        // Reset game for the new difficulty
+        initGame();
+      };
+
+      // ─── TOGGLE FUSION CHEATSHEET ───
+      window.toggleFusionChips = function() {
+        const sheet = document.getElementById('fusionCheatsheet');
+        const btn = document.getElementById('btnToggleChips');
+        if (!sheet || !btn) return;
+        if (sheet.style.display === 'none') {
+          sheet.style.display = 'grid';
+          btn.textContent = '▲ Hide Formulas';
+        } else {
+          sheet.style.display = 'none';
+          btn.textContent = '📐 Show Formulas ▼';
+        }
+      };
+
+      // ─── RULES MODAL (ENGINE POWERED) ───
+      window.openRules = function() {
+        const diff = DIFFICULTIES[currentDiff];
+        VanviGames.showRulesModal('💎 How to Play Jewel Merge 2048', [
+          '🎯 Objective: Merge celebration gemstones by sliding them across the 4x4 grid.',
+          '🔄 How to Slide: Swipe in any direction, tap arrow keys on desktop, or use the on-screen 3D directional pad.',
+          '✨ How Merging Works: When two identical gems collide, they fuse into the next gemstone rank (e.g. ⚪ 2 + ⚪ 2 = 🌸 4, 🌸 4 + 🌸 4 = 🔮 8)!',
+          `🏆 Current Target: Reach ${diff.targetName} to claim ${diff.targetReward} Vanvi Coins 🪙!`,
+          '💎 Tiered Coin Rewards: Emerald 32 (+2🪙), Easy 64 (+3🪙), Medium 128 (+6🪙), Hard 256 (+10🪙), Master 512 (+15🪙)!',
+          '↩️ Need Help? Use "Undo Move" if you made an accidental slide!',
+          '🛡️ Daily Cap: Up to 30 free virtual coins per day.'
+        ]);
+      };
 
       function updateHUD() {
-        document.getElementById('hudScore').textContent = score;
-        if (window.VanviRewardEngine) {
-          document.getElementById('coinBalanceHUD').textContent = window.VanviRewardEngine.getCoins();
+        const scoreEl = document.getElementById('hudScore');
+        const bestEl = document.getElementById('hudBestScore');
+        const coinEl = document.getElementById('coinBalanceHUD');
+        const undoBtn = document.getElementById('btnUndo');
+
+        if (scoreEl) scoreEl.textContent = score;
+        if (bestEl) {
+          if (score > bestScore) {
+            bestScore = score;
+            localStorage.setItem('vanvi_gem_merge_best', bestScore);
+          }
+          bestEl.textContent = bestScore;
+        }
+        if (coinEl && window.VanviGames) {
+          coinEl.textContent = VanviGames.getTotalCoins();
+        }
+        if (undoBtn) {
+          undoBtn.disabled = !previousState;
+        }
+
+        // Target progress calculation
+        let highestTile = 2;
+        for (let r = 0; r < 4; r++) {
+          for (let c = 0; c < 4; c++) {
+            if (board[r][c] > highestTile) highestTile = board[r][c];
+          }
+        }
+
+        const targetVal = DIFFICULTIES[currentDiff].targetVal;
+        const progressPct = Math.min(100, Math.round((Math.log2(highestTile) / Math.log2(targetVal)) * 100));
+        const progressBar = document.getElementById('targetProgressBar');
+        const progressText = document.getElementById('targetProgressPercent');
+        if (progressBar) progressBar.style.width = progressPct + '%';
+        if (progressText) progressText.textContent = progressPct + '%';
+
+        // Update active highlight on on-screen evolution ladder
+        document.querySelectorAll('.ladder-gem').forEach(node => node.classList.remove('active-highest'));
+        const activeLadderNode = document.getElementById('ladderGem' + highestTile);
+        if (activeLadderNode) {
+          activeLadderNode.classList.add('active-highest');
+          // Smooth auto-scroll ladder into view on mobile
+          activeLadderNode.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
       }
 
@@ -292,12 +964,14 @@
         }
         if (empties.length > 0) {
           const rand = empties[Math.floor(Math.random() * empties.length)];
-          board[rand.r][rand.c] = Math.random() < 0.85 ? 2 : 4;
+          const spawnProb4 = DIFFICULTIES[currentDiff].startSpawnProb4;
+          board[rand.r][rand.c] = Math.random() < spawnProb4 ? 4 : 2;
         }
       }
 
       function renderBoard() {
         const container = document.getElementById('gridContainer');
+        if (!container) return;
         container.innerHTML = '';
 
         for (let r = 0; r < 4; r++) {
@@ -307,13 +981,30 @@
             tile.className = 'tile' + (val > 0 ? ' active' : '');
 
             if (val > 0) {
-              const def = GEM_LEVELS[val] || { bg: '#2c1224', icon: '💎' };
+              const def = GEM_LEVELS[val] || { name: 'Gem', bg: 'linear-gradient(135deg, #2c1224, #521943)', color: '#fff', icon: '💎' };
               tile.style.background = def.bg;
-              tile.innerHTML = `<span style="font-size:18px;">${def.icon}</span><span style="font-size:12px; margin-top:2px;">${val}</span>`;
+              tile.style.color = def.color;
+              tile.innerHTML = `
+                <span class="tile-icon">${def.icon}</span>
+                <span class="tile-val">${val}</span>
+                <span class="tile-name">${def.name}</span>
+              `;
             }
             container.appendChild(tile);
           }
         }
+      }
+
+      function showToast(text, x, y) {
+        const boardCard = document.getElementById('boardCard');
+        if (!boardCard) return;
+        const toast = document.createElement('div');
+        toast.className = 'floating-toast';
+        toast.textContent = text;
+        toast.style.left = (x || 50) + '%';
+        toast.style.top = (y || 45) + '%';
+        boardCard.appendChild(toast);
+        setTimeout(() => toast.remove(), 700);
       }
 
       function slideRow(row) {
@@ -321,15 +1012,35 @@
         for (let i = 0; i < arr.length - 1; i++) {
           if (arr[i] === arr[i + 1]) {
             arr[i] *= 2;
-            score += arr[i];
+            const mergedVal = arr[i];
+            score += mergedVal;
             arr[i + 1] = 0;
-            if (arr[i] >= 128 && !won) {
-              won = true;
-              if (window.VanviRewardEngine) {
-                window.VanviRewardEngine.addCoins(20, 'Jewel Merge 128');
-                updateHUD();
-              }
-              document.getElementById('winModal').classList.add('open');
+
+            // Milestone notifications (points celebration without coin spam)
+            const MILESTONE_NAMES = { 16: 'Sapphire 💙', 32: 'Emerald 💚', 64: 'Topaz 💛', 128: 'Ruby ❤️', 256: 'Diamond 👑', 512: 'Crown 🌟' };
+            if (MILESTONE_NAMES[mergedVal] && !achievedMilestones.has(mergedVal)) {
+              achievedMilestones.add(mergedVal);
+              showToast(`Unlocked ${MILESTONE_NAMES[mergedVal]}! ✨`);
+            } else {
+              showToast(`+${mergedVal}`);
+            }
+
+            // Check if player forged target gem!
+            const diff = DIFFICULTIES[currentDiff];
+            if (mergedVal >= diff.targetVal && !targetWon) {
+              targetWon = true;
+              const winAward = VanviGames.awardCoins(diff.targetReward, `Jewel Merge ${diff.name} Win`);
+              setTimeout(() => {
+                VanviGames.showResultModal({
+                  title: `${diff.name} Gem Forged! 💎`,
+                  score: `${score} Points`,
+                  scoreLabel: `Reached ${diff.targetName}`,
+                  coinsAwarded: winAward.awarded,
+                  isSuccess: true,
+                  restartText: 'Keep Merging ➔',
+                  onRestart: () => {}
+                });
+              }, 300);
             }
           }
         }
@@ -339,7 +1050,14 @@
       }
 
       window.move = function(dir) {
-        const prev = JSON.stringify(board);
+        const prevBoardCopy = JSON.stringify(board);
+
+        // Save state for undo
+        const stateBefore = {
+          board: board.map(row => [...row]),
+          score: score,
+          targetWon: targetWon
+        };
 
         if (dir === 'left') {
           for (let r = 0; r < 4; r++) board[r] = slideRow(board[r]);
@@ -359,61 +1077,115 @@
           }
         }
 
-        if (JSON.stringify(board) !== prev) {
+        if (JSON.stringify(board) !== prevBoardCopy) {
+          previousState = stateBefore;
           spawnTile();
           renderBoard();
           updateHUD();
+          checkGameOver();
         }
       };
 
-      // Swipe support
+      window.undoMove = function() {
+        if (!previousState) return;
+        board = previousState.board;
+        score = previousState.score;
+        targetWon = previousState.targetWon;
+        previousState = null;
+        renderBoard();
+        updateHUD();
+        showToast('↩️ Move Undone');
+      };
+
+      function checkGameOver() {
+        // Has empty spaces?
+        for (let r = 0; r < 4; r++) {
+          for (let c = 0; c < 4; c++) {
+            if (board[r][c] === 0) return;
+          }
+        }
+        // Has adjacent matches?
+        for (let r = 0; r < 4; r++) {
+          for (let c = 0; c < 4; c++) {
+            const v = board[r][c];
+            if (c < 3 && board[r][c + 1] === v) return;
+            if (r < 3 && board[r + 1][c] === v) return;
+          }
+        }
+
+        // Game over modal
+        setTimeout(() => {
+          VanviGames.showResultModal({
+            title: 'No Moves Remaining! 🔄',
+            score: `${score} Points`,
+            scoreLabel: 'Final Gem Score',
+            coinsAwarded: 0,
+            isSuccess: false,
+            restartText: 'Try Again 🔄',
+            onRestart: initGame
+          });
+        }, 300);
+      }
+
+      // ─── SWIPE DETECTION ON BOARD ───
       let touchStartX = 0, touchStartY = 0;
-      const grid = document.getElementById('gridContainer');
-      grid.addEventListener('touchstart', e => {
+      const boardElement = document.getElementById('boardCard');
+      boardElement.addEventListener('touchstart', e => {
         if (e.touches && e.touches[0]) {
           touchStartX = e.touches[0].clientX;
           touchStartY = e.touches[0].clientY;
         }
       }, { passive: true });
 
-      grid.addEventListener('touchend', e => {
+      boardElement.addEventListener('touchend', e => {
         if (e.changedTouches && e.changedTouches[0]) {
           const dx = e.changedTouches[0].clientX - touchStartX;
           const dy = e.changedTouches[0].clientY - touchStartY;
-          if (Math.abs(dx) > Math.abs(dy)) {
-            if (dx > 30) move('right');
-            else if (dx < -30) move('left');
-          } else {
-            if (dy > 30) move('down');
-            else if (dy < -30) move('up');
+          if (Math.abs(dx) > 30 || Math.abs(dy) > 30) {
+            if (Math.abs(dx) > Math.abs(dy)) {
+              move(dx > 0 ? 'right' : 'left');
+            } else {
+              move(dy > 0 ? 'down' : 'up');
+            }
           }
         }
       }, { passive: true });
 
-      // Keyboard
+      // ─── KEYBOARD SHORTCUTS ───
       window.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft') move('left');
-        else if (e.key === 'ArrowRight') move('right');
-        else if (e.key === 'ArrowUp') move('up');
-        else if (e.key === 'ArrowDown') move('down');
+        if (['ArrowLeft', 'KeyA'].includes(e.code)) { e.preventDefault(); move('left'); }
+        else if (['ArrowRight', 'KeyD'].includes(e.code)) { e.preventDefault(); move('right'); }
+        else if (['ArrowUp', 'KeyW'].includes(e.code)) { e.preventDefault(); move('up'); }
+        else if (['ArrowDown', 'KeyS'].includes(e.code)) { e.preventDefault(); move('down'); }
+        else if (e.code === 'KeyZ' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); undoMove(); }
       });
 
+      // ─── INIT GAME ───
       window.initGame = function() {
         board = Array(4).fill(null).map(() => Array(4).fill(0));
+        previousState = null;
         score = 0;
-        won = false;
-        spawnTile();
-        spawnTile();
+        targetWon = false;
+        achievedMilestones = new Set();
+
+        // For Easy mode, give friendly starting pairs to immediately teach merging
+        if (currentDiff === 'easy') {
+          board[0][0] = 2;
+          board[0][1] = 2;
+          board[1][0] = 4;
+          board[1][1] = 4;
+        } else {
+          spawnTile();
+          spawnTile();
+        }
+
         renderBoard();
         updateHUD();
-      };
-
-      window.continuePlaying = function() {
-        document.getElementById('winModal').classList.remove('open');
       };
 
       initGame();
     })();
   </script>
+  <script src="js/vanvi-navigation.js"></script>
 </body>
 </html>

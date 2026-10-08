@@ -1,0 +1,281 @@
+/**
+ * Vanvi Moments — Royal Palace Wedding Experience Engine
+ * Template 02: Royal Mewar / Lake Pichola Heritage Edition
+ * Personalized for: Virat & Anushka (#VirushkaWeds)
+ */
+
+export const weddingConfig = {
+  meta: {
+    title: "Anushka & Virat · 12.12.2026 | Royal Udaipur Celebration | Vanvi Moments",
+    description: "Experience the royal wedding celebration of Anushka Sharma & Virat Kohli at Taj Lake Palace, Lake Pichola, Udaipur. Multi-event schedule, love letter, photo gallery & RSVP.",
+    themeColor: "#0D1B3E",
+    ogImage: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop"
+  },
+
+  couple: {
+    bride: "Anushka",
+    groom: "Virat",
+    brideFullName: "Anushka Sharma",
+    groomFullName: "Virat Kohli",
+    monogram: "V&A",
+    date: "2026-12-12",
+    displayDate: "12 December 2026",
+    venue: "Taj Lake Palace, Lake Pichola",
+    venueCity: "Udaipur, Rajasthan",
+    venueAddress: "Pichola, Udaipur, Rajasthan 313001",
+    whatsapp: "919999999999",
+    hashtag: "#VirushkaWeds",
+    tagline: "Two souls, sacred vows under the Udaipur starlight, an eternity together."
+  },
+
+  invite: {
+    blessing: "With the divine blessings of Almighty & our loving ancestors",
+    inviteLabel: "Together with our families, we invite you to celebrate",
+    brideFather: "Col. Ajay Kumar Sharma",
+    brideMother: "Mrs. Ashima Sharma",
+    groomFather: "Late Prem Kohli",
+    groomMother: "Mrs. Saroj Kohli",
+    showGrandparents: true,
+    brideGF: "Late Shri Ram Gopal Sharma",
+    brideGM: "Smt. Shanti Devi",
+    groomGF: "Late Shri J.N. Kohli",
+    groomGM: "Smt. Pushpa Kohli"
+  },
+
+  letter: {
+    title: "A Heartfelt Note from Anushka & Virat",
+    monogram: "V&A",
+    salutation: "To Our Cherished Families & Friends,",
+    body: "Love isn't merely found in grand gestures; it lives quietly in shared smiles, late-night conversations over steaming chai, and unwavering faith in each other. As we take our sacred seven pheras under the starlit sky of Lake Pichola, having your presence and heartfelt blessings means the entire world to us.",
+    closing: "With Eternal Love & Gratitude,",
+    signature: "Virat & Anushka ❤️"
+  },
+
+  themes: {
+    current: "royal-mewar",
+    available: [
+      {
+        id: "royal-mewar",
+        name: "Royal Mewar 👑",
+        deep: "#0D1B3E",
+        navy: "#1A2C5B",
+        gold: "#C8860A",
+        rose: "#A01830",
+        cream: "#FAF4E4",
+        ivory: "#F0E0B0"
+      },
+      {
+        id: "udaipur-pearl",
+        name: "Udaipur Pearl 🪷",
+        deep: "#1C1427",
+        navy: "#2E1C38",
+        gold: "#D4AF37",
+        rose: "#C44569",
+        cream: "#FDF8F5",
+        ivory: "#F5E6DA"
+      },
+      {
+        id: "jaipur-sunset",
+        name: "Jaipur Sunset 🌅",
+        deep: "#2B1612",
+        navy: "#421C16",
+        gold: "#E5A93C",
+        rose: "#B33925",
+        cream: "#FFF9F5",
+        ivory: "#FCE4D6"
+      }
+    ]
+  },
+
+  events: [
+    {
+      id: "mehendi",
+      name: "Mehendi Ceremony",
+      date: "2026-12-11",
+      displayDate: "11 Dec · 2:00 PM",
+      time: "14:00",
+      venue: "Mewar Royal Courtyard",
+      desc: "Fragrant henna artistry, soulful Rajasthani folk music, and marigold showers by Lake Pichola.",
+      icon: "https://assets.shaadipath.com/templates/template02/assets/icons/icon-mehendi.webp",
+      mapsLink: "https://maps.google.com/?q=Taj+Lake+Palace+Udaipur",
+      dressCode: "Pastel Silks & Floral Lehengas"
+    },
+    {
+      id: "haldi",
+      name: "Mangal Haldi",
+      date: "2026-12-11",
+      displayDate: "11 Dec · 10:00 AM",
+      time: "10:00",
+      venue: "Crystal Lotus Pavilion",
+      desc: "Sacred saffron haldi paste, playful flower showers, and laughter in the gentle morning breeze.",
+      icon: "https://assets.shaadipath.com/templates/template02/assets/icons/icon-haldi.webp",
+      mapsLink: "https://maps.google.com/?q=Taj+Lake+Palace+Udaipur",
+      dressCode: "Radiant Sunshine & Saffron Yellow"
+    },
+    {
+      id: "cocktail",
+      name: "Sangeet & Cocktail",
+      date: "2026-12-11",
+      displayDate: "11 Dec · 7:30 PM",
+      time: "19:30",
+      venue: "Lakefront Promenade Lawn",
+      desc: "An unforgettable night of royal sangeet performances, joyful toasts, and starlit celebration.",
+      icon: "https://assets.shaadipath.com/templates/template02/assets/icons/icon-cocktail.webp",
+      mapsLink: "https://maps.google.com/?q=Taj+Lake+Palace+Udaipur",
+      dressCode: "Royal Glamour & Indo-Western Couture"
+    },
+    {
+      id: "sagan",
+      name: "Sagan & Tilak",
+      date: "2026-12-12",
+      displayDate: "12 Dec · 10:00 AM",
+      time: "10:00",
+      venue: "Darbar Heritage Hall",
+      desc: "Auspicious tilak rituals and Vedic family blessings before the sacred vows.",
+      icon: "https://assets.shaadipath.com/templates/template02/assets/icons/icon-sagan.webp",
+      mapsLink: "https://maps.google.com/?q=Taj+Lake+Palace+Udaipur",
+      dressCode: "Traditional Heritage Silks"
+    },
+    {
+      id: "shaadi",
+      name: "Shubh Vivah & Pheras",
+      date: "2026-12-12",
+      displayDate: "12 Dec · 6:30 PM",
+      time: "18:30",
+      venue: "Floating Mandap, Lake Pichola",
+      desc: "Seven sacred vows around the agni, uniting Anushka & Virat for seven lifetimes.",
+      icon: "https://assets.shaadipath.com/templates/template02/assets/icons/icon-shaadi.webp",
+      mapsLink: "https://maps.google.com/?q=Taj+Lake+Palace+Udaipur",
+      dressCode: "Indian Royal Regal Formal",
+      hero: true
+    },
+    {
+      id: "reception",
+      name: "Grand Gala Reception",
+      date: "2026-12-13",
+      displayDate: "13 Dec · 7:30 PM",
+      time: "19:30",
+      venue: "Zenana Palace Terrace",
+      desc: "A grand culinary feast, shehnai melodies, and timeless memories as the newlyweds greet honoured guests.",
+      icon: "https://assets.shaadipath.com/templates/template02/assets/icons/icon-reception.webp",
+      mapsLink: "https://maps.google.com/?q=Taj+Lake+Palace+Udaipur",
+      dressCode: "Luxury Evening Formal"
+    }
+  ],
+
+  story: {
+    show: true,
+    verse: "From a quiet shampoo commercial set to a lifetime of adventures and unconditional love.",
+    customHashtag: "#VirushkaWeds",
+    tags: ["Hopeless Romantics", "Chai & Conversations", "Soulmates", "Forever & Always"]
+  },
+
+  gallery: {
+    show: true,
+    layout: "4",
+    photos: [
+      {
+        src: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1200&auto=format&fit=crop",
+        caption: "A timeless royal sunset gaze",
+        location: "Taj Lake Palace, Udaipur"
+      },
+      {
+        src: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop",
+        caption: "Sacred smiles under royal arches",
+        location: "Lake Pichola Mandap"
+      },
+      {
+        src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop",
+        caption: "Laughter and shared secrets",
+        location: "Zenana Courtyard"
+      },
+      {
+        src: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=1200&auto=format&fit=crop",
+        caption: "Holding hands into forever",
+        location: "Udaipur Promenade"
+      }
+    ]
+  },
+
+  thingsToKnow: [
+    {
+      id: "hashtag",
+      label: "Official Hashtag",
+      value: "#VirushkaWeds",
+      subtext: "Tap to copy & tag your photos!"
+    },
+    {
+      id: "dress",
+      label: "Royal Dress Code",
+      value: "Indian Royal Festive",
+      subtext: "Handloom silks, pastels & festive gold"
+    },
+    {
+      id: "venue",
+      label: "Palace Venue",
+      value: "Taj Lake Palace\nLake Pichola, Udaipur",
+      mapsLink: "https://maps.google.com/?q=Taj+Lake+Palace+Udaipur"
+    },
+    {
+      id: "parking",
+      label: "Boat Jetty & Valet",
+      value: "Private Boat Transfers\nFrom Rameshwar Ghat",
+      subtext: "Complimentary valet parking at main jetty"
+    }
+  ],
+
+  shagun: {
+    enabled: true,
+    title: "Royal Shagun & Blessings",
+    subtitle: "Your warm presence and blessings are our greatest treasures. If you wish to bestow a traditional digital shagun:",
+    upiId: "virat.anushka@okhdfcbank",
+    note: "All contributions will be dedicated to our children's education foundation."
+  },
+
+  blessings: {
+    presets: [
+      "🌸 Sada Suhagan Raho",
+      "💖 Rab Ne Bana Di Jodi",
+      "🎉 Udaipur Celebrations",
+      "✨ Royal Blessings"
+    ],
+    initialList: [
+      {
+        name: "Sunita Maasi 🌸",
+        text: "Wishing Virat & Anushka a lifetime of divine love, starlit laughter, and endless romance!",
+        time: "Just now"
+      },
+      {
+        name: "Rohan & Pooja ✨",
+        text: "The most stunning couple! May God shower endless blessings on your new beginning.",
+        time: "1 hr ago"
+      },
+      {
+        name: "The Sharma Family 🪷",
+        text: "May your bond grow stronger with each passing sunrise. So proud of you both!",
+        time: "3 hrs ago"
+      }
+    ]
+  },
+
+  rsvp: {
+    mode: "whatsapp",
+    heading: "Will you join us?",
+    subtext: "We've saved a seat for you — at our royal table, in our hearts, and under the starlit Lake Pichola sky. Come celebrate with us as we begin this new chapter together.",
+    btnText: "Yes, I'll be there ✨",
+    whatsapp: "919999999999"
+  },
+
+  music: {
+    enabled: true,
+    src: "https://assets.shaadipath.com/templates/template02/assets/song/Template_02.mp3",
+    name: "Royal Shehnai & Sitar Harmony"
+  },
+
+  calendarUrls: {
+    google: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Anushka%20%26%20Virat%20-%20Royal%20Wedding&dates=20261212/20261214&location=Taj%20Lake%20Palace%2C%20Udaipur&details=Celebrating%20the%20royal%20wedding%20of%20Anushka%20Sharma%20%26%20Virat%20Kohli",
+    apple: "https://assets.shaadipath.com/templates/template02/calendar.ics"
+  }
+};
+
+export const templateConfig = weddingConfig;

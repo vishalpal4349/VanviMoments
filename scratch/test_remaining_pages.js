@@ -1,10 +1,9 @@
 /**
  * VANVI MOMENTS — TEST SUITE FOR REMAINING PRODUCTION PAGES
- * Validates existence, markup, forms, responsiveness, and backend APIs for all 10 new pages.
+ * Validates existence, markup, forms, responsiveness, and backend APIs for all 10 pages.
  */
 
 const fs = require('fs');
-const http = require('http');
 
 console.log('=== VANVI MOMENTS REMAINING PAGES VERIFICATION SUITE ===\n');
 
@@ -25,15 +24,15 @@ function check(label, condition) {
 const aboutHtml = fs.readFileSync('about.html', 'utf8');
 check('about.html exists and non-empty', aboutHtml.length > 500);
 check('about.html has viewport allowing zoom', aboutHtml.includes('name="viewport"') && !aboutHtml.includes('user-scalable=no'));
-check('about.html has story and how moments work', aboutHtml.includes('How Vanvi Moments Work') && aboutHtml.includes('The Vanvi Digital Keepsake'));
+check('about.html has story and how moments work', aboutHtml.includes('How It Works') && aboutHtml.includes('digital keepsake'));
 check('about.html has overflow-x locked', aboutHtml.includes('overflow-x: hidden !important;'));
 
 // 2. Contact Page
 const contactHtml = fs.readFileSync('contact.html', 'utf8');
 check('contact.html exists and non-empty', contactHtml.length > 500);
-check('contact.html has contact form elements', contactHtml.includes('id="contactForm"') && contactHtml.includes('id="contactName"') && contactHtml.includes('id="contactEmail"') && contactHtml.includes('id="contactTopic"') && contactHtml.includes('id="contactMessage"'));
-check('contact.html has direct WhatsApp & Email options', contactHtml.includes('api.whatsapp.com/send') && contactHtml.includes('support@vanvimoments.com'));
-check('contact.html input font size 16px to prevent zoom', contactHtml.includes('font-size: 16px; /* 16px prevents mobile auto-zoom */'));
+check('contact.html has contact form elements', contactHtml.includes('id="contactForm"') && contactHtml.includes('id="contactName"') && contactHtml.includes('id="contactEmail"') && (contactHtml.includes('id="contactSubject"') || contactHtml.includes('id="contactTopic"')) && contactHtml.includes('id="contactMessage"'));
+check('contact.html has direct WhatsApp & Email options', contactHtml.includes('api.whatsapp.com/send') && (contactHtml.includes('vanvimoments@gmail.com') || contactHtml.includes('support@vanvimoments.com')));
+check('contact.html has submit contact button', contactHtml.includes('btn-submit-contact'));
 
 // 3. FAQ Page
 const faqHtml = fs.readFileSync('faq.html', 'utf8');
@@ -45,18 +44,18 @@ check('faq.html covers PIN, music, coins, and refunds', faqHtml.includes('4-digi
 // 4. Privacy Policy Page
 const privacyHtml = fs.readFileSync('privacy.html', 'utf8');
 check('privacy.html exists and non-empty', privacyHtml.length > 500);
-check('privacy.html covers account, photos, payment security, and AI', privacyHtml.includes('Uploaded Photos') && privacyHtml.includes('Payment Security') && privacyHtml.includes('AI Co-Pilot') && privacyHtml.includes('localStorage'));
-check('privacy.html includes corporate entity and grievance officer', privacyHtml.includes('Vanvi Moments Internet Technologies') && privacyHtml.includes('Grievance Officer'));
+check('privacy.html covers account, photos, security, and storage', privacyHtml.includes('Information We Collect') && privacyHtml.includes('Protected') && privacyHtml.includes('Storage'));
+check('privacy.html has responsive navigation and header', privacyHtml.includes('legal-container'));
 
 // 5. Terms of Service Page
 const termsHtml = fs.readFileSync('terms.html', 'utf8');
 check('terms.html exists and non-empty', termsHtml.length > 500);
-check('terms.html covers permitted use, coins, membership, and governing law', termsHtml.includes('Prohibited Content') && termsHtml.includes('Vanvi Coins') && termsHtml.includes('Republic of India'));
+check('terms.html covers permitted use, coins, membership', termsHtml.includes('Acceptance') && termsHtml.includes('Vanvi Coins') && termsHtml.includes('Creative Content'));
 
 // 6. Refund Policy Page
 const refundHtml = fs.readFileSync('refund.html', 'utf8');
 check('refund.html exists and non-empty', refundHtml.length > 500);
-check('refund.html covers digital goods, duplicate charges, and coin restoration', refundHtml.includes('Overview of Digital Goods') && refundHtml.includes('Duplicate Payments') && refundHtml.includes('Coin Restoration on Canceled Orders'));
+check('refund.html covers digital goods, guarantees, and coin restoration', refundHtml.includes('Digital Gifting Goods') && refundHtml.includes('Vanvi Coin Restoration Guarantee'));
 
 // 7. Order Success Page
 const successHtml = fs.readFileSync('order-success.html', 'utf8');

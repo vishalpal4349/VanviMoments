@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Heart Rain 💖 — Catch the Sweet Petals — Vanvi Moments</title>
@@ -11,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     :root {
@@ -78,15 +80,7 @@
       border-radius: 99px;
     }
 
-    /* Breadcrumbs */
-    .breadcrumb-bar {
-      max-width: 580px;
-      margin: 12px auto 0;
-      padding: 0 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    /* Navigation Back */
     .btn-nav-back {
       font-size: 12.5px;
       font-weight: 700;
@@ -264,35 +258,53 @@
 <body>
 
   <!-- Header -->
-  <header class="app-header">
-    <a href="games.html" class="brand-link">
-      <span>💖</span> VANVI MOMENTS
-    </a>
-    <div class="header-actions">
+  <header class="app-header" style="height:60px; padding:0 16px; display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.95); backdrop-filter:blur(20px); border-bottom:1px solid var(--border-pink); position:sticky; top:0; z-index:100;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <a href="games.html" class="btn-nav-back" style="text-decoration:none;">
+        ‹ Games
+      </a>
+      <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" style="height:34px; width:auto; max-width:130px; object-fit:contain;">
+        <span style="background:rgba(255,42,122,0.1); border:1px solid rgba(255,42,122,0.25); color:var(--rose-primary); font-size:10px; font-weight:900; letter-spacing:0.8px; padding:2px 7px; border-radius:6px; text-transform:uppercase;">RAIN</span>
+      </a>
+    </div>
+    <div class="header-actions" style="display:flex; align-items:center; gap:6px;">
+      <button type="button" class="btn-nav-back" id="btnShowRules">📖 Rules</button>
+      <button type="button" class="btn-nav-back" id="btnPauseGame" style="display:none;">⏸ Pause</button>
       <div class="coin-pill">
-        🪙 <span id="userCoinBalance">50</span> Coins
+        🪙 <span id="userCoinBalance">50</span>
       </div>
     </div>
   </header>
 
-  <!-- Breadcrumbs -->
-  <div class="breadcrumb-bar">
-    <a class="btn-nav-back" href="games.html">
-      <span>‹</span> <span>Back to Games</span>
-    </a>
-    <span style="font-size: 11.5px; color: var(--text-muted);">
-      Heart Rain · Catch &amp; Chill
-    </span>
-  </div>
-
   <!-- Hero Header -->
   <section class="game-hero">
-    <div class="hero-kicker">✦ CUTE &amp; RELAXING CATCH</div>
+    <div class="hero-kicker">✦ FLAGSHIP DAILY CELEBRATION GAME</div>
     <h1 class="hero-title">Heart <span>Rain</span></h1>
   </section>
 
+  <!-- Difficulty Tabs -->
+  <div class="difficulty-dock" style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px; max-width:520px; margin:0 auto 12px; padding:0 16px;">
+    <button type="button" class="diff-btn active" id="rainDiffEasy" onclick="setRainDiff('easy')" style="padding:6px 2px; border-radius:12px; border:1.5px solid var(--border-pink); background:#2c1224; color:#fff; cursor:pointer; font-weight:850; font-size:11px; box-shadow:0 1px 0 #2c1224; transform:translateY(2px); text-align:center;">
+      <div>🟢 Easy</div>
+      <div style="font-size:9.5px; color:#ffffff; background:#f59e0b; border-radius:99px; padding:1px 4px; margin-top:2px;">+3 Coins 🪙</div>
+    </button>
+    <button type="button" class="diff-btn" id="rainDiffMedium" onclick="setRainDiff('medium')" style="padding:6px 2px; border-radius:12px; border:1.5px solid var(--border-pink); background:#fff; color:var(--text-dark); cursor:pointer; font-weight:850; font-size:11px; box-shadow:0 3px 0 #ebd8e3; text-align:center;">
+      <div>🟡 Medium</div>
+      <div style="font-size:9.5px; color:#b45309; background:#fffbeb; border-radius:99px; padding:1px 4px; margin-top:2px;">+6 Coins 🪙</div>
+    </button>
+    <button type="button" class="diff-btn" id="rainDiffHard" onclick="setRainDiff('hard')" style="padding:6px 2px; border-radius:12px; border:1.5px solid var(--border-pink); background:#fff; color:var(--text-dark); cursor:pointer; font-weight:850; font-size:11px; box-shadow:0 3px 0 #ebd8e3; text-align:center;">
+      <div>🔴 Hard</div>
+      <div style="font-size:9.5px; color:#b45309; background:#fffbeb; border-radius:99px; padding:1px 4px; margin-top:2px;">+10 Coins 🪙</div>
+    </button>
+    <button type="button" class="diff-btn" id="rainDiffMaster" onclick="setRainDiff('master')" style="padding:6px 2px; border-radius:12px; border:1.5px solid var(--border-pink); background:#fff; color:var(--text-dark); cursor:pointer; font-weight:850; font-size:11px; box-shadow:0 3px 0 #ebd8e3; text-align:center;">
+      <div>🌟 Master</div>
+      <div style="font-size:9.5px; color:#b45309; background:#fffbeb; border-radius:99px; padding:1px 4px; margin-top:2px;">+15 Coins 🪙</div>
+    </button>
+  </div>
+
   <!-- Main Stage Card -->
-  <main class="stage-container">
+  <main class="stage-container" style="padding-bottom:110px;">
     <div class="stage-card">
       
       <!-- Stage HUD -->
@@ -303,7 +315,7 @@
         </div>
         <div class="hud-stat-box">
           <span class="hud-stat-val" id="scoreStat">0</span>
-          <span class="hud-stat-label">Hearts Caught</span>
+          <span class="hud-stat-label">Points Caught</span>
         </div>
         <div class="hud-stat-box">
           <span class="hud-stat-val" style="color:#d97706;" id="comboStat">1x</span>
@@ -319,23 +331,36 @@
         <div class="game-overlay" id="startOverlay">
           <div class="overlay-icon">💖</div>
           <h2 class="overlay-title">Catch the Falling Hearts</h2>
-          <p class="overlay-desc">Slide your basket to catch pink hearts (+1), golden stars (+3), and velvet roses (+2) before the 30-second timer runs out!</p>
+          <p class="overlay-desc">Slide basket with finger or Arrow keys. Catch pink hearts (+1), roses (+2), and lucky stars (+3) before time runs out!</p>
           <button type="button" class="btn-start-rain" id="btnStartGame">Start Catching →</button>
         </div>
 
-        <!-- Game Over / Win Overlay -->
-        <div class="game-overlay hidden" id="endOverlay">
-          <div class="overlay-icon" id="endIcon">🎉</div>
-          <h2 class="overlay-title" id="endTitle">Wonderful Catch!</h2>
-          <div class="win-coin-banner" id="endCoinBanner">🪙 +8 Vanvi Coins Added!</div>
-          <p class="overlay-desc" id="endScoreDesc">You caught 24 hearts with a peak 4x combo!</p>
-          <button type="button" class="btn-start-rain" id="btnRestartGame">Play Again ↺</button>
+        <!-- Pause Overlay -->
+        <div class="game-overlay hidden" id="pauseOverlay">
+          <div class="overlay-icon">⏸️</div>
+          <h2 class="overlay-title">Game Paused</h2>
+          <p class="overlay-desc">Take a breath. Ready to jump back into the sweet petal rain?</p>
+          <button type="button" class="btn-start-rain" id="btnResumeGame">Resume Catching ➔</button>
         </div>
       </div>
 
     </div>
+
+    <!-- On-screen Clay Steering Controls for Thumb Ergonomics -->
+    <div style="display:flex; justify-content:center; align-items:center; gap:20px; margin-top:14px;">
+      <button type="button" id="btnSteerLeft" style="width:76px; height:48px; border-radius:16px; background:#ffffff; border:1.5px solid var(--border-pink); font-size:22px; cursor:pointer; color:var(--text-dark); box-shadow:0 4px 0 #ebd8e3, 0 6px 12px rgba(100,50,90,0.08); display:flex; align-items:center; justify-content:center; transition:all 0.12s;" aria-label="Steer Left">
+        ◀
+      </button>
+      <div style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">
+        Slide Basket
+      </div>
+      <button type="button" id="btnSteerRight" style="width:76px; height:48px; border-radius:16px; background:#ffffff; border:1.5px solid var(--border-pink); font-size:22px; cursor:pointer; color:var(--text-dark); box-shadow:0 4px 0 #ebd8e3, 0 6px 12px rgba(100,50,90,0.08); display:flex; align-items:center; justify-content:center; transition:all 0.12s;" aria-label="Steer Right">
+        ▶
+      </button>
+    </div>
   </main>
 
+  <script src="js/vanvi-games-engine.js"></script>
   <script src="js/vanvi-api.js"></script>
   <script src="js/vanvi-navigation.js"></script>
   <script>
@@ -350,20 +375,38 @@
       const scoreStat = document.getElementById('scoreStat');
       const comboStat = document.getElementById('comboStat');
       const startOverlay = document.getElementById('startOverlay');
-      const endOverlay = document.getElementById('endOverlay');
-      const endCoinBanner = document.getElementById('endCoinBanner');
-      const endScoreDesc = document.getElementById('endScoreDesc');
+      const pauseOverlay = document.getElementById('pauseOverlay');
       const btnStartGame = document.getElementById('btnStartGame');
-      const btnRestartGame = document.getElementById('btnRestartGame');
+      const btnResumeGame = document.getElementById('btnResumeGame');
+      const btnPauseGame = document.getElementById('btnPauseGame');
+      const btnShowRules = document.getElementById('btnShowRules');
       const userCoinBalance = document.getElementById('userCoinBalance');
 
       function refreshCoins() {
-        const coins = parseInt(localStorage.getItem('vanvi_coins') || '50', 10);
-        userCoinBalance.textContent = coins;
+        if (window.VanviGames) {
+          userCoinBalance.textContent = VanviGames.getTotalCoins();
+          VanviGames.renderDailyMeter('#dailyMeterMount');
+        }
       }
       refreshCoins();
+      window.addEventListener('vanvi_coins_updated', refreshCoins);
+
+      // Rules Modal
+      if (btnShowRules) {
+        btnShowRules.onclick = function() {
+          if (isPlaying && !isPaused) togglePause();
+          VanviGames.showRulesModal('Heart Rain 💖', [
+            'Slide your basket using touch/drag or Left/Right Arrow keys.',
+            'Catch pink hearts (+1 pt), roses (+2 pts), and lucky stars (+3 pts).',
+            'Avoid missing items to keep your combo multiplier growing (up to 5x)!',
+            'Earn up to +10 virtual Vanvi Coins toward discounts and gift unlocks.',
+            'Daily reward limit applies (max 30 coins per day).'
+          ]);
+        };
+      }
 
       let isPlaying = false;
+      let isPaused = false;
       let score = 0;
       let combo = 1;
       let timeLeft = 30;
@@ -397,7 +440,7 @@
       window.addEventListener('resize', resize);
       resize();
 
-      // Controls
+      // Controls (Touch & Pointer)
       function moveBasket(clientX) {
         const rect = canvas.getBoundingClientRect();
         let targetX = clientX - rect.left - basket.width / 2;
@@ -407,14 +450,89 @@
       }
 
       canvas.addEventListener('pointermove', (e) => {
-        if (isPlaying) moveBasket(e.clientX);
+        if (isPlaying && !isPaused) moveBasket(e.clientX);
       });
       canvas.addEventListener('touchmove', (e) => {
-        if (isPlaying && e.touches[0]) moveBasket(e.touches[0].clientX);
+        if (isPlaying && !isPaused && e.touches[0]) moveBasket(e.touches[0].clientX);
       }, { passive: true });
+
+      // On-Screen Button Steering Controls
+      const btnSteerLeft = document.getElementById('btnSteerLeft');
+      const btnSteerRight = document.getElementById('btnSteerRight');
+      let steerInterval = null;
+
+      function startSteer(dir) {
+        if (!isPlaying || isPaused) return;
+        const step = 32;
+        if (dir === 'left') {
+          basket.x = Math.max(10, basket.x - step);
+        } else {
+          basket.x = Math.min(canvas.width - basket.width - 10, basket.x + step);
+        }
+      }
+
+      if (btnSteerLeft) {
+        btnSteerLeft.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          startSteer('left');
+          clearInterval(steerInterval);
+          steerInterval = setInterval(() => startSteer('left'), 70);
+        });
+        window.addEventListener('pointerup', () => clearInterval(steerInterval));
+        window.addEventListener('pointercancel', () => clearInterval(steerInterval));
+      }
+
+      if (btnSteerRight) {
+        btnSteerRight.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          startSteer('right');
+          clearInterval(steerInterval);
+          steerInterval = setInterval(() => startSteer('right'), 70);
+        });
+      }
+
+      // Keyboard Controls
+      window.addEventListener('keydown', (e) => {
+        if (!isPlaying || isPaused) return;
+        const step = 28;
+        if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+          basket.x = Math.max(10, basket.x - step);
+        } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+          basket.x = Math.min(canvas.width - basket.width - 10, basket.x + step);
+        } else if (e.key === ' ' || e.key === 'Escape') {
+          togglePause();
+        }
+      });
+
+      function togglePause() {
+        if (!isPlaying) return;
+        isPaused = !isPaused;
+        if (isPaused) {
+          pauseOverlay.classList.remove('hidden');
+          btnPauseGame.textContent = '▶ Resume';
+          clearInterval(timerId);
+        } else {
+          pauseOverlay.classList.add('hidden');
+          btnPauseGame.textContent = '⏸ Pause';
+          startTimer();
+          gameLoop();
+        }
+      }
+
+      function startTimer() {
+        clearInterval(timerId);
+        timerId = setInterval(() => {
+          timeLeft--;
+          timeStat.textContent = timeLeft + 's';
+          if (timeLeft <= 0) {
+            endGame();
+          }
+        }, 1000);
+      }
 
       function startGame() {
         isPlaying = true;
+        isPaused = false;
         score = 0;
         combo = 1;
         timeLeft = 30;
@@ -425,25 +543,67 @@
         timeStat.textContent = '30s';
 
         startOverlay.classList.add('hidden');
-        endOverlay.classList.add('hidden');
+        pauseOverlay.classList.add('hidden');
+        if (btnPauseGame) {
+          btnPauseGame.style.display = 'inline-flex';
+          btnPauseGame.textContent = '⏸ Pause';
+        }
 
-        clearInterval(timerId);
-        timerId = setInterval(() => {
-          timeLeft--;
-          timeStat.textContent = timeLeft + 's';
-          if (timeLeft <= 0) {
-            endGame();
-          }
-        }, 1000);
-
+        startTimer();
         gameLoop();
       }
 
+      const RAIN_DIFF_CONFIG = {
+        easy: { speedMult: 1.0, spawnChance: 0.05, coins: 3, name: 'Easy', passScore: 12 },
+        medium: { speedMult: 1.4, spawnChance: 0.065, coins: 6, name: 'Medium', passScore: 20 },
+        hard: { speedMult: 1.8, spawnChance: 0.08, coins: 10, name: 'Hard', passScore: 30 },
+        master: { speedMult: 2.2, spawnChance: 0.095, coins: 15, name: 'Master', passScore: 40 }
+      };
+      let currentRainDiff = 'easy';
+
+      window.setRainDiff = function(diffKey) {
+        if (!RAIN_DIFF_CONFIG[diffKey]) return;
+        currentRainDiff = diffKey;
+        ['rainDiffEasy', 'rainDiffMedium', 'rainDiffHard', 'rainDiffMaster'].forEach(id => {
+          const btn = document.getElementById(id);
+          if (btn) {
+            btn.style.background = '#fff';
+            btn.style.color = '#2c1224';
+            btn.style.borderColor = 'var(--border-pink)';
+            btn.style.boxShadow = '0 3px 0 #ebd8e3';
+            btn.style.transform = 'none';
+            const coinDiv = btn.querySelector('div:last-child');
+            if (coinDiv) {
+              coinDiv.style.background = '#fffbeb';
+              coinDiv.style.color = '#b45309';
+            }
+          }
+        });
+        const activeId = diffKey === 'easy' ? 'rainDiffEasy' :
+          diffKey === 'medium' ? 'rainDiffMedium' :
+          diffKey === 'hard' ? 'rainDiffHard' : 'rainDiffMaster';
+        const activeBtn = document.getElementById(activeId);
+        if (activeBtn) {
+          activeBtn.style.background = '#2c1224';
+          activeBtn.style.color = '#fff';
+          activeBtn.style.borderColor = '#2c1224';
+          activeBtn.style.boxShadow = '0 1px 0 #2c1224';
+          activeBtn.style.transform = 'translateY(2px)';
+          const coinDiv = activeBtn.querySelector('div:last-child');
+          if (coinDiv) {
+            coinDiv.style.background = '#f59e0b';
+            coinDiv.style.color = '#fff';
+          }
+        }
+      };
+
       function spawnItem() {
-        if (Math.random() < 0.055) {
+        const cfg = RAIN_DIFF_CONFIG[currentRainDiff];
+        if (Math.random() < cfg.spawnChance) {
           const type = ITEM_TYPES[Math.floor(Math.random() * ITEM_TYPES.length)];
           items.push({
             ...type,
+            speed: type.speed * cfg.speedMult,
             x: Math.random() * (canvas.width - 40) + 20,
             y: -20
           });
@@ -451,7 +611,7 @@
       }
 
       function gameLoop() {
-        if (!isPlaying) return;
+        if (!isPlaying || isPaused) return;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         spawnItem();
@@ -497,31 +657,30 @@
         isPlaying = false;
         clearInterval(timerId);
         cancelAnimationFrame(animId);
+        if (btnPauseGame) btnPauseGame.style.display = 'none';
 
-        // Calculate Reward
-        let reward = 4;
-        if (score >= 40) reward = 10;
-        else if (score >= 25) reward = 7;
-        else if (score >= 12) reward = 5;
+        const cfg = RAIN_DIFF_CONFIG[currentRainDiff];
+        const isSuccess = score >= cfg.passScore;
+        const reward = isSuccess ? cfg.coins : Math.max(1, Math.floor(cfg.coins / 2));
 
-        let currentCoins = parseInt(localStorage.getItem('vanvi_coins') || '50', 10);
-        currentCoins += reward;
-        localStorage.setItem('vanvi_coins', currentCoins.toString());
+        // Award Coins via Unified Engine
+        const awardRes = VanviGames.awardCoins(reward, 'Heart Rain ' + cfg.name);
         refreshCoins();
 
-        if (window.VanviAPI && window.VanviAPI.coins) {
-          try {
-            window.VanviAPI.coins.add({ amount: reward, reason: 'Heart Rain Score ' + score });
-          } catch(e) {}
-        }
-
-        endCoinBanner.textContent = `🪙 +${reward} Vanvi Coins Unlocked!`;
-        endScoreDesc.textContent = `You caught ${score} points with romantic focus!`;
-        endOverlay.classList.remove('hidden');
+        VanviGames.showResultModal({
+          title: isSuccess ? `${cfg.name} Rain Mastered! 💖` : 'Sweet Effort! 🌸',
+          score: `${score} Pts (${comboStat.textContent} Max Combo)`,
+          scoreLabel: 'Final Score',
+          coinsAwarded: awardRes.awarded,
+          isSuccess: isSuccess,
+          restartText: 'Play Again 🔄',
+          onRestart: startGame
+        });
       }
 
       btnStartGame.addEventListener('click', startGame);
-      btnRestartGame.addEventListener('click', startGame);
+      btnResumeGame.addEventListener('click', togglePause);
+      if (btnPauseGame) btnPauseGame.addEventListener('click', togglePause);
     })();
   </script>
 </body>

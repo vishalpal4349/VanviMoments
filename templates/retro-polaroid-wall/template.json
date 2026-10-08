@@ -2,7 +2,10 @@
   "id": "retro-polaroid-wall",
   "name": "Retro Polaroid Memory Wall",
   "slug": "retro-polaroid-wall",
-  "aliases": ["retro-birthday-polaroid", "polaroid-wall"],
+  "aliases": [
+    "retro-birthday-polaroid",
+    "polaroid-wall"
+  ],
   "category": "Memories",
   "categorySlug": "memories",
   "price": 99,
@@ -11,22 +14,63 @@
   "type": "Vintage Polaroid Scrapbook & Memory Reel",
   "icon": "📸",
   "soundtrack": "Warm Nostalgic Lo-Fi Beats",
-  "tags": ["polaroid", "memories", "vintage", "lofi", "friends", "trip"],
+  "tags": [
+    "polaroid",
+    "memories",
+    "vintage",
+    "lofi",
+    "friends",
+    "trip"
+  ],
   "description": "Upload snapshots with handwritten nostalgic captions, dates, and lo-fi beats for friends, vacations, and road trip memories.",
   "builder": {
-    "type": "common",
+    "type": "custom",
     "photoLimit": 6,
     "hasDate": true,
-    "hasSoundtrack": true
+    "hasSoundtrack": true,
+    "builderPath": "templates/retro-polaroid-wall/builder.html"
   },
   "schema": {
     "fields": [
-      { "key": "wallTitle", "label": "Memory Wall Title", "type": "text", "required": true, "default": "Our Golden Days" },
-      { "key": "senderName", "label": "Your Name / Squad", "type": "text", "required": true, "default": "The Best Crew" },
-      { "key": "message", "label": "Memory Note / Caption", "type": "textarea", "required": true },
-      { "key": "polaroidDate", "label": "Memory Date", "type": "text", "default": "Summer Memories" },
-      { "key": "photos", "label": "Polaroid Photos (Up to 6)", "type": "photos", "max": 6, "required": false },
-      { "key": "soundtrack", "label": "Soundtrack", "type": "audio", "default": "lofi" }
+      {
+        "key": "wallTitle",
+        "label": "Memory Wall Title",
+        "type": "text",
+        "required": true,
+        "default": "Our Golden Days"
+      },
+      {
+        "key": "senderName",
+        "label": "Your Name / Squad",
+        "type": "text",
+        "required": true,
+        "default": "The Best Crew"
+      },
+      {
+        "key": "message",
+        "label": "Memory Note / Caption",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "polaroidDate",
+        "label": "Memory Date",
+        "type": "text",
+        "default": "Summer Memories"
+      },
+      {
+        "key": "photos",
+        "label": "Polaroid Photos (Up to 6)",
+        "type": "photos",
+        "max": 6,
+        "required": false
+      },
+      {
+        "key": "soundtrack",
+        "label": "Soundtrack",
+        "type": "audio",
+        "default": "lofi"
+      }
     ]
   },
   "custom_data_defaults": {

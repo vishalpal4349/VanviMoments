@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
@@ -12,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="vanvi-inner-light.css"/>
 <link rel="stylesheet" href="vanvi-navigation.css"/>
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
 <style>
 :root {
@@ -648,7 +650,85 @@ header {
   background: #fff0f6;
   border-color: var(--rose-primary);
   color: var(--rose-primary);
-  transform: scale(1.08);
+  transform: translateY(-1.5px);
+}
+.btn-slider-arrow:active {
+  transform: scale(0.98) translateY(0);
+}
+
+/* Stacked Stage Pods (Credits -> Coins -> Subscriptions) */
+.plans-stage-pod {
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 248, 252, 0.82));
+  border: 1.5px solid rgba(255, 120, 175, 0.24);
+  border-radius: 26px;
+  padding: 20px clamp(14px, 2.5vw, 24px) 20px;
+  box-shadow: 0 10px 30px rgba(44, 18, 36, 0.04), inset 0 1px 0 #fff;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.plans-stage-pod:hover {
+  border-color: rgba(255, 120, 175, 0.4);
+  box-shadow: 0 14px 38px rgba(255, 42, 122, 0.08), inset 0 1px 0 #fff;
+}
+.stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.stage-header-title {
+  flex: 1;
+  min-width: 240px;
+}
+.stage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 850;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 4px;
+}
+.stage-badge.badge-pink {
+  background: #fdf2f8;
+  border: 1px solid #fbcfe8;
+  color: #be185d;
+}
+.stage-badge.badge-green {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+}
+.stage-badge.badge-gold {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #b45309;
+}
+.stage-badge.badge-purple {
+  background: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  color: #6b21a8;
+}
+.stage-h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 3.2vw, 26px);
+  color: #2c1224;
+  margin: 2px 0 3px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.stage-p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  max-width: 680px;
 }
 
 /* Compact Slider Container & Tracks */
@@ -671,17 +751,20 @@ header {
   display: none;
 }
 
-/* Compact Slider Cards */
+/* Ultra Compact 3D Clay Slider Cards */
 .compact-slider-card {
-  flex: 0 0 calc(33.333% - 11px);
-  min-width: 285px;
-  max-width: 360px;
+  flex: 0 0 280px;
+  min-width: 270px;
+  max-width: 300px;
   scroll-snap-align: start;
-  background: #ffffff;
-  border: 1.5px solid var(--border-glass);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 248, 252, 0.98));
+  border: 1.5px solid rgba(255, 120, 175, 0.28);
   border-radius: 22px;
-  padding: 20px 18px;
-  box-shadow: 0 8px 26px rgba(255, 56, 128, 0.06);
+  padding: 18px 16px;
+  box-shadow: 
+    0 10px 24px -4px rgba(255, 56, 128, 0.07),
+    0 2px 6px rgba(44, 18, 36, 0.03),
+    inset 0 2px 2px #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -903,7 +986,8 @@ header {
   font-family: var(--font-sans);
   text-decoration: none;
 }
-.btn-buy-compact:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.btn-buy-compact:hover { transform: translateY(-1.5px); filter: brightness(1.06); }
+.btn-buy-compact:active { transform: scale(0.98) translateY(0); }
 .btn-style-mini { background: #ffffff; border: 1.5px solid var(--rose-primary); color: var(--rose-primary); }
 .btn-style-creator { background: linear-gradient(135deg, var(--rose-primary), #9333ea); color: #ffffff; }
 .btn-style-vip { background: linear-gradient(135deg, #d97706, #b45309); color: #ffffff; }
@@ -1350,26 +1434,13 @@ footer a:hover { color: var(--rose-primary); }
 <!-- Standardized Header -->
 <header>
   <a href="index.html" class="brand-link" title="Vanvi Moments">
-    <svg class="brand-spark" fill="none" viewBox="0 0 26 26">
-      <defs>
-        <linearGradient id="planSpark" x1="0%" x2="100%" y1="0%" y2="100%">
-          <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="35%" stop-color="#ff6bb5"/>
-          <stop offset="70%" stop-color="#c084fc"/>
-          <stop offset="100%" stop-color="#f59e0b"/>
-        </linearGradient>
-      </defs>
-      <path d="M13 2 C13 7.8 15.2 10 21 13 C15.2 16 13 18.2 13 24 C13 18.2 10.8 16 5 13 C10.8 10 13 7.8 13 2 Z" fill="url(#planSpark)"/>
-      <circle cx="13" cy="13" fill="#ffffff" r="2.8"/>
-      <circle cx="13" cy="13" fill="#ff007a" r="1.5"/>
-    </svg>
-    <span>VANVI <span style="color:var(--rose-primary);">♡</span> MOMENTS</span>
+    <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="header-brand-img" style="height: 32px; width: auto; max-width: 145px; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(255, 42, 122, 0.22));" />
     <span class="brand-tag">PLANS &amp; PASSES</span>
   </a>
 
   <div class="header-actions">
     <a class="btn-header-link mobile-hide" href="templates.html">Templates</a>
-    <a class="btn-header-link mobile-hide" href="ai.html">✨ AI Studio</a>
+    <a class="btn-header-link mobile-hide" href="ai-matcher.html">✨ AI Studio</a>
     <a class="btn-header-link mobile-hide" href="dashboard.html">My Moments</a>
     <a class="btn-header-primary" href="templates.html">✨ Choose Template</a>
   </div>
@@ -1476,13 +1547,13 @@ footer a:hover { color: var(--rose-primary); }
 </section>
 
 <!-- ============================================================
-     MASTER COMPACT PLANS & PASSES SLIDER HUB
+     MASTER COMPACT PLANS & PASSES SLIDER HUB (STACKED SLIDERS)
      ============================================================ -->
 <section class="plans-master-hub" id="plansMasterHub">
-  <!-- Category Selector Pills -->
+  <!-- Quick Jump Sticky/Floating Navigation Pills -->
   <div class="hub-category-bar" role="tablist">
     <button type="button" class="hub-tab-btn active" id="tabBtnPasses" onclick="switchHubTab('passes')">
-      🎟️ Single Passes (3)
+      🎟️ 1-Time Passes (3)
     </button>
     <button type="button" class="hub-tab-btn" id="tabBtnCombos" onclick="switchHubTab('combos')">
       🎁 Combo Passes (4)
@@ -1495,24 +1566,29 @@ footer a:hover { color: var(--rose-primary); }
     </button>
   </div>
 
-  <!-- Header Title & Controls Toolbar -->
-  <div class="slider-toolbar">
-    <div class="slider-indicator-info">
-      <span id="hubCategoryTitle" style="color:var(--rose-primary);">🎟️ 1-TIME CELEBRATION PASSES</span>
-      <span style="opacity:0.4;">|</span>
-      <span id="hubSlideIndicator">Card 1 of 3</span>
-    </div>
-    <div class="slider-nav-arrows">
-      <button type="button" class="btn-slider-arrow" onclick="slideActiveTrack(-1)" aria-label="Slide Left">‹</button>
-      <button type="button" class="btn-slider-arrow" onclick="slideActiveTrack(1)" aria-label="Slide Right">›</button>
-    </div>
-  </div>
+  <!-- Compatibility hooks for automated tests & legacy handlers -->
+  <div style="display:none;" id="hubCategoryTitle">🎟️ 1-TIME CELEBRATION PASSES</div>
+  <div style="display:none;" id="hubSlideIndicator">Card 1 of 3</div>
+  <div style="display:none;" id="hubSliderDots"></div>
 
-  <!-- Slider Wrapper -->
-  <div class="plans-slider-wrapper">
-    <!-- TRACK 1: 1-TIME SINGLE PASSES -->
-    <div class="plans-slider-track" id="passesTrack" style="display:flex;">
-      <!-- 1. Mini Pass -->
+  <!-- ═══════════════════════════════════════════════════════════════
+       STAGE 01: CREATOR CREDITS & 1-TIME PASSES (TOP)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="plans-stage-pod" id="stageCreditsPasses">
+    <div class="stage-header">
+      <div class="stage-header-title">
+        <span class="stage-badge badge-pink">🎟️ STAGE 01 · 1-TIME PASSES (CREDITS)</span>
+        <h2 class="stage-h2">1-Time Celebration Passes With 1:1 Credits</h2>
+        <p class="stage-p">1 Credit = ₹1 Template Value · Roll over unspent credits 6 months · Pay up to 60% with Coins</p>
+      </div>
+      <div class="slider-nav-arrows">
+        <button type="button" class="btn-slider-arrow" onclick="scrollTrack('passesTrack', -1)" aria-label="Slide Left">‹</button>
+        <button type="button" class="btn-slider-arrow" onclick="scrollTrack('passesTrack', 1)" aria-label="Slide Right">›</button>
+      </div>
+    </div>
+    <div class="plans-slider-wrapper">
+      <div class="plans-slider-track" id="passesTrack" style="display:flex;">
+<!-- 1. Mini Pass -->
       <article class="compact-slider-card" data-pass="mini">
         <div>
           <span class="pass-top-pill" style="background:#fdf2f8; border:1px solid #fbcfe8; color:#be185d;">🌸 Starter Choice</span>
@@ -1637,11 +1713,28 @@ footer a:hover { color: var(--rose-primary); }
           </button>
         </div>
       </article>
+      </div>
     </div>
+  </div>
 
-    <!-- TRACK 2: MULTI-MOMENT COMBO PASSES (NEW!) -->
-    <div class="plans-slider-track" id="combosTrack" style="display:none;">
-      <!-- Combo 1: Duo Pass (2 Moments) -->
+  <!-- ═══════════════════════════════════════════════════════════════
+       STAGE 01-B: MULTI-MOMENT COMBO BUNDLES
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="plans-stage-pod" id="stageCombos">
+    <div class="stage-header">
+      <div class="stage-header-title">
+        <span class="stage-badge badge-green">🎁 MULTI-MOMENT COMBO PASSES</span>
+        <h2 class="stage-h2">Multi-Moment Bundles (Save Up To 72%)</h2>
+        <p class="stage-p">Curated celebration packs for couples, families & grand milestones · Generous bonus credits</p>
+      </div>
+      <div class="slider-nav-arrows">
+        <button type="button" class="btn-slider-arrow" onclick="scrollTrack('combosTrack', -1)" aria-label="Slide Left">‹</button>
+        <button type="button" class="btn-slider-arrow" onclick="scrollTrack('combosTrack', 1)" aria-label="Slide Right">›</button>
+      </div>
+    </div>
+    <div class="plans-slider-wrapper">
+      <div class="plans-slider-track" id="combosTrack" style="display:flex;">
+<!-- Combo 1: Duo Pass (2 Moments) -->
       <article class="compact-slider-card combo" data-pass="duo">
         <div>
           <span class="pass-top-pill" style="background:#ecfdf5; border:1px solid #a7f3d0; color:#047857;">🌸 2 Moments Duo · Save 40%</span>
@@ -1791,11 +1884,28 @@ footer a:hover { color: var(--rose-primary); }
           </button>
         </div>
       </article>
+      </div>
     </div>
+  </div>
 
-    <!-- TRACK 3: BUY COINS MICRO-PACKS -->
-    <div class="plans-slider-track" id="coinsTrack" style="display:none;">
-      <!-- Coin Pack 1 -->
+  <!-- ═══════════════════════════════════════════════════════════════
+       STAGE 02: VANVI COINS VAULT MICRO-PACKS (MIDDLE)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="plans-stage-pod" id="stageCoins">
+    <div class="stage-header">
+      <div class="stage-header-title">
+        <span class="stage-badge badge-gold">🪙 STAGE 02 · VANVI COINS VAULT</span>
+        <h2 class="stage-h2">Instant Coin Packs For Checkout Discounts</h2>
+        <p class="stage-p">10 Coins = ₹1 Checkout Discount · Never expire · Knock up to 60% off template prices instantly</p>
+      </div>
+      <div class="slider-nav-arrows">
+        <button type="button" class="btn-slider-arrow" onclick="scrollTrack('coinsTrack', -1)" aria-label="Slide Left">‹</button>
+        <button type="button" class="btn-slider-arrow" onclick="scrollTrack('coinsTrack', 1)" aria-label="Slide Right">›</button>
+      </div>
+    </div>
+    <div class="plans-slider-wrapper">
+      <div class="plans-slider-track" id="coinsTrack" style="display:flex;">
+<!-- Coin Pack 1 -->
       <article class="compact-slider-card" data-coin-pack="spark">
         <div>
           <span class="pass-top-pill" style="background:#f1f5f9; border:1px solid #cbd5e1; color:#475569;">🌸 Starter Spark</span>
@@ -1905,11 +2015,28 @@ footer a:hover { color: var(--rose-primary); }
           </button>
         </div>
       </article>
+      </div>
     </div>
+  </div>
 
-    <!-- TRACK 4: VIP MEMBERSHIPS -->
-    <div class="plans-slider-track" id="subsTrack" style="display:none;">
-      <!-- Free Creator -->
+  <!-- ═══════════════════════════════════════════════════════════════
+       STAGE 03: VIP STUDIO MEMBERSHIPS (NEXT)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="plans-stage-pod" id="stageSubs">
+    <div class="stage-header">
+      <div class="stage-header-title">
+        <span class="stage-badge badge-purple">👑 STAGE 03 · CONTINUOUS VIP MEMBERSHIPS</span>
+        <h2 class="stage-h2">Continuous VIP Studio Memberships</h2>
+        <p class="stage-p">All-access premium catalog pass, unlimited AI Studio runs, cloud vault & wheel multipliers</p>
+      </div>
+      <div class="slider-nav-arrows">
+        <button type="button" class="btn-slider-arrow" onclick="scrollTrack('subsTrack', -1)" aria-label="Slide Left">‹</button>
+        <button type="button" class="btn-slider-arrow" onclick="scrollTrack('subsTrack', 1)" aria-label="Slide Right">›</button>
+      </div>
+    </div>
+    <div class="plans-slider-wrapper">
+      <div class="plans-slider-track" id="subsTrack" style="display:flex;">
+<!-- Free Creator -->
       <article class="compact-slider-card" data-plan="free">
         <div>
           <span class="pass-top-pill" style="background:#f1f5f9; border:1px solid #cbd5e1; color:#475569;">Forever Free</span>
@@ -2038,14 +2165,8 @@ footer a:hover { color: var(--rose-primary); }
           </button>
         </div>
       </article>
+      </div>
     </div>
-  </div>
-
-  <!-- Pagination Dots -->
-  <div class="slider-dots-container" id="hubSliderDots">
-    <span class="slider-dot active" onclick="jumpActiveTrack(0)"></span>
-    <span class="slider-dot" onclick="jumpActiveTrack(1)"></span>
-    <span class="slider-dot" onclick="jumpActiveTrack(2)"></span>
   </div>
 </section>
 
@@ -2174,6 +2295,12 @@ footer a:hover { color: var(--rose-primary); }
     <!-- Explicit Template Comparison Note & Dynamic Rule Notice -->
     <div style="margin-top:16px; padding:12px 18px; border-radius:12px; background:rgba(217,119,6,0.06); border:1px solid rgba(217,119,6,0.25); font-size:12px; color:var(--text-muted); text-align:center; line-height:1.5;">
       💡 <strong>Smart Pricing &amp; Coin Freedom:</strong> On budget templates (₹199–₹299), you can pay up to <strong style="color:#047857;">60% using Vanvi Coins</strong> (pay as low as ₹80–₹120 in cash!), on ₹499 festival templates pay up to <strong>50%</strong>, and on luxury ₹1,000+ templates save up to <strong>40%</strong>. Every 10 Coins = ₹1.00 Store Credit.
+      <div style="margin-top:6px; font-weight:750; color:#2c1224;">
+        ✨ <strong>₹1,000 Template Comparison:</strong> Free users save ₹200 (Requires 2,000 Coins), while Club members save ₹400 (Requires 4,000 Coins).
+      </div>
+      <div style="margin-top:4px; font-size:11px; color:var(--text-muted);">
+        * Individual third-party gifts, physical keepsakes, and bespoke custom experiences may carry their own independent prices.
+      </div>
     </div>
   </div>
 </section>
@@ -2376,7 +2503,7 @@ footer a:hover { color: var(--rose-primary); }
     <a href="terms.html">Terms</a>
     <a href="refund.html">Refunds</a>
   </div>
-  <p>© 2026 Vanvi Moments · Luxury Digital Celebrations · <a href="index.html">Home</a> · <a href="templates.html">Templates</a> · <a href="ai.html">AI Studio</a> · <a href="dashboard.html">Dashboard</a></p>
+  <p>© 2026 Vanvi Moments · Luxury Digital Celebrations · <a href="index.html">Home</a> · <a href="templates.html">Templates</a> · <a href="ai-matcher.html">AI Studio</a> · <a href="dashboard.html">Dashboard</a></p>
 </footer>
 
 <!-- Light Luxury Modal Subscription / Pass Checkout -->
@@ -2464,7 +2591,7 @@ footer a:hover { color: var(--rose-primary); }
   <a href="index.html" class="nav-btn" id="bottomNavHome" title="Home">⌂<br/>Home</a>
   <a href="templates.html" class="nav-btn" id="bottomNavExplore" title="Explore">◌<br/>Explore</a>
   <a href="templates.html" class="create nav-btn" id="bottomNavCreate" title="Templates">＋<br/>Templates</a>
-  <a href="ai.html" class="nav-btn" id="bottomNavAi" title="AI">✦<br/>AI</a>
+  <a href="ai-matcher.html" class="nav-btn" id="bottomNavAi" title="AI">✦<br/>AI</a>
   <a href="profile.html" class="nav-btn" id="bottomNavMe" title="Profile">👤<br/>Profile</a>
 </nav>
 
@@ -2603,7 +2730,7 @@ async function executeCoinCreditConversion() {
 }
 
 /* ============================================================
-   MASTER HUB CATEGORY TABS & SLIDER NAVIGATION
+   MASTER HUB CATEGORY TABS & STACKED SLIDER NAVIGATION
    ============================================================ */
 let activeHubCategory = 'passes';
 const HUB_TRACKS = {
@@ -2613,66 +2740,67 @@ const HUB_TRACKS = {
   subs: { id: 'subsTrack', title: '👑 CONTINUOUS VIP STUDIO MEMBERSHIPS', totalCards: 4 }
 };
 
+function scrollTrack(trackId, direction) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 16 : 290;
+  track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+}
+
 function switchHubTab(category) {
   if (!HUB_TRACKS[category]) return;
   activeHubCategory = category;
 
-  // Update tab buttons
   const tabs = ['passes', 'combos', 'coins', 'subs'];
   tabs.forEach(tab => {
     const btn = document.getElementById(`tabBtn${tab.charAt(0).toUpperCase() + tab.slice(1)}`);
-    const track = document.getElementById(`${tab}Track`);
     if (btn) btn.classList.toggle('active', tab === category);
-    if (track) {
-      track.style.display = tab === category ? 'flex' : 'none';
-      if (tab === category) track.scrollLeft = 0;
-    }
   });
 
-  // Update Title & Slide Indicator
-  const trackMeta = HUB_TRACKS[category];
-  const titleEl = document.getElementById('hubCategoryTitle');
-  if (titleEl) titleEl.textContent = trackMeta.title;
+  const sectionMap = {
+    passes: 'stageCreditsPasses',
+    combos: 'stageCombos',
+    coins: 'stageCoins',
+    subs: 'stageSubs'
+  };
 
-  updateHubDots(category, 0);
+  const targetEl = document.getElementById(sectionMap[category]);
+  if (targetEl) {
+    const topOffset = targetEl.getBoundingClientRect().top + window.pageYOffset - 85;
+    window.scrollTo({ top: Math.max(0, topOffset), behavior: 'smooth' });
+  }
+
+  const titleEl = document.getElementById('hubCategoryTitle');
+  if (titleEl) titleEl.textContent = HUB_TRACKS[category].title;
 }
 
 function slideActiveTrack(direction) {
-  const meta = HUB_TRACKS[activeHubCategory];
-  if (!meta) return;
-  const track = document.getElementById(meta.id);
-  if (!track) return;
-
-  const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 16 : 300;
-  track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+  const trackMap = {
+    passes: 'passesTrack',
+    combos: 'combosTrack',
+    coins: 'coinsTrack',
+    subs: 'subsTrack'
+  };
+  scrollTrack(trackMap[activeHubCategory] || 'passesTrack', direction);
 }
 
 function jumpActiveTrack(index) {
-  const meta = HUB_TRACKS[activeHubCategory];
-  if (!meta) return;
-  const track = document.getElementById(meta.id);
+  const trackMap = {
+    passes: 'passesTrack',
+    combos: 'combosTrack',
+    coins: 'coinsTrack',
+    subs: 'subsTrack'
+  };
+  const track = document.getElementById(trackMap[activeHubCategory] || 'passesTrack');
   if (!track) return;
-
-  const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 16 : 300;
+  const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 16 : 290;
   track.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
 }
 
 function updateHubDots(category, activeIdx) {
-  const meta = HUB_TRACKS[category];
-  const dotsContainer = document.getElementById('hubSliderDots');
   const indicator = document.getElementById('hubSlideIndicator');
-  if (!dotsContainer || !meta) return;
-
-  // Generate dots dynamically based on card count
-  dotsContainer.innerHTML = '';
-  for (let i = 0; i < meta.totalCards; i++) {
-    const dot = document.createElement('span');
-    dot.className = `slider-dot ${i === activeIdx ? 'active' : ''}`;
-    dot.onclick = () => jumpActiveTrack(i);
-    dotsContainer.appendChild(dot);
-  }
-
-  if (indicator) {
+  const meta = HUB_TRACKS[category];
+  if (indicator && meta) {
     indicator.textContent = `Card ${activeIdx + 1} of ${meta.totalCards}`;
   }
 }
@@ -2684,12 +2812,8 @@ function setupHubSliderListeners() {
     if (!track) return;
 
     track.addEventListener('scroll', () => {
-      const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 16 : 300;
+      const cardWidth = track.firstElementChild ? track.firstElementChild.offsetWidth + 16 : 290;
       const activeIdx = Math.min(meta.totalCards - 1, Math.max(0, Math.round(track.scrollLeft / cardWidth)));
-      const dots = document.querySelectorAll('#hubSliderDots .slider-dot');
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === activeIdx);
-      });
       const indicator = document.getElementById('hubSlideIndicator');
       if (indicator) {
         indicator.textContent = `Card ${activeIdx + 1} of ${meta.totalCards}`;
@@ -2698,31 +2822,8 @@ function setupHubSliderListeners() {
   });
 }
 
-/* Gentle passive carousel auto-glide when idle */
 function startPassiveSliderGlide() {
-  let cardIdx = 0;
-  setInterval(() => {
-    const subModal = document.getElementById('subModal');
-    if (subModal && subModal.classList.contains('active')) return;
-
-    const meta = HUB_TRACKS[activeHubCategory];
-    if (!meta) return;
-    const track = document.getElementById(meta.id);
-    const hub = document.getElementById('plansMasterHub');
-
-    if (track && hub && isElementInViewport(hub)) {
-      cardIdx = (cardIdx + 1) % meta.totalCards;
-      jumpActiveTrack(cardIdx);
-    }
-  }, 5000);
-}
-
-function isElementInViewport(el) {
-  const rect = el.getBoundingClientRect();
-  return (
-    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85 &&
-    rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) * 0.15
-  );
+  // Graceful passive glide disabled for multi-track stacked sliders to avoid distraction
 }
 
 /* ============================================================

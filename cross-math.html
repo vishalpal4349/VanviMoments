@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Cross Math Challenge — Vanvi Moments Games</title>
-  <meta name="description" content="Solve procedurally generated math crossword puzzles! Drag and place numbers to balance horizontal and vertical celebration equations.">
+  <title>Equation Master (Cross Math) — Vanvi Moments Games</title>
+  <meta name="description" content="Solve fast-paced equation puzzles! Fill in the empty boxes with swipeable numbers to balance equations, build streaks, and earn Vanvi Coins.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     :root {
@@ -20,7 +22,7 @@
       --text-muted: #88627b;
       --border-pink: rgba(255, 120, 175, 0.28);
       --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-outfit: 'Outfit', sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
@@ -31,487 +33,768 @@
       display: flex;
       flex-direction: column;
       user-select: none;
+      overflow-x: hidden;
+      padding-bottom: 90px;
     }
+
+    /* Header */
     .app-header {
       position: sticky;
       top: 0;
       z-index: 100;
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-pink);
-      height: 60px;
+      height: 58px;
       padding: 0 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .header-logo-img {
+      height: 32px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(255, 42, 122, 0.22));
+    }
     .btn-nav-back {
       font-size: 12.5px;
-      font-weight: 750;
-      color: var(--text-muted);
+      font-weight: 800;
+      color: var(--text-dark);
       display: inline-flex;
       align-items: center;
       gap: 5px;
       background: #ffffff;
-      border: 1px solid var(--border-pink);
-      padding: 6px 12px;
+      border: 1.5px solid var(--border-pink);
+      padding: 6px 14px;
       border-radius: 99px;
       cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(255, 42, 122, 0.08);
+      transition: all 0.2s;
     }
+    .btn-nav-back:hover {
+      border-color: var(--rose-main);
+      color: var(--rose-main);
+      transform: translateX(-2px);
+    }
+
+    /* Main Arena */
     .game-arena {
       flex: 1;
-      max-width: 520px;
+      max-width: 560px;
       margin: 0 auto;
       width: 100%;
-      padding: 16px 14px 40px;
+      padding: 16px 16px 36px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .arena-title-box { text-align: center; margin-bottom: 12px; }
-    .arena-title-box h1 { font-family: var(--font-serif); font-size: 26px; color: var(--text-dark); margin-bottom: 2px; }
-    
+
+    .arena-title-box {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .arena-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.5px;
+      color: #9d174d;
+      background: #ffe4ee;
+      padding: 3px 10px;
+      border-radius: 99px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .arena-title-box h1 {
+      font-family: var(--font-outfit);
+      font-size: 26px;
+      font-weight: 850;
+      color: var(--text-dark);
+      letter-spacing: -0.5px;
+    }
+
+    /* Status HUD */
     .status-hud {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid var(--border-pink);
-      border-radius: 16px;
-      padding: 10px 14px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 16px rgba(255, 60, 130, 0.06);
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid var(--border-pink);
+      border-radius: 18px;
+      padding: 10px 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(255, 60, 130, 0.08);
     }
     .hud-pill {
-      font-size: 12px;
-      font-weight: 800;
+      font-size: 12.5px;
+      font-weight: 850;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
-    .btn-rules-pill {
-      background: rgba(255, 42, 122, 0.08);
-      border: 1px solid rgba(255, 42, 122, 0.25);
-      color: var(--rose-main);
-      font-size: 11.5px;
-      font-weight: 800;
-      padding: 5px 12px;
+    .streak-badge {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      padding: 3px 10px;
       border-radius: 99px;
-      cursor: pointer;
+      font-size: 11px;
+      box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+      animation: pulseStreak 1.8s infinite alternate;
+    }
+    @keyframes pulseStreak {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.06); }
     }
 
-    /* Crossword Board */
-    .cross-board {
-      display: grid;
-      grid-template-columns: repeat(5, 52px);
-      grid-template-rows: repeat(5, 52px);
-      gap: 8px;
-      margin: 10px auto 24px;
-      padding: 14px;
-      background: rgba(255, 255, 255, 0.85);
-      border: 1.5px solid var(--border-pink);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(100, 50, 90, 0.08);
-      justify-content: center;
+    /* Instruction Hint */
+    .hint-bar {
+      font-size: 12.5px;
+      color: #6b4d66;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px dashed rgba(255, 120, 175, 0.4);
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 18px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    @media (max-width: 380px) {
-      .cross-board {
-        grid-template-columns: repeat(5, 44px);
-        grid-template-rows: repeat(5, 44px);
-        gap: 6px;
-        padding: 10px;
-      }
+
+    /* Equations Container */
+    .equations-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      margin-bottom: 24px;
     }
-    .cell {
-      border-radius: 12px;
+
+    .equation-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid rgba(255, 182, 206, 0.7);
+      border-radius: 22px;
+      padding: 14px 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Outfit', sans-serif;
+      gap: 10px;
+      box-shadow: 
+        0 8px 24px rgba(255, 42, 122, 0.08),
+        inset 0 1.5px 2px #ffffff;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .equation-card.is-balanced {
+      border-color: #10b981;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.16);
+    }
+    .equation-card.is-balanced::after {
+      content: '✓';
+      position: absolute;
+      right: 14px;
+      color: #10b981;
+      font-weight: 900;
       font-size: 18px;
-      font-weight: 800;
-      transition: all 0.2s ease;
     }
-    .cell.empty { background: transparent; }
-    .cell.op {
-      background: rgba(255, 240, 246, 0.9);
+
+    /* Equation Elements */
+    .eq-num, .eq-op, .eq-slot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-outfit);
+      font-weight: 850;
+      line-height: 1;
+    }
+    .eq-num {
+      font-size: 24px;
+      color: var(--text-dark);
+      min-width: 32px;
+    }
+    .eq-op {
+      font-size: 22px;
       color: var(--rose-main);
-      font-size: 17px;
+      min-width: 22px;
     }
-    .cell.fixed {
-      background: #f8fafc;
-      color: #334155;
-      border: 1.5px solid #cbd5e1;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
-    }
-    .cell.slot {
+
+    /* Empty Box waiting for number */
+    .eq-slot {
+      min-width: 54px;
+      height: 54px;
+      border-radius: 16px;
       background: #ffffff;
-      border: 2px dashed rgba(255, 42, 122, 0.4);
+      border: 2.5px dashed rgba(255, 42, 122, 0.45);
       color: var(--rose-main);
+      font-size: 24px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(255, 42, 122, 0.08);
+      box-shadow: 
+        0 4px 12px rgba(255, 42, 122, 0.1),
+        inset 0 2px 4px rgba(0, 0, 0, 0.03);
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
     }
-    .cell.slot.filled {
+    .eq-slot:hover {
+      border-color: var(--rose-main);
+      transform: scale(1.05);
+    }
+    .eq-slot.is-active {
+      border-color: #d97706;
+      border-style: solid;
+      box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.22);
+      transform: scale(1.06);
+    }
+    .eq-slot.is-filled {
       border-style: solid;
       border-color: var(--rose-main);
       background: linear-gradient(135deg, #fff0f5, #ffe4ee);
-    }
-    .cell.slot.active {
-      border-color: #d97706;
-      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+      color: #9d174d;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.2);
     }
 
-    /* Digit Tile Rack */
-    .tiles-rack {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
+    /* Swipeable Number Tile Rack */
+    .rack-section {
       width: 100%;
-    }
-    .num-tile {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.95);
       border: 1.5px solid var(--border-pink);
+      border-radius: 24px;
+      padding: 16px 14px;
+      box-shadow: 0 10px 30px rgba(100, 50, 90, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .rack-header {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .swipeable-rack-track {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      overflow-x: auto;
+      padding: 6px 4px 10px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .swipeable-rack-track::-webkit-scrollbar {
+      height: 4px;
+    }
+    .swipeable-rack-track::-webkit-scrollbar-thumb {
+      background: rgba(255, 120, 175, 0.3);
+      border-radius: 99px;
+    }
+
+    .num-tile {
+      flex: 0 0 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #fff7fb 100%);
+      border: 2px solid rgba(255, 180, 210, 0.85);
       color: var(--text-dark);
-      font-family: 'Outfit', sans-serif;
-      font-size: 19px;
+      font-family: var(--font-outfit);
+      font-size: 22px;
       font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(100, 50, 90, 0.08);
-      transition: all 0.2s ease;
+      cursor: grab;
+      scroll-snap-align: start;
+      box-shadow: 
+        0 4px 14px rgba(255, 42, 122, 0.12),
+        inset 0 1.5px 2px #ffffff;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+    .num-tile:active {
+      cursor: grabbing;
+      transform: scale(0.94);
     }
     .num-tile:hover {
       border-color: var(--rose-main);
-      transform: translateY(-2px);
+      transform: translateY(-3px) scale(1.06);
+      box-shadow: 0 8px 20px rgba(255, 42, 122, 0.25);
     }
-    .num-tile.used {
-      opacity: 0.3;
+    .num-tile.is-used {
+      opacity: 0.25;
       pointer-events: none;
       transform: scale(0.9);
+      border-color: #cbd5e1;
     }
 
-    /* Actions */
+    /* Actions Row */
     .controls-row {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       width: 100%;
-      justify-content: center;
+      margin-top: 18px;
     }
     .btn-action {
       flex: 1;
-      max-width: 160px;
-      padding: 11px 16px;
-      border-radius: 14px;
-      font-size: 13px;
-      font-weight: 800;
+      padding: 12px 18px;
+      border-radius: 16px;
+      font-size: 13.5px;
+      font-weight: 850;
       border: none;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: all 0.2s;
+      transition: all 0.22s;
     }
-    .btn-restart { background: #ffffff; border: 1.5px solid var(--border-pink); color: var(--text-dark); }
-    .btn-new { background: var(--rose-gradient); color: #ffffff; box-shadow: 0 4px 14px rgba(255, 42, 122, 0.3); }
+    .btn-clear {
+      background: #ffffff;
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+    }
+    .btn-skip {
+      background: var(--rose-gradient);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(255, 42, 122, 0.35);
+    }
 
-    /* Modal */
-    .modal-overlay {
-      position: fixed; inset: 0; background: rgba(44, 18, 36, 0.6); backdrop-filter: blur(8px);
-      z-index: 200; display: none; align-items: center; justify-content: center; padding: 16px;
+    /* Toast Notification */
+    .vanvi-toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      background: #0f172a;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 99px;
+      padding: 10px 22px;
+      font-size: 13px;
+      font-weight: 800;
+      z-index: 1000;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
     }
-    .modal-overlay.open { display: flex; }
-    .modal-card {
-      background: #ffffff; width: 100%; max-width: 420px; border-radius: 24px; padding: 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.25); border: 1px solid var(--border-pink); position: relative;
+    .vanvi-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
     }
-    .modal-card h3 { font-family: var(--font-serif); font-size: 22px; color: var(--text-dark); margin-bottom: 12px; }
-    .modal-card ul { padding-left: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header class="app-header">
-    <button type="button" class="btn-nav-back" onclick="location.href='games.html'">
-      ‹ Games Arena
-    </button>
-    <div style="font-weight: 850; font-size: 15px; color: var(--rose-main);">
-      🔢 Cross Math Challenge
+    <div style="display:flex; align-items:center; gap:8px;">
+      <a href="games.html" class="btn-nav-back" style="text-decoration:none;">‹ <span>Games</span></a>
+      <a href="index.html" class="header-brand" title="Vanvi Moments Home" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="header-logo-img" />
+        <span style="background:rgba(255,42,122,0.1); border:1px solid rgba(255,42,122,0.25); color:var(--rose-main); font-size:10px; font-weight:900; letter-spacing:0.8px; padding:2px 7px; border-radius:6px; text-transform:uppercase;">MATH</span>
+      </a>
     </div>
-    <div style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:800; background:#fffbeb; border:1px solid #fde68a; padding:4px 10px; border-radius:99px; color:#d97706;">
-      🪙 <span id="coinBalanceHUD">0</span>
+    <div style="font-size: 12px; font-weight: 850; color: #ff2a7a; background: #fff0f5; padding: 4px 10px; border-radius: 99px; border: 1px solid rgba(255,42,122,0.25);">
+      +20 🪙
     </div>
   </header>
 
+  <!-- Game Arena -->
   <main class="game-arena">
     <div class="arena-title-box">
-      <h1>Math Crossword Grid</h1>
-      <p style="font-size:12.5px; color:var(--text-muted);">Fill in the missing numbers so every horizontal and vertical row balances!</p>
+      <span class="arena-badge">Continuous Math Challenge</span>
+      <h1>Equation Master</h1>
     </div>
 
+    <!-- HUD -->
     <div class="status-hud">
       <div class="hud-pill">
-        <span>🏆 Round:</span> <strong id="hudRound" style="color:var(--rose-main);">1</strong>
+        <span>Round</span>
+        <strong id="hudRound" style="color:var(--rose-main); font-size:15px;">1</strong>
+      </div>
+      <div class="streak-badge" id="hudStreak">
+        🔥 Streak: 0
       </div>
       <div class="hud-pill">
-        <span>⏱️ Target:</span> <strong>Balance All</strong>
+        <span>🪙 Coins:</span>
+        <strong id="hudCoins">0</strong>
       </div>
-      <button type="button" class="btn-rules-pill" onclick="openRules()">📖 Rules</button>
     </div>
 
-    <!-- 5x5 Crossword Board -->
-    <div class="cross-board" id="crossBoard"></div>
-
-    <div style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px; letter-spacing:0.5px;">
-      ✦ Tap a missing slot [ ? ], then choose a number:
+    <!-- User Instruction -->
+    <div class="hint-bar">
+      <span>💡</span>
+      <span id="hintText">Tap an empty box [ ? ], then tap a number below to balance the equation!</span>
     </div>
-    
-    <!-- Number Tiles -->
-    <div class="tiles-rack" id="tilesRack"></div>
 
+    <!-- Equations List -->
+    <div class="equations-stack" id="equationsContainer">
+      <!-- Injected procedurally -->
+    </div>
+
+    <!-- Swipeable Number Rack -->
+    <div class="rack-section">
+      <div class="rack-header">Swipeable Numbers Track (Drag or Tap)</div>
+      <div class="swipeable-rack-track" id="tilesRack">
+        <!-- Rendered numbers -->
+      </div>
+    </div>
+
+    <!-- Controls -->
     <div class="controls-row">
-      <button type="button" class="btn-action btn-restart" onclick="clearSlots()">
-        🔄 Clear
-      </button>
-      <button type="button" class="btn-action btn-new" onclick="generateNewRandomMath()">
-        🎲 Next Puzzle
-      </button>
+      <button type="button" class="btn-action btn-clear" onclick="resetCurrentRound()">↺ Reset Boxes</button>
+      <button type="button" class="btn-action btn-skip" onclick="skipToNextRound()">Skip Round →</button>
     </div>
   </main>
 
-  <div class="modal-overlay" id="rulesModal">
-    <div class="modal-card">
-      <h3>🔢 Cross Math Rules</h3>
-      <ul>
-        <li><strong>Goal:</strong> Complete both horizontal and vertical equations correctly!</li>
-        <li><strong>How to play:</strong> Tap any pink dashed slot <span style="color:#ff2a7a; font-weight:800;">[ ? ]</span>, then tap one of the available number tiles below to place it.</li>
-        <li><strong>Procedural Engine:</strong> Numbers and operators are dynamically created every single game — never the same puzzle twice!</li>
-        <li><strong>Reward:</strong> Successfully solving the board awards <strong>+20 Vanvi Coins 🪙</strong>!</li>
-      </ul>
-      <button type="button" class="btn-action btn-new" style="max-width:100%; width:100%;" onclick="closeRules()">
-        Got It, Let's Solve!
-      </button>
-    </div>
-  </div>
+  <div class="vanvi-toast" id="toast"></div>
 
-  <div class="modal-overlay" id="winModal">
-    <div class="modal-card" style="text-align:center;">
-      <div style="font-size:42px; margin-bottom:8px;">🎉</div>
-      <h3>Equation Master!</h3>
-      <div style="font-size:16px; font-weight:850; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:8px 16px; border-radius:12px; margin:12px auto; display:inline-block;">
-        +20 Vanvi Coins Credited 🪙
-      </div>
-      <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">
-        Flawless calculations! All horizontal and vertical equations balanced perfectly.
-      </p>
-      <button type="button" class="btn-action btn-new" style="max-width:100%; width:100%;" onclick="nextRound()">
-        Play Next Procedural Round →
-      </button>
-    </div>
-  </div>
-
+  <!-- Scripts -->
+  <script src="js/vanvi-games-engine.js"></script>
   <script src="js/vanvi-api.js"></script>
   <script>
     (function() {
       'use strict';
 
       let round = 1;
-      let activeSlotIndex = null;
-      let boardData = []; // 5x5 array
-      let slots = []; // metadata of slots to fill
-      let tileNumbers = [];
+      let streak = 0;
+      let equations = []; // Array of equations for this round
+      let activeSlotKey = null; // { eqIdx, slotIdx }
+      let availableTiles = []; // Numbers available in rack
 
-      window.openRules = function() { document.getElementById('rulesModal').classList.add('open'); };
-      window.closeRules = function() { document.getElementById('rulesModal').classList.remove('open'); };
+      const toast = document.getElementById('toast');
+      function showToast(msg, icon = '✨') {
+        if (!toast) return;
+        toast.innerHTML = `<span>${icon}</span> ${msg}`;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      }
 
       function updateHUD() {
         document.getElementById('hudRound').textContent = round;
-        if (window.VanviRewardEngine) {
-          document.getElementById('coinBalanceHUD').textContent = window.VanviRewardEngine.getCoins();
+        document.getElementById('hudStreak').textContent = `🔥 Streak: ${streak}`;
+        if (window.VanviGames) {
+          document.getElementById('hudCoins').textContent = VanviGames.getTotalCoins();
         }
       }
 
-      // Procedural generator for 5x5 math crossword
-      // Layout:
-      // Row 0: Num0 Op0 Num1 = Res0
-      // Row 1: Op1  .   Op2  .  .
-      // Row 2: Num2 Op3 Num3 = Res1
-      // Row 3: =    .   =    .  .
-      // Row 4: Res2 .   Res3 .  .
-      function generatePuzzle() {
-        activeSlotIndex = null;
-        updateHUD();
+      // Procedural Equation Generator (Smoothly scaling difficulty)
+      function generateRoundEquations(roundNum) {
+        const count = roundNum >= 4 ? 3 : 2; // 2 equations initially, 3 as it gets harder
+        const eqList = [];
+        const requiredNumbers = [];
 
-        // 1. Pick 4 random base numbers between 1 and 9
-        const A = Math.floor(Math.random() * 8) + 2;
-        const B = Math.floor(Math.random() * 8) + 2;
-        const C = Math.floor(Math.random() * 8) + 2;
-        const D = Math.floor(Math.random() * 8) + 2;
+        for (let i = 0; i < count; i++) {
+          let n1, n2, op, result, missingPos; // 0 for n1, 1 for n2
 
-        const opList = ['+', '-', '×'];
-        const op0 = opList[Math.floor(Math.random() * 2)]; // Row 0
-        const op1 = opList[Math.floor(Math.random() * 2)]; // Col 0
-        const op2 = opList[Math.floor(Math.random() * 2)]; // Col 2
-        const op3 = opList[Math.floor(Math.random() * 2)]; // Row 2
-
-        const calc = (n1, op, n2) => op === '+' ? n1 + n2 : (op === '-' ? n1 - n2 : n1 * n2);
-
-        const Res0 = calc(A, op0, B);
-        const Res1 = calc(C, op3, D);
-        const Res2 = calc(A, op1, C);
-        const Res3 = calc(B, op2, D);
-
-        // Grid representation
-        boardData = [
-          [ { val: A, type: 'num', id: 'A' }, { val: op0, type: 'op' }, { val: B, type: 'num', id: 'B' }, { val: '=', type: 'op' }, { val: Res0, type: 'fixed' } ],
-          [ { val: op1, type: 'op' }, { type: 'empty' }, { val: op2, type: 'op' }, { type: 'empty' }, { type: 'empty' } ],
-          [ { val: C, type: 'num', id: 'C' }, { val: op3, type: 'op' }, { val: D, type: 'num', id: 'D' }, { val: '=', type: 'op' }, { val: Res1, type: 'fixed' } ],
-          [ { val: '=', type: 'op' }, { type: 'empty' }, { val: '=', type: 'op' }, { type: 'empty' }, { type: 'empty' } ],
-          [ { val: Res2, type: 'fixed' }, { type: 'empty' }, { val: Res3, type: 'fixed' }, { type: 'empty' }, { type: 'empty' } ]
-        ];
-
-        // Pick 2 or 3 of {A, B, C, D} to be blank slots
-        const allNums = [ { r: 0, c: 0, val: A }, { r: 0, c: 2, val: B }, { r: 2, c: 0, val: C }, { r: 2, c: 2, val: D } ];
-        // Shuffle and pick 3 to be slots
-        allNums.sort(() => Math.random() - 0.5);
-        slots = allNums.slice(0, 3).map((item, idx) => {
-          boardData[item.r][item.c].type = 'slot';
-          boardData[item.r][item.c].slotId = idx;
-          boardData[item.r][item.c].userVal = null;
-          return { slotId: idx, expectedVal: item.val, r: item.r, c: item.c };
-        });
-
-        // The remaining num is fixed
-        allNums.slice(3).forEach(item => {
-          boardData[item.r][item.c].type = 'fixed';
-        });
-
-        // Generate pool of tiles: expected slot values + 2 random distractors
-        tileNumbers = slots.map(s => s.expectedVal);
-        while (tileNumbers.length < 5) {
-          const rand = Math.floor(Math.random() * 9) + 1;
-          if (!tileNumbers.includes(rand)) tileNumbers.push(rand);
-        }
-        tileNumbers.sort(() => Math.random() - 0.5);
-
-        renderBoard();
-        renderTiles();
-      }
-
-      function renderBoard() {
-        const board = document.getElementById('crossBoard');
-        board.innerHTML = '';
-
-        boardData.forEach((row, r) => {
-          row.forEach((cell, c) => {
-            const div = document.createElement('div');
-            div.className = 'cell ' + cell.type;
-
-            if (cell.type === 'empty') {
-              // blank cell
-            } else if (cell.type === 'op' || cell.type === 'fixed') {
-              div.textContent = cell.val;
-            } else if (cell.type === 'slot') {
-              div.textContent = cell.userVal !== null ? cell.userVal : '?';
-              if (cell.userVal !== null) div.classList.add('filled');
-              if (activeSlotIndex === cell.slotId) div.classList.add('active');
-
-              div.addEventListener('click', () => {
-                activeSlotIndex = cell.slotId;
-                renderBoard();
-              });
+          if (roundNum <= 2) {
+            // Addition / Subtraction within 20
+            op = Math.random() > 0.5 ? '+' : '-';
+            if (op === '+') {
+              n1 = Math.floor(Math.random() * 8) + 2;
+              n2 = Math.floor(Math.random() * 9) + 1;
+              result = n1 + n2;
+            } else {
+              n1 = Math.floor(Math.random() * 10) + 8;
+              n2 = Math.floor(Math.random() * 7) + 1;
+              result = n1 - n2;
             }
-            board.appendChild(div);
+          } else if (roundNum <= 5) {
+            // Multiplication or larger addition
+            const pick = Math.random();
+            if (pick < 0.4) {
+              op = '×';
+              n1 = Math.floor(Math.random() * 6) + 2;
+              n2 = Math.floor(Math.random() * 7) + 2;
+              result = n1 * n2;
+            } else if (pick < 0.7) {
+              op = '+';
+              n1 = Math.floor(Math.random() * 15) + 6;
+              n2 = Math.floor(Math.random() * 14) + 4;
+              result = n1 + n2;
+            } else {
+              op = '-';
+              n1 = Math.floor(Math.random() * 20) + 12;
+              n2 = Math.floor(Math.random() * 10) + 3;
+              result = n1 - n2;
+            }
+          } else {
+            // Harder level: Multiplications and divisions
+            const pick = Math.random();
+            if (pick < 0.5) {
+              op = '×';
+              n1 = Math.floor(Math.random() * 8) + 3;
+              n2 = Math.floor(Math.random() * 8) + 2;
+              result = n1 * n2;
+            } else {
+              op = '÷';
+              n2 = Math.floor(Math.random() * 6) + 2;
+              result = Math.floor(Math.random() * 8) + 2;
+              n1 = n2 * result;
+            }
+          }
+
+          missingPos = Math.random() > 0.5 ? 0 : 1; // randomly blank first or second number
+          const expected = missingPos === 0 ? n1 : n2;
+          requiredNumbers.push(expected);
+
+          eqList.push({
+            id: `eq_${i}`,
+            n1: n1,
+            n2: n2,
+            op: op,
+            result: result,
+            missingPos: missingPos,
+            expected: expected,
+            userVal: null,
+            isBalanced: false
           });
+        }
+
+        // Add 2-3 random distractor tiles to the rack
+        availableTiles = [...requiredNumbers];
+        while (availableTiles.length < requiredNumbers.length + 3) {
+          const distractor = Math.floor(Math.random() * 18) + 1;
+          if (!availableTiles.includes(distractor)) availableTiles.push(distractor);
+        }
+        // Shuffle rack
+        availableTiles.sort(() => Math.random() - 0.5);
+
+        return eqList;
+      }
+
+      function renderEquations() {
+        const container = document.getElementById('equationsContainer');
+        container.innerHTML = '';
+
+        equations.forEach((eq, eqIdx) => {
+          const card = document.createElement('div');
+          card.className = 'equation-card' + (eq.isBalanced ? ' is-balanced' : '');
+
+          // Left operand
+          if (eq.missingPos === 0) {
+            card.appendChild(createSlotElement(eq, eqIdx));
+          } else {
+            const span = document.createElement('span');
+            span.className = 'eq-num';
+            span.textContent = eq.n1;
+            card.appendChild(span);
+          }
+
+          // Operator
+          const opSpan = document.createElement('span');
+          opSpan.className = 'eq-op';
+          opSpan.textContent = eq.op;
+          card.appendChild(opSpan);
+
+          // Right operand
+          if (eq.missingPos === 1) {
+            card.appendChild(createSlotElement(eq, eqIdx));
+          } else {
+            const span = document.createElement('span');
+            span.className = 'eq-num';
+            span.textContent = eq.n2;
+            card.appendChild(span);
+          }
+
+          // Equal sign
+          const eqSpan = document.createElement('span');
+          eqSpan.className = 'eq-op';
+          eqSpan.textContent = '=';
+          card.appendChild(eqSpan);
+
+          // Result
+          const resSpan = document.createElement('span');
+          resSpan.className = 'eq-num';
+          resSpan.style.color = '#ff2a7a';
+          resSpan.textContent = eq.result;
+          card.appendChild(resSpan);
+
+          container.appendChild(card);
         });
+      }
+
+      function createSlotElement(eq, eqIdx) {
+        const slot = document.createElement('div');
+        const isActive = activeSlotKey === eqIdx;
+        const isFilled = eq.userVal !== null;
+
+        slot.className = 'eq-slot' + (isActive ? ' is-active' : '') + (isFilled ? ' is-filled' : '');
+        slot.textContent = isFilled ? eq.userVal : '?';
+
+        slot.addEventListener('click', () => {
+          if (eq.userVal !== null) {
+            // Return number to rack
+            eq.userVal = null;
+            eq.isBalanced = false;
+            activeSlotKey = eqIdx;
+            renderEquations();
+            renderTiles();
+          } else {
+            activeSlotKey = eqIdx;
+            renderEquations();
+          }
+        });
+
+        // Allow Drag and Drop
+        slot.addEventListener('dragover', (e) => e.preventDefault());
+        slot.addEventListener('drop', (e) => {
+          e.preventDefault();
+          const num = parseInt(e.dataTransfer.getData('text/plain'), 10);
+          if (!isNaN(num)) {
+            placeNumberInSlot(eqIdx, num);
+          }
+        });
+
+        return slot;
       }
 
       function renderTiles() {
         const rack = document.getElementById('tilesRack');
         rack.innerHTML = '';
 
-        tileNumbers.forEach((num, tileIdx) => {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'num-tile';
-          btn.textContent = num;
+        // Count how many times each number is currently used in equations
+        const usedCounts = {};
+        equations.forEach(eq => {
+          if (eq.userVal !== null) {
+            usedCounts[eq.userVal] = (usedCounts[eq.userVal] || 0) + 1;
+          }
+        });
 
-          // Check if this number tile is already placed in a slot
-          const isPlaced = slots.some(s => boardData[s.r][s.c].userVal === num);
-          if (isPlaced) btn.classList.add('used');
+        availableTiles.forEach((num, tileIdx) => {
+          const tile = document.createElement('div');
+          
+          let isUsed = false;
+          if (usedCounts[num] && usedCounts[num] > 0) {
+            isUsed = true;
+            usedCounts[num]--;
+          }
 
-          btn.addEventListener('click', () => onTileClick(num));
-          rack.appendChild(btn);
+          tile.className = 'num-tile' + (isUsed ? ' is-used' : '');
+          tile.textContent = num;
+          tile.draggable = !isUsed;
+
+          tile.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', String(num));
+          });
+
+          tile.addEventListener('click', () => {
+            if (isUsed) return;
+            // If active slot is selected, place into active slot
+            if (activeSlotKey !== null && equations[activeSlotKey]) {
+              placeNumberInSlot(activeSlotKey, num);
+            } else {
+              // Find first empty slot
+              const firstEmptyIdx = equations.findIndex(eq => eq.userVal === null);
+              if (firstEmptyIdx !== -1) {
+                placeNumberInSlot(firstEmptyIdx, num);
+              } else {
+                showToast('Tap a filled box to clear it first!', '💡');
+              }
+            }
+          });
+
+          rack.appendChild(tile);
         });
       }
 
-      function onTileClick(num) {
-        if (activeSlotIndex === null) {
-          // Find first unfilled slot
-          const firstUnfilled = slots.find(s => boardData[s.r][s.c].userVal === null);
-          if (firstUnfilled) activeSlotIndex = firstUnfilled.slotId;
-        }
+      function placeNumberInSlot(eqIdx, num) {
+        const eq = equations[eqIdx];
+        if (!eq) return;
 
-        if (activeSlotIndex !== null) {
-          const slot = slots.find(s => s.slotId === activeSlotIndex);
-          if (slot) {
-            boardData[slot.r][slot.c].userVal = num;
-            
-            // Advance active slot to next empty slot
-            const nextEmpty = slots.find(s => s.slotId !== activeSlotIndex && boardData[s.r][s.c].userVal === null);
-            activeSlotIndex = nextEmpty ? nextEmpty.slotId : null;
+        eq.userVal = num;
+        
+        // Check calculation
+        let calculated = 0;
+        const op1 = eq.missingPos === 0 ? num : eq.n1;
+        const op2 = eq.missingPos === 1 ? num : eq.n2;
 
-            renderBoard();
-            renderTiles();
-            checkEquations();
-          }
-        }
+        if (eq.op === '+') calculated = op1 + op2;
+        else if (eq.op === '-') calculated = op1 - op2;
+        else if (eq.op === '×') calculated = op1 * op2;
+        else if (eq.op === '÷') calculated = op1 / op2;
+
+        eq.isBalanced = (calculated === eq.result);
+
+        // Move to next empty slot automatically
+        const nextEmpty = equations.findIndex((e, idx) => idx > eqIdx && e.userVal === null);
+        activeSlotKey = nextEmpty !== -1 ? nextEmpty : null;
+
+        renderEquations();
+        renderTiles();
+
+        // Check if all equations balanced!
+        checkRoundCompletion();
       }
 
-      function checkEquations() {
-        const allFilled = slots.every(s => boardData[s.r][s.c].userVal !== null);
+      function checkRoundCompletion() {
+        const allFilled = equations.every(eq => eq.userVal !== null);
         if (!allFilled) return;
 
-        const isWin = slots.every(s => boardData[s.r][s.c].userVal === s.expectedVal);
-        if (isWin) {
+        const allCorrect = equations.every(eq => eq.isBalanced);
+
+        if (allCorrect) {
+          streak++;
+          showToast(`Round ${round} Solved! 🔥 Streak: ${streak}`, '🎉');
+          if (window.VanviGames) {
+            VanviGames.awardCoins(4, 'Equation Master Streak');
+          }
+          updateHUD();
+
+          // Smooth automatic progression after 600ms
           setTimeout(() => {
-            if (window.VanviRewardEngine) {
-              window.VanviRewardEngine.addCoins(20, 'Cross Math Round ' + round);
-              updateHUD();
-            }
-            document.getElementById('winModal').classList.add('open');
-          }, 300);
+            round++;
+            startRound();
+          }, 700);
+        } else {
+          showToast('Some equations are incorrect. Tap a box to adjust!', '⚠️');
         }
       }
 
-      window.clearSlots = function() {
-        slots.forEach(s => {
-          boardData[s.r][s.c].userVal = null;
-        });
-        activeSlotIndex = null;
-        renderBoard();
+      window.resetCurrentRound = function() {
+        equations.forEach(eq => { eq.userVal = null; eq.isBalanced = false; });
+        activeSlotKey = 0;
+        renderEquations();
         renderTiles();
+        showToast('Boxes reset!', '↺');
       };
 
-      window.generateNewRandomMath = function() {
-        generatePuzzle();
-      };
-
-      window.nextRound = function() {
-        document.getElementById('winModal').classList.remove('open');
+      window.skipToNextRound = function() {
+        streak = 0;
         round++;
-        generatePuzzle();
+        startRound();
+        showToast('Next round loaded!', '➔');
       };
 
-      generatePuzzle();
+      function startRound() {
+        activeSlotKey = 0;
+        equations = generateRoundEquations(round);
+        updateHUD();
+        renderEquations();
+        renderTiles();
+      }
+
+      // Initial Launch
+      startRound();
+
     })();
   </script>
 </body>

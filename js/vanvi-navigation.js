@@ -8,14 +8,21 @@
 
   // Global Vanvi Atelier Theme & Font Sync across all pages
   try {
-    const savedTheme = localStorage.getItem('vanvi_aesthetic_theme') || 'clay';
+    const savedTheme = localStorage.getItem('vanvi_aesthetic_theme') || 'bloom';
     const savedFont = localStorage.getItem('vanvi_font_pref') || 'royal';
     document.documentElement.setAttribute('data-vanvi-theme', savedTheme);
     document.documentElement.setAttribute('data-vanvi-font', savedFont);
   } catch(e) {}
 
   window.setVanviTheme = function(theme) {
-    const finalTheme = (theme === 'dark' || theme === 'night' || theme === 'emerald') ? 'emerald' : 'clay';
+    let finalTheme = 'bloom';
+    if (theme === 'glass' || theme === 'frost' || theme === 'spatial') {
+      finalTheme = 'glass';
+    } else if (theme === 'dark' || theme === 'night' || theme === 'emerald') {
+      finalTheme = 'emerald';
+    } else if (theme === 'clay' || theme === 'bloom') {
+      finalTheme = 'bloom';
+    }
     document.documentElement.setAttribute('data-vanvi-theme', finalTheme);
     try { localStorage.setItem('vanvi_aesthetic_theme', finalTheme); } catch(e) {}
     if (typeof syncStudioControls === 'function') syncStudioControls();
@@ -28,10 +35,29 @@
   };
 
   window.toggleVanviTheme = function() {
-    const current = document.documentElement.getAttribute('data-vanvi-theme') || 'clay';
-    const next = (current === 'emerald' || current === 'dark' || current === 'night') ? 'clay' : 'emerald';
+    const current = document.documentElement.getAttribute('data-vanvi-theme') || 'bloom';
+    let next = 'emerald';
+    if (current === 'emerald' || current === 'dark' || current === 'night') {
+      next = 'glass';
+    } else if (current === 'glass') {
+      next = 'bloom';
+    } else {
+      next = 'emerald';
+    }
     window.setVanviTheme(next);
   };
+
+  // Cross-tab & Cross-frame live synchronization
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'vanvi_aesthetic_theme' && e.newValue) {
+      document.documentElement.setAttribute('data-vanvi-theme', e.newValue);
+      if (typeof syncStudioControls === 'function') syncStudioControls();
+    }
+    if (e.key === 'vanvi_font_pref' && e.newValue) {
+      document.documentElement.setAttribute('data-vanvi-font', e.newValue);
+      if (typeof syncStudioControls === 'function') syncStudioControls();
+    }
+  });
 
   // Global Reset Aesthetics to Default (Callable by User and AI Assistant)
   window.vanviResetAesthetics = function() {
@@ -63,14 +89,18 @@
     const label = document.getElementById('themeToggleLabel');
     const mobileLabel = document.getElementById('themeToggleMobileLabel');
     if (label) {
-      if (currentTheme === 'emerald' || currentTheme === 'dark' || currentTheme === 'night') {
+      if (currentTheme === 'glass') {
+        label.textContent = '🫧 Spatial Glass';
+      } else if (currentTheme === 'emerald' || currentTheme === 'dark' || currentTheme === 'night') {
         label.textContent = '🌲 Emerald Night';
       } else {
         label.textContent = '🌸 Day Bloom';
       }
     }
     if (mobileLabel) {
-      if (currentTheme === 'emerald' || currentTheme === 'dark' || currentTheme === 'night') {
+      if (currentTheme === 'glass') {
+        mobileLabel.textContent = '🫧';
+      } else if (currentTheme === 'emerald' || currentTheme === 'dark' || currentTheme === 'night') {
         mobileLabel.textContent = '🌲';
       } else {
         mobileLabel.textContent = '🌸';
@@ -79,10 +109,12 @@
 
     document.querySelectorAll('.studio-opt-btn').forEach(btn => {
       const t = btn.getAttribute('data-theme');
-      const isMatched = (t === currentTheme) || (t === 'emerald' && (currentTheme === 'dark' || currentTheme === 'night'));
+      const isMatched = (t === currentTheme) || 
+                        (t === 'emerald' && (currentTheme === 'dark' || currentTheme === 'night')) ||
+                        (t === 'glass' && currentTheme === 'glass');
       if (isMatched) {
-        btn.style.borderColor = t === 'emerald' ? '#D6B878' : '#ff2a7a';
-        btn.style.boxShadow = t === 'emerald' ? '0 0 0 2px rgba(214,184,120,0.5)' : '0 0 0 2px rgba(255,42,122,0.25)';
+        btn.style.borderColor = t === 'emerald' ? '#D6B878' : (t === 'glass' ? '#3b82f6' : '#ff2a7a');
+        btn.style.boxShadow = t === 'emerald' ? '0 0 0 2px rgba(214,184,120,0.5)' : (t === 'glass' ? '0 0 0 2px rgba(59,130,246,0.45)' : '0 0 0 2px rgba(255,42,122,0.25)');
         btn.style.transform = 'translateY(-1px)';
       } else {
         btn.style.borderColor = 'rgba(214,184,120,0.25)';
@@ -120,30 +152,37 @@
             <span style="font-size:22px;">🎨</span>
             <div>
               <h4 style="margin:0; font-size:18px; font-weight:850; color:#0B0D0C; line-height:1.2;">Studio Aesthetics</h4>
-              <span style="font-size:10.5px; color:#52605b;">Dual Atmosphere &amp; Universal Typography</span>
+              <span style="font-size:10.5px; color:#52605b;">3 Curated Atmospheres &amp; Universal Typography</span>
             </div>
           </div>
           <button type="button" onclick="closeStudioSettingsModal()" style="background:none; border:none; font-size:20px; color:#52605b; cursor:pointer; padding:4px 8px; line-height:1;">✕</button>
         </div>
 
-        <!-- 1. Strict 2-Theme Selection (Day Bloom vs Emerald Night) -->
+        <!-- 1. Strict 3-Theme Selection (Day Bloom vs Emerald Night vs Spatial Glass) -->
         <div style="margin-bottom:18px;">
           <label style="display:block; font-size:11px; font-weight:850; text-transform:uppercase; letter-spacing:0.8px; color:#0F3D32; margin-bottom:8px;">
-            ✦ Appearance Mode (2 Curated Themes)
+            ✦ Appearance Mode (3 Curated Themes)
           </label>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" id="themeModeOptions">
+          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;" id="themeModeOptions">
             <!-- Day Bloom -->
-            <button type="button" class="studio-opt-btn" data-theme="clay" onclick="setVanviTheme('clay')" style="padding:12px 10px; border-radius:16px; border:1.5px solid rgba(255,120,175,0.35); background:#fff5f9; text-align:center; cursor:pointer; transition:all 0.2s;">
-              <span style="font-size:22px; display:block; margin-bottom:4px;">🌸</span>
-              <b style="font-size:12px; display:block; color:#2c1224;">Day Bloom</b>
-              <span style="font-size:9.5px; color:#806c80;">Signature Rose Blush</span>
+            <button type="button" class="studio-opt-btn" data-theme="clay" onclick="setVanviTheme('clay')" style="padding:10px 6px; border-radius:16px; border:1.5px solid rgba(255,120,175,0.35); background:#fff5f9; text-align:center; cursor:pointer; transition:all 0.2s;">
+              <span style="font-size:20px; display:block; margin-bottom:3px;">🌸</span>
+              <b style="font-size:11px; display:block; color:#2c1224;">Day Bloom</b>
+              <span style="font-size:8.5px; color:#806c80;">Rose Blush</span>
             </button>
 
             <!-- Emerald Night -->
-            <button type="button" class="studio-opt-btn" data-theme="emerald" onclick="setVanviTheme('emerald')" style="padding:12px 10px; border-radius:16px; border:1.5px solid rgba(214,184,120,0.35); background:#0B0D0C; text-align:center; cursor:pointer; transition:all 0.2s;">
-              <span style="font-size:22px; display:block; margin-bottom:4px;">🌲</span>
-              <b style="font-size:12px; display:block; color:#F1F7F4;">Emerald Night</b>
-              <span style="font-size:9.5px; color:#D6B878;">Obsidian &amp; Gold Luxury</span>
+            <button type="button" class="studio-opt-btn" data-theme="emerald" onclick="setVanviTheme('emerald')" style="padding:10px 6px; border-radius:16px; border:1.5px solid rgba(214,184,120,0.35); background:#0B0D0C; text-align:center; cursor:pointer; transition:all 0.2s;">
+              <span style="font-size:20px; display:block; margin-bottom:3px;">🌲</span>
+              <b style="font-size:11px; display:block; color:#F1F7F4;">Night</b>
+              <span style="font-size:8.5px; color:#D6B878;">Emerald Gold</span>
+            </button>
+
+            <!-- Spatial Glass -->
+            <button type="button" class="studio-opt-btn" data-theme="glass" onclick="setVanviTheme('glass')" style="padding:10px 6px; border-radius:16px; border:1.5px solid rgba(59,130,246,0.35); background:rgba(240,245,255,0.85); text-align:center; cursor:pointer; transition:all 0.2s;">
+              <span style="font-size:20px; display:block; margin-bottom:3px;">🫧</span>
+              <b style="font-size:11px; display:block; color:#0f172a;">Spatial Glass</b>
+              <span style="font-size:8.5px; color:#3b82f6;">Liquid Frost</span>
             </button>
           </div>
         </div>
@@ -154,12 +193,24 @@
             ✦ Typography &amp; Font Vibe
           </label>
           <div style="display:flex; flex-direction:column; gap:8px;" id="fontPairingOptions">
-            <!-- Royal Atelier (Recommended) -->
+            <!-- Spatial Vision (Recommended for Glass) -->
+            <button type="button" class="studio-font-btn" data-font="spatial" onclick="setVanviFont('spatial')" style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-radius:14px; border:1.5px solid rgba(59,130,246,0.25); background:rgba(255,255,255,0.85); text-align:left; cursor:pointer; transition:all 0.2s;">
+              <div>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <b style="font-family:'Plus Jakarta Sans', sans-serif; font-size:15px; color:#0B0D0C; letter-spacing:-0.2px;">Spatial Vision</b>
+                  <span style="font-size:9px; background:linear-gradient(135deg, #38bdf8, #3b82f6); color:#fff; font-weight:800; padding:1.5px 6px; border-radius:99px;">VisionOS</span>
+                </div>
+                <span style="font-size:10px; color:#52605b;">Plus Jakarta Sans + Outfit · Ultra-Smooth Modern</span>
+              </div>
+              <span class="font-check-mark" style="font-size:16px; color:#18A878; display:none;">✓</span>
+            </button>
+
+            <!-- Royal Atelier -->
             <button type="button" class="studio-font-btn" data-font="royal" onclick="setVanviFont('royal')" style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-radius:14px; border:1.5px solid rgba(24,168,120,0.3); background:rgba(241,247,244,0.85); text-align:left; cursor:pointer; transition:all 0.2s;">
               <div>
                 <div style="display:flex; align-items:center; gap:6px;">
                   <b style="font-family:'Cormorant Garamond', Georgia, serif; font-size:16px; color:#0B0D0C;">Royal Atelier</b>
-                  <span style="font-size:9px; background:linear-gradient(135deg, #f59e0b, #d97706); color:#0B0D0C; font-weight:900; padding:1.5px 6px; border-radius:99px;">Recommended</span>
+                  <span style="font-size:9px; background:linear-gradient(135deg, #f59e0b, #d97706); color:#0B0D0C; font-weight:900; padding:1.5px 6px; border-radius:99px;">Classic</span>
                 </div>
                 <span style="font-size:10px; color:#52605b;">Cormorant Garamond + Plus Jakarta Sans · Romantic &amp; Poetic</span>
               </div>
@@ -251,7 +302,9 @@
     'builder.html',
     'custom-experience.html',
     'moment.html',
-    'admin.html'
+    'admin.html',
+    'preview.html',
+    'vanvi-assistant.html'
   ];
 
   // Determine root path prefix according to folder depth
@@ -286,6 +339,7 @@
       currentFile === 'hidden-hearts.html' ||
       currentFile === 'cross-math.html' ||
       currentFile === 'periodic-quiz.html' ||
+      currentFile === 'secret-clue.html' ||
       currentFile === 'word-whisper.html'
     ) {
       return 'rewards';
@@ -293,7 +347,6 @@
 
     // AI Hub
     if (
-      currentFile === 'ai.html' ||
       currentFile === 'ai-matcher.html' ||
       currentFile === 'vanvi-assistant.html'
     ) {
@@ -340,7 +393,7 @@
     }
 
     if (currentFile === 'ai-matcher.html' || currentFile === 'vanvi-assistant.html') {
-      return rootPrefix + 'ai.html';
+      return rootPrefix + 'templates.html';
     }
 
     if (currentFile === 'rewards.html' || currentFile === 'refer.html') {
@@ -565,6 +618,121 @@
       } catch(e) {}
     }
   };
+
+  // 9. Global Floating Vanvi AI Hub Modal (Assistant vs Matcher)
+  function ensureVanviAiHubModalExists() {
+    let hubModal = document.getElementById('vanviAiHubModal');
+    if (hubModal) return hubModal;
+
+    hubModal = document.createElement('div');
+    hubModal.id = 'vanviAiHubModal';
+    hubModal.setAttribute('role', 'dialog');
+    hubModal.setAttribute('aria-modal', 'true');
+    hubModal.setAttribute('aria-label', 'Vanvi Intelligent Atelier Options');
+    hubModal.setAttribute('aria-hidden', 'true');
+
+    hubModal.innerHTML = `
+      <div class="vanvi-ai-hub-sheet" role="document">
+        <div class="vanvi-ai-drag-handle" aria-hidden="true"></div>
+        <div class="vanvi-ai-hub-header">
+          <div class="vanvi-ai-hub-title-pod">
+            <div class="vanvi-ai-spark-orb">✨</div>
+            <div>
+              <h2 class="vanvi-ai-hub-title">Vanvi AI Atelier</h2>
+            </div>
+          </div>
+          <button type="button" class="vanvi-ai-close-btn" id="closeVanviAiHubBtn" aria-label="Close AI Menu">&times;</button>
+        </div>
+        <p class="vanvi-ai-hub-subtitle">Choose your personal AI experience — romance, poetry, and moments.</p>
+
+        <div class="vanvi-ai-options-grid">
+          <!-- Option 1: Vanvi AI Romantic Assistant -->
+          <a href="vanvi-assistant.html" class="vanvi-ai-option-item" id="vanviAiOptionAssistant">
+            <div class="vanvi-ai-item-left">
+              <div class="vanvi-ai-option-icon vanvi-ai-icon-assistant">🐼</div>
+              <div class="vanvi-ai-item-text">
+                <div class="vanvi-ai-badge-row">
+                  <span class="vanvi-ai-pill vanvi-ai-pill-rose">24/7 Companion</span>
+                </div>
+                <h3 class="vanvi-ai-item-heading">Vanvi Romantic Assistant</h3>
+                <p class="vanvi-ai-item-desc">Personal chat for love letters, poetry, apologies, wishes & thoughtful advice.</p>
+              </div>
+            </div>
+            <div class="vanvi-ai-action-arrow" aria-hidden="true">&rarr;</div>
+          </a>
+
+          <!-- Option 2: Vanvi AI Template Matcher -->
+          <a href="ai-matcher.html" class="vanvi-ai-option-item" id="vanviAiOptionMatcher">
+            <div class="vanvi-ai-item-left">
+              <div class="vanvi-ai-option-icon vanvi-ai-icon-matcher">🪄</div>
+              <div class="vanvi-ai-item-text">
+                <div class="vanvi-ai-badge-row">
+                  <span class="vanvi-ai-pill vanvi-ai-pill-purple">Smart Quiz</span>
+                </div>
+                <h3 class="vanvi-ai-item-heading">AI Template Matcher</h3>
+                <p class="vanvi-ai-item-desc">Answer 3 quick questions to discover your ideal 3D interactive moment.</p>
+              </div>
+            </div>
+            <div class="vanvi-ai-action-arrow" aria-hidden="true">&rarr;</div>
+          </a>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(hubModal);
+
+    // Event listeners
+    const closeBtn = hubModal.querySelector('#closeVanviAiHubBtn');
+    if (closeBtn) closeBtn.addEventListener('click', closeVanviAiHub);
+
+    // Dismiss on click outside sheet
+    hubModal.addEventListener('click', function(e) {
+      if (e.target === hubModal) {
+        closeVanviAiHub();
+      }
+    });
+
+    // Close on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && hubModal.classList.contains('is-open')) {
+        closeVanviAiHub();
+      }
+    });
+
+    return hubModal;
+  }
+
+  function openVanviAiHub() {
+    const hub = ensureVanviAiHubModalExists();
+    if (!hub) return;
+    hub.classList.add('is-open');
+    hub.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVanviAiHub() {
+    const hub = document.getElementById('vanviAiHubModal');
+    if (!hub) return;
+    hub.classList.remove('is-open');
+    hub.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  window.openVanviAiHub = openVanviAiHub;
+  window.closeVanviAiHub = closeVanviAiHub;
+
+  // Intercept any clicks on AI floating buttons across all pages
+  document.addEventListener('click', function(e) {
+    const target = e.target;
+    if (!target) return;
+    const aiTrigger = target.closest('#aiFloatBtn, .panda-ai-float, .ai-float, [data-open-ai-hub]');
+    if (aiTrigger) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      openVanviAiHub();
+    }
+  }, true);
 
   // Initialize on DOM ready
   function initAll() {

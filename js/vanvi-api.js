@@ -28,13 +28,14 @@
     };
   }
 
-  // Target backend server on port 3000 when opened via Live Server (5500/5501) or file://
-  let API_BASE = 'http://127.0.0.1:3000';
+  // Target backend server: use relative URL on production domains; on localhost dev server proxy to :3000
+  let API_BASE = '';
   if (typeof window !== 'undefined' && window.location) {
-    if (window.location.port === '3000') {
-      API_BASE = '';
-    } else {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+    if (isLocal && window.location.port !== '3000') {
       API_BASE = 'http://127.0.0.1:3000';
+    } else {
+      API_BASE = '';
     }
   }
 
@@ -619,12 +620,182 @@
         });
       },
 
-      async chatCopilot({ message, history, apiKey }) {
+      async chatCopilot({ message, history, apiKey, confirmed, pendingAction }) {
         return await request('/api/admin/copilot', {
           method: 'POST',
           headers: apiKey ? { 'x-openai-key': apiKey } : {},
-          body: { message, history, apiKey }
+          body: { message, history, apiKey, confirmed, pendingAction }
         });
+      },
+
+      async chatAdminAi(payload) {
+        return await request('/api/admin/ai/command', {
+          method: 'POST',
+          headers: payload.apiKey ? { 'x-openai-key': payload.apiKey } : {},
+          body: payload
+        });
+      },
+
+      // Templates CMS
+      async getTemplates(params = {}) {
+        const qs = new URLSearchParams();
+        if (params.search) qs.append('search', params.search);
+        if (params.category) qs.append('category', params.category);
+        if (params.status) qs.append('status', params.status);
+        if (params.limit) qs.append('limit', params.limit);
+        if (params.offset) qs.append('offset', params.offset);
+        const qStr = qs.toString() ? `?${qs.toString()}` : '';
+        return await request(`/api/admin/templates${qStr}`);
+      },
+
+      async getTemplate(id) {
+        return await request(`/api/admin/templates/${encodeURIComponent(id)}`);
+      },
+
+      async createTemplate(data) {
+        return await request('/api/admin/templates', {
+          method: 'POST',
+          body: data
+        });
+      },
+
+      async updateTemplate(id, updates) {
+        return await request(`/api/admin/templates/${encodeURIComponent(id)}`, {
+          method: 'PUT',
+          body: updates
+        });
+      },
+
+      async saveTemplateDraft(id, draftData) {
+        return await request(`/api/admin/templates/${encodeURIComponent(id)}/draft`, {
+          method: 'POST',
+          body: draftData
+        });
+      },
+
+      async publishTemplate(id) {
+        return await request(`/api/admin/templates/${encodeURIComponent(id)}/publish`, {
+          method: 'POST'
+        });
+      },
+
+      async unpublishTemplate(id) {
+        return await request(`/api/admin/templates/${encodeURIComponent(id)}/unpublish`, {
+          method: 'POST'
+        });
+      },
+
+      async deleteTemplate(id) {
+        return await request(`/api/admin/templates/${encodeURIComponent(id)}`, {
+          method: 'DELETE'
+        });
+      },
+
+      async getTemplateVersions(id) {
+        return await request(`/api/admin/templates/${encodeURIComponent(id)}/versions`);
+      },
+
+      async rollbackTemplate(id, version) {
+        return await request(`/api/admin/templates/${encodeURIComponent(id)}/rollback`, {
+          method: 'POST',
+          body: { version }
+        });
+      },
+
+      // Presets
+      async getPresets() {
+        return await request('/api/admin/presets');
+      },
+
+      async savePreset(data) {
+        return await request('/api/admin/presets', {
+          method: 'POST',
+          body: data
+        });
+      },
+
+      async duplicatePreset(id) {
+        return await request(`/api/admin/presets/${encodeURIComponent(id)}/duplicate`, {
+          method: 'POST'
+        });
+      },
+
+      async clonePresetToTemplate(id, overrides = {}) {
+        return await request(`/api/admin/presets/${encodeURIComponent(id)}/clone-to-template`, {
+          method: 'POST',
+          body: overrides
+        });
+      },
+
+      async deletePreset(id) {
+        return await request(`/api/admin/presets/${encodeURIComponent(id)}`, {
+          method: 'DELETE'
+        });
+      },
+
+      // Site Content
+      async getSiteContent() {
+        return await request('/api/admin/content');
+      },
+
+      async updateSiteContent(content) {
+        return await request('/api/admin/content', {
+          method: 'POST',
+          body: content
+        });
+      },
+
+      async rollbackSiteContent(versionId) {
+        return await request('/api/admin/content/rollback', {
+          method: 'POST',
+          body: { versionId }
+        });
+      },
+
+      // Media
+      async getMedia(params = {}) {
+        const qs = new URLSearchParams();
+        if (params.type) qs.append('type', params.type);
+        if (params.search) qs.append('search', params.search);
+        if (params.limit) qs.append('limit', params.limit);
+        const qStr = qs.toString() ? `?${qs.toString()}` : '';
+        return await request(`/api/admin/media${qStr}`);
+      },
+
+      async uploadMedia(data) {
+        return await request('/api/admin/media/upload', {
+          method: 'POST',
+          body: data
+        });
+      },
+
+      async checkMediaUsage(url) {
+        return await request('/api/admin/media/check-usage', {
+          method: 'POST',
+          body: { url }
+        });
+      },
+
+      async deleteMedia(id, force = false) {
+        return await request(`/api/admin/media/${encodeURIComponent(id)}?force=${force ? 'true' : 'false'}`, {
+          method: 'DELETE'
+        });
+      },
+
+      // Settings & Health
+      async getSettings() {
+        return await request('/api/admin/settings');
+      },
+
+      async updateSettings(settings) {
+        return await request('/api/admin/settings', {
+          method: 'PUT',
+          body: settings
+        });
+      },
+
+      async getHealth() {
+        return await request('/api/admin/health');
       }
     },
 

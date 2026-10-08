@@ -1,0 +1,66 @@
+{
+  "id": "celestial-wedding",
+  "name": "Celestial Wedding — Cosmic Union",
+  "slug": "celestial-wedding",
+  "category": "Wedding",
+  "categorySlug": "wedding",
+  "price": 2799,
+  "originalPrice": 5499,
+  "isFree": false,
+  "badge": "🔮 Cosmic Love",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "Celestial Wedding — Cosmic Union Digital Keepsake",
+  "icon": "⭐",
+  "tags": [
+    "wedding",
+    "luxury",
+    "digital-invitation",
+    "celestial-wedding",
+    "rsvp",
+    "events"
+  ],
+  "description": "Mystical starlight nebulae, custom couple zodiac constellation mapping, ethereal cosmic glow, and interactive star blessings.",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 8,
+    "hasDate": true,
+    "hasSoundtrack": true,
+    "builderPath": "templates/vanvi-royal-wedding/builder.html",
+    "previewPath": "templates/celestial-wedding/index.html"
+  },
+  "schema": {
+    "fields": [
+      {
+        "key": "bride",
+        "label": "Bride Name",
+        "type": "text",
+        "default": "Tanya"
+      },
+      {
+        "key": "groom",
+        "label": "Groom Name",
+        "type": "text",
+        "default": "Rohan"
+      },
+      {
+        "key": "date",
+        "label": "Wedding Date",
+        "type": "text",
+        "default": "12th December 2026"
+      },
+      {
+        "key": "venue",
+        "label": "Venue",
+        "type": "text",
+        "default": "The Grand Palace Grounds"
+      },
+      {
+        "key": "whatsapp",
+        "label": "WhatsApp RSVP",
+        "type": "tel",
+        "default": "917631442934"
+      }
+    ]
+  }
+}

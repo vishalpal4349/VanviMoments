@@ -2,7 +2,10 @@
   "id": "sincere-letter",
   "name": "Apology Dashboard & Sincere Letter",
   "slug": "sincere-letter",
-  "aliases": ["apology-dashboard", "maaf-kar-do"],
+  "aliases": [
+    "apology-dashboard",
+    "maaf-kar-do"
+  ],
   "category": "Apology",
   "categorySlug": "apology",
   "price": 99,
@@ -11,21 +14,57 @@
   "type": "Interactive Apology with Playful Runaway Button",
   "icon": "🕊️",
   "soundtrack": "Peaceful Healing Chimes & Piano",
-  "tags": ["apology", "sorry", "healing", "letter", "heartfelt", "peace"],
+  "tags": [
+    "apology",
+    "sorry",
+    "healing",
+    "letter",
+    "heartfelt",
+    "peace"
+  ],
   "description": "Send a quiet, respectful digital letter to heal misunderstandings with an interactive cute runaway button and sincere forgiveness note.",
   "builder": {
-    "type": "common",
+    "type": "custom",
     "photoLimit": 2,
     "hasDate": false,
-    "hasSoundtrack": true
+    "hasSoundtrack": true,
+    "builderPath": "templates/sincere-letter/builder.html"
   },
   "schema": {
     "fields": [
-      { "key": "recipientName", "label": "Recipient's Name", "type": "text", "required": true, "default": "Someone Special" },
-      { "key": "senderName", "label": "Your Name / Sender", "type": "text", "required": true, "default": "With all my sincerity" },
-      { "key": "message", "label": "Sincere Apology Note", "type": "textarea", "required": true },
-      { "key": "photos", "label": "Cherished Memories", "type": "photos", "max": 2, "required": false },
-      { "key": "soundtrack", "label": "Soundtrack", "type": "audio", "default": "soft" }
+      {
+        "key": "recipientName",
+        "label": "Recipient's Name",
+        "type": "text",
+        "required": true,
+        "default": "Someone Special"
+      },
+      {
+        "key": "senderName",
+        "label": "Your Name / Sender",
+        "type": "text",
+        "required": true,
+        "default": "With all my sincerity"
+      },
+      {
+        "key": "message",
+        "label": "Sincere Apology Note",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "photos",
+        "label": "Cherished Memories",
+        "type": "photos",
+        "max": 2,
+        "required": false
+      },
+      {
+        "key": "soundtrack",
+        "label": "Soundtrack",
+        "type": "audio",
+        "default": "soft"
+      }
     ]
   },
   "custom_data_defaults": {

@@ -1,0 +1,171 @@
+/**
+ * VANVI MOMENTS — AUTHENTICATION CLAYMORPHISM & LUXURY ATMOSPHERE
+ * Fast, Romantic, Smooth, Vibrant 3D Buttons & Tactile Forms
+ */
+
+:root {
+  --auth-rose: #ff2a7a;
+  --auth-rose-glow: rgba(255, 42, 122, 0.35);
+  --auth-rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 45%, #9333ea 100%);
+  --auth-violet: #9333ea;
+  --auth-gold: #d97706;
+  --auth-gold-glow: rgba(217, 119, 6, 0.3);
+  --auth-emerald: #10b981;
+  --auth-sky: #38bdf8;
+  --auth-bg-page: radial-gradient(circle at 15% 15%, #ffe4ee 0%, transparent 40%),
+                  radial-gradient(circle at 85% 12%, #ede9fe 0%, transparent 42%),
+                  radial-gradient(circle at 50% 90%, #fef3c7 0%, transparent 45%),
+                  radial-gradient(circle at 10% 85%, #e0f2fe 0%, transparent 40%),
+                  #fff8fb;
+  --auth-card-bg: linear-gradient(165deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 246, 251, 0.94) 100%);
+  --auth-border: rgba(255, 120, 175, 0.32);
+  --auth-text-dark: #1e0918;
+  --auth-text-muted: #7c4d70;
+}
+
+/* Page Background Overrides */
+body.vanvi-auth-body,
+body.auth-page,
+body[data-page="auth"],
+html[data-vanvi-theme] body.vanvi-auth-body,
+html[data-vanvi-theme="dark"] body.vanvi-auth-body,
+html[data-vanvi-theme="emerald"] body.vanvi-auth-body,
+html[data-vanvi-theme="night"] body.vanvi-auth-body {
+  background: var(--auth-bg-page) !important;
+  background-color: #fff8fb !important;
+  color: var(--auth-text-dark) !important;
+}
+
+/* 3D Tactile Primary Button for Auth Forms */
+.btn-auth-submit,
+.vanvi-auth-btn-primary,
+button[type="submit"].btn-3d {
+  width: 100% !important;
+  min-height: 50px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #ff2a7a 0%, #ff529a 45%, #9333ea 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  font-weight: 850 !important;
+  font-size: 14.5px !important;
+  letter-spacing: 0.3px !important;
+  box-shadow: 
+    0 10px 24px -2px rgba(255, 42, 122, 0.45),
+    0 3.5px 0 #9d174d,
+    inset 0 2px 2px rgba(255, 255, 255, 0.85),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.18) !important;
+  transform: translateY(-2px) !important;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.btn-auth-submit:hover,
+.vanvi-auth-btn-primary:hover,
+button[type="submit"].btn-3d:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: 
+    0 14px 30px rgba(255, 42, 122, 0.6),
+    0 4.5px 0 #9d174d,
+    inset 0 2px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.18) !important;
+}
+
+.btn-auth-submit:active,
+.vanvi-auth-btn-primary:active,
+button[type="submit"].btn-3d:active {
+  transform: translateY(2px) scale(0.97) !important;
+  box-shadow: 0 4px 12px rgba(255, 42, 122, 0.35), 0 1px 0 #9d174d !important;
+}
+
+/* Google 3D Clay Button */
+.btn-google-3d {
+  width: 100% !important;
+  min-height: 48px !important;
+  padding: 0 16px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #ffffff 0%, #fff7fa 100%) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.35) !important;
+  box-shadow: 0 4px 14px rgba(255, 42, 122, 0.08), inset 0 2px 2px #fff, 0 2.5px 0 rgba(255, 120, 175, 0.25) !important;
+  color: #1e0918 !important;
+  font-weight: 800 !important;
+  font-size: 13.5px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  cursor: pointer !important;
+  transform: translateY(-1.5px) !important;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  text-decoration: none !important;
+}
+
+.btn-google-3d:hover {
+  transform: translateY(-3px) scale(1.015) !important;
+  border-color: #ff2a7a !important;
+  box-shadow: 0 8px 22px rgba(255, 42, 122, 0.18), inset 0 2px 2px #fff, 0 3px 0 rgba(255, 42, 122, 0.3) !important;
+}
+
+.btn-google-3d:active {
+  transform: translateY(1.5px) scale(0.97) !important;
+  box-shadow: 0 2px 8px rgba(255, 42, 122, 0.12), inset 0 1px 2px #fff !important;
+}
+
+/* 3D Tactile Form Inputs */
+.input-3d {
+  width: 100% !important;
+  min-height: 48px !important;
+  padding: 0 20px !important;
+  border-radius: 999px !important;
+  background: #ffffff !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.35) !important;
+  font-size: 14px !important;
+  color: #1e0918 !important;
+  outline: none !important;
+  transition: all 0.22s ease !important;
+  box-shadow: inset 0 2px 4px rgba(255, 42, 122, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+}
+
+.input-3d:focus {
+  border-color: #ff2a7a !important;
+  box-shadow: 0 0 0 3.5px rgba(255, 42, 122, 0.2), inset 0 1px 2px #fff !important;
+  background: #ffffff !important;
+}
+
+.input-3d::placeholder {
+  color: #a8849b !important;
+}
+
+/* 3D Smart Back Button */
+.vanvi-btn-back,
+.btn-nav-back {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 7px 16px !important;
+  min-height: 40px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.35) !important;
+  color: #1e0918 !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 12px rgba(255, 42, 122, 0.08), inset 0 1px 2px #ffffff !important;
+  backdrop-filter: blur(12px) !important;
+  cursor: pointer !important;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.vanvi-btn-back:hover,
+.btn-nav-back:hover {
+  transform: translateX(-2px) !important;
+  border-color: #ff2a7a !important;
+  color: #ff2a7a !important;
+  box-shadow: 0 6px 16px rgba(255, 42, 122, 0.16) !important;
+}

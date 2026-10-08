@@ -1,0 +1,66 @@
+{
+  "id": "contemporary-luxe",
+  "name": "Contemporary Luxe — Architectural",
+  "slug": "contemporary-luxe",
+  "category": "Wedding",
+  "categorySlug": "wedding",
+  "price": 2899,
+  "originalPrice": 5799,
+  "isFree": false,
+  "badge": "⚡ Avant-Garde Luxe",
+  "tier": "Signature",
+  "isLuxury": true,
+  "type": "Contemporary Luxe — Architectural Digital Keepsake",
+  "icon": "💎",
+  "tags": [
+    "wedding",
+    "luxury",
+    "digital-invitation",
+    "contemporary-luxe",
+    "rsvp",
+    "events"
+  ],
+  "description": "Brushed titanium borders, deep matte black surfaces, magnetic 3D touch transitions, and ultra-crisp typography.",
+  "builder": {
+    "type": "custom",
+    "photoLimit": 8,
+    "hasDate": true,
+    "hasSoundtrack": true,
+    "builderPath": "templates/vanvi-royal-wedding/builder.html",
+    "previewPath": "templates/contemporary-luxe/index.html"
+  },
+  "schema": {
+    "fields": [
+      {
+        "key": "bride",
+        "label": "Bride Name",
+        "type": "text",
+        "default": "Tanya"
+      },
+      {
+        "key": "groom",
+        "label": "Groom Name",
+        "type": "text",
+        "default": "Rohan"
+      },
+      {
+        "key": "date",
+        "label": "Wedding Date",
+        "type": "text",
+        "default": "12th December 2026"
+      },
+      {
+        "key": "venue",
+        "label": "Venue",
+        "type": "text",
+        "default": "The Grand Palace Grounds"
+      },
+      {
+        "key": "whatsapp",
+        "label": "WhatsApp RSVP",
+        "type": "tel",
+        "default": "917631442934"
+      }
+    ]
+  }
+}

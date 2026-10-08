@@ -1,634 +1,940 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Word Whisper 💬 — Heartfelt Word Puzzles — Vanvi Moments</title>
-  <meta name="description" content="Unscramble sweet, romantic words and heartfelt celebration letters to unlock secret love notes and earn Vanvi Coins.">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="vanvi-inner-light.css">
-  <link rel="stylesheet" href="vanvi-navigation.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0, user-scalable=yes"/>
+  <title>Word Whisper 3D | Romantic Celebration Word Puzzle — Vanvi Moments</title>
+  <meta name="description" content="Play Word Whisper 3D on Vanvi Moments! Deduce secret romantic celebration words with poetic clues, tactile 3D letter tiles, and earn virtual coins."/>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="vanvi-inner-light.css"/>
+  <link rel="stylesheet" href="css/vanvi-auth-clay.css"/>
+  <link rel="stylesheet" href="vanvi-navigation.css"/>
 
   <style>
     :root {
-      --bg-pearl: #fffbfd;
-      --bg-blush: #fff1f6;
-      --card-glass: rgba(255, 255, 255, 0.96);
-      --rose-primary: #ff2a7a;
-      --rose-soft: #ff529a;
-      --gold-champagne: #d97706;
-      --gold-light: #fef3c7;
-      --lilac-neon: #a855f7;
-      --border-pink: rgba(255, 120, 175, 0.28);
-      --text-dark: #2c1224;
-      --text-muted: #88627b;
-      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --rose-main: #ff2a7a;
+      --rose-glow: rgba(255, 42, 122, 0.35);
+      --rose-gradient: linear-gradient(135deg, #ff2a7a 0%, #ff529a 45%, #9333ea 100%);
+      --violet-soft: #9333ea;
+      --gold-accent: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.35);
+      --emerald-correct: #059669;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --text-dark: #1e0918;
+      --text-muted: #7c4d70;
+      --border-pink: rgba(255, 120, 175, 0.35);
+      --bg-page: radial-gradient(circle at 15% 15%, #ffe4ee 0%, transparent 40%),
+                 radial-gradient(circle at 85% 12%, #ede9fe 0%, transparent 42%),
+                 radial-gradient(circle at 50% 90%, #fef3c7 0%, transparent 45%),
+                 radial-gradient(circle at 10% 85%, #e0f2fe 0%, transparent 40%),
+                 #fff8fb;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: radial-gradient(circle at 50% 0%, #ffe4ee 0%, #fff2f6 50%, #fdf5f8 100%);
-      color: var(--text-dark);
-      font-family: var(--font-sans);
       min-height: 100vh;
-      padding-bottom: 95px;
+      background: var(--bg-page);
+      background-color: #fff8fb;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: var(--text-dark);
       overflow-x: hidden !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 14px 40px;
+      position: relative;
     }
 
-    /* Top Header */
-    .app-header {
-      position: sticky;
-      top: 0;
-      z-index: 60;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border-pink);
-      height: 62px;
-      padding: 0 16px;
+    /* Ambient 3D Glowing Orbs */
+    .ambient-orbs-wrap {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      animation: floatAmbient 18s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 360px; height: 360px; background: radial-gradient(circle, #ff2a7a 0%, transparent 70%); top: -60px; left: -60px; }
+    .orb-2 { width: 320px; height: 320px; background: radial-gradient(circle, #9333ea 0%, transparent 70%); bottom: -40px; right: -50px; animation-delay: -6s; }
+    .orb-3 { width: 280px; height: 280px; background: radial-gradient(circle, #f59e0b 0%, transparent 70%); top: 40%; left: 70%; animation-delay: -12s; }
+    .orb-4 { width: 260px; height: 260px; background: radial-gradient(circle, #38bdf8 0%, transparent 70%); top: 60%; left: 10%; animation-delay: -9s; }
+    @keyframes floatAmbient {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, 25px) scale(1.1); }
+    }
+
+    /* Top Sticky Header */
+    .game-top-bar {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 580px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+    .btn-nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      min-height: 40px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.08), inset 0 1px 2px #fff;
+      backdrop-filter: blur(14px);
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+    .btn-nav-back:hover {
+      transform: translateX(-2px);
+      border-color: var(--rose-main);
+      color: var(--rose-main);
+      box-shadow: 0 6px 18px rgba(255, 42, 122, 0.16);
     }
     .brand-link {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
       text-decoration: none;
-      font-weight: 800;
-      font-size: 15px;
-      color: var(--text-dark);
     }
-    .brand-link span { color: var(--rose-primary); }
-
-    .coin-pill {
+    .brand-logo-img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+    }
+    .brand-pill-badges {
       display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: #fef3c7;
-      border: 1px solid #fde68a;
-      color: #b45309;
-      font-size: 12px;
-      font-weight: 800;
-      padding: 5px 12px;
+      gap: 4px;
+    }
+    .pill-badge {
+      font-size: 9.5px;
+      font-weight: 850;
+      padding: 2px 7px;
       border-radius: 99px;
+      color: #fff;
+    }
+    .pill-badge.pro { background: linear-gradient(135deg, #ff2a7a, #9333ea); }
+    .pill-badge.vip { background: linear-gradient(135deg, #f59e0b, #d97706); }
+
+    /* Master Game Stage Container */
+    .word-game-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 580px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
-    /* Breadcrumbs */
-    .breadcrumb-bar {
-      max-width: 580px;
-      margin: 12px auto 0;
-      padding: 0 16px;
+    /* 3D Clay Header Card */
+    .word-header-card {
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 246, 251, 0.94) 100%);
+      border: 2px solid var(--border-pink);
+      border-radius: 28px;
+      padding: 18px 22px;
+      box-shadow:
+        0 20px 50px -10px rgba(255, 42, 122, 0.15),
+        0 8px 24px rgba(147, 51, 234, 0.08),
+        inset 0 2px 3px #ffffff,
+        inset 0 -3px 4px rgba(255, 120, 175, 0.12);
+      backdrop-filter: blur(24px);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .word-title-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    .btn-nav-back {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: #ffffff;
-      border: 1px solid var(--border-pink);
-      padding: 6px 14px;
-      border-radius: 99px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-nav-back:hover { color: var(--rose-primary); border-color: var(--rose-primary); }
-
-    /* Hero */
-    .game-hero {
-      max-width: 560px;
-      margin: 0 auto;
-      padding: 16px 16px 8px;
-      text-align: center;
-    }
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    .game-badge {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--rose-main);
       background: rgba(255, 42, 122, 0.1);
       border: 1px solid rgba(255, 42, 122, 0.25);
-      color: var(--rose-primary);
-      padding: 3px 12px;
+      padding: 3px 10px;
       border-radius: 99px;
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
     }
-    .hero-title {
-      font-family: var(--font-serif);
-      font-size: clamp(26px, 6vw, 34px);
+    .word-game-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 4.5vw, 28px);
       font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 6px;
-    }
-    .hero-title span {
-      background: linear-gradient(135deg, #ff2a7a, #d97706);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero-subtitle {
-      font-size: 13px;
-      color: var(--text-muted);
-      max-width: 440px;
-      margin: 0 auto;
-      line-height: 1.45;
-    }
-
-    /* Main Puzzle Arena Card */
-    .puzzle-card-container {
-      max-width: 520px;
-      margin: 12px auto;
-      padding: 0 16px;
-    }
-    .puzzle-main-card {
-      background: #ffffff;
-      border: 1.5px solid var(--border-pink);
-      border-radius: 26px;
-      padding: 24px 20px;
-      box-shadow: 0 16px 42px rgba(255, 60, 130, 0.08);
-      position: relative;
-      text-align: center;
-    }
-
-    /* Hint Box */
-    .hint-speech-bubble {
-      background: linear-gradient(135deg, #fff7fa 0%, #fffbfd 100%);
-      border: 1px solid rgba(255, 120, 175, 0.3);
-      border-radius: 18px;
-      padding: 14px 18px;
-      margin-bottom: 22px;
-      position: relative;
-    }
-    .hint-badge {
-      font-size: 10.5px;
-      font-weight: 800;
-      color: var(--gold-champagne);
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-    .hint-text {
-      font-family: var(--font-serif);
-      font-size: 17px;
-      font-style: italic;
-      color: #4a2840;
-      line-height: 1.4;
-    }
-
-    /* Answer Slot Boxes */
-    .slots-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 24px;
-      min-height: 56px;
-      flex-wrap: wrap;
-    }
-    .slot-box {
-      width: 48px;
-      height: 52px;
-      border-radius: 14px;
-      border: 2px dashed rgba(255, 120, 175, 0.4);
-      background: #fffbfe;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      font-weight: 900;
-      color: var(--rose-primary);
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .slot-box.filled {
-      border: 2px solid var(--rose-primary);
-      background: #fff0f6;
-      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.18);
-      transform: translateY(-2px);
-    }
-    .slot-box.correct {
-      border-color: #10b981;
-      background: #ecfdf5;
-      color: #059669;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
-    }
-
-    /* Scrambled Letter Tiles Bank */
-    .letters-bank {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-    }
-    .letter-tile {
-      width: 46px;
-      height: 48px;
-      border-radius: 14px;
-      border: 1.5px solid rgba(255, 120, 175, 0.3);
-      background: linear-gradient(135deg, #ffffff 0%, #fff4f9 100%);
-      font-size: 20px;
-      font-weight: 850;
-      color: #2c1224;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(255, 60, 130, 0.08);
-      transition: all 0.2s ease;
-      user-select: none;
-    }
-    .letter-tile:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 18px rgba(255, 42, 122, 0.2);
-      border-color: var(--rose-primary);
-    }
-    .letter-tile.used {
-      opacity: 0.3;
-      pointer-events: none;
-      transform: scale(0.92);
-      box-shadow: none;
-    }
-
-    /* Actions Bar */
-    .puzzle-actions {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-    .btn-action-tool {
-      background: #fff5f8;
-      border: 1px solid var(--border-pink);
       color: var(--text-dark);
-      padding: 8px 16px;
-      border-radius: 99px;
-      font-size: 12px;
-      font-weight: 750;
-      cursor: pointer;
+      line-height: 1.2;
+    }
+    .game-score-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
+      gap: 5px;
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1.5px solid #f59e0b;
+      color: #92400e;
+      font-size: 12.5px;
+      font-weight: 850;
+      padding: 4px 12px;
+      border-radius: 99px;
+      box-shadow: 0 3px 8px rgba(245, 158, 11, 0.2);
     }
-    .btn-action-tool:hover { background: #ffe4ee; color: var(--rose-primary); }
 
-    /* Success Note Overlay */
-    .success-note-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: 26px;
-      padding: 24px;
+    /* Level Selector Pills */
+    .difficulty-pills-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .diff-pill {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+    .diff-pill.active {
+      background: var(--rose-gradient);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* Poetic Whisper Clue Box */
+    .whisper-clue-card {
+      background: linear-gradient(135deg, rgba(255, 240, 246, 0.95) 0%, rgba(255, 248, 240, 0.95) 100%);
+      border: 1.5px dashed rgba(255, 42, 122, 0.35);
+      border-radius: 20px;
+      padding: 12px 18px;
+      font-size: 13.5px;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.06);
+    }
+    .whisper-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      animation: pulseIcon 3s ease-in-out infinite alternate;
+    }
+    @keyframes pulseIcon {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15) rotate(6deg); }
+    }
+    .whisper-text {
+      flex: 1;
+      font-style: italic;
+      line-height: 1.45;
+      font-weight: 600;
+      color: #632d53;
+    }
+
+    /* 3D Tile Board Card */
+    .word-board-card {
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 252, 0.95) 100%);
+      border: 2px solid var(--border-pink);
+      border-radius: 30px;
+      padding: 22px 18px;
+      box-shadow:
+        0 24px 60px -8px rgba(255, 42, 122, 0.16),
+        0 10px 30px rgba(147, 51, 234, 0.1),
+        inset 0 2px 3px #ffffff,
+        inset 0 -3px 4px rgba(255, 120, 175, 0.15);
+      backdrop-filter: blur(28px);
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 8px;
+    }
+
+    .board-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      max-width: 380px;
+      align-items: center;
+    }
+    .board-row {
+      display: flex;
+      gap: 8px;
       justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transform: scale(0.94);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 40;
+      width: 100%;
     }
-    .success-note-overlay.show {
-      opacity: 1;
-      visibility: visible;
-      transform: scale(1);
+
+    /* 3D Clay Letter Tile */
+    .letter-tile {
+      width: clamp(48px, 12vw, 62px);
+      height: clamp(48px, 12vw, 62px);
+      border-radius: 16px;
+      background: #ffffff;
+      border: 2px solid rgba(255, 120, 175, 0.32);
+      box-shadow:
+        0 6px 14px rgba(255, 42, 122, 0.08),
+        inset 0 2px 2px #ffffff,
+        inset 0 -2px 3px rgba(255, 120, 175, 0.12);
+      font-size: clamp(20px, 5.5vw, 26px);
+      font-weight: 900;
+      color: var(--text-dark);
+      display: grid;
+      place-items: center;
+      user-select: none;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .success-badge-icon {
-      font-size: 48px;
-      margin-bottom: 8px;
-      animation: heartBeat 1.2s infinite;
+    .letter-tile.pop {
+      transform: scale(1.1);
+      border-color: var(--rose-main);
     }
-    @keyframes heartBeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.12); }
+    .letter-tile.correct {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+      border-color: #047857 !important;
+      color: #ffffff !important;
+      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.4), inset 0 2px 2px rgba(255,255,255,0.7) !important;
+      animation: flipReveal 0.5s ease forwards;
     }
-    .success-word-revealed {
-      font-family: var(--font-serif);
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--rose-primary);
-      letter-spacing: 2px;
-      margin-bottom: 6px;
+    .letter-tile.present {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+      border-color: #b45309 !important;
+      color: #ffffff !important;
+      box-shadow: 0 8px 18px rgba(245, 158, 11, 0.4), inset 0 2px 2px rgba(255,255,255,0.7) !important;
+      animation: flipReveal 0.5s ease forwards;
     }
-    .success-love-note {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 16px;
-      color: #643853;
-      line-height: 1.5;
-      max-width: 360px;
-      margin-bottom: 16px;
+    .letter-tile.absent {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #94a3b8 !important;
+      box-shadow: inset 0 2px 3px rgba(0,0,0,0.06) !important;
+      animation: flipReveal 0.5s ease forwards;
     }
-    .reward-pill-banner {
-      background: #fef3c7;
-      border: 1px solid #fde68a;
-      color: #b45309;
+
+    @keyframes flipReveal {
+      0% { transform: rotateX(0deg); }
+      50% { transform: rotateX(90deg); }
+      100% { transform: rotateX(0deg); }
+    }
+
+    /* Status Message & Action Row */
+    .game-status-text {
       font-size: 13.5px;
-      font-weight: 850;
-      padding: 8px 18px;
-      border-radius: 99px;
-      margin-bottom: 18px;
+      font-weight: 800;
+      min-height: 22px;
+      color: var(--rose-main);
+      text-align: center;
+      transition: all 0.2s ease;
     }
-    .btn-next-word {
-      background: linear-gradient(135deg, #ff2a7a 0%, #d97706 100%);
-      color: #ffffff;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 99px;
-      font-size: 13.5px;
+
+    /* 3D Tactile On-Screen Keyboard */
+    .word-keyboard-card {
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 246, 251, 0.94) 100%);
+      border: 2px solid var(--border-pink);
+      border-radius: 26px;
+      padding: 14px 10px;
+      box-shadow:
+        0 18px 44px -8px rgba(255, 42, 122, 0.14),
+        inset 0 2px 3px #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      width: 100%;
+    }
+    .kb-row {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      width: 100%;
+    }
+    .key-btn {
+      flex: 1;
+      max-width: 44px;
+      height: 46px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1.5px solid rgba(255, 120, 175, 0.35);
+      font-size: 14px;
       font-weight: 850;
+      color: var(--text-dark);
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(255, 42, 122, 0.28);
-      transition: transform 0.2s;
+      display: grid;
+      place-items: center;
+      box-shadow:
+        0 4px 10px rgba(255, 42, 122, 0.08),
+        0 2.5px 0 #e2a0be,
+        inset 0 1px 2px #ffffff;
+      transform: translateY(-1.5px);
+      transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
     }
-    .btn-next-word:hover { transform: translateY(-2px); }
+    .key-btn:hover {
+      border-color: var(--rose-main);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(255, 42, 122, 0.18), 0 3px 0 #e2a0be;
+    }
+    .key-btn:active {
+      transform: translateY(1.5px);
+      box-shadow: 0 1px 3px rgba(255, 42, 122, 0.1), 0 0.5px 0 #e2a0be;
+    }
+    .key-btn.wide {
+      max-width: 68px;
+      font-size: 12px;
+      padding: 0 6px;
+    }
+    .key-btn.key-enter {
+      background: var(--rose-gradient);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 6px 16px rgba(255, 42, 122, 0.35), 0 2.5px 0 #9d174d;
+    }
+    .key-btn.key-correct {
+      background: #10b981 !important;
+      color: #ffffff !important;
+      border-color: #059669 !important;
+      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3), 0 2px 0 #047857 !important;
+    }
+    .key-btn.key-present {
+      background: #f59e0b !important;
+      color: #ffffff !important;
+      border-color: #d97706 !important;
+      box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3), 0 2px 0 #b45309 !important;
+    }
+    .key-btn.key-absent {
+      background: #e2e8f0 !important;
+      color: #94a3b8 !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.08) !important;
+    }
+
+    /* Modal Victory / Defeat Overlay */
+    .word-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(30, 9, 24, 0.75);
+      backdrop-filter: blur(14px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .word-modal-backdrop.active {
+      display: flex !important;
+    }
+    .word-modal-card {
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 246, 251, 0.95) 100%);
+      border: 2px solid var(--border-pink);
+      border-radius: 30px;
+      padding: 28px 24px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(255, 42, 122, 0.25), 0 10px 30px rgba(0, 0, 0, 0.08);
+      animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalPop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .modal-trophy {
+      font-size: 46px;
+      margin-bottom: 8px;
+    }
+    .modal-word-reveal {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--rose-main);
+      margin: 10px 0;
+      font-family: 'Playfair Display', serif;
+    }
+    .modal-btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .btn-modal-action {
+      flex: 1;
+      min-height: 48px;
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      font-weight: 850;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-modal-action.primary {
+      background: var(--rose-gradient);
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(255, 42, 122, 0.4), 0 2.5px 0 #9d174d;
+      transform: translateY(-2px);
+    }
+    .btn-modal-action.primary:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 26px rgba(255, 42, 122, 0.55), 0 3.5px 0 #9d174d;
+    }
+    .btn-modal-action.secondary {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid var(--border-pink);
+      color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(255, 42, 122, 0.08);
+    }
+
+    /* Confetti Particle */
+    .word-confetti {
+      position: fixed;
+      pointer-events: none;
+      z-index: 100000;
+      font-size: 20px;
+      animation: confettiBurst 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    }
+    @keyframes confettiBurst {
+      0% { opacity: 1; transform: translate(0, 0) scale(0.6); }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(var(--dr)); }
+    }
+
+    /* Responsive Adaptation for Phones */
+    @media (max-width: 440px) {
+      body { padding: 10px 8px 30px; }
+      .game-top-bar { margin-bottom: 8px; }
+      .word-header-card { padding: 14px 16px; border-radius: 22px; }
+      .word-board-card { padding: 16px 12px; border-radius: 24px; }
+      .word-keyboard-card { padding: 10px 4px; border-radius: 20px; }
+      .key-btn { height: 42px; font-size: 13px; }
+      .key-btn.wide { max-width: 54px; font-size: 11px; }
+    }
   </style>
 </head>
-<body>
+<body class="vanvi-auth-body">
 
-  <!-- Header -->
-  <header class="app-header">
-    <a href="games.html" class="brand-link">
-      <span>💬</span> VANVI MOMENTS
-    </a>
-    <div class="header-actions">
-      <div class="coin-pill">
-        🪙 <span id="userCoinBalance">50</span> Coins
-      </div>
-    </div>
-  </header>
-
-  <!-- Breadcrumbs -->
-  <div class="breadcrumb-bar">
-    <a class="btn-nav-back" href="games.html">
-      <span>‹</span> <span>Back to Games</span>
-    </a>
-    <span style="font-size: 11.5px; color: var(--text-muted);">
-      Word Whisper · Puzzle <span id="puzzleIdxLabel">1</span> of 5
-    </span>
+  <!-- Ambient 3D Glowing Orbs -->
+  <div class="ambient-orbs-wrap" aria-hidden="true">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+    <div class="ambient-orb orb-4"></div>
   </div>
 
-  <!-- Hero Header -->
-  <section class="game-hero">
-    <div class="hero-kicker">✦ SWEET ROMANTIC PUZZLE</div>
-    <h1 class="hero-title">Word <span>Whisper</span></h1>
-    <p class="hero-subtitle">Tap the scattered letter tiles in order to reveal the secret emotional word and unlock heartwarming love notes!</p>
-  </section>
-
-  <!-- Main Game Stage Card -->
-  <main class="puzzle-card-container">
-    <div class="puzzle-main-card">
-      
-      <!-- Poetic Hint Bubble -->
-      <div class="hint-speech-bubble">
-        <div class="hint-badge">💌 The Whisper Clue</div>
-        <p class="hint-text" id="whisperHint">"A promise that defies all distances and stays true through time."</p>
+  <!-- Top Sticky Header -->
+  <header class="game-top-bar" role="banner">
+    <a href="games.html" class="btn-nav-back" aria-label="Back to Games Arcade">
+      <span>‹</span> <span>Games</span>
+    </a>
+    <a href="index.html" class="brand-link" title="Vanvi Moments">
+      <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="brand-logo-img"/>
+      <div class="brand-pill-badges">
+        <span class="pill-badge pro">PRO</span>
+        <span class="pill-badge vip">VIP</span>
       </div>
+    </a>
+  </header>
 
-      <!-- Slots to Spell the Word -->
-      <div class="slots-container" id="slotsContainer"></div>
+  <!-- Master Game Stage -->
+  <main class="word-game-container" role="main">
 
-      <!-- Scrambled Letter Tiles -->
-      <div class="letters-bank" id="lettersBank"></div>
-
-      <!-- Bottom Tools -->
-      <div class="puzzle-actions">
-        <button type="button" class="btn-action-tool" id="btnBackspace">
-          <span>⌫</span> Backspace
-        </button>
-        <button type="button" class="btn-action-tool" id="btnShuffle">
-          <span>🔀</span> Shuffle Letters
-        </button>
-      </div>
-
-      <!-- Success Revealed Card Overlay -->
-      <div class="success-note-overlay" id="successNoteOverlay">
-        <div class="success-badge-icon">💖</div>
-        <h2 class="success-word-revealed" id="revealedWordTitle">FOREVER</h2>
-        <p class="success-love-note" id="revealedLoveNote">"In a world where everything changes, you are my one constant forever."</p>
-        <div class="reward-pill-banner" id="rewardPillBanner">
-          🪙 +5 Vanvi Coins Added!
+    <!-- Header & Difficulty Selector -->
+    <section class="word-header-card">
+      <div class="word-title-row">
+        <span class="game-badge">💌 ROMANTIC WORD DEDUCTION</span>
+        <div class="game-score-badge">
+          <span>🪙 Earn:</span> <strong id="rewardLabel">+2 🪙</strong>
         </div>
-        <button type="button" class="btn-next-word" id="btnNextWord">Whisper Next Word →</button>
+      </div>
+      <h1 class="word-game-title">Word Whisper 3D</h1>
+
+      <div class="difficulty-pills-row">
+        <button type="button" class="diff-pill active" onclick="setWordLevel(1)">🌸 Sweet (4 Letters)</button>
+        <button type="button" class="diff-pill" onclick="setWordLevel(2)">💖 Heart (5 Letters)</button>
+        <button type="button" class="diff-pill" onclick="setWordLevel(3)">✨ Forever (6 Letters)</button>
       </div>
 
-    </div>
+      <!-- Whisper Poetic Hint -->
+      <div class="whisper-clue-card">
+        <span class="whisper-icon">💌</span>
+        <p class="whisper-text" id="whisperClueText">"A warm feeling that begins every shared smile..."</p>
+      </div>
+    </section>
+
+    <!-- 3D Letter Tile Board -->
+    <section class="word-board-card" aria-label="Word Puzzle Board">
+      <div class="board-grid" id="boardGrid">
+        <!-- Rendered dynamically based on level word length & row count -->
+      </div>
+      <p class="game-status-text" id="gameStatus" role="status" aria-live="polite">Type letters using touch or keyboard...</p>
+    </section>
+
+    <!-- On-screen 3D Clay Keyboard -->
+    <section class="word-keyboard-card" aria-label="Tactile Alphabet Keyboard">
+      <div class="kb-row">
+        <button type="button" class="key-btn" onclick="handleInputKey('Q')">Q</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('W')">W</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('E')">E</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('R')">R</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('T')">T</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('Y')">Y</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('U')">U</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('I')">I</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('O')">O</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('P')">P</button>
+      </div>
+      <div class="kb-row">
+        <button type="button" class="key-btn" onclick="handleInputKey('A')">A</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('S')">S</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('D')">D</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('F')">F</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('G')">G</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('H')">H</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('J')">J</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('K')">K</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('L')">L</button>
+      </div>
+      <div class="kb-row">
+        <button type="button" class="key-btn wide key-enter" onclick="submitCurrentRow()">ENTER ↵</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('Z')">Z</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('X')">X</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('C')">C</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('V')">V</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('B')">B</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('N')">N</button>
+        <button type="button" class="key-btn" onclick="handleInputKey('M')">M</button>
+        <button type="button" class="key-btn wide" onclick="deleteLastLetter()">⌫</button>
+      </div>
+    </section>
+
   </main>
 
-  <script src="js/vanvi-api.js"></script>
-  <script src="js/vanvi-navigation.js"></script>
+  <!-- Victory & Completion Modal -->
+  <div class="word-modal-backdrop" id="wordModal">
+    <div class="word-modal-card">
+      <div class="modal-trophy" id="modalTrophy">🎉</div>
+      <h2 style="font-family:'Playfair Display', serif; font-size:22px;" id="modalHeading">Whisper Decoded!</h2>
+      <p style="font-size:13px; color:#7c4d70; margin-top:4px;" id="modalSub">The secret celebration word was:</p>
+      <div class="modal-word-reveal" id="modalWordReveal">LOVE</div>
+      <p style="font-size:14px; font-weight:800; color:#059669;" id="modalRewardText">+2 Vanvi Coins Credited! 🪙</p>
+      
+      <div class="modal-btn-row">
+        <button type="button" class="btn-modal-action secondary" onclick="location.href='games.html'">Arcade Hub</button>
+        <button type="button" class="btn-modal-action primary" onclick="startNewWordGame()">Next Word ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Global Games API -->
+  <script src="js/vanvi-games.js"></script>
+
   <script>
-    (function() {
+    (function () {
       'use strict';
 
-      const PUZZLES = [
-        {
-          word: "FOREVER",
-          hint: "A promise that defies all distances and stays true through all seasons.",
-          note: "In a world where everything changes, you are my one constant forever.",
-          reward: 5
-        },
-        {
-          word: "CHERISH",
-          hint: "To hold someone deep in your soul with tender care and gratitude.",
-          note: "Every laugh, every glance, every quiet moment with you is something to cherish.",
-          reward: 6
-        },
-        {
-          word: "BELOVED",
-          hint: "The sweetest title for the one whose smile illuminates your universe.",
-          note: "You are dearly loved, cherished beyond words, and forever my safe home.",
-          reward: 6
-        },
-        {
-          word: "SUNSHINE",
-          hint: "What you bring into my mornings even when the skies are gray.",
-          note: "Thank you for being the warmth and gentle light that never fails to heal me.",
-          reward: 7
-        },
-        {
-          word: "PROMISE",
-          hint: "A quiet vow spoken heart-to-heart that time can never fade.",
-          note: "I promise to celebrate your happiness, hold your hands, and walk beside you always.",
-          reward: 8
+      // Curated Romantic Celebration Word Vault
+      const WORD_DATABASE = {
+        1: [
+          { word: 'LOVE', hint: 'The sweet spark that began our journey together.' },
+          { word: 'ROSE', hint: 'A velvet crimson bloom that speaks without words.' },
+          { word: 'WARM', hint: 'How a tight embrace feels on a chilly December night.' },
+          { word: 'WISH', hint: 'What you silently murmur when you catch a falling star.' },
+          { word: 'DEAR', hint: 'A tender opening word to every handwritten love letter.' },
+          { word: 'GLOW', hint: 'The soft radiant light in your eyes when we laugh.' }
+        ],
+        2: [
+          { word: 'SWEET', hint: 'Tastier than honey and gentler than morning dew.' },
+          { word: 'HEART', hint: 'The steady beat that skips whenever you walk into the room.' },
+          { word: 'SMILE', hint: 'The quickest curve that straightens out any rainy day.' },
+          { word: 'CHARM', hint: 'An irresistible aura that pulls two souls closer.' },
+          { word: 'BLOOM', hint: 'What care and affection turn into under the sunlight.' },
+          { word: 'MAGIC', hint: 'The feeling in the air when two hands accidentally brush.' }
+        ],
+        3: [
+          { word: 'FOREVER', hint: 'A sacred promise to stay through every changing season.' },
+          { word: 'CHERISH', hint: 'To hold a precious memory safe in your deepest thoughts.' },
+          { word: 'BELOVED', hint: 'The sacred title whispered in ancient romantic vows.' },
+          { word: 'ADORED', hint: 'How it feels when someone loves all your little quirks.' },
+          { word: 'SECRET', hint: 'A private unspoken joy shared only between two minds.' }
+        ]
+      };
+
+      let currentLevel = 1;
+      let targetWord = 'LOVE';
+      let targetHint = '';
+      let maxAttempts = 6;
+      let wordLength = 4;
+      let currentAttempt = 0;
+      let currentGuess = '';
+      let isGameOver = false;
+
+      const boardGrid = document.getElementById('boardGrid');
+      const whisperClueText = document.getElementById('whisperClueText');
+      const gameStatus = document.getElementById('gameStatus');
+      const rewardLabel = document.getElementById('rewardLabel');
+      const wordModal = document.getElementById('wordModal');
+
+      // Initialize Game Level
+      window.setWordLevel = function (lvl) {
+        currentLevel = lvl;
+        document.querySelectorAll('.diff-pill').forEach((pill, idx) => {
+          pill.classList.toggle('active', idx + 1 === lvl);
+        });
+
+        if (lvl === 1) {
+          rewardLabel.textContent = '+2 🪙';
+        } else if (lvl === 2) {
+          rewardLabel.textContent = '+4 🪙';
+        } else {
+          rewardLabel.textContent = '+6 🪙';
         }
-      ];
 
-      let currentIndex = 0;
-      let currentInput = [];
-      let tilesState = []; // { letter, id, used }
+        startNewWordGame();
+      };
 
-      const whisperHint = document.getElementById('whisperHint');
-      const slotsContainer = document.getElementById('slotsContainer');
-      const lettersBank = document.getElementById('lettersBank');
-      const btnBackspace = document.getElementById('btnBackspace');
-      const btnShuffle = document.getElementById('btnShuffle');
-      const successNoteOverlay = document.getElementById('successNoteOverlay');
-      const revealedWordTitle = document.getElementById('revealedWordTitle');
-      const revealedLoveNote = document.getElementById('revealedLoveNote');
-      const rewardPillBanner = document.getElementById('rewardPillBanner');
-      const btnNextWord = document.getElementById('btnNextWord');
-      const puzzleIdxLabel = document.getElementById('puzzleIdxLabel');
-      const userCoinBalance = document.getElementById('userCoinBalance');
+      window.startNewWordGame = function () {
+        wordModal.classList.remove('active');
+        isGameOver = false;
+        currentAttempt = 0;
+        currentGuess = '';
+        gameStatus.textContent = 'Type letters using touch or keyboard...';
+        gameStatus.style.color = '#7c4d70';
 
-      function refreshCoins() {
-        const coins = parseInt(localStorage.getItem('vanvi_coins') || '50', 10);
-        userCoinBalance.textContent = coins;
-      }
-      refreshCoins();
+        // Reset Keyboard Key Colors
+        document.querySelectorAll('.key-btn').forEach(btn => {
+          btn.classList.remove('key-correct', 'key-present', 'key-absent');
+        });
 
-      function loadPuzzle(idx) {
-        currentIndex = idx;
-        const puzzle = PUZZLES[currentIndex];
-        puzzleIdxLabel.textContent = (currentIndex + 1);
-        whisperHint.textContent = `"${puzzle.hint}"`;
-        currentInput = [];
-        successNoteOverlay.classList.remove('show');
+        // Pick random word for this level
+        const list = WORD_DATABASE[currentLevel] || WORD_DATABASE[1];
+        const item = list[Math.floor(Math.random() * list.length)];
+        targetWord = item.word.toUpperCase();
+        targetHint = item.hint;
+        wordLength = targetWord.length;
+        maxAttempts = 6;
 
-        // Prepare Scrambled Letters
-        const chars = puzzle.word.split('');
-        tilesState = chars.map((ch, i) => ({ letter: ch, id: i, used: false }));
-        // Shuffle
-        shuffleTiles();
+        whisperClueText.textContent = `"${targetHint}"`;
 
-        renderSlots();
-        renderBank();
-      }
-
-      function shuffleTiles() {
-        for (let i = tilesState.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [tilesState[i], tilesState[j]] = [tilesState[j], tilesState[i]];
-        }
-      }
-
-      function renderSlots() {
-        const puzzle = PUZZLES[currentIndex];
-        slotsContainer.innerHTML = '';
-        for (let i = 0; i < puzzle.word.length; i++) {
-          const slot = document.createElement('div');
-          slot.className = 'slot-box' + (currentInput[i] ? ' filled' : '');
-          slot.textContent = currentInput[i] ? currentInput[i].letter : '';
-          
-          if (currentInput[i]) {
-            slot.addEventListener('click', () => removeInputAt(i));
+        // Build Board Rows
+        boardGrid.innerHTML = '';
+        for (let r = 0; r < maxAttempts; r++) {
+          const row = document.createElement('div');
+          row.className = 'board-row';
+          row.id = `row-${r}`;
+          for (let c = 0; c < wordLength; c++) {
+            const tile = document.createElement('div');
+            tile.className = 'letter-tile';
+            tile.id = `tile-${r}-${c}`;
+            row.appendChild(tile);
           }
-          slotsContainer.appendChild(slot);
+          boardGrid.appendChild(row);
+        }
+      };
+
+      // Input letter handler
+      window.handleInputKey = function (char) {
+        if (isGameOver) return;
+        if (currentGuess.length < wordLength) {
+          currentGuess += char.toUpperCase();
+          updateCurrentRowDisplay();
+        }
+      };
+
+      window.deleteLastLetter = function () {
+        if (isGameOver) return;
+        if (currentGuess.length > 0) {
+          currentGuess = currentGuess.slice(0, -1);
+          updateCurrentRowDisplay();
+        }
+      };
+
+      function updateCurrentRowDisplay() {
+        for (let c = 0; c < wordLength; c++) {
+          const tile = document.getElementById(`tile-${currentAttempt}-${c}`);
+          if (!tile) continue;
+          const letter = currentGuess[c] || '';
+          tile.textContent = letter;
+          if (letter) {
+            tile.classList.add('pop');
+            setTimeout(() => tile.classList.remove('pop'), 120);
+          }
         }
       }
 
-      function renderBank() {
-        lettersBank.innerHTML = '';
-        tilesState.forEach(tile => {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'letter-tile' + (tile.used ? ' used' : '');
-          btn.textContent = tile.letter;
-          btn.addEventListener('click', () => selectTile(tile));
-          lettersBank.appendChild(btn);
+      window.submitCurrentRow = function () {
+        if (isGameOver) return;
+        if (currentGuess.length < wordLength) {
+          gameStatus.textContent = `Need ${wordLength} letters to whisper!`;
+          gameStatus.style.color = '#e11d48';
+          return;
+        }
+
+        // Evaluate guess
+        const guess = currentGuess;
+        const target = targetWord;
+        const letterCounts = {};
+        for (let char of target) {
+          letterCounts[char] = (letterCounts[char] || 0) + 1;
+        }
+
+        const tileStatuses = new Array(wordLength).fill('absent');
+
+        // Pass 1: exact matches
+        for (let i = 0; i < wordLength; i++) {
+          if (guess[i] === target[i]) {
+            tileStatuses[i] = 'correct';
+            letterCounts[guess[i]]--;
+          }
+        }
+
+        // Pass 2: present in word
+        for (let i = 0; i < wordLength; i++) {
+          if (tileStatuses[i] !== 'correct') {
+            const char = guess[i];
+            if (letterCounts[char] > 0) {
+              tileStatuses[i] = 'present';
+              letterCounts[char]--;
+            }
+          }
+        }
+
+        // Animate tile reveals
+        for (let i = 0; i < wordLength; i++) {
+          const tile = document.getElementById(`tile-${currentAttempt}-${i}`);
+          const char = guess[i];
+          const statusClass = tileStatuses[i];
+
+          setTimeout(() => {
+            tile.classList.add(statusClass);
+            updateKeyboardKey(char, statusClass);
+          }, i * 150);
+        }
+
+        const isWin = guess === target;
+
+        setTimeout(() => {
+          if (isWin) {
+            handleVictory();
+          } else {
+            currentAttempt++;
+            currentGuess = '';
+            if (currentAttempt >= maxAttempts) {
+              handleGameOver(false);
+            } else {
+              gameStatus.textContent = `Keep going! ${maxAttempts - currentAttempt} attempts left.`;
+              gameStatus.style.color = '#7c4d70';
+            }
+          }
+        }, wordLength * 150 + 200);
+      };
+
+      function updateKeyboardKey(char, status) {
+        document.querySelectorAll('.key-btn').forEach(btn => {
+          if (btn.textContent.trim().toUpperCase() === char) {
+            if (status === 'correct') {
+              btn.className = 'key-btn key-correct';
+            } else if (status === 'present' && !btn.classList.contains('key-correct')) {
+              btn.className = 'key-btn key-present';
+            } else if (status === 'absent' && !btn.classList.contains('key-correct') && !btn.classList.contains('key-present')) {
+              btn.className = 'key-btn key-absent';
+            }
+          }
         });
       }
 
-      function selectTile(tile) {
-        const puzzle = PUZZLES[currentIndex];
-        if (tile.used || currentInput.length >= puzzle.word.length) return;
+      function handleVictory() {
+        isGameOver = true;
+        gameStatus.textContent = 'Decoded flawlessly! ✨';
+        gameStatus.style.color = '#059669';
 
-        tile.used = true;
-        currentInput.push(tile);
-        renderSlots();
-        renderBank();
+        const coinsWon = currentLevel === 1 ? 2 : (currentLevel === 2 ? 4 : 6);
 
-        checkAnswer();
+        if (window.VanviGames && typeof window.VanviGames.awardCoins === 'function') {
+          window.VanviGames.awardCoins(coinsWon, 'Word Whisper 3D');
+        }
+
+        triggerVictoryConfetti();
+
+        document.getElementById('modalTrophy').textContent = '💖';
+        document.getElementById('modalHeading').textContent = 'Whisper Decoded!';
+        document.getElementById('modalWordReveal').textContent = targetWord;
+        document.getElementById('modalRewardText').textContent = `+${coinsWon} Celebration Coins Earned! 🪙`;
+        wordModal.classList.add('active');
       }
 
-      function removeInputAt(index) {
-        if (index < 0 || index >= currentInput.length) return;
-        const removed = currentInput.splice(index, 1)[0];
-        if (removed) {
-          const matched = tilesState.find(t => t.id === removed.id);
-          if (matched) matched.used = false;
-        }
-        renderSlots();
-        renderBank();
+      function handleGameOver(won) {
+        isGameOver = true;
+        gameStatus.textContent = `The word was ${targetWord}. Try again!`;
+        gameStatus.style.color = '#e11d48';
+
+        document.getElementById('modalTrophy').textContent = '💌';
+        document.getElementById('modalHeading').textContent = 'Keep Cherishing!';
+        document.getElementById('modalWordReveal').textContent = targetWord;
+        document.getElementById('modalRewardText').textContent = 'Practice makes romantic perfection!';
+        wordModal.classList.add('active');
       }
 
-      btnBackspace.addEventListener('click', () => {
-        if (currentInput.length > 0) {
-          removeInputAt(currentInput.length - 1);
-        }
-      });
-
-      btnShuffle.addEventListener('click', () => {
-        shuffleTiles();
-        renderBank();
-      });
-
-      function checkAnswer() {
-        const puzzle = PUZZLES[currentIndex];
-        if (currentInput.length !== puzzle.word.length) return;
-
-        const typed = currentInput.map(i => i.letter).join('');
-        if (typed === puzzle.word) {
-          // Success!
-          document.querySelectorAll('.slot-box').forEach(sb => sb.classList.add('correct'));
-          
-          // Coins
-          const won = puzzle.reward;
-          let currentCoins = parseInt(localStorage.getItem('vanvi_coins') || '50', 10);
-          currentCoins += won;
-          localStorage.setItem('vanvi_coins', currentCoins.toString());
-          refreshCoins();
-
-          if (window.VanviAPI && window.VanviAPI.coins) {
-            try {
-              window.VanviAPI.coins.add({ amount: won, reason: 'Word Whisper ' + puzzle.word });
-            } catch(e) {}
-          }
-
-          setTimeout(() => {
-            revealedWordTitle.textContent = puzzle.word;
-            revealedLoveNote.textContent = `"${puzzle.note}"`;
-            rewardPillBanner.textContent = `🪙 +${won} Vanvi Coins Unlocked!`;
-            successNoteOverlay.classList.add('show');
-          }, 450);
-        } else {
-          // Shake slots
-          slotsContainer.style.transform = 'translateX(-6px)';
-          setTimeout(() => { slotsContainer.style.transform = 'translateX(6px)'; }, 80);
-          setTimeout(() => { slotsContainer.style.transform = 'translateX(0)'; }, 160);
+      function triggerVictoryConfetti() {
+        const emojis = ['💖', '🌸', '✨', '🪙', '💌', '⭐'];
+        for (let i = 0; i < 30; i++) {
+          const p = document.createElement('div');
+          p.className = 'word-confetti';
+          p.textContent = emojis[i % emojis.length];
+          const angle = (i / 30) * 2 * Math.PI;
+          const dist = 90 + Math.random() * 160;
+          p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          p.style.setProperty('--dr', (Math.random() * 720 - 360) + 'deg');
+          p.style.left = (window.innerWidth / 2) + 'px';
+          p.style.top = (window.innerHeight / 2) + 'px';
+          document.body.appendChild(p);
+          setTimeout(() => p.remove(), 1000);
         }
       }
 
-      btnNextWord.addEventListener('click', () => {
-        let nextIdx = currentIndex + 1;
-        if (nextIdx >= PUZZLES.length) nextIdx = 0;
-        loadPuzzle(nextIdx);
+      // Hardware keyboard listener
+      window.addEventListener('keydown', (e) => {
+        if (isGameOver) return;
+        if (e.key === 'Enter') {
+          submitCurrentRow();
+        } else if (e.key === 'Backspace') {
+          deleteLastLetter();
+        } else if (/^[a-zA-Z]$/.test(e.key)) {
+          handleInputKey(e.key.toUpperCase());
+        }
       });
 
-      // Init
-      loadPuzzle(0);
+      // Start on load
+      setWordLevel(1);
     })();
   </script>
+
+  <!-- Global Vanvi Navigation Dock -->
+  <script src="js/vanvi-navigation.js"></script>
 </body>
 </html>

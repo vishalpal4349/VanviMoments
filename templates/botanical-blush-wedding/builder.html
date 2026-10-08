@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Maison Rose Studio — Botanical Blush Builder | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/vanvi-global-experience.css">
+  <link rel="stylesheet" href="../../css/vanvi-custom-builder.css">
+
+  <script src="../../js/vanvi-api.js"></script>
+  <script src="../../js/vanvi-builder-core.js"></script>
+
+  <style>
+    /* Botanical Blush Custom Studio Styling */
+    :root {
+      --rose-gold: #d8a892;
+      --burgundy: #8b3a4a;
+      --accent-deep: #6b2232;
+      --blush-card: rgba(255, 255, 255, 0.05);
+    }
+    .botanical-crest-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d8a892 0%, #8b3a4a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(139, 58, 74, 0.4);
+    }
+    .builder-eyebrow-botanical {
+      font-family: 'Playfair Display', serif;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffd8d0;
+      margin-bottom: 6px;
+    }
+    .builder-save-btn {
+      background: linear-gradient(135deg, #a74e5e 0%, #8b3a4a 100%) !important;
+      border-color: rgba(216, 168, 146, 0.5) !important;
+      box-shadow: 0 4px 16px rgba(139, 58, 74, 0.4) !important;
+    }
+    .builder-save-btn:hover {
+      background: linear-gradient(135deg, #bd5c6e 0%, #9e4354 100%) !important;
+      box-shadow: 0 8px 24px rgba(139, 58, 74, 0.55) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="builder-topbar">
+    <div class="builder-brand-group">
+      <a href="../../templates.html" class="btn-builder-back">← Catalog</a>
+      <div class="builder-template-meta">
+        <div class="botanical-crest-icon">🌸</div>
+        <div>
+          <div class="builder-template-name">Maison Rose Studio</div>
+          <span class="builder-template-badge" style="background: linear-gradient(135deg, #d8a892, #8b3a4a); color: #fff;">Modern Romance Edition</span>
+        </div>
+      </div>
+    </div>
+    <div class="builder-actions-top">
+      <button type="button" id="btnSaveMomentTop" class="builder-save-btn">
+        <span>✨</span> <span>Publish Keepsake</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="builder-layout">
+    <!-- Form Controls Pane -->
+    <section class="builder-form-pane">
+      <div class="builder-hero-intro">
+        <div class="builder-eyebrow-botanical">Cinematic Romance Studio</div>
+        <h1 class="builder-title">Craft Your Botanical Blush Wedding Invitation</h1>
+        <p class="builder-desc">Personalize dusty rose floral aesthetics, interactive Scratch-to-Reveal secret love note, love story memory, celebration timeline, and instant WhatsApp RSVP.</p>
+      </div>
+
+      <!-- Card 1: Couple Names -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">💍</span> The Happy Couple</div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label class="form-label" for="inpGroom">Partner 1 Name</label>
+            <input type="text" id="inpGroom" class="form-input" value="Vivan" placeholder="e.g. Vivan">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inpBride">Partner 2 Name</label>
+            <input type="text" id="inpBride" class="form-input" value="Divya" placeholder="e.g. Divya">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpDate">Wedding Date</label>
+          <input type="text" id="inpDate" class="form-input" value="30 November 2027" placeholder="e.g. 30 November 2027">
+        </div>
+      </div>
+
+      <!-- Card 2: Invitation Message -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">💌</span> The Formal Invitation</div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpInvitationHeading">Invitation Heading</label>
+          <input type="text" id="inpInvitationHeading" class="form-input" value="With Joyful Hearts">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpInvitation">Invitation Message</label>
+          <textarea id="inpInvitation" class="form-textarea" rows="3">We request the honour of your presence as we exchange vows and begin our new chapter together under the blooming canopy of roses. Your blessings and warmth will grace our union with joy that lasts a lifetime.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpFamily">Cordially Invited By (Family Names)</label>
+          <input type="text" id="inpFamily" class="form-input" value="The Verma & Kapoor Families">
+        </div>
+      </div>
+
+      <!-- Card 3: Interactive Scratch-to-Reveal Card -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">✨</span> Scratch-to-Reveal Secret Message</div>
+        <p style="font-size: 12px; color: #cbd5e1; margin-bottom: 12px;">Guests will rub the shimmering rose-gold foil to reveal this intimate hidden love note.</p>
+
+        <div class="form-group">
+          <label class="form-label" for="inpScratchMessage">Hidden Romantic Note</label>
+          <textarea id="inpScratchMessage" class="form-textarea" rows="3">Some stories are written in the stars. Ours begins with you. Thank you for walking this sacred path beside us.</textarea>
+        </div>
+      </div>
+
+      <!-- Card 4: Our Love Story & First Memory -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">📖</span> Love Story &amp; First Memory</div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpStoryHeading">Story Heading</label>
+          <input type="text" id="inpStoryHeading" class="form-input" value="Our Love Story">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpStory">Love Story Narrative</label>
+          <textarea id="inpStory" class="form-textarea" rows="3">Two paths crossed on a quiet rainy afternoon in Bengaluru, blossoming into an eternal companionship filled with gentle laughter, shared sunsets, and timeless promises. Through every season, our love found its deepest root in friendship.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpMemory">First Chapter / Special Memory Quote</label>
+          <textarea id="inpMemory" class="form-textarea" rows="2">"Under the misty canopy of Cubbon Park, a simple coffee turned into seven hours of talking about everything and nothing at all. That was the day forever began."</textarea>
+        </div>
+      </div>
+
+      <!-- Card 5: Venue & RSVP Details -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">📍</span> Venue &amp; RSVP Contact</div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpCity">City &amp; State</label>
+          <input type="text" id="inpCity" class="form-input" value="Bengaluru, Karnataka">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpVenue">Venue Name &amp; Address</label>
+          <input type="text" id="inpVenue" class="form-input" value="The Glasshouse Pavilion & Rose Garden, Cubbon Park Road, Bengaluru">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpMapsUrl">Google Maps Link</label>
+          <input type="url" id="inpMapsUrl" class="form-input" value="https://maps.google.com/?q=The+Glass+House+Bengaluru">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpWhatsapp">WhatsApp RSVP Phone Number</label>
+          <input type="tel" id="inpWhatsapp" class="form-input" value="+919876543210" placeholder="+919876543210">
+        </div>
+      </div>
+
+      <!-- Card 6: Gallery & Photographs -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">🌸</span> Editorial Gallery Photographs</div>
+        <p style="font-size: 12px; color: #cbd5e1; margin-bottom: 12px;">Showcase portraits, garden walks, mandap decor, and sacred detail shots.</p>
+
+        <div class="photo-uploader-grid" id="photoGrid">
+          <!-- Dynamically populated slots -->
+        </div>
+        <input type="file" id="hiddenPhotoInput" accept="image/*" style="display: none;">
+      </div>
+
+      <!-- Card 7: Romantic Soundtrack -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">🎵</span> Romantic Acoustic Soundtrack</div>
+        <div class="chips-grid" id="soundtrackPicker">
+          <div class="chip-option selected" data-track="botanical-blush-melody">
+            <span class="chip-icon">🌸</span>
+            <span>Rose Romance Melody</span>
+          </div>
+          <div class="chip-option" data-track="acoustic-strings">
+            <span class="chip-icon">🎻</span>
+            <span>Acoustic Cello &amp; Piano</span>
+          </div>
+          <div class="chip-option" data-track="sacred-serenade">
+            <span class="chip-icon">✨</span>
+            <span>Garden Serenade</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Preview Pane -->
+    <aside class="builder-preview-pane">
+      <div class="preview-toolbar">
+        <div class="preview-title"><span class="preview-pulse" style="background: #e8cbbf; box-shadow: 0 0 8px #d8a892;"></span><span>Live Interactive Preview</span></div>
+        <div class="device-switcher">
+          <button type="button" class="device-btn active" id="btnDeviceMobile">📱 Mobile</button>
+          <button type="button" class="device-btn" id="btnDeviceDesktop">💻 Desktop</button>
+        </div>
+      </div>
+      <div class="preview-frame-container mobile-mode" id="previewContainer">
+        <iframe id="previewFrame" class="preview-iframe" src="index.html" title="Botanical Blush Live Interactive Preview"></iframe>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Celebration Modal -->
+  <div class="builder-modal-overlay" id="celebrationModal">
+    <div class="builder-modal-card">
+      <div class="modal-icon-badge" style="background: linear-gradient(135deg, #d8a892, #8b3a4a); color: #fff;">🌸</div>
+      <h2 class="modal-title">Maison Rose Invitation Published!</h2>
+      <p class="modal-subtitle">Your cinematic botanical blush wedding invitation is ready to enchant family and guests.</p>
+
+      <div class="share-link-box">
+        <input type="text" id="shareUrlInput" class="share-link-input" readonly>
+        <button type="button" class="share-copy-btn" id="btnCopyShareUrl">📋 Copy</button>
+      </div>
+
+      <div class="modal-actions-grid">
+        <a id="btnModalOpenExp" href="#" class="btn-open-experience" target="_blank"><span>✨</span> Open Final Experience</a>
+        <a id="btnModalWhatsApp" href="#" class="btn-share-whatsapp" target="_blank"><span>💬</span> Share via WhatsApp</a>
+        <button type="button" class="btn-close-modal" onclick="closeCelebrationModal()">Close &amp; Keep Editing</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentPhotos = [
+      'assets/botanical-hero-couple.jpg',
+      'assets/botanical-story-walk.jpg',
+      'assets/botanical-venue-mandap.jpg',
+      'assets/botanical-rings.jpg'
+    ];
+    let currentPhotoSlotIndex = 0;
+    const TEMPLATE_ID = 'botanical-blush-wedding';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Initialize Builder Core
+      await VanviBuilderCore.init({ templateId: TEMPLATE_ID });
+
+      const data = VanviBuilderCore.customData || {};
+      if (data.groomName) document.getElementById('inpGroom').value = data.groomName;
+      if (data.brideName) document.getElementById('inpBride').value = data.brideName;
+      if (data.weddingDate) document.getElementById('inpDate').value = data.weddingDate;
+      if (data.invitationHeading) document.getElementById('inpInvitationHeading').value = data.invitationHeading;
+      if (data.invitationMessage) document.getElementById('inpInvitation').value = data.invitationMessage;
+      if (data.familyDedication) document.getElementById('inpFamily').value = data.familyDedication;
+      if (data.storyHeading) document.getElementById('inpStoryHeading').value = data.storyHeading;
+      if (data.storyContent) document.getElementById('inpStory').value = data.storyContent;
+      if (data.specialMemory) document.getElementById('inpMemory').value = data.specialMemory;
+      if (data.scratchMessage) document.getElementById('inpScratchMessage').value = data.scratchMessage;
+      if (data.city) document.getElementById('inpCity').value = data.city;
+      if (data.venue) document.getElementById('inpVenue').value = data.venue;
+      if (data.mapsUrl) document.getElementById('inpMapsUrl').value = data.mapsUrl;
+      if (data.whatsappPhone) document.getElementById('inpWhatsapp').value = data.whatsappPhone;
+      if (data.photos && Array.isArray(data.photos) && data.photos.length) {
+        currentPhotos = data.photos;
+      }
+
+      renderPhotos();
+
+      const previewFrame = document.getElementById('previewFrame');
+      VanviBuilderCore.attachPreview(previewFrame);
+
+      // 2. Live Sync Function
+      const syncInputs = () => {
+        const groom = document.getElementById('inpGroom').value.trim() || 'Vivan';
+        const bride = document.getElementById('inpBride').value.trim() || 'Divya';
+
+        const payload = {
+          groomName: groom,
+          brideName: bride,
+          coupleNames: `${groom} & ${bride}`,
+          recipient: `${groom} & ${bride}`,
+          sender: document.getElementById('inpFamily').value.trim(),
+          weddingDate: document.getElementById('inpDate').value.trim(),
+          invitationHeading: document.getElementById('inpInvitationHeading').value.trim(),
+          invitationMessage: document.getElementById('inpInvitation').value.trim(),
+          familyDedication: document.getElementById('inpFamily').value.trim(),
+          storyHeading: document.getElementById('inpStoryHeading').value.trim(),
+          storyContent: document.getElementById('inpStory').value.trim(),
+          specialMemory: document.getElementById('inpMemory').value.trim(),
+          scratchMessage: document.getElementById('inpScratchMessage').value.trim(),
+          venueCity: document.getElementById('inpCity').value.trim(),
+          venueName: document.getElementById('inpVenue').value.trim(),
+          venueAddress: document.getElementById('inpVenue').value.trim(),
+          mapsUrl: document.getElementById('inpMapsUrl').value.trim(),
+          whatsappPhone: document.getElementById('inpWhatsapp').value.trim(),
+          gallery: currentPhotos,
+          soundtrack: document.querySelector('#soundtrackPicker .chip-option.selected')?.dataset.track || 'botanical-blush-melody'
+        };
+
+        VanviBuilderCore.update(payload);
+
+        if (previewFrame && previewFrame.contentWindow) {
+          previewFrame.contentWindow.postMessage({
+            type: 'VANVI_LIVE_PREVIEW_SYNC',
+            payload: payload
+          }, '*');
+        }
+      };
+
+      // Listen to input changes
+      document.querySelectorAll('#inpGroom, #inpBride, #inpDate, #inpInvitationHeading, #inpInvitation, #inpFamily, #inpStoryHeading, #inpStory, #inpMemory, #inpScratchMessage, #inpCity, #inpVenue, #inpMapsUrl, #inpWhatsapp').forEach(el => {
+        el.addEventListener('input', syncInputs);
+      });
+
+      // Sound chips
+      document.querySelectorAll('#soundtrackPicker .chip-option').forEach(chip => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('#soundtrackPicker .chip-option').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          syncInputs();
+        });
+      });
+
+      // Viewport Switcher
+      document.getElementById('btnDeviceMobile').addEventListener('click', () => {
+        document.getElementById('btnDeviceMobile').classList.add('active');
+        document.getElementById('btnDeviceDesktop').classList.remove('active');
+        document.getElementById('previewContainer').classList.add('mobile-mode');
+      });
+
+      document.getElementById('btnDeviceDesktop').addEventListener('click', () => {
+        document.getElementById('btnDeviceDesktop').classList.add('active');
+        document.getElementById('btnDeviceMobile').classList.remove('active');
+        document.getElementById('previewContainer').classList.remove('mobile-mode');
+      });
+
+      // Publish Handler
+      document.getElementById('btnSaveMomentTop').addEventListener('click', handlePublish);
+
+      // Copy Share Link
+      document.getElementById('btnCopyShareUrl').addEventListener('click', () => {
+        const input = document.getElementById('shareUrlInput');
+        navigator.clipboard.writeText(input.value).then(() => {
+          document.getElementById('btnCopyShareUrl').textContent = '✓ Copied!';
+          setTimeout(() => { document.getElementById('btnCopyShareUrl').textContent = '📋 Copy'; }, 2000);
+        });
+      });
+
+      // Photo upload change
+      document.getElementById('hiddenPhotoInput').addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+          const uploaded = await VanviBuilderCore.uploadMedia(file, { assetType: 'botanical_photo' });
+          const url = uploaded.url || uploaded;
+          currentPhotos[currentPhotoSlotIndex] = url;
+          renderPhotos();
+          syncInputs();
+        } catch (err) {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            currentPhotos[currentPhotoSlotIndex] = ev.target.result;
+            renderPhotos();
+            syncInputs();
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+
+    function triggerUpload(index) {
+      currentPhotoSlotIndex = index;
+      document.getElementById('hiddenPhotoInput').click();
+    }
+
+    function removePhoto(index, e) {
+      if (e) e.stopPropagation();
+      currentPhotos.splice(index, 1);
+      renderPhotos();
+      VanviBuilderCore.set('gallery', currentPhotos);
+      const previewFrame = document.getElementById('previewFrame');
+      if (previewFrame && previewFrame.contentWindow) {
+        previewFrame.contentWindow.postMessage({
+          type: 'VANVI_LIVE_PREVIEW_SYNC',
+          payload: { gallery: currentPhotos }
+        }, '*');
+      }
+    }
+
+    function renderPhotos() {
+      const grid = document.getElementById('photoGrid');
+      grid.innerHTML = '';
+      const labels = ['Couple Portrait', 'Garden Stroll', 'Mandap Pavillion', 'Wedding Rings'];
+      for (let i = 0; i < 4; i++) {
+        const photo = currentPhotos[i];
+        if (photo) {
+          grid.innerHTML += `
+            <div class="photo-slot">
+              <img src="${photo}" alt="Photo ${i + 1}">
+              <button type="button" class="remove-photo-btn" onclick="removePhoto(${i}, event)">×</button>
+            </div>
+          `;
+        } else {
+          grid.innerHTML += `
+            <div class="photo-slot" onclick="triggerUpload(${i})">
+              <span style="font-size: 20px;">🌸</span>
+              <span style="font-size: 11px; margin-top: 4px; font-weight: 700;">${labels[i] || 'Add Photo'}</span>
+            </div>
+          `;
+        }
+      }
+    }
+
+    async function handlePublish() {
+      const btn = document.getElementById('btnSaveMomentTop');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span>⏳</span> <span>Publishing...</span>';
+      btn.disabled = true;
+
+      try {
+        const groom = document.getElementById('inpGroom').value.trim() || 'Vivan';
+        const bride = document.getElementById('inpBride').value.trim() || 'Divya';
+        const couple = `${groom} & ${bride}`;
+
+        const saved = await VanviBuilderCore.saveMoment({
+          title: `Botanical Blush Wedding of ${couple}`,
+          recipientName: couple,
+          senderName: document.getElementById('inpFamily').value.trim() || 'The Verma & Kapoor Families',
+          occasion: 'Botanical Wedding',
+          templateId: TEMPLATE_ID,
+          price: 1999
+        });
+
+        const shareUrl = saved.shareUrl || saved.experienceUrl || `${window.location.origin}/moment.html?id=${saved.id}&template=${TEMPLATE_ID}`;
+        document.getElementById('shareUrlInput').value = shareUrl;
+        document.getElementById('btnModalOpenExp').href = shareUrl;
+        document.getElementById('btnModalWhatsApp').href = `https://wa.me/?text=${encodeURIComponent(`🌸 Cordially inviting you to the Botanical Blush Wedding of ${couple}: ${shareUrl}`)}`;
+
+        document.getElementById('celebrationModal').classList.add('active');
+      } catch (err) {
+        alert('Could not publish: ' + err.message);
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    function closeCelebrationModal() {
+      document.getElementById('celebrationModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

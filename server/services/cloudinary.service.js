@@ -30,12 +30,12 @@ class CloudinaryService {
       }
     }
 
-    this._isConfigured = Boolean(this.cloudName && this.apiKey && this.apiSecret);
+    this._isConfigured = Boolean(this.cloudName && (this.uploadPreset || (this.apiKey && this.apiSecret)));
   }
 
   get isConfigured() {
     this.reloadConfig();
-    return Boolean(this.cloudName && this.apiKey && this.apiSecret);
+    return Boolean(this.cloudName && (this.uploadPreset || (this.apiKey && this.apiSecret)));
   }
 
   isConfiguredFn() {
@@ -141,32 +141,27 @@ class CloudinaryService {
 
     const folder = this.getStructuredFolder({ templateId, momentId });
     const resourceType = this.getResourceType(mimeType);
-    const timestamp = Math.round(Date.now() / 1000);
+    const base64Data = buffer ? `data:${mimeType || 'image/png'};base64,${buffer.toString('base64')}` : '';
+    const bodyParams = new URLSearchParams();
+    bodyParams.set('file', base64Data);
 
-    const paramsToSign = {
-      folder,
-      timestamp
-    };
+    if (this.uploadPreset) {
+      bodyParams.set('upload_preset', this.uploadPreset);
+      if (folder) bodyParams.set('folder', folder);
+    } else if (this.apiKey && this.apiSecret) {
+      const timestamp = Math.round(Date.now() / 1000);
+      const paramsToSign = { folder, timestamp };
+      if (tags && tags.length) paramsToSign.tags = Array.isArray(tags) ? tags.join(',') : tags;
+      const sortedKeys = Object.keys(paramsToSign).sort();
+      const toSign = sortedKeys.map(k => `${k}=${paramsToSign[k]}`).join('&') + this.apiSecret;
+      const signature = crypto.createHash('sha1').update(toSign).digest('hex');
 
-    if (tags && tags.length) {
-      paramsToSign.tags = Array.isArray(tags) ? tags.join(',') : tags;
+      bodyParams.set('api_key', this.apiKey);
+      bodyParams.set('timestamp', String(timestamp));
+      bodyParams.set('folder', folder);
+      bodyParams.set('signature', signature);
+      if (paramsToSign.tags) bodyParams.set('tags', paramsToSign.tags);
     }
-
-    const sortedKeys = Object.keys(paramsToSign).sort();
-    const toSign = sortedKeys.map(k => `${k}=${paramsToSign[k]}`).join('&') + this.apiSecret;
-    const signature = crypto.createHash('sha1').update(toSign).digest('hex');
-
-    const base64Data = `data:${mimeType};base64,${buffer.toString('base64')}`;
-
-    const bodyParams = new URLSearchParams({
-      file: base64Data,
-      api_key: this.apiKey,
-      timestamp: String(timestamp),
-      folder,
-      signature
-    });
-
-    if (paramsToSign.tags) bodyParams.set('tags', paramsToSign.tags);
 
     const uploadUrl = `https://api.cloudinary.com/v1_1/${this.cloudName}/${resourceType}/upload`;
 

@@ -2,7 +2,11 @@
   "id": "birthday-3d-candle-surprise",
   "name": "Birthday 3D Candle & Polaroid Magic",
   "slug": "birthday-3d-candle-surprise",
-  "aliases": ["birthday-glow-3d", "happybirthday-liart", "3d-candle-surprise"],
+  "aliases": [
+    "birthday-glow-3d",
+    "happybirthday-liart",
+    "3d-candle-surprise"
+  ],
   "category": "Birthday",
   "categorySlug": "birthday",
   "price": 299,
@@ -11,22 +15,65 @@
   "type": "3D Candle & Scratch Experience",
   "icon": "🕯️",
   "soundtrack": "Happy Birthday Acoustic & Orchestral",
-  "tags": ["3D Candle", "Birthday", "Interactive", "Polaroid Stack", "Scratch Card", "Surprise", "Premium"],
+  "tags": [
+    "3D Candle",
+    "Birthday",
+    "Interactive",
+    "Polaroid Stack",
+    "Scratch Card",
+    "Surprise",
+    "Premium"
+  ],
   "description": "An extraordinary multi-stage birthday experience featuring an interactive giftbox open, 3D candle blow-out with real smoke physics, swipeable polaroid memory stack, and gold luxury scratch vouchers.",
   "builder": {
-    "type": "common",
+    "type": "custom",
     "photoLimit": 4,
     "hasScratchWishes": true,
-    "hasSoundtrack": true
+    "hasSoundtrack": true,
+    "builderPath": "templates/birthday-3d-candle-surprise/builder.html"
   },
   "schema": {
     "fields": [
-      { "key": "recipientName", "label": "Recipient Name", "type": "text", "required": true, "default": "Beautiful" },
-      { "key": "senderName", "label": "Sender Name", "type": "text", "required": true, "default": "With all my love ❤️" },
-      { "key": "message", "label": "Heartfelt Birthday Letter", "type": "textarea", "required": true },
-      { "key": "photos", "label": "Polaroid Photos", "type": "photos", "max": 4, "required": false },
-      { "key": "scratchWishes", "label": "3 Scratch Vouchers", "type": "list", "max": 3, "required": false },
-      { "key": "soundtrack", "label": "Music Soundtrack", "type": "audio", "default": "orchestral" }
+      {
+        "key": "recipientName",
+        "label": "Recipient Name",
+        "type": "text",
+        "required": true,
+        "default": "Beautiful"
+      },
+      {
+        "key": "senderName",
+        "label": "Sender Name",
+        "type": "text",
+        "required": true,
+        "default": "With all my love ❤️"
+      },
+      {
+        "key": "message",
+        "label": "Heartfelt Birthday Letter",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "photos",
+        "label": "Polaroid Photos",
+        "type": "photos",
+        "max": 4,
+        "required": false
+      },
+      {
+        "key": "scratchWishes",
+        "label": "3 Scratch Vouchers",
+        "type": "list",
+        "max": 3,
+        "required": false
+      },
+      {
+        "key": "soundtrack",
+        "label": "Music Soundtrack",
+        "type": "audio",
+        "default": "orchestral"
+      }
     ]
   },
   "custom_data_defaults": {
@@ -34,7 +81,11 @@
     "senderName": "With all my love ❤️",
     "message": "To the most wonderful person in my life. Thank you for always being my source of encouragement, my strong support, and the joy in my life. I wish you to always be beautiful, happy, and successful in everything. Happy Birthday! 💕",
     "photos": [],
-    "scratchWishes": ["One Free Coffee Date", "One Wish Granted", "Unconditional Hugs"],
+    "scratchWishes": [
+      "One Free Coffee Date",
+      "One Wish Granted",
+      "Unconditional Hugs"
+    ],
     "soundtrack": "orchestral"
   },
   "accentColor": "#ff477e",

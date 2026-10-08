@@ -1,0 +1,1063 @@
+/* ============================================================
+   Vanvi Moments — Save the Date: Mirror Reveal Edition
+   Design Architecture: Aged heirloom gold, candlelit mist, royal ivory
+   ============================================================ */
+
+:root {
+  --ivory: #fbf4e3;
+  --ivory-soft: #f5ead0;
+  --ivory-pure: #ffffff;
+  --gold: #b8904a;
+  --gold-soft: #d4ad6a;
+  --gold-bright: #e8c87e;
+  --gold-dark: #8a5a16;
+  --charcoal: #0d0a08;
+  --charcoal-light: #2d2620;
+  --mirror-bg: #0e0c0a;
+  --mirror-deep: #080604;
+  --fog-base: #c8d9dd;
+  --wine: #631226;
+  --border-gold: rgba(212, 173, 106, 0.45);
+  --shadow-gold: rgba(184, 144, 74, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background: #fbf5ee;
+  color: var(--charcoal);
+  font-family: 'EB Garamond', 'Cormorant Garamond', 'Times New Roman', serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.wiping {
+  touch-action: none;
+}
+
+/* ═══════════════════════ INTRO PRELUDE ═══════════════════════ */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #090706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1), visibility 1000ms;
+}
+
+.intro-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.intro-veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(14, 12, 10, 0.45) 0%, rgba(8, 6, 4, 0.88) 100%);
+  pointer-events: none;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  max-width: 500px;
+}
+
+.intro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(212, 173, 106, 0.12);
+  border: 1px solid rgba(212, 173, 106, 0.35);
+  color: var(--gold-bright);
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  backdrop-filter: blur(8px);
+}
+
+.intro-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(28px, 6vw, 42px);
+  color: var(--ivory);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+}
+
+.intro-names {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(34px, 8vw, 56px);
+  color: var(--gold-bright);
+  line-height: 1.1;
+  margin: 12px 0 20px;
+  text-shadow: 0 2px 14px rgba(212, 173, 106, 0.35);
+}
+
+.intro-prompt {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: introBreathe 2400ms ease-in-out infinite;
+}
+
+.tap-indicator {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 200, 126, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(212, 173, 106, 0.25) 0%, transparent 70%);
+  box-shadow: 0 0 24px rgba(212, 173, 106, 0.35);
+}
+
+.tap-indicator svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--gold-bright);
+}
+
+.prompt-text {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ivory-soft);
+}
+
+.prompt-sub {
+  font-size: 15px;
+  font-style: italic;
+  color: rgba(245, 234, 208, 0.75);
+}
+
+@keyframes introBreathe {
+  0%, 100% { transform: translateY(0); opacity: 0.88; }
+  50% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ═══════════════════════ MAIN EXPERIENCE STAGE ═══════════════════════ */
+.experience-stage {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("https://assets.shaadipath.com/std-templates/std-03-Mirror/assets/std_bg.webp");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  padding: calc(env(safe-area-inset-top, 0px) + 28px) 16px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.experience-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 20%, transparent 20%, rgba(246, 236, 222, 0.75) 100%);
+  pointer-events: none;
+}
+
+.stage-inner {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── Eyebrow Header ─── */
+.eyebrow-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: fadeUp 1000ms 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.eyebrow-rule {
+  width: clamp(24px, 8vw, 42px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+}
+
+.eyebrow-diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--gold-dark);
+  transform: rotate(45deg);
+}
+
+.experience-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(14px, 4vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  text-align: center;
+  padding-left: 0.45em;
+  opacity: 0;
+  animation: fadeUp 1000ms 350ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.couple-hero-names {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(38px, 11vw, 56px);
+  line-height: 1.05;
+  color: #120d09;
+  text-align: center;
+  margin: 6px 0 16px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  animation: fadeUp 1100ms 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.couple-hero-names .amp {
+  font-weight: 400;
+  color: var(--gold-dark);
+  padding: 0 4px;
+}
+
+/* ═══════════════════════ THE HEIRLOOM MIRROR ═══════════════════════ */
+.mirror-section-wrapper {
+  position: relative;
+  width: min(86vw, 360px);
+  margin: 10px auto 24px;
+  opacity: 0;
+  animation: fadeUp 1200ms 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mirror-glass-frame {
+  position: absolute;
+  left: 19%;
+  top: 31%;
+  width: 62%;
+  height: 57%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #0d0a08;
+  z-index: 5;
+  box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.85);
+}
+
+/* Date revealed behind mist */
+.mirror-date-reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8% 10%;
+  z-index: 2;
+  background: radial-gradient(circle, #251b14 0%, #0d0a08 100%);
+}
+
+.mirror-glow-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, rgba(232, 200, 126, 0.28) 0%, rgba(184, 144, 74, 0.08) 50%, transparent 75%);
+  transition: opacity 1200ms ease;
+}
+
+.mirror-glow-layer.active {
+  opacity: 1;
+  animation: mirrorPulse 3600ms ease-in-out infinite;
+}
+
+@keyframes mirrorPulse {
+  0%, 100% { opacity: 0.95; }
+  50% { opacity: 0.55; }
+}
+
+.date-reveal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.date-day-num {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: clamp(32px, 9vw, 44px);
+  line-height: 1;
+  color: var(--gold-bright);
+  text-shadow: 0 0 18px rgba(232, 200, 126, 0.6);
+  opacity: 0;
+}
+
+.date-month-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  opacity: 0;
+}
+
+.date-month-row .bar {
+  width: 16px;
+  height: 1px;
+  background: var(--gold-soft);
+}
+
+.date-month-text {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 3.4vw, 15px);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  padding-left: 0.3em;
+}
+
+.date-divider-glyph {
+  margin: 8px 0 6px;
+  font-size: 10px;
+  color: var(--gold-soft);
+  opacity: 0;
+}
+
+.date-venue-text {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(13px, 3.8vw, 16px);
+  color: var(--ivory-soft);
+  line-height: 1.25;
+  text-align: center;
+  max-width: 95%;
+  opacity: 0;
+}
+
+.date-city-text {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(10px, 2.7vw, 12px);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  margin-top: 4px;
+  opacity: 0;
+}
+
+/* Animations for reveal */
+.mirror-date-reveal.revealed .date-day-num {
+  animation: dayFocusPull 1100ms 50ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mirror-date-reveal.revealed .date-month-row {
+  animation: fadeUp 900ms 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mirror-date-reveal.revealed .date-divider-glyph {
+  animation: fadeUp 700ms 380ms ease forwards;
+}
+
+.mirror-date-reveal.revealed .date-venue-text {
+  animation: fadeUp 900ms 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mirror-date-reveal.revealed .date-city-text {
+  animation: fadeUp 800ms 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dayFocusPull {
+  0% { opacity: 0; filter: blur(14px); transform: scale(1.22); }
+  60% { opacity: 1; filter: blur(0); transform: scale(1.03); }
+  100% { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+
+/* Mist & Droplet Canvases */
+.sheen-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 800ms ease;
+}
+
+.fog-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 6;
+  cursor: grab;
+  touch-action: none;
+  transition: opacity 800ms ease;
+}
+
+.fog-canvas:active {
+  cursor: grabbing;
+}
+
+.droplet-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 7;
+  pointer-events: none;
+  transition: opacity 800ms ease;
+}
+
+.canvas-cleared {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Wiping Guide Hint */
+.wipe-prompt-hint {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 500ms ease;
+  background: radial-gradient(circle, rgba(14, 12, 10, 0.35) 0%, transparent 80%);
+}
+
+.wipe-prompt-hint.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hint-hand-icon {
+  width: 32px;
+  height: 32px;
+  fill: var(--gold-bright);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+  animation: wipeMotion 2200ms ease-in-out infinite;
+}
+
+.hint-text-box {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.hint-primary-txt {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+.hint-sub-txt {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(245, 234, 208, 0.85);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+@keyframes wipeMotion {
+  0%, 100% { transform: translate(-14px, 8px) rotate(-10deg); opacity: 0.85; }
+  50% { transform: translate(14px, -8px) rotate(10deg); opacity: 1; }
+}
+
+/* Mirror Gilded Antique Frame */
+.mirror-gilded-frame {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  z-index: 4;
+  filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.38)) drop-shadow(0 4px 10px rgba(138, 90, 22, 0.25));
+}
+
+/* ═══════════════════════ FORMAL INVITATION NOTE ═══════════════════════ */
+.formal-announcement {
+  text-align: center;
+  margin-top: 8px;
+  opacity: 0;
+  animation: fadeUp 1000ms 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.formal-text {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(20px, 5.2vw, 24px);
+  color: #241a14;
+}
+
+.formal-ornament {
+  color: var(--gold-dark);
+  margin: 0 8px;
+}
+
+/* ═══════════════════════ ACTION BUTTONS ═══════════════════════ */
+.actions-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 28px 0 20px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 800ms ease, transform 800ms ease;
+}
+
+.actions-container.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-luxury-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #b88628 0%, #8a5814 100%);
+  color: var(--ivory);
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: 1px solid rgba(232, 200, 126, 0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.btn-luxury-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.btn-luxury-cta:active {
+  transform: scale(0.97);
+}
+
+.btn-luxury-cta svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--ivory);
+}
+
+.btn-secondary-cta {
+  background: rgba(251, 244, 227, 0.9);
+  color: #241a14;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary-cta:hover {
+  background: #ffffff;
+}
+
+.btn-secondary-cta svg {
+  fill: #25D366;
+}
+
+/* ═══════════════════════ PREMIUM IMPROVEMENTS ═══════════════════════ */
+
+/* 1. LUXURY COUNTDOWN */
+.countdown-strip {
+  width: 100%;
+  margin-top: 36px;
+  padding: 24px 20px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 900ms ease, transform 900ms ease;
+}
+
+.countdown-strip.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.countdown-title {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin-bottom: 16px;
+}
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10px, 3vw, 20px);
+}
+
+.countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 58px;
+}
+
+.countdown-number {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(26px, 7vw, 36px);
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1;
+}
+
+.countdown-unit {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(36, 26, 20, 0.65);
+  margin-top: 4px;
+}
+
+.countdown-sep {
+  font-family: 'Cinzel', serif;
+  font-size: 24px;
+  color: var(--gold-dark);
+  opacity: 0.6;
+  margin-top: -12px;
+}
+
+/* 2. SACRED LOVE LETTER */
+.sacred-vow-card {
+  width: 100%;
+  margin-top: 32px;
+  padding: 32px 24px;
+  background: #fffdf8;
+  border: 1px solid var(--border-gold);
+  border-radius: 22px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.07);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 900ms ease, transform 900ms ease;
+}
+
+.sacred-vow-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vow-wax-seal {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #a11c34 0%, #64091c 100%);
+  border: 2px solid #df99a8;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(100, 9, 28, 0.35);
+  font-family: 'Cinzel', serif;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+}
+
+.vow-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 14px;
+}
+
+.vow-card-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(17px, 4.2vw, 20px);
+  line-height: 1.6;
+  color: #2b221a;
+  margin: 0 auto;
+  max-width: 520px;
+}
+
+.vow-card-sign {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  color: var(--gold-dark);
+  margin-top: 18px;
+  text-transform: uppercase;
+}
+
+/* 3. EVENT TIMELINE ITINERARY */
+.itinerary-section {
+  width: 100%;
+  margin-top: 32px;
+  padding: 28px 20px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-gold);
+  border-radius: 22px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 900ms ease, transform 900ms ease;
+}
+
+.itinerary-section.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.event-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 560px) {
+  .event-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.event-card-item {
+  padding: 18px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(212, 173, 106, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: transform 250ms ease;
+}
+
+.event-card-item:hover {
+  transform: translateY(-2px);
+}
+
+.event-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.event-card-icon {
+  font-size: 20px;
+}
+
+.event-card-name {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+}
+
+.event-card-time {
+  font-size: 12px;
+  color: var(--gold-dark);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.event-card-venue {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #554438;
+}
+
+/* 4. BLESSINGS INTERACTIVE WALL */
+.blessings-section {
+  width: 100%;
+  margin-top: 32px;
+  padding: 28px 20px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-gold);
+  border-radius: 22px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 900ms ease, transform 900ms ease;
+}
+
+.blessings-section.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.blessings-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.blessing-chip-btn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--border-gold);
+  font-size: 12px;
+  color: #3b2c22;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.blessing-chip-btn:hover {
+  background: var(--ivory);
+  border-color: var(--gold-dark);
+  transform: translateY(-1px);
+}
+
+.blessing-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.blessing-input-box {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border-gold);
+  background: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  color: #241a14;
+  outline: none;
+}
+
+.blessing-send-btn {
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--gold-dark);
+  color: #fff;
+  border: none;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.blessing-messages-list {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.blessing-item {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fdfaf4;
+  border: 1px solid rgba(212, 173, 106, 0.25);
+  font-size: 14px;
+  font-style: italic;
+  color: #342820;
+}
+
+/* ═══════════════════════ MUSIC TOGGLE BUTTON ═══════════════════════ */
+#stdMusicBtn {
+  position: fixed;
+  right: 18px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 173, 106, 0.65);
+  background: rgba(14, 12, 10, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--gold-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9990;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 200ms ease, background 200ms ease;
+}
+
+#stdMusicBtn:active {
+  transform: scale(0.92);
+}
+
+.music-bar-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.std-music-bar {
+  width: 2.5px;
+  height: 14px;
+  background: var(--gold-bright);
+  border-radius: 1px;
+  animation: musicBarsAnim 1s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+.std-music-bar:nth-child(2) { animation-delay: 0.18s; }
+.std-music-bar:nth-child(3) { animation-delay: 0.36s; }
+
+#stdMusicBtn.is-paused .std-music-bar {
+  animation-play-state: paused;
+  transform: scaleY(0.4);
+}
+
+@keyframes musicBarsAnim {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+
+/* ═══════════════════════ VANVI MOMENTS LUXURY WATERMARK ═══════════════════════ */
+#demoWatermarkBadge {
+  position: fixed;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+  transform: translateX(-50%);
+  z-index: 9995;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(18, 14, 11, 0.78);
+  border: 1px solid rgba(232, 200, 126, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 16px rgba(212, 173, 106, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--ivory);
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: vmBreathe 3200ms ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 250ms ease, opacity 350ms ease;
+}
+
+#demoWatermarkBadge:hover {
+  transform: translateX(-50%) translateY(-2px);
+  border-color: rgba(232, 200, 126, 0.8);
+}
+
+#demoWatermarkBadge .vm-heart {
+  color: #ff4d6d;
+  font-size: 12px;
+  animation: vmHeartBeat 1600ms ease-in-out infinite;
+}
+
+@keyframes vmBreathe {
+  0%, 100% { opacity: 0.92; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(-2px); }
+}
+
+@keyframes vmHeartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+/* ═══════════════════════ UTILITY & ENTRANCE ANIMATIONS ═══════════════════════ */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Petals Falling Canvas */
+#petalsCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 200;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
