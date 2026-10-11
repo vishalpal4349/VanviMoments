@@ -1,0 +1,448 @@
+/* ==========================================================================
+   ROYAL VOWS — ULTRA-PREMIUM INDIAN WEDDING DESIGN SYSTEM
+   Palette: Ivory, Pearl White, Champagne Gold, Subtle Blush Pink, Marigold Zari
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700;900&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Pinyon+Script&display=swap');
+
+:root {
+  /* Ultra-Luxury Light Indian Wedding Palette */
+  --bg-ivory: #FCF9F2;
+  --bg-pearl: #FFFDF9;
+  --bg-sandstone: #F7EFE4;
+  --bg-blush: #FDF2F4;
+  
+  --gold-primary: #C59B58;
+  --gold-metallic: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 45%, #AA771C 100%);
+  --gold-sheen: 0 0 25px rgba(212, 175, 55, 0.35);
+  --ruby-velvet: #872033;
+  --rose-subtle: #C4748C;
+  --kesar-accent: #E58E26;
+  
+  --text-main: #2D1A22;
+  --text-muted: #6B555E;
+  --text-light: #9B828C;
+
+  /* Typography */
+  --font-royal: 'Cinzel Decorative', 'Cinzel', serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-garamond: 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Pinyon Script', cursive;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+
+  /* Cards & Glassmorphism */
+  --card-border: 1px solid rgba(197, 155, 88, 0.32);
+  --card-border-gold: 1.5px solid rgba(212, 175, 55, 0.45);
+  --card-shadow: 0 16px 45px -10px rgba(135, 32, 51, 0.1), 0 4px 18px rgba(0, 0, 0, 0.03);
+  --card-shadow-hover: 0 24px 60px -12px rgba(135, 32, 51, 0.18), 0 0 30px rgba(212, 175, 55, 0.25);
+  --radius-card: 20px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background: radial-gradient(circle at 50% 0%, #FFFFFF 0%, var(--bg-ivory) 45%, var(--bg-sandstone) 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Canvas Falling Petals & Gold Dust Engine */
+#petals-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* Floating Audio Music Player Dock */
+.royal-music-dock {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  background: rgba(255, 253, 249, 0.92);
+  backdrop-filter: blur(25px);
+  border: var(--card-border-gold);
+  border-radius: 9999px;
+  padding: 6px 18px 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 12px 35px rgba(135, 32, 51, 0.15), var(--gold-sheen);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+.royal-music-dock:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+.spinning-bell {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ruby-velvet) 0%, #58111A 100%);
+  border: 1.5px solid var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 18px;
+}
+.royal-music-dock.playing .spinning-bell {
+  animation: bellSway 1.8s ease-in-out infinite;
+}
+@keyframes bellSway {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(14deg); }
+  75% { transform: rotate(-14deg); }
+}
+
+/* ==========================================================================
+   ACT 1: CINEMATIC 3D PALACE GATES OPENING
+   ========================================================================== */
+#palace-gates-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  background: radial-gradient(circle at center, #230810 0%, #100307 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s ease;
+  padding: 24px;
+  overflow: hidden;
+}
+#palace-gates-overlay.opened {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.08);
+}
+
+.gates-casket-3d {
+  width: 340px;
+  max-width: 90vw;
+  background: rgba(255, 253, 249, 0.12);
+  backdrop-filter: blur(30px);
+  border: 1.5px solid rgba(212, 175, 55, 0.5);
+  border-radius: 28px;
+  padding: 36px 24px;
+  text-align: center;
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.65), 0 0 50px rgba(212, 175, 55, 0.35);
+  position: relative;
+}
+.mandap-golden-arch {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFF 0%, #FFF5EB 40%, var(--gold-primary) 100%);
+  border: 2px solid #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  box-shadow: 0 0 35px rgba(212, 175, 55, 0.7);
+  animation: pulseArch 2s ease-in-out infinite;
+  cursor: pointer;
+}
+@keyframes pulseArch {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.9)); }
+}
+
+/* ==========================================================================
+   ACT 2: HERO MAJESTY & AUSPICIOUS MUHURAT COUNTDOWN
+   ========================================================================== */
+.hero-royal-stage {
+  min-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 110px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-tag-ganesh {
+  font-family: var(--font-royal);
+  font-size: 0.85rem;
+  letter-spacing: 0.28em;
+  color: var(--gold-primary);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 6.2vw, 4.6rem);
+  color: var(--text-main);
+  line-height: 1.12;
+  margin-bottom: 14px;
+}
+.hero-couple-calligraphy {
+  font-family: var(--font-script);
+  font-size: clamp(4.2rem, 11vw, 7.5rem);
+  color: var(--ruby-velvet);
+  display: block;
+  line-height: 0.9;
+  margin: 10px 0 20px;
+  text-shadow: 0 4px 20px rgba(135, 32, 51, 0.2);
+}
+
+/* Live Countdown Boxes */
+.countdown-ribbon {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin: 28px 0;
+  flex-wrap: wrap;
+}
+.countdown-capsule {
+  background: var(--bg-pearl);
+  border: var(--card-border-gold);
+  border-radius: 14px;
+  padding: 12px 18px;
+  min-width: 74px;
+  box-shadow: var(--card-shadow);
+}
+.countdown-num {
+  font-family: var(--font-royal);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ruby-velvet);
+  line-height: 1;
+}
+.countdown-lbl {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   ACT 3: BRIDE & GROOM ROYAL INTRODUCTION
+   ========================================================================== */
+.couple-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  max-width: 900px;
+  margin: 40px auto;
+}
+.intro-person-card {
+  background: var(--bg-pearl);
+  border: var(--card-border-gold);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.intro-person-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-shadow-hover);
+}
+.person-photo-frame {
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  border: 1px solid rgba(197, 155, 88, 0.4);
+}
+.person-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.intro-person-card:hover .person-photo-frame img {
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   ACT 4: SHAHI PATRIKA INVITATION
+   ========================================================================== */
+.shahi-patrika-wrapper {
+  max-width: 760px;
+  margin: 50px auto;
+  background: #FFFDF9;
+  border: 2px solid var(--gold-primary);
+  border-radius: 24px;
+  padding: clamp(36px, 7vw, 68px);
+  text-align: center;
+  box-shadow: var(--card-shadow), inset 0 0 40px rgba(212, 175, 55, 0.08);
+  position: relative;
+}
+
+/* ==========================================================================
+   ACT 5: UTSAV CEREMONIES CARDS
+   ========================================================================== */
+.ceremonies-grid-stage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  max-width: 980px;
+  margin: 40px auto;
+}
+.ceremony-card {
+  background: var(--bg-pearl);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+.ceremony-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-primary);
+  box-shadow: var(--card-shadow-hover);
+}
+.ceremony-icon-orb {
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: rgba(197, 155, 88, 0.12);
+  border: 1px dashed var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ceremony-icon-orb img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   ACT 6: TIMELINE & INTERACTIVE RITUALS (HALDI SPLASH & DIYA)
+   ========================================================================== */
+.interactive-ritual-box {
+  background: linear-gradient(145deg, #FFFDF8 0%, #FFF5EB 100%);
+  border: var(--card-border-gold);
+  border-radius: var(--radius-card);
+  padding: 32px;
+  max-width: 680px;
+  margin: 40px auto;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+}
+
+/* ==========================================================================
+   ACT 7: RSVP FORM & CONFIRMATION
+   ========================================================================== */
+.rsvp-royal-card {
+  max-width: 620px;
+  margin: 40px auto;
+  background: var(--bg-pearl);
+  border: var(--card-border-gold);
+  border-radius: var(--radius-card);
+  padding: 40px 30px;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+}
+.rsvp-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+.rsvp-input {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 9999px;
+  border: 1px solid rgba(197, 155, 88, 0.4);
+  background: #FFF;
+  font-family: inherit;
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.rsvp-input:focus {
+  border-color: var(--ruby-velvet);
+}
+
+/* Buttons */
+.btn-royal-gold {
+  background: linear-gradient(135deg, var(--ruby-velvet) 0%, #A81C30 100%);
+  border: 1.5px solid var(--gold-primary);
+  color: #FFF;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 14px 34px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(135, 32, 51, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  outline: none;
+}
+.btn-royal-gold:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(135, 32, 51, 0.45);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  body, html {
+    overflow-x: hidden !important;
+  }
+  .hero-royal-stage {
+    padding: 90px 16px 40px;
+  }
+  .shahi-patrika-wrapper {
+    padding: 30px 18px;
+  }
+  .btn-royal-gold {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 20px;
+    font-size: 0.88rem;
+    white-space: normal;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .mandap-golden-arch {
+    width: 80px;
+    height: 80px;
+    font-size: 2.2rem;
+  }
+  .countdown-ribbon {
+    gap: 8px;
+  }
+  .countdown-capsule {
+    min-width: 60px;
+    padding: 8px 10px;
+  }
+  .countdown-num {
+    font-size: 1.3rem;
+  }
+}

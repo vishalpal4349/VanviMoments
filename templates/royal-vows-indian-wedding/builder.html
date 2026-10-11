@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Vanvi Moments Studio — Royal Vows Indian Wedding Builder</title>
+  <meta name="description" content="Customize and publish your Haute Royal Indian Wedding website in real time with Vanvi Moments.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ruby-velvet: #6b0f1a;
+      --ruby-dark: #3a060d;
+      --gold-primary: #D4AF37;
+      --gold-light: #F3E5AB;
+      --gold-glow: rgba(212, 175, 55, 0.28);
+      --bg-dark: #0f0508;
+      --bg-panel: #1a0b10;
+      --bg-card: rgba(35, 14, 22, 0.95);
+      --border-subtle: rgba(212, 175, 55, 0.35);
+      --border-active: #D4AF37;
+      --text-main: #FFF5F7;
+      --text-muted: #D1B3BA;
+      --text-dim: #9E7D86;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      overflow-x: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Ambient Lighting */
+    .ambient-glow {
+      position: fixed;
+      top: -120px;
+      left: 20%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top Navigation */
+    .builder-header {
+      height: 64px;
+      background: rgba(26, 11, 16, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+      flex-shrink: 0;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold-primary), var(--ruby-velvet));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px var(--gold-glow);
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      letter-spacing: 0.08em;
+    }
+    .brand-subtitle {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-header-publish {
+      background: linear-gradient(135deg, var(--gold-primary), #B8860B);
+      color: #1a0b10;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 99px;
+      font-weight: 800;
+      font-size: 0.78rem;
+      cursor: pointer;
+      box-shadow: 0 4px 14px var(--gold-glow);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-header-publish:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
+    }
+
+    /* Main Stage Workspace */
+    .workspace-stage {
+      flex: 1;
+      display: flex;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Left Controls Sidebar */
+    .controls-sidebar {
+      width: 440px;
+      min-width: 340px;
+      max-width: 480px;
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 20;
+    }
+    .step-navigator {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .step-navigator::-webkit-scrollbar { display: none; }
+    .step-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .step-pill.active {
+      background: var(--ruby-velvet);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+      box-shadow: 0 2px 10px rgba(107, 15, 26, 0.5);
+    }
+
+    .form-scroll-pane {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .wizard-step { display: none; }
+    .wizard-step.active { display: block; animation: stepFade 0.25s ease-out; }
+    @keyframes stepFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: var(--gold-primary);
+      margin-bottom: 4px;
+    }
+    .step-desc {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 5px;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 2px var(--gold-glow);
+    }
+
+    /* Sticky Dock Footer */
+    .editor-dock {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-panel);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .dock-btn {
+      flex: 1;
+      padding: 11px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .dock-btn.btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .dock-btn.btn-primary {
+      background: linear-gradient(135deg, var(--gold-primary), #B8860B);
+      color: #1a0b10;
+      box-shadow: 0 4px 14px var(--gold-glow);
+    }
+
+    /* Right Preview Stage */
+    .preview-canvas {
+      flex: 1;
+      background: radial-gradient(circle at center, #240a13 0%, #0f0508 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      position: relative;
+    }
+    .device-switcher {
+      position: absolute;
+      top: 16px;
+      display: flex;
+      background: rgba(26, 11, 16, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 99px;
+      padding: 3px;
+      z-index: 30;
+    }
+    .dev-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dev-btn.active {
+      background: var(--ruby-velvet);
+      color: var(--gold-light);
+    }
+
+    .phone-simulator {
+      width: 380px;
+      height: 92%;
+      max-height: 820px;
+      background: #000;
+      border-radius: 44px;
+      border: 6px solid #2f131c;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.15);
+      position: relative;
+      overflow: hidden;
+      transition: width 0.3s ease;
+    }
+    .phone-notch {
+      width: 120px;
+      height: 20px;
+      background: #2f131c;
+      border-radius: 0 0 12px 12px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+    }
+    .phone-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-card {
+      background: var(--bg-panel);
+      border: 2px solid var(--border-active);
+      border-radius: var(--radius-lg);
+      padding: 30px 24px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px var(--gold-glow);
+    }
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: var(--gold-primary);
+      margin-bottom: 8px;
+    }
+    .modal-price-box {
+      margin: 18px 0;
+      padding: 16px;
+      background: rgba(107, 15, 26, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+    }
+    .modal-price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold-light);
+    }
+    .modal-price-strike {
+      font-size: 1rem;
+      color: var(--text-dim);
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+    .modal-pay-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-primary), #B8860B);
+      color: #1a0b10;
+      border: none;
+      padding: 13px;
+      border-radius: 99px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 18px var(--gold-glow);
+      margin-top: 10px;
+    }
+
+    @media (max-width: 860px) {
+      .workspace-stage {
+        flex-direction: column;
+      }
+      .controls-sidebar {
+        width: 100%;
+        max-width: 100%;
+        height: 52%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .preview-canvas {
+        height: 48%;
+      }
+      .phone-simulator {
+        width: 320px;
+        height: 94%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Top Builder Navigation -->
+  <header class="builder-header">
+    <a href="../../templates.html" class="header-brand" title="Back to Vanvi Moments Catalog">
+      <div class="brand-icon">👑</div>
+      <div>
+        <div class="brand-title">Royal Vows Studio</div>
+        <div class="brand-subtitle">Haute Vivah Experience</div>
+      </div>
+    </a>
+    <div class="header-actions">
+      <button type="button" class="btn-header-publish" onclick="openPublishModal()">
+        <span>🚀</span> <span>Launch ₹1,499</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Stage Workspace -->
+  <div class="workspace-stage">
+
+    <!-- Left Controls Panel -->
+    <div class="controls-sidebar">
+      
+      <!-- Step Navigator -->
+      <nav class="step-navigator">
+        <button type="button" class="step-pill active" onclick="goToStep(1)">1. Couple</button>
+        <button type="button" class="step-pill" onclick="goToStep(2)">2. Date &amp; Muhurat</button>
+        <button type="button" class="step-pill" onclick="goToStep(3)">3. Family &amp; Patrika</button>
+        <button type="button" class="step-pill" onclick="goToStep(4)">4. Ceremonies</button>
+        <button type="button" class="step-pill" onclick="goToStep(5)">5. Photos &amp; Colors</button>
+        <button type="button" class="step-pill" onclick="goToStep(6)">6. RSVP &amp; Share</button>
+      </nav>
+
+      <!-- Form Scroll Pane -->
+      <div class="form-scroll-pane">
+
+        <!-- STEP 1: Couple -->
+        <div class="wizard-step active" id="step-1">
+          <h2 class="step-title">The Royal Couple</h2>
+          <p class="step-desc">Enter the names and descriptions of the Bride &amp; Groom.</p>
+
+          <div class="form-group">
+            <label class="form-label">Bride's Name</label>
+            <input type="text" class="form-input" id="inpBride" value="Tanya" oninput="pushLiveConfig()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Groom's Name</label>
+            <input type="text" class="form-input" id="inpGroom" value="Rohan" oninput="pushLiveConfig()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Invitation Tagline</label>
+            <input type="text" class="form-input" value="Shubh Vivah Celebration" id="inpTagline">
+          </div>
+        </div>
+
+        <!-- STEP 2: Date & Muhurat -->
+        <div class="wizard-step" id="step-2">
+          <h2 class="step-title">Auspicious Date &amp; Venue</h2>
+          <p class="step-desc">Configure the live countdown and wedding muhurat.</p>
+
+          <div class="form-group">
+            <label class="form-label">Wedding Date</label>
+            <input type="date" class="form-input" id="inpDate" value="2026-12-12" onchange="pushLiveConfig()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Auspicious Muhurat</label>
+            <input type="text" class="form-input" value="Godhuli Bela · 11:00 AM" id="inpMuhurat">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Palace / Destination</label>
+            <input type="text" class="form-input" value="Umaid Bhawan Palace, Jodhpur" id="inpVenue">
+          </div>
+        </div>
+
+        <!-- STEP 3: Family & Patrika -->
+        <div class="wizard-step" id="step-3">
+          <h2 class="step-title">Shahi Patrika Honors</h2>
+          <p class="step-desc">Parents &amp; family honors displayed on the digital invitation scroll.</p>
+
+          <div class="form-group">
+            <label class="form-label">Bride's Parents</label>
+            <input type="text" class="form-input" value="Smt. &amp; Shri Suresh Sharma">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Groom's Parents</label>
+            <input type="text" class="form-input" value="Smt. &amp; Shri Ramesh Kapoor">
+          </div>
+        </div>
+
+        <!-- STEP 4: Ceremonies -->
+        <div class="wizard-step" id="step-4">
+          <h2 class="step-title">6-Event Itinerary</h2>
+          <p class="step-desc">From Tilak &amp; Haldi to Sangeet, Shubh Vivah, and Reception.</p>
+
+          <div class="form-group">
+            <label class="form-label">Event 1: Tilak &amp; Sagan</label>
+            <input type="text" class="form-input" value="10 Dec · 4:00 PM · Traditional Pastels">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event 2: Haldi Ki Rasam</label>
+            <input type="text" class="form-input" value="11 Dec · 10:00 AM · Sunshine Yellow">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event 3: Mehendi Garden</label>
+            <input type="text" class="form-input" value="11 Dec · 2:00 PM · Emerald Green">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event 4: Sangeet Sandhya</label>
+            <input type="text" class="form-input" value="11 Dec · 7:30 PM · Black Tie Glamour">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event 5: Shubh Vivah</label>
+            <input type="text" class="form-input" value="12 Dec · 11:00 AM · Royal Indian Silk">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event 6: Royal Reception</label>
+            <input type="text" class="form-input" value="12 Dec · 7:00 PM · Formal Elegance">
+          </div>
+        </div>
+
+        <!-- STEP 5: Photos & Colors -->
+        <div class="wizard-step" id="step-5">
+          <h2 class="step-title">Royal Aesthetics &amp; Photos</h2>
+          <p class="step-desc">Fine-tune the velvet theme, gold accents, and couple portrait URLs.</p>
+
+          <div class="form-group">
+            <label class="form-label">Primary Velvet Accent Color</label>
+            <input type="color" class="form-input" id="inpColor" value="#6b0f1a" onchange="pushLiveConfig()" style="height:44px; padding:4px;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Gold Accent Color</label>
+            <input type="color" class="form-input" id="inpGold" value="#D4AF37" onchange="pushLiveConfig()" style="height:44px; padding:4px;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bride Photo URL</label>
+            <input type="url" class="form-input" id="inpBrideImg" value="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=700&auto=format&fit=crop" oninput="pushLiveConfig()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Groom Photo URL</label>
+            <input type="url" class="form-input" id="inpGroomImg" value="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=700&auto=format&fit=crop" oninput="pushLiveConfig()">
+          </div>
+        </div>
+
+        <!-- STEP 6: RSVP & Share -->
+        <div class="wizard-step" id="step-6">
+          <h2 class="step-title">RSVP &amp; WhatsApp Dispatch</h2>
+          <p class="step-desc">Configure WhatsApp RSVP number and launch the live invitation.</p>
+
+          <div class="form-group">
+            <label class="form-label">Family WhatsApp Number (Without +)</label>
+            <input type="text" class="form-input" value="919876543210" id="inpWaNumber">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hashtag</label>
+            <input type="text" class="form-input" value="#TanyaRohanRoyalVivah">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Dock Footer -->
+      <div class="editor-dock">
+        <button class="dock-btn btn-secondary" id="btnPrev" onclick="navigateStep(-1)" style="display: none;">
+          ← Back
+        </button>
+        <button class="dock-btn btn-primary" id="btnNext" onclick="navigateStep(1)">
+          Next Step →
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Right Live Phone Simulator -->
+    <div class="preview-canvas">
+      <div class="device-switcher">
+        <button class="dev-btn active" onclick="setDevice('mobile')">📱 Mobile</button>
+        <button class="dev-btn" onclick="setDevice('desktop')">💻 Desktop</button>
+      </div>
+
+      <div class="phone-simulator" id="phoneSim">
+        <div class="phone-notch"></div>
+        <iframe src="index.html" class="phone-iframe" id="previewFrame"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Publish & Payment Modal -->
+  <div class="modal-overlay" id="publishModal">
+    <div class="modal-card">
+      <h3 class="modal-title">Launch Royal Vows Invitation</h3>
+      <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+        Get your custom live URL, unlimited guest sharing, WhatsApp RSVP tracking, and Haute Vivah 3D Palace Gates animations.
+      </p>
+
+      <div class="modal-price-box">
+        <span class="modal-price">₹1,499</span>
+        <span class="modal-price-strike">₹2,499</span>
+        <p style="font-size: 0.72rem; color: var(--gold-primary); margin-top: 6px; font-weight:700;">Exclusive Launch Offer (₹1,000 OFF)</p>
+      </div>
+
+      <button class="modal-pay-btn" onclick="processPayment()">
+        Proceed to Checkout (₹1,499) ✦
+      </button>
+
+      <div style="margin-top:14px; font-size:0.75rem; color:var(--text-dim); cursor:pointer;" onclick="closePublishModal()">
+        ← Back to Studio Editing
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 6;
+
+    function goToStep(step) {
+      document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.step-pill').forEach(el => el.classList.remove('active'));
+
+      currentStep = step;
+      document.getElementById('step-' + step).classList.add('active');
+      document.querySelectorAll('.step-pill')[step - 1].classList.add('active');
+
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+
+      btnPrev.style.display = currentStep > 1 ? 'flex' : 'none';
+      if (currentStep === totalSteps) {
+        btnNext.textContent = 'Publish Invitation (₹1,499)';
+        btnNext.onclick = openPublishModal;
+      } else {
+        btnNext.textContent = 'Next Step →';
+        btnNext.onclick = () => navigateStep(1);
+      }
+    }
+
+    function navigateStep(dir) {
+      const next = currentStep + dir;
+      if (next >= 1 && next <= totalSteps) {
+        goToStep(next);
+      }
+    }
+
+    function setDevice(mode) {
+      const phone = document.getElementById('phoneSim');
+      document.querySelectorAll('.dev-btn').forEach(b => b.classList.remove('active'));
+      if (mode === 'desktop') {
+        phone.style.width = '96%';
+        phone.style.maxWidth = '920px';
+        phone.style.borderRadius = '18px';
+        phone.querySelector('.phone-notch').style.display = 'none';
+        event.target.classList.add('active');
+      } else {
+        phone.style.width = '380px';
+        phone.style.maxWidth = '95%';
+        phone.style.borderRadius = '44px';
+        phone.querySelector('.phone-notch').style.display = 'block';
+        event.target.classList.add('active');
+      }
+    }
+
+    function pushLiveConfig() {
+      const iframe = document.getElementById('previewFrame');
+      if (!iframe || !iframe.contentWindow) return;
+
+      const config = {
+        bride: document.getElementById('inpBride')?.value || 'Tanya',
+        groom: document.getElementById('inpGroom')?.value || 'Rohan',
+        date: document.getElementById('inpDate')?.value || '2026-12-12',
+        coupleColor: document.getElementById('inpColor')?.value || '#6b0f1a',
+        dateColor: document.getElementById('inpGold')?.value || '#D4AF37',
+        bridePhoto: document.getElementById('inpBrideImg')?.value,
+        groomPhoto: document.getElementById('inpGroomImg')?.value
+      };
+
+      iframe.contentWindow.postMessage({ type: 'UPDATE_CONFIG', config }, '*');
+    }
+
+    function openPublishModal() {
+      document.getElementById('publishModal').style.display = 'flex';
+    }
+    function closePublishModal() {
+      document.getElementById('publishModal').style.display = 'none';
+    }
+
+    function processPayment() {
+      const bride = document.getElementById('inpBride')?.value || 'Tanya';
+      const groom = document.getElementById('inpGroom')?.value || 'Rohan';
+      const title = encodeURIComponent(`${bride} & ${groom} Royal Vivah`);
+      window.location.href = `../../checkout.html?template=royal-vows-indian-wedding&amount=1499&name=${title}`;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="only light">
+  <title id="page-title">Kishan &amp; Divya · Ivory Arch Collection | Vanvi Moments</title>
+  
+  <meta property="og:title" content="Kishan &amp; Divya · Ivory Arch Wedding Invitation" />
+  <meta property="og:description" content="Minimal Luxe Ivory &amp; Gold sacred Indian wedding celebration of Kishan &amp; Divya." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500;600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/json" id="wedding-config">
+  {
+    "couple": {
+      "bride": "Divya",
+      "groom": "Kishan",
+      "date": "2026-12-12",
+      "venue": "Umaid Bhawan Palace, Jodhpur",
+      "whatsapp": "919876543210",
+      "hashtag": "#KishanWedsDivya"
+    },
+    "invite": {
+      "blessing": "With the eternal blessings of the divine & our loving ancestors",
+      "brideFather": "Mr. Rajesh Sharma",
+      "brideMother": "Mrs. Kavita Sharma",
+      "groomFather": "Mr. Sanjay Kapoor",
+      "groomMother": "Mrs. Neeta Kapoor",
+      "showGrandparents": false
+    },
+    "events": [
+      {
+        "name": "Mehendi",
+        "date": "11 Dec 2026",
+        "time": "2:00 PM",
+        "venue": "Garden Pavilion",
+        "desc": "Henna artistry, marigolds, folk melodies and afternoon tea."
+      },
+      {
+        "name": "Haldi",
+        "date": "11 Dec 2026",
+        "time": "10:00 AM",
+        "venue": "The Sunlit Courtyard",
+        "desc": "A golden morning, fragrant turmeric and celebratory songs."
+      },
+      {
+        "name": "Sangeet & Cocktail",
+        "date": "11 Dec 2026",
+        "time": "7:30 PM",
+        "venue": "The Palace Terrace",
+        "desc": "Music, dance performances, and celebration under the stars."
+      },
+      {
+        "name": "Shaadi & Pheras",
+        "date": "12 Dec 2026",
+        "time": "10:00 AM",
+        "venue": "The Grand Mandap",
+        "desc": "Seven sacred vows, holy fire, and the eternal union."
+      },
+      {
+        "name": "Royal Reception",
+        "date": "12 Dec 2026",
+        "time": "7:30 PM",
+        "venue": "The Grand Ballroom",
+        "desc": "An evening of feast, royal hospitality and memorable blessings."
+      }
+    ],
+    "story": {
+      "show": true,
+      "customHashtag": "#KishanWedsDivya",
+      "tags": ["Soulmates", "Sacred Vows", "Palace Dreams", "Forever & Always"]
+    },
+    "gallery": {
+      "show": true,
+      "layout": "4",
+      "photos": [
+        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80"
+      ]
+    },
+    "thingsToKnow": [],
+    "rsvp": {
+      "mode": "whatsapp",
+      "heading": "Will you join us?",
+      "subtext": "We've saved a seat for you — at our table, in our hearts, and under the royal ivory arches. Come celebrate with us as we begin this sacred chapter together.",
+      "btnText": "Yes, I'll be there 🌸",
+      "whatsapp": "919876543210"
+    },
+    "music": {
+      "enabled": true,
+      "src": "assets/song/Template_03.mp3",
+      "name": "Minimal Luxe Sitar & Flute"
+    }
+  }
+  </script>
+  <script>window.__WEDDING_CONFIG__ = JSON.parse(document.getElementById('wedding-config').textContent);</script>
+
+  <style>
+    :root, html, body { color-scheme: only light; }
+
+    /* Elegant Vanvi Moments Watermark */
+    .vanvi-watermark {
+      position: fixed;
+      bottom: 14px;
+      right: 14px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(30, 24, 20, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(200, 168, 112, 0.45);
+      border-radius: 20px;
+      color: #FAF4E8;
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      transition: all 0.3s ease;
+      opacity: 0.9;
+    }
+    .vanvi-watermark:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      border-color: #C8A870;
+      box-shadow: 0 6px 20px rgba(200, 168, 112, 0.35);
+    }
+    .vanvi-watermark span {
+      color: #C8A870;
+      font-weight: 700;
+    }
+
+    /* VIP Personalization Banner */
+    .vip-guest-banner {
+      display: none;
+      background: linear-gradient(135deg, rgba(200, 168, 112, 0.18), rgba(245, 240, 230, 0.9));
+      border: 1px solid rgba(200, 168, 112, 0.5);
+      border-radius: 30px;
+      padding: 8px 22px;
+      margin: 16px auto 0;
+      max-width: 90%;
+      width: fit-content;
+      box-shadow: 0 4px 18px rgba(200, 168, 112, 0.2);
+      text-align: center;
+      position: relative;
+      z-index: 100;
+      animation: vipPulse 3s ease-in-out infinite alternate;
+    }
+    .vip-guest-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #2D241E;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .vip-guest-name {
+      color: #8F6932;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      text-transform: capitalize;
+      font-weight: 700;
+    }
+    @keyframes vipPulse {
+      0% { transform: scale(0.98); }
+      100% { transform: scale(1.02); }
+    }
+
+    /* Floating Multi-track Audio Player */
+    .vanvi-music-pill {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(250, 245, 238, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(200, 168, 112, 0.45);
+      border-radius: 30px;
+      padding: 5px 12px 5px 6px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      transition: all 0.3s ease;
+    }
+    .vanvi-music-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #C8A870, #8F6932);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: #FAF4E8;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      outline: none;
+    }
+    .vanvi-music-waves {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 14px;
+    }
+    .v-wave {
+      width: 2.5px;
+      background: #C8A870;
+      border-radius: 2px;
+      height: 4px;
+      transition: height 0.2s ease;
+    }
+    .music-playing .v-wave:nth-child(1) { animation: wavePulse 0.9s infinite ease-in-out; }
+    .music-playing .v-wave:nth-child(2) { animation: wavePulse 0.9s infinite ease-in-out 0.2s; }
+    .music-playing .v-wave:nth-child(3) { animation: wavePulse 0.9s infinite ease-in-out 0.4s; }
+    @keyframes wavePulse {
+      0%, 100% { height: 4px; }
+      50% { height: 14px; }
+    }
+    .vanvi-song-select {
+      background: transparent;
+      border: 1px solid rgba(200, 168, 112, 0.35);
+      border-radius: 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      color: #2D241E;
+      padding: 3px 8px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Minimal Luxe Ashirwad Box */
+    .ashirwad-box {
+      margin: 32px auto 0;
+      max-width: 480px;
+      background: rgba(255, 253, 248, 0.92);
+      border: 1px solid rgba(200, 168, 112, 0.45);
+      border-radius: 16px;
+      padding: 22px 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(45, 36, 30, 0.08);
+    }
+    .ashirwad-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.45rem;
+      color: #8F6932;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .ashirwad-subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      color: #6B5E52;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .ashirwad-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .ashirwad-chip {
+      background: rgba(200, 168, 112, 0.12);
+      border: 1px solid rgba(200, 168, 112, 0.35);
+      border-radius: 20px;
+      padding: 5px 12px;
+      color: #3D3228;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.25s ease;
+    }
+    .ashirwad-chip:hover, .ashirwad-chip.active {
+      background: rgba(200, 168, 112, 0.3);
+      border-color: #8F6932;
+      color: #1A140E;
+      transform: translateY(-1px);
+    }
+    .ashirwad-textarea {
+      width: 100%;
+      height: 75px;
+      background: #FFFDF9;
+      border: 1px solid rgba(200, 168, 112, 0.4);
+      border-radius: 8px;
+      color: #2D241E;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      padding: 10px;
+      resize: none;
+      outline: none;
+      margin-bottom: 14px;
+      box-sizing: border-box;
+    }
+    .ashirwad-textarea:focus {
+      border-color: #8F6932;
+      box-shadow: 0 0 10px rgba(200, 168, 112, 0.25);
+    }
+    .ashirwad-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #FFF;
+      border: none;
+      border-radius: 25px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .ashirwad-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+    }
+  </style>
+</head>
+<body>
+
+<div class="c-ring" id="cRing"></div>
+<div class="c-dot"  id="cDot"></div>
+
+<!-- PRELOADER — Gold mandala trace on warm ivory -->
+<div id="preloader" class="preloader">
+  <div class="pl-bg"></div>
+  <div class="pl-content">
+    <div class="pl-mandala-wrap" aria-hidden="true">
+      <svg class="pl-mandala" viewBox="0 0 120 120" width="80" height="80">
+        <circle class="pl-m-ring pl-m-r1" cx="60" cy="60" r="52" fill="none" stroke="#C8A870" stroke-width="0.8"/>
+        <circle class="pl-m-ring pl-m-r2" cx="60" cy="60" r="38" fill="none" stroke="#C8A870" stroke-width="0.6"/>
+        <circle class="pl-m-ring pl-m-r3" cx="60" cy="60" r="22" fill="none" stroke="#C8A870" stroke-width="0.5"/>
+        <g class="pl-m-petals">
+          <ellipse cx="60" cy="18" rx="4.5" ry="11" fill="#C8A870" opacity="0.18" transform="rotate(0   60 60)"/>
+          <ellipse cx="60" cy="18" rx="4.5" ry="11" fill="#C8A870" opacity="0.18" transform="rotate(45  60 60)"/>
+          <ellipse cx="60" cy="18" rx="4.5" ry="11" fill="#C8A870" opacity="0.18" transform="rotate(90  60 60)"/>
+          <ellipse cx="60" cy="18" rx="4.5" ry="11" fill="#C8A870" opacity="0.18" transform="rotate(135 60 60)"/>
+          <ellipse cx="60" cy="18" rx="4.5" ry="11" fill="#C8A870" opacity="0.18" transform="rotate(180 60 60)"/>
+          <ellipse cx="60" cy="18" rx="4.5" ry="11" fill="#C8A870" opacity="0.18" transform="rotate(225 60 60)"/>
+          <ellipse cx="60" cy="18" rx="4.5" ry="11" fill="#C8A870" opacity="0.18" transform="rotate(270 60 60)"/>
+          <ellipse cx="60" cy="18" rx="4.5" ry="11" fill="#C8A870" opacity="0.18" transform="rotate(315 60 60)"/>
+        </g>
+        <circle class="pl-m-dot" cx="60" cy="60" r="3.5" fill="#C8A870"/>
+      </svg>
+    </div>
+    <div class="pl-names" id="plNames">
+      <span class="pl-n1">Kishan</span>
+      <span class="pl-weds">weds</span>
+      <span class="pl-n2">Divya</span>
+    </div>
+  </div>
+</div>
+
+<!-- VIP Personalized Guest Banner -->
+<div class="vip-guest-banner" id="vipBanner">
+  <div class="vip-guest-text">
+    <span>✨ विशेष आमंत्रण : </span>
+    <span class="vip-guest-name" id="vipName">Sharma Family</span>
+    <span> ✨</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HERO SCROLL SCENE (IVORY ARCH & COUPLE DEPTH)
+══════════════════════════════════════════════ -->
+<div id="heroWrap" class="hero-wrap">
+  <div id="heroPin" class="hero-pin">
+    <div class="hero-sky"></div>
+    <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
+
+    <!-- Couple inside Arch -->
+    <img id="l4" class="hl hl-couple" src="assets/layers/Hero Couple.webp" alt="Kishan and Divya">
+    <!-- Ivory Arch Frame -->
+    <img id="l3" class="hl hl-palace" src="assets/layers/Herp Palace.webp" alt="Ivory Arch">
+
+    <div class="hero-floats" aria-hidden="true">
+      <img class="fl diya-l" src="assets/elements/Element 1.webp" alt="">
+      <img class="fl diya-r" src="assets/elements/Element 1.webp" alt="">
+      <img class="fl fall-l" src="assets/elements/Element 4.webp" alt="">
+      <img class="fl fall-r" src="assets/elements/Element 5.webp" alt="">
+    </div>
+
+    <div id="petalHero" class="petal-canvas"></div>
+    <div class="rangoli-orb" style="top:18%;left:8%;" aria-hidden="true"></div>
+    <div class="rangoli-orb" style="top:55%;right:9%;" aria-hidden="true"></div>
+
+    <div id="heroCopy" class="hero-copy">
+      <h1 class="hc-bride"><span>Kishan</span></h1>
+      <span class="hc-weds">weds</span>
+      <h1 class="hc-groom"><span>Divya</span></h1>
+      <div id="heroCountdown" class="hc-countdown" aria-label="Countdown to the wedding"></div>
+    </div>
+
+    <div class="scroll-nudge" id="scrollNudge">
+      <span>Scroll</span>
+      <div class="sn-line"><div class="sn-dot"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- URN BRIDGE -->
+<div class="urn-bridge" id="urnBridge" aria-hidden="true">
+  <canvas id="waterCanvas" class="water-canvas"></canvas>
+  <div class="urn urn-l" id="urnL">
+    <img src="assets/elements/Element_urn-bridge.webp" alt="">
+  </div>
+  <div class="urn-bridge-line" id="urnBridgeLine"></div>
+  <div class="urn urn-r" id="urnR">
+    <img src="assets/elements/Element_urn-bridge.webp" alt="" style="transform:scaleX(-1)">
+  </div>
+</div>
+
+<!-- INVITATION SECTION -->
+<section id="invite" class="s-invite">
+  <img class="bg-fill" src="assets/backgrounds/Background 6.jpg" alt="">
+  <img class="invite-couple-bg" src="assets/layers/Hero Couple.webp" alt="" aria-hidden="true">
+  <div class="toran"><img src="assets/backgrounds/Background 4.webp" alt="" class="toran-img"></div>
+  <img class="fl-moon"   src="assets/elements/Element 3.webp" alt="" aria-hidden="true">
+  <img class="fl-leaf-l" src="assets/elements/Element 4.webp" alt="" aria-hidden="true">
+  <img class="fl-leaf-r" src="assets/elements/Element 5.webp" alt="" aria-hidden="true">
+
+  <div class="container">
+    <div class="invite-card scroll-in">
+      <div class="i-ganesha">
+        <img src="assets/elements/Element 6.webp" alt="Sacred Lotus" class="i-ganesha-img">
+      </div>
+
+      <div class="i-rule">
+        <svg viewBox="0 0 280 6" width="100%" style="max-width:280px">
+          <line x1="0" y1="3" x2="118" y2="3" stroke="#C8A870" stroke-width="0.5" opacity="0.35"/>
+          <circle cx="140" cy="3" r="3" fill="none" stroke="#C8A870" stroke-width="0.6" opacity="0.55"/>
+          <line x1="162" y1="3" x2="280" y2="3" stroke="#C8A870" stroke-width="0.5" opacity="0.35"/>
+        </svg>
+      </div>
+
+      <p class="i-bless">With the blessings of the divine<br>and the love of our families</p>
+      <p class="i-label">Together we invite you to celebrate the wedding of</p>
+
+      <div class="i-names">
+        <span class="i-bride">Kishan</span>
+        <span class="i-amp">&amp;</span>
+        <span class="i-groom">Divya</span>
+      </div>
+
+      <div class="i-fam" id="iFam">
+        <div class="fam-side">
+          <div class="fam-parents"><em>Son of</em><br><span id="iGroomParents">Mr. Sanjay Kapoor &amp; Mrs. Neeta Kapoor</span></div>
+        </div>
+        <div class="fam-dot">✦</div>
+        <div class="fam-side">
+          <div class="fam-parents"><em>Daughter of</em><br><span id="iBrideParents">Mr. Rajesh Sharma &amp; Mrs. Kavita Sharma</span></div>
+        </div>
+      </div>
+      <p class="i-close">On the following auspicious occasions</p>
+    </div>
+  </div>
+  <div id="petalInvite" class="petal-canvas"></div>
+</section>
+
+<!-- EVENTS SECTION -->
+<section id="events" class="s-events">
+  <img class="bg-fill" src="assets/backgrounds/Background 3.webp" alt="">
+  <div class="ev-paper-veil"></div>
+
+  <div class="container">
+    <div class="s-head scroll-in">
+      <span class="sh-eye">The Sacred Celebrations</span>
+      <h2 class="sh-h">Wedding <em>Itinerary</em></h2>
+    </div>
+    <div class="sh-line-wrap"><div class="sh-line" id="evLine"></div></div>
+
+    <div class="ev-float-stage" id="evStage">
+      <article class="ev-node ev-row1 scroll-in" data-idx="0">
+        <div class="ev-icon-wrap"><img src="assets/icons/icon-mehendi.webp" alt="Mehendi" class="ev-icon"><div class="ev-glow"></div></div>
+        <div class="ev-label"><span class="ev-name">Mehendi</span><span class="ev-date">11 Dec · 2:00 PM</span></div>
+        <div class="ev-detail"><p class="ev-venue">Garden Pavilion</p><p class="ev-desc">Henna artistry, marigolds, folk melodies & afternoon tea.</p></div>
+      </article>
+
+      <article class="ev-node ev-row1 scroll-in" data-idx="1">
+        <div class="ev-icon-wrap"><img src="assets/icons/icon-haldi.webp" alt="Haldi" class="ev-icon"><div class="ev-glow"></div></div>
+        <div class="ev-label"><span class="ev-name">Haldi Utsav</span><span class="ev-date">11 Dec · 10:00 AM</span></div>
+        <div class="ev-detail"><p class="ev-venue">The Sunlit Courtyard</p><p class="ev-desc">A golden morning, fragrant turmeric and celebratory songs.</p></div>
+      </article>
+
+      <article class="ev-node ev-row1 scroll-in" data-idx="2">
+        <div class="ev-icon-wrap"><img src="assets/icons/icon-cocktail.webp" alt="Sangeet" class="ev-icon"><div class="ev-glow"></div></div>
+        <div class="ev-label"><span class="ev-name">Sangeet &amp; Musical Night</span><span class="ev-date">11 Dec · 7:30 PM</span></div>
+        <div class="ev-detail"><p class="ev-venue">The Palace Terrace</p><p class="ev-desc">Music, dance performances, and celebration under the stars.</p></div>
+      </article>
+
+      <article class="ev-node ev-row2 ev-node--hero scroll-in" data-idx="3">
+        <div class="ev-icon-wrap"><img src="assets/icons/icon-shaadi.webp" alt="Shaadi" class="ev-icon"><div class="ev-glow"></div></div>
+        <div class="ev-label"><span class="ev-name">Shaadi &amp; Pheras</span><span class="ev-date">12 Dec · 10:00 AM</span></div>
+        <div class="ev-detail"><p class="ev-venue">The Grand Mandap</p><p class="ev-desc">Seven sacred vows, holy fire, and the eternal union.</p></div>
+      </article>
+
+      <article class="ev-node ev-row2 scroll-in" data-idx="4">
+        <div class="ev-icon-wrap"><img src="assets/icons/icon-reception.webp" alt="Reception" class="ev-icon"><div class="ev-glow"></div></div>
+        <div class="ev-label"><span class="ev-name">Royal Reception</span><span class="ev-date">12 Dec · 7:30 PM</span></div>
+        <div class="ev-detail"><p class="ev-venue">The Grand Ballroom</p><p class="ev-desc">An evening of feast, royal hospitality and memorable blessings.</p></div>
+      </article>
+    </div>
+  </div>
+  <div id="petalEvents" class="petal-canvas"></div>
+</section>
+
+<!-- STORY SECTION — Curtain Pull Reveal -->
+<section id="story" class="s-story">
+  <div class="st-paper-bg"></div>
+  <div id="petalStory" class="petal-canvas" style="z-index:8"></div>
+
+  <div class="st-stage" id="stStage">
+    <div class="st-reveal" id="stReveal">
+      <div class="st-rv-inner">
+        <div class="st-rv-header" id="stRvHeader">
+          <span class="sh-eye">Our Journey</span>
+          <h2 class="sh-h">Meet the <em>Couple</em></h2>
+        </div>
+        <div class="st-rv-names" id="stRvNames">
+          <span class="st-rv-bride" id="stRvBride">Kishan</span>
+          <span class="st-rv-amp">&amp;</span>
+          <span class="st-rv-groom" id="stRvGroom">Divya</span>
+        </div>
+        <p class="st-rv-verse" id="stRvVerse">Two souls, one sacred archway, a lifetime of mornings.</p>
+        <div class="st-rv-tags" id="stRvTags">
+          <span class="st-rv-tag">Soulmates</span>
+          <span class="st-rv-tag">Sacred Vows</span>
+          <span class="st-rv-tag">Palace Dreams</span>
+          <span class="st-rv-tag">#KishanWedsDivya</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bride & Groom figures -->
+    <div class="st-char st-bride" id="stBride">
+      <img src="assets/elements/Element_Bride.webp" alt="Bride" class="st-char-img">
+    </div>
+    <div class="st-char st-groom" id="stGroom">
+      <img src="assets/elements/Element_Groom.webp" alt="Groom" class="st-char-img">
+    </div>
+
+    <!-- Interactive Linen Curtains -->
+    <div class="st-curtains" id="stCurtains">
+      <div class="st-curt st-curt-l" id="stCurtL">
+        <img src="assets/elements/Element_Curtain.webp" alt="" class="st-curt-img">
+      </div>
+      <div class="st-curt st-curt-r" id="stCurtR">
+        <img src="assets/elements/Element_Curtain.webp" alt="" class="st-curt-img st-curt-img-mirror">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section id="gallery" class="s-gallery">
+  <img class="bg-fill" src="assets/backgrounds/Background 6.jpg" alt="">
+  <div class="container">
+    <div class="s-head scroll-in">
+      <span class="sh-eye">Captured Moments</span>
+      <h2 class="sh-h">Our <em>Gallery</em></h2>
+    </div>
+    <div class="sh-line-wrap"><div class="sh-line" id="galLine"></div></div>
+    <div class="gal-grid">
+      <div class="gal-item gal-tall scroll-in"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" alt="Couple" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
+      <div class="gal-item scroll-in"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Couple" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
+      <div class="gal-item scroll-in"><img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80" alt="Couple" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
+      <div class="gal-item scroll-in"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" alt="Couple" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- THINGS TO KNOW SECTION -->
+<section id="things" class="s-things">
+  <img class="bg-fill things-sky" src="assets/layers/Hero background.webp" alt="">
+  <div class="things-veil"></div>
+  <div class="container">
+    <div class="s-head scroll-in">
+      <span class="sh-eye sh-eye--lt">Guest Essentials</span>
+      <h2 class="sh-h sh-h--lt">Things to <em>Know</em></h2>
+    </div>
+    <div class="sh-line-wrap"><div class="sh-line" id="thingsLine"></div></div>
+    <div class="tt-row">
+      <div class="tt scroll-in">
+        <span class="tt-l">Wedding Hashtag</span><p class="tt-v">#KishanWedsDivya</p>
+      </div>
+      <div class="tt scroll-in">
+        <span class="tt-l">Dress Code</span><p class="tt-v">Ivory, Gold & Traditional Silk</p>
+      </div>
+      <div class="tt scroll-in">
+        <span class="tt-l">Palace Venue</span><p class="tt-v">Umaid Bhawan<br>Jodhpur</p>
+      </div>
+      <div class="tt scroll-in">
+        <span class="tt-l">Valet Parking</span><p class="tt-v">Available<br>on-site</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP & ASHIRWAD SECTION -->
+<section id="rsvp" class="s-rsvp">
+  <div class="rsvp-paper-veil"></div>
+  <img class="s-diya-l" src="assets/elements/Element 1.webp" alt="" aria-hidden="true">
+  <img class="s-diya-r" src="assets/elements/Element 1.webp" alt="" aria-hidden="true">
+  <div class="rsvp-toran"><img src="assets/backgrounds/Background 4.webp" alt="" class="toran-img"></div>
+
+  <div class="container rsvp-body">
+    <span class="rsvp-eye scroll-in">Join the Celebration</span>
+    <h2 class="rsvp-heading scroll-in" id="rsvpHeading">Will you <em>join us?</em></h2>
+    <p class="rsvp-sub scroll-in" id="rsvpSub">
+      We've saved a seat for you — at our table, in our hearts, and under the open sky.<br>
+      Come celebrate with us as Kishan &amp; Divya begin this new chapter together.
+    </p>
+
+    <div class="rsvp-cta-wrap scroll-in">
+      <a id="rsvpWaBtn" class="rsvp-wa-btn" href="https://wa.me/919876543210?text=Namaste!%20I%20will%20be%20there%20to%20celebrate%20Kishan%20%26%20Divya's%20wedding!" target="_blank">
+        <span class="rsvp-wa-inner">Confirm RSVP via WhatsApp</span>
+      </a>
+    </div>
+
+    <!-- Feature: Minimal Luxe Ashirwad & Blessings Box -->
+    <div class="ashirwad-box scroll-in">
+      <h3 class="ashirwad-title">🙏 Send Sacred Ashirwad</h3>
+      <p class="ashirwad-subtitle">Choose a traditional blessing or write your heartfelt wishes</p>
+      
+      <div class="ashirwad-chips">
+        <span class="ashirwad-chip" onclick="setAshirwad('सदा सुहागिन भव! May your union be blessed with eternal happiness, wealth and love.')">🌸 सदा सुहागिन भव</span>
+        <span class="ashirwad-chip" onclick="setAshirwad('मंगलम भगवान विष्णुः मंगलम गरुड़ध्वजः। Heartiest congratulations to Kishan & Divya!')">🪔 मंगलम भवतु</span>
+        <span class="ashirwad-chip" onclick="setAshirwad('Wishing Kishan & Divya a lifetime of pure grace, laughter and eternal love!')">💖 Eternal Grace</span>
+      </div>
+
+      <textarea id="ashirwadText" class="ashirwad-textarea" placeholder="Type your personal blessings or wishes for Kishan & Divya..."></textarea>
+      
+      <a id="ashirwadBtn" href="javascript:void(0)" onclick="sendAshirwad()" class="ashirwad-submit-btn">
+        <span>Send via WhatsApp</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.288.043.088.072.19.014.305-.058.115-.087.187-.173.289l-.26.309c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.13.332.203.043.072.043.419-.101.824z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" style="text-align:center;padding:28px 16px 36px;background:#F8F4ED;color:#8F6932;font-size:0.78rem;">
+  <p style="margin:0;">Crafted with love for Kishan &amp; Divya · <a href="builder.html" style="color:#C8A870;text-decoration:none;border-bottom:1px solid #C8A870;">Vanvi Moments</a></p>
+</footer>
+
+<!-- Floating Multi-track Audio Player -->
+<div class="vanvi-music-pill" id="vanviMusicPill">
+  <button class="vanvi-music-btn" id="vanviMusicBtn" title="Play / Pause Audio">▶</button>
+  <div class="vanvi-music-waves" id="vanviWaves">
+    <span class="v-wave"></span><span class="v-wave"></span><span class="v-wave"></span>
+  </div>
+  <select class="vanvi-song-select" id="vanviSongSelect" onchange="changeTrack(this.value)">
+    <option value="assets/song/Template_03.mp3">Minimal Sitar Harmony</option>
+    <option value="assets/song/song2.mp3">Royal Flute Journey</option>
+    <option value="assets/song/song3.mp3">Palace Sitar Classic</option>
+  </select>
+</div>
+
+<!-- Vanvi Moments Watermark -->
+<a href="#" class="vanvi-watermark">
+  <span>Vanvi Moments</span> · Ivory Arch Luxe
+</a>
+
+<audio id="bgMusic" src="assets/song/Template_03.mp3" loop preload="none"></audio>
+
+<script src="script.js" defer></script>
+<script>
+  // VIP Guest Personalization URL Reader & Purchase Verification
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const guest = params.get('guest') || params.get('vip');
+    if (guest) {
+      const banner = document.getElementById('vipBanner');
+      const nameEl = document.getElementById('vipName');
+      if (banner && nameEl) {
+        nameEl.textContent = decodeURIComponent(guest);
+        banner.style.display = 'block';
+      }
+    }
+    if (params.get('purchased') === 'true' || params.get('paid') === 'true' || window.vanviPurchased) {
+      const wm = document.querySelector('.vanvi-watermark');
+      if (wm) wm.style.display = 'none';
+    }
+  })();
+
+  // Ashirwad Box Helpers
+  function setAshirwad(text) {
+    const txtArea = document.getElementById('ashirwadText');
+    if (txtArea) txtArea.value = text;
+  }
+  function sendAshirwad() {
+    const text = document.getElementById('ashirwadText').value.trim();
+    if (!text) {
+      alert('Please enter or select a blessing first!');
+      return;
+    }
+    const phone = "919876543210";
+    const msg = encodeURIComponent("🙏 Sacred Ashirwad for Kishan & Divya:\n\n" + text + "\n\n— Sent from Ivory Arch Wedding Invitation");
+    window.open("https://wa.me/" + phone + "?text=" + msg, "_blank");
+  }
+
+  // Audio pill integration
+  const pillBtn = document.getElementById('vanviMusicBtn');
+  const pillWaves = document.getElementById('vanviMusicPill');
+  const bgAudio = document.getElementById('bgMusic');
+
+  if (pillBtn && bgAudio) {
+    pillBtn.addEventListener('click', function() {
+      if (bgAudio.paused) {
+        bgAudio.play().then(() => {
+          pillBtn.textContent = '❚❚';
+          pillWaves.classList.add('music-playing');
+        }).catch(e => console.log(e));
+      } else {
+        bgAudio.pause();
+        pillBtn.textContent = '▶';
+        pillWaves.classList.remove('music-playing');
+      }
+    });
+  }
+
+  function changeTrack(src) {
+    if (!bgAudio) return;
+    const wasPlaying = !bgAudio.paused;
+    bgAudio.src = src;
+    if (wasPlaying) {
+      bgAudio.play();
+      pillBtn.textContent = '❚❚';
+      pillWaves.classList.add('music-playing');
+    }
+  }
+</script>
+
+</body>
+</html>

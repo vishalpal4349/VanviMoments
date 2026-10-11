@@ -1,0 +1,123 @@
+{
+  "templateId": "ivory-arch-wedding",
+  "templateName": "Ivory Arch Wedding",
+  "themeCategory": "Minimal Luxe",
+  "tagline": "आइवरी और गोल्ड शेड्स, सोबर, क्लासी और मिनिमल",
+  "pricing": {
+    "currency": "INR",
+    "currencySymbol": "₹",
+    "discountPrice": 499,
+    "originalPrice": 999,
+    "discountBadge": "50% OFF LIMITED OFFER"
+  },
+  "brand": {
+    "name": "Vanvi Moments",
+    "subTitle": "Bespoke Digital Invitations & Wedding Websites",
+    "watermark": "Vanvi Moments · Ivory Arch Luxe",
+    "supportContact": "+91 98765 43210"
+  },
+  "couple": {
+    "groom": {
+      "name": "Kishan Sharma",
+      "shortName": "Kishan",
+      "parents": "Smt. Sunita & Shri Ramesh Sharma",
+      "designation": "Architect & Urban Designer",
+      "photo": "assets/layers/Hero Couple.webp"
+    },
+    "bride": {
+      "name": "Divya Verma",
+      "shortName": "Divya",
+      "parents": "Smt. Rekha & Shri Rajesh Verma",
+      "designation": "Curator & Visual Artist",
+      "photo": "assets/layers/Hero Couple.webp"
+    },
+    "hashtag": "#KishanWedsDivya",
+    "weddingDate": "2026-12-12",
+    "weddingDateFormatted": "Saturday, 12th December 2026",
+    "muhurat": "Godhuli Bela · 07:15 PM IST",
+    "city": "Udaipur, Rajasthan, India"
+  },
+  "venue": {
+    "name": "The Oberoi Udaivilas",
+    "address": "Badi-Gorela-Mulla Talao Road, Haridas Ji Ki Magri, Udaipur, Rajasthan 313001",
+    "city": "Udaipur",
+    "mapsUrl": "https://maps.google.com/?q=The+Oberoi+Udaivilas+Udaipur"
+  },
+  "ceremonies": [
+    {
+      "id": "mehendi",
+      "name": "Mehendi Ki Raat",
+      "date": "Thursday, 10th December 2026",
+      "time": "04:00 PM Onwards",
+      "venue": "The Courtyard Palms, Udaivilas",
+      "dressCode": "Sage Green & Floral Pastels",
+      "description": "Henna tales, classical sitar, organic sweets & evening laughter under starlit arches."
+    },
+    {
+      "id": "haldi",
+      "name": "Shubh Haldi & Mangala Snanam",
+      "date": "Friday, 11th December 2026",
+      "time": "10:30 AM Onwards",
+      "venue": "Poolside Terraces, Udaivilas",
+      "dressCode": "Champagne Yellow & Pure Ivory",
+      "description": "Sacred marigold petals, herbal ubtan, folk dhol beats & joyful blessings."
+    },
+    {
+      "id": "sangeet",
+      "name": "Sangeet Sandhya",
+      "date": "Friday, 11th December 2026",
+      "time": "07:30 PM Onwards",
+      "venue": "Chandra Mahal Ballroom, Udaivilas",
+      "dressCode": "Gilded Glamour, Sherwanis & Shimmer Lehengas",
+      "description": "Dance face-offs, live sufi band, celebration toasts & unmissable family choreography."
+    },
+    {
+      "id": "shaadi",
+      "name": "Shubh Vivah & Vedic Pheras",
+      "date": "Saturday, 12th December 2026",
+      "time": "Baraat 05:00 PM | Varmala 06:30 PM | Pheras 07:15 PM",
+      "venue": "Zenith Lotus Mandap, Udaivilas",
+      "dressCode": "Regal Ivory, Vintage Gold & Royal Heritage",
+      "description": "Seven sacred vows around the holy agni overlooking serene Lake Pichola."
+    },
+    {
+      "id": "reception",
+      "name": "Grand Royal Reception",
+      "date": "Sunday, 13th December 2026",
+      "time": "07:30 PM Onwards",
+      "venue": "The Lakeview Lawns, Udaivilas",
+      "dressCode": "Black Tie & Contemporary Royal Ethnic",
+      "description": "Gala dinner, acoustic symphony orchestra & toast to the newlyweds."
+    }
+  ],
+  "soundtrack": {
+    "defaultTrack": "assets/song/Template_03.mp3",
+    "trackName": "Sacred Shahnai & Sitar Harmony",
+    "availableTracks": [
+      {
+        "id": "track1",
+        "title": "Sacred Shahnai & Sitar Harmony",
+        "file": "assets/song/Template_03.mp3"
+      },
+      {
+        "id": "track2",
+        "title": "Mangalyam Classical Wedding Flute",
+        "file": "assets/song/song2.mp3"
+      },
+      {
+        "id": "track3",
+        "title": "Acoustic Royal Sitar Symphony",
+        "file": "assets/song/song3.mp3"
+      }
+    ]
+  },
+  "features": {
+    "mandalaPreloader": true,
+    "interactiveCurtains": true,
+    "vipGuestPersonalization": true,
+    "lotusPetalShower": true,
+    "ashirwadWishesBox": true,
+    "sevenStepStudioBuilder": true,
+    "cloudinaryUploadSync": true
+  }
+}

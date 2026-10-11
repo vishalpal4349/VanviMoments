@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+  <title>Royal Wedding Websites &amp; Vivah Keepsakes — Vanvi Moments Atelier</title>
+  <meta name="description" content="India's most regal digital wedding invitations and interactive Save the Dates. Inspired by royal palace architecture, Vedic Lagna Patrikas, live Pushpa Vrishti, and shehnai music."/>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+  <meta name="theme-color" content="#fff5f8"/>
+
+  <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="vanvi-inner-light.css"/>
+  <link rel="stylesheet" href="vanvi-navigation.css"/>
+  <link rel="stylesheet" href="css/vanvi-global-experience.css"/>
+
+  <style>
+    :root {
+      --gold-foil: linear-gradient(135deg, #d4af37 0%, #f3e5ab 30%, #aa7c11 60%, #ffd700 100%);
+      --gold-dark: #8c671a;
+      --gold-sheen: #d4af37;
+      --maroon-royal: #5c0f1c;
+      --maroon-deep: #3b0610;
+      --rose-accent: #ff2a7a;
+      --bg-cream: #fffaf5;
+      --card-glass: rgba(255, 255, 255, 0.94);
+      --border-gold: rgba(212, 175, 55, 0.32);
+      --shadow-royal: 0 16px 40px rgba(92, 15, 28, 0.08), 0 4px 12px rgba(212, 175, 55, 0.12);
+      --shadow-hover: 0 24px 50px rgba(92, 15, 28, 0.16), 0 8px 24px rgba(212, 175, 55, 0.25);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      max-width: 100%;
+      width: 100%;
+      overflow-x: hidden !important;
+      background: var(--bg-cream);
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(255, 228, 235, 0.45) 0%, transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(254, 243, 199, 0.5) 0%, transparent 45%),
+        radial-gradient(circle at 50% 60%, rgba(255, 241, 230, 0.4) 0%, transparent 60%),
+        linear-gradient(180deg, #fffbf7 0%, #fff6ef 100%);
+      color: #2c1224;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      min-height: 100vh;
+      padding-bottom: 90px;
+    }
+
+    /* ─── HEADER BAR ─── */
+    .wedding-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-gold);
+      padding: 10px clamp(14px, 3vw, 28px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .brand-wrap img {
+      height: 32px;
+      width: auto;
+      filter: drop-shadow(0 2px 8px rgba(255, 42, 122, 0.2));
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--maroon-royal);
+      letter-spacing: 0.5px;
+    }
+    .brand-title span {
+      color: var(--rose-accent);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-vip-concierge {
+      background: linear-gradient(135deg, #5c0f1c 0%, #8c1d32 100%);
+      color: #ffffff !important;
+      padding: 8px 16px;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 16px rgba(92, 15, 28, 0.25);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-vip-concierge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(92, 15, 28, 0.35);
+    }
+
+    /* ─── BREADCRUMB ─── */
+    .wedding-breadcrumb {
+      width: 100%;
+      max-width: 1240px;
+      margin: 12px auto 6px;
+      padding: 0 clamp(14px, 3vw, 24px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #78536d;
+    }
+    .wedding-breadcrumb a {
+      color: #78536d;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .wedding-breadcrumb a:hover { color: var(--rose-accent); }
+    .wedding-breadcrumb .sep { opacity: 0.4; }
+    .wedding-breadcrumb .active-crumb {
+      color: var(--maroon-royal);
+      font-weight: 800;
+    }
+
+    /* ─── HERO SECTION ─── */
+    .wedding-hero {
+      width: 100%;
+      max-width: 1240px;
+      margin: 10px auto 30px;
+      padding: clamp(24px, 5vw, 48px) clamp(16px, 3vw, 24px);
+      text-align: center;
+      position: relative;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 99px;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: var(--gold-dark);
+      font-size: 11.5px;
+      font-weight: 850;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(34px, 6.5vw, 62px);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--maroon-deep);
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+    .hero-title .foil-txt {
+      background: linear-gradient(135deg, #aa7c11 0%, #d4af37 40%, #8c671a 70%, #d4af37 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+    }
+    .hero-sub {
+      max-width: 680px;
+      margin: 0 auto 24px;
+      font-size: clamp(14px, 2vw, 17px);
+      line-height: 1.55;
+      color: #63435b;
+      font-weight: 500;
+    }
+    .hero-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .step-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      padding: 7px 14px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 120, 175, 0.25);
+      box-shadow: 0 4px 14px rgba(44, 18, 36, 0.04);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #3b172a;
+    }
+    .step-pill span.icon { font-size: 14px; }
+
+    /* ─── QUICK SECTION TOGGLE ─── */
+    .hero-section-toggle {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 5px;
+      border-radius: 99px;
+      border: 1.5px solid var(--border-gold);
+      box-shadow: 0 8px 24px rgba(92, 15, 28, 0.08);
+      gap: 4px;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .toggle-btn {
+      border: 0;
+      background: transparent;
+      padding: 10px 22px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #63435b;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .toggle-btn.active {
+      background: linear-gradient(135deg, #5c0f1c 0%, #3b0610 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(92, 15, 28, 0.35);
+    }
+
+    /* ─── VIVAH FEATURES BANNER ─── */
+    .vivah-features-banner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto 34px;
+      padding: 14px 20px;
+      background: linear-gradient(90deg, rgba(255, 248, 235, 0.95), rgba(255, 240, 245, 0.95));
+      border: 1.5px dashed rgba(212, 175, 55, 0.45);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      font-weight: 750;
+      color: var(--maroon-royal);
+      text-align: center;
+    }
+    .vivah-features-banner span.dot {
+      color: var(--gold-dark);
+      opacity: 0.6;
+    }
+
+    /* ─── FILTER PILLS ─── */
+    .filter-dock-wrap {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto 30px;
+      padding: 0 clamp(14px, 3vw, 24px);
+    }
+    .filter-dock {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 4px;
+    }
+    .filter-dock::-webkit-scrollbar { display: none; }
+    .filter-pill {
+      background: #ffffff;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 8px 18px;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 750;
+      color: #4a283e;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .filter-pill:hover {
+      border-color: var(--gold-sheen);
+      color: var(--maroon-royal);
+      transform: translateY(-1.5px);
+    }
+    .filter-pill.active {
+      background: linear-gradient(135deg, #aa7c11 0%, #d4af37 100%);
+      color: #ffffff;
+      border-color: #d4af37;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+    }
+
+    /* ─── TEMPLATES SHOWCASE GRID ─── */
+    .templates-grid {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto 48px;
+      padding: 0 clamp(14px, 3vw, 24px);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 28px;
+    }
+
+    /* ─── LUXURY TEMPLATE CARD ─── */
+    .tpl-card {
+      background: #ffffff;
+      border-radius: 28px;
+      border: 1.5px solid rgba(212, 175, 55, 0.28);
+      overflow: hidden;
+      box-shadow: var(--shadow-royal);
+      transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .tpl-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(212, 175, 55, 0.6);
+    }
+
+    /* Card Phone/Stage Preview Area */
+    .card-stage {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      background: linear-gradient(180deg, #fdf8f4 0%, #f6e9e1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 20px 10px;
+    }
+    .stage-ambient-glow {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.22), transparent 70%);
+      pointer-events: none;
+      transition: transform 0.4s ease;
+    }
+    .tpl-card:hover .stage-ambient-glow {
+      transform: scale(1.3);
+    }
+
+    /* Smartphone Bezel Mockup */
+    .phone-mockup-frame {
+      width: 180px;
+      height: 340px;
+      background: #111;
+      border: 6px solid #2d2629;
+      border-radius: 36px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tpl-card:hover .phone-mockup-frame {
+      transform: translateY(-4px) scale(1.02);
+    }
+    .phone-notch {
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 10px;
+      background: #000;
+      border-radius: 99px;
+      z-index: 10;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: #fff;
+    }
+
+    /* Overlay Quick Hover CTA */
+    .stage-hover-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(30, 8, 18, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: 20;
+      padding: 20px;
+    }
+    .card-stage:hover .stage-hover-overlay {
+      opacity: 1;
+    }
+    .btn-stage-action {
+      width: 80%;
+      max-width: 180px;
+      padding: 10px;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-stage-action.btn-outline {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--maroon-royal);
+      border: 1px solid #fff;
+    }
+    .btn-stage-action.btn-filled {
+      background: linear-gradient(135deg, #aa7c11, #d4af37);
+      color: #fff;
+      border: 0;
+    }
+    .btn-stage-action:hover {
+      transform: scale(1.04);
+    }
+
+    /* Badges */
+    .badge-float-row {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 15;
+      pointer-events: none;
+    }
+    .badge-pill {
+      font-size: 11px;
+      font-weight: 850;
+      padding: 4px 10px;
+      border-radius: 99px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+    .badge-bestseller {
+      background: linear-gradient(135deg, #aa7c11 0%, #d4af37 100%);
+      color: #fff;
+    }
+    .badge-vedic {
+      background: linear-gradient(135deg, #5c0f1c 0%, #9e1c33 100%);
+      color: #fff;
+    }
+    .badge-new {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff;
+    }
+
+    /* Card Details Info */
+    .card-body {
+      padding: 22px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .card-category-tag {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold-dark);
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--maroon-deep);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #63435b;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    /* Pricing & Action Row */
+    .card-footer-box {
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .price-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .price-sub {
+      font-size: 11px;
+      color: #8c6e82;
+      text-decoration: line-through;
+    }
+    .price-curr {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--maroon-royal);
+    }
+    .btn-customize-studio {
+      background: linear-gradient(135deg, #5c0f1c 0%, #8c1d32 100%);
+      color: #fff !important;
+      padding: 10px 18px;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(92, 15, 28, 0.2);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-customize-studio:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(92, 15, 28, 0.35);
+      background: linear-gradient(135deg, #781425 0%, #aa253f 100%);
+    }
+
+    /* ─── INTERACTIVE SAVE THE DATE SECTION ─── */
+    .std-section {
+      width: 100%;
+      max-width: 1240px;
+      margin: 20px auto 60px;
+      padding: 0 clamp(14px, 3vw, 24px);
+    }
+    .section-head-box {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .section-eyebrow {
+      font-size: 11.5px;
+      font-weight: 850;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(28px, 4.5vw, 44px);
+      font-weight: 700;
+      color: var(--maroon-deep);
+      line-height: 1.15;
+    }
+    .section-sub {
+      font-size: 14px;
+      color: #63435b;
+      margin-top: 6px;
+    }
+
+    /* ─── BENTO BOX WEDDING PACKAGES ─── */
+    .bento-packages-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .bento-pack-card {
+      background: #ffffff;
+      border-radius: 28px;
+      border: 1.5px solid var(--border-gold);
+      padding: clamp(20px, 4vw, 36px);
+      box-shadow: var(--shadow-royal);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .bento-hero {
+      background: linear-gradient(135deg, #fffcf8 0%, #fff4ed 100%);
+      border: 2px solid rgba(212, 175, 55, 0.5);
+    }
+    .bento-pack-header {
+      margin-bottom: 20px;
+    }
+    .bento-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .bento-pack-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 700;
+      color: var(--maroon-deep);
+      margin-bottom: 8px;
+    }
+    .bento-pack-sub {
+      font-size: 13.5px;
+      color: #63435b;
+      line-height: 1.5;
+    }
+    .perks-list {
+      list-style: none;
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .perks-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 650;
+      color: #3b172a;
+    }
+    .perks-list li span.check {
+      color: #059669;
+      font-weight: 900;
+      font-size: 15px;
+    }
+    .bento-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(212, 175, 55, 0.25);
+      padding-top: 20px;
+      margin-top: auto;
+    }
+
+    @media (max-width: 860px) {
+      .bento-packages-grid {
+        grid-template-columns: 1fr;
+      }
+      .card-stage {
+        height: 330px;
+      }
+      .phone-mockup-frame {
+        width: 160px;
+        height: 300px;
+      }
+    }
+    @media (max-width: 480px) {
+      .templates-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="vanvi-gpu-accel" data-vanvi-theme="clay">
+
+  <!-- 1. MASTER ULTRA-LUXURY HEADER -->
+  <header class="wedding-header">
+    <a href="index.html" class="brand-wrap" title="Vanvi Moments Homepage">
+      <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments Logo"/>
+      <div class="brand-title">VANVI <span>VIVAH</span></div>
+    </a>
+    <div class="header-actions">
+      <a href="templates.html" class="btn-vip-concierge" style="background:#ffffff; color:#5c0f1c !important; border:1px solid var(--border-gold);" title="All Templates">
+        <span>Explore All ↗</span>
+      </a>
+      <a href="custom-experience.html" class="btn-vip-concierge" title="Bespoke Commission">
+        <span>👑 VIP Atelier</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- 2. BREADCRUMB RIBBON -->
+  <nav class="wedding-breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">‹ Home</a>
+    <span class="sep">/</span>
+    <a href="templates.html">Templates</a>
+    <span class="sep">/</span>
+    <span class="active-crumb">Royal Vivah &amp; Wedding</span>
+  </nav>
+
+  <!-- 3. HERO SHOWCASE -->
+  <section class="wedding-hero">
+    <div class="hero-eyebrow">👑 The Royal Vivah &amp; Wedding Atelier</div>
+    <h1 class="hero-title">
+      A Digital Vivah As Grand As Your <span class="foil-txt">Sacred Vows</span>
+    </h1>
+    <p class="hero-sub">
+      India’s most regal celebration keepsakes. Inspired by majestic Udaipur palaces, sacred Vedic rituals, live Pushpa Vrishti petal showers, and authentic shehnai melodies.
+    </p>
+
+    <!-- 3 Step Flow -->
+    <div class="hero-steps">
+      <div class="step-pill"><span class="icon">✨</span> Choose Royal Theme</div>
+      <div class="step-pill"><span class="icon">🎨</span> Personalize Vows &amp; Schedule</div>
+      <div class="step-pill"><span class="icon">💌</span> Share via WhatsApp &amp; Track RSVP</div>
+    </div>
+
+    <!-- Section Switcher -->
+    <div class="hero-section-toggle">
+      <button class="toggle-btn active" onclick="filterCategory('all', this)">All Wedding Websites (19)</button>
+      <button class="toggle-btn" onclick="filterCategory('save-the-date', this)">Interactive Save The Date</button>
+      <button class="toggle-btn" onclick="scrollToPackages()">Vivah Suites &amp; Pricing</button>
+    </div>
+  </section>
+
+  <!-- 4. SIGNATURE FEATURES RIBBON -->
+  <div class="vivah-features-banner">
+    <span>✨ Animated Palace Gates Entry</span>
+    <span class="dot">·</span>
+    <span>🪔 Sanskrit Shree Ganesh Shlokas</span>
+    <span class="dot">·</span>
+    <span>🌸 Live Pushpa Vrishti Petal Shower</span>
+    <span class="dot">·</span>
+    <span>📜 Vedic 5-Ceremony Lagna Patrika</span>
+    <span class="dot">·</span>
+    <span>🎵 Authentic Shehnai/Sitar Music</span>
+    <span class="dot">·</span>
+    <span>💌 Instant WhatsApp RSVP</span>
+  </div>
+
+  <!-- 5. STYLE FILTER TABS -->
+  <div class="filter-dock-wrap">
+    <div class="filter-dock">
+      <button class="filter-pill active" onclick="filterCategory('all', this)">ALL VIVAH (19)</button>
+      <button class="filter-pill" onclick="filterCategory('palace', this)">PALACE &amp; HERITAGE</button>
+      <button class="filter-pill" onclick="filterCategory('vedic', this)">SACRED VEDIC &amp; MANDAPAM</button>
+      <button class="filter-pill" onclick="filterCategory('luxe', this)">MODERN LUXE &amp; BOTANICAL</button>
+      <button class="filter-pill" onclick="filterCategory('save-the-date', this)">SAVE THE DATE (REVEALS)</button>
+    </div>
+  </div>
+
+  <!-- 6. SHOWCASE OF REAL WORKING TEMPLATES ON DISK -->
+  <main class="templates-grid" id="weddingGrid">
+
+    <!-- Card 0: Free Flagship Gift — Vanvi Royal Wedding (Royal Vows) -->
+    <div class="tpl-card" data-category="palace">
+      <div class="card-stage">
+        <div class="stage-ambient-glow"></div>
+        <img src="assets/templates/royal-palace-wedding.jpg" alt="Royal Vows — Vanvi Royal Wedding" style="width:100%; height:100%; object-fit:cover; border-radius:18px;">
+        <span class="badge-pill" style="position:absolute; top:16px; left:16px; background:#10b981; color:#ffffff; font-weight:800; box-shadow:0 4px 12px rgba(16,185,129,0.35);">🎁 100% FREE GIFT</span>
+      </div>
+      <div class="card-info" style="padding: 20px;">
+        <h3 class="tpl-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:22px; font-weight:700; color:var(--maroon-deep); margin-bottom:6px;">Royal Vows — Free Wedding Experience</h3>
+        <p class="tpl-desc" style="font-size:12.5px; color:#63435b; line-height:1.5; margin-bottom:16px;">
+          Complete 33-section cinematic wedding celebration. Royal curtain unboxing, screen bloom, falling petals, Ganesha decree, 5 ceremonies, wax seal reveal, wishes wall, and WhatsApp RSVP. 100% Free lifetime access!
+        </p>
+        <div class="card-footer-box">
+          <div class="price-box">
+            <span class="price-sub">₹2,499</span>
+            <span class="price-curr" style="color:#059669;">FREE (₹0)</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="templates/vanvi-royal-wedding/preview.html" class="btn-preview-ghost" style="padding:8px 14px; border:1px solid rgba(212,175,55,0.4); border-radius:99px; text-decoration:none; font-size:12px; font-weight:700; color:#5c0f1c;">Live Preview</a>
+            <a href="templates/vanvi-royal-wedding/builder.html" class="btn-customize-studio" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%);">Start Free Studio →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 0B: Royal Vows Indian Wedding (Haute Vivah) -->
+    <div class="tpl-card" data-category="palace">
+      <div class="card-stage">
+        <div class="stage-ambient-glow"></div>
+        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=700&auto=format&fit=crop" alt="Royal Vows Indian Wedding" style="width:100%; height:100%; object-fit:cover; border-radius:18px;">
+        <span class="badge-pill badge-bestseller" style="position:absolute; top:16px; left:16px;">👑 HAUTE VIVAH (LAUNCH ₹1,499)</span>
+      </div>
+      <div class="card-info" style="padding: 20px;">
+        <h3 class="tpl-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:22px; font-weight:700; color:var(--maroon-deep); margin-bottom:6px;">Royal Vows Indian Wedding</h3>
+        <p class="tpl-desc" style="font-size:12.5px; color:#63435b; line-height:1.5; margin-bottom:16px;">
+          Haute Royal Indian Vivah celebration website with 3D Palace Gates mandap unboxing, falling rose petals &amp; golden dust canvas, live auspicious muhurat countdown, bride &amp; groom introduction, shahi patrika, 6-event ceremony itinerary, and interactive blessings.
+        </p>
+        <div class="card-footer-box">
+          <div class="price-box">
+            <span class="price-sub">₹2,499</span>
+            <span class="price-curr">₹1,499</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="templates/royal-vows-indian-wedding/preview.html" class="btn-preview-ghost" style="padding:8px 14px; border:1px solid rgba(212,175,55,0.4); border-radius:99px; text-decoration:none; font-size:12px; font-weight:700; color:#5c0f1c;">Live Preview</a>
+            <a href="templates/royal-vows-indian-wedding/builder.html" class="btn-customize-studio">Customize Design →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 0C: Ivory Arch Wedding (Minimal Luxe) -->
+    <div class="tpl-card" data-category="luxe">
+      <div class="card-stage">
+        <div class="stage-ambient-glow"></div>
+        <img src="templates/ivory-arch-wedding/assets/backgrounds/Background 4.webp" alt="Ivory Arch Wedding" style="width:100%; height:100%; object-fit:cover; border-radius:18px;">
+        <span class="badge-pill badge-bestseller" style="position:absolute; top:16px; left:16px; background:#d4af37; color:#1a0b10;">✨ MINIMAL LUXE (₹499)</span>
+      </div>
+      <div class="card-info" style="padding: 20px;">
+        <h3 class="tpl-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:22px; font-weight:700; color:var(--maroon-deep); margin-bottom:6px;">Ivory Arch Wedding</h3>
+        <p class="tpl-desc" style="font-size:12.5px; color:#63435b; line-height:1.5; margin-bottom:16px;">
+          Minimal Luxe Ivory &amp; Soft Champagne Gold wedding celebration website. Layered architectural arches, floating floral petals, elegant curtain reveal, live countdown timer, couple narrative, multi-event ceremony itinerary, and personalized guest link generator.
+        </p>
+        <div class="card-footer-box">
+          <div class="price-box">
+            <span class="price-sub">₹999</span>
+            <span class="price-curr">₹499</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="templates/ivory-arch-wedding/preview.html" class="btn-preview-ghost" style="padding:8px 14px; border:1px solid rgba(212,175,55,0.4); border-radius:99px; text-decoration:none; font-size:12px; font-weight:700; color:#5c0f1c;">Live Preview</a>
+            <a href="templates/ivory-arch-wedding/builder.html" class="btn-customize-studio">Customize Design →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 1: The Royal Udaivilas Baithak (VNV-LUX-05) -->
+    <div class="tpl-card" data-category="palace">
+      <div class="card-stage">
+        <div class="stage-ambient-glow"></div>
+        <img src="assets/templates/royal-palace-wedding.jpg" alt="The Royal Udaivilas Baithak" style="width:100%; height:100%; object-fit:cover; border-radius:18px;">
+        <span class="badge-pill badge-bestseller" style="position:absolute; top:16px; left:16px;">👑 Imperial Palace (50% OFF)</span>
+      </div>
+      <div class="card-info" style="padding: 20px;">
+        <h3 class="tpl-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:22px; font-weight:700; color:var(--maroon-deep); margin-bottom:6px;">The Royal Udaivilas Baithak</h3>
+        <p class="tpl-desc" style="font-size:12.5px; color:#63435b; line-height:1.5; margin-bottom:16px;">
+          Ultra-luxury 13-chapter palace wedding suite. 3D parallax hero with swinging brass diyas, Mewar elephant flower shower cannons, 6 auspicious ceremonies, velvet curtain pull, shagun UPI envelope, and 3 heritage mood presets.
+        </p>
+        <div class="card-footer-box">
+          <div class="price-box">
+            <span class="price-sub">₹1,999</span>
+            <span class="price-curr">₹999</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="templates/royal-udaivilas-baithak/preview.html" class="btn-preview-ghost" style="padding:8px 14px; border:1px solid rgba(212,175,55,0.4); border-radius:99px; text-decoration:none; font-size:12px; font-weight:700; color:#5c0f1c;">Live Preview</a>
+            <a href="templates/royal-udaivilas-baithak/builder.html" class="btn-customize-studio">Customize Design →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: The Grand Royal Palace Vivah -->
+    <div class="tpl-card" data-category="palace">
+      <div class="card-stage">
+        <div class="stage-ambient-glow"></div>
+        <img src="assets/templates/royal-palace-wedding.jpg" alt="The Grand Royal Palace Vivah" style="width:100%; height:100%; object-fit:cover; border-radius:18px;">
+        <span class="badge-pill badge-bestseller" style="position:absolute; top:16px; left:16px;">👑 Udaipur Royal</span>
+      </div>
+      <div class="card-info" style="padding: 20px;">
+        <h3 class="tpl-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:22px; font-weight:700; color:var(--maroon-deep); margin-bottom:6px;">The Grand Royal Palace Vivah</h3>
+        <p class="tpl-desc" style="font-size:12.5px; color:#63435b; line-height:1.5; margin-bottom:16px;">
+          India's most celebrated palace wedding keepsake. Taj Lake Palace gates entry, 5-ceremony schedule, sacred vows parchment, and shehnai music dock.
+        </p>
+        <div class="card-footer-box">
+          <div class="price-box">
+            <span class="price-sub">₹1,999</span>
+            <span class="price-curr">₹999</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="templates/the-grand-royal-palace-wedding/preview.html" class="btn-preview-ghost" style="padding:8px 14px; border:1px solid rgba(212,175,55,0.4); border-radius:99px; text-decoration:none; font-size:12px; font-weight:700; color:#5c0f1c;">Live Preview</a>
+            <a href="templates/the-grand-royal-palace-wedding/builder.html" class="btn-customize-studio">Customize Design →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card: Royal Vivah — Palace & Heritage -->
+    <div class="tpl-card" data-category="palace">
+      <div class="card-stage">
+        <div class="stage-ambient-glow"></div>
+        <img src="assets/templates/royal-palace-wedding.jpg" alt="Royal Vivah — Palace & Heritage" style="width:100%; height:100%; object-fit:cover; border-radius:18px;">
+        <span class="badge-pill badge-bestseller" style="position:absolute; top:16px; left:16px;">👑 Signature Heritage</span>
+      </div>
+      <div class="card-info" style="padding: 20px;">
+        <h3 class="tpl-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:22px; font-weight:700; color:var(--maroon-deep); margin-bottom:6px;">Royal Vivah — Palace &amp; Heritage</h3>
+        <p class="tpl-desc" style="font-size:12.5px; color:#63435b; line-height:1.5; margin-bottom:16px;">
+          Ultra-luxury wedding suite with sacred gold mandala curtains, 3D Pichola gate entrance, ancestral blessings parchment, and wax-seal digital shagun.
+        </p>
+        <div class="card-footer-box">
+          <div class="price-box">
+            <span class="price-sub">₹2,499</span>
+            <span class="price-curr">₹999</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="templates/royal-vivah-palace/preview.html" class="btn-preview-ghost" style="padding:8px 14px; border:1px solid rgba(212,175,55,0.4); border-radius:99px; text-decoration:none; font-size:12px; font-weight:700; color:#5c0f1c;">Live Preview</a>
+            <a href="templates/royal-vivah-palace/builder.html" class="btn-customize-studio">Customize Design →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card: Floral Mehendi Story (Festive / Mehendi / Haldi) -->
+    <div class="tpl-card" data-category="mehendi">
+      <div class="card-stage">
+        <div class="stage-ambient-glow"></div>
+        <img src="assets/templates/floral-mehendi-story.jpg" alt="Floral Mehendi Story" style="width:100%; height:100%; object-fit:cover; border-radius:18px;">
+        <span class="badge-pill badge-bestseller" style="position:absolute; top:16px; left:16px; background:linear-gradient(135deg, #1e3d2c 0%, #2b563e 100%); color:#e6be65; border:1px solid #c89b3c;">🌿 Most Popular / Luxury Floral</span>
+      </div>
+      <div class="card-info" style="padding: 20px;">
+        <h3 class="tpl-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:22px; font-weight:700; color:var(--maroon-deep); margin-bottom:6px;">Floral Mehendi Story</h3>
+        <p class="tpl-desc" style="font-size:12.5px; color:#63435b; line-height:1.5; margin-bottom:16px;">
+          Ultra-luxury festive Mehendi &amp; Vivah suite: Sage curtains reveal animation, 3D palace parallax, swinging brass lanterns, Ashirwad WhatsApp blessings box, and shehnai music dock.
+        </p>
+        <div class="card-footer-box">
+          <div class="price-box">
+            <span class="price-sub">₹999</span>
+            <span class="price-curr" style="color:#1e3d2c; font-weight:800;">₹499</span>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+            <a href="templates/floral-mehendi-story/index.html" class="btn-preview-ghost" style="padding:8px 12px; border:1px solid rgba(200,155,60,0.5); border-radius:99px; text-decoration:none; font-size:12px; font-weight:700; color:#1e3d2c;">Live Preview</a>
+            <a href="templates/floral-mehendi-story/builder.html" class="btn-customize-studio" style="background:linear-gradient(135deg, #1e3d2c 0%, #2b563e 100%); border:1px solid #c89b3c; padding:8px 14px; font-size:12px;">Studio ✏️</a>
+            <a href="https://wa.me/917631442934?text=Namaste%20Vanvi%20Moments!%20I%20want%20to%20book%20the%20Floral%20Mehendi%20Story%20Luxury%20Wedding%20Template%20at%20special%20launch%20price%20%E2%82%B9499." target="_blank" rel="noopener" style="padding:8px 12px; background:#25d366; color:#ffffff; border-radius:99px; text-decoration:none; font-size:12px; font-weight:800; display:inline-flex; align-items:center; gap:4px; box-shadow:0 3px 10px rgba(37,211,102,0.3);" title="Direct WhatsApp Booking">💬 ₹499</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card: Sacred Temple Edition (Traditional / South Indian / Temple Architecture) -->
+    <div class="tpl-card" data-category="traditional">
+      <div class="card-stage">
+        <div class="stage-ambient-glow"></div>
+        <img src="assets/templates/sacred-temple-edition.jpg" alt="Sacred Temple Edition — Traditional Dravidian &amp; Vedic Wedding" style="width:100%; height:100%; object-fit:cover; border-radius:18px;">
+        <span class="badge-pill" style="position:absolute; top:16px; left:16px; background:linear-gradient(135deg, #490c17 0%, #2c070e 100%); color:#ffd700; border:1px solid #d4af37;">🛕 Traditional Temple Luxury</span>
+      </div>
+      <div class="card-info" style="padding: 20px;">
+        <h3 class="tpl-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:22px; font-weight:700; color:var(--maroon-deep); margin-bottom:6px;">Sacred Temple Edition</h3>
+        <p class="tpl-desc" style="font-size:12.5px; color:#63435b; line-height:1.5; margin-bottom:16px;">
+          Traditional Vedic &amp; Dravidian temple architecture suite (Demo: Kishan &amp; Divya): 3D Houseboat Backwaters parallax, Nilavilakku lamp ceremony, Kasavu curtains reveal, and WhatsApp Ashirwad box.
+        </p>
+        <div class="card-footer-box">
+          <div class="price-box">
+            <span class="price-sub">₹2,499</span>
+            <span class="price-curr" style="color:#490c17; font-weight:800;">₹999</span>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+            <a href="templates/sacred-temple-edition/preview.html" class="btn-preview-ghost" style="padding:8px 12px; border:1px solid rgba(212,175,55,0.6); border-radius:99px; text-decoration:none; font-size:12px; font-weight:700; color:#490c17;">Live Preview</a>
+            <a href="templates/sacred-temple-edition/builder.html" class="btn-customize-studio" style="background:linear-gradient(135deg, #490c17 0%, #781d2d 100%); border:1px solid #d4af37; padding:8px 14px; font-size:12px;">Studio ✏️</a>
+            <a href="https://wa.me/917631442934?text=Namaste%20Vanvi%20Moments!%20I%20want%20to%20book%20the%20Sacred%20Temple%20Edition%20Luxury%20Wedding%20Template%20at%20special%20launch%20price%20%E2%82%B9999." target="_blank" rel="noopener" style="padding:8px 12px; background:#25d366; color:#ffffff; border-radius:99px; text-decoration:none; font-size:12px; font-weight:800; display:inline-flex; align-items:center; gap:4px; box-shadow:0 3px 10px rgba(37,211,102,0.3);" title="Direct WhatsApp Booking">💬 ₹999</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card: Golden Lake Collection (Waterfront Royal / Lake Palace Sunset) -->
+    <div class="tpl-card" data-category="waterfront">
+      <div class="card-stage">
+        <div class="stage-ambient-glow"></div>
+        <img src="assets/templates/golden-lake-collection.jpg" alt="Golden Lake Collection — Waterfront Royal" style="width:100%; height:100%; object-fit:cover; border-radius:18px;">
+        <span class="badge-pill" style="position:absolute; top:16px; left:16px; background:linear-gradient(135deg, #b45309 0%, #78350f 100%); color:#fef3c7; border:1px solid #f59e0b;">🌅 Waterfront Royal Signature</span>
+      </div>
+      <div class="card-info" style="padding: 20px;">
+        <h3 class="tpl-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:22px; font-weight:700; color:var(--maroon-deep); margin-bottom:6px;">Golden Lake Collection</h3>
+        <p class="tpl-desc" style="font-size:12.5px; color:#63435b; line-height:1.5; margin-bottom:16px;">
+          Udaipur Lake Palace sunset luxury (Demo: Kishan &amp; Divya): 3D Lake Palace parallax, Swan River Bridge, curtains love story reveal, interactive dhol celebration, and Cloudinary media storage CDN.
+        </p>
+        <div class="card-footer-box">
+          <div class="price-box">
+            <span class="price-sub">₹2,499</span>
+            <span class="price-curr" style="color:#b45309; font-weight:800;">₹999</span>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+            <a href="templates/golden-lake-collection/preview.html" class="btn-preview-ghost" style="padding:8px 12px; border:1px solid rgba(245,158,11,0.6); border-radius:99px; text-decoration:none; font-size:12px; font-weight:700; color:#b45309;">Live Preview</a>
+            <a href="templates/golden-lake-collection/builder.html" class="btn-customize-studio" style="background:linear-gradient(135deg, #b45309 0%, #f59e0b 100%); border:1px solid #ffd700; color:#050d1a; padding:8px 14px; font-size:12px; font-weight:800;">Studio ✏️</a>
+            <a href="https://wa.me/917631442934?text=Namaste%20Vanvi%20Moments!%20I%20want%20to%20book%20the%20Golden%20Lake%20Collection%20Luxury%20Wedding%20Template%20at%20special%20launch%20price%20%E2%82%B9999." target="_blank" rel="noopener" style="padding:8px 12px; background:#25d366; color:#ffffff; border-radius:99px; text-decoration:none; font-size:12px; font-weight:800; display:inline-flex; align-items:center; gap:4px; box-shadow:0 3px 10px rgba(37,211,102,0.3);" title="Direct WhatsApp Booking">💬 ₹999</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Royal Vivah Lagna Patrika -->
+    <div class="tpl-card" data-category="vedic">
+      <div class="card-stage">
+        <div class="stage-ambient-glow"></div>
+        <img src="assets/templates/royal-palace-wedding.jpg" alt="Royal Vivah & Vedic Lagna Patrika" style="width:100%; height:100%; object-fit:cover; border-radius:18px;">
+        <span class="badge-pill badge-vedic" style="position:absolute; top:16px; left:16px;">🐘 Vedic Patrika</span>
+      </div>
+      <div class="card-info" style="padding: 20px;">
+        <h3 class="tpl-title" style="font-family:'Cormorant Garamond', Georgia, serif; font-size:22px; font-weight:700; color:var(--maroon-deep); margin-bottom:6px;">Royal Vivah &amp; Lagna Patrika</h3>
+        <p class="tpl-desc" style="font-size:12.5px; color:#63435b; line-height:1.5; margin-bottom:16px;">
+          Traditional Vedic Patrika celebration with interactive scratch-to-reveal countdown, Pushpa Vrishti petal shower simulator, and wax-sealed guestbook.
+        </p>
+        <div class="card-footer-box">
+          <div class="price-box">
+            <span class="price-sub">₹799</span>
+            <span class="price-curr">₹199</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="templates/royal-vivah-lagna/preview.html" class="btn-preview-ghost" style="padding:8px 14px; border:1px solid rgba(212,175,55,0.4); border-radius:99px; text-decoration:none; font-size:12px; font-weight:700; color:#5c0f1c;">Live Preview</a>
+            <a href="builder.html?template=royal-vivah-lagna" class="btn-customize-studio">Customize Design →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 7. BENTO BOX: WEDDING PACKAGES & PRICING -->
+  <section class="std-section" id="vivahPackages">
+    <div class="section-head-box">
+      <div class="section-eyebrow">👑 Complete Celebration Suites</div>
+      <h2 class="section-title">Everything Together — Save Up To 45%</h2>
+      <p class="section-sub">Curated royal suites for your entire wedding journey. Pay only when you are ready to publish.</p>
+    </div>
+
+    <div class="bento-packages-grid">
+
+      <!-- Package 1: Grand Imperial Vivah Suite -->
+      <div class="bento-pack-card bento-hero">
+        <div>
+          <div class="bento-badge-row">
+            <span class="badge-pill badge-bestseller">👑 Most Celebrated</span>
+            <span class="badge-pill" style="background:rgba(212,175,55,0.2); color:#8c671a;">Save ₹5,000</span>
+          </div>
+          <div class="bento-pack-header">
+            <h3 class="bento-pack-title">Grand Imperial Vivah Suite</h3>
+            <p class="bento-pack-sub">Everything a modern Indian wedding needs — bespoke website, interactive save the date, royal monogram, and guest RSVP management.</p>
+          </div>
+          <ul class="perks-list">
+            <li><span class="check">✓</span> <span>Full Royal Wedding Website (Unlimited Guest Access)</span></li>
+            <li><span class="check">✓</span> <span>Interactive Save the Date (Mirror / Lotus / Sand reveal)</span></li>
+            <li><span class="check">✓</span> <span>Custom Couple Royal Monogram &amp; Wedding Hashtag</span></li>
+            <li><span class="check">✓</span> <span>WhatsApp Instant RSVP &amp; Real-time Guest Dashboard</span></li>
+            <li><span class="check">✓</span> <span>Multi-Event Schedule (Haldi, Mehendi, Sangeet, Vivah, Reception)</span></li>
+            <li><span class="check">✓</span> <span>Interactive Pushpa Vrishti (Rose Petal Shower) for guests</span></li>
+            <li><span class="check">✓</span> <span>Custom Domain Name (e.g., aaravwedsananya.com)</span></li>
+          </ul>
+        </div>
+        <div class="bento-price-row">
+          <div>
+            <div style="font-size:12px; color:#8c6e82; text-decoration:line-through;">₹12,999</div>
+            <div style="font-size:26px; font-weight:900; color:var(--maroon-royal);">₹7,999 <span style="font-size:12px; font-weight:600; color:#059669;">(Save 38%)</span></div>
+          </div>
+          <a href="checkout.html?template=Grand%20Imperial%20Vivah%20Suite&price=7999" class="btn-vip-concierge" style="padding:12px 24px; font-size:14px;">
+            Get This Suite →
+          </a>
+        </div>
+      </div>
+
+      <!-- Package 2: Signature Vivah Duo -->
+      <div class="bento-pack-card">
+        <div>
+          <div class="bento-badge-row">
+            <span class="badge-pill badge-vedic">Signature Duo</span>
+            <span class="badge-pill" style="background:rgba(255,42,122,0.1); color:#ff2a7a;">Save ₹2,500</span>
+          </div>
+          <div class="bento-pack-header">
+            <h3 class="bento-pack-title">Signature Vivah Duo</h3>
+            <p class="bento-pack-sub">Your flagship website paired with an interactive gesture-reveal Save The Date.</p>
+          </div>
+          <ul class="perks-list">
+            <li><span class="check">✓</span> <span>Full Royal Palace Vivah Website</span></li>
+            <li><span class="check">✓</span> <span>Interactive Save the Date Experience</span></li>
+            <li><span class="check">✓</span> <span>Vedic Itinerary &amp; Google Maps Venue Navigation</span></li>
+            <li><span class="check">✓</span> <span>WhatsApp Direct RSVP &amp; Wishes Book</span></li>
+            <li><span class="check">✓</span> <span>Audio Player with Shehnai &amp; Sitar tracks</span></li>
+          </ul>
+        </div>
+        <div class="bento-price-row">
+          <div>
+            <div style="font-size:12px; color:#8c6e82; text-decoration:line-through;">₹4,999</div>
+            <div style="font-size:24px; font-weight:900; color:var(--maroon-royal);">₹2,499</div>
+          </div>
+          <a href="checkout.html?template=Signature%20Vivah%20Duo&price=2499" class="btn-vip-concierge" style="padding:12px 20px; font-size:13.5px;">
+            Get This Suite →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. BOTTOM VANVI DOCK NAVIGATION -->
+  <nav class="bottom-nav-dock" aria-label="Bottom Navigation">
+    <a href="index.html" class="nav-dock-item" title="Home">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">Home</span>
+    </a>
+    <a href="templates.html" class="nav-dock-item" title="Templates">
+      <span class="dock-icon">✨</span>
+      <span class="dock-label">Templates</span>
+    </a>
+    <a href="wedding.html" class="nav-dock-item active" title="Wedding" style="color:var(--rose-accent);">
+      <span class="dock-icon">💍</span>
+      <span class="dock-label">Wedding</span>
+    </a>
+    <a href="games.html" class="nav-dock-item" title="Games">
+      <span class="dock-icon">🎮</span>
+      <span class="dock-label">Games</span>
+    </a>
+    <a href="dashboard.html" class="nav-dock-item" title="My Moments">
+      <span class="dock-icon">💖</span>
+      <span class="dock-label">Moments</span>
+    </a>
+  </nav>
+
+  <script src="js/vanvi-navigation.js"></script>
+  <script>
+    function filterCategory(cat, btn) {
+      document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+      if (btn && btn.classList.contains('filter-pill')) btn.classList.add('active');
+
+      const cards = document.querySelectorAll('#weddingGrid .tpl-card');
+      cards.forEach(card => {
+        if (cat === 'all') {
+          card.style.display = 'flex';
+        } else {
+          const cardCat = card.getAttribute('data-category') || '';
+          if (cardCat.includes(cat)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    function scrollToPackages() {
+      const el = document.getElementById('vivahPackages');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

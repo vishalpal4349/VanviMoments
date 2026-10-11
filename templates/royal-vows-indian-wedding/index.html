@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Royal Vows — Luxury Indian Wedding | Vanvi Moments</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- Floating Falling Rose Petals & Golden Dust Canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Floating Temple Bell Music Player -->
+  <div class="royal-music-dock" id="music-dock" title="Toggle Auspicious Shehnai & Santoor">
+    <div class="spinning-bell">🔔</div>
+    <div style="display:flex; flex-direction:column;">
+      <span style="font-size:0.75rem; font-weight:700; color:var(--text-main);" id="dock-song-title">Royal Shehnai &amp; Santoor</span>
+      <span style="font-size:0.65rem; color:var(--ruby-velvet); font-weight:600;">Vanvi Royal Vows • Tap to Play</span>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       ACT 1: CINEMATIC 3D PALACE GATES / MANDAP OPENING
+       ========================================================================= -->
+  <div id="palace-gates-overlay">
+    <div class="gates-casket-3d">
+      <div class="mandap-golden-arch" id="btn-open-gates" title="Tap to enter wedding world">
+        🏛️
+      </div>
+      <p style="font-family:var(--font-royal); font-size:0.75rem; letter-spacing:0.25em; color:var(--gold-primary); margin-bottom:8px;">HAUTE ROYAL INVITATION</p>
+      <h2 style="font-family:var(--font-serif); font-size:2.8rem; color:#FFF; line-height:1.05; margin-bottom:12px;">
+        <span id="opening-bride">Tanya</span> &amp; <span id="opening-groom">Rohan</span>
+      </h2>
+      <p style="font-size:0.85rem; color:rgba(255,255,255,0.85); margin-bottom:24px;">12th December 2026 • Jodhpur</p>
+      <button class="btn-royal-gold" id="btn-enter-experience">Step Inside Royal Mandap ✨</button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       ACT 2: HERO MAJESTY & AUSPICIOUS MUHURAT COUNTDOWN
+       ========================================================================= -->
+  <header class="hero-royal-stage">
+    <div class="hero-tag-ganesh">॥ श्री गणेशाय नमः ॥</div>
+    <h1 class="hero-headline">Shubh Vivah Celebration</h1>
+    <span class="hero-couple-calligraphy">
+      <span id="hero-bride">Tanya</span> &amp; <span id="hero-groom">Rohan</span>
+    </span>
+    
+    <p style="font-size:1.1rem; color:var(--text-muted); max-width:620px; margin:0 auto;" id="hero-quote">
+      With hearts full of joy and the grace of the divine, we invite you to bless our sacred union under the grand skies of Jodhpur.
+    </p>
+
+    <!-- Live Auspicious Countdown -->
+    <div class="countdown-ribbon">
+      <div class="countdown-capsule">
+        <div class="countdown-num" id="cd-days">00</div>
+        <div class="countdown-lbl">Days</div>
+      </div>
+      <div class="countdown-capsule">
+        <div class="countdown-num" id="cd-hours">00</div>
+        <div class="countdown-lbl">Hours</div>
+      </div>
+      <div class="countdown-capsule">
+        <div class="countdown-num" id="cd-mins">00</div>
+        <div class="countdown-lbl">Minutes</div>
+      </div>
+      <div class="countdown-capsule">
+        <div class="countdown-num" id="cd-secs">00</div>
+        <div class="countdown-lbl">Seconds</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       ACT 3: BRIDE & GROOM ROYAL INTRODUCTION
+       ========================================================================= -->
+  <section style="max-width:960px; margin:40px auto; padding:0 24px;">
+    <div style="text-align:center; margin-bottom:28px;">
+      <span style="font-family:var(--font-royal); font-size:0.75rem; letter-spacing:0.25em; color:var(--gold-primary);">TWO SOULS, ONE DESTINY</span>
+      <h2 style="font-family:var(--font-serif); font-size:2.4rem; color:var(--ruby-velvet); margin-top:6px;">Meet the Bride &amp; Groom</h2>
+    </div>
+
+    <div class="couple-intro-grid">
+      <!-- The Bride -->
+      <div class="intro-person-card">
+        <div class="person-photo-frame">
+          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=700&auto=format&fit=crop" id="img-bride" alt="The Bride" />
+        </div>
+        <h3 style="font-family:var(--font-serif); font-size:1.6rem; color:var(--text-main);" id="card-bride-name">Tanya Sharma</h3>
+        <p style="font-size:0.82rem; font-weight:700; color:var(--gold-primary); text-transform:uppercase; letter-spacing:0.1em; margin:4px 0 10px;">The Bride</p>
+        <p style="font-size:0.88rem; color:var(--text-muted);" id="bio-bride">
+          An artist at heart, a lover of sunset chai, and the soul that brings gentle laughter to every room.
+        </p>
+      </div>
+
+      <!-- The Groom -->
+      <div class="intro-person-card">
+        <div class="person-photo-frame">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=700&auto=format&fit=crop" id="img-groom" alt="The Groom" />
+        </div>
+        <h3 style="font-family:var(--font-serif); font-size:1.6rem; color:var(--text-main);" id="card-groom-name">Rohan Kapoor</h3>
+        <p style="font-size:0.82rem; font-weight:700; color:var(--gold-primary); text-transform:uppercase; letter-spacing:0.1em; margin:4px 0 10px;">The Groom</p>
+        <p style="font-size:0.88rem; color:var(--text-muted);" id="bio-groom">
+          A visionary builder, fierce protector of family, and forever devoted to Tanya's radiant smile.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       ACT 4: SHAHI PATRIKA INVITATION CARD
+       ========================================================================= -->
+  <section style="padding:0 24px;">
+    <div class="shahi-patrika-wrapper">
+      <img src="https://assets.shaadipath.com/templates/template01/assets/elements/Element%206.webp" alt="Lord Ganesha" style="width:72px; margin:0 auto 16px; object-fit:contain;" />
+      
+      <p style="font-family:var(--font-royal); font-size:0.85rem; letter-spacing:0.2em; color:var(--gold-primary); margin-bottom:8px;">
+        ॥ मंगलम् भगवान विष्णुः मंगलम् गरुड़ध्वजः ॥
+      </p>
+      <p style="font-size:1rem; color:var(--text-muted); line-height:1.8; margin-bottom:20px;">
+        With the blessings of our ancestors and the loving support of our families,<br />
+        we request the honor of your gracious presence at the wedding ceremony of
+      </p>
+
+      <h2 style="font-family:var(--font-serif); font-size:clamp(2.4rem, 6vw, 3.8rem); color:var(--ruby-velvet); margin-bottom:12px;">
+        <span id="patrika-bride">Tanya</span> &amp; <span id="patrika-groom">Rohan</span>
+      </h2>
+
+      <!-- Family Honors -->
+      <div style="display:flex; justify-content:center; gap:36px; flex-wrap:wrap; margin:28px 0; font-size:0.95rem;">
+        <div>
+          <em style="color:var(--text-light); font-size:0.82rem; display:block;">Daughter of</em>
+          <strong id="patrika-bride-parents">Mr. &amp; Mrs. Suresh Sharma</strong>
+        </div>
+        <div style="color:var(--gold-primary); font-size:1.4rem; align-self:center;">✦</div>
+        <div>
+          <em style="color:var(--text-light); font-size:0.82rem; display:block;">Son of</em>
+          <strong id="patrika-groom-parents">Mr. &amp; Mrs. Ramesh Kapoor</strong>
+        </div>
+      </div>
+
+      <p style="font-size:0.88rem; color:var(--gold-primary); font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin-top:20px;" id="patrika-venue">
+        12th December 2026 • Umaid Bhawan Palace, Jodhpur
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       ACT 5: COMPLETE 6-EVENT CEREMONIES GRID
+       ========================================================================= -->
+  <section style="max-width:1020px; margin:60px auto; padding:0 24px;">
+    <div style="text-align:center; margin-bottom:32px;">
+      <span style="font-family:var(--font-royal); font-size:0.75rem; letter-spacing:0.25em; color:var(--gold-primary);">SACRED RITUALS &amp; CELEBRATIONS</span>
+      <h2 style="font-family:var(--font-serif); font-size:2.5rem; color:var(--ruby-velvet); margin-top:6px;">Wedding Itinerary</h2>
+      <p style="font-size:0.95rem; color:var(--text-muted);">From vibrant yellow turmeric mornings to sacred pheras under the stars</p>
+    </div>
+
+    <div class="ceremonies-grid-stage">
+      <!-- 1. Tilak / Sagan -->
+      <div class="ceremony-card">
+        <div class="ceremony-icon-orb">
+          <img src="https://assets.shaadipath.com/templates/template01/assets/icons/icon-sagan.webp" alt="Tilak Ceremony" />
+        </div>
+        <h4 style="font-family:var(--font-serif); font-size:1.35rem; color:var(--ruby-velvet);">Tilak &amp; Sagan</h4>
+        <p style="font-size:0.78rem; font-weight:700; color:var(--gold-primary); margin:4px 0 8px;">10 Dec • 4:00 PM</p>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Auspicious blessings, gifting of turbans &amp; sweet beginnings.</p>
+        <span style="font-size:0.75rem; font-weight:600; color:var(--ruby-velvet); display:block; margin-bottom:8px;">Dress: Traditional Pastels</span>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" style="font-size:0.75rem; color:var(--gold-primary); text-decoration:underline;">📍 View on Google Maps</a>
+      </div>
+
+      <!-- 2. Haldi -->
+      <div class="ceremony-card">
+        <div class="ceremony-icon-orb">
+          <img src="https://assets.shaadipath.com/templates/template01/assets/icons/icon-haldi.webp" alt="Haldi Utsav" />
+        </div>
+        <h4 style="font-family:var(--font-serif); font-size:1.35rem; color:var(--ruby-velvet);">Haldi Ki Rasam</h4>
+        <p style="font-size:0.78rem; font-weight:700; color:var(--gold-primary); margin:4px 0 8px;">11 Dec • 10:00 AM</p>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Golden saffron pastes, flower showers &amp; joyous dholak beats.</p>
+        <span style="font-size:0.75rem; font-weight:600; color:var(--ruby-velvet); display:block; margin-bottom:8px;">Dress: Sunshine Yellow</span>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" style="font-size:0.75rem; color:var(--gold-primary); text-decoration:underline;">📍 View on Google Maps</a>
+      </div>
+
+      <!-- 3. Mehendi -->
+      <div class="ceremony-card">
+        <div class="ceremony-icon-orb">
+          <img src="https://assets.shaadipath.com/templates/template01/assets/icons/icon-mehendi.webp" alt="Mehendi" />
+        </div>
+        <h4 style="font-family:var(--font-serif); font-size:1.35rem; color:var(--ruby-velvet);">Mehendi Garden</h4>
+        <p style="font-size:0.78rem; font-weight:700; color:var(--gold-primary); margin:4px 0 8px;">11 Dec • 2:00 PM</p>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Intricate bridal henna, soothing sitar chords &amp; street delicacies.</p>
+        <span style="font-size:0.75rem; font-weight:600; color:var(--ruby-velvet); display:block; margin-bottom:8px;">Dress: Festive Emerald &amp; Floral</span>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" style="font-size:0.75rem; color:var(--gold-primary); text-decoration:underline;">📍 View on Google Maps</a>
+      </div>
+
+      <!-- 4. Sangeet -->
+      <div class="ceremony-card">
+        <div class="ceremony-icon-orb">
+          <img src="https://assets.shaadipath.com/templates/template01/assets/icons/icon-cocktail.webp" alt="Sangeet" />
+        </div>
+        <h4 style="font-family:var(--font-serif); font-size:1.35rem; color:var(--ruby-velvet);">Sangeet Sandhya</h4>
+        <p style="font-size:0.78rem; font-weight:700; color:var(--gold-primary); margin:4px 0 8px;">11 Dec • 7:30 PM</p>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">High-energy dances, cocktail toasts &amp; family face-offs.</p>
+        <span style="font-size:0.75rem; font-weight:600; color:var(--ruby-velvet); display:block; margin-bottom:8px;">Dress: Shimmer &amp; Black Tie Glamour</span>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" style="font-size:0.75rem; color:var(--gold-primary); text-decoration:underline;">📍 View on Google Maps</a>
+      </div>
+
+      <!-- 5. Shubh Vivah -->
+      <div class="ceremony-card" style="border:2px solid var(--gold-primary);">
+        <div class="ceremony-icon-orb">
+          <img src="https://assets.shaadipath.com/templates/template01/assets/icons/icon-shaadi.webp" alt="Wedding" />
+        </div>
+        <h4 style="font-family:var(--font-serif); font-size:1.35rem; color:var(--ruby-velvet);">Shubh Vivah &amp; Pheras</h4>
+        <p style="font-size:0.78rem; font-weight:700; color:var(--gold-primary); margin:4px 0 8px;">12 Dec • 11:00 AM</p>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">The sacred seven vows around the holy agni of togetherness.</p>
+        <span style="font-size:0.75rem; font-weight:600; color:var(--ruby-velvet); display:block; margin-bottom:8px;">Dress: Royal Indian Ethnic</span>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" style="font-size:0.75rem; color:var(--gold-primary); text-decoration:underline;">📍 View on Google Maps</a>
+      </div>
+
+      <!-- 6. Grand Reception -->
+      <div class="ceremony-card">
+        <div class="ceremony-icon-orb">
+          <img src="https://assets.shaadipath.com/templates/template01/assets/icons/icon-reception.webp" alt="Reception" />
+        </div>
+        <h4 style="font-family:var(--font-serif); font-size:1.35rem; color:var(--ruby-velvet);">Royal Reception</h4>
+        <p style="font-size:0.78rem; font-weight:700; color:var(--gold-primary); margin:4px 0 8px;">12 Dec • 7:00 PM</p>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Gala dinner under fairy lights &amp; celebration of the newlyweds.</p>
+        <span style="font-size:0.75rem; font-weight:600; color:var(--ruby-velvet); display:block; margin-bottom:8px;">Dress: Formal Elegance</span>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" style="font-size:0.75rem; color:var(--gold-primary); text-decoration:underline;">📍 View on Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       ACT 6: INTERACTIVE RITUAL (HALDI SPLASH & ROSE PETALS)
+       ========================================================================= -->
+  <section style="padding:0 24px;">
+    <div class="interactive-ritual-box">
+      <div style="font-size:36px; margin-bottom:8px;">✨</div>
+      <h3 style="font-family:var(--font-serif); font-size:1.6rem; color:var(--ruby-velvet); margin-bottom:8px;">
+        Shower Haldi &amp; Flower Petals
+      </h3>
+      <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:18px;">
+        Tap below to shower auspicious marigold blessings upon the couple!
+      </p>
+      <button class="btn-royal-gold" id="btn-shower-blessings">🌸 Shower Royal Blessings 🌸</button>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       ACT 7: RSVP FORM & ATTENDANCE CONFIRMATION
+       ========================================================================= -->
+  <section style="padding:0 24px;">
+    <div class="rsvp-royal-card">
+      <span style="font-family:var(--font-royal); font-size:0.75rem; letter-spacing:0.25em; color:var(--gold-primary);">WILL YOU JOIN US?</span>
+      <h2 style="font-family:var(--font-serif); font-size:2.2rem; color:var(--ruby-velvet); margin:6px 0 16px;">
+        RSVP &amp; Save Your Seat
+      </h2>
+      <p style="font-size:0.92rem; color:var(--text-muted); max-width:480px; margin:0 auto;">
+        Kindly let us know if you will be celebrating with us under the Jodhpur sky.
+      </p>
+
+      <form class="rsvp-form-grid" id="rsvp-form">
+        <input type="text" class="rsvp-input" id="rsvp-guest-name" placeholder="Your Full Name" required />
+        <select class="rsvp-input" id="rsvp-status">
+          <option value="attending">Joyfully Attending (Count me in!)</option>
+          <option value="regret">Regretfully Unable to Attend</option>
+        </select>
+        <input type="number" class="rsvp-input" id="rsvp-guests-count" placeholder="Total Number of Guests" min="1" max="10" value="2" />
+        <button type="submit" class="btn-royal-gold" style="margin-top:8px;">Confirm via WhatsApp 💬</button>
+      </form>
+
+      <!-- Calendar Sync -->
+      <div style="margin-top:32px;">
+        <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--text-light); margin-bottom:12px;">Save Date to Calendar</p>
+        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+          <a href="https://calendar.google.com" target="_blank" rel="noopener" style="font-size:0.78rem; padding:8px 18px; border-radius:9999px; border:1px solid var(--gold-primary); color:var(--ruby-velvet);">Google Calendar</a>
+          <a href="https://shaadipath.com" target="_blank" rel="noopener" style="font-size:0.78rem; padding:8px 18px; border-radius:9999px; background:var(--ruby-velvet); color:#FFF;">Apple / iCal</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       ACT 8: FOOTER & SHAREABLE QR CODE
+       ========================================================================= -->
+  <footer style="text-align:center; padding:70px 24px 90px; color:var(--text-muted);">
+    <h3 style="font-family:var(--font-serif); font-size:1.8rem; color:var(--ruby-velvet); margin-bottom:8px;">
+      Tanya &amp; Rohan
+    </h3>
+    <p style="font-size:0.8rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-primary); margin-bottom:18px;">
+      12 December 2026 • Umaid Bhawan Palace, Jodhpur
+    </p>
+    <p style="font-size:0.78rem; opacity:0.8;">
+      Designed with royal love on <a href="https://vanvimoments.com" style="color:var(--ruby-velvet); font-weight:700;">Vanvi Moments</a>
+    </p>
+  </footer>
+
+  <!-- Vanvi Moments Preview Watermark -->
+  <div id="vanviWatermark" class="vanvi-watermark-pill" style="position:fixed; bottom:14px; left:14px; z-index:99999; background:rgba(26,11,16,0.88); color:#D4AF37; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(212,175,55,0.4); border-radius:999px; padding:6px 14px; font-size:11px; font-weight:700; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(0,0,0,0.4); pointer-events:auto;" title="Vanvi Moments · Royal Vows Preview">
+    <span>✨</span>
+    <span>Vanvi Moments · Royal Preview</span>
+  </div>
+
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('purchased') === 'true' || params.get('paid') === 'true' || window.vanviPurchased) {
+        const wm = document.getElementById('vanviWatermark');
+        if (wm) wm.style.display = 'none';
+      }
+    })();
+  </script>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

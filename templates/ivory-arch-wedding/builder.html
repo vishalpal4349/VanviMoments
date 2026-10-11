@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Vanvi Moments Studio — Ivory Arch Wedding Builder</title>
+  
+  <meta name="description" content="Design and customize your Minimal Luxe Ivory & Gold wedding website in real time with Vanvi Moments.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Minimal Luxe Ivory & Soft Champagne Gold Palette */
+      --gold-primary: #C8A870;
+      --gold-light: #E8D3A8;
+      --gold-dark: #8F6932;
+      --gold-glow: rgba(200, 168, 112, 0.25);
+      --bg-dark: #FAF4E8;
+      --bg-panel: #F5EFE4;
+      --bg-card: rgba(255, 253, 248, 0.95);
+      --border-subtle: rgba(200, 168, 112, 0.35);
+      --border-active: #C8A870;
+      --text-main: #2D241E;
+      --text-muted: #5E5044;
+      --text-dim: #8B7A6C;
+      --btn-gradient: linear-gradient(135deg, #C8A870, #8F6932);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Ambient Lighting */
+    .ambient-glow {
+      position: fixed;
+      top: -150px;
+      left: 15%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(200, 168, 112, 0.16) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Studio Header - Sleek & compact */
+    header.studio-header {
+      height: 52px;
+      background: rgba(245, 239, 228, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      position: relative;
+      z-index: 100;
+      flex-shrink: 0;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .brand-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text-main);
+    }
+    .brand-title span {
+      color: var(--gold-dark);
+      font-style: italic;
+    }
+    .brand-tag {
+      font-size: 0.55rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: rgba(200, 168, 112, 0.18);
+      color: var(--gold-dark);
+      border: 1px solid rgba(200, 168, 112, 0.45);
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .price-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #8F6932;
+      background: rgba(200, 168, 112, 0.18);
+      border: 1px solid rgba(200, 168, 112, 0.4);
+      padding: 4px 10px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .price-pill .strike {
+      text-decoration: line-through;
+      color: var(--text-dim);
+      font-size: 0.62rem;
+    }
+    .publish-btn-head {
+      background: var(--btn-gradient);
+      color: #FFF;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 10px rgba(143, 105, 50, 0.25);
+      transition: all 0.2s ease;
+    }
+    .publish-btn-head:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(143, 105, 50, 0.35);
+    }
+
+    /* Main Studio Container */
+    .studio-layout {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Left Control Panel */
+    .editor-panel {
+      width: 490px;
+      max-width: 100%;
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* Wizard Step Bar */
+    .steps-indicator {
+      display: flex;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 5px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      flex-shrink: 0;
+    }
+    .steps-indicator::-webkit-scrollbar { display: none; }
+    .step-pill {
+      flex: 1;
+      min-width: 58px;
+      text-align: center;
+      padding: 6px 3px;
+      border-radius: 8px;
+      font-size: 0.64rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .step-pill.active {
+      color: #8F6932;
+      background: rgba(200, 168, 112, 0.25);
+      border-color: rgba(200, 168, 112, 0.55);
+    }
+
+    /* Step Content Area */
+    .editor-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 22px 30px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(200, 168, 112, 0.4) transparent;
+    }
+    .wizard-step {
+      display: none;
+    }
+    .wizard-step.active {
+      display: block;
+      animation: fadeInStep 0.35s ease forwards;
+    }
+    @keyframes fadeInStep {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.25rem;
+      color: #8F6932;
+      margin-bottom: 6px;
+    }
+    .step-desc {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      background: #FFFDF9;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.82rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--gold-dark);
+      box-shadow: 0 0 10px rgba(200, 168, 112, 0.25);
+    }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Event Itinerary Card Item */
+    .event-card-item {
+      background: #FFFDF9;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .event-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-family: 'Playfair Display', serif;
+      color: #8F6932;
+      font-size: 0.95rem;
+    }
+
+    /* 4-Slot Photo Uploader (Dual local file + Cloudinary sync) */
+    .uploader-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .upload-card {
+      background: #FFFDF9;
+      border: 1.5px dashed var(--border-subtle);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .upload-card:hover {
+      border-color: var(--gold-dark);
+      background: rgba(200, 168, 112, 0.08);
+    }
+    .upload-card.has-image {
+      border-style: solid;
+      border-color: var(--gold-dark);
+    }
+    .upload-preview {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+    .upload-card.has-image .upload-preview {
+      display: block;
+    }
+    .upload-content {
+      position: relative;
+      z-index: 2;
+    }
+    .upload-card.has-image .upload-content {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .upload-icon {
+      font-size: 1.4rem;
+      color: var(--gold-dark);
+      margin-bottom: 4px;
+    }
+    .upload-text {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .upload-input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    /* Animation Selector Card */
+    .anim-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .anim-card {
+      background: #FFFDF9;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .anim-card.active, .anim-card:hover {
+      border-color: var(--gold-dark);
+      background: rgba(200, 168, 112, 0.18);
+      transform: translateY(-2px);
+    }
+    .anim-icon {
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .anim-name {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* Sticky Footer Dock (Zero Glitch / Perfect Fit) */
+    .editor-dock {
+      position: sticky;
+      bottom: 0;
+      background: rgba(245, 239, 228, 0.98);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border-subtle);
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 50;
+      flex-shrink: 0;
+    }
+    .dock-btn {
+      flex: 1;
+      height: 38px;
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary {
+      background: #FFF;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold-dark);
+    }
+    .btn-primary {
+      background: var(--btn-gradient);
+      border: none;
+      color: #FFF;
+      box-shadow: 0 2px 10px rgba(143, 105, 50, 0.25);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(143, 105, 50, 0.35);
+    }
+
+    /* Right Preview Simulator */
+    .preview-canvas {
+      flex: 1;
+      background: radial-gradient(circle at center, #F0E6D6 0%, #D8CABB 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .device-switcher {
+      position: absolute;
+      top: 14px;
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-subtle);
+      padding: 4px;
+      border-radius: 30px;
+      z-index: 30;
+    }
+    .dev-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dev-btn.active {
+      background: var(--gold-dark);
+      color: #FFF;
+      font-weight: 700;
+    }
+
+    /* Tall Modern Phone Frame (~19.5:9 Aspect Ratio) */
+    .phone-simulator {
+      width: 360px;
+      max-width: 95%;
+      height: 740px;
+      max-height: calc(100vh - 84px);
+      background: #000;
+      border-radius: 42px;
+      box-shadow: 0 25px 60px rgba(60, 48, 38, 0.22), 0 0 0 10px #2D241E, 0 0 0 12px rgba(200, 168, 112, 0.45);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 20px;
+      background: #2D241E;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      z-index: 1000;
+    }
+    .phone-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #FAF4E8;
+    }
+
+    /* Modal for Instant Publish */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-card {
+      background: #FFFDF9;
+      border: 1px solid var(--border-active);
+      border-radius: 20px;
+      padding: 28px 24px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      color: #8F6932;
+      margin-bottom: 8px;
+    }
+    .modal-price-box {
+      background: rgba(200, 168, 112, 0.15);
+      border: 1px solid rgba(200, 168, 112, 0.4);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 16px 0;
+    }
+    .modal-price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #8F6932;
+    }
+    .modal-price-strike {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-decoration: line-through;
+      margin-left: 6px;
+    }
+    .modal-pay-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--btn-gradient);
+      color: #FFF;
+      border: none;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(143, 105, 50, 0.3);
+      transition: all 0.25s ease;
+    }
+    .modal-pay-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(143, 105, 50, 0.45);
+    }
+    .modal-close {
+      margin-top: 14px;
+      font-size: 0.74rem;
+      color: var(--text-dim);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 900px) {
+      .preview-canvas { display: none; }
+      .editor-panel { width: 100%; border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Header -->
+  <header class="studio-header">
+    <a href="#" class="brand-wrap">
+      <div class="brand-title">Vanvi <span>Moments</span></div>
+      <div class="brand-tag">Studio · Ivory Arch</div>
+    </a>
+    <div class="header-actions">
+      <div class="price-pill">
+        <span>₹499</span>
+        <span class="strike">₹2,499</span>
+      </div>
+      <button class="publish-btn-head" onclick="openPublishModal()">
+        <span>Publish Invitation</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Studio Layout -->
+  <div class="studio-layout">
+    
+    <!-- Left Editor -->
+    <div class="editor-panel">
+      <!-- Steps Indicator (7 Full Steps) -->
+      <div class="steps-indicator">
+        <div class="step-pill active" onclick="goToStep(1)">1. Couple</div>
+        <div class="step-pill" onclick="goToStep(2)">2. Parents</div>
+        <div class="step-pill" onclick="goToStep(3)">3. Events</div>
+        <div class="step-pill" onclick="goToStep(4)">4. Story</div>
+        <div class="step-pill" onclick="goToStep(5)">5. Photos</div>
+        <div class="step-pill" onclick="goToStep(6)">6. Guest Info</div>
+        <div class="step-pill" onclick="goToStep(7)">7. VIP &amp; RSVP</div>
+      </div>
+
+      <!-- Editor Body -->
+      <div class="editor-body">
+        
+        <!-- STEP 1: Couple & Date -->
+        <div class="wizard-step active" id="step-1">
+          <h2 class="step-title">Couple &amp; Wedding Date</h2>
+          <p class="step-desc">Enter the details for Kishan &amp; Divya's minimal luxe celebration.</p>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Groom's Name</label>
+              <input type="text" id="groomName" class="form-input" value="Kishan">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Bride's Name</label>
+              <input type="text" id="brideName" class="form-input" value="Divya">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Wedding Date</label>
+            <input type="date" id="weddingDate" class="form-input" value="2026-12-12">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Primary Venue Name</label>
+            <input type="text" id="mainVenue" class="form-input" value="Umaid Bhawan Palace, Jodhpur">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">WhatsApp Contact for RSVP</label>
+            <input type="tel" id="whatsappNum" class="form-input" value="919876543210">
+          </div>
+        </div>
+
+        <!-- STEP 2: Parents & Blessings -->
+        <div class="wizard-step" id="step-2">
+          <h2 class="step-title">Family &amp; Blessings</h2>
+          <p class="step-desc">Personalize parent names and the traditional sacred blessing verse.</p>
+
+          <div class="form-group">
+            <label class="form-label">Divine Blessing Verse</label>
+            <textarea class="form-textarea">With the blessings of the divine and the love of our families</textarea>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Groom's Father</label>
+              <input type="text" class="form-input" value="Mr. Sanjay Kapoor">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Groom's Mother</label>
+              <input type="text" class="form-input" value="Mrs. Neeta Kapoor">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Bride's Father</label>
+              <input type="text" class="form-input" value="Mr. Rajesh Sharma">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Bride's Mother</label>
+              <input type="text" class="form-input" value="Mrs. Kavita Sharma">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Events Itinerary -->
+        <div class="wizard-step" id="step-3">
+          <h2 class="step-title">Ceremonies &amp; Itinerary</h2>
+          <p class="step-desc">Schedule your ceremonies (Mehendi, Haldi, Sangeet, Shaadi, Reception).</p>
+
+          <div class="event-card-item">
+            <div class="event-card-header">
+              <span>🌸 Mehendi Ceremony</span>
+            </div>
+            <div class="form-grid-2" style="margin-bottom:8px;">
+              <input type="text" class="form-input" value="Mehendi">
+              <input type="text" class="form-input" value="2:00 PM">
+            </div>
+            <input type="text" class="form-input" value="Garden Pavilion · Henna artistry, marigolds & tea">
+          </div>
+
+          <div class="event-card-item">
+            <div class="event-card-header">
+              <span>💛 Haldi Utsav</span>
+            </div>
+            <div class="form-grid-2" style="margin-bottom:8px;">
+              <input type="text" class="form-input" value="Haldi">
+              <input type="text" class="form-input" value="10:00 AM">
+            </div>
+            <input type="text" class="form-input" value="Sunlit Courtyard · A golden morning with turmeric">
+          </div>
+
+          <div class="event-card-item">
+            <div class="event-card-header">
+              <span>🎶 Sangeet & Cocktail</span>
+            </div>
+            <div class="form-grid-2" style="margin-bottom:8px;">
+              <input type="text" class="form-input" value="Sangeet">
+              <input type="text" class="form-input" value="7:30 PM">
+            </div>
+            <input type="text" class="form-input" value="Palace Terrace · Music and dance under the stars">
+          </div>
+
+          <div class="event-card-item">
+            <div class="event-card-header">
+              <span>🔥 Shaadi &amp; Pheras</span>
+            </div>
+            <div class="form-grid-2" style="margin-bottom:8px;">
+              <input type="text" class="form-input" value="Shaadi">
+              <input type="text" class="form-input" value="10:00 AM">
+            </div>
+            <input type="text" class="form-input" value="The Grand Mandap · Seven sacred vows & holy fire">
+          </div>
+        </div>
+
+        <!-- STEP 4: Story & Hashtag -->
+        <div class="wizard-step" id="step-4">
+          <h2 class="step-title">Our Story &amp; Personality</h2>
+          <p class="step-desc">Revealed through the interactive champagne linen curtain animation.</p>
+
+          <div class="form-group">
+            <label class="form-label">Wedding Hashtag</label>
+            <input type="text" id="weddingHashtag" class="form-input" value="#KishanWedsDivya">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Couple Story Verse</label>
+            <input type="text" class="form-input" value="Two souls, one sacred archway, a lifetime of mornings.">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Personality Chips (Comma separated)</label>
+            <input type="text" class="form-input" value="Soulmates, Sacred Vows, Palace Dreams, #KishanWedsDivya">
+          </div>
+        </div>
+
+        <!-- STEP 5: Photo Gallery (Dual Upload + Cloudinary Sync) -->
+        <div class="wizard-step" id="step-5">
+          <h2 class="step-title">Moments &amp; Gallery</h2>
+          <p class="step-desc">Upload photos locally or select high-resolution presets for ivory frames.</p>
+
+          <div class="uploader-grid">
+            <div class="upload-card has-image" id="slot-1">
+              <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" class="upload-preview" id="prev-1">
+              <div class="upload-content">
+                <span class="upload-icon">📷</span>
+                <span class="upload-text">Slot 1 (Tall Frame)</span>
+              </div>
+              <input type="file" accept="image/*" class="upload-input" onchange="handleImageUpload(1, this)">
+            </div>
+            <div class="upload-card has-image" id="slot-2">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" class="upload-preview" id="prev-2">
+              <div class="upload-content">
+                <span class="upload-icon">📷</span>
+                <span class="upload-text">Slot 2 (Square)</span>
+              </div>
+              <input type="file" accept="image/*" class="upload-input" onchange="handleImageUpload(2, this)">
+            </div>
+            <div class="upload-card has-image" id="slot-3">
+              <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80" class="upload-preview" id="prev-3">
+              <div class="upload-content">
+                <span class="upload-icon">📷</span>
+                <span class="upload-text">Slot 3 (Square)</span>
+              </div>
+              <input type="file" accept="image/*" class="upload-input" onchange="handleImageUpload(3, this)">
+            </div>
+            <div class="upload-card has-image" id="slot-4">
+              <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" class="upload-preview" id="prev-4">
+              <div class="upload-content">
+                <span class="upload-icon">📷</span>
+                <span class="upload-text">Slot 4 (Square)</span>
+              </div>
+              <input type="file" accept="image/*" class="upload-input" onchange="handleImageUpload(4, this)">
+            </div>
+          </div>
+          <p style="font-size: 0.65rem; color: #8F6932; margin-top: 10px; opacity: 0.85;">
+            ⚡ Cloudinary Sync Ready: Images uploaded here instantly render in your live preview simulator.
+          </p>
+        </div>
+
+        <!-- STEP 6: Guest Essentials & Transitions -->
+        <div class="wizard-step" id="step-6">
+          <h2 class="step-title">Guest Essentials &amp; Animations</h2>
+          <p class="step-desc">Customize guest stay cards and step transition feel.</p>
+
+          <div class="form-group">
+            <label class="form-label">Dress Code Advice</label>
+            <input type="text" class="form-input" value="Ivory, Champagne & Traditional Gold silks.">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Palace Venue & Parking</label>
+            <input type="text" class="form-input" value="Umaid Bhawan Palace, Jodhpur · Valet available.">
+          </div>
+
+          <label class="form-label" style="margin-top:16px;">Step Transition Animations</label>
+          <div class="anim-selector">
+            <div class="anim-card active" onclick="setAnimation('slide', this)">
+              <span class="anim-icon">✨</span>
+              <span class="anim-name">Ivory Slide</span>
+            </div>
+            <div class="anim-card" onclick="setAnimation('zoom', this)">
+              <span class="anim-icon">🌸</span>
+              <span class="anim-name">Arch Zoom</span>
+            </div>
+            <div class="anim-card" onclick="setAnimation('curtain', this)">
+              <span class="anim-icon">🏛️</span>
+              <span class="anim-name">Curtain Flip</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 7: VIP Link & RSVP -->
+        <div class="wizard-step" id="step-7">
+          <h2 class="step-title">VIP Personalization &amp; RSVP</h2>
+          <p class="step-desc">Generate personalized links for specific relatives and configure attendance.</p>
+
+          <div style="background: rgba(200, 168, 112, 0.15); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px; margin-bottom: 16px;">
+            <label class="form-label" style="color:#8F6932;">💌 Personalized VIP Link Generator</label>
+            <input type="text" class="form-input" id="customGuestInput" placeholder="e.g. Sharma Family / Rajesh Uncle" oninput="generateGuestLink()" style="margin-bottom:10px;">
+            <div style="background:#FFF; padding:8px 10px; border-radius:6px; font-size:0.72rem; color:#8F6932; word-break:break-all; margin-bottom:10px;" id="generatedGuestUrl">
+              index.html?guest=Sharma+Family
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="dock-btn btn-primary" style="height:32px; font-size:0.7rem;" onclick="copyGuestLink()">
+                📋 Copy VIP Link
+              </button>
+              <button type="button" class="dock-btn btn-secondary" style="height:32px; font-size:0.7rem;" onclick="testGuestLink()">
+                👁️ Test in Preview
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">RSVP Headline</label>
+            <input type="text" class="form-input" value="Will you join us?">
+          </div>
+          <div class="form-group">
+            <label class="form-label">RSVP WhatsApp Button Label</label>
+            <input type="text" class="form-input" value="Yes, I'll be there 🌸">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sticky Dock Footer -->
+      <div class="editor-dock">
+        <button class="dock-btn btn-secondary" id="btnPrev" onclick="navigateStep(-1)" style="display: none;">
+          ← Back
+        </button>
+        <button class="dock-btn btn-primary" id="btnNext" onclick="navigateStep(1)">
+          Next Step →
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Live Phone Simulator -->
+    <div class="preview-canvas">
+      <div class="device-switcher">
+        <button class="dev-btn active" onclick="setDevice('mobile')">📱 Mobile</button>
+        <button class="dev-btn" onclick="setDevice('desktop')">💻 Desktop</button>
+      </div>
+
+      <div class="phone-simulator" id="phoneSim">
+        <div class="phone-notch"></div>
+        <iframe src="index.html" class="phone-iframe" id="previewFrame"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Publish & Payment Modal -->
+  <div class="modal-overlay" id="publishModal">
+    <div class="modal-card">
+      <h3 class="modal-title">Publish Your Ivory Arch Invitation</h3>
+      <p style="font-size: 0.76rem; color: var(--text-muted); line-height: 1.5;">
+        Get your custom live URL, unlimited guest sharing, WhatsApp RSVP tracking, and Minimal Luxe arch animations.
+      </p>
+
+      <div class="modal-price-box">
+        <span class="modal-price">₹499</span>
+        <span class="modal-price-strike">₹2,499</span>
+        <p style="font-size: 0.65rem; color: #8F6932; margin-top: 4px;">Special Minimal Luxe Launch Offer</p>
+      </div>
+
+      <button class="modal-pay-btn" onclick="processPayment()">
+        Proceed to Pay ₹499 &amp; Launch
+      </button>
+
+      <div class="modal-close" onclick="closePublishModal()">
+        Back to Editing
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 7;
+
+    function goToStep(step) {
+      document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.step-pill').forEach(el => el.classList.remove('active'));
+
+      currentStep = step;
+      document.getElementById('step-' + step).classList.add('active');
+      document.querySelectorAll('.step-pill')[step - 1].classList.add('active');
+
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+
+      btnPrev.style.display = currentStep > 1 ? 'flex' : 'none';
+      if (currentStep === totalSteps) {
+        btnNext.textContent = 'Publish Invitation (₹499)';
+        btnNext.onclick = openPublishModal;
+      } else {
+        btnNext.textContent = 'Next Step →';
+        btnNext.onclick = () => navigateStep(1);
+      }
+    }
+
+    function navigateStep(dir) {
+      const next = currentStep + dir;
+      if (next >= 1 && next <= totalSteps) {
+        goToStep(next);
+      }
+    }
+
+    function setAnimation(anim, card) {
+      document.querySelectorAll('.anim-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    }
+
+    function handleImageUpload(slot, input) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const card = document.getElementById('slot-' + slot);
+        const prev = document.getElementById('prev-' + slot);
+        prev.src = e.target.result;
+        card.classList.add('has-image');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setDevice(mode) {
+      const phone = document.getElementById('phoneSim');
+      document.querySelectorAll('.dev-btn').forEach(b => b.classList.remove('active'));
+      if (mode === 'desktop') {
+        phone.style.width = '96%';
+        phone.style.maxWidth = '920px';
+        phone.style.borderRadius = '18px';
+        phone.querySelector('.phone-notch').style.display = 'none';
+        event.target.classList.add('active');
+      } else {
+        phone.style.width = '360px';
+        phone.style.maxWidth = '95%';
+        phone.style.borderRadius = '42px';
+        phone.querySelector('.phone-notch').style.display = 'block';
+        event.target.classList.add('active');
+      }
+    }
+
+    function generateGuestLink() {
+      const input = document.getElementById('customGuestInput')?.value.trim();
+      const guestUrlBox = document.getElementById('generatedGuestUrl');
+      if (!guestUrlBox) return;
+      if (!input) {
+        guestUrlBox.textContent = 'index.html?guest=Sharma+Family';
+        return;
+      }
+      guestUrlBox.textContent = `index.html?guest=${encodeURIComponent(input)}`;
+    }
+
+    function copyGuestLink() {
+      const input = document.getElementById('customGuestInput')?.value.trim() || 'Sharma Family';
+      const fullUrl = `${window.location.origin}${window.location.pathname.replace('builder.html', 'index.html')}?guest=${encodeURIComponent(input)}`;
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        alert(`Copied VIP Link for ${input}!`);
+      }).catch(() => {
+        prompt('Copy your link:', fullUrl);
+      });
+    }
+
+    function testGuestLink() {
+      const input = document.getElementById('customGuestInput')?.value.trim() || 'Sharma Family';
+      const iframe = document.getElementById('previewFrame');
+      if (iframe) {
+        iframe.src = `index.html?guest=${encodeURIComponent(input)}`;
+      }
+    }
+
+    function openPublishModal() {
+      document.getElementById('publishModal').style.display = 'flex';
+    }
+    function closePublishModal() {
+      document.getElementById('publishModal').style.display = 'none';
+    }
+    function processPayment() {
+      const inputs = document.querySelectorAll('#step-1 input');
+      const groom = (inputs[0] && inputs[0].value) || 'Kishan';
+      const bride = (inputs[1] && inputs[1].value) || 'Divya';
+      const coupleTitle = encodeURIComponent(`${groom} & ${bride} Wedding`);
+      window.location.href = `../../checkout.html?template=ivory-arch-wedding&amount=499&name=${coupleTitle}`;
+    }
+  </script>
+
+</body>
+</html>

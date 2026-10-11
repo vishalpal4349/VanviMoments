@@ -19,6 +19,7 @@
 <script src="js/vanvi-api.js"></script>
 <script src="js/vanvi-google-auth.js"></script>
 <script src="js/vanvi-templates-data.js"></script>
+<script src="js/vanvi-products-data.js"></script>
 <script src="js/vanvi-razorpay.js"></script>
 
 <style>
@@ -195,19 +196,30 @@ header {
   font-size: 16px;
 }
 
-/* Cards Base */
+/* Cards Base (3D Tactile Physics) */
 .checkout-card {
   background: #ffffff;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-radius: 22px;
-  border: 1.5px solid rgba(255, 120, 175, 0.25);
-  box-shadow: 0 12px 35px rgba(236, 72, 153, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1.5px solid rgba(255, 120, 175, 0.28);
+  box-shadow: 
+    0 16px 40px -8px rgba(74, 22, 58, 0.08),
+    0 4px 14px rgba(255, 42, 122, 0.04),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.95);
   padding: 22px;
   margin-bottom: 18px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   overflow: hidden;
+}
+.checkout-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 16px; right: 16px; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 5;
 }
 .card-sec-head {
   display: flex;
@@ -592,7 +604,215 @@ header {
   box-shadow: 0 6px 18px var(--theme-glow);
 }
 
-/* Pay CTA Button */
+/* Luxury Keepsake Companion Callout (Affiliate & Reselling) */
+.luxury-companion-box {
+  background: linear-gradient(135deg, #ffffff 0%, #fffbf6 50%, #fff8f2 100%);
+  border: 1.5px solid rgba(217, 119, 6, 0.35);
+  border-radius: 20px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(217, 119, 6, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.luxury-companion-box::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #ff2a7a, #d97706, #9333ea);
+}
+.companion-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.companion-head-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.companion-badge-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 6px rgba(217, 119, 6, 0.25));
+}
+.companion-title {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 850;
+  color: #92400e;
+}
+.companion-sub {
+  font-size: 11.5px;
+  color: #78526d;
+  margin-top: 1px;
+}
+.btn-explore-companion {
+  background: #ffffff;
+  border: 1.5px solid rgba(217, 119, 6, 0.45);
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 850;
+  padding: 7px 14px;
+  border-radius: 99px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+.btn-explore-companion:hover {
+  background: #fef3c7;
+  border-color: #d97706;
+  transform: translateY(-1px);
+}
+.companion-chips-strip {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.companion-gift-chip {
+  background: #ffffff;
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  border-radius: 99px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #2c1224;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.18s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+.companion-gift-chip:hover {
+  border-color: #ff2a7a;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(255, 42, 122, 0.12);
+}
+.chip-store-tag {
+  font-size: 10px;
+  font-weight: 850;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 1.5px 6px;
+  border-radius: 99px;
+}
+
+/* Physical Delivery Card & Address Form */
+.physical-delivery-card {
+  border-color: rgba(217, 119, 6, 0.35);
+  background: linear-gradient(160deg, #ffffff 60%, #fffbf6 100%);
+  animation: slideDownSmooth 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: none;
+}
+@keyframes slideDownSmooth {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.physical-items-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fffbfe;
+  border: 1px solid rgba(255, 120, 175, 0.25);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+.physical-item-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.physical-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.physical-item-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 120, 175, 0.3);
+}
+.physical-item-name {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+.physical-item-qty {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.physical-item-price {
+  font-size: 13.5px;
+  font-weight: 850;
+  color: var(--rose-primary);
+}
+
+.address-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+@media (max-width: 580px) {
+  .address-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.address-full-col {
+  grid-column: 1 / -1;
+}
+.form-field-unit label {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+.form-field-unit input, .form-field-unit textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255, 120, 175, 0.3);
+  background: #ffffff;
+  font-size: 13.5px;
+  font-family: var(--font-sans);
+  color: var(--text-dark);
+  outline: none;
+  transition: all 0.2s;
+}
+.form-field-unit input:focus, .form-field-unit textarea:focus {
+  border-color: var(--theme-accent);
+  box-shadow: 0 0 0 3px var(--theme-glow);
+}
+.pincode-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+/* Pay CTA Button (3D Tactile Physics) */
 .btn-pay-now {
   width: 100%;
   min-height: 54px;
@@ -602,21 +822,34 @@ header {
   color: #ffffff;
   font-size: 15.5px;
   font-weight: 900;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.45);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  box-shadow: 0 10px 30px var(--theme-glow);
-  transition: all 0.22s ease;
+  box-shadow: 
+    0 12px 32px var(--theme-glow),
+    0 3.5px 0 #be123c,
+    inset 0 2px 2px rgba(255, 255, 255, 0.85),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .btn-pay-now:hover {
-  transform: translateY(-1.5px);
-  box-shadow: 0 14px 38px var(--theme-glow);
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 
+    0 16px 40px var(--theme-glow),
+    0 4.5px 0 #be123c,
+    inset 0 2px 2px rgba(255, 255, 255, 0.95);
+  filter: brightness(1.05);
 }
 .btn-pay-now:active {
-  transform: scale(0.98) translateY(0);
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 
+    0 4px 14px var(--theme-glow),
+    0 1px 0 #be123c,
+    inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Success Order Receipt Modal (Luxury Glassmorphic) */
@@ -854,14 +1087,14 @@ footer a:hover { color: var(--rose-primary); }
         </div>
       </div>
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button type="button" id="btnCheckoutGoogleAuth" style="flex:1; min-height:46px; border-radius:14px; background:#ffffff; border:1.5px solid rgba(255, 42, 122, 0.4); display:flex; align-items:center; justify-content:center; gap:10px; font-weight:800; font-size:13.5px; color:#1f2937; cursor:pointer; box-shadow:0 4px 14px rgba(255,42,122,0.1); transition:all 0.2s;">
-          <svg style="width:20px; height:20px;" viewBox="0 0 24 24">
+        <button type="button" id="btnCheckoutGoogleAuth" class="btn-google-3d" style="flex:1; min-height:48px;">
+          <svg class="google-icon-svg" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
             <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
             <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
           </svg>
-          <span>Sign In with Google (1-Tap)</span>
+          <span>Sign In with Google</span>
         </button>
       </div>
     </div>
@@ -1025,6 +1258,35 @@ footer a:hover { color: var(--rose-primary); }
     </div>
   </section>
 
+  <!-- 4b. Optional Keepsake Companion Recommendation (Affiliate & Reselling) -->
+  <div id="physicalUpsellBox" class="luxury-companion-box">
+    <div class="companion-head-row">
+      <div class="companion-head-left">
+        <span class="companion-badge-icon">🎁</span>
+        <div>
+          <strong class="companion-title">Pair with a Physical Surprise Keepsake</strong>
+          <div class="companion-sub">Delivered to their doorstep via verified partners (Meesho Resell &amp; Amazon Prime)</div>
+        </div>
+      </div>
+      <a href="products.html" target="_blank" class="btn-explore-companion">
+        <span>🛍️</span> <span>Explore Keepsakes ↗</span>
+      </a>
+    </div>
+    <div class="companion-chips-strip">
+      <a href="products.html" target="_blank" class="companion-gift-chip">
+        <span>🎴</span> <span>Velvet NFC Card</span> <span class="chip-store-tag">Meesho (₹249)</span>
+      </a>
+      <a href="products.html" target="_blank" class="companion-gift-chip">
+        <span>🎵</span> <span>Acrylic Song Plaque</span> <span class="chip-store-tag">Amazon (₹399)</span>
+      </a>
+      <a href="products.html" target="_blank" class="companion-gift-chip">
+        <span>🌹</span> <span>Preserved Forever Rose</span> <span class="chip-store-tag">Meesho (₹599)</span>
+      </a>
+    </div>
+  </div>
+
+  <section class="checkout-card physical-delivery-card" id="physicalDeliveryCard" style="display:none;"></section>
+
   <!-- 5. Payment & Order Calculation Ledger -->
   <section class="checkout-card" id="paymentMethodsCard">
     <div class="card-sec-head">
@@ -1039,9 +1301,17 @@ footer a:hover { color: var(--rose-primary); }
 
     <!-- Breakdown List -->
     <div class="price-breakdown-list">
-      <div class="breakdown-row">
+      <div class="breakdown-row" id="rowMomentBase">
         <span>Moment Base Price:</span>
         <span id="txtSubtotal">₹199.00</span>
+      </div>
+      <div class="breakdown-row" id="rowPhysicalSubtotal" style="display:none;">
+        <span>Physical Keepsakes Total:</span>
+        <span id="txtPhysicalSubtotal" style="font-weight:800; color:#b45309;">₹0.00</span>
+      </div>
+      <div class="breakdown-row" id="rowPhysicalShipping" style="display:none; color:#059669; font-weight:800;">
+        <span>Express Courier Delivery:</span>
+        <span>FREE (BlueDart/DTDC)</span>
       </div>
       <div class="breakdown-row discount" id="rowPassDiscount" style="display:none; color:var(--rose-primary);">
         <span>Pass Credits Redeemed:</span>
@@ -1181,18 +1451,18 @@ function vanviGoBack(fallback) {
 
   // 1. Order Parameters
   let templateName = urlParams.get('template') || 'Midnight Wish 3D Celebration';
-  let templateId = urlParams.get('templateId') || '';
+  let templateId = urlParams.get('templateId') || urlParams.get('template') || '';
   let occasion = urlParams.get('occasion') || 'Celebration';
   const recipient = urlParams.get('recipient') || 'Special Someone';
-  let basePrice = parseInt(urlParams.get('price') || '199', 10);
+  let basePrice = parseInt(urlParams.get('amount') || urlParams.get('price') || '199', 10);
   const themeOverride = urlParams.get('theme') || urlParams.get('color') || '';
 
-  // Auto-resolve template details from central Vanvi Registry if templateId is provided
+  // Auto-resolve template details from central Vanvi Registry
   if (templateId && window.VANVI_TEMPLATES && Array.isArray(window.VANVI_TEMPLATES)) {
-    const found = window.VANVI_TEMPLATES.find(t => t.id === templateId || t.slug === templateId || (t.aliases && t.aliases.includes(templateId)));
+    const found = window.VANVI_TEMPLATES.find(t => t.id === templateId || t.slug === templateId || (t.aliases && t.aliases.includes(templateId)) || t.name.toLowerCase() === templateName.toLowerCase());
     if (found) {
-      if (!urlParams.get('template')) templateName = found.name;
-      if (!urlParams.get('price') && found.price) basePrice = found.price;
+      templateName = found.name;
+      if (!urlParams.get('amount') && !urlParams.get('price') && found.price) basePrice = found.price;
       if (!urlParams.get('occasion') && (found.previewOccasion || found.category)) occasion = found.previewOccasion || found.category;
     }
   }
@@ -1536,6 +1806,8 @@ function vanviGoBack(fallback) {
   let activeCoupon = sessionStorage.getItem('vanvi_applied_coupon') || localStorage.getItem('vanvi_active_coupon') || '';
 
   const COUPON_BOOK = {
+    'CELEBRATE20': { type: 'pct', value: 20, label: '20% Welcome Gift Voucher' },
+    'HELP15': { type: 'pct', value: 15, label: '15% Concierge Courtesy Coupon' },
     'WELCOME10': { type: 'pct', value: 10, label: '10% Welcome Discount' },
     'VANVI15': { type: 'pct', value: 15, label: '15% Creator Reward' },
     'LOVE20': { type: 'pct', value: 20, label: '20% Love Celebration Special' },
@@ -1577,14 +1849,160 @@ function vanviGoBack(fallback) {
     if (inputPromoCode) inputPromoCode.value = activeCoupon;
   }
 
-  // 7. Calculation Routine
+  // 7. Physical Boutique Cart & Add-ons Integration
+  const boutiqueCart = (window.VanviCart && window.VanviCart.getCart()) || [];
+  const physicalDeliveryCard = document.getElementById('physicalDeliveryCard');
+  const physicalUpsellBox = document.getElementById('physicalUpsellBox');
+  const chkAddNfcCard = document.getElementById('chkAddNfcCard');
+  const physicalItemsPreview = document.getElementById('physicalItemsPreview');
+  const rowPhysicalSubtotal = document.getElementById('rowPhysicalSubtotal');
+  const txtPhysicalSubtotal = document.getElementById('txtPhysicalSubtotal');
+  const rowPhysicalShipping = document.getElementById('rowPhysicalShipping');
+  const shipFullName = document.getElementById('shipFullName');
+  const shipPhone = document.getElementById('shipPhone');
+  const shipPincode = document.getElementById('shipPincode');
+  const pincodeStatusPill = document.getElementById('pincodeStatusPill');
+  const shipCityState = document.getElementById('shipCityState');
+  const shipAddress = document.getElementById('shipAddress');
+  const shipLandmark = document.getElementById('shipLandmark');
+  const shipGiftNote = document.getElementById('shipGiftNote');
+
+  // If a single physical product was bought directly from boutique
+  const singlePid = urlParams.get('singleProduct');
+  if (singlePid && window.VANVI_PHYSICAL_PRODUCTS) {
+    const pObj = window.VANVI_PHYSICAL_PRODUCTS.find(p => p.id === singlePid);
+    if (pObj && window.VanviCart && !window.VanviCart.getCart().some(i => i.id === singlePid)) {
+      window.VanviCart.addItem(pObj, 1);
+    }
+  }
+
+  // Pre-fill user details if logged in
+  if (currentUser) {
+    if (shipFullName && !shipFullName.value && currentUser.name) shipFullName.value = currentUser.name;
+    if (shipPhone && !shipPhone.value && currentUser.phone) shipPhone.value = currentUser.phone;
+  }
+
+  // Pincode auto-lookup and serviceability check
+  if (shipPincode) {
+    const PINCODE_CITY_MAP = {
+      '11': 'New Delhi, Delhi',
+      '12': 'Gurugram, Haryana',
+      '20': 'Noida, Uttar Pradesh',
+      '40': 'Mumbai, Maharashtra',
+      '41': 'Pune, Maharashtra',
+      '56': 'Bengaluru, Karnataka',
+      '50': 'Hyderabad, Telangana',
+      '60': 'Chennai, Tamil Nadu',
+      '70': 'Kolkata, West Bengal',
+      '38': 'Ahmedabad, Gujarat',
+      '30': 'Jaipur, Rajasthan',
+      '80': 'Patna, Bihar',
+      '22': 'Lucknow, Uttar Pradesh',
+      '46': 'Bhopal, Madhya Pradesh',
+      '45': 'Indore, Madhya Pradesh',
+      '14': 'Chandigarh, Punjab',
+      '68': 'Kochi, Kerala'
+    };
+
+    shipPincode.addEventListener('input', () => {
+      const pin = shipPincode.value.trim();
+      if (/^[1-9][0-9]{5}$/.test(pin)) {
+        if (pincodeStatusPill) {
+          pincodeStatusPill.style.display = 'block';
+          pincodeStatusPill.textContent = '✓ Express Courier Serviceable (2-3 Days via BlueDart / DTDC)';
+        }
+        if (shipCityState && !shipCityState.value) {
+          const prefix = pin.substring(0, 2);
+          if (PINCODE_CITY_MAP[prefix]) {
+            shipCityState.value = PINCODE_CITY_MAP[prefix];
+          }
+        }
+      } else {
+        if (pincodeStatusPill) pincodeStatusPill.style.display = 'none';
+      }
+    });
+  }
+
+  if (chkAddNfcCard) {
+    chkAddNfcCard.addEventListener('change', () => {
+      recalculate();
+    });
+  }
+
+  function renderPhysicalItems() {
+    const currentCart = (window.VanviCart && window.VanviCart.getCart()) || [];
+    const hasNfc = chkAddNfcCard && chkAddNfcCard.checked;
+    if (!physicalItemsPreview) return;
+
+    let itemsHtml = '';
+    currentCart.forEach(item => {
+      itemsHtml += `
+        <div class="physical-item-pill">
+          <img src="${item.image || 'assets/vanvi-moments-logo-header.png'}" alt="${item.name}" class="physical-item-pill-img"/>
+          <div class="physical-item-pill-info">
+            <span class="physical-item-pill-name">${item.name}</span>
+            <span class="physical-item-pill-qty">Qty: ${item.quantity} · ₹${item.price * item.quantity}</span>
+          </div>
+        </div>
+      `;
+    });
+
+    if (hasNfc) {
+      itemsHtml += `
+        <div class="physical-item-pill" style="border-color: rgba(217, 119, 6, 0.4); background: #fffdf5;">
+          <div style="width:36px; height:36px; border-radius:8px; background:linear-gradient(135deg,#b45309,#d97706); display:flex; align-items:center; justify-content:center; font-size:18px;">🎴</div>
+          <div class="physical-item-pill-info">
+            <span class="physical-item-pill-name">Velvet Touch NFC Keepsake Card</span>
+            <span class="physical-item-pill-qty" style="color:#b45309; font-weight:800;">Special Add-on · ₹299</span>
+          </div>
+        </div>
+      `;
+    }
+
+    physicalItemsPreview.innerHTML = itemsHtml || '<div style="font-size:12px; color:var(--text-muted);">No physical items selected.</div>';
+  }
+
+  // 8. Calculation Routine
   let appliedCoins = 0;
   let discountRupees = 0;
   let appliedCredits = 0;
   let couponDiscount = 0;
+  let physicalSubtotal = 0;
   let finalAmount = basePrice;
 
   function recalculate() {
+    const currentCart = (window.VanviCart && window.VanviCart.getCart()) || [];
+    const hasNfc = chkAddNfcCard && chkAddNfcCard.checked;
+    
+    // Physical Subtotal calculation
+    let pCartSum = currentCart.reduce((sum, it) => sum + (it.price * it.quantity), 0);
+    if (hasNfc) pCartSum += 299;
+    physicalSubtotal = pCartSum;
+
+    // Show/hide Physical Delivery card
+    const hasPhysicalItems = physicalSubtotal > 0;
+    if (physicalDeliveryCard) {
+      if (hasPhysicalItems) {
+        physicalDeliveryCard.style.display = 'block';
+        renderPhysicalItems();
+      } else {
+        physicalDeliveryCard.style.display = 'none';
+      }
+    }
+
+    if (rowPhysicalSubtotal && txtPhysicalSubtotal) {
+      if (physicalSubtotal > 0) {
+        rowPhysicalSubtotal.style.display = 'flex';
+        txtPhysicalSubtotal.textContent = `₹${physicalSubtotal.toFixed(2)}`;
+      } else {
+        rowPhysicalSubtotal.style.display = 'none';
+      }
+    }
+
+    if (rowPhysicalShipping) {
+      rowPhysicalShipping.style.display = physicalSubtotal > 0 ? 'flex' : 'none';
+    }
+
     // Pass Card State
     if (userCredits > 0) {
       if (passHasCreditsBlock) passHasCreditsBlock.style.display = 'block';
@@ -1596,8 +2014,11 @@ function vanviGoBack(fallback) {
       if (passNoCreditsBlock) passNoCreditsBlock.style.display = 'block';
     }
 
+    // Gross order base (Digital template + physical gifts)
+    const grossBase = basePrice + physicalSubtotal;
+
     // Coins calculation
-    const isEligible = basePrice >= CONFIG.minOrderForCoins;
+    const isEligible = grossBase >= CONFIG.minOrderForCoins;
     const isCoinsChecked = chkApplyCoins && chkApplyCoins.checked;
 
     const currentUser = (window.VanviAPI && window.VanviAPI.auth.getUser()) || null;
@@ -1622,14 +2043,14 @@ function vanviGoBack(fallback) {
       if (chkApplyCoins) chkApplyCoins.disabled = false;
 
       if (isCoinsChecked && userCoins > 0) {
-        const percentLimitRupees = (basePrice * effectiveMaxPercent) / 100;
+        const percentLimitRupees = (grossBase * effectiveMaxPercent) / 100;
         const fixedRupeeCap = 500;
         const userCoinRupees = userCoins / CONFIG.conversionRate;
         let eligibleRupees = Math.min(percentLimitRupees, fixedRupeeCap, userCoinRupees);
 
-        const minPayable = Math.max(0, Math.round(basePrice * (1 - (effectiveMaxPercent / 100))));
-        if (basePrice - eligibleRupees < minPayable) {
-          eligibleRupees = Math.max(0, basePrice - minPayable);
+        const minPayable = Math.max(0, Math.round(grossBase * (1 - (effectiveMaxPercent / 100))));
+        if (grossBase - eligibleRupees < minPayable) {
+          eligibleRupees = Math.max(0, grossBase - minPayable);
         }
 
         appliedCoins = Math.floor(eligibleRupees * CONFIG.conversionRate);
@@ -1645,9 +2066,9 @@ function vanviGoBack(fallback) {
     if (activeCoupon && COUPON_BOOK[activeCoupon]) {
       const cMeta = COUPON_BOOK[activeCoupon];
       if (cMeta.type === 'pct') {
-        couponDiscount = Math.round((basePrice * cMeta.value) / 100);
+        couponDiscount = Math.round((grossBase * cMeta.value) / 100);
       } else {
-        couponDiscount = Math.min(basePrice, cMeta.value);
+        couponDiscount = Math.min(grossBase, cMeta.value);
       }
       if (rowCouponDiscount) rowCouponDiscount.style.display = 'flex';
       if (lblCouponTitle) lblCouponTitle.textContent = `Coupon (${activeCoupon}) Applied:`;
@@ -1658,7 +2079,7 @@ function vanviGoBack(fallback) {
 
     // Template Celebration Pass Credits Application (1 Credit = ₹1)
     const isPassChecked = chkApplyPass && chkApplyPass.checked;
-    const amountBeforePass = Math.max(0, basePrice - discountRupees - couponDiscount);
+    const amountBeforePass = Math.max(0, grossBase - discountRupees - couponDiscount);
 
     if (isPassChecked && userCredits > 0) {
       appliedCredits = Math.min(amountBeforePass, userCredits);
@@ -1705,10 +2126,10 @@ function vanviGoBack(fallback) {
     if (txtFinalPayable) txtFinalPayable.textContent = `₹${finalAmount.toFixed(2)}`;
 
     if (btnPayText) {
-      if (finalAmount === 0 && (appliedCredits > 0 || basePrice === 0)) {
-        btnPayText.textContent = '✨ Claim Instant (₹0.00) & Get Moment Link';
+      if (finalAmount === 0 && (appliedCredits > 0 || grossBase === 0)) {
+        btnPayText.textContent = '✨ Claim Instant (₹0.00) & Place Order';
       } else {
-        btnPayText.textContent = `Pay ₹${finalAmount.toFixed(2)} & Get Moment Link`;
+        btnPayText.textContent = `Pay ₹${finalAmount.toFixed(2)} & Place Order`;
       }
     }
   }
@@ -1726,9 +2147,60 @@ function vanviGoBack(fallback) {
     });
   });
 
-  // 8. Complete Payment Simulation & Delivery
+  // 9. Complete Payment Simulation & Delivery
   if (btnCompletePayment) {
     btnCompletePayment.addEventListener('click', async () => {
+      const originalBtnText = btnCompletePayment.innerHTML;
+
+      // Validate Physical Delivery fields if physical items or NFC card are selected
+      if (physicalSubtotal > 0) {
+        const nameVal = shipFullName ? shipFullName.value.trim() : '';
+        const phoneVal = shipPhone ? shipPhone.value.trim().replace(/\D/g, '') : '';
+        const pinVal = shipPincode ? shipPincode.value.trim() : '';
+        const addrVal = shipAddress ? shipAddress.value.trim() : '';
+
+        if (!nameVal || nameVal.length < 2) {
+          alert('⚠️ Please enter recipient full delivery name.');
+          physicalDeliveryCard?.scrollIntoView({ behavior: 'smooth' });
+          shipFullName?.focus();
+          return;
+        }
+        if (!phoneVal || !/^[6-9]\d{9}$/.test(phoneVal)) {
+          alert('⚠️ Please enter a valid 10-digit mobile number for courier dispatch updates.');
+          physicalDeliveryCard?.scrollIntoView({ behavior: 'smooth' });
+          shipPhone?.focus();
+          return;
+        }
+        if (!pinVal || !/^[1-9]\d{5}$/.test(pinVal)) {
+          alert('⚠️ Please enter a valid 6-digit Indian delivery pincode.');
+          physicalDeliveryCard?.scrollIntoView({ behavior: 'smooth' });
+          shipPincode?.focus();
+          return;
+        }
+        if (!addrVal || addrVal.length < 5) {
+          alert('⚠️ Please provide complete street address / house number for parcel delivery.');
+          physicalDeliveryCard?.scrollIntoView({ behavior: 'smooth' });
+          shipAddress?.focus();
+          return;
+        }
+
+        // Save delivery record to localStorage
+        const shippingRecord = {
+          fullName: nameVal,
+          phone: phoneVal,
+          pincode: pinVal,
+          cityState: shipCityState ? shipCityState.value.trim() : '',
+          address: addrVal,
+          landmark: shipLandmark ? shipLandmark.value.trim() : '',
+          giftNote: shipGiftNote ? shipGiftNote.value.trim() : '',
+          items: (window.VanviCart && window.VanviCart.getCart()) || [],
+          hasNfcCard: !!(chkAddNfcCard && chkAddNfcCard.checked),
+          physicalSubtotal: physicalSubtotal,
+          timestamp: Date.now()
+        };
+        localStorage.setItem('vanvi_last_shipping_address', JSON.stringify(shippingRecord));
+      }
+
       btnCompletePayment.disabled = true;
       // Helper: Resolve Template-Specific Moment URL (Never universally hardcode moment.html)
       function resolveTemplateMomentUrl(tplId, tplName, rec, occ, snd) {
@@ -1776,6 +2248,11 @@ function vanviGoBack(fallback) {
       let momentUrl = resolveTemplateMomentUrl(templateId, templateName, recipient, occasion, 'You');
 
       function openSuccessReceipt(finalUrl, paymentId, ordId) {
+        // Clear boutique cart upon verified placement
+        if (window.VanviCart && physicalSubtotal > 0) {
+          window.VanviCart.clear();
+        }
+
         // Update Local Wallets
         if (appliedCredits > 0) {
           userCredits = Math.max(0, userCredits - appliedCredits);
@@ -1787,7 +2264,7 @@ function vanviGoBack(fallback) {
         }
 
         btnCompletePayment.disabled = false;
-        btnCompletePayment.innerHTML = `<span>🔒</span> <span>Pay ₹${finalAmount.toFixed(2)} &amp; Get Moment Link</span> <span>→</span>`;
+        btnCompletePayment.innerHTML = `<span>🔒</span> <span>Pay ₹${finalAmount.toFixed(2)} &amp; Place Order</span> <span>→</span>`;
 
         const displayOrderId = ordId || ('ORD-' + Date.now().toString(36).toUpperCase());
 
@@ -1807,7 +2284,7 @@ function vanviGoBack(fallback) {
         if (modalHeadline) modalHeadline.innerHTML = `${occasion} Moment <span>Ready!</span>`;
 
         if (btnDeliverWhatsApp) {
-          const shareText = `Hi ${recipient}! I handcrafted this special digital celebration moment for you on Vanvi Moments. Tap to open: ${finalUrl} ❤️✨`;
+          const shareText = `Hi ${recipient}! I handcrafted this special celebration moment for you on Vanvi Moments. Tap to open: ${finalUrl} ❤️✨`;
           btnDeliverWhatsApp.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
         }
         if (linkViewDirect) {
@@ -1834,7 +2311,8 @@ function vanviGoBack(fallback) {
 
         const linkViewCertificate = document.getElementById('linkViewCertificate');
         if (linkViewCertificate) {
-          linkViewCertificate.href = `order-success.html?orderId=${encodeURIComponent(displayOrderId)}&template=${encodeURIComponent(templateName)}&recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}&amount=${finalAmount.toFixed(2)}&coins=${appliedCoins}&credits=${appliedCredits}&momentUrl=${encodeURIComponent(finalUrl)}&paymentId=${encodeURIComponent(paymentId || '')}`;
+          const hasPhysQuery = physicalSubtotal > 0 ? '&hasPhysical=1' : '';
+          linkViewCertificate.href = `order-success.html?orderId=${encodeURIComponent(displayOrderId)}&template=${encodeURIComponent(templateName)}&recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}&amount=${finalAmount.toFixed(2)}&coins=${appliedCoins}&credits=${appliedCredits}&momentUrl=${encodeURIComponent(finalUrl)}&paymentId=${encodeURIComponent(paymentId || '')}${hasPhysQuery}`;
         }
 
         const linkCustomizeInBuilder = document.getElementById('linkCustomizeInBuilder');
@@ -1878,11 +2356,11 @@ function vanviGoBack(fallback) {
       if (amountPaise < 100) {
         alert('Minimum order amount must be at least ₹1.00 (100 paise).');
         btnCompletePayment.disabled = false;
-        btnCompletePayment.innerHTML = `<span>🔒</span> <span>Pay ₹${finalAmount.toFixed(2)} &amp; Get Moment Link</span> <span>→</span>`;
+        btnCompletePayment.innerHTML = `<span>🔒</span> <span>Pay ₹${finalAmount.toFixed(2)} &amp; Place Order</span> <span>→</span>`;
         return;
       }
 
-      const originalBtnText = btnCompletePayment.innerHTML;
+      // originalBtnText already captured at top of payment handler
       btnCompletePayment.innerHTML = '<span>🔒</span> Connecting to Razorpay Secure Gateway...';
 
       const currentUser = (window.VanviAPI && window.VanviAPI.auth && window.VanviAPI.auth.getUser()) || null;
@@ -1892,14 +2370,18 @@ function vanviGoBack(fallback) {
           amountPaise,
           currency: 'INR',
           name: 'Vanvi Moments',
-          description: `${templateName} — For ${recipient}`,
+          description: physicalSubtotal > 0 ? `${templateName} + Physical Keepsakes` : `${templateName} — For ${recipient}`,
           receipt: 'rcpt_' + Date.now(),
           notes: {
             templateName,
             recipient,
             occasion,
             templateId,
-            customerEmail: currentUser?.email || 'guest@vanvimoments.shop'
+            hasPhysical: physicalSubtotal > 0 ? 'yes' : 'no',
+            physicalTotal: physicalSubtotal,
+            customerName: currentUser?.name || recipient || 'Valued Creator',
+            customerEmail: currentUser?.email || '',
+            customerPhone: currentUser?.phone || ''
           },
           prefill: {
             name: currentUser?.name || recipient || 'Valued Creator',
@@ -1908,11 +2390,9 @@ function vanviGoBack(fallback) {
           },
           themeColor: '#ff2a7a',
           onSuccess: (paymentResult) => {
-            console.log('✓ Razorpay payment verified successfully:', paymentResult);
             openSuccessReceipt(momentUrl, paymentResult.razorpay_payment_id, paymentResult.razorpay_order_id);
           },
           onDismiss: () => {
-            console.log('Razorpay modal dismissed by user.');
             btnCompletePayment.disabled = false;
             btnCompletePayment.innerHTML = originalBtnText;
           },
