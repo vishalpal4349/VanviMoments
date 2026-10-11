@@ -718,6 +718,488 @@
     transform: scale(0.98);
   }
 
+  /* ============================================================
+     ORDER TRACKING & DELIVERY TIMELINE STYLES
+     ============================================================ */
+  .order-timeline-card {
+    background: linear-gradient(145deg, #ffffff 0%, #fffdfd 50%, #fff8fa 100%);
+    border: 1.5px solid var(--border-glass);
+    border-radius: 24px;
+    padding: 22px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(255, 42, 122, 0.06), inset 0 1px 2px #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+  .timeline-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .timeline-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .timeline-badge-live {
+    font-size: 11px;
+    font-weight: 850;
+    padding: 4px 12px;
+    border-radius: 99px;
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.4px;
+  }
+  .pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+    animation: pulseGlow 1.8s infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+  }
+
+  /* Timeline Flow Track */
+  .timeline-steps-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+    margin: 10px 0 24px;
+    gap: 8px;
+  }
+  .timeline-steps-flow::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 12%;
+    right: 12%;
+    height: 3px;
+    background: #f1e5ed;
+    z-index: 1;
+  }
+  .timeline-progress-bar-fill {
+    position: absolute;
+    top: 22px;
+    left: 12%;
+    width: 65%;
+    height: 3px;
+    background: linear-gradient(90deg, #10b981, #ff2a7a, #f59e0b);
+    z-index: 2;
+    border-radius: 99px;
+    box-shadow: 0 0 10px rgba(255, 42, 122, 0.4);
+    transition: width 1s ease-out;
+  }
+
+  .step-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 3;
+  }
+  .step-icon-bubble {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background: #ffffff;
+    border: 2px solid #e2d3df;
+    color: var(--text-muted);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 8px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .step-node.completed .step-icon-bubble {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+  }
+  .step-node.active .step-icon-bubble {
+    background: linear-gradient(135deg, #ff2a7a 0%, #f59e0b 100%);
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(255, 42, 122, 0.45);
+    transform: scale(1.1);
+    animation: activeStepPulse 2.2s infinite;
+  }
+  @keyframes activeStepPulse {
+    0%, 100% { box-shadow: 0 8px 20px rgba(255, 42, 122, 0.45); }
+    50% { box-shadow: 0 12px 28px rgba(255, 42, 122, 0.7); }
+  }
+  .step-title {
+    font-size: 12px;
+    font-weight: 850;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+    line-height: 1.25;
+  }
+  .step-sub {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+  .step-time {
+    font-size: 9.5px;
+    color: #059669;
+    font-weight: 800;
+    margin-top: 3px;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 1px 6px;
+    border-radius: 99px;
+  }
+
+  /* Courier Tracking Info Box */
+  .courier-info-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: linear-gradient(135deg, #fffcf5 0%, #fff7ed 100%);
+    border: 1.5px dashed rgba(217, 119, 6, 0.35);
+    border-radius: 16px;
+    padding: 12px 16px;
+  }
+  .courier-meta-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .courier-logo-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #d97706, #b45309);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(217, 119, 6, 0.25);
+  }
+  .courier-details-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .awb-code-pill {
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 900;
+    color: #92400e;
+    background: #ffffff;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(217, 119, 6, 0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-copy-awb {
+    background: none;
+    border: none;
+    color: #b45309;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  /* ============================================================
+     PREMIUM WHATSAPP SHARE CARD & RICH PREVIEW MOCKUP
+     ============================================================ */
+  .whatsapp-share-card-container {
+    background: linear-gradient(145deg, #ffffff 0%, #f6fdf8 50%, #effcf3 100%);
+    border: 1.5px solid rgba(37, 211, 102, 0.35);
+    border-radius: 24px;
+    padding: 22px 20px;
+    margin-bottom: 26px;
+    box-shadow: 0 10px 32px rgba(37, 211, 102, 0.08);
+  }
+  .whatsapp-sec-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .whatsapp-sec-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 900;
+    color: #0d5f38;
+  }
+  .whatsapp-live-preview-pill {
+    font-size: 10.5px;
+    font-weight: 850;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: rgba(37, 211, 102, 0.15);
+    color: #075e54;
+    border: 1px solid rgba(37, 211, 102, 0.3);
+  }
+
+  /* Realistic WhatsApp Chat Bubble Mockup */
+  .wa-bubble-mockup {
+    max-width: 480px;
+    margin: 0 auto 18px;
+    background: #e7fedb;
+    border-radius: 18px 18px 4px 18px;
+    padding: 12px 14px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(37, 211, 102, 0.2);
+    position: relative;
+    text-align: left;
+  }
+  .wa-bubble-card-inner {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+  .wa-card-banner {
+    height: 120px;
+    background: linear-gradient(135deg, #ff2a7a 0%, #a855f7 50%, #f59e0b 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .wa-card-banner-icon {
+    font-size: 44px;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
+    animation: bannerIconFloat 3s ease-in-out infinite;
+  }
+  @keyframes bannerIconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .wa-card-badge-overlay {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 850;
+    padding: 2px 8px;
+    border-radius: 99px;
+    letter-spacing: 0.4px;
+  }
+  .wa-card-body {
+    padding: 10px 12px;
+  }
+  .wa-card-title {
+    font-size: 13.5px;
+    font-weight: 900;
+    color: #1f2937;
+    margin-bottom: 3px;
+    line-height: 1.3;
+  }
+  .wa-card-desc {
+    font-size: 11.5px;
+    color: #4b5563;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .wa-card-domain {
+    font-size: 10.5px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-transform: uppercase;
+    font-weight: 750;
+    letter-spacing: 0.5px;
+  }
+
+  /* Unlocking PIN Chip */
+  .secret-pin-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border: 1.5px dashed rgba(217, 119, 6, 0.45);
+    border-radius: 99px;
+    padding: 4px 12px;
+    margin-bottom: 6px;
+    font-size: 11.5px;
+    font-weight: 850;
+    color: #92400e;
+  }
+  .secret-pin-number {
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: 950;
+    color: #b45309;
+    letter-spacing: 2px;
+    background: #ffffff;
+    padding: 1px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(217, 119, 6, 0.25);
+  }
+
+  .wa-bubble-caption {
+    font-size: 12.5px;
+    color: #111827;
+    line-height: 1.45;
+  }
+  .wa-bubble-time {
+    font-size: 10px;
+    color: #65676b;
+    text-align: right;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+  }
+  .wa-double-check {
+    color: #53bdeb;
+    font-weight: 900;
+  }
+
+  /* WhatsApp Action Buttons Strip */
+  .wa-actions-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .btn-wa-action-primary {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #25D366 0%, #1da851 50%, #128C7E 100%);
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 900;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 
+      0 10px 26px -2px rgba(37, 211, 102, 0.45),
+      inset 0 3px 3.5px rgba(255, 255, 255, 0.95),
+      inset 0 -3px 4px rgba(10, 110, 45, 0.4);
+    text-shadow: 0 1px 2px rgba(10, 90, 40, 0.4);
+    transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+    cursor: pointer;
+  }
+  .btn-wa-action-primary:hover {
+    transform: translateY(-2px) scale(1.015);
+    box-shadow: 0 14px 34px -2px rgba(37, 211, 102, 0.55), inset 0 3.5px 4px #ffffff;
+    filter: brightness(1.05);
+  }
+  .btn-wa-action-primary:active {
+    transform: translateY(2px) scale(0.985);
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  .btn-wa-action-secondary {
+    width: 100%;
+    background: #ffffff;
+    border: 1.5px solid rgba(37, 211, 102, 0.4);
+    color: #075e54;
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 850;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .btn-wa-action-secondary:hover {
+    background: #e7fedb;
+    border-color: #25D366;
+    transform: translateY(-1.5px);
+  }
+  .btn-wa-action-secondary:active {
+    transform: translateY(1.5px) scale(0.98);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  /* ============================================================
+     PHYSICAL PARCEL DISPATCH CARD (IF ORDER HAS PHYSICAL ITEMS)
+     ============================================================ */
+  .physical-dispatch-card {
+    background: linear-gradient(145deg, #ffffff 0%, #fffdf8 50%, #fff9f2 100%);
+    border: 1.5px solid rgba(217, 119, 6, 0.35);
+    border-radius: 22px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 24px rgba(217, 119, 6, 0.05);
+  }
+  .physical-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(217, 119, 6, 0.25);
+    margin-bottom: 14px;
+  }
+  .physical-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 600px) {
+    .physical-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .address-recap-box {
+    background: #ffffff;
+    border: 1px solid rgba(217, 119, 6, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 12.5px;
+    color: var(--text-dark);
+    line-height: 1.5;
+  }
+  .parchment-greeting-box {
+    background: #fdfaf3;
+    border: 1px solid #ebd8b5;
+    border-radius: 12px;
+    padding: 12px;
+    font-family: var(--font-serif);
+    font-size: 13.5px;
+    color: #78350f;
+    font-style: italic;
+    line-height: 1.5;
+    position: relative;
+  }
+
   /* Luxury Toast Notification */
   .vanvi-toast {
     position: fixed;
@@ -855,6 +1337,32 @@
       text-align: center;
       width: 100%;
     }
+    .timeline-steps-flow {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin: 14px 0 18px;
+    }
+    .timeline-steps-flow::before,
+    .timeline-progress-bar-fill {
+      display: none;
+    }
+    .step-node {
+      flex-direction: row;
+      text-align: left;
+      gap: 12px;
+    }
+    .step-icon-bubble {
+      margin-bottom: 0;
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      font-size: 15px;
+    }
+    .courier-info-strip {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
   }
   </style>
 </head>
@@ -961,6 +1469,206 @@
           <span class="cashback-text"><strong>+10% Order Cashback!</strong> Added bonus coins to your Vanvi Wallet.</span>
         </div>
         <a href="plans.html?tab=coins" style="font-size:11px; font-weight:850; color:#b45309; text-decoration:none;">Wallet →</a>
+      </div>
+    </div>
+
+    <!-- 1. Order Tracking & Delivery Timeline -->
+    <div class="order-timeline-card" id="orderTimelineCard">
+      <div class="timeline-head">
+        <div class="timeline-title-wrap">
+          <span style="font-size:18px;">📦</span>
+          <div>
+            <strong style="font-size:13.5px; color:var(--text-dark);">Live Order Tracking &amp; Delivery Timeline</strong>
+            <div style="font-size:11px; color:var(--text-muted);">Real-time fulfillment &amp; dispatch tracking</div>
+          </div>
+        </div>
+        <div class="timeline-badge-live" id="timelineBadgeStatus">
+          <span class="pulse-dot"></span>
+          <span id="txtTimelineStatus">Fulfillment in Progress</span>
+        </div>
+      </div>
+
+      <!-- Interactive 4-Step Progress Flow -->
+      <div class="timeline-steps-flow">
+        <div class="timeline-progress-bar-fill" id="timelineProgressBar"></div>
+        
+        <!-- Step 1 -->
+        <div class="step-node completed" id="stepNode1">
+          <div class="step-icon-bubble">✓</div>
+          <div>
+            <div class="step-title">Order Secured</div>
+            <div class="step-sub">Payment Verified &amp; Logged</div>
+            <div class="step-time">Just Now</div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-node active" id="stepNode2">
+          <div class="step-icon-bubble" id="stepIcon2">🎨</div>
+          <div>
+            <div class="step-title" id="stepTitle2">Atelier Handcrafting</div>
+            <div class="step-sub" id="stepSub2">Dedication &amp; Media Assembled</div>
+            <div class="step-time" id="stepTime2">In Progress</div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-node" id="stepNode3">
+          <div class="step-icon-bubble" id="stepIcon3">🚀</div>
+          <div>
+            <div class="step-title" id="stepTitle3">Express Dispatch</div>
+            <div class="step-sub" id="stepSub3">BlueDart / DTDC Priority Air</div>
+            <div class="step-time" id="stepTime3">Est: Today</div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-node" id="stepNode4">
+          <div class="step-icon-bubble" id="stepIcon4">🎁</div>
+          <div>
+            <div class="step-title" id="stepTitle4">Recipient Reveal</div>
+            <div class="step-sub" id="stepSub4">Doorstep Unboxing Moment</div>
+            <div class="step-time" id="stepTime4">2-3 Days</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Courier / Instant Dispatch Info Strip -->
+      <div class="courier-info-strip" id="courierInfoStrip">
+        <div class="courier-meta-group">
+          <div class="courier-logo-badge" id="courierIcon">✈️</div>
+          <div class="courier-details-text">
+            <span style="font-size:12px; font-weight:850; color:#92400e;" id="lblCourierName">BlueDart Express Air / DTDC Priority</span>
+            <span style="font-size:11px; color:#b45309;">Tracking AWB: <span class="awb-code-pill" id="valAwbCode">BD-98240192IN <button type="button" class="btn-copy-awb" id="btnCopyAwb" title="Copy tracking code">Copy</button></span></span>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <a href="https://www.bluedart.com/tracking" target="_blank" rel="noopener" class="btn-download-qr" style="background:#ffffff; border-color:rgba(217,119,6,0.35); text-decoration:none;">
+            <span>🌐</span> Track via BlueDart
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Matching Physical Keepsake Recommendations (Affiliate & Reselling) -->
+    <div class="physical-dispatch-card" id="physicalCompanionGiftsCard">
+      <div class="physical-head">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:18px;">🎁</span>
+          <strong style="font-size:13px; color:#92400e; text-transform:uppercase; letter-spacing:0.6px;">Send a Physical Gift Along with this Moment</strong>
+        </div>
+        <span style="font-size:11px; font-weight:800; color:#059669; background:#ecfdf5; padding:2px 10px; border-radius:99px; border:1px solid #a7f3d0;">
+          🛍️ Verified Store Partners
+        </span>
+      </div>
+
+      <div style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">
+        Make your celebration unforgettable! Order a matching physical keepsake delivered directly to their doorstep from Meesho or Amazon:
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px;" id="orderSuccessKeepsakeList">
+        <!-- Velvet NFC Smart Card -->
+        <div style="background:#ffffff; border:1px solid rgba(255,120,175,0.25); border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:8px;">
+          <div style="font-weight:850; font-size:13px; color:var(--text-dark);">🎴 Velvet NFC Keepsake Card</div>
+          <div style="font-size:11.5px; color:var(--text-muted);">Tap phone on card to open this exact digital surprise!</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:6px;">
+            <span style="font-weight:900; color:var(--rose-primary); font-size:15px;">₹249</span>
+            <a href="https://www.meesho.com/search?q=nfc+smart+greeting+cards+velvet" target="_blank" rel="noopener noreferrer sponsored" style="background:linear-gradient(135deg,#ff2a7a,#9333ea); color:#fff; font-size:11px; font-weight:850; padding:5px 12px; border-radius:99px; text-decoration:none;">
+              Buy on Meesho ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Acrylic Song Plaque -->
+        <div style="background:#ffffff; border:1px solid rgba(255,120,175,0.25); border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:8px;">
+          <div style="font-weight:850; font-size:13px; color:var(--text-dark);">🎵 Acrylic Photo &amp; Song Plaque</div>
+          <div style="font-size:11.5px; color:var(--text-muted);">Cast acrylic keepsake with wood stand &amp; waveform!</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:6px;">
+            <span style="font-weight:900; color:var(--rose-primary); font-size:15px;">₹399</span>
+            <a href="https://www.amazon.in/s?k=acrylic+song+photo+plaque+custom&tag=vanvi-21" target="_blank" rel="noopener noreferrer sponsored" style="background:#232f3e; color:#fff; font-size:11px; font-weight:850; padding:5px 12px; border-radius:99px; text-decoration:none;">
+              Buy on Amazon ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Preserved Rose Dome -->
+        <div style="background:#ffffff; border:1px solid rgba(255,120,175,0.25); border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:8px;">
+          <div style="font-weight:850; font-size:13px; color:var(--text-dark);">🌹 Eternal Preserved Rose Dome</div>
+          <div style="font-size:11.5px; color:var(--text-muted);">Real fresh rose preserved 3+ yrs with fairy lights!</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:6px;">
+            <span style="font-weight:900; color:var(--rose-primary); font-size:15px;">₹599</span>
+            <a href="https://www.meesho.com/search?q=preserved+rose+glass+dome+led" target="_blank" rel="noopener noreferrer sponsored" style="background:linear-gradient(135deg,#ff2a7a,#9333ea); color:#fff; font-size:11px; font-weight:850; padding:5px 12px; border-radius:99px; text-decoration:none;">
+              Buy on Meesho ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- 3D Laser Crystal Cube -->
+        <div style="background:#ffffff; border:1px solid rgba(255,120,175,0.25); border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:8px;">
+          <div style="font-weight:850; font-size:13px; color:var(--text-dark);">💎 3D Optical Crystal Memory Cube</div>
+          <div style="font-size:11.5px; color:var(--text-muted);">Optical crystal with internal 3D laser engraving &amp; LED base!</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:6px;">
+            <span style="font-weight:900; color:var(--rose-primary); font-size:15px;">₹699</span>
+            <a href="https://www.amazon.in/s?k=3d+crystal+photo+cube+personalized+led&tag=vanvi-21" target="_blank" rel="noopener noreferrer sponsored" style="background:#232f3e; color:#fff; font-size:11px; font-weight:850; padding:5px 12px; border-radius:99px; text-decoration:none;">
+              Buy on Amazon ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:14px;">
+        <a href="products.html" target="_blank" style="display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:850; color:#92400e; background:#fef3c7; border:1.5px solid #fde68a; padding:7px 18px; border-radius:99px; text-decoration:none; transition:transform 0.2s ease;">
+          <span>🛍️</span> <span>Explore All Curated Keepsakes on Vanvi Boutique ↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. Dedicated WhatsApp Share Card (Rich Visual Preview) -->
+    <div class="whatsapp-share-card-container" id="whatsappShareCardContainer">
+      <div class="whatsapp-sec-header">
+        <div class="whatsapp-sec-title">
+          <span style="font-size:18px;">💬</span>
+          <span>WhatsApp Surprise Card Preview</span>
+        </div>
+        <span class="whatsapp-live-preview-pill">Interactive Share Preview</span>
+      </div>
+
+      <!-- Visual WhatsApp Chat Bubble Mockup -->
+      <div class="wa-bubble-mockup">
+        <div class="wa-bubble-card-inner">
+          <div class="wa-card-banner" id="waCardBanner">
+            <span class="wa-card-banner-icon" id="waBannerIcon">🎂</span>
+            <span class="wa-card-badge-overlay" id="waCardBadgeOverlay">✨ Certified Vanvi Moment</span>
+          </div>
+          <div class="wa-card-body">
+            <div class="secret-pin-chip">
+              <span>🔐 Secret Reveal PIN:</span>
+              <span class="secret-pin-number" id="valSecretPin">7724</span>
+            </div>
+            <div class="wa-card-title" id="waCardTitle">Special Celebration for Someone Special ❤️</div>
+            <div class="wa-card-desc" id="waCardDesc">Tap to unlock your handcrafted musical celebration with personal memories &amp; dedication letter.</div>
+            <div class="wa-card-domain">
+              <span>🔒</span> <span>vanvimoments.shop</span> · <span>Private Link</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="wa-bubble-caption" id="waBubbleCaption">
+          Hey! I created a special celebration surprise just for you. Tap the link to open your keepsake! ✨
+        </div>
+        <div class="wa-bubble-time">
+          <span id="waTimeLabel">Just Now</span> <span class="wa-double-check">✓✓</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="wa-actions-strip">
+        <a href="share.html" id="btnShareWhatsAppDedicated" class="btn-wa-action-primary" target="_blank" rel="noopener">
+          <span>💬</span> Deliver on WhatsApp with 1-Tap <span>💌</span>
+        </a>
+        <button type="button" id="btnCopyWaGreeting" class="btn-wa-action-secondary">
+          <span>📋</span> Copy Formatted WhatsApp Greeting &amp; Link
+        </button>
       </div>
     </div>
 
@@ -1236,9 +1944,123 @@
   }
 
   if (btnWA) {
-    const waText = encodeURIComponent(`Hey ${recipient}! I handcrafted this special digital celebration moment for you on Vanvi Moments. Tap to open and experience the surprise: ${momentUrl} ❤️✨`);
+    const waText = encodeURIComponent(`Hey ${recipient}! I handcrafted this special celebration moment for you on Vanvi Moments. Tap to open and experience the surprise: ${momentUrl} ❤️✨`);
     btnWA.href = `https://api.whatsapp.com/send?text=${waText}`;
   }
+
+  // Generate Deterministic 4-digit Secret PIN based on Order ID
+  let pinSeed = 0;
+  for (let i = 0; i < orderId.length; i++) pinSeed = ((pinSeed << 5) - pinSeed) + orderId.charCodeAt(i);
+  const secretPin = Math.abs(pinSeed % 9000) + 1000;
+  const elSecretPin = document.getElementById('valSecretPin');
+  if (elSecretPin) elSecretPin.textContent = secretPin;
+
+  // Check for Physical Keepsakes in Order
+  const hasPhysicalParam = params.get('hasPhysical') === '1';
+  let shippingData = null;
+  try {
+    const savedShip = localStorage.getItem('vanvi_last_shipping_address');
+    if (savedShip) shippingData = JSON.parse(savedShip);
+  } catch(e) {}
+
+  const isPhysicalOrder = hasPhysicalParam || (shippingData && (shippingData.items?.length > 0 || shippingData.hasNfcCard));
+
+  // Render Order Tracking Timeline & Physical Parcel Details
+  const timelineCard = document.getElementById('orderTimelineCard');
+  const txtTimelineStatus = document.getElementById('txtTimelineStatus');
+  const timelineProgressBar = document.getElementById('timelineProgressBar');
+  const physicalParcelCard = document.getElementById('physicalParcelCard');
+  const lblCourierName = document.getElementById('lblCourierName');
+  const valAwbCode = document.getElementById('valAwbCode');
+  const btnCopyAwb = document.getElementById('btnCopyAwb');
+
+  // Deterministic AWB & Vault Reference
+  const awbNum = 'LIVE-VAULT-' + orderId.substring(0, 10);
+  if (valAwbCode) {
+    valAwbCode.innerHTML = `${awbNum} <button type="button" class="btn-copy-awb" id="btnCopyAwb" title="Copy reference">Copy</button>`;
+  }
+
+  // 100% Instant Digital Vault Delivery
+  if (txtTimelineStatus) txtTimelineStatus.textContent = 'Digital Moment Live 100%';
+  if (timelineProgressBar) timelineProgressBar.style.width = '100%';
+
+  const stepNode2 = document.getElementById('stepNode2');
+  const stepNode3 = document.getElementById('stepNode3');
+  const stepNode4 = document.getElementById('stepNode4');
+  const stepTitle2 = document.getElementById('stepTitle2');
+  const stepTitle3 = document.getElementById('stepTitle3');
+  const stepTitle4 = document.getElementById('stepTitle4');
+  const stepSub2 = document.getElementById('stepSub2');
+  const stepSub3 = document.getElementById('stepSub3');
+  const stepSub4 = document.getElementById('stepSub4');
+  const stepIcon3 = document.getElementById('stepIcon3');
+  const stepIcon4 = document.getElementById('stepIcon4');
+
+  if (stepNode2) stepNode2.className = 'step-node completed';
+  if (stepNode3) stepNode3.className = 'step-node completed';
+  if (stepNode4) stepNode4.className = 'step-node active';
+
+  if (stepTitle2) stepTitle2.textContent = 'Moment Crafted';
+  if (stepSub2) stepSub2.textContent = 'Personalized & Sealed';
+  if (stepTitle3) stepTitle3.textContent = 'Encrypted Cloud';
+  if (stepSub3) stepSub3.textContent = 'Permanent Vault Access';
+  if (stepIcon3) stepIcon3.textContent = '☁️';
+  if (stepTitle4) stepTitle4.textContent = 'Ready to Unbox';
+  if (stepSub4) stepSub4.textContent = 'Instant Surprise Link';
+  if (stepIcon4) stepIcon4.textContent = '✨';
+
+  if (lblCourierName) lblCourierName.textContent = 'Global Ultra-Fast Cloud Delivery';
+
+  // Setup WhatsApp Rich Share Card
+  const waCardBanner = document.getElementById('waCardBanner');
+  const waBannerIcon = document.getElementById('waBannerIcon');
+  const waCardBadgeOverlay = document.getElementById('waCardBadgeOverlay');
+  const waCardTitle = document.getElementById('waCardTitle');
+  const waCardDesc = document.getElementById('waCardDesc');
+  const waBubbleCaption = document.getElementById('waBubbleCaption');
+  const btnShareWhatsAppDedicated = document.getElementById('btnShareWhatsAppDedicated');
+  const btnCopyWaGreeting = document.getElementById('btnCopyWaGreeting');
+
+  if (waCardBanner) waCardBanner.style.background = theme.gradient;
+  if (waBannerIcon) waBannerIcon.textContent = theme.icon;
+  if (waCardBadgeOverlay) waCardBadgeOverlay.textContent = theme.badge;
+  if (waCardTitle) waCardTitle.textContent = `${occasion} Surprise for ${recipient} ❤️`;
+  if (waCardDesc) waCardDesc.textContent = `A customized musical celebration with memories, interactive reveal & dedication letter handcrafted for ${recipient}.`;
+
+  const formattedWaMessage = 
+    `🎉 *Special ${occasion} Surprise for ${recipient}!* ❤️\n\n` +
+    `I handcrafted a personalized digital celebration keepsake exclusively for you on Vanvi Moments.\n\n` +
+    `✨ *Tap to Open & Experience:* ${momentUrl}\n` +
+    `🔐 *Secret Reveal PIN:* ${secretPin}\n\n` +
+    `Wishing you boundless joy and happiness! ✨`;
+
+  if (waBubbleCaption) {
+    waBubbleCaption.innerHTML = `Hey <strong>${recipient}</strong>! I created a special celebration surprise just for you. Tap the link to open your keepsake! ✨`;
+  }
+
+  if (btnShareWhatsAppDedicated) {
+    btnShareWhatsAppDedicated.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(formattedWaMessage)}`;
+  }
+
+  if (btnCopyWaGreeting) {
+    btnCopyWaGreeting.addEventListener('click', () => {
+      navigator.clipboard.writeText(formattedWaMessage).then(() => {
+        showToast('✓ Formatted WhatsApp greeting & link copied! ✨');
+      }).catch(() => {
+        showToast('✓ WhatsApp note ready to share!');
+      });
+    });
+  }
+
+  // Attach AWB Copy listener
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'btnCopyAwb') {
+      const txt = isPhysicalOrder ? awbNum : `LIVE-VAULT-${orderId}`;
+      navigator.clipboard.writeText(txt).then(() => {
+        showToast(`✓ Tracking reference copied: ${txt} 📋`);
+      });
+    }
+  });
 
   // Copy Link with Toast Feedback
   if (btnCopy) {

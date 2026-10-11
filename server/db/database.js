@@ -28,6 +28,7 @@ const initialData = {
   analyticsEvents: [],
   auditLogs: [],
   inquiries: [],
+  friendship_microsites: [],
   meta: {
     version: '1.0.0',
     createdAt: new Date().toISOString()
@@ -52,7 +53,7 @@ function loadStore() {
   }
 
   // Ensure all collections exist
-  const collections = ['users', 'memberships', 'moments', 'orders', 'coinLedger', 'templates', 'analyticsEvents', 'auditLogs', 'inquiries'];
+  const collections = ['users', 'memberships', 'moments', 'orders', 'coinLedger', 'templates', 'analyticsEvents', 'auditLogs', 'inquiries', 'friendship_microsites'];
   collections.forEach(c => {
     if (!Array.isArray(store[c])) store[c] = [];
   });
@@ -738,6 +739,51 @@ function getDatabaseInfo() {
   };
 }
 
+const FriendshipMicrosites = {
+  create: async (data) => {
+    loadStore();
+    const id = data.id || 'fsm_' + Date.now() + '_' + crypto.randomBytes(3).toString('hex');
+    const slug = data.slug || 'f-' + crypto.randomBytes(4).toString('hex');
+    const record = {
+      id,
+      slug,
+      userId: data.userId || data.user_id || null,
+      config: data.config || {},
+      paymentId: data.paymentId || data.payment_id || null,
+      orderId: data.orderId || data.order_id || null,
+      amount: data.amount || 99,
+      status: data.status || 'paid',
+      createdAt: data.createdAt || data.created_at || Date.now(),
+      updatedAt: Date.now()
+    };
+    if (!Array.isArray(store.friendship_microsites)) {
+      store.friendship_microsites = [];
+    }
+    const existingIdx = store.friendship_microsites.findIndex(m => m.slug === slug);
+    if (existingIdx !== -1) {
+      store.friendship_microsites[existingIdx] = { ...store.friendship_microsites[existingIdx], ...record };
+    } else {
+      store.friendship_microsites.push(record);
+    }
+    saveStore();
+    return record;
+  },
+  findBySlug: async (slug) => {
+    loadStore();
+    if (!Array.isArray(store.friendship_microsites)) return null;
+    return store.friendship_microsites.find(m => m.slug === slug) || null;
+  },
+  findById: async (id) => {
+    loadStore();
+    if (!Array.isArray(store.friendship_microsites)) return null;
+    return store.friendship_microsites.find(m => m.id === id) || null;
+  },
+  findAll: async () => {
+    loadStore();
+    return store.friendship_microsites || [];
+  }
+};
+
 module.exports = {
   Users,
   Memberships,
@@ -747,6 +793,7 @@ module.exports = {
   Templates,
   AnalyticsEvents,
   AuditLogs,
+  FriendshipMicrosites,
   getStore,
   saveStore,
   recordAuditLog,

@@ -20,7 +20,7 @@ const templates = [
   'constellation-love',
   'golden-anniversary',
   'retro-polaroid-wall',
-  'sincere-letter',
+  'cute-pastel-birthday',
   'temple-royal-wedding'
 ];
 

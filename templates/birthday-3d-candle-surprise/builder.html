@@ -10,8 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/vanvi-global-experience.css">
   <link rel="stylesheet" href="../../css/vanvi-custom-builder.css">
+  <link rel="stylesheet" href="../../css/vanvi-builder-smart.css">
   <script src="../../js/vanvi-api.js"></script>
   <script src="../../js/vanvi-builder-core.js"></script>
+  <script src="../../js/vanvi-builder-smart.js" defer></script>
+  <script src="../../js/vanvi-template-lock.js" defer></script>
 </head>
 <body>
   <!-- Top Navigation -->
@@ -22,13 +25,13 @@
         <span class="builder-template-icon">🎁</span>
         <div>
           <div class="builder-template-name">Surprise Box & 3D Candle Studio</div>
-          <span class="builder-template-badge">Exploding Box & Scratch Cards</span>
+          <span class="builder-template-badge" style="background:#10b981;color:#fff;font-weight:800;">100% Free VIP Keepsake</span>
         </div>
       </div>
     </div>
     <div class="builder-actions-top">
       <button id="btnSaveMomentTop" class="builder-save-btn">
-        <span>✨</span> <span>Publish Keepsake</span>
+        <span>✨</span> <span>Publish Free Keepsake</span>
       </button>
     </div>
   </header>
@@ -321,17 +324,27 @@
     async function handlePublish() {
       const btn = document.getElementById('btnSaveMomentTop');
       const originalText = btn.innerHTML;
-      btn.innerHTML = '<span>⏳</span> <span>Publishing...</span>';
+      btn.innerHTML = '<span>⏳</span> <span>Publishing 100% Free...</span>';
       btn.disabled = true;
 
       try {
+        const rec = VanviBuilderCore.get('recipientName') || 'Someone Special';
         const saved = await VanviBuilderCore.saveMoment({
-          title: `Surprise Box Keepsake for ${VanviBuilderCore.get('recipientName') || 'Someone Special'}`,
-          recipientName: VanviBuilderCore.get('recipientName') || 'Someone Special',
-          occasion: 'Birthday Surprise'
+          title: `Surprise Box Keepsake for ${rec}`,
+          recipientName: rec,
+          occasion: 'Birthday Surprise',
+          price: 0,
+          status: 'published'
         });
 
-        const shareUrl = saved.shareUrl || saved.experienceUrl || `${window.location.origin}/moment.html?id=${saved.id}&template=${TEMPLATE_ID}`;
+        let shareUrl = saved.shareUrl || saved.experienceUrl;
+        if (!shareUrl) {
+          const momentId = saved.id || saved.slug || Date.now();
+          shareUrl = `https://vanvimoments.shop/moment.html?id=${momentId}&template=${TEMPLATE_ID}`;
+        } else {
+          shareUrl = shareUrl.replace(/vanvimoments\.com/g, 'vanvimoments.shop');
+        }
+
         document.getElementById('shareUrlInput').value = shareUrl;
         document.getElementById('btnModalOpenExp').href = shareUrl;
         document.getElementById('btnModalWhatsApp').href = `https://wa.me/?text=${encodeURIComponent(`🎁 Tap to open your exploding birthday surprise box! ${shareUrl}`)}`;

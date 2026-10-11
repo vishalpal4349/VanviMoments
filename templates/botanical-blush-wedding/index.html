@@ -77,42 +77,7 @@
       z-index: 15;
     }
 
-    /* Top Floating Watermark / Status Badge */
-    .vanvi-watermark-pill {
-      position: fixed;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 60;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 5px 14px;
-      border-radius: var(--radius-full);
-      border: 1px solid var(--border-rose);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent-burgundy);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 18px rgba(139, 58, 74, 0.08);
-      transition: opacity 0.3s ease;
-    }
-    .vanvi-watermark-pill span.dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent-burgundy);
-      border-radius: 50%;
-      display: inline-block;
-      animation: pulseDot 2s infinite ease-in-out;
-    }
-    @keyframes pulseDot {
-      0%, 100% { opacity: 0.4; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.3); }
-    }
+
 
     /* Floating Music Pill Control */
     .floating-audio-control {
@@ -943,17 +908,14 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="../../css/vanvi-template-lock.css">
 </head>
 <body>
 
   <!-- Floating Petal Ambient Canvas -->
   <canvas id="petalCanvas"></canvas>
 
-  <!-- Watermark Pill (Hidden when purchased) -->
-  <div id="demoWatermarkBadge" class="vanvi-watermark-pill">
-    <span class="dot"></span>
-    <span id="watermarkText">Vanvi Moments • Demo</span>
-  </div>
+
 
   <!-- Floating Audio Player -->
   <div id="floatingAudioPill" class="floating-audio-control" title="Toggle Wedding Soundtrack" aria-label="Toggle Soundtrack">
@@ -1273,8 +1235,6 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('purchased') === 'true') {
       state.isPurchased = true;
-      const watermark = document.getElementById('demoWatermarkBadge');
-      if (watermark) watermark.style.display = 'none';
     }
 
     /* ==========================================================================
@@ -1690,5 +1650,6 @@
       }
     });
   </script>
+  <script src="../../js/vanvi-template-lock.js"></script>
 </body>
 </html>

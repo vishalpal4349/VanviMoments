@@ -117,6 +117,11 @@ window.addEventListener("message", (e) => {
   }
 });
 
+// Initial live config application
+if (typeof C !== "undefined" && C) {
+  applyLiveConfig(C);
+}
+
 // ==========================================================================
 // 1. INTERACTIVE GOLD RING FOLLOWER CURSOR
 // ==========================================================================
@@ -1128,30 +1133,10 @@ document.querySelectorAll(".scroll-in").forEach(el => scrollIO.observe(el));
 // ═══════════════════════════════════════════════════════════════════
 function applyWatermarkEntitlement() {
   const badge = document.getElementById("demoWatermarkBadge");
-  if (!badge) return;
-
-  const params = new URLSearchParams(window.location.search);
-  const isPurchased = Boolean(
-    params.get("purchased") === "true" ||
-    params.get("paid") === "true" ||
-    params.get("status") === "paid" ||
-    localStorage.getItem("vanvi_royal_vivah_purchased") === "true" ||
-    (window.vanviActiveMoment && (
-      window.vanviActiveMoment.isPurchased === true ||
-      window.vanviActiveMoment.status === "published" ||
-      window.vanviActiveMoment.status === "paid"
-    ))
-  );
-
-  if (isPurchased) {
-    badge.hidden = true;
-    badge.style.display = "none";
+  if (badge) {
     try {
       badge.remove();
     } catch (e) {}
-  } else {
-    badge.hidden = false;
-    badge.style.display = "inline-flex";
   }
 }
 

@@ -19,10 +19,15 @@ const royalConfig = {
   date: urlParams.get('date') || localConfig.date || '12th December 2026',
   targetTimestamp: new Date(urlParams.get('target') || localConfig.target || '2026-12-12T18:18:00').getTime(),
   venue: urlParams.get('venue') || localConfig.venue || 'The Oberoi Udaivilas, Lake Pichola, Udaipur',
-  whatsapp: urlParams.get('whatsapp') || localConfig.whatsapp || '917631442934'
+  whatsapp: urlParams.get('whatsapp') || localConfig.whatsapp || '917631442934',
+  theme: urlParams.get('theme') || localConfig.theme || 'udaipur-palace'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Apply active theme
+  if (royalConfig.theme) {
+    document.body.setAttribute('data-theme', royalConfig.theme);
+  }
   // Populate dynamic names
   const brideEls = [document.getElementById('heroBride'), document.querySelector('.intro-couple-names')];
   const groomEls = [document.getElementById('heroGroom')];

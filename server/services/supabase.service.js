@@ -358,6 +358,59 @@ class SupabaseService {
     }
     return paymentData;
   }
+
+  // =========================================================================
+  // 8. FRIENDSHIP MICROSITES (₹99 Instant Unlock Kept Forever)
+  // =========================================================================
+  async createFriendshipMicrosite(data) {
+    const slug = data.slug || 'f-' + Math.random().toString(36).substr(2, 8);
+    const payload = {
+      id: data.id || `fsm_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+      slug: slug,
+      user_id: data.user_id || data.userId || null,
+      config: data.config || {},
+      payment_id: data.payment_id || data.paymentId || null,
+      order_id: data.order_id || data.orderId || null,
+      amount: data.amount || 99,
+      status: data.status || 'paid',
+      created_at: new Date().toISOString()
+    };
+
+    if (this.isConfigured) {
+      try {
+        const { data: inserted, error } = await this.client
+          .from('friendship_microsites')
+          .upsert(payload, { onConflict: 'slug' })
+          .select()
+          .single();
+        if (!error && inserted) return inserted;
+        if (error) console.warn('Supabase friendship_microsites notice, fallback to local store:', error.message);
+      } catch (err) {
+        console.warn('Supabase insert friendship error:', err.message);
+      }
+    }
+
+    const db = require('../db/database');
+    return db.FriendshipMicrosites.create(payload);
+  }
+
+  async getFriendshipMicrositeBySlug(slug) {
+    if (this.isConfigured) {
+      try {
+        const { data, error } = await this.client
+          .from('friendship_microsites')
+          .select('*')
+          .eq('slug', slug)
+          .single();
+        if (!error && data) return data;
+      } catch (err) {
+        console.warn('Supabase fetch friendship error:', err.message);
+      }
+    }
+
+    const db = require('../db/database');
+    return db.FriendshipMicrosites.findBySlug(slug);
+  }
 }
 
 // Export singleton instance

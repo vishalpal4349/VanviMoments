@@ -926,10 +926,6 @@
 
   <!-- Top Header with Official Logo -->
   <header class="app-header" style="max-width:820px; margin:0 auto; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; background:rgba(255,255,255,0.94); backdrop-filter:blur(20px); border-radius:99px; border:1px solid var(--border-pink); box-shadow:0 4px 20px rgba(44,18,36,0.06); position:sticky; top:12px; z-index:100;">
-    <a class="vanvi-btn-back" href="javascript:void(0)" onclick="if (history.length > 1) { history.back(); } else { location.href='index.html'; }" style="display:inline-flex; align-items:center; gap:5px; text-decoration:none; font-size:12px; font-weight:800; color:var(--text-dark); background:#ffffff; padding:6px 14px; border-radius:99px; border:1px solid var(--border-pink); box-shadow:0 2px 6px rgba(0,0,0,0.04); transition:all 0.2s;">
-      <span style="color:var(--rose-main); font-size:15px; font-weight:900;">‹</span> <span>Back</span>
-    </a>
-
     <a href="index.html" class="header-brand" title="Vanvi Moments" style="display:inline-flex; align-items:center; text-decoration:none;">
       <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="header-brand-img" style="height: 32px; width: auto; max-width: 145px; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(255, 42, 122, 0.22));" />
     </a>
@@ -940,6 +936,16 @@
       </button>
     </div>
   </header>
+
+  <!-- Master Standard Breadcrumbs Bar -->
+  <div class="breadcrumb-bar" style="max-width:820px; margin:10px auto 14px; padding:0 12px;">
+    <a class="vanvi-btn-back" href="javascript:void(0)" onclick="vanviGoBack('index.html')">
+      <span class="back-arrow">‹</span> <span>Back</span>
+    </a>
+    <div class="breadcrumb-trail">
+      <a href="index.html">Home</a> <span class="crumb-sep">/</span> <span>My Profile &amp; Moments</span>
+    </div>
+  </div>
 
   <!-- Main Profile Content -->
   <main class="profile-main-container">

@@ -814,6 +814,21 @@
       }
     },
 
+    contact: {
+      async submit({ name, email, phone, topic, orderId, message, _vanvi_hp }) {
+        return await request('/api/contact/submit', {
+          method: 'POST',
+          body: { name, email, phone, topic, orderId, message, _vanvi_hp }
+        });
+      },
+      async reportIssue({ name, email, phone, category, pageUrl, description, deviceInfo, _vanvi_hp }) {
+        return await request('/api/contact/report-issue', {
+          method: 'POST',
+          body: { name, email, phone, category, pageUrl, description, deviceInfo, _vanvi_hp }
+        });
+      }
+    },
+
     request: request
   };
 

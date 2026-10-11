@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="../../vanvi-inner-light.css">
   <link rel="stylesheet" href="../../vanvi-navigation.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../css/vanvi-builder-smart.css">
+  <script src="../../js/vanvi-builder-smart.js" defer></script>
+  <script src="../../js/vanvi-template-lock.js" defer></script>
   
   <style>
     body {
@@ -29,6 +32,35 @@
     @media (max-width: 960px) {
       .builder-layout {
         grid-template-columns: 1fr;
+        padding: 0;
+        margin: 0;
+      }
+      body:not(.vanvi-builder-preview-active) .preview-panel-wrap {
+        display: none !important;
+      }
+      body.vanvi-builder-preview-active .builder-panel {
+        display: none !important;
+      }
+      body.vanvi-builder-preview-active .preview-panel-wrap {
+        position: fixed !important;
+        inset: 0 !important;
+        top: 56px !important;
+        bottom: 66px !important;
+        width: 100vw !important;
+        height: calc(100dvh - 122px) !important;
+        z-index: 9999 !important;
+        border-radius: 0 !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+      body.vanvi-builder-preview-active .iframe-display-box {
+        border-radius: 0 !important;
+        border: none !important;
+      }
+      body.vanvi-builder-preview-active .live-iframe.mobile-mode {
+        width: 100vw !important;
+        box-shadow: none !important;
+        border: none !important;
       }
     }
 

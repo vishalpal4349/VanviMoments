@@ -81,7 +81,7 @@ function readFormData() {
   currentConfig.gallery.photos[3] = document.getElementById("inpPhoto3").value.trim();
 
   // Theme
-  const selectedTheme = document.querySelector('input[name="builderTheme"]:checked')?.value || "royal-mewar";
+  const selectedTheme = document.querySelector('input[name="builderTheme"]:checked')?.value || "udaipur-pearl";
   currentConfig.themes.current = selectedTheme;
 
   return currentConfig;
@@ -219,9 +219,7 @@ if (saveAndLaunchBtn) {
     const cfg = readFormData();
     localStorage.setItem("vanvi_custom_wedding_config", JSON.stringify(cfg));
     showToast("🚀 Opening Customized Wedding Invitation!");
-    const targetUrl = (templateSelector && templateSelector.value.includes("mirror-reveal"))
-      ? "../mirror-reveal/index.html"
-      : "./index.html";
+    const targetUrl = (templateSelector && templateSelector.value) ? templateSelector.value : "./index.html";
     setTimeout(() => {
       window.location.href = targetUrl;
     }, 600);

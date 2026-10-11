@@ -1,568 +1,273 @@
 /**
- * VANVI MOMENTS — CURATED GIFT PRODUCTS CATALOG
- * Centralized product registry for the Gift Store showcase.
- * External affiliate links only — VanviMoments does NOT sell/ship these products.
- *
- * HOW TO EDIT:
- * - Add/remove/reorder products in the VANVI_PRODUCTS array below.
- * - Each product needs: id, name, description, image, category, store, storeUrl
- * - Optional: price, badge, featured, order
- * - badge options: 'Featured', 'Popular', 'New', 'Best Seller', 'Top Pick', null
- * - store options: 'Amazon', 'Flipkart', 'Meesho', 'Myntra', 'Brand Store'
+ * VANVI MOMENTS — PHYSICAL GIFT BOUTIQUE & AFFILIATE RESELLING ENGINE
+ * Curated physical celebration treasures with direct 1-tap affiliate and
+ * reselling links across Meesho, Amazon India, Flipkart, and Myntra.
  */
 
 (function(root) {
   'use strict';
 
-  const VANVI_PRODUCTS = [
-
-    // ─── Birthday Gifts ───────────────────────────────────────────
+  const VANVI_BOUTIQUE_PRODUCTS = [
     {
-      id: 'bp-001',
-      name: 'Personalized Wooden Photo Frame',
-      description: 'Laser-engraved name & date on premium mango wood. Perfect keepsake for birthdays.',
-      image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
-      category: 'Birthday Gifts',
-      price: '₹499',
-      badge: 'Popular',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=personalized+birthday+photo+frame',
-      featured: true,
-      order: 1
+      id: 'vnv-nfc-velvet-card',
+      name: 'Vanvi Velvet NFC Smart Keepsake Card',
+      tagline: 'Tap phone on card to instantly launch your surprise moment',
+      description: 'Handcrafted luxury velvet touch greeting card with embedded NTAG215 NFC smart chip and QR backup. Gold-foiled calligraphy, envelope with royal wax seal.',
+      price: 249,
+      originalPrice: 499,
+      category: 'nfc',
+      badge: 'Bestseller 🌟',
+      rating: 4.9,
+      reviewCount: 342,
+      image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=900&q=80',
+      primaryStore: 'meesho',
+      primaryStoreName: 'Meesho Resell',
+      primaryStoreBadge: '🛍️ Meesho Resell Best Price',
+      primaryAffiliateLink: 'https://www.meesho.com/search?q=nfc+smart+greeting+cards+velvet',
+      stores: [
+        { id: 'meesho', name: 'Meesho', icon: '🛍️', badge: 'Best Resell Price', price: 249, link: 'https://www.meesho.com/search?q=nfc+smart+greeting+cards+velvet' },
+        { id: 'amazon', name: 'Amazon Prime', icon: '📦', badge: 'Prime Fast Delivery', price: 299, link: 'https://www.amazon.in/s?k=nfc+greeting+cards+smart&tag=vanvi-21' },
+        { id: 'flipkart', name: 'Flipkart', icon: '⚡', badge: 'Flipkart Assured', price: 289, link: 'https://www.flipkart.com/search?q=nfc+cards+keepsake' },
+        { id: 'myntra', name: 'Myntra', icon: '✨', badge: 'Luxury Gift Box', price: 349, link: 'https://www.myntra.com/gifts' }
+      ],
+      specs: ['Embedded NTAG215 Smart Chip', 'Burgundy Velvet Stock', 'Real Gold Foil Calligraphy', 'Wax-Sealed Envelope Included'],
+      pairsWith: 'Compatible with all 40+ Vanvi celebration templates'
     },
     {
-      id: 'bp-002',
-      name: 'LED Birthday Marquee Light',
-      description: 'Warm-glow LED letter lights spelling HAPPY BIRTHDAY. Battery powered, reusable.',
-      image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80',
-      category: 'Birthday Gifts',
-      price: '₹349',
-      badge: null,
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=happy+birthday+led+light',
-      featured: false,
-      order: 2
+      id: 'vnv-acrylic-song-plaque',
+      name: 'Holographic Song & Moment Acrylic Plaque',
+      tagline: 'Custom photo plaque with audio waveform & instant tap-to-play NFC',
+      description: 'Crystal-clear 4mm cast acrylic plaque featuring your favorite couple/family photo, scannable celebration QR, custom song title, and solid beechwood base.',
+      price: 399,
+      originalPrice: 899,
+      category: 'acrylic',
+      badge: 'Viral Favorite 🔥',
+      rating: 5.0,
+      reviewCount: 518,
+      image: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=80',
+      primaryStore: 'amazon',
+      primaryStoreName: 'Amazon Prime',
+      primaryStoreBadge: '📦 Amazon Prime Choice',
+      primaryAffiliateLink: 'https://www.amazon.in/s?k=acrylic+song+photo+plaque+custom&tag=vanvi-21',
+      stores: [
+        { id: 'amazon', name: 'Amazon Prime', icon: '📦', badge: '1-Day Prime Delivery', price: 399, link: 'https://www.amazon.in/s?k=acrylic+song+photo+plaque+custom&tag=vanvi-21' },
+        { id: 'meesho', name: 'Meesho', icon: '🛍️', badge: 'Wholesale Resell Rate', price: 349, link: 'https://www.meesho.com/search?q=acrylic+photo+frame+song+plaque' },
+        { id: 'flipkart', name: 'Flipkart', icon: '⚡', badge: 'Assured Best Seller', price: 429, link: 'https://www.flipkart.com/search?q=custom+acrylic+song+frame' },
+        { id: 'myntra', name: 'Myntra Luxe', icon: '✨', badge: 'Curated Keepsake', price: 499, link: 'https://www.myntra.com/gifts' }
+      ],
+      specs: ['High-Gloss 4mm Acrylic', 'Solid Beechwood Base Stand', 'Scratch-Proof UV Print', 'Scannable Audio Waveform'],
+      pairsWith: 'Pairs with Midnight Wish, Temple Royale, or Polaroid Love'
     },
     {
-      id: 'bp-003',
-      name: 'Birthday Explosion Gift Box',
-      description: 'Handmade multi-layer surprise box with photos, messages & confetti reveal.',
-      image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80',
-      category: 'Birthday Gifts',
-      price: '₹599',
-      badge: 'Best Seller',
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=birthday+explosion+box',
-      featured: true,
-      order: 3
-    },
-
-    // ─── Couple Gifts ─────────────────────────────────────────────
-    {
-      id: 'cg-001',
-      name: 'King & Queen Couple Bracelets',
-      description: 'Matching magnetic titanium bracelets with crown charms. Adjustable fit.',
-      image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80',
-      category: 'Couple Gifts',
-      price: '₹399',
-      badge: 'Popular',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=couple+bracelets+king+queen',
-      featured: true,
-      order: 1
+      id: 'vnv-led-ring-box',
+      name: 'Royal Velvet 3D Proposal Ring Box with LED Beam',
+      tagline: 'Opens with a focused warm starlight beam illuminating the jewelry',
+      description: 'Midnight blue and ruby red velvet jewelry gift box with an automatic micro-LED spotlight that turns on upon opening, casting an ethereal diamond glow.',
+      price: 299,
+      originalPrice: 699,
+      category: 'proposals',
+      badge: 'Proposal Special 💍',
+      rating: 4.9,
+      reviewCount: 219,
+      image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=80',
+      primaryStore: 'meesho',
+      primaryStoreName: 'Meesho Resell',
+      primaryStoreBadge: '🛍️ Meesho Resell Best Price',
+      primaryAffiliateLink: 'https://www.meesho.com/search?q=led+ring+box+velvet+proposal',
+      stores: [
+        { id: 'meesho', name: 'Meesho', icon: '🛍️', badge: 'Direct Reseller Price', price: 299, link: 'https://www.meesho.com/search?q=led+ring+box+velvet+proposal' },
+        { id: 'amazon', name: 'Amazon Prime', icon: '📦', badge: 'Top Rated Proposal Box', price: 349, link: 'https://www.amazon.in/s?k=led+light+velvet+ring+box&tag=vanvi-21' },
+        { id: 'flipkart', name: 'Flipkart', icon: '⚡', badge: 'SuperCoins Special', price: 329, link: 'https://www.flipkart.com/search?q=led+velvet+ring+box' },
+        { id: 'myntra', name: 'Myntra', icon: '✨', badge: 'Jewelry Accessory', price: 399, link: 'https://www.myntra.com/gifts' }
+      ],
+      specs: ['Micro-LED Spotlight', 'Deep Crimson Velvet Interior', 'Magnetic Smooth Hinge', 'Protective Gift Sleeve'],
+      pairsWith: 'Pairs with The Velvet Ring Box Proposal 3D experience'
     },
     {
-      id: 'cg-002',
-      name: 'Couple Photo Collage Heart Frame',
-      description: 'Heart-shaped wooden frame holding 12 photos. Romantic wall décor.',
-      image: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80',
-      category: 'Couple Gifts',
-      price: '₹649',
-      badge: null,
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=couple+heart+photo+frame',
-      featured: false,
-      order: 2
+      id: 'vnv-wax-sealed-scroll',
+      name: 'Handcrafted Wax-Sealed Vintage Love Parchment',
+      tagline: 'Burned edge antique parchment scroll stamped with genuine royal wax',
+      description: 'Your personalized romantic letter or vows hand-printed on 180 GSM aged parchment paper with burned organic edges and sealed with scented crimson wax stamp.',
+      price: 199,
+      originalPrice: 449,
+      category: 'keepsake',
+      badge: 'Atelier Classic 📜',
+      rating: 4.8,
+      reviewCount: 184,
+      image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=900&q=80',
+      primaryStore: 'amazon',
+      primaryStoreName: 'Amazon Prime',
+      primaryStoreBadge: '📦 Amazon Handcrafted',
+      primaryAffiliateLink: 'https://www.amazon.in/s?k=vintage+parchment+paper+wax+seal+scroll&tag=vanvi-21',
+      stores: [
+        { id: 'amazon', name: 'Amazon India', icon: '📦', badge: 'Prime Fast Dispatch', price: 199, link: 'https://www.amazon.in/s?k=vintage+parchment+paper+wax+seal+scroll&tag=vanvi-21' },
+        { id: 'meesho', name: 'Meesho', icon: '🛍️', badge: 'Reselling Pack', price: 179, link: 'https://www.meesho.com/search?q=wax+seal+scroll+letter' },
+        { id: 'flipkart', name: 'Flipkart', icon: '⚡', badge: 'Gift Scrolls', price: 219, link: 'https://www.flipkart.com/search?q=parchment+scroll+wax+seal' }
+      ],
+      specs: ['180 GSM Textured Parchment', 'Genuine Wax Seal Stamp', 'Jute Ribbon Tie', 'Protective Cylindrical Gift Tube'],
+      pairsWith: 'Pairs with Sincere Love Letter & Retro Polaroid Journey'
     },
     {
-      id: 'cg-003',
-      name: 'Love Scrapbook DIY Kit',
-      description: 'Complete scrapbook kit with stickers, washi tape & photo corners. 40-page journal.',
-      image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80',
-      category: 'Couple Gifts',
-      price: '₹449',
-      badge: 'New',
-      store: 'Meesho',
-      storeUrl: 'https://www.meesho.com/search?q=love+scrapbook+kit',
-      featured: false,
-      order: 3
-    },
-
-    // ─── Personalized Gifts ───────────────────────────────────────
-    {
-      id: 'pg-001',
-      name: 'Custom Name Neon LED Sign',
-      description: 'Acrylic base LED sign with any name. Warm white / pink glow options.',
-      image: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80',
-      category: 'Personalized Gifts',
-      price: '₹799',
-      badge: 'Featured',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=custom+name+neon+led+sign',
-      featured: true,
-      order: 1
+      id: 'vnv-eternal-rose-dome',
+      name: 'Eternal Preserved Rose Glass Cloche with LED Lights',
+      tagline: '100% real natural rose preserved to last 3+ years in glass cloche',
+      description: 'Grade-A fresh Ecuadorian rose preserved with organic glycerin, enclosed in a borosilicate glass cloche dome with warm fairy starlight garland.',
+      price: 599,
+      originalPrice: 1299,
+      category: 'romantic',
+      badge: 'Forever Rose 🌹',
+      rating: 4.9,
+      reviewCount: 395,
+      image: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=900&q=80',
+      primaryStore: 'meesho',
+      primaryStoreName: 'Meesho Resell',
+      primaryStoreBadge: '🛍️ Meesho Resell Best Price',
+      primaryAffiliateLink: 'https://www.meesho.com/search?q=preserved+rose+glass+dome+led',
+      stores: [
+        { id: 'meesho', name: 'Meesho', icon: '🛍️', badge: 'Direct Supplier Rate', price: 599, link: 'https://www.meesho.com/search?q=preserved+rose+glass+dome+led' },
+        { id: 'amazon', name: 'Amazon Prime', icon: '📦', badge: 'Amazon Choice Galaxy Rose', price: 699, link: 'https://www.amazon.in/s?k=eternal+rose+glass+dome+led&tag=vanvi-21' },
+        { id: 'flipkart', name: 'Flipkart', icon: '⚡', badge: 'Flipkart Assured', price: 649, link: 'https://www.flipkart.com/search?q=preserved+forever+rose+dome' },
+        { id: 'myntra', name: 'Myntra Luxe', icon: '✨', badge: 'Luxury Decor Gift', price: 799, link: 'https://www.myntra.com/gifts' }
+      ],
+      specs: ['3+ Year Preserved Natural Rose', 'Borosilicate Glass Dome', 'Warm White LED Garland', 'Natural Wooden Base with Switch'],
+      pairsWith: 'Pairs with Romantic Starlight & Valentine 3D Universe'
     },
     {
-      id: 'pg-002',
-      name: 'Photo Printed Magic Mug',
-      description: 'Color-changing mug reveals your photo when hot liquid is poured. Ceramic, 350ml.',
-      image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
-      category: 'Personalized Gifts',
-      price: '₹299',
-      badge: 'Popular',
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=photo+magic+mug',
-      featured: true,
-      order: 2
+      id: 'vnv-3d-crystal-cube',
+      name: '3D Laser-Etched Optical Crystal Memory Cube',
+      tagline: 'Your photo converted into a floating 3D holographic cloud inside crystal',
+      description: 'K9 optical glass laser-engraved internally with point-cloud precision. Includes a multi-color LED rotating pedestal that illuminates the 3D memory.',
+      price: 699,
+      originalPrice: 1499,
+      category: 'keepsake',
+      badge: 'Luxury Crystal 💎',
+      rating: 5.0,
+      reviewCount: 167,
+      image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=80',
+      primaryStore: 'amazon',
+      primaryStoreName: 'Amazon Prime',
+      primaryStoreBadge: '📦 Amazon Prime Choice',
+      primaryAffiliateLink: 'https://www.amazon.in/s?k=3d+crystal+photo+cube+personalized+led&tag=vanvi-21',
+      stores: [
+        { id: 'amazon', name: 'Amazon Prime', icon: '📦', badge: 'Personalized Crystal Prime', price: 699, link: 'https://www.amazon.in/s?k=3d+crystal+photo+cube+personalized+led&tag=vanvi-21' },
+        { id: 'meesho', name: 'Meesho', icon: '🛍️', badge: 'Reseller Price', price: 629, link: 'https://www.meesho.com/search?q=3d+crystal+photo+frame+led' },
+        { id: 'flipkart', name: 'Flipkart', icon: '⚡', badge: 'Flipkart Assured', price: 749, link: 'https://www.flipkart.com/search?q=custom+3d+crystal+cube' }
+      ],
+      specs: ['K9 Pure Optical Crystal', 'Subsurface Laser Etching', 'RGB Multi-Color Light Base', 'Silk-Lined Presentation Box'],
+      pairsWith: 'Pairs with Memory Vault & Milestone Anniversary'
     },
     {
-      id: 'pg-003',
-      name: 'Engraved Wooden Music Box',
-      description: 'Wind-up music box with custom engraved message on lid. Plays your chosen melody.',
-      image: 'https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=800&q=80',
-      category: 'Personalized Gifts',
-      price: '₹899',
-      badge: null,
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=engraved+wooden+music+box',
-      featured: false,
-      order: 3
-    },
-
-    // ─── Flowers ──────────────────────────────────────────────────
-    {
-      id: 'fl-001',
-      name: 'Preserved Rose in Glass Dome',
-      description: 'Real rose preserved forever under elegant glass dome with LED fairy lights.',
-      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
-      category: 'Flowers',
-      price: '₹699',
-      badge: 'Featured',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=preserved+rose+glass+dome',
-      featured: true,
-      order: 1
+      id: 'vnv-belgian-chocolates',
+      name: 'Artisanal Belgian Celebration Truffles (Box of 8)',
+      tagline: 'Handmade dark & milk chocolate truffles in celebration gift box',
+      description: '8 assorted handcrafted Belgian couverture pralines (Roasted Hazelnut, Raspberry Ganache, Sea Salt Caramel) packaged in an embossed gift box.',
+      price: 299,
+      originalPrice: 599,
+      category: 'chocolates',
+      badge: 'Sweet Delight 🍫',
+      rating: 4.8,
+      reviewCount: 289,
+      image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=900&q=80',
+      primaryStore: 'amazon',
+      primaryStoreName: 'Amazon Prime',
+      primaryStoreBadge: '📦 Amazon Gourmet',
+      primaryAffiliateLink: 'https://www.amazon.in/s?k=belgian+truffles+gift+box&tag=vanvi-21',
+      stores: [
+        { id: 'amazon', name: 'Amazon India', icon: '📦', badge: 'Amazon Gourmet Choice', price: 299, link: 'https://www.amazon.in/s?k=belgian+truffles+gift+box&tag=vanvi-21' },
+        { id: 'meesho', name: 'Meesho', icon: '🛍️', badge: 'Sweet Gift Packs', price: 269, link: 'https://www.meesho.com/search?q=chocolate+gift+box' },
+        { id: 'flipkart', name: 'Flipkart', icon: '⚡', badge: 'SuperCoins Eligible', price: 319, link: 'https://www.flipkart.com/search?q=belgian+chocolate+box' },
+        { id: 'myntra', name: 'Myntra Luxe', icon: '✨', badge: 'Gourmet Treats', price: 349, link: 'https://www.myntra.com/gifts' }
+      ],
+      specs: ['Pure Couverture Chocolate', 'Assorted 8 Pralines', 'Celebration Gift Sleeve', 'Cold-Pack Thermal Shipping'],
+      pairsWith: 'Pairs with Birthday Candle Surprise & Sweet Wishes'
     },
     {
-      id: 'fl-002',
-      name: 'Soap Rose Bouquet Gift Box',
-      description: '18-piece fragrant soap roses in luxury gift box. Lasts months without wilting.',
-      image: 'https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80',
-      category: 'Flowers',
-      price: '₹399',
-      badge: 'Popular',
-      store: 'Meesho',
-      storeUrl: 'https://www.meesho.com/search?q=soap+rose+bouquet+gift+box',
-      featured: false,
-      order: 2
-    },
-
-    // ─── Photo Gifts ──────────────────────────────────────────────
-    {
-      id: 'ph-001',
-      name: 'Acrylic LED Photo Lamp',
-      description: '3D crystal-clear acrylic photo with wooden LED base. Glows beautifully at night.',
-      image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80',
-      category: 'Photo Gifts',
-      price: '₹549',
-      badge: 'Best Seller',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=acrylic+led+photo+lamp',
-      featured: true,
-      order: 1
-    },
-    {
-      id: 'ph-002',
-      name: 'Photo String Lights Clips',
-      description: '20 LED clip lights to hang your favorite photos. Fairy light warm glow, USB powered.',
-      image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80',
-      category: 'Photo Gifts',
-      price: '₹249',
-      badge: null,
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=photo+string+lights+clips',
-      featured: false,
-      order: 2
-    },
-    {
-      id: 'ph-003',
-      name: 'Rotating Photo Cube',
-      description: 'Magnetic spin cube displaying 6 photos. Desktop décor that delights.',
-      image: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=800&q=80',
-      category: 'Photo Gifts',
-      price: '₹349',
-      badge: 'New',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=rotating+photo+cube',
-      featured: false,
-      order: 3
-    },
-
-    // ─── Jewellery ────────────────────────────────────────────────
-    {
-      id: 'jw-001',
-      name: 'Heart Locket Pendant Necklace',
-      description: 'Sterling silver heart locket that opens to hold a tiny photo. Timeless elegance.',
-      image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80',
-      category: 'Jewellery',
-      price: '₹899',
-      badge: 'Featured',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=heart+locket+pendant+necklace',
-      featured: true,
-      order: 1
-    },
-    {
-      id: 'jw-002',
-      name: 'Infinity Charm Bracelet',
-      description: 'Rose-gold infinity symbol bracelet with adjustable chain. Gift-boxed.',
-      image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80',
-      category: 'Jewellery',
-      price: '₹449',
-      badge: 'Popular',
-      store: 'Meesho',
-      storeUrl: 'https://www.meesho.com/search?q=infinity+charm+bracelet',
-      featured: false,
-      order: 2
-    },
-
-    // ─── Cute Gifts ───────────────────────────────────────────────
-    {
-      id: 'cu-001',
-      name: 'Squishy Kawaii Plush Bear',
-      description: 'Ultra-soft 30cm teddy with embroidered heart. Comes in pastel pink, lavender, mint.',
-      image: 'https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=800&q=80',
-      category: 'Cute Gifts',
-      price: '₹399',
-      badge: 'Popular',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=kawaii+plush+teddy+bear',
-      featured: true,
-      order: 1
-    },
-    {
-      id: 'cu-002',
-      name: 'Miniature Love Coupons Book',
-      description: '30 tear-out love coupons — breakfast in bed, movie night, one free hug & more.',
-      image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80',
-      category: 'Cute Gifts',
-      price: '₹199',
-      badge: null,
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=love+coupons+book',
-      featured: false,
-      order: 2
-    },
-    {
-      id: 'cu-003',
-      name: 'Cat Paw Desk Lamp',
-      description: 'Silicone cat paw night light with 3 brightness levels. USB rechargeable, touch control.',
-      image: 'https://images.unsplash.com/photo-1517991104123-1d56a6e81ed9?auto=format&fit=crop&w=800&q=80',
-      category: 'Cute Gifts',
-      price: '₹349',
-      badge: 'New',
-      store: 'Meesho',
-      storeUrl: 'https://www.meesho.com/search?q=cat+paw+lamp',
-      featured: false,
-      order: 3
-    },
-
-    // ─── Room Decor ───────────────────────────────────────────────
-    {
-      id: 'rd-001',
-      name: 'Galaxy Projector Night Light',
-      description: 'Starry sky projector with 15 color modes & bluetooth speaker. Transforms any room.',
-      image: 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80',
-      category: 'Room Decor',
-      price: '₹999',
-      badge: 'Featured',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=galaxy+projector+night+light',
-      featured: true,
-      order: 1
-    },
-    {
-      id: 'rd-002',
-      name: 'Macramé Wall Hanging',
-      description: 'Hand-knotted cotton macramé. Boho-chic décor, 90cm length. Natural ivory color.',
-      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80',
-      category: 'Room Decor',
-      price: '₹549',
-      badge: null,
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=macrame+wall+hanging',
-      featured: false,
-      order: 2
-    },
-
-    // ─── Toys ─────────────────────────────────────────────────────
-    {
-      id: 'ty-001',
-      name: 'Building Blocks Bouquet Set',
-      description: 'Build-your-own flower bouquet from colorful blocks. 500+ pieces, display vase included.',
-      image: 'https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=800&q=80',
-      category: 'Toys',
-      price: '₹799',
-      badge: 'Popular',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=building+blocks+flower+bouquet',
-      featured: true,
-      order: 1
-    },
-    {
-      id: 'ty-002',
-      name: 'DIY Miniature Dollhouse Kit',
-      description: 'Tiny furniture, LED lights & dust cover. Relaxing craft project, beautiful result.',
-      image: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=800&q=80',
-      category: 'Toys',
-      price: '₹1,299',
-      badge: 'New',
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=miniature+dollhouse+kit',
-      featured: false,
-      order: 2
-    },
-
-    // ─── Baby Gifts ───────────────────────────────────────────────
-    {
-      id: 'bb-001',
-      name: 'Baby Milestone Blanket',
-      description: 'Monthly milestone photo blanket with floral wreath markers. Soft organic cotton.',
-      image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80',
-      category: 'Baby Gifts',
-      price: '₹599',
-      badge: 'Popular',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=baby+milestone+blanket',
-      featured: true,
-      order: 1
-    },
-    {
-      id: 'bb-002',
-      name: 'Handprint & Footprint Clay Kit',
-      description: 'Non-toxic clay frame kit to capture tiny hands & feet forever. Includes wooden frame.',
-      image: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=800&q=80',
-      category: 'Baby Gifts',
-      price: '₹449',
-      badge: null,
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=baby+handprint+footprint+kit',
-      featured: false,
-      order: 2
-    },
-
-    // ─── Wedding Gifts ────────────────────────────────────────────
-    {
-      id: 'wg-001',
-      name: 'Crystal Couple Figurine',
-      description: 'Hand-blown crystal bride & groom figurine. Elegant wedding table or shelf décor.',
-      image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
-      category: 'Wedding Gifts',
-      price: '₹1,499',
-      badge: 'Featured',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=crystal+couple+figurine+wedding',
-      featured: true,
-      order: 1
-    },
-    {
-      id: 'wg-002',
-      name: 'Personalized Wedding Photo Album',
-      description: 'Premium leather-bound album with laser-cut cover. Holds 200 photos. Gift-boxed.',
-      image: 'https://images.unsplash.com/photo-1544717302-de2939b7ef71?auto=format&fit=crop&w=800&q=80',
-      category: 'Wedding Gifts',
-      price: '₹1,199',
-      badge: null,
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=personalized+wedding+photo+album',
-      featured: false,
-      order: 2
-    },
-
-    // ─── Anniversary Gifts ────────────────────────────────────────
-    {
-      id: 'ag-001',
-      name: '3D Crystal Photo Cube',
-      description: 'Your photo laser-engraved inside a crystal cube. LED base illuminates the image.',
-      image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80',
-      category: 'Anniversary Gifts',
-      price: '₹1,299',
-      badge: 'Best Seller',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=3d+crystal+photo+cube',
-      featured: true,
-      order: 1
-    },
-    {
-      id: 'ag-002',
-      name: 'Couple Caricature Portrait',
-      description: 'Digital artist creates a fun caricature from your photo. Printed on canvas.',
-      image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80',
-      category: 'Anniversary Gifts',
-      price: '₹799',
-      badge: 'New',
-      store: 'Meesho',
-      storeUrl: 'https://www.meesho.com/search?q=couple+caricature+portrait',
-      featured: false,
-      order: 2
-    },
-
-    // ─── Budget Gifts (Under ₹300) ───────────────────────────────
-    {
-      id: 'bg-001',
-      name: 'Message In A Bottle Kit',
-      description: '50 tiny scrolls inside a glass bottle. Write secret wishes, love notes, memories.',
-      image: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80',
-      category: 'Budget Gifts',
-      price: '₹149',
-      badge: 'Top Pick',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=message+in+a+bottle+gift',
-      featured: true,
-      order: 1
-    },
-    {
-      id: 'bg-002',
-      name: 'Gratitude Journal Pocket Edition',
-      description: 'A5 guided journal with prompts for 90 days of mindful reflection. Pastel cover.',
-      image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
-      category: 'Budget Gifts',
-      price: '₹199',
-      badge: null,
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=gratitude+journal',
-      featured: false,
-      order: 2
-    },
-    {
-      id: 'bg-003',
-      name: 'Handmade Friendship Band Set',
-      description: 'Set of 5 woven friendship bands in rainbow colors. Adjustable, waterproof.',
-      image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80',
-      category: 'Budget Gifts',
-      price: '₹99',
-      badge: null,
-      store: 'Meesho',
-      storeUrl: 'https://www.meesho.com/search?q=friendship+band+set',
-      featured: false,
-      order: 3
-    },
-
-    // ─── Premium Gifts (₹1000+) ──────────────────────────────────
-    {
-      id: 'pr-001',
-      name: 'Smart Digital Photo Frame 10"',
-      description: 'WiFi-enabled touchscreen frame. Upload photos via app from anywhere. Auto slideshow.',
-      image: 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=800&q=80',
-      category: 'Premium Gifts',
-      price: '₹4,999',
-      badge: 'Featured',
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=smart+digital+photo+frame+wifi',
-      featured: true,
-      order: 1
-    },
-    {
-      id: 'pr-002',
-      name: 'Luxury Perfume Gift Set',
-      description: 'Collection of 4 mini designer fragrances in a velvet-lined box. Unisex.',
-      image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80',
-      category: 'Premium Gifts',
-      price: '₹2,499',
-      badge: 'Popular',
-      store: 'Flipkart',
-      storeUrl: 'https://www.flipkart.com/search?q=luxury+perfume+gift+set',
-      featured: true,
-      order: 2
-    },
-    {
-      id: 'pr-003',
-      name: 'Bluetooth Vinyl Record Player',
-      description: 'Retro turntable with built-in speakers & bluetooth. Plays 33/45/78 RPM vinyls.',
-      image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=800&q=80',
-      category: 'Premium Gifts',
-      price: '₹3,999',
-      badge: null,
-      store: 'Amazon',
-      storeUrl: 'https://www.amazon.in/s?k=bluetooth+vinyl+record+player',
-      featured: false,
-      order: 3
+      id: 'vnv-magnetic-levitating-frame',
+      name: 'Floating Magnetic Anti-Gravity Photo Frame',
+      tagline: 'Zero-gravity floating heart frame that hovers in mid-air',
+      description: 'Electro-magnetic levitation photo frame that spins endlessly in mid-air inside a starlight LED halo arch. Shows 2 double-sided photos with zero friction.',
+      price: 799,
+      originalPrice: 1599,
+      category: 'keepsake',
+      badge: 'Magic Levitation ✨',
+      rating: 4.9,
+      reviewCount: 142,
+      image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=80',
+      primaryStore: 'meesho',
+      primaryStoreName: 'Meesho Resell',
+      primaryStoreBadge: '🛍️ Meesho Resell Best Price',
+      primaryAffiliateLink: 'https://www.meesho.com/search?q=magnetic+levitating+photo+frame',
+      stores: [
+        { id: 'meesho', name: 'Meesho', icon: '🛍️', badge: 'Direct Reseller Rate', price: 799, link: 'https://www.meesho.com/search?q=magnetic+levitating+photo+frame' },
+        { id: 'amazon', name: 'Amazon Prime', icon: '📦', badge: 'Prime Anti-Gravity', price: 899, link: 'https://www.amazon.in/s?k=magnetic+levitation+floating+photo+frame&tag=vanvi-21' },
+        { id: 'flipkart', name: 'Flipkart', icon: '⚡', badge: 'Flipkart Assured', price: 849, link: 'https://www.flipkart.com/search?q=magnetic+floating+frame' }
+      ],
+      specs: ['Magnetic Levitation Technology', 'Ambient LED Halo Light', 'Double-Sided Photo Insert', 'Continuous Smooth Rotation'],
+      pairsWith: 'Pairs with Constellation of Love & Cyber Neon Vows'
     }
   ];
 
-  // ─── CATEGORY DEFINITIONS ──────────────────────────────────────
   const VANVI_PRODUCT_CATEGORIES = [
-    { id: 'all', name: 'All Gifts', icon: '🎁', color: '#ff2a7a' },
-    { id: 'Birthday Gifts', name: 'Birthday Gifts', icon: '🎂', color: '#ff2a7a' },
-    { id: 'Couple Gifts', name: 'Couple Gifts', icon: '💑', color: '#ec4899' },
-    { id: 'Personalized Gifts', name: 'Personalized Gifts', icon: '✨', color: '#9a61ff' },
-    { id: 'Flowers', name: 'Flowers', icon: '🌹', color: '#f43f5e' },
-    { id: 'Photo Gifts', name: 'Photo Gifts', icon: '📸', color: '#0284c7' },
-    { id: 'Jewellery', name: 'Jewellery', icon: '💎', color: '#d97706' },
-    { id: 'Cute Gifts', name: 'Cute Gifts', icon: '🧸', color: '#f472b6' },
-    { id: 'Room Decor', name: 'Room Decor', icon: '🏠', color: '#10b981' },
-    { id: 'Toys', name: 'Toys', icon: '🧩', color: '#8b5cf6' },
-    { id: 'Baby Gifts', name: 'Baby Gifts', icon: '👶', color: '#06b6d4' },
-    { id: 'Wedding Gifts', name: 'Wedding Gifts', icon: '💒', color: '#d97706' },
-    { id: 'Anniversary Gifts', name: 'Anniversary Gifts', icon: '💕', color: '#be185d' },
-    { id: 'Budget Gifts', name: 'Budget Gifts', icon: '🏷️', color: '#10b981' },
-    { id: 'Premium Gifts', name: 'Premium Gifts', icon: '👑', color: '#b45309' }
+    { id: 'all', name: 'All Keepsakes', icon: '🎁' },
+    { id: 'nfc', name: 'NFC Smart Cards', icon: '📱' },
+    { id: 'acrylic', name: 'Acrylic Song Plaques', icon: '🎵' },
+    { id: 'proposals', name: 'Velvet Ring Boxes', icon: '💍' },
+    { id: 'keepsake', name: 'Wax Scrolls & Crystals', icon: '📜' },
+    { id: 'romantic', name: 'Eternal Preserved Roses', icon: '🌹' },
+    { id: 'chocolates', name: 'Artisanal Chocolates', icon: '🍫' }
   ];
 
-  // ─── STORE THEME MAP ───────────────────────────────────────────
-  const VANVI_STORE_THEMES = {
-    'Amazon':      { color: '#ff9900', bg: 'rgba(255,153,0,0.08)', icon: '🛒', label: 'View on Amazon' },
-    'Flipkart':    { color: '#2874f0', bg: 'rgba(40,116,240,0.08)', icon: '🛍️', label: 'View on Flipkart' },
-    'Meesho':      { color: '#f43397', bg: 'rgba(244,51,151,0.08)', icon: '🎀', label: 'View on Meesho' },
-    'Myntra':      { color: '#ff3f6c', bg: 'rgba(255,63,108,0.08)', icon: '👗', label: 'View on Myntra' },
-    'Brand Store': { color: '#9a61ff', bg: 'rgba(154,97,255,0.08)', icon: '🏪', label: 'Visit Store' }
+  // ─── AFFILIATE & RESELLING ENGINE ──────────────────────────────────────
+  const VanviAffiliate = {
+    getAll() {
+      return VANVI_BOUTIQUE_PRODUCTS;
+    },
+
+    getById(id) {
+      return VANVI_BOUTIQUE_PRODUCTS.find(p => p.id === id) || null;
+    },
+
+    openStore(productId, storeId) {
+      const prod = this.getById(productId);
+      if (!prod) return;
+
+      let targetUrl = prod.primaryAffiliateLink;
+      let storeName = prod.primaryStoreName;
+
+      if (storeId && prod.stores) {
+        const found = prod.stores.find(s => s.id === storeId);
+        if (found) {
+          targetUrl = found.link;
+          storeName = found.name;
+        }
+      }
+
+      // Smooth click notification toast
+      if (typeof window !== 'undefined' && window.showToast) {
+        window.showToast(`Opening official ${storeName} storefront... 🛍️`);
+      }
+
+      // Open affiliate store safely in new tab
+      window.open(targetUrl, '_blank', 'noopener,noreferrer,sponsored');
+    }
   };
 
-  // ─── HELPER: DETECT STORE FROM AFFILIATE URL ──────────────────
-  function detectStoreFromUrl(url) {
-    if (!url) return 'Brand Store';
-    const lower = String(url).toLowerCase();
-    if (lower.includes('meesho.com') || lower.includes('meesho')) return 'Meesho';
-    if (lower.includes('amazon.') || lower.includes('amzn.')) return 'Amazon';
-    if (lower.includes('flipkart.com') || lower.includes('fkrt.')) return 'Flipkart';
-    if (lower.includes('myntra.com')) return 'Myntra';
-    return 'Brand Store';
-  }
+  // Backwards-compatible dummy cart (prevents legacy reference errors)
+  const VanviCart = {
+    getCart() { return []; },
+    addItem(p) { VanviAffiliate.openStore(p.id); return []; },
+    updateQty() { return []; },
+    removeItem() { return []; },
+    clear() { return []; },
+    getCount() { return 0; },
+    getTotal() { return 0; }
+  };
 
-  // ─── DYNAMIC STORAGE HELPERS ───────────────────────────────────
-  function getVanviProducts() {
-    try {
-      const custom = localStorage.getItem('vanvi_custom_products');
-      if (custom) {
-        const parsed = JSON.parse(custom);
-        if (Array.isArray(parsed)) return parsed;
-      }
-    } catch(e) {}
-    return VANVI_PRODUCTS;
-  }
-
-  function saveVanviProducts(list) {
-    try {
-      localStorage.setItem('vanvi_custom_products', JSON.stringify(list));
-    } catch(e) {}
-  }
-
-  // ─── EXPORTS ───────────────────────────────────────────────────
-  root.VANVI_PRODUCTS = VANVI_PRODUCTS;
+  // ─── EXPORTS ─────────────────────────────────────────────────────────
+  root.VANVI_BOUTIQUE_PRODUCTS = VANVI_BOUTIQUE_PRODUCTS;
+  root.VANVI_PRODUCTS = VANVI_BOUTIQUE_PRODUCTS;
   root.VANVI_PRODUCT_CATEGORIES = VANVI_PRODUCT_CATEGORIES;
-  root.VANVI_STORE_THEMES = VANVI_STORE_THEMES;
-  root.getVanviProducts = getVanviProducts;
-  root.saveVanviProducts = saveVanviProducts;
-  root.detectStoreFromUrl = detectStoreFromUrl;
+  root.VanviAffiliate = VanviAffiliate;
+  root.VanviCart = VanviCart;
 
 })(typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this));

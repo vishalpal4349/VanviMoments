@@ -997,6 +997,7 @@
     #letterScene .boxLetter .formLetter {
       position: relative;
       width: 600px;
+      max-width: 92vw;
       height: 350px;
       background-color: #FFEBEB;
       border-radius: 20px;
@@ -1017,6 +1018,7 @@
     #letterScene .boxLetter .before {
       position: absolute;
       width: 600px;
+      max-width: 92vw;
       height: 350px;
       background: #fff;
       transform: rotate(-15deg);

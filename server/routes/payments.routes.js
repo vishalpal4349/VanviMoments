@@ -9,7 +9,7 @@ const {
   verifyWebhookSignature,
   verifyCashfreeWebhookSignature
 } = require('../services/payment.service');
-const { sendOrderConfirmation } = require('../services/email.service');
+const { sendOrderConfirmation, sendOwnerOrderAlert } = require('../services/email.service');
 
 /**
  * POST /api/payments/verify
@@ -17,7 +17,7 @@ const { sendOrderConfirmation } = require('../services/email.service');
  */
 router.post('/verify', ordersRateLimiter, optionalAuth, async (req, res) => {
   try {
-    const { orderId, paymentId, signature, momentData, customerEmail, customerName } = req.body;
+    const { orderId, paymentId, signature, momentData, customerEmail, customerName, customerPhone } = req.body;
 
     if (!orderId) {
       return res.status(400).json({ success: false, error: 'Order ID is required.' });
@@ -97,20 +97,21 @@ router.post('/verify', ordersRateLimiter, optionalAuth, async (req, res) => {
     const momentSlug = moment ? moment.slug : 'published';
     const recipientEmail = customerEmail || (req.user ? req.user.email : null);
     const buyerName = customerName || (req.user ? req.user.name : 'Valued Creator');
+    const buyerPhone = customerPhone || (req.user ? req.user.phone : null);
     const shareUrl = `moment.html?id=${momentSlug}`;
 
-    // Dispatch transactional confirmation receipt asynchronously
-    if (recipientEmail) {
-      sendOrderConfirmation({
-        toEmail: recipientEmail,
-        customerName: buyerName,
-        orderId: order.id,
-        templateName: order.templateName,
-        amountINR: order.finalAmountINR,
-        momentUrl: `${process.env.BASE_URL || ''}/${shareUrl}`,
-        momentPin: moment ? moment.pinHint : null
-      }).catch(err => console.warn('Email dispatch warning:', err.message));
-    }
+    // Dispatch transactional confirmation receipt to customer AND alert to owner
+    sendOrderConfirmation({
+      toEmail: recipientEmail,
+      customerName: buyerName,
+      customerPhone: buyerPhone,
+      orderId: order.id,
+      templateName: order.templateName,
+      amountINR: order.finalAmountINR,
+      momentUrl: `${process.env.BASE_URL || ''}/${shareUrl}`,
+      momentPin: moment ? moment.pinHint : null,
+      paymentId: paymentId
+    }).catch(err => console.warn('Email dispatch warning:', err.message));
 
     return res.json({
       success: true,
@@ -157,9 +158,29 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
               paidAt: Date.now()
             });
 
+            let momentObj = null;
             if (order.momentId) {
-              await Moments.update(order.momentId, { status: 'published' });
+              momentObj = await Moments.findById(order.momentId);
+              if (momentObj) {
+                await Moments.update(order.momentId, { status: 'published' });
+              }
             }
+
+            const buyerEmail = paymentEntity.email || (order.userId ? (await Users.findById(order.userId))?.email : null);
+            const buyerName = paymentEntity.notes?.customerName || (order.userId ? (await Users.findById(order.userId))?.name : 'Valued Creator');
+            const buyerPhone = paymentEntity.contact || paymentEntity.notes?.phone;
+
+            sendOrderConfirmation({
+              toEmail: buyerEmail,
+              customerName: buyerName,
+              customerPhone: buyerPhone,
+              orderId: order.id,
+              templateName: order.templateName,
+              amountINR: order.finalAmountINR,
+              momentUrl: `${process.env.BASE_URL || ''}/moment.html?id=${momentObj ? momentObj.slug : 'published'}`,
+              momentPin: momentObj ? momentObj.pinHint : null,
+              paymentId: paymentEntity.id
+            }).catch(e => console.warn('[Webhook Order Email Notice]', e.message));
           }
         }
       }
@@ -273,6 +294,9 @@ async function verifyPaymentHandler(req, res) {
       matchedOrder = await Orders.findById(req.body.appOrderId);
     }
 
+    let momentObj = null;
+    let customerUser = null;
+
     if (matchedOrder && matchedOrder.status !== 'paid') {
       await Orders.markAsPaid(matchedOrder.id, {
         paymentId: payment_id,
@@ -290,15 +314,46 @@ async function verifyPaymentHandler(req, res) {
       }
 
       if (matchedOrder.momentId) {
-        await Moments.update(matchedOrder.momentId, { status: 'published' });
+        momentObj = await Moments.findById(matchedOrder.momentId);
+        if (momentObj) {
+          await Moments.update(matchedOrder.momentId, { status: 'published' });
+        }
+      }
+
+      if (matchedOrder.userId) {
+        customerUser = await Users.findById(matchedOrder.userId);
       }
     }
+
+    // Resolve buyer details
+    const buyerEmail = req.body.customerEmail || req.body.email || req.body.notes?.email || req.body.notes?.customerEmail || (customerUser ? customerUser.email : null);
+    const buyerName = req.body.customerName || req.body.name || req.body.notes?.name || req.body.notes?.customerName || (customerUser ? customerUser.name : 'Valued Creator');
+    const buyerPhone = req.body.customerPhone || req.body.phone || req.body.notes?.phone || (customerUser ? customerUser.phone : null);
+    const templateName = matchedOrder?.templateName || req.body.notes?.templateName || req.body.templateName || 'Celebration Experience';
+    const amountINR = matchedOrder ? matchedOrder.finalAmountINR : (req.body.amount ? Math.round(req.body.amount / 100) : 'Paid');
+    const momentSlug = momentObj ? (momentObj.slug || momentObj.id) : (req.body.momentSlug || 'published');
+    const momentUrl = `${process.env.BASE_URL || ''}/moment.html?id=${momentSlug}`;
+
+    // Dispatch customer receipt AND owner alert to vanvimoments@gmail.com
+    sendOrderConfirmation({
+      toEmail: buyerEmail,
+      customerName: buyerName,
+      customerPhone: buyerPhone,
+      orderId: matchedOrder ? matchedOrder.id : order_id,
+      templateName,
+      amountINR,
+      momentUrl,
+      momentPin: momentObj ? momentObj.pinHint : null,
+      paymentId: payment_id
+    }).catch(err => console.warn('[Payment Confirm Dispatch Notice]', err.message));
 
     return res.status(200).json({
       success: true,
       message: 'Payment verified successfully',
       order_id,
-      payment_id
+      payment_id,
+      orderId: matchedOrder ? matchedOrder.id : order_id,
+      momentSlug
     });
   } catch (err) {
     console.error('Verify Payment Error:', err);

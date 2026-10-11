@@ -44,6 +44,67 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(sanitizeBody);
 
+// Auto-heal Windows local path URLs (e.g., /c:/Users/RISHU%20KUMARI/VanviMoments/... or /c%3A/...)
+app.use((req, res, next) => {
+  try {
+    if (req.path.startsWith('/api/')) return next();
+    const rawUrl = req.url;
+    const decoded = decodeURIComponent(rawUrl);
+    const isMangled = /^\/?[a-zA-Z]:[\\\/]/i.test(decoded) || 
+                      /(?:^|\/)[a-zA-Z]:(?:\/|\\)/i.test(decoded) ||
+                      /(?:^|\/)users[\/\\]/i.test(decoded) ||
+                      /vanvimoments[\/\\]/i.test(decoded);
+
+    const aliasMap = {
+      'account': '/profile.html',
+      'my-account': '/profile.html',
+      'settings': '/profile.html',
+      'orders': '/dashboard.html',
+      'order': '/dashboard.html',
+      'my-orders': '/dashboard.html',
+      'moments': '/dashboard.html',
+      'wallet': '/plans.html',
+      'explore': '/templates.html',
+      'shop': '/products.html',
+      'store': '/products.html'
+    };
+
+    if (isMangled) {
+      let clean = '';
+      const vmMatch = decoded.match(/(?:vanvimoments)[\/\\](.*)/i);
+      if (vmMatch && vmMatch[1]) {
+        clean = '/' + vmMatch[1].replace(/\\/g, '/');
+      } else {
+        const tplMatch = decoded.match(/((?:templates|assets|css|js|uploads)[\/\\].*)/i);
+        if (tplMatch && tplMatch[1]) {
+          clean = '/' + tplMatch[1].replace(/\\/g, '/');
+        } else {
+          const htmlMatch = decoded.match(/([a-zA-Z0-9_\-]+\.html)/i);
+          if (htmlMatch && htmlMatch[1]) {
+            clean = '/' + htmlMatch[1];
+          } else {
+            clean = '/index.html';
+          }
+        }
+      }
+      clean = clean.replace(/\/+/g, '/');
+      const cleanSlug = (clean.split('/').filter(Boolean).pop() || '').replace(/\.html$/i, '').toLowerCase();
+      if (aliasMap[cleanSlug]) {
+        clean = aliasMap[cleanSlug];
+      }
+      if (clean && clean !== rawUrl) {
+        return res.redirect(302, clean);
+      }
+    } else {
+      const slug = (req.path.split('/').filter(Boolean).pop() || '').replace(/\.html$/i, '').toLowerCase();
+      if (aliasMap[slug]) {
+        return res.redirect(302, aliasMap[slug]);
+      }
+    }
+  } catch (err) {}
+  next();
+});
+
 // Health check endpoint with deep service status
 app.get('/api/health', async (req, res) => {
   const envStatus = validateEnv();
@@ -85,6 +146,68 @@ app.get('/api/payment-config', paymentsRoutes.getConfigHandler);
 const supabaseService = require('./services/supabase.service');
 const fs = require('fs');
 
+// Friendship Microsites API Endpoints & Short-link Router: /f/:slug
+app.post('/api/friendship/save', async (req, res, next) => {
+  try {
+    const { payment_id, order_id, signature, config, friendName, slug: reqSlug } = req.body;
+    
+    // Auto-generate clean friendly slug if not given
+    let slug = reqSlug;
+    if (!slug) {
+      const cleanName = friendName ? friendName.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'bestie';
+      const randStr = Math.random().toString(36).substring(2, 7);
+      slug = `${cleanName}-${randStr}`;
+    }
+
+    const saved = await supabaseService.createFriendshipMicrosite({
+      slug,
+      config: config || {},
+      payment_id: payment_id || 'pay_sim_' + Date.now(),
+      order_id: order_id || 'order_sim_' + Date.now(),
+      amount: 99,
+      status: 'paid'
+    });
+
+    const shortUrl = `https://vanvimoments.com/f/${encodeURIComponent(saved.slug)}`;
+    return res.json({
+      success: true,
+      slug: saved.slug,
+      shortUrl,
+      localUrl: `/Bestie%20Friendship%F0%9F%98%98/index.html?f=${encodeURIComponent(saved.slug)}`,
+      data: saved
+    });
+  } catch (err) {
+    console.error('Save friendship microsite error:', err);
+    return res.status(500).json({ success: false, error: err.message || 'Failed to save friendship microsite' });
+  }
+});
+
+app.get('/api/friendship/:slug', async (req, res, next) => {
+  try {
+    const { slug } = req.params;
+    if (!slug) return res.status(400).json({ success: false, error: 'Slug is required' });
+
+    const site = await supabaseService.getFriendshipMicrositeBySlug(slug);
+    if (!site) {
+      return res.status(404).json({ success: false, error: 'Friendship microsite not found' });
+    }
+    return res.json({ success: true, data: site });
+  } catch (err) {
+    console.error('Fetch friendship microsite error:', err);
+    return res.status(500).json({ success: false, error: err.message || 'Server error' });
+  }
+});
+
+app.get(['/f/:slug', '/f/:slug/'], async (req, res, next) => {
+  try {
+    const { slug } = req.params;
+    if (!slug) return res.redirect('/category-friendship.html');
+    return res.redirect(`/Bestie%20Friendship%F0%9F%98%98/index.html?f=${encodeURIComponent(slug)}`);
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.get('/m/:slug', async (req, res, next) => {
   try {
     const { slug } = req.params;
@@ -121,6 +244,18 @@ app.get(['/ai.html', '/ai'], (req, res) => {
 });
 app.get(['/constellation-of-love.html', '/constellation-of-love'], (req, res) => {
   return res.redirect(301, '/games.html');
+});
+app.get(['/floral-mehendi-story', '/floral-mehendi-story/'], (req, res) => {
+  const query = req.url.includes('?') ? req.url.substring(req.url.indexOf('?')) : '';
+  return res.redirect(301, `/templates/floral-mehendi-story/index.html${query}`);
+});
+app.get(['/sacred-temple-edition', '/sacred-temple-edition/'], (req, res) => {
+  const query = req.url.includes('?') ? req.url.substring(req.url.indexOf('?')) : '';
+  return res.redirect(301, `/templates/sacred-temple-edition/index.html${query}`);
+});
+app.get(['/golden-lake-collection', '/golden-lake-collection/'], (req, res) => {
+  const query = req.url.includes('?') ? req.url.substring(req.url.indexOf('?')) : '';
+  return res.redirect(301, `/templates/golden-lake-collection/index.html${query}`);
 });
 
 // Serve static uploads & frontend files from project root

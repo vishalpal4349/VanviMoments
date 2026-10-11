@@ -52,7 +52,7 @@ export const weddingConfig = {
   },
 
   themes: {
-    current: "royal-mewar",
+    current: "udaipur-pearl",
     available: [
       {
         id: "royal-mewar",

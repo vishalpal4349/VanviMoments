@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/vanvi-builder-smart.css">
+  <script src="../../js/vanvi-builder-smart.js" defer></script>
+  <script src="../../js/vanvi-template-lock.js" defer></script>
   <style>
     :root {
       --bg-studio: #0e0508;
@@ -93,7 +96,7 @@
     }
     @media (max-width: 960px) {
       .studio-body { grid-template-columns: 1fr; height: auto; }
-      .preview-pane { display: none; }
+      .preview-pane { height: auto; }
     }
 
     /* Left Control Workspace */
@@ -532,8 +535,9 @@
           </div>
           <div class="input-group">
             <label>Theme Preset</label>
-            <select id="bTheme">
-              <option value="royal-burgundy" selected>👑 Imperial Burgundy &amp; 24K Gold</option>
+            <select id="bTheme" onchange="syncToPreview()">
+              <option value="udaipur-palace" selected>🪷 Udaipur Palace &amp; Rose Ivory (Default)</option>
+              <option value="royal-burgundy">👑 Imperial Burgundy &amp; 24K Gold</option>
               <option value="emerald-palace">🌿 Emerald Rajputana &amp; Ivory</option>
               <option value="sapphire-night">💎 Midnight Sapphire &amp; Silver</option>
             </select>
@@ -572,19 +576,19 @@
           </div>
         </div>
 
-        <!-- STEP 13: Publish & Checkout -->
+        <!-- STEP 13: Publish & Free Launch -->
         <div class="step-view" id="stepView13">
           <div class="step-heading-wrap">
             <span class="step-number">Step 13 / 13</span>
-            <h2 class="step-title">Prakashan aur Checkout</h2>
-            <p class="step-desc">Apni website ko lifetime validity ke sath live karein.</p>
+            <h2 class="step-title">Prakashan aur Free Launch</h2>
+            <p class="step-desc">Apni website ko lifetime validity ke sath muft me live karein.</p>
           </div>
-          <div style="background: linear-gradient(135deg, #2b060f, #150206); padding: 20px; border-radius: 18px; border: 1.5px solid var(--gold-primary); text-align: center;">
-            <span style="font-size: 28px;">👑</span>
-            <h3 style="font-family: var(--font-display); font-size: 18px; color: var(--gold-light); margin: 6px 0;">Royal Vows Celebration Pass</h3>
-            <p style="font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px;">₹2,499 <span style="font-size: 13px; text-decoration: line-through; color: var(--text-muted);">₹4,999</span></p>
-            <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 16px;">Lifetime Validity • Unlimited Guest RSVPs • Custom Domain Ready</p>
-            <button type="button" class="btn-save-publish" style="width: 100%; padding: 12px;" onclick="saveAndProceedCheckout()">Continue to Checkout &amp; Pay ₹2,499 →</button>
+          <div style="background: linear-gradient(135deg, #1b0710, #0a0205); padding: 24px; border-radius: 18px; border: 1.5px solid var(--gold-primary); text-align: center;">
+            <span style="font-size: 32px;">🎁</span>
+            <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--gold-light); margin: 6px 0;">Vanvi Community Gift — 100% Free Vivah</h3>
+            <p style="font-size: 26px; font-weight: 800; color: #10b981; margin-bottom: 8px;">FREE (₹0) <span style="font-size: 13px; text-decoration: line-through; color: var(--text-muted);">₹2,499</span></p>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Lifetime Validity • Unlimited Guest RSVPs • No Credit Card Required</p>
+            <button type="button" class="btn-save-publish" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 14px;" onclick="saveAndProceedCheckout()">Publish &amp; Launch My Free Wedding Website 🚀</button>
           </div>
         </div>
 
@@ -632,7 +636,7 @@
 
       // Update prev/next buttons
       document.getElementById('btnPrevStep').style.visibility = currentStep === 1 ? 'hidden' : 'visible';
-      document.getElementById('btnNextStep').textContent = currentStep === totalSteps ? 'Publish Experience ✦' : 'Next Step →';
+      document.getElementById('btnNextStep').textContent = currentStep === totalSteps ? 'Publish Free Experience ✦' : 'Next Step →';
 
       // Scroll active pill into view
       const activePill = document.querySelector('.step-pill.active');
@@ -666,7 +670,8 @@
         date: document.getElementById('bDate').value,
         target: document.getElementById('bTarget').value,
         venue: document.getElementById('bVenue').value,
-        whatsapp: document.getElementById('bWhatsapp').value
+        whatsapp: document.getElementById('bWhatsapp').value,
+        theme: document.getElementById('bTheme') ? document.getElementById('bTheme').value : 'udaipur-palace'
       };
 
       try {
@@ -685,8 +690,10 @@
 
     function saveAndProceedCheckout() {
       syncToPreview();
-      const checkoutUrl = `../../checkout.html?templateId=vanvi-royal-wedding&price=2499&name=Royal%20Vows%20Wedding%20Experience`;
-      window.location.href = checkoutUrl;
+      const data = JSON.parse(localStorage.getItem('vanvi_royal_wedding_data') || '{}');
+      const params = new URLSearchParams(data);
+      alert('🎉 Badhai Ho! Aapka Vanvi Royal Wedding Template 100% Free me Publish ho gaya hai!');
+      window.location.href = 'index.html?' + params.toString();
     }
   </script>
 </body>

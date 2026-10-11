@@ -8,9 +8,11 @@
   ],
   "category": "Birthday",
   "categorySlug": "birthday",
-  "price": 129,
-  "isFree": false,
-  "badge": "Interactive 3D",
+  "price": 0,
+  "originalPrice": 299,
+  "isFree": true,
+  "tier": "Free",
+  "badge": "100% Free Keepsake",
   "type": "3D Interactive Cake & Wax Seal",
   "icon": "🎂",
   "soundtrack": "Midnight Birthday Acoustic",
@@ -19,12 +21,13 @@
     "birthday",
     "interactive",
     "wax seal",
-    "polaroid"
+    "polaroid",
+    "free"
   ],
-  "description": "Interactive birthday keepsake featuring 3D cake candles you can blow out, wax-sealed heartfelt letter, and memory polaroid trail.",
+  "description": "Interactive 100% free birthday keepsake featuring 3D cake candles you can blow out, wax-sealed heartfelt letter, and memory polaroid trail.",
   "builder": {
     "type": "custom",
-    "photoLimit": 3,
+    "photoLimit": 6,
     "hasDate": true,
     "hasSoundtrack": true,
     "builderPath": "templates/birthday-3d-candle/builder.html"

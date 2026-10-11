@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
   <!-- Razorpay Official Checkout SDK -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <link rel="stylesheet" href="css/vanvi-global-experience.css">
   <style>
     :root {
       --bg: #0f050b;
@@ -27,6 +28,7 @@
       color: var(--text);
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
       min-height: 100vh;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -155,7 +157,19 @@
     }
   </style>
 </head>
-<body>
+<body class="vanvi-gpu-accel" data-vanvi-theme="night">
+
+  <nav class="breadcrumb-bar" style="position: absolute; top: 16px; left: 16px; margin: 0 !important; width: auto !important; z-index: 100;" aria-label="Breadcrumb">
+    <a href="index.html" class="vanvi-btn-back" style="background: rgba(20, 10, 26, 0.85); border: 1px solid rgba(255, 120, 175, 0.35); color: #fff;">
+      <span class="back-arrow" style="color: #ff2a7a;">‹</span>
+      <span>Back</span>
+    </a>
+    <div class="breadcrumb-trail">
+      <a href="index.html">Home</a>
+      <span class="crumb-sep">/</span>
+      <span>₹1 Test</span>
+    </div>
+  </nav>
 
   <div class="test-box">
     <div class="badge">⚡ LIVE RAZORPAY TEST</div>
@@ -283,5 +297,6 @@
       }
     }
   </script>
+  <script src="js/vanvi-navigation.js"></script>
 </body>
 </html>

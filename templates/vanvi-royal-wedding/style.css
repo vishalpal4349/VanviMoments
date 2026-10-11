@@ -25,6 +25,62 @@
   --font-quote: 'Playfair Display', Georgia, serif;
 }
 
+/* ─── THEME 1: UDAIPUR PALACE & ROSE IVORY (Flagship Default) ─── */
+body[data-theme="udaipur-palace"],
+body:not([data-theme]) {
+  --crimson-royal: #5c0f1c;
+  --crimson-deep: #380811;
+  --crimson-soft: #7a1e2f;
+  --gold-primary: #b88628;
+  --gold-light: #946019;
+  --gold-dark: #7a4a0f;
+  --ivory-warm: #fff8f2;
+  --ivory-card: #ffffff;
+  --ivory-creme: #fdf0e4;
+  --text-dark: #2a0b12;
+  --text-muted: #6b2636;
+}
+
+/* ─── THEME 2: IMPERIAL BURGUNDY ─── */
+body[data-theme="royal-burgundy"] {
+  --crimson-royal: #4a0e1b;
+  --crimson-deep: #25040a;
+  --crimson-soft: #631525;
+  --gold-primary: #c4985a;
+  --gold-light: #dfba82;
+  --gold-dark: #926c36;
+  --ivory-warm: #fdfbf7;
+  --ivory-card: #ffffff;
+  --text-dark: #1f0f13;
+  --text-muted: #6b555b;
+}
+
+/* ─── THEME 3: EMERALD RAJPUTANA ─── */
+body[data-theme="emerald-palace"] {
+  --crimson-royal: #0d3824;
+  --crimson-deep: #051a10;
+  --crimson-soft: #174d33;
+  --gold-primary: #c4985a;
+  --gold-light: #dfba82;
+  --ivory-warm: #f7faf8;
+  --ivory-card: #ffffff;
+  --text-dark: #0a1f15;
+  --text-muted: #3d5c4b;
+}
+
+/* ─── THEME 4: SAPPHIRE NIGHT ─── */
+body[data-theme="sapphire-night"] {
+  --crimson-royal: #0d1e3d;
+  --crimson-deep: #050d1c;
+  --crimson-soft: #142a54;
+  --gold-primary: #d4af37;
+  --gold-light: #f3e5ab;
+  --ivory-warm: #f5f8fc;
+  --ivory-card: #ffffff;
+  --text-dark: #071124;
+  --text-muted: #3b4e6b;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

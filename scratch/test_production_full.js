@@ -132,7 +132,7 @@ async function runTests() {
       }
     });
     assert(uploadRes.status === 201 && uploadRes.data.success, 'Valid PNG upload accepted and stored');
-    assert(typeof uploadRes.data.url === 'string' && uploadRes.data.url.startsWith('/uploads/'), 'Returns valid safe upload URL path');
+    assert(typeof uploadRes.data.url === 'string' && (uploadRes.data.url.startsWith('/uploads/') || uploadRes.data.url.includes('cloudinary.com')), 'Returns valid safe upload URL path');
 
     // Reject fake / malicious file pretending to be image
     const fakeBase64 = 'data:image/png;base64,' + Buffer.from('MZ... executable content ...').toString('base64');

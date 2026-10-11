@@ -4,6 +4,7 @@ const { Orders, Moments, Users, CoinLedger } = require('../db/database');
 const { optionalAuth, requireAuth } = require('../middleware/auth');
 const { COIN_CONFIG, calculateCoinEligibility } = require('../config/coins');
 const templatesCatalog = require('../../js/vanvi-templates-data.js');
+const { sendOrderConfirmation } = require('../services/email.service');
 
 const LEGACY_TEMPLATE_PRICES = {
   'midnight wish 3d cinema': 1000
@@ -84,6 +85,18 @@ router.post('/create', optionalAuth, async (req, res) => {
 
       if (finalAmountINR === 0 && momentId) {
         await Moments.update(momentId, { status: 'published' });
+        const moment = await Moments.findById(momentId);
+        sendOrderConfirmation({
+          toEmail: user ? user.email : null,
+          customerName: user ? user.name : 'VIP Pass Creator',
+          customerPhone: user ? user.phone : null,
+          orderId: order.id,
+          templateName: order.templateName,
+          amountINR: 0,
+          momentUrl: `moment.html?id=${moment ? moment.slug : 'published'}`,
+          momentPin: moment ? moment.pinHint : null,
+          paymentId: 'credits_pass_settled'
+        }).catch(err => console.warn('[Credits Order Email Notice]', err.message));
       }
     }
 

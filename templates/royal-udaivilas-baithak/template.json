@@ -1,21 +1,23 @@
 {
   "id": "royal-udaivilas-baithak",
-  "name": "The Royal Udaivilas Baithak",
+  "name": "The Royal Udaivilas Baithak — Grand Vivah Suite",
   "slug": "royal-udaivilas-baithak",
+  "sku": "VNV-LUX-05",
   "aliases": [
     "udaivilas-baithak",
     "royal-baithak-wedding",
-    "shaadipath-baithak"
+    "shaadipath-baithak",
+    "udaivilas-palace"
   ],
   "category": "Wedding",
   "categorySlug": "wedding",
-  "price": 1499,
-  "originalPrice": 3999,
+  "price": 999,
+  "originalPrice": 1999,
   "isFree": false,
-  "badge": "👑 Imperial Flagship",
+  "badge": "👑 Imperial Palace (50% OFF)",
   "tier": "Signature",
   "isLuxury": true,
-  "type": "Imperial Royal Baithak Wedding Invitation",
+  "type": "Imperial Royal Baithak Wedding Invitation & Studio Suite",
   "icon": "👑",
   "soundtrack": "Imperial Sitar & Shehnai Courtyard Melody",
   "tags": [
@@ -25,57 +27,37 @@
     "palace",
     "baithak",
     "curtain-reveal",
-    "screen-bloom",
+    "elephant-cannons",
+    "shagun-wax-seal",
+    "guestbook",
     "whatsapp-rsvp",
-    "multi-event",
+    "6-ceremonies",
     "petals",
     "bestseller"
   ],
-  "description": "ShaadiPath-inspired imperial palace baithak: velvet crimson curtain opening, golden candle screen-bloom, falling rose petal physics, multi-event ceremony schedule, Google & Apple Calendar sync, and 1-click WhatsApp RSVP integration.",
+  "description": "Ultra-luxury cinematic palace wedding invitation suite featuring 13 interactive chapters: Sacred Gold Mandala Preloader, 3D Palace Parallax Hero Stage (220vh) with swinging brass diyas & celestial moon, Mewar Elephant Confetti & Flower Shower Cannons, 1200px Gold Toran SVG Garland & Lineage Parchment, 6 Auspicious Ceremonies Itinerary, Theatrical Ruby Velvet Curtain Pull, Editorial Photo Mosaic with Fullscreen Lightbox, Digital Shagun Envelope with crackable wax seal, Interactive Real-Time Guestbook Wall, VIP WhatsApp RSVP with petal burst, Floating Royal Audio Dock, and 3 Heritage Mood Presets.",
   "builder": {
     "type": "custom",
-    "photoLimit": 4,
+    "photoLimit": 6,
     "hasDate": true,
     "hasSoundtrack": true,
-    "previewPath": "templates/royal-udaivilas-baithak/index.html"
+    "builderPath": "templates/royal-udaivilas-baithak/builder.html",
+    "previewPath": "templates/royal-udaivilas-baithak/preview.html",
+    "templatePath": "templates/royal-udaivilas-baithak/index.html"
   },
-  "schema": {
-    "fields": [
-      {
-        "key": "groomName",
-        "label": "Groom's Name",
-        "type": "text",
-        "required": true,
-        "default": "Rohan"
-      },
-      {
-        "key": "brideName",
-        "label": "Bride's Name",
-        "type": "text",
-        "required": true,
-        "default": "Tanya"
-      },
-      {
-        "key": "weddingDate",
-        "label": "Wedding Date",
-        "type": "date",
-        "required": true,
-        "default": "2026-12-12"
-      },
-      {
-        "key": "venue",
-        "label": "Wedding Venue",
-        "type": "text",
-        "required": true,
-        "default": "The Oberoi Udaivilas, Udaipur"
-      },
-      {
-        "key": "hostWhatsApp",
-        "label": "Host WhatsApp (for RSVPs)",
-        "type": "tel",
-        "required": true,
-        "default": "917631442934"
-      }
-    ]
-  }
+  "features": [
+    "Sacred Gold Mandala SVG Trace Preloader with Vanvi Royal Seal",
+    "220vh 3D Palace Parallax Hero Stage with swinging brass diyas & live countdown",
+    "Dual Mewar Elephant Confetti & Pushpa Vrishti Cannons with tap triggers",
+    "1200px Gold Toran SVG Garland, pulsating Ganesha crest & Lineage Parchment",
+    "Celebration Itinerary with 6 Ceremonies (Haldi, Mehendi, Sangeet, Sagan, Vivah, Reception)",
+    "Theatrical Ruby Velvet Curtain Pull with rotating celestial mandala & couple romance verse",
+    "Editorial Moments Gallery with interactive Fullscreen Lightbox",
+    "Digital Shagun Envelope with tap-to-crack authentic red wax seal & UPI QR",
+    "Interactive Real-Time Guest Blessings Wall with LocalStorage persistence",
+    "VIP WhatsApp RSVP with dynamic guest personalization & petal burst physics",
+    "Floating Royal Audio Dock with Shehnai soundscape & background tab detection",
+    "3 Heritage Mood Presets (Royal Mewar, Udaipur Pearl, Jaipur Sunset)",
+    "Bespoke Split-Screen Customizer Studio with Bulk WhatsApp Link Generator"
+  ]
 }

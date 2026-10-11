@@ -589,6 +589,7 @@ footer a:hover { color: var(--rose-primary); }
 </style>
 </head>
 <body class="has-vanvi-dock">
+<canvas id="confettiCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;"></canvas>
 
 <!-- Standardized Header -->
 <header>
@@ -969,6 +970,60 @@ function showToast(msg) {
       VanviQR.renderBrandedCard(cardCanvas, window._activeCardMeta);
     }
   }
+
+  function launchConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#ff2a7a', '#f59e0b', '#a855f7', '#38bdf8', '#10b981', '#fb7185'];
+    const particles = [];
+
+    for (let i = 0; i < 75; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height * 0.4 - 50,
+        size: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vx: (Math.random() - 0.5) * 3,
+        vy: Math.random() * 3 + 2,
+        rot: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 6,
+        opacity: 1
+      });
+    }
+
+    let frame = 0;
+    function animate() {
+      if (frame > 140) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.rotSpeed;
+        if (frame > 90) p.opacity -= 0.02;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rot * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+        ctx.restore();
+      });
+      frame++;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  // Trigger celebratory confetti on initial load
+  setTimeout(launchConfetti, 350);
 })();
 
 function downloadQRCode() {

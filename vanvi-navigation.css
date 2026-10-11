@@ -38,13 +38,19 @@ html[data-vanvi-theme="night"] main,
 html[data-vanvi-theme="emerald"] .main-content,
 html[data-vanvi-theme="dark"] .main-content,
 html[data-vanvi-theme="night"] .main-content {
-  background: radial-gradient(ellipse 90% 65% at 50% 10%, rgba(15, 61, 50, 0.92) 0%, #0B0D0C 75%), url('assets/user-ref.jpg') no-repeat center top fixed !important;
+  background: 
+    radial-gradient(circle at 10% 12%, rgba(16, 185, 129, 0.18) 0%, transparent 40%),
+    radial-gradient(circle at 90% 15%, rgba(245, 158, 11, 0.16) 0%, transparent 42%),
+    radial-gradient(circle at 50% 45%, rgba(139, 92, 246, 0.14) 0%, transparent 50%),
+    radial-gradient(circle at 85% 75%, rgba(6, 182, 212, 0.15) 0%, transparent 42%),
+    radial-gradient(circle at 15% 85%, rgba(244, 63, 94, 0.13) 0%, transparent 40%),
+    #070B0E !important;
   background-size: cover !important;
-  background-color: #0B0D0C !important;
-  color: #F1F7F4 !important;
+  background-color: #070B0E !important;
+  color: #F8FAFC !important;
 }
 
-/* Headers & Navigation Wrappers */
+/* Headers & Navigation Wrappers (Frosted Obsidian Glass + 24K Gold & Cyan Rim) */
 html[data-vanvi-theme="emerald"] header,
 html[data-vanvi-theme="dark"] header,
 html[data-vanvi-theme="night"] header,
@@ -66,12 +72,12 @@ html[data-vanvi-theme="night"] .fixed-header,
 html[data-vanvi-theme="emerald"] .navbar,
 html[data-vanvi-theme="dark"] .navbar,
 html[data-vanvi-theme="night"] .navbar {
-  background: rgba(11, 13, 12, 0.92) !important;
-  border-color: rgba(214, 184, 120, 0.32) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  color: #F1F7F4 !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65) !important;
+  background: rgba(9, 14, 20, 0.94) !important;
+  border-color: rgba(245, 158, 11, 0.38) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  color: #F8FAFC !important;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75), 0 0 20px rgba(16, 185, 129, 0.12) !important;
 }
 
 /* Universal Cards & Containers Transformation (Deep Emerald #0F3D32 + Glass + Gold Trim) */
@@ -381,19 +387,17 @@ html[data-vanvi-theme="night"] body [style*="background-color: rgb(255, 255, 255
 html[data-vanvi-theme="emerald"] body [style*="background: rgba(255, 255, 255"],
 html[data-vanvi-theme="dark"] body [style*="background: rgba(255, 255, 255"],
 html[data-vanvi-theme="night"] body [style*="background: rgba(255, 255, 255"] {
-  background: linear-gradient(145deg, rgba(15, 61, 50, 0.88) 0%, rgba(11, 42, 35, 0.94) 60%, rgba(6, 26, 20, 0.96) 100%) !important;
-  background-color: rgba(15, 61, 50, 0.90) !important;
-  border: 1.5px solid rgba(214, 184, 120, 0.32) !important;
+  background: linear-gradient(145deg, rgba(12, 22, 28, 0.92) 0%, rgba(8, 28, 22, 0.94) 50%, rgba(18, 15, 30, 0.92) 100%) !important;
+  background-color: rgba(10, 18, 22, 0.94) !important;
+  border: 1.5px solid rgba(245, 158, 11, 0.38) !important;
   border-radius: 20px !important;
-  color: #F1F7F4 !important;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6), 0 0 24px rgba(24, 168, 120, 0.12), inset 0 1px 1px rgba(214, 184, 120, 0.25) !important;
-  backdrop-filter: blur(16px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
-  backdrop-filter: blur(16px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  color: #F8FAFC !important;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.75), 0 0 20px rgba(16, 185, 129, 0.14), 0 0 32px rgba(245, 158, 11, 0.10), inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+  backdrop-filter: blur(18px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
 }
 
-/* Headings & Brand Titles (Luminous Pearl #F1F7F4 with Gold / Emerald Shimmer) */
+/* Headings & Brand Titles (Crisp Diamond White with 24K Gold & Emerald Prismatic Glow) */
 html[data-vanvi-theme="emerald"] h1,
 html[data-vanvi-theme="dark"] h1,
 html[data-vanvi-theme="night"] h1,
@@ -445,11 +449,11 @@ html[data-vanvi-theme="night"] [class*="title"]:not([class*="gradient"]):not(spa
 html[data-vanvi-theme="emerald"] [class*="heading"]:not([class*="gradient"]):not(span),
 html[data-vanvi-theme="dark"] [class*="heading"]:not([class*="gradient"]):not(span),
 html[data-vanvi-theme="night"] [class*="heading"]:not([class*="gradient"]):not(span) {
-  color: #F1F7F4 !important;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75), 0 0 16px rgba(251, 191, 36, 0.18) !important;
 }
 
-/* Secondary Copy & Descriptions (Mint #6EE7B7 & Soft Pearl) */
+/* Secondary Copy & Descriptions (Ultra-Clean Luminous Platinum Pearl, NOT Muddy Green!) */
 html[data-vanvi-theme="emerald"] p,
 html[data-vanvi-theme="dark"] p,
 html[data-vanvi-theme="night"] p,
@@ -474,9 +478,11 @@ html[data-vanvi-theme="night"] [class*="desc"]:not([class*="gradient"]),
 html[data-vanvi-theme="emerald"] [class*="sub"]:not([class*="gradient"]),
 html[data-vanvi-theme="dark"] [class*="sub"]:not([class*="gradient"]),
 html[data-vanvi-theme="night"] [class*="sub"]:not([class*="gradient"]) {
-  color: #d1fae5 !important;
+  color: #E2E8F0 !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6) !important;
 }
 
+/* Captions & Highlights (Vibrant Mint Aurora & Starlight Cyan) */
 html[data-vanvi-theme="emerald"] small,
 html[data-vanvi-theme="dark"] small,
 html[data-vanvi-theme="night"] small,
@@ -502,7 +508,7 @@ html[data-vanvi-theme="night"] .breadcrumb-bar a,
 html[data-vanvi-theme="emerald"] .breadcrumb-trail a,
 html[data-vanvi-theme="dark"] .breadcrumb-trail a,
 html[data-vanvi-theme="night"] .breadcrumb-trail a {
-  color: #6EE7B7 !important;
+  color: #38BDF8 !important;
 }
 
 /* Back Button Transformation */
@@ -521,19 +527,19 @@ html[data-vanvi-theme="night"] .nav-back,
 html[data-vanvi-theme="emerald"] .btn-back-nav,
 html[data-vanvi-theme="dark"] .btn-back-nav,
 html[data-vanvi-theme="night"] .btn-back-nav {
-  background: rgba(15, 61, 50, 0.92) !important;
-  color: #D6B878 !important;
-  border: 1px solid rgba(214, 184, 120, 0.4) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+  background: rgba(12, 22, 28, 0.92) !important;
+  color: #FBBF24 !important;
+  border: 1.5px solid rgba(245, 158, 11, 0.45) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), 0 0 15px rgba(245, 158, 11, 0.2) !important;
 }
 
 /* Kickers & Feature Tags */
 html[data-vanvi-theme="emerald"] .kicker,
 html[data-vanvi-theme="dark"] .kicker,
 html[data-vanvi-theme="night"] .kicker {
-  color: #D6B878 !important;
-  background: rgba(24, 168, 120, 0.18) !important;
-  border: 1px solid rgba(214, 184, 120, 0.4) !important;
+  color: #FBBF24 !important;
+  background: rgba(245, 158, 11, 0.15) !important;
+  border: 1px solid rgba(245, 158, 11, 0.45) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -611,12 +617,22 @@ html[data-vanvi-theme="night"] .jewel-champagne {
   text-shadow: 0 0 12px rgba(254, 243, 199, 0.5) !important;
 }
 
-/* Vibrant Glowing Cards Hover in Dark Mode */
+/* Vibrant Multi-Chromatic Glowing Cards Hover in Dark Mode */
 html[data-vanvi-theme="emerald"] body div[class*="card"]:hover,
 html[data-vanvi-theme="dark"] body div[class*="card"]:hover,
-html[data-vanvi-theme="night"] body div[class*="card"]:hover {
-  border-color: rgba(245, 158, 11, 0.65) !important;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 42, 122, 0.25) !important;
+html[data-vanvi-theme="night"] body div[class*="card"]:hover,
+html[data-vanvi-theme="emerald"] body section[class*="card"]:hover,
+html[data-vanvi-theme="dark"] body section[class*="card"]:hover,
+html[data-vanvi-theme="night"] body section[class*="card"]:hover,
+html[data-vanvi-theme="emerald"] body .template-card:hover,
+html[data-vanvi-theme="dark"] body .template-card:hover,
+html[data-vanvi-theme="night"] body .template-card:hover,
+html[data-vanvi-theme="emerald"] body .catalog-card:hover,
+html[data-vanvi-theme="dark"] body .catalog-card:hover,
+html[data-vanvi-theme="night"] body .catalog-card:hover {
+  border-color: rgba(245, 158, 11, 0.75) !important;
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.85), 0 0 28px rgba(245, 158, 11, 0.25), 0 0 42px rgba(16, 185, 129, 0.22) !important;
+  transform: translateY(-3.5px) !important;
 }
 
 /* Multi-colored glowing badges and pills in Dark Mode */
@@ -626,11 +642,11 @@ html[data-vanvi-theme="night"] .badge,
 html[data-vanvi-theme="emerald"] .pill:not(.nav-btn),
 html[data-vanvi-theme="dark"] .pill:not(.nav-btn),
 html[data-vanvi-theme="night"] .pill:not(.nav-btn) {
-  border: 1px solid rgba(245, 158, 11, 0.35) !important;
-  box-shadow: 0 0 10px rgba(24, 168, 120, 0.15) !important;
+  border: 1px solid rgba(245, 158, 11, 0.45) !important;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.2) !important;
 }
 
-/* Inputs, Selects & Forms (Obsidian #0B0D0C Base with Mint Border) */
+/* Inputs, Selects & Forms (Onyx Velvet Base with Gold-Emerald Glow Border) */
 html[data-vanvi-theme="emerald"] input,
 html[data-vanvi-theme="dark"] input,
 html[data-vanvi-theme="night"] input,
@@ -640,9 +656,20 @@ html[data-vanvi-theme="night"] select,
 html[data-vanvi-theme="emerald"] textarea,
 html[data-vanvi-theme="dark"] textarea,
 html[data-vanvi-theme="night"] textarea {
-  background: rgba(11, 13, 12, 0.95) !important;
-  color: #F1F7F4 !important;
-  border: 1px solid rgba(24, 168, 120, 0.35) !important;
+  background: rgba(9, 14, 20, 0.95) !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid rgba(245, 158, 11, 0.4) !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+}
+html[data-vanvi-theme="emerald"] input:focus,
+html[data-vanvi-theme="dark"] input:focus,
+html[data-vanvi-theme="night"] input:focus,
+html[data-vanvi-theme="emerald"] textarea:focus,
+html[data-vanvi-theme="dark"] textarea:focus,
+html[data-vanvi-theme="night"] textarea:focus {
+  border-color: #34D399 !important;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25) !important;
 }
 html[data-vanvi-theme="emerald"] input::placeholder,
 html[data-vanvi-theme="dark"] input::placeholder,
@@ -650,11 +677,11 @@ html[data-vanvi-theme="night"] input::placeholder,
 html[data-vanvi-theme="emerald"] textarea::placeholder,
 html[data-vanvi-theme="dark"] textarea::placeholder,
 html[data-vanvi-theme="night"] textarea::placeholder {
-  color: #6EE7B7 !important;
-  opacity: 0.65;
+  color: #94A3B8 !important;
+  opacity: 0.75;
 }
 
-/* Primary Luxury Buttons (Champagne Gold #D6B878 & Emerald Accent) */
+/* Primary Luxury Buttons (Multi-Jewel Radiant Gradient: Mint Jade -> Cyan -> Royal Violet) */
 html[data-vanvi-theme="emerald"] .primary,
 html[data-vanvi-theme="dark"] .primary,
 html[data-vanvi-theme="night"] .primary,
@@ -667,14 +694,14 @@ html[data-vanvi-theme="night"] button.primary,
 html[data-vanvi-theme="emerald"] a.primary,
 html[data-vanvi-theme="dark"] a.primary,
 html[data-vanvi-theme="night"] a.primary {
-  background: linear-gradient(135deg, #18A878 0%, #2DD4BF 50%, #D6B878 100%) !important;
-  color: #0B0D0C !important;
+  background: linear-gradient(135deg, #10B981 0%, #06B6D4 45%, #8B5CF6 100%) !important;
+  color: #FFFFFF !important;
   font-weight: 850 !important;
-  border: 1px solid rgba(214, 184, 120, 0.6) !important;
-  box-shadow: 0 8px 24px rgba(24, 168, 120, 0.42), 0 0 20px rgba(214, 184, 120, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45), 0 0 20px rgba(6, 182, 212, 0.32) !important;
 }
 
-/* Secondary Buttons */
+/* Secondary Buttons (Onyx Emerald Glass + 24K Gold Rim) */
 html[data-vanvi-theme="emerald"] .secondary,
 html[data-vanvi-theme="dark"] .secondary,
 html[data-vanvi-theme="night"] .secondary,
@@ -684,18 +711,21 @@ html[data-vanvi-theme="night"] .btn-secondary,
 html[data-vanvi-theme="emerald"] button.secondary,
 html[data-vanvi-theme="dark"] button.secondary,
 html[data-vanvi-theme="night"] button.secondary {
-  background: rgba(15, 61, 50, 0.85) !important;
-  color: #D6B878 !important;
-  border: 1px solid rgba(214, 184, 120, 0.35) !important;
+  background: rgba(14, 22, 28, 0.90) !important;
+  color: #FBBF24 !important;
+  border: 1.5px solid rgba(245, 158, 11, 0.45) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* Bottom Dock (Obsidian #0B0D0C + Deep Emerald Glass & Multi-Jewel Tabs) */
+/* Bottom Dock (Obsidian #0B0D0C + 24K Gold Rim & Multi-Jewel Tabs) */
 html[data-vanvi-theme="emerald"] .vanvi-bottom-dock,
 html[data-vanvi-theme="dark"] .vanvi-bottom-dock,
 html[data-vanvi-theme="night"] .vanvi-bottom-dock {
-  background: rgba(11, 15, 13, 0.96) !important;
-  border: 1.5px solid rgba(214, 184, 120, 0.38) !important;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85), 0 0 28px rgba(24, 168, 120, 0.22), inset 0 1px 1px rgba(214, 184, 120, 0.3) !important;
+  background: rgba(8, 13, 18, 0.96) !important;
+  border: 1.5px solid rgba(245, 158, 11, 0.42) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85), 0 0 28px rgba(245, 158, 11, 0.20), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-bottom-dock button,
 html[data-vanvi-theme="dark"] .vanvi-bottom-dock button,
@@ -736,9 +766,9 @@ html[data-vanvi-theme="dark"] .vanvi-bottom-dock #bottomNavExplore.active {
 }
 html[data-vanvi-theme="emerald"] .vanvi-bottom-dock .create,
 html[data-vanvi-theme="dark"] .vanvi-bottom-dock .create {
-  background: linear-gradient(135deg, #18A878 0%, #0F3D32 50%, #D6B878 100%) !important;
-  border: 1.5px solid rgba(214, 184, 120, 0.65) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(24, 168, 120, 0.35) !important;
+  background: linear-gradient(135deg, #F59E0B 0%, #10B981 50%, #8B5CF6 100%) !important;
+  border: 1.5px solid rgba(254, 243, 199, 0.7) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.4) !important;
   color: #ffffff !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-bottom-dock #bottomNavRewards.active,
@@ -3418,43 +3448,46 @@ html[data-vanvi-theme="glass"] .faq-item {
 
 /* Theme 2: Emerald Night */
 html[data-vanvi-theme="emerald"] .vanvi-ai-hub-sheet {
-  background: linear-gradient(180deg, #092a20 0%, #051a14 100%) !important;
-  border-color: rgba(212, 175, 55, 0.45) !important;
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65), inset 0 1px 2px rgba(212, 175, 55, 0.3) !important;
+  background: linear-gradient(145deg, rgba(12, 22, 28, 0.95) 0%, rgba(8, 28, 22, 0.96) 50%, rgba(18, 15, 30, 0.95) 100%) !important;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.85), inset 0 1px 2px rgba(254, 243, 199, 0.3) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-ai-hub-title {
-  color: #f7fee7 !important;
+  color: #FFFFFF !important;
+  text-shadow: 0 0 16px rgba(251, 191, 36, 0.3) !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-ai-hub-subtitle {
-  color: #a7f3d0 !important;
+  color: #E2E8F0 !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-ai-close-btn {
-  background: rgba(15, 61, 50, 0.9) !important;
-  color: #f7fee7 !important;
-  border-color: rgba(212, 175, 55, 0.4) !important;
+  background: rgba(14, 22, 28, 0.9) !important;
+  color: #FBBF24 !important;
+  border-color: rgba(245, 158, 11, 0.45) !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-ai-option-item {
-  background: rgba(10, 42, 34, 0.85) !important;
-  border-color: rgba(212, 175, 55, 0.35) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+  background: rgba(12, 18, 24, 0.9) !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-ai-option-item:hover {
-  border-color: #d4af37 !important;
-  box-shadow: 0 10px 26px rgba(212, 175, 55, 0.25) !important;
+  border-color: #FBBF24 !important;
+  box-shadow: 0 10px 26px rgba(245, 158, 11, 0.35), 0 0 20px rgba(16, 185, 129, 0.25) !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-ai-item-heading {
-  color: #ffffff !important;
+  color: #FFFFFF !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-ai-item-desc {
-  color: #c7eedc !important;
+  color: #E2E8F0 !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-ai-action-arrow {
-  background: #0f3d32 !important;
-  color: #d4af37 !important;
+  background: linear-gradient(135deg, #10B981, #06B6D4) !important;
+  color: #FFFFFF !important;
 }
 html[data-vanvi-theme="emerald"] .vanvi-ai-option-item:hover .vanvi-ai-action-arrow {
-  background: #d4af37 !important;
-  color: #07271d !important;
+  background: linear-gradient(135deg, #F59E0B, #FBBF24) !important;
+  color: #070B0E !important;
 }
 
 /* Theme 3: Spatial Glass */

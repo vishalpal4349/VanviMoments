@@ -2,145 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Royal Vivah — Palace & Heritage | Live Experience | Vanvi Moments</title>
-  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #0d1b3e;
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    }
-
-    #templatePreviewFrame {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    /* Floating Pill Dock */
-    .preview-floating-pill-dock {
-      position: fixed;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(13, 27, 62, 0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(212, 175, 55, 0.55);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .pill-back-btn {
-      font-family: inherit;
-      font-size: 11.5px;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.85);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.2s ease;
-      white-space: nowrap;
-    }
-    .pill-back-btn:hover {
-      color: #d4af37;
-    }
-
-    .pill-divider {
-      width: 1px;
-      height: 14px;
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .pill-title {
-      font-family: 'Cinzel', serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #fef3c7;
-      white-space: nowrap;
-    }
-
-    .pill-price {
-      font-size: 11px;
-      font-weight: 800;
-      color: #d4af37;
-      white-space: nowrap;
-    }
-
-    .pill-cta-create {
-      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
-      color: #0d1b3e !important;
-      font-size: 11.5px;
-      font-weight: 800;
-      text-decoration: none;
-      padding: 6px 16px;
-      border-radius: 999px;
-      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
-      transition: all 0.2s ease;
-      white-space: nowrap;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .pill-cta-create:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
-    }
-
-    @media (max-width: 600px) {
-      .preview-floating-pill-dock {
-        top: 10px;
-        padding: 5px 10px;
-        gap: 6px;
-      }
-      .pill-title {
-        display: none;
-      }
-      .pill-cta-create {
-        padding: 5px 12px;
-        font-size: 11px;
-      }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direct Experience | Vanvi Moments</title>
+  <script>
+    (function() {
+      const search = window.location.search || '';
+      const hash = window.location.hash || '';
+      window.location.replace('index.html' + search + hash);
+    })();
+  </script>
 </head>
-<body>
-
-  <!-- Top Floating Controls -->
-  <header class="preview-floating-pill-dock" role="banner" aria-label="Template Controls">
-    <a href="../../templates.html" class="pill-back-btn" title="Back to Templates Catalog">
-      <span>←</span>
-      <span>Catalog</span>
-    </a>
-    <span class="pill-divider"></span>
-    <span class="pill-title">Royal Vivah — Palace &amp; Heritage</span>
-    <span class="pill-price">₹1,499</span>
-    <a href="./builder.html" class="pill-cta-create" title="Customize this template">
-      <span>Personalize</span>
-      <span>✨</span>
-    </a>
-  </header>
-
-  <!-- Live Template Experience Iframe -->
-  <iframe id="templatePreviewFrame" src="./index.html?preview=1" title="Royal Vivah Live Experience"></iframe>
-
+<body style="background:#000; margin:0; display:flex; align-items:center; justify-content:center; height:100vh; color:#fff; font-family:sans-serif;">
+  <p>Entering template...</p>
 </body>
 </html>

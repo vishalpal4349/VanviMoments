@@ -4,6 +4,10 @@ const crypto = require('crypto');
 const { Users, CoinLedger } = require('../db/database');
 const { hashPassword, verifyPassword, createToken, requireAuth } = require('../middleware/auth');
 const { authRateLimiter } = require('../middleware/security');
+const { sendWelcomeEmail, sendPasswordResetOtp } = require('../services/email.service');
+
+// In-Memory Password Reset OTP Vault (15-min TTL)
+const resetOtpVault = new Map();
 
 // Input validation helpers
 function isValidEmail(email) {
@@ -55,6 +59,15 @@ router.post('/signup', authRateLimiter, async (req, res) => {
     });
 
     const token = createToken(user);
+
+    // Send automated welcome email with +100 bonus coins
+    if (user.email && user.email.includes('@') && !user.email.includes('@mobile.')) {
+      sendWelcomeEmail({
+        toEmail: user.email,
+        customerName: user.name,
+        coins: user.coins || 100
+      }).catch(err => console.warn('[Welcome Email Notice]', err.message));
+    }
 
     return res.status(201).json({
       success: true,
@@ -185,6 +198,15 @@ router.post('/google', authRateLimiter, async (req, res) => {
 
     const token = createToken(user);
 
+    // Send automated welcome email for new Google signups
+    if (isNewUser && user.email && user.email.includes('@')) {
+      sendWelcomeEmail({
+        toEmail: user.email,
+        customerName: user.name,
+        coins: user.coins || 100
+      }).catch(err => console.warn('[Google Welcome Email Notice]', err.message));
+    }
+
     return res.json({
       success: true,
       token,
@@ -267,6 +289,7 @@ router.post('/whatsapp', authRateLimiter, async (req, res) => {
 
 /**
  * POST /api/auth/forgot-password
+ * Generates 6-digit OTP and dispatches real-time email notification
  */
 router.post('/forgot-password', authRateLimiter, async (req, res) => {
   try {
@@ -280,17 +303,149 @@ router.post('/forgot-password', authRateLimiter, async (req, res) => {
       return res.status(404).json({ success: false, error: 'No account found matching this identifier. Please verify or create an account.' });
     }
 
+    const emailKey = user.email.toLowerCase();
+    const existingEntry = resetOtpVault.get(emailKey);
+    const now = Date.now();
+
+    // 1. Anti-spam: 60-second cooldown between requests
+    if (existingEntry && existingEntry.lastRequestedAt && (now - existingEntry.lastRequestedAt < 60000)) {
+      const remainingSecs = Math.ceil((60000 - (now - existingEntry.lastRequestedAt)) / 1000);
+      return res.status(429).json({
+        success: false,
+        error: `Please wait ${remainingSecs}s before requesting another verification code.`,
+        cooldownRemaining: remainingSecs
+      });
+    }
+
+    // 2. Anti-spam: Max 3 OTP requests per 15-minute window
+    if (existingEntry && existingEntry.requestCount >= 3 && now < existingEntry.expiresAt) {
+      const waitMinutes = Math.ceil((existingEntry.expiresAt - now) / 60000);
+      return res.status(429).json({
+        success: false,
+        error: `Security limit reached: Maximum 3 verification codes allowed per 15 minutes. Please wait ${waitMinutes}m or contact our WhatsApp Concierge for instant assistance.`,
+        rateLimited: true
+      });
+    }
+
     const resetRef = 'VNV-' + crypto.randomBytes(4).toString('hex').toUpperCase();
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const currentRequestCount = (existingEntry && now < existingEntry.expiresAt) ? (existingEntry.requestCount || 1) + 1 : 1;
+
+    // Store in vault (15-min TTL)
+    resetOtpVault.set(emailKey, {
+      otp,
+      userId: user.id,
+      resetRef,
+      expiresAt: (existingEntry && existingEntry.expiresAt > now) ? existingEntry.expiresAt : now + 15 * 60 * 1000,
+      lastRequestedAt: now,
+      requestCount: currentRequestCount,
+      attempts: 0
+    });
+
+    // Dispatch real-time OTP email
+    if (user.email && user.email.includes('@') && !user.email.includes('@mobile.')) {
+      sendPasswordResetOtp({
+        toEmail: user.email,
+        customerName: user.name,
+        otp,
+        resetRef
+      }).catch(err => console.warn('[OTP Email Notice]', err.message));
+    }
+
     return res.json({
       success: true,
-      message: `Account located for ${user.name || user.email}! Password reset ticket #${resetRef} has been initiated.`,
+      message: `A 6-digit security code has been dispatched to ${user.email}. Reference: #${resetRef}.`,
       resetRef,
       email: user.email,
-      name: user.name
+      name: user.name,
+      otpSent: true
     });
   } catch (err) {
     console.error('Forgot password error:', err);
     return res.status(500).json({ success: false, error: 'Failed to process password recovery request.' });
+  }
+});
+
+/**
+ * POST /api/auth/verify-reset-otp
+ * Verifies entered 6-digit OTP before allowing password change
+ */
+router.post('/verify-reset-otp', authRateLimiter, async (req, res) => {
+  try {
+    const email = (req.body.email || req.body.identifier || '').trim().toLowerCase();
+    const otp = (req.body.otp || '').trim();
+
+    if (!email || !otp) {
+      return res.status(400).json({ success: false, error: 'Email and 6-digit OTP code are required.' });
+    }
+
+    const entry = resetOtpVault.get(email);
+    if (!entry) {
+      return res.status(400).json({ success: false, error: 'No active OTP found. Please request a new code.' });
+    }
+
+    if (Date.now() > entry.expiresAt) {
+      resetOtpVault.delete(email);
+      return res.status(400).json({ success: false, error: 'OTP has expired. Please request a new code.' });
+    }
+
+    if (entry.otp !== otp) {
+      entry.attempts = (entry.attempts || 0) + 1;
+      if (entry.attempts >= 5) {
+        resetOtpVault.delete(email);
+        return res.status(429).json({ success: false, error: 'Too many incorrect attempts. Please request a new code.' });
+      }
+      return res.status(400).json({ success: false, error: 'Incorrect 6-digit code. Please check your inbox.' });
+    }
+
+    entry.verified = true;
+    return res.json({ success: true, message: 'OTP verified successfully! You may now set a new password.' });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: 'OTP verification failed.' });
+  }
+});
+
+/**
+ * POST /api/auth/reset-password
+ * Applies new password after OTP verification
+ */
+router.post('/reset-password', authRateLimiter, async (req, res) => {
+  try {
+    const email = (req.body.email || req.body.identifier || '').trim().toLowerCase();
+    const otp = (req.body.otp || '').trim();
+    const newPassword = (req.body.newPassword || req.body.password || '').trim();
+
+    if (!email || !otp || !newPassword) {
+      return res.status(400).json({ success: false, error: 'Email, OTP, and new password are required.' });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ success: false, error: 'New password must be at least 6 characters long.' });
+    }
+
+    const entry = resetOtpVault.get(email);
+    if (!entry || entry.otp !== otp || Date.now() > entry.expiresAt) {
+      return res.status(400).json({ success: false, error: 'Invalid or expired OTP code. Please request a new code.' });
+    }
+
+    const user = await Users.findByEmail(email);
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'User account not found.' });
+    }
+
+    const { salt, hash } = hashPassword(newPassword);
+    await Users.update(user.id, { passwordHash: hash, salt });
+
+    // Invalidate used OTP
+    resetOtpVault.delete(email);
+
+    return res.json({
+      success: true,
+      message: 'Password successfully updated! You can now sign in with your new password.'
+    });
+  } catch (err) {
+    console.error('Password reset error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to update password.' });
   }
 });
 

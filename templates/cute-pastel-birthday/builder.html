@@ -11,8 +11,11 @@
   
   <link rel="stylesheet" href="../../css/vanvi-global-experience.css">
   <link rel="stylesheet" href="../../css/vanvi-custom-builder.css">
+  <link rel="stylesheet" href="../../css/vanvi-builder-smart.css">
   <script src="../../js/vanvi-api.js"></script>
   <script src="../../js/vanvi-builder-core.js"></script>
+  <script src="../../js/vanvi-builder-smart.js" defer></script>
+  <script src="../../js/vanvi-template-lock.js" defer></script>
 
   <style>
     :root {
@@ -1043,21 +1046,23 @@
 
       .builder-preview-pane {
         position: static;
-        height: 640px;
+        height: auto;
       }
 
       /* Tab mode toggling on mobile */
-      body.show-preview-mode .builder-form-pane {
-        display: none;
+      body.show-preview-mode .builder-form-pane,
+      body.vanvi-builder-preview-active .builder-form-pane {
+        display: none !important;
       }
-      body.show-preview-mode .builder-preview-pane {
-        display: flex;
+      body.show-preview-mode .builder-preview-pane,
+      body.vanvi-builder-preview-active .builder-preview-pane {
+        display: flex !important;
       }
-      body.show-form-mode .builder-preview-pane {
-        display: none;
+      body.show-form-mode:not(.vanvi-builder-preview-active) .builder-preview-pane {
+        display: none !important;
       }
-      body.show-form-mode .builder-form-pane {
-        display: flex;
+      body.show-form-mode:not(.vanvi-builder-preview-active) .builder-form-pane {
+        display: flex !important;
       }
     }
 

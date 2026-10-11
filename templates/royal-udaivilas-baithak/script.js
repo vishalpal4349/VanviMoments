@@ -1,227 +1,446 @@
 /**
- * THE ROYAL UDAIVILAS BAITHAK — INTERACTIVE SCRIPT
- * Features: Tap-to-Bloom Entrance, Audio System, Petal Physics, Dynamic Config, Google Calendar, 1-Click WhatsApp RSVP
+ * THE ROYAL UDAIVILAS BAITHAK — INTERACTIVE ATELIER ENGINE (VNV-LUX-05)
+ * Features: 3D Tilt, Elephant Cannons, Canvas Confetti & Petals,
+ * Velvet Curtain Pull, Shagun Wax Seal, Real-time Guestbook, Audio Dock & Mood Switcher.
  */
 
-// 1. Dynamic Config & URL Query Parameter Support
-const urlParams = new URLSearchParams(window.location.search);
-const weddingConfig = {
-  bride: urlParams.get('bride') || 'Tanya',
-  groom: urlParams.get('groom') || 'Rohan',
-  date: urlParams.get('date') || '12 December 2026',
-  targetTimestamp: new Date(urlParams.get('target') || '2026-12-12T18:00:00').getTime(),
-  venue: urlParams.get('venue') || 'The Oberoi Udaivilas, Lake Pichola, Udaipur',
-  whatsapp: urlParams.get('whatsapp') || '917631442934'
-};
+(function () {
+  'use strict';
 
-// Populate Dynamic Names if customized
-document.addEventListener('DOMContentLoaded', () => {
-  const brideEls = [document.getElementById('heroBride'), document.querySelector('.pl-n1')];
-  const groomEls = [document.getElementById('heroGroom'), document.querySelector('.pl-n2')];
-  
-  brideEls.forEach(el => { if (el) el.textContent = weddingConfig.bride; });
-  groomEls.forEach(el => { if (el) el.textContent = weddingConfig.groom; });
+  // 1. DYNAMIC CONFIGURATION & URL PARAMETERS
+  const params = new URLSearchParams(window.location.search);
+  const config = {
+    bride: params.get('bride') || 'Tanya',
+    groom: params.get('groom') || 'Rohan',
+    date: params.get('date') || '2026-12-12',
+    venue: params.get('venue') || 'The Oberoi Udaivilas, Lake Pichola, Udaipur',
+    whatsapp: params.get('whatsapp') || '919999999999',
+    guest: params.get('guest') || '',
+    hashtag: params.get('hashtag') || '#TanyaWedsRohan',
+    mood: params.get('mood') || 'pearl',
+    upi: params.get('upi') || 'vanvi.udaivilas@upi'
+  };
 
-  const venueEl = document.getElementById('heroVenue');
-  if (venueEl) venueEl.textContent = weddingConfig.venue;
+  // Populate dynamic text fields
+  function injectData() {
+    // Names
+    const heroBride = document.getElementById('heroBride');
+    const heroGroom = document.getElementById('heroGroom');
+    const plBride = document.getElementById('plBride');
+    const plGroom = document.getElementById('plGroom');
+    if (heroBride) heroBride.textContent = config.bride;
+    if (heroGroom) heroGroom.textContent = config.groom;
+    if (plBride) plBride.textContent = config.bride;
+    if (plGroom) plGroom.textContent = config.groom;
 
-  // Preloader hide
-  setTimeout(() => {
-    const pl = document.getElementById('preloader');
-    if (pl) pl.classList.add('away');
-  }, 900);
+    // Document Title
+    document.title = `${config.bride} & ${config.groom} — The Royal Udaivilas Baithak | Vanvi Moments`;
 
-  // Initialize Countdown
-  initCountdown();
+    // Date & Venue
+    const heroDate = document.getElementById('heroDateText');
+    const heroVenue = document.getElementById('heroVenueText');
+    if (heroDate) heroDate.textContent = formatDate(config.date);
+    if (heroVenue) heroVenue.textContent = config.venue;
 
-  // Initialize Petal Canvas
-  initPetalCanvas();
-});
+    // Guest personalized field
+    const rsvpGuest = document.getElementById('rsvpGuestName');
+    if (rsvpGuest && config.guest) {
+      rsvpGuest.value = decodeURIComponent(config.guest);
+    }
 
-// 2. Tap to Begin & Screen Bloom
-let isExperienceStarted = false;
-function beginExperience() {
-  if (isExperienceStarted) return;
-  isExperienceStarted = true;
+    // Hashtag
+    const hashtagLabel = document.getElementById('hashtagLabel');
+    if (hashtagLabel) hashtagLabel.textContent = config.hashtag;
 
-  const intro = document.getElementById('intro');
-  const bloom = document.getElementById('screenBloom');
-  const body = document.body;
+    // UPI
+    const shagunUpi = document.getElementById('shagunUpiText');
+    if (shagunUpi) shagunUpi.textContent = config.upi;
 
-  // Trigger golden candle bloom flash
-  if (bloom) {
-    bloom.classList.add('active');
-    setTimeout(() => {
-      bloom.classList.remove('active');
-    }, 600);
+    // Set initial mood
+    setHeritageMood(config.mood, false);
   }
 
-  // Open the royal baithak
-  if (intro) {
-    intro.classList.add('opened');
-  }
-  body.classList.remove('intro-active');
-
-  // Attempt audio autoplay on user interaction
-  playAudio();
-}
-
-// 3. Audio Controller
-let isAudioPlaying = false;
-const bgMusic = document.getElementById('bgMusic');
-const musicIcon = document.getElementById('musicIcon');
-const musicLabel = document.getElementById('musicLabel');
-
-function playAudio() {
-  if (!bgMusic) return;
-  bgMusic.volume = 0.65;
-  bgMusic.play().then(() => {
-    isAudioPlaying = true;
-    updateAudioUI();
-  }).catch(() => {
-    isAudioPlaying = false;
-    updateAudioUI();
-  });
-}
-
-function toggleAudio() {
-  if (!bgMusic) return;
-  if (isAudioPlaying) {
-    bgMusic.pause();
-    isAudioPlaying = false;
-  } else {
-    bgMusic.play().then(() => {
-      isAudioPlaying = true;
-    }).catch(() => {});
-  }
-  updateAudioUI();
-}
-
-function updateAudioUI() {
-  if (musicIcon && musicLabel) {
-    musicIcon.textContent = isAudioPlaying ? '🎵' : '🔇';
-    musicLabel.textContent = isAudioPlaying ? 'Playing' : 'Muted';
-  }
-}
-
-// 4. Falling Rose Petals Canvas Physics
-function initPetalCanvas() {
-  const canvas = document.getElementById('petalCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  function resize() {
-    canvas.width = canvas.parentElement.clientWidth || 460;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  const petalCount = 28;
-  const petals = [];
-
-  for (let i = 0; i < petalCount; i++) {
-    petals.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: 6 + Math.random() * 8,
-      d: Math.random() * petalCount,
-      tilt: Math.random() * 10 - 10,
-      tiltAngleIncremental: (Math.random() * 0.07) + 0.02,
-      tiltAngle: 0,
-      opacity: 0.35 + Math.random() * 0.55
-    });
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (let i = 0; i < petalCount; i++) {
-      const p = petals[i];
-      ctx.beginPath();
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.tiltAngle);
-      
-      // Draw organic rose petal shape
-      ctx.fillStyle = `rgba(180, 24, 52, ${p.opacity})`;
-      ctx.ellipse(0, 0, p.r, p.r * 1.5, Math.PI / 4, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.restore();
-
-      // Update positions
-      p.tiltAngle += p.tiltAngleIncremental;
-      p.y += (Math.cos(p.d) + 1.2 + p.r / 8);
-      p.x += Math.sin(p.d) * 0.9;
-
-      // Wrap around screen
-      if (p.y > canvas.height + 20) {
-        p.x = Math.random() * canvas.width;
-        p.y = -20;
+  function formatDate(isoStr) {
+    try {
+      const d = new Date(isoStr);
+      if (!isNaN(d.getTime())) {
+        return d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
       }
-      if (p.x > canvas.width + 20) p.x = -20;
-      if (p.x < -20) p.x = canvas.width + 20;
-    }
-
-    requestAnimationFrame(draw);
+    } catch (e) {}
+    return 'Saturday, 12th December 2026';
   }
 
-  draw();
-}
+  // 2. DISMISS PRELOADER
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const pl = document.getElementById('preloader');
+      if (pl) pl.classList.add('away');
+    }, 1100);
+  });
 
-// 5. Countdown Engine
-function initCountdown() {
-  function update() {
-    const now = new Date().getTime();
-    const diff = weddingConfig.targetTimestamp - now;
-
-    if (diff <= 0) {
-      document.getElementById('cdDays').textContent = '00';
-      document.getElementById('cdHours').textContent = '00';
-      document.getElementById('cdMins').textContent = '00';
-      document.getElementById('cdSecs').textContent = '00';
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-    const pad = n => (n < 10 ? '0' + n : n);
-
+  // 3. ASTRONOMICAL LIVE COUNTDOWN
+  function startCountdown() {
+    const target = new Date(`${config.date}T18:00:00`).getTime();
     const dEl = document.getElementById('cdDays');
     const hEl = document.getElementById('cdHours');
     const mEl = document.getElementById('cdMins');
     const sEl = document.getElementById('cdSecs');
 
-    if (dEl) dEl.textContent = pad(days);
-    if (hEl) hEl.textContent = pad(hours);
-    if (mEl) mEl.textContent = pad(mins);
-    if (sEl) sEl.textContent = pad(secs);
+    function update() {
+      const now = Date.now();
+      const diff = target - now;
+      if (diff <= 0) {
+        if (dEl) dEl.textContent = '00';
+        if (hEl) hEl.textContent = '00';
+        if (mEl) mEl.textContent = '00';
+        if (sEl) sEl.textContent = '00';
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / (1000 * 60)) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
+
+      if (dEl) dEl.textContent = String(days).padStart(2, '0');
+      if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+      if (mEl) mEl.textContent = String(mins).padStart(2, '0');
+      if (sEl) sEl.textContent = String(secs).padStart(2, '0');
+    }
+    update();
+    setInterval(update, 1000);
   }
 
-  update();
-  setInterval(update, 1000);
-}
+  // 4. 3D PERSPECTIVE MOUSE TILT ON HERO BOX
+  const heroStage = document.getElementById('heroStage');
+  const heroBox = document.getElementById('heroContentBox');
+  if (heroStage && heroBox) {
+    heroStage.addEventListener('mousemove', (e) => {
+      const rect = heroStage.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const rotX = (y / rect.height) * -12;
+      const rotY = (x / rect.width) * 12;
+      heroBox.style.transform = `perspective(1400px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+    heroStage.addEventListener('mouseleave', () => {
+      heroBox.style.transform = 'perspective(1400px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  }
 
-// 6. Add to Google Calendar
-function addToGoogleCalendar(title, startUtc, endUtc, location) {
-  const fullTitle = encodeURIComponent(`${weddingConfig.bride} & ${weddingConfig.groom}'s Wedding — ${title}`);
-  const details = encodeURIComponent(`We would be honored by your gracious presence at our wedding celebrations.`);
-  const loc = encodeURIComponent(location || weddingConfig.venue);
-  
-  const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${fullTitle}&dates=${startUtc}/${endUtc}&details=${details}&location=${loc}`;
-  window.open(gcalUrl, '_blank');
-}
+  // 5. CANVAS CONFETTI & FLOWER SHOWER PARTICLES
+  const canvas = document.getElementById('celebrationCanvas');
+  const ctx = canvas ? canvas.getContext('2d') : null;
+  let particles = [];
+  let animId = null;
 
-// 7. 1-Click WhatsApp RSVP Engine
-function submitWhatsAppRSVP() {
-  const guestName = (document.getElementById('guestName')?.value || '').trim() || 'A Guest';
-  const count = document.getElementById('guestCount')?.value || '1';
+  function resizeCanvas() {
+    if (!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
 
-  const message = `Namaste ${weddingConfig.bride} & ${weddingConfig.groom}! 🪷\n\nI/We are delighted to confirm our RSVP for your Royal Wedding celebration at ${weddingConfig.venue}.\n\n• Guest Name: ${guestName}\n• Total Attendees: ${count} Person(s)\n\nLooking forward to celebrating with you! ✨`;
+  class Particle {
+    constructor(x, y, type) {
+      this.x = x;
+      this.y = y;
+      this.type = type; // 'petal' or 'gold'
+      this.size = type === 'petal' ? Math.random() * 12 + 10 : Math.random() * 8 + 6;
+      this.speedX = (Math.random() - 0.5) * 16;
+      this.speedY = -(Math.random() * 14 + 10);
+      this.gravity = 0.35;
+      this.rotation = Math.random() * 360;
+      this.rotSpeed = (Math.random() - 0.5) * 8;
+      this.opacity = 1;
+      this.color = type === 'petal' 
+        ? ['#e11d48', '#be123c', '#fda4af', '#f43f5e'][Math.floor(Math.random() * 4)]
+        : ['#c4985a', '#dfba82', '#f6e3ba', '#ffd700'][Math.floor(Math.random() * 4)];
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.speedY += this.gravity;
+      this.rotation += this.rotSpeed;
+      this.opacity -= 0.008;
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate((this.rotation * Math.PI) / 180);
+      ctx.globalAlpha = Math.max(0, this.opacity);
+      ctx.fillStyle = this.color;
+      if (this.type === 'petal') {
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size, this.size * 0.55, 0, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.7);
+      }
+      ctx.restore();
+    }
+  }
 
-  const waUrl = `https://wa.me/${weddingConfig.whatsapp}?text=${encodeURIComponent(message)}`;
-  window.open(waUrl, '_blank');
-}
+  function launchBlast(originX, originY, type) {
+    if (!ctx) return;
+    for (let i = 0; i < 70; i++) {
+      particles.push(new Particle(originX, originY, type));
+    }
+    if (!animId) loopParticles();
+  }
+
+  function loopParticles() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.update();
+      p.draw();
+      if (p.opacity <= 0 || p.y > canvas.height + 50) {
+        particles.splice(i, 1);
+      }
+    }
+    if (particles.length > 0) {
+      animId = requestAnimationFrame(loopParticles);
+    } else {
+      animId = null;
+    }
+  }
+
+  // Elephant Cannon Trigger
+  window.triggerElephantBlast = function (side) {
+    const x = side === 'left' ? window.innerWidth * 0.2 : window.innerWidth * 0.8;
+    const y = window.innerHeight * 0.6;
+    const type = side === 'left' ? 'petal' : 'gold';
+    launchBlast(x, y, type);
+    showToast(side === 'left' ? '🌸 Pushpa Vrishti Shower Activated!' : '✨ Imperial Gold Confetti Fired!');
+  };
+
+  // 6. THEATRICAL CURTAIN PULL (s-story)
+  window.partTheCurtains = function () {
+    const box = document.getElementById('curtainBox');
+    if (box) {
+      box.classList.add('curtain-open');
+      launchBlast(window.innerWidth / 2, window.innerHeight * 0.5, 'petal');
+      showToast('✦ Royal Sanctuary Revealed ✦');
+    }
+  };
+
+  // 7. FULLSCREEN LIGHTBOX
+  window.openLightbox = function (imgUrl, caption) {
+    const modal = document.getElementById('lightboxModal');
+    const img = document.getElementById('lightboxImg');
+    const cap = document.getElementById('lightboxCaption');
+    if (modal && img) {
+      img.src = imgUrl;
+      if (cap) cap.textContent = caption || '';
+      modal.classList.add('active');
+    }
+  };
+  window.closeLightbox = function () {
+    const modal = document.getElementById('lightboxModal');
+    if (modal) modal.classList.remove('active');
+  };
+
+  // 8. SHAGUN WAX SEAL BREAK
+  window.crackWaxSeal = function () {
+    const seal = document.getElementById('waxSealBtn');
+    const tray = document.getElementById('shagunTray');
+    if (seal) seal.style.transform = 'scale(1.2) rotate(15deg)';
+    setTimeout(() => {
+      if (tray) tray.classList.add('active');
+      launchBlast(window.innerWidth / 2, window.innerHeight * 0.6, 'gold');
+      showToast('💌 Royal Shagun Envelope Opened with Love!');
+    }, 250);
+  };
+
+  window.copyUpiId = function () {
+    const upi = config.upi;
+    navigator.clipboard.writeText(upi).then(() => {
+      showToast(`✓ Copied UPI ID: ${upi}`);
+    }).catch(() => {
+      showToast(`UPI ID: ${upi}`);
+    });
+  };
+
+  // 9. HASHTAG COPY
+  window.copyHashtag = function (ht) {
+    const tag = ht || config.hashtag;
+    navigator.clipboard.writeText(tag).then(() => {
+      showToast(`✓ Copied: ${tag}`);
+    }).catch(() => {
+      showToast(tag);
+    });
+  };
+
+  // 10. REAL-TIME GUESTBOOK (LocalStorage)
+  const LOCAL_STORAGE_KEY = `vanvi_udaivilas_blessings_${config.bride}_${config.groom}`;
+
+  function loadSavedBlessings() {
+    const list = document.getElementById('blessingsList');
+    if (!list) return;
+    try {
+      const saved = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
+      saved.forEach((b) => {
+        const item = document.createElement('div');
+        item.className = 'blessing-entry';
+        item.innerHTML = `
+          <div class="blessing-author">${escapeHtml(b.author)}</div>
+          <div class="blessing-msg">${escapeHtml(b.message)}</div>
+        `;
+        list.prepend(item);
+      });
+    } catch (e) {}
+  }
+
+  window.submitBlessing = function (e) {
+    e.preventDefault();
+    const authorInput = document.getElementById('blessingAuthor');
+    const msgInput = document.getElementById('blessingMessage');
+    const list = document.getElementById('blessingsList');
+    if (!authorInput || !msgInput || !list) return;
+
+    const author = authorInput.value.trim();
+    const message = msgInput.value.trim();
+    if (!author || !message) return;
+
+    const entry = document.createElement('div');
+    entry.className = 'blessing-entry';
+    entry.innerHTML = `
+      <div class="blessing-author">${escapeHtml(author)}</div>
+      <div class="blessing-msg">${escapeHtml(message)}</div>
+    `;
+    list.prepend(entry);
+
+    // Save to local storage
+    try {
+      const saved = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
+      saved.unshift({ author, message, date: new Date().toISOString() });
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(saved.slice(0, 30)));
+    } catch (err) {}
+
+    authorInput.value = '';
+    msgInput.value = '';
+    launchBlast(window.innerWidth / 2, window.innerHeight * 0.7, 'petal');
+    showToast('🕊️ Your blessing has been etched in the royal guestbook!');
+  };
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+  }
+
+  // 11. 1-CLICK WHATSAPP RSVP
+  window.submitWhatsAppRSVP = function () {
+    const nameInput = document.getElementById('rsvpGuestName');
+    const countInput = document.getElementById('rsvpCount');
+    const name = nameInput ? nameInput.value.trim() || 'Honoured Guest' : 'Honoured Guest';
+    const count = countInput ? countInput.value : '2';
+
+    launchBlast(window.innerWidth / 2, window.innerHeight * 0.8, 'petal');
+    launchBlast(window.innerWidth / 2, window.innerHeight * 0.8, 'gold');
+
+    const msg = `Namaste ${config.bride} & ${config.groom}! 🌸\n\nI/We are thrilled to RSVP for your sacred wedding at The Oberoi Udaivilas!\n\n👑 Guest: ${name}\n👥 Total Attendees: ${count}\n✨ Looking forward to celebrating your Shubh Vivah!`;
+    const cleanPhone = config.whatsapp.replace(/\D/g, '') || '919999999999';
+    const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
+
+    showToast('💌 Preparing WhatsApp Confirmation...');
+    setTimeout(() => {
+      window.open(url, '_blank');
+    }, 600);
+  };
+
+  // Google Calendar Link Generator
+  window.addToGoogleCalendar = function (title, startIso, endIso, loc) {
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title + ' — ' + config.bride + ' & ' + config.groom)}&dates=${startIso}/${endIso}&location=${encodeURIComponent(loc)}&details=${encodeURIComponent('The Royal Udaivilas Wedding Celebration')}`;
+    window.open(url, '_blank');
+  };
+
+  // 12. FLOATING ROYAL AUDIO DOCK
+  const audio = document.getElementById('bgMusic');
+  const audioBtn = document.getElementById('audioToggleBtn');
+  const audioIcon = document.getElementById('audioIcon');
+  const audioStatus = document.getElementById('audioStatusText');
+  let isPlaying = false;
+
+  window.toggleAudio = function () {
+    if (!audio) return;
+    if (isPlaying) {
+      audio.pause();
+      isPlaying = false;
+      if (audioBtn) audioBtn.classList.remove('audio-playing');
+      if (audioIcon) audioIcon.textContent = '🔔';
+      if (audioStatus) audioStatus.textContent = 'Music Paused';
+    } else {
+      audio.play().then(() => {
+        isPlaying = true;
+        if (audioBtn) audioBtn.classList.add('audio-playing');
+        if (audioIcon) audioIcon.textContent = '🪕';
+        if (audioStatus) audioStatus.textContent = 'Shehnai Playing';
+      }).catch(() => {
+        showToast('Tap anywhere to enable royal shehnai audio 🔔');
+      });
+    }
+  };
+
+  // Background Tab Pause
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && isPlaying && audio) {
+      audio.pause();
+    } else if (!document.hidden && isPlaying && audio) {
+      audio.play().catch(() => {});
+    }
+  });
+
+  // Autoplay on first user interaction
+  document.addEventListener('click', function autoPlayOnce() {
+    if (!isPlaying && audio) {
+      audio.play().then(() => {
+        isPlaying = true;
+        if (audioBtn) audioBtn.classList.add('audio-playing');
+        if (audioIcon) audioIcon.textContent = '🪕';
+        if (audioStatus) audioStatus.textContent = 'Shehnai Playing';
+      }).catch(() => {});
+    }
+    document.removeEventListener('click', autoPlayOnce);
+  }, { once: true });
+
+  // 13. HERITAGE MOOD SWITCHER
+  window.toggleMoodPicker = function () {
+    const menu = document.getElementById('moodMenu');
+    if (menu) menu.classList.toggle('active');
+  };
+
+  window.setHeritageMood = function (moodName, showNotif = true) {
+    document.body.setAttribute('data-mood', moodName);
+    const label = document.getElementById('currentMoodLabel');
+    const menu = document.getElementById('moodMenu');
+    if (menu) menu.classList.remove('active');
+
+    const names = {
+      mewar: 'Royal Mewar',
+      pearl: 'Udaipur Pearl',
+      sunset: 'Jaipur Sunset'
+    };
+    if (label) label.textContent = names[moodName] || 'Royal Mewar';
+    if (showNotif) {
+      showToast(`Palette applied: ${names[moodName] || moodName} ✨`);
+    }
+  };
+
+  // 14. TOAST NOTIFICATION UTILITY
+  function showToast(msg) {
+    const t = document.getElementById('toastNotice');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => {
+      t.classList.remove('show');
+    }, 2800);
+  }
+
+  // Initialize
+  injectData();
+  startCountdown();
+  loadSavedBlessings();
+})();

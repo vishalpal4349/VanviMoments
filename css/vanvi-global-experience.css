@@ -627,3 +627,347 @@ body:not([data-vanvi-no-dock="true"]) {
   transform: translateY(-1px);
   box-shadow: 0 5px 14px rgba(255, 42, 122, 0.15);
 }
+
+/* ─── 11. UNIVERSAL 3D TACTILE LUXURY PHYSICAL FEEL (v2.0) ─── */
+/* Realistic physical spring depth, layered multi-tier shadows, and specular bevels */
+
+.btn-3d-primary,
+button.primary-3d,
+a.primary-3d {
+  background: linear-gradient(135deg, #ff2a7a 0%, #ff529a 50%, #9333ea 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 99px !important;
+  padding: 12px 24px !important;
+  font-weight: 850 !important;
+  box-shadow: 
+    0 10px 26px rgba(255, 42, 122, 0.4),
+    0 3.5px 0 #be123c,
+    inset 0 2px 2px rgba(255, 255, 255, 0.85),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px) !important;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.btn-3d-primary:hover,
+button.primary-3d:hover,
+a.primary-3d:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: 
+    0 16px 36px rgba(255, 42, 122, 0.55),
+    0 4.5px 0 #be123c,
+    inset 0 2px 2px rgba(255, 255, 255, 0.95) !important;
+  filter: brightness(1.04) !important;
+}
+
+.btn-3d-primary:active,
+button.primary-3d:active,
+a.primary-3d:active {
+  transform: translateY(2px) scale(0.97) !important;
+  box-shadow: 
+    0 3px 10px rgba(255, 42, 122, 0.3),
+    0 0.5px 0 #be123c,
+    inset 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Secondary 3D Glass Button */
+.btn-3d-glass,
+button.glass-3d,
+a.glass-3d {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #2c1224 !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.35) !important;
+  border-radius: 99px !important;
+  padding: 11px 22px !important;
+  font-weight: 800 !important;
+  box-shadow: 
+    0 6px 18px rgba(44, 18, 36, 0.05),
+    0 2.5px 0 rgba(255, 120, 175, 0.35),
+    inset 0 1.5px 1.5px #ffffff !important;
+  transform: translateY(-1.5px) !important;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+
+.btn-3d-glass:hover,
+button.glass-3d:hover,
+a.glass-3d:hover {
+  background: #fff0f6 !important;
+  border-color: #ff2a7a !important;
+  color: #ff2a7a !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 
+    0 10px 24px rgba(255, 42, 122, 0.18),
+    0 3.5px 0 rgba(255, 42, 122, 0.4) !important;
+}
+
+.btn-3d-glass:active,
+button.glass-3d:active,
+a.glass-3d:active {
+  transform: translateY(1.5px) scale(0.97) !important;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.04),
+    0 0.5px 0 rgba(255, 120, 175, 0.35) !important;
+}
+
+/* 3D Elevated Card Utility */
+.card-3d-lift {
+  box-shadow: 
+    0 16px 40px -8px rgba(44, 18, 36, 0.08),
+    0 4px 14px rgba(255, 42, 122, 0.05),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.95) !important;
+  border: 1.5px solid rgba(255, 120, 175, 0.28) !important;
+  border-radius: 24px !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease !important;
+}
+
+.card-3d-lift:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  box-shadow: 
+    0 24px 50px -8px rgba(255, 42, 122, 0.22),
+    0 10px 24px rgba(147, 51, 234, 0.12),
+    inset 0 1.5px 0 rgba(255, 255, 255, 1) !important;
+  border-color: rgba(255, 42, 122, 0.5) !important;
+}
+
+/* ─── 8. 60FPS HARDWARE ACCELERATION & ULTRA-LUXURY GOLD/NEON SHEEN ─── */
+.vanvi-gpu-accel,
+.btn,
+button,
+.card,
+.card-3d-lift,
+.vanvi-btn-back,
+.nav-btn {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Luxury Subtle Gold Sheen Animation */
+@keyframes vanviGoldSheen {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.vanvi-gold-sheen {
+  background: linear-gradient(90deg, #d4af37 0%, #fff2b2 25%, #d4af37 50%, #fef3c7 75%, #d4af37 100%);
+  background-size: 200% auto;
+  color: #0b0d0c !important;
+  animation: vanviGoldSheen 4s linear infinite;
+}
+
+.vanvi-neon-glow {
+  box-shadow: 0 0 20px rgba(255, 42, 122, 0.35), 0 0 40px rgba(214, 184, 120, 0.2);
+}
+
+/* Master Uniform Logo Styling */
+.header-brand-img,
+.brand-logo-img,
+.brand-img,
+.site-logo-img,
+header .brand img,
+header .brand-link img,
+header .header-brand img {
+  height: 32px !important;
+  max-height: 32px !important;
+  width: auto !important;
+  max-width: 145px !important;
+  object-fit: contain !important;
+  display: block !important;
+  filter: drop-shadow(0 2px 6px rgba(255, 42, 122, 0.22)) !important;
+  transition: transform 0.2s ease !important;
+}
+header .brand:hover img,
+header .brand-link:hover img {
+  transform: scale(1.02);
+}
+
+@media (max-width: 600px) {
+  .header-brand-img,
+  .brand-logo-img,
+  .brand-img,
+  .site-logo-img,
+  header .brand img,
+  header .brand-link img,
+  header .header-brand img {
+    height: 28px !important;
+    max-height: 28px !important;
+    max-width: 130px !important;
+  }
+}
+
+/* Master Standardized Breadcrumb Ribbon */
+.breadcrumb-bar,
+.vanvi-breadcrumb-ribbon {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 10px auto 14px !important;
+  padding: 0 clamp(14px, 3vw, 24px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  box-sizing: border-box !important;
+  border: none !important;
+  border-bottom: none !important;
+  background: transparent !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.breadcrumb-bar .vanvi-btn-back,
+.breadcrumb-bar .btn-nav-back,
+.vanvi-breadcrumb-ribbon .vanvi-btn-back {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  height: 36px !important;
+  padding: 0 14px !important;
+  border-radius: 99px !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(255, 120, 175, 0.3) !important;
+  color: #2c1224 !important;
+  font-family: var(--font-modern-sans) !important;
+  font-size: 12.5px !important;
+  font-weight: 750 !important;
+  letter-spacing: 0.2px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 3px 10px rgba(44, 18, 36, 0.05), inset 0 1px 1px #ffffff !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+  user-select: none !important;
+}
+
+.breadcrumb-bar .vanvi-btn-back .back-arrow,
+.breadcrumb-bar .btn-nav-back .back-arrow,
+.vanvi-breadcrumb-ribbon .back-arrow {
+  font-size: 16px !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  color: var(--vanvi-rose) !important;
+  transition: transform 0.2s ease !important;
+}
+
+.breadcrumb-bar .vanvi-btn-back:hover,
+.breadcrumb-bar .btn-nav-back:hover,
+.vanvi-breadcrumb-ribbon .vanvi-btn-back:hover {
+  background: #fff5f8 !important;
+  border-color: var(--vanvi-rose) !important;
+  color: var(--vanvi-rose) !important;
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 6px 16px rgba(255, 42, 122, 0.18) !important;
+}
+
+.breadcrumb-bar .vanvi-btn-back:hover .back-arrow,
+.breadcrumb-bar .btn-nav-back:hover .back-arrow {
+  transform: translateX(-3px) !important;
+}
+
+.breadcrumb-trail {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--vanvi-muted) !important;
+  white-space: nowrap !important;
+  overflow-x: auto !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  padding: 2px 0 !important;
+}
+.breadcrumb-trail::-webkit-scrollbar { display: none !important; }
+
+.breadcrumb-trail a {
+  color: var(--vanvi-muted) !important;
+  text-decoration: none !important;
+  transition: color 0.2s !important;
+}
+.breadcrumb-trail a:hover {
+  color: var(--vanvi-rose) !important;
+  text-decoration: underline !important;
+}
+.breadcrumb-trail .crumb-sep {
+  color: rgba(128, 108, 128, 0.45) !important;
+  margin: 0 2px !important;
+}
+.breadcrumb-trail span:last-child {
+  color: var(--vanvi-ink) !important;
+  font-weight: 800 !important;
+}
+
+/* Emerald Theme Breadcrumb Overrides */
+html[data-vanvi-theme="emerald"] .breadcrumb-bar .vanvi-btn-back,
+html[data-vanvi-theme="dark"] .breadcrumb-bar .vanvi-btn-back,
+html[data-vanvi-theme="night"] .breadcrumb-bar .vanvi-btn-back {
+  background: rgba(19, 10, 24, 0.88) !important;
+  border-color: rgba(214, 184, 120, 0.35) !important;
+  color: #f1f7f4 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+html[data-vanvi-theme="emerald"] .breadcrumb-bar .vanvi-btn-back .back-arrow {
+  color: var(--vanvi-gold) !important;
+}
+html[data-vanvi-theme="emerald"] .breadcrumb-trail {
+  color: #a7f3d0 !important;
+}
+html[data-vanvi-theme="emerald"] .breadcrumb-trail a {
+  color: #6ee7b7 !important;
+}
+html[data-vanvi-theme="emerald"] .breadcrumb-trail span:last-child {
+  color: #f1f7f4 !important;
+}
+
+/* Spatial Glass Theme Breadcrumb Overrides */
+html[data-vanvi-theme="glass"] .breadcrumb-bar .vanvi-btn-back {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(59, 130, 246, 0.35) !important;
+  color: #0f172a !important;
+}
+html[data-vanvi-theme="glass"] .breadcrumb-bar .vanvi-btn-back .back-arrow {
+  color: #3b82f6 !important;
+}
+
+/* Universal Header Tool Button (For Game Rules, Sound, etc.) */
+.btn-game-tool {
+  border: 1.5px solid var(--border-pink, rgba(255, 120, 175, 0.28)) !important;
+  background: #ffffff !important;
+  color: var(--text-dark, #2c1224) !important;
+  box-shadow: 0 4px 12px rgba(255, 60, 130, 0.06), inset 0 1px 2px #fff !important;
+  height: 38px !important;
+  padding: 0 14px !important;
+  border-radius: 99px !important;
+  font-size: 12.5px !important;
+  font-weight: 800 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+.btn-game-tool:hover {
+  transform: translateY(-2px) !important;
+  border-color: var(--vanvi-rose, #ff2a7a) !important;
+  color: var(--vanvi-rose, #ff2a7a) !important;
+  box-shadow: 0 6px 16px rgba(255, 42, 122, 0.16) !important;
+}
+.btn-game-tool:active {
+  transform: translateY(1px) scale(0.97) !important;
+}

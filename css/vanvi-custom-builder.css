@@ -1,4 +1,5 @@
 @import url('vanvi-global-experience.css');
+@import url('vanvi-builder-smart.css');
 
 /* ==========================================================================
    VANVI MOMENTS — PHASE 5 BESPOKE TEMPLATE BUILDER DESIGN SYSTEM
@@ -397,10 +398,10 @@ body {
   gap: 12px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 960px) {
   .builder-preview-pane {
     position: static;
-    height: 600px;
+    height: auto;
   }
 }
 

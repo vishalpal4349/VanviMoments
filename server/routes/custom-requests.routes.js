@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const database = require('../db/database');
 const { rateLimiter } = require('../middleware/security');
+const { sendOwnerBespokeAlert } = require('../services/email.service');
 
 router.post('/submit', rateLimiter(15 * 60 * 1000, 6), (req, res) => {
   const { _vanvi_hp, name, email, contact, occasion, recipient, budget, style, idea, references, details } = req.body || {};
@@ -34,6 +35,12 @@ router.post('/submit', rateLimiter(15 * 60 * 1000, 6), (req, res) => {
   store.customRequests.push(request);
   database.saveStore(store);
   database.recordAuditLog('CUSTOM_REQUEST_SUBMITTED', request.email || request.contact, { requestId, status: request.status });
+
+  // Dispatch real-time alert to vanvimoments@gmail.com & client acknowledgment
+  sendOwnerBespokeAlert({ ...request, requestId }).catch(err => {
+    console.warn('[Bespoke Email Notice]', err.message);
+  });
+
   return res.status(201).json({ success: true, requestId, status: request.status });
 });
 

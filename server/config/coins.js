@@ -84,8 +84,7 @@ const COIN_CONFIG = {
     'wedding-royal': 999,
     'the-grand-royal-palace-wedding': 999,
     'royal-udaipur': 999,
-    'mirror-reveal': 999,
-    'temple-grandeur': 999,
+    'royal-vivah-lagna': 199,
     'milestone-odyssey': 1000
   }
 };

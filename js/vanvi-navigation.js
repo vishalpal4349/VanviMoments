@@ -514,6 +514,10 @@
     backSelectors.forEach(sel => {
       document.querySelectorAll(sel).forEach(btn => {
         if (btn.dataset.vanviBound) return;
+        const onclickAttr = btn.getAttribute('onclick') || '';
+        if (onclickAttr && !onclickAttr.includes('GoBack') && !onclickAttr.includes('history.back') && !onclickAttr.includes('location.href') && !onclickAttr.includes('index.html')) {
+          return;
+        }
         btn.dataset.vanviBound = 'true';
         btn.addEventListener('click', function(e) {
           e.preventDefault();
@@ -647,7 +651,7 @@
 
         <div class="vanvi-ai-options-grid">
           <!-- Option 1: Vanvi AI Romantic Assistant -->
-          <a href="vanvi-assistant.html" class="vanvi-ai-option-item" id="vanviAiOptionAssistant">
+          <a href="${rootPrefix}vanvi-assistant.html" class="vanvi-ai-option-item" id="vanviAiOptionAssistant">
             <div class="vanvi-ai-item-left">
               <div class="vanvi-ai-option-icon vanvi-ai-icon-assistant">🐼</div>
               <div class="vanvi-ai-item-text">
@@ -662,7 +666,7 @@
           </a>
 
           <!-- Option 2: Vanvi AI Template Matcher -->
-          <a href="ai-matcher.html" class="vanvi-ai-option-item" id="vanviAiOptionMatcher">
+          <a href="${rootPrefix}ai-matcher.html" class="vanvi-ai-option-item" id="vanviAiOptionMatcher">
             <div class="vanvi-ai-item-left">
               <div class="vanvi-ai-option-icon vanvi-ai-icon-matcher">🪄</div>
               <div class="vanvi-ai-item-text">
@@ -721,16 +725,111 @@
   window.openVanviAiHub = openVanviAiHub;
   window.closeVanviAiHub = closeVanviAiHub;
 
-  // Intercept any clicks on AI floating buttons across all pages
+  // AI Navigation Handling:
+  // 1. FLOATING AI button: Opens Panda AI Assistant DIRECTLY (vanvi-assistant.html) without any modal popup.
+  // 2. TOP NAVBAR / HOME BAR / HEADER AI button: Opens the choose/select modal (openVanviAiHub).
   document.addEventListener('click', function(e) {
     const target = e.target;
     if (!target) return;
-    const aiTrigger = target.closest('#aiFloatBtn, .panda-ai-float, .ai-float, [data-open-ai-hub]');
-    if (aiTrigger) {
+
+    // 1. FLOATING AI ASSISTANT BUTTON -> DIRECT TO PANDA AI ASSISTANT!
+    const floatingAi = target.closest('#aiFloatBtn, .panda-ai-float, .ai-float, #vanviAssistantFloatPill, .vanvi-assistant-float-pill, .panda-float-pill');
+    if (floatingAi) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      window.location.href = rootPrefix + 'vanvi-assistant.html';
+      return;
+    }
+
+    // 2. TOP NAVBAR / HOME BAR / HEADER AI BUTTON -> OPEN CHOOSE MODAL!
+    const topNavAi = target.closest('[data-open-ai-hub], .nav-ai-btn, .desktop-nav a[href*="ai"], .drawer-link[href*="ai"], .btn-header-link[href*="ai"], #topNavAiBtn, .header-ai-btn');
+    if (topNavAi) {
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
       openVanviAiHub();
+      return;
+    }
+  }, true);
+
+  // Auto-heal current page if opened with mangled Windows path
+  try {
+    const rawPath = window.location.pathname;
+    const decPath = decodeURIComponent(rawPath);
+    if (/^\/?[a-zA-Z]:[\\\/]/i.test(decPath) || decPath.toLowerCase().includes('c:') || decPath.toLowerCase().includes('c%3a') || decPath.toLowerCase().includes('users') || decPath.toLowerCase().includes('vanvimoments')) {
+      let targetClean = '';
+      const vmM = decPath.match(/(?:vanvimoments)[\/\\](.*)/i);
+      if (vmM && vmM[1]) {
+        targetClean = '/' + vmM[1].replace(/\\/g, '/');
+      } else {
+        const tplM = decPath.match(/((?:templates|assets|css|js|uploads)[\/\\].*)/i);
+        if (tplM && tplM[1]) {
+          targetClean = '/' + tplM[1].replace(/\\/g, '/');
+        } else {
+          const hM = decPath.match(/([a-zA-Z0-9_\-]+\.html)/i);
+          if (hM && hM[1]) targetClean = '/' + hM[1];
+        }
+      }
+      targetClean = targetClean.replace(/\/+/g, '/');
+      if (targetClean && targetClean !== rawPath) {
+        window.location.replace(window.location.origin + targetClean + window.location.search + window.location.hash);
+      }
+    }
+  } catch(e) {}
+
+  // Global Link Click Interceptor: Fixes accidental full computer paths and route aliases
+  document.addEventListener('click', function(e) {
+    const a = e.target.closest('a');
+    if (a && a.href) {
+      try {
+        const hrefUrl = new URL(a.href, window.location.origin);
+        const dec = decodeURIComponent(hrefUrl.pathname);
+        const aliasMap = {
+          'account': 'profile.html',
+          'my-account': 'profile.html',
+          'settings': 'profile.html',
+          'orders': 'dashboard.html',
+          'order': 'dashboard.html',
+          'my-orders': 'dashboard.html',
+          'moments': 'dashboard.html',
+          'wallet': 'plans.html',
+          'explore': 'templates.html',
+          'shop': 'products.html',
+          'store': 'products.html'
+        };
+
+        if (/^\/?[a-zA-Z]:[\\\/]/i.test(dec) || dec.toLowerCase().includes('c:') || dec.toLowerCase().includes('c%3a') || dec.toLowerCase().includes('users') || dec.toLowerCase().includes('vanvimoments')) {
+          let cleanL = '';
+          const vmM = dec.match(/(?:vanvimoments)[\/\\](.*)/i);
+          if (vmM && vmM[1]) {
+            cleanL = '/' + vmM[1].replace(/\\/g, '/');
+          } else {
+            const tplM = dec.match(/((?:templates|assets|css|js|uploads)[\/\\].*)/i);
+            if (tplM && tplM[1]) {
+              cleanL = '/' + tplM[1].replace(/\\/g, '/');
+            } else {
+              const hM = dec.match(/([a-zA-Z0-9_\-]+\.html)/i);
+              if (hM && hM[1]) cleanL = '/' + hM[1];
+            }
+          }
+          cleanL = cleanL.replace(/\/+/g, '/');
+          const cleanSlug = (cleanL.split('/').filter(Boolean).pop() || '').replace(/\.html$/i, '').toLowerCase();
+          if (aliasMap[cleanSlug]) cleanL = '/' + aliasMap[cleanSlug];
+          if (cleanL) {
+            e.preventDefault();
+            window.location.href = cleanL + hrefUrl.search + hrefUrl.hash;
+            return;
+          }
+        } else {
+          const rawSlug = (dec.split('/').filter(Boolean).pop() || '').replace(/\.html$/i, '').toLowerCase();
+          if (aliasMap[rawSlug] && !dec.includes(aliasMap[rawSlug])) {
+            e.preventDefault();
+            window.location.href = rootPrefix + aliasMap[rawSlug] + hrefUrl.search + hrefUrl.hash;
+            return;
+          }
+        }
+      } catch(err) {}
     }
   }, true);
 

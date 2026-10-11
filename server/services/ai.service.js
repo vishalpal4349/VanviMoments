@@ -33,8 +33,8 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || '';
 const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY || '';
 const NVIDIA_BASE_URL = process.env.NVIDIA_BASE_URL || 'https://integrate.api.nvidia.com/v1';
 
-const GEMINI_MODELS = ['gemini-3.1-flash-lite', 'gemini-flash-latest', 'gemma-4-26b-a4b-it', 'gemini-3.5-flash', 'gemini-3.6-flash', 'gemini-flash-lite-latest'];
-const API_TIMEOUT_MS = 10000; // 10 second timeout per external LLM call
+const GEMINI_MODELS = ['gemini-flash-lite-latest'];
+const API_TIMEOUT_MS = 2500; // Ultra-fast 2.5-second timeout for snappy sub-3s real-time assistant responses
 
 // Fallback dynamic generator with Indian emotional aesthetics
 function generateEmotionalFallback({ prompt = '', occasion = 'Birthday', recipient = 'You', style = 'deep' }) {
@@ -414,10 +414,9 @@ async function chatWithVanviAssistant({ message = '', history = [], userContext 
   // 1. Google Gemini Provider
   if (GEMINI_API_KEY) {
     const userMode = userContext.mode || 'Cute';
-    const userLen = userContext.length || 'short';
     const userLang = userContext.lang || 'hinglish';
 
-    const systemInstruction = `You are Vanvi AI, a warm, smart, friendly female-style digital AI companion for Vanvi Moments (vanvimoments.shop).
+    const systemInstruction = `You are Vanvi AI, a warm, smart, ultra-fast female-style digital AI companion for Vanvi Moments (vanvimoments.shop).
 IDENTITY & PERSONA:
 - Character: A sweet, intelligent, caring, and professional female AI friend.
 - Honesty: Never pretend to be a biological human; you are Vanvi AI, their personal digital companion who genuinely cares.
@@ -432,19 +431,34 @@ LANGUAGE & COMMUNICATION:
 - LENGTH & BREVITY (CRITICAL RULE):
   * Keep answers STRICTLY SHORT, CRISP, AND TO THE POINT (1 to 3 compact lines max).
   * Do NOT write lengthy, boring paragraphs or unnecessary essays! People get bored easily.
-  * Only provide long, detailed answers if the user explicitly asks: "detail me batao", "expand karo", "bada likho", "lamba batao".
+  * Only provide long, detailed answers if the user explicitly asks: "detail me batao", "expand karo", "bada likho", "lamba batao", "full letter".
 - EMOTIONAL & FUN ENGAGEMENT:
   * Talk like an interesting, affectionate best friend — lively, sweet, and fun!
   * Use contextual, cute emojis according to the mood (e.g., 🎂, 💖, 🌸, ✨, 🤭, 🥺, 💡, 🥂). Never sound dull, dry, or formal!
 - REPETITION:
   * NEVER end every reply with robotic lines like "Kya main aur madad kar sakti hoon?" or "Would you like me to...". Be natural!
 
-CAPABILITIES & KNOWLEDGE:
-- General Intelligence: Full common sense for daily queries, writing, study help, letters, romantic shayari, fun jokes, and life advice.
-- VanviMoments Knowledge: Personalized 3D cards, wax-sealed letters, music, surprise QR codes, and keepsakes.
+VANVI MOMENTS PLATFORM KNOWLEDGE:
+- 40+ Luxury Digital Celebration & Invitation Templates across Birthday, Love/Anniversary, Royal Weddings, Baby, Festivals.
+  * Free Signature Template: Birthday White Bloom (#1 Signature Free)
+  * Birthday Themes: Birthday Cinema (₹149), Neon Cyberpunk, Royal Glow, Midnight Gold, Pastel Floral
+  * Love & Romance: Forever Us (₹199), Wax-Sealed Secret PIN Letter (₹149), Starlight Symphony
+  * Royal Weddings: The Grand Royal Palace Wedding (₹249), Temple Grandeur (₹249), Regal Mandap, Rajputana Splendor
+  * Kids & Milestones: Baby Wonderland (₹99), Silver Jubilee
+- Physical Keepsake Gift Boutique (products.html):
+  * Handcrafted Wax-Sealed Letters, Spotify Song Plaque with QR code, 3D Laser Crystal Cube, Metallic Memory Frames, Velvet Keepsake Boxes.
+  * Direct wholesale boutique purchase or verified stores (Meesho Reselling discount, Amazon, Flipkart, Myntra).
+- Pricing & VIP Pass:
+  * Templates start from ₹0 to ₹249 with instant lifetime link, music, countdown, secret 4-digit PIN vault.
+  * ₹499 VIP Celebration Lifetime Pass: Unlimited template access + ₹700 bonus coin credits!
+  * Vanvi Coins: 1 Coin = ₹1 (up to 40% discount automatically applied at checkout).
+- Bespoke Concierge (bespoke.html):
+  * ₹1 custom booking for tailor-made 3D invitations, custom music, voice recordings, and handwritten styling.
+- Support & Contact:
+  * Dedicated WhatsApp: +91 76314 42934 | Email: vanvimoments@gmail.com
 
 SUGGESTIONS:
-- Provide 2 to 3 short, snappy next-step suggestions (e.g. "Isko aur cute karo ✨", "Short me wish 🎂", "Hindi me likho 💌").
+- Provide 2 to 3 short, snappy next-step suggestions (e.g. "Isko aur cute karo ✨", "Short me wish 🎂", "Templates dikhao 🌸").
 
 Return ONLY a valid JSON object without markdown fences:
 {
@@ -470,7 +484,14 @@ Return ONLY a valid JSON object without markdown fences:
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           signal: AbortSignal.timeout(API_TIMEOUT_MS),
-          body: JSON.stringify({ contents })
+          body: JSON.stringify({
+            contents,
+            generationConfig: {
+              maxOutputTokens: 260,
+              temperature: 0.7,
+              topP: 0.85
+            }
+          })
         });
 
         if (response.ok) {
@@ -809,15 +830,15 @@ function generateAssistantHumanReply({ message = '', history = [], userContext =
   // -------------------------------------------------------------
   // PHYSICAL GIFTS & GIFT STORE (products.html)
   // -------------------------------------------------------------
-  if (q.includes('physical gift') || q.includes('gift store') || q.includes('amazon') || q.includes('flipkart') || q.includes('meesho') || q.includes('photo frame') || q.includes('teddy') || q.includes('jewellery') || q.includes('flowers') || (q.includes('gift') && (q.includes('real') || q.includes('bhejna') || q.includes('product') || q.includes('item')))) {
+  if (q.includes('physical gift') || q.includes('boutique') || q.includes('gift store') || q.includes('amazon') || q.includes('flipkart') || q.includes('meesho') || q.includes('photo frame') || q.includes('keepsake') || q.includes('crystal') || (q.includes('gift') && (q.includes('real') || q.includes('bhejna') || q.includes('product') || q.includes('item')))) {
     return {
       success: true,
       provider: 'vanvi-dialogue-engine',
       reply: isEnglish ?
-        `We have a brand-new **Physical Gift Store** with handpicked gifts across 14 categories! 🎁✨\n\n• **Trending Gifts:** 3D Acrylic LED Photo Lamps, Preserved Glass Rose Domes, Heart Lockets, Couple Matching Bracelets, and Smart Digital Frames.\n• **Verified Platforms:** Direct verified links to **Amazon, Flipkart, and Meesho**.\n• **100% Free to Explore:** No membership or subscription needed at all!\n\nCheck out the curated collection right now:` :
-        `Hamara bilkul naya **Physical Gift Store** live ho chuka hai! 🎁✨\n\nIsme 14 categories ke curated physical gifts hain jinhe aap direct explore kar sakte hain:\n• 📸 **Photo Lamps & Acrylic Frames:** Raat ko glow karne wale personalized lamps.\n• 🌹 **Preserved Rose Glass Dome:** Fairy lights ke sath kabhi na murjhane wala real rose.\n• 💎 **Heart Lockets & Couple Bracelets:** Romantic jewellery keepsakes.\n• 🛒 **Platforms:** Direct official links on **Amazon, Flipkart, aur Meesho**.\n\nKoi subscription ya login ki zaroorat nahi hai — bilkul free explore karein!`,
-      suggestions: ["Gift Store open karo 🎁", "Birthday gifts dikhao 🎂", "Couple gifts browse karein 💑"],
-      action: { label: "🎁 Open Physical Gift Store", url: "products.html" }
+        `Our **Vanvi Keepsake Gift Boutique** is officially live! 🎁✨\n\n• **Handcrafted Keepsakes:** Wax-Sealed Secret Letters, Spotify Acrylic Plaques, 3D Laser Crystal Cubes, and Velvet Memory Boxes.\n• **Purchase Options:** Direct boutique checkout, wholesale reseller pricing via **Meesho**, plus verified **Amazon & Flipkart** listings!\n• Ready to pair seamlessly with your digital invitation link!` :
+        `Hamara **Vanvi Keepsake Gift Boutique** officially live ho chuka hai! 🎁✨\n\n• 💌 **Handcrafted Wax-Sealed Letters & Spotify Plaque:** Real wax seal + scannable Spotify QR code.\n• 💎 **3D Laser Crystal Cube & Metallic Frames:** Laser-engraved photo memories jo hamesha shine karte hain.\n• 🛒 **Platforms:** Direct Boutique cart ke sath sath **Meesho** (wholesale discount), **Amazon** aur **Flipkart** se verified delivery available hai!\n\nAap digital card ke sath physical keepsake bhi gift kar sakte hain!`,
+      suggestions: ["Gift Boutique open karo 🎁", "Spotify Plaque dikhao 🎵", "Birthday gifts dekho 🎂"],
+      action: { label: "🎁 Open Keepsake Boutique", url: "products.html" }
     };
   }
 
@@ -1232,7 +1253,7 @@ function generateAssistantHumanReply({ message = '', history = [], userContext =
         `I completely understand what you are asking! 💡✨\n\nWhether it's about celebrating a loved one, crafting an emotional message, or picking the right gift — a personal, genuine approach always wins hearts! For celebrations, a sincere letter paired with 5-6 cherished photos makes any moment unforgettable.\n\nTell me a little more detail (the occasion, recipient name, or vibe), and I'll craft a personalized plan for you!` :
         `Main samajh rahi hoon aap kya pooch rahe ho! 💡✨\n\nChahe baat kisi celebration ki ho, personal advice ki, ya gifting idea ki — simple aur genuine approach hamesha win karti hai! Agar celebration se related hai, toh dil se likha ek chota sa note aur 5 achhi photos kisi ke bhi din ko unforgettable bana sakti hain.\n\nAap mujhe thoda aur detail batayein (kaunsa occasion hai, kiske liye bana rahe ho), main step-by-step aapko pura plan bana kar dungi! 🌸`,
       suggestions: ["Birthday surprise idea 🎂", "Love collection dikhao 💖", "Free coins kaise lein? 🪙"],
-      action: { label: "🔍 Browse 23+ Templates", url: "templates.html" }
+      action: { label: "🔍 Browse 40+ Luxury Templates", url: "templates.html" }
     };
   }
 

@@ -23,50 +23,6 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* Vanvi Luxury Watermark Pill */
-    .vanvi-top-pill {
-      position: fixed;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 99999;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 182, 217, 0.45);
-      color: #9d174d;
-      font-family: 'Outfit', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-decoration: none;
-      box-shadow: 0 4px 16px rgba(255, 71, 126, 0.12);
-      transition: all 0.25s ease;
-      pointer-events: auto;
-    }
-    .vanvi-top-pill:hover {
-      background: rgba(255, 255, 255, 0.98);
-      transform: translateX(-50%) translateY(-1px);
-      box-shadow: 0 6px 20px rgba(255, 71, 126, 0.2);
-      color: #ff2a7a;
-    }
-    .vanvi-sparkle-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #ff477e;
-      box-shadow: 0 0 8px #ff477e;
-      animation: pulseSparkle 1.8s infinite ease-in-out;
-    }
-    @keyframes pulseSparkle {
-      0%, 100% { opacity: 0.6; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.25); }
-    }
     /* Share Buttons Styling in Finale */
     .vanvi-share-row {
       display: flex;
@@ -87,15 +43,10 @@
       border: 1px solid rgba(255, 120, 175, 0.3) !important;
     }
   </style>
+  <link rel="stylesheet" href="../../css/vanvi-template-lock.css">
 </head>
 
 <body>
-  <!-- Vanvi Floating Luxury Watermark -->
-  <a href="../../index.html" class="vanvi-top-pill" title="Vanvi Moments Luxury Celebrations">
-    <span class="vanvi-sparkle-dot"></span>
-    <span>Vanvi Moments ✦</span>
-  </a>
-
   <!-- Background visual layer -->
   <img src="image/bg.png" alt="Celebration Background" class="background-image">
 
@@ -431,6 +382,7 @@
   <script src="script.js"></script>
   <script src="../../js/vanvi-api.js"></script>
   <script src="../../js/template-adapter.js"></script>
+  <script src="../../js/vanvi-template-lock.js"></script>
 </body>
 
 </html>

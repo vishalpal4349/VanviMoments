@@ -254,6 +254,12 @@
     .brand-tag { display: none; }
     .mobile-hide { display: none !important; }
   }
+  @media (max-width: 480px) {
+    header { padding: 6px 10px !important; gap: 8px; }
+    .brand-logo-img { height: 26px; max-width: 120px; }
+    .header-actions { gap: 6px; }
+    .btn-header-action { padding: 6px 10px; font-size: 11px; }
+  }
 
   /* ── Breadcrumb Bar ── */
   .breadcrumb-bar {
@@ -744,10 +750,20 @@
     gap: 8px;
   }
   .moment-actions-utility-row {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 6px;
-    flex-wrap: wrap;
+  }
+  @media (max-width: 480px) {
+    .moment-actions-utility-row {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+    .btn-card-mini {
+      justify-content: center !important;
+      text-align: center;
+      padding: 6px 8px !important;
+    }
   }
   .btn-card-action {
     padding: 9px 12px;
@@ -1358,6 +1374,7 @@
   const SEED_MOMENTS = [
     {
       id: 'vm_seed_1',
+      templateId: 'birthday-3d-candle-surprise',
       title: 'Midnight Birthday Surprise',
       recipient: 'Vanvi',
       sender: 'Rahul',
@@ -1378,6 +1395,7 @@
     },
     {
       id: 'vm_seed_2',
+      templateId: 'constellation-love',
       title: 'Forever Us · Romance Cinema',
       recipient: 'Sneha',
       sender: 'Karan',
@@ -1397,6 +1415,7 @@
     },
     {
       id: 'vm_seed_3',
+      templateId: 'golden-anniversary',
       title: 'Anniversary Memories Letter',
       recipient: 'Priya & Arjun',
       sender: 'Family',
@@ -1554,14 +1573,21 @@
       let resolvedPath = 'templates/birthday-wish-01/index.html';
       const mOcc = (m.occasion || '').toLowerCase();
       const mTpl = (m.templateId || m.title || '').toLowerCase();
-      if (mTpl.includes('bloom') || mTpl.includes('white-bloom')) {
-        resolvedPath = 'templates/birthday-white-bloom-001/index.html';
-      } else if (mTpl.includes('candle') || mTpl.includes('3d')) {
+      
+      if (mTpl.includes('candle') || mTpl.includes('surprise') || mTpl.includes('3d')) {
         resolvedPath = 'templates/birthday-3d-candle-surprise/index.html';
+      } else if (mTpl.includes('bloom') || mTpl.includes('white-bloom')) {
+        resolvedPath = 'templates/birthday-white-bloom/index.html';
       } else if (mTpl.includes('wish-2') || mTpl.includes('wish-02')) {
         resolvedPath = 'templates/birthday-wish-02/index.html';
-      } else if (mOcc.includes('apology') || mTpl.includes('apology')) {
-        resolvedPath = 'templates/apology-dashboard/index.html';
+      } else if (mTpl.includes('constellation') || mOcc.includes('love') || mTpl.includes('romance') || mTpl.includes('forever')) {
+        resolvedPath = 'templates/constellation-love/index.html';
+      } else if (mOcc.includes('apology') || mTpl.includes('apology') || mTpl.includes('sincere') || mTpl.includes('letter')) {
+        resolvedPath = 'templates/birthday-wish-01/index.html';
+      } else if (mOcc.includes('anniversary') || mTpl.includes('anniversary') || mTpl.includes('golden')) {
+        resolvedPath = 'templates/golden-anniversary/index.html';
+      } else if (mOcc.includes('wedding') || mTpl.includes('vivah') || mTpl.includes('shaadi') || mTpl.includes('palace')) {
+        resolvedPath = 'templates/the-grand-royal-palace-wedding/index.html';
       } else if (mOcc.includes('birthday')) {
         resolvedPath = 'templates/birthday-wish-01/index.html';
       }

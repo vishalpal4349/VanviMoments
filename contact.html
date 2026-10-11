@@ -532,7 +532,7 @@
       <a href="https://api.whatsapp.com/send?phone=917631442934&text=Hi%20Vanvi%20Moments%20Team%2C%20I%20need%20help%20with%20my%20moment" target="_blank" rel="noopener" class="channel-card whatsapp" title="Chat on WhatsApp">
         <div class="channel-icon">💬</div>
         <div class="channel-title">WhatsApp Concierge</div>
-        <div class="channel-sub">+91 76314 42934 · Fast replies</div>
+        <div class="channel-sub">Instant 24/7 · Fast replies</div>
         <div class="channel-cta">Start Chat →</div>
       </a>
 
@@ -579,6 +579,8 @@
             <label for="contactSubject">Reason for Contact</label>
             <select id="contactSubject">
               <option value="order_help">Help With My Moment / Order</option>
+              <option value="website_issue">🚨 Website Glitch / Technical Issue / Bug Report</option>
+              <option value="payment_issue">💳 Payment or Checkout Issue</option>
               <option value="custom_design">Custom Experience / VIP Design</option>
               <option value="coins_billing">Coins, Plans &amp; Billing</option>
               <option value="feedback">General Feedback &amp; Ideas</option>
@@ -663,15 +665,33 @@
       // Submit to Backend API
       let success = true;
       try {
+        if (topic === 'website_issue' || topic === 'payment_issue') {
+          // Trigger technical issue desk endpoint
+          await fetch('/api/contact/report-issue', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name, email, phone,
+              category: topic === 'payment_issue' ? 'Payment or Checkout Issue' : 'Website Glitch / Bug',
+              pageUrl: window.location.href,
+              description: message,
+              deviceInfo: navigator.userAgent,
+              _vanvi_hp: hp
+            })
+          }).catch(() => {});
+        }
+
         if (window.VanviAPI && window.VanviAPI.contact && window.VanviAPI.contact.submit) {
           const res = await window.VanviAPI.contact.submit({ name, email, phone, topic, message, _vanvi_hp: hp });
-          if (res && res.success === false && !res.offline) {
-            // Server returned error
-            console.warn('Server contact error:', res.error);
-          }
+        } else {
+          await fetch('/api/contact/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, phone, topic, message, _vanvi_hp: hp })
+          });
         }
       } catch (err) {
-        console.warn('Network inquiry error, saved locally:', err);
+        console.warn('Network inquiry notice, stored locally:', err);
       }
 
       btn.textContent = 'Message Sent ✨';

@@ -1,7 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>(function(){try{var t=localStorage.getItem('vanvi_aesthetic_theme')||'clay';var f=localStorage.getItem('vanvi_font_pref')||'royal';document.documentElement.setAttribute('data-vanvi-theme',t);document.documentElement.setAttribute('data-vanvi-font',f);}catch(e){}})();</script>
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem('vanvi_aesthetic_theme') || 'clay';
+        var f = localStorage.getItem('vanvi_font_pref') || 'royal';
+        document.documentElement.setAttribute('data-vanvi-theme', t);
+        document.documentElement.setAttribute('data-vanvi-font', f);
+      } catch(e) {}
+
+      // Auto-heal Windows local path URLs and route aliases (e.g. account -> profile.html)
+      try {
+        var raw = window.location.pathname;
+        var decoded = decodeURIComponent(raw).toLowerCase();
+
+        // 1. Alias map for common page variations and typos
+        var aliasMap = {
+          'account': '/profile.html',
+          'my-account': '/profile.html',
+          'settings': '/profile.html',
+          'profile': '/profile.html',
+          'orders': '/dashboard.html',
+          'order': '/dashboard.html',
+          'my-orders': '/dashboard.html',
+          'moments': '/dashboard.html',
+          'my-moments': '/dashboard.html',
+          'wallet': '/plans.html',
+          'coins': '/plans.html',
+          'coin': '/plans.html',
+          'plan': '/plans.html',
+          'plans': '/plans.html',
+          'pricing': '/plans.html',
+          'explore': '/templates.html',
+          'templates': '/templates.html',
+          'template': '/templates.html',
+          'catalog': '/templates.html',
+          'shop': '/products.html',
+          'store': '/products.html',
+          'products': '/products.html',
+          'admin': '/admin.html',
+          'signin': '/login.html',
+          'login': '/login.html',
+          'signup': '/signup.html',
+          'register': '/signup.html',
+          'assistant': '/vanvi-assistant.html',
+          'panda': '/vanvi-assistant.html',
+          'matcher': '/ai-matcher.html',
+          'game': '/games.html',
+          'games': '/games.html',
+          'reward': '/rewards.html',
+          'rewards': '/rewards.html',
+          'refer': '/refer.html',
+          'referral': '/refer.html',
+          'checkout': '/checkout.html',
+          'cart': '/checkout.html',
+          'success': '/order-success.html',
+          'faq': '/faq.html',
+          'contact': '/contact.html',
+          'about': '/about.html'
+        };
+
+        // Extract last slug without extension
+        var pageSlug = decoded.split('/').filter(Boolean).pop() || '';
+        pageSlug = pageSlug.replace(/\.html$/i, '').replace(/\.htm$/i, '');
+
+        var isMangled = /^\/?[a-zA-Z]:[\\\/]/i.test(decoded) || 
+                        decoded.includes('c:') || 
+                        decoded.includes('c%3a') || 
+                        decoded.includes('users') || 
+                        decoded.includes('vanvimoments');
+
+        if (isMangled) {
+          var clean = '';
+          var vmMatch = decoded.match(/(?:vanvimoments)[\/\\](.*)/i);
+          if (vmMatch && vmMatch[1]) {
+            clean = '/' + vmMatch[1].replace(/\\/g, '/');
+          } else {
+            var tplMatch = decoded.match(/((?:templates|assets|css|js|uploads)[\/\\].*)/i);
+            if (tplMatch && tplMatch[1]) {
+              clean = '/' + tplMatch[1].replace(/\\/g, '/');
+            } else {
+              var htmlMatch = decoded.match(/([a-zA-Z0-9_\-]+\.html)/i);
+              if (htmlMatch && htmlMatch[1]) {
+                clean = '/' + htmlMatch[1];
+              } else {
+                clean = '/index.html';
+              }
+            }
+          }
+          clean = clean.replace(/\/+/g, '/');
+          var cleanSlug = clean.split('/').filter(Boolean).pop() || '';
+          cleanSlug = cleanSlug.replace(/\.html$/i, '');
+          if (aliasMap[cleanSlug]) {
+            clean = aliasMap[cleanSlug];
+          }
+          if (clean && clean !== raw) {
+            window.location.replace(window.location.origin + clean + window.location.search + window.location.hash);
+            return;
+          }
+        } else if (aliasMap[pageSlug]) {
+          // Direct route alias heal (e.g. /account.html -> /profile.html)
+          window.location.replace(window.location.origin + aliasMap[pageSlug] + window.location.search + window.location.hash);
+          return;
+        }
+      } catch(err) {}
+    })();
+  </script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
   <title>Moment Not Found ✦ 404 | Vanvi Moments</title>

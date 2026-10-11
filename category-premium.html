@@ -864,7 +864,7 @@
   </a>
     <div class="header-actions">
       <a class="btn-header-link" href="templates.html">All Templates</a>
-      <a class="btn-header-primary" href="#bespokeStudio" onclick="document.getElementById('bespokeStudio').scrollIntoView({behavior:'smooth'})">✨ Custom ₹1</a>
+      <a class="btn-header-primary" href="custom-experience.html">✨ Bespoke Atelier</a>
     </div>
   </header>
 
@@ -874,15 +874,15 @@
       <span>‹</span> <span>Back to Templates</span>
     </a>
     <div class="breadcrumb-trail">
-      <a href="index.html">Home</a> / <a href="templates.html">Templates</a> / <span>👑 Ultra VIP (₹500 – ₹10,000)</span>
+      <a href="index.html">Home</a> / <a href="templates.html">Templates</a> / <span>👑 Ultra VIP Atelier (₹500 – ₹19,999)</span>
     </div>
   </div>
 
   <!-- HERO SECTION -->
   <section class="hero-ultra">
-    <div class="hero-eyebrow-royal">👑 24K ATELIER · ₹500 TO ₹10,000</div>
+    <div class="hero-eyebrow-royal">👑 24K ATELIER · BESPOKE &amp; MASTERPIECES</div>
     <h1>Ultra Luxury &amp; <span>Bespoke Moments</span></h1>
-    <p>Choose a ready 3D flagship masterpiece below, or request a 100% custom experience created just for your milestone.</p>
+    <p>Choose a ready 3D flagship masterpiece below, or commission a 100% bespoke wedding website or custom template handcrafted from scratch.</p>
 
     <!-- Dual Path Fast Selector -->
     <div class="dual-path-cards">
@@ -890,32 +890,35 @@
       <div class="path-card" onclick="document.getElementById('premiumCollection').scrollIntoView({behavior:'smooth'})">
         <div>
           <span class="path-card-badge badge-ready">✦ Ready Flagships</span>
-          <h3 class="path-card-title">₹500 – ₹10,000 Masterpieces</h3>
+          <h3 class="path-card-title">VIP Ready Templates</h3>
           <p class="path-card-desc">Interactive 3D universes, orchestral soundtracks &amp; secret PIN memory locks.</p>
         </div>
-        <div class="path-card-cta">Browse VIP Templates (₹500+) ↓</div>
+        <div class="path-card-cta">Browse VIP Templates ↓</div>
       </div>
 
       <!-- Path 2 Card (Bespoke) -->
-      <div class="path-card bespoke" onclick="document.getElementById('bespokeStudio').scrollIntoView({behavior:'smooth'})">
+      <div class="path-card bespoke" onclick="location.href='custom-experience.html'">
         <div>
-          <span class="path-card-badge badge-bespoke">👑 100% Custom Made</span>
-          <h3 class="path-card-title">Custom Experience Studio</h3>
-          <p class="path-card-desc">Have a unique dream? Our 3D artists craft it from scratch. Book with just ₹1 token.</p>
+          <div style="display:inline-flex; align-items:center; gap:6px;">
+            <span class="path-card-badge badge-bespoke">👑 100% Custom Made</span>
+            <span style="font-size:9px; font-weight:900; background:#be123c; color:#fff; padding:2px 6px; border-radius:99px;">🔒 VIP LOCKED</span>
+          </div>
+          <h3 class="path-card-title">Bespoke Custom Atelier</h3>
+          <p class="path-card-desc">Custom Wedding Website (from ₹4,999) or Custom Template (from ₹999). Zero templates, pure art.</p>
         </div>
-        <div class="path-card-cta">Request Custom Moment (₹1) ↓</div>
+        <div class="path-card-cta">Explore Bespoke Atelier →</div>
       </div>
     </div>
   </section>
 
   <!-- Category Switch Slider -->
   <nav class="category-switch-bar" id="categorySlider">
-    <button type="button" class="switch-pill active" onclick="filterVipCards('all', this)">👑 All VIP (₹500–₹10k)</button>
+    <button type="button" class="switch-pill active" onclick="filterVipCards('all', this)">👑 All VIP</button>
     <button type="button" class="switch-pill" onclick="filterVipCards('3d', this)">🌌 3D &amp; Universe</button>
     <button type="button" class="switch-pill" onclick="filterVipCards('wedding', this)">💍 Wedding &amp; Royal</button>
     <button type="button" class="switch-pill" onclick="filterVipCards('love', this)">❤️ Love &amp; Romance</button>
     <button type="button" class="switch-pill" onclick="filterVipCards('celebration', this)">🎂 Milestone &amp; Family</button>
-    <button type="button" class="switch-pill" onclick="document.getElementById('bespokeStudio').scrollIntoView({behavior:'smooth'})">✨ Custom Bespoke (₹1)</button>
+    <a href="custom-experience.html" class="switch-pill" style="text-decoration:none;">✨ Bespoke Atelier (₹999–₹19.9k)</a>
   </nav>
 
   <!-- ============================================================
@@ -1002,19 +1005,19 @@
 
             <!-- 4. Budget Range -->
             <div class="form-group">
-              <label for="inputBudget">Budget Range</label>
+              <label for="inputBudget">Commission Tier / Budget</label>
               <select id="inputBudget" name="budget">
-                <option value="₹500 – ₹1,500">₹500 – ₹1,500 (Classic Custom)</option>
-                <option value="₹1,500 – ₹3,500">₹1,500 – ₹3,500 (Grand 3D Cinema)</option>
-                <option value="₹3,500 – ₹7,500">₹3,500 – ₹7,500 (Spatial Universe)</option>
-                <option value="₹7,500 – ₹10,000+">₹7,500 – ₹10,000+ (Atelier Commission)</option>
+                <option value="₹999 – ₹4,999 (Custom Template)">₹999 – ₹4,999 (Bespoke Custom Template)</option>
+                <option value="₹4,999 (Atelier Premiere Website)">₹4,999 (Atelier Premiere Wedding Website)</option>
+                <option value="₹9,999 (Royal Signature Website)">₹9,999 (Royal Signature 3D Website)</option>
+                <option value="₹19,999 (Couture Universe)">₹19,999 (Couture Universe + Custom Domain .in)</option>
               </select>
               <!-- Quick Budget Pills -->
               <div class="pill-selector-row">
-                <button type="button" class="select-pill-btn active" onclick="selectBudgetPill(this, '₹500 – ₹1,500')">₹500–₹1,500</button>
-                <button type="button" class="select-pill-btn" onclick="selectBudgetPill(this, '₹1,500 – ₹3,500')">₹1,500–₹3,500</button>
-                <button type="button" class="select-pill-btn" onclick="selectBudgetPill(this, '₹3,500 – ₹7,500')">₹3,500–₹7,500</button>
-                <button type="button" class="select-pill-btn" onclick="selectBudgetPill(this, '₹7,500 – ₹10,000+')">₹7.5k–₹10k+</button>
+                <button type="button" class="select-pill-btn active" onclick="selectBudgetPill(this, '₹999 – ₹4,999 (Custom Template)')">₹999–₹4.9k Template</button>
+                <button type="button" class="select-pill-btn" onclick="selectBudgetPill(this, '₹4,999 (Atelier Premiere Website)')">₹4,999 Premiere</button>
+                <button type="button" class="select-pill-btn" onclick="selectBudgetPill(this, '₹9,999 (Royal Signature Website)')">₹9,999 Royal</button>
+                <button type="button" class="select-pill-btn" onclick="selectBudgetPill(this, '₹19,999 (Couture Universe)')">₹19.9k Couture</button>
               </div>
             </div>
 
@@ -1039,7 +1042,7 @@
             <a href="https://wa.me/917631442934?text=Hi%20Vanvi%20Atelier!%20I%20want%20to%20order%20a%20100%25%20Bespoke%20Custom%20Experience"
               target="_blank" rel="noopener"
               style="display:inline-flex; align-items:center; gap:6px; color:#059669; font-weight:800; font-size:12px; text-decoration:none; background:#ecfdf5; border:1px solid #a7f3d0; padding:7px 14px; border-radius:99px;">
-              <span>💬 Or Chat Directly on WhatsApp (+91 76314 42934)</span>
+              <span>💬 Or Chat Directly on WhatsApp</span>
             </a>
           </div>
 
@@ -1185,10 +1188,12 @@
           const thumb = t.thumbnail || 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=700&auto=format&fit=crop&q=80';
           const safeId = encodeURIComponent(t.id);
           const safeOccasion = encodeURIComponent(t.category || 'Celebration');
+          const directPreviewUrl = t.templatePath || (t.id ? `templates/${t.id}/index.html` : `preview.html?template=${safeId}`);
+          const directBuilderUrl = t.builderPath || (t.id ? `templates/${t.id}/builder.html` : `builder.html?template=${safeId}&occasion=${safeOccasion}`);
 
           return `
             <article class="vanvi-card is-luxury" id="card-${t.id}">
-              <div class="card-art-box" onclick="window.location.href='preview.html?template=${safeId}'" title="Experience ${escapeHtml(t.name)}">
+              <div class="card-art-box" onclick="window.location.href='${directPreviewUrl}'" title="Experience ${escapeHtml(t.name)}">
                 <span class="card-badge-top-left">${escapeHtml(t.category || 'VIP Atelier')}</span>
                 <span class="card-badge-top-right luxury">₹${p.toLocaleString('en-IN')}</span>
                 <img class="card-art-backdrop" src="${thumb}" alt="" aria-hidden="true" loading="lazy">
@@ -1217,10 +1222,10 @@
                 </div>
 
                 <div class="card-actions-grid">
-                  <a href="templates/${t.id}/preview.html" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
+                  <a href="${directPreviewUrl}" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
                     <span>Preview</span>
                   </a>
-                  <a href="builder.html?template=${safeId}&occasion=${safeOccasion}" class="btn-make-yours" title="Create ${escapeHtml(t.name)}">
+                  <a href="${directBuilderUrl}" class="btn-make-yours" title="Create ${escapeHtml(t.name)}">
                     <span>Create</span>
                   </a>
                 </div>

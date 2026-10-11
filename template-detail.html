@@ -17,6 +17,7 @@
 
   <link rel="stylesheet" href="vanvi-inner-light.css" />
   <link rel="stylesheet" href="vanvi-navigation.css" />
+  <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
   <style>
     :root {
@@ -910,16 +911,13 @@
     </div>
   </header>
 
-  <!-- Breadcrumbs -->
-  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-    <a href="index.html">Home</a>
-    <span class="breadcrumb-sep">/</span>
-    <a href="templates.html">Template Store</a>
-    <span class="breadcrumb-sep">/</span>
-    <span id="crumbCategory">Birthday</span>
-    <span class="breadcrumb-sep">/</span>
-    <span id="crumbTitle" style="color: var(--text-main); font-weight: 600;">Birthday Experience</span>
-  </nav>
+  <!-- Master Standard Breadcrumbs Bar -->
+  <div class="breadcrumb-bar">
+    <a class="vanvi-btn-back" href="javascript:void(0)" onclick="vanviGoBack('templates.html')"><span class="back-arrow">‹</span> <span>Back</span></a>
+    <div class="breadcrumb-trail">
+      <a href="index.html">Home</a> <span class="crumb-sep">/</span> <a href="templates.html">Templates</a> <span class="crumb-sep">/</span> <span id="crumbCategory">Category</span> <span class="crumb-sep">/</span> <span id="crumbTitle">Experience Details</span>
+    </div>
+  </div>
 
   <!-- Main Showcase Container -->
   <main class="detail-container">
@@ -1029,7 +1027,7 @@
               ✨ Make It Yours
             </button>
             <a class="btn-preview-link" id="btnExternalPreview" href="templates/birthday-wish-01/index.html" target="_blank" rel="noopener">
-              👁️ Experience Fullscreen Live Demo ↗
+              👁️ Experience Fullscreen Live Celebration ↗
             </a>
             <button class="btn-preview-link" id="btnOrderDirect" onclick="directOrderHandoff()" style="border-color: var(--gold-primary); color: var(--gold-light);">
               Order Template | <span id="btnOrderPrice">₹149</span>

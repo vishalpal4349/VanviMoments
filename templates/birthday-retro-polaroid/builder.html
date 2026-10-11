@@ -12,7 +12,29 @@
     body { background: #1c1a19; color: #fff; font-family: 'Space Grotesk', sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
     .top-bar { background: #262321; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
     .studio-grid { display: grid; grid-template-columns: 460px 1fr; flex: 1; height: calc(100vh - 60px); }
-    @media (max-width: 900px) { .studio-grid { grid-template-columns: 1fr; } .preview-pane { display: none; } }
+        @media (max-width: 900px) {
+      .studio-grid { grid-template-columns: 1fr; height: auto; }
+      body:not(.vanvi-builder-preview-active) .preview-pane { display: none !important; }
+      body.vanvi-builder-preview-active .editor-pane { display: none !important; }
+      body.vanvi-builder-preview-active .preview-pane {
+        display: flex !important;
+        position: fixed !important;
+        inset: 0 !important;
+        top: 56px !important;
+        bottom: 66px !important;
+        width: 100vw !important;
+        height: calc(100dvh - 122px) !important;
+        z-index: 9999 !important;
+        padding: 0 !important;
+      }
+      body.vanvi-builder-preview-active .preview-frame {
+        width: 100vw !important;
+        height: 100% !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+    }
     .editor-pane { background: #211e1c; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; }
     .step-box { background: #2b2825; border-radius: 8px; padding: 16px; border: 1px solid rgba(255,255,255,0.06); }
     .form-group { margin-bottom: 12px; }
@@ -23,6 +45,9 @@
     .preview-frame iframe { width: 100%; height: 100%; border: 0; }
     .btn-save { background: #d97736; color: #fff; border: 0; padding: 12px; font-weight: 700; border-radius: 6px; cursor: pointer; }
   </style>
+  <link rel="stylesheet" href="../../css/vanvi-builder-smart.css">
+  <script src="../../js/vanvi-builder-smart.js" defer></script>
+  <script src="../../js/vanvi-template-lock.js" defer></script>
 </head>
 <body>
   <div class="top-bar">

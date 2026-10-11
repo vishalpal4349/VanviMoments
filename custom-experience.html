@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="vanvi-inner-light.css">
   <link rel="stylesheet" href="vanvi-navigation.css">
   <link rel="stylesheet" href="css/vanvi-global-experience.css" />
+  <link rel="stylesheet" href="css/vanvi-bespoke.css" />
   <style>
     :root {
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -436,7 +437,7 @@
     }
     .tiers-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 16px;
     }
     .tier-card {
@@ -728,15 +729,19 @@
 
   <!-- SHAADIPATH-STYLE EDITORIAL HERO -->
   <section class="bespoke-hero">
-    <span class="eyebrow-pill">✦ The Vanvi Bespoke Atelier ✦</span>
+    <div style="display:inline-flex; align-items:center; gap:8px; margin-bottom:12px;">
+      <span class="eyebrow-pill">✦ The Vanvi Bespoke Atelier ✦</span>
+      <span class="bespoke-card-lock-badge" style="position:static;">🔒 VIP LOCKED · COMING SOON</span>
+    </div>
     <div class="bespoke-rule"></div>
     <h1 class="bespoke-headline">Your celebration story,<br>made <span>entirely for you.</span></h1>
     <div class="bespoke-rule"></div>
     <p class="bespoke-sub">A bespoke celebration website designed from scratch — not from a template, not from a library. Handcrafted for couples, milestone birthdays, and families who want an unrepeatable digital universe.</p>
-    <div class="bespoke-price-tag">Starting at ₹4,999 · One-time · Everything Included</div>
+    <div class="bespoke-price-tag">Starting at ₹4,999 (Custom Website) · From ₹999 (Custom Template) · No Hidden Charges</div>
     <div class="hero-cta-group">
       <a href="#customFormCard" class="btn-bespoke-primary" onclick="document.getElementById('customFormCard').scrollIntoView({behavior:'smooth'})">Begin Your Story →</a>
-      <a href="https://wa.me/917631442934?text=Hi%20Vanvi%20Concierge%2C%20I%20want%20to%20book%20my%20slot%20for%20a%20Bespoke%20Custom%20Experience" target="_blank" rel="noopener" class="btn-bespoke-wa">Book Slot on WhatsApp 💬</a>
+      <a href="https://wa.me/917631442934?text=Hi%20Vanvi%20Concierge%2C%20I%20want%20to%20book%20my%20slot%20for%20a%20Bespoke%20Custom%20Website" target="_blank" rel="noopener" class="btn-bespoke-wa">Book Slot on WhatsApp 💬</a>
+      <a href="https://wa.me/917631442934?text=Hi%20Admin%2C%20I%20want%20to%20consult%20about%20a%20Bespoke%20Commission%20(Website%20or%20Template)" target="_blank" rel="noopener" class="nav-link-pill" style="border-color:#be123c; color:#be123c; font-weight:800; display:inline-flex; align-items:center; gap:6px;">👤 Contact Admin</a>
     </div>
   </section>
 
@@ -813,33 +818,51 @@
     </div>
   </section>
 
-  <!-- 3 TRANSPARENT INVESTMENT TIERS -->
+  <!-- 4 TRANSPARENT INVESTMENT TIERS -->
   <section class="tiers-section">
-    <div class="section-eyebrow">Transparent Investment</div>
+    <div class="section-eyebrow">Transparent Investment · Handcrafted Exclusivity</div>
     <h2 class="section-heading">Select Your Bespoke Commission Tier</h2>
     <div class="tiers-grid">
-      <!-- Tier 1 -->
+      <!-- Tier 0: Custom Template -->
       <div class="tier-card">
-        <div class="tier-name">Atelier Premiere</div>
-        <div class="tier-tagline">Custom celebration microsite with private music &amp; gallery</div>
+        <span class="bespoke-card-lock-badge" style="position:static; margin-bottom:8px; align-self:flex-start;">🔒 VIP LOCKED</span>
+        <div class="tier-name">Bespoke Template</div>
+        <div class="tier-tagline">Custom color palette, private soundtrack &amp; bespoke 3D ritual</div>
         <div class="tier-price-box">
-          <div class="tier-price">₹4,999</div>
-          <span class="tier-note">One-time · 48-hour delivery</span>
+          <div class="tier-price">₹999 <span style="font-size:12px; font-weight:600; color:var(--text-muted);">– ₹4,999</span></div>
+          <span class="tier-note">Starting ₹999 · 24-48h craft</span>
         </div>
         <ul class="tier-perks">
-          <li class="tier-perk-item"><span class="tier-check">✓</span> Bespoke custom design (zero templates)</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Bespoke palette &amp; font styling</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Custom audio score dedication</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Tailored 3D ritual (wax seal / cake)</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Instant WhatsApp sharing link</li>
+        </ul>
+        <button type="button" class="btn-select-tier" onclick="selectTierAndScroll('₹999 (Bespoke Custom Template)')">Select Template →</button>
+      </div>
+
+      <!-- Tier 1: Custom Website Premiere -->
+      <div class="tier-card">
+        <div class="tier-name">Atelier Premiere Site</div>
+        <div class="tier-tagline">100% custom wedding microsite with private music &amp; gallery</div>
+        <div class="tier-price-box">
+          <div class="tier-price">₹4,999</div>
+          <span class="tier-note">Starting ₹4,999 · One-time</span>
+        </div>
+        <ul class="tier-perks">
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Bespoke custom design (0 templates)</li>
           <li class="tier-perk-item"><span class="tier-check">✓</span> Custom audio soundtrack dedication</li>
           <li class="tier-perk-item"><span class="tier-check">✓</span> Interactive photo gallery &amp; love note</li>
           <li class="tier-perk-item"><span class="tier-check">✓</span> 1 round of revisions</li>
           <li class="tier-perk-item"><span class="tier-check">✓</span> WhatsApp guest RSVP integration</li>
         </ul>
-        <button type="button" class="btn-select-tier" onclick="selectTierAndScroll('₹4,999 (Atelier Premiere)')">Select Premiere →</button>
+        <button type="button" class="btn-select-tier" onclick="selectTierAndScroll('₹4,999 (Atelier Premiere Site)')">Select Premiere →</button>
       </div>
 
-      <!-- Tier 2 (Featured) -->
+      <!-- Tier 2 (Featured): Royal Signature -->
       <div class="tier-card featured">
         <div class="tier-badge">👑 MOST POPULAR</div>
-        <div class="tier-name">Royal Signature</div>
+        <div class="tier-name">Royal Signature Site</div>
         <div class="tier-tagline">3D interactive rituals, multi-event schedule &amp; concierge</div>
         <div class="tier-price-box">
           <div class="tier-price">₹9,999</div>
@@ -847,30 +870,30 @@
         </div>
         <ul class="tier-perks">
           <li class="tier-perk-item"><span class="tier-check">✓</span> Everything in Premiere</li>
-          <li class="tier-perk-item"><span class="tier-check">✓</span> 3D interactive ritual (wax seal / candle blow / petals)</li>
-          <li class="tier-perk-item"><span class="tier-check">✓</span> Multi-event timeline (Haldi, Sangeet, Wedding, Pheras)</li>
-          <li class="tier-perk-item"><span class="tier-check">✓</span> Google &amp; Apple Calendar direct integration</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> 3D interactive ritual (wax seal / petals)</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Multi-event timeline (Haldi, Sangeet, Pheras)</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Google &amp; Apple Calendar direct sync</li>
           <li class="tier-perk-item"><span class="tier-check">✓</span> 2 full rounds of revisions</li>
           <li class="tier-perk-item"><span class="tier-check">✓</span> Custom vanity subdomain</li>
         </ul>
-        <button type="button" class="btn-select-tier" onclick="selectTierAndScroll('₹9,999 (Royal Signature)')">Select Royal Signature →</button>
+        <button type="button" class="btn-select-tier" onclick="selectTierAndScroll('₹9,999 (Royal Signature Site)')">Select Royal Signature →</button>
       </div>
 
-      <!-- Tier 3 -->
+      <!-- Tier 3: Couture Universe -->
       <div class="tier-card">
         <div class="tier-name">Couture Universe</div>
-        <div class="tier-tagline">100% custom from scratch with own custom domain .in</div>
+        <div class="tier-tagline">100% custom from scratch with own domain www.yournames.in</div>
         <div class="tier-price-box">
           <div class="tier-price">₹19,999</div>
           <span class="tier-note">One-time · Full white-glove</span>
         </div>
         <ul class="tier-perks">
-          <li class="tier-perk-item"><span class="tier-check">✓</span> Complete custom universe (zero library limits)</li>
-          <li class="tier-perk-item"><span class="tier-check">✓</span> Your own domain (www.yournames.in included)</li>
-          <li class="tier-perk-item"><span class="tier-check">✓</span> Dedicated Lead Art Director consultation call in 24h</li>
-          <li class="tier-perk-item"><span class="tier-check">✓</span> Custom 3D spatial motion &amp; video entrance</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Complete custom universe (zero limits)</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Your own domain (www.yournames.in)</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Dedicated Lead Art Director call in 24h</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Custom 3D spatial motion &amp; entrance</li>
           <li class="tier-perk-item"><span class="tier-check">✓</span> Unlimited revisions until perfection</li>
-          <li class="tier-perk-item"><span class="tier-check">✓</span> Physical printable gold foil QR keepsake cards</li>
+          <li class="tier-perk-item"><span class="tier-check">✓</span> Physical printable gold foil QR cards</li>
         </ul>
         <button type="button" class="btn-select-tier" onclick="selectTierAndScroll('₹19,999 (Couture Universe)')">Select Couture Universe →</button>
       </div>
@@ -878,6 +901,7 @@
   </section>
 
   <!-- BESPOKE INTAKE FORM (MAINTAINS 100% COMPATIBILITY) -->
+  <div id="commissionForm" style="scroll-margin-top: 80px;"></div>
   <div id="customFormCard">
     <form class="card" id="customForm">
       <!-- Honeypot anti-spam trap (invisible to real visitors) -->
@@ -954,7 +978,7 @@
           <div style="width: 44px; height: 44px; border-radius: 14px; background: #25d366; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);">💬</div>
           <div>
             <div style="font-size: 13.5px; font-weight: 850; color: #075e54;">Need instant consultation or have questions?</div>
-            <div style="font-size: 11.5px; color: #4b6b5d;">Chat with our Art Director on WhatsApp: <strong style="color:#075e54;">+91 76314 42934</strong></div>
+            <div style="font-size: 11.5px; color: #4b6b5d;">Chat with our Art Director on WhatsApp: <strong style="color:#075e54;">Available 24/7</strong></div>
           </div>
         </div>
         <a href="https://wa.me/917631442934?text=Hi%20Vanvi%20Concierge%2C%20I%20want%20to%20discuss%20a%20Bespoke%20Celebration%20Experience" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 99px; background: #25d366; color: #ffffff; font-size: 12.5px; font-weight: 850; text-decoration: none; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35); transition: transform 0.2s;">
@@ -1031,11 +1055,33 @@ form.addEventListener('submit', async event => {
       localStorage.setItem('vanvi_custom_requests', JSON.stringify(allRequests));
     } catch (err) {}
 
-    status.innerHTML = `🎉 <strong>Request Confirmed!</strong><br>Request ID: <span style="font-family:monospace; background:rgba(0,0,0,0.06); padding:2px 6px; border-radius:4px;">${reqId}</span><br>Status: <strong>${reqStatus}</strong>.<br>The Vanvi Design Atelier has received your vision and our lead artist will get in touch shortly via WhatsApp.`;
+    status.innerHTML = `🎉 <strong>Request Confirmed!</strong><br>Request ID: <span style="font-family:monospace; background:rgba(0,0,0,0.06); padding:2px 6px; border-radius:4px;">${reqId}</span><br>Status: <strong>${reqStatus}</strong>.<br>Opening WhatsApp concierge with your pre-filled inquiry...`;
     status.style.background = '#ecfdf5';
     status.style.borderColor = '#a7f3d0';
     status.style.color = '#065f46';
     status.className = 'status show';
+
+    // Auto-open pre-formatted WhatsApp chat to +91 7631442934
+    const waText = encodeURIComponent(
+      `💍 *VANVI MOMENTS — BESPOKE COMMISSION INQUIRY* 👑\n` +
+      `━━━━━━━━━━━━━━━━━━━━\n` +
+      `✦ *Request ID:* #${reqId}\n` +
+      `✦ *Name:* ${body.name || 'Client'}\n` +
+      `✦ *Contact:* ${body.contact || 'N/A'}\n` +
+      `✦ *Email:* ${body.email || 'N/A'}\n` +
+      `✦ *Occasion:* ${body.occasion || 'Wedding / Celebration'}\n` +
+      `✦ *Target Date:* ${body.eventDate || 'Upcoming'}\n` +
+      `✦ *Selected Tier / Budget:* ${body.budget || 'Custom Website (₹4,999 - ₹19,999)'}\n` +
+      `✦ *Aesthetic:* ${body.aesthetic || 'Bespoke Atelier'}\n` +
+      `━━━━━━━━━━━━━━━━━━━━\n` +
+      `📝 *Story & Vision:*\n"${body.story || body.idea || 'Custom request'}"\n` +
+      `━━━━━━━━━━━━━━━━━━━━\n` +
+      `✨ Sent via Vanvi Moments Bespoke Atelier Concierge`
+    );
+    setTimeout(() => {
+      window.open(`https://wa.me/917631442934?text=${waText}`, '_blank');
+    }, 600);
+
     form.reset();
   } catch (error) {
     status.textContent = error.message + ' Please try again or reach out directly on WhatsApp.';
@@ -1046,6 +1092,8 @@ form.addEventListener('submit', async event => {
   }
 });
 </script>
+<!-- Bespoke Atelier & Live Social Proof Controller -->
+<script src="js/vanvi-bespoke.js"></script>
 <!-- Global API SDK & Navigation Dock -->
 <script src="js/vanvi-api.js"></script>
 <script src="js/vanvi-navigation.js"></script>

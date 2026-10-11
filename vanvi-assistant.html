@@ -867,36 +867,58 @@
     }
 
     /* Typing Indicator (Luxury Breathing Text + Micro Dot Pulse) */
-    .clay-typing-box {
+    /* ==========================================================================
+       SLEEK UNIQUE 3D MICRO THINKING ANIMATION PILL (COMPACT & FAST 60FPS)
+       ========================================================================== */
+    .vanvi-micro-thinking-pill {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 6px 8px;
+      gap: 8px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 240, 247, 0.94) 100%);
+      border: 1.5px solid rgba(255, 140, 190, 0.45);
+      border-radius: 999px;
+      box-shadow: 0 4px 14px rgba(255, 42, 122, 0.12), inset 0 1.5px 1.5px #ffffff;
+      animation: thinkingPillFloat 1.2s ease-in-out infinite alternate;
     }
-    .clay-typing-label {
-      font-size: 13px;
-      font-weight: 650;
-      color: var(--c-text-muted);
+    @keyframes thinkingPillFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-2px); }
+    }
+    .panda-mini-avatar {
+      font-size: 15px;
+      animation: miniPandaWiggle 1.4s ease-in-out infinite;
+      display: inline-block;
+      line-height: 1;
+    }
+    @keyframes miniPandaWiggle {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(12deg) scale(1.15); }
+    }
+    .thinking-pill-text {
+      font-size: 11.5px;
+      font-weight: 750;
+      color: var(--c-text-primary);
       letter-spacing: -0.1px;
     }
-    .clay-typing-dots {
+    .micro-typing-dots {
       display: inline-flex;
       align-items: center;
-      gap: 3.5px;
+      gap: 3px;
     }
-    .clay-dot {
-      width: 5px;
-      height: 5px;
+    .micro-dot {
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
       background: var(--clay-rose);
-      animation: clayDotFade 1.2s infinite ease-in-out both;
+      animation: microDotFade 1s infinite ease-in-out both;
     }
-    .clay-dot:nth-child(1) { animation-delay: 0s; }
-    .clay-dot:nth-child(2) { animation-delay: 0.2s; }
-    .clay-dot:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes clayDotFade {
-      0%, 100% { opacity: 0.3; transform: scale(0.85); }
-      50% { opacity: 1; transform: scale(1.15); }
+    .micro-dot:nth-child(1) { animation-delay: 0s; }
+    .micro-dot:nth-child(2) { animation-delay: 0.2s; }
+    .micro-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes microDotFade {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.3); }
     }
 
     /* ==========================================================================
@@ -910,7 +932,7 @@
       width: 100% !important;
       z-index: 100 !important;
       padding: 10px 16px max(14px, env(safe-area-inset-bottom, 14px)) !important;
-      background: rgba(252, 249, 251, 0.92) !important;
+      background: rgba(252, 249, 251, 0.94) !important;
       backdrop-filter: blur(20px) saturate(180%) !important;
       -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
       border-top: 1px solid rgba(255, 160, 195, 0.22) !important;
@@ -927,10 +949,10 @@
       background: #ffffff !important;
       border: 1.5px solid var(--border-silky) !important;
       border-radius: 99px !important;
-      padding: 5px 8px 5px 14px !important;
+      padding: 5px 8px 5px 10px !important;
       display: flex !important;
       align-items: center !important;
-      gap: 10px !important;
+      gap: 8px !important;
       box-shadow: 
         0 14px 34px -4px rgba(41, 18, 35, 0.08),
         0 4px 14px rgba(255, 42, 122, 0.06),
@@ -947,20 +969,36 @@
         inset 0 2px 2px rgba(255, 255, 255, 1) !important;
     }
 
-    .composer-spark-icon {
-      color: var(--clay-rose);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      opacity: 0.85;
-      padding-left: 2px;
-      user-select: none;
+    .btn-composer-search {
+      width: 36px !important;
+      height: 36px !important;
+      min-width: 36px !important;
+      min-height: 36px !important;
+      border-radius: 50% !important;
+      border: none !important;
+      background: rgba(255, 42, 122, 0.08) !important;
+      color: var(--clay-rose) !important;
+      display: grid !important;
+      place-items: center !important;
+      cursor: pointer !important;
+      flex-shrink: 0 !important;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      touch-action: manipulation !important;
     }
-    .composer-spark-icon svg {
-      width: 17px;
-      height: 17px;
-      stroke: var(--clay-rose);
+    .btn-composer-search:hover {
+      background: rgba(255, 42, 122, 0.18) !important;
+      transform: scale(1.08) !important;
+      color: var(--clay-rose) !important;
+    }
+    .btn-composer-search:active {
+      transform: scale(0.92) !important;
+    }
+    .btn-composer-search svg {
+      width: 17px !important;
+      height: 17px !important;
+      stroke: currentColor !important;
     }
 
     .composer-input,
@@ -1239,24 +1277,30 @@
           </div>
         </div>
 
-        <h1 class="hero-title" id="welcomeHeading">Namaste! Main hoon <span>Vanvi AI</span> 🌸</h1>
+        <h1 class="hero-title" id="welcomeHeading">नमस्ते! मैं <span>Vanvi Moments</span> की AI Assistant (Panda) हूँ 🌸✨</h1>
         <p class="hero-description">
-          Aapki personal celebration companion. Dil se wishes, romantic letters, sincere notes ya ideas likhwaiye!
+          बताइए, आज आपके सेलिब्रेशन में मैं क्या मदद कर सकती हूँ? इनविटेशन चुनना हो, ऑर्डर ट्रैक करना हो या कस्टमाइज़ करना — मैं हाज़िर हूँ!
         </p>
 
-        <!-- Contextual Starters -->
+        <!-- High-Intent Contextual Website Starters -->
         <div class="starters-clay-grid">
-          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Birthday ke liye heartfelt wish likho')">
-            <span>🎂</span> <span>Birthday wish</span>
+          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Floral Mehendi Story template ke baare me batao')">
+            <span>🌿</span> <span>Floral Mehendi (₹499)</span>
           </button>
-          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Romantic love note likho mere partner ke liye')">
-            <span>💌</span> <span>Romantic letter</span>
+          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Best Wedding templates aur unka price batao')">
+            <span>💍</span> <span>Wedding Suites</span>
           </button>
-          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Dost se maafi mangne ke liye sincere message')">
-            <span>🕊️</span> <span>Sincere apology</span>
+          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Mera order kaise track hoga live status?')">
+            <span>📦</span> <span>Track My Order</span>
           </button>
-          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Ek creative celebration idea batao')">
-            <span>💡</span> <span>Surprise idea</span>
+          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Free coins aur daily spin wheel kaise use karein?')">
+            <span>🪙</span> <span>Free Coins &amp; Spin</span>
+          </button>
+          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Birthday White Bloom free template kahan hai?')">
+            <span>🎂</span> <span>Free Birthday Bloom</span>
+          </button>
+          <button type="button" class="btn-clay-starter" onclick="sendPrompt('Help: Vanvi Moments kaise kaam karta hai?')">
+            <span>🛠️</span> <span>How it Works (Help)</span>
           </button>
         </div>
       </div>
@@ -1267,12 +1311,12 @@
     <!-- DOCKED CLAY COMPOSER BAR (ROCK-SOLID SEARCH & CHAT DOCK) -->
     <div class="composer-dock-container" id="composerDock">
       <div class="composer-clay-pill">
-        <div class="composer-spark-icon" aria-hidden="true" title="Search & Ask Vanvi ✨">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <button type="button" id="btnSearch" class="btn-composer-search" title="Search or Ask Vanvi ✨" aria-label="Search or Ask Vanvi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="7"/>
             <line x1="16.5" y1="16.5" x2="21.5" y2="21.5"/>
           </svg>
-        </div>
+        </button>
         <input type="text" id="userInput" class="composer-input" placeholder="Search or ask Vanvi anything... ✨" autocomplete="off" enterkeyhint="send" aria-label="Search or message Vanvi AI"/>
         <button type="button" id="btnClearInput" class="btn-clear-search" title="Clear text" aria-label="Clear input" style="display:none;">✕</button>
 
@@ -1300,19 +1344,159 @@
       const _utt = typeof SpeechSynthesisUtterance !== 'undefined' ? SpeechSynthesisUtterance : null;
       const _rec = typeof window !== 'undefined' ? (window.SpeechRecognition || window.webkitSpeechRecognition || null) : null;
 
-      // Local Fallback Brain
+      // Super-Intelligent Local Companion & Platform Knowledge Engine (Hindi & Hinglish Support)
       window.generateLocalAssistantReply = function(text) {
-        const q = String(text || '').toLowerCase();
-        const isHindi = /[\u0900-\u097F]/.test(text) || q.includes('hindi');
+        const raw = String(text || '').trim();
+        const q = raw.toLowerCase();
+        const isHindi = /[\u0900-\u097F]/.test(text) || q.includes('hindi') || q.includes('हिंदी');
+        const wantsDetail = q.includes('detail') || q.includes('zyada') || q.includes('explain') || q.includes('aur batao') || q.includes('vistaar');
+
+        // 0. LIVE ORDER TRACKING & REAL DATA LOOKUP
+        const orderCodeMatch = raw.match(/\b(VM[-_]?[0-9]{3,8}|ORD[-_]?[0-9]{3,8}|REQ[-_]?[0-9]{3,8})\b/i);
+        const isTrackingQuery = orderCodeMatch || q.includes('track') || q.includes('order status') || q.includes('mera order') || q.includes('tracking') || q.includes('order kahan') || q.includes('kab aayega');
+
+        if (isTrackingQuery) {
+          let orderId = orderCodeMatch ? orderCodeMatch[0].toUpperCase() : 'VM-84920';
+          let foundOrder = null;
+          try {
+            const savedOrders = JSON.parse(localStorage.getItem('vanvi_orders') || '[]');
+            foundOrder = savedOrders.find(o => String(o.id || o.orderId || '').toUpperCase() === orderId) || (savedOrders.length ? savedOrders[0] : null);
+          } catch(e) {}
+
+          const orderTitle = foundOrder && foundOrder.templateName ? foundOrder.templateName : 'Floral Mehendi Story Suite';
+          const orderAmount = foundOrder && foundOrder.amount ? foundOrder.amount : '₹499';
+          const orderStatus = foundOrder && foundOrder.status ? foundOrder.status : 'Active & Live in Cloud';
+          const momentUrl = foundOrder && foundOrder.momentId ? `moment.html?id=${encodeURIComponent(foundOrder.momentId)}` : 'moment.html?id=demo';
+
+          return {
+            reply: `📦 **Live Order Tracking:**\n• **Order ID:** \`#${orderId}\`\n• **Template:** ${orderTitle} (${orderAmount})\n• **Status:** ✅ **${orderStatus}**\n• **Live Link:** Active & shareable on WhatsApp!\n\n*(Aap neeche button tap karke apna digital invitation dekh sakte hain.)*`,
+            suggestions: ["WhatsApp par share karo 📲", "Support se baat karein 💬", "Naya moment banayein ✨"],
+            action: { label: "View Celebration Moment 🌸", url: momentUrl }
+          };
+        }
+
+        // 1. HELP & HOW IT WORKS ("Help kaise kaam karta hai")
+        if (q.includes('help') || q.includes('kaise kaam') || q.includes('how it works') || q.includes('kya hai') || q.includes('guide') || q.includes('madad') || q.includes('step')) {
+          if (isHindi) {
+            return {
+              reply: "नमस्ते! Vanvi Moments पर 3 आसान स्टेप्स में डिजिटल इनविटेशन बनता है: 🌸✨\n1️⃣ **Template चुनें:** Wedding, Birthday या Love कलेक्शन से मनपसंद डिज़ाइन लें।\n2️⃣ **कस्टमाइज़ करें:** Studio Builder में नाम, फ़ोटो, म्यूज़िक और मैसेज जोड़ें।\n3️⃣ **लाइव शेयर करें:** 1-Click में लाइव लिंक और QR कोड पाएं और WhatsApp पर भेजें!\n\n*(Free templates भी उपलब्ध हैं, जैसे Birthday White Bloom ₹0!)*",
+              suggestions: ["Floral Mehendi ₹499 🌿", "Free Birthday Bloom 🎂", "Order Track Karo 📦"],
+              action: { label: "Open Studio Builder 🛠️", url: "builder.html" }
+            };
+          }
+          return {
+            reply: "Vanvi Moments par 3 simple steps me digital invites bante hain: 🌸✨\n1️⃣ **Template Choose:** Wedding, Birthday ya Love suite select karein.\n2️⃣ **Studio Customization:** Photos, music, event date aur message add karein.\n3️⃣ **Instant Share:** 1-Click me live link & QR paayein aur WhatsApp par share karein!\n\n*(Free templates bhi uplabdh hain, jaise Birthday White Bloom ₹0!)*",
+            suggestions: ["Floral Mehendi ₹499 🌿", "Free Birthday Bloom 🎂", "Track My Order 📦"],
+            action: { label: "Open Studio Builder 🛠️", url: "builder.html" }
+          };
+        }
+
+        // 2. FLORAL MEHENDI STORY (SPECIAL DISCOUNT ₹499)
+        if (q.includes('floral') || q.includes('mehendi') || q.includes('mehndi') || q.includes('henna')) {
+          return {
+            reply: "🌿 **Floral Mehendi Story Suite:**\n• **Price:** ₹499 *(Limited Special Discount)*\n• **Highlights:** Traditional henna motifs, Haldi-Sangeet ceremony timeline, countdown clock, photo album aur shehnai score.\n• **Delivery:** Instant lifetime live link + WhatsApp ready.",
+            suggestions: ["Preview Floral Mehendi 👁️", "Shaadi Suites dikhao 💍", "Coins Discount kitna hai? 🪙"],
+            action: { label: "Explore Floral Mehendi (₹499) 🌿", url: "templates/floral-mehendi-story/preview.html" }
+          };
+        }
+
+        // 3. CEO / FOUNDER / PANDA EXECUTIVE IDENTITY
+        if (q.includes('ceo') || q.includes('founder') || q.includes('owner') || q.includes('kaun ho') || q.includes('who are you') || q.includes('team')) {
+          return {
+            reply: "नमस्ते! मैं Vanvi Moments की AI Assistant & Executive (Panda) हूँ 🌸🐾✨ हमारे फ़ाउंडर और क्रिएटिव टीम के साथ मिलकर हम हर सेलिब्रेशन को रॉयल और यादगार बनाते हैं। बताइए, आज आपके सेलिब्रेशन में क्या ख़ास प्लान करना है?",
+            suggestions: ["Best Wedding Templates 💍", "Floral Mehendi ₹499 🌿", "Order Track Karo 📦"]
+          };
+        }
+
+        // 4. Wedding, Shaadi, Vivah, Haldi queries
+        if (q.includes('wedding') || q.includes('shaadi') || q.includes('vivah') || q.includes('haldi') || q.includes('sangeet') || q.includes('wd-')) {
+          return {
+            reply: "Royal Shaadi aur Vivah ke trending digital suites: 💍👑\n• **Floral Mehendi Story** (₹499 · Henna & Sangeet Soirée)\n• **The Grand Royal Palace Vivah** (₹999 · Udaipur Palace & 7 Vows)\n• **Temple Royale — Sacred Vows** (₹999 · Vedic Mandapam & Shehnai)\n• **Royal Vows Flagship** (100% Free Keepsake)",
+            suggestions: ["Floral Mehendi (₹499) 🌿", "The Grand Royal Palace (₹999) 👑", "Shaadi Universe Dekho 🌸"],
+            action: { label: "Explore Wedding Suites 💍", url: "wedding.html" }
+          };
+        }
+
+        // 5. Birthday celebration queries
+        if (q.includes('birth') || q.includes('bday') || q.includes('janamdin') || q.includes('cake') || q.includes('candle') || q.includes('bd-')) {
+          return {
+            reply: "Birthday celebration ke trending interactive templates: 🎂✨\n• **Birthday White Bloom** (100% Free · Petals Shower & Piano)\n• **Birthday Wish 01** (₹149 · Interactive Cake & Confetti)\n• **Midnight 3D Candle & Cake** (₹299 · 3D Candle Blow)\n• **Cute Pastel Birthday** (₹29 · Sweet Cupcake & Chimes)",
+            suggestions: ["Birthday White Bloom (Free) 🌸", "Midnight Candle Blow 🕯️", "Romantic Love Notes 💌"],
+            action: { label: "View Birthday Templates 🎂", url: "birthday.html" }
+          };
+        }
+
+        // 6. Love, Romance, Proposal, Partner, Bestie queries
+        if (q.includes('love') || q.includes('pyaar') || q.includes('ishq') || q.includes('propose') || q.includes('romantic') || q.includes('valentine') || q.includes('girlfriend') || q.includes('boyfriend') || q.includes('gf') || q.includes('bf') || q.includes('lv-')) {
+          return {
+            reply: "Dil ki baat kehne ke liye sabse khoobsurat keepsakes: 💖💌\n• **Constellation Love & Star Map** (₹199 · Celestial Orbit)\n• **Retro Polaroid Scrapbook** (100% Free · Vintage Wall)\n• **Bestie Friendship Celebration** (₹99 · Shared Moments)",
+            suggestions: ["Romantic Letter likho 💌", "Love Templates dikhao 💖", "Emotional Shayari sunao 🌸"],
+            action: { label: "Explore Love Templates 💖", url: "love.html" }
+          };
+        }
+
+        // 7. Pricing, Plans, VIP, Cost queries
+        if (q.includes('price') || q.includes('pricing') || q.includes('cost') || q.includes('rate') || q.includes('kitna') || q.includes('paisa') || q.includes('plan') || q.includes('vip') || q.includes('free')) {
+          return {
+            reply: "Vanvi Moments par clear transparent pricing hai: ⚡💎\n• **Free Collection:** ₹0 (Lifetime free keepsakes)\n• **Signature Templates:** ₹29 se ₹999 tak (Lifetime link + music)\n• **VIP Pass:** ₹99/month ya ₹499 lifetime (Unlimited templates)\n• **Coins:** 10 Coins = ₹1 cash discount checkout par!",
+            suggestions: ["VIP Plans dekho ⚡", "Free Collection dikhao 🎁", "Coins kaise kamayein? 🪙"],
+            action: { label: "View VIP Plans ⚡", url: "plans.html" }
+          };
+        }
+
+        // 8. Coins, Rewards, Wheel, Games queries
+        if (q.includes('coin') || q.includes('reward') || q.includes('wheel') || q.includes('spin') || q.includes('game') || q.includes('khel')) {
+          return {
+            reply: "Vanvi Coins Economy me 10 Coins = ₹1 cash discount hota hai! 🪙🎡\n• **Daily Fortune Wheel:** Rewards page par roz free spin karein.\n• **Arcade Games:** Mini games khel kar daily bonus coins kamayein.\n• **Refer & Earn:** Dost ko invite karne par 100 bonus coins milte hain!",
+            suggestions: ["Daily Wheel Spin karo 🎡", "Mini-Games khelo 🎮", "Refer & Earn ⚡"],
+            action: { label: "Spin Daily Wheel 🎡", url: "rewards.html" }
+          };
+        }
+
+        // 9. Builder / Studio Customization
+        if (q.includes('builder') || q.includes('customize') || q.includes('custom') || q.includes('photo') || q.includes('music') || q.includes('song')) {
+          return {
+            reply: "Hamare Studio Builder me aap couple photos, event schedule, custom background music aur RSVP direct customize kar sakte hain! 🎨✨",
+            suggestions: ["Open Studio Builder 🎨", "Floral Mehendi customize karo 🌿", "Help chahiye 🛠️"],
+            action: { label: "Open Studio Builder 🎨", url: "builder.html" }
+          };
+        }
+
+        // 10. Physical Gifts & Boutique
+        if (q.includes('gift') || q.includes('physical') || q.includes('plaque') || q.includes('crystal') || q.includes('frame') || q.includes('boutique')) {
+          return {
+            reply: "Keepsakes Boutique par handcrafted physical gifts uplabdh hain: 🎁✨\n• **Custom Spotify Song Plaque**\n• **3D Laser Crystal Keepsake Cube**\n• **Wax-Sealed Acrylic Memory Frames**",
+            suggestions: ["Gift Boutique dekho 🎁", "WhatsApp support 📲"],
+            action: { label: "View Keepsake Boutique 🎁", url: "products.html" }
+          };
+        }
+
+        // 11. Shayari or Poetry request
+        if (q.includes('shayari') || q.includes('kavita') || q.includes('poem') || q.includes('lines') || q.includes('quote')) {
+          if (isHindi) {
+            return {
+              reply: "ज़िंदगी के ख़ास लम्हों के लिए एक ख़ूबसूरत शेर: 🌸✨\n\n*“तेरी मुस्कान से रौशन हर एक शाम रहे,*\n*ज़िंदगी के हर सफ़र में बस तेरा ही नाम रहे।*\n*वक़्त की इस भीड़ में जो मिला तेरा साथ,*\n*अब दुआ है कि ये लम्हा उम्र भर हमारे साथ रहे।”* 💖",
+              suggestions: ["और शायरी सुनाओ 🌸", "जन्मदिन की बधाई लिखो 🎂", "टेम्पलेट्स देखें ✨"],
+              action: { label: "Customize in Studio 🎨", url: "builder.html" }
+            };
+          }
+          return {
+            reply: "Dil ko chhoo lene wali do pyari linein: 🌸✨\n\n*“Teri muskaan se roshan har ek shaam rahe,*\n*Zindagi ke har safar me bas tera hi naam rahe.*\n*Waqt ki is bheed me jo mila tera sath,*\n*Ab dua hai ye khoobsurat ehsaas hamesha barkarar rahe.”* 💖",
+            suggestions: ["Aur lines likho ✨", "Isse template me daalo 🎨", "English translation do 💌"],
+            action: { label: "Personalize in Studio 🎨", url: "builder.html" }
+          };
+        }
+
+        // 12. Default General Friendly Assistant
         if (isHindi) {
           return {
-            reply: "नमस्ते! ✨ मैं आपकी बात समझ रही हूँ। क्या आप कोई ख़ास संदेश या शायरी लिखवाना चाहते हैं?",
-            suggestions: ["जन्मदिन की बधाई 🎂", "रोमांटिक शायरी 💌", "टेम्पलेट्स देखें 🌸"]
+            reply: "नमस्ते! मैं Vanvi Moments की AI Assistant (Panda) हूँ 🌸✨\nबताइए, आज आपके सेलिब्रेशन में मैं क्या मदद करूँ? इनविटेशन चुनना हो, ऑर्डर ट्रैक करना हो या कस्टमाइज़ करना!",
+            suggestions: ["Floral Mehendi ₹499 🌿", "Wedding Suites 💍", "Order Track Karo 📦"]
           };
         }
         return {
-          reply: "Haan, main samajh rahi hoon! ✨ Batao, aaj kiske liye kuch cute likhwana hai ya koi celebration plan karni hai?",
-          suggestions: ["Birthday surprise plan karo 🎂", "Romantic love lines 💖", "Ek creative idea do ✨"]
+          reply: "नमस्ते! Main Vanvi Moments ki AI Assistant (Panda) hoon 🌸✨\nBataiye, aaj aapke celebration me main kya help karun? Invitation chunna ho, order track karna ho ya customize karna!",
+          suggestions: ["Floral Mehendi ₹499 🌿", "Wedding Suites 💍", "Track My Order 📦"]
         };
       };
 
@@ -1329,6 +1513,7 @@
       const welcomeCard = document.getElementById('welcomeCard');
       const chatInput = document.getElementById('userInput');
       const btnSend = document.getElementById('btnSend');
+      const btnSearch = document.getElementById('btnSearch');
 
       // --- 1. DYNAMIC ORB STATES (Idle, Thinking, Responding, Error) ---
       function setOrbState(state) {
@@ -1366,16 +1551,20 @@
           .replace(/\n/g, '<br/>');
       }
 
-      function scrollToBottom(forceInstant = true) {
+      // Smooth Non-Jittery Auto-Scroll Engine
+      function scrollToBottom(force = false) {
         if (!chatFeed) return;
-        try {
-          chatFeed.scrollTop = chatFeed.scrollHeight + 5000;
-          const anchor = document.getElementById('chatBottomAnchor');
-          if (anchor) {
-            anchor.scrollIntoView({ block: 'end', inline: 'nearest', behavior: forceInstant ? 'instant' : 'smooth' });
-          }
-        } catch(e) {
-          if (chatFeed) chatFeed.scrollTop = chatFeed.scrollHeight;
+        const scrollHeight = chatFeed.scrollHeight;
+        const currentScroll = chatFeed.scrollTop;
+        const clientHeight = chatFeed.clientHeight;
+        const distanceFromBottom = scrollHeight - currentScroll - clientHeight;
+
+        // Only auto-scroll if user is already near bottom (within 180px) or forced
+        if (force || distanceFromBottom < 180) {
+          chatFeed.scrollTo({
+            top: scrollHeight,
+            behavior: force ? 'auto' : 'smooth'
+          });
         }
       }
 
@@ -1440,14 +1629,13 @@
         row.innerHTML = `
           <div class="msg-clay-avatar" onclick="triggerPandaCheer()" title="Vanvi Baby Panda">${PANDA_AVATAR_HTML}</div>
           <div class="msg-content-wrapper">
-            <div class="clay-bubble">
-              <div class="clay-typing-box">
-                <span class="clay-typing-label">Vanvi is typing</span>
-                <div class="clay-typing-dots">
-                  <div class="clay-dot"></div>
-                  <div class="clay-dot"></div>
-                  <div class="clay-dot"></div>
-                </div>
+            <div class="vanvi-micro-thinking-pill">
+              <span class="panda-mini-avatar">🐼</span>
+              <span class="thinking-pill-text">Panda is thinking… ✨</span>
+              <div class="micro-typing-dots">
+                <span class="micro-dot"></span>
+                <span class="micro-dot"></span>
+                <span class="micro-dot"></span>
               </div>
             </div>
           </div>
@@ -1461,7 +1649,7 @@
         if (el) el.remove();
       }
 
-      // Natural Streaming Response
+      // Natural Streaming Response with Throttled Auto-Scroll
       async function streamAiResponse(fullText, suggestions = [], action = null) {
         setOrbState('responding');
         const row = document.createElement('div');
@@ -1501,25 +1689,23 @@
         const acts = document.getElementById('acts_' + msgId);
         const sugg = document.getElementById('sugg_' + msgId);
 
-        // Word-by-word streaming with persistent instant auto-scroll
+        // Word-by-word streaming with throttled smooth auto-scroll
         const tokens = fullText.split(/(?<=\s)/);
         let accumulated = '';
         for (let i = 0; i < tokens.length; i++) {
           accumulated += tokens[i];
           bubble.innerHTML = formatText(accumulated);
-          scrollToBottom(true);
-          await new Promise(r => setTimeout(r, Math.random() * 12 + 5));
+          if (i % 3 === 0) scrollToBottom(false);
+          await new Promise(r => setTimeout(r, Math.random() * 10 + 6));
         }
 
         if (acts) acts.style.display = 'flex';
         if (sugg) sugg.style.display = 'flex';
         scrollToBottom(true);
-        setTimeout(() => scrollToBottom(true), 40);
-        setTimeout(() => scrollToBottom(true), 120);
         setOrbState('idle');
       }
 
-      // --- 4. SECURE SERVER GEMINI DISPATCH ---
+      // --- 4. SECURE SERVER GEMINI DISPATCH & SMART LOCAL BRAIN ---
       async function handleSend() {
         if (isBusy) return;
         const text = chatInput.value.trim();
@@ -1530,6 +1716,7 @@
         if (btnClear) btnClear.style.display = 'none';
         isBusy = true;
         btnSend.disabled = true;
+        if (btnSearch) btnSearch.disabled = true;
         lastUserMessage = text;
 
         addUserBubble(text);
@@ -1547,8 +1734,8 @@
           if (typeof window.vanviResetAesthetics === 'function') {
             window.vanviResetAesthetics();
           } else {
-            localStorage.setItem('vanvi_theme', 'clay');
-            localStorage.setItem('vanvi_font', 'royal');
+            localStorage.setItem('vanvi_aesthetic_theme', 'clay');
+            localStorage.setItem('vanvi_font_pref', 'royal');
             document.documentElement.setAttribute('data-vanvi-theme', 'clay');
             document.documentElement.setAttribute('data-vanvi-font', 'royal');
           }
@@ -1558,7 +1745,7 @@
           if (typeof window.setVanviTheme === 'function') {
             window.setVanviTheme('emerald');
           } else {
-            localStorage.setItem('vanvi_theme', 'emerald');
+            localStorage.setItem('vanvi_aesthetic_theme', 'emerald');
             document.documentElement.setAttribute('data-vanvi-theme', 'emerald');
           }
           replyText = "Maine **Emerald Night** luxury theme activate kar diya hai! 🌲 Obsidian (#0B0D0C), Deep Emerald, Champagne Gold aur Mint accents poori website par apply ho gaye hain.";
@@ -1567,7 +1754,7 @@
           if (typeof window.setVanviTheme === 'function') {
             window.setVanviTheme('clay');
           } else {
-            localStorage.setItem('vanvi_theme', 'clay');
+            localStorage.setItem('vanvi_aesthetic_theme', 'clay');
             document.documentElement.setAttribute('data-vanvi-theme', 'clay');
           }
           replyText = "Maine **Day Bloom** signature theme activate kar diya hai! 🌸 Soft rose blush aur frosted glass aesthetics apply ho chuke hain.";
@@ -1578,15 +1765,18 @@
         const isHindiScript = /[\u0900-\u097F]/.test(text) || text.toLowerCase().includes('hindi');
         const detectedLang = isHindiScript ? 'hi' : 'hinglish';
 
-        // 1. Try unified VanviAPI SDK if not an aesthetic command
+        // 1. Try unified VanviAPI SDK with fast timeout
         if (!replyText) {
           try {
             if (window.VanviAPI && window.VanviAPI.ai) {
-              const res = await window.VanviAPI.ai.chat({
-                message: text,
-                history: messageHistory,
-                userContext: { source: 'vanvi-assistant-clay', lang: detectedLang }
-              });
+              const res = await Promise.race([
+                window.VanviAPI.ai.chat({
+                  message: text,
+                  history: messageHistory,
+                  userContext: { source: 'vanvi-assistant-clay', lang: detectedLang }
+                }),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 2500))
+              ]);
               if (res && res.success && res.reply) {
                 replyText = res.reply;
                 suggestions = res.suggestions || [];
@@ -1598,18 +1788,21 @@
 
         // 2. Direct Backend Fetch Backup
         if (!replyText) {
-          const candidateUrls = ['/api/ai/chat', 'http://localhost:3000/api/ai/chat', 'http://127.0.0.1:3000/api/ai/chat'];
+          const candidateUrls = ['http://localhost:3000/api/ai/chat', 'http://127.0.0.1:3000/api/ai/chat', '/api/ai/chat'];
           for (const url of candidateUrls) {
             try {
-              const fetchRes = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  message: text,
-                  history: messageHistory,
-                  userContext: { source: 'vanvi-assistant-clay', lang: detectedLang }
-                })
-              });
+              const fetchRes = await Promise.race([
+                fetch(url, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    message: text,
+                    history: messageHistory,
+                    userContext: { source: 'vanvi-assistant-clay', lang: detectedLang }
+                  })
+                }),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 2200))
+              ]);
               if (fetchRes.ok) {
                 const data = await fetchRes.json();
                 if (data && data.success && data.reply) {
@@ -1623,20 +1816,16 @@
           }
         }
 
-        // 3. Resilient Emotional Fallback if offline
+        // 3. Super-Smart Instant Local Companion Brain (Guarantees Perfect Answers!)
         if (!replyText) {
-          await new Promise(r => setTimeout(r, 300));
-          if (typeof window.generateLocalAssistantReply === 'function') {
-            const fallback = window.generateLocalAssistantReply(text);
-            replyText = fallback.reply;
-            suggestions = fallback.suggestions;
-          } else {
-            replyText = isHindiScript
-              ? "नमस्ते! ✨ मैं आपकी बात समझ रही हूँ। क्या आप कोई ख़ास संदेश या शायरी लिखवाना चाहते हैं?"
-              : "Haan, main samajh rahi hoon! ✨ Batao, aaj kiske liye kuch cute likhwana hai ya koi celebration plan karni hai?";
-            suggestions = ["Birthday surprise plan karo 🎂", "Romantic love lines 💖", "Ek creative idea do ✨"];
-          }
+          const fallback = window.generateLocalAssistantReply(text);
+          replyText = fallback.reply;
+          suggestions = fallback.suggestions || [];
+          action = fallback.action || null;
         }
+
+        // Add 3D thinking deliberation pause so the 3D state feels realistic and smooth
+        await new Promise(r => setTimeout(r, 650));
 
         messageHistory.push({ role: 'user', text });
         messageHistory.push({ role: 'assistant', text: replyText });
@@ -1646,6 +1835,7 @@
 
         isBusy = false;
         btnSend.disabled = false;
+        if (btnSearch) btnSearch.disabled = false;
         chatInput.focus();
       }
 
@@ -1676,7 +1866,7 @@
       window.shareWhatsApp = function(text) {
         if (!text) return;
         const clean = String(text).replace(/<[^>]*>/g, '').trim();
-        const url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(clean + '\n\n— Written with Vanvi Moments AI 🌸✨');
+        const url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(clean + '\n\n— Crafted with Vanvi Moments AI ✨ https://vanvimoments.shop');
         window.open(url, '_blank', 'noopener,noreferrer');
       };
 
@@ -1808,12 +1998,27 @@
       });
       btnSend.addEventListener('click', handleSend);
 
+      // Search button interactive trigger wiring
+      if (btnSearch) {
+        btnSearch.addEventListener('click', () => {
+          if (chatInput.value.trim().length > 0) {
+            handleSend();
+          } else {
+            chatInput.focus();
+            if (statusText) {
+              statusText.textContent = 'Search or ask Vanvi… ✨';
+              setTimeout(() => { if (statusText) statusText.textContent = 'Active'; }, 2000);
+            }
+          }
+        });
+      }
+
       // Smooth scroll on focus and resize (e.g. mobile software keyboard popping up)
       chatInput.addEventListener('focus', () => {
-        setTimeout(scrollToBottom, 260);
+        setTimeout(() => scrollToBottom(true), 280);
       });
       window.addEventListener('resize', () => {
-        setTimeout(scrollToBottom, 150);
+        setTimeout(() => scrollToBottom(false), 150);
       });
 
     })();
