@@ -137,6 +137,52 @@
       builderPath: 'templates/royal-vows-indian-wedding/builder.html'
     },
     // -------------------------------------------------------------
+    // Royal Vivah HD Video Wedding Invitation (InviteMaker Style)
+    // -------------------------------------------------------------
+    {
+      id: 'video-royal-vivah',
+      slug: 'video-royal-vivah',
+      sku: 'VM-VID-VIVAH-01',
+      name: 'Royal Vivah HD Video Invite',
+      aliases: ['video-royal-vivah', 'royal-vivah-video', 'wedding-video-invite', 'invitemaker-wedding'],
+      category: 'Wedding',
+      categorySlug: 'wedding',
+      categoryName: 'Wedding & Engagement',
+      price: 1499,
+      originalPrice: 2499,
+      isFree: false,
+      tier: 'HD Video Special',
+      badge: '🎬 HD Video Invite',
+      type: 'Cinematic 45s HD Motion Video & WhatsApp Status',
+      icon: '🎬',
+      thumbnail: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=700&auto=format&fit=crop',
+      soundtrack: 'Auspicious Royal Shehnai & Santoor Symphony',
+      tags: ['wedding', 'video', 'mp4', 'royal-vivah', 'invitemaker', 'reels', 'whatsapp-status', 'shehnai', 'ganesha'],
+      description: 'InviteMaker-style cinematic 45-second HD customizable wedding invitation video. Features 3D golden Ganesha shloka, royal couple introduction, auspicious muhurat, 4 sacred ceremonies timeline, venue reveal, shehnai audio, and instant personalized MP4 rendering.',
+      features: [
+        'True 1080p 60fps HD MP4 Video Generation & Direct Download',
+        '9:16 Vertical Ratio tailored for WhatsApp Status, Stories & Reels',
+        'Instant Live Preview Video Player with Scrub & Audio Controls',
+        'Act 1: Auspicious Shree Ganeshay Namah & Divine Shloka Reveal',
+        'Act 2: Royal Couple Portrait & Parents Dedication Cards',
+        'Act 3: Save The Date & Auspicious Lagna Muhurat Callout',
+        'Act 4: 4 Sacred Ceremonies Timeline (Haldi, Mehendi, Sangeet, Vivah)',
+        'Act 5: Grand Royal Venue Reveal & Family RSVP Cards',
+        'Customizable Music (Shehnai, Santoor, Flute or Upload MP3)',
+        'Custom Background Video MP4 Support or Royal Golden Particle Canvas',
+        'Razorpay Secure Checkout & Instant Clean HD MP4 Export Unlock'
+      ],
+      customizableFields: ['Groom & Bride Names', 'Parents Honors', 'Wedding Date & Muhurat', '4 Ceremonies Timings', 'Couple Photo', 'Soundtrack / Custom Audio', 'Custom Video Background'],
+      previewOccasion: 'Shubh Vivah Celebration',
+      previewRecipient: 'Aryan & Pooja',
+      previewSender: 'Sharma & Verma Families',
+      previewMessage: 'With the divine blessings of Lord Ganesha, join us as we begin our forever journey together.',
+      accentColor: '#D4AF37',
+      templatePath: 'templates/video-royal-vivah/index.html',
+      previewPath: 'templates/video-royal-vivah/preview.html',
+      builderPath: 'templates/video-royal-vivah/builder.html'
+    },
+    // -------------------------------------------------------------
     // 0. Flagship Royal Palace Wedding & Heritage Keepsakes
     // -------------------------------------------------------------
     {

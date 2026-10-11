@@ -2317,7 +2317,11 @@ function vanviGoBack(fallback) {
 
         const linkCustomizeInBuilder = document.getElementById('linkCustomizeInBuilder');
         if (linkCustomizeInBuilder) {
-          linkCustomizeInBuilder.href = `builder.html?template=${encodeURIComponent(templateId)}&orderId=${encodeURIComponent(displayOrderId)}&recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}`;
+          if (matched && matched.builderPath) {
+            linkCustomizeInBuilder.href = `${matched.builderPath}?paid=true&orderId=${encodeURIComponent(displayOrderId)}&recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}`;
+          } else {
+            linkCustomizeInBuilder.href = `builder.html?template=${encodeURIComponent(templateId)}&orderId=${encodeURIComponent(displayOrderId)}&recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}`;
+          }
         }
 
         const linkOpenShareStudio = document.getElementById('linkOpenShareStudio');

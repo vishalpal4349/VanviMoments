@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Royal Vivah HD Video Studio — Vanvi Moments</title>
+  <meta name="description" content="Customize and render your cinematic 45s HD Indian wedding video invitation in real-time. Inspired by InviteMaker IM254.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/vanvi-global-experience.css" />
+
+  <style>
+    :root {
+      --ruby-dark: #1b070f;
+      --ruby-card: #280b16;
+      --ruby-accent: #e11d48;
+      --gold-primary: #D4AF37;
+      --gold-light: #F3E5AB;
+      --gold-glow: rgba(212, 175, 55, 0.35);
+      --border-subtle: rgba(212, 175, 55, 0.25);
+      --border-active: #D4AF37;
+      --text-main: #FFFFFF;
+      --text-muted: #D1B3BA;
+      --text-dim: #9E7D86;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: #0d0306;
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation */
+    .studio-header {
+      height: 64px;
+      background: rgba(27, 7, 15, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-badge {
+      background: linear-gradient(135deg, var(--gold-primary), #B8860B);
+      color: #1b070f;
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 99px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-save-draft {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-save-draft:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+    .btn-download-hd {
+      background: linear-gradient(135deg, var(--gold-primary), #B8860B);
+      color: #1b070f;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 16px var(--gold-glow);
+      transition: all 0.2s;
+    }
+    .btn-download-hd:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+    }
+
+    /* Main Studio Layout */
+    .studio-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      max-width: 1540px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Left Panel: Customizer Wizard */
+    .customizer-panel {
+      flex: 1;
+      max-width: 620px;
+      padding: 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border-subtle);
+      background: rgba(20, 5, 11, 0.6);
+    }
+    .wizard-steps-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+    }
+    .wizard-steps-nav::-webkit-scrollbar { display: none; }
+    .step-tab {
+      background: rgba(40, 11, 22, 0.7);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .step-tab.active {
+      background: var(--gold-primary);
+      color: #1b070f;
+      border-color: var(--gold-primary);
+      box-shadow: 0 2px 10px var(--gold-glow);
+      font-weight: 700;
+    }
+
+    .form-section {
+      display: none;
+      background: var(--ruby-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+    .form-section.active {
+      display: block;
+      animation: fadeIn 0.25s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .form-group-full {
+      grid-column: 1 / -1;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .form-control {
+      width: 100%;
+      background: rgba(15, 3, 8, 0.85);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.85rem;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: all 0.2s;
+    }
+    .form-control:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    .wizard-footer-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+    }
+    .btn-nav-prev, .btn-nav-next {
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-nav-prev {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+    .btn-nav-next {
+      background: var(--gold-primary);
+      border: none;
+      color: #1b070f;
+    }
+
+    /* Right Panel: Video Player Stage */
+    .preview-stage {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: radial-gradient(circle at center, rgba(35, 10, 20, 0.6) 0%, #0d0306 80%);
+      position: relative;
+    }
+
+    /* Smartphone 9:16 Mockup */
+    .phone-mockup {
+      width: 340px;
+      max-width: 95%;
+      aspect-ratio: 9 / 16;
+      background: #000;
+      border-radius: 36px;
+      border: 4px solid #331521;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.15);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .phone-notch {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 14px;
+      background: #111;
+      border-radius: 99px;
+      z-index: 20;
+    }
+
+    #videoCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: #110307;
+      cursor: pointer;
+    }
+
+    /* Video Player Controls Bar */
+    .player-controls-wrap {
+      width: 340px;
+      max-width: 95%;
+      margin-top: 14px;
+      background: var(--ruby-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .scrubber-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 99px;
+      position: relative;
+      cursor: pointer;
+    }
+    .scrubber-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #e11d48, var(--gold-primary));
+      border-radius: 99px;
+    }
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .controls-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-play-pause {
+      background: var(--gold-primary);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1b070f;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .time-display {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      font-variant-numeric: tabular-nums;
+    }
+    .controls-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-icon-ctl {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .btn-icon-ctl:hover {
+      color: #fff;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-card {
+      background: #1d0711;
+      border: 1px solid var(--gold-primary);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 30px var(--gold-glow);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 480px;
+      padding: 28px;
+      text-align: center;
+      position: relative;
+    }
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+    .modal-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .render-progress-bar {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 18px 0;
+      border: 1px solid var(--border-subtle);
+    }
+    .render-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #e11d48, var(--gold-primary));
+      transition: width 0.1s linear;
+    }
+    .modal-btn-pay {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-primary), #B8860B);
+      color: #1b070f;
+      border: none;
+      padding: 13px;
+      border-radius: 99px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 4px 18px var(--gold-glow);
+      margin-top: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .studio-container {
+        flex-direction: column-reverse;
+      }
+      .customizer-panel {
+        max-width: 100%;
+        border-right: none;
+        border-top: 1px solid var(--border-subtle);
+      }
+      .preview-stage {
+        padding: 16px 12px;
+      }
+      .phone-mockup {
+        width: 290px;
+      }
+      .player-controls-wrap {
+        width: 290px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="studio-header">
+    <div class="header-left">
+      <a href="../../wedding.html" style="text-decoration:none; color:var(--gold-primary); font-size:1.1rem;">←</a>
+      <div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <h1 class="brand-title">Royal Vivah Studio</h1>
+          <span class="brand-badge">🎬 45s HD Video</span>
+        </div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-save-draft" onclick="saveDraft()">💾 Save Draft</button>
+      <button class="btn-download-hd" onclick="handleHdDownloadClick()">
+        <span>✦ Download HD Video</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Studio Workspace -->
+  <main class="studio-container">
+
+    <!-- Left Panel: Customizer Wizard -->
+    <section class="customizer-panel">
+      <!-- Steps Navigation Pills -->
+      <nav class="wizard-steps-nav">
+        <div class="step-tab active" onclick="goToStep(1)"><span>💑</span> Couple &amp; Parents</div>
+        <div class="step-tab" onclick="goToStep(2)"><span>🗓️</span> Date &amp; Muhurat</div>
+        <div class="step-tab" onclick="goToStep(3)"><span>🪔</span> 4 Ceremonies</div>
+        <div class="step-tab" onclick="goToStep(4)"><span>🏛️</span> Venue &amp; RSVP</div>
+        <div class="step-tab" onclick="goToStep(5)"><span>🎵</span> Music &amp; Video</div>
+      </nav>
+
+      <!-- Step 1: Couple & Parents -->
+      <div class="form-section active" id="step-1">
+        <h2 class="section-title">💑 Royal Couple &amp; Family Dedication</h2>
+        <p class="section-desc">Appears in Act 2 of the video with golden calligraphic typography.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Groom's First Name</label>
+            <input type="text" class="form-control" id="inpGroom" value="Aryan" oninput="syncLive()">
+          </div>
+          <div class="form-group">
+            <label>Bride's First Name</label>
+            <input type="text" class="form-control" id="inpBride" value="Pooja" oninput="syncLive()">
+          </div>
+          <div class="form-group form-group-full">
+            <label>Groom's Parents</label>
+            <input type="text" class="form-control" id="inpGroomParents" value="Smt. Rekha &amp; Shri Mahendra Verma" oninput="syncLive()">
+          </div>
+          <div class="form-group form-group-full">
+            <label>Bride's Parents</label>
+            <input type="text" class="form-control" id="inpBrideParents" value="Smt. Sunita &amp; Shri Rajesh Sharma" oninput="syncLive()">
+          </div>
+          <div class="form-group form-group-full">
+            <label>Couple Portrait Photo (Optional)</label>
+            <input type="file" accept="image/*" class="form-control" id="inpPhotoFile" onchange="handlePhotoUpload(event)">
+            <p style="font-size:0.72rem; color:var(--text-dim); margin-top:4px;">Upload your high-res portrait to appear in the ornate royal golden circle frame.</p>
+          </div>
+        </div>
+        <div class="wizard-footer-nav">
+          <div></div>
+          <button class="btn-nav-next" onclick="goToStep(2)">Next: Date &amp; Muhurat →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Date & Muhurat -->
+      <div class="form-section" id="step-2">
+        <h2 class="section-title">🗓️ Auspicious Date &amp; Muhurat</h2>
+        <p class="section-desc">Appears in Act 3 with the royal golden kalash and shloka ribbon.</p>
+        <div class="form-grid">
+          <div class="form-group form-group-full">
+            <label>Wedding Date (Display String)</label>
+            <input type="text" class="form-control" id="inpDate" value="Friday, 12th December 2026" oninput="syncLive()">
+          </div>
+          <div class="form-group form-group-full">
+            <label>Shubh Muhurat Time</label>
+            <input type="text" class="form-control" id="inpMuhurat" value="Shubh Godhuli Bela — 07:15 PM" oninput="syncLive()">
+          </div>
+          <div class="form-group form-group-full">
+            <label>Destination City</label>
+            <input type="text" class="form-control" id="inpCity" value="Udaipur, Rajasthan" oninput="syncLive()">
+          </div>
+        </div>
+        <div class="wizard-footer-nav">
+          <button class="btn-nav-prev" onclick="goToStep(1)">← Previous</button>
+          <button class="btn-nav-next" onclick="goToStep(3)">Next: 4 Ceremonies →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: 4 Ceremonies -->
+      <div class="form-section" id="step-3">
+        <h2 class="section-title">🪔 Sacred Ceremonies Itinerary</h2>
+        <p class="section-desc">Animated staggered cards shown in Act 4 of your cinematic video.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Ceremony 1 Name</label>
+            <input type="text" class="form-control" id="inpEv1Name" value="Haldi Ceremony" oninput="syncLive()">
+          </div>
+          <div class="form-group">
+            <label>Ceremony 1 Timing</label>
+            <input type="text" class="form-control" id="inpEv1Time" value="10 Dec • 10:00 AM" oninput="syncLive()">
+          </div>
+
+          <div class="form-group">
+            <label>Ceremony 2 Name</label>
+            <input type="text" class="form-control" id="inpEv2Name" value="Mehendi &amp; Sangeet" oninput="syncLive()">
+          </div>
+          <div class="form-group">
+            <label>Ceremony 2 Timing</label>
+            <input type="text" class="form-control" id="inpEv2Time" value="11 Dec • 06:00 PM" oninput="syncLive()">
+          </div>
+
+          <div class="form-group">
+            <label>Ceremony 3 Name</label>
+            <input type="text" class="form-control" id="inpEv3Name" value="Shubh Vivah (Pheras)" oninput="syncLive()">
+          </div>
+          <div class="form-group">
+            <label>Ceremony 3 Timing</label>
+            <input type="text" class="form-control" id="inpEv3Time" value="12 Dec • 07:00 PM" oninput="syncLive()">
+          </div>
+
+          <div class="form-group">
+            <label>Ceremony 4 Name</label>
+            <input type="text" class="form-control" id="inpEv4Name" value="Grand Royal Reception" oninput="syncLive()">
+          </div>
+          <div class="form-group">
+            <label>Ceremony 4 Timing</label>
+            <input type="text" class="form-control" id="inpEv4Time" value="13 Dec • 08:00 PM" oninput="syncLive()">
+          </div>
+        </div>
+        <div class="wizard-footer-nav">
+          <button class="btn-nav-prev" onclick="goToStep(2)">← Previous</button>
+          <button class="btn-nav-next" onclick="goToStep(4)">Next: Venue &amp; RSVP →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Venue & RSVP -->
+      <div class="form-section" id="step-4">
+        <h2 class="section-title">🏛️ Grand Venue &amp; Family RSVP</h2>
+        <p class="section-desc">Grand palace reveal and invitation blessing in Act 5.</p>
+        <div class="form-grid">
+          <div class="form-group form-group-full">
+            <label>Palace / Venue Name</label>
+            <input type="text" class="form-control" id="inpVenueName" value="The Grand Palace Resort &amp; Royal Lawns" oninput="syncLive()">
+          </div>
+          <div class="form-group form-group-full">
+            <label>Venue Address</label>
+            <input type="text" class="form-control" id="inpVenueAddress" value="Fateh Sagar Lake Road, Udaipur, Rajasthan" oninput="syncLive()">
+          </div>
+          <div class="form-group">
+            <label>RSVP Host / Families</label>
+            <input type="text" class="form-control" id="inpRsvpName" value="Sharma &amp; Verma Families" oninput="syncLive()">
+          </div>
+          <div class="form-group">
+            <label>RSVP Contact Number</label>
+            <input type="text" class="form-control" id="inpRsvpPhone" value="+91 98765 43210" oninput="syncLive()">
+          </div>
+        </div>
+        <div class="wizard-footer-nav">
+          <button class="btn-nav-prev" onclick="goToStep(3)">← Previous</button>
+          <button class="btn-nav-next" onclick="goToStep(5)">Next: Music &amp; Media →</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Music & Video -->
+      <div class="form-section" id="step-5">
+        <h2 class="section-title">🎵 Music &amp; Background Video</h2>
+        <p class="section-desc">Customize the soundtrack or upload a motion background video.</p>
+        <div class="form-grid">
+          <div class="form-group form-group-full">
+            <label>Background Soundtrack</label>
+            <select class="form-control" id="selMusic">
+              <option value="santoor">Auspicious Raag Yaman &amp; Santoor (Built-in)</option>
+              <option value="shehnai">Royal Shehnai Mangal Dhun (Synthesized)</option>
+            </select>
+          </div>
+          <div class="form-group form-group-full">
+            <label>Custom Audio MP3 (Optional)</label>
+            <input type="file" accept="audio/*" class="form-control" id="inpAudioFile" onchange="handleAudioUpload(event)">
+            <p style="font-size:0.72rem; color:var(--text-dim); margin-top:4px;">Upload your favourite Bollywood / Classical wedding song.</p>
+          </div>
+          <div class="form-group form-group-full">
+            <label>Custom Background MP4 Video (Optional)</label>
+            <input type="file" accept="video/mp4,video/webm" class="form-control" id="inpVideoFile" onchange="handleBgVideoUpload(event)">
+            <p style="font-size:0.72rem; color:var(--text-dim); margin-top:4px;">Have an InviteMaker or custom motion template video? Upload it to composite live text on top!</p>
+          </div>
+        </div>
+        <div class="wizard-footer-nav">
+          <button class="btn-nav-prev" onclick="goToStep(4)">← Previous</button>
+          <button class="btn-nav-next" style="background:linear-gradient(135deg, var(--gold-primary), #B8860B);" onclick="handleHdDownloadClick()">Download HD Video (₹1,499) ✦</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Panel: Video Stage -->
+    <section class="preview-stage">
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <canvas id="videoCanvas"></canvas>
+      </div>
+
+      <!-- Player Controls -->
+      <div class="player-controls-wrap">
+        <div class="scrubber-track" id="scrubberTrack" onclick="handleScrub(event)">
+          <div class="scrubber-progress" id="scrubberProgress"></div>
+        </div>
+        <div class="controls-row">
+          <div class="controls-left">
+            <button class="btn-play-pause" id="btnPlayPause" onclick="togglePlay()">▶</button>
+            <span class="time-display" id="timeDisplay">00:00 / 00:45</span>
+          </div>
+          <div class="controls-right">
+            <button class="btn-icon-ctl" id="btnMute" onclick="toggleMute()" title="Mute/Unmute">🔊</button>
+            <button class="btn-icon-ctl" onclick="seekAct(0)" title="Act 1 (Ganesh)">01</button>
+            <button class="btn-icon-ctl" onclick="seekAct(8)" title="Act 2 (Couple)">02</button>
+            <button class="btn-icon-ctl" onclick="seekAct(18)" title="Act 3 (Date)">03</button>
+            <button class="btn-icon-ctl" onclick="seekAct(26)" title="Act 4 (Events)">04</button>
+            <button class="btn-icon-ctl" onclick="seekAct(36)" title="Act 5 (Venue)">05</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Checkout & Render Modal -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-card">
+      <h3 class="modal-title" id="modalTitle">Unlock HD Wedding Video</h3>
+      <p class="modal-subtitle" id="modalSub">Get your watermark-free, full 1080p 60fps personalized MP4 video ready for WhatsApp Status, Stories &amp; Family Groups.</p>
+
+      <div id="unpaidContent">
+        <div style="background:rgba(255,255,255,0.06); padding:14px; border-radius:12px; margin-bottom:16px; text-align:left; font-size:0.82rem; line-height:1.6;">
+          <div style="color:var(--gold-primary); font-weight:700; margin-bottom:4px;">✨ What's Included:</div>
+          <div>✓ Watermark-free 1080p Full HD MP4 Video</div>
+          <div>✓ 9:16 Vertical Ratio (WhatsApp, Reels &amp; Stories)</div>
+          <div>✓ High-Bitrate Auspicious Classical Soundtrack</div>
+          <div>✓ Cloudinary Permanent Cloud Backup &amp; Share Link</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:0 6px;">
+          <span style="font-size:0.85rem; color:var(--text-muted);">Special Offer:</span>
+          <div>
+            <span style="text-decoration:line-through; font-size:0.85rem; color:var(--text-dim); margin-right:6px;">₹2,499</span>
+            <span style="font-size:1.3rem; font-weight:800; color:var(--gold-primary);">₹1,499</span>
+          </div>
+        </div>
+        <button class="modal-btn-pay" onclick="proceedToPayment()">
+          Proceed to Checkout (₹1,499) ✦
+        </button>
+        <button onclick="simulateTestUnlock()" style="background:none; border:none; color:var(--text-dim); font-size:0.75rem; margin-top:10px; cursor:pointer; text-decoration:underline;">
+          (Dev/Test: Instant Unlock Demo)
+        </button>
+      </div>
+
+      <!-- Live Rendering Progress View -->
+      <div id="renderingContent" style="display:none;">
+        <div class="render-progress-bar">
+          <div class="render-progress-fill" id="renderProgressFill"></div>
+        </div>
+        <div style="font-size:0.82rem; color:var(--gold-light);" id="renderStatusText">
+          Encoding 1080p video frames (0%)...
+        </div>
+        <p style="font-size:0.72rem; color:var(--text-dim); margin-top:8px;">
+          Please keep this tab open while your customized video is rendering.
+        </p>
+      </div>
+
+      <div style="margin-top:16px;">
+        <button onclick="closeModal()" style="background:none; border:none; color:var(--text-dim); font-size:0.75rem; cursor:pointer;">
+          ← Back to Studio Editing
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="video-engine.js"></script>
+  <script>
+    let engine;
+    let isUnlocked = false;
+
+    // Check URL params for order payment success
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('paid') === 'true' || urlParams.get('unlocked') === 'true') {
+      isUnlocked = true;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('videoCanvas');
+      engine = new WeddingVideoEngine(canvas, {
+        duration: 45,
+        watermark: !isUnlocked,
+        onTimeUpdate: (current, duration) => {
+          const prog = (current / duration) * 100;
+          document.getElementById('scrubberProgress').style.width = prog + '%';
+          document.getElementById('timeDisplay').textContent = formatTime(current) + ' / ' + formatTime(duration);
+        },
+        onEnded: () => {
+          document.getElementById('btnPlayPause').textContent = '▶';
+        }
+      });
+
+      // Load saved draft if present
+      const saved = localStorage.getItem('vanvi_draft_video_royal_vivah');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          populateFields(parsed);
+          syncLive();
+        } catch(e) {}
+      } else {
+        syncLive();
+      }
+
+      // Initial draw
+      engine.drawFrame(0);
+    });
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    function togglePlay() {
+      if (!engine) return;
+      engine.togglePlay();
+      document.getElementById('btnPlayPause').textContent = engine.isPlaying ? '❚❚' : '▶';
+    }
+
+    function toggleMute() {
+      if (!engine) return;
+      engine.setMute(!engine.isMuted);
+      document.getElementById('btnMute').textContent = engine.isMuted ? '🔇' : '🔊';
+    }
+
+    function handleScrub(e) {
+      const track = document.getElementById('scrubberTrack');
+      const rect = track.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      engine.seek(pos * engine.duration);
+    }
+
+    function seekAct(time) {
+      if (!engine) return;
+      engine.seek(time);
+    }
+
+    function goToStep(num) {
+      document.querySelectorAll('.step-tab').forEach((t, i) => {
+        t.classList.toggle('active', i + 1 === num);
+      });
+      document.querySelectorAll('.form-section').forEach((s, i) => {
+        s.classList.toggle('active', i + 1 === num);
+      });
+    }
+
+    function syncLive() {
+      if (!engine) return;
+      const data = {
+        groomName: document.getElementById('inpGroom').value || 'Aryan',
+        brideName: document.getElementById('inpBride').value || 'Pooja',
+        groomParents: document.getElementById('inpGroomParents').value || 'Parents',
+        brideParents: document.getElementById('inpBrideParents').value || 'Parents',
+        weddingDate: document.getElementById('inpDate').value || 'Friday, 12th December 2026',
+        muhuratTime: document.getElementById('inpMuhurat').value || 'Shubh Godhuli Bela — 07:15 PM',
+        city: document.getElementById('inpCity').value || 'Udaipur, Rajasthan',
+        events: [
+          { name: document.getElementById('inpEv1Name').value, date: '10 Dec', time: document.getElementById('inpEv1Time').value },
+          { name: document.getElementById('inpEv2Name').value, date: '11 Dec', time: document.getElementById('inpEv2Time').value },
+          { name: document.getElementById('inpEv3Name').value, date: '12 Dec', time: document.getElementById('inpEv3Time').value },
+          { name: document.getElementById('inpEv4Name').value, date: '13 Dec', time: document.getElementById('inpEv4Time').value }
+        ],
+        venueName: document.getElementById('inpVenueName').value || 'The Grand Palace',
+        venueAddress: document.getElementById('inpVenueAddress').value || 'Fateh Sagar, Udaipur',
+        rsvpName: document.getElementById('inpRsvpName').value || 'Family',
+        rsvpPhone: document.getElementById('inpRsvpPhone').value || '+91 98765 43210'
+      };
+      engine.updateData(data);
+    }
+
+    function handlePhotoUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        engine.updateData({ couplePhoto: evt.target.result });
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleAudioUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      const audio = new Audio(url);
+      engine.customAudio = audio;
+      alert('Custom audio uploaded successfully!');
+    }
+
+    function handleBgVideoUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      const vid = document.createElement('video');
+      vid.src = url;
+      vid.loop = true;
+      vid.muted = true;
+      vid.playsInline = true;
+      vid.play();
+      engine.data.bgVideo = vid;
+      alert('Custom background video loaded! Playing in composition.');
+    }
+
+    function saveDraft() {
+      const draft = {
+        groom: document.getElementById('inpGroom').value,
+        bride: document.getElementById('inpBride').value,
+        groomParents: document.getElementById('inpGroomParents').value,
+        brideParents: document.getElementById('inpBrideParents').value,
+        date: document.getElementById('inpDate').value,
+        muhurat: document.getElementById('inpMuhurat').value,
+        city: document.getElementById('inpCity').value,
+        venueName: document.getElementById('inpVenueName').value,
+        venueAddress: document.getElementById('inpVenueAddress').value,
+        rsvpName: document.getElementById('inpRsvpName').value,
+        rsvpPhone: document.getElementById('inpRsvpPhone').value
+      };
+      localStorage.setItem('vanvi_draft_video_royal_vivah', JSON.stringify(draft));
+      alert('✨ Draft saved successfully to your Vanvi Moments account!');
+    }
+
+    function populateFields(d) {
+      if (d.groom) document.getElementById('inpGroom').value = d.groom;
+      if (d.bride) document.getElementById('inpBride').value = d.bride;
+      if (d.groomParents) document.getElementById('inpGroomParents').value = d.groomParents;
+      if (d.brideParents) document.getElementById('inpBrideParents').value = d.brideParents;
+      if (d.date) document.getElementById('inpDate').value = d.date;
+      if (d.muhurat) document.getElementById('inpMuhurat').value = d.muhurat;
+      if (d.city) document.getElementById('inpCity').value = d.city;
+      if (d.venueName) document.getElementById('inpVenueName').value = d.venueName;
+      if (d.venueAddress) document.getElementById('inpVenueAddress').value = d.venueAddress;
+      if (d.rsvpName) document.getElementById('inpRsvpName').value = d.rsvpName;
+      if (d.rsvpPhone) document.getElementById('inpRsvpPhone').value = d.rsvpPhone;
+    }
+
+    function handleHdDownloadClick() {
+      if (isUnlocked) {
+        startRealRendering();
+      } else {
+        openModal();
+      }
+    }
+
+    function openModal() {
+      document.getElementById('checkoutModal').style.display = 'flex';
+      document.getElementById('unpaidContent').style.display = 'block';
+      document.getElementById('renderingContent').style.display = 'none';
+      document.getElementById('modalTitle').textContent = 'Unlock HD Wedding Video';
+    }
+
+    function closeModal() {
+      document.getElementById('checkoutModal').style.display = 'none';
+    }
+
+    function proceedToPayment() {
+      const groom = document.getElementById('inpGroom').value || 'Aryan';
+      const bride = document.getElementById('inpBride').value || 'Pooja';
+      const name = encodeURIComponent(`${groom} & ${bride} Royal Vivah Video`);
+      window.location.href = `../../checkout.html?template=video-royal-vivah&amount=1499&name=${name}`;
+    }
+
+    function simulateTestUnlock() {
+      isUnlocked = true;
+      engine.setWatermark(false);
+      startRealRendering();
+    }
+
+    async function startRealRendering() {
+      document.getElementById('checkoutModal').style.display = 'flex';
+      document.getElementById('unpaidContent').style.display = 'none';
+      document.getElementById('renderingContent').style.display = 'block';
+      document.getElementById('modalTitle').textContent = 'Rendering 1080p HD Video';
+      document.getElementById('modalSub').textContent = 'Encoding your personalized wedding invite with audio & visual motion...';
+
+      try {
+        const result = await engine.renderVideo({}, (progress) => {
+          document.getElementById('renderProgressFill').style.width = progress.percent + '%';
+          document.getElementById('renderStatusText').textContent =
+            `Encoding frame ${progress.frame}/${progress.totalFrames} (${progress.percent}%)...`;
+        });
+
+        // Trigger direct download
+        const url = URL.createObjectURL(result.blob);
+        const a = document.createElement('a');
+        a.href = url;
+        const bride = document.getElementById('inpBride').value || 'Bride';
+        const groom = document.getElementById('inpGroom').value || 'Groom';
+        a.download = `${groom}_and_${bride}_Wedding_Invitation_HD.${result.extension}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        document.getElementById('modalTitle').textContent = '🎉 Video Rendered Successfully!';
+        document.getElementById('modalSub').textContent = 'Your high-definition wedding video has been downloaded to your device.';
+        document.getElementById('renderStatusText').textContent = 'Download complete! You can now share it directly on WhatsApp, Instagram & YouTube.';
+      } catch (err) {
+        console.error('Rendering error:', err);
+        alert('Render failed: ' + err.message);
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>
