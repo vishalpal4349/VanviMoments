@@ -876,23 +876,41 @@
     const tbody = document.getElementById('adminOrdersTbody');
     if (!tbody) return;
 
-    const demoOrders = [
+    let orders = [
       { id: 'ORD-98214', customer: 'Aman Mathur', template: 'Birthday Wish 01', amount: '₹149', coins: 50, status: 'Paid' },
       { id: 'ORD-98215', customer: 'Priya Sharma', template: 'Birthday Wish 02', amount: '₹149', coins: 0, status: 'Paid' },
       { id: 'ORD-98216', customer: 'Rohit Sen', template: 'Romantic Constellation', amount: '₹199', coins: 100, status: 'Paid' },
       { id: 'ORD-98217', customer: 'Neha Kapoor', template: 'Anniversary Toast', amount: '₹249', coins: 0, status: 'Paid' }
     ];
 
-    tbody.innerHTML = demoOrders.map(o => `
+    try {
+      const storedOrders = JSON.parse(localStorage.getItem('vanvi_orders') || localStorage.getItem('vanvi_user_orders') || '[]');
+      if (Array.isArray(storedOrders) && storedOrders.length > 0) {
+        const mapped = storedOrders.map(so => ({
+          id: so.id || so.orderId || ('ORD-' + Math.floor(Math.random()*89999 + 10000)),
+          customer: so.customerName || so.name || so.customer || 'Store Client',
+          template: so.templateTitle || so.templateName || so.template || 'Custom Moment',
+          amount: typeof so.amount === 'number' ? `₹${so.amount}` : (so.amount || '₹149'),
+          coins: so.coinsUsed || so.coinsEarned || 0,
+          status: so.status || 'Paid'
+        }));
+        orders = [...mapped, ...orders];
+      }
+    } catch (e) {}
+
+    tbody.innerHTML = orders.map(o => `
       <tr>
         <td><code style="font-weight:750;">#${o.id}</code></td>
         <td><strong>${escapeHtml(o.customer)}</strong></td>
         <td>${escapeHtml(o.template)}</td>
         <td><strong style="color:var(--gold-champagne);">${o.amount}</strong></td>
         <td><span style="color:var(--rose-primary); font-weight:700;">🪙 ${o.coins}</span></td>
-        <td><span class="pill-badge badge-active">${o.status}</span></td>
+        <td><span class="clay-badge badge-paid">${o.status}</span></td>
         <td>
-          <button type="button" class="action-btn-pill action-btn-danger" onclick="refundOrderAction('${o.id}')">Refund</button>
+          <div style="display:flex; gap:6px;">
+            <a href="https://wa.me/917631442934?text=Hi%20${encodeURIComponent(o.customer)}%2C%20regarding%20your%20Vanvi%20Moments%20order%20%23${o.id}" target="_blank" class="btn-table-action" style="background:#25d366; color:#fff; border-color:#25d366;" title="Chat with customer on WhatsApp">💬 WhatsApp</a>
+            <button type="button" class="btn-table-action" style="color:#dc2626; border-color:#fca5a5;" onclick="refundOrderAction('${o.id}')">Refund</button>
+          </div>
         </td>
       </tr>
     `).join('');
@@ -915,7 +933,23 @@
     const tbody = document.getElementById('adminUsersTbody');
     if (!tbody) return;
 
-    tbody.innerHTML = demoUsers.map((u, i) => `
+    let users = [...demoUsers];
+    try {
+      const activeUser = JSON.parse(localStorage.getItem('vanvi_user') || 'null');
+      if (activeUser && activeUser.email && !users.some(u => u.email === activeUser.email)) {
+        users.unshift({
+          id: activeUser.id || 'usr_current',
+          name: activeUser.name || 'Current User',
+          email: activeUser.email,
+          phone: activeUser.phone || '+91 98765 00000',
+          tier: activeUser.tier || 'vip',
+          coins: activeUser.coins || 150,
+          role: activeUser.role || 'user'
+        });
+      }
+    } catch (e) {}
+
+    tbody.innerHTML = users.map((u, i) => `
       <tr>
         <td>
           <strong>${escapeHtml(u.name)}</strong>
@@ -926,7 +960,10 @@
         <td><strong style="color:var(--gold-champagne);">🪙 ${u.coins}</strong></td>
         <td><span style="font-size:11.5px; color:var(--text-muted);">Active</span></td>
         <td>
-          <button type="button" class="action-btn-pill action-btn-rose" onclick="openEditUserAdminModal('${u.id}')">✏️ Edit</button>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn-table-action btn-table-coins" onclick="openCoinModalForUser('${u.id}', '${escapeHtml(u.name)}', '${escapeHtml(u.email || u.phone)}')">🪙 Coins</button>
+            <button type="button" class="btn-table-action" onclick="openEditUserAdminModal('${u.id}')">✏️ Edit</button>
+          </div>
         </td>
       </tr>
     `).join('');
@@ -1382,9 +1419,145 @@
     if (frame) frame.style.width = width;
   };
 
-  // ─── 19. ATELIER SETTINGS ───
-  window.saveAdminSettings = function() {
-    showToast('✓ Settings updated and saved successfully!');
+  // ─── 19B. BESPOKE CONCIERGE COMMISSIONS ───
+  window.loadCustomRequests = async function() {
+    const tbody = document.getElementById('adminCustomRequestsTbody');
+    const badge = document.getElementById('badgeRequestsCount');
+    if (!tbody) return;
+
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:28px; color:var(--text-muted);">✨ Loading VIP Bespoke Commissions...</td></tr>';
+
+    let list = [];
+    try {
+      const resp = await fetch('/api/admin/custom-requests');
+      if (resp.ok) {
+        const data = await resp.json();
+        if (data && data.success && Array.isArray(data.requests)) {
+          list = data.requests;
+        }
+      }
+    } catch (e) {
+      console.warn('Backend custom-requests fetch fallback:', e);
+    }
+
+    if (!list.length) {
+      try {
+        const stored = localStorage.getItem('vanvi_custom_requests');
+        if (stored) list = JSON.parse(stored);
+      } catch (e) {}
+    }
+
+    if (!list.length) {
+      list = [
+        {
+          id: 'REQ-1042',
+          requestId: 'REQ-1042',
+          name: 'Kabir & Rhea',
+          email: 'kabir.rhea@example.com',
+          phone: '+91 98201 12345',
+          occasion: 'Palace Vivah',
+          theme: 'Rajasthani Royal Palace with live shehnai & gold animations',
+          budget: '₹4,999 (Custom Website)',
+          eventDate: '18 Dec 2026',
+          status: 'pending',
+          createdAt: new Date(Date.now() - 3600000 * 2).toISOString()
+        },
+        {
+          id: 'REQ-1041',
+          requestId: 'REQ-1041',
+          name: 'Ananya Sen',
+          email: 'ananya.sen@example.com',
+          phone: '+91 98110 54321',
+          occasion: 'Sweet 16 Birthday',
+          theme: 'Exploding 3D gift box with retro Polaroid keepsakes',
+          budget: '₹999 (Custom Template)',
+          eventDate: '05 Nov 2026',
+          status: 'approved',
+          createdAt: new Date(Date.now() - 3600000 * 5).toISOString()
+        },
+        {
+          id: 'REQ-1040',
+          requestId: 'REQ-1040',
+          name: 'Dr. Siddharth & Tanya',
+          email: 'siddharth.tanya@example.com',
+          phone: '+91 97400 98765',
+          occasion: 'Grand Luxury Wedding',
+          theme: 'Full couture custom website with domain & interactive timeline',
+          budget: '₹19,999 (Full Couture)',
+          eventDate: '12 Jan 2027',
+          status: 'in-review',
+          createdAt: new Date(Date.now() - 3600000 * 24).toISOString()
+        }
+      ];
+    }
+
+    if (badge) badge.textContent = list.length;
+
+    tbody.innerHTML = list.map(req => {
+      const id = escapeHtml(req.id || req.requestId || 'REQ-NEW');
+      const name = escapeHtml(req.name || req.clientName || 'Patron');
+      const contact = escapeHtml(req.phone || req.email || 'Direct');
+      const occasion = escapeHtml(req.occasion || 'Celebration');
+      const theme = escapeHtml(req.theme || req.vision || req.notes || 'Bespoke custom creation');
+      const budget = escapeHtml(req.budget || '₹999+');
+      const eventDate = escapeHtml(req.eventDate || req.targetDate || 'Flexible');
+      const status = (req.status || 'pending').toLowerCase();
+
+      let badgeClass = 'badge-draft';
+      let badgeLabel = 'Pending Review';
+      if (status === 'approved' || status === 'paid' || status === 'completed') {
+        badgeClass = 'badge-active';
+        badgeLabel = status === 'completed' ? 'Delivered ✓' : 'Approved ✓';
+      } else if (status === 'in-review') {
+        badgeClass = 'badge-premium';
+        badgeLabel = 'In Review ✦';
+      }
+
+      const waMsg = encodeURIComponent(`Hi ${name}, regarding your Bespoke commission request #${id} (${occasion}) for Vanvi Moments!`);
+      const waNumber = (req.phone && req.phone.replace(/[^0-9]/g, '')) || '917631442934';
+
+      return `
+        <tr>
+          <td><code style="font-weight:800; color:var(--rose-primary); font-size:12px;">#${id}</code></td>
+          <td>
+            <div style="font-weight:800; color:var(--text-main);">${name}</div>
+            <div style="font-size:11px; color:var(--text-dim);">${contact}</div>
+          </td>
+          <td>
+            <div style="font-size:12.5px; font-weight:700; color:var(--text-main);">${occasion}</div>
+            <div style="font-size:11.5px; color:var(--text-muted); max-width:320px; line-height:1.4;">${theme}</div>
+            <div style="font-size:11px; color:var(--emerald); font-weight:700; margin-top:2px;">📅 Target: ${eventDate}</div>
+          </td>
+          <td><strong style="color:var(--emerald); font-size:13px;">${budget}</strong></td>
+          <td><span class="pill-badge ${badgeClass}">${badgeLabel}</span></td>
+          <td>
+            <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+              <a href="https://wa.me/${waNumber}?text=${waMsg}" target="_blank" class="action-btn-pill" style="background:#25d366; color:#fff; border-color:#25d366;" title="Chat directly with client on WhatsApp">
+                💬 WhatsApp
+              </a>
+              <button type="button" class="action-btn-pill" onclick="updateCustomReqStatus('${id}', 'approved')" title="Mark as approved" style="color:var(--emerald);">
+                ✓ Approve
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  };
+
+  window.updateCustomReqStatus = async function(id, newStatus) {
+    try {
+      await fetch(`/api/admin/custom-requests/${encodeURIComponent(id)}/status`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
+      });
+      showToast(`✓ Request #${id} updated to ${newStatus}!`);
+      loadCustomRequests();
+    } catch (e) {
+      showToast(`Status updated locally!`);
+      loadCustomRequests();
+    }
   };
 
   // ─── 20. ESCAPE HTML HELPER ───

@@ -1500,90 +1500,110 @@ footer .brand{font-size:20px}footer p{font-size:10px;color:#8a7285;margin-top:8p
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 640px) {
   #premiumCollectionSection, #freeCollectionSection {
-    padding: 12px 10px 18px !important;
+    padding: 14px 12px 20px !important;
   }
   #premiumTemplateSlider, #freeTemplateSlider {
-    gap: 10px !important;
-    padding-bottom: 8px !important;
+    gap: 12px !important;
+    padding-bottom: 10px !important;
   }
   #premiumTemplateSlider .template,
   #freeTemplateSlider .template {
-    flex: 0 0 152px !important;
-    max-width: 152px !important;
-    min-width: 152px !important;
-    border-radius: 16px !important;
-    padding-bottom: 2px !important;
+    flex: 0 0 178px !important;
+    max-width: 178px !important;
+    min-width: 178px !important;
+    border-radius: 18px !important;
+    padding-bottom: 4px !important;
+    background: #ffffff !important;
+    border: 1.5px solid rgba(255, 120, 175, 0.3) !important;
+    box-shadow: 0 8px 22px rgba(44, 18, 36, 0.08) !important;
+    transition: transform 0.22s ease, box-shadow 0.22s ease !important;
   }
   #premiumTemplateSlider .template .thumb,
   #freeTemplateSlider .template .thumb {
-    height: 110px !important;
-    max-height: 110px !important;
-    border-radius: 14px 14px 0 0 !important;
+    height: 124px !important;
+    max-height: 124px !important;
+    border-radius: 16px 16px 0 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
   #premiumTemplateSlider .template-info,
   #freeTemplateSlider .template-info {
-    padding: 8px 8px 10px !important;
+    padding: 9px 9px 11px !important;
   }
   #premiumTemplateSlider .template-info b,
   #freeTemplateSlider .template-info b {
-    font-size: 12px !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     display: block !important;
     line-height: 1.25 !important;
+    color: #2c1224 !important;
   }
   #premiumTemplateSlider .template-info small,
   #freeTemplateSlider .template-info small {
-    font-size: 10px !important;
-    margin: 2px 0 !important;
+    font-size: 10.5px !important;
+    margin: 2px 0 4px !important;
     display: block !important;
   }
   #premiumTemplateSlider .template-rating-pill,
   #freeTemplateSlider .template-rating-pill {
-    padding: 1.5px 6px !important;
-    font-size: 9px !important;
-    margin-bottom: 4px !important;
+    padding: 2px 7px !important;
+    font-size: 9.5px !important;
+    margin-bottom: 5px !important;
   }
   #premiumTemplateSlider .home-tpl-action-row,
   #freeTemplateSlider .home-tpl-action-row {
-    margin-top: 6px !important;
-    gap: 5px !important;
+    margin-top: 8px !important;
+    gap: 6px !important;
     display: flex !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   .home-btn-explore {
-    padding: 6px 10px !important;
+    padding: 6px 6px !important;
     font-size: 11px !important;
     font-weight: 800 !important;
     border-radius: 99px !important;
     min-height: 32px !important;
-    flex: 1 !important;
+    flex: 1 1 50% !important;
     justify-content: center !important;
     text-align: center !important;
+    align-items: center !important;
+    display: inline-flex !important;
     background: #ffffff !important;
     border: 1.5px solid rgba(255, 42, 122, 0.4) !important;
     color: #2c1224 !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    text-decoration: none !important;
   }
   .home-btn-make-yours {
-    padding: 6px 12px !important;
+    padding: 6px 6px !important;
     font-size: 11px !important;
     font-weight: 850 !important;
     border-radius: 99px !important;
     min-height: 32px !important;
-    flex: 1.25 !important;
+    flex: 1 1 50% !important;
     justify-content: center !important;
     text-align: center !important;
+    align-items: center !important;
+    display: inline-flex !important;
     background: linear-gradient(135deg, #ff1361, #f59e0b) !important;
     color: #ffffff !important;
     box-shadow: 0 4px 14px rgba(255, 19, 97, 0.35) !important;
     border: none !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    text-decoration: none !important;
   }
   .template-view-all-card {
-    min-width: 134px !important;
-    flex: 0 0 134px !important;
-    padding: 14px 10px !important;
-    border-radius: 16px !important;
+    min-width: 156px !important;
+    flex: 0 0 156px !important;
+    padding: 16px 12px !important;
+    border-radius: 18px !important;
   }
 }
 
@@ -4424,7 +4444,8 @@ html[data-vanvi-theme="dark"] .hero-desc-secondary {
     gap: 12px !important;
   }
   .template-slider .template {
-    flex: 0 0 178px !important;
+    flex: 0 0 196px !important;
+    max-width: 200px !important;
   }
   .slider-control {
     display: flex !important;
@@ -6155,7 +6176,7 @@ button,
 <nav class="drawer-nav" style="padding-top: 6px;">
 <a class="drawer-link" href="#" onclick="event.preventDefault(); document.getElementById('mobileDrawer')?.classList.remove('open'); openStudioSettingsModal();" style="color:#ff2a7a; font-weight:850; background:rgba(255,42,122,0.07); border-radius:12px; border:1px solid rgba(255,42,122,0.22); margin-bottom:4px;">🎨 Studio Aesthetics (Fonts &amp; Dark Mode)</a>
 <a class="drawer-link" href="templates.html">🔍 All Templates &amp; Categories</a>
-<a class="drawer-link" href="ai-matcher.html">🐼 Panda AI Matcher</a>
+<a class="drawer-link" href="javascript:void(0)" onclick="document.getElementById('mobileDrawer')?.classList.remove('open'); openVanviAiHub(); return false;" data-open-ai-hub="true">🐼 Vanvi AI Atelier (Choose Mode)</a>
 <a class="drawer-link" href="games.html">🎮 Celebration Mini-Games</a>
 <a class="drawer-link" href="rewards.html">🎁 My Rewards &amp; Coupons</a>
 <a class="drawer-link" href="dashboard.html">📁 My Moments &amp; History</a>
@@ -6213,7 +6234,7 @@ button,
   <span class="theme-dot"></span>
   <span id="themeToggleLabel">🎨 Aesthetics</span>
 </button>
-<a href="templates.html">Explore</a><a href="products.html">🎁 Gifts</a><a href="dashboard.html">My Moments</a><a href="ai-matcher.html">AI</a>
+<a href="templates.html">Explore</a><a href="products.html">🎁 Gifts</a><a href="dashboard.html">My Moments</a><a href="javascript:void(0)" onclick="openVanviAiHub(); return false;" data-open-ai-hub="true" title="Vanvi AI Atelier · Choose Experience">AI ✦</a>
 <button aria-label="⌕" class="header-desktop-added global-search-btn" title="Search Templates">⌕</button><a aria-label="💎 Premium" class="header-desktop-added premium-mini" href="plans.html">💎 Premium</a><a href="profile.html" class="header-desktop-added desktop-profile-btn" id="desktopProfileBtn" title="My Profile &amp; Account"><span>👤</span> <span>Profile</span></a><button type="button" class="header-desktop-added desktop-menu-btn" id="desktopMenuBtn" aria-label="Open Navigation Menu" title="All Navigation, Wallet &amp; Categories"><span class="hamburger-bars"><span></span><span></span><span></span></span><span>Menu</span></button><a class="secondary" id="loginBtnDesktop" href="login.html">Login</a><button class="primary" onclick="window.location.href='ai-matcher.html'">Create Moment</button>
 </nav>
 <div class="header-mobile-actions">
