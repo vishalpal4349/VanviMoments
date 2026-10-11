@@ -642,8 +642,16 @@
       <!-- Step 5: Music & Video -->
       <div class="form-section" id="step-5">
         <h2 class="section-title">🎵 Music &amp; Background Video</h2>
-        <p class="section-desc">Customize the soundtrack or upload a motion background video.</p>
+        <p class="section-desc">Customize the soundtrack or choose a motion background video style.</p>
         <div class="form-grid">
+          <div class="form-group form-group-full">
+            <label>Motion Video Theme Style</label>
+            <select class="form-control" id="selBgTheme" onchange="handleBgThemeChange(this.value)">
+              <option value="invitemaker">🎬 InviteMaker IM254 Divine Motion Video (Shiv-Parvati &amp; Mandap)</option>
+              <option value="canvas">👑 Imperial Ruby Velvet &amp; Gold Mandala (Built-in Canvas)</option>
+              <option value="custom">📁 Custom Uploaded MP4 Video</option>
+            </select>
+          </div>
           <div class="form-group form-group-full">
             <label>Background Soundtrack</label>
             <select class="form-control" id="selMusic">
@@ -656,10 +664,10 @@
             <input type="file" accept="audio/*" class="form-control" id="inpAudioFile" onchange="handleAudioUpload(event)">
             <p style="font-size:0.72rem; color:var(--text-dim); margin-top:4px;">Upload your favourite Bollywood / Classical wedding song.</p>
           </div>
-          <div class="form-group form-group-full">
-            <label>Custom Background MP4 Video (Optional)</label>
+          <div class="form-group form-group-full" id="grpCustomVideo" style="display:none;">
+            <label>Upload Custom MP4 Video File</label>
             <input type="file" accept="video/mp4,video/webm" class="form-control" id="inpVideoFile" onchange="handleBgVideoUpload(event)">
-            <p style="font-size:0.72rem; color:var(--text-dim); margin-top:4px;">Have an InviteMaker or custom motion template video? Upload it to composite live text on top!</p>
+            <p style="font-size:0.72rem; color:var(--text-dim); margin-top:4px;">Upload your own MP4 base motion video to composite names and dates on top.</p>
           </div>
         </div>
         <div class="wizard-footer-nav">
@@ -787,6 +795,9 @@
         syncLive();
       }
 
+      // Initialize default InviteMaker video theme
+      handleBgThemeChange('invitemaker');
+
       // Initial draw
       engine.drawFrame(0);
     });
@@ -873,6 +884,31 @@
       alert('Custom audio uploaded successfully!');
     }
 
+    function handleBgThemeChange(val) {
+      const grp = document.getElementById('grpCustomVideo');
+      if (grp) grp.style.display = val === 'custom' ? 'block' : 'none';
+
+      if (val === 'invitemaker') {
+        const vid = document.createElement('video');
+        vid.crossOrigin = 'anonymous';
+        vid.src = 'https://d3u6p79xhaw6jk.cloudfront.net/templates/6ac8044326f6d270acd1e471/video.mp4';
+        vid.loop = true;
+        vid.muted = engine.isMuted;
+        vid.playsInline = true;
+        vid.onloadeddata = () => {
+          engine.drawFrame(engine.currentTime);
+        };
+        vid.play().catch(() => {});
+        engine.data.bgVideo = vid;
+      } else if (val === 'canvas') {
+        if (engine.data.bgVideo) {
+          engine.data.bgVideo.pause();
+          engine.data.bgVideo = null;
+        }
+      }
+      engine.drawFrame(engine.currentTime);
+    }
+
     function handleBgVideoUpload(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -880,9 +916,9 @@
       const vid = document.createElement('video');
       vid.src = url;
       vid.loop = true;
-      vid.muted = true;
+      vid.muted = engine.isMuted;
       vid.playsInline = true;
-      vid.play();
+      vid.play().catch(() => {});
       engine.data.bgVideo = vid;
       alert('Custom background video loaded! Playing in composition.');
     }

@@ -177,6 +177,9 @@
       if (this.isPlaying) return;
       this.isPlaying = true;
       this.startAudio();
+      if (this.data.bgVideo) {
+        this.data.bgVideo.play().catch(() => {});
+      }
       this.lastFrameTime = performance.now();
       this.loop(this.lastFrameTime);
     }
@@ -184,6 +187,9 @@
     pause() {
       this.isPlaying = false;
       this.stopAudio();
+      if (this.data.bgVideo) {
+        this.data.bgVideo.pause();
+      }
       if (this.rafId) {
         cancelAnimationFrame(this.rafId);
         this.rafId = null;
@@ -200,6 +206,9 @@
       if (this.customAudio) {
         this.customAudio.currentTime = this.currentTime;
       }
+      if (this.data.bgVideo && this.data.bgVideo.duration) {
+        this.data.bgVideo.currentTime = this.currentTime % this.data.bgVideo.duration;
+      }
       this.drawFrame(this.currentTime);
       if (this.onTimeUpdate) this.onTimeUpdate(this.currentTime, this.duration);
     }
@@ -208,6 +217,9 @@
       this.isMuted = mute;
       if (this.customAudio) {
         this.customAudio.muted = mute;
+      }
+      if (this.data.bgVideo) {
+        this.data.bgVideo.muted = mute;
       }
     }
 
@@ -218,6 +230,14 @@
 
       this.currentTime += delta * this.playbackRate;
 
+      // Keep background video synced
+      if (this.data.bgVideo && this.data.bgVideo.duration) {
+        const targetVidTime = this.currentTime % this.data.bgVideo.duration;
+        if (Math.abs(this.data.bgVideo.currentTime - targetVidTime) > 0.35) {
+          this.data.bgVideo.currentTime = targetVidTime;
+        }
+      }
+
       // Periodic gentle musical pluck
       if (Math.floor(this.currentTime * 2) !== Math.floor((this.currentTime - delta) * 2)) {
         this.playSynthNoteSequence();
@@ -225,6 +245,7 @@
 
       if (this.currentTime >= this.duration) {
         this.currentTime = 0; // loop
+        if (this.data.bgVideo) this.data.bgVideo.currentTime = 0;
         if (this.onEnded) this.onEnded();
       }
 
