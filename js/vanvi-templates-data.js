@@ -92,6 +92,51 @@
       builderPath: 'templates/ivory-arch-wedding/builder.html'
     },
     // -------------------------------------------------------------
+    // Royal Vows Haute Vivah Indian Wedding
+    // -------------------------------------------------------------
+    {
+      id: 'royal-vows-indian-wedding',
+      slug: 'royal-vows-indian-wedding',
+      sku: 'VM-VOWS-01',
+      name: 'Royal Vows Indian Wedding',
+      aliases: ['royal-vows-indian-wedding', 'royal-vows', 'royal-vows-wedding', 'haute-vivah'],
+      category: 'Wedding',
+      categorySlug: 'wedding',
+      categoryName: 'Wedding & Engagement',
+      price: 1499,
+      originalPrice: 2499,
+      isFree: false,
+      tier: 'Haute Vivah',
+      badge: '👑 Haute Vivah',
+      type: '3D Palace Gates & Mandap Unboxing Ceremony',
+      icon: '👑',
+      thumbnail: 'assets/templates/vanvi-royal-wedding-showcase.jpg',
+      soundtrack: 'Auspicious Classical Shehnai & Santoor Melodies',
+      tags: ['wedding', 'royal-vows', 'royal', 'palace-gates', '3d', 'mandap', 'shehnai', 'santoor', 'countdown', 'patrika'],
+      description: 'Haute Royal Indian Vivah celebration website with 3D Palace Gates mandap unboxing, falling rose petals & golden dust canvas, live auspicious muhurat countdown, bride & groom introduction, shahi patrika, 6-event ceremony itinerary, and interactive blessings.',
+      features: [
+        'Cinematic 3D Palace Gates Mandap Unboxing Ceremony',
+        'Falling Rose Petals & Golden Shimmer Particle Canvas',
+        'Synthesized Classical Shehnai & Santoor Soundscape',
+        'Live Auspicious Muhurat Countdown Timer Ribbon',
+        'Bride & Groom Royal Introduction Cards',
+        'Authentic Shahi Patrika Digital Invitation Card',
+        'Complete 6-Event Sacred Ceremonies Grid with Maps Integration',
+        'Interactive Flower Shower & Haldi Blessings Button',
+        'RSVP Form with Direct WhatsApp Confirmation Dispatch',
+        'Integrated Live Studio Builder with Mobile & Desktop Simulator'
+      ],
+      customizableFields: ['Bride & Groom Names', 'Wedding Date & Muhurat', 'Family & Patrika Text', 'Ceremonies Details', 'Couples Photos', 'RSVP WhatsApp Number'],
+      previewOccasion: 'Shubh Vivah',
+      previewRecipient: 'Tanya & Rohan',
+      previewSender: 'Sharma & Verma Families',
+      previewMessage: 'With hearts full of joy and the grace of the divine, we invite you to bless our sacred union.',
+      accentColor: '#6b0f1a',
+      templatePath: 'templates/royal-vows-indian-wedding/index.html',
+      previewPath: 'templates/royal-vows-indian-wedding/preview.html',
+      builderPath: 'templates/royal-vows-indian-wedding/builder.html'
+    },
+    // -------------------------------------------------------------
     // Maison Rose — Botanical Blush Wedding
     // -------------------------------------------------------------
     {

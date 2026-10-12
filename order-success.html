@@ -1818,6 +1818,16 @@
       icon: '✨',
       badge: '✨ Bespoke Digital Keepsake',
       cheer: 'Magical Moment Ready to Share!'
+    },
+    wedding: {
+      accent: '#6b0f1a',
+      accentSec: '#D4AF37',
+      glow: 'rgba(212, 175, 55, 0.35)',
+      gradient: 'linear-gradient(135deg, #6b0f1a 0%, #D4AF37 100%)',
+      light: 'rgba(107, 15, 26, 0.08)',
+      icon: '👑',
+      badge: '👑 Haute Royal Vivah & Wedding Edition',
+      cheer: 'Sacred Vivah Invitation Ready to Share!'
     }
   };
 
@@ -1825,9 +1835,10 @@
   const occLower = occasion.toLowerCase();
   const nameLower = itemName.toLowerCase();
   let matchedKey = 'celebration';
-  if (occLower.includes('birth') || nameLower.includes('birth')) matchedKey = 'birthday';
+  if (occLower.includes('wed') || occLower.includes('vivah') || occLower.includes('shaadi') || nameLower.includes('royal') || nameLower.includes('vow') || nameLower.includes('arch')) matchedKey = 'wedding';
+  else if (occLower.includes('birth') || nameLower.includes('birth')) matchedKey = 'birthday';
   else if (occLower.includes('love') || occLower.includes('romance') || nameLower.includes('love') || nameLower.includes('valentine')) matchedKey = 'love';
-  else if (occLower.includes('anniv') || nameLower.includes('anniv') || nameLower.includes('wedding')) matchedKey = 'anniversary';
+  else if (occLower.includes('anniv') || nameLower.includes('anniv')) matchedKey = 'anniversary';
   else if (occLower.includes('apol') || occLower.includes('sorry') || nameLower.includes('sorry')) matchedKey = 'apology';
   else if (occLower.includes('friend') || nameLower.includes('friend') || nameLower.includes('bestie')) matchedKey = 'friendship';
 
@@ -1848,7 +1859,11 @@
   let momentUrl = params.get('momentUrl') || params.get('url');
   if (!momentUrl) {
     const tplKey = (params.get('template') || params.get('templateId') || occasion || '').toLowerCase();
-    if (tplKey.includes('bloom') || tplKey.includes('white-bloom')) {
+    if (tplKey.includes('royal-vow') || tplKey.includes('royal-vows') || tplKey.includes('vow')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/royal-vows-indian-wedding/index.html')}?purchased=true&paid=true&bride=${encodeURIComponent(params.get('bride') || recipient)}&groom=${encodeURIComponent(params.get('groom') || 'Rohan')}`;
+    } else if (tplKey.includes('ivory') || tplKey.includes('arch')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/ivory-arch-wedding/index.html')}?purchased=true&paid=true&bride=${encodeURIComponent(params.get('bride') || 'Divya')}&groom=${encodeURIComponent(params.get('groom') || recipient)}`;
+    } else if (tplKey.includes('bloom') || tplKey.includes('white-bloom')) {
       momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/birthday-white-bloom-001/index.html')}?recipient=${encodeURIComponent(recipient)}`;
     } else if (tplKey.includes('candle') || tplKey.includes('3d')) {
       momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/birthday-3d-candle-surprise/index.html')}?recipient=${encodeURIComponent(recipient)}`;

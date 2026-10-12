@@ -365,56 +365,97 @@
     });
   }
 
+  // Apple / iCal Download Generator
+  const btnIcalSync = document.getElementById("btn-ical-sync");
+  if (btnIcalSync) {
+    btnIcalSync.addEventListener("click", (e) => {
+      e.preventDefault();
+      const bride = document.getElementById("hero-bride")?.textContent || "Tanya";
+      const groom = document.getElementById("hero-groom")?.textContent || "Rohan";
+      const icsData = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Vanvi Moments//Royal Vows Wedding//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "BEGIN:VEVENT",
+        "SUMMARY:" + bride + " & " + groom + " — Royal Vivah Celebration",
+        "DESCRIPTION:Sacred union and wedding celebrations of " + bride + " and " + groom + " under the skies of Jodhpur.",
+        "LOCATION:Umaid Bhawan Palace, Jodhpur, Rajasthan",
+        "DTSTART:20261212T053000Z",
+        "DTEND:20261212T183000Z",
+        "STATUS:CONFIRMED",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+
+      const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute("download", `${bride}_and_${groom}_Royal_Wedding.ics`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  }
+
   // =========================================================================
-  // 6. BUILDER INTEGRATION (POSTMESSAGE LISTENER)
+  // 6. BUILDER & ECOSYSTEM INTEGRATION (POSTMESSAGE & API SYNC)
   // =========================================================================
-  window.addEventListener("message", (event) => {
-    if (!event.data || event.data.type !== "UPDATE_CONFIG") return;
-    const cfg = event.data.config;
-    if (!cfg) return;
+  function applyConfig(cfg) {
+    if (!cfg || typeof cfg !== "object") return;
 
     // Bride Name
-    if (cfg.bride) {
-      const bElements = ["opening-bride", "hero-bride", "card-bride-name", "patrika-bride"];
+    const bride = cfg.bride || cfg.brideName;
+    if (bride) {
+      const bElements = ["opening-bride", "hero-bride", "card-bride-name", "patrika-bride", "footer-bride"];
       bElements.forEach((id) => {
         const el = document.getElementById(id);
-        if (el) el.textContent = cfg.bride;
+        if (el) el.textContent = bride;
       });
     }
 
     // Groom Name
-    if (cfg.groom) {
-      const gElements = ["opening-groom", "hero-groom", "card-groom-name", "patrika-groom"];
+    const groom = cfg.groom || cfg.groomName;
+    if (groom) {
+      const gElements = ["opening-groom", "hero-groom", "card-groom-name", "patrika-groom", "footer-groom"];
       gElements.forEach((id) => {
         const el = document.getElementById(id);
-        if (el) el.textContent = cfg.groom;
+        if (el) el.textContent = groom;
       });
     }
 
     // Wedding Date
-    if (cfg.date) {
-      weddingDate = new Date(`${cfg.date}T11:00:00`);
-      updateCountdown();
+    if (cfg.date || cfg.weddingDate) {
+      const d = cfg.date || cfg.weddingDate;
+      weddingDate = new Date(`${d}T11:00:00`);
+      if (typeof updateCountdown === "function") updateCountdown();
+    }
+
+    // Quote / Invitation Text
+    if (cfg.quote || cfg.message || cfg.invitationText) {
+      const qEl = document.getElementById("hero-quote");
+      if (qEl) qEl.textContent = cfg.quote || cfg.message || cfg.invitationText;
     }
 
     // Couple Colors
-    if (cfg.coupleColor) {
-      document.documentElement.style.setProperty("--ruby-velvet", cfg.coupleColor);
+    if (cfg.coupleColor || cfg.primaryColor) {
+      document.documentElement.style.setProperty("--ruby-velvet", cfg.coupleColor || cfg.primaryColor);
     }
 
     // Date Color
-    if (cfg.dateColor) {
-      document.documentElement.style.setProperty("--gold-primary", cfg.dateColor);
+    if (cfg.dateColor || cfg.goldColor) {
+      document.documentElement.style.setProperty("--gold-primary", cfg.dateColor || cfg.goldColor);
     }
 
     // Bride and Groom Photos (URL or base64 dataURI)
-    if (cfg.bridePhoto) {
+    if (cfg.bridePhoto || cfg.brideImg) {
       const imgBride = document.getElementById("img-bride");
-      if (imgBride) imgBride.src = cfg.bridePhoto;
+      if (imgBride) imgBride.src = cfg.bridePhoto || cfg.brideImg;
     }
-    if (cfg.groomPhoto) {
+    if (cfg.groomPhoto || cfg.groomImg) {
       const imgGroom = document.getElementById("img-groom");
-      if (imgGroom) imgGroom.src = cfg.groomPhoto;
+      if (imgGroom) imgGroom.src = cfg.groomPhoto || cfg.groomImg;
     }
 
     // Font customization
@@ -433,8 +474,49 @@
     }
 
     // Dynamic RSVP Phone
-    if (cfg.phone) {
-      rsvpPhone = cfg.phone.replace(/[^0-9]/g, "");
+    if (cfg.phone || cfg.whatsapp) {
+      const ph = cfg.phone || cfg.whatsapp;
+      rsvpPhone = ph.replace(/[^0-9]/g, "");
+    }
+
+    // Watermark Removal Check
+    if (cfg.paid || cfg.purchased || cfg.status === "published" || window.vanviPurchased) {
+      const wm = document.getElementById("vanviWatermark");
+      if (wm) wm.style.display = "none";
+    }
+  }
+
+  // Handle postMessage from Studio Builder & Previewers
+  window.addEventListener("message", (event) => {
+    if (!event.data) return;
+    const d = event.data;
+    if (d.type === "UPDATE_CONFIG" && d.config) {
+      applyConfig(d.config);
+    } else if ((d.type === "VANVI_LIVE_PREVIEW_SYNC" || d.type === "VANVI_UPDATE_CUSTOM_DATA") && (d.customData || d.config)) {
+      applyConfig(d.customData || d.config);
+    } else if (d.config) {
+      applyConfig(d.config);
+    } else if (d.customData) {
+      applyConfig(d.customData);
+    }
+  });
+
+  // Handle Vanvi Moment API Dynamic Loader
+  window.addEventListener("vanvi:momentLoaded", (e) => {
+    if (e.detail) {
+      const moment = e.detail;
+      const custom = moment.custom_data || {};
+      applyConfig({
+        bride: custom.bride || (moment.title ? moment.title.split("&")[0].trim() : "Tanya"),
+        groom: custom.groom || (moment.title ? moment.title.split("&")[1]?.replace("Royal Vivah", "").trim() : "Rohan"),
+        date: custom.date || moment.date,
+        quote: moment.message,
+        bridePhoto: custom.bridePhoto,
+        groomPhoto: custom.groomPhoto,
+        phone: custom.phone,
+        paid: moment.paid || moment.isPurchased || moment.status === "published",
+        status: moment.status
+      });
     }
   });
 

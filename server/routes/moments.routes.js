@@ -140,6 +140,9 @@ router.get('/public/:slug', async (req, res) => {
       templateId: moment.templateId || moment.template_id || 'birthday-3d-candle',
       musicTrack: moment.musicTrack,
       locked: isPinLocked,
+      paid: Boolean(moment.paid || moment.isPurchased || moment.status === 'published'),
+      isPurchased: Boolean(moment.paid || moment.isPurchased || moment.status === 'published'),
+      status: moment.status || (moment.paid ? 'published' : 'draft'),
       createdAt: moment.createdAt
     };
 

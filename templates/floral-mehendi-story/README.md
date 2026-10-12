@@ -32,7 +32,7 @@ floral-mehendi-story/
 ---
 
 ## ⚙️ How to Customize (Dynamic Config)
-Inside [index.html](file:///c:/Users/RISHU%20KUMARI/Downloads/Wedding%20Templates/floral-mehendi-story/index.html), search for `<script type="application/json" id="wedding-config">`.
+Inside [index.html](./index.html), search for `<script type="application/json" id="wedding-config">`.
 You can update:
 - **`couple`**: Bride & Groom names, Wedding date (`YYYY-MM-DD`), Venue, WhatsApp number, Hashtag.
 - **`events`**: Add, remove or edit events (Mehendi, Haldi, Cocktail, Sagan, Shaadi, Reception) with custom time, venue & Google Maps links.

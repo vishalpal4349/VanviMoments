@@ -1525,6 +1525,14 @@ function vanviGoBack(fallback) {
       light: 'rgba(217, 119, 6, 0.08)',
       icon: '✨',
       badge: '✨ Bespoke Digital Keepsake'
+    },
+    wedding: {
+      accent: '#6b0f1a',
+      glow: 'rgba(212, 175, 55, 0.35)',
+      gradient: 'linear-gradient(135deg, #6b0f1a 0%, #D4AF37 100%)',
+      light: 'rgba(107, 15, 26, 0.08)',
+      icon: '👑',
+      badge: '👑 Haute Royal Vivah & Wedding Edition'
     }
   };
 
@@ -1537,6 +1545,8 @@ function vanviGoBack(fallback) {
 
     if (tObj && tObj.categorySlug && THEME_PROFILES[tObj.categorySlug]) {
       matchedKey = tObj.categorySlug;
+    } else if (occLower.includes('wed') || occLower.includes('vivah') || occLower.includes('shaadi') || nameLower.includes('royal') || nameLower.includes('vow') || nameLower.includes('arch') || nameLower.includes('wedding')) {
+      matchedKey = 'wedding';
     } else if (occLower.includes('birth') || nameLower.includes('birth')) {
       matchedKey = 'birthday';
     } else if (occLower.includes('love') || occLower.includes('romance') || occLower.includes('valen') || nameLower.includes('love') || nameLower.includes('rose')) {
