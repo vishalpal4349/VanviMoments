@@ -19,7 +19,7 @@
 <body>
   <header class="builder-topbar">
     <div class="builder-brand-group">
-      <a href="../../index.html#template-world" class="btn-builder-back">← Template World</a>
+      <a href="../../templates.html" class="btn-builder-compact-back" title="Back to Templates">‹</a>
       <div class="builder-template-meta">
         <span class="builder-template-icon">🎉</span>
         <div>
@@ -34,6 +34,16 @@
       </button>
     </div>
   </header>
+
+  <!-- Mobile Segmented View Tabs (Edit Form vs Phone Live Preview) -->
+  <div class="builder-mobile-tabs" id="mobileTabsBar">
+    <button type="button" class="tab-btn active" id="tabBtnForm" onclick="switchMobileView('form')">
+      <span>✏️</span> <span>Customize</span>
+    </button>
+    <button type="button" class="tab-btn" id="tabBtnPreview" onclick="switchMobileView('preview')">
+      <span>📱</span> <span>Phone Preview</span>
+    </button>
+  </div>
 
   <main class="builder-layout">
     <section class="builder-form-pane">
@@ -96,6 +106,67 @@
           <div class="photo-slot" onclick="triggerUpload(2)"><span style="font-size: 20px;">➕</span><span style="font-size: 11px; margin-top: 4px; font-weight: 700;">Add Photo 3</span></div>
         </div>
         <input type="file" id="hiddenPhotoInput" accept="image/*" style="display: none;">
+      </div>
+
+      <!-- NEW PREMIUM CARD 1: 🌟 3 Secret Birthday Wishes -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">🌟</span> 3 Secret Birthday Wishes (Stars)</div>
+        <p style="font-size: 12.5px; color: var(--builder-ink-muted); margin-bottom: 14px;">The recipient can tap each floating constellation star in Scene 4 to reveal these custom fortunes.</p>
+        
+        <div class="form-group">
+          <label class="form-label" for="inpWish1">Star 1 — Secret Wish of Joy</label>
+          <input type="text" id="inpWish1" class="form-input" value="May your laughter echo louder, coffee taste sweeter, and your heart stay warm 🌸">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpWish2">Star 2 — Secret Wish of Peace & Health</label>
+          <input type="text" id="inpWish2" class="form-input" value="May vibrant health, unstoppable courage, and profound peace walk beside you 🕊️">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpWish3">Star 3 — Secret Wish of Wildest Dreams</label>
+          <input type="text" id="inpWish3" class="form-input" value="May the wildest dream you quietly whispered to the stars come true ✨">
+        </div>
+      </div>
+
+      <!-- NEW PREMIUM CARD 2: ⏳ Golden Memories Timeline -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">⏳</span> Memory Journey Timeline (Chapters)</div>
+        <p style="font-size: 12.5px; color: var(--builder-ink-muted); margin-bottom: 14px;">Milestones shown on the interactive memory tape in Scene 5.</p>
+        
+        <div class="form-group">
+          <label class="form-label" for="inpTimelineTitle1">Chapter 1 Title</label>
+          <input type="text" id="inpTimelineTitle1" class="form-input" value="Chapter 1: The Spark">
+          <input type="text" id="inpTimelineDesc1" class="form-input" style="margin-top: 4px;" value="Where our bond began and laughter quickly became our favourite language.">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpTimelineTitle2">Chapter 2 Title</label>
+          <input type="text" id="inpTimelineTitle2" class="form-input" value="Chapter 2: Midnight Talks & Chaos">
+          <input type="text" id="inpTimelineDesc2" class="form-input" style="margin-top: 4px;" value="Inside jokes that make no sense to anyone else, deep conversations, and warm coffee.">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpTimelineTitle3">Chapter 3 Title</label>
+          <input type="text" id="inpTimelineTitle3" class="form-input" value="Chapter 3: Stronger Side By Side">
+          <input type="text" id="inpTimelineDesc3" class="form-input" style="margin-top: 4px;" value="Through every milestone, always cheering each other on and smiling brighter together.">
+        </div>
+      </div>
+
+      <!-- NEW PREMIUM CARD 3: 🏆 Official VIP Recognition Award -->
+      <div class="builder-card">
+        <div class="builder-card-title"><span class="card-icon">🏆</span> Official VIP Best Person Award</div>
+        <p style="font-size: 12.5px; color: var(--builder-ink-muted); margin-bottom: 14px;">The gold-embossed digital luxury certificate with interactive Wax Seal in Scene 6.</p>
+        
+        <div class="form-group">
+          <label class="form-label" for="inpCertHeadline">Award Title</label>
+          <input type="text" id="inpCertHeadline" class="form-input" value="Certificate of Pure Awesomeness">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpCertCitation">Official Citation Note</label>
+          <textarea id="inpCertCitation" class="form-textarea" rows="2">For possessing an irreplaceable laugh, a warm soul, and making the universe infinitely brighter simply by existing.</textarea>
+        </div>
       </div>
 
       <div class="builder-card">
@@ -181,7 +252,24 @@
           date: document.getElementById('inpDate').value,
           photos: currentPhotos,
           cakeFlavor: document.querySelector('#cakeFlavorPicker .chip-option.selected')?.dataset.flavor || 'chocolate',
-          soundtrack: document.querySelector('#soundtrackPicker .chip-option.selected')?.dataset.track || 'party-pop'
+          soundtrack: document.querySelector('#soundtrackPicker .chip-option.selected')?.dataset.track || 'party-pop',
+          wishes: {
+            wish1: document.getElementById('inpWish1')?.value || '',
+            wish2: document.getElementById('inpWish2')?.value || '',
+            wish3: document.getElementById('inpWish3')?.value || ''
+          },
+          timeline: {
+            t1: document.getElementById('inpTimelineTitle1')?.value || '',
+            d1: document.getElementById('inpTimelineDesc1')?.value || '',
+            t2: document.getElementById('inpTimelineTitle2')?.value || '',
+            d2: document.getElementById('inpTimelineDesc2')?.value || '',
+            t3: document.getElementById('inpTimelineTitle3')?.value || '',
+            d3: document.getElementById('inpTimelineDesc3')?.value || ''
+          },
+          certificate: {
+            headline: document.getElementById('inpCertHeadline')?.value || '',
+            citation: document.getElementById('inpCertCitation')?.value || ''
+          }
         };
 
         VanviBuilderCore.update(payload);
@@ -197,7 +285,7 @@
         }
       };
 
-      document.querySelectorAll('#inpRecipient, #inpSender, #inpMessage, #inpDate').forEach(el => {
+      document.querySelectorAll('#inpRecipient, #inpSender, #inpMessage, #inpDate, #inpWish1, #inpWish2, #inpWish3, #inpTimelineTitle1, #inpTimelineDesc1, #inpTimelineTitle2, #inpTimelineDesc2, #inpTimelineTitle3, #inpTimelineDesc3, #inpCertHeadline, #inpCertCitation').forEach(el => {
         el.addEventListener('input', syncInputs);
       });
 
@@ -343,6 +431,44 @@
     function closeCelebrationModal() {
       document.getElementById('celebrationModal').classList.remove('active');
     }
+
+    // Mobile View Switching (Customize vs Phone Live Preview)
+    function switchMobileView(mode) {
+      const formPane = document.querySelector('.builder-form-pane');
+      const previewPane = document.querySelector('.builder-preview-pane');
+      const btnForm = document.getElementById('tabBtnForm');
+      const btnPreview = document.getElementById('tabBtnPreview');
+      const fab = document.getElementById('floatingPreviewFab');
+
+      if (mode === 'preview') {
+        formPane?.classList.add('mobile-hidden');
+        previewPane?.classList.remove('mobile-hidden');
+        btnForm?.classList.remove('active');
+        btnPreview?.classList.add('active');
+        if (fab) fab.innerHTML = '<span>✏️ Edit Form</span>';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        formPane?.classList.remove('mobile-hidden');
+        previewPane?.classList.add('mobile-hidden');
+        btnForm?.classList.add('active');
+        btnPreview?.classList.remove('active');
+        if (fab) fab.innerHTML = '<span>📱 Phone Preview</span>';
+      }
+    }
+
+    function toggleFloatingPreview() {
+      const previewPane = document.querySelector('.builder-preview-pane');
+      if (previewPane && !previewPane.classList.contains('mobile-hidden')) {
+        switchMobileView('form');
+      } else {
+        switchMobileView('preview');
+      }
+    }
   </script>
+
+  <!-- Quick Floating Phone Preview FAB on Mobile -->
+  <button type="button" class="floating-preview-fab" id="floatingPreviewFab" onclick="toggleFloatingPreview()">
+    <span>📱 Phone Preview</span>
+  </button>
 </body>
 </html>

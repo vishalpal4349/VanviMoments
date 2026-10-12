@@ -646,3 +646,152 @@ body {
   cursor: pointer;
   padding: 6px;
 }
+
+/* ─── Compact Header Back Button ─── */
+.btn-builder-compact-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #ffffff;
+  border: 1px solid var(--builder-border);
+  color: var(--builder-ink);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 800;
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.btn-builder-compact-back:hover {
+  background: var(--builder-rose);
+  border-color: var(--builder-rose);
+  color: #ffffff;
+  transform: translateX(-2px);
+}
+
+/* ─── Mobile Segmented Tabs Bar (Edit vs Phone Preview) ─── */
+.builder-mobile-tabs {
+  display: none;
+  position: sticky;
+  top: 57px;
+  z-index: 95;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--builder-border);
+  padding: 8px 14px;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+}
+
+.builder-mobile-tabs .tab-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--builder-border);
+  background: #ffffff;
+  color: var(--builder-ink-muted);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.builder-mobile-tabs .tab-btn.active {
+  background: linear-gradient(135deg, #ff2a7a, #be123c);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(255, 42, 122, 0.3);
+}
+
+/* Floating Preview FAB for Quick Phone Glance */
+.floating-preview-fab {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 18px;
+  z-index: 99;
+  background: linear-gradient(135deg, #ff2a7a, #be123c);
+  color: #ffffff;
+  border: none;
+  border-radius: 99px;
+  padding: 12px 20px;
+  font-size: 13.5px;
+  font-weight: 850;
+  box-shadow: 0 8px 24px rgba(255, 42, 122, 0.45);
+  cursor: pointer;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.floating-preview-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255, 42, 122, 0.55);
+}
+
+/* Responsive Media Queries for Mobile Screens */
+@media (max-width: 960px) {
+  .builder-mobile-tabs {
+    display: flex;
+  }
+  .floating-preview-fab {
+    display: inline-flex;
+  }
+  .builder-form-pane.mobile-hidden {
+    display: none !important;
+  }
+  .builder-preview-pane.mobile-hidden {
+    display: none !important;
+  }
+  .builder-preview-pane {
+    position: static;
+    height: auto;
+    min-height: calc(100vh - 160px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+  }
+  .preview-frame-container {
+    width: 100% !important;
+    max-width: 375px !important;
+    height: 640px !important;
+    min-height: 540px !important;
+    max-height: 80vh !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .builder-topbar {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  .builder-brand-group {
+    gap: 8px;
+  }
+  .builder-template-name {
+    font-size: 13.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+  }
+  .builder-template-badge {
+    display: none;
+  }
+  .builder-save-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+}
