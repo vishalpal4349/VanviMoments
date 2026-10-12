@@ -550,12 +550,14 @@
             <input type="color" class="form-input" id="inpGold" value="#D4AF37" onchange="pushLiveConfig()" style="height:44px; padding:4px;">
           </div>
           <div class="form-group">
-            <label class="form-label">Bride Photo URL</label>
-            <input type="url" class="form-input" id="inpBrideImg" value="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=700&auto=format&fit=crop" oninput="pushLiveConfig()">
+            <label class="form-label">Upload Bride Portrait Photo</label>
+            <input type="file" accept="image/*" class="form-input" id="fileBrideImg" onchange="handlePhotoUpload(event, 'inpBrideImg')" style="padding:8px;">
+            <input type="url" class="form-input" id="inpBrideImg" value="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=700&auto=format&fit=crop" oninput="pushLiveConfig()" style="margin-top:6px; font-size:0.75rem;">
           </div>
           <div class="form-group">
-            <label class="form-label">Groom Photo URL</label>
-            <input type="url" class="form-input" id="inpGroomImg" value="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=700&auto=format&fit=crop" oninput="pushLiveConfig()">
+            <label class="form-label">Upload Groom Portrait Photo</label>
+            <input type="file" accept="image/*" class="form-input" id="fileGroomImg" onchange="handlePhotoUpload(event, 'inpGroomImg')" style="padding:8px;">
+            <input type="url" class="form-input" id="inpGroomImg" value="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=700&auto=format&fit=crop" oninput="pushLiveConfig()" style="margin-top:6px; font-size:0.75rem;">
           </div>
         </div>
 
@@ -688,10 +690,25 @@
         coupleColor: document.getElementById('inpColor')?.value || '#6b0f1a',
         dateColor: document.getElementById('inpGold')?.value || '#D4AF37',
         bridePhoto: document.getElementById('inpBrideImg')?.value,
-        groomPhoto: document.getElementById('inpGroomImg')?.value
+        groomPhoto: document.getElementById('inpGroomImg')?.value,
+        phone: document.getElementById('inpWaNumber')?.value || '919876543210'
       };
 
       iframe.contentWindow.postMessage({ type: 'UPDATE_CONFIG', config }, '*');
+    }
+
+    function handlePhotoUpload(e, targetId) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        const inp = document.getElementById(targetId);
+        if (inp) {
+          inp.value = evt.target.result;
+          pushLiveConfig();
+        }
+      };
+      reader.readAsDataURL(file);
     }
 
     function openPublishModal() {

@@ -11,6 +11,45 @@
   let isAudioPlaying = false;
   let audioCtx = null;
   let audioTimer = null;
+  let rsvpPhone = "919876543210";
+
+  // Auto-initialize from URL Parameters (for shared moments & direct links)
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const pBride = urlParams.get("bride");
+    const pGroom = urlParams.get("groom");
+    const pDate = urlParams.get("date");
+    const pPhone = urlParams.get("phone") || urlParams.get("whatsapp");
+    const pBrideImg = urlParams.get("bridePhoto") || urlParams.get("brideImg");
+    const pGroomImg = urlParams.get("groomPhoto") || urlParams.get("groomImg");
+
+    if (pBride) {
+      ["opening-bride", "hero-bride", "card-bride-name", "patrika-bride"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = pBride;
+      });
+    }
+    if (pGroom) {
+      ["opening-groom", "hero-groom", "card-groom-name", "patrika-groom"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = pGroom;
+      });
+    }
+    if (pDate) {
+      weddingDate = new Date(`${pDate}T11:00:00`);
+    }
+    if (pPhone) {
+      rsvpPhone = pPhone.replace(/[^0-9]/g, "");
+    }
+    if (pBrideImg) {
+      const img = document.getElementById("img-bride");
+      if (img) img.src = pBrideImg;
+    }
+    if (pGroomImg) {
+      const img = document.getElementById("img-groom");
+      if (img) img.src = pGroomImg;
+    }
+  } catch (e) {}
 
   // DOM Elements
   const gatesOverlay = document.getElementById("palace-gates-overlay");
@@ -321,7 +360,7 @@
       const statusText = status === "attending" ? "joyfully attending" : "regretfully unable to attend";
       const text = `Namaste! 🙏\n\nI am ${guestName}. I will be ${statusText} the Royal Wedding of ${bride} & ${groom}.\n\nTotal Guests: ${guestsCount}\n\nSending our warmest congratulations and blessings! ✨`;
 
-      const whatsappUrl = `https://api.whatsapp.com/send?phone=919876543210&text=${encodeURIComponent(text)}`;
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${rsvpPhone}&text=${encodeURIComponent(text)}`;
       window.open(whatsappUrl, "_blank");
     });
   }
@@ -391,6 +430,11 @@
       if (fontFamilies[cfg.font]) {
         document.documentElement.style.setProperty("--font-serif", fontFamilies[cfg.font]);
       }
+    }
+
+    // Dynamic RSVP Phone
+    if (cfg.phone) {
+      rsvpPhone = cfg.phone.replace(/[^0-9]/g, "");
     }
   });
 

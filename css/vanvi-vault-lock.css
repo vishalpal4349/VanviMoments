@@ -1,0 +1,432 @@
+/* ==========================================================================
+   VANVI MOMENTS — LUXURY VAULT LOCK & COMING SOON CURIOSITY SYSTEM
+   Ultra-premium golden lock badges, shimmer animations & curiosity modal
+   ========================================================================== */
+
+/* 1. Locked Card Aesthetic */
+.vanvi-card.is-vault-locked,
+.tpl-card.is-vault-locked {
+  position: relative !important;
+  cursor: pointer !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease !important;
+}
+
+.vanvi-card.is-vault-locked:hover,
+.tpl-card.is-vault-locked:hover {
+  transform: translateY(-6px) scale(1.015) !important;
+  box-shadow: 0 16px 36px rgba(212, 175, 55, 0.22), 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Golden Padlock Badge on Top Right */
+.vault-lock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, #1A120B 0%, #2D1E12 50%, #150F09 100%);
+  border: 1px solid rgba(212, 175, 55, 0.65);
+  color: #F7D070 !important;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 99px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 12px rgba(212, 175, 55, 0.25);
+  z-index: 5;
+  animation: vaultPulseGlow 3s infinite ease-in-out;
+}
+
+@keyframes vaultPulseGlow {
+  0%, 100% {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px rgba(212, 175, 55, 0.25);
+    border-color: rgba(212, 175, 55, 0.55);
+  }
+  50% {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 18px rgba(212, 175, 55, 0.55);
+    border-color: rgba(255, 223, 128, 0.95);
+  }
+}
+
+/* Center Artwork Frosted Lock Emblem */
+.vault-overlay-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(18, 12, 8, 0.68);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), inset 0 0 14px rgba(212, 175, 55, 0.25);
+  z-index: 4;
+  pointer-events: none;
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+
+.vanvi-card.is-vault-locked:hover .vault-overlay-center,
+.tpl-card.is-vault-locked:hover .vault-overlay-center {
+  transform: translate(-50%, -50%) scale(1.12);
+  border-color: #F7D070;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(212, 175, 55, 0.45);
+}
+
+.vault-lock-icon {
+  font-size: 24px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  animation: lockFloat 3.2s infinite ease-in-out;
+}
+
+@keyframes lockFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Locked Card Actions Button */
+.btn-vault-locked {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  background: linear-gradient(135deg, rgba(30, 20, 15, 0.95), rgba(45, 30, 20, 0.95)) !important;
+  color: #F7D070 !important;
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+  border-radius: 99px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  padding: 8px 16px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.btn-vault-locked:hover {
+  background: linear-gradient(135deg, #2A1A10, #3E2616) !important;
+  border-color: #F7D070 !important;
+  color: #FFF2CC !important;
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* ==========================================================================
+   2. ULTRA-PREMIUM CURIOSITY MODAL (Glassmorphism & Gold Particles)
+   ========================================================================== */
+.vanvi-vault-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 5, 4, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.vanvi-vault-modal-backdrop.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vanvi-vault-modal-window {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(165deg, #1C120C 0%, #120A07 55%, #0B0604 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  border-radius: 28px;
+  padding: 32px 26px 28px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.75), 0 0 40px rgba(212, 175, 55, 0.18), inset 0 1px 0 rgba(255, 235, 170, 0.2);
+  color: #F5EBE1;
+  text-align: center;
+  transform: translateY(24px) scale(0.95);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.vanvi-vault-modal-backdrop.is-active .vanvi-vault-modal-window {
+  transform: translateY(0) scale(1);
+}
+
+/* Ambient Radial Glow inside Modal */
+.modal-gold-aura {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.28) 0%, rgba(212, 175, 55, 0) 70%);
+  filter: blur(35px);
+  pointer-events: none;
+}
+
+/* Close Button */
+.modal-close-cross {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 50%;
+  color: #D6B878;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.modal-close-cross:hover {
+  background: rgba(212, 175, 55, 0.2);
+  color: #FFFFFF;
+  border-color: #F7D070;
+  transform: rotate(90deg);
+}
+
+/* Floating 3D Padlock Display */
+.vault-anim-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 16px;
+  background: radial-gradient(circle at 35% 30%, #382414 0%, #1E120A 75%);
+  border: 2px solid #D4AF37;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 24px rgba(212, 175, 55, 0.4), inset 0 2px 8px rgba(255, 235, 170, 0.4);
+  animation: padlockPulse 3.5s infinite ease-in-out;
+}
+
+@keyframes padlockPulse {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.35);
+  }
+  50% {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7), 0 0 32px rgba(212, 175, 55, 0.6);
+  }
+}
+
+.vault-anim-badge .padlock-big {
+  font-size: 38px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+}
+
+.vault-anim-badge .sparkle-orbit {
+  position: absolute;
+  font-size: 14px;
+  animation: orbitSparkle 4s infinite linear;
+}
+
+@keyframes orbitSparkle {
+  0% { transform: rotate(0deg) translateX(46px) rotate(0deg); opacity: 0.8; }
+  50% { opacity: 0.3; }
+  100% { transform: rotate(360deg) translateX(46px) rotate(-360deg); opacity: 0.8; }
+}
+
+/* Typography */
+.vault-pill-tag {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #D4AF37;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 10px;
+}
+
+.vault-modal-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #FFF1D2;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.vault-template-highlight {
+  color: #E6C675;
+  font-style: italic;
+  display: block;
+  font-size: 19px;
+  margin-top: 4px;
+}
+
+.vault-modal-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #D1BEB0;
+  margin: 12px 0 20px;
+}
+
+/* Feature Sneak Peeks Pills */
+.vault-features-dock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.vault-feat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 99px;
+  padding: 5px 11px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #F0E3D3;
+}
+
+/* VIP Notify Input Box */
+.vault-vip-card {
+  background: rgba(35, 22, 15, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.vault-vip-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #F7D070;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.vault-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.vault-email-input {
+  flex: 1;
+  background: rgba(10, 6, 4, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 99px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #FFFFFF;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.vault-email-input:focus {
+  border-color: #F7D070;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+}
+
+.vault-submit-btn {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+  color: #1A1008;
+  border: none;
+  border-radius: 99px;
+  padding: 10px 18px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vault-submit-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+}
+
+.vault-success-msg {
+  display: none;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid #10b981;
+  color: #6ee7b7;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-top: 8px;
+  animation: fadeInDown 0.3s ease;
+}
+
+/* Primary Action: Go to Unlocked Templates */
+.btn-explore-live {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: 99px;
+  padding: 11px 22px;
+  color: #F5EBE1;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-explore-live:hover {
+  background: rgba(212, 175, 55, 0.2);
+  color: #FFFFFF;
+  border-color: #F7D070;
+  transform: translateY(-1px);
+}
+
+/* Mobile Viewport Polish (320px – 480px) */
+@media (max-width: 480px) {
+  .vault-modal-card {
+    width: 92% !important;
+    padding: 22px 18px !important;
+    border-radius: 20px !important;
+  }
+  .vault-lock-badge {
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+  }
+  .vault-overlay-center {
+    width: 52px !important;
+    height: 52px !important;
+  }
+}
+
