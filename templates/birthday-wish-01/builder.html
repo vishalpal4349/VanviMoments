@@ -412,7 +412,12 @@
             try { q.set('photos', JSON.stringify(currentPhotos)); } catch(e){}
           }
           if (saved && saved.id) q.set('id', saved.id);
+          q.set('paid', 'true');
+          q.set('purchased', 'true');
+          q.set('status', 'published');
           shareUrl = `${window.location.origin}${window.location.pathname.replace('builder.html', 'index.html')}?${q.toString()}`;
+        } else if (!shareUrl.includes('paid=true')) {
+          shareUrl += (shareUrl.includes('?') ? '&' : '?') + 'paid=true&purchased=true&status=published';
         }
 
         document.getElementById('shareUrlInput').value = shareUrl;

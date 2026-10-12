@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Bespoke Customizer Studio — The Royal Udaivilas Baithak | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+  <!-- Royal Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/vanvi-template-lock.css">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #080f1a;
+      --panel-bg: rgba(16, 28, 46, 0.98);
+      --gold: #c4985a;
+      --gold-light: #dfba82;
+      --gold-glow: rgba(196, 152, 90, 0.4);
+      --border-line: rgba(196, 152, 90, 0.28);
+      --text-light: #fdfaf5;
+      --text-muted: #9aa8bc;
+      --crimson: #540e1b;
+      --font-display: 'Cinzel', serif;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-family: var(--font-sans);
+      overflow-x: hidden !important;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+    }
+
+    /* ─── TOP CONTROL BAR ─── */
+    .studio-topbar {
+      min-height: 56px;
+      background: rgba(8, 15, 26, 0.98);
+      border-bottom: 1px solid var(--border-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      gap: 10px;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+
+    .tb-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .btn-tb-back {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 750;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .btn-tb-back:hover { color: #ffffff; }
+
+    .tb-brand-title {
+      font-family: var(--font-display);
+      font-size: 12.5px;
+      color: var(--gold);
+      letter-spacing: 1px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Desktop Device Switcher */
+    .tb-center {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 3px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .view-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .view-btn.active {
+      background: var(--gold);
+      color: #080f1a;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .tb-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-preset-load {
+      background: rgba(196, 152, 90, 0.18);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-preset-load:hover { background: rgba(196, 152, 90, 0.35); }
+
+    .btn-unlock-gold {
+      background: linear-gradient(135deg, #dfba82 0%, #c4985a 50%, #926c36 100%);
+      color: #080f1a !important;
+      font-weight: 850;
+      font-size: 12px;
+      text-decoration: none;
+      padding: 7px 16px;
+      border-radius: 99px;
+      box-shadow: 0 4px 16px var(--gold-glow);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      transition: transform 0.2s;
+    }
+    .btn-unlock-gold:hover { transform: translateY(-1px); }
+
+    /* ─── MOBILE MODE TOGGLE SEGMENT (Screens < 860px) ─── */
+    .mobile-view-segment-bar {
+      display: none;
+      width: 100%;
+      background: rgba(16, 28, 46, 0.98);
+      border-bottom: 1px solid var(--border-line);
+      padding: 8px 12px;
+      gap: 8px;
+      z-index: 90;
+    }
+    .seg-btn {
+      flex: 1;
+      border: 1px solid var(--border-line);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 8px 14px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .seg-btn.active {
+      background: var(--gold);
+      color: #080f1a;
+      border-color: var(--gold);
+      box-shadow: 0 4px 12px rgba(196, 152, 90, 0.35);
+    }
+
+    /* ─── STUDIO SPLIT WORKSPACE ─── */
+    .studio-workspace {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    /* ─── LEFT: CUSTOMIZER SIDEBAR ─── */
+    .studio-editor-panel {
+      width: 480px;
+      min-width: 340px;
+      max-width: 520px;
+      background: var(--panel-bg);
+      border-right: 1px solid var(--border-line);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    /* Tabs Bar */
+    .editor-tabs-bar {
+      display: flex;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border-line);
+      background: rgba(8, 15, 26, 0.9);
+      padding: 6px 8px 0;
+      gap: 4px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .editor-tabs-bar::-webkit-scrollbar { display: none; }
+
+    .tab-item {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 11.5px;
+      font-weight: 750;
+      letter-spacing: 0.5px;
+      padding: 8px 12px;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    .tab-item.active {
+      color: var(--gold-light);
+      background: rgba(196, 152, 90, 0.14);
+      border-bottom-color: var(--gold);
+    }
+
+    /* Tab Content Area */
+    .editor-scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 16px 80px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .form-section-title {
+      font-family: var(--font-display);
+      font-size: 13.5px;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+      width: 100%;
+    }
+    .form-group label {
+      font-size: 11.5px;
+      font-weight: 750;
+      color: var(--gold-light);
+      letter-spacing: 0.5px;
+    }
+    .form-input, .form-textarea, .form-select {
+      background: rgba(8, 15, 26, 0.7);
+      border: 1px solid var(--border-line);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: var(--text-light);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      outline: none;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      transition: border 0.2s;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 12px rgba(196, 152, 90, 0.2);
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+    }
+
+    /* Bulk WhatsApp Links Box */
+    .guest-link-row {
+      background: rgba(8, 15, 26, 0.6);
+      border: 1px solid var(--border-line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .guest-link-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-light);
+      word-break: break-word;
+    }
+    .btn-copy-wa {
+      background: #25d366;
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ─── RIGHT: LIVE PREVIEW CONTAINER ─── */
+    .studio-preview-stage {
+      flex: 1;
+      background: radial-gradient(circle at center, #101c2e 0%, #050a12 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+
+    .preview-device-box {
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-device-box.mobile-mode {
+      max-width: 414px;
+      max-height: 860px;
+      height: 94%;
+      border-radius: 40px;
+      border: 8px solid #1a273b;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 40px var(--gold-glow);
+      overflow: hidden;
+    }
+
+    .preview-device-box.laptop-mode {
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+    }
+
+    .live-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #080f1a;
+    }
+
+    /* Sticky Mobile Bottom Action Pill */
+    .mobile-sticky-bottom-actions {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      max-width: 100vw;
+      box-sizing: border-box;
+      background: rgba(8, 15, 26, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-line);
+      padding: 10px 12px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+      z-index: 999;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mobile-sticky-bottom-actions button,
+    .mobile-sticky-bottom-actions a {
+      flex: 1;
+      justify-content: center;
+      text-align: center;
+      min-width: 0;
+      box-sizing: border-box;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    /* ─── MOBILE RESPONSIVE ENGINE (360px - 860px) ─── */
+    @media (max-width: 860px) {
+      .tb-center {
+        display: none; /* Handled by mobile-view-segment-bar */
+      }
+      .mobile-view-segment-bar {
+        display: flex;
+      }
+      .studio-workspace {
+        height: calc(100vh - 105px);
+        height: calc(100dvh - 105px);
+        position: relative;
+      }
+      .studio-editor-panel {
+        width: 100%;
+        max-width: 100%;
+        border-right: none;
+      }
+      .studio-preview-stage {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+      }
+      .preview-device-box.laptop-mode,
+      .preview-device-box.mobile-mode {
+        max-width: 100%;
+        max-height: 100%;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      /* View switching classes on workspace */
+      .studio-workspace.view-editor .studio-preview-stage {
+        display: none;
+      }
+      .studio-workspace.view-editor .studio-editor-panel {
+        display: flex;
+      }
+      .studio-workspace.view-preview .studio-editor-panel {
+        display: none;
+      }
+      .studio-workspace.view-preview .studio-preview-stage {
+        display: flex;
+      }
+
+      .mobile-sticky-bottom-actions {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .form-row-2 {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .tb-brand-title {
+        max-width: 140px;
+        font-size: 11.5px;
+      }
+      .btn-unlock-gold {
+        font-size: 11px;
+        padding: 6px 12px;
+      }
+      .btn-preset-load {
+        display: none;
+      }
+      .editor-scroll-area {
+        padding: 16px 12px 90px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Studio Bar -->
+  <header class="studio-topbar">
+    <div class="tb-left">
+      <a href="./preview.html" class="btn-tb-back">‹ Preview</a>
+      <span class="tb-brand-title">UDAIVILAS STUDIO</span>
+    </div>
+
+    <!-- Desktop Switcher -->
+    <div class="tb-center">
+      <button type="button" class="view-btn" id="btnViewMobile" onclick="setPreviewDevice('mobile')">📱 Phone</button>
+      <button type="button" class="view-btn active" id="btnViewLaptop" onclick="setPreviewDevice('laptop')">💻 Laptop Full</button>
+    </div>
+
+    <div class="tb-right">
+      <button type="button" class="btn-preset-load" onclick="loadSamplePreset()">✨ Sample</button>
+      <a href="../../checkout.html?templateId=royal-udaivilas-baithak&price=999" class="btn-unlock-gold">
+        👑 Unlock (₹999)
+      </a>
+    </div>
+  </header>
+
+  <!-- Mobile Segmented Bar (Screens < 860px) -->
+  <div class="mobile-view-segment-bar" id="mobileSegmentBar">
+    <button type="button" class="seg-btn active" id="segBtnEditor" onclick="setMobileStudioMode('editor')">
+      <span>✏️ Customizer</span>
+    </button>
+    <button type="button" class="seg-btn" id="segBtnPreview" onclick="setMobileStudioMode('preview')">
+      <span>👁️ Live Preview</span>
+    </button>
+  </div>
+
+  <!-- Studio Workspace -->
+  <div class="studio-workspace view-editor" id="studioWorkspace">
+
+    <!-- LEFT: CUSTOMIZER FORM -->
+    <aside class="studio-editor-panel" id="editorPanel">
+      <!-- Tabs -->
+      <nav class="editor-tabs-bar">
+        <button type="button" class="tab-item active" onclick="switchTab('couple')">💑 Couple</button>
+        <button type="button" class="tab-item" onclick="switchTab('lineage')">👑 Family</button>
+        <button type="button" class="tab-item" onclick="switchTab('events')">🗓️ Ceremonies</button>
+        <button type="button" class="tab-item" onclick="switchTab('vows')">💌 Story</button>
+        <button type="button" class="tab-item" onclick="switchTab('shagun')">🎁 Shagun UPI</button>
+        <button type="button" class="tab-item" onclick="switchTab('mood')">🎨 Mood Theme</button>
+        <button type="button" class="tab-item" onclick="switchTab('guests')">💬 VIP Guests</button>
+      </nav>
+
+      <!-- Tab Content Area -->
+      <div class="editor-scroll-area" id="editorForms">
+
+        <!-- TAB 1: COUPLE & MUHURAT -->
+        <div class="tab-pane" id="pane-couple">
+          <div class="form-section-title">💑 Royal Couple &amp; Auspicious Muhurat</div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Bride's Name:</label>
+              <input type="text" id="inpBride" class="form-input" value="Tanya" oninput="syncLivePreview()">
+            </div>
+            <div class="form-group">
+              <label>Groom's Name:</label>
+              <input type="text" id="inpGroom" class="form-input" value="Rohan" oninput="syncLivePreview()">
+            </div>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Wedding Date:</label>
+              <input type="date" id="inpDate" class="form-input" value="2026-12-12" oninput="syncLivePreview()">
+            </div>
+            <div class="form-group">
+              <label>Muhurat Time:</label>
+              <input type="text" id="inpTime" class="form-input" value="05:30 PM (Sunset Mandap)" oninput="syncLivePreview()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Palace Venue:</label>
+            <input type="text" id="inpVenue" class="form-input" value="The Oberoi Udaivilas, Lake Pichola, Udaipur" oninput="syncLivePreview()">
+          </div>
+          <div class="form-group">
+            <label>Couple Wedding Hashtag:</label>
+            <input type="text" id="inpHashtag" class="form-input" value="#TanyaWedsRohan" oninput="syncLivePreview()">
+          </div>
+          <div class="form-group">
+            <label>RSVP WhatsApp Number (with country code):</label>
+            <input type="text" id="inpWhatsapp" class="form-input" value="919999999999" oninput="syncLivePreview()">
+          </div>
+        </div>
+
+        <!-- TAB 2: FAMILY & LINEAGE -->
+        <div class="tab-pane" id="pane-lineage" style="display:none;">
+          <div class="form-section-title">👑 Sacred Family Lineage &amp; Elders</div>
+          <div class="form-group">
+            <label>Bride's Proud Parents:</label>
+            <input type="text" id="inpBrideParents" class="form-input" value="Mr. Rajesh &amp; Mrs. Kavita Sharma" oninput="syncLivePreview()">
+          </div>
+          <div class="form-group">
+            <label>Bride's Grandparents Blessings:</label>
+            <input type="text" id="inpBrideGP" class="form-input" value="Blessings of Late Shri D.N. Sharma &amp; Smt. Pushpa Devi" oninput="syncLivePreview()">
+          </div>
+          <div class="form-group">
+            <label>Groom's Proud Parents:</label>
+            <input type="text" id="inpGroomParents" class="form-input" value="Mr. Sanjay &amp; Mrs. Neeta Kapoor" oninput="syncLivePreview()">
+          </div>
+          <div class="form-group">
+            <label>Groom's Grandparents Blessings:</label>
+            <input type="text" id="inpGroomGP" class="form-input" value="Blessings of Late Shri M.L. Kapoor &amp; Smt. Savitri Devi" oninput="syncLivePreview()">
+          </div>
+        </div>
+
+        <!-- TAB 3: 6 AUSPICIOUS CEREMONIES -->
+        <div class="tab-pane" id="pane-events" style="display:none;">
+          <div class="form-section-title">🗓️ 6 Auspicious Ceremonies Itinerary</div>
+          <div class="form-group">
+            <label>1. Mangal Haldi:</label>
+            <input type="text" class="form-input" value="11 Dec 2026 • 10:00 AM • The Lotus Courtyard">
+          </div>
+          <div class="form-group">
+            <label>2. Mehendi Ceremony:</label>
+            <input type="text" class="form-input" value="11 Dec 2026 • 02:30 PM • Mewar Verandah Gardens">
+          </div>
+          <div class="form-group">
+            <label>3. Royal Sangeet &amp; Cocktail:</label>
+            <input type="text" class="form-input" value="11 Dec 2026 • 07:30 PM • The Grand Ballroom & Lawns">
+          </div>
+          <div class="form-group">
+            <label>4. Sagan &amp; Shubh Tilak:</label>
+            <input type="text" class="form-input" value="12 Dec 2026 • 10:30 AM • Darbar Heritage Pavilion">
+          </div>
+          <div class="form-group">
+            <label>5. Sacred Vivah &amp; Pheras (Hero):</label>
+            <input type="text" class="form-input" value="12 Dec 2026 • 05:30 PM • The Lakeside Mandap">
+          </div>
+          <div class="form-group">
+            <label>6. Grand Royal Reception:</label>
+            <input type="text" class="form-input" value="13 Dec 2026 • 07:30 PM • Royal Promenade & Deck">
+          </div>
+        </div>
+
+        <!-- TAB 4: STORY & VOWS -->
+        <div class="tab-pane" id="pane-vows" style="display:none;">
+          <div class="form-section-title">💌 Couple Romance Verse &amp; Velvet Curtain</div>
+          <div class="form-group">
+            <label>Sanctum Romance Passage:</label>
+            <textarea id="inpStory" class="form-textarea" rows="4" oninput="syncLivePreview()">It began with a shared cup of spiced chai by the lake and a conversation neither of us wished to end. Through quiet laughter, whispered hopes, and unwavering faith, we discovered our sanctuary in each other. Now, under the blessings of our sacred elders, we step into forever.</textarea>
+          </div>
+          <div class="form-group">
+            <label>Curtain Reveal Romance Tags (comma separated):</label>
+            <input type="text" class="form-input" value="✨ Soulmates, 🪷 Lake Pichola Vows, ☕ Chai & Conversations, 👑 Forever & Always">
+          </div>
+        </div>
+
+        <!-- TAB 5: DIGITAL SHAGUN UPI -->
+        <div class="tab-pane" id="pane-shagun" style="display:none;">
+          <div class="form-section-title">🎁 Traditional Digital Shagun UPI Settings</div>
+          <div class="form-group">
+            <label>Payee Name / Beneficiary:</label>
+            <input type="text" id="inpShagunPayee" class="form-input" value="Tanya & Rohan" oninput="syncLivePreview()">
+          </div>
+          <div class="form-group">
+            <label>UPI ID (Google Pay / PhonePe / Paytm):</label>
+            <input type="text" id="inpUpi" class="form-input" value="vanvi.udaivilas@upi" oninput="syncLivePreview()">
+          </div>
+          <div class="form-group">
+            <label>Envelope Blessing Message:</label>
+            <textarea class="form-textarea" rows="2">Your presence and divine blessings are our greatest treasure. For cherished family wishing to bless digitally with traditional Shagun.</textarea>
+          </div>
+        </div>
+
+        <!-- TAB 6: MOOD THEME -->
+        <div class="tab-pane" id="pane-mood" style="display:none;">
+          <div class="form-section-title">🎨 Heritage Mood &amp; Soundscape</div>
+          <div class="form-group">
+            <label>Select Heritage Palette Preset:</label>
+            <select id="inpMood" class="form-select" onchange="syncLivePreview()">
+              <option value="pearl" selected>🪷 Udaipur Pearl (Rose Ivory &amp; Crimson Velvet)</option>
+              <option value="mewar">👑 Royal Mewar (Deep Midnight Sapphire &amp; Gold)</option>
+              <option value="sunset">🌅 Jaipur Sunset (Imperial Terracotta &amp; Gold)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Audio Soundscape Track:</label>
+            <select class="form-select">
+              <option selected>Santoor & Sacred Shehnai Symphony</option>
+              <option>Temple Sitar & Flute Raga</option>
+              <option>Ambient Palace Sarod Harmonies</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- TAB 7: VIP BULK WHATSAPP GENERATOR -->
+        <div class="tab-pane" id="pane-guests" style="display:none;">
+          <div class="form-section-title">💬 VIP Bulk WhatsApp Guest Link Generator</div>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
+            Type guest names (one per line). We will generate individual personalized invitation links (`?guest=Name`) ready to share with 1 click!
+          </p>
+          <div class="form-group">
+            <label>Enter Guest Names (one per line):</label>
+            <textarea id="guestListInput" class="form-textarea" rows="4" placeholder="Sharma Ji & Family&#10;Dr. Verma&#10;Aarav & Kriti">Sharma Ji & Family
+Dr. Vikram Verma
+Aarav & Kriti
+Mrs. Sunita Singhania</textarea>
+          </div>
+          <button type="button" class="btn-preset-load" onclick="generateGuestLinks()" style="width:100%; margin-bottom:16px; padding:10px;">
+            ⚡ Generate Personalized VIP WhatsApp Links
+          </button>
+
+          <div id="guestLinksOutput"></div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- RIGHT: LIVE PREVIEW IFRAME -->
+    <main class="studio-preview-stage" id="previewStage">
+      <div class="preview-device-box laptop-mode" id="previewDeviceBox">
+        <iframe src="./index.html?mood=pearl" class="live-iframe" id="previewIframe" title="Live Interactive Studio Preview"></iframe>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Mobile Sticky Bottom Bar (Screens < 860px) -->
+  <div class="mobile-sticky-bottom-actions">
+    <button type="button" class="btn-preset-load" id="mobToggleActionBtn" onclick="setMobileStudioMode('preview')" style="padding:8px 12px; font-size:11.5px;">
+      👁️ Preview
+    </button>
+    <a href="../../checkout.html?templateId=royal-udaivilas-baithak&price=999" class="btn-unlock-gold" style="font-size:11.5px; padding:8px 14px;">
+      👑 Unlock (₹999)
+    </a>
+  </div>
+
+  <script>
+    // Tab Switcher
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
+      if (event && event.target) event.target.classList.add('active');
+
+      document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
+      const targetPane = document.getElementById(`pane-${tabId}`);
+      if (targetPane) targetPane.style.display = 'block';
+    }
+
+    // Desktop Device Switcher
+    function setPreviewDevice(mode) {
+      const box = document.getElementById('previewDeviceBox');
+      const btnDesk = document.getElementById('btnViewLaptop');
+      const btnMob = document.getElementById('btnViewMobile');
+
+      if (mode === 'mobile') {
+        box.className = 'preview-device-box mobile-mode';
+        if (btnMob) btnMob.classList.add('active');
+        if (btnDesk) btnDesk.classList.remove('active');
+      } else {
+        box.className = 'preview-device-box laptop-mode';
+        if (btnDesk) btnDesk.classList.add('active');
+        if (btnMob) btnMob.classList.remove('active');
+      }
+    }
+
+    // Mobile View Segment Toggle (Editor vs Preview on phones)
+    function setMobileStudioMode(mode) {
+      const ws = document.getElementById('studioWorkspace');
+      const segEd = document.getElementById('segBtnEditor');
+      const segPr = document.getElementById('segBtnPreview');
+      const mobBtn = document.getElementById('mobToggleActionBtn');
+
+      if (mode === 'preview') {
+        ws.classList.remove('view-editor');
+        ws.classList.add('view-preview');
+        if (segPr) segPr.classList.add('active');
+        if (segEd) segEd.classList.remove('active');
+        if (mobBtn) {
+          mobBtn.innerHTML = '✏️ Edit Details';
+          mobBtn.onclick = () => setMobileStudioMode('editor');
+        }
+      } else {
+        ws.classList.remove('view-preview');
+        ws.classList.add('view-editor');
+        if (segEd) segEd.classList.add('active');
+        if (segPr) segPr.classList.remove('active');
+        if (mobBtn) {
+          mobBtn.innerHTML = '👁️ Preview';
+          mobBtn.onclick = () => setMobileStudioMode('preview');
+        }
+      }
+    }
+
+    // Live Sync with Iframe
+    let syncTimer = null;
+    function syncLivePreview() {
+      clearTimeout(syncTimer);
+      syncTimer = setTimeout(() => {
+        const bride = encodeURIComponent(document.getElementById('inpBride').value.trim() || 'Tanya');
+        const groom = encodeURIComponent(document.getElementById('inpGroom').value.trim() || 'Rohan');
+        const date = encodeURIComponent(document.getElementById('inpDate').value || '2026-12-12');
+        const venue = encodeURIComponent(document.getElementById('inpVenue').value.trim() || 'The Oberoi Udaivilas');
+        const whatsapp = encodeURIComponent(document.getElementById('inpWhatsapp').value.trim() || '919999999999');
+        const hashtag = encodeURIComponent(document.getElementById('inpHashtag').value.trim() || '#TanyaWedsRohan');
+        const upi = encodeURIComponent(document.getElementById('inpUpi').value.trim() || 'vanvi.udaivilas@upi');
+        const mood = encodeURIComponent(document.getElementById('inpMood').value || 'pearl');
+
+        const url = `./index.html?bride=${bride}&groom=${groom}&date=${date}&venue=${venue}&whatsapp=${whatsapp}&hashtag=${hashtag}&upi=${upi}&mood=${mood}&preview=1`;
+        
+        const iframe = document.getElementById('previewIframe');
+        if (iframe) iframe.src = url;
+      }, 350);
+    }
+
+    // Sample Preset Loader
+    function loadSamplePreset() {
+      document.getElementById('inpBride').value = 'Ananya';
+      document.getElementById('inpGroom').value = 'Kabir';
+      document.getElementById('inpDate').value = '2026-12-18';
+      document.getElementById('inpVenue').value = 'The Oberoi Udaivilas, Lake Pichola, Udaipur';
+      document.getElementById('inpHashtag').value = '#KabirWedsAnanya';
+      document.getElementById('inpUpi').value = 'kabir.ananya@upi';
+      document.getElementById('inpMood').value = 'mewar';
+      syncLivePreview();
+    }
+
+    // VIP Guest Links Generator
+    function generateGuestLinks() {
+      const raw = document.getElementById('guestListInput').value;
+      const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+      const output = document.getElementById('guestLinksOutput');
+      output.innerHTML = '';
+
+      const bride = document.getElementById('inpBride').value.trim() || 'Tanya';
+      const groom = document.getElementById('inpGroom').value.trim() || 'Rohan';
+
+      lines.forEach(name => {
+        const encName = encodeURIComponent(name);
+        const link = `${window.location.origin}/templates/royal-udaivilas-baithak/index.html?guest=${encName}`;
+        const waMsg = `Namaste ${name}! 🌸\nWith great joy and divine blessings, ${bride} & ${groom} warmly invite you to celebrate their sacred wedding at The Oberoi Udaivilas, Udaipur!\n\nView your personalized royal invitation: ${link}`;
+
+        const row = document.createElement('div');
+        row.className = 'guest-link-row';
+        row.innerHTML = `
+          <div style="min-width:0; flex:1;">
+            <div class="guest-link-name">${name}</div>
+            <div style="font-size:10.5px; color:#9aa8bc; word-break:break-all; overflow:hidden; text-overflow:ellipsis;">${link}</div>
+          </div>
+          <button type="button" class="btn-copy-wa" onclick="shareWa('${encodeURIComponent(waMsg)}')">Share ↗</button>
+        `;
+        output.appendChild(row);
+      });
+    }
+
+    function shareWa(encText) {
+      window.open(`https://wa.me/?text=${encText}`, '_blank');
+    }
+  </script>
+</body>
+</html>

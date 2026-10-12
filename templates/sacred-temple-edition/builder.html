@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Studio: Sacred Temple Edition Customizer | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-deep: #996515;
+      --maroon-deep: #490c17;
+      --backwaters-deep: #061510;
+      --backwaters-panel: #0d281f;
+      --bg-cream: #fffcf5;
+      --border-gold: rgba(212, 175, 55, 0.35);
+      --text-main: #f3e5ab;
+      --text-muted: #b8a69d;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: #040e0b;
+      color: #fffcf5;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* TOP DOCK */
+    .builder-topbar {
+      height: 64px;
+      background: rgba(6, 21, 16, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+      flex-shrink: 0;
+    }
+
+    .tb-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-back-pill {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--gold-light);
+      border: 1px solid var(--border-gold);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-back-pill:hover {
+      background: rgba(212, 175, 55, 0.2);
+    }
+
+    .tb-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tb-title {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .price-tag-pill {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold-primary);
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #ffd700;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .tb-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-pay-publish-top {
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      color: #1a0808;
+      border: 1px solid var(--gold-light);
+      padding: 8px 20px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-pay-publish-top:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+    }
+
+    /* STEP NAVIGATION TABS */
+    .steps-nav-bar {
+      background: #081a13;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      display: flex;
+      overflow-x: auto;
+      padding: 0 16px;
+      scrollbar-width: none;
+      flex-shrink: 0;
+    }
+    .steps-nav-bar::-webkit-scrollbar { display: none; }
+
+    .step-tab-btn {
+      background: none;
+      border: none;
+      color: #a49187;
+      padding: 12px 16px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .step-tab-btn.active {
+      color: var(--gold-light);
+      border-bottom-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    /* SPLIT WORKSPACE */
+    .builder-main-workspace {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .builder-editor-pane {
+      width: 440px;
+      background: var(--backwaters-panel);
+      border-right: 1px solid var(--border-gold);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .editor-step-content {
+      padding: 24px 20px;
+      display: none;
+    }
+
+    .editor-step-content.active {
+      display: block;
+    }
+
+    .step-header-box {
+      margin-bottom: 20px;
+    }
+
+    .step-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gold-primary);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .step-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      color: var(--gold-light);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      background: rgba(4, 14, 11, 0.85);
+      border: 1px solid var(--border-gold);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fffcf5;
+      font-family: inherit;
+      font-size: 13.5px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--gold-light);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
+
+    /* STEP 7 LAUNCH CARD */
+    .step-7-publish-box {
+      background: linear-gradient(135deg, rgba(73, 12, 23, 0.7) 0%, rgba(6, 21, 16, 0.9) 100%);
+      border: 2px solid var(--gold-primary);
+      border-radius: 20px;
+      padding: 24px 18px;
+      text-align: center;
+      margin-top: 10px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+
+    .launch-price-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold-primary);
+      border-radius: 99px;
+      padding: 6px 16px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gold-light);
+    }
+
+    .btn-pay-publish-huge {
+      width: 100%;
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      color: #1a0808;
+      border: 1px solid #fff;
+      border-radius: 99px;
+      padding: 16px;
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .btn-pay-publish-huge:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 14px 40px rgba(212, 175, 55, 0.7);
+    }
+
+    /* RIGHT PREVIEW STAGE */
+    .builder-preview-stage {
+      flex: 1;
+      background: #020705;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .live-iframe-viewport {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 14px;
+      background: #000;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    }
+
+    /* MOBILE SEGMENT BAR */
+    .mobile-segment-bar {
+      display: none;
+      height: 44px;
+      background: #081a13;
+      border-top: 1px solid var(--border-gold);
+    }
+
+    .mobile-seg-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      color: #a49187;
+      font-weight: 700;
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+
+    .mobile-seg-btn.active {
+      color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.15);
+    }
+
+    /* PAYMENT MODAL */
+    .payment-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .payment-modal-backdrop.open {
+      display: flex;
+    }
+
+    .payment-modal-card {
+      background: linear-gradient(145deg, #10261f 0%, #061510 100%);
+      border: 2px solid var(--gold-primary);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 480px;
+      padding: 30px 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 35px rgba(212, 175, 55, 0.4);
+      text-align: center;
+      position: relative;
+      animation: modalSlide 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalSlide {
+      from { transform: scale(0.9) translateY(20px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .btn-close-modal {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #a49187;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* SUCCESS STATE */
+    .publish-success-card {
+      display: none;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    @media (max-width: 860px) {
+      .builder-editor-pane {
+        width: 100%;
+        display: block;
+      }
+      .builder-preview-stage {
+        display: none;
+      }
+      .mobile-segment-bar {
+        display: flex;
+      }
+      .workspace-show-preview .builder-editor-pane {
+        display: none;
+      }
+      .workspace-show-preview .builder-preview-stage {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="builder-topbar">
+    <div class="tb-left">
+      <a href="../../templates.html" class="btn-back-pill">← Catalog</a>
+      <div class="tb-title-group">
+        <span style="font-size:18px;">🛕</span>
+        <div class="tb-title">Sacred Temple Studio</div>
+        <div class="price-tag-pill">
+          <span><s>₹2,499</s></span>
+          <span style="color:#25d366;">₹999 Launch</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tb-right">
+      <a href="https://wa.me/917631442934?text=Namaste%20Vanvi%20Moments!%20I%20want%20to%20activate%20Sacred%20Temple%20Edition%20at%20launch%20price%20%E2%82%B9999" target="_blank" rel="noopener" class="btn-back-pill" style="background:#25d366; color:#fff; border:none;">
+        💬 WhatsApp (₹999)
+      </a>
+      <button type="button" class="btn-pay-publish-top" onclick="goToStep7AndOpenPayment()">
+        ✨ Pay ₹999 &amp; Publish
+      </button>
+    </div>
+  </header>
+
+  <!-- Step Navigation Bar -->
+  <nav class="steps-nav-bar" id="stepsNavBar">
+    <button type="button" class="step-tab-btn active" onclick="switchStep(1)">1. 👑 Couple</button>
+    <button type="button" class="step-tab-btn" onclick="switchStep(2)">2. 📜 Vedic Farman</button>
+    <button type="button" class="step-tab-btn" onclick="switchStep(3)">3. 🛕 Muhurtham</button>
+    <button type="button" class="step-tab-btn" onclick="switchStep(4)">4. 💖 Love Story</button>
+    <button type="button" class="step-tab-btn" onclick="switchStep(5)">5. 📸 Gallery</button>
+    <button type="button" class="step-tab-btn" onclick="switchStep(6)">6. 💬 VIP Links</button>
+    <button type="button" class="step-tab-btn" onclick="switchStep(7)" style="color:#ffd700;">7. 🚀 Pay &amp; Publish (₹999)</button>
+  </nav>
+
+  <!-- Mobile Segment Switcher -->
+  <div class="mobile-segment-bar" id="mobileSegBar">
+    <button type="button" class="mobile-seg-btn active" id="mobBtnEditor" onclick="setMobileMode('editor')">✏️ Customizer</button>
+    <button type="button" class="mobile-seg-btn" id="mobBtnPreview" onclick="setMobileMode('preview')">👁️ Live Preview</button>
+  </div>
+
+  <!-- Main Workspace -->
+  <div class="builder-main-workspace" id="builderWorkspace">
+
+    <!-- LEFT: 7-STEP FORM CONTROLS -->
+    <aside class="builder-editor-pane">
+
+      <!-- STEP 1: COUPLE & DATE -->
+      <div class="editor-step-content active" id="stepView1">
+        <div class="step-header-box">
+          <div class="step-badge">Step 01 / 07</div>
+          <h2 class="step-heading">👑 Sacred Couple &amp; Date</h2>
+        </div>
+        <div class="form-group">
+          <label>Groom's Name</label>
+          <input type="text" id="inpGroom" class="form-input" value="Kishan" oninput="syncPreview()">
+        </div>
+        <div class="form-group">
+          <label>Bride's Name</label>
+          <input type="text" id="inpBride" class="form-input" value="Divya" oninput="syncPreview()">
+        </div>
+        <div class="form-group">
+          <label>Wedding Date</label>
+          <input type="date" id="inpDate" class="form-input" value="2027-07-13" oninput="syncPreview()">
+        </div>
+        <div class="form-group">
+          <label>Auspicious Muhurtham Timing</label>
+          <input type="text" id="inpMuhurtham" class="form-input" value="9:15 AM – 10:45 AM" oninput="syncPreview()">
+        </div>
+        <div class="form-group">
+          <label>Official Wedding Hashtag</label>
+          <input type="text" id="inpHashtag" class="form-input" value="#KishanWedsDivya" oninput="syncPreview()">
+        </div>
+        <button type="button" class="btn-back-pill" style="width:100%; padding:10px; margin-top:8px;" onclick="switchStep(2)">
+          Next: Vedic Farman →
+        </button>
+      </div>
+
+      <!-- STEP 2: VEDIC FARMAN -->
+      <div class="editor-step-content" id="stepView2">
+        <div class="step-header-box">
+          <div class="step-badge">Step 02 / 07</div>
+          <h2 class="step-heading">📜 Vedic Farman &amp; Slokas</h2>
+        </div>
+        <div class="form-group">
+          <label>Auspicious Sloka Text</label>
+          <input type="text" class="form-input" value="॥ ॐ श्री गणेशाय नमः ॥ मङ्गलम् भगवान् विष्णुः ॥">
+        </div>
+        <div class="form-group">
+          <label>Parents' Sacred Invitation Message</label>
+          <textarea class="form-textarea" rows="3">With divine blessings of Lord Guruvayurappan, the families of Kishan &amp; Divya cordially invite you to grace their sacred Vivah.</textarea>
+        </div>
+        <button type="button" class="btn-back-pill" style="width:100%; padding:10px; margin-top:8px;" onclick="switchStep(3)">
+          Next: Muhurtham Schedule →
+        </button>
+      </div>
+
+      <!-- STEP 3: MUHURTHAM TIMELINE -->
+      <div class="editor-step-content" id="stepView3">
+        <div class="step-header-box">
+          <div class="step-badge">Step 03 / 07</div>
+          <h2 class="step-heading">🛕 Ceremonial Muhurtham</h2>
+        </div>
+        <div class="form-group">
+          <label>Venue &amp; Mandapam Address</label>
+          <input type="text" id="inpVenue" class="form-input" value="Guruvayur Temple & Backwaters Pavilion, Kerala" oninput="syncPreview()">
+        </div>
+        <div class="form-group">
+          <label>Host WhatsApp Number for RSVPs</label>
+          <input type="tel" id="inpWhatsapp" class="form-input" value="917631442934" oninput="syncPreview()">
+        </div>
+        <button type="button" class="btn-back-pill" style="width:100%; padding:10px; margin-top:8px;" onclick="switchStep(4)">
+          Next: Love Story →
+        </button>
+      </div>
+
+      <!-- STEP 4: LOVE STORY -->
+      <div class="editor-step-content" id="stepView4">
+        <div class="step-header-box">
+          <div class="step-badge">Step 04 / 07</div>
+          <h2 class="step-heading">💖 Backwaters Love Story</h2>
+        </div>
+        <div class="form-group">
+          <label>How We Met</label>
+          <textarea class="form-textarea" rows="3">Under the calm skies of Alleppey backwaters, two souls discovered a companionship that felt as ancient and sacred as temple prayers.</textarea>
+        </div>
+        <button type="button" class="btn-back-pill" style="width:100%; padding:10px; margin-top:8px;" onclick="switchStep(5)">
+          Next: Temple Gallery →
+        </button>
+      </div>
+
+      <!-- STEP 5: GALLERY -->
+      <div class="editor-step-content" id="stepView5">
+        <div class="step-header-box">
+          <div class="step-badge">Step 05 / 07</div>
+          <h2 class="step-heading">📸 Temple Moments Gallery</h2>
+        </div>
+        <div class="form-group">
+          <label>Pre-Wedding Photos Included</label>
+          <p style="font-size:12.5px; color:var(--text-muted);">
+            4 high-definition temple art &amp; couple portraits configured automatically.
+          </p>
+        </div>
+        <button type="button" class="btn-back-pill" style="width:100%; padding:10px; margin-top:8px;" onclick="switchStep(6)">
+          Next: VIP Guest Links →
+        </button>
+      </div>
+
+      <!-- STEP 6: VIP LINKS -->
+      <div class="editor-step-content" id="stepView6">
+        <div class="step-header-box">
+          <div class="step-badge">Step 06 / 07</div>
+          <h2 class="step-heading">💬 VIP Guest Links Generator</h2>
+        </div>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
+          Enter guest names (one per line). Generates instant personal invitation links with <code>?guest=Name</code> greeting!
+        </p>
+        <div class="form-group">
+          <textarea id="guestListInput" class="form-textarea" rows="4">Iyer Family &amp; Elders
+Dr. K. N. Swamy
+Ananya &amp; Karthik
+Smt. Lakshmi Radhakrishnan</textarea>
+        </div>
+        <button type="button" class="btn-back-pill" style="width:100%; padding:10px;" onclick="generateVIPLinks()">
+          ⚡ Generate Personalized VIP WhatsApp Links
+        </button>
+        <div id="vipGuestOutput" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
+        <button type="button" class="btn-back-pill" style="width:100%; padding:10px; margin-top:16px; border-color:var(--gold-primary);" onclick="switchStep(7)">
+          Next: Step 7 Pay &amp; Publish →
+        </button>
+      </div>
+
+      <!-- STEP 7: PAY & PUBLISH -->
+      <div class="editor-step-content" id="stepView7">
+        <div class="step-header-box">
+          <div class="step-badge">Step 07 / 07</div>
+          <h2 class="step-heading">🚀 Launch &amp; Publish Site</h2>
+        </div>
+
+        <div class="form-group">
+          <label>Choose Custom Live URL Slug</label>
+          <div style="display:flex; align-items:center; background:rgba(0,0,0,0.5); border:1px solid var(--border-gold); border-radius:10px; padding:0 12px;">
+            <span style="font-size:12px; color:var(--gold-primary);">vanvimoments.com/</span>
+            <input type="text" id="liveSlugInp" value="kishan-divya" style="background:none; border:none; color:#fff; padding:10px 4px; outline:none; font-weight:700; width:100%;">
+          </div>
+        </div>
+
+        <!-- STEP 7 END PUBLISH CARD -->
+        <div class="step-7-publish-box">
+          <div class="launch-price-banner">
+            <span><s>₹2,499</s></span>
+            <span style="color:#ffd700; font-size:14px;">₹999 Launch Price</span>
+            <span style="background:#25d366; color:#fff; border-radius:99px; padding:2px 8px; font-size:10px;">SAVE 60%</span>
+          </div>
+
+          <h3 style="font-family:'Cinzel', serif; font-size:18px; color:var(--gold-light); margin-bottom:8px;">
+            Ready to Go Live!
+          </h3>
+          <p style="font-size:12px; color:var(--text-muted); line-height:1.5;">
+            Unlock unlimited guest visits, WhatsApp RSVPs, personalized guest link generator, and lifetime hosting.
+          </p>
+
+          <button type="button" class="btn-pay-publish-huge" onclick="openPaymentModal()">
+            <span>Pay ₹999 &amp; Publish Site ✨</span>
+          </button>
+          <div style="font-size:11px; color:#a49187; margin-top:8px;">Original <s>₹2,499</s> • 1-Click Instant Activation</div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- RIGHT: LIVE PREVIEW IFRAME -->
+    <main class="builder-preview-stage">
+      <iframe src="./index.html" class="live-iframe-viewport" id="previewIframe" title="Live Preview"></iframe>
+    </main>
+
+  </div>
+
+  <!-- PAYMENT & AUTO PUBLISH MODAL POPUP -->
+  <div class="payment-modal-backdrop" id="paymentModal">
+    <div class="payment-modal-card">
+      <button type="button" class="btn-close-modal" onclick="closePaymentModal()">✕</button>
+
+      <!-- CHECKOUT FORM -->
+      <div id="modalCheckoutForm">
+        <div style="font-size:32px; margin-bottom:4px;">🛕</div>
+        <h3 style="font-family:'Cinzel', serif; font-size:22px; color:var(--gold-light); margin-bottom:4px;">Confirm &amp; Publish</h3>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:18px;">Sacred Temple Edition • Lifetime Live Hosting</p>
+
+        <div style="background:rgba(255,255,255,0.06); border:1px solid var(--border-gold); border-radius:14px; padding:14px; text-align:left; margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;">
+            <span>Couple:</span>
+            <strong style="color:var(--gold-light);"><span id="mGroom">Kishan</span> &amp; <span id="mBride">Divya</span></strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;">
+            <span>Live URL:</span>
+            <strong style="color:#25d366;">vanvimoments.com/<span id="mSlug">kishan-divya</span></strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:14px; border-top:1px dashed var(--border-gold); padding-top:8px; margin-top:8px;">
+            <span>Launch Total:</span>
+            <strong style="color:#ffd700; font-size:16px;"><s>₹2,499</s> ₹999</strong>
+          </div>
+        </div>
+
+        <!-- 3 Instant Checkout Options -->
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <button type="button" class="btn-pay-publish-huge" style="margin:0; font-size:13.5px;" onclick="executeAutoPublish('UPI / Gateway')">
+            ⚡ Pay ₹999 &amp; Auto-Publish Now
+          </button>
+          
+          <a id="btnModalCheckoutLink" href="../../checkout.html?templateId=sacred-temple-edition&price=999" class="btn-back-pill" style="padding:12px; font-size:12.5px; text-align:center;">
+            💳 Razorpay / Cards / NetBanking (₹999)
+          </a>
+
+          <a id="btnModalWaPay" href="https://wa.me/917631442934?text=Namaste%20Vanvi%20Moments!%20Confirming%20payment%20of%20%E2%82%B9999%20to%20publish%20Sacred%20Temple%20Edition%20for%20Kishan%20and%20Divya" target="_blank" rel="noopener" class="btn-back-pill" style="background:#25d366; color:#fff; border:none; padding:12px; font-size:12.5px; text-align:center;">
+            💬 WhatsApp Pay Instant Activation (₹999)
+          </a>
+        </div>
+      </div>
+
+      <!-- SUCCESS SCREEN -->
+      <div id="modalSuccessScreen" class="publish-success-card">
+        <div style="font-size:42px; margin-bottom:6px;">🎉</div>
+        <h3 style="font-family:'Cinzel', serif; font-size:22px; color:var(--gold-light); margin-bottom:6px;">Your Wedding Site is LIVE!</h3>
+        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:16px;">Payment verified &amp; bespoke wedding keepsake launched successfully.</p>
+
+        <div style="background:rgba(37,211,102,0.12); border:1px solid #25d366; border-radius:14px; padding:14px; margin-bottom:18px;">
+          <div style="font-size:11px; text-transform:uppercase; color:#25d366; font-weight:800; letter-spacing:1px; margin-bottom:4px;">Your Permanent Live Link:</div>
+          <div id="publishedLiveUrl" style="font-family:monospace; font-size:14px; font-weight:800; color:#fff; word-break:break-all;">https://vanvimoments.com/kishan-divya</div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <a id="btnOpenPublished" href="./index.html" target="_blank" class="btn-pay-publish-huge" style="margin:0; font-size:13px; text-decoration:none;">
+            🚀 Open Live Wedding Site
+          </a>
+          <button type="button" class="btn-back-pill" style="padding:10px;" onclick="copyLivePublishedUrl()">
+            📋 Copy Wedding Link
+          </button>
+          <a id="btnShareWaPublished" href="#" target="_blank" rel="noopener" class="btn-back-pill" style="background:#25d366; color:#fff; border:none; padding:10px; text-decoration:none;">
+            💬 Share with Family on WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+
+    function switchStep(stepNum) {
+      currentStep = stepNum;
+      document.querySelectorAll('.step-tab-btn').forEach((b, i) => {
+        b.classList.toggle('active', i + 1 === stepNum);
+      });
+      document.querySelectorAll('.editor-step-content').forEach((s, i) => {
+        s.classList.toggle('active', i + 1 === stepNum);
+      });
+    }
+
+    function goToStep7AndOpenPayment() {
+      switchStep(7);
+      openPaymentModal();
+    }
+
+    let syncTimer = null;
+    function syncPreview() {
+      clearTimeout(syncTimer);
+      syncTimer = setTimeout(() => {
+        const groom = encodeURIComponent(document.getElementById('inpGroom').value);
+        const bride = encodeURIComponent(document.getElementById('inpBride').value);
+        const date = encodeURIComponent(document.getElementById('inpDate').value);
+        const muhurtham = encodeURIComponent(document.getElementById('inpMuhurtham').value);
+        const venue = encodeURIComponent(document.getElementById('inpVenue').value);
+        const whatsapp = encodeURIComponent(document.getElementById('inpWhatsapp').value);
+        const hashtag = encodeURIComponent(document.getElementById('inpHashtag').value);
+
+        const url = `./index.html?groom=${groom}&bride=${bride}&date=${date}&muhurtham=${muhurtham}&venue=${venue}&whatsapp=${whatsapp}&hashtag=${hashtag}&preview=1`;
+        const iframe = document.getElementById('previewIframe');
+        if (iframe) iframe.src = url;
+      }, 300);
+    }
+
+    function setMobileMode(mode) {
+      const ws = document.getElementById('builderWorkspace');
+      const btnE = document.getElementById('mobBtnEditor');
+      const btnP = document.getElementById('mobBtnPreview');
+      if (mode === 'preview') {
+        ws.classList.add('workspace-show-preview');
+        btnP.classList.add('active');
+        btnE.classList.remove('active');
+      } else {
+        ws.classList.remove('workspace-show-preview');
+        btnE.classList.add('active');
+        btnP.classList.remove('active');
+      }
+    }
+
+    function generateVIPLinks() {
+      const raw = document.getElementById('guestListInput').value;
+      const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+      const out = document.getElementById('vipGuestOutput');
+      if (!lines.length) return;
+
+      out.innerHTML = lines.map(name => {
+        const encName = encodeURIComponent(name);
+        const link = `${window.location.origin}/templates/sacred-temple-edition/index.html?guest=${encName}`;
+        const waMsg = encodeURIComponent(`🪷 Dear ${name},\n\nYou are cordially invited to celebrate the Sacred Temple Vivah of Kishan & Divya!\n\nView your bespoke invitation:\n${link}`);
+        return `
+          <div style="background:rgba(255,255,255,0.06); padding:8px 12px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:12px;">
+            <span style="font-weight:700; color:var(--gold-light);">${name}</span>
+            <div style="display:flex; gap:6px;">
+              <button type="button" class="btn-back-pill" style="padding:4px 8px; font-size:11px;" onclick="navigator.clipboard.writeText('${link}'); alert('Link copied for ${name}!');">Copy Link 📋</button>
+              <a href="https://wa.me/?text=${waMsg}" target="_blank" class="btn-back-pill" style="background:#25d366; color:#fff; border:none; padding:4px 10px; font-size:11px; text-decoration:none;">Share 💬</a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // PAYMENT & AUTO PUBLISH LOGIC
+    function openPaymentModal() {
+      const groom = document.getElementById('inpGroom').value || 'Kishan';
+      const bride = document.getElementById('inpBride').value || 'Divya';
+      const slug = document.getElementById('liveSlugInp').value || 'kishan-divya';
+
+      document.getElementById('mGroom').textContent = groom;
+      document.getElementById('mBride').textContent = bride;
+      document.getElementById('mSlug').textContent = slug;
+
+      document.getElementById('modalCheckoutForm').style.display = 'block';
+      document.getElementById('modalSuccessScreen').style.display = 'none';
+
+      document.getElementById('paymentModal').classList.add('open');
+    }
+
+    function closePaymentModal() {
+      document.getElementById('paymentModal').classList.remove('open');
+    }
+
+    function executeAutoPublish(method) {
+      const slug = document.getElementById('liveSlugInp').value || 'kishan-divya';
+      const fullUrl = `https://vanvimoments.com/${slug}`;
+      const localUrl = `./index.html?slug=${slug}`;
+
+      document.getElementById('publishedLiveUrl').textContent = fullUrl;
+      document.getElementById('btnOpenPublished').href = localUrl;
+
+      const groom = document.getElementById('inpGroom').value || 'Kishan';
+      const bride = document.getElementById('inpBride').value || 'Divya';
+      const shareMsg = encodeURIComponent(`🪷 We are delighted to announce our wedding! Here is our sacred temple digital invitation: ${fullUrl}`);
+      document.getElementById('btnShareWaPublished').href = `https://wa.me/?text=${shareMsg}`;
+
+      // Transition to Success
+      document.getElementById('modalCheckoutForm').style.display = 'none';
+      document.getElementById('modalSuccessScreen').style.display = 'block';
+    }
+
+    function copyLivePublishedUrl() {
+      const url = document.getElementById('publishedLiveUrl').textContent;
+      navigator.clipboard.writeText(url).then(() => {
+        alert('Live Wedding URL copied to clipboard: ' + url);
+      });
+    }
+  </script>
+</body>
+</html>

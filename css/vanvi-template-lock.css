@@ -1,0 +1,138 @@
+/**
+ * VANVI MOMENTS — UNIVERSAL TEMPLATE VIEWPORT & RESPONSIVE LOCK ENGINE
+ * 
+ * Rules:
+ * 1. Perfectly locked & centered horizontally and vertically on any device
+ * 2. Zero accidental zoom: disabled double-tap zoom, gesture zoom, pinch distortion
+ * 3. Adapts naturally to any phone screen size from bottom to top (using 100dvh & safe-area-inset)
+ * 4. Applies universally to all existing and upcoming templates!
+ */
+
+/* Viewport & touch constraints */
+html {
+  width: 100%;
+  height: 100%;
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+  touch-action: manipulation;
+  overflow-x: hidden !important;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  touch-action: pan-y;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile-Only Centered Constraints: only apply on actual mobile devices (max-width: 768px) or explicit phone-mode */
+@media (max-width: 768px) {
+  #device,
+  #device-frame,
+  .device-container,
+  .experience-container,
+  .experience-stage,
+  .gift-app-container,
+  .polaroid-stage,
+  .envelope-showcase-container,
+  .hero-celestial-stage,
+  .main-wrapper,
+  .page-container,
+  .template-stage,
+  .template-wrapper,
+  .wedding-stage,
+  .canvas-wrapper,
+  .main-stage,
+  .grand-palace-stage,
+  .temple-stage-container,
+  .stage-container,
+  .vows-card,
+  .voucher-card,
+  .invite-card,
+  .container:not(.website-container):not(.navbar-container):not(.footer-container):not(.builder-container),
+  main:not(.website-main):not(.builder-layout):not(.builder-stage):not(.studio-main):not(.studio-body) {
+    max-width: 480px !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* On Laptop & Desktop (min-width: 769px): expand naturally to FULL SCREEN desktop experience! */
+@media (min-width: 769px) {
+  body.phone-mode #device,
+  body.phone-mode #device-frame,
+  body.phone-mode .device-container {
+    max-width: 440px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  body:not(.phone-mode) .template-stage,
+  body:not(.phone-mode) .wedding-stage,
+  body:not(.phone-mode) .grand-palace-stage,
+  body:not(.phone-mode) .temple-stage-container,
+  body:not(.phone-mode) .experience-stage,
+  body:not(.phone-mode) .canvas-wrapper,
+  body:not(.phone-mode) .main-stage,
+  body:not(.phone-mode) .stage-container,
+  body:not(.phone-mode) main:not(.website-main):not(.builder-layout):not(.builder-stage):not(.studio-main):not(.studio-body) {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    min-height: 100vh;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Safe Area Insets for Modern Devices */
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --vanvi-dvh: 100dvh;
+}
+
+/* Ensure bottom docked buttons or floating audio widgets respect phone safe area */
+.floating-music-widget,
+.floating-audio-pill,
+#floatingAudioPill,
+#musicBtn,
+#bgMusicBtn,
+.audio-toggle-btn {
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Prevent image, video, or canvas horizontal blowout */
+img, video, canvas, iframe {
+  max-width: 100%;
+}
+
+/* Completely eliminate all watermarks, cookie banners and floating corner popups across all templates & previews */
+.vanvi-preview-top-dock,
+.vanvi-cookie-banner,
+.cookie-banner,
+.vanvi-watermark-pill,
+#demoWatermarkBadge,
+.vm-watermark-pill,
+.vanvi-top-pill,
+.top-nav-bar,
+.nav-builder-pill,
+#builderToggleBtn {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+}

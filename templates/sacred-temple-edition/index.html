@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Kishan &amp; Divya — Sacred Temple Edition | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rozha+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Canvases -->
+  <canvas id="firefliesCanvas"></canvas>
+  <canvas id="blessingPetalsCanvas"></canvas>
+
+  <!-- Audio Element -->
+  <audio id="templeAudio" loop preload="auto">
+    <source src="assets/temple-wedding-sacred-melody.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating Audio Dock -->
+  <div class="floating-audio-dock">
+    <button type="button" class="btn-sacred-audio" id="btnTempleAudio" onclick="toggleTempleAudio()" title="Toggle Sacred Temple Audio" aria-label="Toggle Audio">
+      🎵
+    </button>
+  </div>
+
+  <!-- VIP Personalized Guest Pill -->
+  <div class="vip-guest-floating-pill" id="vipGuestPill">
+    🪷 Sacred Invitation
+  </div>
+
+  <!-- 1. KERALA KASAVU CURTAINS STORY REVEAL OVERLAY -->
+  <div class="kasavu-curtain-overlay" id="kasavuCurtainOverlay">
+    <div class="curtain-panel curtain-left"></div>
+    <div class="curtain-panel curtain-right"></div>
+    
+    <div class="curtain-seal-center">
+      <div class="sacred-seal-disc" onclick="openKasavuCurtains()" role="button" aria-label="Tap to Open Sacred Curtains">
+        <div class="seal-om-icon">🕉️</div>
+        <div class="seal-tag">Vedic Vivah</div>
+      </div>
+      <div class="curtain-couple-names"><span class="bind-groom">Kishan</span> &amp; <span class="bind-bride">Divya</span></div>
+      <button type="button" class="curtain-enter-btn" onclick="openKasavuCurtains()">
+        <span>Enter Sacred Ceremony</span>
+        <span>→</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. HERO STAGE (3D HOUSEBOAT BACKWATERS & GOPURAM PARALLAX) -->
+  <header class="hero-backwaters-stage">
+    <div class="stage-gopuram-backdrop"></div>
+    <div class="backwaters-water-reflection"></div>
+
+    <div style="position:relative; z-index:10; max-width:850px; margin:0 auto;">
+      <div class="vedic-sloka-badge">
+        <span>॥ ॐ श्री गणेशाय नमः ॥ मङ्गलम् भगवान् विष्णुः ॥</span>
+      </div>
+
+      <h1 class="hero-main-title">
+        <span class="hero-names-duo">
+          <span class="bind-groom">Kishan</span>
+          <span class="hero-ampersand">&amp;</span>
+          <span class="bind-bride">Divya</span>
+        </span>
+      </h1>
+
+      <p class="hero-subcaption">
+        Two souls uniting under the sacred temple gopuram, surrounded by tranquil Kerala backwaters and divine Vedic blessings.
+      </p>
+
+      <!-- Astronomical Muhurtham Countdown -->
+      <div class="muhurtham-countdown-wrap">
+        <div class="countdown-box">
+          <div class="cd-val" id="cdDays">00</div>
+          <div class="cd-lbl">Days</div>
+        </div>
+        <div class="countdown-box">
+          <div class="cd-val" id="cdHours">00</div>
+          <div class="cd-lbl">Hours</div>
+        </div>
+        <div class="countdown-box">
+          <div class="cd-val" id="cdMins">00</div>
+          <div class="cd-lbl">Mins</div>
+        </div>
+        <div class="countdown-box">
+          <div class="cd-val" id="cdSecs">00</div>
+          <div class="cd-lbl">Secs</div>
+        </div>
+      </div>
+
+      <div class="hero-actions-cluster">
+        <a href="#ashirwadSection" class="btn-temple-gold">💌 Sacred Ashirwad</a>
+        <a href="#itinerarySection" class="btn-temple-ghost">🛕 Muhurtham Schedule</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. NILAVILAKKU LAMP LIGHTING CEREMONY (SCROLL-TRIGGERED) -->
+  <section class="section-container">
+    <div class="nilavilakku-ceremony-stage" id="nilavilakkuCeremonyStage">
+      <div class="nilavilakku-flame-wrapper">
+        <div class="flame-radial-glow"></div>
+        <div class="sacred-flame"></div>
+        <div class="lamp-oil-bowl"></div>
+        <div class="brass-lamp-stem"></div>
+      </div>
+
+      <h2 class="ceremony-heading">The Sacred Nilavilakku Deepam</h2>
+      <p class="ceremony-desc">
+        Lighting the traditional brass Nilavilakku invokes the eternal grace of Lord Guruvayurappan. May this divine flame bring health, harmony, and timeless auspiciousness to Kishan &amp; Divya's sacred marital journey.
+      </p>
+      <div style="font-family:'Cinzel', serif; font-size:12px; letter-spacing:2px; color:var(--gold-primary);">
+        ✦ TAMASO MA JYOTIRGAMAYA ✦
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SACRED COUPLE SHOWCASE -->
+  <section class="section-container">
+    <div style="text-align:center; margin-bottom:10px;">
+      <div class="vedic-sloka-badge">Vedic Union</div>
+      <h2 style="font-family:'Cinzel', serif; font-size:clamp(28px, 4vw, 42px); color:var(--gold-light);">The Sacred Couple</h2>
+      <p style="font-family:'Cormorant Garamond', serif; font-size:18px; font-style:italic; color:#ecdcb9;">Destined by the stars, solemnized by sacred vows.</p>
+    </div>
+
+    <div class="couple-showcase-grid">
+      <!-- Groom Card -->
+      <div class="couple-portrait-card">
+        <div class="portrait-img-box">
+          <img src="assets/temple-groom-vivan.jpg" alt="The Groom Kishan" loading="lazy">
+        </div>
+        <div class="portrait-details">
+          <div class="portrait-name bind-groom">Kishan</div>
+          <div class="portrait-role">The Sacred Groom</div>
+          <p class="portrait-bio">
+            A quiet storm of calm wisdom and devotion. Rooted in heritage, ready to honor and cherish Divya through every sacred step of the Saptapadi.
+          </p>
+        </div>
+      </div>
+
+      <!-- Bride Card -->
+      <div class="couple-portrait-card">
+        <div class="portrait-img-box">
+          <img src="assets/temple-bride-divya.jpg" alt="The Bride Divya" loading="lazy">
+        </div>
+        <div class="portrait-details">
+          <div class="portrait-name bind-bride">Divya</div>
+          <div class="portrait-role">The Sacred Bride</div>
+          <p class="portrait-bio">
+            Radiant with poise, classical elegance, and kindness. Adorned in pure Kanchipuram silk and temple jewels, embarking on an eternal spiritual voyage.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. AUSPICIOUS 4-PHASE MUHURTHAM TIMELINE -->
+  <section class="section-container" id="itinerarySection">
+    <div style="text-align:center;">
+      <div class="vedic-sloka-badge">Sacred Rituals</div>
+      <h2 style="font-family:'Cinzel', serif; font-size:clamp(28px, 4vw, 42px); color:var(--gold-light);">Auspicious Muhurtham Timeline</h2>
+      <p style="font-family:'Cormorant Garamond', serif; font-size:18px; font-style:italic; color:#ecdcb9;">Every sacred milestone timed with celestial planetary harmony.</p>
+    </div>
+
+    <div class="timeline-cards-grid">
+      <!-- 1. Mangala Snanam & Haldi -->
+      <div class="ceremony-card">
+        <img src="assets/temple-haldi-art.jpg" alt="Mangala Snanam" class="ceremony-card-img" loading="lazy">
+        <div class="ceremony-content">
+          <span class="ceremony-time-badge">07:00 AM • Morning Dawn</span>
+          <h3 class="ceremony-title">Mangala Snanam</h3>
+          <p class="ceremony-desc-text">
+            Purifying ritual with sacred temple water, fresh turmeric paste, fragrant sandalwood oil, and Vedic chants.
+          </p>
+          <div class="ceremony-location">📍 The Temple Lotus Courtyard</div>
+        </div>
+      </div>
+
+      <!-- 2. Kanyadaanam & Vows -->
+      <div class="ceremony-card">
+        <img src="assets/temple-mandap-portal.jpg" alt="Kanyadaanam & Mandapam Vows" class="ceremony-card-img" loading="lazy">
+        <div class="ceremony-content">
+          <span class="ceremony-time-badge">09:15 AM • Shubh Muhurtham</span>
+          <h3 class="ceremony-title">Kanyadaanam &amp; Vows</h3>
+          <p class="ceremony-desc-text">
+            The bride's parents bestow their sacred blessing as the couple takes holy oaths beside the sacred Vedic Agni.
+          </p>
+          <div class="ceremony-location">📍 Main Mandapam Sanctorum</div>
+        </div>
+      </div>
+
+      <!-- 3. Mangalasutra Dharanam -->
+      <div class="ceremony-card">
+        <img src="assets/temple-sacred-mangalsutra.jpg" alt="Mangalasutra Dharanam" class="ceremony-card-img" loading="lazy">
+        <div class="ceremony-content">
+          <span class="ceremony-time-badge">10:30 AM • Auspicious Hour</span>
+          <h3 class="ceremony-title">Mangalasutra Dharanam</h3>
+          <p class="ceremony-desc-text">
+            Tying the sacred yellow thread with three knots symbolizing manasa, vacha, and karmana sacred eternal devotion.
+          </p>
+          <div class="ceremony-location">📍 Golden Pillar Stage</div>
+        </div>
+      </div>
+
+      <!-- 4. Royal Sadya Feast -->
+      <div class="ceremony-card">
+        <img src="assets/temple-reception-art.jpg" alt="Grand Sadya & Reception" class="ceremony-card-img" loading="lazy">
+        <div class="ceremony-content">
+          <span class="ceremony-time-badge">01:00 PM • Afternoon Feast</span>
+          <h3 class="ceremony-title">Grand Sadya &amp; Feast</h3>
+          <p class="ceremony-desc-text">
+            Traditional 24-dish vegetarian royal feast served on pristine banana leaves accompanied by flute &amp; veena ragas.
+          </p>
+          <div class="ceremony-location">📍 Backwaters Royal Verandah</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. SACRED MOMENTS GALLERY -->
+  <section class="section-container">
+    <div style="text-align:center;">
+      <div class="vedic-sloka-badge">Sacred Visuals</div>
+      <h2 style="font-family:'Cinzel', serif; font-size:clamp(28px, 4vw, 42px); color:var(--gold-light);">Temple Moments Gallery</h2>
+      <p style="font-family:'Cormorant Garamond', serif; font-size:18px; font-style:italic; color:#ecdcb9;">Whispers of love captured across Kerala backwaters and sacred pillars.</p>
+    </div>
+
+    <div class="temple-gallery-mosaic">
+      <div class="gallery-mosaic-item">
+        <img src="assets/temple-couple-portrait.jpg" alt="Kishan & Divya" loading="lazy">
+      </div>
+      <div class="gallery-mosaic-item">
+        <img src="assets/temple-gallery-rings.jpg" alt="Sacred Temple Rings" loading="lazy">
+      </div>
+      <div class="gallery-mosaic-item">
+        <img src="assets/temple-gallery-steps.jpg" alt="Temple Architecture Steps" loading="lazy">
+      </div>
+      <div class="gallery-mosaic-item">
+        <img src="assets/temple-mehendi-art.jpg" alt="Traditional Mehendi Art" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. INTERACTIVE SACRED ASHIRWAD & BLESSINGS (WHATSAPP DELIVERY) -->
+  <section class="section-container" id="ashirwadSection">
+    <div class="ashirwad-box-wrap">
+      <div style="font-size:36px; margin-bottom:8px;">🪷</div>
+      <h2 class="ashirwad-title">Sacred Ashirwad Box</h2>
+      <p class="ashirwad-subtitle">
+        Offer your heartfelt Vedic blessings to Kishan &amp; Divya. Delivered directly to the couple's WhatsApp with sacred flower petals!
+      </p>
+
+      <div class="ashirwad-form-group">
+        <label for="ashirwadName">Your Name &amp; Family</label>
+        <input type="text" id="ashirwadName" class="ashirwad-input" placeholder="e.g. Ramesh Iyer &amp; Family">
+      </div>
+
+      <div class="ashirwad-form-group">
+        <label for="ashirwadMsg">Your Sacred Blessing / Ashirwad</label>
+        <textarea id="ashirwadMsg" class="ashirwad-textarea" rows="3" placeholder="e.g. May your marriage be filled with divine peace, joy, and prosperity!"></textarea>
+      </div>
+
+      <button type="button" class="btn-send-blessing" onclick="sendSacredAshirwadWhatsApp()">
+        <span>💬 Send Sacred Blessing via WhatsApp</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 8. VENUE & RSVP FOOTER -->
+  <footer style="background:linear-gradient(180deg, transparent 0%, rgba(6,21,16,0.95) 40%); border-top:1px solid rgba(212,175,55,0.3); padding:60px 20px; text-align:center;">
+    <div style="max-width:680px; margin:0 auto;">
+      <div style="font-size:32px; margin-bottom:12px;">🛕</div>
+      <h3 style="font-family:'Cinzel', serif; font-size:24px; color:var(--gold-light); margin-bottom:8px;">Guruvayur Temple Mandapam</h3>
+      <p style="font-size:14px; color:#ecdcb9; margin-bottom:20px;" class="bind-venue">
+        Guruvayur Temple &amp; Backwaters Pavilion, Kerala
+      </p>
+
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:30px;">
+        <a href="https://maps.google.com/?q=Guruvayur+Temple+Kerala" target="_blank" rel="noopener" class="btn-temple-gold" style="font-size:12.5px; padding:10px 20px;">
+          📍 Google Maps Navigation
+        </a>
+        <a href="https://wa.me/917631442934?text=Namaste!%20Confirming%20my%20RSVP%20for%20Kishan%20and%20Divya%20Temple%20Wedding." target="_blank" rel="noopener" class="btn-temple-ghost" style="font-size:12.5px; padding:10px 20px;">
+          💬 WhatsApp RSVP
+        </a>
+      </div>
+
+      <div style="font-size:11px; letter-spacing:2px; color:rgba(212,175,55,0.7); text-transform:uppercase;">
+        Vanvi Moments • Sacred Temple Edition (VNV-TMPL-02)
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="vanvi-toast" id="vanviToast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

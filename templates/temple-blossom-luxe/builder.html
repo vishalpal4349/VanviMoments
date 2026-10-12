@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Temple Blossom Studio — Luxury Light Theme Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root {
+  /* LUXURY LIGHT THEME TOKENS */
+  --bg-studio: #FAF5ED;
+  --bg-panel: #FFFFFF;
+  --bg-card: #FFFDF9;
+  --bg-subtle: #F6EFE5;
+  --border-gold: rgba(200, 155, 85, 0.28);
+  --border-gold-focus: #C89B55;
+  --primary-gold: #C89B55;
+  --gold-glow: rgba(200, 155, 85, 0.22);
+  --accent-rose: #D9828B;
+  --accent-peach: #F8D8C9;
+  --text-dark: #3E302B;
+  --text-muted: #7E6C65;
+  --text-faint: #B5A49D;
+  --shadow-soft: 0 12px 36px rgba(100, 70, 50, 0.08);
+  --shadow-card: 0 4px 18px rgba(140, 105, 80, 0.06);
+  --shadow-gold: 0 6px 24px rgba(200, 155, 85, 0.35);
+  --safe-bottom: env(safe-area-inset-bottom, 16px);
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--bg-studio);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* TOP NAVBAR */
+.builder-nav {
+  height: 64px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-gold);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 16px rgba(140, 105, 80, 0.05);
+}
+
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #DFB770 0%, #C89B55 50%, #9C7132 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 17px;
+  box-shadow: 0 4px 12px rgba(200, 155, 85, 0.3);
+}
+
+.brand-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--text-dark);
+  line-height: 1.15;
+}
+
+.brand-text span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary-gold);
+  font-weight: 700;
+}
+
+/* VIEW MODE TOGGLE (MOBILE / TABLET) */
+.view-mode-toggle {
+  display: none;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-gold);
+  border-radius: 100px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.mode-btn {
+  padding: 7px 15px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .25s ease;
+}
+
+.mode-btn.active {
+  background: #FFFFFF;
+  color: var(--text-dark);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(140, 105, 80, 0.12);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(113, 128, 107, 0.12);
+  color: #4F644A;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #508047;
+  box-shadow: 0 0 8px #508047;
+  animation: pulse-dot 1.8s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.3); }
+}
+
+.action-publish-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #D4A35B 0%, #B8853C 100%);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-gold);
+  transition: all .25s ease;
+}
+
+.action-publish-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(200, 155, 85, 0.5);
+}
+
+/* MAIN STUDIO LAYOUT */
+.studio-layout {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  flex: 1;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+/* LEFT CONTROLS COLUMN */
+.editor-sidebar {
+  background: var(--bg-panel);
+  border-right: 1px solid var(--border-gold);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* STEP TABS SCROLLER */
+.step-nav-bar {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-gold);
+  padding: 10px 16px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.step-nav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.step-pill {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 100px;
+  background: var(--bg-subtle);
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.step-pill i {
+  font-size: 11px;
+}
+
+.step-pill.active {
+  background: #FFFFFF;
+  color: var(--primary-gold);
+  border-color: var(--primary-gold);
+  box-shadow: 0 2px 8px rgba(200, 155, 85, 0.15);
+  font-weight: 700;
+}
+
+.step-pill.completed {
+  color: #4F644A;
+}
+
+/* EDITOR FORMS CONTAINER */
+.forms-scroller {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px 20px calc(90px + var(--safe-bottom));
+  -webkit-overflow-scrolling: touch;
+}
+
+.form-step-section {
+  display: none;
+  animation: fadeIn .25s ease;
+}
+
+.form-step-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-header {
+  margin-bottom: 20px;
+}
+
+.step-counter {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-rose);
+  margin-bottom: 4px;
+}
+
+.step-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.step-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+/* FORM FIELDS */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 7px;
+  letter-spacing: 0.3px;
+}
+
+.form-label span.hint {
+  font-size: 10px;
+  color: var(--text-faint);
+  font-weight: 400;
+}
+
+.form-control {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid rgba(200, 155, 85, 0.35);
+  color: var(--text-dark);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12.5px;
+  transition: all .2s ease;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--border-gold-focus);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 72px;
+  line-height: 1.4;
+}
+
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* CARDS WITHIN FORMS */
+.lux-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.lux-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+  letter-spacing: 0.4px;
+}
+
+.lux-card-title i {
+  color: var(--primary-gold);
+}
+
+/* DUAL UPLOADER (LOCAL FILE + WEB URL) */
+.uploader-box {
+  background: #FFFFFF;
+  border: 2px dashed rgba(200, 155, 85, 0.4);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .25s ease;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.uploader-box:hover {
+  border-color: var(--primary-gold);
+  background: #FFFDF9;
+}
+
+.uploader-preview {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: none;
+  margin-bottom: 8px;
+}
+
+.uploader-prompt i {
+  font-size: 24px;
+  color: var(--primary-gold);
+  margin-bottom: 6px;
+}
+
+.uploader-prompt p {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.uploader-prompt span {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.file-hidden-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.url-fallback-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.url-fallback-row input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 11px;
+  border-radius: 8px;
+  border: 1px solid var(--border-gold);
+  background: #FFFFFF;
+  color: var(--text-dark);
+}
+
+/* BOTTOM FIXED BAR IN EDITOR */
+.editor-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-gold);
+  padding: 14px 20px calc(14px + var(--safe-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 -4px 20px rgba(140, 105, 80, 0.08);
+  z-index: 10;
+}
+
+.btn-nav-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-prev {
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border-color: var(--border-gold);
+}
+
+.btn-prev:hover {
+  background: #EFE6D9;
+  color: var(--text-dark);
+}
+
+.btn-next {
+  background: linear-gradient(135deg, #DFB770 0%, #C89B55 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(200, 155, 85, 0.3);
+}
+
+.btn-next:hover {
+  box-shadow: 0 6px 20px rgba(200, 155, 85, 0.45);
+  transform: translateY(-1px);
+}
+
+/* RIGHT PREVIEW COLUMN */
+.preview-pane {
+  background: #EDE6DA;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  background-image: radial-gradient(rgba(200, 155, 85, 0.15) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* DEVICE FRAME */
+.device-mockup {
+  width: 410px;
+  max-width: 100%;
+  height: min(840px, 94vh);
+  background: #111111;
+  border-radius: 46px;
+  box-shadow: 0 25px 70px rgba(70, 50, 40, 0.25), 0 0 0 10px #2D2723, 0 0 0 12px rgba(200, 155, 85, 0.45);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.device-top-notch {
+  height: 24px;
+  background: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.notch-pill {
+  width: 80px;
+  height: 12px;
+  background: #000000;
+  border-radius: 10px;
+}
+
+.preview-iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: #FFFAF1;
+}
+
+/* FLOATING CONTROLS OVER PREVIEW */
+.preview-floating-bar {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  display: flex;
+  gap: 10px;
+  z-index: 50;
+}
+
+.preview-float-btn {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-gold);
+  border-radius: 100px;
+  padding: 7px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 16px rgba(100, 70, 50, 0.1);
+  transition: all .2s ease;
+}
+
+.preview-float-btn:hover {
+  background: #FFFFFF;
+  color: var(--primary-gold);
+  border-color: var(--primary-gold);
+}
+
+/* PUBLISH MODAL (₹399 ROYAL LAUNCH) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(40, 30, 25, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.open {
+  display: flex;
+  animation: fadeIn .25s ease;
+}
+
+.modal-lux-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-gold);
+  border-radius: 24px;
+  max-width: 480px;
+  width: 100%;
+  padding: 32px 28px;
+  box-shadow: 0 30px 80px rgba(60, 40, 30, 0.28);
+  position: relative;
+  text-align: center;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--text-faint);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.modal-close-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-dark);
+}
+
+.modal-royalty-crown {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #FFF3DD, #F8E5BF);
+  border: 1px solid var(--primary-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #B8853C;
+  margin: 0 auto 16px;
+  box-shadow: 0 6px 18px rgba(200, 155, 85, 0.25);
+}
+
+.modal-lux-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.modal-lux-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.pricing-badge-row {
+  background: #FFFDF9;
+  border: 1px dashed var(--primary-gold);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.pricing-badge-row .original {
+  font-size: 14px;
+  color: var(--text-faint);
+  text-decoration: line-through;
+}
+
+.pricing-badge-row .final-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #B8853C;
+}
+
+.pricing-badge-row .tax-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #4F644A;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.feature-bullets {
+  text-align: left;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 12px;
+  color: var(--text-dark);
+}
+
+.feature-bullets div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.feature-bullets i {
+  color: #4F644A;
+  font-size: 13px;
+}
+
+.btn-complete-publish {
+  width: 100%;
+  padding: 14px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #DFB770 0%, #C89B55 50%, #9C7132 100%);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(200, 155, 85, 0.4);
+  transition: all .25s ease;
+}
+
+.btn-complete-publish:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(200, 155, 85, 0.55);
+}
+
+/* PUBLISHED STATE SUCCESS BOX */
+.published-success-box {
+  display: none;
+  background: #F4F8F3;
+  border: 1px solid #C4DEC0;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 16px;
+  text-align: left;
+}
+
+.published-success-box.visible {
+  display: block;
+}
+
+.success-link-wrap {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.success-link-wrap input {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+  border: 1px solid #B0CDAC;
+  background: #FFFFFF;
+  color: #2F422A;
+  font-family: monospace;
+}
+
+.btn-copy-link {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #4F644A;
+  color: #FFFFFF;
+  border: none;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 900px) {
+  .studio-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .view-mode-toggle {
+    display: flex;
+  }
+
+  .editor-sidebar {
+    height: calc(100vh - 64px);
+  }
+
+  .preview-pane {
+    display: none;
+    height: calc(100vh - 64px);
+    padding: 14px;
+  }
+
+  /* When preview active on mobile */
+  body.show-preview .editor-sidebar {
+    display: none;
+  }
+
+  body.show-preview .preview-pane {
+    display: flex;
+  }
+
+  .device-mockup {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: none;
+    border: none;
+  }
+
+  .device-mockup {
+    box-shadow: 0 0 0 3px #D6CAB8;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="builder-nav">
+  <a href="index.html" class="brand-wrap">
+    <div class="brand-icon">
+      <i class="fa-solid fa-gem"></i>
+    </div>
+    <div class="brand-text">
+      <h1>Vanvi Moments</h1>
+      <span>Royal Studio Builder</span>
+    </div>
+  </a>
+
+  <!-- Mobile View Mode Toggle -->
+  <div class="view-mode-toggle">
+    <button class="mode-btn active" id="btnModeEdit" onclick="switchMobileView('edit')">
+      <i class="fa-solid fa-pen-nib"></i> Edit
+    </button>
+    <button class="mode-btn" id="btnModePreview" onclick="switchMobileView('preview')">
+      <i class="fa-solid fa-eye"></i> Preview
+    </button>
+  </div>
+
+  <div class="nav-actions">
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      <span>Live Sync</span>
+    </div>
+    <button class="action-publish-btn" onclick="openPublishModal()">
+      <i class="fa-solid fa-crown"></i> Publish ₹399
+    </button>
+  </div>
+</header>
+
+<!-- MAIN STUDIO -->
+<main class="studio-layout">
+
+  <!-- LEFT: STEP FORM CONTROLS -->
+  <aside class="editor-sidebar">
+
+    <!-- HORIZONTAL STEP NAV -->
+    <div class="step-nav-bar">
+      <button class="step-pill active" onclick="goToStep(0)">
+        <i class="fa-solid fa-heart"></i> Couple &amp; Intro
+      </button>
+      <button class="step-pill" onclick="goToStep(1)">
+        <i class="fa-solid fa-hands-praying"></i> Parents Blessings
+      </button>
+      <button class="step-pill" onclick="goToStep(2)">
+        <i class="fa-regular fa-calendar-days"></i> Events Itinerary
+      </button>
+      <button class="step-pill" onclick="goToStep(3)">
+        <i class="fa-solid fa-location-dot"></i> Venue &amp; Map
+      </button>
+      <button class="step-pill" onclick="goToStep(4)">
+        <i class="fa-solid fa-images"></i> Photos &amp; Music
+      </button>
+      <button class="step-pill" onclick="goToStep(5)">
+        <i class="fa-solid fa-crown"></i> Publish ₹399
+      </button>
+    </div>
+
+    <!-- FORM STEPS SCROLLER -->
+    <div class="forms-scroller">
+
+      <!-- STEP 1: COUPLE & INTRO -->
+      <section class="form-step-section active" id="step-0">
+        <div class="step-header">
+          <div class="step-counter">Step 1 of 6</div>
+          <h2 class="step-title">Couple &amp; Intro Details</h2>
+          <p class="step-desc">Customize the regal 3D temple entrance text, royal bride &amp; groom names, and the wedding date.</p>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-archway"></i> 3D Temple Entrance Screen
+          </div>
+          <div class="form-group">
+            <label class="form-label">Intro Kicker Text</label>
+            <input type="text" id="introKicker" class="form-control" value="Together with their families" placeholder="e.g. Together with their families">
+          </div>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-ring"></i> Royal Couple Names
+          </div>
+          <div class="two-col-grid">
+            <div class="form-group">
+              <label class="form-label">Groom's Name</label>
+              <input type="text" id="groomName" class="form-control" value="Arjun" placeholder="e.g. Arjun">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Bride's Name</label>
+              <input type="text" id="brideName" class="form-control" value="Meera" placeholder="e.g. Meera">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Wedding Date Tagline</label>
+            <input type="text" id="weddingDate" class="form-control" value="20 · 12 · 2026" placeholder="e.g. 20 · 12 · 2026">
+          </div>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-feather"></i> Hero Invitation Note
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hero Invitation Subtitle</label>
+            <textarea id="heroSub" class="form-control" placeholder="Invitation message">Invite you to celebrate a beautiful beginning, surrounded by love, laughter and flowers.</textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2: PARENTS BLESSINGS -->
+      <section class="form-step-section" id="step-1">
+        <div class="step-header">
+          <div class="step-counter">Step 2 of 6</div>
+          <h2 class="step-title">Parents &amp; Blessings</h2>
+          <p class="step-desc">Acknowledge the cherished parents of both bride and groom with custom blessing names.</p>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-user-tie"></i> Groom's Parents
+          </div>
+          <div class="form-group">
+            <label class="form-label">Groom's Father</label>
+            <input type="text" id="groomFather" class="form-control" value="Mr. Rajesh Sharma" placeholder="Father's full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Groom's Mother</label>
+            <input type="text" id="groomMother" class="form-control" value="Mrs. Sunita Sharma" placeholder="Mother's full name">
+          </div>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-person-dress"></i> Bride's Parents
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bride's Father</label>
+            <input type="text" id="brideFather" class="form-control" value="Mr. Ramesh Verma" placeholder="Father's full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bride's Mother</label>
+            <input type="text" id="brideMother" class="form-control" value="Mrs. Anita Verma" placeholder="Mother's full name">
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3: EVENTS ITINERARY -->
+      <section class="form-step-section" id="step-2">
+        <div class="step-header">
+          <div class="step-counter">Step 3 of 6</div>
+          <h2 class="step-title">Wedding Itinerary</h2>
+          <p class="step-desc">Configure the four 3D interactive celebration cards shown in the event section.</p>
+        </div>
+
+        <!-- Event 1 -->
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-sparkles"></i> Celebration 1: Engagement
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Title</label>
+            <input type="text" id="ev0Title" class="form-control" value="Engagement">
+          </div>
+          <div class="two-col-grid">
+            <div class="form-group">
+              <label class="form-label">Day &amp; Month</label>
+              <input type="text" id="ev0Date" class="form-control" value="18 December">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Time</label>
+              <input type="text" id="ev0Time" class="form-control" value="7:00 PM">
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-sun"></i> Celebration 2: Haldi
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Title</label>
+            <input type="text" id="ev1Title" class="form-control" value="Haldi">
+          </div>
+          <div class="two-col-grid">
+            <div class="form-group">
+              <label class="form-label">Day &amp; Month</label>
+              <input type="text" id="ev1Date" class="form-control" value="19 December">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Time</label>
+              <input type="text" id="ev1Time" class="form-control" value="11:00 AM">
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-om"></i> Celebration 3: Wedding Muhurtham
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Title</label>
+            <input type="text" id="ev2Title" class="form-control" value="Wedding">
+          </div>
+          <div class="two-col-grid">
+            <div class="form-group">
+              <label class="form-label">Day &amp; Month</label>
+              <input type="text" id="ev2Date" class="form-control" value="20 December">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Time</label>
+              <input type="text" id="ev2Time" class="form-control" value="9:00 AM">
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 4 -->
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-champagne-glasses"></i> Celebration 4: Grand Reception
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Title</label>
+            <input type="text" id="ev3Title" class="form-control" value="Reception">
+          </div>
+          <div class="two-col-grid">
+            <div class="form-group">
+              <label class="form-label">Day &amp; Month</label>
+              <input type="text" id="ev3Date" class="form-control" value="20 December">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Time</label>
+              <input type="text" id="ev3Time" class="form-control" value="7:00 PM">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 4: VENUE & GOOGLE MAPS -->
+      <section class="form-step-section" id="step-3">
+        <div class="step-header">
+          <div class="step-counter">Step 4 of 6</div>
+          <h2 class="step-title">Palace Venue &amp; Maps</h2>
+          <p class="step-desc">Guide your honored guests effortlessly to the wedding destination with direct navigation links.</p>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-hotel"></i> Venue Destination
+          </div>
+          <div class="form-group">
+            <label class="form-label">Venue Name</label>
+            <input type="text" id="venueName" class="form-control" value="Rose Garden Palace" placeholder="e.g. Taj Falaknuma Palace">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Address</label>
+            <textarea id="venueAddress" class="form-control" placeholder="Complete location details">123 Celebration Avenue, Hyderabad, Telangana</textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">
+              <span>Google Maps URL</span>
+              <span class="hint">Opens direct navigation</span>
+            </label>
+            <input type="url" id="venueMapUrl" class="form-control" value="https://www.google.com/maps/search/?api=1&query=Hyderabad%2C%20Telangana" placeholder="https://maps.google.com/...">
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 5: PHOTOS & MUSIC -->
+      <section class="form-step-section" id="step-4">
+        <div class="step-header">
+          <div class="step-counter">Step 5 of 6</div>
+          <h2 class="step-title">Photos &amp; Atmosphere</h2>
+          <p class="step-desc">Upload your portrait for the floral garland opening, gallery photos, and select background shehnai.</p>
+        </div>
+
+        <!-- HERO COUPLE IMAGE -->
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-camera-retro"></i> Hero Garland Couple Portrait
+          </div>
+          <div class="uploader-box" id="heroDropBox">
+            <img id="heroImgPreview" class="uploader-preview" src="assets/coupleimg.png" alt="Couple Preview" style="display:block;">
+            <div class="uploader-prompt">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <p>Upload Couple Photo (PNG or JPG)</p>
+              <span>Tap to browse files from device</span>
+            </div>
+            <input type="file" id="heroFileInput" class="file-hidden-input" accept="image/*">
+          </div>
+          <div class="url-fallback-row">
+            <input type="text" id="heroUrlInput" placeholder="Or paste public image URL" value="assets/coupleimg.png">
+            <button type="button" class="btn-nav-step btn-prev" onclick="applyHeroUrl()">Apply</button>
+          </div>
+        </div>
+
+        <!-- GALLERY SLIDES -->
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-regular fa-images"></i> Gallery Carousel Photos
+          </div>
+          <div class="form-group">
+            <label class="form-label">Photo 1 URL</label>
+            <input type="text" id="gal0" class="form-control" value="assets/hinducouple1.png">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Photo 2 URL</label>
+            <input type="text" id="gal1" class="form-control" value="assets/hinducouple2.png">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Photo 3 URL</label>
+            <input type="text" id="gal2" class="form-control" value="assets/hinucouple3.png">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Photo 4 URL</label>
+            <input type="text" id="gal3" class="form-control" value="assets/hinducouple4.png">
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 6: PUBLISH & REMOVE WATERMARK -->
+      <section class="form-step-section" id="step-5">
+        <div class="step-header">
+          <div class="step-counter">Step 6 of 6</div>
+          <h2 class="step-title">Publish &amp; Share</h2>
+          <p class="step-desc">Publish your royal digital wedding invite in full HD with zero watermarks for ₹399.</p>
+        </div>
+
+        <div class="lux-card" style="text-align: center; padding: 28px 20px;">
+          <div class="modal-royalty-crown">
+            <i class="fa-solid fa-crown"></i>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:22px; color:var(--text-dark); margin-bottom:8px;">Ready to Go Live?</h3>
+          <p style="font-size:12.5px; color:var(--text-muted); line-height:1.5; margin-bottom:20px;">
+            Remove all Vanvi Moments watermarks, enable unlimited high-speed guest visits, and generate your clean sharing link.
+          </p>
+
+          <div class="pricing-badge-row">
+            <div>
+              <div class="original">₹1,499</div>
+              <div class="final-price">₹399</div>
+            </div>
+            <div>
+              <div class="tax-label"><i class="fa-solid fa-check"></i> Lifetime Link</div>
+              <div class="tax-label"><i class="fa-solid fa-check"></i> No Watermark</div>
+            </div>
+          </div>
+
+          <button class="btn-complete-publish" onclick="executePublish()">
+            <i class="fa-solid fa-bolt"></i> Pay ₹399 &amp; Activate Now
+          </button>
+
+          <div class="published-success-box" id="stepPublishResult">
+            <div style="font-weight:700; color:#2F422A; font-size:13px; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-circle-check" style="color:#508047;"></i> Published Successfully!
+            </div>
+            <p style="font-size:11px; color:#495D45; margin-top:4px;">Watermarks removed! Share this clean link with your guests:</p>
+            <div class="success-link-wrap">
+              <input type="text" id="cleanLiveUrl" readonly>
+              <button class="btn-copy-link" onclick="copyCleanLink()"><i class="fa-regular fa-copy"></i> Copy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FIXED BOTTOM DOCK (MOBILE ZERO-CUTOFF) -->
+    <div class="editor-bottom-bar">
+      <button class="btn-nav-step btn-prev" id="btnPrevStep" onclick="prevStep()">
+        <i class="fa-solid fa-arrow-left"></i> Previous
+      </button>
+      <button class="btn-nav-step btn-next" id="btnNextStep" onclick="nextStep()">
+        Next Step <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- RIGHT: REAL-TIME LUXURY PREVIEW -->
+  <section class="preview-pane">
+    <div class="preview-floating-bar">
+      <button class="preview-float-btn" onclick="reloadPreview()">
+        <i class="fa-solid fa-arrow-rotate-right"></i> Reset Animation
+      </button>
+      <button class="preview-float-btn" onclick="openFullscreenPreview()">
+        <i class="fa-solid fa-expand"></i> Fullscreen
+      </button>
+    </div>
+
+    <!-- PHONE CHASSIS -->
+    <div class="device-mockup">
+      <div class="device-top-notch">
+        <div class="notch-pill"></div>
+      </div>
+      <iframe id="previewIframe" class="preview-iframe" src="index.html" title="Temple Blossom Live Preview"></iframe>
+    </div>
+  </section>
+
+</main>
+
+<!-- PUBLISH MODAL POPUP -->
+<div class="modal-overlay" id="publishModal">
+  <div class="modal-lux-card">
+    <button class="modal-close-btn" onclick="closePublishModal()">&times;</button>
+    <div class="modal-royalty-crown">
+      <i class="fa-solid fa-crown"></i>
+    </div>
+    <h2 class="modal-lux-title">Publish Invitation</h2>
+    <p class="modal-lux-sub">Unlock clean watermark-free viewing for your guests across WhatsApp and web.</p>
+
+    <div class="pricing-badge-row">
+      <span class="original">₹1,499</span>
+      <span class="final-price">₹399</span>
+      <span class="tax-label">Instant Unlock</span>
+    </div>
+
+    <div class="feature-bullets">
+      <div><i class="fa-solid fa-circle-check"></i> Removes all "Vanvi Moments" watermarks</div>
+      <div><i class="fa-solid fa-circle-check"></i> Unlimited guest views &amp; RSVP tracking</div>
+      <div><i class="fa-solid fa-circle-check"></i> High-speed 3D temple entrance zoom</div>
+      <div><i class="fa-solid fa-circle-check"></i> Audio auto-play and Google Maps integration</div>
+    </div>
+
+    <button class="btn-complete-publish" onclick="executePublish()">
+      <i class="fa-solid fa-lock-open"></i> Unlock &amp; Remove Watermark (₹399)
+    </button>
+  </div>
+</div>
+
+<script>
+/* ====================================================================
+   VANVI LUXURY STUDIO BUILDER CONTROLLER
+   ==================================================================== */
+
+let currentStep = 0;
+const totalSteps = 6;
+let isPublished = false;
+
+// Step Navigation
+function goToStep(stepIndex) {
+  currentStep = Math.max(0, Math.min(stepIndex, totalSteps - 1));
+  
+  // Update Pills
+  document.querySelectorAll('.step-pill').forEach((pill, idx) => {
+    pill.classList.toggle('active', idx === currentStep);
+    if (idx < currentStep) pill.classList.add('completed');
+  });
+
+  // Update Sections
+  document.querySelectorAll('.form-step-section').forEach((sec, idx) => {
+    sec.classList.toggle('active', idx === currentStep);
+  });
+
+  // Update Bottom Dock Buttons
+  const btnPrev = document.getElementById('btnPrevStep');
+  const btnNext = document.getElementById('btnNextStep');
+
+  if (currentStep === 0) {
+    btnPrev.style.visibility = 'hidden';
+  } else {
+    btnPrev.style.visibility = 'visible';
+  }
+
+  if (currentStep === totalSteps - 1) {
+    btnNext.innerHTML = '<i class="fa-solid fa-crown"></i> Complete';
+  } else {
+    btnNext.innerHTML = 'Next Step <i class="fa-solid fa-arrow-right"></i>';
+  }
+
+  // Scroll editor to top
+  const scroller = document.querySelector('.forms-scroller');
+  if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  if (currentStep < totalSteps - 1) {
+    goToStep(currentStep + 1);
+  } else {
+    openPublishModal();
+  }
+}
+
+function prevStep() {
+  if (currentStep > 0) {
+    goToStep(currentStep - 1);
+  }
+}
+
+// Mobile View Mode Switcher
+function switchMobileView(mode) {
+  const btnEdit = document.getElementById('btnModeEdit');
+  const btnPreview = document.getElementById('btnModePreview');
+
+  if (mode === 'preview') {
+    document.body.classList.add('show-preview');
+    btnPreview.classList.add('active');
+    btnEdit.classList.remove('active');
+  } else {
+    document.body.classList.remove('show-preview');
+    btnEdit.classList.add('active');
+    btnPreview.classList.remove('active');
+  }
+}
+
+// Collect Data Payload
+function getFormData() {
+  return {
+    introKicker: document.getElementById('introKicker')?.value || '',
+    groomName: document.getElementById('groomName')?.value || '',
+    brideName: document.getElementById('brideName')?.value || '',
+    weddingDate: document.getElementById('weddingDate')?.value || '',
+    heroSub: document.getElementById('heroSub')?.value || '',
+
+    groomFather: document.getElementById('groomFather')?.value || '',
+    groomMother: document.getElementById('groomMother')?.value || '',
+    brideFather: document.getElementById('brideFather')?.value || '',
+    brideMother: document.getElementById('brideMother')?.value || '',
+
+    events: [
+      {
+        title: document.getElementById('ev0Title')?.value || '',
+        date: document.getElementById('ev0Date')?.value || '',
+        time: document.getElementById('ev0Time')?.value || ''
+      },
+      {
+        title: document.getElementById('ev1Title')?.value || '',
+        date: document.getElementById('ev1Date')?.value || '',
+        time: document.getElementById('ev1Time')?.value || ''
+      },
+      {
+        title: document.getElementById('ev2Title')?.value || '',
+        date: document.getElementById('ev2Date')?.value || '',
+        time: document.getElementById('ev2Time')?.value || ''
+      },
+      {
+        title: document.getElementById('ev3Title')?.value || '',
+        date: document.getElementById('ev3Date')?.value || '',
+        time: document.getElementById('ev3Time')?.value || ''
+      }
+    ],
+
+    venueName: document.getElementById('venueName')?.value || '',
+    venueAddress: document.getElementById('venueAddress')?.value || '',
+    venueMapUrl: document.getElementById('venueMapUrl')?.value || '',
+
+    heroCoupleImg: document.getElementById('heroUrlInput')?.value || '',
+    galleryImages: [
+      document.getElementById('gal0')?.value || '',
+      document.getElementById('gal1')?.value || '',
+      document.getElementById('gal2')?.value || '',
+      document.getElementById('gal3')?.value || ''
+    ],
+
+    isPublished: isPublished
+  };
+}
+
+// Send Live Sync to Iframe
+function syncToIframe() {
+  const iframe = document.getElementById('previewIframe');
+  if (!iframe || !iframe.contentWindow) return;
+
+  const payload = getFormData();
+  iframe.contentWindow.postMessage({
+    type: 'VANVI_UPDATE_DATA',
+    payload: payload
+  }, '*');
+}
+
+// Attach Live Listeners to Inputs
+function attachLiveListeners() {
+  const inputs = document.querySelectorAll('.form-control');
+  inputs.forEach(input => {
+    input.addEventListener('input', syncToIframe);
+  });
+}
+
+// Handle Image Local Upload
+const heroFileInput = document.getElementById('heroFileInput');
+if (heroFileInput) {
+  heroFileInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const base64 = evt.target.result;
+        document.getElementById('heroImgPreview').src = base64;
+        document.getElementById('heroImgPreview').style.display = 'block';
+        document.getElementById('heroUrlInput').value = base64;
+        syncToIframe();
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+function applyHeroUrl() {
+  const val = document.getElementById('heroUrlInput')?.value;
+  if (val) {
+    document.getElementById('heroImgPreview').src = val;
+    document.getElementById('heroImgPreview').style.display = 'block';
+    syncToIframe();
+  }
+}
+
+// Reload Preview
+function reloadPreview() {
+  const iframe = document.getElementById('previewIframe');
+  if (iframe) {
+    iframe.src = 'index.html' + (isPublished ? '?published=1' : '');
+    iframe.onload = () => {
+      setTimeout(syncToIframe, 350);
+    };
+  }
+}
+
+function openFullscreenPreview() {
+  const url = 'index.html' + (isPublished ? '?published=1' : '');
+  window.open(url, '_blank');
+}
+
+// Modal Handlers
+function openPublishModal() {
+  document.getElementById('publishModal').classList.add('open');
+}
+
+function closePublishModal() {
+  document.getElementById('publishModal').classList.remove('open');
+}
+
+// Execute Publish (₹399 Activation)
+function executePublish() {
+  isPublished = true;
+  closePublishModal();
+
+  // Strip watermarks live in iframe
+  syncToIframe();
+
+  // Show Success Box in Step 6
+  const cleanLink = window.location.origin + window.location.pathname.replace('builder.html', 'index.html') + '?published=1';
+  const urlBox = document.getElementById('cleanLiveUrl');
+  if (urlBox) urlBox.value = cleanLink;
+
+  const resultBox = document.getElementById('stepPublishResult');
+  if (resultBox) resultBox.classList.add('visible');
+
+  goToStep(5);
+
+  // Change top publish button state
+  const topBtn = document.querySelector('.action-publish-btn');
+  if (topBtn) {
+    topBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Published';
+    topBtn.style.background = '#4F644A';
+  }
+}
+
+function copyCleanLink() {
+  const urlBox = document.getElementById('cleanLiveUrl');
+  if (urlBox) {
+    urlBox.select();
+    navigator.clipboard.writeText(urlBox.value).then(() => {
+      alert('Clean invite link copied! Watermarks are removed.');
+    });
+  }
+}
+
+// Initial Sync Setup
+window.addEventListener('DOMContentLoaded', () => {
+  goToStep(0);
+  attachLiveListeners();
+
+  const iframe = document.getElementById('previewIframe');
+  if (iframe) {
+    iframe.addEventListener('load', () => {
+      setTimeout(syncToIframe, 400);
+    });
+  }
+});
+</script>
+
+</body>
+</html>

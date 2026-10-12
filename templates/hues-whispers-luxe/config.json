@@ -1,0 +1,86 @@
+{
+  "templateId": "hues-whispers-luxe",
+  "templateName": "Premium Wedding · Rose & Clay Edition",
+  "brand": {
+    "name": "Vanvi Moments",
+    "subTitle": "Bespoke Digital Invitations & Wedding Websites",
+    "watermark": "Vanvi Moments · Premium Wedding Edition",
+    "supportContact": "+91 98765 43210"
+  },
+  "pricing": {
+    "currency": "INR",
+    "currencySymbol": "₹",
+    "discountPrice": 1499,
+    "originalPrice": 4999,
+    "discountBadge": "70% OFF LIMITED TIME"
+  },
+  "couple": {
+    "bride": {
+      "name": "Meera Iyer",
+      "shortName": "Meera",
+      "parents": "Suresh & Lakshmi Iyer",
+      "role": "Bride's parents"
+    },
+    "groom": {
+      "name": "Arjun Malhotra",
+      "shortName": "Arjun",
+      "parents": "Vikram & Kavita Malhotra",
+      "role": "Groom's parents"
+    },
+    "hashtag": "#ArjunKiMeera",
+    "weddingDate": "2026-12-23",
+    "weddingDateFormatted": "Wednesday, 23 December 2026",
+    "time": "6:00 pm onwards",
+    "city": "Hyderabad, Telangana, India",
+    "mainVenue": "Taj Krishna, Banjara Hills"
+  },
+  "functions": [
+    {
+      "id": "haldi",
+      "title": "Haldi Ceremony",
+      "date": "21 December 2026",
+      "time": "10:00 am – 2:00 pm",
+      "venue": "The Westin Hyderabad Mindspace, HITEC City",
+      "artwork": "assets/artwork/art-3.webp"
+    },
+    {
+      "id": "mehendi",
+      "title": "Mehendi Night",
+      "date": "22 December 2026",
+      "time": "5:30 pm – 9:30 pm",
+      "venue": "Shilpakala Vedika, Madhapur",
+      "artwork": "assets/artwork/art-4.webp"
+    },
+    {
+      "id": "sangeet",
+      "title": "Sangeet Sandhya",
+      "date": "22 December 2026",
+      "time": "7:00 pm – 11:00 pm",
+      "venue": "Taj Falaknuma Palace, Hyderabad",
+      "artwork": "assets/artwork/art-5.webp"
+    },
+    {
+      "id": "shaadi",
+      "title": "The Royal Wedding",
+      "date": "23 December 2026",
+      "time": "6:00 pm – 10:00 pm",
+      "venue": "Taj Krishna, Banjara Hills",
+      "artwork": "assets/artwork/art-6.webp"
+    },
+    {
+      "id": "reception",
+      "title": "Grand Reception",
+      "date": "24 December 2026",
+      "time": "7:30 pm – 11:30 pm",
+      "venue": "Novotel Hyderabad Convention Centre, HICC",
+      "artwork": "assets/artwork/art-7.webp"
+    }
+  ],
+  "builderFeatures": {
+    "dualImageUpload": true,
+    "cloudinarySyncReady": true,
+    "stepAnimationSelector": true,
+    "zeroCutoffStickyDock": true,
+    "responsiveDeviceFrame": true
+  }
+}

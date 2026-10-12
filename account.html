@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url=profile.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting to Account & Profile | Vanvi Moments</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <script>
+    // Instant zero-delay client redirect preserving queries & hashes
+    var target = 'profile.html' + window.location.search + window.location.hash;
+    window.location.replace(target);
+  </script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 50% 30%, #fff0f5 0%, #fffbfd 100%);
+      color: #2c1224;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 42, 122, 0.2);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 16px 40px rgba(255, 42, 122, 0.12);
+      max-width: 380px;
+      margin: 20px;
+    }
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 3.5px solid rgba(255, 42, 122, 0.18);
+      border-top-color: #ff2a7a;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    h2 { font-size: 19px; margin: 0 0 8px; color: #2c1224; font-weight: 800; }
+    p { font-size: 13.5px; color: #7b5971; margin: 0 0 20px; line-height: 1.5; }
+    a.btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff2a7a 0%, #ff529a 100%);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 11px 22px;
+      border-radius: 99px;
+      box-shadow: 0 6px 18px rgba(255, 42, 122, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="spinner"></div>
+    <h2>Redirecting to Account...</h2>
+    <p>Taking you directly to your Vanvi Moments Profile & Account Hub.</p>
+    <a class="btn" href="profile.html">Click here if not redirected</a>
+  </div>
+</body>
+</html>

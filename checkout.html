@@ -1450,19 +1450,28 @@ function vanviGoBack(fallback) {
   const urlParams = new URLSearchParams(window.location.search);
 
   // 1. Order Parameters
-  let templateName = urlParams.get('template') || 'Midnight Wish 3D Celebration';
-  let templateId = urlParams.get('templateId') || urlParams.get('template') || '';
+  let templateId = urlParams.get('templateId') || urlParams.get('template') || urlParams.get('id') || '';
+  let templateName = urlParams.get('templateName') || (urlParams.get('template') && !urlParams.get('template').includes('-') ? urlParams.get('template') : '') || 'Vanvi Celebration Keepsake';
   let occasion = urlParams.get('occasion') || 'Celebration';
-  const recipient = urlParams.get('recipient') || 'Special Someone';
-  let basePrice = parseInt(urlParams.get('amount') || urlParams.get('price') || '199', 10);
+  const recipient = urlParams.get('recipient') || urlParams.get('name') || urlParams.get('celebrant') || 'Special Someone';
+  let rawPrice = urlParams.get('amount') || urlParams.get('price');
+  let basePrice = rawPrice !== null ? parseInt(rawPrice, 10) : 199;
+  if (isNaN(basePrice)) basePrice = 199;
   const themeOverride = urlParams.get('theme') || urlParams.get('color') || '';
 
   // Auto-resolve template details from central Vanvi Registry
   if (templateId && window.VANVI_TEMPLATES && Array.isArray(window.VANVI_TEMPLATES)) {
-    const found = window.VANVI_TEMPLATES.find(t => t.id === templateId || t.slug === templateId || (t.aliases && t.aliases.includes(templateId)) || t.name.toLowerCase() === templateName.toLowerCase());
+    const found = window.VANVI_TEMPLATES.find(t => 
+      t.id === templateId || 
+      t.slug === templateId || 
+      (t.aliases && t.aliases.includes(templateId)) || 
+      t.name.toLowerCase() === templateId.toLowerCase() ||
+      (templateName && t.name.toLowerCase() === templateName.toLowerCase())
+    );
     if (found) {
       templateName = found.name;
-      if (!urlParams.get('amount') && !urlParams.get('price') && typeof found.price === 'number') basePrice = found.price;
+      templateId = found.id;
+      if (rawPrice === null && typeof found.price === 'number') basePrice = found.price;
       if (!urlParams.get('occasion') && (found.previewOccasion || found.category)) occasion = found.previewOccasion || found.category;
     }
   }
@@ -2208,7 +2217,7 @@ function vanviGoBack(fallback) {
         const list = window.VANVI_TEMPLATES || (window.VanviTemplatesData && window.VanviTemplatesData.getAll && window.VanviTemplatesData.getAll()) || [];
         if (Array.isArray(list) && list.length) {
           matched = list.find(t => 
-            (tplId && (t.id === tplId || t.slug === tplId || (t.aliases && t.aliases.includes(tplId)))) ||
+            (tplId && (t.id === tplId || t.slug === tplId || (t.aliases && t.aliases.includes(tplId)) || (t.builderPath && t.builderPath.includes(tplId)) || (t.templatePath && t.templatePath.includes(tplId)))) ||
             (tplName && (t.name.toLowerCase() === tplName.toLowerCase() || t.id.toLowerCase() === tplName.toLowerCase()))
           );
         }
@@ -2218,11 +2227,19 @@ function vanviGoBack(fallback) {
         q.set('name', rec || 'Special Someone');
         q.set('sender', snd || 'You');
         q.set('occasion', occ || (matched ? matched.category : 'Celebration'));
+        q.set('paid', 'true');
+        q.set('purchased', 'true');
+        q.set('status', 'published');
 
         if (matched && matched.templatePath) {
           let path = matched.templatePath;
           if (path.endsWith('/')) path += 'index.html';
           return `${window.location.origin}${window.location.pathname.replace('checkout.html', path)}?${q.toString()}`;
+        }
+
+        const cleanTplId = (tplId || '').replace(/^\/+/g, '').replace(/^templates\//g, '');
+        if (cleanTplId && cleanTplId.length > 2) {
+          return `${window.location.origin}${window.location.pathname.replace('checkout.html', `templates/${cleanTplId}/index.html`)}?${q.toString()}`;
         }
 
         const key = (tplId || tplName || '').toLowerCase();

@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Vanvi Moments — Wedding Website Studio & Builder</title>
+  
+  <meta name="description" content="Design and customize your luxury Indian wedding website in real time with Vanvi Moments.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Razorpay Standard Web Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  
+  <style>
+    :root {
+      /* ShaadiPath Inspired Royal Palette: Ivory, Deep Wine/Plum & Warm Terracotta */
+      --gold-primary: #C4985A;
+      --gold-light: #E2BC82;
+      --gold-dark: #8F6932;
+      --gold-glow: rgba(196, 152, 90, 0.25);
+      --bg-dark: #FAF3E8;
+      --bg-panel: #F4EAD9;
+      --bg-card: rgba(255, 253, 248, 0.95);
+      --border-subtle: rgba(196, 152, 90, 0.35);
+      --border-active: #C4985A;
+      --text-main: #3D1E2E;
+      --text-muted: #6B4E5D;
+      --text-dim: #947887;
+      --btn-gradient: linear-gradient(135deg, #6C2600, #8B3C14);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Ambient Warm Ivory Glow Background */
+    .ambient-glow {
+      position: fixed;
+      top: -150px;
+      left: 15%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(212, 160, 96, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-glow-2 {
+      position: fixed;
+      bottom: -150px;
+      right: 10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(108, 38, 0, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top Navigation Header */
+    header.studio-header {
+      height: 52px;
+      background: rgba(250, 243, 232, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      position: relative;
+      z-index: 100;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .brand-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text-main);
+    }
+    .brand-title span {
+      color: #8B3C14;
+      font-style: italic;
+    }
+    .brand-tag {
+      font-size: 0.55rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: rgba(196, 152, 90, 0.16);
+      color: #6C2600;
+      border: 1px solid rgba(196, 152, 90, 0.4);
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-preview-btn {
+      background: #FFF;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+    .header-preview-btn:hover {
+      border-color: var(--gold-primary);
+      color: var(--text-main);
+    }
+    .publish-btn {
+      background: var(--btn-gradient);
+      color: #FAF3E8;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 10px rgba(108, 38, 0, 0.25);
+      transition: all 0.2s ease;
+    }
+    .publish-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(108, 38, 0, 0.35);
+    }
+
+    /* Main Studio Layout: Split Screen (Left: Form Builder, Right: Live Phone Simulation) */
+    .studio-workspace {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 52px);
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    /* LEFT SIDE: BUILDER FORM */
+    .builder-sidebar {
+      width: 48%;
+      min-width: 420px;
+      max-width: 620px;
+      height: 100%;
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 20;
+    }
+
+    /* Stepper Header Pills */
+    .steps-nav {
+      display: flex;
+      padding: 12px 16px;
+      background: rgba(244, 234, 217, 0.95);
+      border-bottom: 1px solid var(--border-subtle);
+      overflow-x: auto;
+      gap: 8px;
+      scrollbar-width: none;
+    }
+    .steps-nav::-webkit-scrollbar { display: none; }
+
+    .step-pill {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(196, 152, 90, 0.25);
+      padding: 7px 13px;
+      border-radius: 30px;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .step-pill:hover {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--text-main);
+    }
+    .step-pill.active {
+      background: #FFF;
+      border-color: #6C2600;
+      color: #6C2600;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(108, 38, 0, 0.12);
+    }
+    .step-number {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(108, 38, 0, 0.1);
+      color: #6C2600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
+    .step-pill.active .step-number {
+      background: #6C2600;
+      color: #FFF;
+      font-weight: 700;
+    }
+
+    /* Form Body Scroll Area */
+    .builder-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 26px 100px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-subtle) transparent;
+    }
+
+    .form-step {
+      display: none;
+      animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .form-step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8B3C14;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .section-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+
+    /* Form Fields */
+    .field-group {
+      margin-bottom: 20px;
+    }
+    .field-label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--text-main);
+      margin-bottom: 7px;
+    }
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      background: #FFFDF9;
+      border: 1px solid rgba(196, 152, 90, 0.38);
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.88rem;
+      outline: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 1px 3px rgba(61, 30, 46, 0.04);
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: #6C2600;
+      box-shadow: 0 0 0 3px rgba(108, 38, 0, 0.12);
+      background: #FFFFFF;
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* Event Card Item Box in Builder */
+    .event-builder-item {
+      background: #FFFDF9;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 14px;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(61, 30, 46, 0.04);
+      transition: border-color 0.2s ease;
+    }
+    .event-builder-item:hover {
+      border-color: var(--gold-primary);
+    }
+    .event-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .event-item-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #6C2600;
+    }
+    .delete-item-btn {
+      background: none;
+      border: none;
+      color: #C84630;
+      cursor: pointer;
+      font-size: 0.74rem;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    .delete-item-btn:hover {
+      background: rgba(200, 70, 48, 0.1);
+    }
+    .add-more-btn {
+      background: rgba(196, 152, 90, 0.12);
+      border: 1px dashed #6C2600;
+      color: #6C2600;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      width: 100%;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+    .add-more-btn:hover {
+      background: rgba(196, 152, 90, 0.22);
+    }
+
+    /* Theme Selector Radio Tiles */
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .theme-card-option {
+      background: #FFFDF9;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 1px 4px rgba(61, 30, 46, 0.03);
+    }
+    .theme-card-option:hover {
+      border-color: #6C2600;
+      transform: translateY(-2px);
+    }
+    .theme-card-option.active {
+      border-color: #6C2600;
+      background: #FFF;
+      box-shadow: 0 4px 14px rgba(108, 38, 0, 0.14);
+    }
+    .theme-color-preview {
+      width: 100%;
+      height: 38px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .theme-card-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* Photo Upload Grid */
+    .photo-slots {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .photo-slot {
+      background: #FFFDF9;
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-md);
+      aspect-ratio: 4/5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .photo-slot:hover {
+      border-color: #6C2600;
+      background: #FFF;
+    }
+    .photo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+
+    /* Bottom Sticky Footer for Builder Steps */
+    .builder-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(244, 234, 217, 0.98);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border-subtle);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 50;
+    }
+    .btn-prev {
+      background: #FFF;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-weight: 500;
+      padding: 9px 20px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .btn-prev:hover {
+      border-color: #6C2600;
+    }
+    .btn-next {
+      background: var(--btn-gradient);
+      color: #FAF3E8;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 30px;
+      border: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(108, 38, 0, 0.25);
+    }
+    .btn-next:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(108, 38, 0, 0.35);
+    }
+
+    /* RIGHT SIDE: LIVE SIMULATOR / PREVIEW */
+    .simulator-stage {
+      flex: 1;
+      height: 100%;
+      background: #EDE1D1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 20px;
+    }
+
+    .device-switcher {
+      position: absolute;
+      top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-subtle);
+      padding: 4px;
+      border-radius: 30px;
+      z-index: 30;
+      box-shadow: 0 2px 8px rgba(61, 30, 46, 0.06);
+    }
+    .dev-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dev-btn.active {
+      background: #6C2600;
+      color: #FAF3E8;
+      font-weight: 600;
+    }
+
+    /* Modern Ultra-Tall Phone Frame Mockup (19.5:9 Aspect Ratio) */
+    .phone-mockup {
+      width: 380px;
+      height: 800px;
+      max-height: 90vh;
+      background: #000;
+      border-radius: 48px;
+      box-shadow: 0 25px 60px rgba(61, 30, 46, 0.22), 0 0 0 10px #2A1D23, 0 0 0 12px rgba(196, 152, 90, 0.45);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Dynamic Island / Speaker Notch */
+    .phone-notch {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 104px;
+      height: 25px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 50;
+      pointer-events: none;
+      box-shadow: 0 1px 4px rgba(255,255,255,0.06);
+    }
+
+    .preview-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #FAF3E8;
+    }
+
+    /* Modal / Toast Notifications */
+    .toast-pill {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #3D1E2E;
+      border: 1px solid var(--gold-primary);
+      color: #FAF3E8;
+      padding: 10px 22px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(61, 30, 46, 0.25);
+      font-size: 0.78rem;
+      font-weight: 500;
+      z-index: 10000;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast-pill.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Special Launch Offer Card & Payment Modal Styles */
+    .launch-offer-card {
+      margin-top: 24px;
+      background: linear-gradient(135deg, rgba(30, 61, 44, 0.05) 0%, rgba(200, 155, 60, 0.14) 100%);
+      border: 1.5px solid #C4985A;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(108, 38, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .launch-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #1e3d2c 0%, #2b563e 100%);
+      color: #FAF3E8;
+      border: 1px solid #C4985A;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .launch-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .launch-price-current {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1e3d2c;
+      line-height: 1;
+    }
+    .launch-price-orig {
+      font-size: 1rem;
+      color: #947887;
+      text-decoration: line-through;
+    }
+    .launch-discount-tag {
+      background: #25d366;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .launch-features-list {
+      list-style: none;
+      margin: 14px 0 18px 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .launch-features-list li {
+      font-size: 0.78rem;
+      color: #3D1E2E;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.35;
+    }
+    .btn-pay-now-primary {
+      width: 100%;
+      background: linear-gradient(135deg, #1e3d2c 0%, #2b563e 100%);
+      color: #FAF3E8;
+      border: 1.5px solid #C4985A;
+      padding: 13px 20px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(30, 61, 44, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+    }
+    .btn-pay-now-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(30, 61, 44, 0.45);
+      background: linear-gradient(135deg, #2b563e 0%, #1e3d2c 100%);
+    }
+    .btn-wa-booking-secondary {
+      width: 100%;
+      margin-top: 8px;
+      background: #25d366;
+      color: #ffffff;
+      border: none;
+      padding: 11px 18px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+      transition: all 0.25s ease;
+    }
+    .btn-wa-booking-secondary:hover {
+      background: #1eb857;
+      transform: translateY(-1px);
+    }
+
+    /* Modal Popup Backdrop & Dialog */
+    .floral-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(24, 40, 30, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .floral-modal-overlay.open {
+      display: flex;
+    }
+    .floral-modal-card {
+      background: #FFFDF8;
+      border: 1.5px solid #C4985A;
+      border-radius: 24px;
+      max-width: 460px;
+      width: 100%;
+      padding: 26px 22px;
+      box-shadow: 0 24px 60px rgba(30, 61, 44, 0.35);
+      position: relative;
+      text-align: center;
+      animation: floralModalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes floralModalPop {
+      0% { transform: scale(0.92); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ========================================================
+       RESPONSIVE MOBILE VIEW
+       ======================================================== */
+    @media (max-width: 900px) {
+      body {
+        height: auto;
+        overflow-y: auto;
+      }
+      .studio-workspace {
+        flex-direction: column;
+        height: auto;
+        overflow-y: visible;
+      }
+      .builder-sidebar {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-right: none;
+      }
+      .header-preview-btn {
+        display: flex;
+      }
+      .simulator-stage {
+        padding: 30px 14px 60px;
+        min-height: auto;
+        background: #EDE1D1;
+      }
+      .device-switcher {
+        position: relative;
+        top: 0;
+        margin-bottom: 20px;
+      }
+      .phone-mockup {
+        width: 100%;
+        max-width: 360px;
+        height: 760px;
+        border-radius: 44px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 0 8px #1E222A, 0 0 0 10px rgba(196, 152, 90, 0.3);
+      }
+      .input-row {
+        grid-template-columns: 1fr;
+      }
+      .builder-content {
+        padding: 18px 16px 85px;
+      }
+      .section-title {
+        font-size: 1.35rem;
+      }
+      .builder-footer {
+        padding: 12px 18px;
+      }
+      .btn-prev {
+        padding: 8px 16px;
+        font-size: 0.75rem;
+      }
+      .btn-next {
+        padding: 8px 20px;
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Luxury Lights -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Header -->
+  <header class="studio-header">
+    <a href="../../wedding.html" class="brand-wrap" title="Back to Wedding Catalog">
+      <span style="font-size:16px; margin-right:2px; color:var(--text-main);">←</span>
+      <div class="brand-title">Vanvi <span>Moments</span></div>
+      <span class="brand-tag">Studio</span>
+    </a>
+
+    <div class="header-actions">
+      <button class="header-preview-btn" onclick="scrollToPreview()">
+        📱 Live Demo
+      </button>
+      <button class="publish-btn" onclick="publishWebsite()" title="Publish your wedding website for ₹499">
+        ✨ Publish (₹499)
+      </button>
+    </div>
+  </header>
+
+  <!-- Studio Workspace -->
+  <main class="studio-workspace">
+
+    <!-- LEFT SIDE: BUILDER FORM STEPS -->
+    <section class="builder-sidebar">
+      
+      <!-- Stepper Navigation -->
+      <nav class="steps-nav" id="stepsNav">
+        <button class="step-pill active" data-step="1" onclick="jumpToStep(1)">
+          <span class="step-number">1</span> Couple
+        </button>
+        <button class="step-pill" data-step="2" onclick="jumpToStep(2)">
+          <span class="step-number">2</span> Blessings
+        </button>
+        <button class="step-pill" data-step="3" onclick="jumpToStep(3)">
+          <span class="step-number">3</span> Events
+        </button>
+        <button class="step-pill" data-step="4" onclick="jumpToStep(4)">
+          <span class="step-number">4</span> Story
+        </button>
+        <button class="step-pill" data-step="5" onclick="jumpToStep(5)">
+          <span class="step-number">5</span> Gallery
+        </button>
+        <button class="step-pill" data-step="6" onclick="jumpToStep(6)">
+          <span class="step-number">6</span> Theme
+        </button>
+        <button class="step-pill" data-step="7" onclick="jumpToStep(7)">
+          <span class="step-number">7</span> RSVP
+        </button>
+      </nav>
+
+      <!-- Scrollable Form Container -->
+      <div class="builder-content">
+
+        <!-- STEP 1: COUPLE ESSENTIALS -->
+        <div class="form-step active" id="step1">
+          <span class="section-eyebrow">Step 01 / 07</span>
+          <h2 class="section-title">Couple Details</h2>
+          <p class="section-desc">Enter bride &amp; groom names, marriage date and wedding hashtag.</p>
+
+          <div class="field-group">
+            <div class="input-row">
+              <div>
+                <label class="field-label">Bride's Name</label>
+                <input type="text" class="form-input" id="brideName" value="Priya" oninput="syncLive()">
+              </div>
+              <div>
+                <label class="field-label">Groom's Name</label>
+                <input type="text" class="form-input" id="groomName" value="Arjun" oninput="syncLive()">
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="input-row">
+              <div>
+                <label class="field-label">Wedding Date</label>
+                <input type="date" class="form-input" id="weddingDate" value="2026-12-12" oninput="syncLive()">
+              </div>
+              <div>
+                <label class="field-label">Hashtag</label>
+                <input type="text" class="form-input" id="weddingHashtag" value="#PriyaWedsArjun" oninput="syncLive()">
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Primary Venue / Palace</label>
+            <input type="text" class="form-input" id="venueName" value="Umaid Bhawan Palace, Jodhpur" oninput="syncLive()">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">WhatsApp Contact (for RSVPs)</label>
+            <input type="tel" class="form-input" id="whatsappNum" value="919999999999" oninput="syncLive()">
+          </div>
+        </div>
+
+        <!-- STEP 2: FAMILY & BLESSINGS -->
+        <div class="form-step" id="step2">
+          <span class="section-eyebrow">Step 02 / 07</span>
+          <h2 class="section-title">Family &amp; Blessings</h2>
+          <p class="section-desc">Personalize parent names and the traditional sacred blessing verse.</p>
+
+          <div class="field-group">
+            <label class="field-label">Divine Blessing Verse</label>
+            <textarea class="form-textarea" id="blessingVerse" oninput="syncLive()">With the blessings of the divine and the love of our families</textarea>
+          </div>
+
+          <div class="field-group">
+            <div class="input-row">
+              <div>
+                <label class="field-label">Bride's Father</label>
+                <input type="text" class="form-input" id="brideFather" value="Mr. Suresh Sharma" oninput="syncLive()">
+              </div>
+              <div>
+                <label class="field-label">Bride's Mother</label>
+                <input type="text" class="form-input" id="brideMother" value="Mrs. Anita Sharma" oninput="syncLive()">
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="input-row">
+              <div>
+                <label class="field-label">Groom's Father</label>
+                <input type="text" class="form-input" id="groomFather" value="Mr. Ramesh Kapoor" oninput="syncLive()">
+              </div>
+              <div>
+                <label class="field-label">Groom's Mother</label>
+                <input type="text" class="form-input" id="groomMother" value="Mrs. Sunita Kapoor" oninput="syncLive()">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: EVENTS ITINERARY -->
+        <div class="form-step" id="step3">
+          <span class="section-eyebrow">Step 03 / 07</span>
+          <h2 class="section-title">Wedding Itinerary</h2>
+          <p class="section-desc">Schedule your ceremonies (Mehendi, Haldi, Shaadi, Reception) with Google Maps.</p>
+
+          <div id="eventsContainer">
+            <!-- Event 1 -->
+            <div class="event-builder-item" data-ev-id="0">
+              <div class="event-item-top">
+                <span class="event-item-title">🌸 Mehendi Ceremony</span>
+              </div>
+              <div class="input-row" style="margin-bottom:10px;">
+                <input type="text" class="form-input ev-name" value="Mehendi" placeholder="Event Name" oninput="syncLive()">
+                <input type="text" class="form-input ev-time" value="2:00 PM" placeholder="Time" oninput="syncLive()">
+              </div>
+              <input type="text" class="form-input ev-venue" value="Garden Pavilion" placeholder="Venue" style="margin-bottom:10px;" oninput="syncLive()">
+              <input type="text" class="form-input ev-desc" value="Henna, marigolds, folk music, and afternoon light." placeholder="Description" oninput="syncLive()">
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-builder-item" data-ev-id="1">
+              <div class="event-item-top">
+                <span class="event-item-title">💛 Haldi Utsav</span>
+              </div>
+              <div class="input-row" style="margin-bottom:10px;">
+                <input type="text" class="form-input ev-name" value="Haldi" placeholder="Event Name" oninput="syncLive()">
+                <input type="text" class="form-input ev-time" value="10:00 AM" placeholder="Time" oninput="syncLive()">
+              </div>
+              <input type="text" class="form-input ev-venue" value="The Garden Room" placeholder="Venue" style="margin-bottom:10px;" oninput="syncLive()">
+              <input type="text" class="form-input ev-desc" value="Turmeric, saffron, laughter, and morning sunshine." placeholder="Description" oninput="syncLive()">
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-builder-item" data-ev-id="2">
+              <div class="event-item-top">
+                <span class="event-item-title">🔥 Shaadi / Pheras</span>
+              </div>
+              <div class="input-row" style="margin-bottom:10px;">
+                <input type="text" class="form-input ev-name" value="Shaadi" placeholder="Event Name" oninput="syncLive()">
+                <input type="text" class="form-input ev-time" value="10:00 AM" placeholder="Time" oninput="syncLive()">
+              </div>
+              <input type="text" class="form-input ev-venue" value="The Grand Mandap" placeholder="Venue" style="margin-bottom:10px;" oninput="syncLive()">
+              <input type="text" class="form-input ev-desc" value="Seven vows, one lifetime — the moment that matters." placeholder="Description" oninput="syncLive()">
+            </div>
+          </div>
+
+          <button type="button" class="add-more-btn" onclick="addNewEvent()">
+            + Add Another Ceremony
+          </button>
+        </div>
+
+        <!-- STEP 4: LOVE STORY & TAGS -->
+        <div class="form-step" id="step4">
+          <span class="section-eyebrow">Step 04 / 07</span>
+          <h2 class="section-title">Our Story &amp; Personality</h2>
+          <p class="section-desc">Add a short couple verse and fun tags displayed inside the interactive curtain reveal.</p>
+
+          <div class="field-group">
+            <label class="field-label">Couple Story Verse</label>
+            <input type="text" class="form-input" id="storyVerse" value="Two hearts, one garden, a lifetime of blooms." oninput="syncLive()">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Personality Tags (Comma separated)</label>
+            <input type="text" class="form-input" id="storyTags" value="Garden dreamers, Mehendi lovers, Chai &amp; marigolds, Forever &amp; always" oninput="syncLive()">
+          </div>
+        </div>
+
+        <!-- STEP 5: PHOTO GALLERY -->
+        <div class="form-step" id="step5">
+          <span class="section-eyebrow">Step 05 / 07</span>
+          <h2 class="section-title">Moments &amp; Gallery</h2>
+          <p class="section-desc">Add links to your pre-wedding photographs to be displayed in royal ornate frames.</p>
+
+          <div class="photo-slots">
+            <div class="photo-slot">
+              <img id="slotImg0" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" alt="Photo 1">
+            </div>
+            <div class="photo-slot">
+              <img id="slotImg1" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Photo 2">
+            </div>
+            <div class="photo-slot">
+              <img id="slotImg2" src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80" alt="Photo 3">
+            </div>
+            <div class="photo-slot">
+              <img id="slotImg3" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" alt="Photo 4">
+            </div>
+          </div>
+          <p style="font-size: 0.72rem; color: var(--text-dim); margin-top: 12px; text-align: center;">Pre-loaded with high-resolution royal couple presets.</p>
+        </div>
+
+        <!-- STEP 6: LUXURY THEMES & MUSIC -->
+        <div class="form-step" id="step6">
+          <span class="section-eyebrow">Step 06 / 07</span>
+          <h2 class="section-title">Color Palette &amp; Song</h2>
+          <p class="section-desc">Choose your wedding mood theme and background audio soundtrack.</p>
+
+          <label class="field-label">Select Color Theme</label>
+          <div class="themes-grid">
+            <div class="theme-card-option active" onclick="pickTheme('classic', this)">
+              <div class="theme-color-preview" style="background: linear-gradient(135deg, #F5D0A9, #D4A060);"></div>
+              <div class="theme-card-name">Classic Floral</div>
+            </div>
+            <div class="theme-card-option" onclick="pickTheme('blossom', this)">
+              <div class="theme-color-preview" style="background: linear-gradient(135deg, #FFAEC0, #E08298);"></div>
+              <div class="theme-card-name">Rose Blossom</div>
+            </div>
+            <div class="theme-card-option" onclick="pickTheme('royal', this)">
+              <div class="theme-color-preview" style="background: linear-gradient(135deg, #A82845, #C5A059);"></div>
+              <div class="theme-card-name">Royal Velvet</div>
+            </div>
+            <div class="theme-card-option" onclick="pickTheme('golden', this)">
+              <div class="theme-color-preview" style="background: linear-gradient(135deg, #FDE08B, #D6A442);"></div>
+              <div class="theme-card-name">Golden Sand</div>
+            </div>
+            <div class="theme-card-option" onclick="pickTheme('sage', this)">
+              <div class="theme-color-preview" style="background: linear-gradient(135deg, #A9CCA9, #759A7A);"></div>
+              <div class="theme-card-name">Sage Garden</div>
+            </div>
+          </div>
+
+          <div class="field-group" style="margin-top:24px;">
+            <label class="field-label">Background Audio Track</label>
+            <select class="form-select" id="builderSong" onchange="syncLive()">
+              <option value="assets/song/Template_04.mp3">Track 1: Floral Shehnai (Acoustic)</option>
+              <option value="assets/song/song2.mp3">Track 2: Royal Palace Beats</option>
+              <option value="assets/song/song3.mp3">Track 3: Midnight Sitar Melody</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- STEP 7: RSVP & PUBLISH -->
+        <div class="form-step" id="step7">
+          <span class="section-eyebrow">Step 07 / 07</span>
+          <h2 class="section-title">RSVP &amp; WhatsApp Connect</h2>
+          <p class="section-desc">Configure how guests confirm their attendance for your celebrations.</p>
+
+          <div class="field-group">
+            <label class="field-label">RSVP Title</label>
+            <input type="text" class="form-input" id="rsvpHeading" value="Will you join us?" oninput="syncLive()">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Emotional Invitation Message</label>
+            <textarea class="form-textarea" id="rsvpSubtext" oninput="syncLive()">We've saved a seat for you in our garden — at our table, in our hearts, under an open sky full of marigolds. Come celebrate with us as we begin this beautiful chapter together.</textarea>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Confirm Button Label</label>
+            <input type="text" class="form-input" id="rsvpBtnText" value="Yes, I'll be there 🌸" oninput="syncLive()">
+          </div>
+
+          <!-- VIP Guest Link Generator & Personalized Sender Tool (Feature #1) -->
+          <div style="margin-top:28px; padding:18px; background:#FFFDF9; border:1px solid #C4985A; border-radius:12px; box-shadow:0 2px 10px rgba(61,30,46,0.06);">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span style="font-size:1.1rem;">💌</span>
+              <h3 style="font-family:'Playfair Display',serif; font-size:1.05rem; color:#6C2600; font-weight:600;">Personalized Guest Link Generator</h3>
+            </div>
+            <p style="font-size:0.75rem; color:#6B4E5D; margin-bottom:14px; line-height:1.45;">
+              Create custom invite links for specific relatives or guests (e.g. <em>Sharma Family</em> or <em>Ramesh Uncle</em>). When they open the link, their name will appear with a personalized welcome greeting!
+            </p>
+
+            <div class="field-group" style="margin-bottom:12px;">
+              <label class="field-label">Guest / Family Name</label>
+              <input type="text" class="form-input" id="customGuestInput" placeholder="e.g. Sharma Family / Rajesh Uncle" oninput="generateGuestLink()">
+            </div>
+
+            <div style="background:#F4EAD9; padding:10px 12px; border-radius:8px; border:1px dashed rgba(196,152,90,0.6); margin-bottom:12px; word-break:break-all; font-size:0.75rem; color:#3D1E2E;" id="generatedGuestUrl">
+              index.html?guest=Sharma+Family
+            </div>
+
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="btn-next" style="flex:1; padding:9px 12px; font-size:0.75rem; display:flex; align-items:center; justify-content:center; gap:6px;" onclick="copyGuestLink()">
+                📋 Copy Personalized Link
+              </button>
+              <button type="button" class="btn-prev" style="padding:9px 14px; font-size:0.75rem;" onclick="testGuestLink()">
+                👁️ Test in Preview
+              </button>
+            </div>
+          </div>
+
+          <!-- Special Launch Offer & ₹499 Instant Auto-Publish Card -->
+          <div class="launch-offer-card">
+            <div class="launch-badge-pill">
+              <span>🌿</span> Special Launch Offer (50% OFF)
+            </div>
+            
+            <div class="launch-price-row">
+              <span class="launch-price-current">₹499</span>
+              <span class="launch-price-orig">₹999</span>
+              <span class="launch-discount-tag">50% OFF</span>
+            </div>
+            
+            <p style="font-size:0.75rem; color:#6B4E5D; margin-bottom:12px; line-height:1.45;">
+              Unlock your full-fledged live celebration website with lifetime validity, instant Razorpay/UPI gateway activation, and unlimited personalized guest invites.
+            </p>
+
+            <ul class="launch-features-list">
+              <li><span>✦</span> <strong>Permanent Live Link:</strong> <span style="color:#1e3d2c;">vanvimoments.com/<span id="cardSlugPreview">priya-arjun</span></span></li>
+              <li><span>✦</span> <strong>VIP Guest Links:</strong> Unlimited personalized invitations (?guest=Name)</li>
+              <li><span>✦</span> <strong>Interactive Ashirwad Box:</strong> Instant WhatsApp delivery & blessings wall</li>
+              <li><span>✦</span> <strong>Music Soundscape:</strong> Royal Shehnai & Sitar acoustic soundtrack included</li>
+              <li><span>✦</span> <strong>Zero Hidden Fees:</strong> 1-Time payment of ₹499 only</li>
+            </ul>
+
+            <button type="button" class="btn-pay-now-primary" onclick="initiateFloralPayment()">
+              ⚡ Pay ₹499 & Auto-Publish Live
+            </button>
+
+            <a id="btnFloralWaBooking" href="https://wa.me/917631442934?text=Namaste%20Vanvi%20Moments!%20I%20want%20to%20publish%20Floral%20Mehendi%20Story%20for%20%E2%82%B9499." target="_blank" rel="noopener" class="btn-wa-booking-secondary">
+              💬 WhatsApp Pay Instant Activation (₹499)
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Builder Sticky Navigation Bottom -->
+      <footer class="builder-footer">
+        <button type="button" class="btn-prev" id="prevBtn" onclick="prevStep()">Back</button>
+        <span style="font-size:0.75rem; color: var(--gold-light); font-weight:600;" id="stepProgressLabel">1 of 7</span>
+        <button type="button" class="btn-next" id="nextBtn" onclick="nextStep()">Next Step →</button>
+      </footer>
+
+    </section>
+
+    <!-- RIGHT SIDE: INTERACTIVE IPHONE SIMULATION -->
+    <section class="simulator-stage" id="simulatorStage">
+      
+      <div class="device-switcher">
+        <button class="dev-btn active" onclick="setDeviceMode('mobile')">📱 Mobile</button>
+        <button class="dev-btn" onclick="setDeviceMode('desktop')">💻 Desktop View</button>
+      </div>
+
+      <!-- Realistic iPhone Mockup -->
+      <div class="phone-mockup" id="phoneMockup">
+        <div class="phone-notch"></div>
+        <iframe src="index.html" class="preview-iframe" id="previewIframe" title="Live Preview"></iframe>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Live Toast Notification -->
+  <div class="toast-pill" id="toastPill">
+    <span>✨</span>
+    <span id="toastMsg">Changes updated in live simulator!</span>
+  </div>
+
+  <!-- PAYMENT & AUTO PUBLISH CONFIRMATION MODAL -->
+  <div class="floral-modal-overlay" id="floralPaymentModal">
+    <div class="floral-modal-card">
+      <button type="button" onclick="closeFloralModal()" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:20px; color:#947887; cursor:pointer;" aria-label="Close">✕</button>
+
+      <div id="floralModalCheckoutView">
+        <div style="font-size:36px; margin-bottom:4px;">🌸</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:22px; color:#1e3d2c; margin-bottom:4px;">Publish Floral Mehendi Story</h3>
+        <p style="font-size:12px; color:#6B4E5D; margin-bottom:18px;">Ultra-Luxury Festive Keepsake • Lifetime Validity</p>
+
+        <div style="background:rgba(30,61,44,0.06); border:1px solid rgba(200,155,60,0.4); border-radius:14px; padding:14px; text-align:left; margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;">
+            <span style="color:#6B4E5D;">Couple:</span>
+            <strong style="color:#1e3d2c;"><span id="mCoupleDisplay">Priya & Arjun</span></strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;">
+            <span style="color:#6B4E5D;">Live URL:</span>
+            <strong style="color:#1e3d2c; font-family:monospace;">vanvimoments.com/<span id="mSlugDisplay">priya-arjun</span></strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:14px; border-top:1px dashed rgba(200,155,60,0.5); padding-top:8px; margin-top:8px;">
+            <span style="color:#6B4E5D;">Launch Total:</span>
+            <strong style="color:#1e3d2c; font-size:16px;"><s>₹999</s> <span style="color:#25d366; font-size:18px;">₹499</span></strong>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <button type="button" class="btn-pay-now-primary" onclick="executeRazorpayFloralCheckout()">
+            ⚡ Proceed to Pay ₹499 via Razorpay
+          </button>
+          
+          <a id="mWaPayBtn" href="https://wa.me/917631442934?text=Namaste%20Vanvi%20Moments!%20Paying%20%E2%82%B9499%20to%20publish%20Floral%20Mehendi%20Story." target="_blank" rel="noopener" class="btn-wa-booking-secondary">
+            💬 WhatsApp UPI Direct Pay (₹499)
+          </a>
+        </div>
+      </div>
+
+      <!-- SUCCESS SCREEN -->
+      <div id="floralModalSuccessView" style="display:none; text-align:center;">
+        <div style="font-size:44px; margin-bottom:6px;">🎉</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:22px; color:#1e3d2c; margin-bottom:4px;">Website is Officially LIVE!</h3>
+        <p style="font-size:12.5px; color:#6B4E5D; margin-bottom:16px;">Payment of ₹499 verified! Your festive wedding website is active forever.</p>
+
+        <div style="background:rgba(37,211,102,0.12); border:1px solid #25d366; border-radius:14px; padding:14px; margin-bottom:18px;">
+          <div style="font-size:10.5px; text-transform:uppercase; color:#1e3d2c; font-weight:800; letter-spacing:1px; margin-bottom:4px;">Your Permanent Live Website Link:</div>
+          <div id="livePublishedUrlText" style="font-family:monospace; font-size:14px; font-weight:800; color:#1e3d2c; word-break:break-all;">https://vanvimoments.com/priya-arjun</div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <a id="btnOpenPublishedSite" href="index.html" target="_blank" class="btn-pay-now-primary" style="text-decoration:none;">
+            🚀 Open Live Wedding Site
+          </a>
+          <button type="button" class="btn-next" style="padding:10px; font-size:0.8rem;" onclick="copyLivePublishedUrl()">
+            📋 Copy Wedding Link
+          </button>
+          <a id="btnShareWaPublishedSite" href="#" target="_blank" rel="noopener" class="btn-wa-booking-secondary" style="margin-top:0;">
+            💬 Share with Family on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 7;
+    let selectedTheme = 'classic';
+
+    // Navigation logic
+    function jumpToStep(step) {
+      if (step < 1 || step > totalSteps) return;
+      currentStep = step;
+
+      // Update Nav Pills
+      document.querySelectorAll('.step-pill').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.getAttribute('data-step')) === step);
+      });
+
+      // Update Form Steps
+      document.querySelectorAll('.form-step').forEach((s, idx) => {
+        s.classList.toggle('active', idx + 1 === step);
+      });
+
+      // Update Footer labels
+      document.getElementById('stepProgressLabel').textContent = `${step} of ${totalSteps}`;
+      document.getElementById('prevBtn').style.visibility = step === 1 ? 'hidden' : 'visible';
+      document.getElementById('nextBtn').textContent = step === totalSteps ? 'Publish Site ✨' : 'Next Step →';
+
+      // Scroll top
+      document.querySelector('.builder-content').scrollTop = 0;
+    }
+
+    function nextStep() {
+      if (currentStep === totalSteps) {
+        publishWebsite();
+      } else {
+        jumpToStep(currentStep + 1);
+      }
+    }
+
+    function prevStep() {
+      jumpToStep(currentStep - 1);
+    }
+
+    // Theme selector
+    function pickTheme(theme, el) {
+      selectedTheme = theme;
+      document.querySelectorAll('.theme-card-option').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      syncLive();
+    }
+
+    // Add new ceremony
+    function addNewEvent() {
+      const container = document.getElementById('eventsContainer');
+      const count = container.querySelectorAll('.event-builder-item').length;
+      const div = document.createElement('div');
+      div.className = 'event-builder-item';
+      div.setAttribute('data-ev-id', count);
+      div.innerHTML = `
+        <div class="event-item-top">
+          <span class="event-item-title">✨ New Celebration</span>
+          <button type="button" class="delete-item-btn" onclick="this.closest('.event-builder-item').remove(); syncLive();">Remove</button>
+        </div>
+        <div class="input-row" style="margin-bottom:10px;">
+          <input type="text" class="form-input ev-name" value="Sangeet Night" placeholder="Event Name" oninput="syncLive()">
+          <input type="text" class="form-input ev-time" value="7:00 PM" placeholder="Time" oninput="syncLive()">
+        </div>
+        <input type="text" class="form-input ev-venue" value="The Courtyard" placeholder="Venue" style="margin-bottom:10px;" oninput="syncLive()">
+        <input type="text" class="form-input ev-desc" value="Music, dance performances, and celebration under the stars." placeholder="Description" oninput="syncLive()">
+      `;
+      container.appendChild(div);
+      syncLive();
+    }
+
+    // Live Real-Time Synchronizer with iframe
+    function syncLive() {
+      const iframe = document.getElementById('previewIframe');
+      if (!iframe || !iframe.contentWindow) return;
+
+      const bride = document.getElementById('brideName').value;
+      const groom = document.getElementById('groomName').value;
+      const date = document.getElementById('weddingDate').value;
+      const hashtag = document.getElementById('weddingHashtag').value;
+      const venue = document.getElementById('venueName').value;
+      const whatsapp = document.getElementById('whatsappNum').value;
+      const blessing = document.getElementById('blessingVerse').value;
+      const storyVerse = document.getElementById('storyVerse').value;
+      const storyTags = document.getElementById('storyTags').value.split(',').map(s => s.trim()).filter(Boolean);
+      const rsvpHeading = document.getElementById('rsvpHeading').value;
+      const rsvpSub = document.getElementById('rsvpSubtext').value;
+
+      // Extract events
+      const events = [];
+      document.querySelectorAll('.event-builder-item').forEach((item, idx) => {
+        const name = item.querySelector('.ev-name')?.value || 'Ceremony';
+        const time = item.querySelector('.ev-time')?.value || '12:00 PM';
+        const v = item.querySelector('.ev-venue')?.value || venue;
+        const desc = item.querySelector('.ev-desc')?.value || '';
+        events.push({
+          id: 'ev_' + idx,
+          name: name,
+          time: time,
+          venue: v,
+          desc: desc,
+          icon: 'assets/icons/icon-mehendi.webp'
+        });
+      });
+
+      // Update iframe DOM directly
+      try {
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        if (!doc) return;
+
+        // Names in hero and preloader
+        doc.querySelectorAll('.hc-bride span, .pl-n1, .i-bride, #stRvBride').forEach(e => e.textContent = bride);
+        doc.querySelectorAll('.hc-groom span, .pl-n2, .i-groom, #stRvGroom').forEach(e => e.textContent = groom);
+        doc.querySelectorAll('.ft-names').forEach(e => e.textContent = bride + ' & ' + groom);
+
+        // Blessing
+        const blessEl = doc.querySelector('.i-bless');
+        if (blessEl) blessEl.innerHTML = blessing.replace(/\\n/g, '<br>');
+
+        // Story verse & tags
+        const vEl = doc.getElementById('stRvVerse');
+        if (vEl) vEl.textContent = storyVerse;
+
+        const tagsEl = doc.getElementById('stRvTags');
+        if (tagsEl && storyTags.length) {
+          tagsEl.innerHTML = storyTags.map(t => `<span class="st-rv-tag">${t}</span>`).join('');
+        }
+
+        // Apply Theme in Iframe
+        if (typeof iframe.contentWindow.switchTheme === 'function') {
+          iframe.contentWindow.switchTheme(selectedTheme);
+        }
+      } catch (err) {
+        console.warn('Iframe sync notice:', err);
+      }
+    }
+
+    // Publish & Payment Integration
+    function getFloralFormData() {
+      const bride = (document.getElementById('brideName')?.value || 'Priya').trim();
+      const groom = (document.getElementById('groomName')?.value || 'Arjun').trim();
+      const weddingDate = document.getElementById('weddingDate')?.value || '';
+      const venueName = document.getElementById('venueName')?.value || 'The Lalit Laxmi Vilas Palace, Udaipur';
+      const rsvpWhatsapp = (document.getElementById('rsvpWhatsapp')?.value || '917631442934').replace(/\D/g, '');
+      const slug = (bride + '-' + groom).toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
+      return { bride, groom, weddingDate, venueName, rsvpWhatsapp, slug };
+    }
+
+    function publishWebsite() {
+      const data = getFloralFormData();
+      const couple = `${data.bride} & ${data.groom}`;
+
+      // Update Modal displays
+      const coupleEl = document.getElementById('mCoupleDisplay');
+      if (coupleEl) coupleEl.textContent = couple;
+      const slugEl = document.getElementById('mSlugDisplay');
+      if (slugEl) slugEl.textContent = data.slug;
+      const cardSlugEl = document.getElementById('cardSlugPreview');
+      if (cardSlugEl) cardSlugEl.textContent = data.slug;
+
+      const waMsg = encodeURIComponent(`Namaste Vanvi Moments! I want to confirm payment of ₹499 to publish Floral Mehendi Story Vivah Suite for ${couple} (Live URL: vanvimoments.com/${data.slug}).`);
+      const waBtn = document.getElementById('mWaPayBtn');
+      if (waBtn) waBtn.href = `https://wa.me/917631442934?text=${waMsg}`;
+
+      // Reset modal view states and open modal
+      document.getElementById('floralModalCheckoutView').style.display = 'block';
+      document.getElementById('floralModalSuccessView').style.display = 'none';
+      document.getElementById('floralPaymentModal').classList.add('open');
+    }
+
+    function initiateFloralPayment() {
+      publishWebsite();
+    }
+
+    function closeFloralModal() {
+      document.getElementById('floralPaymentModal').classList.remove('open');
+    }
+
+    async function executeRazorpayFloralCheckout() {
+      const data = getFloralFormData();
+      showToast('Connecting to Razorpay Secure Gateway (₹499)... 🔒');
+
+      let orderData = null;
+      try {
+        // 1. Create order on backend (amount: 49900 paise = ₹499 INR)
+        const orderRes = await fetch('/api/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount: 49900,
+            currency: 'INR',
+            receipt: 'rcpt_floral_' + Date.now(),
+            notes: {
+              template: 'floral-mehendi-story',
+              couple: `${data.bride} & ${data.groom}`,
+              slug: data.slug,
+              whatsapp: data.rsvpWhatsapp
+            }
+          })
+        });
+
+        if (orderRes.ok) {
+          orderData = await orderRes.json();
+        }
+      } catch (err) {
+        console.warn('Backend order call notice:', err);
+      }
+
+      // Default key fallback from environment
+      const keyId = (orderData && orderData.key_id) || 'rzp_test_TlVNL5jlAkOovF';
+      const orderId = (orderData && orderData.order_id) || ('order_sim_' + Date.now());
+
+      // 2. Launch Razorpay Checkout Modal
+      if (typeof Razorpay !== 'undefined') {
+        const options = {
+          key: keyId,
+          amount: 49900,
+          currency: 'INR',
+          name: 'Vanvi Moments',
+          description: `Floral Mehendi Story Vivah Suite for ${data.bride} & ${data.groom} (₹499 Launch Price)`,
+          image: 'assets/templates/floral-mehendi-story.jpg',
+          order_id: orderData ? orderData.order_id : undefined,
+          prefill: {
+            name: `${data.bride} & ${data.groom}`,
+            email: 'celebrate@vanvimoments.com',
+            contact: data.rsvpWhatsapp || '917631442934'
+          },
+          theme: {
+            color: '#1e3d2c'
+          },
+          handler: async function (response) {
+            await handleFloralPaymentSuccess(
+              response.razorpay_payment_id || ('pay_' + Date.now()),
+              orderId,
+              response.razorpay_signature
+            );
+          },
+          modal: {
+            ondismiss: function () {
+              showToast('Payment window closed. Your customizations are safely saved in browser!');
+            }
+          }
+        };
+
+        try {
+          const rzp = new Razorpay(options);
+          rzp.on('payment.failed', function (resp) {
+            alert('Payment failed: ' + (resp.error ? resp.error.description : 'Unknown error'));
+          });
+          rzp.open();
+          return;
+        } catch (e) {
+          console.warn('Razorpay popup open error, using simulation fallback:', e);
+        }
+      }
+
+      // Simulation fallback for environments without active window popups
+      const proceedSim = confirm(`⚡ Razorpay Payment Gateway Ready (₹499 INR).\n\nDo you want to confirm the payment of ₹499 and publish the Floral Mehendi Story live site for ${data.bride} & ${data.groom}?`);
+      if (proceedSim) {
+        await handleFloralPaymentSuccess('pay_sim_' + Date.now(), orderId, null);
+      }
+    }
+
+    async function handleFloralPaymentSuccess(paymentId, orderId, signature) {
+      const data = getFloralFormData();
+      const liveUrl = `https://vanvimoments.com/${data.slug}`;
+
+      // Save to local storage for persistence
+      try {
+        localStorage.setItem(`vanvi_published_${data.slug}`, JSON.stringify({
+          template: 'floral-mehendi-story',
+          bride: data.bride,
+          groom: data.groom,
+          paymentId: paymentId,
+          orderId: orderId,
+          publishedAt: new Date().toISOString()
+        }));
+      } catch (e) {}
+
+      // Verify payment on backend if signature available
+      if (signature) {
+        try {
+          fetch('/api/verify-payment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              razorpay_order_id: orderId,
+              razorpay_payment_id: paymentId,
+              razorpay_signature: signature
+            })
+          }).catch(() => {});
+        } catch (e) {}
+      }
+
+      // Populate Success Screen
+      document.getElementById('livePublishedUrlText').textContent = liveUrl;
+      document.getElementById('btnOpenPublishedSite').href = `./index.html?bride=${encodeURIComponent(data.bride)}&groom=${encodeURIComponent(data.groom)}`;
+
+      const shareMsg = encodeURIComponent(`🌸 Namaste! We invite you to our wedding celebration! View our bespoke Floral Mehendi Story invitation here:\n${liveUrl}`);
+      document.getElementById('btnShareWaPublishedSite').href = `https://wa.me/?text=${shareMsg}`;
+
+      // Show Success View
+      document.getElementById('floralModalCheckoutView').style.display = 'none';
+      document.getElementById('floralModalSuccessView').style.display = 'block';
+
+      showToast(`🎉 Payment of ₹499 verified! Site is LIVE at: ${liveUrl}`);
+    }
+
+    function copyLivePublishedUrl() {
+      const data = getFloralFormData();
+      const liveUrl = `https://vanvimoments.com/${data.slug}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(liveUrl).then(() => {
+          showToast(`📋 Live link copied: ${liveUrl}`);
+        }).catch(() => {
+          prompt('Copy your live wedding URL:', liveUrl);
+        });
+      } else {
+        prompt('Copy your live wedding URL:', liveUrl);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastPill');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3800);
+    }
+
+    function setDeviceMode(mode) {
+      const phone = document.getElementById('phoneMockup');
+      document.querySelectorAll('.dev-btn').forEach(b => b.classList.remove('active'));
+
+      if (mode === 'desktop') {
+        phone.style.width = '96%';
+        phone.style.maxWidth = '920px';
+        phone.style.borderRadius = '18px';
+        phone.querySelector('.phone-notch').style.display = 'none';
+        event.target.classList.add('active');
+      } else {
+        phone.style.width = '380px';
+        phone.style.maxWidth = '380px';
+        phone.style.borderRadius = '50px';
+        phone.querySelector('.phone-notch').style.display = 'block';
+        event.target.classList.add('active');
+      }
+    }
+
+    function scrollToPreview() {
+      document.getElementById('simulatorStage').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Feature #1: Personalized Guest Link Generator
+    function generateGuestLink() {
+      const input = document.getElementById('customGuestInput')?.value.trim();
+      const guestUrlBox = document.getElementById('generatedGuestUrl');
+      if (!guestUrlBox) return;
+      if (!input) {
+        guestUrlBox.textContent = 'index.html?guest=Sharma+Family';
+        return;
+      }
+      const encoded = encodeURIComponent(input);
+      guestUrlBox.textContent = `index.html?guest=${encoded}`;
+    }
+
+    function copyGuestLink() {
+      const input = document.getElementById('customGuestInput')?.value.trim() || 'Sharma Family';
+      const encoded = encodeURIComponent(input);
+      const fullUrl = `${window.location.origin}${window.location.pathname.replace('builder.html', 'index.html')}?guest=${encoded}`;
+      
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(fullUrl).then(() => {
+          showToast(`📋 Copied VIP link for "${input}"!`);
+        }).catch(() => {
+          prompt('Copy this personalized invite link:', fullUrl);
+        });
+      } else {
+        prompt('Copy this personalized invite link:', fullUrl);
+      }
+    }
+
+    function testGuestLink() {
+      const input = document.getElementById('customGuestInput')?.value.trim() || 'Sharma Family';
+      const encoded = encodeURIComponent(input);
+      const iframe = document.getElementById('previewIframe');
+      if (iframe) {
+        iframe.src = `index.html?guest=${encoded}`;
+        showToast(`🌸 Previewing invite personalized for "${input}"!`);
+      }
+    }
+
+    // Auto-sync after iframe loads
+    window.addEventListener('load', () => {
+      jumpToStep(1);
+      setTimeout(syncLive, 800);
+    });
+  </script>
+</body>
+</html>

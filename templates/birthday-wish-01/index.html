@@ -419,6 +419,208 @@
       color: var(--accent) !important;
     }
 
+    /* ─── Ultra-Premium Compact Finale Experience (Short & Luxe) ─── */
+    .vanvi-luxe-finale-panel {
+      width: 100%;
+      max-width: 440px;
+      margin: 16px auto 0;
+      padding: 14px 14px 12px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 242, 247, 0.94) 100%);
+      border: 1.5px solid rgba(255, 77, 109, 0.32);
+      box-shadow: 
+        0 14px 36px rgba(201, 24, 74, 0.12),
+        0 2px 10px rgba(0, 0, 0, 0.03),
+        inset 0 1.5px 1.5px #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-sizing: border-box;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      animation: luxePanelGlow 6s ease-in-out infinite alternate;
+    }
+    @keyframes luxePanelGlow {
+      0% { border-color: rgba(255, 77, 109, 0.32); box-shadow: 0 14px 36px rgba(201, 24, 74, 0.12); }
+      100% { border-color: rgba(255, 117, 143, 0.55); box-shadow: 0 16px 42px rgba(255, 77, 109, 0.2), 0 0 18px rgba(255, 182, 193, 0.3); }
+    }
+
+    /* Primary Short & Ultra-Premium Customize Pill */
+    .btn-luxe-studio {
+      width: 100%;
+      height: 48px;
+      padding: 0 18px 0 16px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, #ff2a7a 0%, #ff4d6d 45%, #9333ea 100%);
+      background-size: 200% auto;
+      border: 1.2px solid rgba(255, 255, 255, 0.5);
+      color: #ffffff !important;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 22px rgba(255, 42, 122, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: studioGradientMove 4s ease infinite;
+    }
+    @keyframes studioGradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .btn-luxe-studio:hover {
+      transform: translateY(-2px) scale(1.015);
+      box-shadow: 0 12px 28px rgba(255, 42, 122, 0.5), 0 0 16px rgba(255, 77, 109, 0.3);
+      border-color: #ffffff;
+    }
+    .btn-luxe-studio:active {
+      transform: scale(0.98);
+    }
+    .luxe-studio-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .luxe-sparkle-spin {
+      color: #fef08a;
+      font-size: 15px;
+      line-height: 1;
+      display: inline-block;
+      animation: spinSparkle 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 4px rgba(254, 240, 138, 0.8));
+    }
+    @keyframes spinSparkle {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.25) rotate(180deg); }
+    }
+    .luxe-studio-text {
+      font-size: 14.5px;
+      font-weight: 850;
+      letter-spacing: 0.3px;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+    .luxe-studio-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .luxe-free-chip {
+      background: #ffffff;
+      color: #ff2a7a;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 3px 9px;
+      border-radius: 99px;
+      letter-spacing: 0.2px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: inline-flex;
+      align-items: center;
+    }
+    .luxe-arrow {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      transition: transform 0.22s ease;
+      line-height: 1;
+    }
+    .btn-luxe-studio:hover .luxe-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Dual Compact Micro-Actions */
+    .luxe-actions-dual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+    }
+    .btn-dual-action {
+      height: 40px;
+      padding: 0 10px;
+      border-radius: 99px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      box-sizing: border-box;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .btn-dual-action:active {
+      transform: scale(0.97);
+    }
+    .btn-dual-wa {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.28);
+    }
+    .btn-dual-wa:hover {
+      background: linear-gradient(135deg, #2ae06d 0%, #169b8c 100%);
+      transform: translateY(-1.5px);
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+    }
+    .btn-dual-replay {
+      background: #ffffff;
+      color: #643851;
+      border: 1.2px solid rgba(255, 143, 171, 0.4);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+    .btn-dual-replay:hover {
+      background: #fff5f8;
+      border-color: #ff4d6d;
+      color: #c9184a;
+      transform: translateY(-1.5px);
+    }
+    .action-icon {
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    /* Micro Trust Reassurance */
+    .luxe-micro-reassurance {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #8c5d76;
+      margin-top: 2px;
+      letter-spacing: 0.1px;
+    }
+    .reassurance-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .reassurance-dot {
+      color: #ff4d6d;
+      font-size: 9px;
+    }
+    .reassurance-sep {
+      color: rgba(255, 77, 109, 0.4);
+      font-weight: 800;
+    }
+
+    /* Suppress any accidental injection or popup banner */
+    #vanviUniversalEndCta,
+    .vanvi-universal-end-cta {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+
     .step-dots {
       display: flex;
       gap: 6px;
@@ -721,7 +923,7 @@
   </style>
   <link rel="stylesheet" href="../../css/vanvi-template-lock.css">
 </head>
-<body>
+<body data-has-custom-cta="true">
 
   <div class="bg-blobs"></div>
   <canvas id="confettiCanvas"></canvas>
@@ -964,16 +1166,40 @@ You bring so much gentleness and magic to everyone around you. May this year sho
         <div class="letter-signature" id="txtLetterSign">— With all my love, Always</div>
       </div>
 
-      <div class="actions-stack">
-        <button type="button" class="btn-step btn-step-whatsapp" onclick="shareOnWhatsApp()">
-          <span>Share via WhatsApp</span> <span>💬</span>
-        </button>
-        <a href="builder.html" class="btn-step btn-step-secondary">
-          <span>Make Your Free Gift (₹0)</span> <span>✨</span>
+      <!-- Ultra-Premium Compact Finale Experience (Short & Luxe) -->
+      <div class="vanvi-luxe-finale-panel">
+        <!-- Primary Short & Ultra-Premium Customize Pill -->
+        <a href="builder.html" class="btn-luxe-studio" id="btnFinaleCustomize" title="Personalize this celebration in 30 seconds">
+          <div class="luxe-studio-left">
+            <span class="luxe-sparkle-spin">✦</span>
+            <span class="luxe-studio-text">Customize in Studio</span>
+          </div>
+          <div class="luxe-studio-right">
+            <span class="luxe-free-chip">₹0 Free</span>
+            <span class="luxe-arrow">→</span>
+          </div>
         </a>
-        <button type="button" class="btn-step btn-step-outline" onclick="replayAll()">
-          <span>Replay Celebration</span> <span>🔄</span>
-        </button>
+
+        <!-- Dual Compact Micro-Actions -->
+        <div class="luxe-actions-dual">
+          <button type="button" class="btn-dual-action btn-dual-wa" onclick="shareOnWhatsApp()" title="Share with birthday star on WhatsApp">
+            <span class="action-icon">💬</span>
+            <span>Share on WhatsApp</span>
+          </button>
+          <button type="button" class="btn-dual-action btn-dual-replay" onclick="replayAll()" title="Replay celebration from beginning">
+            <span class="action-icon">🔄</span>
+            <span>Replay</span>
+          </button>
+        </div>
+
+        <!-- Micro Reassurance Strip -->
+        <div class="luxe-micro-reassurance">
+          <span class="reassurance-item"><span class="reassurance-dot">✦</span> 100% Free Forever</span>
+          <span class="reassurance-sep">·</span>
+          <span class="reassurance-item"><span class="reassurance-dot">⚡</span> Ready in 30s</span>
+          <span class="reassurance-sep">·</span>
+          <span class="reassurance-item"><span class="reassurance-dot">♾️</span> Lifetime Validity</span>
+        </div>
       </div>
 
       <div class="step-dots" id="dots7"></div>

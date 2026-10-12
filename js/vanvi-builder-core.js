@@ -314,13 +314,19 @@
 
         // Construct canonical URLs
         const origin = window.location.origin || '';
-        const momentUrl = savedMoment.slug ? `${origin}/m/${encodeURIComponent(savedMoment.slug)}` : `${origin}/moment.html?id=${encodeURIComponent(savedMoment.id)}&template=${encodeURIComponent(this.templateId)}`;
-        const experienceUrl = momentUrl;
-        const directTemplateUrl = `${origin}/templates/${encodeURIComponent(this.templateId)}/index.html?id=${encodeURIComponent(savedMoment.id)}`;
+        const isFree = this.isTemplateFree();
+        const price = this.getTemplatePrice();
+        const paidQuery = isFree || new URLSearchParams(window.location.search).get('paid') === 'true' ? '&paid=true&purchased=true&status=published' : '';
 
-        savedMoment.experienceUrl = experienceUrl;
+        const directTemplateUrl = `${origin}/templates/${encodeURIComponent(this.templateId)}/index.html?id=${encodeURIComponent(savedMoment.id)}${paidQuery}`;
+        const momentUrl = savedMoment.slug ? `${origin}/m/${encodeURIComponent(savedMoment.slug)}` : directTemplateUrl;
+
+        savedMoment.experienceUrl = directTemplateUrl;
         savedMoment.directTemplateUrl = directTemplateUrl;
-        savedMoment.shareUrl = experienceUrl;
+        savedMoment.shareUrl = directTemplateUrl;
+        savedMoment.isFree = isFree;
+        savedMoment.price = price;
+        savedMoment.checkoutUrl = this.getCheckoutUrl({ recipient: rec, occasion: occ });
 
         this.listeners.saveSuccess.forEach(fn => fn(savedMoment));
         return savedMoment;
@@ -333,7 +339,93 @@
     }
 
     /**
-     * Connect Live Preview iframe
+     * Get Template Metadata from Registry
+     */
+    getTemplateMeta() {
+      if (this.templateConfig && typeof this.templateConfig.price === 'number') {
+        return this.templateConfig;
+      }
+      if (window.VanviTemplatesData && typeof window.VanviTemplatesData.getAll === 'function') {
+        const list = window.VanviTemplatesData.getAll();
+        const found = list.find(t => 
+          t.id === this.templateId || 
+          t.slug === this.templateId || 
+          (t.aliases && t.aliases.includes(this.templateId))
+        );
+        if (found) return found;
+      }
+      return null;
+    }
+
+    getTemplatePrice() {
+      const meta = this.getTemplateMeta();
+      if (meta && typeof meta.price === 'number') return meta.price;
+      return 0;
+    }
+
+    isTemplateFree() {
+      const meta = this.getTemplateMeta();
+      if (meta) {
+        if (meta.isFree === true || meta.price === 0) return true;
+        return false;
+      }
+      // If template ID starts with birthday-wish-01 or free catalog
+      if (this.templateId === 'birthday-wish-01' || this.templateId === 'birthday-white-bloom') return true;
+      return false;
+    }
+
+    getCheckoutUrl({ recipient, occasion } = {}) {
+      const price = this.getTemplatePrice();
+      const rec = recipient || this.customData.recipientName || this.customData.recipient || this.customData.coupleNames || 'Special Someone';
+      const occ = occasion || this.customData.occasion || 'Celebration';
+      return `../../checkout.html?templateId=${encodeURIComponent(this.templateId)}&amount=${price}&recipient=${encodeURIComponent(rec)}&occasion=${encodeURIComponent(occ)}`;
+    }
+
+    /**
+     * Automatically bind form inputs for real-time live preview synchronization
+     */
+    bindInputs(container) {
+      const root = container || document;
+      const inputs = root.querySelectorAll('input:not([type="hidden"]):not([type="file"]), textarea, select');
+      inputs.forEach(inp => {
+        if (inp.__vanviBound) return;
+        inp.__vanviBound = true;
+        inp.addEventListener('input', () => {
+          const rawId = inp.id || inp.name || '';
+          const key = rawId.replace(/^(inp|input|txt)_?/, '');
+          const val = inp.value;
+          if (!key) return;
+
+          const updateObj = {};
+          updateObj[key] = val;
+          const kLower = key.toLowerCase();
+
+          if (kLower.includes('recipient') || kLower === 'name') {
+            updateObj.recipientName = val;
+            updateObj.recipient = val;
+          } else if (kLower.includes('sender')) {
+            updateObj.senderName = val;
+            updateObj.sender = val;
+          } else if (kLower.includes('message') || kLower.includes('body')) {
+            updateObj.message = val;
+          } else if (kLower.includes('date')) {
+            updateObj.date = val;
+          } else if (kLower.includes('couple')) {
+            updateObj.coupleNames = val;
+            updateObj.recipientName = val;
+          } else if (kLower.includes('bride')) {
+            updateObj.bride = val;
+          } else if (kLower.includes('groom')) {
+            updateObj.groom = val;
+          }
+
+          this.update(updateObj);
+        });
+      });
+    }
+
+    /**
+     * Connect Live Preview iframe and dispatch real-time keystroke broadcasts
      */
     attachPreview(iframeElement) {
       if (!iframeElement) return;
@@ -341,9 +433,35 @@
       const sync = () => {
         try {
           if (iframeElement.contentWindow) {
+            const rec = this.customData.recipientName || this.customData.recipient || this.customData.coupleNames || this.customData.bride || this.customData.wallTitle || '';
+            const snd = this.customData.senderName || this.customData.sender || '';
+            const msg = this.customData.message || this.customData.letterBodyText || '';
+            const dt = this.customData.date || this.customData.celebrationDate || this.customData.anniversaryDate || '';
+            const pts = this.customData.photos || this.customData.gallery || [];
+
+            const syncPayload = {
+              type: 'VANVI_LIVE_PREVIEW_SYNC',
+              customData: this.customData,
+              recipient: rec,
+              recipientName: rec,
+              bride: this.customData.bride || '',
+              groom: this.customData.groom || '',
+              sender: snd,
+              senderName: snd,
+              message: msg,
+              date: dt,
+              photos: pts
+            };
+
+            // Broadcast multi-protocol formats for universal backward/forward template compatibility
+            iframeElement.contentWindow.postMessage(syncPayload, '*');
             iframeElement.contentWindow.postMessage({
               type: 'VANVI_UPDATE_CUSTOM_DATA',
               customData: this.customData
+            }, '*');
+            iframeElement.contentWindow.postMessage({
+              type: 'UPDATE_CONFIG',
+              config: this.customData
             }, '*');
           }
         } catch (e) {}
@@ -351,6 +469,13 @@
 
       this.listeners.change.push(sync);
       iframeElement.addEventListener('load', sync);
+
+      // Auto-bind input listeners across the active builder form
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => this.bindInputs());
+      } else {
+        setTimeout(() => this.bindInputs(), 100);
+      }
     }
   }
 

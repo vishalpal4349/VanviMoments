@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Smart Wedding Studio Builder | Vanvi Moments</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Great+Vibes&family=Jost:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --rose-deep: #702d3c;
+      --rose-sub: #581b1f;
+      --gold-accent: #c9a55d;
+      --gold-light: #f7e4b5;
+      --bg-cream: #fdfaf1;
+      --bg-sidebar: #fffcf8;
+      --border-warm: #eedecf;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    
+    html, body {
+      height: 100%;
+      width: 100%;
+      background: #140508;
+      color: #3e282b;
+      font-family: 'Jost', sans-serif;
+      overflow: hidden;
+    }
+
+    /* TOP SMART HEADER */
+    .smart-header {
+      background: #23080e;
+      border-bottom: 1px solid rgba(201, 165, 93, 0.4);
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      flex-shrink: 0;
+      z-index: 1000;
+    }
+    .brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: #f7e4b5;
+      letter-spacing: 2px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .brand-title span {
+      color: #c9a55d;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      border: 1px solid rgba(201, 165, 93, 0.5);
+      padding: 2px 6px;
+      border-radius: 12px;
+      margin-left: 4px;
+    }
+
+    /* TOP VIEW SWITCHER (Mobile Preview vs Controls) */
+    .top-action-cluster {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .smart-toggle-pill {
+      display: flex;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(201, 165, 93, 0.4);
+      border-radius: 20px;
+      padding: 2px;
+    }
+    .toggle-pill-btn {
+      background: transparent;
+      border: none;
+      color: #eedecf;
+      padding: 5px 12px;
+      border-radius: 16px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .toggle-pill-btn.active {
+      background: var(--gold-accent);
+      color: #1a0509;
+      box-shadow: 0 2px 8px rgba(201, 165, 93, 0.45);
+    }
+
+    .publish-btn-smart {
+      background: linear-gradient(135deg, #d4a853 0%, #aa8032 100%);
+      color: #1a0509;
+      font-weight: 700;
+      border: 1px solid #ffe299;
+      padding: 6px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(201, 165, 93, 0.35);
+      transition: transform 0.2s;
+    }
+    .publish-btn-smart:hover { transform: scale(1.03); }
+
+    /* WORKSPACE FLEX */
+    .smart-workspace {
+      display: flex;
+      height: calc(100% - 56px);
+      width: 100%;
+      position: relative;
+    }
+
+    /* CONTROLS PANE */
+    .controls-pane {
+      width: 460px;
+      background: #fffcf8;
+      border-right: 1px solid var(--border-warm);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      flex-shrink: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 50;
+    }
+
+    /* STEP CHIPS NAV (Horizontal smooth scroll) */
+    .step-chips-scroller {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      background: #fdf5ec;
+      border-bottom: 1px solid var(--border-warm);
+      padding: 8px 12px;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .step-chips-scroller::-webkit-scrollbar { display: none; }
+    
+    .chip-btn {
+      white-space: nowrap;
+      padding: 6px 12px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      border-radius: 16px;
+      border: 1px solid #ebd8cb;
+      background: #fff;
+      color: #702d3c;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chip-btn.active {
+      background: #702d3c;
+      color: #fff;
+      border-color: #702d3c;
+      box-shadow: 0 2px 8px rgba(112, 45, 60, 0.25);
+    }
+
+    /* FORM SCROLL BODY */
+    .form-pane-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 22px 85px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .form-step {
+      display: none;
+      animation: stepSlide 0.25s ease-out;
+    }
+    .form-step.active {
+      display: block;
+    }
+    @keyframes stepSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-lead-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      color: var(--rose-deep);
+      margin-bottom: 14px;
+      font-weight: 700;
+      border-bottom: 1px dashed #e5d1c2;
+      padding-bottom: 6px;
+    }
+
+    .field-wrap {
+      margin-bottom: 15px;
+    }
+    .field-wrap label {
+      display: block;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      color: #721022;
+      letter-spacing: 0.6px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    .field-wrap input, .field-wrap textarea, .field-wrap select {
+      width: 100%;
+      padding: 11px 13px;
+      background: #fff;
+      border: 1.2px solid #dcc6b8;
+      color: #3e282b;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: 'Jost', sans-serif;
+      transition: border-color 0.2s;
+    }
+    .field-wrap input:focus, .field-wrap textarea:focus, .field-wrap select:focus {
+      outline: none;
+      border-color: var(--rose-deep);
+      box-shadow: 0 0 8px rgba(112, 45, 60, 0.2);
+    }
+
+    /* DUAL UPLOAD BOX */
+    .smart-upload-box {
+      background: #fdf7f2;
+      border: 1px solid var(--border-warm);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 6px;
+    }
+    .upload-switch-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .upload-sw-btn {
+      flex: 1;
+      padding: 6px;
+      font-size: 0.74rem;
+      border: 1px solid #dcc6b8;
+      background: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .upload-sw-btn.active {
+      background: var(--rose-deep);
+      color: #fff;
+      border-color: var(--rose-deep);
+    }
+    .smart-dropzone {
+      border: 2px dashed rgba(112, 45, 60, 0.35);
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--rose-sub);
+      transition: all 0.2s;
+    }
+    .smart-dropzone:hover {
+      border-color: var(--rose-deep);
+      background: rgba(112, 45, 60, 0.04);
+    }
+
+    /* FIXED BOTTOM DOCK (Strict no cutoff) */
+    .smart-bottom-dock {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 66px;
+      background: #ffffff;
+      border-top: 1px solid var(--border-warm);
+      padding: 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 -4px 18px rgba(0,0,0,0.06);
+      z-index: 100;
+    }
+    .btn-dock-action {
+      flex: 1;
+      height: 44px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-dock-prev {
+      background: #f0e6dd;
+      color: #581b1f;
+      border: 1px solid #dfcfc2;
+    }
+    .btn-dock-next {
+      background: linear-gradient(135deg, #8c1229 0%, #ad1c3a 60%, #700c1e 100%);
+      color: #fff;
+      border: 1px solid rgba(255, 220, 150, 0.4);
+      box-shadow: 0 4px 15px rgba(140, 18, 41, 0.25);
+    }
+    .btn-dock-next:hover { transform: translateY(-1px); }
+
+    /* PREVIEW STAGE */
+    .preview-stage {
+      flex: 1;
+      background: #0f0305;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-device-card {
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      background: #fff;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.85), 0 0 30px rgba(201, 165, 93, 0.25);
+      border: 2px solid var(--gold-accent);
+      overflow: hidden;
+    }
+    .mode-mobile-frame {
+      width: 410px;
+      height: 94%;
+      max-height: 840px;
+      border-radius: 36px;
+    }
+    .mode-desktop-frame {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+    }
+    .frame-viewport {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* SMART MOBILE-FIRST RESPONSIVE ENGINE */
+    @media (max-width: 860px) {
+      .smart-workspace {
+        flex-direction: column;
+      }
+      /* On mobile, user can switch between 'Edit Mode' and 'Live Preview Mode' */
+      .controls-pane {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0;
+        z-index: 40;
+      }
+      .controls-pane.hidden-on-mobile {
+        display: none !important;
+      }
+      .preview-stage {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0;
+        padding: 8px;
+        z-index: 30;
+      }
+      .mode-mobile-frame {
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        border-radius: 0;
+        border: none;
+      }
+      .brand-title {
+        font-size: 1.05rem;
+      }
+      .brand-title span { display: none; }
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-box {
+      background: #fff;
+      border: 2px solid var(--gold-accent);
+      border-radius: 22px;
+      padding: 28px;
+      max-width: 440px;
+      width: 90%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="smart-header">
+    <div class="brand-title">
+      VANVI MOMENTS <span>STUDIO PRO</span>
+    </div>
+
+    <div class="top-action-cluster">
+      <!-- Device/View Switcher -->
+      <div class="smart-toggle-pill">
+        <button id="btnViewEdit" class="toggle-pill-btn active" onclick="switchMobileTab('edit')">✏️ Edit</button>
+        <button id="btnViewLive" class="toggle-pill-btn" onclick="switchMobileTab('live')">👁️ Live Preview</button>
+      </div>
+
+      <button onclick="openModal()" class="publish-btn-smart">
+        Publish 🚀
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN WORKSPACE -->
+  <div class="smart-workspace">
+    <!-- LEFT / MOBILE CONTROLS -->
+    <div id="controlsPane" class="controls-pane">
+      <!-- STEP CHIPS -->
+      <div class="step-chips-scroller">
+        <button class="chip-btn active" onclick="setStep(1)">1. Couple</button>
+        <button class="chip-btn" onclick="setStep(2)">2. Parents</button>
+        <button class="chip-btn" onclick="setStep(3)">3. Functions</button>
+        <button class="chip-btn" onclick="setStep(4)">4. Story</button>
+        <button class="chip-btn" onclick="setStep(5)">5. Blessings</button>
+        <button class="chip-btn" onclick="setStep(6)">6. Media & Music</button>
+      </div>
+
+      <div class="form-pane-content">
+        <!-- STEP 1 -->
+        <div id="step-1" class="form-step active">
+          <h3 class="step-lead-title">👑 Bride &amp; Groom Details</h3>
+          <div class="field-wrap">
+            <label for="inBride">Bride's Full Name</label>
+            <input type="text" id="inBride" value="Meera Iyer">
+          </div>
+          <div class="field-wrap">
+            <label for="inGroom">Groom's Full Name</label>
+            <input type="text" id="inGroom" value="Arjun Malhotra">
+          </div>
+          <div class="field-wrap">
+            <label for="inDate">Wedding Date</label>
+            <input type="date" id="inDate" value="2026-12-23">
+          </div>
+          <div class="field-wrap">
+            <label for="inCity">Wedding City</label>
+            <input type="text" id="inCity" value="Hyderabad, India">
+          </div>
+          <div class="field-wrap">
+            <label for="inHashtag">Couple Hashtag</label>
+            <input type="text" id="inHashtag" value="#ArjunKiMeera">
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="step-2" class="form-step">
+          <h3 class="step-lead-title">🪔 Parents &amp; Invocations</h3>
+          <div class="field-wrap">
+            <label for="inBrideParents">Bride's Parents</label>
+            <input type="text" id="inBrideParents" value="Suresh &amp; Lakshmi Iyer">
+          </div>
+          <div class="field-wrap">
+            <label for="inGroomParents">Groom's Parents</label>
+            <input type="text" id="inGroomParents" value="Vikram &amp; Kavita Malhotra">
+          </div>
+          <div class="field-wrap">
+            <label for="inVenue">Main Venue Name &amp; Area</label>
+            <input type="text" id="inVenue" value="Taj Krishna, Banjara Hills">
+          </div>
+          <div class="field-wrap">
+            <label for="inShloka">Blessing Shloka</label>
+            <input type="text" id="inShloka" value="|| Shri Ganeshay Namah ||">
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div id="step-3" class="form-step">
+          <h3 class="step-lead-title">🎪 All 5 Functions</h3>
+          <div class="field-wrap">
+            <label for="inHaldi">1. Haldi Celebration</label>
+            <input type="text" id="inHaldi" value="21 December 2026 · 10:00 am · The Westin Mindspace">
+          </div>
+          <div class="field-wrap">
+            <label for="inMehendi">2. Mehendi Night</label>
+            <input type="text" id="inMehendi" value="22 December 2026 · 5:30 pm · Shilpakala Vedika">
+          </div>
+          <div class="field-wrap">
+            <label for="inSangeet">3. Sangeet &amp; Cocktail</label>
+            <input type="text" id="inSangeet" value="22 December 2026 · 7:00 pm · Taj Falaknuma Palace">
+          </div>
+          <div class="field-wrap">
+            <label for="inMuhurtham">4. Sacred Shaadi &amp; Pheras</label>
+            <input type="text" id="inMuhurtham" value="23 December 2026 · 6:00 pm · Taj Krishna">
+          </div>
+          <div class="field-wrap">
+            <label for="inReception">5. Grand Reception</label>
+            <input type="text" id="inReception" value="24 December 2026 · 7:30 pm · Novotel HICC">
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div id="step-4" class="form-step">
+          <h3 class="step-lead-title">💖 Our Story Journey</h3>
+          <div class="field-wrap">
+            <label for="inStory1">Milestone 1: We Met</label>
+            <textarea id="inStory1" rows="2">A college event brought us together. We stayed long after it ended, talking about everything.</textarea>
+          </div>
+          <div class="field-wrap">
+            <label for="inStory2">Milestone 2: We Grew</label>
+            <textarea id="inStory2" rows="2">Shared playlists, long calls and plenty of coffee. We became the first person the other wanted to tell.</textarea>
+          </div>
+          <div class="field-wrap">
+            <label for="inStory3">Milestone 3: We Explored</label>
+            <textarea id="inStory3" rows="2">From quiet hill stations to busy city streets, we found new places and new reasons to enjoy life together.</textarea>
+          </div>
+          <div class="field-wrap">
+            <label for="inStory4">Milestone 4: Now, Forever</label>
+            <textarea id="inStory4" rows="2">One very happy yes, and here we are. Our next adventure begins with our favourite people.</textarea>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div id="step-5" class="form-step">
+          <h3 class="step-lead-title">💌 Smart Blessings Wall</h3>
+          <div class="field-wrap">
+            <label for="inBlessing1">Featured Family Blessing 1</label>
+            <textarea id="inBlessing1" rows="2">Wishing Meera and Arjun an eternal bond of love, laughter, and lifelong togetherness!</textarea>
+          </div>
+          <div class="field-wrap">
+            <label for="inAuthor1">Blessing Author 1</label>
+            <input type="text" id="inAuthor1" value="Rajesh &amp; Priya Sharma · Hyderabad">
+          </div>
+          <div class="field-wrap">
+            <label for="inBlessing2">Featured Family Blessing 2</label>
+            <textarea id="inBlessing2" rows="2">Heartiest congratulations to both the families. Excited and eager to celebrate all the ceremonies!</textarea>
+          </div>
+          <div class="field-wrap">
+            <label for="inAuthor2">Blessing Author 2</label>
+            <input type="text" id="inAuthor2" value="Smt. Radhika &amp; K. Iyer · Chennai">
+          </div>
+        </div>
+
+        <!-- STEP 6 -->
+        <div id="step-6" class="form-step">
+          <h3 class="step-lead-title">📸 Dual Upload &amp; Background Music</h3>
+          <div class="field-wrap">
+            <label>Hero Couple Portrait</label>
+            <div class="smart-upload-box">
+              <div class="upload-switch-row">
+                <button type="button" class="upload-sw-btn active">Device / Phone Upload</button>
+              </div>
+              <div class="smart-dropzone" onclick="document.getElementById('fileIn1').click()">
+                📁 Tap to Pick Photo from Gallery / Files<br>
+                <span style="font-size:0.75rem; color:#888;">(JPG, PNG, WebP)</span>
+                <input type="file" id="fileIn1" style="display:none;" accept="image/*" onchange="handleFileSelected(this)">
+              </div>
+            </div>
+          </div>
+          <div class="field-wrap">
+            <label for="selSoundtrack">Background Shehnai / Music Audio</label>
+            <select id="selSoundtrack">
+              <option value="original">Wedding Flute &amp; Sitar Harmony (Original)</option>
+              <option value="shehnai">Mangalyam Classical Shehnai</option>
+              <option value="acoustic">Kudmayi Acoustic Sitar Harmony</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM DOCK BUTTONS -->
+      <div class="smart-bottom-dock">
+        <button class="btn-dock-action btn-dock-prev" onclick="moveStep(-1)">← Back</button>
+        <button class="btn-dock-action btn-dock-next" id="btnNextAction" onclick="handleNextOrPublish()">Next Step →</button>
+      </div>
+    </div>
+
+    <!-- RIGHT / MOBILE PREVIEW STAGE -->
+    <div id="previewStage" class="preview-stage">
+      <div id="deviceWrapper" class="preview-device-card mode-mobile-frame">
+        <iframe id="previewFrame" src="index.html" class="frame-viewport" title="Live Preview"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- PUBLISH CHECKOUT MODAL -->
+  <div id="pubModal" class="modal-overlay">
+    <div class="modal-box">
+      <div style="font-size: 38px; margin-bottom: 6px;">👑</div>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--rose-deep); margin-bottom: 8px;">
+        Launch Royal Wedding Website
+      </h2>
+      <p style="font-size: 0.88rem; color: #665255; margin-bottom: 16px; line-height: 1.5;">
+        Get your custom live URL, unlimited guest sharing, interactive 3D wax seal envelope ceremony, RSVP tracking, and Google Maps venue guidance.
+      </p>
+      
+      <div style="background: rgba(201, 165, 93, 0.12); border: 1.5px solid var(--gold-accent); border-radius: 14px; padding: 12px; margin-bottom: 18px;">
+        <div style="font-size: 1.85rem; font-weight: 800; color: #702d3c;">
+          ₹1,499 <span style="font-size: 0.95rem; color: #888; text-decoration: line-through; font-weight: 400;">₹4,999</span>
+        </div>
+        <p style="font-size: 0.72rem; color: #9c6c2b; font-weight: 700; margin-top: 3px;">
+          ✦ LIMITED TIME LAUNCH OFFER (70% OFF)
+        </p>
+      </div>
+
+      <button onclick="proceedToCheckout()" style="background: linear-gradient(135deg, #d4a853, #aa8032); color: #1a0509; font-weight: 800; border: none; padding: 14px 24px; border-radius: 99px; cursor: pointer; width: 100%; font-size: 1rem; box-shadow: 0 4px 18px rgba(201, 165, 93, 0.45); transition: transform 0.2s;">
+        Proceed to Real Razorpay Checkout (₹1,499) ✦
+      </button>
+
+      <div style="margin-top: 14px; display: flex; gap: 8px; justify-content: center;">
+        <button onclick="openDirectExperience()" style="background: #fdfaf1; border: 1px solid #dcc6b8; color: #702d3c; padding: 8px 16px; border-radius: 99px; font-size: 0.78rem; font-weight: 600; cursor: pointer;">
+          👁️ Preview Unlocked Experience
+        </button>
+        <button onclick="closeModal()" style="background: none; border: none; color: #888; font-size: 0.8rem; cursor: pointer; padding: 8px 14px;">
+          ← Back to Studio
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/vanvi-api.js"></script>
+  <script src="../../js/template-adapter.js"></script>
+  <script src="../../js/vanvi-template-lock.js"></script>
+  <script>
+    let curStep = 1;
+    const totalSteps = 6;
+    let heroPhotoData = '';
+
+    function setStep(step) {
+      curStep = step;
+      document.querySelectorAll('.form-step').forEach((el, i) => {
+        el.classList.toggle('active', i + 1 === step);
+      });
+      document.querySelectorAll('.chip-btn').forEach((el, i) => {
+        el.classList.toggle('active', i + 1 === step);
+      });
+
+      const nextBtn = document.getElementById('btnNextAction');
+      if (nextBtn) {
+        if (curStep === totalSteps) {
+          nextBtn.textContent = 'Publish & Unlock (₹1,499) 👑';
+          nextBtn.style.background = 'linear-gradient(135deg, #d4a853, #aa8032)';
+          nextBtn.style.color = '#1a0509';
+        } else {
+          nextBtn.textContent = 'Next Step →';
+          nextBtn.style.background = 'var(--rose-deep)';
+          nextBtn.style.color = '#fff';
+        }
+      }
+    }
+
+    function moveStep(dir) {
+      let next = curStep + dir;
+      if (next >= 1 && next <= totalSteps) {
+        setStep(next);
+      }
+    }
+
+    function handleNextOrPublish() {
+      if (curStep === totalSteps) {
+        openModal();
+      } else {
+        moveStep(1);
+      }
+    }
+
+    // Live Sync Function
+    function syncLive() {
+      const iframe = document.getElementById('previewFrame');
+      if (!iframe || !iframe.contentWindow) return;
+
+      const bride = document.getElementById('inBride')?.value || 'Meera Iyer';
+      const groom = document.getElementById('inGroom')?.value || 'Arjun Malhotra';
+      const date = document.getElementById('inDate')?.value || '2026-12-23';
+      const city = document.getElementById('inCity')?.value || 'Hyderabad, India';
+      const hashtag = document.getElementById('inHashtag')?.value || '#ArjunKiMeera';
+      const brideParents = document.getElementById('inBrideParents')?.value || 'Suresh & Lakshmi Iyer';
+      const groomParents = document.getElementById('inGroomParents')?.value || 'Vikram & Kavita Malhotra';
+      const venue = document.getElementById('inVenue')?.value || 'Taj Krishna, Banjara Hills';
+      const shloka = document.getElementById('inShloka')?.value || '|| Shri Ganeshay Namah ||';
+      const note = document.getElementById('inStory1')?.value || '';
+
+      const payload = {
+        bride,
+        groom,
+        date,
+        city,
+        hashtag,
+        brideParents,
+        groomParents,
+        venue,
+        shloka,
+        note,
+        heroImg: heroPhotoData
+      };
+
+      iframe.contentWindow.postMessage({
+        type: 'VANVI_LIVE_PREVIEW_SYNC',
+        recipient: `${bride} & ${groom}`,
+        recipientName: `${bride} & ${groom}`,
+        bride,
+        groom,
+        sender: `${brideParents} & ${groomParents}`,
+        customData: payload
+      }, '*');
+
+      iframe.contentWindow.postMessage({
+        type: 'UPDATE_CONFIG',
+        config: payload
+      }, '*');
+    }
+
+    // Attach sync to all inputs
+    document.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', syncLive);
+      el.addEventListener('change', syncLive);
+    });
+
+    // Mobile View Toggle
+    function switchMobileTab(mode) {
+      const controls = document.getElementById('controlsPane');
+      const btnEdit = document.getElementById('btnViewEdit');
+      const btnLive = document.getElementById('btnViewLive');
+
+      if (mode === 'live') {
+        controls.classList.add('hidden-on-mobile');
+        btnLive.classList.add('active');
+        btnEdit.classList.remove('active');
+      } else {
+        controls.classList.remove('hidden-on-mobile');
+        btnEdit.classList.add('active');
+        btnLive.classList.remove('active');
+      }
+    }
+
+    function handleFileSelected(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          heroPhotoData = e.target.result;
+          syncLive();
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function openModal() {
+      document.getElementById('pubModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('pubModal').style.display = 'none';
+    }
+
+    // Checkout Flow Connection
+    function proceedToCheckout() {
+      const bride = document.getElementById('inBride')?.value || 'Meera Iyer';
+      const groom = document.getElementById('inGroom')?.value || 'Arjun Malhotra';
+      const coupleTitle = encodeURIComponent(`${bride} & ${groom} Royal Vivah`);
+      window.location.href = `../../checkout.html?templateId=hues-whispers-luxe&amount=1499&name=${coupleTitle}&recipient=${encodeURIComponent(bride + ' & ' + groom)}&occasion=Wedding`;
+    }
+
+    function openDirectExperience() {
+      const bride = document.getElementById('inBride')?.value || 'Meera Iyer';
+      const groom = document.getElementById('inGroom')?.value || 'Arjun Malhotra';
+      const date = document.getElementById('inDate')?.value || '2026-12-23';
+      const q = new URLSearchParams();
+      q.set('bride', bride);
+      q.set('groom', groom);
+      q.set('name', `${bride} & ${groom}`);
+      q.set('date', date);
+      q.set('paid', 'true');
+      q.set('purchased', 'true');
+      q.set('status', 'published');
+      window.open(`index.html?${q.toString()}`, '_blank');
+    }
+
+    // Initial frame load sync
+    document.getElementById('previewFrame').addEventListener('load', () => {
+      setTimeout(syncLive, 300);
+    });
+  </script>
+</body>
+</html>

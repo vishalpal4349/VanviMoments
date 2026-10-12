@@ -1,0 +1,865 @@
+<!DOCTYPE html><html lang="en"><head>
+
+  <!-- Luxury Fonts & Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Meera Iyer &amp; Arjun Malhotra are getting married on 23 December 2026. Join their celebrations."><meta name="theme-color" content="#702d3c"><script>
+  (function() {
+    try {
+      if (window.self !== window.top || new URLSearchParams(window.location.search).has('no_envelope')) {
+        document.documentElement.dataset.invitationEntrance = 'open';
+        return;
+      }
+    } catch(e) {}
+    document.documentElement.dataset.invitationEntrance = 'pending';
+    setTimeout(() => {
+      if (document.documentElement.dataset.invitationEntrance === 'pending') {
+        document.documentElement.dataset.invitationEntrance = 'open';
+      }
+    }, 2500);
+  })();
+</script><style>
+        
+        
+      
+  /* FLOATING NAVIGATION PILL */
+  
+
+  /* SECTION BADGES & TITLES */
+  .section-badge-pill {
+    display: inline-block;
+    padding: 5px 14px;
+    background: rgba(201, 165, 93, 0.15);
+    border: 1px solid #c9a55d;
+    color: #8c1229;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+  .section-royal-title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: clamp(2rem, 4.5vw, 3rem) !important;
+    color: #721022 !important;
+    font-weight: 600 !important;
+    margin-bottom: 6px !important;
+    line-height: 1.2 !important;
+  }
+  .section-subtitle {
+    color: #6d534b;
+    font-size: 0.95rem;
+    max-width: 600px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* GALLERY SECTION */
+  .gallery-shell, .rsvp-shell, .venue-shell, .wishes-shell {
+    text-align: center;
+    margin-top: 35px;
+    padding: 40px 24px !important;
+  }
+  .gallery-grid-luxe {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .gallery-item-luxe {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 1px solid rgba(201, 165, 93, 0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .gallery-item-luxe img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .gallery-item-luxe:hover img {
+    transform: scale(1.08);
+  }
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(114, 16, 34, 0.85) 0%, transparent 60%);
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .gallery-item-luxe:hover .gallery-overlay {
+    opacity: 1;
+  }
+  .gallery-caption {
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+
+  /* RSVP FORM LUXE */
+  .rsvp-form-luxe {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(201, 165, 93, 0.35);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(114, 16, 34, 0.06);
+  }
+  .form-row-dual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  .form-field {
+    margin-bottom: 14px;
+  }
+  .form-field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #721022;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+  .input-luxe {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #dcc6b8;
+    background: #fffdf9;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-family: 'Manrope', sans-serif;
+    color: #3e282b;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .input-luxe:focus {
+    outline: none;
+    border-color: #8c1229;
+    box-shadow: 0 0 10px rgba(140, 18, 41, 0.2);
+  }
+  .rsvp-submit-btn, .wish-send-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #8c1229 0%, #ad1c3a 60%, #700c1e 100%);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 220, 150, 0.4);
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(140, 18, 41, 0.35);
+    transition: all 0.3s ease;
+  }
+  .rsvp-submit-btn:hover, .wish-send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(173, 28, 58, 0.45);
+  }
+  .rsvp-success-banner {
+    margin-top: 16px;
+    padding: 12px;
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    color: #166534;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* VENUE CARDS */
+  .venue-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+    text-align: left;
+  }
+  .venue-info-card {
+    background: #fffdf9;
+    border: 1px solid rgba(201, 165, 93, 0.4);
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+  }
+  .venue-icon {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+  }
+  .venue-info-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: #721022;
+    margin-bottom: 4px;
+  }
+  .venue-name {
+    font-weight: 700;
+    color: #2b1216;
+    margin-bottom: 6px;
+  }
+  .venue-desc {
+    font-size: 0.88rem;
+    color: #6d534b;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .venue-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .venue-tags span {
+    background: rgba(201, 165, 93, 0.15);
+    color: #721022;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+  }
+  .venue-map-link {
+    display: inline-block;
+    padding: 9px 18px;
+    background: #fcf7ef;
+    border: 1.5px solid #c9a55d;
+    color: #721022;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .venue-map-link:hover {
+    background: #721022;
+    color: #fff;
+  }
+
+  /* WISHES GUEST BOOK */
+  .wishes-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+  .wish-item {
+    background: #fff;
+    border: 1px solid #ecd9cb;
+    border-radius: 14px;
+    padding: 18px;
+    border-left: 4px solid #c9a55d;
+  }
+  .wish-quote {
+    font-style: italic;
+    color: #4a282e;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .wish-author {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #8c1229;
+  }
+  .wish-input-box {
+    max-width: 580px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    .form-row-dual, .venue-cards-grid, .wishes-board {
+      grid-template-columns: 1fr !important;
+    }
+    .gallery-grid-luxe {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+
+  /* FLOATING THEME SWITCHER */
+  
+
+  /* BLESSINGS SECTION CLEANUP */
+  .wishes-shell {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 40px 24px !important;
+  }
+
+</style><meta name="robots" content="noindex, nofollow"><link rel="canonical" href="https://wedding.huesnwhispers.shop/meera-arjun-231226"><link rel="icon" type="image/svg+xml" sizes="any" href="https://wedding.huesnwhispers.shop/favicon.svg"><meta property="og:type" content="website"><meta property="og:title" content="Meera Iyer &amp; Arjun Malhotra | Wedding invitation"><meta property="og:description" content="Meera Iyer &amp; Arjun Malhotra are getting married on 23 December 2026. Join their celebrations."><meta property="og:url" content="https://wedding.huesnwhispers.shop/meera-arjun-231226"><meta property="og:site_name" content="Vanvi Moments"><meta property="og:image" content="https://wedding.huesnwhispers.shop/social/meera-arjun-231226.jpg?v=3bc19ab4d6a3859f"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Meera Iyer &amp; Arjun Malhotra | Wedding invitation"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://wedding.huesnwhispers.shop/social/meera-arjun-231226.jpg?v=3bc19ab4d6a3859f"><title>Meera Iyer &amp; Arjun Malhotra | Wedding invitation</title><link rel="stylesheet" href="footer.css"><link rel="stylesheet" href="main.css"><link rel="stylesheet" href="ornament.css"><link rel="stylesheet" href="invitation.css"><link rel="stylesheet" href="music.css"><link rel="stylesheet" href="artwork.css"><link rel="stylesheet" href="ourstory.css"><link rel="stylesheet" href="invitation.css"><link rel="stylesheet" href="envelope.css"><link rel="stylesheet" href="timeline.css"><link rel="stylesheet" href="rsvp.css"><style>
+  html, body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    height: auto !important;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  dialog:not([open]) {
+    display: none !important;
+  }
+  .floral-clay, .floral-invitation {
+    overflow: visible !important;
+    height: auto !important;
+  }
+</style>
+
+<style id="luxury-polish-styles">
+  /* Premium Visual Polish & Typography */
+  :root {
+    --gold-gradient: linear-gradient(135deg, #dfba73 0%, #c59b48 50%, #9a7226 100%);
+    --gold-glow: 0 4px 20px rgba(212, 168, 83, 0.28);
+    --card-shadow: 0 16px 40px -12px rgba(90, 20, 30, 0.12), 0 2px 10px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Smooth rendering */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Couple title gold shimmer */
+  .hero-names-title {
+    filter: drop-shadow(0 4px 12px rgba(155, 28, 58, 0.18));
+    animation: gentleShimmer 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes gentleShimmer {
+    0% { filter: drop-shadow(0 4px 12px rgba(155, 28, 58, 0.18)); }
+    100% { filter: drop-shadow(0 6px 18px rgba(212, 168, 83, 0.35)); }
+  }
+
+  /* Royal cards enhanced styling */
+  .floral-section-card, .inv-card, .ec-card {
+    box-shadow: var(--card-shadow) !important;
+    border-radius: 18px !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .ec-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 50px -10px rgba(120, 25, 40, 0.2) !important;
+  }
+
+  /* Image protection against broken icons */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+  img[alt]:after {
+    display: none !important;
+  }
+
+  /* Gold button sheen */
+  .ec-btn--primary, .hero-btn-primary {
+    background: linear-gradient(135deg, #8c1229 0%, #ad1c3a 60%, #700c1e 100%) !important;
+    box-shadow: 0 6px 20px rgba(140, 18, 41, 0.35) !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    border: 1px solid rgba(255, 220, 150, 0.3) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .ec-btn--primary:hover, .hero-btn-primary:hover {
+    box-shadow: 0 8px 25px rgba(173, 28, 58, 0.5) !important;
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Audio player luxury floating pill */
+  .music-player {
+    bottom: 24px !important;
+    right: 24px !important;
+    z-index: 999 !important;
+    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.18));
+  }
+  
+  .music-toggle {
+    background: rgba(255, 253, 247, 0.95) !important;
+    border: 1.5px solid #d4a853 !important;
+    backdrop-filter: blur(10px) !important;
+    color: #721022 !important;
+    padding: 10px 18px !important;
+    border-radius: 50px !important;
+    box-shadow: 0 4px 15px rgba(212, 168, 83, 0.25) !important;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .music-toggle:hover {
+    background: #fff8eb !important;
+    transform: scale(1.05);
+  }
+
+  /* Countdown box premium look */
+  .wedding-countdown--clay .countdown-stage {
+    background: rgba(255, 252, 245, 0.85);
+    border: 1px solid rgba(212, 168, 83, 0.45);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8), 0 8px 24px rgba(114, 16, 34, 0.08);
+    border-radius: 16px;
+    padding: 14px 22px;
+  }
+
+  .countdown-cell {
+    padding: 0 12px;
+  }
+
+  .countdown-value {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 2.2rem !important;
+    color: #721022 !important;
+    font-weight: 700 !important;
+  }
+
+  .countdown-label {
+    color: #9c6c44 !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+  }
+
+  /* Vanvi Moments footer branding */
+  .floral-footer {
+    background: radial-gradient(circle at top, rgba(247, 186, 90, 0.12), transparent 70%);
+    border-top: 1px solid rgba(212, 168, 83, 0.25);
+  }
+</style>
+
+
+<style id="smart-blessings-css">
+  
+  /* Responsive Hero Couple Names (Never duplicate) */
+  .hero-names-title {
+    font-family: 'Allura', cursive !important;
+    font-size: clamp(3.2rem, 9vw, 5.8rem) !important;
+    line-height: 1.08 !important;
+    text-align: center !important;
+  }
+  .hero-names-bride {
+    display: block !important;
+    color: var(--floral-accent, #9b1c3a) !important;
+  }
+  .hero-names-amp {
+    display: block !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 0.45em !important;
+    margin: 0.1em 0 !important;
+    font-style: italic !important;
+  }
+  .hero-names-groom {
+    display: block !important;
+    color: #7d5a1e !important;
+  }
+
+
+  /* SMART BLESSINGS CARD */
+  .smart-blessings-shell {
+    position: relative;
+    max-width: 820px;
+    margin: 45px auto 30px;
+    padding: 42px 28px !important;
+    text-align: center;
+    background: linear-gradient(165deg, rgba(255, 253, 248, 0.98), rgba(253, 244, 235, 0.95)) !important;
+    border: 1.5px solid rgba(201, 165, 93, 0.45) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 16px 50px rgba(114, 16, 34, 0.08), 0 2px 10px rgba(0,0,0,0.03) !important;
+    overflow: hidden;
+  }
+  .blessings-aura-glow {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 160px;
+    background: radial-gradient(circle, rgba(212, 168, 83, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .blessings-badge {
+    display: inline-block;
+    padding: 5px 16px;
+    background: rgba(201, 165, 93, 0.16);
+    border: 1px solid #c9a55d;
+    color: #8c1229;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .blessings-title {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: clamp(2rem, 4.5vw, 3rem) !important;
+    color: #721022 !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+    line-height: 1.18 !important;
+  }
+  .blessings-subtitle {
+    font-size: 0.95rem;
+    color: #6d534b;
+    max-width: 540px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+  }
+  .blessings-wall {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+  .blessing-card {
+    background: #fff;
+    border: 1px solid #eddcd0;
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    position: relative;
+    border-left: 4px solid #c9a55d;
+    transition: transform 0.25s ease;
+  }
+  .blessing-card:hover {
+    transform: translateY(-2px);
+  }
+  .blessing-lotus {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+  }
+  .blessing-msg {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #3e282b;
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .blessing-meta {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #8c1229;
+  }
+  .blessing-city {
+    font-weight: 400;
+    color: #8a7069;
+  }
+
+  .blessing-post-form {
+    max-width: 580px;
+    margin: 0 auto;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(201, 165, 93, 0.35);
+    border-radius: 18px;
+    padding: 20px;
+  }
+  .blessing-input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .blessing-input, .blessing-textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: #fff;
+    border: 1px solid #dfcdc1;
+    border-radius: 10px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.88rem;
+    color: #3e282b;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+  .blessing-input:focus, .blessing-textarea:focus {
+    outline: none;
+    border-color: #8c1229;
+    box-shadow: 0 0 8px rgba(140, 18, 41, 0.18);
+  }
+  .blessing-submit-btn {
+    width: 100%;
+    padding: 13px 20px;
+    margin-top: 10px;
+    background: linear-gradient(135deg, #8c1229 0%, #ad1c3a 60%, #700c1e 100%);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 220, 150, 0.4);
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(140, 18, 41, 0.3);
+    transition: all 0.25s ease;
+  }
+  .blessing-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(173, 28, 58, 0.45);
+  }
+
+  @media (max-width: 680px) {
+    .blessings-wall, .blessing-input-row {
+      grid-template-columns: 1fr !important;
+    }
+    .smart-blessings-shell {
+      padding: 30px 16px !important;
+      margin-inline: 10px;
+    }
+  }
+</style>
+
+</head><body>
+
+
+
+
+
+<a class="skip-link" href="#main">Skip to content</a><div data-invitation-content data-image-reveals><div class="floral-clay" data-astro-cid-ky5rlqaz><div class="floral-invitation theme-rose"><div class="floral-atmosphere" aria-hidden="true"><div class="floral-top-glow"></div><div class="floral-right-glow"></div><div class="floral-left-glow"></div></div><main id="main"><section class="floral-hero" aria-labelledby="couple-names"><div class="floral-hero-background" aria-hidden="true"><img class="hero-background-image" src="assets/artwork/art-1.webp" width="1536" height="1024" alt loading="eager" decoding="async" fetchpriority="high"></div><div class="floral-hero-corners" aria-hidden="true"><img class="hero-corner hero-corner--tl" src="https://wedding.huesnwhispers.shop/artwork/f611b1498764d10c8bc8/320.webp" sizes="(max-width: 767px) 30vw, (max-width: 1454px) 22vw, 320px" width="484" height="525" alt loading="eager" decoding="async" fetchpriority="high" data-corner="topLeft"><img class="hero-corner hero-corner--tr" src="https://wedding.huesnwhispers.shop/artwork/23da43eec046afd50756/320.webp" sizes="(max-width: 767px) 30vw, (max-width: 1454px) 22vw, 320px" width="559" height="533" alt loading="eager" decoding="async" fetchpriority="high" data-corner="topRight"><img class="hero-corner hero-corner--bl" src="https://wedding.huesnwhispers.shop/artwork/28bf2c120beca9d96bc2/320.webp" sizes="(max-width: 767px) 30vw, (max-width: 1454px) 22vw, 320px" width="504" height="438" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomLeft"><img class="hero-corner hero-corner--br" src="https://wedding.huesnwhispers.shop/artwork/5356743a8c106cd26e08/320.webp" sizes="(max-width: 767px) 30vw, (max-width: 1454px) 22vw, 320px" width="535" height="437" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomRight"></div><div class="floral-hero-grid"><div class="floral-hero-copy"><div class="hero-blessing"><img class="hero-ganesha" src="assets/artwork/lord_ganesha.svg" alt="Lord Ganesha" width="1200" height="1310"><p>|| Shri Ganeshay Namah ||</p></div><div class="hero-divider-ornament" aria-hidden="true"><span></span></div><h1 class="hero-names-title" id="couple-names"><span class="hero-names-bride">Meera Iyer</span><span class="hero-names-amp">&amp;</span><span class="hero-names-groom">Arjun Malhotra</span></h1><p class="hero-preamble">Are Getting Married</p><p class="hero-hashtag">#ArjunKiMeera</p><div class="hero-divider-ornament" aria-hidden="true"><span></span></div><div class="hero-icon-row"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v4m10-4v4M4 10h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"></path></svg>Wednesday, 23 December 2026</span><span class="hero-icon-row__sep" aria-hidden="true"></span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path></svg>Hyderabad</span></div><section class="wedding-countdown wedding-countdown--clay" data-wedding-countdown data-countdown-target="2026-12-23T18:00:00+05:30" data-countdown-label="Until our wedding" data-countdown-finished-label="Our wedding day" aria-label="Wedding countdown"><div class="countdown-stage"><div class="countdown-values" data-countdown-values hidden role="timer" aria-live="off" aria-atomic="true"><div class="countdown-cell"><span class="countdown-value" data-countdown-unit="days">00</span><span class="countdown-label">days</span></div><div class="countdown-cell"><span class="countdown-value" data-countdown-unit="hours">00</span><span class="countdown-label">hours</span></div><div class="countdown-cell"><span class="countdown-value" data-countdown-unit="minutes">00</span><span class="countdown-label">minutes</span></div><div class="countdown-cell"><span class="countdown-value" data-countdown-unit="seconds">00</span><span class="countdown-label">seconds</span></div></div><p class="countdown-fallback" data-countdown-fallback><time datetime="2026-12-23T18:00:00+05:30">23 December 2026 Â· 6:00 pm IST</time></p><p class="countdown-finished" data-countdown-finished hidden role="status">Let the celebrations begin!</p></div><p class="countdown-heading" data-countdown-heading>Until our wedding</p></section></div><div class="floral-hero-portrait"><img class="hero-characters-img" src="assets/artwork/art-2.webp" width="1122" height="1402" alt="Illustration of Meera Iyer and Arjun Malhotra" loading="eager" decoding="async" fetchpriority="high"></div></div><a class="hero-scroll-down" href="#celebrations"><span>Scroll Down</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a></section><section class="inv-wrap" id="invitation" aria-label="An invitation from our families"><div class="inv-card"><img class="inv-corner inv-corner--tl" src="https://wedding.huesnwhispers.shop/artwork/629d871098ccdc336585/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="275" height="526" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topLeft"><img class="inv-corner inv-corner--tr" src="https://wedding.huesnwhispers.shop/artwork/5218fefe5bdc73055d75/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="270" height="537" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topRight"><img class="inv-corner inv-corner--bl" src="https://wedding.huesnwhispers.shop/artwork/2740ecffde7c0b189ac3/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="440" height="897" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomLeft"><img class="inv-corner inv-corner--br" src="https://wedding.huesnwhispers.shop/artwork/d0fde787562b0a34ef7e/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="440" height="892" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomRight"><div class="inv-card__inner"><p class="inv-preamble">Together with our families
+We joyfully invite you to
+Celebrate the wedding of</p><h2 class="inv-names"><span>Meera Iyer</span><span class="inv-names__amp">&amp;</span><span>Arjun Malhotra</span></h2><div class="inv-heart-divider" aria-hidden="true"><span></span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span></span></div><div class="inv-families-wrap"><p class="inv-families__label-center">With love &amp; blessings of</p><div class="inv-families"><div class="inv-families__side"><p class="inv-families__names">Suresh &amp; Lakshmi Iyer</p><p class="inv-families__role">Bride's parents</p></div><div class="inv-families__sep" aria-hidden="true"></div><div class="inv-families__side"><p class="inv-families__names">Vikram &amp; Kavita Malhotra</p><p class="inv-families__role">Groom's parents</p></div></div></div><div class="inv-detail"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v4m10-4v4M4 10h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"></path></svg><div><p class="inv-detail__main">Wednesday, 23 December 2026</p><p class="inv-detail__sub">6:00 pm onwards</p></div></div><div class="inv-detail"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path></svg><div><p class="inv-detail__main">Taj Krishna, Banjara Hills</p></div></div></div></div></section><div class="floral-content"><section id="celebrations" class="floral-celebrations" aria-labelledby="celebrations-title" data-astro-cid-zzhsjrb7><div class="floral-section-card celebrations-shell" data-astro-cid-zzhsjrb7><div class="celebrations-shell__motif" aria-hidden="true" data-astro-cid-zzhsjrb7><span data-astro-cid-zzhsjrb7></span><span data-astro-cid-zzhsjrb7></span><span data-astro-cid-zzhsjrb7></span><span data-astro-cid-zzhsjrb7></span><span data-astro-cid-zzhsjrb7></span></div><p class="floral-section-label" data-astro-cid-zzhsjrb7>The Celebrations</p><h2 id="celebrations-title" data-astro-cid-zzhsjrb7>Join us for every celebration.</h2><p class="celebrations-introduction" data-astro-cid-zzhsjrb7>We&#39;re eagerly waiting to celebrate with you. Join us for good company, plenty of laughter, and moments worth sharing.</p><nav class="floral-event-nav" aria-label="Jump to an event" data-astro-cid-zzhsjrb7><a href="#haldi" style="--event-nav-accent: #fbbf24; --event-nav-bg: #fffbeb;" data-astro-cid-zzhsjrb7>Haldi</a><a href="#mehendi" style="--event-nav-accent: #166534; --event-nav-bg: #f0fdf4;" data-astro-cid-zzhsjrb7>Mehendi</a><a href="#sangeet" style="--event-nav-accent: #5b21b6; --event-nav-bg: #f4e9ff;" data-astro-cid-zzhsjrb7>Sangeet</a><a href="#shaadi" style="--event-nav-accent: #be185d; --event-nav-bg: #fdece0;" data-astro-cid-zzhsjrb7>Shaadi</a><a href="#reception" style="--event-nav-accent: #17365d; --event-nav-bg: #eef3fa;" data-astro-cid-zzhsjrb7>Reception</a></nav></div><div class="floral-event-list" data-astro-cid-zzhsjrb7><article id="haldi" class="ec-card" data-event-type="haldi" aria-labelledby="haldi-title" style="--ec-bg: #fffbeb; --ec-accent: #fbbf24; --ec-on-accent: #000000;"><img class="ec-corner ec-corner--tl" src="https://wedding.huesnwhispers.shop/artwork/a641cb3a246c20dd9b8a/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="178" height="546" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topLeft"><img class="ec-corner ec-corner--tr" src="https://wedding.huesnwhispers.shop/artwork/a508b1086628b7b2fc13/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="183" height="537" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topRight"><img class="ec-corner ec-corner--bl" src="https://wedding.huesnwhispers.shop/artwork/6065f969f6ac3275419a/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="309" height="925" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomLeft"><img class="ec-corner ec-corner--br" src="https://wedding.huesnwhispers.shop/artwork/ed5cc0b5e1bd345f03c9/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="288" height="934" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomRight"><div class="ec-layout"><div class="ec-title-section"><p class="ec-preamble">Â· Wedding Event Â·</p><h3 id="haldi-title" class="ec-event-name">Haldi</h3><p class="ec-description ec-description--desktop">Join us for our Haldi celebration.</p></div><div class="ec-image-panel"><img class="ec-characters" src="assets/artwork/art-3.webp" width="1176" height="1337" alt="Couple celebrating Haldi" loading="lazy" decoding="async" fetchpriority="auto"></div><p class="ec-description ec-description--mobile">Join us for our Haldi celebration.</p><div class="ec-details-section"><div class="ec-details"><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="6" width="16" height="14" rx="3"></rect><path d="M8 3.8v4.4M16 3.8v4.4M4 10h16" stroke-linecap="round"></path></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Date</span><time class="ec-detail-value" datetime="2026-12-21T10:00:00+05:30">21 December 2026</time></div></div><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.8V12l3 1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Time</span><span class="ec-detail-value"><time datetime="2026-12-21T10:00:00+05:30">10:00 am</time> &ndash; <time datetime="2026-12-21T14:00:00+05:30">2:00 pm</time></span></div></div><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21c3.5-4.2 6-7.2 6-10.5A6 6 0 0 0 6 10.5C6 13.8 8.5 16.8 12 21Z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="10" r="2.3"></circle></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Venue</span><span class="ec-detail-value">The Westin Hyderabad Mindspace, HITEC City</span></div></div></div><div class="ec-actions"><a class="ec-btn ec-btn--primary" href="https://maps.app.goo.gl/aSkw3zQAtQZvbcF77" target="_blank" rel="noopener noreferrer" aria-label="Get directions for Haldi (opens a new tab)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path></svg>Get Directions</a><details class="floral-calendar"><summary class="ec-btn ec-btn--outline"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v4m10-4v4M4 10h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"></path></svg>Add to Calendar</summary><div class="floral-calendar-options"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Haldi+%7C+Meera+Iyer+%26+Arjun+Malhotra&amp;dates=20261221T043000Z%2F20261221T083000Z&amp;ctz=Asia%2FKolkata&amp;details=Join+us+for+our+Haldi+celebration.%0Ahttps%3A%2F%2Fwedding.huesnwhispers.shop%2Fmeera-arjun-231226%23haldi&amp;location=The+Westin+Hyderabad+Mindspace%2C+HITEC+City" target="_blank" rel="noopener noreferrer">Google Calendar <span aria-hidden="true">&nearr;</span></a><a href="/calendar/meera-arjun-231226/haldi.ics" download="meera-arjun-231226-haldi.ics">Apple / Outlook (.ics) <span aria-hidden="true">&darr;</span></a></div></details></div></div></div></article><article id="mehendi" class="ec-card" data-event-type="mehendi" aria-labelledby="mehendi-title" style="--ec-bg: #f0fdf4; --ec-accent: #166534; --ec-on-accent: #ffffff;"><img class="ec-corner ec-corner--tl" src="https://wedding.huesnwhispers.shop/artwork/f4f8dcb91b52c6e89906/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="315" height="395" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topLeft"><img class="ec-corner ec-corner--tr" src="https://wedding.huesnwhispers.shop/artwork/575e39f1b93e4815db95/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="339" height="395" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topRight"><img class="ec-corner ec-corner--bl" src="https://wedding.huesnwhispers.shop/artwork/8d09468bd01d36907514/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="357" height="1001" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomLeft"><img class="ec-corner ec-corner--br" src="https://wedding.huesnwhispers.shop/artwork/b04fa62e21482329b35f/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="358" height="1002" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomRight"><div class="ec-layout"><div class="ec-title-section"><p class="ec-preamble">Â· Wedding Event Â·</p><h3 id="mehendi-title" class="ec-event-name">Mehendi</h3><p class="ec-description ec-description--desktop">Join us for our Mehendi celebration.</p></div><div class="ec-image-panel"><img class="ec-characters" src="assets/artwork/art-4.webp" width="1024" height="1536" alt="Couple celebrating Mehendi" loading="lazy" decoding="async" fetchpriority="auto"></div><p class="ec-description ec-description--mobile">Join us for our Mehendi celebration.</p><div class="ec-details-section"><div class="ec-details"><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="6" width="16" height="14" rx="3"></rect><path d="M8 3.8v4.4M16 3.8v4.4M4 10h16" stroke-linecap="round"></path></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Date</span><time class="ec-detail-value" datetime="2026-12-22T17:30:00+05:30">22 December 2026</time></div></div><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.8V12l3 1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Time</span><span class="ec-detail-value"><time datetime="2026-12-22T17:30:00+05:30">5:30 pm</time> &ndash; <time datetime="2026-12-22T21:30:00+05:30">9:30 pm</time></span></div></div><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21c3.5-4.2 6-7.2 6-10.5A6 6 0 0 0 6 10.5C6 13.8 8.5 16.8 12 21Z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="10" r="2.3"></circle></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Venue</span><span class="ec-detail-value">Shilpakala Vedika, Madhapur</span></div></div></div><div class="ec-actions"><a class="ec-btn ec-btn--primary" href="https://maps.app.goo.gl/xHA7irMKKRjn7Yxj6" target="_blank" rel="noopener noreferrer" aria-label="Get directions for Mehendi (opens a new tab)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path></svg>Get Directions</a><details class="floral-calendar"><summary class="ec-btn ec-btn--outline"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v4m10-4v4M4 10h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"></path></svg>Add to Calendar</summary><div class="floral-calendar-options"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Mehendi+%7C+Meera+Iyer+%26+Arjun+Malhotra&amp;dates=20261222T120000Z%2F20261222T160000Z&amp;ctz=Asia%2FKolkata&amp;details=Join+us+for+our+Mehendi+celebration.%0Ahttps%3A%2F%2Fwedding.huesnwhispers.shop%2Fmeera-arjun-231226%23mehendi&amp;location=Shilpakala+Vedika%2C+Madhapur" target="_blank" rel="noopener noreferrer">Google Calendar <span aria-hidden="true">&nearr;</span></a><a href="/calendar/meera-arjun-231226/mehendi.ics" download="meera-arjun-231226-mehendi.ics">Apple / Outlook (.ics) <span aria-hidden="true">&darr;</span></a></div></details></div></div></div></article><article id="sangeet" class="ec-card" data-event-type="sangeet" aria-labelledby="sangeet-title" style="--ec-bg: #f4e9ff; --ec-accent: #5b21b6; --ec-on-accent: #ffffff;"><img class="ec-corner ec-corner--tl" src="https://wedding.huesnwhispers.shop/artwork/559788e126c72e472af2/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="206" height="532" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topLeft"><img class="ec-corner ec-corner--tr" src="https://wedding.huesnwhispers.shop/artwork/e1795b7b843f21c347ea/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="215" height="535" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topRight"><img class="ec-corner ec-corner--bl" src="https://wedding.huesnwhispers.shop/artwork/325e367c48a01602c993/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="374" height="918" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomLeft"><img class="ec-corner ec-corner--br" src="https://wedding.huesnwhispers.shop/artwork/0f300f1fc97426ac2845/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="380" height="923" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomRight"><div class="ec-layout"><div class="ec-title-section"><p class="ec-preamble">Â· Wedding Event Â·</p><h3 id="sangeet-title" class="ec-event-name">Sangeet</h3><p class="ec-description ec-description--desktop">Join us for our Sangeet celebration.</p></div><div class="ec-image-panel"><img class="ec-characters" src="assets/artwork/art-5.webp" width="1122" height="1402" alt="Couple celebrating Sangeet" loading="lazy" decoding="async" fetchpriority="auto"></div><p class="ec-description ec-description--mobile">Join us for our Sangeet celebration.</p><div class="ec-details-section"><div class="ec-details"><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="6" width="16" height="14" rx="3"></rect><path d="M8 3.8v4.4M16 3.8v4.4M4 10h16" stroke-linecap="round"></path></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Date</span><time class="ec-detail-value" datetime="2026-12-22T19:00:00+05:30">22 December 2026</time></div></div><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.8V12l3 1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Time</span><span class="ec-detail-value"><time datetime="2026-12-22T19:00:00+05:30">7:00 pm</time> &ndash; <time datetime="2026-12-22T23:00:00+05:30">11:00 pm</time></span></div></div><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21c3.5-4.2 6-7.2 6-10.5A6 6 0 0 0 6 10.5C6 13.8 8.5 16.8 12 21Z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="10" r="2.3"></circle></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Venue</span><span class="ec-detail-value">Taj Falaknuma Palace, Hyderabad</span></div></div></div><div class="ec-actions"><a class="ec-btn ec-btn--primary" href="https://maps.app.goo.gl/BEBMT5uH3Xe2wX9E6" target="_blank" rel="noopener noreferrer" aria-label="Get directions for Sangeet (opens a new tab)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path></svg>Get Directions</a><details class="floral-calendar"><summary class="ec-btn ec-btn--outline"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v4m10-4v4M4 10h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"></path></svg>Add to Calendar</summary><div class="floral-calendar-options"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Sangeet+%7C+Meera+Iyer+%26+Arjun+Malhotra&amp;dates=20261222T133000Z%2F20261222T173000Z&amp;ctz=Asia%2FKolkata&amp;details=Join+us+for+our+Sangeet+celebration.%0Ahttps%3A%2F%2Fwedding.huesnwhispers.shop%2Fmeera-arjun-231226%23sangeet&amp;location=Taj+Falaknuma+Palace%2C+Hyderabad" target="_blank" rel="noopener noreferrer">Google Calendar <span aria-hidden="true">&nearr;</span></a><a href="/calendar/meera-arjun-231226/sangeet.ics" download="meera-arjun-231226-sangeet.ics">Apple / Outlook (.ics) <span aria-hidden="true">&darr;</span></a></div></details></div></div></div></article><article id="shaadi" class="ec-card" data-event-type="wedding" aria-labelledby="shaadi-title" style="--ec-bg: #fdece0; --ec-accent: #be185d; --ec-on-accent: #ffffff;"><img class="ec-corner ec-corner--tl" src="https://wedding.huesnwhispers.shop/artwork/61d9351297851b92e6ce/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="215" height="497" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topLeft"><img class="ec-corner ec-corner--tr" src="https://wedding.huesnwhispers.shop/artwork/a35ea22444fc2cf65799/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="221" height="491" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topRight"><img class="ec-corner ec-corner--bl" src="https://wedding.huesnwhispers.shop/artwork/2d865c04af139ffb0b47/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="257" height="919" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomLeft"><img class="ec-corner ec-corner--br" src="https://wedding.huesnwhispers.shop/artwork/34fbd207816057630388/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="226" height="942" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomRight"><div class="ec-layout"><div class="ec-title-section"><p class="ec-preamble">Â· Wedding Event Â·</p><h3 id="shaadi-title" class="ec-event-name">Shaadi</h3><p class="ec-description ec-description--desktop">Join us as we celebrate our wedding.</p></div><div class="ec-image-panel"><img class="ec-characters" src="assets/artwork/art-6.webp" width="1122" height="1402" alt="Couple celebrating Shaadi" loading="lazy" decoding="async" fetchpriority="auto"></div><p class="ec-description ec-description--mobile">Join us as we celebrate our wedding.</p><div class="ec-details-section"><div class="ec-details"><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="6" width="16" height="14" rx="3"></rect><path d="M8 3.8v4.4M16 3.8v4.4M4 10h16" stroke-linecap="round"></path></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Date</span><time class="ec-detail-value" datetime="2026-12-23T18:00:00+05:30">23 December 2026</time></div></div><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.8V12l3 1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Time</span><span class="ec-detail-value"><time datetime="2026-12-23T18:00:00+05:30">6:00 pm</time> &ndash; <time datetime="2026-12-23T22:00:00+05:30">10:00 pm</time></span></div></div><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21c3.5-4.2 6-7.2 6-10.5A6 6 0 0 0 6 10.5C6 13.8 8.5 16.8 12 21Z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="10" r="2.3"></circle></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Venue</span><span class="ec-detail-value">Taj Krishna, Banjara Hills</span></div></div></div><div class="ec-actions"><a class="ec-btn ec-btn--primary" href="https://maps.app.goo.gl/3FKqtJB3bCHAV6ZP7" target="_blank" rel="noopener noreferrer" aria-label="Get directions for Shaadi (opens a new tab)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path></svg>Get Directions</a><details class="floral-calendar"><summary class="ec-btn ec-btn--outline"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v4m10-4v4M4 10h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"></path></svg>Add to Calendar</summary><div class="floral-calendar-options"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Shaadi+%7C+Meera+Iyer+%26+Arjun+Malhotra&amp;dates=20261223T123000Z%2F20261223T163000Z&amp;ctz=Asia%2FKolkata&amp;details=Join+us+as+we+celebrate+our+wedding.%0Ahttps%3A%2F%2Fwedding.huesnwhispers.shop%2Fmeera-arjun-231226%23shaadi&amp;location=Taj+Krishna%2C+Banjara+Hills" target="_blank" rel="noopener noreferrer">Google Calendar <span aria-hidden="true">&nearr;</span></a><a href="/calendar/meera-arjun-231226/shaadi.ics" download="meera-arjun-231226-shaadi.ics">Apple / Outlook (.ics) <span aria-hidden="true">&darr;</span></a></div></details></div></div></div></article><article id="reception" class="ec-card" data-event-type="reception" aria-labelledby="reception-title" style="--ec-bg: #eef3fa; --ec-accent: #17365d; --ec-on-accent: #ffffff;"><img class="ec-corner ec-corner--tl" src="https://wedding.huesnwhispers.shop/artwork/1c18e830afad87c92bc9/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="197" height="422" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topLeft"><img class="ec-corner ec-corner--tr" src="https://wedding.huesnwhispers.shop/artwork/ac98c3c12202ad1a2c8b/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="197" height="416" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topRight"><img class="ec-corner ec-corner--bl" src="https://wedding.huesnwhispers.shop/artwork/92d64deb36c1c817c7a5/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="391" height="824" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomLeft"><img class="ec-corner ec-corner--br" src="https://wedding.huesnwhispers.shop/artwork/71037d4a948ba7a1fb73/160.webp" sizes="(max-width: 767px) 22vw, 150px" width="407" height="831" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomRight"><div class="ec-layout"><div class="ec-title-section"><p class="ec-preamble">Â· Wedding Event Â·</p><h3 id="reception-title" class="ec-event-name">Reception</h3><p class="ec-description ec-description--desktop">Join us for our Reception celebration.</p></div><div class="ec-image-panel"><img class="ec-characters" src="assets/artwork/art-7.webp" width="1122" height="1402" alt="Couple celebrating Reception" loading="lazy" decoding="async" fetchpriority="auto"></div><p class="ec-description ec-description--mobile">Join us for our Reception celebration.</p><div class="ec-details-section"><div class="ec-details"><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="6" width="16" height="14" rx="3"></rect><path d="M8 3.8v4.4M16 3.8v4.4M4 10h16" stroke-linecap="round"></path></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Date</span><time class="ec-detail-value" datetime="2026-12-24T19:30:00+05:30">24 December 2026</time></div></div><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.8V12l3 1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Time</span><span class="ec-detail-value"><time datetime="2026-12-24T19:30:00+05:30">7:30 pm</time> &ndash; <time datetime="2026-12-24T23:30:00+05:30">11:30 pm</time></span></div></div><div class="ec-detail-row"><div class="ec-icon-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21c3.5-4.2 6-7.2 6-10.5A6 6 0 0 0 6 10.5C6 13.8 8.5 16.8 12 21Z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="10" r="2.3"></circle></svg></div><div class="ec-detail-content"><span class="ec-detail-label">Venue</span><span class="ec-detail-value">Novotel Hyderabad Convention Centre, HICC</span></div></div></div><div class="ec-actions"><a class="ec-btn ec-btn--primary" href="https://maps.app.goo.gl/MDiK2X64DETtsiNg7" target="_blank" rel="noopener noreferrer" aria-label="Get directions for Reception (opens a new tab)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path></svg>Get Directions</a><details class="floral-calendar"><summary class="ec-btn ec-btn--outline"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v4m10-4v4M4 10h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"></path></svg>Add to Calendar</summary><div class="floral-calendar-options"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Reception+%7C+Meera+Iyer+%26+Arjun+Malhotra&amp;dates=20261224T140000Z%2F20261224T180000Z&amp;ctz=Asia%2FKolkata&amp;details=Join+us+for+our+Reception+celebration.%0Ahttps%3A%2F%2Fwedding.huesnwhispers.shop%2Fmeera-arjun-231226%23reception&amp;location=Novotel+Hyderabad+Convention+Centre%2C+HICC" target="_blank" rel="noopener noreferrer">Google Calendar <span aria-hidden="true">&nearr;</span></a><a href="/calendar/meera-arjun-231226/reception.ics" download="meera-arjun-231226-reception.ics">Apple / Outlook (.ics) <span aria-hidden="true">&darr;</span></a></div></details></div></div></div></article></div></section><section id="our-story" class="our-story our-story--floral-3d-1" aria-labelledby="our-story-title"><div class="story-decor" aria-hidden="true"><img class="story-corner story-corner--topLeft" src="https://wedding.huesnwhispers.shop/artwork/eb0d022875a4614b2e34/160.webp" sizes="(min-width: 768px) 140px, 22vw" width="441" height="535" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topLeft"><img class="story-corner story-corner--topRight" src="https://wedding.huesnwhispers.shop/artwork/aee067f0f96c2246d2a4/160.webp" sizes="(min-width: 768px) 140px, 22vw" width="446" height="566" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="topRight"><img class="story-corner story-corner--bottomLeft" src="https://wedding.huesnwhispers.shop/artwork/53665d33edfd01a3c449/160.webp" sizes="(min-width: 768px) 140px, 22vw" width="523" height="410" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomLeft"><img class="story-corner story-corner--bottomRight" src="https://wedding.huesnwhispers.shop/artwork/ed5fb176e6e6facdaad3/160.webp" sizes="(min-width: 768px) 140px, 22vw" width="493" height="383" alt loading="lazy" decoding="async" fetchpriority="auto" data-corner="bottomRight"><span class="story-petal story-petal--1"></span><span class="story-petal story-petal--2"></span><span class="story-petal story-petal--3"></span><span class="story-petal story-petal--4"></span><span class="story-petal story-petal--5"></span><span class="story-petal story-petal--6"></span><span class="story-petal story-petal--7"></span><span class="story-petal story-petal--8"></span></div><header class="story-header"><div class="story-intro"><p class="story-eyebrow">Our Story</p><h2 id="our-story-title">Different paths,
+one beautiful beginning.</h2><span class="story-intro-heart" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></span><p class="story-introduction">From our first conversation to the plans we are making now, it has been the everyday moments that made this feel like us.</p></div><div class="story-portrait"><img class="story-character" src="assets/artwork/art-8.webp" width="1374" height="1145" alt="Illustration of a couple sharing a quiet moment" loading="lazy" decoding="async" fetchpriority="auto"></div></header><div class="story-journey"><svg class="story-trail story-trail--desktop" viewBox="0 0 1000 600" preserveAspectRatio="none" fill="none" aria-hidden="true"><path transform="translate(0 0)" d="M140 90C95-40 455-25 475 100S595 220 745 170S1020 260 830 295"></path><path transform="translate(0 300)" d="M140 90C95-40 455-25 475 100S595 220 745 170S1020 260 830 295"></path></svg><svg class="story-trail story-trail--mobile" viewBox="0 0 40 800" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M20 0c-28 65 28 135 0 200c-28 65 28 135 0 200c-28 65 28 135 0 200c-28 65 28 135 0 200"></path></svg><ol class="story-milestones" role="list"><li class="story-milestone" data-story-milestone="part-1"><div class="story-image-frame"><img class="story-milestone-image" src="assets/artwork/art-9.webp" width="597" height="485" alt loading="lazy" decoding="async" fetchpriority="auto"></div><div class="story-milestone-copy"><span class="story-milestone-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 8 10-5 10 5-10 5ZM6 10v6c4 3 8 3 12 0v-6M22 8v8"></path></svg></span><h3>We Met</h3><p>A college event brought us together. We stayed long after it ended, talking about everything except the reason we had come.</p></div><span class="story-trail-heart" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></span></li><li class="story-milestone" data-story-milestone="part-2"><div class="story-image-frame"><img class="story-milestone-image" src="assets/artwork/art-10.webp" width="566" height="495" alt loading="lazy" decoding="async" fetchpriority="auto"></div><div class="story-milestone-copy"><span class="story-milestone-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></span><h3>We Grew</h3><p>There were shared playlists, long calls and plenty of coffee. Little by little, we became the first person the other wanted to tell.</p></div><span class="story-trail-heart" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></span></li><li class="story-milestone" data-story-milestone="part-3"><div class="story-image-frame"><img class="story-milestone-image" src="assets/artwork/art-11.webp" width="699" height="470" alt loading="lazy" decoding="async" fetchpriority="auto"></div><div class="story-milestone-copy"><span class="story-milestone-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 3-6 18-4-8-8-4ZM11 13 21 3"></path></svg></span><h3>We Explored</h3><p>From quiet hill stations to busy city streets, we found new places and new reasons to enjoy doing life together.</p></div><span class="story-trail-heart" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></span></li><li class="story-milestone" data-story-milestone="part-4"><div class="story-image-frame"><img class="story-milestone-image" src="assets/artwork/art-12.webp" width="514" height="463" alt loading="lazy" decoding="async" fetchpriority="auto"></div><div class="story-milestone-copy"><span class="story-milestone-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 15a6 6 0 1 1-12 0 6 6 0 0 1 12 0ZM23 15a6 6 0 1 1-12 0 6 6 0 0 1 12 0ZM5 5l2-3 2 3-2 3ZM15 5l2-3 2 3-2 3Z"></path></svg></span><h3>Now, Forever</h3><p>One very happy yes, and here we are. Our next adventure begins with our favourite people beside us, and that includes you.</p></div><span class="story-trail-heart" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></span></li></ol></div><p class="story-closing"><span>Two stories, and so much still to write together.</span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></p></section><section class="floral-section-card note-shell" aria-labelledby="note-title" data-astro-cid-rv2azjrn><div class="note-shell__header" data-astro-cid-rv2azjrn><p class="floral-section-label" data-astro-cid-rv2azjrn>Wedding Notes</p><h2 id="note-title" data-astro-cid-rv2azjrn>A Note From Us</h2></div><blockquote class="note-shell__quote" data-astro-cid-rv2azjrn><span class="note-shell__quote-mark" aria-hidden="true" data-astro-cid-rv2azjrn>&ldquo;</span><div class="note-shell__lines" data-astro-cid-rv2azjrn><p class="note-shell__line" data-astro-cid-rv2azjrn>Your presence will make our celebrations complete. We look forward to sharing these special moments with you.</p></div></blockquote><p class="note-shell__family-line" data-astro-cid-rv2azjrn>&mdash; Meera Iyer &amp; Arjun Malhotra</p></section></div>
+<!-- SECTION: GUEST BLESSINGS & WISHES -->
+
+
+<!-- SMART LUXE BLESSINGS BOX -->
+<section id="wishes" class="floral-section-card smart-blessings-shell" aria-labelledby="wishes-title">
+  <div class="blessings-aura-glow"></div>
+  <div class="blessings-badge">SHUBH AASHIRVAAD · WARM BLESSINGS</div>
+  <h2 id="wishes-title" class="blessings-title">Blessings for Meera &amp; Arjun</h2>
+  <p class="blessings-subtitle">Your warm wishes and heartfelt blessings will forever light up our new beginning.</p>
+
+  <!-- Live Wishes Carousel/Wall -->
+  <div class="blessings-wall" id="wishesBoard">
+    <div class="blessing-card">
+      <div class="blessing-lotus">🪷</div>
+      <p class="blessing-msg">“Wishing Meera and Arjun an eternal bond of love, laughter, and lifelong togetherness! May Mahadev bless both of you.”</p>
+      <div class="blessing-meta">— Rajesh &amp; Priya Sharma <span class="blessing-city">· Hyderabad</span></div>
+    </div>
+    <div class="blessing-card">
+      <div class="blessing-lotus">🪷</div>
+      <p class="blessing-msg">“Heartiest congratulations to both the families. Excited and eager to celebrate all the royal ceremonies together!”</p>
+      <div class="blessing-meta">— Smt. Radhika &amp; K. Iyer <span class="blessing-city">· Chennai</span></div>
+    </div>
+  </div>
+
+  <!-- Interactive Input Card -->
+  <div class="blessing-post-form">
+    <div class="blessing-input-row">
+      <input type="text" id="guestWishName" placeholder="Your Name (e.g. Ramesh Uncle)" class="blessing-input">
+      <input type="text" id="guestWishCity" placeholder="Your City / Family" class="blessing-input">
+    </div>
+    <textarea id="guestWishText" rows="3" placeholder="Write your warm blessing or wish for the bride &amp; groom..." class="blessing-textarea"></textarea>
+    <button type="button" onclick="postSmartBlessing()" class="blessing-submit-btn">
+      <span>Send Royal Blessings</span> ✨
+    </button>
+  </div>
+</section>
+
+
+
+
+
+</main><footer class="floral-footer" style="padding: 45px 20px; text-align: center;">
+  <div style="font-family: 'Cormorant Garamond', serif; font-size: 26px; color: #721022; letter-spacing: 2px; font-weight: 600;">VANVI MOMENTS</div>
+  <p style="font-size: 13px; color: #835e58; margin-top: 6px;">Bespoke Digital Wedding Websites & Royal Invitations</p>
+  <div id="demoWatermarkBadge" style="margin-top: 14px; display: inline-block; background: rgba(201, 165, 93, 0.15); border: 1px solid #c9a55d; padding: 5px 16px; border-radius: 20px; font-size: 11px; color: #721022; letter-spacing: 1px;">
+    VANVI MOMENTS · PREMIUM WEDDING EDITION
+  </div>
+</footer></div><div class="petals" aria-hidden="true" data-astro-cid-ky5rlqaz><span style="--x:7%;--size:14px;--drift:-50px;--turn:0deg;--fall:5s;--delay:0s" data-astro-cid-ky5rlqaz></span><span style="--x:54%;--size:21px;--drift:-21px;--turn:67deg;--fall:6.3s;--delay:0.5s" data-astro-cid-ky5rlqaz></span><span style="--x:1%;--size:17px;--drift:8px;--turn:134deg;--fall:7.6s;--delay:1s" data-astro-cid-ky5rlqaz></span><span style="--x:48%;--size:24px;--drift:37px;--turn:201deg;--fall:5.4s;--delay:0.3s" data-astro-cid-ky5rlqaz></span><span style="--x:95%;--size:20px;--drift:-34px;--turn:268deg;--fall:6.7s;--delay:0.8s" data-astro-cid-ky5rlqaz></span><span style="--x:42%;--size:16px;--drift:-5px;--turn:335deg;--fall:8s;--delay:0.1s" data-astro-cid-ky5rlqaz></span><span style="--x:89%;--size:23px;--drift:24px;--turn:42deg;--fall:5.8s;--delay:0.6s" data-astro-cid-ky5rlqaz></span><span style="--x:36%;--size:19px;--drift:-47px;--turn:109deg;--fall:7.1s;--delay:1.1s" data-astro-cid-ky5rlqaz></span><span style="--x:83%;--size:15px;--drift:-18px;--turn:176deg;--fall:8.4s;--delay:0.4s" data-astro-cid-ky5rlqaz></span><span style="--x:30%;--size:22px;--drift:11px;--turn:243deg;--fall:6.2s;--delay:0.9s" data-astro-cid-ky5rlqaz></span><span style="--x:77%;--size:18px;--drift:40px;--turn:310deg;--fall:7.5s;--delay:0.2s" data-astro-cid-ky5rlqaz></span><span style="--x:24%;--size:14px;--drift:-31px;--turn:17deg;--fall:5.3s;--delay:0.7s" data-astro-cid-ky5rlqaz></span><span style="--x:71%;--size:21px;--drift:-2px;--turn:84deg;--fall:6.6s;--delay:0s" data-astro-cid-ky5rlqaz></span><span style="--x:18%;--size:17px;--drift:27px;--turn:151deg;--fall:7.9s;--delay:0.5s" data-astro-cid-ky5rlqaz></span><span style="--x:65%;--size:24px;--drift:-44px;--turn:218deg;--fall:5.7s;--delay:1s" data-astro-cid-ky5rlqaz></span><span style="--x:12%;--size:20px;--drift:-15px;--turn:285deg;--fall:7s;--delay:0.3s" data-astro-cid-ky5rlqaz></span><span style="--x:59%;--size:16px;--drift:14px;--turn:352deg;--fall:8.3s;--delay:0.8s" data-astro-cid-ky5rlqaz></span><span style="--x:6%;--size:23px;--drift:43px;--turn:59deg;--fall:6.1s;--delay:0.1s" data-astro-cid-ky5rlqaz></span><span style="--x:53%;--size:19px;--drift:-28px;--turn:126deg;--fall:7.4s;--delay:0.6s" data-astro-cid-ky5rlqaz></span><span style="--x:0%;--size:15px;--drift:1px;--turn:193deg;--fall:5.2s;--delay:1.1s" data-astro-cid-ky5rlqaz></span><span style="--x:47%;--size:22px;--drift:30px;--turn:260deg;--fall:6.5s;--delay:0.4s" data-astro-cid-ky5rlqaz></span><span style="--x:94%;--size:18px;--drift:-41px;--turn:327deg;--fall:7.8s;--delay:0.9s" data-astro-cid-ky5rlqaz></span><span style="--x:41%;--size:14px;--drift:-12px;--turn:34deg;--fall:5.6s;--delay:0.2s" data-astro-cid-ky5rlqaz></span><span style="--x:88%;--size:21px;--drift:17px;--turn:101deg;--fall:6.9s;--delay:0.7s" data-astro-cid-ky5rlqaz></span><span style="--x:35%;--size:17px;--drift:46px;--turn:168deg;--fall:8.2s;--delay:0s" data-astro-cid-ky5rlqaz></span><span style="--x:82%;--size:24px;--drift:-25px;--turn:235deg;--fall:6s;--delay:0.5s" data-astro-cid-ky5rlqaz></span><span style="--x:29%;--size:20px;--drift:4px;--turn:302deg;--fall:7.3s;--delay:1s" data-astro-cid-ky5rlqaz></span><span style="--x:76%;--size:16px;--drift:33px;--turn:9deg;--fall:5.1s;--delay:0.3s" data-astro-cid-ky5rlqaz></span><span style="--x:23%;--size:23px;--drift:-38px;--turn:76deg;--fall:6.4s;--delay:0.8s" data-astro-cid-ky5rlqaz></span><span style="--x:70%;--size:19px;--drift:-9px;--turn:143deg;--fall:7.7s;--delay:0.1s" data-astro-cid-ky5rlqaz></span><span style="--x:17%;--size:15px;--drift:20px;--turn:210deg;--fall:5.5s;--delay:0.6s" data-astro-cid-ky5rlqaz></span><span style="--x:64%;--size:22px;--drift:49px;--turn:277deg;--fall:6.8s;--delay:1.1s" data-astro-cid-ky5rlqaz></span></div></div><aside class="music-player music-player--clay" data-music-player hidden data-src="assets/audio/wedding_song.mp3" data-autoplay="true" data-start-on="entrance" data-volume="0.35" data-title="Wedding music" aria-label="Wedding background music" data-astro-cid-3d5edsf5><audio preload="none" loop data-music-audio data-astro-cid-3d5edsf5></audio><button type="button" class="music-toggle" data-music-toggle aria-pressed="false" aria-label="Play music: Wedding music" data-astro-cid-3d5edsf5><svg class="music-note-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-3d5edsf5><path d="M9 18V5l11-2v13M9 9l11-2" data-astro-cid-3d5edsf5></path><ellipse cx="6" cy="18" rx="3" ry="2.5" data-astro-cid-3d5edsf5></ellipse><ellipse cx="17" cy="16" rx="3" ry="2.5" data-astro-cid-3d5edsf5></ellipse></svg><svg class="music-state-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" aria-hidden="true" data-astro-cid-3d5edsf5><path class="music-action-symbol music-play-symbol" d="m8 5 11 7-11 7Z" fill="currentColor" stroke="none" data-astro-cid-3d5edsf5></path><path class="music-action-symbol music-pause-symbol" d="M8 5v14M16 5v14" stroke-width="4" data-astro-cid-3d5edsf5></path><rect class="music-action-symbol music-cancel-symbol" x="6" y="6" width="12" height="12" rx="1" fill="currentColor" stroke="none" data-astro-cid-3d5edsf5></rect></svg><span data-music-label data-astro-cid-3d5edsf5>Play music</span></button><p class="music-status" data-music-status role="status" aria-live="polite" data-astro-cid-3d5edsf5></p></aside><noscript><aside class="music-native" aria-label="Wedding background music" data-astro-cid-3d5edsf5><p data-astro-cid-3d5edsf5>Wedding music</p><audio controls preload="none" loop aria-label="Wedding music" data-astro-cid-3d5edsf5><source src="assets/audio/wedding_song.mp3" type="audio/mpeg" data-astro-cid-3d5edsf5></audio></aside></noscript></div><div style="display:none;" data-demo-watermark aria-hidden="true"></div><dialog class="envelope-entrance envelope-rose" data-envelope-entrance aria-label="Wedding invitation for Meera and Arjun"><svg class="envelope-confetti" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><path id="envelope-confetti-heart" d="M0 12C-5 7-16 0-13-7C-10-14-3-13 0-7C3-13 10-14 13-7C16 0 5 7 0 12Z"></path><g id="envelope-confetti-letter" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="-17" y="-12" width="34" height="24" rx="2"></rect><path d="m-16-11 16 13 16-13M-16 11-5 0M16 11 5 0"></path></g><pattern id="envelope-confetti-pattern" width="460" height="520" patternUnits="userSpaceOnUse"><g fill="none" stroke="currentColor" stroke-width="1.5"><use href="#envelope-confetti-heart" transform="translate(48 43) rotate(-24) scale(.9)"></use><use href="#envelope-confetti-heart" transform="translate(294 64) rotate(19) scale(1.2)"></use><use href="#envelope-confetti-heart" transform="translate(175 181) rotate(-12) scale(.65)"></use><use href="#envelope-confetti-heart" transform="translate(413 242) rotate(32)"></use><use href="#envelope-confetti-heart" transform="translate(58 346) rotate(14) scale(1.15)"></use><use href="#envelope-confetti-heart" transform="translate(259 397) rotate(-32) scale(.8)"></use><use href="#envelope-confetti-heart" transform="translate(394 466) rotate(9) scale(.65)"></use></g><g fill="currentColor" opacity=".6"><use href="#envelope-confetti-heart" transform="translate(97 236) rotate(28) scale(.45)"></use><use href="#envelope-confetti-heart" transform="translate(343 150) rotate(-16) scale(.5)"></use><use href="#envelope-confetti-heart" transform="translate(152 479) rotate(-18) scale(.55)"></use></g><use href="#envelope-confetti-letter" transform="translate(162 64) rotate(17) scale(.85)"></use><use href="#envelope-confetti-letter" transform="translate(408 107) rotate(-24)"></use><use href="#envelope-confetti-letter" transform="translate(37 158) rotate(-11) scale(.7)"></use><use href="#envelope-confetti-letter" transform="translate(279 265) rotate(24) scale(1.1)"></use><use href="#envelope-confetti-letter" transform="translate(170 327) rotate(-29) scale(.8)"></use><use href="#envelope-confetti-letter" transform="translate(363 367) rotate(13) scale(.7)"></use><use href="#envelope-confetti-letter" transform="translate(53 471) rotate(-16)"></use></pattern></defs><rect width="100%" height="100%" fill="url(#envelope-confetti-pattern)"></rect></svg><div class="envelope-scene"><div class="envelope"><div class="envelope-back" aria-hidden="true"></div><div class="envelope-letter" aria-hidden="true"><span class="envelope-letter-mark">&#10022;</span><span>A beautiful beginning</span><span class="envelope-letter-rule"></span></div><div class="envelope-pocket" aria-hidden="true"></div><div class="envelope-fold envelope-fold-left" aria-hidden="true"></div><div class="envelope-fold envelope-fold-right" aria-hidden="true"></div><div class="envelope-flap-shadow" aria-hidden="true"></div><div class="envelope-flap" aria-hidden="true"></div><form method="dialog" class="envelope-open-form"><button type="submit" class="envelope-open-button" data-envelope-open aria-label="Tap here to open invitation"><span class="envelope-seal" aria-hidden="true"><svg viewBox="0 0 100 100" class="envelope-seal-ring" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="44" stroke="#f47858" stroke-width="1.2" opacity=".6"></circle><circle cx="50" cy="51" r="29" stroke="#500707" stroke-width="2.2" opacity=".7"></circle><circle cx="50" cy="49" r="29" stroke="#e36044" stroke-width=".9" opacity=".65"></circle><g stroke="#540808" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M50 64C39 63 32 55 33 45C34 35 44 30 52 34C60 27 72 37 67 47C76 57 61 68 50 64Z"></path><path d="M43 39C43 31 54 32 57 39C66 36 68 44 60 49C61 58 50 60 45 53C35 51 36 42 43 39Z"></path><path d="M45 42C47 37 55 38 56 44L49 49L45 42ZM49 49L45 53M56 44L60 49M33 45L38 49M57 39L52 34"></path><path d="M50 65V78M50 73C41 76 34 71 32 63C40 62 47 66 50 73ZM50 70C58 71 65 67 68 60C58 58 52 62 50 70Z"></path></g><g stroke="#f18764" stroke-width=".85" stroke-linecap="round" stroke-linejoin="round" opacity=".7" transform="translate(-.7 -1)"><path d="M50 64C39 63 32 55 33 45C34 35 44 30 52 34C60 27 72 37 67 47C76 57 61 68 50 64Z"></path><path d="M43 39C43 31 54 32 57 39C66 36 68 44 60 49C61 58 50 60 45 53C35 51 36 42 43 39ZM45 42C47 37 55 38 56 44L49 49L45 42Z"></path><path d="M50 65V78M50 73C41 76 34 71 32 63C40 62 47 66 50 73ZM50 70C58 71 65 67 68 60C58 58 52 62 50 70Z"></path></g></svg></span><svg class="envelope-open-label" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="envelope-seal-caption" d="M100 170a70 70 0 1 1 0-140a70 70 0 1 1 0 140"></path></defs><text text-anchor="middle"><textPath href="#envelope-seal-caption" startOffset="50%">TAP HERE</textPath></text><path d="M100 179l-6-6c-5-5 2-11 6-5c4-6 11 0 6 5Z"></path></svg></button></form></div></div><div style="display:none;" data-demo-watermark aria-hidden="true"></div></dialog><script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dialog = document.querySelector('[data-envelope-entrance]');
+    const openBtn = document.querySelector('[data-envelope-open]');
+    const audio = document.querySelector('[data-music-audio]');
+    const musicBtn = document.querySelector('[data-music-toggle]');
+
+    const inIframe = (function() {
+      try { return window.self !== window.top; } catch(e) { return true; }
+    })();
+    const isDirect = new URLSearchParams(window.location.search).has('no_envelope');
+
+    if (inIframe || isDirect) {
+      if (dialog) {
+        try { dialog.close(); } catch(e) {}
+        dialog.style.display = 'none';
+      }
+      document.documentElement.dataset.invitationEntrance = 'open';
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+    } else {
+      if (dialog) {
+        try { dialog.showModal(); } catch(e) { dialog.open = true; }
+      }
+    }
+
+    if (openBtn) {
+      openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (dialog) {
+          dialog.classList.add('is-opening');
+          setTimeout(() => {
+            try { dialog.close(); } catch(e) {}
+            dialog.style.display = 'none';
+            document.documentElement.dataset.invitationEntrance = 'open';
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+          }, 700);
+        }
+        if (audio) {
+          audio.src = 'assets/audio/wedding_song.mp3';
+          audio.play().catch(e => console.log(e));
+        }
+      });
+    }
+
+    if (musicBtn && audio) {
+      musicBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+          musicBtn.setAttribute('aria-pressed', 'true');
+        } else {
+          audio.pause();
+          musicBtn.setAttribute('aria-pressed', 'false');
+        }
+      });
+    }
+
+    // Live countdown
+    const target = new Date('2026-12-23T18:00:00+05:30').getTime();
+    const countWrap = document.querySelector('[data-countdown-values]');
+    if (countWrap) {
+      countWrap.removeAttribute('hidden');
+      const fallback = document.querySelector('[data-countdown-fallback]');
+      if (fallback) fallback.setAttribute('hidden', 'true');
+
+      function update() {
+        const now = new Date().getTime();
+        const diff = target - now;
+        if (diff <= 0) return;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const dEl = document.querySelector('[data-countdown-unit="days"]');
+        const hEl = document.querySelector('[data-countdown-unit="hours"]');
+        const mEl = document.querySelector('[data-countdown-unit="minutes"]');
+        const sEl = document.querySelector('[data-countdown-unit="seconds"]');
+        if (dEl) dEl.textContent = String(d).padStart(2, '0');
+        if (hEl) hEl.textContent = String(h).padStart(2, '0');
+        if (mEl) mEl.textContent = String(m).padStart(2, '0');
+        if (sEl) sEl.textContent = String(s).padStart(2, '0');
+      }
+      update();
+      setInterval(update, 1000);
+    }
+  });
+</script>
+<script src="../../js/vanvi-api.js"></script>
+<script src="../../js/template-adapter.js"></script>
+<script src="../../js/vanvi-template-lock.js"></script>
+<script>
+  // Real-time Live Sync Receiver for Hues & Whispers Luxe Studio
+  function applyLiveHuesData(cfg) {
+    if (!cfg) return;
+    const bride = cfg.bride || cfg.brideName || (cfg.couple && cfg.couple.bride && cfg.couple.bride.name) || '';
+    const groom = cfg.groom || cfg.groomName || (cfg.couple && cfg.couple.groom && cfg.couple.groom.name) || '';
+    const date = cfg.date || cfg.weddingDate || '';
+    const city = cfg.city || cfg.weddingCity || '';
+    const hashtag = cfg.hashtag || '';
+    const brideParents = cfg.brideParents || (cfg.couple && cfg.couple.bride && cfg.couple.bride.parents) || '';
+    const groomParents = cfg.groomParents || (cfg.couple && cfg.couple.groom && cfg.couple.groom.parents) || '';
+    const venue = cfg.venue || cfg.venueName || '';
+    const shloka = cfg.shloka || '';
+    const note = cfg.note || cfg.message || '';
+    const heroImg = cfg.heroImg || cfg.heroPhoto || (Array.isArray(cfg.photos) && cfg.photos[0]);
+
+    if (bride) {
+      document.querySelectorAll('.hero-names-bride, #brideName, .bride-name').forEach(el => el.textContent = bride);
+    }
+    if (groom) {
+      document.querySelectorAll('.hero-names-groom, #groomName, .groom-name').forEach(el => el.textContent = groom);
+    }
+    if (bride && groom) {
+      document.title = `${bride} & ${groom} — Shubh Vivah | Vanvi Moments`;
+      document.querySelectorAll('.inv-names__amp').forEach(el => {
+        const p = el.parentElement;
+        if (p) {
+          const spans = p.querySelectorAll('span:not(.inv-names__amp)');
+          if (spans.length >= 2) {
+            spans[0].textContent = bride;
+            spans[1].textContent = groom;
+          }
+        }
+      });
+    }
+    if (date) {
+      document.querySelectorAll('.inv-date-ribbon, #weddingDate, .wedding-date-txt').forEach(el => el.textContent = date);
+    }
+    if (city) {
+      document.querySelectorAll('.wedding-city-txt, #weddingCity').forEach(el => el.textContent = city);
+    }
+    if (hashtag) {
+      document.querySelectorAll('.wedding-hashtag, #coupleHashtag').forEach(el => el.textContent = hashtag);
+    }
+    if (brideParents) {
+      document.querySelectorAll('#brideParents, .bride-parents-txt').forEach(el => el.textContent = brideParents);
+    }
+    if (groomParents) {
+      document.querySelectorAll('#groomParents, .groom-parents-txt').forEach(el => el.textContent = groomParents);
+    }
+    if (venue) {
+      document.querySelectorAll('#venueLocation, .venue-name-txt').forEach(el => el.textContent = venue);
+    }
+    if (shloka) {
+      document.querySelectorAll('#blessingShloka, .shloka-txt').forEach(el => el.textContent = shloka);
+    }
+    if (note) {
+      const noteEl = document.querySelector('.note-card p, #noteFromUs');
+      if (noteEl) noteEl.textContent = note;
+    }
+    if (heroImg) {
+      document.querySelectorAll('.hero-couple-img, #heroCoupleImg').forEach(el => el.src = heroImg);
+    }
+  }
+
+  window.addEventListener('message', (e) => {
+    if (!e.data) return;
+    if (e.data.type === 'VANVI_LIVE_PREVIEW_SYNC' || e.data.type === 'UPDATE_CONFIG' || e.data.type === 'VANVI_UPDATE_CUSTOM_DATA') {
+      const cfg = e.data.customData || e.data.config || e.data;
+      applyLiveHuesData(cfg);
+    }
+  });
+
+  const qp = new URLSearchParams(window.location.search);
+  const qBride = qp.get('bride');
+  const qGroom = qp.get('groom');
+  const qName = qp.get('name') || qp.get('recipient');
+  if (qBride || qGroom) {
+    applyLiveHuesData({ bride: qBride, groom: qGroom, date: qp.get('date'), note: qp.get('message') });
+  } else if (qName && qName.includes('&')) {
+    const p = qName.split('&').map(s => s.trim());
+    applyLiveHuesData({ bride: p[0], groom: p[1], date: qp.get('date'), note: qp.get('message') });
+  }
+</script>
+</body></html>

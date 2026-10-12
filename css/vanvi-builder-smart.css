@@ -1,0 +1,385 @@
+/**
+ * VANVI MOMENTS — UNIVERSAL BUILDER SMART RESPONSIVE ENGINE (v2.0)
+ * 
+ * Solves:
+ * 1. Mobile Phone View: Eliminates all 50%/50% vertical/horizontal splits ("aadha-aadha" cut-off).
+ *    Switches seamlessly between full 100% Edit mode and full 100% Live Preview mode with floating controls.
+ * 2. Laptop / Desktop View: Displays a luxury centered smartphone mockup frame with sleek glass bezels,
+ *    subtle jewel glow, and zero distortion.
+ */
+
+/* ─── 1. LAPTOP / DESKTOP STUDIO ENHANCEMENT (> 960px) ─── */
+@media (min-width: 961px) {
+  /* Ensure container doesn't overflow */
+  .builder-layout,
+  .shaadi-builder-container,
+  .studio-main,
+  .studio-body {
+    display: flex !important;
+    height: calc(100vh - 65px) !important;
+    max-height: calc(100vh - 65px) !important;
+    overflow: hidden !important;
+  }
+
+  /* Form Sidebar Pane */
+  .builder-form-pane,
+  .builder-sidebar,
+  .editor-pane {
+    width: 440px !important;
+    min-width: 400px !important;
+    max-width: 480px !important;
+    height: 100% !important;
+    flex-shrink: 0 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    border-right: 1px solid rgba(255, 120, 175, 0.22);
+  }
+
+  /* Preview Stage Pane */
+  .builder-preview-pane,
+  .builder-stage,
+  .preview-pane {
+    flex: 1 !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 24px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    top: auto !important;
+  }
+
+  /* Luxury Phone Mockup Frame on Laptop */
+  .preview-frame-container,
+  .preview-frame-wrapper,
+  .preview-phone-frame,
+  .preview-iframe-container {
+    width: 100% !important;
+    max-width: 412px !important;
+    height: min(84vh, 830px) !important;
+    max-height: 86vh !important;
+    margin: auto !important;
+    border-radius: 42px !important;
+    border: 8px solid #1a1324 !important;
+    background: #000000 !important;
+    box-shadow: 
+      0 25px 70px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 0 40px rgba(255, 42, 122, 0.15) !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    transition: max-width 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease !important;
+  }
+
+  /* Mockup bezel inner container */
+  .mockup-bezel {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+    border-radius: 0 !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .preview-iframe,
+  .mockup-bezel iframe,
+  .preview-frame,
+  .preview-phone-frame iframe {
+    width: 100% !important;
+    height: 100% !important;
+    flex: 1 !important;
+    border: none !important;
+    background: #ffffff;
+    display: block !important;
+  }
+
+  /* Expandable Device Switcher Modes on Laptop */
+  .preview-frame-container.desktop-mode,
+  .preview-frame-container.desktop-view,
+  .preview-frame-wrapper.desktop-mode,
+  .preview-frame.desktop {
+    max-width: 960px !important;
+    border-radius: 18px !important;
+    border-width: 4px !important;
+  }
+
+  .preview-frame-container.tablet-view {
+    max-width: 768px !important;
+    border-radius: 26px !important;
+    border-width: 6px !important;
+  }
+
+  /* Hide mobile-only bar on desktop */
+  .vanvi-builder-mobile-bar,
+  .mobile-view-tabs {
+    display: none !important;
+  }
+}
+
+/* ─── 2. MOBILE PHONE & TABLET SMART ARCHITECTURE (<= 960px) ─── */
+@media (max-width: 960px) {
+  html, body {
+    overflow-x: hidden !important;
+    height: 100% !important;
+  }
+
+  body {
+    padding-bottom: 74px !important;
+  }
+
+  /* Master layout container fills screen without rigid split */
+  .builder-layout,
+  .shaadi-builder-container,
+  .studio-main,
+  .studio-body {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: calc(100dvh - 60px) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* ── MODE 1: EDIT FORM MODE (Default on mobile) ── */
+  body:not(.vanvi-builder-preview-active) .builder-form-pane,
+  body:not(.vanvi-builder-preview-active) .builder-sidebar,
+  body:not(.vanvi-builder-preview-active) .editor-pane {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 16px 14px 24px !important;
+    overflow-y: visible !important;
+    border-right: none !important;
+  }
+
+  body:not(.vanvi-builder-preview-active) .builder-preview-pane,
+  body:not(.vanvi-builder-preview-active) .builder-stage,
+  body:not(.vanvi-builder-preview-active) .preview-pane {
+    display: none !important;
+  }
+
+  /* ── MODE 2: LIVE PREVIEW FULL-SCREEN MODE ── */
+  body.vanvi-builder-preview-active {
+    overflow: hidden !important;
+  }
+
+  body.vanvi-builder-preview-active .builder-form-pane,
+  body.vanvi-builder-preview-active .builder-sidebar,
+  body.vanvi-builder-preview-active .editor-pane {
+    display: none !important;
+  }
+
+  body.vanvi-builder-preview-active .builder-preview-pane,
+  body.vanvi-builder-preview-active .builder-stage,
+  body.vanvi-builder-preview-active .preview-pane,
+  body.vanvi-builder-preview-active .preview-panel-wrap {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+    top: 56px !important;
+    bottom: 64px !important;
+    width: 100vw !important;
+    height: calc(100dvh - 120px) !important;
+    z-index: 9999 !important;
+    background: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* When in preview mode, preview container fills 100% edge-to-edge */
+  body.vanvi-builder-preview-active .preview-frame-container,
+  body.vanvi-builder-preview-active .preview-frame-wrapper,
+  body.vanvi-builder-preview-active .preview-phone-frame,
+  body.vanvi-builder-preview-active .preview-iframe-container,
+  body.vanvi-builder-preview-active .iframe-display-box {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #000000 !important;
+  }
+
+  body.vanvi-builder-preview-active .mockup-bezel {
+    border: none !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    box-shadow: none !important;
+  }
+
+  body.vanvi-builder-preview-active .bezel-notch {
+    display: none !important;
+  }
+
+  body.vanvi-builder-preview-active .preview-iframe,
+  body.vanvi-builder-preview-active .mockup-bezel iframe,
+  body.vanvi-builder-preview-active .preview-frame,
+  body.vanvi-builder-preview-active .preview-phone-frame iframe,
+  body.vanvi-builder-preview-active .live-iframe {
+    width: 100vw !important;
+    height: 100% !important;
+    border: none !important;
+    border-radius: 0 !important;
+    display: block !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide preview toolbars when docked on mobile full view */
+  body.vanvi-builder-preview-active .preview-toolbar,
+  body.vanvi-builder-preview-active .preview-device-switcher,
+  body.vanvi-builder-preview-active .preview-top-bar,
+  body.vanvi-builder-preview-active .device-switcher,
+  body.vanvi-builder-preview-active .device-switcher-pill {
+    display: none !important;
+  }
+
+  /* ── 3. FLOATING SMART BOTTOM NAVIGATION DOCK (MOBILE) ── */
+  .vanvi-builder-mobile-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    z-index: 999999;
+    background: rgba(22, 12, 28, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 120, 175, 0.28);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    gap: 10px;
+    box-sizing: border-box;
+    padding-bottom: max(8px, env(safe-area-inset-bottom, 8px));
+  }
+
+  .vanvi-mobile-switch-group {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 4px;
+    flex: 1;
+    max-width: 280px;
+  }
+
+  .vanvi-mobile-switch-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: #e2d7e8;
+    font-size: 12.5px;
+    font-weight: 750;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .vanvi-mobile-switch-btn.active {
+    background: linear-gradient(135deg, #ff2a7a 0%, #d81b60 100%);
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(255, 42, 122, 0.4);
+  }
+
+  .vanvi-mobile-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+    color: #1a0820 !important;
+    font-size: 12px;
+    font-weight: 850;
+    padding: 9px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+    white-space: nowrap;
+    transition: transform 0.2s;
+  }
+
+  .vanvi-mobile-action-btn:active {
+    transform: scale(0.96);
+  }
+}
+
+/* ─── 4. STANDARDIZED BUILDER TOP-LEFT BACK BUTTON ─── */
+.vanvi-builder-back-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  height: 36px !important;
+  padding: 0 14px !important;
+  border-radius: 99px !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(255, 120, 175, 0.35) !important;
+  color: #2c1224 !important;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08) !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+  margin-right: 12px !important;
+}
+.vanvi-builder-back-btn .back-arrow {
+  color: #ff2a7a !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  transition: transform 0.2s ease !important;
+}
+.vanvi-builder-back-btn:hover {
+  background: #fff5f8 !important;
+  border-color: #ff2a7a !important;
+  color: #ff2a7a !important;
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 6px 16px rgba(255, 42, 122, 0.2) !important;
+}
+.vanvi-builder-back-btn:hover .back-arrow {
+  transform: translateX(-3px) !important;
+}
+
+/* Dark Theme & Palace Builders Override */
+.studio-header .vanvi-builder-back-btn,
+.shaadi-builder-header .vanvi-builder-back-btn,
+.builder-header .vanvi-builder-back-btn {
+  background: rgba(23, 9, 14, 0.9) !important;
+  border: 1px solid rgba(234, 179, 8, 0.4) !important;
+  color: #fef08a !important;
+}
+.studio-header .vanvi-builder-back-btn .back-arrow,
+.shaadi-builder-header .vanvi-builder-back-btn .back-arrow,
+.builder-header .vanvi-builder-back-btn .back-arrow {
+  color: #eab308 !important;
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hues & Whispers Luxe — Live Preview | Vanvi Moments</title>
+  <script>
+    // Seamlessly forward to index.html preserving query parameters
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has('preview')) params.set('preview', 'true');
+    window.location.replace('index.html?' + params.toString());
+  </script>
+</head>
+<body style="margin:0; background:#140508; color:#f7e4b5; font-family:sans-serif; display:flex; align-items:center; justify-content:center; height:100vh;">
+  <p>Loading Vanvi Moments Royal Vivah Atelier...</p>
+</body>
+</html>
