@@ -1462,7 +1462,7 @@ function vanviGoBack(fallback) {
     const found = window.VANVI_TEMPLATES.find(t => t.id === templateId || t.slug === templateId || (t.aliases && t.aliases.includes(templateId)) || t.name.toLowerCase() === templateName.toLowerCase());
     if (found) {
       templateName = found.name;
-      if (!urlParams.get('amount') && !urlParams.get('price') && found.price) basePrice = found.price;
+      if (!urlParams.get('amount') && !urlParams.get('price') && typeof found.price === 'number') basePrice = found.price;
       if (!urlParams.get('occasion') && (found.previewOccasion || found.category)) occasion = found.previewOccasion || found.category;
     }
   }

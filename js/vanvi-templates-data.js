@@ -137,52 +137,6 @@
       builderPath: 'templates/royal-vows-indian-wedding/builder.html'
     },
     // -------------------------------------------------------------
-    // Royal Vivah HD Video Wedding Invitation (InviteMaker Style)
-    // -------------------------------------------------------------
-    {
-      id: 'video-royal-vivah',
-      slug: 'video-royal-vivah',
-      sku: 'VM-VID-VIVAH-01',
-      name: 'Royal Vivah HD Video Invite',
-      aliases: ['video-royal-vivah', 'royal-vivah-video', 'wedding-video-invite', 'invitemaker-wedding'],
-      category: 'Wedding',
-      categorySlug: 'wedding',
-      categoryName: 'Wedding & Engagement',
-      price: 1499,
-      originalPrice: 2499,
-      isFree: false,
-      tier: 'HD Video Special',
-      badge: '🎬 HD Video Invite',
-      type: 'Cinematic 45s HD Motion Video & WhatsApp Status',
-      icon: '🎬',
-      thumbnail: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=700&auto=format&fit=crop',
-      soundtrack: 'Auspicious Royal Shehnai & Santoor Symphony',
-      tags: ['wedding', 'video', 'mp4', 'royal-vivah', 'invitemaker', 'reels', 'whatsapp-status', 'shehnai', 'ganesha'],
-      description: 'InviteMaker-style cinematic 45-second HD customizable wedding invitation video. Features 3D golden Ganesha shloka, royal couple introduction, auspicious muhurat, 4 sacred ceremonies timeline, venue reveal, shehnai audio, and instant personalized MP4 rendering.',
-      features: [
-        'True 1080p 60fps HD MP4 Video Generation & Direct Download',
-        '9:16 Vertical Ratio tailored for WhatsApp Status, Stories & Reels',
-        'Instant Live Preview Video Player with Scrub & Audio Controls',
-        'Act 1: Auspicious Shree Ganeshay Namah & Divine Shloka Reveal',
-        'Act 2: Royal Couple Portrait & Parents Dedication Cards',
-        'Act 3: Save The Date & Auspicious Lagna Muhurat Callout',
-        'Act 4: 4 Sacred Ceremonies Timeline (Haldi, Mehendi, Sangeet, Vivah)',
-        'Act 5: Grand Royal Venue Reveal & Family RSVP Cards',
-        'Customizable Music (Shehnai, Santoor, Flute or Upload MP3)',
-        'Custom Background Video MP4 Support or Royal Golden Particle Canvas',
-        'Razorpay Secure Checkout & Instant Clean HD MP4 Export Unlock'
-      ],
-      customizableFields: ['Groom & Bride Names', 'Parents Honors', 'Wedding Date & Muhurat', '4 Ceremonies Timings', 'Couple Photo', 'Soundtrack / Custom Audio', 'Custom Video Background'],
-      previewOccasion: 'Shubh Vivah Celebration',
-      previewRecipient: 'Aryan & Pooja',
-      previewSender: 'Sharma & Verma Families',
-      previewMessage: 'With the divine blessings of Lord Ganesha, join us as we begin our forever journey together.',
-      accentColor: '#D4AF37',
-      templatePath: 'templates/video-royal-vivah/index.html',
-      previewPath: 'templates/video-royal-vivah/preview.html',
-      builderPath: 'templates/video-royal-vivah/builder.html'
-    },
-    // -------------------------------------------------------------
     // 0. Flagship Royal Palace Wedding & Heritage Keepsakes
     // -------------------------------------------------------------
     {
@@ -490,18 +444,19 @@
       category: 'Birthday',
       categorySlug: 'birthday',
       categoryName: 'Birthday',
-      price: 149,
-      originalPrice: 429,
-      isFree: false,
-      tier: 'Premium',
-      badge: '🔥 Bestseller',
+      price: 0,
+      originalPrice: 149,
+      isFree: true,
+      tier: '100% Free Gift',
+      badge: '🎁 100% Free Gift',
       type: 'Multi-Step Birthday Microsite',
       icon: '🎂',
       thumbnail: 'https://cdn.cutiepage.in/static/products/birthday-wish1.jpg',
       soundtrack: 'Birthday Celebration Melody',
-      tags: ['bestseller', 'birthday', 'interactive', 'candles', 'polaroid', 'letter'],
-      description: 'Lifetime validity + Make it in just 30 seconds + live beautiful QR Code. A playful multi-step birthday microsite with an intro, interactive celebration scene, flip cards, and final heartfelt letter.',
+      tags: ['free', 'bestseller', 'birthday', 'interactive', 'candles', 'polaroid', 'letter'],
+      description: '100% Free Community Gift. Lifetime validity + Make it in just 30 seconds + live beautiful QR Code. A playful multi-step birthday microsite with an intro, interactive celebration scene, flip cards, and final heartfelt letter.',
       features: [
+        '100% Free Lifetime Celebration Keepsake',
         'Interactive Gift Opening Scene',
         'Tap-to-Blow Birthday Candles',
         'Swipeable Polaroid Memory Deck',
@@ -516,7 +471,9 @@
       previewSender: 'With all my love, Sneha',
       previewMessage: 'Wishing you another 365 days of laughter, golden sunsets, and big dreams. May your year be as bright and beautiful as your smile. Happy Birthday! 🎂✨',
       accentColor: '#ff4d6d',
-      templatePath: 'templates/birthday-wish-01/index.html'
+      templatePath: 'templates/birthday-wish-01/index.html',
+      previewPath: 'templates/birthday-wish-01/preview.html',
+      builderPath: 'templates/birthday-wish-01/builder.html'
     },
     {
       id: 'birthday-wish-2',
@@ -2484,30 +2441,41 @@
       const catSlug = (t.categorySlug || t.category || 'birthday').toLowerCase().replace(/[^a-z0-9]/g, '');
       const videoSrc = t.videoPreview || t.previewVideo || null;
 
+      const isLocked = (typeof window !== 'undefined' && window.VanviVault && typeof window.VanviVault.isUnlocked === 'function')
+        ? !window.VanviVault.isUnlocked(t.id || t.slug)
+        : false;
+
       const directPreviewUrl = t.templatePath || (t.id ? `templates/${safeId}/index.html` : `preview.html?template=${safeId}`);
       const directBuilderUrl = t.builderPath || (t.id ? `templates/${safeId}/builder.html` : `builder.html?template=${safeId}&occasion=${safeOccasion}`);
 
       return `
-        <article class="vanvi-card ${isLux ? 'is-luxury' : ''}" data-cat="${escapeHtml(catSlug)}" id="card-${t.id}">
-          <div class="card-art-box" onclick="window.location.href='${directPreviewUrl}'" title="Experience ${escapeHtml(t.name)}">
+        <article class="vanvi-card ${isLux ? 'is-luxury' : ''} ${isLocked ? 'is-vault-locked' : ''}" data-cat="${escapeHtml(catSlug)}" id="card-${t.id}" data-vault-locked="${isLocked ? 'true' : 'false'}" data-vault-title="${escapeHtml(t.name)}">
+          <div class="card-art-box" onclick="${isLocked ? `window.VanviVault && window.VanviVault.openModal('${escapeHtml(t.name)}')` : `window.location.href='${directPreviewUrl}'`}" title="${isLocked ? 'Locked in Vault — Coming Soon' : `Experience ${escapeHtml(t.name)}`}">
             <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
               <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
             </div>
-            <span class="card-badge-top-right ${isFree ? 'free' : (isLux ? 'luxury' : 'price')}">
-              ${isFree ? '🎁 Free' : (isLux ? '✦ Signature' : `₹${p}`)}
-            </span>
+            ${isLocked ? `
+              <span class="vault-lock-badge">🔒 VAULT DROP</span>
+            ` : `
+              <span class="card-badge-top-right ${isFree ? 'free' : (isLux ? 'luxury' : 'price')}">
+                ${isFree ? '🎁 Free' : (isLux ? '✦ Signature' : `₹${p}`)}
+              </span>
+            `}
             <!-- Ambient blurred aura behind image so colors glow without letterbox -->
             <img class="card-art-backdrop" src="${thumb}" alt="" aria-hidden="true" loading="lazy">
             <!-- Centerpiece uncropped artwork: perfectly centered & framed -->
             <img class="card-art-img" src="${thumb}" alt="${escapeHtml(t.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?w=700&auto=format&fit=crop&q=80';">
-            ${videoSrc ? `
+            ${isLocked ? `
+              <div class="vault-overlay-center"><span class="vault-lock-icon">🔒</span></div>
+            ` : ''}
+            ${videoSrc && !isLocked ? `
               <video class="card-art-video" src="${escapeHtml(videoSrc)}" poster="${thumb}" muted loop playsinline preload="none" onmouseenter="this.play()" onmouseleave="this.pause()" aria-hidden="true"></video>
             ` : ''}
           </div>
 
           <div class="card-body">
             <div class="card-exp-hint">
-              <span class="exp-hint-pill">${escapeHtml(expHint)}</span>
+              <span class="exp-hint-pill">${isLocked ? '🔒 Private Atelier' : escapeHtml(expHint)}</span>
             </div>
             <div class="card-header-meta">
               <h3 class="card-title" title="${escapeHtml(t.name)}">${escapeHtml(t.name)}</h3>
@@ -2522,17 +2490,23 @@
               </div>
               <div class="card-status-subtle">
                 <span class="status-dot">✦</span>
-                <span class="status-txt">${isFree ? 'Forever Free' : 'Lifetime Access'}</span>
+                <span class="status-txt">${isLocked ? 'Releasing Soon' : (isFree ? 'Forever Free' : 'Lifetime Access')}</span>
               </div>
             </div>
 
             <div class="card-actions-grid">
-              <a href="${directPreviewUrl}" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
-                <span>Preview</span>
-              </a>
-              <a href="${directBuilderUrl}" class="btn-make-yours" title="Create ${escapeHtml(t.name)}">
-                <span>Create ✦</span>
-              </a>
+              ${isLocked ? `
+                <button type="button" class="btn-vault-locked" onclick="window.VanviVault && window.VanviVault.openModal('${escapeHtml(t.name)}')" title="Unlock Early Access">
+                  <span>🔒 Private Vault — Drop Soon ✦</span>
+                </button>
+              ` : `
+                <a href="${directPreviewUrl}" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
+                  <span>Preview</span>
+                </a>
+                <a href="${directBuilderUrl}" class="btn-make-yours" title="Create ${escapeHtml(t.name)}">
+                  <span>Create ✦</span>
+                </a>
+              `}
             </div>
           </div>
         </article>

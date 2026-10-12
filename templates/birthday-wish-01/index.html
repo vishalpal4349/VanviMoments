@@ -348,24 +348,76 @@
     /* Navigation CTA Buttons */
     .btn-step {
       width: 100%;
-      height: 52px;
+      min-height: 50px;
+      padding: 12px 18px;
       border-radius: 16px;
       border: none;
       background: linear-gradient(135deg, #ff4d6d, #c9184a);
       color: #ffffff;
       font-family: 'Outfit', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       cursor: pointer;
       box-shadow: 0 8px 24px var(--accent-glow);
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       margin-top: 14px;
+      text-decoration: none;
+      box-sizing: border-box;
+      -webkit-appearance: none;
     }
-    .btn-step:active { transform: scale(0.97); }
+    .btn-step:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(201, 24, 74, 0.4);
+    }
+    .btn-step:active {
+      transform: scale(0.97);
+    }
+
+    .actions-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      margin-top: 16px;
+    }
+    .actions-stack .btn-step {
+      margin-top: 0;
+    }
+
+    .btn-step-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E) !important;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35) !important;
+      color: #ffffff !important;
+    }
+    .btn-step-whatsapp:hover {
+      box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45) !important;
+    }
+
+    .btn-step-secondary {
+      background: #ffffff !important;
+      color: var(--accent-deep) !important;
+      border: 1.5px solid var(--border) !important;
+      box-shadow: 0 4px 16px rgba(201, 24, 74, 0.1) !important;
+    }
+    .btn-step-secondary:hover {
+      background: #fff5f8 !important;
+      border-color: var(--accent) !important;
+    }
+
+    .btn-step-outline {
+      background: transparent !important;
+      color: var(--text-muted) !important;
+      border: 1.5px dashed var(--border) !important;
+      box-shadow: none !important;
+    }
+    .btn-step-outline:hover {
+      background: rgba(255, 255, 255, 0.6) !important;
+      color: var(--accent) !important;
+    }
 
     .step-dots {
       display: flex;
@@ -383,6 +435,68 @@
       width: 24px;
       border-radius: 99px;
       background: var(--accent);
+    }
+
+    /* Ultra Responsive Layout for Mobile Devices (320px - 480px) */
+    @media (max-width: 480px) {
+      .app-wrap {
+        padding: 16px 12px 60px;
+      }
+      .hero-title {
+        font-size: clamp(23px, 6.5vw, 28px);
+      }
+      .hero-sub {
+        font-size: 14px;
+        margin-bottom: 18px;
+      }
+      .gift-stage {
+        width: 150px;
+        height: 150px;
+        margin: 10px auto 20px;
+      }
+      .cake-container {
+        padding: 20px 14px;
+        border-radius: 22px;
+      }
+      .polaroid-img-box {
+        height: 200px;
+      }
+      .letter-paper {
+        padding: 20px 16px;
+        border-radius: 18px;
+      }
+      .letter-body {
+        font-size: 18px;
+      }
+      .btn-step {
+        min-height: 48px;
+        font-size: 14.5px;
+        padding: 10px 14px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero-title {
+        font-size: 21px;
+      }
+      .gift-stage {
+        width: 130px;
+        height: 130px;
+      }
+      .gift-bow {
+        font-size: 46px;
+      }
+      .polaroid-img-box {
+        height: 175px;
+      }
+      .letter-body {
+        font-size: 16.5px;
+      }
+      .btn-step {
+        font-size: 13.5px;
+        padding: 10px 12px;
+        gap: 6px;
+      }
     }
   </style>
   <link rel="stylesheet" href="../../css/vanvi-template-lock.css">
@@ -442,10 +556,10 @@
       <div class="cake-container" onclick="blowAllCandles()">
         <div class="cake-art">
           <div class="cake-cherries">
-            <div class="candle-stick" id="c1"><div class="candle-flame"></div></div>
-            <div class="candle-stick" id="c2"><div class="candle-flame"></div></div>
-            <div class="candle-stick" id="c3"><div class="candle-flame"></div></div>
-            <div class="candle-stick" id="c4"><div class="candle-flame"></div></div>
+            <div class="candle-stick" id="c1" onclick="blowSingleCandle(event, this)"><div class="candle-flame"></div></div>
+            <div class="candle-stick" id="c2" onclick="blowSingleCandle(event, this)"><div class="candle-flame"></div></div>
+            <div class="candle-stick" id="c3" onclick="blowSingleCandle(event, this)"><div class="candle-flame"></div></div>
+            <div class="candle-stick" id="c4" onclick="blowSingleCandle(event, this)"><div class="candle-flame"></div></div>
           </div>
           <div class="cake-base">
             <div class="cake-icing"></div>
@@ -516,9 +630,17 @@ You bring so much gentleness and magic to everyone around you. May this year sho
         <div class="letter-signature" id="txtLetterSign">— With all my love, Always</div>
       </div>
 
-      <button type="button" class="btn-step" onclick="replayAll()">
-        <span>Replay Celebration</span> <span>🔄</span>
-      </button>
+      <div class="actions-stack">
+        <button type="button" class="btn-step btn-step-whatsapp" onclick="shareOnWhatsApp()">
+          <span>Share via WhatsApp</span> <span>💬</span>
+        </button>
+        <a href="builder.html" class="btn-step btn-step-secondary">
+          <span>Make Your Free Gift (₹0)</span> <span>✨</span>
+        </a>
+        <button type="button" class="btn-step btn-step-outline" onclick="replayAll()">
+          <span>Replay Celebration</span> <span>🔄</span>
+        </button>
+      </div>
 
       <div class="step-dots">
         <span class="dot"></span>
@@ -538,28 +660,120 @@ You bring so much gentleness and magic to everyone around you. May this year sho
     const message = params.get('message') || null;
 
     if (recipient) {
-      document.getElementById('txtRecipientHero').textContent = `Happy Birthday, ${recipient}!`;
-      document.getElementById('txtLetterHeading').textContent = `Dearest ${recipient},`;
+      const hero = document.getElementById('txtRecipientHero');
+      if (hero) hero.textContent = `Happy Birthday, ${recipient}!`;
+      const head = document.getElementById('txtLetterHeading');
+      if (head) head.textContent = `Dearest ${recipient},`;
     }
     if (message) {
-      document.getElementById('txtLetterBody').textContent = message;
+      const body = document.getElementById('txtLetterBody');
+      if (body) body.textContent = message;
     }
     if (sender) {
-      document.getElementById('txtLetterSign').textContent = `— ${sender}`;
+      const sign = document.getElementById('txtLetterSign');
+      if (sign) sign.textContent = `— ${sender}`;
+    }
+
+    // Dynamic Polaroid Deck Updater
+    function updatePolaroidPhotos(photosList) {
+      if (!Array.isArray(photosList) || photosList.length === 0) return;
+      const deck = document.getElementById('polaroidDeck');
+      if (!deck) return;
+      const valid = photosList.filter(Boolean);
+      if (!valid.length) return;
+      const captions = [
+        'Where all the best smiles begin 🌸',
+        'Another year more wonderful than the last! ✨',
+        'Celebrating you today and always! 🎂',
+        'Cherished memories with endless laughter 💖'
+      ];
+      deck.innerHTML = valid.map((src, i) => `
+        <div class="polaroid-card">
+          <div class="polaroid-img-box">
+            <img src="${src}" alt="Memory ${i + 1}" loading="lazy">
+          </div>
+          <div class="polaroid-caption">${captions[i % captions.length]}</div>
+        </div>
+      `).join('');
+    }
+
+    const photosParam = params.get('photos');
+    if (photosParam) {
+      try {
+        const parsed = JSON.parse(photosParam);
+        if (Array.isArray(parsed)) updatePolaroidPhotos(parsed);
+      } catch(e) {
+        if (photosParam.includes(',')) updatePolaroidPhotos(photosParam.split(','));
+      }
+    }
+
+    // Web Audio Synthesizer Fallback for Melodic Birthday Chime
+    let audioCtx = null;
+    let synthPlaying = false;
+
+    function playSynthBirthdayChime() {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        synthPlaying = true;
+        document.getElementById('audioLabel').textContent = 'Playing 🎵';
+
+        // Happy birthday melody notes & durations: [freq, durationSec]
+        const notes = [
+          [261.63, 0.35], [261.63, 0.35], [293.66, 0.7], [261.63, 0.7], [349.23, 0.7], [329.63, 1.2],
+          [261.63, 0.35], [261.63, 0.35], [293.66, 0.7], [261.63, 0.7], [392.00, 0.7], [349.23, 1.2],
+          [261.63, 0.35], [261.63, 0.35], [523.25, 0.7], [440.00, 0.7], [349.23, 0.7], [329.63, 0.7], [293.66, 0.9],
+          [466.16, 0.35], [466.16, 0.35], [440.00, 0.7], [349.23, 0.7], [392.00, 0.7], [349.23, 1.4]
+        ];
+
+        let currTime = audioCtx.currentTime + 0.05;
+        notes.forEach(([freq, dur]) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, currTime);
+          gain.gain.setValueAtTime(0.001, currTime);
+          gain.gain.exponentialRampToValueAtTime(0.2, currTime + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.001, currTime + dur - 0.05);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(currTime);
+          osc.stop(currTime + dur);
+          currTime += dur + 0.05;
+        });
+      } catch (e) {
+        console.warn('Synth playback failed:', e);
+      }
+    }
+
+    function stopSynthChime() {
+      if (audioCtx && audioCtx.state !== 'closed') {
+        try { audioCtx.suspend(); } catch(e) {}
+      }
+      synthPlaying = false;
     }
 
     // Audio Handling
     let isPlaying = false;
     const audio = document.getElementById('bgAudio');
     function toggleAudio() {
-      if (!isPlaying) {
+      if (!isPlaying && !synthPlaying) {
         audio.play().then(() => {
           isPlaying = true;
           document.getElementById('audioLabel').textContent = 'Playing 🎵';
-        }).catch(() => {});
+        }).catch(() => {
+          // Play synth chime fallback
+          playSynthBirthdayChime();
+        });
       } else {
         audio.pause();
+        stopSynthChime();
         isPlaying = false;
+        synthPlaying = false;
         document.getElementById('audioLabel').textContent = 'Sound Off 🔇';
       }
     }
@@ -577,9 +791,22 @@ You bring so much gentleness and magic to everyone around you. May this year sho
     }
 
     function openGift() {
-      if (!isPlaying) toggleAudio();
+      if (!isPlaying && !synthPlaying) toggleAudio();
       triggerConfetti();
       goToScene(2);
+    }
+
+    function blowSingleCandle(e, el) {
+      if (e) e.stopPropagation();
+      if (!el) return;
+      el.classList.add('blown');
+      triggerConfetti();
+      const remaining = document.querySelectorAll('.candle-stick:not(.blown)').length;
+      if (remaining === 0) {
+        document.getElementById('candleStatus').innerHTML = '🎉 All Wishes Made! Fireworks Ignited! ✨';
+      } else {
+        document.getElementById('candleStatus').innerHTML = `🕯️ ${remaining} candle${remaining > 1 ? 's' : ''} left! Tap to blow!`;
+      }
     }
 
     function blowAllCandles() {
@@ -593,6 +820,43 @@ You bring so much gentleness and magic to everyone around you. May this year sho
       document.getElementById('candleStatus').innerHTML = '🕯️ Tap cake to blow candles &amp; ignite fireworks!';
       goToScene(1);
     }
+
+    function shareOnWhatsApp() {
+      const rec = (document.getElementById('txtRecipientHero')?.textContent || 'Friend').replace('Happy Birthday, ', '').replace('!', '');
+      const shareUrl = window.location.href;
+      const text = `🎂 Happy Birthday ${rec}! Here is an interactive celebration keepsake handcrafted just for you: ${shareUrl}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    // Live Builder Sync (postMessage from builder.html)
+    window.addEventListener('message', (event) => {
+      if (!event.data) return;
+      if (event.data.type === 'VANVI_LIVE_PREVIEW_SYNC' || event.data.type === 'VANVI_PREVIEW_UPDATE') {
+        const d = event.data;
+        const rec = d.recipient || d.recipientName || (d.customData && d.customData.recipientName);
+        const snd = d.sender || d.senderName || (d.customData && d.customData.senderName);
+        const msg = d.message || (d.customData && d.customData.message);
+        const pts = d.photos || (d.customData && d.customData.photos);
+
+        if (rec) {
+          const el = document.getElementById('txtRecipientHero');
+          if (el) el.textContent = `Happy Birthday, ${rec}!`;
+          const hd = document.getElementById('txtLetterHeading');
+          if (hd) hd.textContent = `Dearest ${rec},`;
+        }
+        if (msg) {
+          const el = document.getElementById('txtLetterBody');
+          if (el) el.textContent = msg;
+        }
+        if (snd) {
+          const el = document.getElementById('txtLetterSign');
+          if (el) el.textContent = `— ${snd}`;
+        }
+        if (Array.isArray(pts) && pts.length > 0) {
+          updatePolaroidPhotos(pts);
+        }
+      }
+    });
 
     // Confetti Physics Engine
     const canvas = document.getElementById('confettiCanvas');

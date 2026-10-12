@@ -24,13 +24,13 @@
         <span class="builder-template-icon">🎉</span>
         <div>
           <div class="builder-template-name">Birthday Wish 01 Studio</div>
-          <span class="builder-template-badge">Confetti & Cake Cut</span>
+          <span class="builder-template-badge" style="background:#d1fae5; color:#059669; border:1px solid rgba(5,150,105,0.3); font-weight:800;">🎁 100% Free Gift</span>
         </div>
       </div>
     </div>
     <div class="builder-actions-top">
       <button id="btnSaveMomentTop" class="builder-save-btn">
-        <span>✨</span> <span>Publish Keepsake</span>
+        <span>✨</span> <span>Publish Free Gift (₹0)</span>
       </button>
     </div>
   </header>
@@ -38,7 +38,7 @@
   <main class="builder-layout">
     <section class="builder-form-pane">
       <div class="builder-hero-intro">
-        <div class="builder-eyebrow">Interactive Cake Cut Customizer</div>
+        <div class="builder-eyebrow">100% Free Interactive Birthday Keepsake</div>
         <h1 class="builder-title">Cut the Birthday Cake & Blast Confetti!</h1>
         <p class="builder-desc">An upbeat, cheerful birthday experience with interactive cake slicing, bursts of confetti, cheerful music, and festive party banners.</p>
       </div>
@@ -110,6 +110,12 @@
             <span>Acoustic Cheers</span>
           </div>
         </div>
+      </div>
+
+      <div style="margin-top: 24px; padding-bottom: 24px;">
+        <button id="btnSaveMomentBottom" class="builder-save-btn" style="width: 100%; height: 50px; justify-content: center; font-size: 16px; border-radius: 14px;">
+          <span>🎁</span> <span>Publish Free Gift (₹0)</span>
+        </button>
       </div>
     </section>
 
@@ -216,7 +222,8 @@
         document.getElementById('previewContainer').classList.remove('mobile-mode');
       });
 
-      document.getElementById('btnSaveMomentTop').addEventListener('click', handlePublish);
+      document.getElementById('btnSaveMomentTop')?.addEventListener('click', handlePublish);
+      document.getElementById('btnSaveMomentBottom')?.addEventListener('click', handlePublish);
 
       document.getElementById('btnCopyShareUrl').addEventListener('click', () => {
         const input = document.getElementById('shareUrlInput');
@@ -284,19 +291,42 @@
     }
 
     async function handlePublish() {
-      const btn = document.getElementById('btnSaveMomentTop');
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<span>⏳</span> <span>Publishing...</span>';
-      btn.disabled = true;
+      const btnTop = document.getElementById('btnSaveMomentTop');
+      const btnBottom = document.getElementById('btnSaveMomentBottom');
+      const origTop = btnTop ? btnTop.innerHTML : '';
+      const origBottom = btnBottom ? btnBottom.innerHTML : '';
+
+      if (btnTop) { btnTop.innerHTML = '<span>⏳</span> <span>Publishing...</span>'; btnTop.disabled = true; }
+      if (btnBottom) { btnBottom.innerHTML = '<span>⏳</span> <span>Publishing...</span>'; btnBottom.disabled = true; }
 
       try {
+        const recipient = document.getElementById('inpRecipient').value.trim() || 'Someone Special';
+        const sender = document.getElementById('inpSender').value.trim() || 'Your Besties';
+        const message = document.getElementById('inpMessage').value.trim();
+
         const saved = await VanviBuilderCore.saveMoment({
-          title: `Birthday Cake Cutting for ${VanviBuilderCore.get('recipientName') || 'Someone Special'}`,
-          recipientName: VanviBuilderCore.get('recipientName') || 'Someone Special',
-          occasion: 'Birthday'
+          title: `Birthday Cake Cutting for ${recipient}`,
+          recipientName: recipient,
+          senderName: sender,
+          message: message,
+          occasion: 'Birthday',
+          photos: currentPhotos
         });
 
-        const shareUrl = saved.shareUrl || saved.experienceUrl || `${window.location.origin}/moment.html?id=${saved.id}&template=${TEMPLATE_ID}`;
+        let shareUrl = saved && (saved.shareUrl || saved.experienceUrl);
+        if (!shareUrl) {
+          const q = new URLSearchParams();
+          q.set('name', recipient);
+          q.set('recipient', recipient);
+          q.set('sender', sender);
+          if (message) q.set('message', message);
+          if (currentPhotos && currentPhotos.length) {
+            try { q.set('photos', JSON.stringify(currentPhotos)); } catch(e){}
+          }
+          if (saved && saved.id) q.set('id', saved.id);
+          shareUrl = `${window.location.origin}${window.location.pathname.replace('builder.html', 'index.html')}?${q.toString()}`;
+        }
+
         document.getElementById('shareUrlInput').value = shareUrl;
         document.getElementById('btnModalOpenExp').href = shareUrl;
         document.getElementById('btnModalWhatsApp').href = `https://wa.me/?text=${encodeURIComponent(`🎂 Slice the cake and celebrate with me! ${shareUrl}`)}`;
@@ -305,8 +335,8 @@
       } catch (err) {
         alert('Could not publish: ' + err.message);
       } finally {
-        btn.innerHTML = originalText;
-        btn.disabled = false;
+        if (btnTop) { btnTop.innerHTML = origTop; btnTop.disabled = false; }
+        if (btnBottom) { btnBottom.innerHTML = origBottom; btnBottom.disabled = false; }
       }
     }
 

@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="vanvi-navigation.css" />
   <link rel="stylesheet" href="css/vanvi-global-experience.css" />
   <link rel="stylesheet" href="css/vanvi-template-cards.css" />
+  <link rel="stylesheet" href="css/vanvi-vault-lock.css" />
 
   <style>
     :root {
@@ -1283,7 +1284,6 @@
         'wedding-floating-lotus': 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&auto=format&fit=crop&q=80',
         'ivory-arch-wedding': 'templates/ivory-arch-wedding/assets/backgrounds/Background 4.webp',
         'royal-vows-indian-wedding': 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=700&auto=format&fit=crop&q=80',
-        'video-royal-vivah': 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=700&auto=format&fit=crop&q=80',
         'maa-papa-tribute': 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&auto=format&fit=crop&q=80'
       };
 
@@ -1370,25 +1370,36 @@
         const tagline = getCleanTagline(t);
         const discountText = t.discount || (orig > p ? `${Math.round(((orig - p) / orig) * 100)}% off` : '');
 
+        const isLocked = (typeof window !== 'undefined' && window.VanviVault && typeof window.VanviVault.isUnlocked === 'function')
+          ? !window.VanviVault.isUnlocked(t.id || t.slug)
+          : false;
+
         const directPreviewUrl = t.templatePath || (t.id ? `templates/${safeId}/index.html` : `preview.html?template=${safeId}`);
         const directBuilderUrl = t.builderPath || (t.id ? `templates/${safeId}/builder.html` : `builder.html?template=${safeId}&occasion=${safeOccasion}`);
 
         return `
-          <article class="vanvi-card ${isLux ? 'is-luxury' : ''}" data-cat="${escapeHtml(catSlug)}" id="card-${t.id}">
-            <div class="card-art-box" onclick="window.location.href='${directPreviewUrl}'" title="Experience ${escapeHtml(t.name)}">
+          <article class="vanvi-card ${isLux ? 'is-luxury' : ''} ${isLocked ? 'is-vault-locked' : ''}" data-cat="${escapeHtml(catSlug)}" id="card-${t.id}" data-vault-locked="${isLocked ? 'true' : 'false'}" data-vault-title="${escapeHtml(t.name)}">
+            <div class="card-art-box" onclick="${isLocked ? `window.VanviVault && window.VanviVault.openModal('${escapeHtml(t.name)}')` : `window.location.href='${directPreviewUrl}'`}" title="${isLocked ? 'Locked in Vault — Coming Soon' : `Experience ${escapeHtml(t.name)}`}">
               <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
                 <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
               </div>
-              <span class="card-badge-top-right ${isFree ? 'free' : (isLux ? 'luxury' : 'price')}">
-                ${isFree ? '🎁 Free' : (isLux ? '✦ Signature' : `₹${p}`)}
-              </span>
+              ${isLocked ? `
+                <span class="vault-lock-badge">🔒 VAULT DROP</span>
+              ` : `
+                <span class="card-badge-top-right ${isFree ? 'free' : (isLux ? 'luxury' : 'price')}">
+                  ${isFree ? '🎁 Free' : (isLux ? '✦ Signature' : `₹${p}`)}
+                </span>
+              `}
               <img class="card-art-backdrop" src="${thumb}" alt="" aria-hidden="true" loading="lazy">
               <img class="card-art-img" src="${thumb}" alt="${escapeHtml(t.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?w=700&auto=format&fit=crop&q=80';">
+              ${isLocked ? `
+                <div class="vault-overlay-center"><span class="vault-lock-icon">🔒</span></div>
+              ` : ''}
             </div>
 
             <div class="card-body">
               <div class="card-exp-hint">
-                <span class="exp-hint-pill">${escapeHtml(expHint)}</span>
+                <span class="exp-hint-pill">${isLocked ? '🔒 Private Atelier' : escapeHtml(expHint)}</span>
               </div>
               <div class="card-header-meta">
                 <h3 class="card-title" title="${escapeHtml(t.name)}">${escapeHtml(t.name)}</h3>
@@ -1403,17 +1414,23 @@
                 </div>
                 <div class="card-status-subtle">
                   <span class="status-dot">✦</span>
-                  <span class="status-txt">${isFree ? 'Forever Free' : 'Lifetime Access'}</span>
+                  <span class="status-txt">${isLocked ? 'Releasing Soon' : (isFree ? 'Forever Free' : 'Lifetime Access')}</span>
                 </div>
               </div>
 
               <div class="card-actions-grid">
-                <a href="${directPreviewUrl}" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
-                  <span>Preview</span>
-                </a>
-                <a href="${directBuilderUrl}" class="btn-make-yours" title="Create ${escapeHtml(t.name)}">
-                  <span>Create ✦</span>
-                </a>
+                ${isLocked ? `
+                  <button type="button" class="btn-vault-locked" onclick="window.VanviVault && window.VanviVault.openModal('${escapeHtml(t.name)}')" title="Unlock Early Access">
+                    <span>🔒 Private Vault — Drop Soon ✦</span>
+                  </button>
+                ` : `
+                  <a href="${directPreviewUrl}" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
+                    <span>Preview</span>
+                  </a>
+                  <a href="${directBuilderUrl}" class="btn-make-yours" title="Create ${escapeHtml(t.name)}">
+                    <span>Create ✦</span>
+                  </a>
+                `}
               </div>
             </div>
           </article>
@@ -2040,7 +2057,9 @@
       updateActiveChipsRow();
       renderFilteredResults();
     })();
+  </script>
   <script src="js/vanvi-navigation.js"></script>
+  <script src="js/vanvi-vault-lock.js"></script>
   <script src="js/vanvi-bespoke.js"></script>
 
   <!-- Lenis Smooth Scroll Engine -->
