@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="vanvi-navigation.css" />
   <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
+  <!-- Google Identity Services Official Client -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
   <style>
     :root {
       --clay-bg: #ffd1dc;
@@ -26,9 +29,9 @@
       --clay-input-bg: #fff1f5;
       --clay-text-dark: #3f1127;
       --clay-text-muted: #8d4f6c;
-      --clay-shadow-card: 0 32px 75px rgba(180, 70, 110, 0.25), 0 8px 24px rgba(0, 0, 0, 0.04), inset 0 2px 3px #ffffff;
+      --clay-shadow-card: 0 24px 60px rgba(180, 70, 110, 0.22), 0 8px 24px rgba(0, 0, 0, 0.04), inset 0 2px 3px #ffffff;
       --clay-shadow-inner: 0 14px 34px rgba(180, 70, 110, 0.12), inset 0 2px 2px #ffffff;
-      --clay-shadow-btn: 0 10px 24px rgba(236, 72, 153, 0.45), 0 3px 0 #be185d, inset 0 2px 2px rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(0, 0, 0, 0.16);
+      --clay-shadow-btn: 0 10px 24px rgba(236, 72, 153, 0.42), 0 3px 0 #be185d, inset 0 2px 2px rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(0, 0, 0, 0.16);
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
 
@@ -36,6 +39,7 @@
 
     body {
       min-height: 100vh;
+      min-height: 100dvh;
       background: var(--clay-bg-grad);
       font-family: var(--font-sans);
       color: var(--clay-text-dark);
@@ -43,12 +47,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding: 24px 16px 28px;
+      padding: 24px 16px 36px;
       position: relative;
     }
 
-    /* Ambient 3D Studio Clay Props (Potted plant, flower, floating clouds & hearts) */
+    /* Ambient 3D Studio Clay Background Props */
     .clay-studio-props {
       position: fixed;
       inset: 0;
@@ -65,40 +68,38 @@
     }
 
     .prop-cloud-1 {
-      top: 8%;
+      top: 6%;
       left: 6%;
       font-size: 42px;
       animation: floatCloud 16s ease-in-out infinite alternate;
       opacity: 0.85;
     }
     .prop-cloud-2 {
-      top: 14%;
+      top: 12%;
       right: 7%;
       font-size: 48px;
       animation: floatCloud 20s ease-in-out infinite alternate -6s;
       opacity: 0.85;
     }
     .prop-heart-float {
-      top: 32%;
-      left: 10%;
+      top: 30%;
+      left: 8%;
       font-size: 26px;
       animation: floatHeart 12s ease-in-out infinite alternate;
     }
     .prop-star-float {
-      top: 28%;
-      right: 11%;
+      top: 26%;
+      right: 9%;
       font-size: 24px;
       animation: floatHeart 14s ease-in-out infinite alternate -4s;
     }
 
-    /* Potted Plant & Flower on Desktop Sides */
     .prop-potted-plant {
       bottom: 24px;
       left: max(20px, calc(50% - 390px));
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.3s ease;
     }
     .prop-plant-leaves {
       font-size: 64px;
@@ -120,7 +121,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.3s ease;
     }
     .prop-flower-bloom {
       font-size: 58px;
@@ -145,7 +145,7 @@
       100% { transform: translateY(-16px) rotate(12deg) scale(1.08); }
     }
 
-    /* Smart Fixed Back Button (Firmly pinned at top-left across all devices) */
+    /* Fixed Back Button */
     .clay-nav-back {
       position: fixed;
       top: 18px;
@@ -182,7 +182,7 @@
     /* Top Mode Switcher Bar */
     .clay-mode-switch-wrap {
       width: 100%;
-      max-width: 390px;
+      max-width: 420px;
       display: flex;
       justify-content: center;
       margin-bottom: 12px;
@@ -192,17 +192,17 @@
     .clay-mode-switch {
       display: inline-flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       padding: 4px;
       border-radius: 999px;
       box-shadow: 0 6px 18px rgba(180, 70, 110, 0.1), inset 0 1px 2px #fff;
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.9);
       gap: 4px;
     }
     .clay-mode-tab {
-      padding: 7px 16px;
+      padding: 7px 18px;
       border-radius: 999px;
       font-size: 12.5px;
       font-weight: 800;
@@ -211,7 +211,7 @@
       transition: all 0.22s ease;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
     .clay-mode-tab.active {
       background: var(--clay-primary);
@@ -227,34 +227,45 @@
       font-weight: 900;
     }
 
-    /* Master Tall Phone-Style Clay Card Stage (Slim on laptop & mobile) */
+    /* Master Compact Phone Card (~420px wide centered) */
     .clay-phone-card {
       position: relative;
       z-index: 10;
       width: 100%;
       max-width: 420px;
       background: #ffffff;
-      border-radius: 40px;
+      border-radius: 38px;
       box-shadow: var(--clay-shadow-card);
       padding: 22px 18px 20px;
-      margin: 0 auto;
+      margin: auto 0;
       text-align: center;
       overflow: hidden;
       transform: translateZ(0);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: authCardEnter 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    /* Top Header Section */
+    @keyframes authCardEnter {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Top Greeting Section */
     .clay-header-top {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .clay-heart-emblem {
       font-size: 22px;
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       animation: heartBreathe 3s ease-in-out infinite alternate;
     }
     @keyframes heartBreathe {
@@ -262,31 +273,31 @@
       100% { transform: scale(1.15); }
     }
     .clay-main-title {
-      font-size: 27px;
+      font-size: 25px;
       font-weight: 900;
       color: #9d174d;
       letter-spacing: -0.5px;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     .clay-rays {
       font-size: 16px;
       color: #f59e0b;
     }
     .clay-sub-text {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--clay-text-muted);
-      margin-top: 4px;
+      margin-top: 3px;
       font-weight: 600;
     }
 
-    /* 3D Cute Clay Girl Character (Joyful open eyes, pink hoodie, leaning on card) */
+    /* 3D Cute Clay Character */
     .clay-girl-stage {
       position: relative;
       width: 100%;
-      max-width: 175px;
-      margin: 0 auto -22px;
+      max-width: 135px;
+      margin: 0 auto -18px;
       z-index: 2;
     }
     .clay-girl-photo {
@@ -295,7 +306,7 @@
       display: block;
       object-fit: cover;
       border-radius: 36px 36px 0 0;
-      filter: drop-shadow(0 14px 22px rgba(180, 70, 110, 0.2));
+      filter: drop-shadow(0 12px 20px rgba(180, 70, 110, 0.2));
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .clay-girl-stage:hover .clay-girl-photo {
@@ -307,64 +318,49 @@
       position: relative;
       z-index: 4;
       background: #ffffff;
-      border-radius: 34px;
-      padding: 22px 18px 20px;
+      border-radius: 32px;
+      padding: 18px 16px 14px;
       box-shadow: var(--clay-shadow-inner);
-      border: 1.5px solid rgba(254, 230, 238, 0.9);
+      border: 1.5px solid rgba(254, 226, 235, 0.9);
     }
 
-    /* Coins Reward Banner */
-    .clay-coins-banner {
-      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-      border: 1.5px dashed #f59e0b;
-      border-radius: 999px;
-      padding: 6px 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11.5px;
-      font-weight: 850;
-      color: #b45309;
-      margin-bottom: 14px;
-      box-shadow: 0 4px 10px rgba(245, 158, 11, 0.15);
-    }
-
-    /* Clay Pill Inset Input Fields */
+    /* Inset Input Rows */
     .clay-field-row {
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       position: relative;
+      text-align: left;
     }
     .clay-pill-input-box {
       width: 100%;
-      min-height: 50px;
+      min-height: 45px;
       background: var(--clay-input-bg);
       border-radius: 999px;
       box-shadow: inset 0 2.5px 5px rgba(180, 70, 110, 0.08), inset 0 1px 2px rgba(0,0,0,0.04);
       display: flex;
       align-items: center;
-      padding: 5px 8px 5px 6px;
-      transition: all 0.22s ease;
+      padding: 4px 8px 4px 6px;
+      transition: all 0.2s ease;
       border: 1.5px solid transparent;
     }
     .clay-pill-input-box:focus-within {
       background: #ffffff;
       border-color: var(--clay-primary);
-      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.25), inset 0 1px 2px #fff;
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.22), inset 0 1px 2px #fff;
     }
     .clay-icon-circle {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
       color: #ffffff;
       display: grid;
       place-items: center;
       flex-shrink: 0;
-      box-shadow: 0 4px 10px rgba(236, 72, 153, 0.35), inset 0 1px 2px rgba(255,255,255,0.7);
+      box-shadow: 0 4px 10px rgba(236, 72, 153, 0.32), inset 0 1px 2px rgba(255,255,255,0.7);
     }
     .clay-icon-circle svg {
-      width: 17px;
-      height: 17px;
+      width: 16px;
+      height: 16px;
     }
     .clay-native-input {
       flex: 1;
@@ -372,43 +368,118 @@
       border: none;
       outline: none;
       background: transparent;
-      padding: 0 12px;
+      padding: 0 11px;
       font-family: var(--font-sans);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 600;
       color: var(--clay-text-dark);
+      min-width: 0;
     }
     .clay-native-input::placeholder {
-      color: #c08497;
+      color: #b58299;
       font-weight: 500;
     }
     .clay-pwd-toggle {
       background: transparent;
       border: none;
-      font-size: 18px;
-      color: #be185d;
+      font-size: 17px;
+      color: #a26982;
       cursor: pointer;
       padding: 6px 10px;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, color 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
+      user-select: none;
     }
     .clay-pwd-toggle:hover {
       transform: scale(1.15);
       color: var(--clay-primary);
     }
 
-    /* Tactile 3D Clay Primary Action Button */
+    /* Live Password Strength Meter */
+    .strength-meter-wrap {
+      margin: -4px 6px 10px;
+    }
+    .strength-bar-track {
+      display: flex;
+      gap: 5px;
+      height: 4px;
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    .strength-bar-segment {
+      flex: 1;
+      height: 100%;
+      background: #f1e2e8;
+      border-radius: 99px;
+      transition: background 0.3s ease;
+    }
+    .strength-text-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--clay-text-muted);
+    }
+    .strength-score-label {
+      font-weight: 800;
+      text-transform: capitalize;
+    }
+
+    /* Password Match Status Pill */
+    .pwd-match-hint {
+      font-size: 11px;
+      font-weight: 700;
+      margin: -4px 6px 10px;
+      display: none;
+    }
+    .pwd-match-hint.match {
+      color: #15803d;
+      display: block;
+    }
+    .pwd-match-hint.mismatch {
+      color: #dc2626;
+      display: block;
+    }
+
+    /* Terms Acceptance Checkbox */
+    .clay-terms-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 8px 4px 10px;
+      font-size: 11.5px;
+      color: var(--clay-text-muted);
+      cursor: pointer;
+      text-align: left;
+      line-height: 1.4;
+      user-select: none;
+    }
+    .clay-terms-wrap input {
+      accent-color: var(--clay-primary);
+      width: 15px;
+      height: 15px;
+      margin-top: 1px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .clay-terms-wrap a {
+      color: var(--clay-primary);
+      font-weight: 800;
+      text-decoration: underline;
+    }
+
+    /* Primary Action Button */
     .clay-btn-main {
       width: 100%;
-      min-height: 52px;
+      min-height: 46px;
       border-radius: 999px;
-      background: linear-gradient(180deg, #f43f5e 0%, #e11d48 100%);
+      background: linear-gradient(180deg, #f472b6 0%, #db2777 100%);
       color: #ffffff;
       border: 1px solid rgba(255, 255, 255, 0.6);
       font-family: var(--font-sans);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 850;
       letter-spacing: 0.3px;
       cursor: pointer;
@@ -417,44 +488,77 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-top: 6px;
-      transform: translateY(-2px);
       transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .clay-btn-main:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 14px 28px rgba(244, 63, 94, 0.55), 0 4px 0 #be185d;
+      transform: translateY(-2px) scale(1.015);
+      box-shadow: 0 14px 28px rgba(236, 72, 153, 0.55), 0 4px 0 #be185d;
     }
     .clay-btn-main:active {
-      transform: translateY(2px) scale(0.98);
-      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3), 0 1px 0 #be185d;
+      transform: translateY(2px) scale(0.985);
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3), 0 1px 0 #be185d;
     }
     .clay-btn-main:disabled {
-      opacity: 0.65;
+      opacity: 0.75;
       cursor: not-allowed;
       transform: none;
+      box-shadow: none;
     }
 
-    /* Live Status message box */
+    /* Loading Spinner */
+    .btn-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Status Alert Message */
     .form-status {
-      margin-top: 12px;
-      font-size: 12.5px;
+      margin-top: 8px;
+      font-size: 12px;
       font-weight: 700;
       min-height: 18px;
       color: var(--clay-text-muted);
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      text-align: center;
     }
-    .form-status.error { color: #dc2626; }
-    .form-status.success { color: #16a34a; }
+    .form-status.error {
+      color: #dc2626;
+      background: #fef2f2;
+      border: 1px solid #fee2e2;
+    }
+    .form-status.success {
+      color: #15803d;
+      background: #f0fdf4;
+      border: 1px solid #dcfce7;
+    }
+    .form-status a {
+      color: inherit;
+      text-decoration: underline;
+      font-weight: 850;
+    }
 
     /* Divider */
     .clay-divider-line {
       display: flex;
       align-items: center;
       text-align: center;
-      margin: 16px 0 14px;
-      color: #b57a91;
-      font-size: 11.5px;
-      font-weight: 700;
+      margin: 10px 0 10px;
+      color: #b58299;
+      font-size: 11px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     .clay-divider-line::before,
     .clay-divider-line::after {
@@ -463,41 +567,54 @@
       border-bottom: 1.5px solid #fed7e2;
     }
     .clay-divider-line span {
-      padding: 0 12px;
+      padding: 0 10px;
     }
 
-    /* 3 Circular Clay Social Buttons */
-    .clay-social-group {
+    /* Official Prominent Google Sign-Up Button */
+    .btn-google-official {
+      width: 100%;
+      min-height: 44px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1.5px solid #fed7e2;
+      box-shadow: 0 4px 14px rgba(180, 70, 110, 0.08), inset 0 1px 1px #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .clay-social-pill {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 1.5px solid #fed7e2;
-      box-shadow: 0 8px 18px rgba(180, 70, 110, 0.1), inset 0 2px 2px #ffffff, 0 2px 0 rgba(180, 70, 110, 0.08);
-      display: grid;
-      place-items: center;
+      gap: 10px;
       cursor: pointer;
-      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 750;
+      color: #374151;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      margin-bottom: 10px;
     }
-    .clay-social-pill:hover {
-      transform: translateY(-3px) scale(1.08);
-      border-color: var(--clay-primary);
-      box-shadow: 0 12px 24px rgba(236, 72, 153, 0.25), inset 0 2px 2px #fff;
+    .btn-google-official:hover {
+      transform: translateY(-2px);
+      border-color: #4285F4;
+      box-shadow: 0 8px 20px rgba(66, 133, 244, 0.18), inset 0 1px 1px #fff;
+      color: #1f2937;
     }
-    .clay-social-pill:active {
-      transform: translateY(1px) scale(0.96);
+    .btn-google-official:active {
+      transform: translateY(1px);
+    }
+    .google-g-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
     }
 
-    /* Bottom Switch Text */
+    /* GIS Real Button Container */
+    #gsiButtonContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    /* Footer Switch Link */
     .clay-footer-link {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--clay-text-muted);
       font-weight: 600;
     }
@@ -509,66 +626,6 @@
     }
     .clay-footer-link a:hover {
       text-decoration: underline;
-    }
-
-    /* Google Modal (Claymorphic) */
-    .google-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100vh;
-      background: rgba(60, 17, 39, 0.72);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 99999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .google-modal-backdrop.active { display: flex !important; }
-    .google-modal-card {
-      background: #ffffff;
-      border-radius: 32px;
-      padding: 26px 22px;
-      max-width: 380px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
-      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    @keyframes modalPop {
-      0% { transform: scale(0.92); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .google-account-list { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
-    .google-account-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 14px;
-      border-radius: 16px;
-      background: #fff5f8;
-      border: 1.5px solid #fecdd3;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.2s ease;
-    }
-    .google-account-item:hover {
-      background: #ffe4e6;
-      border-color: var(--clay-primary);
-      transform: translateY(-2px);
-    }
-    .google-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--clay-primary);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 15px;
     }
 
     /* Confetti Particle */
@@ -591,9 +648,11 @@
         display: none !important;
       }
     }
+
     @media (max-width: 480px) {
       body {
-        padding: 58px 12px 24px;
+        padding: 56px 12px 24px;
+        justify-content: flex-start;
       }
       .clay-nav-back {
         top: 12px;
@@ -603,19 +662,27 @@
         font-size: 12px;
       }
       .clay-phone-card {
-        padding: 22px 14px 18px;
-        border-radius: 36px;
+        padding: 20px 14px 16px;
+        border-radius: 32px;
       }
       .clay-main-title {
-        font-size: 23px;
+        font-size: 22px;
       }
       .clay-girl-stage {
-        max-width: 220px;
-        margin-bottom: -32px;
+        max-width: 155px;
+        margin-bottom: -20px;
       }
       .clay-inner-card {
-        padding: 18px 14px 16px;
-        border-radius: 28px;
+        padding: 18px 12px 14px;
+        border-radius: 26px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
       }
     }
   </style>
@@ -623,7 +690,7 @@
 
 <body class="vanvi-auth-body" id="authBody">
 
-  <!-- Ambient 3D Studio Clay Background Props (Clouds, Floating Hearts, Potted Plants) -->
+  <!-- Ambient 3D Studio Clay Background Props -->
   <div class="clay-studio-props" aria-hidden="true">
     <div class="clay-prop prop-cloud-1">☁️</div>
     <div class="clay-prop prop-cloud-2">☁️</div>
@@ -643,7 +710,7 @@
     </div>
   </div>
 
-  <!-- Smart Fixed Back Button (Anchored Top-Left on All Devices) -->
+  <!-- Smart Fixed Back Button -->
   <a class="clay-nav-back" href="javascript:void(0)" onclick="vanviGoBack('index.html')" aria-label="Back to home">
     <span class="back-arrow" aria-hidden="true">‹</span>
     <span>Back</span>
@@ -664,34 +731,27 @@
     </nav>
   </div>
 
-  <!-- Master 3D Clay Phone Card (Slim on laptop & mobile) -->
+  <!-- Master Compact Phone Card (~420px wide centered) -->
   <main class="clay-phone-card" id="authStage" role="main">
 
     <!-- Top Greeting Section -->
     <header class="clay-header-top">
       <div class="clay-heart-emblem" aria-hidden="true">💖</div>
       <h1 class="clay-main-title" id="signupTitle">
-        <span class="clay-rays">🔆</span>
+        <span class="clay-rays">✨</span>
         <span>Create Account</span>
-        <span class="clay-rays">🔆</span>
+        <span class="clay-rays">✨</span>
       </h1>
-      <p class="clay-sub-text">Join Vanvi Moments & get 100 free coins 🪙</p>
+      <p class="clay-sub-text">Join Vanvi Moments & earn 100 free coins</p>
     </header>
 
-    <!-- 3D Cute Clay Girl Character (Joyful open eyes, pink hoodie, flower clip) -->
+    <!-- 3D Cute Clay Character -->
     <div class="clay-girl-stage" aria-hidden="true">
       <img src="assets/vanvi-clay-girl-signup.jpg" alt="Cute Vanvi Moments 3D Girl" class="clay-girl-photo" loading="eager" />
     </div>
 
     <!-- Elevated Inner White Clay Form Card -->
     <section class="clay-inner-card" aria-label="Registration credentials">
-      
-      <!-- Coins Bonus Banner -->
-      <div class="clay-coins-banner">
-        <span>🪙</span>
-        <span>+100 Celebration Coins Gift Added</span>
-      </div>
-
       <form id="signupForm" novalidate>
 
         <!-- Full Name Field -->
@@ -706,7 +766,7 @@
           </div>
         </div>
 
-        <!-- Email or Mobile Field -->
+        <!-- Email Address Field -->
         <div class="clay-field-row">
           <div class="clay-pill-input-box">
             <div class="clay-icon-circle" aria-hidden="true">
@@ -714,7 +774,19 @@
                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
               </svg>
             </div>
-            <input class="clay-native-input" id="signupEmail" name="email" type="text" placeholder="Email or Mobile" autocomplete="username" required aria-label="Email or Mobile" />
+            <input class="clay-native-input" id="signupEmail" name="email" type="email" placeholder="Email Address" autocomplete="email" required aria-label="Email Address" />
+          </div>
+        </div>
+
+        <!-- Mobile Number Field (Optional/Supported) -->
+        <div class="clay-field-row">
+          <div class="clay-pill-input-box">
+            <div class="clay-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+            </div>
+            <input class="clay-native-input" id="signupPhone" name="phone" type="tel" placeholder="Mobile Number (optional)" autocomplete="tel" aria-label="Mobile Number" />
           </div>
         </div>
 
@@ -726,51 +798,71 @@
                 <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
               </svg>
             </div>
-            <input class="clay-native-input" id="signupPassword" name="password" type="password" placeholder="Create Password" autocomplete="new-password" required aria-label="Password" />
+            <input class="clay-native-input" id="signupPassword" name="password" type="password" placeholder="Create Password (min 6 chars)" autocomplete="new-password" required aria-label="Password" />
             <button type="button" class="clay-pwd-toggle" id="btnTogglePwd" title="Show/Hide Password" aria-label="Toggle password visibility">👁️</button>
           </div>
         </div>
 
-        <!-- Chunky 3D Clay Submit Button -->
+        <!-- Live Password Strength Meter -->
+        <div class="strength-meter-wrap" id="strengthMeterWrap">
+          <div class="strength-bar-track">
+            <div class="strength-bar-segment" id="strengthSeg1"></div>
+            <div class="strength-bar-segment" id="strengthSeg2"></div>
+            <div class="strength-bar-segment" id="strengthSeg3"></div>
+          </div>
+          <div class="strength-text-row">
+            <span>Strength: <span class="strength-score-label" id="strengthLabel">Enter password</span></span>
+            <span id="strengthHint">Min 6 characters</span>
+          </div>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="clay-field-row">
+          <div class="clay-pill-input-box">
+            <div class="clay-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <input class="clay-native-input" id="signupConfirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password" autocomplete="new-password" required aria-label="Confirm Password" />
+            <button type="button" class="clay-pwd-toggle" id="btnToggleConfirmPwd" title="Show/Hide Confirm Password" aria-label="Toggle confirm password visibility">👁️</button>
+          </div>
+        </div>
+        <div class="pwd-match-hint" id="pwdMatchHint"></div>
+
+        <!-- Terms Acceptance Checkbox -->
+        <label class="clay-terms-wrap">
+          <input type="checkbox" id="agreeTerms" required />
+          <span>I accept the <a href="terms.html" target="_blank">Terms of Service</a> & <a href="privacy.html" target="_blank">Privacy Policy</a></span>
+        </label>
+
+        <!-- Primary Submit Button -->
         <button class="clay-btn-main" type="submit" id="btnSignupSubmit">
-          <span>Create Account ✨</span>
+          <span class="btn-spinner" id="signupSpinner" style="display:none;" aria-hidden="true"></span>
+          <span id="signupBtnText">Create Account (+100 🪙) ✨</span>
         </button>
 
-        <!-- Status Message -->
-        <p id="signupStatus" class="form-status" role="status" aria-live="polite"></p>
+        <!-- Status Alert Message -->
+        <p id="signupStatus" class="form-status" role="status" aria-live="polite" style="display:none;"></p>
       </form>
 
       <!-- Divider -->
       <div class="clay-divider-line">
-        <span>or continue with</span>
+        <span>or sign up with</span>
       </div>
 
-      <!-- 3 Circular Clay Social Buttons (Google, Apple, Facebook) -->
-      <div class="clay-social-group">
-        <!-- Google Sign-Up Button -->
-        <button type="button" class="clay-social-pill" id="googleSignupBtn" title="Continue with Google" aria-label="Sign up with Google">
-          <svg viewBox="0 0 24 24" width="22" height="22">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-        </button>
+      <!-- Real Official Google Sign-Up Button -->
+      <div id="gsiButtonContainer" style="display:none;"></div>
 
-        <!-- Apple ID Button -->
-        <button type="button" class="clay-social-pill" id="btnAppleAuth" title="Continue with Apple ID" aria-label="Sign up with Apple ID">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="#2d1538">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.93-2.85-.9.04-2 .6-2.65 1.36-.56.65-1.06 1.71-.93 2.73 1.01.08 2.03-.49 2.65-1.24z"/>
-          </svg>
-        </button>
-
-        <!-- Facebook Button -->
-        <button type="button" class="clay-social-pill" id="btnFbAuth" title="Continue with Facebook" aria-label="Sign up with Facebook">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="#1877F2">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-        </button>
-      </div>
+      <button type="button" class="btn-google-official" id="googleSignupBtn" title="Sign up with Google" aria-label="Sign up with Google">
+        <svg class="google-g-icon" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        <span>Sign up with Google (+100 🪙)</span>
+      </button>
 
       <!-- Bottom Switch Link -->
       <p class="clay-footer-link">
@@ -779,33 +871,7 @@
     </section>
   </main>
 
-  <!-- Luxury Google Account Selector Modal (Claymorphic) -->
-  <div class="google-modal-backdrop" id="googleModal" role="dialog" aria-modal="true" aria-labelledby="googleModalTitle">
-    <div class="google-modal-card">
-      <div style="display:flex; justify-content:center; margin-bottom:12px;">
-        <svg viewBox="0 0 24 24" width="36" height="36">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-        </svg>
-      </div>
-      <h3 id="googleModalTitle" style="font-size:18px; font-weight:800; color:#3f1127; margin-bottom:4px;">Sign up with Google</h3>
-      <p style="font-size:12.5px; color:#8d4f6c; margin-bottom:16px;">Choose an account to get 100 free celebration coins</p>
-
-      <div class="google-account-list" id="googleAccountList"></div>
-
-      <div style="margin-bottom:12px;">
-        <button type="button" class="clay-btn-main" id="btnGoogleDirectAuth" style="font-size:13.5px; min-height:44px;">
-          <span>Continue with Google Account</span>
-        </button>
-      </div>
-
-      <button type="button" onclick="closeGoogleModal()" style="width:100%; padding:10px; border-radius:99px; border:1px solid #ddd; background:#fff1f5; font-weight:700; color:#8d4f6c; cursor:pointer; font-size:13px;">Cancel</button>
-    </div>
-  </div>
-
-  <!-- Central Client API, Google Auth & i18n Translation Script -->
+  <!-- Central Client API, Google Auth & Navigation Scripts -->
   <script src="js/vanvi-api.js"></script>
   <script src="js/vanvi-google-auth.js"></script>
   <script src="js/vanvi-i18n.js"></script>
@@ -827,11 +893,49 @@
       const status = document.getElementById('signupStatus');
       const googleBtn = document.getElementById('googleSignupBtn');
       const authStage = document.getElementById('authStage');
-      const googleModal = document.getElementById('googleModal');
       const btnTogglePwd = document.getElementById('btnTogglePwd');
+      const btnToggleConfirmPwd = document.getElementById('btnToggleConfirmPwd');
       const pwdInput = document.getElementById('signupPassword');
+      const confirmPwdInput = document.getElementById('signupConfirmPassword');
+      const nameInput = document.getElementById('signupName');
+      const emailInput = document.getElementById('signupEmail');
+      const phoneInput = document.getElementById('signupPhone');
+      const termsCheckbox = document.getElementById('agreeTerms');
+      const btnSubmit = document.getElementById('btnSignupSubmit');
+      const spinner = document.getElementById('signupSpinner');
+      const btnText = document.getElementById('signupBtnText');
+      const matchHint = document.getElementById('pwdMatchHint');
 
-      // Password Visibility Toggle
+      // Strength Meter Elements
+      const seg1 = document.getElementById('strengthSeg1');
+      const seg2 = document.getElementById('strengthSeg2');
+      const seg3 = document.getElementById('strengthSeg3');
+      const strengthLabel = document.getElementById('strengthLabel');
+      const strengthHint = document.getElementById('strengthHint');
+
+      function showStatus(msg, type, isHtml) {
+        if (!status) return;
+        if (!msg) {
+          status.style.display = 'none';
+          status.textContent = '';
+          return;
+        }
+        status.style.display = 'block';
+        if (isHtml) {
+          status.innerHTML = msg;
+        } else {
+          status.textContent = msg;
+        }
+        status.className = 'form-status ' + (type || '');
+      }
+
+      function setLoading(isLoading) {
+        if (btnSubmit) btnSubmit.disabled = isLoading;
+        if (spinner) spinner.style.display = isLoading ? 'inline-block' : 'none';
+        if (btnText) btnText.textContent = isLoading ? 'Creating account...' : 'Create Account (+100 🪙) ✨';
+      }
+
+      // Password Visibility Toggles
       btnTogglePwd?.addEventListener('click', () => {
         if (pwdInput.type === 'password') {
           pwdInput.type = 'text';
@@ -842,7 +946,83 @@
         }
       });
 
-      // Celebration Unlock Sequence
+      btnToggleConfirmPwd?.addEventListener('click', () => {
+        if (confirmPwdInput.type === 'password') {
+          confirmPwdInput.type = 'text';
+          btnToggleConfirmPwd.textContent = '🔒';
+        } else {
+          confirmPwdInput.type = 'password';
+          btnToggleConfirmPwd.textContent = '👁️';
+        }
+      });
+
+      // Live Password Strength Calculation
+      function checkPasswordStrength(val) {
+        if (!val) {
+          seg1.style.background = '#f1e2e8';
+          seg2.style.background = '#f1e2e8';
+          seg3.style.background = '#f1e2e8';
+          strengthLabel.textContent = 'Enter password';
+          strengthLabel.style.color = 'var(--clay-text-muted)';
+          strengthHint.textContent = 'Min 6 characters';
+          return 0;
+        }
+
+        let score = 0;
+        if (val.length >= 6) score++;
+        if (val.length >= 8 && /[A-Z]/.test(val) && /[a-z]/.test(val)) score++;
+        if (/[0-9]/.test(val) && /[^A-Za-z0-9]/.test(val)) score++;
+
+        if (score === 1) {
+          seg1.style.background = '#ef4444';
+          seg2.style.background = '#f1e2e8';
+          seg3.style.background = '#f1e2e8';
+          strengthLabel.textContent = 'Weak';
+          strengthLabel.style.color = '#ef4444';
+          strengthHint.textContent = 'Add uppercase & numbers';
+        } else if (score === 2) {
+          seg1.style.background = '#f59e0b';
+          seg2.style.background = '#f59e0b';
+          seg3.style.background = '#f1e2e8';
+          strengthLabel.textContent = 'Fair';
+          strengthLabel.style.color = '#d97706';
+          strengthHint.textContent = 'Add a symbol (e.g. !@#$)';
+        } else if (score >= 3) {
+          seg1.style.background = '#10b981';
+          seg2.style.background = '#10b981';
+          seg3.style.background = '#10b981';
+          strengthLabel.textContent = 'Strong ✨';
+          strengthLabel.style.color = '#059669';
+          strengthHint.textContent = 'Great password!';
+        }
+
+        return score;
+      }
+
+      pwdInput.addEventListener('input', () => {
+        checkPasswordStrength(pwdInput.value);
+        checkPasswordMatch();
+      });
+
+      function checkPasswordMatch() {
+        const p1 = pwdInput.value;
+        const p2 = confirmPwdInput.value;
+        if (!p2) {
+          matchHint.style.display = 'none';
+          return;
+        }
+        if (p1 === p2) {
+          matchHint.className = 'pwd-match-hint match';
+          matchHint.textContent = '✓ Passwords match';
+        } else {
+          matchHint.className = 'pwd-match-hint mismatch';
+          matchHint.textContent = '✕ Passwords do not match';
+        }
+      }
+
+      confirmPwdInput.addEventListener('input', checkPasswordMatch);
+
+      // Celebration Confetti
       window.triggerAuthSuccessCelebration = function (redirectUrl) {
         const emojis = ['✨', '💖', '🌸', '🪙', '✦', '⭐'];
         const cardRect = (authStage || document.body).getBoundingClientRect();
@@ -869,204 +1049,113 @@
 
         setTimeout(() => {
           window.location.href = redirectUrl || 'dashboard.html';
-        }, 750);
+        }, 800);
       };
 
-      // Standard Registration Form Submission
+      // Registration Form Submission
       form.addEventListener('submit', async function (event) {
         event.preventDefault();
-        const button = form.querySelector('button[type="submit"]');
-        button.disabled = true;
-        status.textContent = 'Creating your celebration space... ✨';
-        status.className = 'form-status';
+        showStatus('');
 
-        const name = form.name.value.trim();
-        const identifier = form.email.value.trim();
-        const password = form.password.value;
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput ? phoneInput.value.trim() : '';
+        const password = pwdInput.value;
+        const confirmPassword = confirmPwdInput.value;
+
+        if (!name) {
+          showStatus('Please enter your full name.', 'error');
+          nameInput.focus();
+          return;
+        }
+
+        if (!email || !email.includes('@') || !email.includes('.')) {
+          showStatus('Please enter a valid email address.', 'error');
+          emailInput.focus();
+          return;
+        }
+
+        if (!password || password.length < 6) {
+          showStatus('Password must be at least 6 characters long.', 'error');
+          pwdInput.focus();
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          showStatus('Passwords do not match. Please re-enter your password.', 'error');
+          confirmPwdInput.focus();
+          return;
+        }
+
+        if (!termsCheckbox.checked) {
+          showStatus('Please accept the Terms of Service & Privacy Policy to register.', 'error');
+          termsCheckbox.focus();
+          return;
+        }
+
+        setLoading(true);
 
         try {
-          const result = await window.VanviAPI.auth.signup({ name, identifier, password });
+          const result = await window.VanviAPI.auth.signup({
+            name,
+            email,
+            password,
+            phone: phone || undefined,
+            identifier: email
+          });
+
           if (result.success) {
-            status.textContent = 'Your account is ready! Opening your dashboard... 🌸';
-            status.className = 'form-status success';
-            if (identifier.includes('@') && !identifier.includes('@whatsapp')) {
-              rememberAccount(name, identifier);
-            }
-            window.triggerAuthSuccessCelebration('dashboard.html');
+            showStatus('Welcome to Vanvi Moments! +100 Coins added! Opening dashboard... 🌸', 'success');
+            const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
+            window.triggerAuthSuccessCelebration(redirectUrl);
             return;
           }
-          button.disabled = false;
-          status.textContent = result.error || 'Sign up failed. Please check your information.';
-          status.className = 'form-status error';
+
+          setLoading(false);
+
+          // Handle duplicate account with helpful sign-in link
+          if (result.error && (result.error.toLowerCase().includes('already exists') || result.error.toLowerCase().includes('registered'))) {
+            showStatus(
+              `${result.error} <a href="login.html?email=${encodeURIComponent(email)}">Sign In instead →</a>`,
+              'error',
+              true
+            );
+          } else {
+            showStatus(result.error || 'Registration failed. Please check your information.', 'error');
+          }
         } catch (err) {
-          button.disabled = false;
-          status.textContent = 'Connection error. Please try again.';
-          status.className = 'form-status error';
+          setLoading(false);
+          showStatus('Network connection error. Please try again.', 'error');
         }
       });
 
-      // Google Accounts Helper
-      function getStoredAccounts() {
-        const accounts = [];
-        const seen = new Set();
-        try {
-          const list = JSON.parse(localStorage.getItem('vanvi_saved_accounts') || '[]');
-          if (Array.isArray(list)) {
-            list.forEach(a => {
-              if (a && a.email && !seen.has(a.email.toLowerCase())) {
-                seen.add(a.email.toLowerCase());
-                accounts.push({ name: a.name || a.email.split('@')[0], email: a.email });
-              }
-            });
-          }
-        } catch (e) { }
-
-        try {
-          const user = JSON.parse(localStorage.getItem('vanvi_user') || 'null');
-          if (user && user.email && !user.email.includes('@whatsapp') && !seen.has(user.email.toLowerCase())) {
-            seen.add(user.email.toLowerCase());
-            accounts.push({ name: user.name || user.email.split('@')[0], email: user.email });
-          }
-        } catch (e) { }
-
-        const lastEmail = localStorage.getItem('vanvi_last_email');
-        if (lastEmail && !lastEmail.includes('@whatsapp') && !seen.has(lastEmail.toLowerCase())) {
-          seen.add(lastEmail.toLowerCase());
-          accounts.push({ name: lastEmail.split('@')[0], email: lastEmail });
-        }
-        return accounts;
-      }
-
-      function rememberAccount(name, email) {
-        if (!email || email.includes('@whatsapp')) return;
-        try {
-          const list = JSON.parse(localStorage.getItem('vanvi_saved_accounts') || '[]');
-          const filtered = list.filter(a => a && a.email && a.email.toLowerCase() !== email.toLowerCase());
-          filtered.unshift({ name: name || email.split('@')[0], email });
-          localStorage.setItem('vanvi_saved_accounts', JSON.stringify(filtered.slice(0, 8)));
-        } catch (e) { }
-      }
-
-      function renderGoogleAccounts() {
-        const listContainer = document.getElementById('googleAccountList');
-        if (!listContainer) return;
-        listContainer.innerHTML = '';
-        const accounts = getStoredAccounts();
-
-        if (accounts.length > 0) {
-          accounts.forEach(acc => {
-            const displayName = acc.name;
-            const email = acc.email;
-            const initial = displayName.charAt(0).toUpperCase();
-            const item = document.createElement('div');
-            item.className = 'google-account-item';
-            item.onclick = () => chooseGoogleSignup(displayName, email);
-            item.innerHTML = `
-              <div class="google-avatar">${initial}</div>
-              <div>
-                <div style="font-weight:800; font-size:13.5px; color:#3f1127;">${displayName}</div>
-                <div style="font-size:11.5px; color:#8d4f6c;">${email}</div>
-              </div>
-            `;
-            listContainer.appendChild(item);
-          });
-        }
-      }
-
-      // Google Sign-Up Click
+      // Google Sign-Up Action
       googleBtn?.addEventListener('click', function () {
         if (window.VanviGoogleAuth) {
           window.VanviGoogleAuth.signIn({
             onSuccess: (res) => {
-              status.textContent = `Welcome ${res.user.name}! 100 Bonus Coins Added ✨`;
-              status.className = 'form-status success';
-              window.triggerAuthSuccessCelebration('dashboard.html');
+              showStatus(`Welcome ${res.user.name}! 100 celebration coins unlocked! Opening dashboard... ✨`, 'success');
+              const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
+              window.triggerAuthSuccessCelebration(redirectUrl);
             },
             onError: (err) => {
-              status.textContent = err.message || 'Google sign-up failed. Please try again.';
-              status.className = 'form-status error';
+              showStatus(err.message || 'Google sign-up could not be completed.', 'error');
             }
           });
-        } else {
-          renderGoogleAccounts();
-          googleModal.classList.add('active');
-          document.body.style.overflow = 'hidden';
         }
       });
 
-      window.closeGoogleModal = function () {
-        googleModal.classList.remove('active');
-        document.body.style.overflow = '';
-      };
-
-      googleModal?.addEventListener('click', function (e) {
-        if (e.target === googleModal) {
-          closeGoogleModal();
-        }
-      });
-
-      const btnGoogleDirectAuth = document.getElementById('btnGoogleDirectAuth');
-      btnGoogleDirectAuth?.addEventListener('click', function () {
-        if (window.VanviGoogleAuth) {
-          window.VanviGoogleAuth.signIn({
-            onSuccess: (res) => {
-              closeGoogleModal();
-              window.triggerAuthSuccessCelebration('dashboard.html');
-            }
+      // Attempt GIS button rendering into #gsiButtonContainer if supported
+      window.addEventListener('load', () => {
+        if (window.VanviGoogleAuth && window.VanviGoogleAuth.renderButton) {
+          window.VanviGoogleAuth.renderButton('gsiButtonContainer', {
+            theme: 'outline',
+            size: 'large',
+            shape: 'pill',
+            text: 'signup_with',
+            width: 340
           });
-          return;
         }
-        const accounts = getStoredAccounts();
-        if (accounts.length > 0) {
-          chooseGoogleSignup(accounts[0].name, accounts[0].email);
-        } else {
-          chooseGoogleSignup('Google User', 'user@gmail.com');
-        }
-      });
-
-      window.chooseGoogleSignup = async function (name, email) {
-        closeGoogleModal();
-        status.textContent = 'Creating account with Google... ✨';
-        status.className = 'form-status';
-
-        try {
-          const res = await window.VanviAPI.auth.googleAuth({
-            email,
-            name,
-            googleId: 'g_' + Date.now()
-          });
-
-          if (res.success) {
-            rememberAccount(name, email);
-            localStorage.setItem('vanvi_last_email', email);
-            status.textContent = `Welcome ${name}! 100 Bonus Coins Added ✨`;
-            status.className = 'form-status success';
-            window.triggerAuthSuccessCelebration('dashboard.html');
-          } else {
-            status.textContent = res.error || 'Google sign-up failed.';
-            status.className = 'form-status error';
-          }
-        } catch (e) {
-          status.textContent = 'Google sign-up error.';
-          status.className = 'form-status error';
-        }
-      };
-
-      // Optional Social Buttons
-      document.getElementById('btnAppleAuth')?.addEventListener('click', () => {
-        status.textContent = 'Connecting with Apple ID...';
-        status.className = 'form-status';
-        setTimeout(() => {
-          chooseGoogleSignup('Apple Member', 'member@icloud.com');
-        }, 600);
-      });
-
-      document.getElementById('btnFbAuth')?.addEventListener('click', () => {
-        status.textContent = 'Connecting with Facebook...';
-        status.className = 'form-status';
-        setTimeout(() => {
-          chooseGoogleSignup('Facebook Member', 'member@facebook.com');
-        }, 600);
       });
 
     })();

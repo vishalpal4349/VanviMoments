@@ -189,10 +189,10 @@
         return res;
       },
 
-      async googleAuth({ email, name, googleId, picture } = {}) {
+      async googleAuth({ email, name, googleId, picture, credential, id_token } = {}) {
         const res = await request('/api/auth/google', {
           method: 'POST',
-          body: { email, name, googleId, picture }
+          body: { email, name, googleId, picture, credential, id_token }
         });
 
         if (res.success && res.token) {
@@ -208,37 +208,29 @@
         return res;
       },
 
-      async whatsappAuth({ phone, name, identifier } = {}) {
-        const res = await request('/api/auth/whatsapp', {
+      async forgotPassword({ identifier, email, phone } = {}) {
+        const idVal = identifier || email || phone;
+        return await request('/api/auth/forgot-password', {
           method: 'POST',
-          body: { phone: phone || identifier, name }
+          body: { identifier: idVal, email, phone }
         });
-
-        if (res.success && res.token) {
-          cachedToken = res.token;
-          cachedUser = res.user;
-          localStorage.setItem(STORAGE_KEY_TOKEN, res.token);
-          localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(res.user));
-          if (res.user.coins) {
-            localStorage.setItem('vanvi_user_coins', res.user.coins);
-          }
-          notifyAuth();
-        }
-        return res;
       },
 
-      async getProfile() {
-        if (!cachedToken) return { success: false, error: 'Not logged in' };
-        const res = await request('/api/auth/me');
-        if (res.success && res.user) {
-          cachedUser = res.user;
-          localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(res.user));
-          if (res.user.coins) {
-            localStorage.setItem('vanvi_user_coins', res.user.coins);
-          }
-          notifyAuth();
-        }
-        return res;
+      async verifyResetOtp({ email, identifier, otp } = {}) {
+        const idVal = email || identifier;
+        return await request('/api/auth/verify-reset-otp', {
+          method: 'POST',
+          body: { email: idVal, otp }
+        });
+      },
+
+      async resetPassword({ email, identifier, otp, newPassword, password } = {}) {
+        const idVal = email || identifier;
+        const passVal = newPassword || password;
+        return await request('/api/auth/reset-password', {
+          method: 'POST',
+          body: { email: idVal, otp, newPassword: passVal }
+        });
       },
 
       logout() {

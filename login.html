@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0, user-scalable=yes" />
   <title>Login | Vanvi Moments</title>
-  <meta name="description" content="Login to continue your journey with Vanvi Moments - handcrafted celebration keepsakes." />
+  <meta name="description" content="Sign in to your Vanvi Moments account to craft and manage handcrafted digital celebration invitations." />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,9 @@
   <link rel="stylesheet" href="vanvi-inner-light.css" />
   <link rel="stylesheet" href="vanvi-navigation.css" />
   <link rel="stylesheet" href="css/vanvi-global-experience.css" />
+
+  <!-- Google Identity Services Official Client -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <style>
     :root {
@@ -26,9 +29,9 @@
       --clay-input-bg: #f5f0fb;
       --clay-text-dark: #2c1642;
       --clay-text-muted: #7b6694;
-      --clay-shadow-card: 0 32px 75px rgba(110, 80, 168, 0.28), 0 8px 24px rgba(0, 0, 0, 0.04), inset 0 2px 3px #ffffff;
+      --clay-shadow-card: 0 24px 60px rgba(110, 80, 168, 0.22), 0 8px 24px rgba(0, 0, 0, 0.04), inset 0 2px 3px #ffffff;
       --clay-shadow-inner: 0 14px 34px rgba(120, 90, 180, 0.12), inset 0 2px 2px #ffffff;
-      --clay-shadow-btn: 0 10px 24px rgba(148, 113, 228, 0.45), 0 3px 0 #6e46be, inset 0 2px 2px rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(0, 0, 0, 0.16);
+      --clay-shadow-btn: 0 10px 24px rgba(148, 113, 228, 0.42), 0 3px 0 #6e46be, inset 0 2px 2px rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(0, 0, 0, 0.16);
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
 
@@ -36,6 +39,7 @@
 
     body {
       min-height: 100vh;
+      min-height: 100dvh;
       background: var(--clay-bg-grad);
       font-family: var(--font-sans);
       color: var(--clay-text-dark);
@@ -43,12 +47,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding: 24px 16px 28px;
+      padding: 24px 16px 36px;
       position: relative;
     }
 
-    /* Ambient 3D Studio Clay Props (Potted plant, flower, floating clouds & hearts) */
+    /* Ambient 3D Studio Clay Background Props */
     .clay-studio-props {
       position: fixed;
       inset: 0;
@@ -65,40 +68,38 @@
     }
 
     .prop-cloud-1 {
-      top: 8%;
+      top: 6%;
       left: 6%;
       font-size: 42px;
       animation: floatCloud 16s ease-in-out infinite alternate;
       opacity: 0.85;
     }
     .prop-cloud-2 {
-      top: 14%;
+      top: 12%;
       right: 7%;
       font-size: 48px;
       animation: floatCloud 20s ease-in-out infinite alternate -6s;
       opacity: 0.85;
     }
     .prop-heart-float {
-      top: 32%;
-      left: 10%;
+      top: 30%;
+      left: 8%;
       font-size: 26px;
       animation: floatHeart 12s ease-in-out infinite alternate;
     }
     .prop-star-float {
-      top: 28%;
-      right: 11%;
+      top: 26%;
+      right: 9%;
       font-size: 24px;
       animation: floatHeart 14s ease-in-out infinite alternate -4s;
     }
 
-    /* Potted Plant & Flower on Desktop Sides */
     .prop-potted-plant {
       bottom: 24px;
       left: max(20px, calc(50% - 390px));
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.3s ease;
     }
     .prop-plant-leaves {
       font-size: 64px;
@@ -120,7 +121,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.3s ease;
     }
     .prop-flower-bloom {
       font-size: 58px;
@@ -145,7 +145,7 @@
       100% { transform: translateY(-16px) rotate(12deg) scale(1.08); }
     }
 
-    /* Smart Fixed Back Button (Firmly pinned at top-left across all devices) */
+    /* Fixed Back Button */
     .clay-nav-back {
       position: fixed;
       top: 18px;
@@ -182,7 +182,7 @@
     /* Top Mode Switcher Bar */
     .clay-mode-switch-wrap {
       width: 100%;
-      max-width: 390px;
+      max-width: 420px;
       display: flex;
       justify-content: center;
       margin-bottom: 12px;
@@ -192,17 +192,17 @@
     .clay-mode-switch {
       display: inline-flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       padding: 4px;
       border-radius: 999px;
       box-shadow: 0 6px 18px rgba(110, 80, 160, 0.1), inset 0 1px 2px #fff;
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.9);
       gap: 4px;
     }
     .clay-mode-tab {
-      padding: 7px 16px;
+      padding: 7px 18px;
       border-radius: 999px;
       font-size: 12.5px;
       font-weight: 800;
@@ -211,7 +211,7 @@
       transition: all 0.22s ease;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
     .clay-mode-tab.active {
       background: var(--clay-primary);
@@ -227,34 +227,45 @@
       font-weight: 900;
     }
 
-    /* Master Tall Phone-Style Clay Card Stage (Slim on laptop & mobile) */
+    /* Master Compact Phone Card (~420px wide centered on desktop & mobile) */
     .clay-phone-card {
       position: relative;
       z-index: 10;
       width: 100%;
       max-width: 420px;
       background: #ffffff;
-      border-radius: 40px;
+      border-radius: 38px;
       box-shadow: var(--clay-shadow-card);
       padding: 22px 18px 20px;
       margin: 0 auto;
       text-align: center;
       overflow: hidden;
       transform: translateZ(0);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: authCardEnter 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    /* Top Header Section */
+    @keyframes authCardEnter {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Top Greeting Section */
     .clay-header-top {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .clay-heart-emblem {
       font-size: 22px;
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       animation: heartBreathe 3s ease-in-out infinite alternate;
     }
     @keyframes heartBreathe {
@@ -262,31 +273,31 @@
       100% { transform: scale(1.15); }
     }
     .clay-main-title {
-      font-size: 27px;
+      font-size: 26px;
       font-weight: 900;
       color: #5c3b99;
       letter-spacing: -0.5px;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     .clay-rays {
       font-size: 16px;
       color: #f59e0b;
     }
     .clay-sub-text {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--clay-text-muted);
-      margin-top: 4px;
+      margin-top: 3px;
       font-weight: 600;
     }
 
-    /* 3D Cute Clay Girl Character Placement (Both eyes open, leaning on card) */
+    /* 3D Cute Clay Character */
     .clay-girl-stage {
       position: relative;
       width: 100%;
-      max-width: 175px;
-      margin: 0 auto -22px; /* Strategic overlap so girl sits directly over inner card */
+      max-width: 170px;
+      margin: 0 auto -22px;
       z-index: 2;
     }
     .clay-girl-photo {
@@ -295,7 +306,7 @@
       display: block;
       object-fit: cover;
       border-radius: 36px 36px 0 0;
-      filter: drop-shadow(0 14px 22px rgba(110, 80, 168, 0.2));
+      filter: drop-shadow(0 12px 20px rgba(110, 80, 168, 0.2));
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .clay-girl-stage:hover .clay-girl-photo {
@@ -307,27 +318,28 @@
       position: relative;
       z-index: 4;
       background: #ffffff;
-      border-radius: 34px;
-      padding: 24px 18px 20px;
+      border-radius: 32px;
+      padding: 22px 18px 18px;
       box-shadow: var(--clay-shadow-inner);
       border: 1.5px solid rgba(240, 235, 250, 0.9);
     }
 
     /* Clay Pill Inset Input Fields */
     .clay-field-row {
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       position: relative;
+      text-align: left;
     }
     .clay-pill-input-box {
       width: 100%;
-      min-height: 52px;
+      min-height: 50px;
       background: var(--clay-input-bg);
       border-radius: 999px;
       box-shadow: inset 0 2.5px 5px rgba(100, 70, 150, 0.08), inset 0 1px 2px rgba(0,0,0,0.04);
       display: flex;
       align-items: center;
-      padding: 5px 8px 5px 6px;
-      transition: all 0.22s ease;
+      padding: 4px 8px 4px 6px;
+      transition: all 0.2s ease;
       border: 1.5px solid transparent;
     }
     .clay-pill-input-box:focus-within {
@@ -336,8 +348,8 @@
       box-shadow: 0 0 0 3px rgba(148, 113, 228, 0.25), inset 0 1px 2px #fff;
     }
     .clay-icon-circle {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: linear-gradient(135deg, #bca6f0 0%, #a284e6 100%);
       color: #ffffff;
@@ -347,8 +359,8 @@
       box-shadow: 0 4px 10px rgba(148, 113, 228, 0.35), inset 0 1px 2px rgba(255,255,255,0.7);
     }
     .clay-icon-circle svg {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
     }
     .clay-native-input {
       flex: 1;
@@ -358,9 +370,10 @@
       background: transparent;
       padding: 0 12px;
       font-family: var(--font-sans);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 600;
       color: var(--clay-text-dark);
+      min-width: 0;
     }
     .clay-native-input::placeholder {
       color: #a494bc;
@@ -369,14 +382,15 @@
     .clay-pwd-toggle {
       background: transparent;
       border: none;
-      font-size: 18px;
+      font-size: 17px;
       color: #927fb0;
       cursor: pointer;
       padding: 6px 10px;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, color 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
+      user-select: none;
     }
     .clay-pwd-toggle:hover {
       transform: scale(1.15);
@@ -388,7 +402,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 12px 6px 18px;
+      margin: 10px 4px 14px;
       font-size: 12px;
     }
     .clay-remember-wrap {
@@ -398,11 +412,13 @@
       color: var(--clay-text-muted);
       cursor: pointer;
       font-weight: 600;
+      user-select: none;
     }
     .clay-remember-wrap input {
       accent-color: var(--clay-primary);
-      width: 14px;
-      height: 14px;
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
     }
     .clay-forgot-link {
       color: var(--clay-primary);
@@ -415,16 +431,16 @@
       color: var(--clay-primary-dark);
     }
 
-    /* Tactile 3D Clay Primary Action Button */
+    /* Primary Action Button */
     .clay-btn-main {
       width: 100%;
-      min-height: 52px;
+      min-height: 50px;
       border-radius: 999px;
       background: linear-gradient(180deg, #aa8ced 0%, #8c67df 100%);
       color: #ffffff;
       border: 1px solid rgba(255, 255, 255, 0.6);
       font-family: var(--font-sans);
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 850;
       letter-spacing: 0.3px;
       cursor: pointer;
@@ -433,43 +449,72 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transform: translateY(-2px);
       transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
     }
     .clay-btn-main:hover {
-      transform: translateY(-4px) scale(1.02);
+      transform: translateY(-2px) scale(1.015);
       box-shadow: 0 14px 28px rgba(148, 113, 228, 0.55), 0 4px 0 #6e46be;
     }
     .clay-btn-main:active {
-      transform: translateY(2px) scale(0.98);
+      transform: translateY(2px) scale(0.985);
       box-shadow: 0 4px 12px rgba(148, 113, 228, 0.3), 0 1px 0 #6e46be;
     }
     .clay-btn-main:disabled {
-      opacity: 0.65;
+      opacity: 0.75;
       cursor: not-allowed;
       transform: none;
+      box-shadow: none;
     }
 
-    /* Live Status message box */
+    /* Loading Spinner */
+    .btn-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Status Alert Message */
     .form-status {
-      margin-top: 12px;
-      font-size: 12.5px;
+      margin-top: 10px;
+      font-size: 12px;
       font-weight: 700;
       min-height: 18px;
       color: var(--clay-text-muted);
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
     }
-    .form-status.error { color: #dc2626; }
-    .form-status.success { color: #16a34a; }
+    .form-status.error {
+      color: #dc2626;
+      background: #fef2f2;
+      border: 1px solid #fee2e2;
+    }
+    .form-status.success {
+      color: #15803d;
+      background: #f0fdf4;
+      border: 1px solid #dcfce7;
+    }
 
     /* Divider */
     .clay-divider-line {
       display: flex;
       align-items: center;
       text-align: center;
-      margin: 18px 0 16px;
+      margin: 16px 0 14px;
       color: #a494bc;
-      font-size: 11.5px;
-      font-weight: 700;
+      font-size: 11px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     .clay-divider-line::before,
     .clay-divider-line::after {
@@ -478,41 +523,54 @@
       border-bottom: 1.5px solid #eae2f5;
     }
     .clay-divider-line span {
-      padding: 0 12px;
+      padding: 0 10px;
     }
 
-    /* 3 Circular Clay Social Buttons */
-    .clay-social-group {
+    /* Official Prominent Google Sign-In Button */
+    .btn-google-official {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1.5px solid #e2d9f3;
+      box-shadow: 0 4px 14px rgba(110, 80, 160, 0.08), inset 0 1px 1px #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-    .clay-social-pill {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 1.5px solid #eae2f5;
-      box-shadow: 0 8px 18px rgba(110, 80, 160, 0.1), inset 0 2px 2px #ffffff, 0 2px 0 rgba(110, 80, 160, 0.08);
-      display: grid;
-      place-items: center;
+      gap: 10px;
       cursor: pointer;
-      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 750;
+      color: #374151;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      margin-bottom: 14px;
     }
-    .clay-social-pill:hover {
-      transform: translateY(-3px) scale(1.08);
-      border-color: var(--clay-primary);
-      box-shadow: 0 12px 24px rgba(148, 113, 228, 0.25), inset 0 2px 2px #fff;
+    .btn-google-official:hover {
+      transform: translateY(-2px);
+      border-color: #4285F4;
+      box-shadow: 0 8px 20px rgba(66, 133, 244, 0.18), inset 0 1px 1px #fff;
+      color: #1f2937;
     }
-    .clay-social-pill:active {
-      transform: translateY(1px) scale(0.96);
+    .btn-google-official:active {
+      transform: translateY(1px);
+    }
+    .google-g-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
     }
 
-    /* Bottom Switch Text */
+    /* GIS Real Button Container */
+    #gsiButtonContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    /* Footer Switch Link */
     .clay-footer-link {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--clay-text-muted);
       font-weight: 600;
     }
@@ -524,66 +582,6 @@
     }
     .clay-footer-link a:hover {
       text-decoration: underline;
-    }
-
-    /* Google Modal (Claymorphic) */
-    .google-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100vh;
-      background: rgba(44, 22, 66, 0.72);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 99999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .google-modal-backdrop.active { display: flex !important; }
-    .google-modal-card {
-      background: #ffffff;
-      border-radius: 32px;
-      padding: 26px 22px;
-      max-width: 380px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
-      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    @keyframes modalPop {
-      0% { transform: scale(0.92); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .google-account-list { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
-    .google-account-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 14px;
-      border-radius: 16px;
-      background: #f7f3fd;
-      border: 1.5px solid #e7ddf8;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.2s ease;
-    }
-    .google-account-item:hover {
-      background: #ede4fc;
-      border-color: var(--clay-primary);
-      transform: translateY(-2px);
-    }
-    .google-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--clay-primary);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 15px;
     }
 
     /* Confetti Particle */
@@ -603,12 +601,14 @@
     @media (max-width: 860px) {
       .prop-potted-plant,
       .prop-potted-flower {
-        display: none !important; /* Hide side props on tablet & mobile */
+        display: none !important;
       }
     }
+
     @media (max-width: 480px) {
       body {
-        padding: 58px 12px 24px;
+        padding: 56px 12px 24px;
+        justify-content: flex-start;
       }
       .clay-nav-back {
         top: 12px;
@@ -618,19 +618,27 @@
         font-size: 12px;
       }
       .clay-phone-card {
-        padding: 22px 14px 18px;
-        border-radius: 36px;
+        padding: 20px 14px 16px;
+        border-radius: 32px;
       }
       .clay-main-title {
         font-size: 23px;
       }
       .clay-girl-stage {
-        max-width: 220px;
-        margin-bottom: -32px;
+        max-width: 155px;
+        margin-bottom: -20px;
       }
       .clay-inner-card {
-        padding: 20px 14px 16px;
-        border-radius: 28px;
+        padding: 18px 12px 14px;
+        border-radius: 26px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
       }
     }
   </style>
@@ -638,7 +646,7 @@
 
 <body class="vanvi-auth-body" id="authBody">
 
-  <!-- Ambient 3D Studio Clay Background Props (Clouds, Floating Hearts, Potted Plants) -->
+  <!-- Ambient 3D Studio Clay Background Props -->
   <div class="clay-studio-props" aria-hidden="true">
     <div class="clay-prop prop-cloud-1">☁️</div>
     <div class="clay-prop prop-cloud-2">☁️</div>
@@ -658,7 +666,7 @@
     </div>
   </div>
 
-  <!-- Smart Fixed Back Button (Anchored Top-Left on All Devices) -->
+  <!-- Smart Fixed Back Button -->
   <a class="clay-nav-back" href="javascript:void(0)" onclick="vanviGoBack('index.html')" aria-label="Back to home">
     <span class="back-arrow" aria-hidden="true">‹</span>
     <span>Back</span>
@@ -679,7 +687,7 @@
     </nav>
   </div>
 
-  <!-- Master 3D Clay Phone Card (Slim on laptop & mobile) -->
+  <!-- Master Compact Phone Card (~420px wide centered) -->
   <main class="clay-phone-card" id="authStage" role="main">
 
     <!-- Top Greeting Section -->
@@ -690,10 +698,10 @@
         <span>Welcome Back</span>
         <span class="clay-rays">🔆</span>
       </h1>
-      <p class="clay-sub-text">Login to continue your journey</p>
+      <p class="clay-sub-text">Login to continue your celebration journey</p>
     </header>
 
-    <!-- 3D Cute Clay Girl Character (Both round eyes open, smiling, leaning on ledge) -->
+    <!-- 3D Cute Clay Character -->
     <div class="clay-girl-stage" aria-hidden="true">
       <img src="assets/vanvi-clay-girl-login.jpg" alt="Cute Vanvi Moments 3D Girl" class="clay-girl-photo" loading="eager" />
     </div>
@@ -702,7 +710,7 @@
     <section class="clay-inner-card" aria-label="Sign in credentials">
       <form id="loginForm" novalidate>
 
-        <!-- Email or Username Field -->
+        <!-- Email or Mobile Field -->
         <div class="clay-field-row">
           <div class="clay-pill-input-box">
             <div class="clay-icon-circle" aria-hidden="true">
@@ -710,7 +718,7 @@
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
               </svg>
             </div>
-            <input class="clay-native-input" id="loginEmail" name="email" type="text" placeholder="Email or Username" autocomplete="username" required aria-label="Email or Username" />
+            <input class="clay-native-input" id="loginEmail" name="email" type="text" placeholder="Email or Mobile Number" autocomplete="username" required aria-label="Email or Mobile Number" />
           </div>
         </div>
 
@@ -736,81 +744,42 @@
           <a class="clay-forgot-link" href="forgot-password.html">Forgot Password?</a>
         </div>
 
-        <!-- Chunky 3D Clay Login Button -->
+        <!-- Tactile 3D Clay Login Button -->
         <button class="clay-btn-main" type="submit" id="btnLoginSubmit">
-          <span>Login</span>
+          <span class="btn-spinner" id="loginSpinner" style="display:none;" aria-hidden="true"></span>
+          <span id="loginBtnText">Sign In</span>
         </button>
 
-        <!-- Status Message -->
-        <p id="loginStatus" class="form-status" role="status" aria-live="polite"></p>
+        <!-- Status Alert Message -->
+        <p id="loginStatus" class="form-status" role="status" aria-live="polite" style="display:none;"></p>
       </form>
 
       <!-- Divider -->
       <div class="clay-divider-line">
-        <span>or continue with</span>
+        <span>or sign in with</span>
       </div>
 
-      <!-- 3 Circular Clay Social Buttons (Google, Apple, Facebook) -->
-      <div class="clay-social-group">
-        <!-- 1-Tap Google Button -->
-        <button type="button" class="clay-social-pill" id="googleLoginBtn" title="Continue with Google" aria-label="Sign in with Google">
-          <svg viewBox="0 0 24 24" width="22" height="22">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-        </button>
+      <!-- Real Official Google Sign-In Button -->
+      <div id="gsiButtonContainer" style="display:none;"></div>
 
-        <!-- Apple ID Button -->
-        <button type="button" class="clay-social-pill" id="btnAppleAuth" title="Continue with Apple ID" aria-label="Sign in with Apple ID">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="#2d1538">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.93-2.85-.9.04-2 .6-2.65 1.36-.56.65-1.06 1.71-.93 2.73 1.01.08 2.03-.49 2.65-1.24z"/>
-          </svg>
-        </button>
-
-        <!-- Facebook Button -->
-        <button type="button" class="clay-social-pill" id="btnFbAuth" title="Continue with Facebook" aria-label="Sign in with Facebook">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="#1877F2">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Bottom Switch Link -->
-      <p class="clay-footer-link">
-        Don't have an account? <a href="signup.html">Sign Up</a>
-      </p>
-    </section>
-  </main>
-
-  <!-- Luxury Google Account Selector Modal (Claymorphic) -->
-  <div class="google-modal-backdrop" id="googleModal" role="dialog" aria-modal="true" aria-labelledby="googleModalTitle">
-    <div class="google-modal-card">
-      <div style="display:flex; justify-content:center; margin-bottom:12px;">
-        <svg viewBox="0 0 24 24" width="36" height="36">
+      <button type="button" class="btn-google-official" id="googleLoginBtn" title="Continue with Google" aria-label="Sign in with Google">
+        <svg class="google-g-icon" viewBox="0 0 24 24">
           <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
           <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
           <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
           <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
         </svg>
-      </div>
-      <h3 id="googleModalTitle" style="font-size:18px; font-weight:800; color:#2c1642; margin-bottom:4px;">Sign in with Google</h3>
-      <p style="font-size:12.5px; color:#7b6694; margin-bottom:16px;">Choose an account to continue to Vanvi Moments</p>
+        <span>Continue with Google</span>
+      </button>
 
-      <div class="google-account-list" id="googleAccountList"></div>
+      <!-- Bottom Switch Link -->
+      <p class="clay-footer-link">
+        Don't have an account? <a href="signup.html">Sign Up (+100 🪙 free)</a>
+      </p>
+    </section>
+  </main>
 
-      <div style="margin-bottom:12px;">
-        <button type="button" class="clay-btn-main" id="btnGoogleDirectAuth" style="font-size:13.5px; min-height:44px;">
-          <span>Continue with Google Account</span>
-        </button>
-      </div>
-
-      <button type="button" onclick="closeGoogleModal()" style="width:100%; padding:10px; border-radius:99px; border:1px solid #ddd; background:#f5f0fb; font-weight:700; color:#6b538c; cursor:pointer; font-size:13px;">Cancel</button>
-    </div>
-  </div>
-
-  <!-- Central Client API, Google Auth & i18n Translation Script -->
+  <!-- Central Client API, Google Auth & Navigation Scripts -->
   <script src="js/vanvi-api.js"></script>
   <script src="js/vanvi-google-auth.js"></script>
   <script src="js/vanvi-i18n.js"></script>
@@ -832,22 +801,61 @@
       const status = document.getElementById('loginStatus');
       const googleBtn = document.getElementById('googleLoginBtn');
       const authStage = document.getElementById('authStage');
-      const googleModal = document.getElementById('googleModal');
       const btnTogglePwd = document.getElementById('btnTogglePwd');
       const pwdInput = document.getElementById('loginPassword');
+      const emailInput = document.getElementById('loginEmail');
+      const rememberCheckbox = document.getElementById('rememberMe');
+      const btnSubmit = document.getElementById('btnLoginSubmit');
+      const spinner = document.getElementById('loginSpinner');
+      const btnText = document.getElementById('loginBtnText');
+
+      // Auto-fill remembered identifier
+      try {
+        const remembered = localStorage.getItem('vanvi_remember_identifier') || localStorage.getItem('vanvi_last_email');
+        if (remembered) {
+          emailInput.value = remembered;
+          if (rememberCheckbox) rememberCheckbox.checked = true;
+        }
+      } catch (e) {}
+
+      // Handle redirect status message (e.g. from password reset)
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('reset') === 'success') {
+        showStatus('✓ Password updated successfully! Please sign in with your new password.', 'success');
+      }
+
+      function showStatus(msg, type) {
+        if (!status) return;
+        if (!msg) {
+          status.style.display = 'none';
+          status.textContent = '';
+          return;
+        }
+        status.style.display = 'block';
+        status.textContent = msg;
+        status.className = 'form-status ' + (type || '');
+      }
+
+      function setLoading(isLoading) {
+        if (btnSubmit) btnSubmit.disabled = isLoading;
+        if (spinner) spinner.style.display = isLoading ? 'inline-block' : 'none';
+        if (btnText) btnText.textContent = isLoading ? 'Signing in...' : 'Sign In';
+      }
 
       // Password Visibility Toggle
       btnTogglePwd?.addEventListener('click', () => {
         if (pwdInput.type === 'password') {
           pwdInput.type = 'text';
           btnTogglePwd.textContent = '🔒';
+          btnTogglePwd.setAttribute('aria-label', 'Hide password');
         } else {
           pwdInput.type = 'password';
           btnTogglePwd.textContent = '👁️';
+          btnTogglePwd.setAttribute('aria-label', 'Show password');
         }
       });
 
-      // Celebration Unlock Sequence
+      // Celebration Confetti Sequence
       window.triggerAuthSuccessCelebration = function (redirectUrl) {
         const emojis = ['✨', '🪙', '✦', '⭐', '💫', '🌟'];
         const cardRect = (authStage || document.body).getBoundingClientRect();
@@ -874,206 +882,84 @@
 
         setTimeout(() => {
           window.location.href = redirectUrl || 'dashboard.html';
-        }, 750);
+        }, 800);
       };
 
       // Standard Login Form Submission
       form.addEventListener('submit', async function (event) {
         event.preventDefault();
-        const button = form.querySelector('button[type="submit"]');
-        button.disabled = true;
-        status.textContent = 'Signing you in securely...';
-        status.className = 'form-status';
+        showStatus('');
 
-        const identifier = form.email.value.trim();
-        const password = form.password.value;
+        const identifier = emailInput.value.trim();
+        const password = pwdInput.value;
+
+        if (!identifier) {
+          showStatus('Please enter your registered email or mobile number.', 'error');
+          emailInput.focus();
+          return;
+        }
+
+        if (!password) {
+          showStatus('Please enter your password.', 'error');
+          pwdInput.focus();
+          return;
+        }
+
+        setLoading(true);
 
         try {
           const result = await window.VanviAPI.auth.login({ identifier, password });
           if (result.success) {
-            status.textContent = 'Welcome back! Opening your dashboard... ✨';
-            status.className = 'form-status success';
-            if (result.user?.email && !result.user.email.includes('@whatsapp')) {
-              rememberAccount(result.user.name, result.user.email);
+            // Remember identifier if checked
+            if (rememberCheckbox && rememberCheckbox.checked) {
+              localStorage.setItem('vanvi_remember_identifier', identifier);
+              localStorage.setItem('vanvi_remember_me', 'true');
+            } else {
+              localStorage.removeItem('vanvi_remember_identifier');
+              localStorage.removeItem('vanvi_remember_me');
             }
+
+            showStatus('Welcome back! Opening your celebration dashboard... ✨', 'success');
             const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
             window.triggerAuthSuccessCelebration(redirectUrl);
             return;
           }
-          button.disabled = false;
-          status.textContent = result.error || 'Sign in failed. Please check your credentials.';
-          status.className = 'form-status error';
+
+          setLoading(false);
+          showStatus(result.error || 'Invalid email/mobile or password. Please try again.', 'error');
         } catch (err) {
-          button.disabled = false;
-          status.textContent = 'Connection error. Please try again.';
-          status.className = 'form-status error';
+          setLoading(false);
+          showStatus('Network connection error. Please try again.', 'error');
         }
       });
 
-      // Google Accounts Helper
-      function getStoredAccounts() {
-        const accounts = [];
-        const seen = new Set();
-        try {
-          const list = JSON.parse(localStorage.getItem('vanvi_saved_accounts') || '[]');
-          if (Array.isArray(list)) {
-            list.forEach(a => {
-              if (a && a.email && !a.email.includes('@whatsapp') && !seen.has(a.email.toLowerCase())) {
-                seen.add(a.email.toLowerCase());
-                accounts.push({ name: a.name || a.email.split('@')[0], email: a.email });
-              }
-            });
-          }
-        } catch (e) { }
-
-        try {
-          const user = JSON.parse(localStorage.getItem('vanvi_user') || 'null');
-          if (user && user.email && !user.email.includes('@whatsapp') && !seen.has(user.email.toLowerCase())) {
-            seen.add(user.email.toLowerCase());
-            accounts.push({ name: user.name || user.email.split('@')[0], email: user.email });
-          }
-        } catch (e) { }
-
-        const lastEmail = localStorage.getItem('vanvi_last_email');
-        if (lastEmail && !lastEmail.includes('@whatsapp') && !seen.has(lastEmail.toLowerCase())) {
-          seen.add(lastEmail.toLowerCase());
-          accounts.push({ name: lastEmail.split('@')[0], email: lastEmail });
-        }
-        return accounts;
-      }
-
-      function rememberAccount(name, email) {
-        if (!email || email.includes('@whatsapp')) return;
-        try {
-          const list = JSON.parse(localStorage.getItem('vanvi_saved_accounts') || '[]');
-          const filtered = list.filter(a => a && a.email && a.email.toLowerCase() !== email.toLowerCase());
-          filtered.unshift({ name: name || email.split('@')[0], email });
-          localStorage.setItem('vanvi_saved_accounts', JSON.stringify(filtered.slice(0, 8)));
-        } catch (e) { }
-      }
-
-      function renderGoogleAccounts() {
-        const listContainer = document.getElementById('googleAccountList');
-        if (!listContainer) return;
-        listContainer.innerHTML = '';
-        const accounts = getStoredAccounts();
-
-        if (accounts.length > 0) {
-          accounts.forEach(acc => {
-            const displayName = acc.name;
-            const email = acc.email;
-            const initial = displayName.charAt(0).toUpperCase();
-            const item = document.createElement('div');
-            item.className = 'google-account-item';
-            item.onclick = () => chooseGoogleAccount(displayName, email);
-            item.innerHTML = `
-              <div class="google-avatar">${initial}</div>
-              <div>
-                <div style="font-weight:800; font-size:13.5px; color:#2c1642;">${displayName}</div>
-                <div style="font-size:11.5px; color:#7b6694;">${email}</div>
-              </div>
-            `;
-            listContainer.appendChild(item);
-          });
-        }
-      }
-
-      // Google Sign-In Click
+      // Google Sign-In Action
       googleBtn?.addEventListener('click', function () {
         if (window.VanviGoogleAuth) {
           window.VanviGoogleAuth.signIn({
             onSuccess: (res) => {
-              status.textContent = `Signed in as ${res.user.name}! Opening your dashboard... ✨`;
-              status.className = 'form-status success';
+              showStatus(`Signed in as ${res.user.name}! Opening dashboard... ✨`, 'success');
               const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
               window.triggerAuthSuccessCelebration(redirectUrl);
             },
             onError: (err) => {
-              status.textContent = err.message || 'Google sign-in failed. Please try again.';
-              status.className = 'form-status error';
+              showStatus(err.message || 'Google sign-in could not be completed.', 'error');
             }
           });
-        } else {
-          renderGoogleAccounts();
-          googleModal.classList.add('active');
-          document.body.style.overflow = 'hidden';
         }
       });
 
-      window.closeGoogleModal = function () {
-        googleModal.classList.remove('active');
-        document.body.style.overflow = '';
-      };
-
-      googleModal?.addEventListener('click', function (e) {
-        if (e.target === googleModal) {
-          closeGoogleModal();
-        }
-      });
-
-      const btnGoogleDirectAuth = document.getElementById('btnGoogleDirectAuth');
-      btnGoogleDirectAuth?.addEventListener('click', function () {
-        if (window.VanviGoogleAuth) {
-          window.VanviGoogleAuth.signIn({
-            onSuccess: (res) => {
-              closeGoogleModal();
-              window.triggerAuthSuccessCelebration('dashboard.html');
-            }
+      // Attempt GIS button rendering into #gsiButtonContainer if supported
+      window.addEventListener('load', () => {
+        if (window.VanviGoogleAuth && window.VanviGoogleAuth.renderButton) {
+          window.VanviGoogleAuth.renderButton('gsiButtonContainer', {
+            theme: 'outline',
+            size: 'large',
+            shape: 'pill',
+            text: 'signin_with',
+            width: 340
           });
-          return;
         }
-        const accounts = getStoredAccounts();
-        if (accounts.length > 0) {
-          chooseGoogleAccount(accounts[0].name, accounts[0].email);
-        } else {
-          chooseGoogleAccount('Google User', 'user@gmail.com');
-        }
-      });
-
-      window.chooseGoogleAccount = async function (name, email) {
-        closeGoogleModal();
-        status.textContent = 'Authenticating with Google... ✨';
-        status.className = 'form-status';
-
-        try {
-          const res = await window.VanviAPI.auth.googleAuth({
-            email,
-            name,
-            googleId: 'g_' + Date.now()
-          });
-
-          if (res.success) {
-            rememberAccount(name, email);
-            localStorage.setItem('vanvi_last_email', email);
-            status.textContent = `Signed in as ${name}! Welcome ✨`;
-            status.className = 'form-status success';
-            const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
-            window.triggerAuthSuccessCelebration(redirectUrl);
-          } else {
-            status.textContent = res.error || 'Google sign-in failed.';
-            status.className = 'form-status error';
-          }
-        } catch (e) {
-          status.textContent = 'Google sign-in error.';
-          status.className = 'form-status error';
-        }
-      };
-
-      // Optional Social Buttons
-      document.getElementById('btnAppleAuth')?.addEventListener('click', () => {
-        status.textContent = 'Connecting with Apple ID...';
-        status.className = 'form-status';
-        setTimeout(() => {
-          chooseGoogleAccount('Apple Member', 'member@icloud.com');
-        }, 600);
-      });
-
-      document.getElementById('btnFbAuth')?.addEventListener('click', () => {
-        status.textContent = 'Connecting with Facebook...';
-        status.className = 'form-status';
-        setTimeout(() => {
-          chooseGoogleAccount('Facebook Member', 'member@facebook.com');
-        }, 600);
       });
 
     })();

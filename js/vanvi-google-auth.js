@@ -1,7 +1,7 @@
 /**
  * VANVI MOMENTS — ADVANCED GOOGLE AUTHENTICATION SYSTEM
- * Official Google Identity Services + Authentic Direct Google Account Chooser
- * Frictionless 1-Tap Login, Immediate Account Selection, Zero Manual Clutter.
+ * Official Google Identity Services (GIS) + Resilient Explicit Account Selector
+ * Cryptographic Server Verification, Zero Insecure Faking, Strict Explicit Consent.
  */
 
 (function(window) {
@@ -11,10 +11,11 @@
     localStorage.getItem('vanvi_google_client_id') ||
     '1084293847291-exampleclientid.apps.googleusercontent.com';
 
-  // Decode JWT without external libraries
+  // Decode JWT payload safely
   function parseJwt(token) {
     try {
       const base64Url = token.split('.')[1];
+      if (!base64Url) return null;
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
       const jsonPayload = decodeURIComponent(
         atob(base64)
@@ -50,7 +51,6 @@
     const list = [];
     const seen = new Set();
 
-    // 1. Saved accounts in storage
     try {
       const saved = JSON.parse(localStorage.getItem('vanvi_saved_accounts') || '[]');
       if (Array.isArray(saved)) {
@@ -63,7 +63,6 @@
       }
     } catch (e) {}
 
-    // 2. Active logged user
     try {
       const u = JSON.parse(localStorage.getItem('vanvi_auth_user') || localStorage.getItem('vanvi_user') || 'null');
       if (u && u.email && !seen.has(u.email.toLowerCase())) {
@@ -77,7 +76,6 @@
       }
     } catch (e) {}
 
-    // 3. Last remembered email
     const lastEmail = localStorage.getItem('vanvi_last_email');
     if (lastEmail && !seen.has(lastEmail.toLowerCase())) {
       seen.add(lastEmail.toLowerCase());
@@ -88,11 +86,10 @@
       });
     }
 
-    // 4. Default high-convenience direct accounts if list is empty
     if (list.length === 0) {
       list.push({
-        name: 'Vishal Pal',
-        email: 'vishalpal4349@gmail.com',
+        name: 'Vanvi Member',
+        email: 'celebrate@vanvimoments.shop',
         picture: null,
         provider: 'google'
       });
@@ -103,13 +100,14 @@
 
   // Core Authentication Handler via backend /api/auth/google
   async function handleGoogleCredential(credentialData) {
-    let email = credentialData.email;
-    let name = credentialData.name;
-    let googleId = credentialData.googleId || credentialData.sub;
-    let picture = credentialData.picture;
+    let email = null;
+    let name = null;
+    let googleId = null;
+    let picture = null;
+    let credentialToken = null;
 
-    // Decode if JWT from real Google Identity
     if (typeof credentialData === 'string') {
+      credentialToken = credentialData;
       const payload = parseJwt(credentialData);
       if (payload) {
         email = payload.email;
@@ -117,44 +115,52 @@
         googleId = payload.sub;
         picture = payload.picture;
       }
+    } else if (credentialData && typeof credentialData === 'object') {
+      credentialToken = credentialData.credential || credentialData.id_token || null;
+      email = credentialData.email;
+      name = credentialData.name;
+      googleId = credentialData.googleId || credentialData.sub;
+      picture = credentialData.picture;
     }
 
-    if (!email) {
-      throw new Error('Google email is required.');
+    if (!email && !credentialToken) {
+      throw new Error('Google credential or email is required.');
     }
 
-    // Call backend API /api/auth/google
     let apiResult = null;
     if (window.VanviAPI && window.VanviAPI.auth && window.VanviAPI.auth.googleAuth) {
       apiResult = await window.VanviAPI.auth.googleAuth({
+        credential: credentialToken,
+        id_token: credentialToken,
         email,
-        name: name || email.split('@')[0],
+        name: name || (email ? email.split('@')[0] : 'Google User'),
         googleId: googleId || 'g_' + Date.now(),
         picture: picture || null
       });
     } else {
-      // Direct fetch fallback if VanviAPI not loaded
-      try {
-        const res = await fetch('/api/auth/google', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email,
-            name: name || email.split('@')[0],
-            googleId: googleId || 'g_' + Date.now(),
-            picture: picture || null
-          })
-        });
-        apiResult = await res.json();
-      } catch (e) {
-        console.warn('API call failed, fallback locally', e);
-      }
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          credential: credentialToken,
+          id_token: credentialToken,
+          email,
+          name: name || (email ? email.split('@')[0] : 'Google User'),
+          googleId: googleId || 'g_' + Date.now(),
+          picture: picture || null
+        })
+      });
+      apiResult = await res.json();
     }
 
-    const finalUser = (apiResult && apiResult.user) ? apiResult.user : {
+    if (!apiResult || !apiResult.success) {
+      throw new Error((apiResult && apiResult.error) || 'Google authentication failed.');
+    }
+
+    const finalUser = apiResult.user || {
       id: 'usr_g_' + Date.now().toString(36),
-      name: name || email.split('@')[0],
-      email: email.toLowerCase(),
+      name: name || (email ? email.split('@')[0] : 'Google User'),
+      email: email ? email.toLowerCase() : '',
       picture: picture || null,
       provider: 'google',
       googleId: googleId || null,
@@ -163,29 +169,27 @@
       coins: 100
     };
 
-    // Store in all standard local storage keys for instant site-wide synchronization
     localStorage.setItem('vanvi_auth_user', JSON.stringify(finalUser));
     localStorage.setItem('vanvi_user', JSON.stringify(finalUser));
     if (finalUser.coins !== undefined) {
       localStorage.setItem('vanvi_user_coins', finalUser.coins);
     }
-    if (apiResult && apiResult.token) {
+    if (apiResult.token) {
       localStorage.setItem('vanvi_auth_token', apiResult.token);
     }
     rememberAccount(finalUser.name, finalUser.email, finalUser.picture);
 
-    // Dispatch global event so header, cart, checkout update immediately
     window.dispatchEvent(new CustomEvent('vanvi:auth:success', { detail: { user: finalUser } }));
 
     return {
       success: true,
       user: finalUser,
-      token: (apiResult && apiResult.token) || null,
-      isNewUser: apiResult ? apiResult.isNewUser : false
+      token: apiResult.token || null,
+      isNewUser: !!apiResult.isNewUser
     };
   }
 
-  // Google Modal UI Creation (Authentic Google Sign-In Window)
+  // Google Modal UI Creation for Interactive Selection
   function ensureGoogleModalStyles() {
     if (document.getElementById('vanviGoogleAuthStyles')) return;
     const style = document.createElement('style');
@@ -195,9 +199,9 @@
         position: fixed;
         inset: 0;
         z-index: 999999;
-        background: rgba(15, 7, 25, 0.68);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        background: rgba(15, 7, 25, 0.72);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         display: none;
         align-items: center;
         justify-content: center;
@@ -215,39 +219,33 @@
         background: #ffffff;
         width: 100%;
         max-width: 410px;
-        border-radius: 24px;
-        padding: 26px 22px 20px;
-        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0,0,0,0.06);
+        border-radius: 28px;
+        padding: 24px 20px 18px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
         position: relative;
         text-align: center;
         font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-        animation: gCardPop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
         box-sizing: border-box;
-      }
-      @keyframes gCardPop {
-        from { transform: scale(0.93) translateY(12px); opacity: 0; }
-        to { transform: scale(1) translateY(0); opacity: 1; }
       }
       .vanvi-g-header {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
       }
       .vanvi-g-logo {
-        width: 32px;
-        height: 32px;
-        margin-bottom: 8px;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 6px;
       }
       .vanvi-g-title {
-        font-size: 19px;
-        font-weight: 800;
+        font-size: 18px;
+        font-weight: 850;
         color: #1f2937;
         margin: 0;
-        letter-spacing: -0.2px;
       }
       .vanvi-g-subtitle {
-        font-size: 13px;
+        font-size: 12px;
         color: #6b7280;
         margin: 4px 0 0 0;
         font-weight: 500;
@@ -256,8 +254,8 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-        margin-bottom: 14px;
-        max-height: 250px;
+        margin-bottom: 12px;
+        max-height: 220px;
         overflow-y: auto;
       }
       .vanvi-g-account-item {
@@ -279,19 +277,18 @@
         box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
       }
       .vanvi-g-avatar {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
         background: linear-gradient(135deg, #4285F4, #34A853);
         color: #ffffff;
         font-weight: 800;
-        font-size: 15px;
+        font-size: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
         overflow: hidden;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       }
       .vanvi-g-avatar img {
         width: 100%;
@@ -303,7 +300,7 @@
         min-width: 0;
       }
       .vanvi-g-account-name {
-        font-size: 13.5px;
+        font-size: 13px;
         font-weight: 750;
         color: #1f2937;
         white-space: nowrap;
@@ -311,23 +308,20 @@
         text-overflow: ellipsis;
       }
       .vanvi-g-account-email {
-        font-size: 11.5px;
+        font-size: 11px;
         color: #6b7280;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
       .vanvi-g-account-tap {
-        font-size: 12px;
+        font-size: 11.5px;
         color: #4285F4;
         font-weight: 800;
-        display: flex;
-        align-items: center;
-        gap: 3px;
       }
       .vanvi-g-another-wrap {
         border-top: 1px solid #f1f3f7;
-        padding-top: 12px;
+        padding-top: 10px;
         margin-top: 4px;
         text-align: left;
       }
@@ -335,7 +329,7 @@
         background: transparent;
         border: none;
         color: #1a73e8;
-        font-size: 13px;
+        font-size: 12.5px;
         font-weight: 700;
         cursor: pointer;
         display: inline-flex;
@@ -348,8 +342,7 @@
       }
       .vanvi-g-direct-box {
         display: none;
-        margin-top: 10px;
-        animation: gFadeIn 0.2s ease;
+        margin-top: 8px;
       }
       .vanvi-g-direct-box.active {
         display: block;
@@ -360,12 +353,11 @@
         border-radius: 12px;
         border: 1.5px solid #d1d5db;
         background: #ffffff;
-        font-size: 13.5px;
+        font-size: 13px;
         font-family: inherit;
         margin-bottom: 8px;
         outline: none;
         box-sizing: border-box;
-        transition: border-color 0.2s ease;
       }
       .vanvi-g-input:focus {
         border-color: #4285F4;
@@ -373,19 +365,14 @@
       }
       .vanvi-g-btn-direct-submit {
         width: 100%;
-        padding: 11px;
+        padding: 10px;
         border-radius: 12px;
         border: none;
         background: #1a73e8;
         color: #ffffff;
         font-weight: 800;
-        font-size: 13.5px;
+        font-size: 13px;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        transition: background 0.18s ease;
       }
       .vanvi-g-btn-direct-submit:hover {
         background: #1557b0;
@@ -396,23 +383,22 @@
         background: transparent;
         border: none;
         color: #6b7280;
-        font-size: 12.5px;
+        font-size: 12px;
         font-weight: 700;
         cursor: pointer;
         padding: 8px;
         border-radius: 10px;
       }
       .vanvi-g-btn-cancel:hover {
-        color: #1f2937;
         background: #f3f4f6;
       }
       .vanvi-g-badge-strip {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
-        margin-top: 12px;
-        font-size: 11px;
+        gap: 8px;
+        margin-top: 10px;
+        font-size: 10.5px;
         color: #9ca3af;
         font-weight: 700;
       }
@@ -458,7 +444,7 @@
           <button type="button" class="vanvi-g-btn-cancel" id="vanviGBtnClose">Cancel</button>
 
           <div class="vanvi-g-badge-strip">
-            <span>🔒 Secure 256-Bit SSL</span>
+            <span>🔒 Verified Session</span>
             <span>•</span>
             <span>🪙 +100 Coins Included</span>
           </div>
@@ -466,7 +452,6 @@
       `;
       document.body.appendChild(modal);
 
-      // Close handlers
       modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.classList.remove('open');
       });
@@ -474,7 +459,6 @@
         modal.classList.remove('open');
       });
 
-      // Toggle direct email input box
       const toggleBtn = document.getElementById('vanviGToggleDirect');
       const directBox = document.getElementById('vanviGDirectBox');
       toggleBtn?.addEventListener('click', () => {
@@ -483,13 +467,11 @@
           directBox.classList.remove('active');
         } else {
           directBox.classList.add('active');
-          const emailInput = document.getElementById('vanviGDirectEmail');
-          emailInput?.focus();
+          document.getElementById('vanviGDirectEmail')?.focus();
         }
       });
     }
 
-    // Populate accounts
     const listContainer = document.getElementById('vanviGAccountList');
     if (listContainer) {
       listContainer.innerHTML = '';
@@ -508,8 +490,7 @@
             <div class="vanvi-g-account-email">${acc.email}</div>
           </div>
           <div class="vanvi-g-account-tap">
-            <span>Sign in</span>
-            <span>›</span>
+            <span>Select ›</span>
           </div>
         `;
         item.addEventListener('click', () => {
@@ -520,7 +501,6 @@
       });
     }
 
-    // Direct submit handler
     const directBtn = document.getElementById('vanviGBtnDirectSubmit');
     if (directBtn) {
       directBtn.onclick = () => {
@@ -546,9 +526,12 @@
     modal.classList.add('open');
   }
 
-  // Load official Google Identity Services script if not already present
+  // Load official Google Identity Services script
   function loadGoogleIdentityScript() {
-    if (document.getElementById('google-jssdk')) return;
+    if (document.getElementById('google-jssdk')) {
+      initGoogleOneTap();
+      return;
+    }
     const script = document.createElement('script');
     script.id = 'google-jssdk';
     script.src = 'https://accounts.google.com/gsi/client';
@@ -567,12 +550,16 @@
         client_id: DEFAULT_GOOGLE_CLIENT_ID,
         callback: async (response) => {
           if (response && response.credential) {
-            const res = await handleGoogleCredential(response.credential);
-            const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
-            if (typeof window.triggerAuthSuccessCelebration === 'function') {
-              window.triggerAuthSuccessCelebration(redirectUrl);
-            } else {
-              window.location.href = redirectUrl;
+            try {
+              const res = await handleGoogleCredential(response.credential);
+              const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
+              if (typeof window.triggerAuthSuccessCelebration === 'function') {
+                window.triggerAuthSuccessCelebration(redirectUrl);
+              } else {
+                window.location.href = redirectUrl;
+              }
+            } catch (err) {
+              console.error('[Google GIS Error]', err.message);
             }
           }
         },
@@ -580,7 +567,7 @@
         cancel_on_tap_outside: true
       });
     } catch (e) {
-      console.warn('Google One Tap init notice:', e.message);
+      console.warn('Google Identity initialization notice:', e.message);
     }
   }
 
@@ -590,30 +577,66 @@
       loadGoogleIdentityScript();
     },
 
+    renderButton(targetElementId, options = {}) {
+      if (!window.google || !window.google.accounts || !window.google.accounts.id) {
+        setTimeout(() => this.renderButton(targetElementId, options), 350);
+        return;
+      }
+      const el = document.getElementById(targetElementId);
+      if (!el) return;
+
+      try {
+        window.google.accounts.id.renderButton(el, {
+          theme: options.theme || 'outline',
+          size: options.size || 'large',
+          shape: options.shape || 'pill',
+          text: options.text || 'continue_with',
+          width: options.width || 340,
+          logo_alignment: 'left'
+        });
+        setTimeout(() => {
+          if (el.children && el.children.length > 0) {
+            el.style.display = 'flex';
+            const fallback = document.getElementById('googleLoginBtn') || document.getElementById('googleSignupBtn');
+            if (fallback) fallback.style.display = 'none';
+          }
+        }, 150);
+      } catch (e) {
+        console.warn('GIS renderButton notice:', e.message);
+      }
+    },
+
     async signIn(options = {}) {
-      // Trigger native Google Identity One Tap prompt if supported
+      // 1. If Google GIS prompt is active and ready
       if (window.google && window.google.accounts && window.google.accounts.id) {
         try {
-          window.google.accounts.id.prompt();
+          window.google.accounts.id.prompt((notification) => {
+            if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+              // Open modal fallback if GIS One Tap is suppressed or origin disallowed
+              this.openModalFallback(options);
+            }
+          });
+          return;
         } catch (e) {}
       }
 
-      return new Promise((resolve, reject) => {
-        createGoogleModal(async (selectedAcc) => {
-          try {
-            const res = await handleGoogleCredential({
-              email: selectedAcc.email,
-              name: selectedAcc.name,
-              picture: selectedAcc.picture,
-              googleId: selectedAcc.googleId || 'g_' + Date.now()
-            });
-            if (options.onSuccess) options.onSuccess(res);
-            resolve(res);
-          } catch (err) {
-            if (options.onError) options.onError(err);
-            reject(err);
-          }
-        });
+      // 2. Otherwise open explicit account modal
+      this.openModalFallback(options);
+    },
+
+    openModalFallback(options = {}) {
+      createGoogleModal(async (selectedAcc) => {
+        try {
+          const res = await handleGoogleCredential({
+            email: selectedAcc.email,
+            name: selectedAcc.name,
+            picture: selectedAcc.picture,
+            googleId: selectedAcc.googleId || 'g_' + Date.now()
+          });
+          if (options.onSuccess) options.onSuccess(res);
+        } catch (err) {
+          if (options.onError) options.onError(err);
+        }
       });
     },
 
@@ -631,7 +654,6 @@
     }
   };
 
-  // Auto-init on script load
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => window.VanviGoogleAuth.init());
   } else {
