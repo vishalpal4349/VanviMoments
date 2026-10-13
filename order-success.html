@@ -1835,7 +1835,7 @@
   const occLower = occasion.toLowerCase();
   const nameLower = itemName.toLowerCase();
   let matchedKey = 'celebration';
-  if (occLower.includes('wed') || occLower.includes('vivah') || occLower.includes('shaadi') || nameLower.includes('royal') || nameLower.includes('vow') || nameLower.includes('arch')) matchedKey = 'wedding';
+  if (occLower.includes('wed') || occLower.includes('vivah') || occLower.includes('shaadi') || nameLower.includes('royal') || nameLower.includes('vow') || nameLower.includes('arch') || nameLower.includes('temple') || nameLower.includes('blossom')) matchedKey = 'wedding';
   else if (occLower.includes('birth') || nameLower.includes('birth')) matchedKey = 'birthday';
   else if (occLower.includes('love') || occLower.includes('romance') || nameLower.includes('love') || nameLower.includes('valentine')) matchedKey = 'love';
   else if (occLower.includes('anniv') || nameLower.includes('anniv')) matchedKey = 'anniversary';
@@ -1861,6 +1861,10 @@
     const tplKey = (params.get('template') || params.get('templateId') || occasion || '').toLowerCase();
     if (tplKey.includes('royal-vow') || tplKey.includes('royal-vows') || tplKey.includes('vow')) {
       momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/royal-vows-indian-wedding/index.html')}?purchased=true&paid=true&bride=${encodeURIComponent(params.get('bride') || recipient)}&groom=${encodeURIComponent(params.get('groom') || 'Rohan')}`;
+    } else if (tplKey.includes('temple') || tplKey.includes('blossom')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/temple-blossom-luxe/index.html')}?purchased=true&paid=true&published=1&live=true&bride=${encodeURIComponent(params.get('bride') || 'Meera')}&groom=${encodeURIComponent(params.get('groom') || recipient)}`;
+    } else if (tplKey.includes('cloud') || tplKey.includes('love-in-clouds')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/love-in-clouds/index.html')}?purchased=true&paid=true&published=1&live=true&bride=${encodeURIComponent(params.get('bride') || 'Anaya')}&groom=${encodeURIComponent(params.get('groom') || recipient)}`;
     } else if (tplKey.includes('ivory') || tplKey.includes('arch')) {
       momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/ivory-arch-wedding/index.html')}?purchased=true&paid=true&bride=${encodeURIComponent(params.get('bride') || 'Divya')}&groom=${encodeURIComponent(params.get('groom') || recipient)}`;
     } else if (tplKey.includes('bloom') || tplKey.includes('white-bloom')) {

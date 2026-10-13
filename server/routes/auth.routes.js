@@ -1,13 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
-const { Users, CoinLedger } = require('../db/database');
+const { Users, CoinLedger, AuditLogs } = require('../db/database');
 const { hashPassword, verifyPassword, createToken, requireAuth } = require('../middleware/auth');
 const { authRateLimiter } = require('../middleware/security');
 const { sendWelcomeEmail, sendPasswordResetOtp } = require('../services/email.service');
 
 // In-Memory Password Reset OTP Vault (15-min TTL)
 const resetOtpVault = new Map();
+
+// Helper to reliably extract client IP and User Agent
+function getClientMeta(req) {
+  const forwarded = req.headers['x-forwarded-for'];
+  const ip = (forwarded ? String(forwarded).split(',')[0].trim() : (req.socket?.remoteAddress || req.ip || '127.0.0.1')).replace(/^::ffff:/, '');
+  const ua = req.headers['user-agent'] || 'Browser Client';
+  return { ip, ua };
+}
 
 // Input validation helpers
 function isValidEmail(email) {
@@ -26,6 +34,7 @@ router.post('/signup', authRateLimiter, async (req, res) => {
   try {
     const { name, password } = req.body;
     const rawId = (req.body.identifier || req.body.email || req.body.phone || '').trim();
+    const { ip, ua } = getClientMeta(req);
 
     if (!name || name.trim().length < 2) {
       return res.status(400).json({ success: false, error: 'Name must be at least 2 characters.' });
@@ -55,8 +64,25 @@ router.post('/signup', authRateLimiter, async (req, res) => {
       email: userEmail,
       phone: userPhone,
       passwordHash: hash,
-      salt: salt
+      salt: salt,
+      provider: 'local',
+      status: 'active',
+      signupIp: ip,
+      signupUa: ua,
+      lastLoginIp: ip,
+      lastLoginUa: ua,
+      loginCount: 1,
+      loginHistory: [{ timestamp: Date.now(), ip, ua, provider: 'local', status: 'success' }]
     });
+
+    // Record signup in Audit Logs
+    await AuditLogs.create({
+      actorUserId: user.id,
+      action: 'user.signup',
+      targetEntity: 'user',
+      targetId: user.id,
+      metadata: { name: user.name, email: user.email, phone: user.phone, provider: 'local', ip, ua }
+    }).catch(err => console.warn('[Audit Log Error]', err.message));
 
     const token = createToken(user);
 
@@ -79,7 +105,9 @@ router.post('/signup', authRateLimiter, async (req, res) => {
         phone: user.phone,
         role: user.role,
         tier: user.tier,
-        coins: user.coins
+        coins: user.coins,
+        status: user.status || 'active',
+        provider: user.provider || 'local'
       }
     });
   } catch (err) {
@@ -95,6 +123,7 @@ router.post('/login', authRateLimiter, async (req, res) => {
   try {
     const { password } = req.body;
     const rawId = (req.body.identifier || req.body.email || req.body.phone || '').trim();
+    const { ip, ua } = getClientMeta(req);
 
     if (!rawId || !password) {
       return res.status(400).json({ success: false, error: 'Email or mobile number and password are required.' });
@@ -105,12 +134,37 @@ router.post('/login', authRateLimiter, async (req, res) => {
       return res.status(401).json({ success: false, error: 'Invalid email/phone or password.' });
     }
 
+    if (user.status === 'suspended') {
+      return res.status(403).json({ success: false, error: 'Your account has been suspended by administration. Please contact support.' });
+    }
+
     const valid = verifyPassword(password, user.salt, user.passwordHash);
     if (!valid) {
       return res.status(401).json({ success: false, error: 'Invalid email/phone or password.' });
     }
 
-    const token = createToken(user);
+    // Update login analytics & history
+    const history = Array.isArray(user.loginHistory) ? user.loginHistory.slice(0, 19) : [];
+    history.unshift({ timestamp: Date.now(), ip, ua, provider: user.provider || 'local', status: 'success' });
+
+    const updatedUser = await Users.update(user.id, {
+      lastLogin: Date.now(),
+      lastLoginIp: ip,
+      lastLoginUa: ua,
+      loginCount: (user.loginCount || 0) + 1,
+      loginHistory: history
+    });
+
+    // Audit log login
+    await AuditLogs.create({
+      actorUserId: user.id,
+      action: 'user.login',
+      targetEntity: 'user',
+      targetId: user.id,
+      metadata: { ip, ua, provider: user.provider || 'local' }
+    }).catch(err => console.warn('[Audit Log Error]', err.message));
+
+    const token = createToken(updatedUser || user);
 
     return res.json({
       success: true,
@@ -122,7 +176,10 @@ router.post('/login', authRateLimiter, async (req, res) => {
         phone: user.phone,
         role: user.role,
         tier: user.tier,
-        coins: user.coins
+        coins: user.coins,
+        status: user.status || 'active',
+        provider: user.provider || 'local',
+        lastLogin: Date.now()
       }
     });
   } catch (err) {
@@ -143,9 +200,15 @@ router.get('/me', requireAuth, async (req, res) => {
         id: user.id,
         name: user.name,
         email: user.email,
+        phone: user.phone,
         role: user.role,
         tier: user.tier,
-        coins: user.coins
+        coins: user.coins,
+        templateCredits: user.templateCredits || 0,
+        activePass: user.activePass || null,
+        status: user.status || 'active',
+        provider: user.provider || 'local',
+        lastLogin: user.lastLogin
       }
     });
   } catch (err) {
@@ -160,6 +223,7 @@ router.get('/me', requireAuth, async (req, res) => {
 router.post('/google', authRateLimiter, async (req, res) => {
   try {
     const { email, name, googleId, picture } = req.body;
+    const { ip, ua } = getClientMeta(req);
 
     if (!email || !isValidEmail(email)) {
       return res.status(400).json({ success: false, error: 'Valid Google email is required.' });
@@ -185,15 +249,51 @@ router.post('/google', authRateLimiter, async (req, res) => {
         salt: salt,
         role: 'user',
         tier: 'free',
-        coins: 100
+        coins: 100,
+        status: 'active',
+        signupIp: ip,
+        signupUa: ua,
+        lastLoginIp: ip,
+        lastLoginUa: ua,
+        loginCount: 1,
+        loginHistory: [{ timestamp: Date.now(), ip, ua, provider: 'google', status: 'success' }]
       });
+
+      await AuditLogs.create({
+        actorUserId: user.id,
+        action: 'user.signup',
+        targetEntity: 'user',
+        targetId: user.id,
+        metadata: { email: cleanEmail, name: userName, provider: 'google', ip, ua }
+      }).catch(err => console.warn('[Audit Log Error]', err.message));
     } else {
-      // User exists: link googleId, update avatar if provided, update lastLogin
-      const updates = { lastLogin: Date.now() };
+      if (user.status === 'suspended') {
+        return res.status(403).json({ success: false, error: 'Your account has been suspended by administration. Please contact support.' });
+      }
+
+      const history = Array.isArray(user.loginHistory) ? user.loginHistory.slice(0, 19) : [];
+      history.unshift({ timestamp: Date.now(), ip, ua, provider: 'google', status: 'success' });
+
+      // User exists: link googleId, update avatar, update lastLogin & count
+      const updates = { 
+        lastLogin: Date.now(),
+        lastLoginIp: ip,
+        lastLoginUa: ua,
+        loginCount: (user.loginCount || 0) + 1,
+        loginHistory: history
+      };
       if (googleId && !user.googleId) updates.googleId = googleId;
       if (picture) updates.picture = picture;
       if (!user.provider) updates.provider = 'google';
       user = await Users.update(user.id, updates);
+
+      await AuditLogs.create({
+        actorUserId: user.id,
+        action: 'user.login',
+        targetEntity: 'user',
+        targetId: user.id,
+        metadata: { ip, ua, provider: 'google' }
+      }).catch(err => console.warn('[Audit Log Error]', err.message));
     }
 
     const token = createToken(user);
@@ -221,7 +321,9 @@ router.post('/google', authRateLimiter, async (req, res) => {
         provider: user.provider || 'google',
         role: user.role,
         tier: user.tier,
-        coins: user.coins
+        coins: user.coins,
+        status: user.status || 'active',
+        lastLogin: Date.now()
       }
     });
   } catch (err) {

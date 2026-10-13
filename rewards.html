@@ -1426,14 +1426,14 @@
         <span class="coin-rate-pill">Exchange Value: 10 Coins = ₹1.00 · Up to 40% Off Any Template</span>
       </div>
       <div class="hero-btn-row">
-        <button type="button" class="hero-cta-btn" onclick="switchRewardTab('wheel')">🎡 Spin Wheel Now</button>
-        <button type="button" class="hero-cta-btn secondary" onclick="switchRewardTab('games')">🎮 Play &amp; Earn Games</button>
+        <button type="button" class="hero-cta-btn" onclick="switchRewardTab('wheel', true)">🎡 Spin Wheel Now</button>
+        <button type="button" class="hero-cta-btn secondary" onclick="switchRewardTab('games', true)">🎮 Play &amp; Earn Games</button>
       </div>
     </div>
 
     <!-- 2. Quick Access Hub (4 Tactile Action Badges) -->
     <div class="rewards-quick-hub" aria-label="Quick Reward Actions">
-      <div class="quick-hub-pill active" onclick="switchRewardTab('wheel')">
+      <div class="quick-hub-pill active" onclick="switchRewardTab('wheel', true)">
         <span class="hub-pill-icon">🎡</span>
         <div class="hub-pill-text">
           <strong>Daily Spin</strong>
@@ -1484,7 +1484,7 @@
     <!-- TAB 1: DAILY WHEEL & LUCKY MOMENT -->
     <div class="tab-content-pane active" id="tabPaneWheel">
       <!-- Daily Fortune Wheel -->
-      <div class="wheel-card-section">
+      <div class="wheel-card-section" id="wheelSection">
         <div class="wheel-section-head">
           <div class="coin-kicker">Daily Little Surprise</div>
           <h2 style="font-family:var(--font-serif); font-size:24px; color:var(--text-dark); margin-bottom:4px;">Daily Reward Fortune Wheel</h2>
@@ -1933,7 +1933,7 @@
       }
 
       // Tabs Logic
-      window.switchRewardTab = function(tabKey) {
+      window.switchRewardTab = function(tabKey, autoScroll = false) {
         document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.tab-content-pane').forEach(pane => pane.classList.remove('active'));
         document.querySelectorAll('.quick-hub-pill').forEach(pill => pill.classList.remove('active'));
@@ -1942,40 +1942,76 @@
           document.getElementById('tabBtnWheel')?.classList.add('active');
           document.getElementById('tabPaneWheel')?.classList.add('active');
           document.querySelectorAll('.quick-hub-pill')[0]?.classList.add('active');
+          if (autoScroll) {
+            setTimeout(() => {
+              const el = document.getElementById('wheelSection');
+              if (el) {
+                const yOffset = -70;
+                const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+                const hub = document.getElementById('hubSpinBtn');
+                if (hub && !hub.classList.contains('disabled')) {
+                  hub.style.transform = 'scale(1.15)';
+                  setTimeout(() => { hub.style.transform = ''; }, 600);
+                }
+              }
+            }, 80);
+          }
         } else if (tabKey === 'games') {
           document.getElementById('tabBtnGames')?.classList.add('active');
           document.getElementById('tabPaneGames')?.classList.add('active');
           document.querySelectorAll('.quick-hub-pill')[1]?.classList.add('active');
+          if (autoScroll) {
+            setTimeout(() => {
+              document.getElementById('tabPaneGames')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 80);
+          }
         } else if (tabKey === 'coupons') {
           document.getElementById('tabBtnCoupons')?.classList.add('active');
           document.getElementById('tabPaneCoupons')?.classList.add('active');
           document.querySelectorAll('.quick-hub-pill')[2]?.classList.add('active');
+          if (autoScroll) {
+            setTimeout(() => {
+              document.getElementById('tabPaneCoupons')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 80);
+          }
         } else if (tabKey === 'referral') {
           document.getElementById('tabBtnReferral')?.classList.add('active');
           document.getElementById('tabPaneReferral')?.classList.add('active');
           document.querySelectorAll('.quick-hub-pill')[3]?.classList.add('active');
+          if (autoScroll) {
+            setTimeout(() => {
+              document.getElementById('tabPaneReferral')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 80);
+          }
         }
 
-        // Smooth scroll to tabs bar if below fold
-        const tabsEl = document.querySelector('.rewards-nav-tabs-wrapper');
-        if (tabsEl && window.scrollY > tabsEl.offsetTop) {
-          tabsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Smooth scroll to tabs bar if below fold and not specifically targeting a section
+        if (!autoScroll) {
+          const tabsEl = document.querySelector('.rewards-nav-tabs-wrapper');
+          if (tabsEl && window.scrollY > tabsEl.offsetTop) {
+            tabsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }
       };
 
-      // Check hash on load
-      if (window.location.hash) {
-        const h = window.location.hash.replace('#', '').toLowerCase();
-        if (['wheel', 'games', 'coupons', 'referral'].includes(h)) {
-          switchRewardTab(h);
-        } else if (h === 'spin') {
-          switchRewardTab('wheel');
-        } else if (h === 'offers' || h === 'discounts') {
-          switchRewardTab('coupons');
-        } else if (h === 'refer') {
-          switchRewardTab('referral');
+      // Check hash on load and on hashchange
+      function handleRewardHash() {
+        if (window.location.hash) {
+          const h = window.location.hash.replace('#', '').toLowerCase();
+          if (h === 'wheel' || h === 'spin' || h === 'spinner' || h === 'fortunewheel') {
+            switchRewardTab('wheel', true);
+          } else if (['games', 'coupons', 'referral'].includes(h)) {
+            switchRewardTab(h, true);
+          } else if (h === 'offers' || h === 'discounts') {
+            switchRewardTab('coupons', true);
+          } else if (h === 'refer') {
+            switchRewardTab('referral', true);
+          }
         }
       }
+      handleRewardHash();
+      window.addEventListener('hashchange', handleRewardHash);
 
       // Coins Helpers
       function getCoins() {

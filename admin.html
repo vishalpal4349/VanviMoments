@@ -1662,32 +1662,110 @@
         <!-- ========================================================
              TAB 11: USERS & WALLETS
              ======================================================== -->
+        <!-- ========================================================
+             TAB 11: USERS & FULL CONTROL CENTER
+             ======================================================== -->
         <section id="tab-users" class="tab-pane">
           <div class="page-title-row">
             <div>
-              <h1 class="page-main-heading">👥 Registered Creators &amp; Wallets</h1>
-              <p class="page-sub-caption">Manage registered users, membership tiers (Vanvi Club / VIP), and coin balances.</p>
+              <h1 class="page-main-heading">👥 Creator Control Center &amp; User Intelligence</h1>
+              <p class="page-sub-caption">Complete A-to-Z control over all registered users, login trails, authentication methods, wallet coins &amp; VIP tiers.</p>
             </div>
-            <button type="button" class="btn-3d btn-3d-gold" onclick="openGrantCoinsModal()">🪙 Grant Coins</button>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="btn-3d" onclick="refreshAdminUsersList()">🔄 Refresh Users</button>
+              <button type="button" class="btn-3d btn-3d-gold" onclick="openGrantCoinsModal()">🪙 Grant / Deduct Coins</button>
+            </div>
           </div>
 
+          <!-- Users KPI Stat Bar -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:14px; margin-bottom:18px;">
+            <div class="kpi-card" style="padding:14px 16px;">
+              <div class="kpi-title">Total Users <span>👥</span></div>
+              <div class="kpi-num" id="statTotalUsers">0</div>
+              <div class="kpi-meta">All registered accounts</div>
+            </div>
+            <div class="kpi-card" style="padding:14px 16px;">
+              <div class="kpi-title">Active Accounts <span>🟢</span></div>
+              <div class="kpi-num" id="statActiveUsers" style="color:var(--emerald);">0</div>
+              <div class="kpi-meta" style="color:var(--emerald);">Verified &amp; active</div>
+            </div>
+            <div class="kpi-card" style="padding:14px 16px;">
+              <div class="kpi-title">Suspended <span>🔴</span></div>
+              <div class="kpi-num" id="statSuspendedUsers" style="color:var(--danger);">0</div>
+              <div class="kpi-meta" style="color:var(--danger);">Restricted accounts</div>
+            </div>
+            <div class="kpi-card" style="padding:14px 16px;">
+              <div class="kpi-title">VIP &amp; Club <span>👑</span></div>
+              <div class="kpi-num" id="statVipUsers" style="color:var(--gold-champagne);">0</div>
+              <div class="kpi-meta" style="color:var(--gold-champagne);">Subscribed members</div>
+            </div>
+            <div class="kpi-card" style="padding:14px 16px;">
+              <div class="kpi-title">Google OAuth <span>🌐</span></div>
+              <div class="kpi-num" id="statGoogleUsers" style="color:#0284c7;">0</div>
+              <div class="kpi-meta" style="color:#0284c7;">Google sign-in users</div>
+            </div>
+            <div class="kpi-card" style="padding:14px 16px;">
+              <div class="kpi-title">Circulating Coins <span>🪙</span></div>
+              <div class="kpi-num" id="statTotalCoins" style="color:#d97706;">0</div>
+              <div class="kpi-meta" style="color:#d97706;">Wallet balance total</div>
+            </div>
+          </div>
+
+          <!-- Master Filter & Search Bar -->
+          <div class="panel-card" style="padding:14px 18px; margin-bottom:16px;">
+            <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+              <div style="flex:1; min-width:240px; position:relative;">
+                <input type="text" class="text-input" id="adminUserSearchInput" placeholder="🔍 Search by name, email, phone, user ID..." oninput="filterAdminUsersLive()" style="padding-left:36px;"/>
+                <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px; opacity:0.6;">🔍</span>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <select class="select-input" id="adminUserFilterTier" onchange="filterAdminUsersLive()" style="width:auto; min-width:130px;">
+                  <option value="all">All Tiers</option>
+                  <option value="free">Free Creator</option>
+                  <option value="member">Vanvi Club</option>
+                  <option value="vip">VIP Patron</option>
+                </select>
+                <select class="select-input" id="adminUserFilterProvider" onchange="filterAdminUsersLive()" style="width:auto; min-width:140px;">
+                  <option value="all">All Auth Methods</option>
+                  <option value="google">Google Auth</option>
+                  <option value="local">Manual Auth</option>
+                </select>
+                <select class="select-input" id="adminUserFilterStatus" onchange="filterAdminUsersLive()" style="width:auto; min-width:120px;">
+                  <option value="all">All Status</option>
+                  <option value="active">🟢 Active</option>
+                  <option value="suspended">🔴 Suspended</option>
+                </select>
+                <select class="select-input" id="adminUserFilterRole" onchange="filterAdminUsersLive()" style="width:auto; min-width:120px;">
+                  <option value="all">All Roles</option>
+                  <option value="user">Creators</option>
+                  <option value="admin">Admins</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Table Panel -->
           <div class="panel-card" style="padding:0; overflow:hidden;">
             <div class="admin-table-wrap" style="border:none;">
               <table class="admin-table">
                 <thead>
                   <tr>
-                    <th>Creator</th>
-                    <th>Email / Phone</th>
-                    <th>Tier</th>
-                    <th>Coins Balance</th>
-                    <th>Registered</th>
+                    <th>Creator &amp; Role</th>
+                    <th>Email &amp; Phone</th>
+                    <th>Auth &amp; Status</th>
+                    <th>Tier &amp; Pass</th>
+                    <th>Wallets (Coins / Credits)</th>
+                    <th>Last Active &amp; Logins</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody id="adminUsersTbody">
-                  <!-- Populated by loadAllUsers() -->
+                  <!-- Populated dynamically by loadAllUsers() -->
                 </tbody>
               </table>
+            </div>
+            <div id="adminUsersEmptyState" style="display:none; padding:32px; text-align:center; color:var(--text-dim); font-size:13px;">
+              No matching creators found. Try clearing your search or filter.
             </div>
           </div>
         </section>
@@ -2211,6 +2289,25 @@
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
           <div class="field-group">
+            <label class="field-caption">Account Status</label>
+            <select class="select-input" id="editUserAdminStatus">
+              <option value="active">🟢 Active</option>
+              <option value="suspended">🔴 Suspended / Restricted</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-caption">Active Celebration Pass</label>
+            <select class="select-input" id="editUserAdminActivePass">
+              <option value="">None</option>
+              <option value="Mini Pass">Mini Celebration Pass (320 Cr)</option>
+              <option value="Creator Pass">Creator Festival Pass (700 Cr)</option>
+              <option value="VIP Pass">VIP Luxury Pass (1,500 Cr)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="field-group">
             <label class="field-caption">Coin Balance (🪙)</label>
             <input type="number" class="text-input" id="editUserAdminCoins" min="0"/>
           </div>
@@ -2228,6 +2325,39 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL: FULL A-TO-Z USER DOSSIER & AUDIT TRAIL
+       ============================================================ -->
+  <div class="modal-backdrop-wrap" id="userDossierModal">
+    <div class="modal-box-card modal-box-large" style="max-width:880px; max-height:92vh; overflow-y:auto; padding:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; border-bottom:1px solid var(--border-subtle); padding-bottom:14px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div id="dossierAvatar" style="width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg, var(--rose-primary), var(--gold-champagne)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:20px; box-shadow:0 4px 14px rgba(255,42,122,0.25);">U</div>
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <h3 class="modal-title-text" id="dossierUserName" style="margin:0; font-size:18px;">Creator Profile</h3>
+              <span id="dossierStatusBadge" class="pill-badge badge-free">ACTIVE</span>
+            </div>
+            <span id="dossierUserId" style="font-size:11px; color:var(--text-dim); font-family:var(--font-mono);">usr_id</span>
+          </div>
+        </div>
+        <button type="button" style="background:transparent; border:none; color:var(--text-muted); font-size:24px; cursor:pointer;" onclick="closeUserDossierModal()">×</button>
+      </div>
+
+      <!-- Dossier Sub-Tabs -->
+      <div style="display:flex; gap:8px; border-bottom:1px solid var(--border-subtle); margin-bottom:18px; overflow-x:auto; padding-bottom:4px;" id="dossierTabsBar">
+        <button type="button" class="action-btn-pill active" id="tabDossierBtnOverview" onclick="switchDossierTab('overview')">📋 Profile &amp; Auth</button>
+        <button type="button" class="action-btn-pill" id="tabDossierBtnLogins" onclick="switchDossierTab('logins')">🔐 Login Trail &amp; IP</button>
+        <button type="button" class="action-btn-pill" id="tabDossierBtnLedger" onclick="switchDossierTab('ledger')">🪙 Coin Ledger</button>
+        <button type="button" class="action-btn-pill" id="tabDossierBtnActivity" onclick="switchDossierTab('activity')">💌 Orders &amp; Moments</button>
+      </div>
+
+      <div id="dossierContentArea">
+        <!-- Rendered dynamically by controller -->
+      </div>
     </div>
   </div>
 

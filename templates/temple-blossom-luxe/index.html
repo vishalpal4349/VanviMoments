@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="A beautiful digital wedding invitation.">
 <title>Arjun & Meera — Wedding Invitation</title>
+<link rel="stylesheet" href="../../css/vanvi-global-experience.css" />
+<link rel="stylesheet" href="../../css/vanvi-template-lock.css" />
 
 <noscript>
 <style>
@@ -3054,6 +3056,35 @@ body.is-published .vanvi-watermark {
     text-transform: uppercase;
     text-decoration: none;
 }
+
+@media (max-width: 480px) {
+    .vanvi-top-badge {
+        top: 10px;
+        left: 10px;
+        padding: 5px 12px 5px 10px;
+        font-size: 8.5px;
+        letter-spacing: 1px;
+    }
+    .floating-audio-ctrl {
+        bottom: 14px;
+        right: 14px;
+        width: 42px;
+        height: 42px;
+        font-size: 15px;
+    }
+    .vanvi-watermark-pill {
+        bottom: 14px !important;
+        left: 14px !important;
+        padding: 5px 10px !important;
+        font-size: 9.5px !important;
+        max-width: calc(100vw - 80px) !important;
+    }
+    .rsvp-form button {
+        padding: 14px 18px !important;
+        font-size: 14px !important;
+        width: 100% !important;
+    }
+}
 </style>
 </head>
 
@@ -4573,8 +4604,10 @@ if (audioToggle) {
 
 // Enhanced Live update listener for Vanvi Studio Builder
 window.addEventListener('message', (e) => {
-    if (!e.data || e.data.type !== 'VANVI_UPDATE_DATA') return;
-    const d = e.data.payload;
+    if (!e.data) return;
+    const type = e.data.type || e.data.action;
+    if (type !== 'VANVI_UPDATE_DATA' && type !== 'VANVI_LIVE_PREVIEW_SYNC' && type !== 'UPDATE_CONFIG') return;
+    const d = e.data.payload || e.data.data || e.data.config || e.data;
     if (!d) return;
 
     // Intro Names
@@ -4687,18 +4720,35 @@ window.addEventListener('message', (e) => {
     }
 
     // Watermark publication toggle
+    const wmEl = document.getElementById('vanviWatermark');
     if (d.isPublished) {
         document.body.classList.add('is-published');
+        if (wmEl) wmEl.style.display = 'none';
     } else if (d.isPublished === false) {
         document.body.classList.remove('is-published');
+        if (wmEl) wmEl.style.display = 'flex';
     }
 });
 
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('published') === '1' || urlParams.get('live') === 'true') {
-    document.body.classList.add('is-published');
-}
+(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('published') === '1' || urlParams.get('live') === 'true' || urlParams.get('purchased') === 'true' || urlParams.get('paid') === 'true' || window.vanviPurchased) {
+        document.body.classList.add('is-published');
+        const wm = document.getElementById('vanviWatermark');
+        if (wm) wm.style.display = 'none';
+    }
+})();
 </script>
+
+<!-- Vanvi Moments Preview Watermark -->
+<div id="vanviWatermark" class="vanvi-watermark-pill" style="position:fixed; bottom:16px; left:16px; z-index:99999; background:rgba(255,250,241,0.92); color:#493b37; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(200,155,85,0.45); border-radius:999px; padding:6px 14px; font-size:11px; font-weight:700; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(94,62,45,0.15); pointer-events:auto;" title="Vanvi Moments · Temple Blossom Luxe Preview">
+    <span style="color:#c89b55;">✨</span>
+    <span style="font-family:sans-serif;">Vanvi Moments · Temple Blossom Preview</span>
+</div>
+
+<script src="../../js/vanvi-api.js"></script>
+<script src="../../js/template-adapter.js"></script>
+<script src="../../js/vanvi-template-lock.js"></script>
 
 </body>
 </html>

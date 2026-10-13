@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Aarav & Ananya — Our Love Story in the Clouds</title>
+<link rel="stylesheet" href="../../css/vanvi-global-experience.css" />
+<link rel="stylesheet" href="../../css/vanvi-template-lock.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root {
+  --sky-top: #1A7CEB;
+  --sky-mid: #5BA7F7;
+  --cloud-pink: #F8B4C8;
+  --cloud-peach: #FCECE8;
+  --cloud-white: #FFFFFF;
+  --ocean-blue: #1C548C;
+  --gold-warm: #E5A855;
+  --gold-sheen: #F5D38C;
+  --rose-deep: #D05B7C;
+  --text-dark: #2B3A4A;
+  --text-light: #6A7D92;
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --border-glass: rgba(255, 255, 255, 0.6);
+  --shadow-cloud: 0 16px 40px rgba(70, 110, 160, 0.14);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #F3F8FD;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* FLOATING CLOUD PARTICLES EFFECT */
+.cloud-particle-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* FLOATING MUSIC CONTROLLER */
+.music-floater {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF9BB7, #66A6FF);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 8px 24px rgba(60, 120, 200, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.music-floater:hover {
+  transform: scale(1.1) rotate(15deg);
+}
+
+.music-floater.playing {
+  animation: pulse-ring 2.2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(255, 155, 183, 0.6); }
+  70% { box-shadow: 0 0 0 16px rgba(255, 155, 183, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 155, 183, 0); }
+}
+
+/* HERO SECTION - RECREATION OF UPLOADED TEMPLATE 10 */
+.hero-clouds {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  background: #1978E5;
+  padding: 40px 20px 0;
+}
+
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  z-index: 1;
+}
+
+/* Soft radiant vignette for contrast */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 25%, rgba(20, 80, 160, 0.15) 0%, rgba(20, 80, 160, 0.4) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* HERO HEADINGS (EXACT REPLICA OF IMAGE) */
+.hero-content {
+  position: relative;
+  z-index: 5;
+  margin-top: 15px;
+  max-width: 680px;
+  padding: 0 16px;
+  animation: heroFadeDown 1.2s ease-out forwards;
+}
+
+@keyframes heroFadeDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-pill-badge {
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 8vw, 76px);
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 1.05;
+  margin-bottom: 8px;
+  text-shadow: 0 4px 20px rgba(10, 40, 80, 0.4);
+  letter-spacing: -0.5px;
+}
+
+.hero-names-cursive {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(26px, 5.2vw, 42px);
+  color: #FFFFFF;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-shadow: 0 3px 16px rgba(10, 40, 80, 0.35);
+}
+
+.hero-names-cursive span {
+  font-style: normal;
+  font-size: 0.85em;
+  padding: 0 6px;
+  opacity: 0.9;
+}
+
+.hero-tagline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(13px, 2.8vw, 17px);
+  font-weight: 400;
+  color: #FFFFFF;
+  opacity: 0.95;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px rgba(10, 40, 80, 0.3);
+  margin-bottom: 20px;
+}
+
+/* SCROLL CUE AT BOTTOM */
+.hero-scroll-cue {
+  position: relative;
+  z-index: 5;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #FFFFFF;
+  cursor: pointer;
+  animation: floatCue 2.2s infinite ease-in-out;
+}
+
+@keyframes floatCue {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.hero-scroll-cue span {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.hero-scroll-cue i {
+  font-size: 18px;
+}
+
+/* SECTION WRAPPERS */
+.section-wrap {
+  position: relative;
+  padding: 85px 20px;
+  overflow: hidden;
+}
+
+.section-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  margin-bottom: 8px;
+}
+
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 48px);
+  color: var(--text-dark);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.section-desc {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-top: 8px;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* REVEAL CARDS WITH FROSTED GLASS & CLOUD CURVES */
+.glass-cloud-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--border-glass);
+  border-radius: 28px;
+  box-shadow: var(--shadow-cloud);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.glass-cloud-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 50px rgba(50, 90, 140, 0.18);
+}
+
+/* PARENTS BLESSINGS GRID */
+.parents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.parent-side-card {
+  padding: 36px 28px;
+  text-align: center;
+  border-radius: 28px;
+}
+
+.parent-cloud-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  margin: 0 auto 18px;
+  background: linear-gradient(135deg, #FFE3EB, #DDF0FF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--rose-deep);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 8px 20px rgba(208, 91, 124, 0.15);
+}
+
+.parent-role-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+
+.parent-names-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.parent-single-name {
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.parent-single-name strong {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-light);
+  margin-bottom: 2px;
+}
+
+/* ITINERARY EVENTS 4-GRID */
+.events-cloud-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.event-cloud-box {
+  padding: 30px 22px;
+  text-align: center;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-cloud-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FF9BB7, #5BA7F7);
+}
+
+.event-emblem {
+  font-size: 26px;
+  margin-bottom: 12px;
+  color: var(--sky-mid);
+}
+
+.event-cloud-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.event-timing-row {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(91, 167, 247, 0.1);
+  color: #1E60A8;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.event-loc-sub {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* DESTINATION PALACE VENUE & MAP */
+.venue-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 40px;
+}
+
+.venue-info h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+}
+
+.venue-address-text {
+  font-size: 14px;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.btn-open-maps {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 26px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #1C7CEB, #4497F5);
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(28, 124, 235, 0.35);
+  transition: all .25s ease;
+}
+
+.btn-open-maps:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(28, 124, 235, 0.5);
+}
+
+.venue-mock-map {
+  width: 100%;
+  height: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+.venue-mock-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* GALLERY CAROUSEL */
+.gallery-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.gallery-photo-card {
+  height: 260px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-cloud);
+}
+
+.gallery-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.gallery-photo-card:hover img {
+  transform: scale(1.08);
+}
+
+/* COUNTDOWN TO OUR FOREVER */
+.countdown-box {
+  text-align: center;
+  padding: 50px 30px;
+  border-radius: 36px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 247, 255, 0.95));
+}
+
+.countdown-digits-grid {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.digit-card {
+  width: 90px;
+  height: 96px;
+  border-radius: 18px;
+  background: #FFFFFF;
+  border: 1px solid rgba(91, 167, 247, 0.3);
+  box-shadow: 0 10px 25px rgba(50, 100, 160, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.digit-card .number {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #1A7CEB;
+  line-height: 1;
+}
+
+.digit-card .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-light);
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+/* RSVP INTERACTIVE FORM */
+.rsvp-card-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 32px;
+}
+
+.rsvp-form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.rsvp-input {
+  width: 100%;
+  padding: 13px 18px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(91, 167, 247, 0.25);
+  background: #FFFFFF;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--text-dark);
+  transition: all .2s ease;
+}
+
+.rsvp-input:focus {
+  outline: none;
+  border-color: #1A7CEB;
+  box-shadow: 0 0 0 3px rgba(26, 124, 235, 0.15);
+}
+
+.btn-submit-rsvp {
+  padding: 14px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #FF8BA7 0%, #1A7CEB 100%);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255, 139, 167, 0.35);
+  transition: all .25s ease;
+}
+
+.btn-submit-rsvp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 139, 167, 0.5);
+}
+
+.rsvp-success-toast {
+  display: none;
+  background: #E8F5E9;
+  border: 1px solid #A5D6A7;
+  color: #2E7D32;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 14px;
+}
+
+/* FOOTER & WATERMARK LOGO */
+.clouds-footer {
+  text-align: center;
+  padding: 60px 20px 40px;
+  position: relative;
+  z-index: 5;
+}
+
+.footer-couple-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-style: italic;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.footer-date-line {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+/* VANVI MOMENTS WATERMARK (DISAPPEARS WHEN is-published) */
+.vanvi-watermark-wrap {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  transition: opacity .3s ease;
+}
+
+.vanvi-watermark-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 18px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(229, 168, 85, 0.4);
+  color: #8C6228;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
+
+.vanvi-watermark-link:hover {
+  background: #FFFDF9;
+  border-color: #E5A855;
+}
+
+/* WATERMARK STRIPPER RULE */
+body.is-published .vanvi-watermark-wrap {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .venue-showcase {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  .digit-card {
+    width: 72px;
+    height: 80px;
+  }
+  .digit-card .number {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-floater {
+    bottom: 14px;
+    right: 14px;
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+  }
+  .vanvi-watermark-pill {
+    bottom: 14px !important;
+    left: 14px !important;
+    padding: 5px 10px !important;
+    font-size: 9.5px !important;
+    max-width: calc(100vw - 80px) !important;
+  }
+  .btn-submit-rsvp {
+    padding: 13px 18px !important;
+    font-size: 13px !important;
+    width: 100% !important;
+  }
+  .digit-card {
+    width: 64px;
+    height: 72px;
+  }
+  .digit-card .number {
+    font-size: 24px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- FLOATING PARTICLES CANVAS -->
+<canvas id="cloudCanvas" class="cloud-particle-canvas"></canvas>
+
+<!-- FLOATING MUSIC BUTTON -->
+<div class="music-floater" id="musicToggleBtn" title="Play Romantic Song">
+  <i class="fa-solid fa-music"></i>
+</div>
+<audio id="romanticAudio" loop preload="auto">
+  <source src="assets/romantic-clouds.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HERO: LOVE IN THE CLOUDS (TEMPLATE 10) -->
+<header class="hero-clouds" id="home">
+  <img src="assets/cloud-hero.jpg" class="hero-bg-img" id="heroBgImg" alt="Our Love Story - Aarav & Ananya">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-pill-badge" id="heroBadge">TOGETHER FOREVER</div>
+    <h1 class="hero-title" id="heroMainTitle">Our Love Story</h1>
+    <div class="hero-names-cursive" id="heroCoupleCursive">
+      <span id="txtGroom">Aarav</span> &amp; <span id="txtBride">Ananya</span>
+    </div>
+    <p class="hero-tagline" id="heroTagline">A beautiful beginning to our forever</p>
+  </div>
+
+  <div class="hero-scroll-cue" onclick="scrollToSection('blessings')">
+    <span>Scroll to Explore</span>
+    <i class="fa-solid fa-angle-down"></i>
+  </div>
+</header>
+
+<!-- BLESSINGS / PARENTS -->
+<section class="section-wrap" id="blessings">
+  <div class="section-container">
+    <div class="section-head">
+      <span class="section-eyebrow" id="blessEyebrow">With Endless Love</span>
+      <h2 class="section-heading" id="blessTitle">Beloved Parents</h2>
+      <p class="section-desc" id="blessSub">With the eternal blessings and graceful support of our families, we begin this magical voyage.</p>
+    </div>
+
+    <div class="parents-grid">
+      <!-- Groom's Parents -->
+      <div class="glass-cloud-card parent-side-card">
+        <div class="parent-cloud-icon"><i class="fa-solid fa-heart"></i></div>
+        <h3 class="parent-role-title">Groom's Family</h3>
+        <div class="parent-names-block">
+          <div class="parent-single-name">
+            <strong>Father</strong>
+            <span id="groomFatherTxt">Mr. Rajesh Sharma</span>
+          </div>
+          <div class="parent-single-name">
+            <strong>Mother</strong>
+            <span id="groomMotherTxt">Mrs. Sunita Sharma</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bride's Parents -->
+      <div class="glass-cloud-card parent-side-card">
+        <div class="parent-cloud-icon"><i class="fa-solid fa-gem"></i></div>
+        <h3 class="parent-role-title">Bride's Family</h3>
+        <div class="parent-names-block">
+          <div class="parent-single-name">
+            <strong>Father</strong>
+            <span id="brideFatherTxt">Mr. Ramesh Verma</span>
+          </div>
+          <div class="parent-single-name">
+            <strong>Mother</strong>
+            <span id="brideMotherTxt">Mrs. Anita Verma</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS ITINERARY -->
+<section class="section-wrap" id="events">
+  <div class="section-container">
+    <div class="section-head">
+      <span class="section-eyebrow">Wedding Celebrations</span>
+      <h2 class="section-heading">Our Special Moments</h2>
+      <p class="section-desc">Join us in the rituals of love, joy, melodies, and lifelong vows.</p>
+    </div>
+
+    <div class="events-cloud-grid">
+      <!-- Event 1 -->
+      <div class="glass-cloud-card event-cloud-box">
+        <div class="event-emblem"><i class="fa-solid fa-sparkles"></i></div>
+        <h3 id="ev0TitleTxt">Engagement</h3>
+        <div class="event-timing-row">
+          <span id="ev0DateTxt">18 December</span> · <span id="ev0TimeTxt">7:00 PM</span>
+        </div>
+        <div class="event-loc-sub" id="ev0LocTxt">Cloud View Banquet</div>
+      </div>
+
+      <!-- Event 2 -->
+      <div class="glass-cloud-card event-cloud-box">
+        <div class="event-emblem"><i class="fa-solid fa-sun"></i></div>
+        <h3 id="ev1TitleTxt">Haldi</h3>
+        <div class="event-timing-row">
+          <span id="ev1DateTxt">19 December</span> · <span id="ev1TimeTxt">11:00 AM</span>
+        </div>
+        <div class="event-loc-sub" id="ev1LocTxt">Golden Courtyard</div>
+      </div>
+
+      <!-- Event 3 -->
+      <div class="glass-cloud-card event-cloud-box">
+        <div class="event-emblem"><i class="fa-solid fa-om"></i></div>
+        <h3 id="ev2TitleTxt">Wedding</h3>
+        <div class="event-timing-row">
+          <span id="ev2DateTxt">20 December</span> · <span id="ev2TimeTxt">9:00 AM</span>
+        </div>
+        <div class="event-loc-sub" id="ev2LocTxt">Royal Sunset Deck</div>
+      </div>
+
+      <!-- Event 4 -->
+      <div class="glass-cloud-card event-cloud-box">
+        <div class="event-emblem"><i class="fa-solid fa-champagne-glasses"></i></div>
+        <h3 id="ev3TitleTxt">Reception</h3>
+        <div class="event-timing-row">
+          <span id="ev3DateTxt">20 December</span> · <span id="ev3TimeTxt">7:00 PM</span>
+        </div>
+        <div class="event-loc-sub" id="ev3LocTxt">Grand Crystal Ballroom</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VENUE & GOOGLE MAPS -->
+<section class="section-wrap" id="venue">
+  <div class="section-container">
+    <div class="glass-cloud-card venue-showcase">
+      <div class="venue-info">
+        <span class="section-eyebrow">Destination</span>
+        <h3 id="venueNameTxt">The Rose Garden Palace</h3>
+        <p class="venue-address-text" id="venueAddressTxt">123 Celebration Avenue, Beside Lake Vista, Hyderabad, Telangana</p>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-open-maps" id="venueMapBtn">
+          <i class="fa-solid fa-location-arrow"></i> Open in Google Maps
+        </a>
+      </div>
+
+      <div class="venue-mock-map">
+        <iframe id="venueIframeMap" src="https://maps.google.com/maps?q=Hyderabad%20Palace&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section class="section-wrap" id="gallery">
+  <div class="section-container">
+    <div class="section-head">
+      <span class="section-eyebrow">Sweet Memories</span>
+      <h2 class="section-heading">Moments of Love</h2>
+      <p class="section-desc">Glimpses of laughter, stolen glances, and dreams taking flight.</p>
+    </div>
+
+    <div class="gallery-strip">
+      <div class="gallery-photo-card"><img id="gal0Img" src="assets/gallery-1.png" alt="Couple Moment 1"></div>
+      <div class="gallery-photo-card"><img id="gal1Img" src="assets/gallery-2.png" alt="Couple Moment 2"></div>
+      <div class="gallery-photo-card"><img id="gal2Img" src="assets/gallery-3.png" alt="Couple Moment 3"></div>
+      <div class="gallery-photo-card"><img id="gal3Img" src="assets/gallery-4.png" alt="Couple Moment 4"></div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section class="section-wrap" id="countdown">
+  <div class="section-container">
+    <div class="glass-cloud-card countdown-box">
+      <span class="section-eyebrow">Counting The Seconds</span>
+      <h2 class="section-heading">Until Our Forever</h2>
+      <p class="section-desc">We cannot wait to celebrate this fairytale with you.</p>
+
+      <div class="countdown-digits-grid">
+        <div class="digit-card">
+          <div class="number" id="cdDays">00</div>
+          <div class="label">Days</div>
+        </div>
+        <div class="digit-card">
+          <div class="number" id="cdHours">00</div>
+          <div class="label">Hours</div>
+        </div>
+        <div class="digit-card">
+          <div class="number" id="cdMinutes">00</div>
+          <div class="label">Minutes</div>
+        </div>
+        <div class="digit-card">
+          <div class="number" id="cdSeconds">00</div>
+          <div class="label">Seconds</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="section-wrap" id="rsvp">
+  <div class="section-container">
+    <div class="glass-cloud-card rsvp-card-wrap">
+      <div class="section-head" style="margin-bottom: 24px;">
+        <span class="section-eyebrow">Will You Join Us?</span>
+        <h2 class="section-heading" style="font-size: 32px;">Bless Our Beginning</h2>
+        <p class="section-desc">Kindly respond to assist our royal arrangements.</p>
+      </div>
+
+      <form class="rsvp-form-grid" id="cloudsRsvpForm">
+        <input type="text" class="rsvp-input" placeholder="Your Name" required>
+        <input type="tel" class="rsvp-input" placeholder="Phone Number" required>
+        <select class="rsvp-input" required>
+          <option value="">Will you attend?</option>
+          <option value="Yes, joyfully!">Yes, joyfully attending!</option>
+          <option value="Regretfully declined">Regretfully will miss it</option>
+        </select>
+        <input type="number" class="rsvp-input" placeholder="Number of Guests" min="1" max="10" value="2">
+        <button type="submit" class="btn-submit-rsvp">
+          <i class="fa-solid fa-paper-plane"></i> Send RSVP Confirmation
+        </button>
+      </form>
+      <div class="rsvp-success-toast" id="rsvpSuccessToast">
+        <i class="fa-solid fa-circle-check"></i> Thank you! Your warm RSVP has been received.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="clouds-footer">
+  <div class="footer-couple-name" id="footCouple">Aarav &amp; Ananya</div>
+  <div class="footer-date-line" id="footDate">20 December 2026 · Celebrating Pure Love</div>
+
+  <!-- Vanvi Moments Watermark (Strips on is-published) -->
+  <div class="vanvi-watermark-wrap">
+    <a href="builder.html" class="vanvi-watermark-link">
+      <i class="fa-solid fa-gem" style="color:#C89B55;"></i>
+      <span>Created with Vanvi Moments Studio</span>
+    </a>
+  </div>
+</footer>
+
+<script>
+/* ====================================================================
+   LOVE IN THE CLOUDS (TEMPLATE 10) LOGIC & LIVE SYNC
+   ==================================================================== */
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Background Music Controller
+const audio = document.getElementById('romanticAudio');
+const musicBtn = document.getElementById('musicToggleBtn');
+let isPlaying = false;
+
+function toggleMusic() {
+  if (!audio) return;
+  if (isPlaying) {
+    audio.pause();
+    musicBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
+    musicBtn.classList.remove('playing');
+    isPlaying = false;
+  } else {
+    audio.play().then(() => {
+      musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+      musicBtn.classList.add('playing');
+      isPlaying = true;
+    }).catch(() => {});
+  }
+}
+
+if (musicBtn) {
+  musicBtn.addEventListener('click', toggleMusic);
+}
+
+// Auto play music on first user touch
+window.addEventListener('click', () => {
+  if (!isPlaying && audio) {
+    audio.play().then(() => {
+      musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+      musicBtn.classList.add('playing');
+      isPlaying = true;
+    }).catch(() => {});
+  }
+}, { once: true });
+
+// RSVP Form submit simulation
+const rsvpForm = document.getElementById('cloudsRsvpForm');
+if (rsvpForm) {
+  rsvpForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    rsvpForm.style.display = 'none';
+    document.getElementById('rsvpSuccessToast').style.display = 'block';
+  });
+}
+
+// Live Countdown
+let targetDate = new Date('2026-12-20T10:00:00').getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  if (diff > 0) {
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
+    document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cdMinutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('cdSeconds').textContent = String(seconds).padStart(2, '0');
+  }
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Floating Pink & Gold Cloud Particle Canvas
+const canvas = document.getElementById('cloudCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+class CloudParticle {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.radius = Math.random() * 26 + 10;
+    this.vx = (Math.random() - 0.5) * 0.4;
+    this.vy = -Math.random() * 0.5 - 0.2;
+    this.alpha = Math.random() * 0.35 + 0.1;
+    this.color = Math.random() > 0.4 ? '255, 180, 200' : '255, 230, 210';
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.y < -this.radius) {
+      this.y = canvas.height + this.radius;
+      this.x = Math.random() * canvas.width;
+    }
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+    ctx.filter = 'blur(6px)';
+    ctx.fill();
+    ctx.filter = 'none';
+  }
+}
+
+for (let i = 0; i < 22; i++) {
+  particles.push(new CloudParticle());
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// Real-Time Sync Receiver from Builder
+window.addEventListener('message', (e) => {
+  if (!e.data) return;
+  const type = e.data.type || e.data.action;
+  if (type !== 'VANVI_UPDATE_DATA' && type !== 'VANVI_LIVE_PREVIEW_SYNC' && type !== 'UPDATE_CONFIG') return;
+  const d = e.data.payload || e.data.data || e.data.config || e.data;
+  if (!d) return;
+
+  // Hero Fields
+  if (d.badge) document.getElementById('heroBadge').textContent = d.badge;
+  if (d.mainTitle) document.getElementById('heroMainTitle').textContent = d.mainTitle;
+  if (d.groomName) {
+    document.getElementById('txtGroom').textContent = d.groomName;
+    document.getElementById('footCouple').textContent = `${d.groomName} & ${d.brideName || 'Ananya'}`;
+  }
+  if (d.brideName) {
+    document.getElementById('txtBride').textContent = d.brideName;
+    document.getElementById('footCouple').textContent = `${d.groomName || 'Aarav'} & ${d.brideName}`;
+  }
+  if (d.tagline) document.getElementById('heroTagline').textContent = d.tagline;
+  if (d.weddingDate) {
+    document.getElementById('footDate').textContent = `${d.weddingDate} · Celebrating Pure Love`;
+  }
+  if (d.heroBgImg) {
+    document.getElementById('heroBgImg').src = d.heroBgImg;
+  }
+
+  // Parents
+  if (d.groomFather) document.getElementById('groomFatherTxt').textContent = d.groomFather;
+  if (d.groomMother) document.getElementById('groomMotherTxt').textContent = d.groomMother;
+  if (d.brideFather) document.getElementById('brideFatherTxt').textContent = d.brideFather;
+  if (d.brideMother) document.getElementById('brideMotherTxt').textContent = d.brideMother;
+
+  // Events
+  if (d.events && Array.isArray(d.events)) {
+    d.events.forEach((ev, idx) => {
+      const t = document.getElementById(`ev${idx}TitleTxt`);
+      const dt = document.getElementById(`ev${idx}DateTxt`);
+      const tm = document.getElementById(`ev${idx}TimeTxt`);
+      const lc = document.getElementById(`ev${idx}LocTxt`);
+      if (t && ev.title) t.textContent = ev.title;
+      if (dt && ev.date) dt.textContent = ev.date;
+      if (tm && ev.time) tm.textContent = ev.time;
+      if (lc && ev.location) lc.textContent = ev.location;
+    });
+  }
+
+  // Venue
+  if (d.venueName) document.getElementById('venueNameTxt').textContent = d.venueName;
+  if (d.venueAddress) {
+    document.getElementById('venueAddressTxt').textContent = d.venueAddress;
+    const ifr = document.getElementById('venueIframeMap');
+    if (ifr) ifr.src = `https://maps.google.com/maps?q=${encodeURIComponent(d.venueAddress)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+  }
+  if (d.venueMapUrl) {
+    const btn = document.getElementById('venueMapBtn');
+    if (btn) btn.href = d.venueMapUrl;
+  }
+
+  // Gallery
+  if (d.galleryImages && Array.isArray(d.galleryImages)) {
+    d.galleryImages.forEach((src, idx) => {
+      const img = document.getElementById(`gal${idx}Img`);
+      if (img && src) img.src = src;
+    });
+  }
+
+  // Published Watermark Toggle
+  const wmEl = document.getElementById('vanviWatermark');
+  if (d.isPublished) {
+    document.body.classList.add('is-published');
+    if (wmEl) wmEl.style.display = 'none';
+  } else if (d.isPublished === false) {
+    document.body.classList.remove('is-published');
+    if (wmEl) wmEl.style.display = 'flex';
+  }
+});
+
+// Check url query param
+(function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('published') === '1' || urlParams.get('live') === 'true' || urlParams.get('purchased') === 'true' || urlParams.get('paid') === 'true' || window.vanviPurchased) {
+    document.body.classList.add('is-published');
+    const wmEl = document.getElementById('vanviWatermark');
+    if (wmEl) wmEl.style.display = 'none';
+  }
+})();
+</script>
+
+<!-- Vanvi Moments Preview Watermark -->
+<div id="vanviWatermark" class="vanvi-watermark-pill" style="position:fixed; bottom:16px; left:16px; z-index:99999; background:rgba(255,255,255,0.92); color:#233446; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(91,167,247,0.45); border-radius:999px; padding:6px 14px; font-size:11px; font-weight:700; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(40,80,130,0.15); pointer-events:auto;" title="Vanvi Moments · Love in Clouds Preview">
+  <span style="color:#FF8BA7;">☁️</span>
+  <span style="font-family:sans-serif;">Vanvi Moments · Love in Clouds Preview</span>
+</div>
+
+<script src="../../js/vanvi-api.js"></script>
+<script src="../../js/template-adapter.js"></script>
+<script src="../../js/vanvi-template-lock.js"></script>
+
+</body>
+</html>

@@ -37,11 +37,42 @@ router.get('/overview', async (req, res) => {
  */
 router.get('/users', async (req, res) => {
   try {
-    const { query } = req.query;
-    const users = await Users.listAll({ query });
-    return res.json({ success: true, users });
+    const { query, tier, provider, status, role } = req.query;
+    const users = await Users.listAll({ query, tier, provider, status, role });
+    
+    // Overview statistics for dashboard
+    const allUsers = await Users.listAll({ limit: 10000 });
+    const stats = {
+      totalUsers: allUsers.length,
+      activeUsers: allUsers.filter(u => (u.status || 'active') === 'active').length,
+      suspendedUsers: allUsers.filter(u => u.status === 'suspended').length,
+      vipUsers: allUsers.filter(u => u.tier === 'vip' || u.tier === 'member').length,
+      googleUsers: allUsers.filter(u => u.provider === 'google').length,
+      localUsers: allUsers.filter(u => (u.provider || 'local') === 'local').length,
+      totalCoins: allUsers.reduce((s, u) => s + (Number(u.coins) || 0), 0)
+    };
+
+    return res.json({ success: true, users, stats });
   } catch (err) {
+    console.error('Admin users fetch error:', err);
     return res.status(500).json({ success: false, error: 'Failed to retrieve users.' });
+  }
+});
+
+/**
+ * GET /api/admin/users/:id/dossier
+ * Full A-to-Z control dossier: profile, activity, login history, coin transactions, moments, orders
+ */
+router.get('/users/:id/dossier', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const dossier = await Users.getUserDossier(id);
+    if (!dossier) return res.status(404).json({ success: false, error: 'User dossier not found.' });
+
+    return res.json({ success: true, dossier });
+  } catch (err) {
+    console.error('Admin user dossier error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to load user dossier.' });
   }
 });
 
@@ -57,10 +88,15 @@ router.post('/users/:id/coins', async (req, res) => {
     const user = await Users.findById(id);
     if (!user) return res.status(404).json({ success: false, error: 'User not found.' });
 
+    const numAmount = Math.abs(parseInt(amount, 10));
+    if (isNaN(numAmount) || numAmount <= 0) {
+      return res.status(400).json({ success: false, error: 'Valid coin amount is required.' });
+    }
+
     const entry = await CoinLedger.create({
       userId: id,
       type: type === 'debit' ? 'debit' : 'credit',
-      amount: Math.abs(parseInt(amount, 10)),
+      amount: numAmount,
       reason: reason || `Admin adjustment by ${req.user.name}`,
       refId: `admin_${req.user.id}`
     });
@@ -70,7 +106,7 @@ router.post('/users/:id/coins', async (req, res) => {
       action: 'coins.adjusted',
       targetEntity: 'user',
       targetId: id,
-      metadata: { amount, type, reason }
+      metadata: { amount: numAmount, type, reason }
     });
 
     const updatedUser = await Users.findById(id);
@@ -82,25 +118,72 @@ router.post('/users/:id/coins', async (req, res) => {
 });
 
 /**
+ * POST /api/admin/users/:id/status
+ * Toggle or set status (active / suspended)
+ */
+router.post('/users/:id/status', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body; // 'active' or 'suspended'
+
+    if (id === req.user.id) {
+      return res.status(400).json({ success: false, error: 'Cannot modify status of your own admin account.' });
+    }
+
+    const user = await Users.findById(id);
+    if (!user) return res.status(404).json({ success: false, error: 'User not found.' });
+
+    const newStatus = status === 'suspended' ? 'suspended' : 'active';
+    const updated = await Users.update(id, { status: newStatus });
+
+    await AuditLogs.create({
+      actorUserId: req.user.id,
+      action: newStatus === 'suspended' ? 'user.suspended' : 'user.reactivated',
+      targetEntity: 'user',
+      targetId: id,
+      metadata: { previousStatus: user.status, newStatus }
+    });
+
+    return res.json({ success: true, user: updated, message: `User marked as ${newStatus}.` });
+  } catch (err) {
+    console.error('User status toggle error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to update user status.' });
+  }
+});
+
+/**
  * PUT /api/admin/users/:id
- * Update user details (tier, role, templateCredits, name, phone, etc.)
+ * Full control: update tier, role, status, activePass, templateCredits, name, phone, email, coins
  */
 router.put('/users/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, phone, tier, role, templateCredits, coins } = req.body;
+    const { name, phone, email, tier, role, templateCredits, coins, status, activePass, passExpiry } = req.body;
     const user = await Users.findById(id);
     if (!user) return res.status(404).json({ success: false, error: 'User not found.' });
 
     const updates = {};
     if (name !== undefined) updates.name = name.trim();
     if (phone !== undefined) updates.phone = phone.trim();
+    if (email !== undefined && email.includes('@')) updates.email = email.trim().toLowerCase();
     if (tier !== undefined) updates.tier = tier;
     if (role !== undefined) updates.role = role;
+    if (status !== undefined) updates.status = status;
+    if (activePass !== undefined) updates.activePass = activePass;
+    if (passExpiry !== undefined) updates.passExpiry = passExpiry;
     if (templateCredits !== undefined) updates.templateCredits = parseInt(templateCredits, 10) || 0;
     if (coins !== undefined) updates.coins = parseInt(coins, 10) || 0;
 
     const updated = await Users.update(id, updates);
+
+    await AuditLogs.create({
+      actorUserId: req.user.id,
+      action: 'user.updated',
+      targetEntity: 'user',
+      targetId: id,
+      metadata: updates
+    });
+
     return res.json({ success: true, user: updated });
   } catch (err) {
     return res.status(500).json({ success: false, error: 'Failed to update user.' });
@@ -118,7 +201,15 @@ router.delete('/users/:id', async (req, res) => {
     }
     const success = await Users.delete(id);
     if (!success) return res.status(404).json({ success: false, error: 'User not found.' });
-    return res.json({ success: true, message: 'User account removed.' });
+
+    await AuditLogs.create({
+      actorUserId: req.user.id,
+      action: 'user.deleted',
+      targetEntity: 'user',
+      targetId: id
+    });
+
+    return res.json({ success: true, message: 'User account permanently removed.' });
   } catch (err) {
     return res.status(500).json({ success: false, error: 'Failed to delete user.' });
   }

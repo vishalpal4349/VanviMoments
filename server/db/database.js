@@ -155,8 +155,15 @@ const Users = {
       templateCredits: userData.templateCredits || 0,
       activePass: userData.activePass || null,
       passExpiry: userData.passExpiry || null,
-      lastLogin: Date.now(),
-      createdAt: Date.now()
+      status: userData.status || 'active',
+      signupIp: userData.signupIp || null,
+      signupUa: userData.signupUa || null,
+      lastLoginIp: userData.lastLoginIp || userData.signupIp || null,
+      lastLoginUa: userData.lastLoginUa || userData.signupUa || null,
+      loginCount: userData.loginCount || 1,
+      loginHistory: Array.isArray(userData.loginHistory) ? userData.loginHistory : [],
+      lastLogin: userData.lastLogin || Date.now(),
+      createdAt: userData.createdAt || Date.now()
     };
     store.users.push(user);
     saveStore();
@@ -189,16 +196,52 @@ const Users = {
     return true;
   },
 
-  async listAll({ limit = 100, query = '' } = {}) {
+  async listAll({ limit = 500, query = '', tier = '', provider = '', status = '', role = '' } = {}) {
     let list = store.users.slice().sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
     if (query) {
       const q = query.toLowerCase();
-      list = list.filter(u => (u.name && u.name.toLowerCase().includes(q)) || (u.email && u.email.toLowerCase().includes(q)) || (u.phone && u.phone.includes(q)));
+      list = list.filter(u => 
+        (u.name && u.name.toLowerCase().includes(q)) || 
+        (u.email && u.email.toLowerCase().includes(q)) || 
+        (u.phone && String(u.phone).includes(q)) ||
+        (u.id && u.id.toLowerCase().includes(q))
+      );
     }
+    if (tier && tier !== 'all') list = list.filter(u => u.tier === tier);
+    if (provider && provider !== 'all') list = list.filter(u => (u.provider || 'local') === provider);
+    if (status && status !== 'all') list = list.filter(u => (u.status || 'active') === status);
+    if (role && role !== 'all') list = list.filter(u => u.role === role);
+
     return list.slice(0, limit).map(u => {
       const { passwordHash, salt, ...safe } = u;
       return safe;
     });
+  },
+
+  async getUserDossier(id) {
+    const user = store.users.find(u => u.id === id);
+    if (!user) return null;
+    const { passwordHash, salt, ...safeUser } = user;
+    const userOrders = (store.orders || []).filter(o => o.userId === id).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    const userMoments = (store.moments || []).filter(m => m.userId === id).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    const userLedger = (store.coinLedger || []).filter(c => c.userId === id).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+    const userAudit = (store.auditLogs || []).filter(a => a.targetId === id || a.actorUserId === id).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    const userMemberships = (store.memberships || []).filter(m => m.userId === id).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+    return {
+      user: safeUser,
+      orders: userOrders,
+      moments: userMoments,
+      ledger: userLedger,
+      auditLogs: userAudit,
+      memberships: userMemberships,
+      stats: {
+        totalOrders: userOrders.length,
+        totalMoments: userMoments.length,
+        totalCoinsEarned: userLedger.filter(l => l.type === 'credit').reduce((s, l) => s + (Number(l.amount) || 0), 0),
+        totalCoinsSpent: userLedger.filter(l => l.type === 'debit').reduce((s, l) => s + (Number(l.amount) || 0), 0)
+      }
+    };
   }
 };
 

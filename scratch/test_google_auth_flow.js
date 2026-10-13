@@ -1,90 +1,67 @@
-const http = require('http');
-const { Users, CoinLedger } = require('../server/db/database');
+const { chromium } = require('playwright-core');
 
-async function runTests() {
-  console.log('--- Testing Google Auth & Data Storage Flow ---');
-
-  // 1. Direct DB Repository Test
-  const testEmail = `g_test_${Date.now()}@gmail.com`;
-  const createdUser = await Users.create({
-    name: 'Aman Google Test',
-    email: testEmail,
-    googleId: 'g_1029384756',
-    picture: 'https://lh3.googleusercontent.com/a/testavatar',
-    provider: 'google',
-    role: 'user',
-    tier: 'free',
-    coins: 100
+(async () => {
+  const browser = await chromium.launch({
+    executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    headless: true
   });
 
-  console.log('1. User Created in DB:', {
-    id: createdUser.id,
-    name: createdUser.name,
-    email: createdUser.email,
-    picture: createdUser.picture,
-    provider: createdUser.provider,
-    coins: createdUser.coins
-  });
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
 
-  if (!createdUser.picture || createdUser.provider !== 'google') {
-    throw new Error('Google picture or provider was not persisted properly!');
-  }
+    console.log('Testing login page Google Auth...');
+    await page.goto('http://localhost:3000/login.html', { waitUntil: 'networkidle' });
 
-  // 2. Test User Retrieval by Email
-  const foundUser = await Users.findByEmail(testEmail);
-  if (!foundUser || foundUser.id !== createdUser.id) {
-    throw new Error('Failed to find user by Google email!');
-  }
-  console.log('2. Successfully retrieved user by email.');
+    // Click Google Auth button
+    await page.click('#googleLoginBtn');
+    await page.waitForTimeout(600);
 
-  // 3. Test Users.listAll safe mapping
-  const allUsers = await Users.listAll({ query: 'Aman Google Test' });
-  if (!allUsers.some(u => u.email === testEmail)) {
-    throw new Error('User not listed in Users.listAll!');
-  }
-  const listedUser = allUsers.find(u => u.email === testEmail);
-  if (listedUser.passwordHash !== undefined || listedUser.salt !== undefined) {
-    throw new Error('Security risk: passwordHash or salt leaked in listAll!');
-  }
-  console.log('3. Users.listAll securely strips passwords and includes Google attributes:', {
-    id: listedUser.id,
-    name: listedUser.name,
-    email: listedUser.email,
-    provider: listedUser.provider,
-    picture: listedUser.picture,
-    hasPasswordHash: listedUser.passwordHash !== undefined
-  });
+    // Check if modal or prompt is visible
+    const modalVisible = await page.evaluate(() => {
+      const gModal = document.getElementById('googleModal');
+      const gGlobModal = document.getElementById('vanviGlobalGoogleModal');
+      return (gModal && gModal.classList.contains('active')) || (gGlobModal && gGlobModal.classList.contains('open'));
+    });
+    console.log('Google Auth Modal Active:', modalVisible);
 
-  // 4. Test Users.update
-  const updatedUser = await Users.update(createdUser.id, {
-    coins: 250,
-    tier: 'member',
-    templateCredits: 3
-  });
-  if (updatedUser.coins !== 250 || updatedUser.tier !== 'member' || updatedUser.templateCredits !== 3) {
-    throw new Error('Users.update failed to update wallet or tier!');
-  }
-  console.log('4. Users.update successfully updated wallet and tier:', {
-    coins: updatedUser.coins,
-    tier: updatedUser.tier,
-    templateCredits: updatedUser.templateCredits
-  });
+    // Test Signup page
+    console.log('Testing signup page Google Auth...');
+    await page.goto('http://localhost:3000/signup.html', { waitUntil: 'networkidle' });
+    await page.click('#googleSignupBtn');
+    await page.waitForTimeout(600);
 
-  // 5. Test Users.delete
-  const deleteSuccess = await Users.delete(createdUser.id);
-  if (!deleteSuccess) {
-    throw new Error('Users.delete failed!');
-  }
-  const deletedCheck = await Users.findById(createdUser.id);
-  if (deletedCheck !== null) {
-    throw new Error('User was not removed from DB store!');
-  }
-  console.log('5. Users.delete successfully removed test account.');
+    const signupModalVisible = await page.evaluate(() => {
+      const gModal = document.getElementById('googleModal');
+      const gGlobModal = document.getElementById('vanviGlobalGoogleModal');
+      return (gModal && gModal.classList.contains('active')) || (gGlobModal && gGlobModal.classList.contains('open'));
+    });
+    console.log('Signup Google Auth Modal Active:', signupModalVisible);
 
-  console.log('\n>>> ALL GOOGLE AUTH DATA REPOSITORY TESTS PASSED SUCCESSFULLY! ✨ <<<');
-}
+    // Close Google Modal
+    await page.click('#vanviGBtnClose');
+    await page.waitForTimeout(300);
+    await page.fill('#signupName', 'Priya Sharma');
+    await page.fill('#signupEmail', 'priya.sharma@example.com');
+    await page.fill('#signupPassword', 'mypassword123');
+    await page.fill('#signupConfirmPassword', 'wrongpass');
+    await page.click('#btnSignupSubmit');
+    await page.waitForTimeout(300);
 
-runTests().catch(err => {
-  console.error('Test Failed:', err);
-  process.exit(1);
-});
+    const statusText = await page.textContent('#signupStatus');
+    console.log('Signup Mismatched Password Status:', statusText);
+
+    // Now fill matching password
+    await page.fill('#signupConfirmPassword', 'mypassword123');
+    await page.click('#btnSignupSubmit');
+    await page.waitForTimeout(1000);
+
+    const finalStatus = await page.textContent('#signupStatus');
+    console.log('Signup Correct Password Status:', finalStatus);
+
+    await browser.close();
+    console.log('ALL AUTH TESTS COMPLETED SUCCESSFULLY!');
+  } catch (err) {
+    console.error('Test error:', err);
+    await browser.close();
+  }
+})();

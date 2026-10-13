@@ -341,6 +341,66 @@ router.post('/referral/claim', requireAuth, async (req, res) => {
   }
 });
 
+/**
+ * POST /api/coins/convert-to-credits
+ * Converts user's Vanvi Coins to 1:1 Template Credits (10 Coins = 1 Credit).
+ * Deducts coins, adds template credits, and records in CoinLedger.
+ */
+router.post('/convert-to-credits', requireAuth, async (req, res) => {
+  try {
+    const user = req.user;
+    const requestedCoins = parseInt(req.body.coins, 10);
+
+    if (isNaN(requestedCoins) || requestedCoins < 10) {
+      return res.status(400).json({
+        success: false,
+        error: 'Minimum 10 Vanvi Coins required for conversion (10 Coins = 1 Credit).'
+      });
+    }
+
+    const freshUser = await Users.findById(user.id);
+    if (!freshUser) {
+      return res.status(404).json({ success: false, error: 'User not found.' });
+    }
+
+    if (freshUser.coins < requestedCoins) {
+      return res.status(400).json({
+        success: false,
+        error: `Insufficient coins! You currently have ${freshUser.coins} coins.`
+      });
+    }
+
+    const creditsGained = Math.floor(requestedCoins / 10);
+    const coinsToDeduct = creditsGained * 10;
+
+    await CoinLedger.create({
+      userId: freshUser.id,
+      type: 'debit',
+      amount: coinsToDeduct,
+      reason: `Converted to ${creditsGained} Template Credits`,
+      refId: 'conv_' + Date.now()
+    });
+
+    const curCredits = Number(freshUser.templateCredits || 0);
+    const newCredits = curCredits + creditsGained;
+    await Users.update(freshUser.id, { templateCredits: newCredits });
+
+    const updatedUser = await Users.findById(freshUser.id);
+
+    return res.json({
+      success: true,
+      coinsDeducted: coinsToDeduct,
+      creditsGained,
+      newCoins: updatedUser.coins,
+      newCredits: updatedUser.templateCredits,
+      message: `Successfully converted ${coinsToDeduct} Coins into ${creditsGained} Credits!`
+    });
+  } catch (err) {
+    console.error('Convert to credits error:', err);
+    return res.status(500).json({ success: false, error: 'Failed to convert coins.' });
+  }
+});
+
 module.exports = router;
 
 

@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Love in the Clouds Studio — Vanvi Moments Builder (Template 10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root {
+  /* LIGHT SKY & CLOUD LUXURY THEME */
+  --bg-studio: #F4F8FD;
+  --bg-panel: #FFFFFF;
+  --bg-card: #FDFEFE;
+  --bg-subtle: #EDF4FC;
+  --border-sky: rgba(91, 167, 247, 0.28);
+  --border-sky-focus: #1A7CEB;
+  --primary-blue: #1A7CEB;
+  --accent-pink: #FF8BA7;
+  --gold-warm: #E5A855;
+  --text-dark: #233446;
+  --text-muted: #6B7C90;
+  --text-faint: #A6B4C4;
+  --shadow-soft: 0 12px 36px rgba(40, 80, 130, 0.08);
+  --shadow-card: 0 4px 18px rgba(40, 80, 130, 0.06);
+  --shadow-blue: 0 6px 24px rgba(26, 124, 235, 0.35);
+  --safe-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg-studio);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* TOP NAVBAR */
+.builder-nav {
+  height: 64px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-sky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 16px rgba(40, 80, 130, 0.05);
+}
+
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #FF8BA7 0%, #1A7CEB 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 17px;
+  box-shadow: 0 4px 14px rgba(26, 124, 235, 0.25);
+}
+
+.brand-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.15;
+}
+
+.brand-text span {
+  font-size: 9.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary-blue);
+  font-weight: 700;
+}
+
+/* VIEW MODE TOGGLE (MOBILE / TABLET) */
+.view-mode-toggle {
+  display: none;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-sky);
+  border-radius: 100px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.mode-btn {
+  padding: 7px 15px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .25s ease;
+}
+
+.mode-btn.active {
+  background: #FFFFFF;
+  color: var(--text-dark);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(40, 80, 130, 0.12);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(26, 124, 235, 0.1);
+  color: #1A7CEB;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1A7CEB;
+  box-shadow: 0 0 8px #1A7CEB;
+  animation: pulse-dot 1.8s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.3); }
+}
+
+.action-publish-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #FF8BA7 0%, #1A7CEB 100%);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 139, 167, 0.35);
+  transition: all .25s ease;
+}
+
+.action-publish-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(255, 139, 167, 0.5);
+}
+
+/* MAIN STUDIO LAYOUT */
+.studio-layout {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  flex: 1;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+/* LEFT CONTROLS COLUMN */
+.editor-sidebar {
+  background: var(--bg-panel);
+  border-right: 1px solid var(--border-sky);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* STEP TABS SCROLLER */
+.step-nav-bar {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-sky);
+  padding: 10px 16px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.step-nav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.step-pill {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 100px;
+  background: var(--bg-subtle);
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.step-pill.active {
+  background: #FFFFFF;
+  color: var(--primary-blue);
+  border-color: var(--primary-blue);
+  box-shadow: 0 2px 8px rgba(26, 124, 235, 0.15);
+  font-weight: 700;
+}
+
+.step-pill.completed {
+  color: #2E7D32;
+}
+
+/* FORMS SCROLLER */
+.forms-scroller {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px 20px calc(90px + var(--safe-bottom));
+  -webkit-overflow-scrolling: touch;
+}
+
+.form-step-section {
+  display: none;
+  animation: fadeIn .25s ease;
+}
+
+.form-step-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-header {
+  margin-bottom: 20px;
+}
+
+.step-counter {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-pink);
+  margin-bottom: 4px;
+}
+
+.step-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.step-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+/* FORM FIELDS */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 7px;
+  letter-spacing: 0.3px;
+}
+
+.form-label span.hint {
+  font-size: 10px;
+  color: var(--text-faint);
+  font-weight: 400;
+}
+
+.form-control {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-sky);
+  color: var(--text-dark);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12.5px;
+  transition: all .2s ease;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--border-sky-focus);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(26, 124, 235, 0.15);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 72px;
+  line-height: 1.4;
+}
+
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* CARDS WITHIN FORMS */
+.lux-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-sky);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.lux-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.lux-card-title i {
+  color: var(--primary-blue);
+}
+
+/* DUAL UPLOADER (LOCAL FILE + WEB URL) */
+.uploader-box {
+  background: #FFFFFF;
+  border: 2px dashed rgba(26, 124, 235, 0.4);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .25s ease;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.uploader-box:hover {
+  border-color: var(--primary-blue);
+  background: #F7FBFF;
+}
+
+.uploader-preview {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.uploader-prompt i {
+  font-size: 24px;
+  color: var(--primary-blue);
+  margin-bottom: 6px;
+}
+
+.uploader-prompt p {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.uploader-prompt span {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.file-hidden-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.url-fallback-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.url-fallback-row input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 11px;
+  border-radius: 8px;
+  border: 1px solid var(--border-sky);
+  background: #FFFFFF;
+  color: var(--text-dark);
+}
+
+/* BOTTOM FIXED BAR IN EDITOR */
+.editor-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-sky);
+  padding: 14px 20px calc(14px + var(--safe-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 -4px 20px rgba(40, 80, 130, 0.08);
+  z-index: 10;
+}
+
+.btn-nav-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-prev {
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border-color: var(--border-sky);
+}
+
+.btn-prev:hover {
+  background: #E2EEFB;
+  color: var(--text-dark);
+}
+
+.btn-next {
+  background: linear-gradient(135deg, #FF8BA7 0%, #1A7CEB 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(26, 124, 235, 0.3);
+}
+
+.btn-next:hover {
+  box-shadow: 0 6px 20px rgba(26, 124, 235, 0.45);
+  transform: translateY(-1px);
+}
+
+/* RIGHT PREVIEW COLUMN */
+.preview-pane {
+  background: #EAF2FB;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  background-image: radial-gradient(rgba(26, 124, 235, 0.12) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* DEVICE FRAME */
+.device-mockup {
+  width: 410px;
+  max-width: 100%;
+  height: min(840px, 94vh);
+  background: #111111;
+  border-radius: 46px;
+  box-shadow: 0 25px 70px rgba(40, 70, 110, 0.22), 0 0 0 10px #2A3644, 0 0 0 12px rgba(91, 167, 247, 0.45);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.device-top-notch {
+  height: 24px;
+  background: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.notch-pill {
+  width: 80px;
+  height: 12px;
+  background: #000000;
+  border-radius: 10px;
+}
+
+.preview-iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: #F3F8FD;
+}
+
+/* FLOATING CONTROLS OVER PREVIEW */
+.preview-floating-bar {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  display: flex;
+  gap: 10px;
+  z-index: 50;
+}
+
+.preview-float-btn {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-sky);
+  border-radius: 100px;
+  padding: 7px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 16px rgba(40, 80, 130, 0.1);
+  transition: all .2s ease;
+}
+
+.preview-float-btn:hover {
+  background: #FFFFFF;
+  color: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+/* PUBLISH MODAL (₹399 ROYAL LAUNCH) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 40, 70, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.open {
+  display: flex;
+  animation: fadeIn .25s ease;
+}
+
+.modal-lux-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-sky);
+  border-radius: 24px;
+  max-width: 480px;
+  width: 100%;
+  padding: 32px 28px;
+  box-shadow: 0 30px 80px rgba(30, 60, 100, 0.28);
+  position: relative;
+  text-align: center;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--text-faint);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.modal-royalty-crown {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #FFE4EC, #E1EFFF);
+  border: 1px solid var(--primary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--primary-blue);
+  margin: 0 auto 16px;
+  box-shadow: 0 6px 18px rgba(26, 124, 235, 0.2);
+}
+
+.modal-lux-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.modal-lux-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.pricing-badge-row {
+  background: #F7FAFE;
+  border: 1.5px dashed var(--primary-blue);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.pricing-badge-row .original {
+  font-size: 14px;
+  color: var(--text-faint);
+  text-decoration: line-through;
+}
+
+.pricing-badge-row .final-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+
+.pricing-badge-row .tax-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #2E7D32;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.feature-bullets {
+  text-align: left;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 12px;
+  color: var(--text-dark);
+}
+
+.feature-bullets div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.feature-bullets i {
+  color: #2E7D32;
+  font-size: 13px;
+}
+
+.btn-complete-publish {
+  width: 100%;
+  padding: 14px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #FF8BA7 0%, #1A7CEB 100%);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(26, 124, 235, 0.4);
+  transition: all .25s ease;
+}
+
+.btn-complete-publish:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(26, 124, 235, 0.55);
+}
+
+/* SUCCESS BOX */
+.published-success-box {
+  display: none;
+  background: #F1F8F2;
+  border: 1px solid #B7DEC0;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 16px;
+  text-align: left;
+}
+
+.published-success-box.visible {
+  display: block;
+}
+
+.success-link-wrap {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.success-link-wrap input {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+  border: 1px solid #A2D0AC;
+  background: #FFFFFF;
+  color: #28442D;
+  font-family: monospace;
+}
+
+.btn-copy-link {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #2E7D32;
+  color: #FFFFFF;
+  border: none;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .studio-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .view-mode-toggle {
+    display: flex;
+  }
+  .editor-sidebar {
+    height: calc(100vh - 64px);
+  }
+  .preview-pane {
+    display: none;
+    height: calc(100vh - 64px);
+    padding: 14px;
+  }
+  body.show-preview .editor-sidebar {
+    display: none;
+  }
+  body.show-preview .preview-pane {
+    display: flex;
+  }
+  .device-mockup {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 0 3px #CFE0F2;
+  }
+}
+
+@media (max-width: 600px) {
+  .builder-nav {
+    padding: 0 10px;
+    height: 56px;
+    gap: 6px;
+  }
+  .brand-wrap {
+    gap: 8px;
+  }
+  .brand-wrap img {
+    height: 30px !important;
+  }
+  .brand-text h1 {
+    font-size: 13px;
+  }
+  .brand-text span {
+    display: none;
+  }
+  .live-badge {
+    display: none;
+  }
+  .action-publish-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+    gap: 4px;
+  }
+  .view-mode-toggle {
+    padding: 2px;
+  }
+  .mode-btn {
+    padding: 5px 9px;
+    font-size: 10px;
+  }
+  .editor-sidebar {
+    height: calc(100vh - 56px);
+  }
+  .preview-pane {
+    height: calc(100vh - 56px);
+    padding: 8px;
+  }
+  .editor-bottom-bar {
+    padding: 8px 10px calc(8px + var(--safe-bottom));
+    gap: 8px;
+  }
+  .btn-nav-step {
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+    padding: 9px 8px;
+    font-size: 11px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .step-nav-bar {
+    padding: 8px 8px;
+    gap: 5px;
+  }
+  .step-pill {
+    padding: 5px 8px;
+    font-size: 10.5px;
+    white-space: nowrap;
+  }
+  .forms-scroller {
+    padding: 12px 10px 84px;
+  }
+  .lux-card {
+    padding: 14px 10px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .pricing-badge-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .modal-lux-card {
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand-text {
+    display: none;
+  }
+  .mode-btn {
+    padding: 4px 6px;
+    font-size: 9px;
+  }
+  .action-publish-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+  .btn-nav-step {
+    padding: 7px 6px;
+    font-size: 10px;
+    gap: 3px;
+  }
+}
+
+    /* Vanvi Ultra-Responsive Mobile Button Clamp Engine */
+    @media (max-width: 600px) {
+      .editor-dock, .editor-bottom-bar, .builder-bottom-nav, .dock-container {
+        padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .dock-btn, .btn-nav-step, .btn-step-prev, .btn-step-next, .btn-action {
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+        height: 38px !important;
+        padding: 0 8px !important;
+        font-size: 0.74rem !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        box-sizing: border-box !important;
+      }
+      .dock-btn.btn-primary, .btn-nav-step.primary, .btn-step-next.primary {
+        flex: 1.35 1 0 !important;
+      }
+      .preview-canvas, .preview-panel {
+        display: none !important;
+      }
+      .editor-panel, .builder-form-pane {
+        width: 100% !important;
+        max-width: 100vw !important;
+        border-right: none !important;
+      }
+    }
+    @media (max-width: 360px) {
+      .editor-dock, .editor-bottom-bar, .builder-bottom-nav {
+        padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 0px)) !important;
+        gap: 5px !important;
+      }
+      .dock-btn, .btn-nav-step, .btn-step-prev, .btn-step-next {
+        height: 34px !important;
+        font-size: 0.68rem !important;
+        padding: 0 4px !important;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="builder-nav">
+  <a href="../../index.html" class="brand-wrap" title="Vanvi Moments">
+    <img src="../../assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" style="height:36px; width:auto; max-width:130px; object-fit:contain; border-radius:6px;" onerror="this.src='../../assets/vanvi-moments-logo.png'">
+    <div class="brand-text">
+      <h1>Vanvi Moments</h1>
+      <span>Love in Clouds Studio</span>
+    </div>
+  </a>
+
+  <!-- Mobile View Mode Toggle -->
+  <div class="view-mode-toggle">
+    <button class="mode-btn active" id="btnModeEdit" onclick="switchMobileView('edit')">
+      <i class="fa-solid fa-pen-nib"></i> Edit
+    </button>
+    <button class="mode-btn" id="btnModePreview" onclick="switchMobileView('preview')">
+      <i class="fa-solid fa-eye"></i> Preview
+    </button>
+  </div>
+
+  <div class="nav-actions">
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      <span>Live Sync</span>
+    </div>
+    <button class="action-publish-btn" onclick="openPublishModal()">
+      <i class="fa-solid fa-crown"></i> Publish ₹799
+    </button>
+  </div>
+</header>
+
+<!-- MAIN STUDIO -->
+<main class="studio-layout">
+
+  <!-- LEFT: STEP FORM CONTROLS -->
+  <aside class="editor-sidebar">
+
+    <!-- HORIZONTAL STEP NAV -->
+    <div class="step-nav-bar">
+      <button class="step-pill active" onclick="goToStep(0)">
+        <i class="fa-solid fa-cloud-sun"></i> Hero &amp; Couple
+      </button>
+      <button class="step-pill" onclick="goToStep(1)">
+        <i class="fa-solid fa-hands-praying"></i> Parents Blessings
+      </button>
+      <button class="step-pill" onclick="goToStep(2)">
+        <i class="fa-regular fa-calendar-days"></i> Events Itinerary
+      </button>
+      <button class="step-pill" onclick="goToStep(3)">
+        <i class="fa-solid fa-location-dot"></i> Venue &amp; Map
+      </button>
+      <button class="step-pill" onclick="goToStep(4)">
+        <i class="fa-solid fa-images"></i> Photos &amp; Music
+      </button>
+      <button class="step-pill" onclick="goToStep(5)">
+        <i class="fa-solid fa-crown"></i> Publish ₹799
+      </button>
+    </div>
+
+    <!-- FORM STEPS SCROLLER -->
+    <div class="forms-scroller">
+
+      <!-- STEP 1: HERO & COUPLE -->
+      <section class="form-step-section active" id="step-0">
+        <div class="step-header">
+          <div class="step-counter">Step 1 of 6</div>
+          <h2 class="step-title">Hero Screen &amp; Couple</h2>
+          <p class="step-desc">Configure the exact typography and couple names shown on your cloud heart opening screen.</p>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-certificate"></i> Floating Pill Badge
+          </div>
+          <div class="form-group">
+            <label class="form-label">Top Badge Text</label>
+            <input type="text" id="badgeInput" class="form-control" value="TOGETHER FOREVER" placeholder="TOGETHER FOREVER">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Main Heading</label>
+            <input type="text" id="mainTitleInput" class="form-control" value="Our Love Story" placeholder="Our Love Story">
+          </div>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-heart"></i> Couple Names (Template 10)
+          </div>
+          <div class="two-col-grid">
+            <div class="form-group">
+              <label class="form-label">Groom's Name</label>
+              <input type="text" id="groomNameInput" class="form-control" value="Aarav" placeholder="Aarav">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Bride's Name</label>
+              <input type="text" id="brideNameInput" class="form-control" value="Ananya" placeholder="Ananya">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Love Story Tagline</label>
+            <input type="text" id="taglineInput" class="form-control" value="A beautiful beginning to our forever">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Wedding Date</label>
+            <input type="text" id="weddingDateInput" class="form-control" value="20 December 2026">
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2: PARENTS BLESSINGS -->
+      <section class="form-step-section" id="step-1">
+        <div class="step-header">
+          <div class="step-counter">Step 2 of 6</div>
+          <h2 class="step-title">Parents Blessings</h2>
+          <p class="step-desc">Customize the family blessings section for both Aarav and Ananya.</p>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-user-tie"></i> Groom's Parents
+          </div>
+          <div class="form-group">
+            <label class="form-label">Groom's Father</label>
+            <input type="text" id="groomFatherInput" class="form-control" value="Mr. Rajesh Sharma">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Groom's Mother</label>
+            <input type="text" id="groomMotherInput" class="form-control" value="Mrs. Sunita Sharma">
+          </div>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title">
+            <i class="fa-solid fa-person-dress"></i> Bride's Parents
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bride's Father</label>
+            <input type="text" id="brideFatherInput" class="form-control" value="Mr. Ramesh Verma">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bride's Mother</label>
+            <input type="text" id="brideMotherInput" class="form-control" value="Mrs. Anita Verma">
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3: EVENTS ITINERARY -->
+      <section class="form-step-section" id="step-2">
+        <div class="step-header">
+          <div class="step-counter">Step 3 of 6</div>
+          <h2 class="step-title">Celebration Schedule</h2>
+          <p class="step-desc">Set up Engagement, Haldi, Wedding Muhurtham, and Grand Reception.</p>
+        </div>
+
+        <!-- Event 1 -->
+        <div class="lux-card">
+          <div class="lux-card-title"><i class="fa-solid fa-ring"></i> Event 1: Engagement</div>
+          <div class="form-group">
+            <label class="form-label">Event Name</label>
+            <input type="text" id="ev0Title" class="form-control" value="Engagement">
+          </div>
+          <div class="two-col-grid">
+            <div class="form-group"><label class="form-label">Date</label><input type="text" id="ev0Date" class="form-control" value="18 December"></div>
+            <div class="form-group"><label class="form-label">Time</label><input type="text" id="ev0Time" class="form-control" value="7:00 PM"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Hall / Deck</label><input type="text" id="ev0Loc" class="form-control" value="Cloud View Banquet"></div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="lux-card">
+          <div class="lux-card-title"><i class="fa-solid fa-sun"></i> Event 2: Haldi</div>
+          <div class="form-group">
+            <label class="form-label">Event Name</label>
+            <input type="text" id="ev1Title" class="form-control" value="Haldi">
+          </div>
+          <div class="two-col-grid">
+            <div class="form-group"><label class="form-label">Date</label><input type="text" id="ev1Date" class="form-control" value="19 December"></div>
+            <div class="form-group"><label class="form-label">Time</label><input type="text" id="ev1Time" class="form-control" value="11:00 AM"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Hall / Deck</label><input type="text" id="ev1Loc" class="form-control" value="Golden Courtyard"></div>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="lux-card">
+          <div class="lux-card-title"><i class="fa-solid fa-om"></i> Event 3: Wedding</div>
+          <div class="form-group">
+            <label class="form-label">Event Name</label>
+            <input type="text" id="ev2Title" class="form-control" value="Wedding">
+          </div>
+          <div class="two-col-grid">
+            <div class="form-group"><label class="form-label">Date</label><input type="text" id="ev2Date" class="form-control" value="20 December"></div>
+            <div class="form-group"><label class="form-label">Time</label><input type="text" id="ev2Time" class="form-control" value="9:00 AM"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Hall / Deck</label><input type="text" id="ev2Loc" class="form-control" value="Royal Sunset Deck"></div>
+        </div>
+
+        <!-- Event 4 -->
+        <div class="lux-card">
+          <div class="lux-card-title"><i class="fa-solid fa-champagne-glasses"></i> Event 4: Reception</div>
+          <div class="form-group">
+            <label class="form-label">Event Name</label>
+            <input type="text" id="ev3Title" class="form-control" value="Reception">
+          </div>
+          <div class="two-col-grid">
+            <div class="form-group"><label class="form-label">Date</label><input type="text" id="ev3Date" class="form-control" value="20 December"></div>
+            <div class="form-group"><label class="form-label">Time</label><input type="text" id="ev3Time" class="form-control" value="7:00 PM"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Hall / Deck</label><input type="text" id="ev3Loc" class="form-control" value="Grand Crystal Ballroom"></div>
+        </div>
+      </section>
+
+      <!-- STEP 4: VENUE & MAP -->
+      <section class="form-step-section" id="step-3">
+        <div class="step-header">
+          <div class="step-counter">Step 4 of 6</div>
+          <h2 class="step-title">Venue &amp; Google Maps</h2>
+          <p class="step-desc">Provide seamless location details so guests can navigate in one tap.</p>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title"><i class="fa-solid fa-hotel"></i> Destination Details</div>
+          <div class="form-group">
+            <label class="form-label">Venue Name</label>
+            <input type="text" id="venueNameInput" class="form-control" value="The Rose Garden Palace">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Address</label>
+            <textarea id="venueAddressInput" class="form-control">123 Celebration Avenue, Beside Lake Vista, Hyderabad, Telangana</textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Google Maps Link</label>
+            <input type="url" id="venueMapUrlInput" class="form-control" value="https://www.google.com/maps/search/?api=1&query=Hyderabad%2C%20Telangana">
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 5: PHOTOS & MUSIC -->
+      <section class="form-step-section" id="step-4">
+        <div class="step-header">
+          <div class="step-counter">Step 5 of 6</div>
+          <h2 class="step-title">Photos &amp; Atmosphere</h2>
+          <p class="step-desc">Change the hero background image or update the gallery moments.</p>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title"><i class="fa-solid fa-image"></i> Cloud Heart Hero Background</div>
+          <div class="uploader-box" id="heroDropBox">
+            <img id="heroImgPreview" class="uploader-preview" src="assets/cloud-hero.jpg" alt="Cloud Hero Preview">
+            <div class="uploader-prompt">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <p>Upload Custom Couple Background</p>
+              <span>Tap to browse files from device</span>
+            </div>
+            <input type="file" id="heroFileInput" class="file-hidden-input" accept="image/*">
+          </div>
+          <div class="url-fallback-row">
+            <input type="text" id="heroUrlInput" placeholder="Or paste public image URL" value="assets/cloud-hero.jpg">
+            <button type="button" class="btn-nav-step btn-prev" onclick="applyHeroUrl()">Apply</button>
+          </div>
+        </div>
+
+        <div class="lux-card">
+          <div class="lux-card-title"><i class="fa-regular fa-images"></i> Gallery Photos (4 Photos)</div>
+          <div class="form-group"><label class="form-label">Photo 1</label><input type="text" id="gal0" class="form-control" value="assets/gallery-1.png"></div>
+          <div class="form-group"><label class="form-label">Photo 2</label><input type="text" id="gal1" class="form-control" value="assets/gallery-2.png"></div>
+          <div class="form-group"><label class="form-label">Photo 3</label><input type="text" id="gal2" class="form-control" value="assets/gallery-3.png"></div>
+          <div class="form-group"><label class="form-label">Photo 4</label><input type="text" id="gal3" class="form-control" value="assets/gallery-4.png"></div>
+        </div>
+      </section>
+
+      <!-- STEP 6: PUBLISH ₹399 -->
+      <section class="form-step-section" id="step-5">
+        <div class="step-header">
+          <div class="step-counter">Step 6 of 6</div>
+          <h2 class="step-title">Publish &amp; Strip Watermark</h2>
+          <p class="step-desc">Remove all Vanvi Moments watermarks for ₹399 and generate a clean shareable link.</p>
+        </div>
+
+        <div class="lux-card" style="text-align: center; padding: 28px 20px;">
+          <div class="modal-royalty-crown"><i class="fa-solid fa-crown"></i></div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:22px; color:var(--text-dark); margin-bottom:8px;">Activate Template 10</h3>
+          <p style="font-size:12.5px; color:var(--text-muted); line-height:1.5; margin-bottom:20px;">
+            Remove all branding, unlock high-speed server response, and get your lifetime WhatsApp invitation link.
+          </p>
+
+          <div class="pricing-badge-row">
+            <div>
+              <div class="original">₹2,499</div>
+              <div class="final-price">₹799</div>
+            </div>
+            <div>
+              <div class="tax-label"><i class="fa-solid fa-check"></i> Lifetime Link</div>
+              <div class="tax-label"><i class="fa-solid fa-check"></i> Watermark Removed</div>
+            </div>
+          </div>
+
+          <button class="btn-complete-publish" onclick="executePublish()">
+            <i class="fa-solid fa-bolt"></i> Pay ₹799 &amp; Activate Now
+          </button>
+
+          <div style="margin-top:12px; font-size:11.5px;">
+            <a href="javascript:void(0)" onclick="simulateLocalPublish()" style="color:var(--primary-blue); text-decoration:underline;">Test Watermark-Free Preview (Simulation)</a>
+          </div>
+
+          <div class="published-success-box" id="stepPublishResult">
+            <div style="font-weight:700; color:#28442D; font-size:13px; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-circle-check" style="color:#2E7D32;"></i> Published Successfully!
+            </div>
+            <p style="font-size:11px; color:#4E6953; margin-top:4px;">Watermark removed! Clean invite URL:</p>
+            <div class="success-link-wrap">
+              <input type="text" id="cleanLiveUrl" readonly>
+              <button class="btn-copy-link" onclick="copyCleanLink()"><i class="fa-regular fa-copy"></i> Copy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FIXED BOTTOM DOCK (MOBILE ZERO-CUTOFF) -->
+    <div class="editor-bottom-bar">
+      <button class="btn-nav-step btn-prev" id="btnPrevStep" onclick="prevStep()">
+        <i class="fa-solid fa-arrow-left"></i> Previous
+      </button>
+      <button class="btn-nav-step btn-next" id="btnNextStep" onclick="nextStep()">
+        Next Step <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- RIGHT: REAL-TIME PREVIEW -->
+  <section class="preview-pane">
+    <div class="preview-floating-bar">
+      <button class="preview-float-btn" onclick="reloadPreview()">
+        <i class="fa-solid fa-arrow-rotate-right"></i> Reset Animation
+      </button>
+      <button class="preview-float-btn" onclick="openFullscreenPreview()">
+        <i class="fa-solid fa-expand"></i> Fullscreen
+      </button>
+    </div>
+
+    <!-- PHONE CHASSIS -->
+    <div class="device-mockup">
+      <div class="device-top-notch"><div class="notch-pill"></div></div>
+      <iframe id="previewIframe" class="preview-iframe" src="index.html" title="Cloud Romance Live Preview"></iframe>
+    </div>
+  </section>
+
+</main>
+
+<!-- PUBLISH MODAL POPUP -->
+<div class="modal-overlay" id="publishModal">
+  <div class="modal-lux-card">
+    <button class="modal-close-btn" onclick="closePublishModal()">&times;</button>
+    <div class="modal-royalty-crown"><i class="fa-solid fa-crown"></i></div>
+    <h2 class="modal-lux-title">Publish Invitation</h2>
+    <p class="modal-lux-sub">Unlock clean watermark-free viewing for your guests across WhatsApp and web.</p>
+
+    <div class="pricing-badge-row">
+      <span class="original">₹2,499</span>
+      <span class="final-price">₹799</span>
+      <span class="tax-label">Instant Unlock</span>
+    </div>
+
+    <div class="feature-bullets">
+      <div><i class="fa-solid fa-circle-check"></i> Removes all "Vanvi Moments" watermarks</div>
+      <div><i class="fa-solid fa-circle-check"></i> Unlimited guest visits &amp; RSVP tracking</div>
+      <div><i class="fa-solid fa-circle-check"></i> High-definition cloud heart aesthetic</div>
+      <div><i class="fa-solid fa-circle-check"></i> Instant romantic song playback</div>
+    </div>
+
+    <button class="btn-complete-publish" onclick="executePublish()">
+      <i class="fa-solid fa-lock-open"></i> Unlock &amp; Remove Watermark (₹799)
+    </button>
+  </div>
+</div>
+
+<script>
+/* CONTROLLER FOR CLOUD BUILDER */
+let currentStep = 0;
+const totalSteps = 6;
+let isPublished = false;
+
+function goToStep(stepIndex) {
+  currentStep = Math.max(0, Math.min(stepIndex, totalSteps - 1));
+  document.querySelectorAll('.step-pill').forEach((pill, idx) => {
+    pill.classList.toggle('active', idx === currentStep);
+    if (idx < currentStep) pill.classList.add('completed');
+  });
+  document.querySelectorAll('.form-step-section').forEach((sec, idx) => {
+    sec.classList.toggle('active', idx === currentStep);
+  });
+
+  const btnPrev = document.getElementById('btnPrevStep');
+  const btnNext = document.getElementById('btnNextStep');
+  btnPrev.style.visibility = (currentStep === 0) ? 'hidden' : 'visible';
+  btnNext.innerHTML = (currentStep === totalSteps - 1) ? '<i class="fa-solid fa-crown"></i> Complete' : 'Next Step <i class="fa-solid fa-arrow-right"></i>';
+
+  const scroller = document.querySelector('.forms-scroller');
+  if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  if (currentStep < totalSteps - 1) goToStep(currentStep + 1);
+  else openPublishModal();
+}
+
+function prevStep() {
+  if (currentStep > 0) goToStep(currentStep - 1);
+}
+
+function switchMobileView(mode) {
+  const btnEdit = document.getElementById('btnModeEdit');
+  const btnPreview = document.getElementById('btnModePreview');
+  if (mode === 'preview') {
+    document.body.classList.add('show-preview');
+    btnPreview.classList.add('active');
+    btnEdit.classList.remove('active');
+  } else {
+    document.body.classList.remove('show-preview');
+    btnEdit.classList.add('active');
+    btnPreview.classList.remove('active');
+  }
+}
+
+function getFormData() {
+  return {
+    badge: document.getElementById('badgeInput')?.value || '',
+    mainTitle: document.getElementById('mainTitleInput')?.value || '',
+    groomName: document.getElementById('groomNameInput')?.value || '',
+    brideName: document.getElementById('brideNameInput')?.value || '',
+    tagline: document.getElementById('taglineInput')?.value || '',
+    weddingDate: document.getElementById('weddingDateInput')?.value || '',
+
+    groomFather: document.getElementById('groomFatherInput')?.value || '',
+    groomMother: document.getElementById('groomMotherInput')?.value || '',
+    brideFather: document.getElementById('brideFatherInput')?.value || '',
+    brideMother: document.getElementById('brideMotherInput')?.value || '',
+
+    events: [
+      {
+        title: document.getElementById('ev0Title')?.value || '',
+        date: document.getElementById('ev0Date')?.value || '',
+        time: document.getElementById('ev0Time')?.value || '',
+        location: document.getElementById('ev0Loc')?.value || ''
+      },
+      {
+        title: document.getElementById('ev1Title')?.value || '',
+        date: document.getElementById('ev1Date')?.value || '',
+        time: document.getElementById('ev1Time')?.value || '',
+        location: document.getElementById('ev1Loc')?.value || ''
+      },
+      {
+        title: document.getElementById('ev2Title')?.value || '',
+        date: document.getElementById('ev2Date')?.value || '',
+        time: document.getElementById('ev2Time')?.value || '',
+        location: document.getElementById('ev2Loc')?.value || ''
+      },
+      {
+        title: document.getElementById('ev3Title')?.value || '',
+        date: document.getElementById('ev3Date')?.value || '',
+        time: document.getElementById('ev3Time')?.value || '',
+        location: document.getElementById('ev3Loc')?.value || ''
+      }
+    ],
+
+    venueName: document.getElementById('venueNameInput')?.value || '',
+    venueAddress: document.getElementById('venueAddressInput')?.value || '',
+    venueMapUrl: document.getElementById('venueMapUrlInput')?.value || '',
+
+    heroBgImg: document.getElementById('heroUrlInput')?.value || '',
+    galleryImages: [
+      document.getElementById('gal0')?.value || '',
+      document.getElementById('gal1')?.value || '',
+      document.getElementById('gal2')?.value || '',
+      document.getElementById('gal3')?.value || ''
+    ],
+
+    isPublished: isPublished
+  };
+}
+
+function syncToIframe() {
+  const iframe = document.getElementById('previewIframe');
+  if (!iframe || !iframe.contentWindow) return;
+  iframe.contentWindow.postMessage({
+    type: 'VANVI_UPDATE_DATA',
+    payload: getFormData()
+  }, '*');
+}
+
+function attachLiveListeners() {
+  document.querySelectorAll('.form-control').forEach(input => {
+    input.addEventListener('input', syncToIframe);
+  });
+}
+
+// Image uploader
+const fileInput = document.getElementById('heroFileInput');
+if (fileInput) {
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        const base64 = evt.target.result;
+        document.getElementById('heroImgPreview').src = base64;
+        document.getElementById('heroUrlInput').value = base64;
+        syncToIframe();
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+function applyHeroUrl() {
+  const val = document.getElementById('heroUrlInput')?.value;
+  if (val) {
+    document.getElementById('heroImgPreview').src = val;
+    syncToIframe();
+  }
+}
+
+function reloadPreview() {
+  const iframe = document.getElementById('previewIframe');
+  if (iframe) {
+    iframe.src = 'index.html' + (isPublished ? '?published=1' : '');
+    iframe.onload = () => setTimeout(syncToIframe, 350);
+  }
+}
+
+function openFullscreenPreview() {
+  window.open('index.html' + (isPublished ? '?published=1' : ''), '_blank');
+}
+
+function openPublishModal() {
+  document.getElementById('publishModal').classList.add('open');
+}
+
+function closePublishModal() {
+  document.getElementById('publishModal').classList.remove('open');
+}
+
+function executePublish() {
+  closePublishModal();
+  const groom = document.getElementById('txtGroomInput')?.value || document.getElementById('groomName')?.value || 'Aarav';
+  const bride = document.getElementById('txtBrideInput')?.value || document.getElementById('brideName')?.value || 'Anaya';
+  const title = encodeURIComponent(`${groom} & ${bride} - Love in Clouds`);
+  window.location.href = `../../checkout.html?template=love-in-clouds&amount=799&name=${title}&bride=${encodeURIComponent(bride)}&groom=${encodeURIComponent(groom)}&occasion=Romance`;
+}
+
+function simulateLocalPublish() {
+  isPublished = true;
+  closePublishModal();
+  syncToIframe();
+
+  const cleanLink = window.location.origin + window.location.pathname.replace('builder.html', 'index.html') + '?published=1';
+  const urlBox = document.getElementById('cleanLiveUrl');
+  if (urlBox) urlBox.value = cleanLink;
+
+  const res = document.getElementById('stepPublishResult');
+  if (res) res.classList.add('visible');
+  goToStep(5);
+
+  const topBtn = document.querySelector('.action-publish-btn');
+  if (topBtn) {
+    topBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Published';
+    topBtn.style.background = '#2E7D32';
+  }
+}
+
+function copyCleanLink() {
+  const urlBox = document.getElementById('cleanLiveUrl');
+  if (urlBox) {
+    urlBox.select();
+    navigator.clipboard.writeText(urlBox.value).then(() => {
+      alert('Clean invite link copied! Watermark removed.');
+    });
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  goToStep(0);
+  attachLiveListeners();
+  const iframe = document.getElementById('previewIframe');
+  if (iframe) {
+    iframe.addEventListener('load', () => setTimeout(syncToIframe, 400));
+  }
+});
+</script>
+
+</body>
+</html>

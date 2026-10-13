@@ -552,6 +552,9 @@
   // 7. Luxury Cookie Consent Banner (GDPR / DPDP Act 2023)
   function initCookieConsent() {
     try {
+      // Do not obstruct focused auth pages (login, signup, forgot-password)
+      const curPath = window.location.pathname.toLowerCase();
+      if (curPath.includes('login') || curPath.includes('signup') || curPath.includes('forgot-password')) return;
       if (localStorage.getItem('vanvi_cookie_consent')) return;
       if (document.querySelector('.vanvi-cookie-banner')) return;
 

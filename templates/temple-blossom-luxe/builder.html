@@ -827,27 +827,166 @@ textarea.form-control {
     width: 100%;
     height: 100%;
     border-radius: 20px;
-    box-shadow: none;
+    box-shadow: 0 0 0 3px #D6CAB8;
     border: none;
   }
+}
 
-  .device-mockup {
-    box-shadow: 0 0 0 3px #D6CAB8;
+@media (max-width: 600px) {
+  .builder-nav {
+    padding: 0 10px;
+    height: 56px;
+    gap: 6px;
+  }
+  .brand-wrap {
+    gap: 8px;
+  }
+  .brand-wrap img {
+    height: 30px !important;
+  }
+  .brand-text h1 {
+    font-size: 13px;
+  }
+  .brand-text span {
+    display: none;
+  }
+  .live-badge {
+    display: none;
+  }
+  .action-publish-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+    gap: 4px;
+  }
+  .view-mode-toggle {
+    padding: 2px;
+  }
+  .mode-btn {
+    padding: 5px 9px;
+    font-size: 10px;
+  }
+  .editor-sidebar {
+    height: calc(100vh - 56px);
+  }
+  .preview-pane {
+    height: calc(100vh - 56px);
+    padding: 8px;
+  }
+  .editor-bottom-bar {
+    padding: 8px 10px calc(8px + var(--safe-bottom));
+    gap: 8px;
+  }
+  .btn-nav-step {
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+    padding: 9px 8px;
+    font-size: 11px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .step-nav-bar {
+    padding: 8px 8px;
+    gap: 5px;
+  }
+  .step-pill {
+    padding: 5px 8px;
+    font-size: 10.5px;
+    white-space: nowrap;
+  }
+  .forms-scroller {
+    padding: 12px 10px 84px;
+  }
+  .lux-card {
+    padding: 14px 10px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .pricing-badge-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .modal-lux-card {
+    padding: 24px 16px;
   }
 }
-</style>
+
+@media (max-width: 360px) {
+  .brand-text {
+    display: none;
+  }
+  .mode-btn {
+    padding: 4px 6px;
+    font-size: 9px;
+  }
+  .action-publish-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+  .btn-nav-step {
+    padding: 7px 6px;
+    font-size: 10px;
+    gap: 3px;
+  }
+}
+
+    /* Vanvi Ultra-Responsive Mobile Button Clamp Engine */
+    @media (max-width: 600px) {
+      .editor-dock, .editor-bottom-bar, .builder-bottom-nav, .dock-container {
+        padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .dock-btn, .btn-nav-step, .btn-step-prev, .btn-step-next, .btn-action {
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+        height: 38px !important;
+        padding: 0 8px !important;
+        font-size: 0.74rem !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        box-sizing: border-box !important;
+      }
+      .dock-btn.btn-primary, .btn-nav-step.primary, .btn-step-next.primary {
+        flex: 1.35 1 0 !important;
+      }
+      .preview-canvas, .preview-panel {
+        display: none !important;
+      }
+      .editor-panel, .builder-form-pane {
+        width: 100% !important;
+        max-width: 100vw !important;
+        border-right: none !important;
+      }
+    }
+    @media (max-width: 360px) {
+      .editor-dock, .editor-bottom-bar, .builder-bottom-nav {
+        padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 0px)) !important;
+        gap: 5px !important;
+      }
+      .dock-btn, .btn-nav-step, .btn-step-prev, .btn-step-next {
+        height: 34px !important;
+        font-size: 0.68rem !important;
+        padding: 0 4px !important;
+      }
+    }
+
+  </style>
 </head>
 <body>
 
 <!-- TOP BAR -->
 <header class="builder-nav">
-  <a href="index.html" class="brand-wrap">
-    <div class="brand-icon">
-      <i class="fa-solid fa-gem"></i>
-    </div>
+  <a href="../../index.html" class="brand-wrap" title="Vanvi Moments">
+    <img src="../../assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" style="height:36px; width:auto; max-width:130px; object-fit:contain; border-radius:6px;" onerror="this.src='../../assets/vanvi-moments-logo.png'">
     <div class="brand-text">
       <h1>Vanvi Moments</h1>
-      <span>Royal Studio Builder</span>
+      <span>Temple Blossom Studio</span>
     </div>
   </a>
 
@@ -867,7 +1006,7 @@ textarea.form-control {
       <span>Live Sync</span>
     </div>
     <button class="action-publish-btn" onclick="openPublishModal()">
-      <i class="fa-solid fa-crown"></i> Publish ₹399
+      <i class="fa-solid fa-crown"></i> Publish ₹799
     </button>
   </div>
 </header>
@@ -896,7 +1035,7 @@ textarea.form-control {
         <i class="fa-solid fa-images"></i> Photos &amp; Music
       </button>
       <button class="step-pill" onclick="goToStep(5)">
-        <i class="fa-solid fa-crown"></i> Publish ₹399
+        <i class="fa-solid fa-crown"></i> Publish ₹799
       </button>
     </div>
 
@@ -1183,8 +1322,8 @@ textarea.form-control {
 
           <div class="pricing-badge-row">
             <div>
-              <div class="original">₹1,499</div>
-              <div class="final-price">₹399</div>
+              <div class="original">₹2,499</div>
+              <div class="final-price">₹799</div>
             </div>
             <div>
               <div class="tax-label"><i class="fa-solid fa-check"></i> Lifetime Link</div>
@@ -1193,8 +1332,12 @@ textarea.form-control {
           </div>
 
           <button class="btn-complete-publish" onclick="executePublish()">
-            <i class="fa-solid fa-bolt"></i> Pay ₹399 &amp; Activate Now
+            <i class="fa-solid fa-bolt"></i> Pay ₹799 &amp; Activate Now
           </button>
+
+          <div style="margin-top:12px; font-size:11.5px;">
+            <a href="javascript:void(0)" onclick="simulateLocalPublish()" style="color:var(--primary-gold); text-decoration:underline;">Test Watermark-Free Preview (Simulation)</a>
+          </div>
 
           <div class="published-success-box" id="stepPublishResult">
             <div style="font-weight:700; color:#2F422A; font-size:13px; display:flex; align-items:center; gap:6px;">
@@ -1256,8 +1399,8 @@ textarea.form-control {
     <p class="modal-lux-sub">Unlock clean watermark-free viewing for your guests across WhatsApp and web.</p>
 
     <div class="pricing-badge-row">
-      <span class="original">₹1,499</span>
-      <span class="final-price">₹399</span>
+      <span class="original">₹2,499</span>
+      <span class="final-price">₹799</span>
       <span class="tax-label">Instant Unlock</span>
     </div>
 
@@ -1269,7 +1412,7 @@ textarea.form-control {
     </div>
 
     <button class="btn-complete-publish" onclick="executePublish()">
-      <i class="fa-solid fa-lock-open"></i> Unlock &amp; Remove Watermark (₹399)
+      <i class="fa-solid fa-lock-open"></i> Unlock &amp; Remove Watermark (₹799)
     </button>
   </div>
 </div>
@@ -1475,8 +1618,16 @@ function closePublishModal() {
   document.getElementById('publishModal').classList.remove('open');
 }
 
-// Execute Publish (₹399 Activation)
+// Execute Publish (₹799 Checkout Activation)
 function executePublish() {
+  closePublishModal();
+  const groom = document.getElementById('groomName')?.value || 'Arjun';
+  const bride = document.getElementById('brideName')?.value || 'Meera';
+  const title = encodeURIComponent(`${groom} & ${bride} Wedding`);
+  window.location.href = `../../checkout.html?template=temple-blossom-luxe&amount=799&name=${title}&bride=${encodeURIComponent(bride)}&groom=${encodeURIComponent(groom)}&occasion=Wedding`;
+}
+
+function simulateLocalPublish() {
   isPublished = true;
   closePublishModal();
 

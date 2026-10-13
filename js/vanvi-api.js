@@ -360,6 +360,18 @@
           method: 'POST',
           body: { orderAmountINR, userCoins, tier, templateId }
         });
+      },
+
+      async convertToCredits(coins) {
+        const res = await request('/api/coins/convert-to-credits', {
+          method: 'POST',
+          body: { coins }
+        });
+        if (res.success) {
+          if (res.newCoins !== undefined) localStorage.setItem('vanvi_user_coins', res.newCoins);
+          if (res.newCredits !== undefined) localStorage.setItem('vanvi_template_credits', res.newCredits);
+        }
+        return res;
       }
     },
 

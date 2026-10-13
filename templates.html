@@ -985,7 +985,7 @@
   </section>
 
   <!-- 5. Main Content Area -->
-  <main class="discovery-container">
+  <main class="discovery-container" id="catalogSection">
     
     <!-- 5A. Curated Occasion Rails (Default Discovery View) -->
     <div id="discoveryRailsView">
@@ -1257,35 +1257,45 @@
     (function () {
       'use strict';
 
-      // Curated High-Definition Mockup Thumbnails
+      // Curated High-Definition Mockup Thumbnails — Vanvi Luxury Bespoke Originals
       const THUMBNAIL_MAP = {
-        'birthday-wish-1': 'https://cdn.cutiepage.in/static/products/birthday-wish1.jpg',
-        'birthday-wish-2': 'https://cdn.cutiepage.in/static/products/birthday-wish2.jpg',
-        'birthday-gf': 'https://cdn.cutiepage.in/template-seeds/girlfriends-day/cover.png',
-        'netflix-style-story': 'https://cdn.cutiepage.in/template-seeds/netflix-story/cover.webp',
-        'birthday-cinema': 'https://cdn.cutiepage.in/template-seeds/netflix-story/cover.webp',
-        'little-love': 'https://cdn.cutiepage.in/template-seeds/couples-day/cover.webp',
-        'best-friend-chaos': 'https://cdn.cutiepage.in/template-seeds/friendship-day/cover.webp',
-        'birthday-3d-candle': 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&auto=format&fit=crop&q=80',
-        'birthday-white-bloom': 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&auto=format&fit=crop&q=80',
-        'retro-polaroid-wall': 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=80',
-        'golden-anniversary': 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&auto=format&fit=crop&q=80',
-        'sincere-letter': 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80',
-        'apology-dashboard': 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80',
+        'birthday-wish-1': 'assets/templates/vanvi-birthday-bold-luxe.jpg',
+        'birthday-wish-2': 'assets/templates/vanvi-birthday-showcase.jpg',
+        'birthday-gf': 'assets/templates/vanvi-girlfriend-love.jpg',
+        'netflix-style-story': 'assets/templates/vanvi-cinema-story.jpg',
+        'birthday-cinema': 'assets/templates/vanvi-cinema-story.jpg',
+        'little-love': 'assets/templates/vanvi-girlfriend-love.jpg',
+        'best-friend-chaos': 'assets/templates/vanvi-bestie-memories.jpg',
+        'bestie-friendship': 'assets/templates/vanvi-friendship-showcase.jpg',
+        'birthday-3d-candle': 'assets/templates/vanvi-birthday-vibrant.jpg',
+        'birthday-3d-candle-surprise': 'assets/templates/vanvi-birthday-vibrant.jpg',
+        'birthday-bloom': 'assets/templates/vanvi-birthday-bold-showcase.jpg',
+        'birthday-white-bloom': 'assets/templates/vanvi-birthday-showcase.jpg',
+        'cute-pastel-birthday': 'assets/templates/cute-pastel-birthday.jpg',
+        'retro-polaroid-wall': 'assets/templates/vanvi-retro-polaroid-luxe.jpg',
+        'birthday-retro-polaroid': 'assets/templates/vanvi-retro-polaroid-showcase.jpg',
+        'golden-anniversary': 'assets/templates/vanvi-anniversary-gold-luxe.jpg',
+        'golden-anniversary-walk': 'assets/templates/vanvi-anniversary-showcase.jpg',
+        'sincere-letter': 'assets/templates/vanvi-apology-luxe.jpg',
+        'apology-dashboard': 'assets/templates/vanvi-apology-luxe.jpg',
         'the-grand-royal-palace-wedding': 'assets/templates/royal-palace-wedding.jpg',
         'floral-mehendi-story': 'assets/templates/floral-mehendi-story.jpg',
         'sacred-temple-edition': 'assets/templates/sacred-temple-edition.jpg',
         'golden-lake-collection': 'assets/templates/golden-lake-collection.jpg',
         'royal-palace-wedding': 'assets/templates/royal-palace-wedding.jpg',
         'royal-udaipur': 'assets/templates/royal-palace-wedding.jpg',
-        'royal-vivah-lagna': 'assets/templates/royal-palace-wedding.jpg',
-        'forever-us': 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&auto=format&fit=crop&q=80',
-        'royal-shaadi-invite': 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&auto=format&fit=crop&q=80',
-        'wedding-floating-lotus': 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&auto=format&fit=crop&q=80',
-        'ivory-arch-wedding': 'templates/ivory-arch-wedding/assets/backgrounds/Background 4.webp',
-        'royal-vows-indian-wedding': 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=700&auto=format&fit=crop&q=80',
+        'royal-udaivilas-baithak': 'assets/templates/golden-lake-collection.jpg',
+        'royal-vivah-lagna': 'assets/templates/marigold-garden-vivah.jpg',
+        'forever-us': 'assets/templates/vanvi-love-romance-showcase.jpg',
+        'royal-shaadi-invite': 'assets/templates/vanvi-royal-wedding-showcase.jpg',
+        'wedding-floating-lotus': 'assets/templates/sacred-temple-edition.jpg',
+        'ivory-arch-wedding': 'assets/templates/vanvi-ivory-arch-wedding.jpg',
+        'royal-vows-indian-wedding': 'assets/templates/vanvi-royal-wedding-showcase.jpg',
+        'temple-blossom-luxe': 'assets/templates/vanvi-temple-blossom-luxe.jpg',
+        'love-in-clouds': 'assets/templates/vanvi-love-in-clouds.jpg',
         'hues-whispers-luxe': 'assets/templates/hues-whispers-luxe.jpg',
-        'maa-papa-tribute': 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&auto=format&fit=crop&q=80'
+        'vanvi-royal-wedding': 'assets/templates/vanvi-royal-wedding-showcase.jpg',
+        'maa-papa-tribute': 'assets/templates/vanvi-anniversary-gold-luxe.jpg'
       };
 
       // Filter State
