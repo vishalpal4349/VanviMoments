@@ -19,19 +19,21 @@
 
   <style>
     :root {
-      --clay-bg: #d8c8f8;
-      --clay-bg-grad: radial-gradient(circle at 50% 28%, #f0e6ff 0%, #dfd0fc 48%, #c6b2f4 100%);
-      --clay-card-bg: #ffffff;
-      --clay-primary: #9471e4;
-      --clay-primary-dark: #7a54cf;
-      --clay-primary-glow: rgba(148, 113, 228, 0.4);
-      --clay-badge-bg: #bca6f0;
-      --clay-input-bg: #f5f0fb;
-      --clay-text-dark: #2c1642;
-      --clay-text-muted: #7b6694;
-      --clay-shadow-card: 0 24px 60px rgba(110, 80, 168, 0.22), 0 8px 24px rgba(0, 0, 0, 0.04), inset 0 2px 3px #ffffff;
-      --clay-shadow-inner: 0 14px 34px rgba(120, 90, 180, 0.12), inset 0 2px 2px #ffffff;
-      --clay-shadow-btn: 0 10px 24px rgba(148, 113, 228, 0.42), 0 3px 0 #6e46be, inset 0 2px 2px rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(0, 0, 0, 0.16);
+      /* Ultra-Vibrant Twilight Amethyst, Royal Indigo & Radiant Magenta */
+      --clay-bg-grad: radial-gradient(circle at 10% 15%, rgba(139, 92, 246, 0.45) 0%, transparent 45%),
+                      radial-gradient(circle at 90% 12%, rgba(236, 72, 153, 0.4) 0%, transparent 45%),
+                      radial-gradient(circle at 50% 90%, rgba(245, 158, 11, 0.35) 0%, transparent 45%),
+                      radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.4) 0%, transparent 50%),
+                      linear-gradient(135deg, #ede9fe 0%, #fae8ff 35%, #ffe4e6 70%, #fef3c7 100%);
+      --clay-primary: #8b5cf6;
+      --clay-primary-dark: #7c3aed;
+      --clay-primary-grad: linear-gradient(135deg, #8b5cf6 0%, #a855f7 40%, #ec4899 100%);
+      --clay-input-bg: #f8f4ff;
+      --clay-text-dark: #280b45;
+      --clay-text-muted: #6f4c94;
+      --clay-shadow-card: 0 25px 65px -12px rgba(124, 58, 237, 0.28), 0 8px 24px -4px rgba(236, 72, 153, 0.16), 0 0 0 1.5px rgba(255, 255, 255, 0.95), inset 0 2px 2px #ffffff;
+      --clay-shadow-inner: 0 8px 24px rgba(124, 58, 237, 0.08), inset 0 2px 2px #ffffff;
+      --clay-shadow-btn: 0 10px 24px -4px rgba(139, 92, 246, 0.45), 0 3px 0 #6d28d9, inset 0 2px 2px rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(0, 0, 0, 0.16);
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
 
@@ -41,17 +43,19 @@
       min-height: 100vh;
       min-height: 100dvh;
       background: var(--clay-bg-grad);
+      background-attachment: fixed;
       font-family: var(--font-sans);
       color: var(--clay-text-dark);
       overflow-x: hidden !important;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px 16px 36px;
+      justify-content: center;
+      padding: 16px 12px;
       position: relative;
     }
 
-    /* Ambient 3D Studio Clay Background Props */
+    /* Ambient Luxury Glowing Background Props */
     .clay-studio-props {
       position: fixed;
       inset: 0;
@@ -59,110 +63,73 @@
       z-index: 0;
       overflow: hidden;
     }
-
-    .clay-prop {
+    .luxe-glow-orb {
       position: absolute;
-      user-select: none;
-      filter: drop-shadow(0 14px 28px rgba(90, 60, 140, 0.18));
+      border-radius: 50%;
+      pointer-events: none;
       will-change: transform;
     }
+    .luxe-glow-orb-1 {
+      top: -60px;
+      left: -60px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.42) 0%, rgba(236, 72, 153, 0.18) 60%, transparent 80%);
+      filter: blur(60px);
+      animation: driftGlow1 16s ease-in-out infinite alternate;
+    }
+    .luxe-glow-orb-2 {
+      bottom: -60px;
+      right: -60px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(244, 63, 94, 0.38) 0%, rgba(245, 158, 11, 0.25) 60%, transparent 80%);
+      filter: blur(65px);
+      animation: driftGlow2 20s ease-in-out infinite alternate;
+    }
+    .clay-prop-star {
+      position: absolute;
+      font-weight: 900;
+      user-select: none;
+      animation: sparkle 3.5s ease-in-out infinite alternate;
+    }
+    .star-1 { top: 12%; left: 14%; font-size: 24px; color: #a855f7; text-shadow: 0 0 16px rgba(168, 85, 247, 0.6); }
+    .star-2 { top: 16%; right: 15%; font-size: 22px; color: #ec4899; text-shadow: 0 0 16px rgba(236, 72, 153, 0.6); animation-delay: -1.2s; }
+    .star-3 { bottom: 18%; left: 16%; font-size: 26px; color: #f59e0b; text-shadow: 0 0 16px rgba(245, 158, 11, 0.6); animation-delay: -2s; }
+    .star-4 { bottom: 15%; right: 18%; font-size: 20px; color: #8b5cf6; text-shadow: 0 0 16px rgba(139, 92, 246, 0.6); animation-delay: -0.7s; }
 
-    .prop-cloud-1 {
-      top: 6%;
-      left: 6%;
-      font-size: 42px;
-      animation: floatCloud 16s ease-in-out infinite alternate;
-      opacity: 0.85;
+    @keyframes driftGlow1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, 40px) scale(1.12); }
     }
-    .prop-cloud-2 {
-      top: 12%;
-      right: 7%;
-      font-size: 48px;
-      animation: floatCloud 20s ease-in-out infinite alternate -6s;
-      opacity: 0.85;
+    @keyframes driftGlow2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-35px, -30px) scale(1.1); }
     }
-    .prop-heart-float {
-      top: 30%;
-      left: 8%;
-      font-size: 26px;
-      animation: floatHeart 12s ease-in-out infinite alternate;
-    }
-    .prop-star-float {
-      top: 26%;
-      right: 9%;
-      font-size: 24px;
-      animation: floatHeart 14s ease-in-out infinite alternate -4s;
-    }
-
-    .prop-potted-plant {
-      bottom: 24px;
-      left: max(20px, calc(50% - 390px));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .prop-plant-leaves {
-      font-size: 64px;
-      line-height: 1;
-      transform: translateY(12px);
-      filter: drop-shadow(0 6px 12px rgba(46, 125, 50, 0.25));
-    }
-    .prop-plant-pot {
-      width: 58px;
-      height: 48px;
-      background: linear-gradient(180deg, #ecd8be 0%, #d8be98 100%);
-      border-radius: 6px 6px 18px 18px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), inset 0 2px 2px #fff;
-    }
-
-    .prop-potted-flower {
-      bottom: 24px;
-      right: max(20px, calc(50% - 390px));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .prop-flower-bloom {
-      font-size: 58px;
-      line-height: 1;
-      transform: translateY(10px);
-      filter: drop-shadow(0 6px 12px rgba(233, 30, 99, 0.25));
-    }
-    .prop-flower-pot {
-      width: 54px;
-      height: 44px;
-      background: linear-gradient(180deg, #f8bbd0 0%, #f48fb1 100%);
-      border-radius: 6px 6px 18px 18px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), inset 0 2px 2px #fff;
-    }
-
-    @keyframes floatCloud {
-      0% { transform: translateY(0) translateX(0); }
-      100% { transform: translateY(-12px) translateX(16px); }
-    }
-    @keyframes floatHeart {
-      0% { transform: translateY(0) rotate(0deg) scale(1); }
-      100% { transform: translateY(-16px) rotate(12deg) scale(1.08); }
+    @keyframes sparkle {
+      0% { opacity: 0.45; transform: scale(0.9) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.15) rotate(15deg); }
+      100% { opacity: 0.45; transform: scale(0.9) rotate(0deg); }
     }
 
     /* Fixed Back Button */
     .clay-nav-back {
       position: fixed;
-      top: 18px;
-      left: 20px;
+      top: 16px;
+      left: 18px;
       z-index: 1000;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 8px 18px;
-      min-height: 40px;
+      gap: 6px;
+      padding: 7px 16px;
+      min-height: 38px;
       border-radius: 999px;
       background: #ffffff;
       border: 1.5px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 8px 24px rgba(90, 60, 140, 0.15), inset 0 2px 2px #ffffff;
-      color: #3b1b54;
+      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.14), inset 0 2px 2px #ffffff;
+      color: #280b45;
       font-family: var(--font-sans);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 850;
       text-decoration: none;
       cursor: pointer;
@@ -171,10 +138,10 @@
     .clay-nav-back:hover {
       transform: translateX(-3px) scale(1.03);
       color: var(--clay-primary);
-      box-shadow: 0 12px 28px rgba(90, 60, 140, 0.25);
+      box-shadow: 0 12px 28px rgba(124, 58, 237, 0.25);
     }
     .clay-nav-back .back-arrow {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1;
       font-weight: 900;
     }
@@ -182,72 +149,76 @@
     /* Top Mode Switcher Bar */
     .clay-mode-switch-wrap {
       width: 100%;
-      max-width: 420px;
+      max-width: 395px;
       display: flex;
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       position: relative;
       z-index: 10;
     }
     .clay-mode-switch {
       display: inline-flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       padding: 4px;
       border-radius: 999px;
-      box-shadow: 0 6px 18px rgba(110, 80, 160, 0.1), inset 0 1px 2px #fff;
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.1), inset 0 1px 2px #fff;
+      border: 1px solid rgba(255, 255, 255, 0.95);
       gap: 4px;
     }
     .clay-mode-tab {
-      padding: 7px 18px;
+      padding: 6px 16px;
       border-radius: 999px;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 800;
       color: var(--clay-text-muted);
       text-decoration: none;
-      transition: all 0.22s ease;
+      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
     .clay-mode-tab.active {
       background: var(--clay-primary);
+      background-image: var(--clay-primary-grad);
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(148, 113, 228, 0.35);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.35);
     }
     .clay-coins-tag {
-      font-size: 9.5px;
+      font-size: 9px;
       padding: 1.5px 6px;
       border-radius: 99px;
       background: #f59e0b;
       color: #fff;
       font-weight: 900;
+      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
     }
 
-    /* Master Compact Phone Card (~420px wide centered on desktop & mobile) */
+    /* Master Floating Center Card (~395px compact on laptop & mobile) */
     .clay-phone-card {
       position: relative;
       z-index: 10;
       width: 100%;
-      max-width: 420px;
-      background: #ffffff;
-      border-radius: 38px;
+      max-width: 395px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border-radius: 32px;
       box-shadow: var(--clay-shadow-card);
-      padding: 22px 18px 20px;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      padding: 16px 14px 14px;
       margin: 0 auto;
       text-align: center;
       overflow: hidden;
-      transform: translateZ(0);
-      animation: authCardEnter 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: cardPopEnter 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    @keyframes authCardEnter {
+    @keyframes cardPopEnter {
       from {
         opacity: 0;
-        transform: translateY(18px) scale(0.97);
+        transform: translateY(14px) scale(0.96);
       }
       to {
         opacity: 1;
@@ -255,62 +226,59 @@
       }
     }
 
-    /* Top Greeting Section */
+    /* Top Greeting Section with Compact Luxury Avatar */
     .clay-header-top {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 2px;
+      margin-bottom: 6px;
     }
-    .clay-heart-emblem {
-      font-size: 22px;
+    .clay-avatar-bubble {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 5px;
+      border-radius: 50%;
+      padding: 2.5px;
+      background: var(--clay-primary-grad);
+      box-shadow: 0 8px 20px rgba(124, 58, 237, 0.28), 0 0 0 2px rgba(255, 255, 255, 0.95);
+      animation: avatarFloat 4s ease-in-out infinite alternate;
+    }
+    @keyframes avatarFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-3px); }
+    }
+    .clay-avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      background: #ffffff;
+    }
+    .clay-avatar-sparkle {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      font-size: 13px;
       line-height: 1;
-      margin-bottom: 4px;
-      animation: heartBreathe 3s ease-in-out infinite alternate;
-    }
-    @keyframes heartBreathe {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.15); }
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
     }
     .clay-main-title {
-      font-size: 26px;
+      font-size: 21px;
       font-weight: 900;
-      color: #5c3b99;
-      letter-spacing: -0.5px;
+      color: var(--clay-text-dark);
+      letter-spacing: -0.3px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-    }
-    .clay-rays {
-      font-size: 16px;
-      color: #f59e0b;
+      gap: 5px;
+      margin: 0;
     }
     .clay-sub-text {
-      font-size: 12.5px;
+      font-size: 11.5px;
       color: var(--clay-text-muted);
-      margin-top: 3px;
+      margin-top: 2px;
       font-weight: 600;
-    }
-
-    /* 3D Cute Clay Character */
-    .clay-girl-stage {
-      position: relative;
-      width: 100%;
-      max-width: 170px;
-      margin: 0 auto -22px;
-      z-index: 2;
-    }
-    .clay-girl-photo {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-      border-radius: 36px 36px 0 0;
-      filter: drop-shadow(0 12px 20px rgba(110, 80, 168, 0.2));
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .clay-girl-stage:hover .clay-girl-photo {
-      transform: scale(1.03) translateY(-2px);
     }
 
     /* Inner Elevated White Clay Form Card */
@@ -318,49 +286,49 @@
       position: relative;
       z-index: 4;
       background: #ffffff;
-      border-radius: 32px;
-      padding: 22px 18px 18px;
+      border-radius: 26px;
+      padding: 14px 14px 12px;
       box-shadow: var(--clay-shadow-inner);
-      border: 1.5px solid rgba(240, 235, 250, 0.9);
+      border: 1.5px solid rgba(243, 232, 255, 0.95);
     }
 
-    /* Clay Pill Inset Input Fields */
+    /* Inset Input Rows */
     .clay-field-row {
-      margin-bottom: 12px;
+      margin-bottom: 9px;
       position: relative;
       text-align: left;
     }
     .clay-pill-input-box {
       width: 100%;
-      min-height: 50px;
+      min-height: 44px;
       background: var(--clay-input-bg);
       border-radius: 999px;
-      box-shadow: inset 0 2.5px 5px rgba(100, 70, 150, 0.08), inset 0 1px 2px rgba(0,0,0,0.04);
+      box-shadow: inset 0 2px 4px rgba(124, 58, 237, 0.08), inset 0 1px 2px rgba(0,0,0,0.03);
       display: flex;
       align-items: center;
-      padding: 4px 8px 4px 6px;
+      padding: 3px 6px 3px 5px;
       transition: all 0.2s ease;
       border: 1.5px solid transparent;
     }
     .clay-pill-input-box:focus-within {
       background: #ffffff;
       border-color: var(--clay-primary);
-      box-shadow: 0 0 0 3px rgba(148, 113, 228, 0.25), inset 0 1px 2px #fff;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.22), inset 0 1px 2px #fff;
     }
     .clay-icon-circle {
-      width: 38px;
-      height: 38px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #bca6f0 0%, #a284e6 100%);
+      background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
       color: #ffffff;
       display: grid;
       place-items: center;
       flex-shrink: 0;
-      box-shadow: 0 4px 10px rgba(148, 113, 228, 0.35), inset 0 1px 2px rgba(255,255,255,0.7);
+      box-shadow: 0 3px 8px rgba(124, 58, 237, 0.3), inset 0 1px 2px rgba(255,255,255,0.7);
     }
     .clay-icon-circle svg {
-      width: 17px;
-      height: 17px;
+      width: 15px;
+      height: 15px;
     }
     .clay-native-input {
       flex: 1;
@@ -368,24 +336,25 @@
       border: none;
       outline: none;
       background: transparent;
-      padding: 0 12px;
+      padding: 0 10px;
       font-family: var(--font-sans);
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--clay-text-dark);
       min-width: 0;
     }
     .clay-native-input::placeholder {
-      color: #a494bc;
+      color: #9f86bb;
       font-weight: 500;
+      font-size: 12.5px;
     }
     .clay-pwd-toggle {
       background: transparent;
       border: none;
-      font-size: 17px;
-      color: #927fb0;
+      font-size: 15px;
+      color: #8c71aa;
       cursor: pointer;
-      padding: 6px 10px;
+      padding: 4px 8px;
       transition: transform 0.2s ease, color 0.2s ease;
       display: flex;
       align-items: center;
@@ -397,13 +366,13 @@
       color: var(--clay-primary);
     }
 
-    /* Auxiliary Row */
+    /* Auxiliary Links Row */
     .clay-aux-links {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 10px 4px 14px;
-      font-size: 12px;
+      margin: 8px 4px 12px;
+      font-size: 11.5px;
     }
     .clay-remember-wrap {
       display: inline-flex;
@@ -416,8 +385,8 @@
     }
     .clay-remember-wrap input {
       accent-color: var(--clay-primary);
-      width: 15px;
-      height: 15px;
+      width: 14px;
+      height: 14px;
       cursor: pointer;
     }
     .clay-forgot-link {
@@ -434,31 +403,30 @@
     /* Primary Action Button */
     .clay-btn-main {
       width: 100%;
-      min-height: 50px;
+      min-height: 44px;
       border-radius: 999px;
-      background: linear-gradient(180deg, #aa8ced 0%, #8c67df 100%);
+      background: var(--clay-primary-grad);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.65);
       font-family: var(--font-sans);
-      font-size: 15.5px;
+      font-size: 14.5px;
       font-weight: 850;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
       cursor: pointer;
       box-shadow: var(--clay-shadow-btn);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
     }
     .clay-btn-main:hover {
       transform: translateY(-2px) scale(1.015);
-      box-shadow: 0 14px 28px rgba(148, 113, 228, 0.55), 0 4px 0 #6e46be;
+      box-shadow: 0 12px 26px rgba(139, 92, 246, 0.5), 0 4px 0 #6d28d9;
     }
     .clay-btn-main:active {
       transform: translateY(2px) scale(0.985);
-      box-shadow: 0 4px 12px rgba(148, 113, 228, 0.3), 0 1px 0 #6e46be;
+      box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3), 0 1px 0 #6d28d9;
     }
     .clay-btn-main:disabled {
       opacity: 0.75;
@@ -469,9 +437,9 @@
 
     /* Loading Spinner */
     .btn-spinner {
-      width: 18px;
-      height: 18px;
-      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.35);
       border-top-color: #ffffff;
       border-radius: 50%;
       animation: spin 0.75s linear infinite;
@@ -484,14 +452,15 @@
 
     /* Status Alert Message */
     .form-status {
-      margin-top: 10px;
-      font-size: 12px;
+      margin-top: 8px;
+      font-size: 11.5px;
       font-weight: 700;
-      min-height: 18px;
+      min-height: 16px;
       color: var(--clay-text-muted);
-      padding: 4px 8px;
+      padding: 5px 8px;
       border-radius: 8px;
       transition: all 0.2s ease;
+      text-align: center;
     }
     .form-status.error {
       color: #dc2626;
@@ -509,9 +478,9 @@
       display: flex;
       align-items: center;
       text-align: center;
-      margin: 16px 0 14px;
-      color: #a494bc;
-      font-size: 11px;
+      margin: 10px 0;
+      color: #9f86bb;
+      font-size: 10px;
       font-weight: 750;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -523,54 +492,51 @@
       border-bottom: 1.5px solid #eae2f5;
     }
     .clay-divider-line span {
-      padding: 0 10px;
+      padding: 0 8px;
     }
 
-    /* Official Prominent Google Sign-In Button */
-    .btn-google-official {
+    /* Official Google Mount Container (Single Clean Trigger) */
+    .gsi-mount-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 6px 0 10px;
+      min-height: 42px;
       width: 100%;
-      min-height: 48px;
+    }
+    .btn-google-trigger {
+      width: 100%;
+      min-height: 42px;
       border-radius: 999px;
       background: #ffffff;
       border: 1.5px solid #e2d9f3;
-      box-shadow: 0 4px 14px rgba(110, 80, 160, 0.08), inset 0 1px 1px #ffffff;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.08), inset 0 1px 1px #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       cursor: pointer;
       font-family: var(--font-sans);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 750;
       color: #374151;
       transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-      margin-bottom: 14px;
     }
-    .btn-google-official:hover {
-      transform: translateY(-2px);
+    .btn-google-trigger:hover {
+      transform: translateY(-1.5px);
       border-color: #4285F4;
-      box-shadow: 0 8px 20px rgba(66, 133, 244, 0.18), inset 0 1px 1px #fff;
+      box-shadow: 0 8px 18px rgba(66, 133, 244, 0.16);
       color: #1f2937;
     }
-    .btn-google-official:active {
-      transform: translateY(1px);
-    }
     .google-g-icon {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       flex-shrink: 0;
-    }
-
-    /* GIS Real Button Container */
-    #gsiButtonContainer {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 14px;
     }
 
     /* Footer Switch Link */
     .clay-footer-link {
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--clay-text-muted);
       font-weight: 600;
     }
@@ -607,30 +573,30 @@
 
     @media (max-width: 480px) {
       body {
-        padding: 56px 12px 24px;
+        padding: 50px 10px 20px;
         justify-content: flex-start;
       }
       .clay-nav-back {
-        top: 12px;
-        left: 12px;
-        padding: 6px 14px;
-        min-height: 36px;
-        font-size: 12px;
+        top: 10px;
+        left: 10px;
+        padding: 5px 12px;
+        min-height: 34px;
+        font-size: 11.5px;
       }
       .clay-phone-card {
-        padding: 20px 14px 16px;
-        border-radius: 32px;
+        padding: 16px 12px 14px;
+        border-radius: 28px;
       }
       .clay-main-title {
-        font-size: 23px;
+        font-size: 21px;
       }
       .clay-girl-stage {
-        max-width: 155px;
-        margin-bottom: -20px;
+        max-width: 115px;
+        margin-bottom: -16px;
       }
       .clay-inner-card {
-        padding: 18px 12px 14px;
-        border-radius: 26px;
+        padding: 16px 12px 12px;
+        border-radius: 24px;
       }
     }
 
@@ -646,24 +612,14 @@
 
 <body class="vanvi-auth-body" id="authBody">
 
-  <!-- Ambient 3D Studio Clay Background Props -->
+  <!-- Ambient 3D Luxury Cosmic Aurora Glowing Props -->
   <div class="clay-studio-props" aria-hidden="true">
-    <div class="clay-prop prop-cloud-1">☁️</div>
-    <div class="clay-prop prop-cloud-2">☁️</div>
-    <div class="clay-prop prop-heart-float">💖</div>
-    <div class="clay-prop prop-star-float">✨</div>
-
-    <!-- Potted Plant on Left (Desktop) -->
-    <div class="clay-prop prop-potted-plant">
-      <div class="prop-plant-leaves">🪴</div>
-      <div class="prop-plant-pot"></div>
-    </div>
-
-    <!-- Potted Flower on Right (Desktop) -->
-    <div class="clay-prop prop-potted-flower">
-      <div class="prop-flower-bloom">🌸</div>
-      <div class="prop-flower-pot"></div>
-    </div>
+    <div class="luxe-glow-orb luxe-glow-orb-1"></div>
+    <div class="luxe-glow-orb luxe-glow-orb-2"></div>
+    <div class="clay-prop-star star-1">✦</div>
+    <div class="clay-prop-star star-2">✨</div>
+    <div class="clay-prop-star star-3">⭐</div>
+    <div class="clay-prop-star star-4">✦</div>
   </div>
 
   <!-- Smart Fixed Back Button -->
@@ -682,29 +638,24 @@
       <a href="signup.html" class="clay-mode-tab">
         <span>✨</span>
         <span>Sign Up</span>
-        <span class="clay-coins-tag">+100 🪙</span>
       </a>
     </nav>
   </div>
 
-  <!-- Master Compact Phone Card (~420px wide centered) -->
+  <!-- Master Floating Center Card (~395px wide centered on desktop & mobile) -->
   <main class="clay-phone-card" id="authStage" role="main">
 
-    <!-- Top Greeting Section -->
+    <!-- Top Greeting Section with Compact Luxury Avatar -->
     <header class="clay-header-top">
-      <div class="clay-heart-emblem" aria-hidden="true">💖</div>
+      <div class="clay-avatar-bubble" aria-hidden="true">
+        <img src="assets/vanvi-clay-girl-login.jpg" alt="Vanvi Moments" class="clay-avatar-img" />
+        <span class="clay-avatar-sparkle">✨</span>
+      </div>
       <h1 class="clay-main-title" id="loginTitle">
-        <span class="clay-rays">🔆</span>
         <span>Welcome Back</span>
-        <span class="clay-rays">🔆</span>
       </h1>
-      <p class="clay-sub-text">Login to continue your celebration journey</p>
+      <p class="clay-sub-text">Sign in to continue celebrating</p>
     </header>
-
-    <!-- 3D Cute Clay Character -->
-    <div class="clay-girl-stage" aria-hidden="true">
-      <img src="assets/vanvi-clay-girl-login.jpg" alt="Cute Vanvi Moments 3D Girl" class="clay-girl-photo" loading="eager" />
-    </div>
 
     <!-- Elevated Inner White Clay Form Card -->
     <section class="clay-inner-card" aria-label="Sign in credentials">
@@ -747,34 +698,34 @@
         <!-- Tactile 3D Clay Login Button -->
         <button class="clay-btn-main" type="submit" id="btnLoginSubmit">
           <span class="btn-spinner" id="loginSpinner" style="display:none;" aria-hidden="true"></span>
-          <span id="loginBtnText">Sign In</span>
+          <span id="loginBtnText">Sign In ✨</span>
         </button>
 
         <!-- Status Alert Message -->
         <p id="loginStatus" class="form-status" role="status" aria-live="polite" style="display:none;"></p>
       </form>
 
-      <!-- Divider -->
+      <!-- Single Official Google Sign-In Section -->
       <div class="clay-divider-line">
-        <span>or sign in with</span>
+        <span>or continue with</span>
       </div>
 
-      <!-- Real Official Google Sign-In Button -->
-      <div id="gsiButtonContainer" style="display:none;"></div>
-
-      <button type="button" class="btn-google-official" id="googleLoginBtn" title="Continue with Google" aria-label="Sign in with Google">
-        <svg class="google-g-icon" viewBox="0 0 24 24">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-        </svg>
-        <span>Continue with Google</span>
-      </button>
+      <div class="gsi-mount-wrap" id="gsiMountWrap">
+        <div id="gsiButtonContainer"></div>
+        <button type="button" class="btn-google-trigger" id="googleUnifiedBtn" title="Continue with Google" aria-label="Sign in with Google">
+          <svg class="google-g-icon" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          <span>Continue with Google</span>
+        </button>
+      </div>
 
       <!-- Bottom Switch Link -->
       <p class="clay-footer-link">
-        Don't have an account? <a href="signup.html">Sign Up (+100 🪙 free)</a>
+        Don't have an account? <a href="signup.html">Sign Up</a>
       </p>
     </section>
   </main>
@@ -799,7 +750,7 @@
 
       const form = document.getElementById('loginForm');
       const status = document.getElementById('loginStatus');
-      const googleBtn = document.getElementById('googleLoginBtn');
+      const googleBtn = document.getElementById('googleUnifiedBtn');
       const authStage = document.getElementById('authStage');
       const btnTogglePwd = document.getElementById('btnTogglePwd');
       const pwdInput = document.getElementById('loginPassword');
@@ -910,7 +861,6 @@
         try {
           const result = await window.VanviAPI.auth.login({ identifier, password });
           if (result.success) {
-            // Remember identifier if checked
             if (rememberCheckbox && rememberCheckbox.checked) {
               localStorage.setItem('vanvi_remember_identifier', identifier);
               localStorage.setItem('vanvi_remember_me', 'true');
@@ -933,7 +883,7 @@
         }
       });
 
-      // Google Sign-In Action
+      // Google Unified Sign-In Action
       googleBtn?.addEventListener('click', function () {
         if (window.VanviGoogleAuth) {
           window.VanviGoogleAuth.signIn({
@@ -956,8 +906,8 @@
             theme: 'outline',
             size: 'large',
             shape: 'pill',
-            text: 'signin_with',
-            width: 340
+            text: 'continue_with',
+            width: 320
           });
         }
       });
