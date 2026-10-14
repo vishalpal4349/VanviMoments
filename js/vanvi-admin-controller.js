@@ -88,18 +88,19 @@
   window.refreshAdminData = async function() {
     try {
       const hasAuth = !!(localStorage.getItem('vanvi_auth_token') || localStorage.getItem('vanvi_token') || localStorage.getItem('vanvi_admin_token') || localStorage.getItem('vanvi_admin_key'));
-      if (hasAuth && window.VanviAPI && window.VanviAPI.admin) {
-        const res = await window.VanviAPI.admin.getOverview();
+      if (hasAuth) {
+        const response = await fetch('/api/admin/overview', { headers: getAdminAuthHeaders() });
+        const res = response.ok ? await response.json() : null;
         if (res && res.success && res.metrics) {
           const m = res.metrics;
-          if (document.getElementById('kpiRevenue')) document.getElementById('kpiRevenue').textContent = `₹${(m.totalRevenueINR || 44814).toLocaleString()}`;
-          if (document.getElementById('kpiOrders')) document.getElementById('kpiOrders').textContent = m.totalOrders || 507;
-          if (document.getElementById('kpiUsers')) document.getElementById('kpiUsers').textContent = m.totalUsers || 532;
-          if (document.getElementById('kpiMoments')) document.getElementById('kpiMoments').textContent = m.totalMoments || 958;
-          if (document.getElementById('kpiTemplates')) document.getElementById('kpiTemplates').textContent = m.templatesCount || 51;
-          if (document.getElementById('badgeTplCount')) document.getElementById('badgeTplCount').textContent = m.templatesCount || 51;
-          if (document.getElementById('badgeMomentsCount')) document.getElementById('badgeMomentsCount').textContent = m.totalMoments || 958;
-          if (document.getElementById('badgeOrdersCount')) document.getElementById('badgeOrdersCount').textContent = m.totalOrders || 507;
+          if (document.getElementById('kpiRevenue')) document.getElementById('kpiRevenue').textContent = `₹${Number(m.totalRevenueINR || 0).toLocaleString()}`;
+          if (document.getElementById('kpiOrders')) document.getElementById('kpiOrders').textContent = m.totalOrders || 0;
+          if (document.getElementById('kpiUsers')) document.getElementById('kpiUsers').textContent = m.totalUsers || 0;
+          if (document.getElementById('kpiMoments')) document.getElementById('kpiMoments').textContent = m.totalMoments || 0;
+          if (document.getElementById('kpiTemplates')) document.getElementById('kpiTemplates').textContent = m.templatesCount || 0;
+          if (document.getElementById('badgeTplCount')) document.getElementById('badgeTplCount').textContent = m.templatesCount || 0;
+          if (document.getElementById('badgeMomentsCount')) document.getElementById('badgeMomentsCount').textContent = m.totalMoments || 0;
+          if (document.getElementById('badgeOrdersCount')) document.getElementById('badgeOrdersCount').textContent = m.totalOrders || 0;
 
           if (m.systemHealth && m.systemHealth.services) {
             const dbEngine = m.systemHealth.services.database.engine;
@@ -872,53 +873,70 @@
   };
 
   // ─── 11. ORDERS & REVENUE ────────────────────────────────────────────
-  window.loadAllOrders = function() {
+  window.loadAllOrders = async function() {
     const tbody = document.getElementById('adminOrdersTbody');
     if (!tbody) return;
 
-    let orders = [
-      { id: 'ORD-98214', customer: 'Aman Mathur', template: 'Birthday Wish 01', amount: '₹149', coins: 50, status: 'Paid' },
-      { id: 'ORD-98215', customer: 'Priya Sharma', template: 'Birthday Wish 02', amount: '₹149', coins: 0, status: 'Paid' },
-      { id: 'ORD-98216', customer: 'Rohit Sen', template: 'Romantic Constellation', amount: '₹199', coins: 100, status: 'Paid' },
-      { id: 'ORD-98217', customer: 'Neha Kapoor', template: 'Anniversary Toast', amount: '₹249', coins: 0, status: 'Paid' }
-    ];
-
     try {
-      const storedOrders = JSON.parse(localStorage.getItem('vanvi_orders') || localStorage.getItem('vanvi_user_orders') || '[]');
-      if (Array.isArray(storedOrders) && storedOrders.length > 0) {
-        const mapped = storedOrders.map(so => ({
-          id: so.id || so.orderId || ('ORD-' + Math.floor(Math.random()*89999 + 10000)),
-          customer: so.customerName || so.name || so.customer || 'Store Client',
-          template: so.templateTitle || so.templateName || so.template || 'Custom Moment',
-          amount: typeof so.amount === 'number' ? `₹${so.amount}` : (so.amount || '₹149'),
-          coins: so.coinsUsed || so.coinsEarned || 0,
-          status: so.status || 'Paid'
-        }));
-        orders = [...mapped, ...orders];
+      const response = await fetch('/api/admin/orders', { headers: getAdminAuthHeaders() });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !Array.isArray(result.orders)) {
+        throw new Error(result.error || `Could not load orders (${response.status}).`);
       }
-    } catch (e) {}
 
-    tbody.innerHTML = orders.map(o => `
+      if (!result.orders.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:28px; color:var(--text-muted);">No orders have been recorded yet.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = result.orders.map(order => {
+        const orderId = String(order.id || '');
+        const customer = order.customerName || 'Guest customer';
+        const phone = String(order.customerPhone || '').replace(/\D/g, '');
+        const status = String(order.status || 'pending');
+        const amount = Number(order.finalAmountINR || 0);
+        const whatsappHref = phone
+          ? `https://wa.me/${phone}?text=${encodeURIComponent(`Hi ${customer}, regarding your Vanvi Moments order #${orderId}`)}`
+          : '';
+
+        return `
       <tr>
-        <td><code style="font-weight:750;">#${o.id}</code></td>
-        <td><strong>${escapeHtml(o.customer)}</strong></td>
-        <td>${escapeHtml(o.template)}</td>
-        <td><strong style="color:var(--gold-champagne);">${o.amount}</strong></td>
-        <td><span style="color:var(--rose-primary); font-weight:700;">🪙 ${o.coins}</span></td>
-        <td><span class="clay-badge badge-paid">${o.status}</span></td>
+        <td><code style="font-weight:750;">#${escapeHtml(orderId)}</code></td>
+        <td><strong>${escapeHtml(customer)}</strong>${order.customerEmail ? `<div style="font-size:11px; color:var(--text-muted);">${escapeHtml(order.customerEmail)}</div>` : ''}</td>
+        <td>${escapeHtml(order.templateName || 'Celebration')}</td>
+        <td><strong style="color:var(--gold-champagne);">₹${amount.toLocaleString('en-IN')}</strong></td>
+        <td><span style="color:var(--rose-primary); font-weight:700;">🪙 ${Number(order.coinsUsed || 0)}</span></td>
+        <td><span class="clay-badge">${escapeHtml(status)}</span></td>
         <td>
           <div style="display:flex; gap:6px;">
-            <a href="https://wa.me/917631442934?text=Hi%20${encodeURIComponent(o.customer)}%2C%20regarding%20your%20Vanvi%20Moments%20order%20%23${o.id}" target="_blank" class="btn-table-action" style="background:#25d366; color:#fff; border-color:#25d366;" title="Chat with customer on WhatsApp">💬 WhatsApp</a>
-            <button type="button" class="btn-table-action" style="color:#dc2626; border-color:#fca5a5;" onclick="refundOrderAction('${o.id}')">Refund</button>
+            ${whatsappHref ? `<a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn-table-action" style="background:#25d366; color:#fff; border-color:#25d366;" title="Chat with customer on WhatsApp">💬 WhatsApp</a>` : '<span class="btn-table-action" aria-disabled="true" title="No customer phone number on this order">No phone</span>'}
+            ${status === 'paid' ? `<button type="button" class="btn-table-action" style="color:#dc2626; border-color:#fca5a5;" onclick="refundOrderAction('${escapeHtml(orderId)}')">Record refund</button>` : ''}
           </div>
         </td>
       </tr>
-    `).join('');
+    `;
+      }).join('');
+    } catch (error) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:28px; color:var(--danger);">${escapeHtml(error.message)}</td></tr>`;
+    }
   };
 
-  window.refundOrderAction = function(id) {
-    if (confirm(`Process refund for order #${id}? Coins will be automatically credited back.`)) {
-      showToast(`✓ Order #${id} refunded and customer coins restored!`);
+  window.refundOrderAction = async function(id) {
+    if (!confirm(`Record a refund for order #${id}? This updates Vanvi's order record; process any gateway refund separately.`)) return;
+    try {
+      const response = await fetch(`/api/admin/orders/${encodeURIComponent(id)}/refund`, {
+        method: 'POST',
+        headers: getAdminAuthHeaders(),
+        body: JSON.stringify({ reason: 'Admin recorded refund' })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || `Refund update failed (${response.status}).`);
+      }
+      showToast('Order record updated; complete any payment-provider refund separately.', 'info');
+      await loadAllOrders();
+    } catch (error) {
+      showToast(error.message, 'error');
     }
   };
 
@@ -928,10 +946,18 @@
   let activeDossierTab = 'overview';
 
   function getAdminAuthHeaders() {
-    const token = localStorage.getItem('vanvi_auth_token') || sessionStorage.getItem('vanvi_auth_token') || '';
+    const token = localStorage.getItem('vanvi_auth_token') ||
+      localStorage.getItem('vanvi_token') ||
+      localStorage.getItem('vanvi_admin_token') ||
+      sessionStorage.getItem('vanvi_auth_token') ||
+      sessionStorage.getItem('vanvi_token') ||
+      sessionStorage.getItem('vanvi_admin_token') ||
+      '';
+    const adminKey = localStorage.getItem('vanvi_admin_key') || sessionStorage.getItem('vanvi_admin_key') || '';
     return {
       'Content-Type': 'application/json',
-      'Authorization': token ? `Bearer ${token}` : ''
+      ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+      ...(adminKey ? { 'x-admin-key': adminKey } : {})
     };
   }
 
@@ -948,13 +974,15 @@
           updateUserKpiStats(data.stats);
         }
       } else {
-        // Fallback to local store or demo users if unauthorized in demo preview
-        console.warn('Admin users API unauthorized, using cached/local users');
-        allAdminUsers = getLocalFallbackUsers();
+        throw new Error(`Could not load users (${res.status}).`);
       }
-    } catch (err) {
-      console.warn('Network error loading users, fallback active:', err);
-      allAdminUsers = getLocalFallbackUsers();
+    } catch (error) {
+      allAdminUsers = [];
+      if (tbody) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:28px; color:var(--danger);">${escapeHtml(error.message)}</td></tr>`;
+      }
+      updateUserKpisFromList(allAdminUsers);
+      return;
     }
 
     updateUserKpisFromList(allAdminUsers);
@@ -966,36 +994,6 @@
     showToast('🔄 Refreshing live creator directory...');
     loadAllUsers();
   };
-
-  function getLocalFallbackUsers() {
-    try {
-      const activeUser = JSON.parse(localStorage.getItem('vanvi_user') || 'null');
-      const base = [
-        { id: 'usr_admin', name: 'Vanvi Administrator', email: 'admin@vanvimoments.shop', phone: '+91 99999 99999', tier: 'vip', coins: 10000, role: 'admin', provider: 'local', status: 'active', loginCount: 42, lastLogin: Date.now() - 3600000, createdAt: Date.now() - 86400000 * 30 },
-        { id: 'usr_priya', name: 'Priya Sharma', email: 'priya.sharma@example.com', phone: '+91 98765 43210', tier: 'member', coins: 500, role: 'user', provider: 'google', status: 'active', loginCount: 12, lastLogin: Date.now() - 1800000, createdAt: Date.now() - 86400000 * 14 },
-        { id: 'usr_aarav', name: 'Aarav Verma', email: 'aarav.verma@example.com', phone: '+91 98111 22334', tier: 'free', coins: 150, role: 'user', provider: 'local', status: 'active', loginCount: 5, lastLogin: Date.now() - 86400000, createdAt: Date.now() - 86400000 * 7 }
-      ];
-      if (activeUser && activeUser.email && !base.some(u => u.email === activeUser.email)) {
-        base.unshift({
-          id: activeUser.id || 'usr_active',
-          name: activeUser.name || 'Current Creator',
-          email: activeUser.email,
-          phone: activeUser.phone || null,
-          tier: activeUser.tier || 'free',
-          coins: activeUser.coins || 100,
-          role: activeUser.role || 'user',
-          provider: activeUser.provider || 'local',
-          status: 'active',
-          loginCount: 1,
-          lastLogin: Date.now(),
-          createdAt: Date.now()
-        });
-      }
-      return base;
-    } catch (e) {
-      return [];
-    }
-  }
 
   function updateUserKpiStats(stats) {
     if (document.getElementById('statTotalUsers')) document.getElementById('statTotalUsers').textContent = stats.totalUsers || 0;
@@ -1690,7 +1688,7 @@
       exportedAt: new Date().toISOString(),
       templates: currentTemplates,
       presets: adminPresets,
-      users: demoUsers
+      users: allAdminUsers
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -1891,7 +1889,10 @@
 
     const matchedTpls = currentTemplates.filter(t => t.name.toLowerCase().includes(q) || t.id.toLowerCase().includes(q));
     const matchedPresets = adminPresets.filter(p => p.name.toLowerCase().includes(q));
-    const matchedUsers = demoUsers.filter(u => u.name.toLowerCase().includes(q) || (u.email && u.email.toLowerCase().includes(q)));
+    const matchedUsers = allAdminUsers.filter(u =>
+      (u.name && u.name.toLowerCase().includes(q)) ||
+      (u.email && u.email.toLowerCase().includes(q))
+    );
 
     let html = '';
     if (matchedTpls.length > 0) {

@@ -574,6 +574,8 @@
     if (
       pathname.includes('birthday-wish-01') ||
       pathname.includes('birthday-wish-1') ||
+      pathname.includes('birthday-3d-candle') ||
+      pathname.includes('birthday-3d-candle-surprise') ||
       document.getElementById('scene7') ||
       document.querySelector('[data-has-custom-cta]') ||
       document.querySelector('.vanvi-luxe-finale-panel') ||
@@ -583,6 +585,7 @@
       if (stray) stray.remove();
       return;
     }
+
 
     if (document.getElementById('vanviUniversalEndCta') || document.querySelector('.vanvi-template-end-cta')) {
       return;

@@ -1,1202 +1,1882 @@
-/* ==========================================================================
-   VANVI MOMENTS — ROYAL INVITATION STUDIO STYLESHEET
-   Ultra-Luxury Aesthetics, 4 Royal Themes, Split-Screen UX & Live Card Canvas
-   ========================================================================== */
+/**
+ * ==========================================================================
+ * VANVI MOMENTS — INVITATION MAKER STUDIO CSS
+ * Exact Invilix UI Architecture + Vanvi Moments Ultra-Luxe Design System
+ * Full Support for Wedding & Birthday, Mobile & Laptop Perfect Sizing
+ * ==========================================================================
+ */
 
 :root {
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-heading: 'Cinzel', Georgia, serif;
-  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-script: 'Alex Brush', cursive;
-  --font-hindi: 'Rozha One', serif;
+  --ivm-ink: #0f172a;
+  --ivm-ink-soft: #2d3748;
+  --ivm-muted: #64748b;
+  --ivm-paper: #f9f7f2;
+  --ivm-cream: #fbf9f5;
+  --ivm-card-bg: #ffffff;
+  --ivm-gold: #c59b27;
+  --ivm-gold-deep: #9a7818;
+  --ivm-gold-wash: #fdf8eb;
+  --ivm-teal: #1b7470;
+  --ivm-teal-deep: #135552;
+  --ivm-teal-wash: rgba(27, 116, 112, 0.12);
+  --ivm-line: #e6dfd1;
+  --ivm-line-strong: #d5cbba;
+  --ivm-radius: 10px;
+  --ivm-radius-sm: 6px;
+  --ivm-font-display: 'Playfair Display', Georgia, serif;
+  --ivm-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --ivm-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+  --ivm-card-shadow: 0 12px 36px -4px rgba(15, 23, 42, 0.16);
+}
 
-  --bg-studio: #0d060a;
-  --bg-sidebar: #170d14;
-  --bg-card-panel: #11080e;
-  
-  --ink-light: #fff5f8;
-  --ink-muted: #b89cae;
-  --ink-faint: #78586f;
+/* Small-phone containment: the Studio must never create a sideways page. */
+@media (max-width: 599.98px) {
+  .ivm-wrap,
+  .ivm-nav,
+  .ivm-panel,
+  .ivm-pvcol,
+  .ivm-fields,
+  .ivm-f,
+  .ivm-f input,
+  .ivm-f textarea { box-sizing: border-box; max-width: 100%; }
 
-  --gold-primary: #d4af37;
-  --gold-gradient: linear-gradient(135deg, #f7d774 0%, #d4af37 50%, #aa7c11 100%);
-  --gold-glow: rgba(212, 175, 55, 0.28);
-  --rose-primary: #ff2a7a;
-  
-  --border-subtle: rgba(212, 175, 55, 0.2);
-  --border-hover: rgba(212, 175, 55, 0.45);
-  --border-active: #d4af37;
-
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-full: 9999px;
-
-  --header-height: 64px;
-  --mobile-dock-height: 68px;
+  .ivm-nav { padding: 10px 14px; }
+  .ivm-nav-links { display: none; }
+  .ivm-nav-title { font-size: 15px; }
+  .ivm-nav-tag { display: none; }
+  .ivm-wrap { width: 100%; padding-left: 14px; padding-right: 14px; }
+  .ivm-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ivm-pick:last-child { grid-column: 1 / -1; }
+  .ivm-steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ivm-steps-btn { min-width: 0; min-height: 44px; padding: 8px; font-size: 12px; }
+  .ivm-f--half { min-width: 0; }
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  background-color: var(--bg-studio);
-  font-family: var(--font-body);
-  color: var(--ink-light);
+body.ivm-body {
+  font-family: var(--ivm-font-sans);
+  background: var(--ivm-cream);
+  color: var(--ivm-ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
 /* ==========================================================================
-   STUDIO HEADER
+   1. NAVIGATION HEADER (Invilix Style)
    ========================================================================== */
-.studio-header {
-  height: var(--header-height);
-  background: rgba(23, 13, 20, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 clamp(12px, 3vw, 28px);
+.ivm-nav {
   position: sticky;
   top: 0;
   z-index: 100;
-}
-
-.brand-cluster {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: rgba(251, 249, 245, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ivm-line);
 }
 
-.btn-back-home {
+.ivm-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: var(--ivm-ink);
+}
+
+.ivm-nav-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-subtle);
-  color: var(--ink-light);
-  text-decoration: none;
-  transition: all 0.2s ease;
 }
 
-.btn-back-home:hover {
-  background: rgba(212, 175, 55, 0.15);
-  border-color: var(--gold-primary);
-  color: var(--gold-primary);
-  transform: translateX(-2px);
+.ivm-nav-logo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: block;
 }
 
-.brand-identity {
-  display: flex;
-  flex-direction: column;
+.ivm-nav-title {
+  font-family: var(--ivm-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ivm-ink);
 }
 
-.brand-badge-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  color: var(--gold-primary);
+.ivm-nav-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--ivm-gold-wash);
+  color: var(--ivm-gold-deep);
+  border: 1px solid rgba(197, 155, 39, 0.25);
+  margin-left: 4px;
 }
 
-.brand-badge-pill .sparkle {
-  animation: pulseSparkle 2s infinite ease-in-out;
-}
-
-@keyframes pulseSparkle {
-  0%, 100% { opacity: 0.6; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 6px var(--gold-primary)); }
-}
-
-.studio-title {
-  font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.5px;
-}
-
-/* Aspect Ratio Selector */
-.ratio-toggle-group {
-  display: flex;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 3px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--border-subtle);
-}
-
-.ratio-btn {
-  background: transparent;
-  border: none;
-  color: var(--ink-muted);
-  font-size: 11.5px;
-  font-weight: 700;
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s ease;
-}
-
-.ratio-btn.active {
-  background: var(--gold-gradient);
-  color: #170d14;
-  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
-}
-
-/* Header Action Buttons */
-.header-actions {
+.ivm-nav-links {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1.25rem;
 }
 
-.btn-studio-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 38px;
-  padding: 0 16px;
-  border-radius: var(--radius-full);
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+.ivm-nav-link {
   text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ivm-ink-soft);
+  transition: color 0.15s;
 }
 
-.btn-studio-ghost {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-subtle);
-  color: var(--ink-light);
+.ivm-nav-link:hover {
+  color: var(--ivm-gold-deep);
 }
 
-.btn-studio-ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--gold-primary);
-  color: var(--gold-primary);
-}
-
-.btn-studio-primary {
-  background: var(--gold-gradient);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #170d14;
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
-}
-
-.btn-studio-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
-}
-
-/* ==========================================================================
-   STUDIO MAIN WORKSPACE (SPLIT SCREEN)
-   ========================================================================== */
-.studio-workspace {
-  display: grid;
-  grid-template-columns: 460px 1fr;
-  height: calc(100vh - var(--header-height));
-  overflow: hidden;
-}
-
-@media (min-width: 1400px) {
-  .studio-workspace {
-    grid-template-columns: 500px 1fr;
-  }
-}
-
-/* Left Sidebar Form */
-.studio-sidebar {
-  background: var(--bg-sidebar);
-  border-right: 1px solid var(--border-subtle);
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 20px 22px 90px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
-}
-
-.studio-sidebar::-webkit-scrollbar {
-  width: 5px;
-}
-.studio-sidebar::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.25);
-  border-radius: 99px;
-}
-
-/* Studio Tabs */
-.studio-tabs-row {
-  display: flex;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 4px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-subtle);
-  margin-bottom: 22px;
-  gap: 4px;
-}
-
-.studio-tab-btn {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: var(--ink-muted);
-  font-size: 11px;
-  font-weight: 750;
-  padding: 8px 6px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  display: flex;
+/* Base Buttons */
+.ivm-btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: none;
+  border-radius: var(--ivm-radius-sm);
+  background: var(--ivm-ink);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 
-.studio-tab-btn.active {
-  background: rgba(212, 175, 55, 0.15);
-  color: var(--gold-primary);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+.ivm-btn:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
 }
 
-/* Tab Panels */
-.tab-panel {
-  display: none;
-  animation: fadeInTab 0.2s ease-in-out;
+.ivm-btn--gold {
+  background: linear-gradient(135deg, #d4af37, #b8860b);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(184, 134, 11, 0.25);
 }
-.tab-panel.active {
+
+.ivm-btn--gold:hover {
+  background: linear-gradient(135deg, #dfbc4a, #9e7308);
+  box-shadow: 0 4px 16px rgba(184, 134, 11, 0.35);
+}
+
+.ivm-btn--ghost {
+  background: transparent;
+  color: var(--ivm-ink);
+  border: 1.5px solid var(--ivm-line-strong);
+}
+
+.ivm-btn--ghost:hover {
+  background: #ffffff;
+  border-color: var(--ivm-ink);
+}
+
+.ivm-btn--block {
+  width: 100%;
+}
+
+.ivm-btn--sm {
+  min-height: 38px;
+  padding: 0 14px;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   2. HERO & OCCASION PICKER (Invilix 1:1 Ditto with 3D Fan)
+   ========================================================================== */
+.ivm-hero {
+  padding: 16px 20px 24px;
+}
+
+.ivm-hero-grid {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+}
+
+@media (min-width: 980px) {
+  .ivm-hero {
+    padding: 36px 0 54px;
+  }
+  .ivm-hero-grid {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 40px;
+  }
+}
+
+.ivm-hero h1,
+.ivm-hero-h1 {
+  font-family: var(--ivm-font-display);
+  font-size: clamp(34px, 5.5vw, 62px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--ivm-ink);
+  margin: 0 0 14px;
+}
+
+.ivm-hero-sub {
+  font-size: 18px;
+  color: var(--ivm-ink-soft);
+  max-width: 34em;
+  margin: 0 0 24px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.ivm-nowrap {
+  white-space: nowrap;
+}
+
+.ivm-pick-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ivm-ink);
+  margin: 0 0 10px;
+}
+
+.ivm-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 560px;
+}
+
+.ivm-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 96px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--ivm-line-strong);
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 600;
+  font-size: 16px;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.ivm-pick svg {
+  width: 30px;
+  height: 30px;
+  color: var(--ivm-teal);
+  flex-shrink: 0;
+}
+
+.ivm-pick span {
   display: block;
 }
 
-@keyframes fadeInTab {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Section Containers */
-.control-section {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: var(--radius-md);
-  padding: 16px;
-  margin-bottom: 18px;
-}
-
-.section-label {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--gold-primary);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Theme Swatches Grid */
-.themes-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.theme-card-option {
-  border: 1.5px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-md);
-  padding: 10px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  background: rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.theme-card-option:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-2px);
-}
-
-.theme-card-option.active {
-  border-color: var(--gold-primary);
-  background: rgba(212, 175, 55, 0.08);
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.2);
-}
-
-.theme-card-option.active::after {
-  content: '✓';
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--gold-primary);
-  color: #170d14;
-  font-size: 10px;
-  font-weight: 900;
-  display: grid;
-  place-items: center;
-}
-
-.theme-preview-strip {
-  height: 36px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-size: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.theme-card-name {
-  font-size: 12px;
-  font-weight: 750;
-  color: #fff;
-}
-
-.theme-card-desc {
-  font-size: 10px;
-  color: var(--ink-muted);
-}
-
-/* Form Groups & Inputs */
-.form-group {
-  margin-bottom: 14px;
-}
-
-.form-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--ink-muted);
-  margin-bottom: 6px;
-}
-
-.form-input, .form-select, .form-textarea {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  font-family: inherit;
+.ivm-pick small {
+  display: block;
+  font-weight: 400;
+  color: var(--ivm-muted);
   font-size: 13px;
-  color: #fff;
-  transition: all 0.2s ease;
-  outline: none;
-}
-
-.form-input:focus, .form-select:focus, .form-textarea:focus {
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.form-textarea {
-  resize: vertical;
-  min-height: 64px;
-}
-
-.input-split-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-/* Quick Preset Chips */
-.preset-chips-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-
-.preset-chip {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--ink-muted);
-  font-size: 10.5px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: all 0.18s ease;
-}
-
-.preset-chip:hover {
-  background: rgba(212, 175, 55, 0.15);
-  border-color: var(--gold-primary);
-  color: var(--gold-primary);
-}
-
-/* Toggle Switch */
-.toggle-switch-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 0;
-}
-
-.toggle-switch-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink-light);
-}
-
-.switch-control {
-  position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 22px;
-}
-
-.switch-control input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.switch-slider {
-  position: absolute;
-  cursor: pointer;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.15);
-  transition: .3s;
-  border-radius: 99px;
-}
-
-.switch-slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: .3s;
-  border-radius: 50%;
-}
-
-input:checked + .switch-slider {
-  background-color: var(--gold-primary);
-}
-
-input:checked + .switch-slider:before {
-  transform: translateX(18px);
-}
-
-/* ==========================================================================
-   RIGHT SIDEBAR: STICKY LIVE CANVAS STAGE
-   ========================================================================== */
-.studio-canvas-stage {
-  background: radial-gradient(circle at center, #1b0c16 0%, #0d060a 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  overflow: auto;
-  position: relative;
-}
-
-.canvas-device-wrapper {
-  position: relative;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.12);
-  border-radius: 12px;
-}
-
-/* Aspect Ratio Dimensions */
-.canvas-device-wrapper.ratio-post {
-  width: 440px;
-  max-width: 90vw;
-  aspect-ratio: 4 / 5;
-}
-
-.canvas-device-wrapper.ratio-story {
-  width: 380px;
-  max-width: 90vw;
-  aspect-ratio: 9 / 16;
-}
-
-/* ==========================================================================
-   THE LUXURY CARD CONTAINER (WYSIWYG)
-   ========================================================================== */
-.vanvi-invitation-card {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(18px, 4vw, 28px);
-  text-align: center;
-  border-radius: 12px;
-  user-select: text;
-  transition: background 0.4s ease, color 0.4s ease;
-}
-
-/* ─── THEME 1: RAJWADA ROYALE ─── */
-.vanvi-invitation-card.theme-rajwada {
-  background: radial-gradient(circle at 50% 30%, #4a0d1e 0%, #29040e 100%);
-  color: #fff4ea;
-  border: 3px double #d4af37;
-  box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
-}
-.theme-rajwada .gold-text {
-  color: #f7d774;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-}
-.theme-rajwada .arch-ornament {
-  stroke: #d4af37;
-  fill: none;
-}
-.theme-rajwada .card-divider {
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
-}
-
-/* ─── THEME 2: UDAIPUR PEARL & ROSE GOLD ─── */
-.vanvi-invitation-card.theme-udaipur {
-  background: radial-gradient(circle at 50% 35%, #fffdf9 0%, #f7efe5 100%);
-  color: #3b2230;
-  border: 2px solid #e0a899;
-}
-.theme-udaipur .gold-text {
-  color: #b05c74;
-}
-.theme-udaipur .arch-ornament {
-  stroke: #c48270;
-  fill: none;
-}
-.theme-udaipur .card-divider {
-  background: linear-gradient(90deg, transparent, #e0a899, transparent);
-}
-
-/* ─── THEME 3: EMERALD & BRASS ─── */
-.vanvi-invitation-card.theme-emerald {
-  background: radial-gradient(circle at 50% 30%, #0d3b30 0%, #061f19 100%);
-  color: #f8fafc;
-  border: 3px double #e5b869;
-}
-.theme-emerald .gold-text {
-  color: #fce196;
-}
-.theme-emerald .arch-ornament {
-  stroke: #e5b869;
-  fill: none;
-}
-.theme-emerald .card-divider {
-  background: linear-gradient(90deg, transparent, #e5b869, transparent);
-}
-
-/* ─── THEME 4: CHAMPAGNE SILK ─── */
-.vanvi-invitation-card.theme-champagne {
-  background: radial-gradient(circle at 50% 30%, #faf6f0 0%, #ebe2d3 100%);
-  color: #271e22;
-  border: 1.5px solid #cbb295;
-}
-.theme-champagne .gold-text {
-  color: #8c6d48;
-}
-.theme-champagne .arch-ornament {
-  stroke: #cbb295;
-  fill: none;
-}
-.theme-champagne .card-divider {
-  background: linear-gradient(90deg, transparent, #cbb295, transparent);
-}
-
-/* Card Elements */
-.card-header-cluster {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.sacred-shloka {
-  font-family: var(--font-hindi);
-  font-size: 13px;
-  line-height: 1.5;
-  letter-spacing: 0.5px;
-  max-width: 90%;
-  margin: 0 auto;
-}
-
-.host-greeting-line {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(12px, 2.2vw, 14px);
-  margin-top: 4px;
-  opacity: 0.85;
-}
-
-/* Couple / Names Centerpiece */
-.card-names-centerpiece {
-  margin: 8px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.person-name {
-  font-family: var(--font-heading);
-  font-size: clamp(20px, 4.6vw, 30px);
-  font-weight: 800;
-  letter-spacing: 1px;
-  line-height: 1.15;
-}
-
-.script-ampersand {
-  font-family: var(--font-script);
-  font-size: clamp(24px, 5.5vw, 36px);
-  line-height: 1;
-  margin: 2px 0;
-}
-
-.person-parents {
-  font-family: var(--font-serif);
-  font-size: 11px;
-  font-style: italic;
-  opacity: 0.8;
+  line-height: 1.3;
   margin-top: 2px;
 }
 
-/* Photo Frame Container */
-.card-photo-container {
-  width: 100px;
-  height: 120px;
-  margin: 6px auto;
-  border-radius: 99px 99px 10px 10px;
+.ivm-pick:hover {
+  border-color: var(--ivm-ink-soft);
+  transform: translateY(-2px);
+}
+
+.ivm-pick[aria-pressed="true"] {
+  border-color: var(--ivm-teal);
+  box-shadow: 0 0 0 3px var(--ivm-teal-wash), inset 0 0 0 1px var(--ivm-teal);
+  background: #fff;
+}
+
+.ivm-after {
+  font-size: 14px;
+  color: var(--ivm-muted);
+  margin-top: 14px;
+}
+
+/* 3D Hero Fan Layout (Invilix Math) */
+.ivm-fan {
+  position: relative;
+  height: 340px;
+  margin: 6px auto 0;
+  width: 100%;
+  max-width: 560px;
+}
+
+@media (min-width: 980px) {
+  .ivm-fan {
+    height: 480px;
+  }
+}
+
+@media (max-width: 719.98px) {
+  .ivm-fan,
+  .ivm-after {
+    display: none;
+  }
+  .ivm-hero-grid {
+    gap: 0;
+  }
+  .ivm-hero h1,
+  .ivm-hero-h1 {
+    font-size: clamp(30px, 8.6vw, 38px);
+    margin-bottom: 8px;
+  }
+  .ivm-hero-sub {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+  .ivm-pick-label {
+    margin-bottom: 8px;
+  }
+  .ivm-picker {
+    gap: 8px;
+  }
+  .ivm-pick {
+    min-height: 72px;
+    padding: 10px 10px 10px 12px;
+    gap: 6px;
+    font-size: 15px;
+  }
+  .ivm-pick svg {
+    width: 24px;
+    height: 24px;
+  }
+  .ivm-pick small {
+    font-size: 12px;
+  }
+}
+
+.ivm-fan .ivm-fc {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 240px;
+  height: 300px;
+  margin-left: -120px;
+  margin-top: -150px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(11, 21, 36, 0.08), 0 22px 44px rgba(11, 21, 36, 0.18);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+  background: #ffffff;
   overflow: hidden;
-  border: 2px solid var(--gold-primary);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-  display: none;
+  cursor: pointer;
 }
 
-.card-photo-container.visible {
-  display: block;
+@media (min-width: 980px) {
+  .ivm-fan .ivm-fc {
+    width: 280px;
+    height: 350px;
+    margin-left: -140px;
+    margin-top: -175px;
+  }
 }
 
-.card-photo-img {
+.ivm-fan .ivm-fc img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-/* Event Details & Schedule */
-.card-event-badge {
-  font-family: var(--font-heading);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 4px;
+.ivm-fan .ivm-fc--left {
+  z-index: 1;
+  transform: translate(-140px, 18px) rotate(-9deg);
 }
 
-.card-datetime-row {
+.ivm-fan .ivm-fc--center {
+  z-index: 3;
+  transform: translate(0px, -6px) rotate(0deg);
+  box-shadow: 0 4px 8px rgba(11, 21, 36, 0.1), 0 26px 52px rgba(11, 21, 36, 0.22);
+}
+
+.ivm-fan .ivm-fc--right {
+  z-index: 2;
+  transform: translate(140px, 18px) rotate(9deg);
+}
+
+@media (min-width: 980px) {
+  .ivm-fan .ivm-fc--left {
+    transform: translate(-170px, 20px) rotate(-9deg);
+  }
+  .ivm-fan .ivm-fc--center {
+    transform: translate(0px, -8px) rotate(0deg);
+  }
+  .ivm-fan .ivm-fc--right {
+    transform: translate(170px, 20px) rotate(9deg);
+  }
+}
+
+.ivm-fan .ivm-fc:hover {
+  transform: translateY(-10px) scale(1.03) !important;
+  z-index: 10 !important;
+  box-shadow: 0 10px 24px rgba(11, 21, 36, 0.14), 0 32px 60px rgba(11, 21, 36, 0.26);
+}
+
+/* ==========================================================================
+   3. STUDIO SPLIT WORKSPACE (.ivm-maker)
+   ========================================================================== */
+.ivm-maker {
+  background: var(--ivm-paper);
+  border-top: 1px solid var(--ivm-line);
+  border-bottom: 1px solid var(--ivm-line);
+  padding: 30px 16px 60px;
+}
+
+.ivm-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.ivm-mk {
+  display: grid;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .ivm-mk {
+    grid-template-columns: minmax(0, 1.05fr) minmax(400px, 490px);
+    gap: 44px;
+    align-items: start;
+  }
+}
+
+/* Left Form Panel */
+.ivm-panel {
+  background: var(--ivm-card-bg);
+  border: 1px solid var(--ivm-line);
+  border-radius: 14px;
+  box-shadow: var(--ivm-shadow);
+  overflow: hidden;
+}
+
+/* Step Bar Navigation (1 Details, 2 Design, 3 Style, 4 Download) */
+.ivm-steps {
+  display: flex;
+  border-bottom: 1px solid var(--ivm-line);
+  background: #ffffff;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ivm-steps::-webkit-scrollbar {
+  display: none;
+}
+
+.ivm-steps-btn {
+  flex: 1;
+  min-width: 110px;
+  min-height: 56px;
+  border: none;
+  background: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  font-family: var(--font-serif);
-  font-size: clamp(13px, 2.5vw, 15px);
+  gap: 9px;
   font-weight: 600;
-  margin: 4px 0;
+  font-size: 15px;
+  color: var(--ivm-muted);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
-.card-datetime-row .bullet-sep {
-  opacity: 0.4;
+.ivm-steps-btn b {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ivm-paper);
+  color: var(--ivm-ink-soft);
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.15s;
 }
 
-.card-venue-block {
-  font-size: 11.5px;
+.ivm-steps-btn:hover {
+  color: var(--ivm-ink);
+}
+
+.ivm-steps-btn[aria-selected="true"] {
+  color: var(--ivm-ink);
+  border-bottom-color: var(--ivm-gold);
+}
+
+.ivm-steps-btn[aria-selected="true"] b {
+  background: var(--ivm-gold);
+  color: #fff;
+}
+
+/* Step Content Sections */
+.ivm-step-pane {
+  padding: 24px 22px;
+  display: none;
+}
+
+.ivm-step-pane.active {
+  display: block;
+}
+
+.ivm-step-h {
+  font-family: var(--ivm-font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--ivm-ink);
+}
+
+.ivm-step-sub {
+  font-size: 14px;
+  color: var(--ivm-muted);
+  margin-bottom: 20px;
+}
+
+/* Form Fields Grid */
+.ivm-fields {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ivm-f {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  grid-column: span 2;
+}
+
+.ivm-f--half {
+  grid-column: span 1;
+}
+
+.ivm-f label, .ivm-lbl {
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--ivm-ink-soft);
+}
+
+.ivm-f input[type="text"],
+.ivm-f input[type="date"],
+.ivm-f input[type="time"],
+.ivm-f select,
+.ivm-f textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--ivm-line-strong);
+  border-radius: var(--ivm-radius-sm);
+  background: #fff;
+  font-size: 15px;
+  color: var(--ivm-ink);
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.ivm-f textarea {
+  min-height: 72px;
   line-height: 1.4;
-  max-width: 85%;
-  margin: 2px auto 0;
-  opacity: 0.9;
+  resize: vertical;
 }
 
-/* Card Bottom Cluster (QR & RSVP) */
-.card-footer-cluster {
+.ivm-f input:focus,
+.ivm-f textarea:focus,
+.ivm-f select:focus {
+  outline: none;
+  border-color: var(--ivm-gold);
+  box-shadow: 0 0 0 3px var(--ivm-gold-wash);
+}
+
+.ivm-hint {
+  font-size: 13px;
+  color: var(--ivm-muted);
+  margin-top: 3px;
+}
+
+.ivm-optional {
+  font-weight: 400;
+  color: var(--ivm-muted);
+  font-size: 13.5px;
+}
+
+/* Wording Accordion (.ivm-grp--wording) */
+.ivm-grp--wording {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ivm-line);
+}
+
+.ivm-wl-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px dashed rgba(212, 175, 55, 0.3);
-  font-size: 10px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
   text-align: left;
 }
 
-.venue-qr-box {
+.ivm-wl-title-wrap {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 8px;
 }
 
-.qr-canvas-wrap {
-  width: 44px;
-  height: 44px;
-  background: #fff;
-  padding: 3px;
-  border-radius: 6px;
-  border: 1px solid var(--gold-primary);
-  display: grid;
-  place-items: center;
+.ivm-wl-title {
+  font-family: var(--ivm-font-display);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ivm-ink);
 }
 
-.qr-canvas-wrap canvas, .qr-canvas-wrap img {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.qr-label-txt {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
-.qr-label-txt strong {
-  font-size: 9px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-.qr-label-txt span {
-  font-size: 8.5px;
-  opacity: 0.7;
-}
-
-.rsvp-box {
-  text-align: right;
-  line-height: 1.3;
-}
-.rsvp-label {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--gold-primary);
-}
-
-/* Direct inline editable elements */
-[contenteditable="true"] {
-  outline: none;
-  cursor: text;
-  border-radius: 2px;
-  transition: background 0.15s ease;
-}
-[contenteditable="true"]:hover {
-  background: rgba(212, 175, 55, 0.1);
-}
-[contenteditable="true"]:focus {
-  background: rgba(212, 175, 55, 0.2);
-  box-shadow: 0 0 0 1px var(--gold-primary);
-}
-
-/* ==========================================================================
-   MOBILE SEGMENTED DOCK (< 920px)
-   ========================================================================== */
-.mobile-segmented-dock {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: var(--mobile-dock-height);
-  background: rgba(23, 13, 20, 0.98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border-subtle);
-  padding: 8px 14px;
-  z-index: 1000;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.mobile-dock-tabs {
-  display: flex;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 3px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--border-subtle);
-}
-
-.dock-tab-btn {
-  background: transparent;
-  border: none;
-  color: var(--ink-muted);
-  font-size: 11.5px;
-  font-weight: 800;
-  padding: 7px 14px;
-  border-radius: var(--radius-full);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.dock-tab-btn.active {
-  background: var(--gold-gradient);
-  color: #170d14;
-}
-
-.dock-quick-download {
-  background: var(--gold-gradient);
-  color: #170d14;
-  border: none;
-  border-radius: var(--radius-full);
-  font-size: 12px;
-  font-weight: 850;
-  padding: 9px 16px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-@media (max-width: 920px) {
-  .studio-workspace {
-    grid-template-columns: 1fr;
-    height: auto;
-    overflow: visible;
-    padding-bottom: var(--mobile-dock-height);
-  }
-
-  .mobile-segmented-dock {
-    display: flex;
-  }
-
-  /* View Toggle Mode */
-  body:not(.view-preview-mode) .studio-canvas-stage {
-    display: none !important;
-  }
-  body:not(.view-preview-mode) .studio-sidebar {
-    display: block !important;
-    height: auto;
-    border-right: none;
-  }
-
-  body.view-preview-mode .studio-sidebar {
-    display: none !important;
-  }
-  body.view-preview-mode .studio-canvas-stage {
-    display: flex !important;
-    min-height: calc(100vh - var(--header-height) - var(--mobile-dock-height));
-  }
-
-  .ratio-toggle-group {
-    display: none;
-  }
-}
-
-/* ==========================================================================
-   MODALS (DOWNLOAD & WEB KEEPSAKE)
-   ========================================================================== */
-.studio-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 4, 8, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 10000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-}
-
-.studio-modal-backdrop.active {
-  display: flex;
-}
-
-.studio-modal-card {
-  background: #1c0e19;
-  border: 1.5px solid var(--border-hover);
-  border-radius: var(--radius-lg);
-  max-width: 480px;
-  width: 100%;
-  padding: 26px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(212, 175, 55, 0.15);
-  animation: modalScaleUp 0.22s ease-out;
-  position: relative;
-}
-
-@keyframes modalScaleUp {
-  from { opacity: 0; transform: scale(0.94); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.modal-header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.modal-title {
-  font-family: var(--font-heading);
-  font-size: 18px;
-  color: var(--gold-primary);
-}
-
-.modal-close-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: none;
-  color: #fff;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
+.ivm-wl-count {
   font-size: 14px;
+  color: var(--ivm-muted);
 }
 
-/* ==========================================================================
-   ADDITIONAL 4 ROYAL THEMES (PEACOCK, RANI PINK, HALDI, OBSIDIAN)
-   ========================================================================== */
-/* ─── THEME 5: JODHPUR PEACOCK BLUE ─── */
-.vanvi-invitation-card.theme-peacock {
-  background: radial-gradient(circle at 50% 30%, #0e2b4d 0%, #051426 100%);
-  color: #eaf2fb;
-  border: 3px double #e0b457;
-  box-shadow: inset 0 0 45px rgba(0,0,0,0.65);
-}
-.theme-peacock .gold-text {
-  color: #ffd978;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-}
-.theme-peacock .arch-ornament {
-  stroke: #e0b457;
-  fill: none;
-}
-.theme-peacock .card-divider {
-  background: linear-gradient(90deg, transparent, #e0b457, transparent);
+.ivm-wl-chev {
+  width: 20px;
+  height: 20px;
+  color: var(--ivm-muted);
+  transition: transform 0.2s;
 }
 
-/* ─── THEME 6: JAIPUR RANI PINK & GOTA PATTI ─── */
-.vanvi-invitation-card.theme-ranipink {
-  background: radial-gradient(circle at 50% 30%, #8c0c46 0%, #4a0322 100%);
-  color: #fff1f6;
-  border: 3px double #fcd34d;
-  box-shadow: inset 0 0 45px rgba(0,0,0,0.6);
-}
-.theme-ranipink .gold-text {
-  color: #ffe082;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-}
-.theme-ranipink .arch-ornament {
-  stroke: #fcd34d;
-  fill: none;
-}
-.theme-ranipink .card-divider {
-  background: linear-gradient(90deg, transparent, #fcd34d, transparent);
+.ivm-wl-toggle[aria-expanded="true"] .ivm-wl-chev {
+  transform: rotate(180deg);
 }
 
-/* ─── THEME 7: KASHI MARIGOLD & HALDI CHANDAN ─── */
-.vanvi-invitation-card.theme-haldi {
-  background: radial-gradient(circle at 50% 30%, #7c440d 0%, #421f02 100%);
-  color: #fff8ee;
-  border: 3px double #fbbf24;
-  box-shadow: inset 0 0 45px rgba(0,0,0,0.65);
-}
-.theme-haldi .gold-text {
-  color: #fde047;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-}
-.theme-haldi .arch-ornament {
-  stroke: #fbbf24;
-  fill: none;
-}
-.theme-haldi .card-divider {
-  background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+.ivm-wl-body {
+  margin-top: 12px;
+  display: none;
 }
 
-/* ─── THEME 8: MIDNIGHT OBSIDIAN SAPPHIRE ─── */
-.vanvi-invitation-card.theme-obsidian {
-  background: radial-gradient(circle at 50% 30%, #171926 0%, #090a10 100%);
-  color: #f8fafc;
-  border: 3px double #e2b755;
-  box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
-}
-.theme-obsidian .gold-text {
-  color: #fde68a;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
-}
-.theme-obsidian .arch-ornament {
-  stroke: #e2b755;
-  fill: none;
-}
-.theme-obsidian .card-divider {
-  background: linear-gradient(90deg, transparent, #e2b755, transparent);
-}
-
-/* ==========================================================================
-   TYPOGRAPHY SUITE & FONT UTILITIES
-   ========================================================================== */
-.font-pinyon { font-family: 'Pinyon Script', cursive !important; }
-.font-cinzel-dec { font-family: 'Cinzel Decorative', Georgia, serif !important; letter-spacing: 2px; }
-.font-cormorant { font-family: 'Cormorant Garamond', Georgia, serif !important; }
-.font-alex { font-family: 'Alex Brush', cursive !important; }
-.font-greatvibes { font-family: 'Great Vibes', cursive !important; }
-.font-playfair { font-family: 'Playfair Display', Georgia, serif !important; }
-.font-rozha { font-family: 'Rozha One', serif !important; }
-.font-yatra { font-family: 'Yatra One', cursive !important; }
-
-/* Body Fonts */
-.body-jakarta { font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important; }
-.body-cormorant { font-family: 'Cormorant Garamond', Georgia, serif !important; }
-.body-montserrat { font-family: 'Montserrat', sans-serif !important; letter-spacing: 0.5px; }
-.body-cinzel { font-family: 'Cinzel', Georgia, serif !important; letter-spacing: 1px; }
-
-/* Gold Shimmer Effect */
-.gold-shimmer-active .gold-text {
-  background: linear-gradient(120deg, #f7d774 0%, #ffffff 40%, #d4af37 60%, #f7d774 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: goldFoilGleam 4s linear infinite;
-}
-
-@keyframes goldFoilGleam {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
-
-/* Border Styles */
-.border-double { border-style: double !important; border-width: 4px !important; }
-.border-silk-clean { border-style: solid !important; border-width: 1.5px !important; }
-.border-jali {
-  border: 1px solid var(--gold-primary) !important;
-  outline: 6px double var(--gold-primary);
-  outline-offset: -12px;
-}
-.border-corner-mandala {
-  border: 2px solid var(--gold-primary) !important;
-  position: relative;
-}
-.border-corner-mandala::before,
-.border-corner-mandala::after {
-  content: "✦";
-  position: absolute;
-  color: var(--gold-primary);
-  font-size: 14px;
-}
-.border-corner-mandala::before { top: 6px; left: 8px; }
-.border-corner-mandala::after { bottom: 6px; right: 8px; }
-
-/* Deity Embellishment Icon Container */
-.deity-badge-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 8px;
-}
-.deity-badge-svg {
-  width: 42px;
-  height: 42px;
-  color: var(--gold-primary);
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-  transition: transform 0.3s ease;
-}
-.deity-badge-wrap:hover .deity-badge-svg {
-  transform: scale(1.08);
-}
-
-/* Font Picker Grid in Sidebar */
-.fonts-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  margin-top: 8px;
-}
-.font-card-option {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s ease;
-}
-.font-card-option:hover {
-  background: rgba(212, 175, 55, 0.1);
-  border-color: var(--gold-primary);
-}
-.font-card-option.active {
-  background: rgba(212, 175, 55, 0.18);
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 12px var(--gold-glow);
-}
-.font-card-sample {
-  font-size: 18px;
-  color: #fff;
+.ivm-wl-body.open {
   display: block;
-  margin-bottom: 4px;
-}
-.font-card-name {
-  font-size: 10.5px;
-  color: var(--ink-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
-/* Audio Player Floating Bar */
-.studio-audio-player {
-  position: fixed;
-  bottom: 20px;
-  right: 24px;
-  background: rgba(23, 13, 20, 0.92);
-  border: 1px solid var(--border-hover);
-  border-radius: 99px;
-  padding: 8px 16px;
-  backdrop-filter: blur(16px);
+.ivm-wl-intro {
+  font-size: 13.5px;
+  color: var(--ivm-muted);
+  margin-bottom: 12px;
+}
+
+.ivm-wl-list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.ivm-wl-item {
+  padding: 10px 12px;
+  background: var(--ivm-paper);
+  border-radius: var(--ivm-radius-sm);
+  border: 1px solid var(--ivm-line);
+}
+
+.ivm-wl-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.ivm-wl-top label {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.ivm-wl-row {
+  display: flex;
+  gap: 8px;
+}
+
+.ivm-wl-row textarea {
+  flex: 1;
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--ivm-line-strong);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+}
+
+.ivm-wl-eye {
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1.5px solid var(--ivm-line-strong);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ivm-ink-soft);
+  transition: all 0.15s;
+}
+
+.ivm-wl-eye:hover {
+  background: var(--ivm-paper);
+}
+
+.ivm-wl-eye[aria-pressed="true"] {
+  background: var(--ivm-ink);
+  border-color: var(--ivm-ink);
+  color: #fff;
+}
+
+/* Photo Upload & Cloudinary Box */
+.ivm-photo-box {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ivm-line);
+}
+
+.ivm-photo-inner {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border: 1.5px dashed var(--ivm-line-strong);
+  border-radius: 10px;
+  background: var(--ivm-paper);
+}
+
+.ivm-photo-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  background: #e2e8f0 center/cover no-repeat;
+  display: grid;
+  place-items: center;
+  color: var(--ivm-muted);
+  flex-shrink: 0;
+  border: 1px solid var(--ivm-line);
+}
+
+.ivm-photo-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.ivm-cloudinary-row {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.ivm-cloudinary-input {
+  flex: 1;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--ivm-line-strong);
+  border-radius: 6px;
+  font-size: 13px;
+  background: #fff;
+}
+
+.ivm-range-row {
+  margin-top: 12px;
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-  z-index: 99;
 }
-.btn-music-toggle {
-  background: var(--gold-gradient);
-  border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  color: #170d14;
+
+.ivm-range-row label {
+  font-size: 13px;
+  color: var(--ivm-muted);
+  white-space: nowrap;
+}
+
+.ivm-range-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--ivm-gold);
+}
+
+/* Step Footer Navigation (Back / Next Buttons) */
+.ivm-step-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ivm-line);
+}
+
+/* ==========================================================================
+   4. STEP 2: DESIGN CARDS GRID (.ivm-tgrid)
+   ========================================================================== */
+.ivm-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.ivm-chip {
+  min-height: 38px;
+  padding: 0 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--ivm-line-strong);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
   font-size: 14px;
+  color: var(--ivm-ink-soft);
+  transition: all 0.15s;
+}
+
+.ivm-chip:hover {
+  border-color: var(--ivm-ink);
+}
+
+.ivm-chip[aria-pressed="true"] {
+  background: var(--ivm-ink);
+  border-color: var(--ivm-ink);
+  color: #fff;
+}
+
+.ivm-tgrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (min-width: 600px) {
+  .ivm-tgrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ivm-tcard {
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ivm-tcard-preview {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  outline: 3px solid transparent;
+  outline-offset: 3px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  text-align: center;
+  color: #fff;
+}
+
+.ivm-tcard-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.ivm-tcard:hover .ivm-tcard-preview {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.14);
+}
+
+.ivm-tcard[aria-pressed="true"] .ivm-tcard-preview {
+  outline-color: var(--ivm-gold);
+}
+
+.ivm-tn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 2px 0;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ivm-ink);
+}
+
+.ivm-tcard[aria-pressed="true"] .ivm-tn::after {
+  content: "Selected";
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ivm-gold-deep);
+}
+
+/* ==========================================================================
+   5. STEP 3: STYLE (Colour Swatches & Typography Pairs)
+   ========================================================================== */
+.ivm-st-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0 10px;
+}
+
+.ivm-st-lab {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ivm-muted);
+}
+
+.ivm-st-cur {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ivm-gold-deep);
+}
+
+/* Swatches Grid */
+.ivm-st-themes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 600px) {
+  .ivm-st-themes {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+.ivm-st-th {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.ivm-st-face {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+  outline: 2.5px solid transparent;
+  outline-offset: 2.5px;
+  transition: all 0.15s;
+  color: #ecc978;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ivm-st-th:hover .ivm-st-face {
+  transform: scale(1.05);
+}
+
+.ivm-st-th[aria-checked="true"] .ivm-st-face {
+  outline-color: var(--ivm-gold);
+}
+
+.ivm-st-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ivm-ink-soft);
+  max-width: 68px;
+  line-height: 1.2;
+}
+
+.ivm-st-th--custom input[type="color"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+/* Font Pairs Grid */
+.ivm-st-pairs {
+  display: grid;
+  gap: 10px;
+}
+
+.ivm-st-pair {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: var(--ivm-radius-sm);
+  border: 1.5px solid var(--ivm-line-strong);
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+}
+
+.ivm-st-pair:hover {
+  border-color: var(--ivm-ink-soft);
+}
+
+.ivm-st-pair[aria-checked="true"] {
+  border-color: var(--ivm-gold);
+  background: #fffdf9;
+  box-shadow: 0 0 0 3px var(--ivm-gold-wash);
+}
+
+.ivm-st-pair-s {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ivm-st-pair-h {
+  font-size: 20px;
+  color: var(--ivm-ink);
+  line-height: 1.2;
+}
+
+.ivm-st-pair-b {
+  font-size: 13px;
+  color: var(--ivm-muted);
+}
+
+.ivm-st-pair-n {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ivm-ink-soft);
+  margin-left: auto;
+  margin-right: 12px;
+}
+
+.ivm-st-radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--ivm-line-strong);
   display: grid;
   place-items: center;
+  flex-shrink: 0;
+}
+
+.ivm-st-pair[aria-checked="true"] .ivm-st-radio {
+  border-color: var(--ivm-gold);
+  background: var(--ivm-gold);
+}
+
+.ivm-st-pair[aria-checked="true"] .ivm-st-radio svg {
+  color: #fff;
+}
+
+/* ==========================================================================
+   6. STEP 4: DOWNLOAD
+   ========================================================================== */
+.ivm-dl-options {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.ivm-dl-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: var(--ivm-radius-sm);
+  border: 1.5px solid var(--ivm-line-strong);
+  background: #fff;
   cursor: pointer;
+  transition: all 0.15s;
 }
-.music-info {
-  font-size: 11.5px;
-  color: var(--ink-light);
+
+.ivm-dl-card:hover {
+  border-color: var(--ivm-gold);
 }
-.music-info span {
+
+.ivm-dl-card[aria-checked="true"] {
+  border-color: var(--ivm-gold);
+  background: #fffdf9;
+  box-shadow: 0 0 0 3px var(--ivm-gold-wash);
+}
+
+.ivm-dl-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--ivm-gold-wash);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ivm-gold-deep);
+  flex-shrink: 0;
+}
+
+.ivm-dl-info b {
   display: block;
-  font-size: 9.5px;
-  color: var(--gold-primary);
+  font-size: 15px;
+  color: var(--ivm-ink);
+}
+
+.ivm-dl-info small {
+  display: block;
+  font-size: 13px;
+  color: var(--ivm-muted);
+}
+
+.ivm-dl-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   7. RIGHT STICKY PREVIEW COLUMN (.ivm-pvcol)
+   ========================================================================== */
+.ivm-pvcol {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .ivm-pvcol {
+    position: sticky;
+    top: 76px;
+  }
+}
+
+.ivm-pvbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.ivm-pvbar-t {
+  font-family: var(--ivm-font-display);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--ivm-ink);
+}
+
+.ivm-seg {
+  display: inline-flex;
+  border: 1.5px solid var(--ivm-line-strong);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.ivm-seg button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--ivm-ink-soft);
+  transition: all 0.15s;
+}
+
+.ivm-seg button + button {
+  border-left: 1px solid var(--ivm-line);
+}
+
+.ivm-seg button[aria-pressed="true"] {
+  background: var(--ivm-ink);
+  color: #fff;
+}
+
+/* Card Stage Device Frame */
+.ivm-pvbox {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.ivm-pvstage {
+  width: 100%;
+  max-width: 440px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: var(--ivm-card-shadow);
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.ivm-pvstage.ratio-post {
+  aspect-ratio: 4 / 5;
+}
+
+.ivm-pvstage.ratio-story {
+  aspect-ratio: 9 / 16;
+}
+
+/* The Invitation Card Rendering Inside Stage */
+.ivm-card-canvas {
+  width: 100%;
+  height: 100%;
+  padding: 24px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  background: #1a080d;
+  color: #fff;
+}
+
+/* Ornate Border Overlay */
+.ivm-card-border {
+  position: absolute;
+  inset: 10px;
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  pointer-events: none;
+}
+
+.ivm-card-border::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed rgba(212, 175, 55, 0.4);
+}
+
+/* Indian Toran Festoon Garland */
+.ivm-card-toran {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  right: 20px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.95;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.ivm-card-toran svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Card Background Luxury Patterns */
+.ivm-card-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.14;
+  transition: opacity 0.3s ease;
+}
+
+.pattern-jaali {
+  background-image: radial-gradient(#d4af37 1px, transparent 1px), radial-gradient(#d4af37 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.pattern-buti {
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 4 C18 10 24 14 24 18 C24 22 20 26 16 26 C12 26 8 22 8 18 C8 14 14 10 16 4 Z' fill='none' stroke='%23d4af37' stroke-width='0.8'/%3E%3Ccircle cx='16' cy='18' r='2' fill='%23d4af37'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
+}
+
+.pattern-zari {
+  background: repeating-linear-gradient(45deg, rgba(212,175,55,0.06), rgba(212,175,55,0.06) 1px, transparent 1px, transparent 8px),
+              repeating-linear-gradient(-45deg, rgba(212,175,55,0.06), rgba(212,175,55,0.06) 1px, transparent 1px, transparent 8px);
+}
+
+.pattern-stars {
+  background-image: radial-gradient(circle at 50% 50%, #fcedb6 1.2px, transparent 1.2px),
+                    radial-gradient(circle at 20% 80%, #fcedb6 0.8px, transparent 0.8px),
+                    radial-gradient(circle at 80% 20%, #fcedb6 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* Royal Scalloped Arch Overlay */
+.ivm-card-arch-overlay {
+  position: absolute;
+  inset: 12px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ivm-card-arch-overlay svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Corner Accents */
+.ivm-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: #d4af37;
+  border-style: solid;
+  pointer-events: none;
+}
+.ivm-corner-tl { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
+.ivm-corner-tr { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
+.ivm-corner-bl { bottom: 6px; left: 6px; border-width: 0 0 2px 2px; }
+.ivm-corner-br { bottom: 6px; right: 6px; border-width: 0 2px 2px 0; }
+
+/* QR Code presentation */
+.ivm-card-qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.ivm-card-qr-lbl {
+  font-size: 7.5px;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ecc978;
+}
+
+/* Card Content Blocks */
+.ivm-card-top {
+  width: 100%;
+  z-index: 3;
+}
+
+.ivm-card-deity-wrap {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 6px;
+  color: #d4af37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ivm-card-deity-wrap svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.ivm-card-shloka {
+  font-size: 11px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+  padding: 0 10px;
+}
+
+.ivm-card-host {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.88);
+  font-style: italic;
+  max-width: 85%;
+  margin: 0 auto;
+}
+
+/* Names Core */
+.ivm-card-core {
+  width: 100%;
+  margin: 10px 0;
+  z-index: 2;
+}
+
+.ivm-card-photo-wrap {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 2px solid #d4af37;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  margin: 0 auto 8px;
+  overflow: hidden;
+  display: none;
+}
+
+.ivm-card-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28%;
+}
+
+.ivm-card-name {
+  font-size: 32px;
+  line-height: 1.1;
+  color: #ecc978;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.ivm-card-subtext {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 2px;
+}
+
+.ivm-card-weds {
+  font-size: 15px;
+  font-style: italic;
+  color: #ecc978;
+  margin: 4px 0;
+}
+
+/* Bottom Event Details */
+.ivm-card-btm {
+  width: 100%;
+  z-index: 2;
+  margin-top: auto;
+}
+
+.ivm-card-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ecc978;
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  padding: 3px 0;
+  margin-bottom: 6px;
+}
+
+.ivm-card-date-time {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.ivm-card-venue {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.35;
+  max-width: 88%;
+  margin: 0 auto 8px;
+}
+
+.ivm-card-foot-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(212, 175, 55, 0.25);
+  font-size: 10.5px;
+}
+
+.ivm-card-qr {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: #ffffff;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ivm-card-rsvp {
+  text-align: right;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ivm-card-rsvp b {
+  display: block;
+  color: #ecc978;
+  font-size: 11px;
+}
+
+/* Edit Hint Chip */
+.ivm-chip-edit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 12px auto 0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--ivm-paper);
+  border: 1px solid var(--ivm-line);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ivm-ink-soft);
+  cursor: default;
+}
+
+.ivm-pvnote {
+  text-align: center;
+  color: var(--ivm-muted);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   8. CARD THEMES & STYLING CLASSES
+   ========================================================================== */
+/* Wedding Themes */
+.theme-rajwada {
+  background: radial-gradient(120% 90% at 50% 30%, #30030f, #1e020a 55%, #0f0105);
+}
+.theme-udaipur {
+  background: radial-gradient(120% 90% at 50% 30%, #421021, #2b0814 55%, #18030b);
+}
+.theme-peacock {
+  background: radial-gradient(120% 90% at 50% 30%, #084852, #053138 55%, #021a1e);
+}
+.theme-emerald {
+  background: radial-gradient(120% 90% at 50% 30%, #06392c, #03251c 55%, #021510);
+}
+.theme-ranipink {
+  background: radial-gradient(120% 90% at 50% 30%, #52062d, #38031d 55%, #1e010f);
+}
+.theme-haldi {
+  background: radial-gradient(120% 90% at 50% 30%, #5a2e04, #3d1d02 55%, #220f01);
+}
+
+/* Birthday Themes */
+.theme-starlight {
+  background: radial-gradient(120% 90% at 50% 30%, #0d1b38, #070f22 55%, #020610);
+}
+.theme-pastel {
+  background: radial-gradient(120% 90% at 50% 30%, #43213a, #2d1326 55%, #180714);
+}
+.theme-jungle {
+  background: radial-gradient(120% 90% at 50% 30%, #153e2a, #0d281a 55%, #05130b);
+}
+.theme-milestone {
+  background: radial-gradient(120% 90% at 50% 30%, #1a1a1a, #0d0d0d 55%, #000000);
+}
+.theme-carousel {
+  background: radial-gradient(120% 90% at 50% 30%, #4a1525, #320c18 55%, #19050b);
+}
+.theme-neon {
+  background: radial-gradient(120% 90% at 50% 30%, #2e0854, #1d0338 55%, #0d011c);
+}
+
+/* Typography Classes */
+.font-pinyon { font-family: 'Pinyon Script', cursive; font-weight: 400; }
+.font-cormorant { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-style: italic; }
+.font-cinzel { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.04em; }
+.font-bricolage { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; }
+.font-playful { font-family: 'Rozha One', serif; font-weight: 400; }
+.font-indic { font-family: 'Yatra One', cursive; font-weight: 400; }
+
+/* 24K Gold Shimmer Animation */
+@keyframes goldShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.gold-shimmer-active .ivm-card-name {
+  background: linear-gradient(90deg, #fcedb6 0%, #d4af37 25%, #fff7d6 50%, #d4af37 75%, #fcedb6 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 5s linear infinite;
+}
+
+/* Living 3D Keepsake Upgrade Box */
+.ivm-living-box {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(184, 134, 11, 0.05));
+  border: 1.5px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--ivm-radius-md);
+  padding: 16px 18px;
+  margin-top: 14px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.ivm-living-box::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.25), transparent 70%);
+  pointer-events: none;
+}
+
+.ivm-living-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ivm-living-badge {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #b8860b;
+  text-transform: uppercase;
+}
+
+.ivm-living-pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: #fbf4d9;
+  color: #8c6708;
+  border: 1px solid rgba(184, 134, 11, 0.3);
+}
+
+.ivm-living-title {
+  font-family: var(--ivm-font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ivm-ink);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.ivm-living-desc {
+  font-size: 13px;
+  color: var(--ivm-ink-soft);
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+
+.ivm-living-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #d4af37, #b8860b);
+  color: #ffffff !important;
+  padding: 9px 16px;
+  border-radius: var(--ivm-radius-sm);
+  font-weight: 700;
+  font-size: 13.5px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(184, 134, 11, 0.25);
+  transition: all 0.2s ease;
+}
+
+.ivm-living-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(184, 134, 11, 0.35);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   9. TRUST & FAQ SECTIONS (Invilix Style)
+   ========================================================================== */
+.ivm-trust {
+  padding: 44px 20px 20px;
+}
+
+.ivm-trust ul {
+  list-style: none;
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .ivm-trust ul {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+
+.ivm-trust li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.ivm-trust-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--ivm-gold-wash);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ivm-gold-deep);
+  flex-shrink: 0;
+}
+
+.ivm-trust b {
+  display: block;
+  font-size: 16px;
+  color: var(--ivm-ink);
+  margin-bottom: 2px;
+}
+
+.ivm-trust span {
+  font-size: 14px;
+  color: var(--ivm-muted);
+  line-height: 1.45;
+}
+
+/* FAQ */
+.ivm-faq {
+  padding: 30px 20px 60px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.ivm-faq h2 {
+  font-family: var(--ivm-font-display);
+  font-size: clamp(26px, 4vw, 36px);
+  margin-bottom: 20px;
+}
+
+.ivm-faq details {
+  border-bottom: 1px solid var(--ivm-line);
+}
+
+.ivm-faq summary {
+  list-style: none;
+  cursor: pointer;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 16.5px;
+  padding: 12px 0;
+  color: var(--ivm-ink);
+}
+
+.ivm-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.ivm-faq summary::after {
+  content: "+";
+  font-size: 24px;
+  color: var(--ivm-gold);
+}
+
+.ivm-faq details[open] summary::after {
+  content: "\2212";
+}
+
+.ivm-faq p {
+  padding-bottom: 18px;
+  font-size: 14.5px;
+  color: var(--ivm-muted);
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   10. MOBILE BOTTOM FLOATING DOCK (Seamless Phone UX)
+   ========================================================================== */
+.ivm-mob-dock {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .ivm-mob-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--ivm-line);
+    box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08);
+  }
+
+  .ivm-mob-dock-btn {
+    flex: 1;
+    min-height: 46px;
+    border: none;
+    background: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ivm-ink-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .ivm-mob-dock-btn.active {
+    background: var(--ivm-paper);
+    color: var(--ivm-ink);
+  }
+
+  .ivm-mob-dock-btn--dl {
+    background: linear-gradient(135deg, #d4af37, #b8860b);
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(184, 134, 11, 0.3);
+  }
+
+  body.ivm-view-preview .ivm-panel {
+    display: none;
+  }
+
+  body.ivm-view-preview .ivm-pvcol {
+    display: block;
+  }
+}
+
+/* Final mobile overrides: placed after the desktop component rules. */
+@media (max-width: 599.98px) {
+  .ivm-wrap { width: 100%; padding-left: 14px; padding-right: 14px; box-sizing: border-box; }
+  .ivm-nav { padding: 10px 14px; box-sizing: border-box; }
+  .ivm-nav-links, .ivm-nav-tag { display: none; }
+  .ivm-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ivm-pick:last-child { grid-column: 1 / -1; }
+  .ivm-steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ivm-steps-btn { min-width: 0; min-height: 44px; padding: 8px; font-size: 12px; }
 }

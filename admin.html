@@ -892,7 +892,7 @@
         <a class="nav-tab-btn" data-tab="templates" onclick="switchTab('templates')">
           <span class="nav-icon">🎨</span>
           <span>Template Manager</span>
-          <span class="nav-count-badge" id="badgeTplCount">51</span>
+          <span class="nav-count-badge" id="badgeTplCount">0</span>
         </a>
         <a class="nav-tab-btn" data-tab="presets" onclick="switchTab('presets')">
           <span class="nav-icon">✨</span>
@@ -929,7 +929,7 @@
         <a class="nav-tab-btn" data-tab="orders" onclick="switchTab('orders')">
           <span class="nav-icon">💳</span>
           <span>Orders &amp; Refunds</span>
-          <span class="nav-count-badge" id="badgeOrdersCount">500+</span>
+          <span class="nav-count-badge" id="badgeOrdersCount">0</span>
         </a>
         <a class="nav-tab-btn" data-tab="users" onclick="switchTab('users')">
           <span class="nav-icon">👥</span>
@@ -938,12 +938,12 @@
         <a class="nav-tab-btn" data-tab="moments" onclick="switchTab('moments')">
           <span class="nav-icon">💌</span>
           <span>Moments Moderation</span>
-          <span class="nav-count-badge" id="badgeMomentsCount">950+</span>
+          <span class="nav-count-badge" id="badgeMomentsCount">0</span>
         </a>
         <a class="nav-tab-btn" data-tab="custom-requests" onclick="switchTab('custom-requests')">
           <span class="nav-icon">💎</span>
           <span>Bespoke Concierge</span>
-          <span class="nav-count-badge" id="badgeRequestsCount" style="background:rgba(217,119,6,0.15); color:var(--gold-champagne);">3</span>
+          <span class="nav-count-badge" id="badgeRequestsCount" style="background:rgba(217,119,6,0.15); color:var(--gold-champagne);">0</span>
         </a>
         <a class="nav-tab-btn" data-tab="coupons" onclick="switchTab('coupons')">
           <span class="nav-icon">🏷️</span>
@@ -1026,28 +1026,28 @@
               <div class="health-icon-box" style="background:#ecfdf5; color:#059669;">🗄️</div>
               <div>
                 <strong style="display:block; font-size:13px;" id="lblDbEngine">Transactional JSON Store</strong>
-                <span style="font-size:11.5px; color:var(--emerald);">● Supabase / DB Operational</span>
+                <span style="font-size:11.5px; color:var(--emerald);">● Checking status…</span>
               </div>
             </div>
             <div class="health-card">
               <div class="health-icon-box" style="background:#f0f9ff; color:#0284c7;">☁️</div>
               <div>
                 <strong style="display:block; font-size:13px;">Cloudinary CDN</strong>
-                <span style="font-size:11.5px; color:var(--cyan);" id="lblCloudinaryStatus">● CDN Active &amp; Ready</span>
+                <span style="font-size:11.5px; color:var(--cyan);" id="lblCloudinaryStatus">● Not checked</span>
               </div>
             </div>
             <div class="health-card">
               <div class="health-icon-box" style="background:#fef3c7; color:#b45309;">💳</div>
               <div>
                 <strong style="display:block; font-size:13px;">Razorpay Gateway</strong>
-                <span style="font-size:11.5px; color:var(--gold-champagne);" id="lblRazorpayStatus">● Live Simulation / Ready</span>
+                <span style="font-size:11.5px; color:var(--gold-champagne);" id="lblRazorpayStatus">● Checking configuration…</span>
               </div>
             </div>
             <div class="health-card">
               <div class="health-icon-box" style="background:#f5f3ff; color:#7c3aed;">⚡</div>
               <div>
                 <strong style="display:block; font-size:13px;">Express Engine</strong>
-                <span style="font-size:11.5px; color:var(--purple);" id="lblApiLatency">&lt; 15ms Latency</span>
+                <span style="font-size:11.5px; color:var(--purple);" id="lblApiLatency">Latency unavailable</span>
               </div>
             </div>
           </div>
@@ -1056,33 +1056,33 @@
           <div class="kpi-cards-grid">
             <div class="kpi-card">
               <div class="kpi-title"><span>Total Revenue</span> <span>₹</span></div>
-              <div class="kpi-num" id="kpiRevenue">₹44,814</div>
-              <div class="kpi-meta"><span>↑ +28%</span> <span>this week</span></div>
+              <div class="kpi-num" id="kpiRevenue">₹0</div>
+              <div class="kpi-meta"><span>Live total</span></div>
             </div>
             <div class="kpi-card">
               <div class="kpi-title"><span>Paid Orders</span> <span>📦</span></div>
-              <div class="kpi-num" id="kpiOrders">507</div>
-              <div class="kpi-meta"><span>239 completed</span></div>
+              <div class="kpi-num" id="kpiOrders">0</div>
+              <div class="kpi-meta"><span>Recorded orders</span></div>
             </div>
             <div class="kpi-card">
               <div class="kpi-title"><span>Registered Creators</span> <span>👥</span></div>
-              <div class="kpi-num" id="kpiUsers">532</div>
-              <div class="kpi-meta"><span>+14 today</span></div>
+              <div class="kpi-num" id="kpiUsers">0</div>
+              <div class="kpi-meta"><span>Registered creators</span></div>
             </div>
             <div class="kpi-card">
               <div class="kpi-title"><span>Moments Created</span> <span>💌</span></div>
-              <div class="kpi-num" id="kpiMoments">958</div>
-              <div class="kpi-meta"><span>100% active</span></div>
+              <div class="kpi-num" id="kpiMoments">0</div>
+              <div class="kpi-meta"><span>Recorded moments</span></div>
             </div>
             <div class="kpi-card">
               <div class="kpi-title"><span>Live Templates</span> <span>🎨</span></div>
-              <div class="kpi-num" id="kpiTemplates">51</div>
+              <div class="kpi-num" id="kpiTemplates">0</div>
               <div class="kpi-meta" id="kpiDraftsCount"><span>0 drafts pending</span></div>
             </div>
             <div class="kpi-card">
               <div class="kpi-title"><span>Physical Gifts</span> <span>🎁</span></div>
-              <div class="kpi-num" id="kpiProducts">24 Items</div>
-              <div class="kpi-meta"><span>Affiliate integrated</span></div>
+              <div class="kpi-num" id="kpiProducts">0 Items</div>
+              <div class="kpi-meta"><span>Catalog items</span></div>
             </div>
           </div>
 
@@ -1195,7 +1195,7 @@
           <div class="page-title-row">
             <div>
               <h1 class="page-main-heading">🎨 Template Manager &amp; Catalog</h1>
-              <p class="page-sub-caption">Manage 51+ live celebration experiences. Edit content, sections, colors, builder fields, and SEO.</p>
+              <p class="page-sub-caption">Manage registered celebration experiences. Edit content, sections, colors, builder fields, and SEO.</p>
             </div>
             <div style="display:flex; gap:8px;">
               <button type="button" class="btn-3d btn-3d-rose" onclick="openNewTemplateModal()">＋ Create Template</button>

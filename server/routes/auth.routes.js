@@ -18,24 +18,8 @@ function verifyGoogleIdToken(token) {
   return new Promise((resolve) => {
     if (!token || typeof token !== 'string') return resolve(null);
 
-    let payload = null;
-    try {
-      const parts = token.split('.');
-      if (parts.length === 3) {
-        payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf8'));
-      }
-    } catch (e) {
-      return resolve(null);
-    }
-
-    if (!payload || !payload.email) return resolve(null);
-
-    const validIss = payload.iss === 'accounts.google.com' || payload.iss === 'https://accounts.google.com';
-    const notExpired = typeof payload.exp === 'number' ? (payload.exp * 1000 > Date.now() - 300000) : true;
-    if (!validIss || !notExpired) {
-      console.warn('[Google Auth] Invalid issuer or expired token claims');
-      return resolve(null);
-    }
+    const googleClientId = process.env.GOOGLE_CLIENT_ID;
+    if (!googleClientId) return resolve(null);
 
     // Verify token with Google public tokeninfo endpoint
     const url = `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(token)}`;
@@ -46,49 +30,34 @@ function verifyGoogleIdToken(token) {
         try {
           if (res.statusCode === 200) {
             const verified = JSON.parse(data);
-            if (verified && verified.email) {
+            if (
+              verified &&
+              verified.aud === googleClientId &&
+              (verified.email_verified === true || verified.email_verified === 'true') &&
+              verified.email &&
+              verified.sub
+            ) {
               return resolve({
                 email: verified.email.toLowerCase(),
-                name: verified.name || payload.name || verified.email.split('@')[0],
-                picture: verified.picture || payload.picture || null,
-                googleId: verified.sub || payload.sub,
+                name: verified.name || verified.email.split('@')[0],
+                picture: verified.picture || null,
+                googleId: verified.sub,
                 verifiedByGoogle: true
               });
             }
           }
-        } catch (e) {}
-
-        // Fallback to structural claim verification
-        resolve({
-          email: payload.email.toLowerCase(),
-          name: payload.name || payload.email.split('@')[0],
-          picture: payload.picture || null,
-          googleId: payload.sub || ('g_' + Date.now()),
-          verifiedByGoogle: true
-        });
+        } catch (e) {
+          console.warn('[Google Auth] Google token verification response was invalid.');
+        }
+        resolve(null);
       });
     });
 
-    req.on('error', () => {
-      // Offline / network boundary fallback
-      resolve({
-        email: payload.email.toLowerCase(),
-        name: payload.name || payload.email.split('@')[0],
-        picture: payload.picture || null,
-        googleId: payload.sub || ('g_' + Date.now()),
-        verifiedByGoogle: true
-      });
-    });
+    req.on('error', () => resolve(null));
 
     req.on('timeout', () => {
       req.destroy();
-      resolve({
-        email: payload.email.toLowerCase(),
-        name: payload.name || payload.email.split('@')[0],
-        picture: payload.picture || null,
-        googleId: payload.sub || ('g_' + Date.now()),
-        verifiedByGoogle: true
-      });
+      resolve(null);
     });
   });
 }
@@ -309,21 +278,19 @@ router.post('/google', authRateLimiter, async (req, res) => {
     let { email, name, googleId, picture, credential, id_token } = req.body;
     const { ip, ua } = getClientMeta(req);
 
-    // Cryptographically verify Google credential token if provided
+    // Google sign-in is accepted only after server-side token verification.
     const googleToken = credential || id_token;
-    if (googleToken) {
-      const verified = await verifyGoogleIdToken(googleToken);
-      if (verified && verified.email) {
-        email = verified.email;
-        name = verified.name;
-        googleId = verified.googleId;
-        picture = verified.picture;
-      } else {
-        return res.status(401).json({
-          success: false,
-          error: 'Google authentication credential is invalid or has expired. Please select your Google account again.'
-        });
-      }
+    const verified = await verifyGoogleIdToken(googleToken);
+    if (verified && verified.email) {
+      email = verified.email;
+      name = verified.name;
+      googleId = verified.googleId;
+      picture = verified.picture;
+    } else {
+      return res.status(401).json({
+        success: false,
+        error: 'Google authentication credential is invalid or has expired. Please select your Google account again.'
+      });
     }
 
     if (!email || !isValidEmail(email)) {
@@ -667,5 +634,5 @@ router.post('/logout', (req, res) => {
 });
 
 module.exports = router;
-
+module.exports.verifyGoogleIdToken = verifyGoogleIdToken;
 

@@ -9,7 +9,7 @@
 
 Vanvi Moments features a robust, defense-in-depth architecture. The backend implementation actively enforces **timing-safe comparisons**, **recursive HTML/script sanitization**, **IP-based sliding rate limiters**, **scrypt password hashing**, **HMAC-SHA256 session tokens**, and **strict Content-Security-Policy headers**.
 
-Our static code inspection, dependency analysis, and automated test execution identified **2 Action Items** (1 Medium Severity, 1 Low Severity) that should be addressed before general commercial availability.
+The original findings in this report were incomplete. A focused follow-up review identified and remediated fail-open authentication and checkout paths; the production friendship microsite publishing path is disabled until it can be tied to a verified application order.
 
 ---
 
@@ -26,7 +26,7 @@ Our static code inspection, dependency analysis, and automated test execution id
   - File upload endpoint [`/api/upload`](file:///c:/Users/RISHU%20KUMARI/VanviMoments/server/routes/upload.routes.js) verifies image file magic bytes using `validateImageBuffer` in `server/services/storage.service.js` (checks for JPEG `FF D8 FF`, PNG `89 50 4E 47`, and WebP `52 49 46 46`), preventing executable script uploads disguised with image extensions.
 
 ### B. Authentication & Login Protection
-- **Status**: ✅ **VERIFIED SECURE**
+- **Status**: ✅ **HARDENED**
 - **Evidence**:
   - **Password Storage**: Passwords are **never stored in plaintext**.
   - Hash function in [`server/middleware/auth.js`](file:///c:/Users/RISHU%20KUMARI/VanviMoments/server/middleware/auth.js#L18-L32) utilizes Node.js native `crypto.scryptSync(password, salt, 64)` with a cryptographically secure 16-byte random salt generated via `crypto.randomBytes(16)`.
@@ -34,21 +34,22 @@ Our static code inspection, dependency analysis, and automated test execution id
   - **Moment PIN Codes**: 4-digit guest unlock PINs are hashed using HMAC-SHA256 (`hashPin`) and verified via `verifyPin` using `crypto.timingSafeEqual`.
   - **Rate Limiting**: `authRateLimiter` restricts authentication attempts to **15 requests per 15 minutes** per IP address.
   - **Session Expiry**: Tokens are cryptographically signed HMAC-SHA256 JWTs with a 30-day expiration timestamp verified on every protected request.
+  - Google sign-in now requires a server-verified ID token, configured client audience, verified email, and Google subject; unverified request-body emails and offline token fallbacks are rejected.
+  - Public signup no longer grants admin privileges to the first registrant or a specially named email in production.
 
 ### C. Authorization, Roles & Resource Ownership
-- **Status**: ⚠️ **ACTION REQUIRED (MEDIUM SEVERITY)**
+- **Status**: ✅ **REMEDIATED (MEDIUM SEVERITY)**
 - **Evidence**:
   - In [`server/middleware/auth.js`](file:///c:/Users/RISHU%20KUMARI/VanviMoments/server/middleware/auth.js#L99-L110):
     ```javascript
     const adminKey = req.headers['x-admin-key'];
-    const configuredAdminKey = process.env.ADMIN_SECRET_KEY || 'vanvi_secret_admin_2025_x9k2p';
-    if (adminKey && adminKey === configuredAdminKey) {
+    const configuredAdminKey = process.env.ADMIN_SECRET_KEY;
+    if (adminKey && configuredAdminKey && adminKey === configuredAdminKey) {
       req.user = { id: 'admin_master', name: 'System Administrator', role: 'admin', tier: 'VIP' };
       return next();
     }
     ```
-  - **Vulnerability**: If `ADMIN_SECRET_KEY` is not declared in the deployment environment, the default string `'vanvi_secret_admin_2025_x9k2p'` grants master admin privileges.
-  - **Recommended Minimal Fix**: Remove the hardcoded string fallback. If `process.env.ADMIN_SECRET_KEY` is empty or undefined, fail closed and reject the `x-admin-key` header.
+  - The hardcoded fallback was removed. Admin-key authentication now fails closed when `ADMIN_SECRET_KEY` is empty or undefined; a regression assertion covers rejection of the former default key in `scratch/test_prelaunch_hardening.js`.
   - **Ownership Checks**: Moments deletion (`DELETE /api/moments/:id`) checks `moment.user_id === req.user.id` before allowing deletion.
 
 ### D. Safe Error Handling & Information Disclosure
@@ -78,7 +79,7 @@ Our static code inspection, dependency analysis, and automated test execution id
     - `Referrer-Policy: strict-origin-when-cross-origin`
 
 ### G. Database & Payment Verification Security
-- **Status**: ✅ **VERIFIED SECURE**
+- **Status**: ✅ **HARDENED**
 - **Evidence**:
   - **Payment Verification**: In [`server/routes/payments.routes.js`](file:///c:/Users/RISHU%20KUMARI/VanviMoments/server/routes/payments.routes.js), payment completion requires cryptographic proof:
     ```javascript
@@ -89,17 +90,28 @@ Our static code inspection, dependency analysis, and automated test execution id
     ```
   - Direct manipulation of order status via client-side parameters is impossible because the server recalculates the order hash and confirms signature matching before updating status to `'paid'`.
   - **Coin Ledger Integrity**: Coin discounts are calculated on the server via [`/api/coins/calculate-eligibility`](file:///c:/Users/RISHU%20KUMARI/VanviMoments/server/routes/coins.routes.js). The maximum discount is capped at 20% for free creators and 40% for VIPs, preventing client-side discount tampering.
+  - Checkout now creates and stores a gateway order against the server-side application order and authoritative catalog price. Verification rejects unknown application orders and does not accept client-selected order IDs.
+  - Simulation order signatures and payment-gateway fallback are development-only; production checkout fails closed when live payment configuration is missing or unavailable.
+  - The legacy `/api/setup-razorpay` endpoint no longer accepts or writes credentials. Payment secrets must be configured through server environment variables.
+  - Friendship microsite publishing returns `503` in production until its payment flow uses an internally verified order.
 
 ---
 
 ## 3. Security Findings & Recommended Remediation
 
-| Finding ID | Vulnerability | Severity | Impact | Remediation | Status |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **SEC-01** | Default `ADMIN_SECRET_KEY` fallback string in `auth.js` | **Medium** | Could permit unauthorized admin bypass if environment variable is missing | Remove fallback string; fail closed if absent | Ready to Patch |
-| **SEC-02** | Default `JWT_SECRET` development placeholder | **Low** | Weak session signing if deployed to production without custom key | Enforced in `env.js` validateEnv check | Already Guarded |
-| **SEC-03** | Unicode directory name (`Bestie Friendship😘/`) | **Low** | URL encoding ambiguity on non-UTF-8 servers | Rename directory to `bestie-friendship/` | Suggested Cleanup |
+| Finding ID | Vulnerability | Severity | Remediation | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **SEC-01** | Default `ADMIN_SECRET_KEY` fallback string | **Medium** | Removed fallback; missing key fails closed | **Remediated** |
+| **SEC-02** | First public registrant or admin-named email could receive admin role | **Critical** | Production account creation always assigns non-admin roles | **Remediated** |
+| **SEC-03** | Google sign-in accepted unverified token claims and raw email fallback | **Critical** | Require verified Google tokeninfo response and configured audience | **Remediated** |
+| **SEC-04** | Simulated payment signatures and gateway fallback accepted in production | **Critical** | Restrict simulation to development and fail closed in production | **Remediated** |
+| **SEC-05** | Payment verification could select an unrelated application order | **High** | Bind gateway order ID to a server-created pending order; reject unmatched IDs | **Remediated** |
+| **SEC-06** | Unauthenticated endpoint accepted and persisted Razorpay secrets | **High** | Disable credential-writing endpoint; require server environment configuration | **Remediated** |
+| **SEC-07** | Friendship publishing could mark arbitrary request data as paid | **High** | Disable production publishing pending verified order integration | **Mitigated; feature unavailable in production** |
+| **SEC-08** | Unknown template identifiers could receive fallback checkout pricing | **Medium** | Require a registered template or explicit legacy price | **Remediated** |
+| **SEC-09** | Example/weak JWT and admin secrets could be accepted in production | **High** | Require non-placeholder secrets of at least 32 characters | **Remediated** |
+| **SEC-10** | Credentialed CORS reflected arbitrary request origins | **High** | Restrict production CORS to `ALLOWED_ORIGINS`; wildcard is development-only | **Remediated** |
 
 ---
 
-*Report concluded. The Vanvi Moments security posture is robust, resilient, and ready for commercial launch upon applying SEC-01.*
+*Follow-up remediation is reflected in the code and this report. The focused QA script could not be run in the Windows sandbox; full browser, asset, and production-gateway verification remains outstanding.*

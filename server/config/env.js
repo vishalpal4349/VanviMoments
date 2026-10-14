@@ -25,7 +25,7 @@ const envConfig = {
   // Core Server
   PORT: process.env.PORT || 3000,
   NODE_ENV: process.env.NODE_ENV || 'development',
-  JWT_SECRET: process.env.JWT_SECRET || 'vanvi_secret_jwt_key_development_only_change_in_prod',
+  JWT_SECRET: process.env.VANVI_JWT_SECRET || process.env.JWT_SECRET || 'vanvi_secret_jwt_key_development_only_change_in_prod',
   BASE_URL: process.env.BASE_URL || 'http://localhost:3000',
   ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',').map(s => s.trim()) : ['*'],
 
@@ -83,13 +83,15 @@ function validateEnv() {
       warnings.push('NOTICE: DATABASE_URL not set. Running on local transactional JSON store.');
     }
     if (!envConfig.RAZORPAY_KEY_ID && !envConfig.CASHFREE_APP_ID) {
-      warnings.push('NOTICE: No payment gateway keys found. Running in simulation payment mode.');
+      warnings.push('CRITICAL: No live payment gateway is configured. Checkout is disabled.');
     }
   }
 
   const integrationStatus = {
     database: envConfig.DATABASE_URL ? 'PostgreSQL / Supabase (Connected)' : 'Transactional JSON Store (Active)',
-    payments: (envConfig.RAZORPAY_KEY_ID || envConfig.CASHFREE_APP_ID) ? 'Live Gateway Configured' : 'Safe Development Simulation',
+    payments: (envConfig.RAZORPAY_KEY_ID || envConfig.CASHFREE_APP_ID)
+      ? 'Live Gateway Configured'
+      : (isProd ? 'Unavailable (checkout disabled)' : 'Development Simulation'),
     storage: (envConfig.CLOUDINARY_CLOUD_NAME || envConfig.CLOUDINARY_URL || envConfig.AWS_S3_BUCKET) ? 'Cloud Storage Active' : 'Local Storage with Magic-Byte Validation',
     ai: (envConfig.GEMINI_API_KEY ? 'Google Gemini' : envConfig.OPENAI_API_KEY ? 'OpenAI GPT' : envConfig.ANTHROPIC_API_KEY ? 'Anthropic Claude' : 'Vanvi Emotional Poetry Engine'),
     email: (envConfig.SMTP_HOST || envConfig.RESEND_API_KEY) ? 'SMTP / Resend Configured' : 'Console Notification Simulation',
@@ -107,4 +109,3 @@ module.exports = {
   envConfig,
   validateEnv
 };
-

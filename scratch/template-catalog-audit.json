@@ -1,0 +1,1188 @@
+{
+  "generatedAt": "2026-10-14T21:13:08.949Z",
+  "templateFolders": 37,
+  "catalogEntries": 16,
+  "missingRequiredFiles": [],
+  "invalidJson": [],
+  "unregisteredFolders": [
+    "Anniversary Eternal ❤️",
+    "Best Friend Day 01",
+    "birthday-retro-polaroid",
+    "birthday-white-bloom",
+    "birthday-wish-01",
+    "birthday-wish-02",
+    "constellation-love",
+    "golden-anniversary",
+    "golden-lake-collection",
+    "hues-whispers-luxe",
+    "love-in-clouds",
+    "retro-polaroid-wall",
+    "royal-shaadi-invite",
+    "royal-udaipur",
+    "royal-udaivilas-baithak",
+    "royal-vivah-lagna",
+    "sacred-temple-edition",
+    "temple-royal-wedding",
+    "the-grand-royal-palace-wedding",
+    "vanvi-royal-wedding",
+    "wedding-floating-lotus"
+  ],
+  "missingRefs": [
+    {
+      "folder": "Anniversary Eternal ❤️",
+      "file": "builder.js",
+      "ref": "file"
+    },
+    {
+      "folder": "Anniversary Eternal ❤️",
+      "file": "script.js",
+      "ref": "${p.url}"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "builder.js",
+      "ref": "file"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "builder.js",
+      "ref": "file"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_embed_raw.html",
+      "ref": "&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22132%22%20height%3D%2218%22%20viewBox%3D%220%200%20132%2018%22%3E%3Cg%20font-family%3D%22Inter%2Csystem-ui%2C-apple-system%2CSegoe%20UI%2CRoboto%2Csans-serif%22%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22131%22%20height%3D%2217%22%20rx%3D%228.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.9%22%20stroke%3D%22%23000000%22%20stroke-opacity%3D%220.1%22%2F%3E%3Cpath%20transform%3D%22translate(7%203.4"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_embed_raw.html",
+      "ref": "&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22132%22%20height%3D%2218%22%20viewBox%3D%220%200%20132%2018%22%3E%3Cg%20font-family%3D%22Inter%2Csystem-ui%2C-apple-system%2CSegoe%20UI%2CRoboto%2Csans-serif%22%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22131%22%20height%3D%2217%22%20rx%3D%228.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.9%22%20stroke%3D%22%23000000%22%20stroke-opacity%3D%220.1%22%2F%3E%3Cpath%20transform%3D%22translate(7%203.4"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABaElEQVR4nCxSi63EMAgzn+T2n+gN8Ea6Bs4mrRBCjXGMSfb/H85BFZqfwb0tOxTIPXkpR5rz1FJoNQjesGajTy0Ghjecv0CucCMZeEJ01XtsVm1VXhGNqI7uQClbmQUbLrfQJl0Wx6IsD7I6q5RR2RVEG//CDFTSDK+hPL0eLOZTu5xZM1g42BBI6cZV4iQ7WF9Csb/9ObaJPi56lJPeaQE1zJReEpNP70FPYEtb3wajS6KkX3eAlmgq+XwVt4FX5eEA5lTOpIbOBaBgxbPeDwewF626aUAU/efXcpc3rJ6hST+xNa7QlMeR4pToaZ/NYhJrTc0F0YDpqXydbT+aT3SSVJRCUCxco2aGlvda0yxRC6ZaAtAYGPeQqUauUwu6e523UGLl5SbBuF26wSKmFMiWXovRcqKdLCMes9upyZB6Uip8wpyPsmSfjywBZfpF0yw2+DgQGmKgXKfQ3E619PO2vu+HlN4/AAAA//+96j/fAAAABklEQVQDAMyHNORyzuJDAAAAAElFTkSuQmCC&quot;"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABaElEQVR4nCxSi63EMAgzn+T2n+gN8Ea6Bs4mrRBCjXGMSfb/H85BFZqfwb0tOxTIPXkpR5rz1FJoNQjesGajTy0Ghjecv0CucCMZeEJ01XtsVm1VXhGNqI7uQClbmQUbLrfQJl0Wx6IsD7I6q5RR2RVEG//CDFTSDK+hPL0eLOZTu5xZM1g42BBI6cZV4iQ7WF9Csb/9ObaJPi56lJPeaQE1zJReEpNP70FPYEtb3wajS6KkX3eAlmgq+XwVt4FX5eEA5lTOpIbOBaBgxbPeDwewF626aUAU/efXcpc3rJ6hST+xNa7QlMeR4pToaZ/NYhJrTc0F0YDpqXydbT+aT3SSVJRCUCxco2aGlvda0yxRC6ZaAtAYGPeQqUauUwu6e523UGLl5SbBuF26wSKmFMiWXovRcqKdLCMes9upyZB6Uip8wpyPsmSfjywBZfpF0yw2+DgQGmKgXKfQ3E619PO2vu+HlN4/AAAA//+96j/fAAAABklEQVQDAMyHNORyzuJDAAAAAElFTkSuQmCC&quot;"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABaElEQVR4nCxSi63EMAgzn+T2n+gN8Ea6Bs4mrRBCjXGMSfb/H85BFZqfwb0tOxTIPXkpR5rz1FJoNQjesGajTy0Ghjecv0CucCMZeEJ01XtsVm1VXhGNqI7uQClbmQUbLrfQJl0Wx6IsD7I6q5RR2RVEG//CDFTSDK+hPL0eLOZTu5xZM1g42BBI6cZV4iQ7WF9Csb/9ObaJPi56lJPeaQE1zJReEpNP70FPYEtb3wajS6KkX3eAlmgq+XwVt4FX5eEA5lTOpIbOBaBgxbPeDwewF626aUAU/efXcpc3rJ6hST+xNa7QlMeR4pToaZ/NYhJrTc0F0YDpqXydbT+aT3SSVJRCUCxco2aGlvda0yxRC6ZaAtAYGPeQqUauUwu6e523UGLl5SbBuF26wSKmFMiWXovRcqKdLCMes9upyZB6Uip8wpyPsmSfjywBZfpF0yw2+DgQGmKgXKfQ3E619PO2vu+HlN4/AAAA//+96j/fAAAABklEQVQDAMyHNORyzuJDAAAAAElFTkSuQmCC&quot;"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABaElEQVR4nCxSi63EMAgzn+T2n+gN8Ea6Bs4mrRBCjXGMSfb/H85BFZqfwb0tOxTIPXkpR5rz1FJoNQjesGajTy0Ghjecv0CucCMZeEJ01XtsVm1VXhGNqI7uQClbmQUbLrfQJl0Wx6IsD7I6q5RR2RVEG//CDFTSDK+hPL0eLOZTu5xZM1g42BBI6cZV4iQ7WF9Csb/9ObaJPi56lJPeaQE1zJReEpNP70FPYEtb3wajS6KkX3eAlmgq+XwVt4FX5eEA5lTOpIbOBaBgxbPeDwewF626aUAU/efXcpc3rJ6hST+xNa7QlMeR4pToaZ/NYhJrTc0F0YDpqXydbT+aT3SSVJRCUCxco2aGlvda0yxRC6ZaAtAYGPeQqUauUwu6e523UGLl5SbBuF26wSKmFMiWXovRcqKdLCMes9upyZB6Uip8wpyPsmSfjywBZfpF0yw2+DgQGmKgXKfQ3E619PO2vu+HlN4/AAAA//+96j/fAAAABklEQVQDAMyHNORyzuJDAAAAAElFTkSuQmCC&quot;"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABaElEQVR4nCxSi63EMAgzn+T2n+gN8Ea6Bs4mrRBCjXGMSfb/H85BFZqfwb0tOxTIPXkpR5rz1FJoNQjesGajTy0Ghjecv0CucCMZeEJ01XtsVm1VXhGNqI7uQClbmQUbLrfQJl0Wx6IsD7I6q5RR2RVEG//CDFTSDK+hPL0eLOZTu5xZM1g42BBI6cZV4iQ7WF9Csb/9ObaJPi56lJPeaQE1zJReEpNP70FPYEtb3wajS6KkX3eAlmgq+XwVt4FX5eEA5lTOpIbOBaBgxbPeDwewF626aUAU/efXcpc3rJ6hST+xNa7QlMeR4pToaZ/NYhJrTc0F0YDpqXydbT+aT3SSVJRCUCxco2aGlvda0yxRC6ZaAtAYGPeQqUauUwu6e523UGLl5SbBuF26wSKmFMiWXovRcqKdLCMes9upyZB6Uip8wpyPsmSfjywBZfpF0yw2+DgQGmKgXKfQ3E619PO2vu+HlN4/AAAA//+96j/fAAAABklEQVQDAMyHNORyzuJDAAAAAElFTkSuQmCC&quot;"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABaElEQVR4nCxSi63EMAgzn+T2n+gN8Ea6Bs4mrRBCjXGMSfb/H85BFZqfwb0tOxTIPXkpR5rz1FJoNQjesGajTy0Ghjecv0CucCMZeEJ01XtsVm1VXhGNqI7uQClbmQUbLrfQJl0Wx6IsD7I6q5RR2RVEG//CDFTSDK+hPL0eLOZTu5xZM1g42BBI6cZV4iQ7WF9Csb/9ObaJPi56lJPeaQE1zJReEpNP70FPYEtb3wajS6KkX3eAlmgq+XwVt4FX5eEA5lTOpIbOBaBgxbPeDwewF626aUAU/efXcpc3rJ6hST+xNa7QlMeR4pToaZ/NYhJrTc0F0YDpqXydbT+aT3SSVJRCUCxco2aGlvda0yxRC6ZaAtAYGPeQqUauUwu6e523UGLl5SbBuF26wSKmFMiWXovRcqKdLCMes9upyZB6Uip8wpyPsmSfjywBZfpF0yw2+DgQGmKgXKfQ3E619PO2vu+HlN4/AAAA//+96j/fAAAABklEQVQDAMyHNORyzuJDAAAAAElFTkSuQmCC&quot;"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABaElEQVR4nCxSi63EMAgzn+T2n+gN8Ea6Bs4mrRBCjXGMSfb/H85BFZqfwb0tOxTIPXkpR5rz1FJoNQjesGajTy0Ghjecv0CucCMZeEJ01XtsVm1VXhGNqI7uQClbmQUbLrfQJl0Wx6IsD7I6q5RR2RVEG//CDFTSDK+hPL0eLOZTu5xZM1g42BBI6cZV4iQ7WF9Csb/9ObaJPi56lJPeaQE1zJReEpNP70FPYEtb3wajS6KkX3eAlmgq+XwVt4FX5eEA5lTOpIbOBaBgxbPeDwewF626aUAU/efXcpc3rJ6hST+xNa7QlMeR4pToaZ/NYhJrTc0F0YDpqXydbT+aT3SSVJRCUCxco2aGlvda0yxRC6ZaAtAYGPeQqUauUwu6e523UGLl5SbBuF26wSKmFMiWXovRcqKdLCMes9upyZB6Uip8wpyPsmSfjywBZfpF0yw2+DgQGmKgXKfQ3E619PO2vu+HlN4/AAAA//+96j/fAAAABklEQVQDAMyHNORyzuJDAAAAAElFTkSuQmCC&quot;"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABaElEQVR4nCxSi63EMAgzn+T2n+gN8Ea6Bs4mrRBCjXGMSfb/H85BFZqfwb0tOxTIPXkpR5rz1FJoNQjesGajTy0Ghjecv0CucCMZeEJ01XtsVm1VXhGNqI7uQClbmQUbLrfQJl0Wx6IsD7I6q5RR2RVEG//CDFTSDK+hPL0eLOZTu5xZM1g42BBI6cZV4iQ7WF9Csb/9ObaJPi56lJPeaQE1zJReEpNP70FPYEtb3wajS6KkX3eAlmgq+XwVt4FX5eEA5lTOpIbOBaBgxbPeDwewF626aUAU/efXcpc3rJ6hST+xNa7QlMeR4pToaZ/NYhJrTc0F0YDpqXydbT+aT3SSVJRCUCxco2aGlvda0yxRC6ZaAtAYGPeQqUauUwu6e523UGLl5SbBuF26wSKmFMiWXovRcqKdLCMes9upyZB6Uip8wpyPsmSfjywBZfpF0yw2+DgQGmKgXKfQ3E619PO2vu+HlN4/AAAA//+96j/fAAAABklEQVQDAMyHNORyzuJDAAAAAElFTkSuQmCC&quot;"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABaElEQVR4nCxSi63EMAgzn+T2n+gN8Ea6Bs4mrRBCjXGMSfb/H85BFZqfwb0tOxTIPXkpR5rz1FJoNQjesGajTy0Ghjecv0CucCMZeEJ01XtsVm1VXhGNqI7uQClbmQUbLrfQJl0Wx6IsD7I6q5RR2RVEG//CDFTSDK+hPL0eLOZTu5xZM1g42BBI6cZV4iQ7WF9Csb/9ObaJPi56lJPeaQE1zJReEpNP70FPYEtb3wajS6KkX3eAlmgq+XwVt4FX5eEA5lTOpIbOBaBgxbPeDwewF626aUAU/efXcpc3rJ6hST+xNa7QlMeR4pToaZ/NYhJrTc0F0YDpqXydbT+aT3SSVJRCUCxco2aGlvda0yxRC6ZaAtAYGPeQqUauUwu6e523UGLl5SbBuF26wSKmFMiWXovRcqKdLCMes9upyZB6Uip8wpyPsmSfjywBZfpF0yw2+DgQGmKgXKfQ3E619PO2vu+HlN4/AAAA//+96j/fAAAABklEQVQDAMyHNORyzuJDAAAAAElFTkSuQmCC&quot;"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23g"
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "file": "friendship_preview_raw.html",
+      "ref": "%23c"
+    },
+    {
+      "folder": "Birthday 2.0",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "Birthday 2.0",
+      "file": "builder.html",
+      "ref": "image/png"
+    },
+    {
+      "folder": "Birthday-Box",
+      "file": "assets\\gift-preview-modal.js",
+      "ref": "about:blank"
+    },
+    {
+      "folder": "Birthday-Box",
+      "file": "builder.html",
+      "ref": "input.files[0]"
+    },
+    {
+      "folder": "For Maa",
+      "file": "builder.js",
+      "ref": "file"
+    },
+    {
+      "folder": "Hey Birthday",
+      "file": "builder.js",
+      "ref": "${src}"
+    },
+    {
+      "folder": "Hey Birthday",
+      "file": "builder.js",
+      "ref": "f"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "music_platform.js",
+      "ref": "file"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "social.js",
+      "ref": "blob"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "social.js",
+      "ref": "url"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "social.js",
+      "ref": "day"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "social.js",
+      "ref": "day"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "social.js",
+      "ref": "day"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "social.js",
+      "ref": "day"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "vendor_fonts.css",
+      "ref": "cormorant-garamond-italic-latin-ext.woff2"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "vendor_fonts.css",
+      "ref": "cormorant-garamond-italic-latin.woff2"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "vendor_fonts.css",
+      "ref": "cormorant-garamond-latin-ext.woff2"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "vendor_fonts.css",
+      "ref": "cormorant-garamond-latin.woff2"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "vendor_fonts.css",
+      "ref": "fraunces-latin-ext.woff2"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "vendor_fonts.css",
+      "ref": "fraunces-latin.woff2"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "vendor_fonts.css",
+      "ref": "sora-latin-ext.woff2"
+    },
+    {
+      "folder": "Papercut Lotus",
+      "file": "vendor_fonts.css",
+      "ref": "sora-latin.woff2"
+    },
+    {
+      "folder": "Rose Invitaion Wedding",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "Rose Invitaion Wedding",
+      "file": "social.js",
+      "ref": "blob"
+    },
+    {
+      "folder": "Rose Invitaion Wedding",
+      "file": "social.js",
+      "ref": "url"
+    },
+    {
+      "folder": "Rose Invitaion Wedding",
+      "file": "social.js",
+      "ref": "l.address"
+    },
+    {
+      "folder": "Rose Invitaion Wedding",
+      "file": "styles.css",
+      "ref": "media/white-gradient.webp"
+    },
+    {
+      "folder": "Rose Invitaion Wedding",
+      "file": "_platform\\music.js",
+      "ref": "file"
+    },
+    {
+      "folder": "Rose Invitaion Wedding",
+      "file": "_platform\\rsvp.css",
+      "ref": "../../fonts/satoshi/Satoshi-Medium.otf"
+    },
+    {
+      "folder": "birthday-3d-candle-surprise",
+      "file": "builder.html",
+      "ref": "${photo}"
+    },
+    {
+      "folder": "birthday-3d-candle-surprise",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "birthday-white-bloom",
+      "file": "builder.html",
+      "ref": "${photo}"
+    },
+    {
+      "folder": "birthday-white-bloom",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "birthday-white-bloom",
+      "file": "script.js",
+      "ref": "photo.src"
+    },
+    {
+      "folder": "birthday-white-bloom",
+      "file": "script.js",
+      "ref": "memory.photo"
+    },
+    {
+      "folder": "birthday-white-bloom",
+      "file": "script.js",
+      "ref": "photo.src"
+    },
+    {
+      "folder": "birthday-white-bloom",
+      "file": "script.js",
+      "ref": "music.src"
+    },
+    {
+      "folder": "birthday-wish-01",
+      "file": "builder.html",
+      "ref": "${photo}"
+    },
+    {
+      "folder": "birthday-wish-01",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "birthday-wish-01",
+      "file": "index.html",
+      "ref": "${src}"
+    },
+    {
+      "folder": "birthday-wish-02",
+      "file": "builder.html",
+      "ref": "${photo}"
+    },
+    {
+      "folder": "birthday-wish-02",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "botanical-blush-wedding",
+      "file": "builder.html",
+      "ref": "${photo}"
+    },
+    {
+      "folder": "botanical-blush-wedding",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "botanical-blush-wedding",
+      "file": "index.html",
+      "ref": "blob"
+    },
+    {
+      "folder": "constellation-love",
+      "file": "builder.html",
+      "ref": "${photo}"
+    },
+    {
+      "folder": "constellation-love",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "cute-pastel-birthday",
+      "file": "builder.html",
+      "ref": "${photo.url}"
+    },
+    {
+      "folder": "cute-pastel-birthday",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "cute-pastel-birthday",
+      "file": "script.js",
+      "ref": "${item.url}"
+    },
+    {
+      "folder": "cute-pastel-birthday",
+      "file": "script.js",
+      "ref": "${mem.img ||"
+    },
+    {
+      "folder": "floral-mehendi-story",
+      "file": "index.html",
+      "ref": "${ev.mapsLink}"
+    },
+    {
+      "folder": "floral-mehendi-story",
+      "file": "index.html",
+      "ref": "${ev.icon}"
+    },
+    {
+      "folder": "floral-mehendi-story",
+      "file": "index.html",
+      "ref": "${p}"
+    },
+    {
+      "folder": "floral-mehendi-story",
+      "file": "index.html",
+      "ref": "${item.mapsLink}"
+    },
+    {
+      "folder": "golden-anniversary",
+      "file": "builder.html",
+      "ref": "${photo}"
+    },
+    {
+      "folder": "golden-anniversary",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "hues-whispers-luxe",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "ivory-arch-wedding",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "ivory-arch-wedding",
+      "file": "script.js",
+      "ref": "assets/elements/Element 2.webp"
+    },
+    {
+      "folder": "love-in-clouds",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "love-in-clouds",
+      "file": "builder.html",
+      "ref": "input.files[0]"
+    },
+    {
+      "folder": "retro-polaroid-wall",
+      "file": "builder.html",
+      "ref": "${photo}"
+    },
+    {
+      "folder": "retro-polaroid-wall",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "royal-palace-wedding",
+      "file": "assets\\main-DwYZ-OEa.js",
+      "ref": "${e.icon}"
+    },
+    {
+      "folder": "royal-palace-wedding",
+      "file": "assets\\main-DwYZ-OEa.js",
+      "ref": "${n}"
+    },
+    {
+      "folder": "royal-palace-wedding",
+      "file": "assets\\main-DwYZ-OEa.js",
+      "ref": "new Blob([n]"
+    },
+    {
+      "folder": "royal-shaadi-invite",
+      "file": "index.html",
+      "ref": "blob"
+    },
+    {
+      "folder": "royal-udaipur",
+      "file": "assets\\main-DwYZ-OEa.js",
+      "ref": "${e.icon}"
+    },
+    {
+      "folder": "royal-udaipur",
+      "file": "assets\\main-DwYZ-OEa.js",
+      "ref": "${n}"
+    },
+    {
+      "folder": "royal-udaipur",
+      "file": "assets\\main-DwYZ-OEa.js",
+      "ref": "new Blob([n]"
+    },
+    {
+      "folder": "royal-udaivilas-baithak",
+      "file": "builder.html",
+      "ref": "getLiveUrl("
+    },
+    {
+      "folder": "royal-vivah-palace",
+      "file": "main.js",
+      "ref": "${ev.icon}"
+    },
+    {
+      "folder": "royal-vivah-palace",
+      "file": "main.js",
+      "ref": "${ev.mapsLink ||"
+    },
+    {
+      "folder": "royal-vivah-palace",
+      "file": "main.js",
+      "ref": "${src}"
+    },
+    {
+      "folder": "royal-vows-indian-wedding",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "royal-vows-indian-wedding",
+      "file": "main.js",
+      "ref": "blob"
+    },
+    {
+      "folder": "sorry-bubu",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "temple-blossom-luxe",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "temple-blossom-luxe",
+      "file": "builder.html",
+      "ref": "input.files[0]"
+    },
+    {
+      "folder": "temple-royal-wedding",
+      "file": "builder.html",
+      "ref": "${p}"
+    },
+    {
+      "folder": "temple-royal-wedding",
+      "file": "builder.html",
+      "ref": "file"
+    },
+    {
+      "folder": "the-grand-royal-palace-wedding",
+      "file": "assets\\main-DwYZ-OEa.js",
+      "ref": "${e.icon}"
+    },
+    {
+      "folder": "the-grand-royal-palace-wedding",
+      "file": "assets\\main-DwYZ-OEa.js",
+      "ref": "${n}"
+    },
+    {
+      "folder": "the-grand-royal-palace-wedding",
+      "file": "assets\\main-DwYZ-OEa.js",
+      "ref": "new Blob([n]"
+    },
+    {
+      "folder": "vanvi-royal-wedding",
+      "file": "script.js",
+      "ref": "blob"
+    },
+    {
+      "folder": "wedding-floating-lotus",
+      "file": "builder.html",
+      "ref": "input.files[0]"
+    },
+    {
+      "folder": "wedding-floating-lotus",
+      "file": "script.js",
+      "ref": "${escapeHtml(p.url)}"
+    },
+    {
+      "folder": "wedding-floating-lotus",
+      "file": "script.js",
+      "ref": "blob"
+    }
+  ],
+  "catalogBrokenPaths": [],
+  "results": [
+    {
+      "folder": "Anniversary Eternal ❤️",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Anniversary Eternal ❤️ — Our Love Story",
+        "category": "Interactive Multi-Chapter Love Story Microsite",
+        "price": 0,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "Best Friend Day 01",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Bestfriend Day — Hot-Air Balloon, Memory Wall & Scratch Reveal Edition",
+        "category": "Interactive Multi-Experience Friendship Microsite",
+        "price": 39,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "Birthday 2.0",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Birthday 2.0",
+        "category": "Birthday",
+        "price": 0,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "birthday-2-0"
+      ]
+    },
+    {
+      "folder": "Birthday-Box",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Birthday Box",
+        "category": "Birthday",
+        "price": 0,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "birthday-box"
+      ]
+    },
+    {
+      "folder": "For Maa",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "For Maa — The Things She Always Says",
+        "category": "Emotional Digital Calling & Memory Flip Keepsake",
+        "price": 0,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "for-maa-01"
+      ]
+    },
+    {
+      "folder": "Hey Birthday",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Hey Birthday",
+        "category": "Birthday",
+        "price": 0,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "hey-birthday"
+      ]
+    },
+    {
+      "folder": "Papercut Lotus",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Papercut Lotus",
+        "category": "Wedding",
+        "price": 499,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "papercut-lotus"
+      ]
+    },
+    {
+      "folder": "Rose Invitaion Wedding",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Rose Invitation Wedding",
+        "category": "Wedding",
+        "price": 499,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "rose-invitation-wedding"
+      ]
+    },
+    {
+      "folder": "birthday-3d-candle-surprise",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Aurelia 3D Candle & Memory Atelier",
+        "category": "Birthday",
+        "price": 0,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "birthday-3d-candle-surprise"
+      ]
+    },
+    {
+      "folder": "birthday-retro-polaroid",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Retro Polaroid — The Nostalgic Scrapbook",
+        "category": "Birthday",
+        "price": 299,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "birthday-white-bloom",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Birthday White Bloom",
+        "category": "Birthday",
+        "price": 0,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "birthday-wish-01",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Birthday Wish 01",
+        "category": "Birthday",
+        "price": 0,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "birthday-wish-02",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Birthday Wish 02",
+        "category": "Birthday",
+        "price": 149,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "botanical-blush-wedding",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Maison Rose — Eternal Invitation",
+        "category": "Wedding",
+        "price": 1999,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "botanical-blush-wedding"
+      ]
+    },
+    {
+      "folder": "constellation-love",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Birthday Gift for Girlfriend & Romance",
+        "category": "Love & Romance",
+        "price": 149,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "cute-pastel-birthday",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Cute Pastel Birthday",
+        "category": "Birthday",
+        "price": 29,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "cute-pastel-birthday"
+      ]
+    },
+    {
+      "folder": "floral-mehendi-story",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Floral Mehendi Story",
+        "category": "Wedding",
+        "price": 499,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "floral-mehendi-story"
+      ]
+    },
+    {
+      "folder": "golden-anniversary",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Golden Anniversary & Milestones",
+        "category": "Anniversary",
+        "price": 199,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "golden-lake-collection",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Golden Lake Collection — Lake Palace Sunset Luxury",
+        "category": "Wedding",
+        "price": 999,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "hues-whispers-luxe",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Hues Whispers Luxe",
+        "category": "Wedding",
+        "price": 499,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "ivory-arch-wedding",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Ivory Arch Wedding",
+        "category": "Wedding",
+        "price": 499,
+        "hasCustomization": false
+      },
+      "catalogIds": [
+        "ivory-arch-wedding"
+      ]
+    },
+    {
+      "folder": "love-in-clouds",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Love in Clouds",
+        "category": "Romance",
+        "price": 799,
+        "hasCustomization": false
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "retro-polaroid-wall",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Retro Polaroid Memory Wall",
+        "category": "Memories",
+        "price": 99,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "royal-palace-wedding",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "The Grand Royal Palace Vivah",
+        "category": "Wedding",
+        "price": 999,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "the-grand-royal-palace-wedding"
+      ]
+    },
+    {
+      "folder": "royal-shaadi-invite",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Royal Shaadi Invite",
+        "category": "Wedding",
+        "price": 299,
+        "hasCustomization": false
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "royal-udaipur",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "The Grand Royal Palace Vivah",
+        "category": "Wedding",
+        "price": 999,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "royal-udaivilas-baithak",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "The Royal Udaivilas Baithak — Grand Vivah Suite",
+        "category": "Wedding",
+        "price": 999,
+        "hasCustomization": false
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "royal-vivah-lagna",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Royal Vivah Lagna",
+        "category": "Wedding",
+        "price": 499,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "royal-vivah-palace",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Royal Vivah — Palace & Heritage",
+        "category": "Wedding",
+        "price": 1499,
+        "hasCustomization": false
+      },
+      "catalogIds": [
+        "royal-vivah-palace"
+      ]
+    },
+    {
+      "folder": "royal-vows-indian-wedding",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Royal Vows Indian Wedding",
+        "category": "Wedding",
+        "price": 1499,
+        "hasCustomization": false
+      },
+      "catalogIds": [
+        "royal-vows-indian-wedding"
+      ]
+    },
+    {
+      "folder": "sacred-temple-edition",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Sacred Temple Edition — Traditional Dravidian & Vedic Wedding",
+        "category": "Wedding",
+        "price": 999,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "sorry-bubu",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Cute Sorry",
+        "category": "Apology",
+        "price": 29,
+        "hasCustomization": true
+      },
+      "catalogIds": [
+        "cute-sorry"
+      ]
+    },
+    {
+      "folder": "temple-blossom-luxe",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Temple Blossom Luxe Wedding",
+        "category": "Wedding",
+        "price": 799,
+        "hasCustomization": false
+      },
+      "catalogIds": [
+        "temple-blossom-luxe"
+      ]
+    },
+    {
+      "folder": "temple-royal-wedding",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Temple Royale — Sacred Vows",
+        "category": "Wedding",
+        "price": 999,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "the-grand-royal-palace-wedding",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "The Grand Royal Palace Vivah",
+        "category": "Wedding",
+        "price": 999,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "vanvi-royal-wedding",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Royal Vows — The Wedding Experience",
+        "category": "Wedding",
+        "price": 0,
+        "hasCustomization": true
+      },
+      "catalogIds": []
+    },
+    {
+      "folder": "wedding-floating-lotus",
+      "missingFiles": [],
+      "jsonValid": true,
+      "jsonError": null,
+      "metadata": {
+        "name": "Floating Lotus 3D Wedding Invitation",
+        "category": "Wedding",
+        "price": 499,
+        "hasCustomization": false
+      },
+      "catalogIds": []
+    }
+  ]
+}

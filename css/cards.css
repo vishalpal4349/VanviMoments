@@ -1,0 +1,213 @@
+/* Invilix Free Invitation Cards Stylesheet (v7) */
+/* Canvas: 1080 x 1350 (portrait) or 1080 x 1920 (story) */
+.ivc .ring { box-shadow: none; }
+.ivc img { max-width: none; }
+.ivc { position: relative; width: 1080px; height: 1350px; overflow: hidden; box-sizing: border-box; font-family: 'Cormorant Garamond', Georgia, serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-kerning: normal; }
+.ivc.story { height: 1920px; }
+.ivc *, .ivc *::before, .ivc *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.ivc svg { display: block; }
+.ivc .ph { width: 100%; height: 100%; object-fit: cover; display: block; user-select: none; }
+.ivc [data-fit] { width: 100%; }
+.ivc .nm { white-space: nowrap; }
+.ivc p { text-wrap: balance; }
+.ivc .mw { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font: 500 21px/1 'DM Sans', sans-serif; letter-spacing: .06em; opacity: .66; z-index: 30; }
+
+/* ===================================================== W01 Rajwada */
+.t-rajwada { background: radial-gradient(120% 80% at 50% 48%, var(--bgA,#8e1a2b) 0%, var(--bgB,#6a0e1b) 55%, var(--bgC,#4a0812) 100%); color: var(--ink2,#f5e6c8); }
+.t-rajwada .buti { position: absolute; inset: 0; opacity: .12; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cg fill='%23e8c77e'%3E%3Cpath d='M48 58 C 38 58 35 49 39 43 C 43 37 51 35 53 28 C 57 34 58 41 56 48 C 54 54 52 58 48 58Z'/%3E%3Ccircle cx='0' cy='0' r='2.5'/%3E%3Ccircle cx='96' cy='0' r='2.5'/%3E%3Ccircle cx='0' cy='96' r='2.5'/%3E%3Ccircle cx='96' cy='96' r='2.5'/%3E%3C/g%3E%3C/svg%3E"); }
+.t-rajwada .frame { position: absolute; inset: 36px; border: 2px solid var(--gold,#d9b264); }
+.t-rajwada .frame::after { content: ''; position: absolute; inset: 10px; border: 1px solid color-mix(in srgb, var(--gold,#d9b264) 60%, transparent); }
+.t-rajwada .toran { position: absolute; top: 0; left: 0; width: 100%; z-index: 3; }
+.t-rajwada .col { position: absolute; left: 120px; right: 120px; top: 236px; bottom: 92px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; z-index: 2; }
+.t-rajwada .kicker { font: 600 28px/1 'Cinzel', serif; letter-spacing: .32em; padding-left: .32em; color: var(--accent,#e8c77e); }
+.t-rajwada .msg { font: italic 400 32px/1.28 'Cormorant Garamond', serif; max-width: 680px; color: var(--ink2,#f3dfbd); }
+.t-rajwada .medal { position: relative; width: 350px; height: 350px; flex: none; }
+.t-rajwada .medal .ring { position: absolute; inset: 0; width: 100%; height: 100%; }
+.t-rajwada .win { position: absolute; left: 50%; top: 50%; width: 69%; height: 69%; transform: translate(-50%, -50%); border-radius: 50%; overflow: hidden; background: radial-gradient(var(--winA,#7d1220), var(--winB,#560a15)); }
+.t-rajwada .mono { display: flex; align-items: center; justify-content: center; gap: 12px; height: 100%; font: italic 500 84px/1 'Cormorant Garamond', serif; color: var(--ink,#ecc978); }
+.t-rajwada .mono svg { width: 30px; height: 30px; }
+.t-rajwada .names { width: 100%; }
+.t-rajwada .nm { font: italic 500 118px/1.02 'Cormorant Garamond', serif; color: var(--ink,#ecc978); }
+.t-rajwada .weds { display: flex; align-items: center; justify-content: center; gap: 20px; font: 400 22px/1 'Cinzel', serif; letter-spacing: .3em; padding-left: .3em; color: var(--ink2,#f3dfbd); margin: 6px 0 8px; }
+.t-rajwada .weds i { width: 90px; height: 1px; background: var(--gold,#d9b264); }
+.t-rajwada .band { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: 100%; border-top: 1.5px solid var(--gold,#d9b264); border-bottom: 1.5px solid var(--gold,#d9b264); padding: 16px 0; font: 400 23px/1 'Cinzel', serif; letter-spacing: .14em; color: var(--ink2,#f3dfbd); }
+.t-rajwada .band b { font: 600 36px/1 'Cinzel', serif; letter-spacing: .06em; color: var(--ink,#ecc978); padding: 6px 26px; border-left: 1px solid color-mix(in srgb, var(--gold,#d9b264) 55%, transparent); border-right: 1px solid color-mix(in srgb, var(--gold,#d9b264) 55%, transparent); }
+.t-rajwada .venue { font: 500 34px/1.25 'Cormorant Garamond', serif; max-width: 740px; color: var(--ink2,#f3dfbd); }
+.t-rajwada .mw { color: var(--accent,#e8c77e); bottom: 58px; font-size: 19px; }
+.t-rajwada.story .col { top: 300px; bottom: 150px; }
+.t-rajwada.story .medal { width: 470px; height: 470px; }
+.t-rajwada.story .kicker { font-size: 32px; }
+.t-rajwada.story .msg { font-size: 36px; }
+.t-rajwada.story .band { padding: 22px 0; }
+
+/* ===================================================== W02 Kanjeevaram */
+.t-kanjeevaram { background: radial-gradient(90% 60% at 50% 45%, var(--bgA,#13594f) 0%, var(--bgB,#0e4a43) 55%, var(--bgC,#0a3a34) 100%); color: var(--ink2,#f6e7bf); }
+.t-kanjeevaram .silk { position: absolute; inset: 0; opacity: .22; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='%23e2b04a'%3E%3Ccircle cx='30' cy='30' r='3'/%3E%3Ccircle cx='90' cy='90' r='3'/%3E%3Cpath d='M90 22 C 84 22 82 28 84 32 C 86 36 92 36 94 32 C 96 28 98 24 96 18 C 95 21 93 22 90 22Z'/%3E%3Cpath d='M30 82 C 24 82 22 88 24 92 C 26 96 32 96 34 92 C 36 88 38 84 36 78 C 35 81 33 82 30 82Z'/%3E%3C/g%3E%3C/svg%3E"); }
+.t-kanjeevaram .tb { position: absolute; left: 0; width: 100%; z-index: 2; }
+.t-kanjeevaram .tb-t { top: 0; }
+.t-kanjeevaram .tb-b { bottom: 0; transform: scaleY(-1); }
+.t-kanjeevaram .col { position: absolute; left: 120px; right: 120px; top: 214px; bottom: 250px; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; text-align: center; z-index: 3; }
+.t-kanjeevaram .kicker { font: 400 30px/1 'Marcellus', serif; letter-spacing: .24em; padding-left: .24em; color: var(--ink,#e2b04a); }
+.t-kanjeevaram .lamp { width: 160px; height: 240px; flex: none; }
+.t-kanjeevaram .door { position: relative; width: 300px; height: 286px; flex: none; }
+.t-kanjeevaram .door .ph { position: absolute; inset: 0; clip-path: polygon(1.8% 98%, 1.8% 28.6%, 13.6% 28.6%, 13.6% 19%, 25% 19%, 25% 10.5%, 36.4% 10.5%, 36.4% 1.9%, 63.6% 1.9%, 63.6% 10.5%, 75% 10.5%, 75% 19%, 86.4% 19%, 86.4% 28.6%, 98.2% 28.6%, 98.2% 98%); }
+.t-kanjeevaram .door-line { position: absolute; inset: 0; width: 100%; height: 100%; }
+.t-kanjeevaram .msg { font: italic 400 32px/1.28 'Cormorant Garamond', serif; max-width: 740px; color: var(--ink2,#f6e7bf); }
+.t-kanjeevaram .names { width: 100%; }
+.t-kanjeevaram .nm { font: 400 88px/1.08 'Marcellus', serif; color: var(--name,#f0c75e); letter-spacing: .01em; }
+.t-kanjeevaram .amp { font: italic 500 62px/1 'Cormorant Garamond', serif; color: var(--pop2,#f39ac0); margin: 2px 0; }
+.t-kanjeevaram .when b { display: block; font: 400 34px/1.2 'Marcellus', serif; color: var(--ink2,#f6e7bf); letter-spacing: .02em; }
+.t-kanjeevaram .when span { display: block; font: italic 500 30px/1.3 'Cormorant Garamond', serif; color: var(--pop2,#f39ac0); margin-top: 4px; }
+.t-kanjeevaram .venue { font: 500 32px/1.25 'Cormorant Garamond', serif; max-width: 760px; color: var(--ink2,#f6e7bf); }
+.t-kanjeevaram .mw { color: var(--ink2,#f6e7bf); opacity: .7; bottom: 214px; z-index: 4; }
+.t-kanjeevaram.story .col { top: 270px; bottom: 300px; }
+.t-kanjeevaram.story .mw { bottom: 226px; }
+.t-kanjeevaram.story .lamp { width: 190px; height: 285px; }
+.t-kanjeevaram.story .door { width: 480px; height: 458px; }
+.t-kanjeevaram.story .kicker { font-size: 34px; }
+
+/* ===================================================== W03 Kasavu */
+.t-kasavu { background: var(--wb,#f4ecd9); color: var(--ink,#3a2a1a); }
+.t-kasavu .loom { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(120,90,40,.035) 0 1px, transparent 1px 4px), repeating-linear-gradient(0deg, rgba(120,90,40,.03) 0 1px, transparent 1px 5px); }
+.t-kasavu .kasavu { position: absolute; left: 60px; top: 0; bottom: 0; display: flex; gap: 9px; }
+.t-kasavu .kasavu i { display: block; height: 100%; }
+.t-kasavu .kasavu .g { width: 78px; background: repeating-linear-gradient(0deg, rgba(255,247,220,.22) 0 2px, transparent 2px 7px), linear-gradient(90deg, var(--gd1,#a87f2a), var(--gd2,#e9c86f) 28%, var(--gd3,#c9a24a) 52%, var(--gd4,#f0d488) 74%, var(--gd1,#a87f2a)); }
+.t-kasavu .kasavu .r { width: 7px; background: var(--bar,#8b1e2d); }
+.t-kasavu .kasavu .g2 { width: 10px; background: linear-gradient(90deg, var(--gd5,#b8913c), var(--gd6,#ecd08a), var(--gd5,#b8913c)); }
+.t-kasavu .col { position: absolute; left: 262px; right: 96px; top: 100px; bottom: 110px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 34px; }
+.t-kasavu .jas { width: 720px; margin-left: -14px; }
+.t-kasavu .pic { width: 100%; height: 380px; outline: 1.5px solid var(--gd3,#c9a24a); outline-offset: 12px; margin: 12px 0 6px; overflow: hidden; }
+.t-kasavu .msg { font: italic 400 37px/1.3 'Cormorant Garamond', serif; color: var(--ink2,#7b5d35); max-width: 620px; }
+.t-kasavu .names { width: 100%; }
+.t-kasavu .nm { font: 300 170px/.98 'Cormorant Garamond', serif; letter-spacing: -.01em; color: var(--ink,#3a2a1a); }
+.t-kasavu .and { font: italic 400 46px/1 'Cormorant Garamond', serif; color: var(--acc,#a8812e); margin: 6px 0 10px 6px; }
+.t-kasavu .rule { width: 140px; height: 3px; background: linear-gradient(90deg, var(--gd1,#a87f2a), var(--gd2,#e9c86f), var(--gd1,#a87f2a)); }
+.t-kasavu .dl { display: grid; grid-template-columns: 110px 1fr; gap: 18px 20px; width: 100%; align-items: baseline; }
+.t-kasavu dt { font: italic 500 30px/1.3 'Cormorant Garamond', serif; color: var(--acc,#a8812e); }
+.t-kasavu dd { font: 400 29px/1.45 'DM Sans', sans-serif; color: var(--ink,#3a2a1a); }
+.t-kasavu dd b { font-weight: 500; }
+.t-kasavu .mw { color: var(--ink2,#7b5d35); left: 262px; text-align: left; }
+.t-kasavu.has-photo .nm { font-size: 118px; }
+.t-kasavu.has-photo .col { gap: 20px; top: 70px; bottom: 100px; }
+.t-kasavu.has-photo .pic { height: 470px; }
+.t-kasavu.story .col { gap: 56px; top: 160px; bottom: 160px; }
+.t-kasavu.story .nm { font-size: 190px; }
+.t-kasavu.story .pic { height: 780px; }
+
+/* ===================================================== W04 Nikah */
+.t-nikah { background: radial-gradient(90% 70% at 50% 40%, var(--bgA,#0f3c38) 0%, var(--bgB,#0b302d) 60%, var(--bgC,#072320) 100%); color: var(--ivory,#f4ead2); }
+.t-nikah .lattice { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .16; }
+.t-nikah .arch { position: absolute; inset: 0; width: 100%; height: 100%; }
+.t-nikah .arch .a1 { fill: var(--winA,#0e3b37); stroke: var(--ink,#d8b46a); stroke-width: 14; }
+.t-nikah .arch .a2 { fill: none; stroke: var(--winA,#0e3b37); stroke-width: 7; }
+.t-nikah .moon { position: absolute; left: 50%; top: 22px; width: 92px; height: 92px; transform: translateX(-50%); }
+.t-nikah .col { position: absolute; left: 150px; right: 150px; top: 262px; bottom: 130px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; }
+.t-nikah .bism { font: italic 500 30px/1 'Cormorant Garamond', serif; color: var(--ink,#d8b46a); letter-spacing: .02em; }
+.t-nikah .lantern { width: 128px; height: 240px; flex: none; }
+.t-nikah .mih { width: 280px; height: 330px; flex: none; border-radius: 140px 140px 6px 6px; overflow: hidden; box-shadow: 0 0 0 5px var(--winA,#0e3b37), 0 0 0 8px var(--ink,#d8b46a); }
+.t-nikah .msg { font: italic 400 30px/1.3 'Cormorant Garamond', serif; color: var(--ink2,#e9dcb9); max-width: 640px; }
+.t-nikah .names { width: 100%; }
+.t-nikah .nm { font: 400 112px/1.18 'Pinyon Script', cursive; color: var(--ivory,#f4ead2); padding: 0 20px; }
+.t-nikah .amp { font: italic 500 50px/1 'Cormorant Garamond', serif; color: var(--ink,#d8b46a); margin: -6px 0 -4px; }
+.t-nikah .when b { display: block; font: 400 28px/1.3 'Cinzel', serif; letter-spacing: .08em; color: var(--ink,#d8b46a); }
+.t-nikah .when span { display: block; font: italic 500 30px/1.3 'Cormorant Garamond', serif; color: var(--ink2,#e9dcb9); }
+.t-nikah .venue { font: 500 31px/1.25 'Cormorant Garamond', serif; color: var(--ink2,#e9dcb9); max-width: 680px; }
+.t-nikah .mw { color: var(--ink,#d8b46a); bottom: 30px; }
+.t-nikah.story .moon { top: 80px; width: 120px; height: 120px; }
+.t-nikah.story .col { top: 420px; bottom: 190px; }
+.t-nikah.story .lantern { width: 150px; height: 281px; }
+.t-nikah.story .mih { width: 380px; height: 460px; border-radius: 190px 190px 6px 6px; }
+.t-nikah.has-photo:not(.story) .col { top: 250px; }
+.t-nikah.has-photo:not(.story) .nm { font-size: 96px; }
+.t-nikah.has-photo .bism[data-ls] { margin-bottom: 14px; }
+
+/* ===================================================== W05 Chapel */
+.t-chapel { background: var(--wb,#fbf8f1); color: var(--ink,#1d2f4f); }
+.t-chapel .paper { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(140,120,70,.09) 100%); }
+.t-chapel .rule1 { position: absolute; inset: 44px; border: 2px solid var(--ink,#1d2f4f); }
+.t-chapel .rule2 { position: absolute; inset: 56px; border: 1px solid color-mix(in srgb, var(--ink,#1d2f4f) 55%, transparent); }
+.t-chapel .lilies { position: absolute; left: 0; right: 0; bottom: 60px; width: 100%; height: 300px; }
+.t-chapel .col { position: absolute; left: 150px; right: 150px; top: 116px; bottom: 140px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; }
+.t-chapel .doves { width: 440px; height: 144px; flex: none; }
+.t-chapel .cameo { width: 230px; height: 290px; flex: none; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 7px var(--wb,#fbf8f1), 0 0 0 9px var(--ink,#1d2f4f), 0 0 0 15px var(--wb,#fbf8f1), 0 0 0 16px color-mix(in srgb, var(--ink,#1d2f4f) 60%, transparent); margin-top: 16px; }
+.t-chapel .kicker { font: 400 26px/1 'Cinzel', serif; letter-spacing: .3em; padding-left: .3em; color: var(--ink,#1d2f4f); }
+.t-chapel .msg { font: italic 400 33px/1.3 'Cormorant Garamond', serif; color: var(--ink2,#4a5a72); max-width: 660px; }
+.t-chapel .names { width: 100%; }
+.t-chapel .nm { font: 400 116px/1.2 'Pinyon Script', cursive; color: var(--ink,#1d2f4f); padding: 0 24px; }
+.t-chapel .and { font: italic 400 38px/1 'Cormorant Garamond', serif; color: var(--acc,#a88a4a); margin: -8px 0 -4px; }
+.t-chapel .when { font: 500 33px/1.35 'Cormorant Garamond', serif; color: var(--ink,#1d2f4f); }
+.t-chapel .venue { font: 600 29px/1.3 'Cormorant Garamond', serif; letter-spacing: .02em; color: var(--ink2,#4a5a72); max-width: 620px; }
+.t-chapel .mw { color: var(--ink2,#4a5a72); bottom: 82px; font-size: 19px; }
+.t-chapel.has-photo:not(.story) .nm { font-size: 100px; }
+.t-chapel.story .col { top: 190px; bottom: 260px; }
+.t-chapel.story .doves { width: 520px; height: 170px; }
+.t-chapel.story .cameo { width: 320px; height: 400px; }
+.t-chapel.story .kicker { font-size: 30px; }
+
+/* ===================================================== W06 Gallery */
+.t-gallery { background: var(--wb,#ece7df); color: var(--ink,#1c1a17); }
+.t-gallery .pic { position: absolute; left: 64px; right: 64px; top: 64px; height: 780px; overflow: hidden; }
+.t-gallery .pic.blank { background: var(--blk,#3b3f2e); display: flex; align-items: center; justify-content: center; gap: 18px; color: var(--wb,#ece7df); }
+.t-gallery .pic.blank span { font: 300 380px/1 'Cormorant Garamond', serif; }
+.t-gallery .pic.blank em { font: italic 400 210px/1 'Cormorant Garamond', serif; color: var(--blkem,#a8a28c); transform: translateY(10px); }
+.t-gallery .label { position: absolute; left: 64px; right: 64px; top: 884px; bottom: 96px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 44px; border-top: 2px solid var(--ink,#1c1a17); padding-top: 30px; }
+.t-gallery .lt { min-width: 0; }
+.t-gallery .msg { font: 500 22px/1 'DM Sans', sans-serif; letter-spacing: .04em; color: var(--soft,#8a8478); margin-bottom: 18px; }
+.t-gallery .nm { font: 300 92px/1.04 'Bricolage Grotesque', sans-serif; font-variation-settings: 'opsz' 96; letter-spacing: -.035em; }
+.t-gallery .nm em { font: italic 400 1em/1 'Cormorant Garamond', serif; letter-spacing: 0; color: var(--ink2,#6d6656); }
+.t-gallery .rt { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.t-gallery .row { border-bottom: 1px solid var(--ln,#c9c1b2); padding-bottom: 16px; }
+.t-gallery .row:last-child { border-bottom: 0; }
+.t-gallery .row small { display: block; font: 500 18px/1 'DM Sans', sans-serif; letter-spacing: .06em; color: var(--soft,#8a8478); margin-bottom: 8px; }
+.t-gallery .row p { font: 400 25px/1.4 'DM Sans', sans-serif; color: var(--ink,#1c1a17); text-wrap: pretty; }
+.t-gallery .mw { color: var(--soft,#8a8478); text-align: left; left: 64px; bottom: 40px; }
+.t-gallery.story .pic { height: 1200px; }
+.t-gallery.story .label { top: 1310px; bottom: 120px; }
+.t-gallery.story .nm { font-size: 104px; }
+.t-gallery.story .pic.blank span { font-size: 480px; }
+
+/* ===================================================== W07 Garden / Watercolour */
+.t-watercolour { background: var(--wb,#fdf8f4); color: var(--ink,#7a4a4f); }
+.t-watercolour .flora { position: absolute; inset: 0; width: 100%; height: 100%; }
+.t-watercolour .col { position: absolute; left: 150px; right: 150px; top: 150px; bottom: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; }
+.t-watercolour .pic { width: 270px; height: 270px; flex: none; border-radius: 50%; overflow: hidden; border: 10px solid #fff; box-shadow: 0 0 0 2px var(--ring,#e9b9b4), 0 12px 30px color-mix(in srgb, var(--ink,#7a4a4f) 15%, transparent); margin-bottom: 10px; }
+.t-watercolour .msg, .t-watercolour .sub { font: italic 400 32px/1.3 'Cormorant Garamond', serif; color: var(--ink2,#8a6a62); }
+.t-watercolour .names { width: 100%; }
+.t-watercolour .nm { font: 400 140px/1.16 'Pinyon Script', cursive; color: var(--ink,#7a4a4f); padding: 0 30px; }
+.t-watercolour .amp { font: 400 80px/.7 'Pinyon Script', cursive; color: var(--accent,#d4899a); }
+.t-watercolour .date { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: 100%; max-width: 640px; margin-top: 18px; }
+.t-watercolour .date span { font: 600 22px/1 'Cormorant Garamond', serif; letter-spacing: .22em; text-transform: uppercase; border-top: 1px solid var(--ln,#d9b3ae); border-bottom: 1px solid var(--ln,#d9b3ae); padding: 14px 0; }
+.t-watercolour .date b { font: italic 400 112px/1 'Cormorant Garamond', serif; padding: 0 28px; color: var(--ink,#7a4a4f); }
+.t-watercolour .my { font: 600 24px/1 'Cormorant Garamond', serif; letter-spacing: .3em; text-transform: uppercase; padding-left: .3em; }
+.t-watercolour .venue { font: 500 31px/1.28 'Cormorant Garamond', serif; color: var(--ink3,#6c5450); max-width: 640px; margin-top: 10px; }
+.t-watercolour .mw { color: var(--ink2,#8a6a62); }
+.t-watercolour.has-photo:not(.story) .nm { font-size: 112px; }
+.t-watercolour.has-photo:not(.story) .date b { font-size: 92px; }
+.t-watercolour.has-photo:not(.story) .col { top: 110px; gap: 8px; }
+.t-watercolour.story .col { gap: 24px; }
+.t-watercolour.story .pic { width: 380px; height: 380px; }
+
+/* ===================================================== W09 Blush letter */
+.t-blush { background: var(--wb,#fbf3ef); color: var(--ink,#6e3d48); }
+.t-blush .col { position: absolute; left: 140px; right: 140px; top: 140px; bottom: 120px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; }
+.t-blush .nm { font: 400 128px/1.12 'Pinyon Script', cursive; color: var(--ink,#6e3d48); }
+.t-blush .msg { font: italic 400 32px/1.3 'Cormorant Garamond', serif; color: var(--ink2,#8b5f63); max-width: 660px; }
+
+/* ===================================================== B01 Balloon Pop */
+.t-balloon { background: var(--wb,#fff3c9); color: var(--ink,#4a3a5a); }
+.t-balloon .col { position: absolute; left: 120px; right: 120px; top: 140px; bottom: 110px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; }
+.t-balloon .badge { display: inline-flex; align-items: center; justify-content: center; background: var(--accent,#fa5a50); color: #fff; font: 800 34px/1 'Baloo 2', sans-serif; padding: 12px 30px; border-radius: 999px; letter-spacing: .04em; }
+.t-balloon .nm { font: 800 130px/1.05 'Baloo 2', sans-serif; color: var(--ink,#4a3a5a); }
+.t-balloon .msg { font: 500 32px/1.3 'DM Sans', sans-serif; color: var(--ink2,#7b5ea7); max-width: 680px; }
+.t-balloon .pills { display: flex; gap: 16px; margin: 12px 0; }
+.t-balloon .pills span { background: #fff; border: 2px solid var(--ink,#4a3a5a); border-radius: 30px; padding: 10px 24px; font: 700 26px/1 'DM Sans', sans-serif; }
+.t-balloon .venue { font: 500 30px/1.3 'DM Sans', sans-serif; color: var(--ink,#4a3a5a); max-width: 700px; }
+
+/* ===================================================== H01 Griha Pravesh */
+.t-griha { background: var(--wb,#fff1dc); color: var(--ink,#7a2412); }
+.t-griha .col { position: absolute; left: 120px; right: 120px; top: 130px; bottom: 100px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; }
+.t-griha .kicker { font: 400 30px/1 'Marcellus', serif; letter-spacing: .24em; color: var(--accent,#b4441d); }
+.t-griha .nm { font: 600 110px/1.08 'Cormorant Garamond', serif; color: var(--ink,#7a2412); }
+.t-griha .home { font: 400 48px/1.2 'Marcellus', serif; color: var(--accent,#b4441d); margin: 6px 0; }
+.t-griha .msg { font: italic 400 32px/1.3 'Cormorant Garamond', serif; color: var(--ink2,#6b3a1e); max-width: 700px; }
+.t-griha .venue { font: 400 30px/1.3 'Marcellus', serif; color: var(--ink3,#3f2a17); max-width: 720px; }

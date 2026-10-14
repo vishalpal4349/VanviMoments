@@ -19,6 +19,16 @@ router.post('/create', optionalAuth, async (req, res) => {
     const { momentId, templateName, templateId, applyCoins, applyPassCredits } = req.body;
     const userId = req.user ? req.user.id : null;
 
+    if (momentId) {
+      const moment = await Moments.findById(momentId);
+      if (!moment) {
+        return res.status(404).json({ success: false, error: 'Celebration moment not found.' });
+      }
+      if (moment.userId && moment.userId !== userId) {
+        return res.status(403).json({ success: false, error: 'You are not authorized to purchase this moment.' });
+      }
+    }
+
     // 1. Determine Base Price on Server (Authoritative)
     const catalogTemplate = templateId
       ? templatesCatalog.getById(templateId)
@@ -26,6 +36,9 @@ router.post('/create', optionalAuth, async (req, res) => {
         templateName && template.name.toLowerCase() === String(templateName).trim().toLowerCase()
       );
     const normalizedName = String(templateName || '').trim().toLowerCase();
+    if (!catalogTemplate && !LEGACY_TEMPLATE_PRICES[normalizedName]) {
+      return res.status(400).json({ success: false, error: 'Please select a valid celebration template.' });
+    }
     const catalogPrice = catalogTemplate
       ? Number(catalogTemplate.price)
       : (LEGACY_TEMPLATE_PRICES[normalizedName] ?? null);
@@ -76,6 +89,33 @@ router.post('/create', optionalAuth, async (req, res) => {
       status: finalAmountINR === 0 ? 'paid' : 'pending'
     });
 
+    let gatewayOrder = null;
+    if (finalAmountINR > 0) {
+      try {
+        const { createGatewayOrder } = require('../services/payment.service');
+        gatewayOrder = await createGatewayOrder({
+          orderId: order.id,
+          amountINR: finalAmountINR,
+          currency: 'INR',
+          customerEmail: req.user ? req.user.email : undefined,
+          customerName: req.user ? req.user.name : undefined,
+          customerPhone: req.user ? req.user.phone : undefined
+        });
+        await Orders.update(order.id, {
+          gateway: gatewayOrder.gateway || 'razorpay',
+          gatewayOrderId: gatewayOrder.gatewayOrderId
+        });
+      } catch (gatewayError) {
+        await Orders.update(order.id, { status: 'failed' });
+        return res.status(gatewayError.statusCode || 503).json({
+          success: false,
+          error: gatewayError.statusCode === 400
+            ? gatewayError.message
+            : 'Payment gateway is unavailable. Please try again later.'
+        });
+      }
+    }
+
     // 5. If 100% settled with credits, instantly deduct balance & activate moment
     let remainingUserCredits = null;
     if (userId && passCreditsUsed > 0) {
@@ -105,7 +145,7 @@ router.post('/create', optionalAuth, async (req, res) => {
       success: true,
       order: {
         id: order.id,
-        gatewayOrderId: order.gatewayOrderId,
+        gatewayOrderId: gatewayOrder ? gatewayOrder.gatewayOrderId : order.gatewayOrderId,
         basePrice,
         coinsUsed,
         discountINR,
@@ -114,6 +154,10 @@ router.post('/create', optionalAuth, async (req, res) => {
         currency: 'INR',
         amountInPaisa: Math.round(finalAmountINR * 100),
         status: order.status,
+        paymentMode: gatewayOrder ? gatewayOrder.mode : 'credits',
+        paymentGateway: gatewayOrder ? gatewayOrder.gateway : null,
+        paymentSessionId: gatewayOrder ? gatewayOrder.paymentSessionId : null,
+        keyId: gatewayOrder ? (gatewayOrder.keyId || gatewayOrder.key_id || null) : null,
         fullyCoveredByCredits: finalAmountINR === 0,
         remainingCredits: remainingUserCredits
       }
@@ -125,4 +169,3 @@ router.post('/create', optionalAuth, async (req, res) => {
 });
 
 module.exports = router;
-

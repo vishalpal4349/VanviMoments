@@ -28,6 +28,10 @@ router.post('/verify', ordersRateLimiter, optionalAuth, async (req, res) => {
       return res.status(404).json({ success: false, error: 'Order not found.' });
     }
 
+    if (order.userId && (!req.user || req.user.id !== order.userId)) {
+      return res.status(403).json({ success: false, error: 'You are not authorized to complete this order.' });
+    }
+
     if (order.status === 'paid') {
       const existingMoment = order.momentId ? await Moments.findById(order.momentId) : null;
       return res.json({
@@ -36,6 +40,14 @@ router.post('/verify', ordersRateLimiter, optionalAuth, async (req, res) => {
         order,
         momentSlug: existingMoment ? existingMoment.slug : 'published',
         shareUrl: existingMoment ? `moment.html?id=${existingMoment.slug}` : 'dashboard.html'
+      });
+    }
+    if (applicationOrder.userId && (!req.user || req.user.id !== applicationOrder.userId)) {
+      return res.status(req.user ? 403 : 401).json({
+        success: false,
+        error: req.user
+          ? 'You are not authorized to create a payment for this order.'
+          : 'Sign in to create a payment for this order.'
       });
     }
 
@@ -152,11 +164,28 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
 
         if (gatewayOrderId) {
           const order = await Orders.findByGatewayOrderId(gatewayOrderId);
-          if (order && order.status !== 'paid') {
+          const paidAmountPaisa = Math.round(Number(order ? order.finalAmountINR : 0) * 100);
+          if (
+            order &&
+            order.status === 'pending' &&
+            paymentEntity.status === 'captured' &&
+            paymentEntity.currency === 'INR' &&
+            Number(paymentEntity.amount) === paidAmountPaisa
+          ) {
             await Orders.markAsPaid(order.id, {
               paymentId: paymentEntity.id,
               paidAt: Date.now()
             });
+
+            if (order.userId && order.coinsUsed > 0) {
+              await CoinLedger.create({
+                userId: order.userId,
+                type: 'debit',
+                amount: order.coinsUsed,
+                reason: `Checkout discount on ${order.templateName}`,
+                refId: order.id
+              });
+            }
 
             let momentObj = null;
             if (order.momentId) {
@@ -223,12 +252,31 @@ async function createOrderHandler(req, res) {
       });
     }
 
+    const applicationOrder = receipt ? await Orders.findById(String(receipt)) : null;
+    const isPlaceholderOrder = applicationOrder &&
+      /^(order_demo_|order_sim_|order_test_)/.test(applicationOrder.gatewayOrderId || '');
+    if (
+      !applicationOrder ||
+      applicationOrder.status !== 'pending' ||
+      !isPlaceholderOrder ||
+      numericAmount !== Math.round(Number(applicationOrder.finalAmountINR) * 100)
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: 'A matching pending application order is required.'
+      });
+    }
+
     const { createRazorpayOrder } = require('../services/payment.service');
     const orderData = await createRazorpayOrder({
       amount: numericAmount,
       currency: currency || 'INR',
-      receipt: receipt || `rcpt_${Date.now()}`,
+      receipt: applicationOrder.id,
       notes: notes || {}
+    });
+    await Orders.update(applicationOrder.id, {
+      gateway: 'razorpay',
+      gatewayOrderId: orderData.order_id
     });
 
     return res.status(200).json({
@@ -239,10 +287,12 @@ async function createOrderHandler(req, res) {
     });
   } catch (err) {
     console.error('Create Order Error:', err);
-    const statusCode = err.statusCode || (err.message && err.message.includes('401') ? 401 : 500);
+    const statusCode = err.statusCode || 500;
     return res.status(statusCode).json({
       success: false,
-      error: err.message || 'Failed to create Razorpay order'
+      error: statusCode === 503
+        ? 'Payment gateway is temporarily unavailable.'
+        : 'Failed to create payment order.'
     });
   }
 }
@@ -289,9 +339,18 @@ async function verifyPaymentHandler(req, res) {
     }
 
     // Mark corresponding store order as paid if found
-    let matchedOrder = await Orders.findByGatewayOrderId(order_id);
-    if (!matchedOrder && req.body.appOrderId) {
-      matchedOrder = await Orders.findById(req.body.appOrderId);
+    const matchedOrder = await Orders.findByGatewayOrderId(order_id);
+    if (!matchedOrder) {
+      return res.status(404).json({ success: false, error: 'No matching application order was found.' });
+    }
+    if (matchedOrder.userId && req.user && req.user.id !== matchedOrder.userId) {
+      return res.status(403).json({ success: false, error: 'You are not authorized to complete this order.' });
+    }
+    if (matchedOrder.userId && !req.user) {
+      return res.status(401).json({ success: false, error: 'Sign in to complete this order.' });
+    }
+    if (matchedOrder.status === 'failed' || matchedOrder.status === 'refunded') {
+      return res.status(409).json({ success: false, error: 'This order can no longer be completed.' });
     }
 
     let momentObj = null;
@@ -372,8 +431,8 @@ function getConfigHandler(req, res) {
 }
 
 // Router mounts
-router.post('/create-order', createOrderHandler);
-router.post('/verify-payment', verifyPaymentHandler);
+router.post('/create-order', optionalAuth, createOrderHandler);
+router.post('/verify-payment', optionalAuth, verifyPaymentHandler);
 router.get('/config', getConfigHandler);
 
 module.exports = router;

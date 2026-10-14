@@ -951,10 +951,9 @@
     <!-- Smart Instant Quick Searches (Horizontally scrollable, prevent wrapping, clipping & overflow) -->
     <div class="quick-search-tags-row" id="quickSearchTagsRow">
       <span class="quick-search-label" style="font-size:10.5px; font-weight:800; color:var(--text-muted); white-space:nowrap; flex-shrink:0;">⚡ Quick Filter:</span>
-      <button type="button" class="quick-tag-chip" onclick="applySearchTag('wedding')">💍 Wedding &amp; Vivah</button>
+      <button type="button" class="quick-tag-chip" onclick="applySearchTag('wedding')">💍 Wedding</button>
       <button type="button" class="quick-tag-chip" onclick="applySearchTag('birthday')">🎂 Birthday</button>
-      <button type="button" class="quick-tag-chip" onclick="applySearchTag('love')">💖 Love &amp; Anniversary</button>
-      <button type="button" class="quick-tag-chip" onclick="applySearchTag('family')">👨‍👩‍👧 Family &amp; Friends</button>
+      <button type="button" class="quick-tag-chip" onclick="applySearchTag('family')">👨‍👩‍👧 Family</button>
       <button type="button" class="quick-tag-chip" onclick="applySearchTag('apology')">💌 Apology</button>
       <button type="button" class="quick-tag-chip" onclick="applySearchTag('free')">🎁 Free (₹0)</button>
     </div>
@@ -962,16 +961,16 @@
     <!-- Smart Unified Occasion & Category Filter Strip (Clean & Premium) -->
     <div class="atelier-filter-hub">
       <nav class="quick-occasions-strip" id="quickOccasionsStrip" aria-label="Smart Categories">
-        <button type="button" id="quick-cat-all" class="quick-cat-pill active" data-cat="all" onclick="selectQuickCategory('all')">✨ All Moments</button>
-        <button type="button" id="quick-cat-wedding" class="quick-cat-pill" data-cat="wedding" onclick="selectQuickCategory('wedding')">💍 Wedding &amp; Vivah (17)</button>
-        <button type="button" id="quick-cat-birthday" class="quick-cat-pill" data-cat="birthday" onclick="selectQuickCategory('birthday')">🎂 Birthday (7)</button>
-        <button type="button" id="quick-cat-love" class="quick-cat-pill" data-cat="love" onclick="selectQuickCategory('love')">💖 Love &amp; Anniversary (3)</button>
-        <button type="button" id="quick-cat-family" class="quick-cat-pill" data-cat="family" onclick="selectQuickCategory('family')">👨‍👩‍👧 Family &amp; Friends (2)</button>
+        <button type="button" id="quick-cat-all" class="quick-cat-pill active" data-cat="all" onclick="selectQuickCategory('all')">✨ All Moments (16)</button>
+        <button type="button" id="quick-cat-wedding" class="quick-cat-pill" data-cat="wedding" onclick="selectQuickCategory('wedding')">💍 Wedding (9)</button>
+        <button type="button" id="quick-cat-birthday" class="quick-cat-pill" data-cat="birthday" onclick="selectQuickCategory('birthday')">🎂 Birthday (5)</button>
+        <button type="button" id="quick-cat-family" class="quick-cat-pill" data-cat="family" onclick="selectQuickCategory('family')">👨‍👩‍👧 Family (1)</button>
         <button type="button" id="quick-cat-apology" class="quick-cat-pill" data-cat="apology" onclick="selectQuickCategory('apology')">💌 Apology (1)</button>
-        <button type="button" id="quick-cat-free" class="quick-cat-pill pill-free" data-cat="free" onclick="selectQuickCategory('free')">🎁 100% Free</button>
-        <button type="button" id="quick-cat-vip" class="quick-cat-pill pill-vip" data-cat="vip" onclick="selectQuickCategory('vip')">👑 Palace VIP (₹700+)</button>
+        <button type="button" id="quick-cat-free" class="quick-cat-pill pill-free" data-cat="free" onclick="selectQuickCategory('free')">🎁 100% Free (8)</button>
       </nav>
     </div>
+
+
 
     <!-- Active Filters Removable Chips -->
     <div class="active-filters-row" id="activeFiltersRow">
@@ -1017,76 +1016,42 @@
       </section>
 
       <!-- Section 3: Birthday Magic -->
+      <!-- Section 3: Wedding Celebrations (Unified Wedding & Vivah) -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <h2 class="section-title">🎂 Birthday Magic</h2>
-          <a href="category-birthday.html" class="section-view-all-pill" id="viewall-birthday">View All (7) →</a>
-        </div>
-        <div class="cards-rail" id="rail-birthday"></div>
-      </section>
-
-      <!-- Section 3B: Royal Vivah & Wedding Celebrations -->
-      <section class="occasion-section">
-        <div class="section-header-row">
-          <h2 class="section-title">💍 Royal Vivah &amp; Weddings</h2>
-          <a href="category-wedding.html" class="section-view-all-pill" id="viewall-wedding">View All (17) →</a>
+          <h2 class="section-title">💍 Wedding Celebrations</h2>
+          <a href="templates.html?category=wedding" class="section-view-all-pill" id="viewall-wedding">View All (9) →</a>
         </div>
         <div class="cards-rail" id="rail-wedding"></div>
       </section>
 
-      <!-- Section 4: Love & Romance -->
+      <!-- Section 4: Birthday Magic -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <h2 class="section-title">💖 Love &amp; Romance</h2>
-          <a href="category-love.html" class="section-view-all-pill" id="viewall-love">View All (4) →</a>
+          <h2 class="section-title">🎂 Birthday Magic</h2>
+          <a href="templates.html?category=birthday" class="section-view-all-pill" id="viewall-birthday">View All (5) →</a>
         </div>
-        <div class="cards-rail" id="rail-love"></div>
+        <div class="cards-rail" id="rail-birthday"></div>
       </section>
 
-      <!-- Section 5: Anniversary & Milestones -->
+      <!-- Section 5: Family & Gratitude -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <h2 class="section-title">💍 Anniversary &amp; Milestones</h2>
-          <a href="category-anniversary.html" class="section-view-all-pill" id="viewall-anniversary">View All (2) →</a>
-        </div>
-        <div class="cards-rail" id="rail-anniversary"></div>
-      </section>
-
-      <!-- Section 6: Friendship & Cheers -->
-      <section class="occasion-section">
-        <div class="section-header-row">
-          <h2 class="section-title">👯 Friendship &amp; Cheers</h2>
-          <a href="category-friendship.html" class="section-view-all-pill" id="viewall-friendship">View All (2) →</a>
-        </div>
-        <div class="cards-rail" id="rail-friendship"></div>
-      </section>
-
-      <!-- Section 7: Family & Gratitude -->
-      <section class="occasion-section">
-        <div class="section-header-row">
-          <h2 class="section-title">👨‍👩‍👦 Family &amp; Gratitude</h2>
-          <a href="category-family.html" class="section-view-all-pill" id="viewall-family">View All (2) →</a>
+          <h2 class="section-title">👨‍👩‍👧 Family &amp; Gratitude</h2>
+          <a href="templates.html?category=family" class="section-view-all-pill" id="viewall-family">View All (1) →</a>
         </div>
         <div class="cards-rail" id="rail-family"></div>
       </section>
 
-      <!-- Section 8: Memories & Keepsakes -->
+      <!-- Section 6: Apology & Reconciliation -->
       <section class="occasion-section">
         <div class="section-header-row">
-          <h2 class="section-title">📸 Memories &amp; Keepsakes</h2>
-          <a href="category-memories.html" class="section-view-all-pill" id="viewall-memories">View All (3) →</a>
+          <h2 class="section-title">💌 Sincere Apology</h2>
+          <a href="templates.html?category=apology" class="section-view-all-pill" id="viewall-apology">View All (1) →</a>
         </div>
-        <div class="cards-rail" id="rail-memories"></div>
+        <div class="cards-rail" id="rail-apology"></div>
       </section>
 
-      <!-- Section 9: Signature Premium Editions -->
-      <section class="occasion-section">
-        <div class="section-header-row">
-          <h2 class="section-title">👑 VIP Signature Editions</h2>
-          <a href="category-premium.html" class="section-view-all-pill" id="viewall-premium">View All (2) →</a>
-        </div>
-        <div class="cards-rail" id="rail-premium"></div>
-      </section>
 
       <!-- Section 10: You Might Also Like / More Templates Worth A Look -->
       <section class="more-templates-section" id="sectionRecommendations">
@@ -1254,7 +1219,9 @@
         'For Maa': 'templates/For Maa/assets/images/card.jpg',
         'best-friend-01': 'assets/templates/vanvi-friendship-showcase.jpg',
         'birthday-box': 'assets/templates/vanvi-birthday-box.jpg',
-        'anniversary-eternal': 'assets/templates/vanvi-anniversary-eternal.jpg'
+        'anniversary-eternal': 'assets/templates/vanvi-anniversary-eternal.jpg',
+        'hey-birthday': 'templates/Hey Birthday/assets/photo1.jpg',
+        'Hey Birthday': 'templates/Hey Birthday/assets/photo1.jpg'
       };
 
       // Filter State
@@ -1539,48 +1506,22 @@
             filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('wedding')
           },
           {
-            railId: 'rail-love',
-            viewAllId: 'viewall-love',
-            filterFn: t => {
-              const c = (t.categorySlug || t.category || '').toLowerCase();
-              return c.includes('love') || c.includes('romance');
-            }
-          },
-          {
-            railId: 'rail-anniversary',
-            viewAllId: 'viewall-anniversary',
-            filterFn: t => {
-              const c = (t.categorySlug || t.category || '').toLowerCase();
-              return c.includes('anniversary') || c.includes('wedding');
-            }
-          },
-          {
-            railId: 'rail-friendship',
-            viewAllId: 'viewall-friendship',
-            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('friend')
+            railId: 'rail-birthday',
+            viewAllId: 'viewall-birthday',
+            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('birthday')
           },
           {
             railId: 'rail-family',
             viewAllId: 'viewall-family',
-            filterFn: t => {
-              const c = (t.categorySlug || t.category || '').toLowerCase();
-              return c.includes('family') || c.includes('thank') || c.includes('maa');
-            }
+            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('family') || (t.id || '').includes('maa')
           },
           {
-            railId: 'rail-memories',
-            viewAllId: 'viewall-memories',
-            filterFn: t => {
-              const c = (t.categorySlug || t.category || '').toLowerCase();
-              return c.includes('memor') || c.includes('timeline') || c.includes('farewell');
-            }
-          },
-          {
-            railId: 'rail-premium',
-            viewAllId: 'viewall-premium',
-            filterFn: t => Number(t.price || 0) >= 199 || t.tier === 'Signature' || t.isLuxury
+            railId: 'rail-apology',
+            viewAllId: 'viewall-apology',
+            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('apology') || (t.id || '').includes('sorry')
           }
         ];
+
 
         railsConfig.forEach(cfg => {
           const el = document.getElementById(cfg.railId);
@@ -1725,14 +1666,14 @@
         const all = getTemplates();
         const categories = [
           { id: 'all', label: '✨ All Moments' },
-          { id: 'wedding', label: '💍 Wedding & Vivah' },
+          { id: 'wedding', label: '💍 Wedding' },
           { id: 'birthday', label: '🎂 Birthday' },
-          { id: 'love', label: '💖 Love & Anniversary' },
           { id: 'family', label: '👨‍👩‍👧 Family & Friends' },
           { id: 'apology', label: '💌 Apology' },
           { id: 'free', label: '🎁 100% Free' },
-          { id: 'premium', label: '👑 Palace VIP (₹700+)' }
+          { id: 'premium', label: '👑 VIP Premium' }
         ];
+
 
         let html = '';
         categories.forEach(cat => {
@@ -2007,7 +1948,6 @@
   </script>
   <script src="js/vanvi-navigation.js"></script>
   <script src="js/vanvi-vault-lock.js"></script>
-  <script src="js/vanvi-bespoke.js"></script>
 
   <!-- Lenis Smooth Scroll Engine -->
   <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>

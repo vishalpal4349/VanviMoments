@@ -8,8 +8,9 @@ const cors = require('cors');
 const path = require('path');
 
 const { securityHeaders, sanitizeBody, enforceHttps } = require('./middleware/security');
+const { optionalAuth } = require('./middleware/auth');
 const { requestTracker, captureError, getMetricsSummary } = require('./middleware/monitoring');
-const { validateEnv } = require('./config/env');
+const { validateEnv, envConfig } = require('./config/env');
 const { testConnection } = require('./db/database');
 
 const authRoutes = require('./routes/auth.routes');
@@ -36,7 +37,15 @@ app.use(enforceHttps);
 app.use(securityHeaders);
 app.use(requestTracker);
 app.use(cors({
-  origin: true,
+  origin(origin, callback) {
+    if (!origin) return callback(null, true);
+    const allowedOrigins = envConfig.ALLOWED_ORIGINS;
+    const wildcardAllowed = envConfig.NODE_ENV !== 'production' && allowedOrigins.includes('*');
+    if (wildcardAllowed || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Origin is not allowed by CORS.'));
+  },
   credentials: true
 }));
 
@@ -138,25 +147,14 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/custom-requests', customRequestRoutes);
 
 // Razorpay Standard Checkout Endpoints (Direct Mounts)
-app.post('/api/create-order', paymentsRoutes.createOrderHandler);
-app.post('/api/verify-payment', paymentsRoutes.verifyPaymentHandler);
+app.post('/api/create-order', optionalAuth, paymentsRoutes.createOrderHandler);
+app.post('/api/verify-payment', optionalAuth, paymentsRoutes.verifyPaymentHandler);
 app.get('/api/payment-config', paymentsRoutes.getConfigHandler);
 app.post('/api/setup-razorpay', (req, res) => {
-  const { key_id, key_secret } = req.body;
-  if (!key_id || !key_secret) {
-    return res.status(400).json({ success: false, error: 'Key ID and Secret required' });
-  }
-  process.env.RAZORPAY_KEY_ID = key_id.trim();
-  process.env.RAZORPAY_KEY_SECRET = key_secret.trim();
-  try {
-    let env = fs.readFileSync('.env', 'utf8');
-    env = env.replace(/^RAZORPAY_KEY_ID=.*$/m, `RAZORPAY_KEY_ID=${key_id.trim()}`);
-    env = env.replace(/^RAZORPAY_KEY_SECRET=.*$/m, `RAZORPAY_KEY_SECRET=${key_secret.trim()}`);
-    fs.writeFileSync('.env', env, 'utf8');
-  } catch (e) {
-    console.error('Failed to update .env', e);
-  }
-  return res.json({ success: true, message: 'Razorpay API keys saved successfully!', key_id: key_id.trim() });
+  return res.status(410).json({
+    success: false,
+    error: 'Payment credentials must be configured as server environment variables.'
+  });
 });
 
 // Canonical Moment Dynamic Router: /m/:slug (Resolves: slug -> moment -> template_id -> template)
@@ -166,6 +164,12 @@ const fs = require('fs');
 // Friendship Microsites API Endpoints & Short-link Router: /f/:slug
 app.post('/api/friendship/save', async (req, res, next) => {
   try {
+    if (process.env.NODE_ENV === 'production') {
+      return res.status(503).json({
+        success: false,
+        error: 'Friendship publishing is unavailable until verified checkout is configured.'
+      });
+    }
     const { payment_id, order_id, signature, config, friendName, slug: reqSlug } = req.body;
     
     // Auto-generate clean friendly slug if not given

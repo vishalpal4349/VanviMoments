@@ -136,7 +136,12 @@ const Users = {
   async create(userData) {
     const id = 'usr_' + crypto.randomBytes(8).toString('hex');
     const isFirstUser = store.users.length === 0;
-    const isAdminEmail = userData.email && (userData.email.includes('admin@vanvimoments.shop') || userData.email.includes('admin@vanvimoments.com') || isFirstUser);
+    const isAdminEmail = Boolean(userData.email && (
+      userData.email.includes('admin@vanvimoments.shop') ||
+      userData.email.includes('admin@vanvimoments.com') ||
+      isFirstUser
+    ));
+    const mayAssignAdmin = process.env.NODE_ENV !== 'production';
 
     const user = {
       id,
@@ -148,7 +153,9 @@ const Users = {
       provider: userData.provider || (userData.googleId ? 'google' : 'local'),
       passwordHash: userData.passwordHash,
       salt: userData.salt,
-      role: userData.role || (isAdminEmail ? 'admin' : 'user'),
+      role: userData.role === 'admin' && mayAssignAdmin
+        ? 'admin'
+        : (mayAssignAdmin && isAdminEmail ? 'admin' : 'user'),
       tier: userData.tier || 'free',
       coins: 0, // Initialized to 0, credited via ledger
       lastSpinTime: 0,
@@ -843,4 +850,3 @@ module.exports = {
   testConnection,
   getDatabaseInfo
 };
-

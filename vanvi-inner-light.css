@@ -2,6 +2,7 @@
  * VANVI MOMENTS — PREMIUM SCROLL EXPERIENCE ENHANCEMENTS
  * Ultra-Premium Romantic Light Palette & Tactile Jewel Micro-Interactions
  */
+@import url("./css/vanvi-global-experience.css");
 
 :root {
   /* Ultra-Premium Romantic Light System */
@@ -23,14 +24,13 @@
 /* Scroll Animation Base Classes */
 .scroll-animate {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translate3d(0, 40px, 0);
   transition: opacity 0.8s ease, transform 0.8s ease;
-  will-change: opacity, transform;
 }
 
 .scroll-animate.animate-in {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Staggered animation delay utilities */

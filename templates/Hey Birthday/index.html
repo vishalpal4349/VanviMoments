@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday Emma 🎂💗 — Vanvi Moments</title>
+  <meta name="description" content="A playful, interactive birthday portal and experience handcrafted with love on Vanvi Moments.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Candle smoke toggle when blown out */
+    .wish-cake.all-out .candle-flame-wrap {
+      display: none !important;
+    }
+    .wish-cake.all-out .wish-smoke {
+      display: block !important;
+      animation: smokeRise 2.8s ease-out forwards;
+    }
+    @keyframes smokeRise {
+      0% { opacity: 0.9; transform: translateY(0) scale(1); }
+      50% { opacity: 0.6; transform: translateY(-8px) scale(1.1) skewX(4deg); }
+      100% { opacity: 0; transform: translateY(-22px) scale(1.3) skewX(-6deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating brand badge -->
+  <a href="../../index.html" class="vanvi-badge" title="Created on Vanvi Moments">
+    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <span>Vanvi Moments</span>
+  </a>
+
+  <!-- Audio elements -->
+  <audio id="bg-music" src="assets/music.mp3" preload="auto" loop></audio>
+
+  <!-- Interactive Experience Container -->
+  <div class="tpl-birthday" id="birthday-experience">
+    
+    <!-- Background doodles -->
+    <div class="background-doodles" aria-hidden="true">
+      <span>♡</span>
+      <span>✦</span>
+      <span>☁</span>
+      <span>✿</span>
+      <span>⋆</span>
+      <span>♡</span>
+    </div>
+
+    <!-- 1. VERIFICATION SCREEN -->
+    <section class="screen active" data-screen="verification">
+      <div class="card hero-card">
+        <div class="sticker sticker-top">PRIVATE BIRTHDAY PORTAL 💌</div>
+        <div class="cartoon-face floating">(˶ᵔ ᵕ ᵔ˶)</div>
+        <p class="eyebrow">tiny security checkpoint</p>
+        <h1>Hold Up 👀</h1>
+        <p>This extremely serious website needs to verify one extremely serious detail.</p>
+        <h2>Are you <span class="recipient-name">Emma</span>?</h2>
+        <div class="buttons">
+          <button type="button" class="primary-btn" id="btn-verify-yes">Yep, that’s me ✨</button>
+          <button type="button" class="secondary-btn" id="btn-verify-no">Wrong person 😶</button>
+        </div>
+        <p class="tiny-note">Security system powered by vibes and one button.</p>
+      </div>
+    </section>
+
+    <!-- 2. NO SCREEN (Wrong person) -->
+    <section class="screen" data-screen="no">
+      <div class="card compact-card">
+        <div class="big-emoji">🕵️‍♀️</div>
+        <h1>Hmm… suspicious.</h1>
+        <p>This tiny corner was made only for <strong class="recipient-name">Emma</strong>.</p>
+        <p>The guards are adorable, but surprisingly strict. 🐰</p>
+        <button type="button" class="secondary-btn" id="btn-try-again">Try Again ↩</button>
+      </div>
+    </section>
+
+    <!-- 3. INTRO SCREEN -->
+    <section class="screen" data-screen="intro">
+      <div class="split-layout">
+        <div class="polaroid rotate-left">
+          <div class="cartoon-scene pink-scene">
+            <div class="cloud cloud-one">☁</div>
+            <div class="cloud cloud-two">☁</div>
+            <div class="bunny-character">
+              <div class="bunny-ears">ᕱ ᕱ</div>
+              <div class="bunny-face">•ᴗ•</div>
+            </div>
+            <div class="mini-heart">♡</div>
+            <small>birthday department mascot</small>
+          </div>
+          <div class="polaroid-caption">officially verified ✨</div>
+        </div>
+        <div class="paper-card rotate-right">
+          <span class="tape"></span>
+          <p class="handwritten-small">access granted 🌷</p>
+          <h1 class="handwritten-title">Hi <span class="recipient-name">Emma</span>!</h1>
+          <p>Welcome to a tiny birthday universe built with unnecessary effort, questionable design decisions, and very serious levels of pink.</p>
+          <p>No instructions. Just click things, enjoy the nonsense, and pretend this website passed quality testing. 😂</p>
+          <button type="button" class="primary-btn" id="btn-intro-enter">Enter ✨</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. BIRTHDAY TITLE SCREEN -->
+    <section class="screen" data-screen="birthday">
+      <div class="birthday-wrap">
+        <div class="birthday-copy paper-card">
+          <span class="sparkle">✦</span>
+          <p class="eyebrow">breaking birthday news</p>
+          <h1 class="mega-title">Happy Birthday</h1>
+          <h2><span class="recipient-name">Emma</span> 🎂💗</h2>
+          <p>Today’s forecast: 100% chance of cake, random compliments, dramatic decorations, and absolutely no responsibility for unnecessary calories.</p>
+          <button type="button" class="primary-btn" id="btn-birthday-continue">Continue →</button>
+        </div>
+        <div class="character-stack">
+          <div class="bubble-card bubble-one">👑<span>main character day</span></div>
+          <div class="bubble-card bubble-two">🧁<span>cake tax = zero</span></div>
+          <div class="bubble-card bubble-three">✨<span>sparkle permit active</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FOUR LITTLE NOTES SCREEN -->
+    <section class="screen" data-screen="notes">
+      <div class="notes-mailbox-section">
+        <p class="eyebrow">four tiny stickers for you</p>
+        <h1 class="handwritten-title">Four Little Notes 💌</h1>
+        <p class="section-subtitle">No predictions, no rules — just four small things I wanted to leave here.</p>
+        <p class="notes-hint">tap a sticker to flip it ✨</p>
+        
+        <div class="notes-flip-grid" aria-label="Four little birthday notes">
+          
+          <!-- Note 1 -->
+          <div class="flip-card" role="button" tabindex="0" data-note-index="0" aria-label="Little note 1">
+            <div class="flip-inner">
+              <div class="flip-face flip-front pastel-pink">
+                <div class="card-emoji">♡</div>
+                <b>Little Note 01</b>
+                <small>tap to flip</small>
+              </div>
+              <div class="flip-face flip-back">
+                <span class="flip-note-number">note 01 / 04</span>
+                <p class="note-flip-text" id="note-text-0">Some people slowly become important without you even noticing when it happened. You're definitely one of those people. ❤️</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Note 2 -->
+          <div class="flip-card" role="button" tabindex="0" data-note-index="1" aria-label="Little note 2">
+            <div class="flip-inner">
+              <div class="flip-face flip-front pastel-yellow">
+                <div class="card-emoji">✦</div>
+                <b>Little Note 02</b>
+                <small>tap to flip</small>
+              </div>
+              <div class="flip-face flip-back">
+                <span class="flip-note-number">note 02 / 04</span>
+                <p class="note-flip-text" id="note-text-1">I hope this year gives you plenty of moments that make you genuinely happy — even the little ones you never planned for. ✨</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Note 3 -->
+          <div class="flip-card" role="button" tabindex="0" data-note-index="2" aria-label="Little note 3">
+            <div class="flip-inner">
+              <div class="flip-face flip-front pastel-lilac">
+                <div class="card-emoji">🌷</div>
+                <b>Little Note 03</b>
+                <small>tap to flip</small>
+              </div>
+              <div class="flip-face flip-back">
+                <span class="flip-note-number">note 03 / 04</span>
+                <p class="note-flip-text" id="note-text-2">You have a genuinely good heart, and I hope life keeps giving you people and moments that deserve that side of you. 🌷</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Note 4 -->
+          <div class="flip-card" role="button" tabindex="0" data-note-index="3" aria-label="Little note 4">
+            <div class="flip-inner">
+              <div class="flip-face flip-front pastel-mint">
+                <div class="card-emoji">☁</div>
+                <b>Little Note 04</b>
+                <small>tap to flip</small>
+              </div>
+              <div class="flip-face flip-back">
+                <span class="flip-note-number">note 04 / 04</span>
+                <p class="note-flip-text" id="note-text-3">Here's to more good conversations, silly memories, unexpected laughs, and many more stories worth remembering. 😂❤️</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <button type="button" class="primary-btn" id="btn-notes-continue">Continue →</button>
+      </div>
+    </section>
+
+    <!-- 6. BALLOONS GAME SCREEN -->
+    <section class="screen" data-screen="balloons">
+      <div class="balloon-layout">
+        <div class="paper-card balloon-copy rotate-left">
+          <span class="tape"></span>
+          <p class="eyebrow">tiny birthday mini-game</p>
+          <h1 class="handwritten-title">Pop! Pop! Pop! 🎈</h1>
+          <p>There are five balloons causing unnecessary drama. Please deal with the situation.</p>
+          <p class="status-text" id="balloon-status">Balloons remaining: 5</p>
+          <button type="button" class="primary-btn" id="btn-balloons-continue" style="display:none;">Continue →</button>
+        </div>
+        <div class="balloon-stage" aria-label="Balloon popping game">
+          <button type="button" class="balloon balloon-one" data-balloon="0" aria-label="Pop pink balloon"><span>♡</span></button>
+          <button type="button" class="balloon balloon-two" data-balloon="1" aria-label="Pop yellow balloon"><span>✦</span></button>
+          <button type="button" class="balloon balloon-three" data-balloon="2" aria-label="Pop purple balloon"><span>☁</span></button>
+          <button type="button" class="balloon balloon-four" data-balloon="3" aria-label="Pop mint balloon"><span>✿</span></button>
+          <button type="button" class="balloon balloon-five" data-balloon="4" aria-label="Pop peach balloon"><span>★</span></button>
+          <div class="balloon-pop-text" id="balloon-pop-comment">tap the balloons ✨</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. LAUGH METER SCREEN -->
+    <section class="screen" data-screen="laugh">
+      <div class="laugh-layout">
+        <div class="paper-card laugh-copy rotate-left">
+          <span class="tape"></span>
+          <p class="eyebrow">highly scientific experiment</p>
+          <h1 class="handwritten-title">Laugh Meter 😂</h1>
+          <p>This machine has one job: check whether your birthday mood is functioning properly.</p>
+          <p class="tiny-note">Accuracy: questionable. Confidence: unnecessarily high.</p>
+          
+          <div class="laugh-meter-box">
+            <div class="laugh-score-row">
+              <span>Mood reading</span>
+              <strong id="laugh-score-val">0%</strong>
+            </div>
+            <div class="laugh-track" aria-label="Laugh meter">
+              <div class="laugh-fill" id="laugh-track-fill" style="width: 0%;"></div>
+            </div>
+            <p class="laugh-status" id="laugh-status-text">Current diagnosis: suspiciously serious. 👀</p>
+          </div>
+
+          <button type="button" class="primary-btn" id="btn-laugh-action">Press for Better Mood 😂</button>
+        </div>
+
+        <div class="laugh-machine" aria-live="polite">
+          <div class="machine-antenna"><span></span></div>
+          <div class="machine-body">
+            <div class="machine-label">MOOD-O-METER</div>
+            <div class="laugh-face" id="machine-face">😐</div>
+            <div class="machine-lights"><i></i><i></i><i></i></div>
+            <div class="machine-printout" id="machine-printout">waiting for a smile...</div>
+          </div>
+          <div class="machine-shadow"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. PHOTO ALBUM SCREEN -->
+    <section class="screen" data-screen="album">
+      <div class="album-section">
+        <p class="eyebrow">extremely rare photographic evidence</p>
+        <h1 class="handwritten-title">The Very Serious Photo Album 📸</h1>
+        <p class="section-subtitle">The photo department had limited resources, so Instagram has officially been promoted to chief photographer. 😂</p>
+        
+        <div class="album-grid" id="album-grid">
+          <!-- 5 tilted polaroids -->
+          <figure class="album-card album-tilt-one" data-photo-index="0">
+            <span class="album-tape"></span>
+            <div class="album-image-wrap">
+              <img src="assets/photo1.jpg" alt="Album photo 1">
+              <div class="album-fallback">📷</div>
+            </div>
+          </figure>
+
+          <figure class="album-card album-tilt-two" data-photo-index="1">
+            <span class="album-tape"></span>
+            <div class="album-image-wrap">
+              <img src="assets/photo2.jpg" alt="Album photo 2">
+              <div class="album-fallback">🕵️‍♀️</div>
+            </div>
+          </figure>
+
+          <figure class="album-card album-tilt-three" data-photo-index="2">
+            <span class="album-tape"></span>
+            <div class="album-image-wrap">
+              <img src="assets/photo3.jpg" alt="Album photo 3">
+              <div class="album-fallback">✨</div>
+            </div>
+          </figure>
+
+          <figure class="album-card album-tilt-four" data-photo-index="3">
+            <span class="album-tape"></span>
+            <div class="album-image-wrap">
+              <img src="assets/photo4.jpg" alt="Album photo 4">
+              <div class="album-fallback">🔎</div>
+            </div>
+          </figure>
+
+          <figure class="album-card album-featured" data-photo-index="4">
+            <span class="album-tape"></span>
+            <div class="album-image-wrap">
+              <img src="assets/photo5.jpg" alt="Album photo 5">
+              <div class="album-fallback">🏆</div>
+            </div>
+          </figure>
+        </div>
+
+        <p class="album-hint">Tap any photo for a completely unnecessary museum spotlight ✨</p>
+        <button type="button" class="primary-btn" id="btn-album-continue">Continue →</button>
+      </div>
+    </section>
+
+    <!-- 9. CAKE & CANDLES SCREEN -->
+    <section class="screen" data-screen="cake">
+      <div class="cake-layout">
+        
+<div class="wish-cake" id="wish-cake">
+  <div class="wish-glow" aria-hidden="true"></div>
+  <svg viewBox="0 0 330 320" role="img" aria-label="Birthday cake with five lit candles">
+    <defs>
+      <radialGradient id="wishFlame" cx="50%" cy="70%" r="60%">
+        <stop offset="0" stop-color="#fff3b0" />
+        <stop offset=".55" stop-color="#ffb347" />
+        <stop offset="1" stop-color="#ff7a59" />
+      </radialGradient>
+      <radialGradient id="wishHalo">
+        <stop offset="0" stop-color="rgba(255,220,130,.75)" />
+        <stop offset="1" stop-color="rgba(255,220,130,0)" />
+      </radialGradient>
+      <linearGradient id="wishTier" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0" stop-color="#f7b6cf" />
+        <stop offset="1" stop-color="#e88db2" />
+      </linearGradient>
+      <linearGradient id="wishPlate" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0" stop-color="#ffffff" />
+        <stop offset="1" stop-color="#e9dbe3" />
+      </linearGradient>
+    </defs>
+    <!-- Base plate -->
+    <ellipse cx="165" cy="300" rx="140" ry="14" fill="rgba(110,70,95,.14)" />
+    <ellipse cx="165" cy="288" rx="150" ry="20" fill="url(#wishPlate)" stroke="#e3d3dc" />
+    
+    <!-- Tier -->
+    <rect x="40" y="180" width="250" height="104" rx="16" fill="url(#wishTier)" />
+    <rect x="40" y="228" width="250" height="12" fill="#fff7fb" opacity=".9" />
+    <ellipse cx="165" cy="282" rx="125" ry="10" fill="#e07fa7" opacity=".5" />
+    
+    <!-- Frosting drips and top icing -->
+    <path d="M40 186 L45.6 186 C 45.6 199.5, 62.2 199.5, 62.2 186 L73.3 186 C 73.3 215.5, 90.0 215.5, 90.0 186 L101.1 186 C 101.1 218.0, 117.8 218.0, 117.8 186 L128.9 186 C 128.9 221.2, 145.6 221.2, 145.6 186 L156.7 186 C 156.7 220.3, 173.3 220.3, 173.3 186 L184.4 186 C 184.4 218.6, 201.1 218.6, 201.1 186 L212.2 186 C 212.2 213.3, 228.9 213.3, 228.9 186 L240.0 186 C 240.0 218.1, 256.7 218.1, 256.7 186 L267.8 186 C 267.8 218.2, 284.4 218.2, 284.4 186 L290 186 L290 178 L40 178 Z" fill="#fff7fb" />
+    <ellipse cx="165" cy="180" rx="125" ry="18" fill="#fff7fb" />
+    
+    <!-- Sprinkles -->
+    <rect x="51.5" y="251.8" width="7" height="2.6" rx="1.3" fill="#7fc4ff" transform="rotate(23 55 253.1)" />
+    <rect x="226.4" y="273.9" width="7" height="2.6" rx="1.3" fill="#8fd6b5" transform="rotate(19 229.9 275.2)" />
+    <rect x="76.5" y="258.2" width="7" height="2.6" rx="1.3" fill="#8fd6b5" transform="rotate(121 80 259.5)" />
+    <rect x="156.8" y="255.4" width="7" height="2.6" rx="1.3" fill="#8fd6b5" transform="rotate(138 160.3 256.7)" />
+    <rect x="60.4" y="248.6" width="7" height="2.6" rx="1.3" fill="#8fd6b5" transform="rotate(108 63.9 249.9)" />
+    <rect x="218.1" y="251.8" width="7" height="2.6" rx="1.3" fill="#ffd76f" transform="rotate(67 221.6 253.1)" />
+    <rect x="186.9" y="267.5" width="7" height="2.6" rx="1.3" fill="#7fc4ff" transform="rotate(159 190.4 268.8)" />
+    <rect x="215.2" y="255.4" width="7" height="2.6" rx="1.3" fill="#ffd76f" transform="rotate(154 218.7 256.7)" />
+    <rect x="131.2" y="258.7" width="7" height="2.6" rx="1.3" fill="#b9a2f0" transform="rotate(171 134.7 260)" />
+    <rect x="204.1" y="269.3" width="7" height="2.6" rx="1.3" fill="#ffffff" transform="rotate(51 207.6 270.6)" />
+    <rect x="100.6" y="270.3" width="7" height="2.6" rx="1.3" fill="#b9a2f0" transform="rotate(140 104.1 271.6)" />
+    <rect x="241.5" y="265.0" width="7" height="2.6" rx="1.3" fill="#7fc4ff" transform="rotate(173 245 266.3)" />
+    <rect x="151.5" y="272.7" width="7" height="2.6" rx="1.3" fill="#ffffff" transform="rotate(53 155 274)" />
+    <rect x="82.3" y="260.0" width="7" height="2.6" rx="1.3" fill="#ffd76f" transform="rotate(89 85.8 261.3)" />
+    <rect x="134.8" y="248.9" width="7" height="2.6" rx="1.3" fill="#ffd76f" transform="rotate(98 138.3 250.2)" />
+    <rect x="82.7" y="261.8" width="7" height="2.6" rx="1.3" fill="#b9a2f0" transform="rotate(156 86.2 263.1)" />
+    <rect x="245.1" y="259.2" width="7" height="2.6" rx="1.3" fill="#8fd6b5" transform="rotate(146 248.6 260.5)" />
+    <rect x="168.1" y="265.3" width="7" height="2.6" rx="1.3" fill="#b9a2f0" transform="rotate(82 171.6 266.6)" />
+    <rect x="160.1" y="253.0" width="7" height="2.6" rx="1.3" fill="#7fc4ff" transform="rotate(32 163.6 254.3)" />
+    <rect x="154.6" y="259.3" width="7" height="2.6" rx="1.3" fill="#ffffff" transform="rotate(167 158.1 260.6)" />
+    <rect x="150.6" y="250.3" width="7" height="2.6" rx="1.3" fill="#ff7fae" transform="rotate(35 154.1 251.6)" />
+    <rect x="230.6" y="265.3" width="7" height="2.6" rx="1.3" fill="#b9a2f0" transform="rotate(95 234.1 266.6)" />
+    <rect x="270.4" y="274.6" width="7" height="2.6" rx="1.3" fill="#ff7fae" transform="rotate(136 273.9 275.9)" />
+    <rect x="86.5" y="264.0" width="7" height="2.6" rx="1.3" fill="#ffd76f" transform="rotate(110 90 265.3)" />
+    <rect x="207.4" y="262.8" width="7" height="2.6" rx="1.3" fill="#8fd6b5" transform="rotate(132 210.9 264.1)" />
+    <rect x="235.4" y="252.6" width="7" height="2.6" rx="1.3" fill="#b9a2f0" transform="rotate(108 238.9 253.9)" />
+    <rect x="135.9" y="250.8" width="7" height="2.6" rx="1.3" fill="#ffd76f" transform="rotate(53 139.4 252.1)" />
+    <rect x="229.7" y="260.3" width="7" height="2.6" rx="1.3" fill="#b9a2f0" transform="rotate(132 233.2 261.6)" />
+    <rect x="269.6" y="247.2" width="7" height="2.6" rx="1.3" fill="#b9a2f0" transform="rotate(104 273.1 248.5)" />
+    <rect x="147.8" y="272.3" width="7" height="2.6" rx="1.3" fill="#8fd6b5" transform="rotate(31 151.3 273.6)" />
+    
+    <!-- Cream puffs -->
+    <ellipse cx="88" cy="176" rx="9" ry="7" fill="#ff8fbd" opacity=".9" />
+    <ellipse cx="128" cy="176" rx="9" ry="7" fill="#ffd76f" opacity=".9" />
+    <ellipse cx="168" cy="176" rx="9" ry="7" fill="#b9a2f0" opacity=".9" />
+    <ellipse cx="208" cy="176" rx="9" ry="7" fill="#8fd6b5" opacity=".9" />
+    <ellipse cx="248" cy="176" rx="9" ry="7" fill="#ff8fbd" opacity=".9" />
+    <ellipse cx="280" cy="176" rx="9" ry="7" fill="#ffd76f" opacity=".9" />
+    
+    <!-- 5 Candles -->
+    
+    <g class="candle-group" data-candle="0">
+      <!-- Wax body -->
+      <rect x="89" y="120" width="12" height="52" rx="4" fill="#fff" />
+      <!-- Diagonal stripes -->
+      <path d="M89 126 l12 -7 v5 l-12 7z" fill="#ff8fbd" />
+      <path d="M89 137 l12 -7 v5 l-12 7z" fill="#ff8fbd" />
+      <path d="M89 148 l12 -7 v5 l-12 7z" fill="#ff8fbd" />
+      <path d="M89 159 l12 -7 v5 l-12 7z" fill="#ff8fbd" />
+      <!-- Wick -->
+      <rect x="94" y="113" width="2" height="8" rx="1" fill="#6b5560" />
+      
+      <!-- Flames (visible when lit) -->
+      <g class="candle-flame-wrap">
+        <circle cx="95" cy="101" r="17" fill="url(#wishHalo)" />
+        <g class="wish-flame" style="animation-delay: 0.00s">
+          <path d="M95 86 C 104 98, 103 111, 95 114 C 87 111, 86 98, 95 86 Z" fill="url(#wishFlame)" />
+          <path d="M95 99 C 98.5 105, 98 111, 95 113 C 92 111, 91.5 105, 95 99 Z" fill="#fff6d6" />
+        </g>
+      </g>
+      
+      <!-- Smoke (visible when blown out) -->
+      <path class="wish-smoke" d="M95 112 c-6 -10 6 -14 0 -24 c-6 -10 4 -16 2 -26" stroke="#b9aab4" stroke-width="2.4" fill="none" stroke-linecap="round" style="display:none;" />
+    </g>
+
+    <g class="candle-group" data-candle="1">
+      <!-- Wax body -->
+      <rect x="124" y="120" width="12" height="52" rx="4" fill="#fff" />
+      <!-- Diagonal stripes -->
+      <path d="M124 126 l12 -7 v5 l-12 7z" fill="#ffd76f" />
+      <path d="M124 137 l12 -7 v5 l-12 7z" fill="#ffd76f" />
+      <path d="M124 148 l12 -7 v5 l-12 7z" fill="#ffd76f" />
+      <path d="M124 159 l12 -7 v5 l-12 7z" fill="#ffd76f" />
+      <!-- Wick -->
+      <rect x="129" y="113" width="2" height="8" rx="1" fill="#6b5560" />
+      
+      <!-- Flames (visible when lit) -->
+      <g class="candle-flame-wrap">
+        <circle cx="130" cy="101" r="17" fill="url(#wishHalo)" />
+        <g class="wish-flame" style="animation-delay: -0.37s">
+          <path d="M130 86 C 139 98, 138 111, 130 114 C 122 111, 121 98, 130 86 Z" fill="url(#wishFlame)" />
+          <path d="M130 99 C 133.5 105, 133 111, 130 113 C 127 111, 126.5 105, 130 99 Z" fill="#fff6d6" />
+        </g>
+      </g>
+      
+      <!-- Smoke (visible when blown out) -->
+      <path class="wish-smoke" d="M130 112 c-6 -10 6 -14 0 -24 c-6 -10 4 -16 2 -26" stroke="#b9aab4" stroke-width="2.4" fill="none" stroke-linecap="round" style="display:none;" />
+    </g>
+
+    <g class="candle-group" data-candle="2">
+      <!-- Wax body -->
+      <rect x="159" y="120" width="12" height="52" rx="4" fill="#fff" />
+      <!-- Diagonal stripes -->
+      <path d="M159 126 l12 -7 v5 l-12 7z" fill="#b9a2f0" />
+      <path d="M159 137 l12 -7 v5 l-12 7z" fill="#b9a2f0" />
+      <path d="M159 148 l12 -7 v5 l-12 7z" fill="#b9a2f0" />
+      <path d="M159 159 l12 -7 v5 l-12 7z" fill="#b9a2f0" />
+      <!-- Wick -->
+      <rect x="164" y="113" width="2" height="8" rx="1" fill="#6b5560" />
+      
+      <!-- Flames (visible when lit) -->
+      <g class="candle-flame-wrap">
+        <circle cx="165" cy="101" r="17" fill="url(#wishHalo)" />
+        <g class="wish-flame" style="animation-delay: -0.74s">
+          <path d="M165 86 C 174 98, 173 111, 165 114 C 157 111, 156 98, 165 86 Z" fill="url(#wishFlame)" />
+          <path d="M165 99 C 168.5 105, 168 111, 165 113 C 162 111, 161.5 105, 165 99 Z" fill="#fff6d6" />
+        </g>
+      </g>
+      
+      <!-- Smoke (visible when blown out) -->
+      <path class="wish-smoke" d="M165 112 c-6 -10 6 -14 0 -24 c-6 -10 4 -16 2 -26" stroke="#b9aab4" stroke-width="2.4" fill="none" stroke-linecap="round" style="display:none;" />
+    </g>
+
+    <g class="candle-group" data-candle="3">
+      <!-- Wax body -->
+      <rect x="194" y="120" width="12" height="52" rx="4" fill="#fff" />
+      <!-- Diagonal stripes -->
+      <path d="M194 126 l12 -7 v5 l-12 7z" fill="#8fd6b5" />
+      <path d="M194 137 l12 -7 v5 l-12 7z" fill="#8fd6b5" />
+      <path d="M194 148 l12 -7 v5 l-12 7z" fill="#8fd6b5" />
+      <path d="M194 159 l12 -7 v5 l-12 7z" fill="#8fd6b5" />
+      <!-- Wick -->
+      <rect x="199" y="113" width="2" height="8" rx="1" fill="#6b5560" />
+      
+      <!-- Flames (visible when lit) -->
+      <g class="candle-flame-wrap">
+        <circle cx="200" cy="101" r="17" fill="url(#wishHalo)" />
+        <g class="wish-flame" style="animation-delay: -1.11s">
+          <path d="M200 86 C 209 98, 208 111, 200 114 C 192 111, 191 98, 200 86 Z" fill="url(#wishFlame)" />
+          <path d="M200 99 C 203.5 105, 203 111, 200 113 C 197 111, 196.5 105, 200 99 Z" fill="#fff6d6" />
+        </g>
+      </g>
+      
+      <!-- Smoke (visible when blown out) -->
+      <path class="wish-smoke" d="M200 112 c-6 -10 6 -14 0 -24 c-6 -10 4 -16 2 -26" stroke="#b9aab4" stroke-width="2.4" fill="none" stroke-linecap="round" style="display:none;" />
+    </g>
+
+    <g class="candle-group" data-candle="4">
+      <!-- Wax body -->
+      <rect x="229" y="120" width="12" height="52" rx="4" fill="#fff" />
+      <!-- Diagonal stripes -->
+      <path d="M229 126 l12 -7 v5 l-12 7z" fill="#7fc4ff" />
+      <path d="M229 137 l12 -7 v5 l-12 7z" fill="#7fc4ff" />
+      <path d="M229 148 l12 -7 v5 l-12 7z" fill="#7fc4ff" />
+      <path d="M229 159 l12 -7 v5 l-12 7z" fill="#7fc4ff" />
+      <!-- Wick -->
+      <rect x="234" y="113" width="2" height="8" rx="1" fill="#6b5560" />
+      
+      <!-- Flames (visible when lit) -->
+      <g class="candle-flame-wrap">
+        <circle cx="235" cy="101" r="17" fill="url(#wishHalo)" />
+        <g class="wish-flame" style="animation-delay: -1.48s">
+          <path d="M235 86 C 244 98, 243 111, 235 114 C 227 111, 226 98, 235 86 Z" fill="url(#wishFlame)" />
+          <path d="M235 99 C 238.5 105, 238 111, 235 113 C 232 111, 231.5 105, 235 99 Z" fill="#fff6d6" />
+        </g>
+      </g>
+      
+      <!-- Smoke (visible when blown out) -->
+      <path class="wish-smoke" d="M235 112 c-6 -10 6 -14 0 -24 c-6 -10 4 -16 2 -26" stroke="#b9aab4" stroke-width="2.4" fill="none" stroke-linecap="round" style="display:none;" />
+    </g>
+  </svg>
+</div>
+        <div class="paper-card cake-copy rotate-right">
+          <span class="tape"></span>
+          <p class="eyebrow">mandatory ceremony</p>
+          <h1 class="handwritten-title">Make a Wish</h1>
+          <p>Take a second, make a proper wish, and click the button when you’re done. The internet has agreed not to ask what you wished for. 😌</p>
+          <button type="button" class="primary-btn" id="btn-cake-blow">Blow the Candles 🎂</button>
+          <button type="button" class="primary-btn" id="btn-cake-continue" style="display:none;">Continue ✨</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. HEARTFELT LETTER SCREEN -->
+    <section class="screen letter-screen" data-screen="message">
+      <div class="letter-shell">
+        <div class="letter-topbar">
+          <span>💌 for <strong class="recipient-name">Emma</strong></span>
+          <span>from <strong class="sender-name">Rahul</strong></span>
+        </div>
+        <article class="letter-paper">
+          <div class="corner-sticker">♡</div>
+          <div class="letter-lines" id="letter-lines">
+            <!-- paragraphs inserted dynamically -->
+          </div>
+          <p class="signature" id="letter-signature">— Rahul 🙂</p>
+          
+          <div class="bday-react" data-testid="birthday-reactions">
+            <p class="bday-react-title">How did this make you feel?</p>
+            <div class="bday-react-row">
+              <button type="button" class="react-chip" data-reaction="loved"><span aria-hidden="true">🥹</span> Loved it</button>
+              <button type="button" class="react-chip" data-reaction="tears"><span aria-hidden="true">😭</span> Happy tears</button>
+              <button type="button" class="react-chip" data-reaction="thanks"><span aria-hidden="true">🤗</span> Thank you so much</button>
+              <button type="button" class="react-chip" data-reaction="best"><span aria-hidden="true">🎉</span> Best surprise ever</button>
+            </div>
+            <p class="bday-react-thanks" id="react-thanks" style="display:none;"></p>
+          </div>
+
+          <div class="letter-actions">
+            <button type="button" class="secondary-btn" id="btn-see-again">See It Again ↻</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Music toggle button -->
+    <button type="button" class="music-control" id="music-btn" style="display:none;" aria-label="Pause or play birthday music">🔊 Music</button>
+
+    <!-- Confetti canvas overlay -->
+    <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+
+    <!-- Toast message -->
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

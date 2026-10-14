@@ -257,7 +257,15 @@ router.post('/moments/:id/status', async (req, res) => {
  */
 router.get('/orders', async (req, res) => {
   try {
-    const orders = await Orders.listAll({ limit: 100 });
+    const orders = await Promise.all((await Orders.listAll({ limit: 100 })).map(async order => {
+      const customer = order.userId ? await Users.findById(order.userId) : null;
+      return {
+        ...order,
+        customerName: customer ? customer.name : null,
+        customerEmail: customer ? customer.email : null,
+        customerPhone: customer ? customer.phone : null
+      };
+    }));
     return res.json({ success: true, orders });
   } catch (err) {
     return res.status(500).json({ success: false, error: 'Failed to retrieve orders.' });
@@ -644,4 +652,3 @@ router.get('/health', async (req, res) => {
 });
 
 module.exports = router;
-

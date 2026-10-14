@@ -6,9 +6,19 @@
 const crypto = require('crypto');
 const { Users } = require('../db/database');
 
-const JWT_SECRET = process.env.VANVI_JWT_SECRET || (process.env.NODE_ENV === 'production' ? '' : 'vanvi_dev_secret_change_before_deploy');
-if (process.env.NODE_ENV === 'production' && !JWT_SECRET) {
-  throw new Error('VANVI_JWT_SECRET must be configured in production.');
+const isProduction = process.env.NODE_ENV === 'production';
+const configuredJwtSecret = process.env.VANVI_JWT_SECRET || process.env.JWT_SECRET || '';
+const isPlaceholderSecret = value => /replace_with|change_in_prod|development_only|placeholder|your[_-]?secret/i.test(value);
+if (isProduction && (
+  configuredJwtSecret.length < 32 ||
+  isPlaceholderSecret(configuredJwtSecret)
+)) {
+  throw new Error('Configure a non-placeholder JWT_SECRET or VANVI_JWT_SECRET of at least 32 characters in production.');
+}
+const JWT_SECRET = configuredJwtSecret || (isProduction ? '' : 'vanvi_dev_secret_change_before_deploy');
+const configuredAdminKey = process.env.ADMIN_SECRET_KEY || '';
+if (isProduction && (configuredAdminKey.length < 32 || isPlaceholderSecret(configuredAdminKey))) {
+  throw new Error('Configure a non-placeholder ADMIN_SECRET_KEY of at least 32 characters in production.');
 }
 const TOKEN_EXPIRY_MS = 30 * 24 * 60 * 60 * 1000; // 30 Days
 
@@ -97,8 +107,15 @@ function verifyToken(token) {
 async function requireAuth(req, res, next) {
   // Support master admin API key for backend integrations, control center tests, and CLI tasks
   const adminKey = req.headers['x-admin-key'];
-  const configuredAdminKey = process.env.ADMIN_SECRET_KEY || 'vanvi_secret_admin_2025_x9k2p';
-  if (adminKey && adminKey === configuredAdminKey) {
+  const providedAdminKey = typeof adminKey === 'string' ? Buffer.from(adminKey, 'utf8') : null;
+  const expectedAdminKey = Buffer.from(configuredAdminKey, 'utf8');
+  if (
+    providedAdminKey &&
+    configuredAdminKey.length >= 32 &&
+    !isPlaceholderSecret(configuredAdminKey) &&
+    providedAdminKey.length === expectedAdminKey.length &&
+    crypto.timingSafeEqual(providedAdminKey, expectedAdminKey)
+  ) {
     req.user = {
       id: 'admin_master',
       name: 'System Administrator',
@@ -160,4 +177,3 @@ module.exports = {
   requireAuth,
   optionalAuth
 };
-

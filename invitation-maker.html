@@ -1,678 +1,692 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
-  <title>Royal Indian Wedding & Event Invitation Studio — Vanvi Moments</title>
-  <meta name="description" content="Create ultra-luxury Indian wedding invitations, Vivah cards, and event e-cards with live venue QR codes, royal Sanskrit shlokas, and 4K ultra-HD downloads." />
+  <title>Free Invitation Maker | Wedding & Birthday | Vanvi Moments</title>
+  <meta name="description" content="Make a free wedding or birthday invitation card online. Pick a design, add your details, and download for WhatsApp, Instagram or print. No sign-up." />
+  <meta name="theme-color" content="#c59b27" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <meta name="theme-color" content="#170d14" />
 
-  <!-- Google Typography: Royal Serif, Calligraphy Scripts, and Devanagari -->
+  <!-- Google Typography: Playfair Display, Cormorant Garamond, Cinzel, Pinyon Script, Plus Jakarta Sans, Rozha One, Yatra One, Marcellus, Baloo 2 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rozha+One&family=Yatra+One&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Marcellus&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rozha+One&family=Yatra+One&display=swap" rel="stylesheet" />
 
-  <!-- Libraries -->
+  <!-- External Libraries for Live QR & 4K PNG Rendering -->
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
 
-  <!-- Studio Stylesheet -->
+  <!-- Card Designs & Templates Engine CSS -->
+  <link rel="stylesheet" href="css/cards.css" />
+
+  <!-- Vanvi invitation maker styling -->
   <link rel="stylesheet" href="css/vanvi-invitation-maker.css" />
 </head>
-<body>
+<body class="ivm-body">
 
-  <!-- Top Studio Header -->
-  <header class="studio-header">
-    <div class="brand-cluster">
-      <a href="templates.html" class="btn-back-home" title="Back to Templates" aria-label="Back">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M19 12H5M12 19l-7-7 7-7"/>
-        </svg>
-      </a>
-      <div class="brand-identity">
-        <div class="brand-badge-pill">
-          <span class="sparkle">✦</span>
-          <span>VANVI LUXE STUDIO</span>
-        </div>
-        <span class="studio-title">Royal Invitation Maker</span>
+  <!-- ======================================================================
+       1. NAVIGATION HEADER
+       ====================================================================== -->
+  <header class="ivm-nav">
+    <a href="templates.html" class="ivm-nav-brand">
+      <div class="ivm-nav-logo">
+        <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" width="32" height="32" />
       </div>
-    </div>
+      <span class="ivm-nav-title">Vanvi Moments</span>
+      <span class="ivm-nav-tag">Card Maker</span>
+    </a>
 
-    <!-- Aspect Ratio Toggle -->
-    <div class="ratio-toggle-group" title="Select Card Aspect Ratio">
-      <button type="button" class="ratio-btn active" data-ratio="post">
-        <span>4:5 Post</span>
-      </button>
-      <button type="button" class="ratio-btn" data-ratio="story">
-        <span>9:16 Story</span>
-      </button>
-    </div>
-
-    <!-- Header Actions -->
-    <div class="header-actions">
-      <button type="button" class="btn-studio-action btn-studio-ghost" id="btnShareWhatsApp" title="Share via WhatsApp" style="color:#25d366;border-color:rgba(37,211,102,0.35);">
-        <span>📱 WhatsApp</span>
-      </button>
-      <button type="button" class="btn-studio-action btn-studio-ghost" id="btnTriggerWebKeepsake" title="Generate Interactive Web Link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="2" y1="12" x2="22" y2="12"></line>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-        </svg>
-        <span>Web Keepsake</span>
-      </button>
-      <button type="button" class="btn-studio-action btn-studio-primary" id="btnTriggerDownload" title="Download Print-Ready 4K Card">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <div class="ivm-nav-links">
+      <a href="templates.html" class="ivm-nav-link">All Templates</a>
+      <a href="#faq" class="ivm-nav-link">FAQ</a>
+      <button type="button" class="ivm-btn ivm-btn--gold ivm-btn--sm" id="btnNavDownload">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
-        <span>Download 4K</span>
+        <span>Download Card</span>
       </button>
     </div>
   </header>
 
-  <!-- Main Split-Screen Workspace -->
-  <main class="studio-workspace">
+  <!-- ======================================================================
+       2. HERO SECTION & OCCASION PICKER
+       ====================================================================== -->
+  <section id="top" class="ivm-hero">
+    <div class="ivm-wrap ivm-hero-grid">
+      <div>
+        <h1 class="ivm-hero-h1">Free invitation card maker</h1>
+        <p class="ivm-hero-sub">Make a wedding, birthday or housewarming card in a couple of minutes. Download it for WhatsApp and Instagram, or print it. <span class="ivm-nowrap">No sign-up.</span></p>
 
-    <!-- ======================================================================
-         LEFT COLUMN: CUSTOMIZATION CONTROLS
-         ====================================================================== -->
-    <aside class="studio-sidebar">
-      
-      <!-- Studio Category Tabs -->
-      <nav class="studio-tabs-row" aria-label="Studio Options">
-        <button type="button" class="studio-tab-btn active" data-tab="themes">
-          <span>🎨 Themes</span>
-        </button>
-        <button type="button" class="studio-tab-btn" data-tab="fonts">
-          <span>🔤 Fonts</span>
-        </button>
-        <button type="button" class="studio-tab-btn" data-tab="deities">
-          <span>👑 Deities</span>
-        </button>
-        <button type="button" class="studio-tab-btn" data-tab="details">
-          <span>✍️ Details</span>
-        </button>
-        <button type="button" class="studio-tab-btn" data-tab="photo">
-          <span>📸 Photo</span>
-        </button>
-        <button type="button" class="studio-tab-btn" data-tab="presets">
-          <span>📜 Shlokas</span>
-        </button>
-      </nav>
-
-      <!-- TAB 1: ROYAL THEMES & PALETTES -->
-      <section class="tab-panel active" id="panel_themes">
-        <div class="control-section">
-          <div class="section-label">
-            <span>Royal Indian Palettes</span>
-            <small style="color:var(--ink-muted);font-weight:600;">8 Grand Themes</small>
-          </div>
-          <div class="themes-grid">
-            
-            <!-- 1. Rajwada Royale -->
-            <div class="theme-card-option active" data-theme="theme-rajwada">
-              <div class="theme-preview-strip" style="background:#4a0d1e;color:#f7d774;border-color:#d4af37;">
-                Rajwada
-              </div>
-              <span class="theme-card-name">Rajwada Crimson</span>
-              <span class="theme-card-desc">Royal maroon velvet with 24K gold foil.</span>
-            </div>
-
-            <!-- 2. Udaipur Sunset -->
-            <div class="theme-card-option" data-theme="theme-udaipur">
-              <div class="theme-preview-strip" style="background:#f7efe5;color:#b05c74;border-color:#e0a899;">
-                Udaipur
-              </div>
-              <span class="theme-card-name">Udaipur Sunset</span>
-              <span class="theme-card-desc">Ivory raw silk with soft rose gold arches.</span>
-            </div>
-
-            <!-- 3. Emerald & Brass -->
-            <div class="theme-card-option" data-theme="theme-emerald">
-              <div class="theme-preview-strip" style="background:#0d3b30;color:#fce196;border-color:#e5b869;">
-                Emerald
-              </div>
-              <span class="theme-card-name">Emerald Shehnai</span>
-              <span class="theme-card-desc">Deep forest green with warm brass trims.</span>
-            </div>
-
-            <!-- 4. Champagne Silk -->
-            <div class="theme-card-option" data-theme="theme-champagne">
-              <div class="theme-preview-strip" style="background:#ebe2d3;color:#8c6d48;border-color:#cbb295;">
-                Champagne
-              </div>
-              <span class="theme-card-name">Champagne Silk</span>
-              <span class="theme-card-desc">Minimalist French cream with serif elegance.</span>
-            </div>
-
-            <!-- 5. Jodhpur Peacock -->
-            <div class="theme-card-option" data-theme="theme-peacock">
-              <div class="theme-preview-strip" style="background:#0e2b4d;color:#ffd978;border-color:#e0b457;">
-                Peacock
-              </div>
-              <span class="theme-card-name">Jodhpur Peacock</span>
-              <span class="theme-card-desc">Imperial indigo blue with antique gold crest.</span>
-            </div>
-
-            <!-- 6. Jaipur Rani Pink -->
-            <div class="theme-card-option" data-theme="theme-ranipink">
-              <div class="theme-preview-strip" style="background:#8c0c46;color:#ffe082;border-color:#fcd34d;">
-                Rani Pink
-              </div>
-              <span class="theme-card-name">Jaipur Rani Pink</span>
-              <span class="theme-card-desc">Vibrant Gota Patti pink with glowing gold.</span>
-            </div>
-
-            <!-- 7. Kashi Haldi -->
-            <div class="theme-card-option" data-theme="theme-haldi">
-              <div class="theme-preview-strip" style="background:#7c440d;color:#fde047;border-color:#fbbf24;">
-                Haldi
-              </div>
-              <span class="theme-card-name">Haldi Chandan</span>
-              <span class="theme-card-desc">Turmeric saffron ochre with warm terracotta.</span>
-            </div>
-
-            <!-- 8. Midnight Obsidian -->
-            <div class="theme-card-option" data-theme="theme-obsidian">
-              <div class="theme-preview-strip" style="background:#171926;color:#fde68a;border-color:#e2b755;">
-                Obsidian
-              </div>
-              <span class="theme-card-name">Midnight Obsidian</span>
-              <span class="theme-card-desc">Starry black sapphire with pure gold accents.</span>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="control-section">
-          <div class="section-label">
-            <span>Visual Options</span>
-          </div>
-          <div class="toggle-switch-row">
-            <span class="toggle-switch-label">Include Parents & Family Line</span>
-            <label class="switch-control">
-              <input type="checkbox" id="toggleParents" checked />
-              <span class="switch-slider"></span>
-            </label>
-          </div>
-          <div class="toggle-switch-row">
-            <span class="toggle-switch-label">Display Venue Google Maps QR Code</span>
-            <label class="switch-control">
-              <input type="checkbox" id="toggleQR" checked />
-              <span class="switch-slider"></span>
-            </label>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 2: TYPOGRAPHY & FONT STYLES -->
-      <section class="tab-panel" id="panel_fonts">
-        <div class="control-section">
-          <div class="section-label">
-            <span>Couple Names Typography</span>
-            <small style="color:var(--ink-muted);font-weight:600;">8 Grand Fonts</small>
-          </div>
-          <div class="fonts-grid" id="coupleFontsGrid">
-            
-            <div class="font-card-option active" data-font="font-pinyon">
-              <span class="font-card-sample" style="font-family:'Pinyon Script',cursive;font-size:24px;">Aditya & Priya</span>
-              <span class="font-card-name">Pinyon Script</span>
-            </div>
-
-            <div class="font-card-option" data-font="font-cinzel-dec">
-              <span class="font-card-sample" style="font-family:'Cinzel Decorative',serif;font-size:16px;">ADITYA & PRIYA</span>
-              <span class="font-card-name">Cinzel Decorative</span>
-            </div>
-
-            <div class="font-card-option" data-font="font-cormorant">
-              <span class="font-card-sample" style="font-family:'Cormorant Garamond',serif;font-size:20px;">Aditya & Priya</span>
-              <span class="font-card-name">Cormorant Garamond</span>
-            </div>
-
-            <div class="font-card-option" data-font="font-alex">
-              <span class="font-card-sample" style="font-family:'Alex Brush',cursive;font-size:22px;">Aditya & Priya</span>
-              <span class="font-card-name">Alex Brush</span>
-            </div>
-
-            <div class="font-card-option" data-font="font-greatvibes">
-              <span class="font-card-sample" style="font-family:'Great Vibes',cursive;font-size:22px;">Aditya & Priya</span>
-              <span class="font-card-name">Great Vibes</span>
-            </div>
-
-            <div class="font-card-option" data-font="font-playfair">
-              <span class="font-card-sample" style="font-family:'Playfair Display',serif;font-size:18px;">Aditya & Priya</span>
-              <span class="font-card-name">Playfair Display</span>
-            </div>
-
-            <div class="font-card-option" data-font="font-rozha">
-              <span class="font-card-sample" style="font-family:'Rozha One',serif;font-size:18px;">आदित्य & प्रिया</span>
-              <span class="font-card-name">Rozha One</span>
-            </div>
-
-            <div class="font-card-option" data-font="font-yatra">
-              <span class="font-card-sample" style="font-family:'Yatra One',cursive;font-size:18px;">आदित्य & प्रिया</span>
-              <span class="font-card-name">Yatra One</span>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="control-section">
-          <div class="section-label">
-            <span>Body & Details Font</span>
-          </div>
-          <div class="fonts-grid" id="bodyFontsGrid">
-            <div class="font-card-option active" data-body-font="body-cormorant">
-              <span class="font-card-sample" style="font-family:'Cormorant Garamond',serif;font-size:16px;">The Taj Lake Palace</span>
-              <span class="font-card-name">Cormorant Garamond</span>
-            </div>
-            <div class="font-card-option" data-body-font="body-jakarta">
-              <span class="font-card-sample" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;">The Taj Lake Palace</span>
-              <span class="font-card-name">Jakarta Sans</span>
-            </div>
-            <div class="font-card-option" data-body-font="body-montserrat">
-              <span class="font-card-sample" style="font-family:'Montserrat',sans-serif;font-size:13px;">The Taj Lake Palace</span>
-              <span class="font-card-name">Montserrat</span>
-            </div>
-            <div class="font-card-option" data-body-font="body-cinzel">
-              <span class="font-card-sample" style="font-family:'Cinzel',serif;font-size:13px;">THE TAJ LAKE PALACE</span>
-              <span class="font-card-name">Cinzel Classical</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="control-section">
-          <div class="section-label">
-            <span>Royal Border & Frame Style</span>
-          </div>
-          <div class="preset-chips-wrap">
-            <button type="button" class="preset-chip active" data-border-style="border-double">Double Royal Line</button>
-            <button type="button" class="preset-chip" data-border-style="border-jali">Mughal Jali Inset</button>
-            <button type="button" class="preset-chip" data-border-style="border-corner-mandala">Corner Mandalas</button>
-            <button type="button" class="preset-chip" data-border-style="border-silk-clean">Minimalist Silk</button>
-          </div>
-
-          <div class="toggle-switch-row" style="margin-top:14px;">
-            <span class="toggle-switch-label">24K Gold Foil Shimmer Animation</span>
-            <label class="switch-control">
-              <input type="checkbox" id="toggleGoldShimmer" checked />
-              <span class="switch-slider"></span>
-            </label>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 3: SACRED CREST & DEITIES -->
-      <section class="tab-panel" id="panel_deities">
-        <div class="control-section">
-          <div class="section-label">
-            <span>Sacred Deity / Royal Emblem</span>
-          </div>
-          <div class="themes-grid" style="grid-template-columns: repeat(3, 1fr);" id="deityOptionsGrid">
-            
-            <div class="theme-card-option active" data-deity="ganesha" style="padding:12px 6px;">
-              <span style="font-size:26px;display:block;margin-bottom:4px;">🐘</span>
-              <span class="theme-card-name" style="font-size:11px;">Lord Ganesha</span>
-            </div>
-
-            <div class="theme-card-option" data-deity="kalash" style="padding:12px 6px;">
-              <span style="font-size:26px;display:block;margin-bottom:4px;">🪔</span>
-              <span class="theme-card-name" style="font-size:11px;">Mangal Kalash</span>
-            </div>
-
-            <div class="theme-card-option" data-deity="radhaKrishna" style="padding:12px 6px;">
-              <span style="font-size:26px;display:block;margin-bottom:4px;">🌸</span>
-              <span class="theme-card-name" style="font-size:11px;">Radha Krishna</span>
-            </div>
-
-            <div class="theme-card-option" data-deity="peacock" style="padding:12px 6px;">
-              <span style="font-size:26px;display:block;margin-bottom:4px;">🦚</span>
-              <span class="theme-card-name" style="font-size:11px;">Royal Peacock</span>
-            </div>
-
-            <div class="theme-card-option" data-deity="crest" style="padding:12px 6px;">
-              <span style="font-size:26px;display:block;margin-bottom:4px;">👑</span>
-              <span class="theme-card-name" style="font-size:11px;">Royal Crest</span>
-            </div>
-
-            <div class="theme-card-option" data-deity="none" style="padding:12px 6px;">
-              <span style="font-size:26px;display:block;margin-bottom:4px;">✨</span>
-              <span class="theme-card-name" style="font-size:11px;">Minimal Clean</span>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 4: EVENT DETAILS & NAMES -->
-      <section class="tab-panel" id="panel_details">
-        
-        <div class="control-section">
-          <div class="section-label">
-            <span>Ceremony Quick Switcher</span>
-          </div>
-          <div class="preset-chips-wrap">
-            <button type="button" class="preset-chip active" data-ceremony="vivah">💍 Shubh Vivah</button>
-            <button type="button" class="preset-chip" data-ceremony="sangeet">💃 Sangeet Night</button>
-            <button type="button" class="preset-chip" data-ceremony="haldi">🪔 Haldi Rasam</button>
-            <button type="button" class="preset-chip" data-ceremony="mehendi">🌿 Mehendi Ki Raat</button>
-            <button type="button" class="preset-chip" data-ceremony="roka">✨ Roka / Ring</button>
-            <button type="button" class="preset-chip" data-ceremony="reception">🥂 Reception</button>
-          </div>
-        </div>
-
-        <div class="control-section">
-          <div class="section-label">
-            <span>Ceremony Badge & Host Line</span>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inpEventBadge">Ceremony Header</label>
-            <input type="text" id="inpEventBadge" class="form-input" value="WEDDING CEREMONY" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inpHostGreeting">Host & Family Line</label>
-            <textarea id="inpHostGreeting" class="form-textarea" rows="2">Together with their families, cordially invite you to celebrate the wedding of</textarea>
-          </div>
-        </div>
-
-        <div class="control-section">
-          <div class="section-label">
-            <span>Couple / Celebrants</span>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inpGroom">Groom's Name</label>
-            <input type="text" id="inpGroom" class="form-input" value="Aditya Sharma" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inpGroomParents">Groom's Parents</label>
-            <input type="text" id="inpGroomParents" class="form-input" value="S/o Mrs. Sunita & Mr. Rajesh Sharma" />
-          </div>
-
-          <div style="text-align:center;margin:8px 0;color:var(--gold-primary);font-family:var(--font-script);font-size:24px;">&</div>
-
-          <div class="form-group">
-            <label class="form-label" for="inpBride">Bride's Name</label>
-            <input type="text" id="inpBride" class="form-input" value="Priya Verma" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inpBrideParents">Bride's Parents</label>
-            <input type="text" id="inpBrideParents" class="form-input" value="D/o Mrs. Rekha & Mr. Manoj Verma" />
-          </div>
-        </div>
-
-        <div class="control-section">
-          <div class="section-label">
-            <span>Date & Venue</span>
-          </div>
-          <div class="input-split-2">
-            <div class="form-group">
-              <label class="form-label" for="inpEventDate">Date</label>
-              <input type="text" id="inpEventDate" class="form-input" value="Sunday, 24th December 2026" />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="inpEventTime">Time</label>
-              <input type="text" id="inpEventTime" class="form-input" value="7:00 PM Onwards" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inpVenueName">Venue Name</label>
-            <input type="text" id="inpVenueName" class="form-input" value="The Taj Lake Palace" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inpVenueAddress">Venue Address & City</label>
-            <input type="text" id="inpVenueAddress" class="form-input" value="Pichola, Udaipur, Rajasthan 313001" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inpVenueUrl">Google Maps Link (for QR Code)</label>
-            <input type="url" id="inpVenueUrl" class="form-input" value="https://maps.google.com/?q=Taj+Lake+Palace+Udaipur" placeholder="https://maps.google.com/..." />
-          </div>
-        </div>
-
-        <div class="control-section">
-          <div class="section-label">
-            <span>RSVP & Contact</span>
-          </div>
-          <div class="input-split-2">
-            <div class="form-group">
-              <label class="form-label" for="inpRsvpName">RSVP Family</label>
-              <input type="text" id="inpRsvpName" class="form-input" value="Sharma & Verma Family" />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="inpRsvpPhone">Contact Phone</label>
-              <input type="text" id="inpRsvpPhone" class="form-input" value="+91 98765 43210" />
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      <!-- TAB 5: PHOTO & FRAME -->
-      <section class="tab-panel" id="panel_photo">
-        <div class="control-section">
-          <div class="section-label">
-            <span>Couple / Portrait Photo</span>
-          </div>
-          <div class="toggle-switch-row" style="margin-bottom:12px;">
-            <span class="toggle-switch-label">Show Photo on Card</span>
-            <label class="switch-control">
-              <input type="checkbox" id="togglePhoto" />
-              <span class="switch-slider"></span>
-            </label>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="inpPhotoFile">Upload High-Res Photo</label>
-            <input type="file" id="inpPhotoFile" class="form-input" accept="image/*" />
-          </div>
-
-          <div style="display:flex;align-items:center;gap:12px;margin-top:12px;">
-            <img id="photoPreviewThumb" alt="Preview" style="display:none;width:56px;height:56px;border-radius:10px;object-fit:cover;border:1px solid var(--gold-primary);" />
-            <button type="button" id="btnRemovePhoto" class="preset-chip" style="display:none;color:#ff4f91;border-color:rgba(255,79,145,0.3);">Remove Photo</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 6: SHLOKAS & WORDING PRESETS -->
-      <section class="tab-panel" id="panel_presets">
-        <div class="control-section">
-          <div class="section-label">
-            <span>Sacred Sanskrit Shlokas</span>
-          </div>
-          <div class="preset-chips-wrap">
-            <button type="button" class="preset-chip active" data-preset-shloka="ganesh">🐘 Ganesh Vandana</button>
-            <button type="button" class="preset-chip" data-preset-shloka="vishnu">🪔 Mangalam Bhagwan</button>
-            <button type="button" class="preset-chip" data-preset-shloka="radhaKrishna">🌸 Radha Krishna</button>
-            <button type="button" class="preset-chip" data-preset-shloka="modern">✨ Modern Love</button>
-            <button type="button" class="preset-chip" data-preset-shloka="none">Hide Shloka</button>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inpShloka">Header Shloka Text</label>
-            <textarea id="inpShloka" class="form-textarea" rows="3">॥ श्री गणेशाय नमः ॥
-वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥</textarea>
-          </div>
-        </div>
-
-        <div class="control-section">
-          <div class="section-label">
-            <span>Wording Tone Presets</span>
-          </div>
-          <div class="preset-chips-wrap">
-            <button type="button" class="preset-chip" data-preset-tone="royal">👑 Royal Heritage</button>
-            <button type="button" class="preset-chip" data-preset-tone="traditional">🪔 Traditional Shubh Vivah</button>
-            <button type="button" class="preset-chip" data-preset-tone="modern">💍 Modern Couple</button>
-            <button type="button" class="preset-chip" data-preset-tone="cocktail">🍸 Sangeet & Cocktail</button>
-          </div>
-        </div>
-      </section>
-
-    </aside>
-
-    <!-- ======================================================================
-         RIGHT COLUMN: STICKY LIVE CANVAS PREVIEW
-         ====================================================================== -->
-    <section class="studio-canvas-stage">
-      
-      <!-- Device & Card Canvas Wrapper -->
-      <div class="canvas-device-wrapper ratio-post" id="canvasDeviceWrapper">
-        
-        <!-- The Live Interactive Card Container -->
-        <article class="vanvi-invitation-card theme-rajwada border-double gold-shimmer-active" id="invitationCard">
-          
-          <!-- Top Royal Arch & Deity Emblem -->
-          <div class="card-header-cluster">
-            
-            <div class="deity-badge-wrap" id="dispDeityWrap">
-              <!-- Default Lord Ganesha SVG -->
-              <svg class="deity-badge-svg" viewBox="0 0 64 64" fill="currentColor">
-                <path d="M32 4c-3 0-5 2-6 5-3 0-6 2-7 5-2 3-1 7 1 9-2 2-3 5-3 8 0 6 4 11 10 12v3c-3 1-6 3-8 6-3 3-4 7-4 11h34c0-4-1-8-4-11-2-3-5-5-8-6v-3c6-1 10-6 10-12 0-3-1-6-3-8 2-2 3-6 1-9-1-3-4-5-7-5-1-3-3-5-6-5zm-3 8c1-1 2-1 3-1s2 0 3 1v5h-6v-5zm-7 6c2 0 3 1 4 2v4c-2 0-3-1-4-2-1-1-1-3 0-4zm14 0c1 1 1 3 0 4-1 1-2 2-4 2v-4c1-1 2-2 4-2zm-8 7c2-1 6-1 8 0 2 1 3 3 3 5 0 3-3 6-7 6s-7-3-7-6c0-2 1-4 3-5zm4 17c5 0 9 3 11 7H19c2-4 6-7 11-7z"/>
-              </svg>
-            </div>
-
-            <svg class="arch-ornament" width="80" height="20" viewBox="0 0 100 24" aria-hidden="true">
-              <path d="M 0 12 Q 25 0 50 12 Q 75 24 100 12" stroke-width="1.2"></path>
-              <circle cx="50" cy="12" r="3.5" fill="currentColor"></circle>
+        <p id="pickLabel" class="ivm-pick-label">What are you celebrating?</p>
+        <div role="group" aria-labelledby="pickLabel" class="ivm-picker">
+          <!-- Wedding Option -->
+          <button type="button" class="ivm-pick" id="pickWedding" aria-pressed="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="19" r="8"></circle>
+              <circle cx="20" cy="19" r="8"></circle>
+              <path d="M17 6l3-3 3 3-3 3z" fill="currentColor"></path>
             </svg>
-            
-            <p class="sacred-shloka gold-text" id="dispShloka" contenteditable="true" title="Click to edit shloka directly">
-              ॥ श्री गणेशाय नमः ॥<br />
-              वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
-            </p>
+            <span>Wedding<small>15 designs</small></span>
+          </button>
 
-            <p class="host-greeting-line" id="dispHostGreeting" contenteditable="true" title="Click to edit greeting directly">
-              Together with their families, cordially invite you to celebrate the wedding of
-            </p>
-          </div>
+          <!-- Birthday Option -->
+          <button type="button" class="ivm-pick" id="pickBirthday" aria-pressed="false">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 28h22M7 28V17h18v11M7 22c3 2 6-2 9 0s6 2 9 0"></path>
+              <path d="M16 17v-5"></path>
+              <path d="M16 4c2 2 2 4 0 5-2-1-2-3 0-5z" fill="currentColor"></path>
+            </svg>
+            <span>Birthday<small>8 designs</small></span>
+          </button>
 
-          <!-- Photo Container (Optional) -->
-          <div class="card-photo-container" id="cardPhotoWrap">
-            <img class="card-photo-img" id="cardPhotoImg" src="" alt="Couple Portrait" />
-          </div>
-
-          <!-- Couple Centerpiece -->
-          <div class="card-names-centerpiece">
-            <h1 class="person-name gold-text font-pinyon" id="dispGroom" contenteditable="true" title="Click to edit Groom's Name directly">Aditya Sharma</h1>
-            <p class="person-parents" id="dispGroomParents" contenteditable="true">S/o Mrs. Sunita &amp; Mr. Rajesh Sharma</p>
-            
-            <div class="script-ampersand gold-text">&amp;</div>
-            
-            <h1 class="person-name gold-text font-pinyon" id="dispBride" contenteditable="true" title="Click to edit Bride's Name directly">Priya Verma</h1>
-            <p class="person-parents" id="dispBrideParents" contenteditable="true">D/o Mrs. Rekha &amp; Mr. Manoj Verma</p>
-          </div>
-
-          <!-- Event Details & Schedule -->
-          <div class="card-details-cluster body-cormorant" id="dispDetailsCluster">
-            <div class="card-divider" style="height:1px;width:70%;margin:4px auto 8px;"></div>
-            
-            <div class="card-event-badge gold-text" id="dispEventBadge" contenteditable="true">WEDDING CEREMONY</div>
-            
-            <div class="card-datetime-row">
-              <span id="dispEventDate" contenteditable="true">Sunday, 24th December 2026</span>
-              <span class="bullet-sep">✦</span>
-              <span id="dispEventTime" contenteditable="true">7:00 PM Onwards</span>
-            </div>
-
-            <div class="card-venue-block">
-              <strong id="dispVenueName" style="display:block;font-size:12.5px;" contenteditable="true">The Taj Lake Palace</strong>
-              <span id="dispVenueAddress" contenteditable="true">Pichola, Udaipur, Rajasthan 313001</span>
-            </div>
-          </div>
-
-          <!-- Bottom Cluster: Golden QR Code & RSVP -->
-          <div class="card-footer-cluster">
-            <div class="venue-qr-box" id="cardVenueQRBox">
-              <div class="qr-canvas-wrap" id="qrCodeContainer" title="Scan to open Google Maps Route"></div>
-              <div class="qr-label-txt">
-                <strong class="gold-text">VENUE ROUTE</strong>
-                <span>Scan for Navigation</span>
-              </div>
-            </div>
-
-            <div class="rsvp-box">
-              <div class="rsvp-label">R.S.V.P</div>
-              <div id="dispRsvpName" style="font-weight:700;" contenteditable="true">Sharma &amp; Verma Family</div>
-              <div id="dispRsvpPhone" style="opacity:0.85;" contenteditable="true">+91 98765 43210</div>
-            </div>
-          </div>
-
-        </article>
-
+          <!-- Housewarming Option -->
+          <button type="button" class="ivm-pick" id="pickHousewarming" aria-pressed="false">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 15 16 5l12 10M7 13v14h18V13"></path>
+              <path d="M13 27v-8h6v8"></path>
+            </svg>
+            <span>Housewarming<small>8 designs</small></span>
+          </button>
+        </div>
+        <p class="ivm-after">Pick one to start. You can change it later.</p>
       </div>
 
-    </section>
-
-  </main>
-
-  <!-- Floating Shehnai Audio Player -->
-  <aside class="studio-audio-player" id="studioAudioPlayer">
-    <button type="button" class="btn-music-toggle" id="btnToggleMusic" title="Play / Pause Royal Shehnai Music">
-      <span id="musicPlayIcon">▶</span>
-    </button>
-    <div class="music-info">
-      <strong>Royal Shehnai & Sitar</strong>
-      <span>Celebration Ambiance</span>
+      <!-- 3D Card Fan with Vanvi template artwork -->
+      <div aria-hidden="true" class="ivm-fan" id="heroFan">
+        <div class="ivm-fc ivm-fc--left" id="fanCardLeft" title="Click to edit design">
+          <img src="assets/templates/floral-mehendi-story.jpg" alt="Floral Mehendi wedding invitation design" id="fanImgLeft" />
+        </div>
+        <div class="ivm-fc ivm-fc--center" id="fanCardCenter" title="Click to edit design">
+          <img src="assets/templates/royal-palace-wedding.jpg" alt="Royal Palace wedding invitation design" id="fanImgCenter" />
+        </div>
+        <div class="ivm-fc ivm-fc--right" id="fanCardRight" title="Click to edit design">
+          <img src="assets/templates/vanvi-temple-blossom-luxe.jpg" alt="Temple Blossom wedding invitation design" id="fanImgRight" />
+        </div>
+      </div>
     </div>
-    <audio id="weddingAudio" loop preload="none">
-      <source src="templates/Papercut Lotus/media/wedding_track.mp3" type="audio/mpeg">
-    </audio>
-  </aside>
+  </section>
 
-  <!-- Mobile Bottom Mode Dock -->
-  <footer class="mobile-mode-dock">
-    <button type="button" class="dock-btn active" id="dockBtnEdit">
+  <!-- ======================================================================
+       3. SPLIT WORKSPACE (.ivm-maker)
+       ====================================================================== -->
+  <section class="ivm-maker">
+    <div class="ivm-wrap">
+      <div class="ivm-mk">
+
+        <!-- LEFT COLUMN: FORM PANEL -->
+        <div class="ivm-panel">
+
+          <!-- 4 Steps Header -->
+          <nav class="ivm-steps" role="tablist">
+            <button type="button" role="tab" class="ivm-steps-btn" id="stepBtnDetails" aria-selected="true" data-step="1">
+              <b>1</b> Details
+            </button>
+            <button type="button" role="tab" class="ivm-steps-btn" id="stepBtnDesign" aria-selected="false" data-step="2">
+              <b>2</b> Design
+            </button>
+            <button type="button" role="tab" class="ivm-steps-btn" id="stepBtnStyle" aria-selected="false" data-step="3">
+              <b>3</b> Style
+            </button>
+            <button type="button" role="tab" class="ivm-steps-btn" id="stepBtnDownload" aria-selected="false" data-step="4">
+              <b>4</b> Download
+            </button>
+          </nav>
+
+          <!-- ==========================================================
+               STEP 1: DETAILS
+               ========================================================== -->
+          <div class="ivm-step-pane active" id="paneDetails">
+            <h2 class="ivm-step-h" id="detailsHeading">Event Details</h2>
+            <p class="ivm-step-sub" id="detailsSub">Fill in your names, date and venue to customize your card.</p>
+
+            <div class="ivm-fields">
+              <!-- Dynamic Field 1 (Bride or Birthday Person) -->
+              <div class="ivm-f ivm-f--half" id="fieldBrideWrap">
+                <label for="f-bride" id="labelBride">Bride's name</label>
+                <input type="text" id="f-bride" value="Priya" autocomplete="off" autocapitalize="words" />
+              </div>
+
+              <!-- Dynamic Field 2 (Groom or Age/Turning) -->
+              <div class="ivm-f ivm-f--half" id="fieldGroomWrap">
+                <label for="f-groom" id="labelGroom">Groom's name</label>
+                <input type="text" id="f-groom" value="Aarav" autocomplete="off" autocapitalize="words" />
+              </div>
+
+              <!-- Date & Time -->
+              <div class="ivm-f ivm-f--half">
+                <label for="f-date">Event Date</label>
+                <input type="date" id="f-date" value="2026-12-11" />
+              </div>
+
+              <div class="ivm-f ivm-f--half">
+                <label for="f-time">Event Time</label>
+                <input type="time" id="f-time" value="19:00" />
+              </div>
+
+              <!-- Venue -->
+              <div class="ivm-f">
+                <label for="f-venue">Venue Name & City</label>
+                <textarea id="f-venue" rows="2" placeholder="The Grand Palace, Udaipur, Rajasthan">The Grand Palace, Udaipur, Rajasthan</textarea>
+                <p class="ivm-hint">Hall name and area is enough. Long addresses wrap neatly.</p>
+              </div>
+
+              <!-- Google Maps Link for QR Code -->
+              <div class="ivm-f">
+                <label for="f-maps">Google Maps Link <span class="ivm-optional">(for Golden QR Code)</span></label>
+                <input type="text" id="f-maps" value="https://maps.google.com" placeholder="Paste Google Maps location link..." />
+                <p class="ivm-hint">Guests can scan the QR code directly to get turn-by-turn navigation.</p>
+              </div>
+
+              <!-- Invitation Line -->
+              <div class="ivm-f">
+                <label for="f-message">Invitation Line <span class="ivm-optional">(optional)</span></label>
+                <input type="text" id="f-message" value="With the blessings of our elders, we invite you to celebrate" />
+                <p class="ivm-hint">This line sits just above the names.</p>
+              </div>
+            </div>
+
+            <!-- Card Wording Accordion (2 lines) -->
+            <div class="ivm-grp--wording">
+              <button type="button" class="ivm-wl-toggle" id="btnToggleWording" aria-expanded="false">
+                <div class="ivm-wl-title-wrap">
+                  <span class="ivm-wl-title">Card wording</span>
+                  <span class="ivm-wl-count">(2 lines)</span>
+                </div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="ivm-wl-chev">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+
+              <div class="ivm-wl-body" id="wordingBody">
+                <p class="ivm-wl-intro">Change any wording line, or hide it with the eye button.</p>
+                <ul class="ivm-wl-list">
+                  <li class="ivm-wl-item">
+                    <div class="ivm-wl-top">
+                      <label for="w-kicker">Top line / Heading</label>
+                    </div>
+                    <div class="ivm-wl-row">
+                      <textarea id="w-kicker" rows="1">Shubh Vivah</textarea>
+                      <button type="button" class="ivm-wl-eye" id="btnEyeKicker" aria-pressed="false" title="Hide/Show Top Line">
+                        <span>Hide</span>
+                      </button>
+                    </div>
+                  </li>
+
+                  <li class="ivm-wl-item">
+                    <div class="ivm-wl-top">
+                      <label for="w-connector">Between the names</label>
+                    </div>
+                    <div class="ivm-wl-row">
+                      <textarea id="w-connector" rows="1">weds</textarea>
+                      <button type="button" class="ivm-wl-eye" id="btnEyeConnector" aria-pressed="false" title="Hide/Show Connector">
+                        <span>Hide</span>
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Photo Upload & Cloudinary Box -->
+            <div class="ivm-photo-box">
+              <label class="ivm-lbl">Photo <span class="ivm-optional">(optional)</span></label>
+              
+              <div class="ivm-photo-inner">
+                <div class="ivm-photo-thumb" id="photoThumb">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div>
+                  <p class="ivm-hint" style="margin:0 0 6px;">Upload a photo or paste a Cloudinary link.</p>
+                  <div class="ivm-photo-acts">
+                    <label for="photoFileIn" class="ivm-btn ivm-btn--ghost ivm-btn--sm">Change photo</label>
+                    <input type="file" id="photoFileIn" accept="image/*" style="display:none;" />
+                    <button type="button" class="ivm-btn ivm-btn--ghost ivm-btn--sm" id="btnRemovePhoto">Remove</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cloudinary URL Input -->
+              <div class="ivm-cloudinary-row">
+                <input type="text" class="ivm-cloudinary-input" id="cloudinaryUrlIn" placeholder="Or paste Cloudinary / Web Image URL here..." />
+                <button type="button" class="ivm-btn ivm-btn--sm" id="btnLoadCloudinary">Load</button>
+              </div>
+
+              <!-- Photo Position Range Slider -->
+              <div class="ivm-range-row">
+                <label for="photoPosSlider">Photo position</label>
+                <input type="range" id="photoPosSlider" min="0" max="100" value="28" />
+              </div>
+            </div>
+
+            <!-- Step 1 Footer -->
+            <div class="ivm-step-foot">
+              <span></span>
+              <button type="button" class="ivm-btn ivm-btn--gold" id="btnNextToDesign">
+                <span>Next: choose a design</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- ==========================================================
+               STEP 2: DESIGN CARDS GRID
+               ========================================================== -->
+          <div class="ivm-step-pane" id="paneDesign">
+            <h2 class="ivm-step-h">Choose a Design</h2>
+            <p class="ivm-step-sub">Select a curated luxury template for your card.</p>
+
+            <!-- Filter Chips -->
+            <div class="ivm-chips" id="designFilterChips">
+              <button type="button" class="ivm-chip" aria-pressed="true" data-filter="all">All</button>
+              <button type="button" class="ivm-chip" aria-pressed="false" data-filter="royal">Royal</button>
+              <button type="button" class="ivm-chip" aria-pressed="false" data-filter="floral">Floral</button>
+              <button type="button" class="ivm-chip" aria-pressed="false" data-filter="classic">Classic</button>
+            </div>
+
+            <!-- Cards Grid (Populated dynamically) -->
+            <div class="ivm-tgrid" id="designGrid"></div>
+
+            <!-- Step 2 Footer -->
+            <div class="ivm-step-foot">
+              <button type="button" class="ivm-btn ivm-btn--ghost" id="btnBackToDetails">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span>Back: details</span>
+              </button>
+              <button type="button" class="ivm-btn ivm-btn--gold" id="btnNextToStyle">
+                <span>Next: style this design</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- ==========================================================
+               STEP 3: STYLE (Colour Swatches & Typography)
+               ========================================================== -->
+          <div class="ivm-step-pane" id="paneStyle">
+            <h2 class="ivm-step-h">Colours & Fonts</h2>
+            <p class="ivm-step-sub">Customize the colour palette and typography pairings.</p>
+
+            <!-- Palette Swatches -->
+            <div class="ivm-st-sub">
+              <span class="ivm-st-lab">Colour Palette</span>
+              <span class="ivm-st-cur" id="dispActivePaletteName">Rajwada Royale</span>
+            </div>
+
+            <div class="ivm-st-themes" id="paletteSwatchesGroup">
+              <button type="button" class="ivm-st-th" data-theme="rajwada" aria-checked="true">
+                <span class="ivm-st-face" style="background: radial-gradient(120% 90% at 50% 40%, #30030f, #1e020a 55%, #0f0105);">Aa</span>
+                <span class="ivm-st-name">Rajwada</span>
+              </button>
+              <button type="button" class="ivm-st-th" data-theme="udaipur" aria-checked="false">
+                <span class="ivm-st-face" style="background: radial-gradient(120% 90% at 50% 40%, #421021, #2b0814 55%, #18030b);">Aa</span>
+                <span class="ivm-st-name">Udaipur</span>
+              </button>
+              <button type="button" class="ivm-st-th" data-theme="peacock" aria-checked="false">
+                <span class="ivm-st-face" style="background: radial-gradient(120% 90% at 50% 40%, #084852, #053138 55%, #021a1e);">Aa</span>
+                <span class="ivm-st-name">Peacock</span>
+              </button>
+              <button type="button" class="ivm-st-th" data-theme="emerald" aria-checked="false">
+                <span class="ivm-st-face" style="background: radial-gradient(120% 90% at 50% 40%, #06392c, #03251c 55%, #021510);">Aa</span>
+                <span class="ivm-st-name">Emerald</span>
+              </button>
+              <button type="button" class="ivm-st-th" data-theme="ranipink" aria-checked="false">
+                <span class="ivm-st-face" style="background: radial-gradient(120% 90% at 50% 40%, #52062d, #38031d 55%, #1e010f);">Aa</span>
+                <span class="ivm-st-name">Rani Pink</span>
+              </button>
+              <button type="button" class="ivm-st-th" data-theme="haldi" aria-checked="false">
+                <span class="ivm-st-face" style="background: radial-gradient(120% 90% at 50% 40%, #5a2e04, #3d1d02 55%, #220f01);">Aa</span>
+                <span class="ivm-st-name">Haldi Gold</span>
+              </button>
+              <label class="ivm-st-th ivm-st-th--custom">
+                <span class="ivm-st-face" style="background: linear-gradient(135deg, #f093fb, #f5576c);">+</span>
+                <span class="ivm-st-name">Custom</span>
+                <input type="color" id="customColorPicker" value="#2b0814" />
+              </label>
+            </div>
+
+            <!-- Typography Pairings -->
+            <div class="ivm-st-sub">
+              <span class="ivm-st-lab">Font Pairings</span>
+              <span class="ivm-st-cur" id="dispActiveFontName">Design's own</span>
+            </div>
+
+            <div class="ivm-st-pairs">
+              <!-- Pair 1: Design's own -->
+              <button type="button" class="ivm-st-pair" data-font="pinyon" aria-checked="true">
+                <div class="ivm-st-pair-s">
+                  <span class="ivm-st-pair-h font-pinyon">Priya &amp; Aarav</span>
+                  <span class="ivm-st-pair-b font-cinzel">Friday, 11th December</span>
+                </div>
+                <span class="ivm-st-pair-n">Design's own</span>
+                <div class="ivm-st-radio">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </button>
+
+              <!-- Pair 2: Classic -->
+              <button type="button" class="ivm-st-pair" data-font="cinzel" aria-checked="false">
+                <div class="ivm-st-pair-s">
+                  <span class="ivm-st-pair-h font-cinzel">PRIYA &amp; AARAV</span>
+                  <span class="ivm-st-pair-b font-cormorant">Friday, 11th December</span>
+                </div>
+                <span class="ivm-st-pair-n">Classic</span>
+                <div class="ivm-st-radio"></div>
+              </button>
+
+              <!-- Pair 3: Elegant Script -->
+              <button type="button" class="ivm-st-pair" data-font="cormorant" aria-checked="false">
+                <div class="ivm-st-pair-s">
+                  <span class="ivm-st-pair-h font-cormorant">Priya &amp; Aarav</span>
+                  <span class="ivm-st-pair-b font-cinzel">Friday, 11th December</span>
+                </div>
+                <span class="ivm-st-pair-n">Serif Royalty</span>
+                <div class="ivm-st-radio"></div>
+              </button>
+
+              <!-- Pair 4: Modern -->
+              <button type="button" class="ivm-st-pair" data-font="bricolage" aria-checked="false">
+                <div class="ivm-st-pair-s">
+                  <span class="ivm-st-pair-h font-bricolage">Priya &amp; Aarav</span>
+                  <span class="ivm-st-pair-b">Friday, 11th December</span>
+                </div>
+                <span class="ivm-st-pair-n">Modern</span>
+                <div class="ivm-st-radio"></div>
+              </button>
+
+              <!-- Pair 5: Playful -->
+              <button type="button" class="ivm-st-pair" data-font="playful" aria-checked="false">
+                <div class="ivm-st-pair-s">
+                  <span class="ivm-st-pair-h font-playful">Priya &amp; Aarav</span>
+                  <span class="ivm-st-pair-b font-cormorant">Friday, 11th December</span>
+                </div>
+                <span class="ivm-st-pair-n">Playful Grand</span>
+                <div class="ivm-st-radio"></div>
+              </button>
+
+              <!-- Pair 6: Indic / Hindi -->
+              <button type="button" class="ivm-st-pair" data-font="indic" aria-checked="false">
+                <div class="ivm-st-pair-s">
+                  <span class="ivm-st-pair-h font-indic">प्रिया एवं आरव</span>
+                  <span class="ivm-st-pair-b">Works in हिन्दी &amp; Regional</span>
+                </div>
+                <span class="ivm-st-pair-n">Indic Royal</span>
+                <div class="ivm-st-radio"></div>
+              </button>
+            </div>
+
+            <!-- Step 3 Footer -->
+            <div class="ivm-step-foot">
+              <button type="button" class="ivm-btn ivm-btn--ghost" id="btnBackToDesign">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span>Back: design</span>
+              </button>
+              <button type="button" class="ivm-btn ivm-btn--gold" id="btnNextToDownload">
+                <span>Next: download card</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- ==========================================================
+               STEP 4: DOWNLOAD
+               ========================================================== -->
+          <div class="ivm-step-pane" id="paneDownload">
+            <h2 class="ivm-step-h">Download Your Card</h2>
+            <p class="ivm-step-sub">Choose your desired format and save in crystal-clear 4K resolution.</p>
+
+            <div class="ivm-dl-options">
+              <!-- Format 1: Post 4:5 -->
+              <div class="ivm-dl-card" data-dl-ratio="post" aria-checked="true">
+                <div class="ivm-dl-icon">📱</div>
+                <div class="ivm-dl-info">
+                  <b>Post (1080 × 1350)</b>
+                  <small>Best for WhatsApp chats and Instagram posts</small>
+                </div>
+              </div>
+
+              <!-- Format 2: Story 9:16 -->
+              <div class="ivm-dl-card" data-dl-ratio="story" aria-checked="false">
+                <div class="ivm-dl-icon">📲</div>
+                <div class="ivm-dl-info">
+                  <b>Story (1080 × 1920)</b>
+                  <small>Fills full screen for WhatsApp Status and Instagram Story</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="ivm-dl-actions">
+              <button type="button" class="ivm-btn ivm-btn--gold ivm-btn--block" id="btnPrimaryDownloadPNG">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Download Card (Free, 4K HD PNG)</span>
+              </button>
+
+              <button type="button" class="ivm-btn ivm-btn--ghost ivm-btn--block" id="btnShareWhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.39 1.3-1.92 1.38-.49.07-1.12.1-3.23-.77-2.7-1.11-4.45-3.86-4.59-4.04-.13-.18-1.1-1.46-1.1-2.78 0-1.32.69-1.97.94-2.24.25-.26.54-.33.72-.33.18 0 .36 0 .52.01.17.01.4.06.61.56.22.52.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.13.29-.26.44-.13.15-.28.34-.4.46-.13.13-.27.27-.12.53.15.26.68 1.12 1.46 1.81 1 .89 1.84 1.17 2.1 1.3.26.13.42.11.58-.07.16-.18.69-.8 1.05-1.34.25-.37.52-.31.86-.18.34.13 2.16 1.02 2.53 1.2.37.18.62.27.71.42.09.15.09.87-.15 1.55z"/>
+                </svg>
+                <span>Share via WhatsApp</span>
+              </button>
+            </div>
+
+            <!-- Vanvi Exclusive: 3D Living Web Keepsake Upgrade Card -->
+            <div class="ivm-living-box">
+              <div class="ivm-living-head">
+                <span class="ivm-living-badge">✦ VANVI EXCLUSIVE</span>
+                <span class="ivm-living-pill">Live 3D Website</span>
+              </div>
+              <h4 class="ivm-living-title">Want this as a Living 3D Web Keepsake?</h4>
+              <p class="ivm-living-desc">Go beyond flat cards. Send a cinematic web experience with romantic background music, 3D wax-seal envelope unfold, guest countdown, and interactive RSVP tracking.</p>
+              <a href="templates.html" class="ivm-living-cta">
+                <span>Explore 3D Keepsake Templates</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+            </div>
+
+            <p class="ivm-pvnote">Free, no sign-up required. Your photo stays strictly on this device.</p>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: STICKY LIVE PREVIEW -->
+        <aside class="ivm-pvcol">
+          <div class="ivm-pvbar">
+            <span class="ivm-pvbar-t" id="dispPreviewCardName">Rajwada Royale</span>
+            <div class="ivm-seg" role="group" aria-label="Card format">
+              <button type="button" id="segRatioPost" aria-pressed="true">Post 4:5</button>
+              <button type="button" id="segRatioStory" aria-pressed="false">Story 9:16</button>
+            </div>
+          </div>
+
+          <!-- Preview Stage Device Frame -->
+          <div class="ivm-pvbox">
+            <div class="ivm-pvstage ratio-post gold-shimmer-active" id="liveCardStage">
+              
+              <div class="ivm-card-canvas theme-rajwada" id="cardCanvas">
+                <!-- Royal Background Patterns (Buti / Jaali / Zari / Constellations) -->
+                <div class="ivm-card-pattern" id="cardPattern"></div>
+
+                <!-- Traditional Royal Toran (Mango Leaves & Marigold Garland) -->
+                <div class="ivm-card-toran" id="cardToran"></div>
+
+                <!-- Scalloped Palace Arch Overlay -->
+                <div class="ivm-card-arch-overlay" id="cardArchOverlay"></div>
+
+                <!-- Border Overlay & Corner Accents -->
+                <div class="ivm-card-border"></div>
+                <div class="ivm-corner ivm-corner-tl"></div>
+                <div class="ivm-corner ivm-corner-tr"></div>
+                <div class="ivm-corner ivm-corner-bl"></div>
+                <div class="ivm-corner ivm-corner-br"></div>
+
+                <!-- Top Block: Shloka & Invitation Line -->
+                <div class="ivm-card-top">
+                  <div class="ivm-card-deity-wrap" id="cardDeityWrap">
+                    <!-- Lord Ganesha Silhouette -->
+                    <svg viewBox="0 0 100 100" id="cardDeitySvg">
+                      <path d="M50 8 C40 8 32 16 32 26 C32 34 38 40 45 42 C42 45 40 49 40 54 C40 62 46 68 53 68 C58 68 62 65 64 61 C68 65 74 68 80 68 C83 68 86 67 88 65 C85 62 82 58 82 54 C82 46 88 40 88 32 C88 22 78 12 66 10 C61 9 55 8 50 8 Z M50 14 C54 14 58 15 62 16 C72 18 80 26 80 34 C80 40 76 45 74 50 C76 52 78 55 80 58 C76 60 72 60 68 58 C66 54 62 50 58 50 C54 50 50 54 48 58 C46 54 46 50 48 46 C52 46 56 42 56 36 C56 30 50 26 44 26 C40 26 38 28 38 30 C38 24 43 14 50 14 Z M51 22 C53 22 55 24 55 26 C55 28 53 30 51 30 C49 30 47 28 47 26 C47 24 49 22 51 22 Z"/>
+                    </svg>
+                  </div>
+                  <div class="ivm-card-shloka font-indic" id="dispCardShloka" contenteditable="true" title="Click to edit shloka directly">
+                    ॥ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ॥
+                  </div>
+                  <div class="ivm-card-host" id="dispCardMessage" contenteditable="true" title="Click to edit invitation line directly">
+                    With the blessings of our elders, we invite you to celebrate
+                  </div>
+                </div>
+
+                <!-- Core Block: Couple / Birthday Names -->
+                <div class="ivm-card-core">
+                  <div class="ivm-card-photo-wrap" id="cardPhotoWrap">
+                    <img src="" alt="Guest of Honour" class="ivm-card-photo-img" id="cardPhotoImg" />
+                  </div>
+
+                  <div class="ivm-card-name font-pinyon" id="dispCardName1" contenteditable="true" title="Click to edit name directly">Priya</div>
+                  <div class="ivm-card-weds" id="dispCardConnector" contenteditable="true" title="Click to edit connector directly">weds</div>
+                  <div class="ivm-card-name font-pinyon" id="dispCardName2" contenteditable="true" title="Click to edit name directly">Aarav</div>
+                </div>
+
+                <!-- Bottom Block: Ceremony, Date, Venue, QR & RSVP -->
+                <div class="ivm-card-btm">
+                  <div class="ivm-card-badge" id="dispCardBadge" contenteditable="true" title="Click to edit event title directly">
+                    WEDDING CEREMONY
+                  </div>
+                  <div class="ivm-card-date-time" id="dispCardDateTime" contenteditable="true" title="Click to edit date/time directly">
+                    Friday, 11th December 2026 • 7:00 PM
+                  </div>
+                  <div class="ivm-card-venue" id="dispCardVenue" contenteditable="true" title="Click to edit venue directly">
+                    The Grand Palace, Udaipur, Rajasthan
+                  </div>
+
+                  <div class="ivm-card-foot-flex">
+                    <div class="ivm-card-qr-box">
+                      <div class="ivm-card-qr" id="dispCardQr" title="Scan for Google Maps Navigation"></div>
+                      <span class="ivm-card-qr-lbl">Scan for Venue</span>
+                    </div>
+                    <div class="ivm-card-rsvp">
+                      <span>R.S.V.P</span>
+                      <b id="dispCardRsvp" contenteditable="true" title="Click to edit RSVP directly">Sharma &amp; Verma Family</b>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Edit Hint Chip -->
+          <div style="text-align: center;">
+            <div class="ivm-chip-edit">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+              <span>Click any text on the card to edit directly</span>
+            </div>
+          </div>
+
+          <!-- Big Instant Download Button Below Preview -->
+          <button type="button" class="ivm-btn ivm-btn--gold ivm-btn--block" style="margin-top: 14px; min-height: 50px;" id="btnSideDownloadPNG">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download card</span>
+          </button>
+          <p class="ivm-pvnote">Free, no sign-up. 4K Ultra-HD PNG.</p>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       4. TRUST BADGES SECTION (Invilix Style)
+       ====================================================================== -->
+  <section class="ivm-trust">
+    <div class="ivm-wrap">
+      <ul>
+        <li>
+          <div class="ivm-trust-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <div>
+            <b>Free to make and download</b>
+            <span>Generate unlimited royal cards in 4K resolution with zero watermarks on your design.</span>
+          </div>
+        </li>
+
+        <li>
+          <div class="ivm-trust-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <div>
+            <b>No sign-up</b>
+            <span>Instant creation without annoying account logins, passwords, or credit card requirements.</span>
+          </div>
+        </li>
+
+        <li>
+          <div class="ivm-trust-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div>
+            <b>Your photo stays on your device</b>
+            <span>Your photos are processed directly in your browser or loaded securely from Cloudinary.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       5. FREQUENTLY ASKED QUESTIONS (Invilix Style)
+       ====================================================================== -->
+  <section class="ivm-faq" id="faq">
+    <h2>Questions</h2>
+    <details>
+      <summary>Is it really 100% free?</summary>
+      <p>Yes. You can make and download as many high-resolution invitation cards as you like for both WhatsApp and printing.</p>
+    </details>
+    <details>
+      <summary>Which size should I download?</summary>
+      <p>Choose <strong>Post (1080 × 1350)</strong> for WhatsApp direct chat messages and Instagram grid posts. Choose <strong>Story (9:16)</strong> for WhatsApp Status and Instagram stories.</p>
+    </details>
+    <details>
+      <summary>How does the Golden QR code work?</summary>
+      <p>When you enter your event venue's Google Maps link, a crisp QR code is automatically generated on your invitation card. When guests scan it with their phone camera, Google Maps opens instantly for turn-by-turn navigation.</p>
+    </details>
+    <details>
+      <summary>Can I use my Cloudinary image?</summary>
+      <p>Yes! Simply paste your Cloudinary link into the photo field and click "Load". It renders instantly inside the card's royal frame.</p>
+    </details>
+  </section>
+
+  <!-- ======================================================================
+       6. MOBILE FLOATING ACTION DOCK
+       ====================================================================== -->
+  <footer class="ivm-mob-dock">
+    <button type="button" class="ivm-mob-dock-btn active" id="dockBtnForm">
       <span>✏️ Edit Details</span>
     </button>
-    <button type="button" class="dock-btn" id="dockBtnPreview">
+    <button type="button" class="ivm-mob-dock-btn" id="dockBtnCard">
       <span>👁️ View Card</span>
+    </button>
+    <button type="button" class="ivm-mob-dock-btn ivm-mob-dock-btn--dl" id="dockBtnDl">
+      <span>📥 Download</span>
     </button>
   </footer>
 
-  <!-- MODAL: Download 4K -->
-  <div class="studio-modal-backdrop" id="modalDownload">
-    <div class="studio-modal-card">
-      <div class="modal-header-row">
-        <h3 class="modal-title">Export High-Res Invitation</h3>
-        <button type="button" class="modal-close-btn" data-close-modal="modalDownload">&times;</button>
-      </div>
-      <p style="font-size:13px;color:var(--ink-muted);line-height:1.5;margin-bottom:18px;">
-        Generate print-ready 4K ultra-high resolution image. Perfect for WhatsApp sharing, Instagram stories, and luxury printing.
-      </p>
-      
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <button type="button" class="btn-studio-action btn-studio-primary" id="btnDoExportPNG" style="width:100%;justify-content:center;padding:14px;">
-          <span>📸 Download 4K Ultra-HD PNG</span>
-        </button>
-        <button type="button" class="btn-studio-action btn-studio-ghost" id="btnDoShareWhatsAppDirect" style="width:100%;justify-content:center;padding:14px;color:#25d366;border-color:rgba(37,211,102,0.4);">
-          <span>📲 Share Directly to WhatsApp</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: Web Keepsake -->
-  <div class="studio-modal-backdrop" id="modalWebKeepsake">
-    <div class="studio-modal-card">
-      <div class="modal-header-row">
-        <h3 class="modal-title">Interactive Web Keepsake</h3>
-        <button type="button" class="modal-close-btn" data-close-modal="modalWebKeepsake">&times;</button>
-      </div>
-      <p style="font-size:13.5px;color:var(--ink-muted);line-height:1.5;margin-bottom:16px;">
-        Turn this invitation into a live 3D animated web experience with background Shehnai music, dynamic RSVP tracking, and 1-tap Google Maps navigation for guests.
-      </p>
-      <div style="background:rgba(212,175,55,0.08);border:1px solid var(--border-hover);border-radius:12px;padding:14px;margin-bottom:18px;">
-        <span style="font-size:11px;font-weight:700;color:var(--gold-primary);text-transform:uppercase;display:block;margin-bottom:4px;">✦ Signature Vanvi Feature</span>
-        <span style="font-size:12.5px;color:#fff;">Personalized short link: <code>vanvimoments.shop/m/aditya-priya</code></span>
-      </div>
-      <a href="checkout.html?templateId=hues-whispers-luxe&recipient=Aditya%20%26%20Priya" class="btn-studio-action btn-studio-primary" style="width:100%;justify-content:center;padding:14px;text-decoration:none;">
-        <span>Publish Web Keepsake (₹1.00 Test) →</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- Studio Script -->
+  <!-- Maker Logic Script -->
   <script src="js/vanvi-invitation-maker.js"></script>
 </body>
 </html>

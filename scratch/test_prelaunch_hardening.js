@@ -22,6 +22,8 @@ const {
   timingSafeStringEqual,
   rateLimiter
 } = require('../server/middleware/security');
+const { requireAuth } = require('../server/middleware/auth');
+const { verifyPaymentSignature } = require('../server/services/payment.service');
 
 // Test Timing-safe string equal
 assert.strictEqual(timingSafeStringEqual('secret_hash_12345', 'secret_hash_12345'), true, 'Equal strings must match');
@@ -55,6 +57,34 @@ assert.ok(!mockReq.body.sender.includes('onerror='), 'onerror stripped from send
 assert.strictEqual(mockReq.body.cleanNote, 'Safe heartfelt celebration', 'Clean note preserved');
 console.log('  ✅ Security headers, HSTS, CSP, and XSS sanitization verified.');
 
+const previousNodeEnv = process.env.NODE_ENV;
+process.env.NODE_ENV = 'production';
+assert.strictEqual(
+  verifyPaymentSignature({
+    gatewayOrderId: 'order_sim_forged',
+    paymentId: 'pay_sim_forged',
+    signature: 'anything'
+  }),
+  false,
+  'Simulation signatures must never verify in production'
+);
+process.env.NODE_ENV = 'development';
+assert.strictEqual(
+  verifyPaymentSignature({
+    gatewayOrderId: 'order_sim_test',
+    paymentId: 'pay_sim_test',
+    signature: 'development-only'
+  }),
+  true,
+  'Development simulation signatures should remain available for local tests'
+);
+if (previousNodeEnv === undefined) {
+  delete process.env.NODE_ENV;
+} else {
+  process.env.NODE_ENV = previousNodeEnv;
+}
+console.log('  ✅ Payment simulation is disabled in production and preserved for development.');
+
 // --------------------------------------------------------------------------
 // 2. Database & Migration Schema
 // --------------------------------------------------------------------------
@@ -63,6 +93,36 @@ const { runMigration } = require('../server/db/migrate');
 const { testConnection } = require('../server/db/database');
 
 (async () => {
+  const originalAdminSecretKey = process.env.ADMIN_SECRET_KEY;
+  const mockAdminRes = {
+    statusCode: null,
+    status(code) {
+      this.statusCode = code;
+      return this;
+    },
+    json() {
+      return this;
+    }
+  };
+  let nextCalled = false;
+
+  try {
+    delete process.env.ADMIN_SECRET_KEY;
+    await requireAuth(
+      { headers: { 'x-admin-key': 'vanvi_secret_admin_2025_x9k2p' }, cookies: {} },
+      mockAdminRes,
+      () => { nextCalled = true; }
+    );
+    assert.strictEqual(mockAdminRes.statusCode, 401, 'Default admin key must not authenticate when no key is configured');
+    assert.strictEqual(nextCalled, false, 'Rejected admin key must not call next');
+  } finally {
+    if (originalAdminSecretKey === undefined) {
+      delete process.env.ADMIN_SECRET_KEY;
+    } else {
+      process.env.ADMIN_SECRET_KEY = originalAdminSecretKey;
+    }
+  }
+
   const migrationResult = await runMigration({ dryRun: true });
   assert.strictEqual(migrationResult.success, true, 'Dry run migration must succeed');
   assert.strictEqual(migrationResult.tables.length, 8, 'All 8 relational tables must be verified');

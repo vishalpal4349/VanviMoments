@@ -96,14 +96,15 @@ async function createRazorpayOrder({ amount, currency = 'INR', receipt, notes = 
  * Algorithm: HMAC-SHA256(order_id + "|" + payment_id, KEY_SECRET)
  */
 function verifyRazorpaySignature({ order_id, payment_id, razorpay_signature }) {
-  if (order_id && (order_id.startsWith('order_demo_') || order_id.startsWith('order_sim_') || order_id.startsWith('order_test_'))) {
-    return true;
-  }
-
   if (!order_id || !payment_id || !razorpay_signature) {
     const err = new Error('Missing required fields for signature verification');
     err.statusCode = 400;
     throw err;
+  }
+
+  const isSimulationOrder = /^(order_demo_|order_sim_|order_test_)/.test(order_id);
+  if (isSimulationOrder) {
+    return process.env.NODE_ENV !== 'production';
   }
 
   const keySecret = process.env.RAZORPAY_KEY_SECRET || RAZORPAY_KEY_SECRET;
@@ -213,11 +214,22 @@ async function createGatewayOrder({ orderId, amountINR, currency = 'INR', custom
       }
       throw new Error(rzpOrder.error ? rzpOrder.error.description : 'Failed to create Razorpay order');
     } catch (err) {
-      console.warn('Live Razorpay order creation failed, falling back to secure simulation:', err.message);
+      if (process.env.NODE_ENV === 'production') {
+        const gatewayError = new Error('Payment gateway is temporarily unavailable.');
+        gatewayError.statusCode = 503;
+        throw gatewayError;
+      }
+      console.warn('Live Razorpay order creation failed, falling back to development simulation:', err.message);
     }
   }
 
-  // 3. Safe Development Simulation Mode
+  if (process.env.NODE_ENV === 'production') {
+    const gatewayError = new Error('No live payment gateway is configured.');
+    gatewayError.statusCode = 503;
+    throw gatewayError;
+  }
+
+  // Development-only simulation mode
   const simGatewayOrderId = 'order_sim_' + crypto.randomBytes(8).toString('hex');
   return {
     success: true,
@@ -234,11 +246,14 @@ async function createGatewayOrder({ orderId, amountINR, currency = 'INR', custom
  * Verify Razorpay payment signature
  */
 function verifyPaymentSignature({ gatewayOrderId, paymentId, signature }) {
-  if (!isRazorpayConfigured) {
-    return process.env.NODE_ENV !== 'production' && Boolean(gatewayOrderId && paymentId && signature);
+  if (!gatewayOrderId || !paymentId || !signature) return false;
+
+  const isSimulationOrder = /^(order_demo_|order_sim_|order_test_)/.test(gatewayOrderId);
+  if (isSimulationOrder) {
+    return process.env.NODE_ENV !== 'production';
   }
 
-  if (!gatewayOrderId || !paymentId || !signature) {
+  if (!isRazorpayConfigured) {
     return false;
   }
 

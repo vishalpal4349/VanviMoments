@@ -1,0 +1,181 @@
+className:`wish-cake${
+`,children:[(0,l.jsx)(`div`,{
+className:`wish-glow`,"aria-hidden":`true`
+viewBox:`0 0 330 320`,role:`img`,"aria-label":e?`Birthday cake, candles blown out`:`Birthday cake with five lit candles`,children:[(0,l.jsxs)(`defs`,{
+children:[(0,l.jsxs)(`radialGradient`,{
+id:`wishFlame`,cx:`50%`,cy:`70%`,r:`60%`,children:[(0,l.jsx)(`stop`,{
+id:`wishHalo`,children:[(0,l.jsx)(`stop`,{
+id:`wishTier`,x1:`0`,x2:`0`,y1:`0`,y2:`1`,children:[(0,l.jsx)(`stop`,{
+id:`wishPlate`,x1:`0`,x2:`0`,y1:`0`,y2:`1`,children:[(0,l.jsx)(`stop`,{
+children:[(0,l.jsx)(`rect`,{
+className:`wish-smoke`,d:`M${
+children:[(0,l.jsx)(`circle`,{
+className:`wish-flame`,style:{
+,children:[(0,l.jsx)(`path`,{
+cls:`balloon-one`,icon:`♡`,label:`pink`
+cls:`balloon-two`,icon:`✦`,label:`yellow`
+cls:`balloon-three`,icon:`☁`,label:`purple`
+cls:`balloon-four`,icon:`✿`,label:`mint`
+cls:`balloon-five`,icon:`★`,label:`peach`
+key:`loved`,emoji:`🥹`,label:`Loved it`
+key:`tears`,emoji:`😭`,label:`Happy tears`
+key:`thanks`,emoji:`🤗`,label:`Thank you so much`
+key:`best`,emoji:`🎉`,label:`Best surprise ever`
+text:``,show:!1
+text:e,show:!0
+G(`blocked`),K(`Tap the music button to start the song 🎵`)
+className:`tpl-birthday`,ref:p,children:[(0,l.jsxs)(`div`,{
+className:`background-doodles`,"aria-hidden":`true`,children:[(0,l.jsx)(`span`,{
+className:`screen active`,"data-screen":`verification`,children:(0,l.jsxs)(`div`,{
+className:`card hero-card`,children:[(0,l.jsx)(`div`,{
+className:`sticker sticker-top`,children:`PRIVATE BIRTHDAY PORTAL 💌`
+className:`cartoon-face floating`,children:`(˶ᵔ ᵕ ᵔ˶)`
+className:`eyebrow`,children:`tiny security checkpoint`
+children:[`Are you `,a,`?`]
+className:`buttons`,children:[(0,l.jsx)(`button`,{
+className:`primary-btn`,onClick:se,children:`Yep, that’s me ✨`
+),(0,l.jsx)(`button`,{
+className:`secondary-btn`,onClick:()=>J(`no`),children:`Wrong person 😶`
+className:`tiny-note`,children:`Security system powered by vibes and one button.`
+className:`screen active`,"data-screen":`no`,children:(0,l.jsxs)(`div`,{
+className:`card compact-card`,children:[(0,l.jsx)(`div`,{
+className:`big-emoji`,children:`🕵️‍♀️`
+children:[`This tiny corner was made only for `,(0,l.jsx)(`strong`,{
+),(0,l.jsx)(`button`,{
+className:`secondary-btn`,onClick:()=>J(`verification`),children:`Try Again ↩`
+className:`screen active`,"data-screen":`intro`,children:(0,l.jsxs)(`div`,{
+className:`split-layout`,children:[(0,l.jsxs)(`div`,{
+className:`polaroid rotate-left`,children:[(0,l.jsxs)(`div`,{
+className:`cartoon-scene pink-scene`,children:[(0,l.jsx)(`div`,{
+className:`cloud cloud-one`,children:`☁`
+className:`cloud cloud-two`,children:`☁`
+className:`bunny-character`,children:[(0,l.jsx)(`div`,{
+className:`bunny-ears`,children:`ᕱ ᕱ`
+className:`bunny-face`,children:`•ᴗ•`
+className:`mini-heart`,children:`♡`
+className:`polaroid-caption`,children:`officially verified ✨`
+className:`paper-card rotate-right`,children:[(0,l.jsx)(`span`,{
+className:`tape`
+className:`handwritten-small`,children:`access granted 🌷`
+className:`handwritten-title`,children:[`Hi `,a,`!`]
+),(0,l.jsx)(`button`,{
+className:`primary-btn`,onClick:ce,children:`Enter ✨`
+className:`screen active`,"data-screen":`birthday`,children:(0,l.jsxs)(`div`,{
+className:`birthday-wrap`,children:[(0,l.jsxs)(`div`,{
+className:`birthday-copy paper-card`,children:[(0,l.jsx)(`span`,{
+className:`sparkle`,children:`✦`
+className:`eyebrow`,children:`breaking birthday news`
+className:`mega-title`,children:`Happy Birthday`
+children:[a,` 🎂💗`]
+),(0,l.jsx)(`button`,{
+className:`primary-btn`,onClick:()=>J(`notes`),children:`Continue →`
+className:`character-stack`,children:[(0,l.jsxs)(`div`,{
+className:`bubble-card bubble-one`,children:[`👑`,(0,l.jsx)(`span`,{
+className:`bubble-card bubble-two`,children:[`🧁`,(0,l.jsx)(`span`,{
+className:`bubble-card bubble-three`,children:[`✨`,(0,l.jsx)(`span`,{
+className:`screen active`,"data-screen":`notes`,children:(0,l.jsxs)(`div`,{
+className:`notes-mailbox-section`,children:[(0,l.jsx)(`p`,{
+className:`eyebrow`,children:`four tiny stickers for you`
+className:`handwritten-title`,children:`Four Little Notes 💌`
+className:`section-subtitle`,children:`No predictions, no rules — just four small things I wanted to leave here.`
+className:`notes-hint`,children:`tap a sticker to flip it ✨`
+className:`notes-flip-grid`,"aria-label":`Four little birthday notes`,children:y.map((e,t)=>(0,l.jsx)(`div`,{
+className:`flip-card${
+`,onClick:()=>X(t),role:`button`,tabIndex:0,onKeyDown:e=>(e.key===`Enter`||e.key===` `)&&X(t),"aria-label":`Little note ${
+className:`flip-inner`,children:[(0,l.jsxs)(`div`,{
+className:`flip-face flip-front ${
+`,children:[(0,l.jsx)(`div`,{
+className:`card-emoji`,children:e.emoji
+children:[`Little Note 0`,t+1]
+className:`flip-face flip-back`,children:[(0,l.jsxs)(`span`,{
+className:`flip-note-number`,children:[`note 0`,t+1,` / 04`]
+className:`note-flip-text`,children:u[t]
+),(0,l.jsx)(`button`,{
+className:`primary-btn`,onClick:()=>J(`balloons`),children:`Continue →`
+className:`screen active`,"data-screen":`balloons`,children:(0,l.jsxs)(`div`,{
+className:`balloon-layout`,children:[(0,l.jsxs)(`div`,{
+className:`paper-card balloon-copy rotate-left`,children:[(0,l.jsx)(`span`,{
+className:`tape`
+className:`eyebrow`,children:`tiny birthday mini-game`
+className:`handwritten-title`,children:`Pop! Pop! Pop! 🎈`
+className:`status-text`,children:Z===0?`All balloons successfully defeated 🎉`:`Balloons remaining: ${
+),Z===0&&(0,l.jsx)(`button`,{
+className:`primary-btn`,onClick:()=>J(`laugh`),children:`Continue →`
+className:`balloon-stage`,"aria-label":`Balloon popping game`,children:[b.map((e,t)=>(0,l.jsx)(`button`,{
+className:`balloon ${
+`,onClick:()=>le(t),"aria-label":`Pop ${
+className:`balloon-pop-text`,children:Z===5?`tap the balloons ✨`:ne[4-Z]
+className:`screen active`,"data-screen":`laugh`,children:(0,l.jsxs)(`div`,{
+className:`laugh-layout`,children:[(0,l.jsxs)(`div`,{
+className:`paper-card laugh-copy rotate-left`,children:[(0,l.jsx)(`span`,{
+className:`tape`
+className:`eyebrow`,children:`highly scientific experiment`
+className:`handwritten-title`,children:`Laugh Meter 😂`
+className:`tiny-note`,children:`Accuracy: questionable. Confidence: unnecessarily high.`
+className:`laugh-meter-box`,children:[(0,l.jsxs)(`div`,{
+className:`laugh-score-row`,children:[(0,l.jsx)(`span`,{
+children:[$?$.value:0,`%`]
+className:`laugh-track`,"aria-label":`Laugh meter`,children:(0,l.jsx)(`div`,{
+className:`laugh-fill`,style:{
+className:`laugh-status`,children:$?$.status:`Current diagnosis: suspiciously serious. 👀`
+),M<x.length?(0,l.jsx)(`button`,{
+className:`primary-btn`,onClick:Q,children:`Press for Better Mood 😂`
+):(0,l.jsx)(`button`,{
+className:`primary-btn`,onClick:()=>J(`album`),children:`Continue →`
+className:`laugh-machine`,"aria-live":`polite`,children:[(0,l.jsx)(`div`,{
+className:`machine-antenna`,children:(0,l.jsx)(`span`,{
+className:`machine-body`,children:[(0,l.jsx)(`div`,{
+className:`machine-label`,children:`MOOD-O-METER`
+className:`laugh-face${
+className:`machine-lights`,children:[(0,l.jsx)(`i`,{
+className:`machine-printout`,children:$?$.print:`waiting for a smile...`
+className:`machine-shadow`
+className:`screen active`,"data-screen":`album`,children:(0,l.jsxs)(`div`,{
+className:`album-section`,children:[(0,l.jsx)(`p`,{
+className:`eyebrow`,children:`extremely rare photographic evidence`
+className:`handwritten-title`,children:`The Very Serious Photo Album 📸`
+className:`section-subtitle`,children:`The photo department had limited resources, so Instagram has officially been promoted to chief photographer. 😂`
+className:`album-grid`,children:f.map((e,t)=>(0,l.jsxs)(`figure`,{
+className:`album-card ${
+`,onClick:()=>ue(t),children:[(0,l.jsx)(`span`,{
+className:`album-tape`
+className:`album-image-wrap`,children:[!R[t]&&(0,l.jsx)(`img`,{
+className:`album-fallback${
+className:`album-hint`,children:`No photos were added for this one 💫`
+className:`album-hint`,children:`Tap any photo for a completely unnecessary museum spotlight ✨`
+),(0,l.jsx)(`button`,{
+className:`primary-btn`,onClick:()=>J(`cake`),children:`Continue →`
+className:`screen active`,"data-screen":`cake`,children:(0,l.jsxs)(`div`,{
+className:`cake-layout`,children:[(0,l.jsx)(ee,{
+className:`paper-card cake-copy rotate-right`,children:[(0,l.jsx)(`span`,{
+className:`tape`
+className:`eyebrow`,children:`mandatory ceremony`
+className:`handwritten-title`,children:`Make a Wish`
+children:`Take a second, make a proper wish, and click the button when you’re done. The internet has agreed not to ask what you wished for. 😌`
+),H?(0,l.jsx)(`button`,{
+className:`primary-btn`,onClick:pe,children:`Continue ✨`
+):(0,l.jsx)(`button`,{
+className:`primary-btn`,onClick:de,children:`Blow the Candles 🎂`
+className:`screen active letter-screen`,"data-screen":`message`,children:(0,l.jsxs)(`div`,{
+className:`letter-shell`,children:[(0,l.jsxs)(`div`,{
+className:`letter-topbar`,children:[(0,l.jsxs)(`span`,{
+children:[`💌 for `,a]
+children:[`from `,o]
+className:`letter-paper`,children:[(0,l.jsx)(`div`,{
+className:`corner-sticker`,children:`♡`
+className:`letter-lines`,children:d.map((e,t)=>(0,l.jsx)(`p`,{
+className:`signature`,children:[`— `,o,` 🙂`]
+className:`bday-react`,"data-testid":`birthday-reactions`,children:[(0,l.jsx)(`p`,{
+className:`bday-react-title`,children:`How did this make you feel?`
+className:`bday-react-row`,children:ae.map(e=>(0,l.jsxs)(`button`,{
+type:`button`,className:`react-chip${
+`,"aria-pressed":B===e.key,"data-reaction":e.key,onClick:()=>{
+,children:[(0,l.jsx)(`span`,{
+className:`bday-react-thanks`,children:[`Aww — `,o,` will see that 💗`]
+className:`letter-actions`,children:(0,l.jsx)(`button`,{
+className:`secondary-btn`,onClick:me,children:`See It Again ↻`
+),(0,l.jsx)(`audio`,{
+),W!==`hidden`&&(0,l.jsx)(`button`,{
+className:`music-control`,onClick:fe,"aria-label":`Pause or play birthday music`,children:he
+ref:m,className:`confetti-canvas`
+className:`toast${
