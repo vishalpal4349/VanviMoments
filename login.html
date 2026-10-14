@@ -19,19 +19,15 @@
 
   <style>
     :root {
-      --clay-bg: #d8c8f8;
       --clay-bg-grad: radial-gradient(circle at 50% 28%, #f0e6ff 0%, #dfd0fc 48%, #c6b2f4 100%);
-      --clay-card-bg: #ffffff;
       --clay-primary: #9471e4;
-      --clay-primary-dark: #7a54cf;
-      --clay-primary-glow: rgba(148, 113, 228, 0.4);
-      --clay-badge-bg: #bca6f0;
+      --clay-primary-grad: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
       --clay-input-bg: #f5f0fb;
       --clay-text-dark: #2c1642;
       --clay-text-muted: #7b6694;
-      --clay-shadow-card: 0 24px 60px rgba(110, 80, 168, 0.22), 0 8px 24px rgba(0, 0, 0, 0.04), inset 0 2px 3px #ffffff;
-      --clay-shadow-inner: 0 14px 34px rgba(120, 90, 180, 0.12), inset 0 2px 2px #ffffff;
-      --clay-shadow-btn: 0 10px 24px rgba(148, 113, 228, 0.42), 0 3px 0 #6e46be, inset 0 2px 2px rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(0, 0, 0, 0.16);
+      --clay-shadow-card: 0 16px 40px rgba(110, 80, 168, 0.2), 0 4px 12px rgba(0, 0, 0, 0.04), inset 0 2px 3px #ffffff;
+      --clay-shadow-inner: 0 8px 24px rgba(120, 90, 180, 0.08), inset 0 2px 2px #ffffff;
+      --clay-shadow-btn: 0 8px 20px rgba(148, 113, 228, 0.38), 0 2px 0 #6e46be;
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
 
@@ -47,11 +43,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px 16px 36px;
+      justify-content: center;
+      padding: 10px 12px;
       position: relative;
     }
 
-    /* Ambient 3D Studio Clay Background Props */
+    /* Ambient Floating Props (Soft & Compact) */
     .clay-studio-props {
       position: fixed;
       inset: 0;
@@ -59,200 +56,109 @@
       z-index: 0;
       overflow: hidden;
     }
-
     .clay-prop {
       position: absolute;
       user-select: none;
-      filter: drop-shadow(0 14px 28px rgba(90, 60, 140, 0.18));
-      will-change: transform;
+      filter: drop-shadow(0 10px 20px rgba(90, 60, 140, 0.14));
+      opacity: 0.75;
     }
+    .prop-cloud-1 { top: 4%; left: 5%; font-size: 36px; }
+    .prop-cloud-2 { top: 8%; right: 5%; font-size: 38px; }
+    .prop-heart-float { top: 22%; left: 7%; font-size: 22px; }
+    .prop-star-float { top: 20%; right: 7%; font-size: 20px; }
 
-    .prop-cloud-1 {
-      top: 6%;
-      left: 6%;
-      font-size: 42px;
-      animation: floatCloud 16s ease-in-out infinite alternate;
-      opacity: 0.85;
-    }
-    .prop-cloud-2 {
-      top: 12%;
-      right: 7%;
-      font-size: 48px;
-      animation: floatCloud 20s ease-in-out infinite alternate -6s;
-      opacity: 0.85;
-    }
-    .prop-heart-float {
-      top: 30%;
-      left: 8%;
-      font-size: 26px;
-      animation: floatHeart 12s ease-in-out infinite alternate;
-    }
-    .prop-star-float {
-      top: 26%;
-      right: 9%;
-      font-size: 24px;
-      animation: floatHeart 14s ease-in-out infinite alternate -4s;
-    }
-
-    .prop-potted-plant {
-      bottom: 24px;
-      left: max(20px, calc(50% - 390px));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .prop-plant-leaves {
-      font-size: 64px;
-      line-height: 1;
-      transform: translateY(12px);
-      filter: drop-shadow(0 6px 12px rgba(46, 125, 50, 0.25));
-    }
-    .prop-plant-pot {
-      width: 58px;
-      height: 48px;
-      background: linear-gradient(180deg, #ecd8be 0%, #d8be98 100%);
-      border-radius: 6px 6px 18px 18px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), inset 0 2px 2px #fff;
-    }
-
-    .prop-potted-flower {
-      bottom: 24px;
-      right: max(20px, calc(50% - 390px));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .prop-flower-bloom {
-      font-size: 58px;
-      line-height: 1;
-      transform: translateY(10px);
-      filter: drop-shadow(0 6px 12px rgba(233, 30, 99, 0.25));
-    }
-    .prop-flower-pot {
-      width: 54px;
-      height: 44px;
-      background: linear-gradient(180deg, #f8bbd0 0%, #f48fb1 100%);
-      border-radius: 6px 6px 18px 18px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), inset 0 2px 2px #fff;
-    }
-
-    @keyframes floatCloud {
-      0% { transform: translateY(0) translateX(0); }
-      100% { transform: translateY(-12px) translateX(16px); }
-    }
-    @keyframes floatHeart {
-      0% { transform: translateY(0) rotate(0deg) scale(1); }
-      100% { transform: translateY(-16px) rotate(12deg) scale(1.08); }
-    }
-
-    /* Fixed Back Button */
+    /* Smart Fixed Back Button */
     .clay-nav-back {
       position: fixed;
-      top: 18px;
-      left: 20px;
+      top: 12px;
+      left: 14px;
       z-index: 1000;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 8px 18px;
-      min-height: 40px;
+      gap: 5px;
+      padding: 5px 12px;
+      min-height: 32px;
       border-radius: 999px;
       background: #ffffff;
-      border: 1.5px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 8px 24px rgba(90, 60, 140, 0.15), inset 0 2px 2px #ffffff;
-      color: #3b1b54;
-      font-family: var(--font-sans);
-      font-size: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12);
+      color: #280b45;
+      font-size: 11.5px;
       font-weight: 850;
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.2s ease;
     }
     .clay-nav-back:hover {
-      transform: translateX(-3px) scale(1.03);
+      transform: translateX(-2px);
       color: var(--clay-primary);
-      box-shadow: 0 12px 28px rgba(90, 60, 140, 0.25);
-    }
-    .clay-nav-back .back-arrow {
-      font-size: 18px;
-      line-height: 1;
-      font-weight: 900;
     }
 
-    /* Top Mode Switcher Bar */
+    /* Mode Switcher Bar */
     .clay-mode-switch-wrap {
       width: 100%;
-      max-width: 420px;
+      max-width: 375px;
       display: flex;
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
       position: relative;
       z-index: 10;
     }
     .clay-mode-switch {
       display: inline-flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 4px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3px;
       border-radius: 999px;
-      box-shadow: 0 6px 18px rgba(110, 80, 160, 0.1), inset 0 1px 2px #fff;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      gap: 4px;
+      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      gap: 3px;
     }
     .clay-mode-tab {
-      padding: 7px 18px;
+      padding: 5px 14px;
       border-radius: 999px;
-      font-size: 12.5px;
+      font-size: 11.5px;
       font-weight: 800;
       color: var(--clay-text-muted);
       text-decoration: none;
-      transition: all 0.22s ease;
+      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
     }
     .clay-mode-tab.active {
       background: var(--clay-primary);
+      background-image: var(--clay-primary-grad);
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(148, 113, 228, 0.35);
+      box-shadow: 0 3px 10px rgba(139, 92, 246, 0.35);
     }
     .clay-coins-tag {
-      font-size: 9.5px;
-      padding: 1.5px 6px;
+      font-size: 9px;
+      padding: 1px 5px;
       border-radius: 99px;
       background: #f59e0b;
       color: #fff;
       font-weight: 900;
     }
 
-    /* Master Compact Phone Card (~420px wide centered on desktop & mobile) */
+    /* Master Compact Phone Card (~375px STRICT on Laptop & Mobile) */
     .clay-phone-card {
       position: relative;
       z-index: 10;
       width: 100%;
-      max-width: 420px;
+      max-width: 375px;
       background: #ffffff;
-      border-radius: 38px;
+      border-radius: 30px;
       box-shadow: var(--clay-shadow-card);
-      padding: 22px 18px 20px;
+      padding: 14px 14px 12px;
       margin: 0 auto;
       text-align: center;
-      overflow: hidden;
-      transform: translateZ(0);
-      animation: authCardEnter 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+      box-sizing: border-box;
+      animation: authCardEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
-
     @keyframes authCardEnter {
-      from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.97);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity: 0; transform: translateY(10px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     /* Top Greeting Section */
@@ -263,32 +169,23 @@
       margin-bottom: 2px;
     }
     .clay-heart-emblem {
-      font-size: 22px;
-      line-height: 1;
-      margin-bottom: 4px;
-      animation: heartBreathe 3s ease-in-out infinite alternate;
-    }
-    @keyframes heartBreathe {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.15); }
+      font-size: 16px;
+      margin-bottom: 1px;
     }
     .clay-main-title {
-      font-size: 26px;
+      font-size: 19px;
       font-weight: 900;
-      color: #5c3b99;
-      letter-spacing: -0.5px;
+      color: var(--clay-text-dark);
+      letter-spacing: -0.3px;
+      margin: 0;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-    }
-    .clay-rays {
-      font-size: 16px;
-      color: #f59e0b;
+      gap: 4px;
     }
     .clay-sub-text {
-      font-size: 12.5px;
+      font-size: 11px;
       color: var(--clay-text-muted);
-      margin-top: 3px;
+      margin-top: 1px;
       font-weight: 600;
     }
 
@@ -296,8 +193,8 @@
     .clay-girl-stage {
       position: relative;
       width: 100%;
-      max-width: 170px;
-      margin: 0 auto -22px;
+      max-width: 95px;
+      margin: 0 auto -12px;
       z-index: 2;
     }
     .clay-girl-photo {
@@ -305,62 +202,57 @@
       height: auto;
       display: block;
       object-fit: cover;
-      border-radius: 36px 36px 0 0;
-      filter: drop-shadow(0 12px 20px rgba(110, 80, 168, 0.2));
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .clay-girl-stage:hover .clay-girl-photo {
-      transform: scale(1.03) translateY(-2px);
+      border-radius: 24px 24px 0 0;
+      filter: drop-shadow(0 8px 16px rgba(110, 80, 168, 0.18));
     }
 
-    /* Inner Elevated White Clay Form Card */
+    /* Elevated Inner White Clay Form Card */
     .clay-inner-card {
       position: relative;
       z-index: 4;
       background: #ffffff;
-      border-radius: 32px;
-      padding: 22px 18px 18px;
+      border-radius: 22px;
+      padding: 12px 12px 10px;
       box-shadow: var(--clay-shadow-inner);
-      border: 1.5px solid rgba(240, 235, 250, 0.9);
+      border: 1px solid rgba(243, 232, 255, 0.95);
     }
 
-    /* Clay Pill Inset Input Fields */
+    /* Inset Input Rows */
     .clay-field-row {
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       position: relative;
       text-align: left;
     }
     .clay-pill-input-box {
       width: 100%;
-      min-height: 50px;
+      height: 38px;
       background: var(--clay-input-bg);
       border-radius: 999px;
-      box-shadow: inset 0 2.5px 5px rgba(100, 70, 150, 0.08), inset 0 1px 2px rgba(0,0,0,0.04);
+      box-shadow: inset 0 2px 4px rgba(124, 58, 237, 0.08);
       display: flex;
       align-items: center;
-      padding: 4px 8px 4px 6px;
-      transition: all 0.2s ease;
+      padding: 2px 6px 2px 4px;
       border: 1.5px solid transparent;
+      transition: all 0.2s ease;
     }
     .clay-pill-input-box:focus-within {
       background: #ffffff;
       border-color: var(--clay-primary);
-      box-shadow: 0 0 0 3px rgba(148, 113, 228, 0.25), inset 0 1px 2px #fff;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.22);
     }
     .clay-icon-circle {
-      width: 38px;
-      height: 38px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #bca6f0 0%, #a284e6 100%);
+      background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
       color: #ffffff;
       display: grid;
       place-items: center;
       flex-shrink: 0;
-      box-shadow: 0 4px 10px rgba(148, 113, 228, 0.35), inset 0 1px 2px rgba(255,255,255,0.7);
     }
     .clay-icon-circle svg {
-      width: 17px;
-      height: 17px;
+      width: 14px;
+      height: 14px;
     }
     .clay-native-input {
       flex: 1;
@@ -368,110 +260,95 @@
       border: none;
       outline: none;
       background: transparent;
-      padding: 0 12px;
+      padding: 0 8px;
       font-family: var(--font-sans);
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--clay-text-dark);
       min-width: 0;
     }
     .clay-native-input::placeholder {
-      color: #a494bc;
+      color: #9f86bb;
       font-weight: 500;
+      font-size: 12px;
     }
     .clay-pwd-toggle {
       background: transparent;
       border: none;
-      font-size: 17px;
-      color: #927fb0;
+      font-size: 14px;
+      color: #8c71aa;
       cursor: pointer;
-      padding: 6px 10px;
-      transition: transform 0.2s ease, color 0.2s ease;
+      padding: 3px 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      user-select: none;
-    }
-    .clay-pwd-toggle:hover {
-      transform: scale(1.15);
-      color: var(--clay-primary);
     }
 
-    /* Auxiliary Row */
+    /* Auxiliary Links */
     .clay-aux-links {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 10px 4px 14px;
-      font-size: 12px;
+      margin: 6px 4px 8px;
+      font-size: 11px;
     }
     .clay-remember-wrap {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       color: var(--clay-text-muted);
       cursor: pointer;
       font-weight: 600;
-      user-select: none;
     }
     .clay-remember-wrap input {
       accent-color: var(--clay-primary);
-      width: 15px;
-      height: 15px;
+      width: 13px;
+      height: 13px;
       cursor: pointer;
     }
     .clay-forgot-link {
       color: var(--clay-primary);
       font-weight: 800;
       text-decoration: none;
-      transition: color 0.2s ease;
     }
     .clay-forgot-link:hover {
       text-decoration: underline;
-      color: var(--clay-primary-dark);
     }
 
-    /* Primary Action Button */
+    /* Main Submit Button */
     .clay-btn-main {
       width: 100%;
-      min-height: 50px;
+      height: 40px;
       border-radius: 999px;
-      background: linear-gradient(180deg, #aa8ced 0%, #8c67df 100%);
+      background: var(--clay-primary-grad);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: none;
       font-family: var(--font-sans);
-      font-size: 15.5px;
+      font-size: 13.5px;
       font-weight: 850;
-      letter-spacing: 0.3px;
       cursor: pointer;
       box-shadow: var(--clay-shadow-btn);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
+      gap: 6px;
+      transition: all 0.2s ease;
     }
     .clay-btn-main:hover {
-      transform: translateY(-2px) scale(1.015);
-      box-shadow: 0 14px 28px rgba(148, 113, 228, 0.55), 0 4px 0 #6e46be;
-    }
-    .clay-btn-main:active {
-      transform: translateY(2px) scale(0.985);
-      box-shadow: 0 4px 12px rgba(148, 113, 228, 0.3), 0 1px 0 #6e46be;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(139, 92, 246, 0.45);
     }
     .clay-btn-main:disabled {
-      opacity: 0.75;
+      opacity: 0.7;
       cursor: not-allowed;
       transform: none;
-      box-shadow: none;
     }
 
     /* Loading Spinner */
     .btn-spinner {
-      width: 18px;
-      height: 18px;
-      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
       border-top-color: #ffffff;
       border-radius: 50%;
       animation: spin 0.75s linear infinite;
@@ -484,14 +361,14 @@
 
     /* Status Alert Message */
     .form-status {
-      margin-top: 10px;
-      font-size: 12px;
+      margin-top: 6px;
+      font-size: 11px;
       font-weight: 700;
-      min-height: 18px;
+      min-height: 14px;
       color: var(--clay-text-muted);
-      padding: 4px 8px;
-      border-radius: 8px;
-      transition: all 0.2s ease;
+      padding: 4px 6px;
+      border-radius: 6px;
+      text-align: center;
     }
     .form-status.error {
       color: #dc2626;
@@ -509,9 +386,9 @@
       display: flex;
       align-items: center;
       text-align: center;
-      margin: 16px 0 14px;
-      color: #a494bc;
-      font-size: 11px;
+      margin: 8px 0;
+      color: #9f86bb;
+      font-size: 10px;
       font-weight: 750;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -520,57 +397,32 @@
     .clay-divider-line::after {
       content: '';
       flex: 1;
-      border-bottom: 1.5px solid #eae2f5;
+      border-bottom: 1px solid #eae2f5;
     }
     .clay-divider-line span {
-      padding: 0 10px;
+      padding: 0 6px;
     }
 
-    /* Official Prominent Google Sign-In Button */
-    .btn-google-official {
-      width: 100%;
-      min-height: 48px;
-      border-radius: 999px;
-      background: #ffffff;
-      border: 1.5px solid #e2d9f3;
-      box-shadow: 0 4px 14px rgba(110, 80, 160, 0.08), inset 0 1px 1px #ffffff;
+    /* Official Google Mount Container (Pristine Single Google GIS Container) */
+    .gsi-mount-wrap {
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      font-family: var(--font-sans);
-      font-size: 14px;
-      font-weight: 750;
-      color: #374151;
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-      margin-bottom: 14px;
+      align-items: center;
+      margin: 4px 0 8px;
+      width: 100%;
+      min-height: 40px;
     }
-    .btn-google-official:hover {
-      transform: translateY(-2px);
-      border-color: #4285F4;
-      box-shadow: 0 8px 20px rgba(66, 133, 244, 0.18), inset 0 1px 1px #fff;
-      color: #1f2937;
-    }
-    .btn-google-official:active {
-      transform: translateY(1px);
-    }
-    .google-g-icon {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
-
-    /* GIS Real Button Container */
     #gsiButtonContainer {
       display: flex;
       justify-content: center;
-      margin-bottom: 14px;
+      align-items: center;
+      width: 100%;
+      min-height: 40px;
     }
 
     /* Footer Switch Link */
     .clay-footer-link {
-      font-size: 12.5px;
+      font-size: 11.5px;
       color: var(--clay-text-muted);
       font-weight: 600;
     }
@@ -578,10 +430,7 @@
       color: var(--clay-primary);
       font-weight: 850;
       text-decoration: none;
-      margin-left: 4px;
-    }
-    .clay-footer-link a:hover {
-      text-decoration: underline;
+      margin-left: 3px;
     }
 
     /* Confetti Particle */
@@ -589,204 +438,24 @@
       position: fixed;
       pointer-events: none;
       z-index: 100000;
-      font-size: 20px;
-      animation: confettiBurst 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+      font-size: 18px;
+      animation: confettiBurst 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
     }
     @keyframes confettiBurst {
       0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
-      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(var(--dr)); }
-    }
-
-    /* Responsive Adaptations */
-    @media (max-width: 860px) {
-      .prop-potted-plant,
-      .prop-potted-flower {
-        display: none !important;
-      }
-    }
-
-    /* =========================================================
-       SUPERIOR LAPTOP & MOBILE RESPONSIVE ENGINE (ZERO SCROLL FIT)
-       ========================================================= */
-    @media (max-width: 768px) {
-      .prop-potted-plant,
-      .prop-potted-flower,
-      .floating-clay-star,
-      .ambient-glow-orb {
-        display: none !important;
-      }
-      .clay-stage-canvas {
-        padding: 10px 8px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: clamp(8px, 2vh, 16px) 10px;
-        min-height: 100vh;
-        min-height: 100dvh;
-        justify-content: center;
-      }
-      .clay-nav-back {
-        top: 10px;
-        left: 10px;
-        padding: 5px 12px;
-        min-height: 32px;
-        font-size: 11.5px;
-      }
-      .clay-mode-switch-wrap {
-        margin-bottom: 6px;
-      }
-      .clay-mode-switch {
-        padding: 3px;
-        gap: 3px;
-      }
-      .clay-mode-tab {
-        padding: 5px 13px;
-        font-size: 11.5px;
-      }
-      .clay-phone-card {
-        max-width: 380px;
-        width: 100%;
-        padding: clamp(12px, 3.5vw, 18px) clamp(10px, 3vw, 16px) clamp(10px, 3vw, 14px);
-        border-radius: 28px;
-      }
-      .clay-girl-stage {
-        max-width: clamp(95px, 22vw, 130px) !important;
-        margin: 0 auto -16px !important;
-      }
-      .clay-girl-photo {
-        border-radius: 26px 26px 0 0;
-      }
-      .clay-main-title {
-        font-size: clamp(19px, 4.8vw, 22px);
-        margin-bottom: 2px;
-      }
-      .clay-sub-text {
-        font-size: 11.5px;
-        margin-bottom: 8px;
-      }
-      .clay-inner-card {
-        padding: clamp(12px, 3vw, 16px) clamp(10px, 2.5vw, 14px) clamp(10px, 2.5vw, 12px);
-        border-radius: 22px;
-      }
-      .clay-field-row {
-        margin-bottom: 10px;
-      }
-      .clay-pill-input-box {
-        height: 42px;
-        border-radius: 12px;
-      }
-      .clay-icon-circle {
-        width: 28px;
-        height: 28px;
-        margin-left: 8px;
-      }
-      .clay-native-input {
-        font-size: 13.5px;
-        padding: 0 10px 0 6px;
-      }
-      .clay-submit-btn {
-        height: 44px;
-        font-size: 13.5px;
-        border-radius: 14px;
-        margin-top: 6px;
-      }
-      .btn-google-official {
-        height: 42px;
-        font-size: 13px;
-        border-radius: 14px;
-      }
-      .clay-form-divider {
-        margin: 10px 0;
-      }
-      .clay-bottom-links {
-        margin-top: 10px;
-        font-size: 11.5px;
-      }
-    }
-
-    /* Shorter phone screens (e.g. iPhone SE, compact Androids, landscape) */
-    @media (max-height: 740px) and (max-width: 480px) {
-      body {
-        padding: 6px 8px;
-      }
-      .clay-mode-switch-wrap {
-        margin-bottom: 4px;
-      }
-      .clay-phone-card {
-        padding: 10px 10px 8px;
-        border-radius: 24px;
-      }
-      .clay-girl-stage {
-        max-width: 85px !important;
-        margin: 0 auto -12px !important;
-      }
-      .clay-main-title {
-        font-size: 18px;
-        margin-bottom: 0px;
-      }
-      .clay-sub-text {
-        font-size: 11px;
-        margin-bottom: 6px;
-      }
-      .clay-inner-card {
-        padding: 10px 10px 8px;
-        border-radius: 18px;
-      }
-      .clay-field-row {
-        margin-bottom: 8px;
-      }
-      .clay-pill-input-box {
-        height: 38px;
-      }
-      .clay-submit-btn {
-        height: 40px;
-        font-size: 13px;
-        margin-top: 4px;
-      }
-      .btn-google-official {
-        height: 38px;
-        font-size: 12.5px;
-      }
-      .clay-form-divider {
-        margin: 8px 0;
-      }
-      .clay-bottom-links {
-        margin-top: 8px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.001ms !important;
-      }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.3) rotate(var(--dr)); }
     }
   </style>
 </head>
 
 <body class="vanvi-auth-body" id="authBody">
 
-  <!-- Ambient 3D Studio Clay Background Props -->
+  <!-- Ambient Floating Background Props -->
   <div class="clay-studio-props" aria-hidden="true">
     <div class="clay-prop prop-cloud-1">☁️</div>
     <div class="clay-prop prop-cloud-2">☁️</div>
     <div class="clay-prop prop-heart-float">💖</div>
     <div class="clay-prop prop-star-float">✨</div>
-
-    <!-- Potted Plant on Left (Desktop) -->
-    <div class="clay-prop prop-potted-plant">
-      <div class="prop-plant-leaves">🪴</div>
-      <div class="prop-plant-pot"></div>
-    </div>
-
-    <!-- Potted Flower on Right (Desktop) -->
-    <div class="clay-prop prop-potted-flower">
-      <div class="prop-flower-bloom">🌸</div>
-      <div class="prop-flower-pot"></div>
-    </div>
   </div>
 
   <!-- Smart Fixed Back Button -->
@@ -810,16 +479,14 @@
     </nav>
   </div>
 
-  <!-- Master Compact Phone Card (~420px wide centered) -->
+  <!-- Master Compact Phone Card (~375px wide centered) -->
   <main class="clay-phone-card" id="authStage" role="main">
 
     <!-- Top Greeting Section -->
     <header class="clay-header-top">
       <div class="clay-heart-emblem" aria-hidden="true">💖</div>
       <h1 class="clay-main-title" id="loginTitle">
-        <span class="clay-rays">🔆</span>
         <span>Welcome Back</span>
-        <span class="clay-rays">🔆</span>
       </h1>
       <p class="clay-sub-text">Login to continue your celebration journey</p>
     </header>
@@ -879,21 +546,13 @@
 
       <!-- Divider -->
       <div class="clay-divider-line">
-        <span>or sign in with</span>
+        <span>or continue with</span>
       </div>
 
-      <!-- Real Official Google Sign-In Button -->
-      <div id="gsiButtonContainer" style="display:none;"></div>
-
-      <button type="button" class="btn-google-official" id="googleLoginBtn" title="Continue with Google" aria-label="Sign in with Google">
-        <svg class="google-g-icon" viewBox="0 0 24 24">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-        </svg>
-        <span>Continue with Google</span>
-      </button>
+      <!-- Real Official Google Sign-In Container (NO DUPLICATE BUTTON) -->
+      <div class="gsi-mount-wrap">
+        <div id="gsiButtonContainer"></div>
+      </div>
 
       <!-- Bottom Switch Link -->
       <p class="clay-footer-link">
@@ -908,7 +567,6 @@
   <script src="js/vanvi-i18n.js"></script>
 
   <script>
-    // Universal safe back navigation helper
     function vanviGoBack(fallbackUrl) {
       if (window.history.length > 1 && document.referrer && document.referrer.indexOf(window.location.host) !== -1) {
         window.history.back();
@@ -922,7 +580,6 @@
 
       const form = document.getElementById('loginForm');
       const status = document.getElementById('loginStatus');
-      const googleBtn = document.getElementById('googleLoginBtn');
       const authStage = document.getElementById('authStage');
       const btnTogglePwd = document.getElementById('btnTogglePwd');
       const pwdInput = document.getElementById('loginPassword');
@@ -985,12 +642,12 @@
         const centerX = cardRect.left + cardRect.width / 2;
         const centerY = cardRect.top + cardRect.height / 2;
 
-        for (let i = 0; i < 28; i++) {
+        for (let i = 0; i < 24; i++) {
           const p = document.createElement('div');
           p.className = 'success-confetti-particle';
           p.textContent = emojis[i % emojis.length];
-          const angle = (i / 28) * 2 * Math.PI;
-          const dist = 90 + Math.random() * 180;
+          const angle = (i / 24) * 2 * Math.PI;
+          const dist = 80 + Math.random() * 150;
           const dx = Math.cos(angle) * dist + 'px';
           const dy = Math.sin(angle) * dist + 'px';
           const dr = (Math.random() * 720 - 360) + 'deg';
@@ -1000,15 +657,15 @@
           p.style.left = centerX + 'px';
           p.style.top = centerY + 'px';
           document.body.appendChild(p);
-          setTimeout(() => p.remove(), 1000);
+          setTimeout(() => p.remove(), 900);
         }
 
         setTimeout(() => {
           window.location.href = redirectUrl || 'dashboard.html';
-        }, 800);
+        }, 750);
       };
 
-      // Standard Login Form Submission
+      // Real Live API Login Form Submission
       form.addEventListener('submit', async function (event) {
         event.preventDefault();
         showStatus('');
@@ -1033,7 +690,6 @@
         try {
           const result = await window.VanviAPI.auth.login({ identifier, password });
           if (result.success) {
-            // Remember identifier if checked
             if (rememberCheckbox && rememberCheckbox.checked) {
               localStorage.setItem('vanvi_remember_identifier', identifier);
               localStorage.setItem('vanvi_remember_me', 'true');
@@ -1049,41 +705,27 @@
           }
 
           setLoading(false);
-          showStatus(result.error || 'Invalid email/mobile or password. Please try again.', 'error');
+          showStatus(result.error || 'Invalid credentials. Please try again.', 'error');
         } catch (err) {
           setLoading(false);
           showStatus('Network connection error. Please try again.', 'error');
         }
       });
 
-      // Google Sign-In Action
-      googleBtn?.addEventListener('click', function () {
-        if (window.VanviGoogleAuth) {
-          window.VanviGoogleAuth.signIn({
-            onSuccess: (res) => {
-              showStatus(`Signed in as ${res.user.name}! Opening dashboard... ✨`, 'success');
-              const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
-              window.triggerAuthSuccessCelebration(redirectUrl);
-            },
-            onError: (err) => {
-              showStatus(err.message || 'Google sign-in could not be completed.', 'error');
-            }
-          });
-        }
-      });
-
-      // Attempt GIS button rendering into #gsiButtonContainer if supported
-      window.addEventListener('load', () => {
+      // Render official Google button into #gsiButtonContainer
+      function mountGoogleBtn() {
         if (window.VanviGoogleAuth && window.VanviGoogleAuth.renderButton) {
           window.VanviGoogleAuth.renderButton('gsiButtonContainer', {
             theme: 'outline',
             size: 'large',
             shape: 'pill',
             text: 'signin_with',
-            width: 340
+            width: 300
           });
         }
-      });
+      }
+      window.addEventListener('load', mountGoogleBtn);
+      if (document.readyState === 'complete') mountGoogleBtn();
 
     })();
   </script>
