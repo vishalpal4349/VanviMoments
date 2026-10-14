@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="sunshine">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Happy Friendship Day — Vanvi Moments Special</title>
+  
+  <meta name="description" content="A warm, interactive celebration for my favourite person. Balloon surprise, wrapped stats, memory wall, promises, scratch cards, and certificate.">
+  <meta property="og:title" content="Happy Friendship Day | Vanvi Moments">
+  <meta property="og:description" content="A personalized digital keepsake crafted with memories, laughter, and appreciation.">
+  <meta property="og:image" content="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery1.jpeg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Razorpay Official Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body data-transition="fade-slide">
+
+  <!-- Ambient Background Gradients -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-circle orb-1"></div>
+    <div class="ambient-circle orb-2"></div>
+  </div>
+
+  <!-- =========================================================================
+       1. OPENING HOT-AIR BALLOON INTRO CURTAIN
+       ========================================================================= -->
+  <div class="intro-curtain" id="introCurtain">
+    <div class="curtain-content">
+      <!-- Sticky Corner Note -->
+      <div class="intro-sticky-note" id="introStickyLabel">For My Person :)</div>
+
+      <!-- Hot-Air Balloon Asset -->
+      <div class="balloon-wrapper">
+        <div class="balloon-dome">
+          <div class="balloon-stripes"></div>
+          <div class="balloon-badge" id="balloonBadgeText">Happy Friendship Day</div>
+        </div>
+        <div class="balloon-ropes"></div>
+        <div class="envelope-basket">
+          <div class="envelope-post-stamp" id="envelopeStampText">✿</div>
+          <div class="envelope-recipient" id="introFriendName">my best friend</div>
+          <div class="envelope-subline" id="envelopeSubline">a delivery for you…</div>
+        </div>
+      </div>
+
+      <!-- Card Details Below Balloon -->
+      <div class="intro-card-details">
+        <h1 class="intro-big-title" id="introBigTitle">Hey You!</h1>
+        <p class="intro-card-msg" id="introCardMsg">I made a little something&#10;just for you...</p>
+        <span class="intro-note-pill" id="introNotePill">happy friendship day ✿</span>
+      </div>
+
+      <!-- Tap to Begin Prompt -->
+      <div class="intro-tap-prompt">
+        <span class="sparkle-icon">✨</span>
+        <span id="introTapBtnText">TAP ANYWHERE TO BEGIN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. TOP BAR & MUSIC DOCK
+       ========================================================================= -->
+  <header class="top-nav">
+    <a href="#" class="brand-badge">
+      <div class="brand-gem">V</div>
+      <span class="brand-name">Vanvi Moments</span>
+    </a>
+
+    <div class="nav-actions">
+      <!-- Floating Audio Pill -->
+      <div class="audio-dock" id="audioDock" title="Toggle Background Music">
+        <div class="audio-play-icon">▶</div>
+        <div class="audio-wave">
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+        </div>
+        <div class="audio-track-info">
+          <span class="audio-track-title" id="audioTitle">Our Song</span>
+          <span class="audio-track-subtitle" id="audioSubtitle">the one that's ours</span>
+        </div>
+      </div>
+
+      <!-- Quick Theme Switcher -->
+      <button class="theme-switch-btn" id="themeSwitchBtn" title="Switch Theme">
+        <span>🎨</span>
+        <span class="theme-name">Seaglass</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       3. MAIN CONTENT CONTAINER
+       ========================================================================= -->
+  <main class="page-container">
+
+    <!-- SECTION 1: HERO GREETING -->
+    <section class="section-spacing hero-section">
+      <div class="hero-card">
+        <div class="hero-visual">
+          <div class="hero-portrait-frame">
+            <img id="heroPortrait" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery1.jpeg" alt="Best Friend Moment">
+            <div class="hero-banner-tag" id="heroBannerTag">to the best one ✿</div>
+          </div>
+          <div class="hero-greeting-strip">
+            <img class="strip-thumb" id="greetingPhoto1" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/greeting1.gif" alt="Snapshot 1">
+            <img class="strip-thumb" id="greetingPhoto2" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/greeting2.gif" alt="Snapshot 2">
+            <img class="strip-thumb" id="greetingPhoto3" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/greeting3.jpeg" alt="Snapshot 3">
+          </div>
+        </div>
+
+        <div class="hero-content">
+          <span class="hero-badge-pill" id="heroEyebrow">happy friendship day</span>
+          <h2 class="hero-title" id="heroTitle">To My Favourite Person</h2>
+          <p class="hero-body-text" id="heroBody">
+            Every year this day comes around and I think the same thing: I got so lucky with you. So instead of a text this time, I built you a tiny corner of the internet. Stay a while, there's a bit to see.
+          </p>
+          <a href="#wrappedSection" class="hero-cta-btn" id="heroCtaBtn">
+            <span>see our wrapped</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW SECTION 2: FRIENDSHIP WRAPPED METRICS 📊 -->
+    <section class="section-spacing" id="wrappedSection">
+      <div class="section-header">
+        <span class="section-eyebrow">BY THE NUMBERS</span>
+        <h2 class="section-title">Our Friendship Wrapped ✦</h2>
+        <p class="section-subtitle">Real stats behind our unhinged, unbreakable bond</p>
+      </div>
+
+      <div class="wrapped-grid">
+        <div class="wrapped-card">
+          <div class="wrapped-emoji">📞</div>
+          <div class="wrapped-number" id="statCalls">3,420+</div>
+          <div class="wrapped-label">Midnight Calls</div>
+          <div class="wrapped-subtext">talking about absolutely nothing</div>
+        </div>
+
+        <div class="wrapped-card">
+          <div class="wrapped-emoji">😂</div>
+          <div class="wrapped-number" id="statMemes">12.5k</div>
+          <div class="wrapped-label">Shared Reels & Memes</div>
+          <div class="wrapped-subtext">laughed until stomach ached</div>
+        </div>
+
+        <div class="wrapped-card">
+          <div class="wrapped-emoji">🍟</div>
+          <div class="wrapped-number" id="statSnacks">∞</div>
+          <div class="wrapped-label">Late Night Snacks</div>
+          <div class="wrapped-subtext">terrible food, best therapy</div>
+        </div>
+
+        <div class="wrapped-card">
+          <div class="wrapped-emoji">🤍</div>
+          <div class="wrapped-number" id="statLoyalty">100%</div>
+          <div class="wrapped-label">Pure Loyalty</div>
+          <div class="wrapped-subtext">no exit option, lifelong deal</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: MEMORY WALL (3D POLAROIDS) -->
+    <section class="section-spacing" id="memoryWall">
+      <div class="section-header">
+        <span class="section-eyebrow" id="galleryEyebrow">the memory wall</span>
+        <h2 class="section-title" id="galleryTitle">flip one over</h2>
+        <p class="section-subtitle" id="gallerySubtitle">every photo has something written on the back ✿</p>
+      </div>
+
+      <div class="memory-grid">
+        <!-- Polaroid 1 -->
+        <div class="polaroid-card">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-img-wrapper">
+                <img id="galleryPhoto1" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery1.jpeg" alt="Memory 1">
+              </div>
+              <div class="polaroid-front-caption">tap to flip ✿</div>
+              <div class="flip-hint-badge">Click to reveal note</div>
+            </div>
+            <div class="polaroid-back">
+              <div class="back-stamp">#01</div>
+              <p class="polaroid-back-text" id="galleryCaption1">day one energy. we had no idea what was coming.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Polaroid 2 -->
+        <div class="polaroid-card">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-img-wrapper">
+                <img id="galleryPhoto2" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery2.gif" alt="Memory 2">
+              </div>
+              <div class="polaroid-front-caption">tap to flip ✿</div>
+              <div class="flip-hint-badge">Click to reveal note</div>
+            </div>
+            <div class="polaroid-back">
+              <div class="back-stamp">#02</div>
+              <p class="polaroid-back-text" id="galleryCaption2">still one of the funniest nights of my life.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Polaroid 3 -->
+        <div class="polaroid-card">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-img-wrapper">
+                <img id="galleryPhoto3" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery3.jpeg" alt="Memory 3">
+              </div>
+              <div class="polaroid-front-caption">tap to flip ✿</div>
+              <div class="flip-hint-badge">Click to reveal note</div>
+            </div>
+            <div class="polaroid-back">
+              <div class="back-stamp">#03</div>
+              <p class="polaroid-back-text" id="galleryCaption3">nothing happened this day. that was the best part.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Polaroid 4 -->
+        <div class="polaroid-card">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-img-wrapper">
+                <img id="galleryPhoto4" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter1.jpeg" alt="Memory 4">
+              </div>
+              <div class="polaroid-front-caption">tap to flip ✿</div>
+              <div class="flip-hint-badge">Click to reveal note</div>
+            </div>
+            <div class="polaroid-back">
+              <div class="back-stamp">#04</div>
+              <p class="polaroid-back-text" id="galleryCaption4">the trip we planned badly and loved anyway.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Polaroid 5 -->
+        <div class="polaroid-card">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-img-wrapper">
+                <img id="galleryPhoto5" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter2.jpeg" alt="Memory 5">
+              </div>
+              <div class="polaroid-front-caption">tap to flip ✿</div>
+              <div class="flip-hint-badge">Click to reveal note</div>
+            </div>
+            <div class="polaroid-back">
+              <div class="back-stamp">#05</div>
+              <p class="polaroid-back-text" id="galleryCaption5">3am, terrible snacks, best conversation.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Polaroid 6 -->
+        <div class="polaroid-card">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-img-wrapper">
+                <img id="galleryPhoto6" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter3.jpeg" alt="Memory 6">
+              </div>
+              <div class="polaroid-front-caption">tap to flip ✿</div>
+              <div class="flip-hint-badge">Click to reveal note</div>
+            </div>
+            <div class="polaroid-back">
+              <div class="back-stamp">#06</div>
+              <p class="polaroid-back-text" id="galleryCaption6">proof we clean up alright when we try.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-action-wrap">
+        <a href="#promisesSection" class="hero-cta-btn" id="galleryButtonText">
+          <span>lock our pinky promises</span>
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- NEW SECTION 4: INTERACTIVE PINKY PROMISES 🤙 -->
+    <section class="section-spacing" id="promisesSection">
+      <div class="section-header">
+        <span class="section-eyebrow">SACRED PACT</span>
+        <h2 class="section-title">Our Pinky Promises 🤙</h2>
+        <p class="section-subtitle">Tap each card to lock in our lifelong friend code</p>
+      </div>
+
+      <div class="promise-grid">
+        <div class="promise-card locked-in" data-promise="1">
+          <div class="promise-header">
+            <span class="promise-badge">🔐</span>
+            <span class="promise-status">Locked In</span>
+          </div>
+          <h4 class="promise-title">Never Drift Apart</h4>
+          <p class="promise-body">No matter how busy life gets, one call and we pick up right where we left off.</p>
+          <div class="promise-tap-hint">✦ Tap to pledge</div>
+        </div>
+
+        <div class="promise-card locked-in" data-promise="2">
+          <div class="promise-header">
+            <span class="promise-badge">🤫</span>
+            <span class="promise-status">Locked In</span>
+          </div>
+          <h4 class="promise-title">Vault of Secrets</h4>
+          <p class="promise-body">All our embarrassing stories, crashes, and laughs stay between us forever.</p>
+          <div class="promise-tap-hint">✦ Tap to pledge</div>
+        </div>
+
+        <div class="promise-card locked-in" data-promise="3">
+          <div class="promise-header">
+            <span class="promise-badge">✈️</span>
+            <span class="promise-status">Locked In</span>
+          </div>
+          <h4 class="promise-title">The Unplanned Trips</h4>
+          <p class="promise-body">At least one chaotic, unplanned road trip every year until we are old and wrinkled.</p>
+          <div class="promise-tap-hint">✦ Tap to pledge</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: SCRATCH CARDS ("SIX LITTLE TRUTHS") -->
+    <section class="section-spacing" id="scratchCards">
+      <div class="section-header">
+        <span class="section-eyebrow" id="scratchEyebrow">six little truths</span>
+        <h2 class="section-title" id="scratchTitle">scratch these open</h2>
+        <p class="section-subtitle" id="scratchSubtitle">rub each one — there's something under it ✿</p>
+      </div>
+
+      <div class="scratch-grid">
+        <!-- Card 1 -->
+        <div class="scratch-card">
+          <div class="scratch-secret-content">
+            <div class="secret-icon">✨</div>
+            <h4 class="secret-label" id="scratchLabel1">you show up</h4>
+            <p class="secret-body" id="scratchBody1">you notice something's off before I've said a word. that's the whole thing.</p>
+          </div>
+          <canvas class="scratch-canvas"></canvas>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="scratch-card">
+          <div class="scratch-secret-content">
+            <div class="secret-icon">😂</div>
+            <h4 class="secret-label" id="scratchLabel2">you're funny</h4>
+            <p class="secret-body" id="scratchBody2">half my best memories are us doing nothing and laughing until it hurt.</p>
+          </div>
+          <canvas class="scratch-canvas"></canvas>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="scratch-card">
+          <div class="scratch-secret-content">
+            <div class="secret-icon">🤝</div>
+            <h4 class="secret-label" id="scratchLabel3">you're stuck</h4>
+            <p class="secret-body" id="scratchBody3">years in and you still pick up on the first ring. no exit option, sorry.</p>
+          </div>
+          <canvas class="scratch-canvas"></canvas>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="scratch-card">
+          <div class="scratch-secret-content">
+            <div class="secret-icon">🤍</div>
+            <h4 class="secret-label" id="scratchLabel4">you're honest</h4>
+            <p class="secret-body" id="scratchBody4">you tell me the thing I don't want to hear, kindly. I always need it.</p>
+          </div>
+          <canvas class="scratch-canvas"></canvas>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="scratch-card">
+          <div class="scratch-secret-content">
+            <div class="secret-icon">💭</div>
+            <h4 class="secret-label" id="scratchLabel5">you remember</h4>
+            <p class="secret-body" id="scratchBody5">the small stuff — the worry from a Tuesday, the name I mentioned once.</p>
+          </div>
+          <canvas class="scratch-canvas"></canvas>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="scratch-card">
+          <div class="scratch-secret-content">
+            <div class="secret-icon">🏡</div>
+            <h4 class="secret-label" id="scratchLabel6">you're home</h4>
+            <p class="secret-body" id="scratchBody6">no catching up needed. we just pick it back up exactly where we left it.</p>
+          </div>
+          <canvas class="scratch-canvas"></canvas>
+        </div>
+      </div>
+
+      <div class="scratch-hint-bar">
+        <span>💡 Use finger or cursor to scratch off the foil coating</span>
+      </div>
+
+      <div class="gallery-action-wrap">
+        <a href="#certificateSection" class="hero-cta-btn" id="scratchButtonText">
+          <span>view our certificate</span>
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- NEW SECTION 6: BEST FRIENDSHIP CERTIFICATE 📜 -->
+    <section class="section-spacing" id="certificateSection">
+      <div class="certificate-frame">
+        <div class="cert-seal">★</div>
+        <div class="cert-header">Official Recognition of Soul Bond</div>
+        <h2 class="cert-title">Certified Best Friend of a Lifetime</h2>
+        <div class="cert-recipient" id="certRecipient">my best friend</div>
+        <p class="cert-body">
+          For exceptional patience, unli-rant listening capabilities, unpaid psychological consultation, and unmatched sense of humor during times of absolute chaos.
+        </p>
+        <div class="cert-badges">
+          <span class="cert-pill">✓ Lifetime Verified</span>
+          <span class="cert-pill">✓ 24/7 Hotline</span>
+          <span class="cert-pill">✓ Ride or Die Partner</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: HANDWRITTEN LETTER -->
+    <section class="section-spacing" id="letterSection">
+      <div class="letter-parchment-wrap">
+        <div class="letter-top-row">
+          <div>
+            <span class="letter-heading-eyebrow" id="letterEyebrow">✿ one last thing ✿</span>
+            <h2 class="letter-heading-title" id="letterTitle">A Note For You</h2>
+          </div>
+          <img class="letter-mascot-img" id="letterMascot" src="https://cdn.cutiepage.in/template-seeds/brothers-day/cat.gif" alt="Mascot">
+        </div>
+
+        <!-- Photo Strip -->
+        <div class="letter-photo-strip">
+          <img class="letter-strip-photo" id="letterPhoto1" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter1.jpeg" alt="Film 1">
+          <img class="letter-strip-photo" id="letterPhoto2" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter2.jpeg" alt="Film 2">
+          <img class="letter-strip-photo" id="letterPhoto3" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter3.jpeg" alt="Film 3">
+        </div>
+
+        <div class="letter-salutation" id="letterSalutation">Hey you,</div>
+
+        <div class="letter-content-body" id="letterBody">
+I'm not great at saying this stuff out loud, so I made you a page instead — a song, our photos, and a few things I actually mean.
+
+thank you for the years of picking up the phone, for the advice I didn't ask for and definitely needed, and for never once making me explain myself twice. you've seen every version of me and stayed for all of them.
+
+I hope today is a good one. and I hope you know that whatever happens next, you've got a person in your corner permanently. that's me. I'm the person.
+        </div>
+
+        <div class="letter-closing-wrap">
+          <span class="letter-closing-text" id="letterClosing">always in your corner,</span>
+          <span class="letter-signature-text" id="letterSignature">your friend</span>
+        </div>
+
+        <!-- NEW SECTION 8: 39 INR UNLOCK CARD -->
+        <div class="gift-unlock-card" style="margin-top: 36px;">
+          <div class="gift-price-badge">
+            <span class="gift-price-strike">₹199</span>
+            <span>Only ₹39 / One-time</span>
+          </div>
+          <h3 class="gift-card-title">Make It Yours Forever ✦</h3>
+          <p class="gift-card-desc">
+            Unlock complete lifetime access, custom domain link, uncompressed photo storage, and instant WhatsApp QR gift box for just ₹39.
+          </p>
+          <button type="button" class="pay-btn-main" id="btnUnlockPayment">
+            <span>💳 Pay ₹39 & Lock Gift</span>
+          </button>
+        </div>
+
+        <!-- Final Action Hub -->
+        <div class="letter-action-hub">
+          <button class="replay-btn" id="letterRestartBtn">
+            <span>↻</span>
+            <span>play it again</span>
+          </button>
+
+          <div class="share-hub">
+            <a href="#" target="_blank" class="whatsapp-share-btn" id="whatsappShareBtn">
+              <span>💬</span>
+              <span>Send to Bestie</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       4. FOOTER & VANVI MOMENTS BRAND
+       ========================================================================= -->
+  <footer class="site-footer">
+    <a href="#" class="vanvi-gold-seal">
+      <span>✨</span>
+      <span id="footerSignoff">made with love by me</span>
+      <span>•</span>
+      <strong>Vanvi Moments</strong>
+    </a>
+  </footer>
+
+  <!-- PREVIEW WATERMARK BADGE (Removes automatically after publish) -->
+  <div class="vanvi-watermark-ribbon" id="vanviWatermark" style="position:fixed; bottom:16px; left:16px; z-index:99999; background:rgba(255,255,255,0.92); color:#14907f; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(20,144,127,0.3); border-radius:999px; padding:6px 14px; font-size:11px; font-weight:700; display:flex; align-items:center; gap:8px; box-shadow:0 4px 14px rgba(0,0,0,0.12);">
+    <span>✨ Vanvi Moments Preview</span>
+    <a href="./builder.html" style="background:#14907f; color:#fff; text-decoration:none; padding:3px 10px; border-radius:999px; font-size:10.5px;">Unlock for ₹39</a>
+  </div>
+
+  <!-- Celebration Modal for Payment Success & Unique Link -->
+  <div class="celebration-overlay" id="celebrationModal" style="display: none;">
+    <div class="celebration-card">
+      <div class="celebration-badge">🎉 PAYMENT SUCCESSFUL · ₹39</div>
+      <h2 class="celebration-title">Your Bestie Microsite is LIVE!</h2>
+      <p class="celebration-subtitle">Permanent short-link locked & verified forever.</p>
+      
+      <div class="shortlink-box">
+        <input type="text" readonly id="celebrationShortlinkInput" class="shortlink-input" value="https://vanvimoments.com/f/bestie">
+        <button type="button" class="btn-copy-shortlink" id="btnCopyShortlink">Copy Link</button>
+      </div>
+
+      <div class="celebration-actions">
+        <a href="#" target="_blank" id="celebrationWaBtn" class="btn-celebration-wa">💬 Send to Bestie on WhatsApp</a>
+      </div>
+
+      <button type="button" class="btn-close-modal" id="btnCloseCelebration">Close & View Page</button>
+    </div>
+  </div>
+
+  <div class="toast-hub" id="toastHub"></div>
+
+  <script src="./script.js"></script>
+  <script>
+    function evaluateWatermark() {
+      const params = new URLSearchParams(window.location.search);
+      const isPublished = params.get('published') === 'true' || params.get('paid') === 'true' || params.get('purchased') === 'true' || params.get('watermark') === 'false';
+      const wm = document.getElementById('vanviWatermark');
+      if (isPublished && wm) {
+        wm.style.display = 'none';
+      }
+    }
+    evaluateWatermark();
+    window.addEventListener('load', evaluateWatermark);
+    window.addEventListener('message', function(e) {
+      if (e.data && (e.data.isPublished || e.data.removeWatermark || e.data.paid)) {
+        const wm = document.getElementById('vanviWatermark');
+        if (wm) wm.style.display = 'none';
+      }
+    });
+  </script>
+  <script src="../../js/vanvi-template-lock.js"></script>
+</body>
+</html>

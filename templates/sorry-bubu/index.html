@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Cute Sorry 💗 | Vanvi Moments</title>
+  <link rel="icon" href="https://cdn.cutiepage.in/template-seeds/cute-apology/intro.gif" />
+
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <script type="module" crossorigin src="/assets/templatesSorryBubuIndex-BU5GsBva.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-P2Xu9kJm.js">
+  <link rel="stylesheet" crossorigin href="/assets/sorryBubuIndex-C6sqDIAR.css">
+</head>
+<body>
+
+  <!-- Atmospheric Background Canvas -->
+  <div class="apology-atmosphere">
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="floating-hearts-layer" id="floatingHeartsLayer"></div>
+  </div>
+
+  <!-- Top Navigation & Chapter Progress Dots -->
+  <header class="chapter-stepper-bar">
+    <div class="step-dot active" data-step="0" title="Cover"></div>
+    <div class="step-dot" data-step="1" title="Game"></div>
+    <div class="step-dot" data-step="2" title="Letter"></div>
+    <div class="step-dot" data-step="3" title="Gallery"></div>
+    <div class="step-dot" data-step="4" title="Music"></div>
+    <div class="step-dot" data-step="5" title="Finale"></div>
+  </header>
+
+  <!-- Top Actions Wrap: Audio Toggle + Customize Pill -->
+  <div class="top-action-pills-wrap">
+    <button class="audio-mini-pill" id="topAudioToggle" aria-label="Toggle Background Music">
+      <div class="equalizer-anim" id="topNavEqualizer">
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+      </div>
+      <span id="topAudioText">I Love You</span>
+    </button>
+    <a href="./builder.html" class="top-customize-pill" title="Customize for ₹29">
+      <span>✨ Edit</span>
+    </a>
+  </div>
+
+  <!-- Top Action Button -->
+  <div style="position:fixed; top:16px; right:16px; z-index:9999;">
+    <a href="./builder.html" style="background:linear-gradient(135deg, #ff2a7a, #9333ea); color:#fff; text-decoration:none; padding:6px 14px; border-radius:99px; font-size:11px; font-weight:800; box-shadow:0 4px 12px rgba(255,42,122,0.35); display:inline-flex; align-items:center; gap:4px;">✦ Customize</a>
+  </div>
+
+  <!-- Main Multi-Chapter App Container -->
+  <main class="apology-app-root">
+
+    <!-- ==============================================
+         CHAPTER 0: MAGAZINE COVER
+         ============================================== -->
+    <section class="chapter-screen active" id="screenCover">
+      <div class="glass-magazine-card">
+        <div class="cover-brow-wrap">
+          <span class="brow-line"></span>
+          <span class="cover-brow-text" id="coverLabel">TO MY</span>
+          <span class="brow-line"></span>
+        </div>
+
+        <h1 class="cover-recipient-name" id="coverRecipient">BUBU</h1>
+
+        <div class="tagline-headline-group">
+          <span class="cover-tagline-text" id="coverTagline">I'm so</span>
+          <span class="tilted-badge-chip" id="coverHeadline">so so so</span>
+        </div>
+
+        <h2 class="cover-subheadline-text" id="coverSubheadline">SORRY</h2>
+
+        <p class="cover-description-text" id="coverDescription">
+          I know I upset you, and a sorry over text felt too small. So I made you this tiny website instead, to steal at least one smile from you 💗
+        </p>
+
+        <div class="cover-gif-container">
+          <img id="coverImg" src="https://cdn.cutiepage.in/template-seeds/cute-apology/intro.gif" alt="Cute apology illustration" />
+        </div>
+
+        <button class="btn-blush" id="coverNextBtn">
+          <span id="coverNextBtnText">Come in →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         CHAPTER 1: TIC TAC LOVE GAME
+         ============================================== -->
+    <section class="chapter-screen" id="screenGame">
+      <div class="glass-magazine-card">
+        <h2 class="game-title-text" id="gameHeading">One heart is missing, place it 💘</h2>
+
+        <div class="tictac-board-grid" id="tictacBoard">
+          <!-- Rendered dynamically by script.js -->
+        </div>
+
+        <div class="game-success-banner" id="gameSuccessBanner" style="display: none;">
+          <div class="game-success-text">Three hearts aligned! You melted my heart 💗</div>
+          <p style="font-size: 13px; color: var(--color-muted);">Opening your letter...</p>
+        </div>
+
+        <div class="section-nav-footer">
+          <button class="btn-periwinkle" onclick="window.goToScreen(0)">← Back</button>
+          <button class="btn-periwinkle" onclick="window.goToScreen(2)">Skip to Letter →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         CHAPTER 2: LOVE LETTER
+         ============================================== -->
+    <section class="chapter-screen" id="screenLetter">
+      <div class="glass-magazine-card">
+        <div class="letter-parchment-sheet">
+          <img src="https://cdn.cutiepage.in/template-seeds/cute-apology/stamp.png" class="stamp-badge-pos" alt="Postal stamp" onerror="this.style.display='none'" />
+          
+          <div class="letter-small-tag" id="letterSmallHeader">A NOTE</div>
+          <h2 class="letter-heading-title" id="letterTitle">Just For You ✦</h2>
+          <div class="letter-greeting-text" id="letterGreeting">To my Bubu,</div>
+          
+          <p class="letter-body-copy" id="letterBody">
+            I hate it when we fight, and I hate it more when it's my fault. You matter more to me than being right ever will. I'm sorry, truly. 💗
+          </p>
+
+          <div class="letter-signature-text" id="letterSignature">Yours always, Dudu 💌</div>
+
+          <div class="letter-floating-photo-accent">
+            <img id="letterPhotoImg" src="https://cdn.cutiepage.in/template-seeds/cute-apology/letter.png" alt="Pinned love memory" />
+          </div>
+        </div>
+
+        <div class="section-nav-footer">
+          <button class="btn-periwinkle" onclick="window.goToScreen(1)">← Back</button>
+          <button class="btn-blush" onclick="window.goToScreen(3)">View Our Memories →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         CHAPTER 3: PHOTO CAROUSEL
+         ============================================== -->
+    <section class="chapter-screen" id="screenGallery">
+      <div class="glass-magazine-card">
+        <div class="gallery-vintage-frame">
+          <h2 class="gallery-headline-text" id="galleryTitle">Little Surprises</h2>
+          
+          <div class="gallery-meta-strip">
+            <span id="galleryFromLabel">From: Your Dudu</span>
+            <span id="galleryToLabel">To: My Bubu</span>
+          </div>
+
+          <div class="gallery-photo-stage">
+            <img id="galleryMainImg" class="gallery-photo-img" src="https://cdn.cutiepage.in/template-seeds/cute-apology/pic1.jpg" alt="Memory snapshot" />
+            <div class="polaroid-caption-pill" id="galleryCaptionPill">flowers, because you deserve them 🌷</div>
+          </div>
+
+          <div class="gallery-carousel-arrows">
+            <button class="gallery-arrow-btn" id="galleryPrevBtn" title="Previous Photo">←</button>
+            <button class="gallery-arrow-btn" id="galleryNextBtn" title="Next Photo">→</button>
+          </div>
+
+          <div class="gallery-footer-signature" id="gallerySignature">sealed with love, Dudu 💌</div>
+        </div>
+
+        <div class="section-nav-footer">
+          <button class="btn-periwinkle" onclick="window.goToScreen(2)">← Back</button>
+          <button class="btn-blush" onclick="window.goToScreen(4)">Listen to Playlist 🎵</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         CHAPTER 4: MUSIC VINYL JUKEBOX
+         ============================================== -->
+    <section class="chapter-screen" id="screenMusic">
+      <div class="player-glass-card">
+        <h2 class="playlist-main-title" id="playlistHeading">Songs That Feel Like Us 💗</h2>
+
+        <div class="vinyl-album-wrapper">
+          <div class="vinyl-disc-art" id="playerVinylArt">
+            <img id="playerCoverImg" src="https://cdn.cutiepage.in/template-seeds/cute-apology/cover1.gif" alt="Album Cover" />
+            <div class="vinyl-center-hole"></div>
+          </div>
+        </div>
+
+        <div class="player-now-tag">NOW PLAYING</div>
+        <div class="player-song-title" id="playerSongTitle">I Love You</div>
+
+        <div class="player-progress-container">
+          <input type="range" class="custom-range-slider" id="musicProgressBar" min="0" max="100" value="0" />
+          <div class="player-time-row">
+            <span id="musicCurTime">0:00</span>
+            <span id="musicDurTime">3:15</span>
+          </div>
+        </div>
+
+        <div class="player-controls-row">
+          <button class="player-ctrl-btn" id="playerPrevBtn" title="Previous Track">⏮</button>
+          <button class="player-ctrl-btn btn-play-hero" id="playerPlayBtn" title="Play or Pause">▶</button>
+          <button class="player-ctrl-btn" id="playerNextBtn" title="Next Track">⏭</button>
+        </div>
+
+        <div class="playlist-items-list" id="playlistTracksList">
+          <!-- Rendered dynamically by script.js -->
+        </div>
+
+        <div class="section-nav-footer">
+          <button class="btn-periwinkle" onclick="window.goToScreen(3)">← Back</button>
+          <button class="btn-blush" onclick="window.goToScreen(5)">One Last Thing →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         CHAPTER 5: FINALE & HUG
+         ============================================== -->
+    <section class="chapter-screen" id="screenFinale">
+      <div class="finale-glass-card">
+        <div class="finale-brow-brand">VANVI MOMENTS</div>
+        <h1 class="finale-hero-title" id="thankYouTitle">I Love You</h1>
+        <div class="finale-hero-subtitle" id="thankYouSubtitle">more than anything 💞</div>
+
+        <p class="finale-body-text" id="thankYouBody">
+          If you smiled even once while going through this, it was all worth it. Now come here, I owe you a hug. 💗
+        </p>
+
+        <div class="finale-gif-wrap">
+          <img id="thankYouImg" src="https://cdn.cutiepage.in/template-seeds/cute-apology/thankyou.gif" alt="Warm hug illustration" />
+        </div>
+
+        <button class="finale-hug-button" id="claimHugBtn">
+          <span>Claim Your Hug 🫂</span>
+        </button>
+
+        <button class="btn-periwinkle" id="whatsappShareBtn" style="margin-bottom: 10px;">
+          <span>💬 Send This to WhatsApp</span>
+        </button>
+
+        <!-- Customize CTA for Recipient -->
+        <a href="./builder.html" class="btn-customize-cta" id="customizeCtaBtn">
+          <span>✨ Create Your Own Sorry Page (₹29) →</span>
+        </a>
+
+        <div class="finale-footer-quote" id="thankYouFooter">made with 💗, hugs, and a lot of missing you ✨</div>
+
+        <div class="vanvi-brand-watermark">
+          <span>VANVI MOMENTS</span> · LUXURY APOLOGY MICROSITE
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    (function() {
+      function evaluateWatermark() {
+        const params = new URLSearchParams(window.location.search);
+        const isPublished = params.get('published') === 'true' || params.get('watermark') === 'false';
+        if (isPublished) {
+          const ribbon = document.getElementById('vanviWatermark');
+          if (ribbon) ribbon.style.display = 'none';
+          document.querySelectorAll('.vanvi-brand-watermark, .watermark-unlock-btn').forEach(el => el.style.display = 'none');
+        }
+      }
+      evaluateWatermark();
+      window.addEventListener('load', evaluateWatermark);
+      window.addEventListener('message', (e) => {
+        if (e.data && (e.data.isPublished === true || e.data.removeWatermark)) {
+          const ribbon = document.getElementById('vanviWatermark');
+          if (ribbon) ribbon.style.display = 'none';
+          document.querySelectorAll('.vanvi-brand-watermark, .watermark-unlock-btn').forEach(el => el.style.display = 'none');
+        }
+      });
+    })();
+  </script>
+  <script src="../../js/vanvi-template-lock.js"></script>
+</body>
+</html>

@@ -1,0 +1,736 @@
+/* Balcony platform toolbar - the edit/preview chrome shared by EVERY template.
+   Not part of any one template: a template includes this alongside toolbar.js
+   and gets the bar, the buy modal (plan picker), the finalize/share modal and
+   the design-system button styles for free. See toolbar.js for the contract.
+
+   The purple accent IS the Balcony design-system dusk-500, so the chrome reads
+   as "the platform", clearly distinct from the invitation being edited. These
+   tokens live here (the platform owns the design system); a template's own
+   editor CSS consumes them, so toolbar.css must load before it. */
+
+:root {
+  --edit-accent: #5F0FFF;             /* dusk-500 */
+  --edit-accent-soft: rgba(95, 15, 255, 0.5);
+  --edit-accent-faint: rgba(95, 15, 255, 0.45);
+  --edit-accent-tint: rgba(95, 15, 255, 0.06);
+  --edit-bg: #faf8ff;
+
+  /* Design-system button tokens (mirrored here because template pages don't load
+     the platform's token CSS - kept in sync with public/css/tokens). */
+  --ds-dusk-200: #BB99FF;
+  --ds-dusk-600: #4900DB;   /* --color-surface-brand-primary-default */
+  --ds-dusk-700: #3800A8;   /* --color-surface-brand-primary-bold  */
+  --ds-dawn-500: #ffad33;   /* --color-dawn-500 - the primary button's glow */
+  --ds-btn-font: 600 12px/1 "Satoshi", var(--tb-font), system-ui, sans-serif;
+  --ds-btn-elevation:
+    inset 2px 2px 4px 2px rgba(255, 255, 255, 0.3),
+    inset -2px -2px 4px 2px rgba(0, 0, 0, 0.15),
+    2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+  --ds-btn-elevation-hover:
+    inset 2px 2px 4px 2px rgba(255, 255, 255, 0.3),
+    inset -2px -2px 4px 2px rgba(0, 0, 0, 0.15),
+    2px 2px 5px 2px rgba(0, 0, 0, 0.1),
+    4px 4px 6px 4px rgba(0, 0, 0, 0.09);
+
+  /* Chrome typography. Uses the template's own fonts when it defines these
+     tokens (rose-invitation does, via variables.css), and falls back to a
+     platform stack on templates that don't - the whole point of shared chrome
+     being portable. Weights are literals (400/600) so no token is needed. */
+  --tb-font: var(--font-secondary, system-ui, -apple-system, "Segoe UI", sans-serif);
+  --tb-font-display: var(--font-primary, var(--tb-font));
+}
+
+/* ---------- Toolbar (edit + preview) ----------
+   One bar in both modes - see the mount()/buildBar block in toolbar.js. The bar
+   floats over the invitation with no background and reserves no space, so it
+   never hides template chrome (e.g. the music toggle). It's click-through
+   (pointer-events: none); only its interactive children catch clicks. */
+.edit-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 58px;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  pointer-events: none;
+  color: var(--edit-accent);
+  font: 400 14px var(--tb-font);
+}
+
+.edit-bar__brand,
+.edit-bar__home a,
+.edit-btn { pointer-events: auto; }
+
+.edit-bar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.edit-bar__brand svg {
+  flex: none;
+}
+
+/* Signed-in visitor's Dashboard link; empty (and gone) for logged-out shoppers.
+   Stays visible on phones (unlike the brand text) - it's a navigation escape. */
+.edit-bar__home:empty {
+  display: none;
+}
+
+.edit-bar__saved {
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.edit-bar__saved.is-on {
+  opacity: 0.75;
+}
+
+.edit-bar__spacer {
+  flex: 1 1 auto;
+}
+
+.edit-bar__actions {
+  display: inline-flex;
+  gap: 10px;
+}
+
+/* Outlined variant (design-system .btn-sm.outlined) - secondary actions */
+.edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1.5px solid var(--ds-dusk-200);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--edit-accent);
+  font: var(--ds-btn-font);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: var(--edit-accent);
+  color: var(--ds-dusk-700);
+}
+
+/* Primary variant (design-system .btn.primary) - the seated, filled CTA with the
+   dawn-500 glow that rests at the bottom and glides up on hover. */
+.edit-btn--primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* 0, not just a transparent colour - the filled CTA carries no border at all.
+     The outlined Cancel button beside it in the buy modal keeps its 1.5px box,
+     and the two still line up because .edit-modal__actions is a flex row at the
+     default align-items: stretch. */
+  border: 0;
+  background: var(--ds-dusk-600);
+  color: #ffffff;
+  box-shadow: var(--ds-btn-elevation);
+}
+
+.edit-btn--primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: radial-gradient(circle at center,
+    color-mix(in srgb, var(--ds-dawn-500) 70%, transparent) 0%,
+    transparent 55%);
+  background-repeat: no-repeat;
+  background-size: 200% 200%;
+  background-position: 50% 100%;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: background-position 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Hover keeps the base dusk fill exactly - only the dawn glow glides up (and the
+   elevation lifts), matching the design-system primary button. */
+.edit-btn--primary:hover {
+  background: var(--ds-dusk-600);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: var(--ds-btn-elevation-hover);
+}
+
+.edit-btn--primary:hover::before {
+  background-position: 50% 0%;
+}
+
+/* Quiet = outlined with a lighter divider (matches base outlined look) */
+.edit-btn--quiet {
+  border-color: var(--edit-accent-soft);
+}
+
+/* The trial's call to action, pinned in the toolbar. */
+.edit-btn--buy {
+  background: var(--edit-accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .edit-bar { gap: 6px; padding: 0 10px; }
+  .edit-bar__brand { font-size: 12px; }
+  .edit-btn { padding: 7px 10px; font-size: 12px; }
+}
+
+/* Phone: hide the wordy brand + saved indicator; the Reset / Preview buttons
+   stay (they're floating pills now, not a crowded bar). */
+@media (max-width: 560px) {
+  .edit-bar__brand-text,
+  .edit-bar__saved {
+    display: none;
+  }
+}
+
+/* ---------- Finalize / share / upsell modal ---------- */
+.edit-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.edit-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(37, 8, 96, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.edit-modal__box {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 480px);
+  padding: 30px 28px;
+  border: 2px solid var(--edit-accent);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.28);
+  color: var(--brown, #43302b);
+  font: 400 14px var(--tb-font);
+}
+
+.edit-modal__box h3 {
+  font: 600 22px var(--tb-font-display);
+  color: var(--edit-accent);
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.edit-modal__box p {
+  margin-bottom: 12px;
+  line-height: 1.55;
+}
+
+.edit-modal__link {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.edit-modal__link input {
+  flex: 1 1 auto;
+  padding: 9px 12px;
+  border: 1.5px solid var(--edit-accent-soft);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--brown, #43302b);
+  font: 400 13px var(--tb-font);
+}
+
+.edit-modal__actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Buy modal (plan picker) ---------- */
+.edit-modal__box--buy {
+  /* The buy modal uses Satoshi throughout - override the chrome font tokens so
+     every descendant (headings, plans, total, FAQs) resolves to Satoshi rather
+     than the host template's own fonts. */
+  --tb-font: "Satoshi", system-ui, sans-serif;
+  --tb-font-display: "Satoshi", system-ui, sans-serif;
+  width: min(94vw, 468px);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 28px 26px;
+  border-radius: 20px;
+  font-family: "Satoshi", system-ui, sans-serif;
+}
+
+/* Buy-modal actions: the two buttons (Cancel outlined · Proceed primary) share
+   the full width, each growing equally, with Proceed pinned on the right. Sized
+   to the design-system btn-md. */
+.edit-modal__box--buy .edit-modal__actions {
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: nowrap;
+}
+
+.edit-modal__box--buy .edit-modal__actions .edit-btn {
+  flex: 1 1 0;
+  justify-content: center;
+  padding: 13px 26px;
+  font-size: 14px;
+}
+
+.buy-modal__eyebrow {
+  font: 700 11px var(--tb-font);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--edit-accent);
+  margin-bottom: 4px;
+}
+
+.buy-modal h3 {
+  text-align: left;
+  margin: 0 0 18px;
+  font: 600 24px/1.15 var(--tb-font-display);
+  color: var(--ds-dusk-700);
+}
+
+.buy-modal__plans {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+/* The invitation panel. It used to be one of two selectable plan cards, hence
+   the class name and the .is-selected accent - there is nothing to select any
+   more, so it is a plain div: no pointer, no hover, no radio. */
+.buy-plan {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 16px;
+  border: 1.5px solid #ece7f7;
+  border-radius: 16px;
+  background: #fff;
+  color: #2b2733;
+  text-align: left;
+}
+
+.buy-plan.is-selected {
+  border-color: var(--edit-accent);
+  background: var(--edit-accent-tint);
+  box-shadow: 0 0 0 3px var(--edit-accent-tint);
+}
+
+.buy-plan__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The panel's heading. It used to share a row with the invitation's price
+   (.buy-plan__head / __price / __price-original, all gone with it - the TOTAL
+   below is the only place a price is stated now), so it sits directly in the
+   column and carries the gap the tagline used to provide. */
+.buy-plan__name {
+  margin-bottom: 10px;
+  font: 600 15px var(--tb-font-display);
+  color: #201b2b;
+}
+
+.buy-discount-badge {
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #ffe3e3;
+  color: #c92a2a;
+  font: 700 10px var(--tb-font);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.buy-plan__points {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.buy-plan__point {
+  padding-left: 22px;
+  position: relative;
+  font-size: 12.5px;
+  color: #453f52;
+}
+
+.buy-plan__point::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  color: var(--edit-accent);
+  font-weight: 700;
+}
+
+/* Optional personalization - the one thing the shopper picks in this modal.
+   It sits ABOVE the total (it changes it) and is preselected to "Not now", so
+   the invitation still reads as one product at one price and this reads as
+   something offered, not something withheld. */
+.buy-addons {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1.5px solid #ece7f7;
+}
+
+.buy-addons__title {
+  font: 600 14px var(--tb-font-display);
+  color: var(--ds-dusk-700);
+}
+
+.buy-addons__lead {
+  margin: 4px 0 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #6b6478;
+}
+
+.buy-addons__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* A <button role="radio">, so it is reachable and pressable without any of
+   the styling a native radio drags in. One row: mark, label, price. It was a
+   three-column grid when each option also carried a description line; the
+   labels say it themselves, so the descriptions and the grid both went. */
+.buy-addon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  background: #faf8ff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.buy-addon:hover {
+  border-color: #d9cdf3;
+}
+
+.buy-addon:focus-visible {
+  outline: none;
+  border-color: var(--edit-accent);
+  box-shadow: 0 0 0 3px var(--edit-accent-tint);
+}
+
+.buy-addon.is-selected {
+  border-color: var(--edit-accent);
+  background: var(--edit-accent-tint);
+}
+
+.buy-addon__mark {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #c9c1d8;
+  border-radius: 999px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.buy-addon__mark::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #fff;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.buy-addon.is-selected .buy-addon__mark {
+  border-color: var(--edit-accent);
+  background: var(--edit-accent);
+}
+
+.buy-addon.is-selected .buy-addon__mark::after {
+  opacity: 1;
+}
+
+/* Takes the slack, so the price is pushed to the right-hand edge. */
+.buy-addon__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: 600 13px var(--tb-font);
+  color: #201b2b;
+}
+
+.buy-addon__price {
+  flex: none;
+  font: 700 13px var(--tb-font);
+  color: var(--ds-dusk-700);
+  white-space: nowrap;
+}
+
+/* The "Not now" option costs nothing, and should not advertise a price as
+   though it did. */
+.buy-addon__price--free {
+  color: #a39cb0;
+}
+
+/* The invitation's own price, on its own line above the total - shown only
+   once an add-on is picked (toggled in JS, see buyModalHtml/syncBuyModal in
+   toolbar.js). Deliberately lighter than .buy-modal__total: this is one term
+   being added, not the answer, so it should read as quieter than the number
+   it feeds into. */
+.buy-modal__breakdown {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 14px;
+  font: 500 13px var(--tb-font);
+  color: #6b6478;
+}
+
+.buy-modal__breakdown-amt {
+  font: 600 13px var(--tb-font);
+  color: #4a4453;
+}
+
+.buy-modal__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1.5px solid #ece7f7;
+  font: 700 12px var(--tb-font);
+  color: #6b6478;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.buy-modal__total-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.buy-modal__total-amt {
+  font: 700 24px var(--tb-font-display);
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ds-dusk-700);
+}
+
+.buy-modal__total-original {
+  font: 600 14px var(--tb-font-display);
+  text-transform: none;
+  letter-spacing: normal;
+  color: #a39cb0;
+  text-decoration: line-through;
+}
+
+/* ---- Buy-modal FAQs (admin-managed accordion) ---- */
+.buy-faqs {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1.5px solid #ece7f7;
+}
+
+.buy-faqs__title {
+  font: 700 11px var(--tb-font);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b6478;
+  margin-bottom: 6px;
+}
+
+.buy-faq {
+  border-bottom: 1px solid #f0edf7;
+}
+
+.buy-faq:last-child {
+  border-bottom: 0;
+}
+
+.buy-faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 2px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font: 600 13px var(--tb-font);
+  color: #201b2b;
+}
+
+.buy-faq__chev {
+  flex: none;
+  color: var(--edit-accent);
+  transition: transform 0.2s ease;
+}
+
+.buy-faq.is-open .buy-faq__chev {
+  transform: rotate(180deg);
+}
+
+.buy-faq__a {
+  display: none;
+  padding: 0 2px 12px;
+  font: 400 12.5px/1.55 var(--tb-font);
+  color: #5c5568;
+}
+
+.buy-faq.is-open .buy-faq__a {
+  display: block;
+}
+
+@media (max-width: 560px) {
+  .edit-modal__box--buy {
+    padding: 20px 16px;
+  }
+
+  /* Finalize modal link row wraps rather than overflows */
+  .edit-modal__link {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- Trial watermark (unpurchased templates only) ----------
+   Tiled Balcony Invites logo laid over the preview of a trial - a real element
+   appended by renderWatermark() in toolbar.js (NOT body::before/::after:
+   several templates already claim those for their own chrome, and a
+   template-set `width` there fights our `right: 0` under CSS's
+   over-constrained box resolution - see the comment in toolbar.js). Fixed +
+   click-through like the bar, sitting above the invitation but below the
+   bar/buy-CTA/modal so the chrome stays fully legible and usable. The mark is
+   the logo artwork itself (public/landing/logo.svg, 372x145, #5F0FFF) - its
+   path data baked into a small tiled SVG rather than loaded as an <img>, which
+   matches how the rest of this file avoids image requests, and lets one
+   declaration cover any viewport/scroll height with no JS resize handling.
+   Regenerate if the logo ever changes: take the path `d`s out of logo.svg, wrap
+   them in <g fill='#5F0FFF' transform='translate(120 90) rotate(-28)
+   scale(0.403) translate(-186 -72.5)'> - which centres the 372x145 mark on the
+   240x180 tile - then percent-encode space, <, > and #. */
+.trial-watermark {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  pointer-events: none;
+  opacity: 0.16;
+  background-repeat: repeat;
+  background-size: 240px 180px;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='180'%3E%3Cg%20fill='%235F0FFF'%20transform='translate(120%2090)%20rotate(-28)%20scale(0.403)%20translate(-186%20-72.5)'%3E%3Cpath%20d='M43.2334%2077.29V67.1465H43.2295C43.2295%2055.3956%2034.7617%2048.4844%2024.3164%2048.4844C13.8713%2048.4846%205.4043%2055.3957%205.4043%2067.1465H5.40039V77.29H5.4043C5.4043%2089.0408%2013.8713%2095.9519%2024.3164%2095.9521C34.7617%2095.9521%2043.2295%2089.041%2043.2295%2077.29H43.2334ZM48.6338%2077.29C48.6338%2092.3984%2037.7461%20104.646%2024.3164%20104.646C11.0204%20104.646%200.218402%2092.6409%200.00488281%2077.7402H0V0.0898438L5.40039%205.35449V49.957C9.85815%2043.7561%2016.6753%2039.7902%2024.3164%2039.79C37.6998%2039.79%2048.5572%2051.9537%2048.6318%2066.9902H48.6338V77.29Z'/%3E%3Cpath%20d='M109.533%2077.1484H109.566C109.566%2077.6322%20109.555%2078.1132%20109.533%2078.5908V104.648L104.133%2099.3848V94.3818C99.6749%20100.557%2092.8725%20104.505%2085.2495%20104.505C71.8199%20104.505%2060.9331%2092.2567%2060.9331%2077.1484V66.8486H60.9351C61.0096%2051.8121%2071.8661%2039.6486%2085.2495%2039.6484C98.6792%2039.6484%20109.566%2051.8966%20109.566%2067.0049H104.163C104.163%2055.254%2095.6948%2048.3428%2085.2495%2048.3428C74.8043%2048.3429%2066.3364%2055.2541%2066.3364%2067.0049H66.3335V77.1484H66.3364C66.3364%2088.8993%2074.8043%2095.8105%2085.2495%2095.8105C95.3425%2095.8105%20103.588%2089.358%20104.133%2078.3213V67.0488H109.533V77.1484Z'/%3E%3Cpath%20d='M121.867%20104.648L127.267%2099.8984V5.26244L121.867%20-0.00156406L121.867%20104.648Z'/%3E%3Cpath%20d='M144.97%2077.293C144.97%2089.0438%20153.438%2095.955%20163.883%2095.9551C174.328%2095.9551%20182.796%2089.0439%20182.796%2077.293H188.199C188.199%2092.4013%20177.313%20104.649%20163.883%20104.649C150.453%20104.649%20139.566%2092.4012%20139.566%2077.293V66.9932H139.568C139.643%2051.9567%20150.499%2039.7931%20163.883%2039.793C177.313%2039.793%20188.199%2052.0411%20188.199%2067.1494H182.796C182.796%2055.3985%20174.328%2048.4873%20163.883%2048.4873C153.438%2048.4874%20144.97%2055.3986%20144.97%2067.1494H144.967V77.293H144.97Z'/%3E%3Cpath%20d='M243.7%2077.293V66.9932H243.728C243.653%2055.3371%20235.215%2048.4873%20224.816%2048.4873C214.371%2048.4875%20205.904%2055.3986%20205.904%2067.1494H205.9V77.293H205.904C205.904%2089.0437%20214.371%2095.9549%20224.816%2095.9551C235.262%2095.9551%20243.729%2089.0439%20243.729%2077.293H243.7ZM249.134%2077.293C249.134%2092.4013%20238.246%20104.649%20224.816%20104.649C211.387%20104.649%20200.5%2092.4011%20200.5%2077.293V66.9932H200.502C200.577%2051.9568%20211.433%2039.7932%20224.816%2039.793C238.246%2039.793%20249.134%2052.0411%20249.134%2067.1494H249.101V77.293H249.134Z'/%3E%3Cpath%20d='M285.75%2039.7461C299.163%2039.7461%20310.038%2051.9641%20310.065%2067.0469H310.133V104.646L304.733%2099.3828V67.1025H304.663C304.663%2055.3516%20296.195%2048.4404%20285.75%2048.4404C275.304%2048.4405%20266.836%2055.3517%20266.836%2067.1025H266.833V99.3828L261.433%20104.646V67.0469H261.434C261.461%2051.9642%20272.336%2039.7461%20285.75%2039.7461Z'/%3E%3Cpath%20d='M371.133%2077.4004H371.065C371.064%2077.7187%20371.058%2078.0359%20371.047%2078.3516H371.117V144.552L365.716%20141.222V94.4609C361.26%20100.703%20354.42%20104.7%20346.75%20104.7C333.336%20104.7%20322.461%2092.4829%20322.434%2077.4004L322.433%2039.8008L327.833%2045.0645V77.3447H327.836C327.837%2089.0954%20336.304%2096.0068%20346.75%2096.0068C357.195%2096.0068%20365.662%2089.0954%20365.663%2077.3447H365.733V45.0645L371.133%2039.8008V77.4004Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ---------- Rotate-to-portrait hint (shared across every template) ----------
+   Templates are designed portrait-first. toolbar.js injects a .rotate-hint
+   overlay into every page (all modes); the rules below reveal it only on a
+   phone-sized landscape viewport - a real phone turned sideways OR the
+   platform's phone-landscape device preview (which also renders a short
+   landscape viewport). Tablets are taller than the cap, so they're excluded.
+   Theme-neutral (no per-template vars) since this file is shared. */
+.rotate-hint {
+  display: none;
+}
+
+@media (orientation: landscape) and (max-height: 540px) {
+  .rotate-hint {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    background: #fdf8ee;
+    color: #6b4a2b;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+.rotate-hint__inner {
+  max-width: 360px;
+}
+
+.rotate-hint__icon {
+  width: 52px;
+  height: 52px;
+  animation: rotate-hint-tip 2s ease-in-out infinite;
+}
+
+.rotate-hint__title {
+  margin-top: 14px;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.rotate-hint__text {
+  margin-top: 6px;
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+/* A gentle "turn me" nudge on the phone icon. */
+@keyframes rotate-hint-tip {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-24deg); }
+}
+
+/* The trial's buy button - floated to the bottom-right as a large, prominent
+   call-to-action instead of sitting small in the top bar. Used in BOTH trial
+   modes ("Buy to unlock all" while editing, "Buy this template" from the
+   preview), so the control does not move between the two views.
+
+   The .edit-btn.edit-btn--buycta specificity keeps the mobile .edit-btn size
+   rule from shrinking it. */
+.edit-btn.edit-btn--buycta {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 400;
+  padding: 15px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 999px;
+  /* This rule outranks .edit-btn--primary, so setting box-shadow here REPLACES
+     the shared elevation rather than adding to it - which is how this button
+     lost the inner bevel every other primary button has. Composing the token
+     back in restores it; the big purple lift that makes this one read as
+     floating over the page is appended after it. */
+  box-shadow:
+    var(--ds-btn-elevation),
+    0 16px 36px rgba(95, 15, 255, 0.38);
+}

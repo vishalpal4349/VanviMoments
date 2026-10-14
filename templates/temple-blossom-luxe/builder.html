@@ -1282,23 +1282,43 @@ textarea.form-control {
         <!-- GALLERY SLIDES -->
         <div class="lux-card">
           <div class="lux-card-title">
-            <i class="fa-regular fa-images"></i> Gallery Carousel Photos
+            <i class="fa-regular fa-images"></i> Gallery Carousel Photos (Upload or URL)
           </div>
           <div class="form-group">
-            <label class="form-label">Photo 1 URL</label>
-            <input type="text" id="gal0" class="form-control" value="assets/hinducouple1.png">
+            <label class="form-label">Photo 1</label>
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="gal0" class="form-control" value="assets/hinducouple1.png" placeholder="Photo 1 URL">
+              <label style="background:#FFF5EA; border:1px solid #D4AF37; color:#493B37; padding:7px 12px; border-radius:8px; cursor:pointer; font-size:11.5px; font-weight:700; display:flex; align-items:center; gap:4px; white-space:nowrap;">
+                📁 Browse <input type="file" accept="image/*" style="display:none;" onchange="handleTempleGalleryUpload(0, this)">
+              </label>
+            </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Photo 2 URL</label>
-            <input type="text" id="gal1" class="form-control" value="assets/hinducouple2.png">
+            <label class="form-label">Photo 2</label>
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="gal1" class="form-control" value="assets/hinducouple2.png" placeholder="Photo 2 URL">
+              <label style="background:#FFF5EA; border:1px solid #D4AF37; color:#493B37; padding:7px 12px; border-radius:8px; cursor:pointer; font-size:11.5px; font-weight:700; display:flex; align-items:center; gap:4px; white-space:nowrap;">
+                📁 Browse <input type="file" accept="image/*" style="display:none;" onchange="handleTempleGalleryUpload(1, this)">
+              </label>
+            </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Photo 3 URL</label>
-            <input type="text" id="gal2" class="form-control" value="assets/hinucouple3.png">
+            <label class="form-label">Photo 3</label>
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="gal2" class="form-control" value="assets/hinucouple3.png" placeholder="Photo 3 URL">
+              <label style="background:#FFF5EA; border:1px solid #D4AF37; color:#493B37; padding:7px 12px; border-radius:8px; cursor:pointer; font-size:11.5px; font-weight:700; display:flex; align-items:center; gap:4px; white-space:nowrap;">
+                📁 Browse <input type="file" accept="image/*" style="display:none;" onchange="handleTempleGalleryUpload(2, this)">
+              </label>
+            </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Photo 4 URL</label>
-            <input type="text" id="gal3" class="form-control" value="assets/hinducouple4.png">
+            <label class="form-label">Photo 4</label>
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="gal3" class="form-control" value="assets/hinducouple4.png" placeholder="Photo 4 URL">
+              <label style="background:#FFF5EA; border:1px solid #D4AF37; color:#493B37; padding:7px 12px; border-radius:8px; cursor:pointer; font-size:11.5px; font-weight:700; display:flex; align-items:center; gap:4px; white-space:nowrap;">
+                📁 Browse <input type="file" accept="image/*" style="display:none;" onchange="handleTempleGalleryUpload(3, this)">
+              </label>
+            </div>
           </div>
         </div>
       </section>
@@ -1412,7 +1432,7 @@ textarea.form-control {
     </div>
 
     <button class="btn-complete-publish" onclick="executePublish()">
-      <i class="fa-solid fa-lock-open"></i> Unlock &amp; Remove Watermark (₹799)
+      <i class="fa-solid fa-paper-plane"></i> Publish &amp; Share Live Link (₹799)
     </button>
   </div>
 </div>
@@ -1590,6 +1610,18 @@ function applyHeroUrl() {
     document.getElementById('heroImgPreview').src = val;
     document.getElementById('heroImgPreview').style.display = 'block';
     syncToIframe();
+  }
+}
+
+function handleTempleGalleryUpload(idx, input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const el = document.getElementById('gal' + idx);
+      if (el) el.value = e.target.result;
+      syncToIframe();
+    };
+    reader.readAsDataURL(input.files[0]);
   }
 }
 

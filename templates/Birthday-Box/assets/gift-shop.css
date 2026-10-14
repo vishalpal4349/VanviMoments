@@ -1,0 +1,171 @@
+/* DilSeCraft gift cards — indigo, rani, offset ink. Not a white shop clone. */
+
+.dsc-card{
+  display:flex;
+  flex-direction:column;
+  background:var(--ink2,#1E1960);
+  color:var(--chalk,#FFF6EA);
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+}
+.dsc-card:hover{transform:translateY(-3px)}
+.tile.dsc-card{
+  padding:0;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:none;
+}
+.tile.dsc-card::before{display:none}
+.tile.dsc-card p{flex:none}
+.tile.dsc-card h3{margin:0;font-size:1.2rem}
+.tile.dsc-card h3 a.tile-link::after{content:none;display:none}
+.tile.dsc-card:hover,.tile.dsc-card:focus-within{transform:translateY(-3px);box-shadow:none}
+.tile.dsc-card .go,.tile.dsc-card .pill,.tile.dsc-card .glyph,.tile.dsc-card .tile-cat,.tile.dsc-card .tile-gif{display:none}
+.tile.dsc-card h3{margin:0}
+
+.dsc-shot{
+  display:block;
+  aspect-ratio:16/9;
+  background:#241c55;
+  overflow:hidden;
+}
+.dsc-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.dsc-shot-fallback{
+  display:grid;place-items:center;height:100%;
+  font-size:2rem;color:var(--c,#FF3D7F);
+}
+
+.dsc-card-body{display:flex;flex-direction:column;gap:6px;padding:14px 14px 16px;flex:1}
+.dsc-kicker{
+  margin:0;
+  font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--c,#FF3D7F);
+}
+.dsc-card-title{
+  margin:0;
+  font-size:1.2rem;line-height:1.2;letter-spacing:-.02em;font-weight:800;
+  font-family:var(--disp,var(--gift-display,"Gabarito",system-ui,sans-serif));
+  color:var(--chalk,#FFF6EA);
+}
+.dsc-card-title a{color:inherit;text-decoration:none}
+.dsc-card-title a::after{content:none}
+.dsc-card-desc{
+  margin:0;
+  color:var(--mist,#A79DE0);
+  font-size:.9rem;line-height:1.35;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.tile.dsc-card .dsc-card-desc{color:var(--mist,#A79DE0)}
+
+.dsc-card-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-top:auto;padding-top:8px;
+}
+.dsc-card-price{display:flex;align-items:baseline;gap:8px;margin:0}
+.dsc-card-now{
+  font-family:var(--disp,var(--gift-display,"Gabarito",system-ui,sans-serif));
+  font-weight:800;font-size:1.05rem;color:var(--chalk,#FFF6EA);
+}
+.dsc-card-was{color:var(--mist,#A79DE0);font-size:.82rem;text-decoration:line-through}
+.dsc-make{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:8px 14px;border-radius:999px;text-decoration:none;white-space:nowrap;
+  background:var(--chalk,#FFF6EA);color:var(--ink3,#0B0830);
+  font-weight:800;font-size:.84rem;
+}
+.dsc-make:hover{background:#fff;color:var(--ink3,#0B0830)}
+.dsc-preview{
+  align-self:flex-start;margin-top:2px;
+  color:var(--mist,#A79DE0);font-size:.8rem;font-weight:650;text-decoration:none;
+}
+.dsc-preview:hover{color:#fff}
+.gift-shop-kicker a{color:inherit;text-decoration:none}
+.gift-shop-kicker a:hover{color:#fff}
+
+.tiles{
+  display:grid;gap:14px;
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,255px),1fr));
+}
+
+/* /gifts stays on the DilSeCraft indigo page — chips on top, not a left shop rail */
+.gift-shop{
+  padding:8px 0 24px;
+}
+.gift-shop-hero{text-align:center;padding:8px 0 6px}
+.gift-shop-kicker{
+  display:inline-flex;align-items:center;gap:9px;margin:0 0 12px;
+  font-family:var(--gift-display,"Gabarito",system-ui,sans-serif);
+  font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gift-text-muted,#A79DE0);
+}
+.gift-shop-kicker::before{
+  content:"";width:22px;height:3px;border-radius:2px;background:var(--gift-rose,#FF3D7F);
+}
+.gift-shop-hero h1{
+  margin:0 0 12px;color:var(--gift-chalk,#FFF6EA);
+  font-size:clamp(1.75rem,5vw,2.5rem);letter-spacing:-.032em;
+}
+.gift-shop-hero .gift-lead{margin-left:auto;margin-right:auto}
+.gift-shop-count{margin:10px 2px 16px;font-size:.84rem;color:var(--gift-text-muted,#A79DE0);opacity:.85}
+.gift-shop-toolbar{
+  display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:22px 0 14px;
+}
+.gift-shop-search{position:relative;flex:1 1 320px;min-width:0}
+.gift-shop-search i{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.55;
+}
+.gift-shop-search input{
+  width:100%;padding:13px 40px 13px 40px;border-radius:999px;font-size:.95rem;
+  background:var(--gift-card,rgba(255,255,255,.06));color:inherit;
+  border:1px solid var(--gift-border,rgba(255,255,255,.14));appearance:none;
+}
+.gift-shop-search input:focus{outline:2px solid var(--gift-rose,#FF3D7F);outline-offset:1px}
+.gift-shop-search-clear{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  background:none;border:0;color:inherit;opacity:.6;cursor:pointer;padding:8px;
+}
+.gift-shop-toolbar .gl-sort{display:flex;align-items:center;gap:8px;font-size:.86rem;color:var(--gift-text-muted,#A79DE0)}
+.gift-shop-toolbar select{
+  padding:11px 14px;border-radius:999px;font:inherit;font-size:.9rem;cursor:pointer;
+  background:var(--gift-card,rgba(255,255,255,.06));color:inherit;
+  border:1px solid var(--gift-border,rgba(255,255,255,.14));
+}
+.gift-shop-facets{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.gift-shop .gl-chips{display:flex;gap:8px;flex-wrap:wrap}
+.gift-shop .gl-chip,
+.gift-shop .gl-price{
+  padding:9px 15px;border-radius:999px;font:inherit;font-size:.86rem;font-weight:600;cursor:pointer;
+  background:transparent;color:inherit;border:1px solid var(--gift-border,rgba(255,255,255,.16));
+}
+.gift-shop .gl-chip span,.gift-shop .gl-price span{opacity:.55;font-weight:500;margin-left:3px}
+.gift-shop .gl-chip.is-on,
+.gift-shop .gl-price.is-on{
+  background:var(--gift-rose,#FF3D7F);border-color:var(--gift-rose,#FF3D7F);color:#fff;
+}
+.gift-shop .gl-chip.is-on span,.gift-shop .gl-price.is-on span{opacity:.8;color:#fff}
+.gift-shop .gl-grid{
+  display:grid;gap:18px;
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));
+}
+.gift-shop .gift-card.dsc-card{
+  padding:0;backdrop-filter:none;
+  background:var(--ink2,#1E1960);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:none;
+}
+.gift-shop .gl-empty{color:var(--gift-text-muted,#A79DE0);text-align:center;padding:38px 10px}
+.gift-shop .gl-reset{color:var(--gift-rose,#FF3D7F);background:none;border:0;font:inherit;font-weight:700;cursor:pointer;text-decoration:underline}
+.gl-card.is-hidden,.dsc-card.is-hidden{display:none}
+
+@media (max-width:640px){
+  .gift-shop-toolbar{margin-top:14px}
+  .gift-shop-toolbar .gl-sort{width:100%;justify-content:space-between}
+  .gift-shop-toolbar select{flex:1}
+  .gift-shop .gl-chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+  .gift-shop .gl-chips::-webkit-scrollbar{display:none}
+  .gift-shop .gl-chip,.gift-shop .gl-price{flex:0 0 auto;white-space:nowrap}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .dsc-card-media video{display:none}
+}

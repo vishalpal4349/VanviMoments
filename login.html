@@ -511,6 +511,11 @@
       width: 100%;
       min-height: 44px;
     }
+    #gsiButtonContainer > div,
+    #gsiButtonContainer iframe {
+      margin: 0 auto !important;
+      max-width: 100% !important;
+    }
 
     /* Footer Switch Link */
     .clay-footer-link {
@@ -539,6 +544,112 @@
     @keyframes confettiBurst {
       0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
       100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(var(--dr)); }
+    }
+
+    /* ==========================================================================
+       LAPTOP & DESKTOP BOUTIQUE COMPACT LUXURY EXPERIENCE
+       Sleek, small centered jewel card with balanced negative space
+       ========================================================================== */
+    @media (min-width: 601px) {
+      body {
+        padding: 20px 16px;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .clay-mode-switch-wrap {
+        max-width: 340px;
+        margin-bottom: 6px;
+      }
+      .clay-mode-tab {
+        padding: 4px 13px;
+        font-size: 11px;
+      }
+      .clay-phone-card {
+        max-width: 340px;
+        padding: 12px 14px 11px;
+        border-radius: 26px;
+        box-shadow: 0 18px 45px -10px rgba(124, 58, 237, 0.2), 0 4px 14px -2px rgba(236, 72, 153, 0.1), 0 0 0 1.5px rgba(255, 255, 255, 0.95);
+      }
+      .clay-header-top {
+        margin-bottom: 4px;
+      }
+      .clay-avatar-bubble {
+        width: 44px;
+        height: 44px;
+        margin: 0 auto 3px;
+        padding: 2px;
+      }
+      .clay-avatar-sparkle {
+        font-size: 11px;
+        bottom: -2px;
+        right: -2px;
+      }
+      .clay-main-title {
+        font-size: 18px;
+        gap: 4px;
+      }
+      .clay-sub-text {
+        font-size: 10.5px;
+        margin-top: 1px;
+      }
+      .clay-inner-card {
+        padding: 11px 12px 10px;
+        border-radius: 20px;
+      }
+      .clay-field-row {
+        margin-bottom: 6px;
+      }
+      .clay-pill-input-box {
+        min-height: 38px;
+        padding: 2px 6px 2px 4px;
+      }
+      .clay-icon-circle {
+        width: 30px;
+        height: 30px;
+      }
+      .clay-icon-circle svg {
+        width: 13px;
+        height: 13px;
+      }
+      .clay-native-input {
+        font-size: 12px;
+        padding: 0 8px;
+      }
+      .clay-native-input::placeholder {
+        font-size: 11px;
+      }
+      .clay-pwd-toggle {
+        font-size: 13px;
+        padding: 2px 6px;
+      }
+      .clay-aux-links {
+        margin: 5px 3px 6px;
+        font-size: 10.5px;
+      }
+      .clay-remember-wrap input {
+        width: 13px;
+        height: 13px;
+      }
+      .clay-btn-main {
+        min-height: 37px;
+        font-size: 13px;
+        font-weight: 850;
+      }
+      .clay-divider-line {
+        margin: 6px 0 5px;
+        font-size: 9.5px;
+      }
+      .gsi-mount-wrap {
+        margin: 3px 0 5px;
+        min-height: 38px;
+      }
+      #gsiButtonContainer {
+        min-height: 38px;
+      }
+      .clay-footer-link {
+        font-size: 10.5px;
+        margin-top: 3px;
+      }
     }
 
     /* Responsive Adaptations */
@@ -689,7 +800,7 @@
       </div>
 
       <div class="gsi-mount-wrap" id="gsiMountWrap">
-        <div id="gsiButtonContainer" class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="continue_with" data-size="large" data-logo_alignment="left" data-width="320"></div>
+        <div id="gsiButtonContainer" class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="continue_with" data-size="large" data-logo_alignment="left" data-width="290"></div>
       </div>
 
       <!-- Bottom Switch Link -->
@@ -859,7 +970,7 @@
             size: 'large',
             shape: 'pill',
             text: 'continue_with',
-            width: 320
+            width: 290
           });
         }
       }

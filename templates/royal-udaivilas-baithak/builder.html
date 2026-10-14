@@ -562,8 +562,9 @@
 
     <div class="tb-right">
       <button type="button" class="btn-preset-load" onclick="loadSamplePreset()">✨ Sample</button>
-      <a href="../../checkout.html?templateId=royal-udaivilas-baithak&price=999" class="btn-unlock-gold">
-        👑 Unlock (₹999)
+      <button type="button" class="btn-preset-load" onclick="openLiveCustomizedPreview()" style="background:rgba(255,255,255,0.1); color:#fff; border-color:rgba(255,255,255,0.2);">👁️ Fullscreen</button>
+      <a href="javascript:void(0)" onclick="copyOrShareLiveLink()" class="btn-unlock-gold" style="background:linear-gradient(135deg, #d4af37, #996515); color:#fff;">
+        ✦ Save &amp; Share
       </a>
     </div>
   </header>
@@ -767,13 +768,12 @@ Mrs. Sunita Singhania</textarea>
 
   </div>
 
-  <!-- Mobile Sticky Bottom Bar (Screens < 860px) -->
   <div class="mobile-sticky-bottom-actions">
     <button type="button" class="btn-preset-load" id="mobToggleActionBtn" onclick="setMobileStudioMode('preview')" style="padding:8px 12px; font-size:11.5px;">
       👁️ Preview
     </button>
-    <a href="../../checkout.html?templateId=royal-udaivilas-baithak&price=999" class="btn-unlock-gold" style="font-size:11.5px; padding:8px 14px;">
-      👑 Unlock (₹999)
+    <a href="javascript:void(0)" onclick="copyOrShareLiveLink()" class="btn-unlock-gold" style="font-size:11.5px; padding:8px 14px; background:linear-gradient(135deg, #d4af37, #996515); color:#fff;">
+      ✦ Save &amp; Share
     </a>
   </div>
 
@@ -896,6 +896,32 @@ Mrs. Sunita Singhania</textarea>
 
     function shareWa(encText) {
       window.open(`https://wa.me/?text=${encText}`, '_blank');
+    }
+
+    function getLiveUrl() {
+      const bride = encodeURIComponent(document.getElementById('inpBride').value.trim() || 'Tanya');
+      const groom = encodeURIComponent(document.getElementById('inpGroom').value.trim() || 'Rohan');
+      const date = encodeURIComponent(document.getElementById('inpDate').value || '2026-12-12');
+      const venue = encodeURIComponent(document.getElementById('inpVenue').value.trim() || 'The Oberoi Udaivilas');
+      const whatsapp = encodeURIComponent(document.getElementById('inpWhatsapp').value.trim() || '919999999999');
+      const hashtag = encodeURIComponent(document.getElementById('inpHashtag').value.trim() || '#TanyaWedsRohan');
+      const upi = encodeURIComponent(document.getElementById('inpUpi').value.trim() || 'vanvi.udaivilas@upi');
+      const mood = encodeURIComponent(document.getElementById('inpMood').value || 'pearl');
+      return `./index.html?bride=${bride}&groom=${groom}&date=${date}&venue=${venue}&whatsapp=${whatsapp}&hashtag=${hashtag}&upi=${upi}&mood=${mood}`;
+    }
+
+    function openLiveCustomizedPreview() {
+      window.open(getLiveUrl(), '_blank');
+    }
+
+    function copyOrShareLiveLink() {
+      const url = new URL(getLiveUrl(), window.location.href).href;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url);
+        alert('🎉 Royal Invitation Link copied to clipboard!\n\nShare it directly on WhatsApp with your family & guests:\n' + url);
+      } else {
+        prompt('Copy your Royal Invitation Link:', url);
+      }
     }
   </script>
 </body>

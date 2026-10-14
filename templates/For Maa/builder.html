@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>For Maa Studio — Vanvi Moments</title>
+  <link rel="icon" href="./assets/images/art-maa.png" />
+  <link rel="stylesheet" href="./builder.css" />
+  <script src="../../js/vanvi-template-lock.js" defer></script>
+</head>
+<body data-theme="haldi">
+
+  <!-- Top App Navigation Bar -->
+  <header class="studio-header">
+    <div class="brand-cluster">
+      <a href="../../templates.html" class="back-home-pill" title="Back to Templates" aria-label="Back">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </a>
+      <div class="brand-identity">
+        <div class="brand-badge-pill">
+          <span class="heart-pulse">✦</span>
+          <span class="brand-text">VANVI MOMENTS</span>
+        </div>
+        <span class="template-crumb">For Maa — Keepsake Studio</span>
+      </div>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <div class="price-pill-tag">
+        <span class="original-strike">₹499</span>
+        <span class="deal-price">FREE</span>
+        <span class="save-chip">100% OFF</span>
+      </div>
+      <button type="button" class="btn-primary-publish" id="headerPublishBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+        <span>Publish Free</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Segmented View Switcher (<= 920px) -->
+  <div class="mobile-view-tabs" id="mobileViewTabs">
+    <div class="tabs-slider-track">
+      <button type="button" class="view-tab-btn active" id="tabBtnEditor">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+          <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+        <span>Customize</span>
+      </button>
+      <button type="button" class="view-tab-btn" id="tabBtnPreview">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span>Live Preview</span>
+        <span class="preview-live-badge">LIVE</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Dual Workspace -->
+  <main class="studio-workbench">
+
+    <!-- LEFT PANEL: Editor Controls -->
+    <aside class="editor-drawer" id="editorDrawer">
+      
+      <!-- Section Quick Pills -->
+      <nav class="section-pills-bar">
+        <button type="button" class="pill-nav-item active" data-section="sec-palette">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 10 10 0 000-20"/></svg>
+          <span>Themes</span>
+        </button>
+        <button type="button" class="pill-nav-item" data-section="sec-names">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Names & Photo</span>
+        </button>
+        <button type="button" class="pill-nav-item" data-section="sec-phrases">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <span>5 Phrases</span>
+        </button>
+        <button type="button" class="pill-nav-item" data-section="sec-never">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span>Never Said</span>
+        </button>
+        <button type="button" class="pill-nav-item" data-section="sec-letter">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>Letter</span>
+        </button>
+      </nav>
+
+      <div class="editor-scroll-area">
+
+        <!-- 1. COLOR THEME PALETTES (10 Themes) -->
+        <section class="config-group-card" id="sec-palette">
+          <div class="config-card-header">
+            <span class="header-emoji">🎨</span>
+            <div class="header-titles">
+              <h3>10 Emotional Palettes</h3>
+              <p>Indian heritage tones that dynamically theme your keepsakes</p>
+            </div>
+          </div>
+          <div class="palette-swatches-grid" id="palettePicker">
+            <button type="button" class="theme-swatch-card active" data-theme="haldi">
+              <span class="swatch-circle" style="background:linear-gradient(135deg,#FFF8EC,#D97706 55%,#C2410C)"></span>
+              <span class="swatch-name">Haldi</span>
+            </button>
+            <button type="button" class="theme-swatch-card" data-theme="tulsi">
+              <span class="swatch-circle" style="background:linear-gradient(135deg,#F1F6EC,#4D7C3F 55%,#C2683C)"></span>
+              <span class="swatch-name">Tulsi</span>
+            </button>
+            <button type="button" class="theme-swatch-card" data-theme="chandan">
+              <span class="swatch-circle" style="background:linear-gradient(135deg,#F7EFE3,#9E2B2B 55%,#C08A2E)"></span>
+              <span class="swatch-name">Chandan</span>
+            </button>
+            <button type="button" class="theme-swatch-card" data-theme="rose">
+              <span class="swatch-circle" style="background:linear-gradient(135deg,#FFF1F3,#C4607E 55%,#C08A50)"></span>
+              <span class="swatch-name">Rose</span>
+            </button>
+            <button type="button" class="theme-swatch-card" data-theme="sepia">
+              <span class="swatch-circle" style="background:linear-gradient(135deg,#EFE6D5,#8C5E3C 55%,#B08A46)"></span>
+              <span class="swatch-name">Sepia</span>
+            </button>
+            <button type="button" class="theme-swatch-card" data-theme="mint">
+              <span class="swatch-circle" style="background:linear-gradient(135deg,#EAF7F0,#127A5E 55%,#C2683C)"></span>
+              <span class="swatch-name">Mint</span>
+            </button>
+            <button type="button" class="theme-swatch-card" data-theme="marigold">
+              <span class="swatch-circle" style="background:linear-gradient(135deg,#3B0A1E,#FFB005 55%,#FF6F3C)"></span>
+              <span class="swatch-name">Marigold</span>
+            </button>
+            <button type="button" class="theme-swatch-card" data-theme="ember">
+              <span class="swatch-circle" style="background:linear-gradient(135deg,#1A0F0A,#FF8A3D 55%,#FFD166)"></span>
+              <span class="swatch-name">Ember</span>
+            </button>
+            <button type="button" class="theme-swatch-card" data-theme="indigo">
+              <span class="swatch-circle" style="background:linear-gradient(135deg,#141046,#FFC53D 55%,#FF8FB1)"></span>
+              <span class="swatch-name">Indigo</span>
+            </button>
+            <button type="button" class="theme-swatch-card" data-theme="paper">
+              <span class="swatch-circle" style="background:linear-gradient(135deg,#F5F0E4,#B25A2A 55%,#B8892A)"></span>
+              <span class="swatch-name">Paper</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 2. NAMES & CALLER PHOTO -->
+        <section class="config-group-card" id="sec-names">
+          <div class="config-card-header">
+            <span class="header-emoji">👩</span>
+            <div class="header-titles">
+              <h3>Who is this for?</h3>
+              <p>Customises the incoming phone call greeting</p>
+            </div>
+          </div>
+          <div class="form-fields-grid">
+            <div class="input-block">
+              <label for="inp_to">What you call her</label>
+              <input type="text" id="inp_to" placeholder="e.g. Maa, Mom, Ammi, Aai" value="Maa" maxlength="20" autocomplete="off" />
+            </div>
+            <div class="input-block">
+              <label for="inp_from">Your Name (Caller ID)</label>
+              <input type="text" id="inp_from" placeholder="e.g. Anubhav, Rishu" value="Your child" maxlength="22" autocomplete="off" />
+            </div>
+            <div class="input-block full-width">
+              <label>Her Photo (Optional — Shows on Call Screen)</label>
+              <div class="photo-upload-row">
+                <div class="avatar-preview-box">
+                  <img id="avatarThumb" src="" alt="Photo preview" style="display:none;" />
+                  <span id="avatarPlaceholder">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+                      <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                  </span>
+                </div>
+                <div class="upload-btn-wrap">
+                  <div class="upload-actions-line">
+                    <label for="inp_photo_file" class="btn-select-file">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                      </svg>
+                      <span id="uploadBtnText">Upload Photo</span>
+                    </label>
+                    <input type="file" id="inp_photo_file" accept="image/*" class="hidden-file-input" />
+                    <button type="button" class="btn-remove-photo" id="btnRemovePhoto" style="display:none;">Remove</button>
+                  </div>
+                  <p class="field-hint">Square photos look best on her incoming call avatar</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. THINGS SHE ALWAYS SAYS (5 Pairs) -->
+        <section class="config-group-card" id="sec-phrases">
+          <div class="config-card-header">
+            <span class="header-emoji">💬</span>
+            <div class="header-titles">
+              <h3>Things She Always Says</h3>
+              <p>Front shows what she says; back flips to what you knew she meant</p>
+            </div>
+          </div>
+
+          <div class="phrases-accordion-list">
+
+            <!-- Pair 01 -->
+            <div class="phrase-editor-block">
+              <div class="phrase-badge">01</div>
+              <div class="phrase-fields">
+                <div class="input-block">
+                  <label for="inp_said_0">What she says (Front)</label>
+                  <input type="text" id="inp_said_0" value="Have you eaten?" placeholder="Have you eaten?" maxlength="70" />
+                </div>
+                <div class="input-block">
+                  <label for="inp_meant_0">What you knew she meant (Back)</label>
+                  <input type="text" id="inp_meant_0" value="She was never asking about food. She was asking if I was okay." placeholder="What she meant..." maxlength="110" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Pair 02 -->
+            <div class="phrase-editor-block">
+              <div class="phrase-badge">02</div>
+              <div class="phrase-fields">
+                <div class="input-block">
+                  <label for="inp_said_1">What she says (Front)</label>
+                  <input type="text" id="inp_said_1" value="Take a jacket, it gets cold." placeholder="Take a jacket..." maxlength="70" />
+                </div>
+                <div class="input-block">
+                  <label for="inp_meant_1">What you knew she meant (Back)</label>
+                  <input type="text" id="inp_meant_1" value="She had already checked the weather for a city she doesn't live in." placeholder="What she meant..." maxlength="110" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Pair 03 -->
+            <div class="phrase-editor-block">
+              <div class="phrase-badge">03</div>
+              <div class="phrase-fields">
+                <div class="input-block">
+                  <label for="inp_said_2">What she says (Front)</label>
+                  <input type="text" id="inp_said_2" value="Do you need money?" placeholder="Do you need money?" maxlength="70" />
+                </div>
+                <div class="input-block">
+                  <label for="inp_meant_2">What you knew she meant (Back)</label>
+                  <input type="text" id="inp_meant_2" value="She'd worked out my rent was due before I had." placeholder="What she meant..." maxlength="110" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Pair 04 -->
+            <div class="phrase-editor-block">
+              <div class="phrase-badge">04</div>
+              <div class="phrase-fields">
+                <div class="input-block">
+                  <label for="inp_said_3">What she says (Front)</label>
+                  <input type="text" id="inp_said_3" value="I'm fine, don't worry about me." placeholder="I'm fine..." maxlength="70" />
+                </div>
+                <div class="input-block">
+                  <label for="inp_meant_3">What you knew she meant (Back)</label>
+                  <input type="text" id="inp_meant_3" value="This was never true. Not once." placeholder="What she meant..." maxlength="110" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Pair 05 -->
+            <div class="phrase-editor-block">
+              <div class="phrase-badge">05</div>
+              <div class="phrase-fields">
+                <div class="input-block">
+                  <label for="inp_said_4">What she says (Front)</label>
+                  <input type="text" id="inp_said_4" value="Call when you reach." placeholder="Call when you reach." maxlength="70" />
+                </div>
+                <div class="input-block">
+                  <label for="inp_meant_4">What you knew she meant (Back)</label>
+                  <input type="text" id="inp_meant_4" value="She stayed awake until I did. Every single time." placeholder="What she meant..." maxlength="110" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 4. NEVER SAID -->
+        <section class="config-group-card" id="sec-never">
+          <div class="config-card-header">
+            <span class="header-emoji">🙏</span>
+            <div class="header-titles">
+              <h3>Never Said Out Loud</h3>
+              <p>The unsaid gratitude that stays in your heart</p>
+            </div>
+          </div>
+          <div class="form-fields-grid">
+            <div class="input-block full-width">
+              <label for="inp_never">Heartfelt Statement</label>
+              <textarea id="inp_never" rows="2" maxlength="200">Thank you. Out loud, properly, once.</textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. THE LETTER -->
+        <section class="config-group-card" id="sec-letter">
+          <div class="config-card-header">
+            <span class="header-emoji">📜</span>
+            <div class="header-titles">
+              <h3>The Soul Letter</h3>
+              <p>Revealed line by line to touch her heart</p>
+            </div>
+          </div>
+          <div class="form-fields-grid">
+            <div class="input-block full-width">
+              <label for="inp_note">Letter Paragraphs</label>
+              <textarea id="inp_note" rows="3" maxlength="360">You never once asked me to notice. I noticed anyway.</textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sidebar Desktop Publish Box -->
+        <div class="drawer-publish-banner">
+          <div class="banner-deal">
+            <span class="deal-badge">SPECIAL MOTHER'S GIFT</span>
+            <div class="deal-prices">
+              <span class="deal-now">FREE</span>
+              <span class="deal-was">₹499</span>
+            </div>
+          </div>
+          <button type="button" class="btn-publish-big" id="sidebarPublishBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>Publish for Free & Get Link</span>
+          </button>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- RIGHT STAGE: Live Interactive Preview -->
+    <section class="preview-stage" id="previewStage">
+      
+      <div class="preview-toolbar">
+        <div class="device-selectors">
+          <button type="button" class="device-pill active" data-device="mobile">📱 Phone</button>
+          <button type="button" class="device-pill" data-device="tablet">📟 Tablet</button>
+          <button type="button" class="device-pill" data-device="desktop">💻 Desktop</button>
+        </div>
+
+        <div class="live-status-pill">
+          <span class="live-dot"></span>
+          <span>Live Synchronized Preview</span>
+        </div>
+      </div>
+
+      <div class="device-shell-wrapper">
+        <div class="device-bezel mobile-view" id="deviceBezel">
+          <div class="phone-speaker-notch"></div>
+          <iframe src="./index.html" id="previewFrame" title="For Maa Live Preview"></iframe>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Sticky Mobile Dock -->
+  <div class="mobile-bottom-dock">
+    <div class="dock-meta-cluster">
+      <span class="dock-theme-pill" id="dockThemeBadge">Haldi</span>
+      <span class="dock-price-val">FREE</span>
+      <span class="dock-price-cut">₹499</span>
+    </div>
+    <div class="dock-actions-cluster">
+      <button type="button" class="dock-btn-secondary" id="dockPreviewBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span id="dockPreviewBtnLabel">Preview</span>
+      </button>
+      <button type="button" class="dock-btn-primary" id="mobileDockPublishBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+        <span>Publish Free</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- FREE PUBLISH MODAL -->
+  <div class="publish-modal-backdrop" id="publishModal">
+    <div class="publish-modal-card">
+      <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      
+      <!-- Checkout Step -->
+      <div class="modal-step" id="modalStepCheckout">
+        <div class="modal-header-icon">👵</div>
+        <h2 class="modal-title">Publish Your Gift for Maa</h2>
+        <p class="modal-subtitle">Generate an ad-free, watermark-free digital keepsake that she can open and cherish forever.</p>
+
+        <div class="pricing-card">
+          <div class="price-row">
+            <span>For Maa Interactive Keepsake</span>
+            <span class="strike">₹499</span>
+          </div>
+          <div class="price-row">
+            <span>Vanvi Cloud Lifetime Hosting</span>
+            <span class="free">FREE</span>
+          </div>
+          <div class="price-row">
+            <span>Watermark Removal Included</span>
+            <span class="free">FREE</span>
+          </div>
+          <div class="divider-line"></div>
+          <div class="price-row total">
+            <span>Total Payable:</span>
+            <span class="amount" style="color:#15803D;">FREE</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-pay-now" id="btnPayNow">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          <span>Publish for Free & Get Link</span>
+        </button>
+      </div>
+
+      <!-- Success Step -->
+      <div class="modal-step hidden" id="modalStepSuccess">
+        <div class="modal-header-icon success">🎉</div>
+        <h2 class="modal-title">Gift is Live & Ready!</h2>
+        <p class="modal-subtitle">Watermark has been removed! Share this private link directly with <span id="successRecipientName">Maa</span>:</p>
+
+        <div class="live-link-box">
+          <input type="text" id="publishedLinkInput" readonly />
+          <button type="button" class="copy-url-btn" id="copyUrlBtn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+
+        <div class="modal-share-actions">
+          <button type="button" class="btn-whatsapp-share" id="modalWhatsappBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 2C6.516 2 2.031 6.485 2.031 12c0 1.83.498 3.545 1.365 5.024L2 22l5.127-1.344C8.568 21.493 10.25 22 12.031 22c5.516 0 10-4.485 10-10s-4.484-10-10-10zm5.82 14.285c-.244.686-1.42 1.31-1.957 1.378-.507.065-1.168.103-3.766-.967-3.13-1.288-5.148-4.464-5.305-4.673-.156-.208-1.267-1.688-1.267-3.22 0-1.53.799-2.285 1.085-2.597.285-.312.624-.39.832-.39.208 0 .416.002.598.01.196.01.455-.074.71.538.26.624.884 2.158.962 2.314.078.156.13.338.026.546-.104.208-.156.338-.312.52-.156.182-.338.406-.48.546-.156.156-.32.325-.138.637.182.312.81 1.336 1.737 2.162 1.192 1.062 2.197 1.39 2.509 1.546.312.156.494.13.676-.078.182-.208.78-.91 1.014-1.222.234-.312.468-.26.78-.156.312.104 1.974.93 2.312 1.1.338.17.564.254.646.398.082.143.082.832-.162 1.518z"/></svg>
+            <span>Send on WhatsApp</span>
+          </button>
+          <a href="#" target="_blank" class="btn-open-live" id="modalOpenLiveBtn">
+            <span>View Live Website ↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module" src="./builder.js"></script>
+</body>
+</html>

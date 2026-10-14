@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Rose Wedding Studio — Vanvi Moments Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root {
+  --bg-studio: #FDF7F9;
+  --bg-panel: #FFFFFF;
+  --bg-card: #FFFDFC;
+  --bg-subtle: #FAF0F3;
+  --rose-primary: #962E44;
+  --rose-deep: #6D1B2D;
+  --rose-light: #C2506B;
+  --rose-soft: #F9EBEF;
+  --gold-accent: #C49758;
+  --gold-light: #DFC08A;
+  --border-rose: rgba(184, 80, 102, 0.2);
+  --border-focus: #962E44;
+  --text-dark: #2C131A;
+  --text-muted: #7A5761;
+  --text-faint: #B59BA3;
+  --shadow-soft: 0 12px 36px rgba(109, 27, 45, 0.08);
+  --shadow-card: 0 4px 18px rgba(109, 27, 45, 0.05);
+  --shadow-rose: 0 8px 26px rgba(150, 46, 68, 0.35);
+  --safe-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg-studio);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* TOP NAVBAR */
+.builder-nav {
+  height: 64px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-rose);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 16px rgba(109, 27, 45, 0.04);
+}
+
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--rose-light), var(--rose-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 16px;
+  box-shadow: 0 4px 14px rgba(150, 46, 68, 0.3);
+}
+
+.brand-text h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--rose-deep);
+  line-height: 1.15;
+}
+
+.brand-text span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rose-primary);
+  font-weight: 700;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.view-device-toggle {
+  display: flex;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-rose);
+  border-radius: 100px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.device-btn {
+  background: transparent;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .2s ease;
+}
+
+.device-btn.active {
+  background: #FFFFFF;
+  color: var(--rose-deep);
+  box-shadow: 0 2px 8px rgba(109, 27, 45, 0.1);
+}
+
+.btn-publish {
+  background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-rose);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all .25s ease;
+}
+
+.btn-publish:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(150, 46, 68, 0.45);
+}
+
+/* MAIN BUILDER BODY */
+.builder-body {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+/* LEFT SIDEBAR (EDITOR) */
+.editor-sidebar {
+  width: 480px;
+  background: var(--bg-panel);
+  border-right: 1px solid var(--border-rose);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 20;
+  box-shadow: var(--shadow-soft);
+}
+
+/* STEP WIZARD HEADER & PROGRESS */
+.wizard-header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border-rose);
+  background: #FFFDFE;
+}
+
+.wizard-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.wizard-step-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--rose-deep);
+}
+
+.wizard-step-count {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--rose-primary);
+  background: var(--rose-soft);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.wizard-progress-track {
+  width: 100%;
+  height: 4px;
+  background: var(--rose-soft);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.wizard-progress-bar {
+  height: 100%;
+  width: 16.66%;
+  background: linear-gradient(90deg, var(--rose-primary), var(--rose-light));
+  border-radius: 100px;
+  transition: width .3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* HORIZONTAL STEP CHIPS */
+.wizard-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.wizard-tabs::-webkit-scrollbar { display: none; }
+
+.step-tab {
+  flex-shrink: 0;
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--border-rose);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all .2s ease;
+}
+
+.step-tab.active {
+  background: var(--rose-deep);
+  color: #FFFFFF;
+  border-color: var(--rose-deep);
+  box-shadow: 0 2px 8px rgba(109, 27, 45, 0.25);
+}
+
+.step-tab.completed {
+  color: var(--rose-primary);
+  border-color: rgba(150, 46, 68, 0.4);
+}
+
+/* SCROLLABLE STEP FORM */
+.editor-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 20px 100px;
+}
+
+.step-page {
+  display: none;
+  animation: stepFadeIn .3s ease;
+}
+.step-page.active {
+  display: block;
+}
+
+@keyframes stepFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-rose);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 16px;
+}
+
+.step-card-header {
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(184, 80, 102, 0.12);
+  padding-bottom: 12px;
+}
+
+.step-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--rose-deep);
+}
+
+.step-card-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* FORM CONTROLS */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.form-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 10px 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-rose);
+  border-radius: 12px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text-dark);
+  outline: none;
+  transition: all .2s ease;
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(150, 46, 68, 0.12);
+}
+
+.form-textarea {
+  min-height: 75px;
+  resize: vertical;
+}
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* IMAGE UPLOAD BOX */
+.upload-card {
+  background: #FFF;
+  border: 1.5px dashed var(--border-rose);
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+  transition: all .2s ease;
+  margin-top: 8px;
+}
+
+.upload-card:hover {
+  border-color: var(--rose-primary);
+  background: var(--bg-subtle);
+}
+
+.upload-preview {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: none;
+  border: 1px solid var(--border-rose);
+}
+
+.upload-btn-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-subtle);
+  color: var(--rose-primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.upload-btn-label:hover {
+  background: var(--rose-soft);
+}
+
+.file-hidden {
+  display: none;
+}
+
+/* BOTTOM NAVIGATION STEP BAR */
+.wizard-footer-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(64px + var(--safe-bottom));
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--border-rose);
+  padding: 10px 20px calc(10px + var(--safe-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 30;
+  box-shadow: 0 -4px 18px rgba(109, 27, 45, 0.05);
+}
+
+.btn-dock-preview {
+  display: none;
+  padding: 10px 14px;
+  border-radius: 100px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-rose);
+  color: var(--rose-primary);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.btn-step-prev {
+  padding: 10px 18px;
+  border-radius: 100px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-rose);
+  color: var(--text-dark);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .2s ease;
+}
+
+.btn-step-prev:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-step-next {
+  padding: 10px 24px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
+  color: #FFFFFF;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-rose);
+  transition: all .2s ease;
+}
+
+.btn-step-next:hover {
+  transform: translateY(-1px);
+}
+
+/* RIGHT PREVIEW STAGE */
+.preview-stage {
+  flex: 1;
+  background: radial-gradient(circle at center, #24161a 0%, #15090d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.preview-stage.theater-mode .device-wrapper {
+  width: 100%;
+  max-width: 960px;
+  height: 94%;
+  border-radius: 20px;
+  box-shadow: 0 28px 70px rgba(0,0,0,0.6);
+}
+
+.device-wrapper {
+  position: relative;
+  width: 375px;
+  height: 760px;
+  max-height: 96%;
+  background: #1c1c1e;
+  border-radius: 54px;
+  box-shadow: 0 28px 64px rgba(0,0,0,0.6), 0 0 0 12px #2d1c22, 0 0 0 13px rgba(255,255,255,0.1);
+  overflow: hidden;
+  transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.device-screen {
+  position: absolute;
+  inset: 0;
+  border-radius: 46px;
+  overflow: hidden;
+  background: #FFFDFE;
+}
+
+.preview-stage.theater-mode .device-screen {
+  border-radius: 16px;
+}
+
+.device-screen iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* FLOATING MOBILE PREVIEW DOCK */
+.mobile-preview-dock {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(64px + var(--safe-bottom));
+  padding: 10px 16px calc(10px + var(--safe-bottom));
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-rose);
+  z-index: 100;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 -4px 20px rgba(109, 27, 45, 0.08);
+}
+
+.dock-preview-btn {
+  flex: 1;
+  padding: 11px 16px;
+  border-radius: 100px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-rose);
+  color: var(--rose-primary);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dock-publish-btn {
+  flex: 1;
+  padding: 11px 18px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.close-mobile-preview {
+  display: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.25);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+/* PUBLISH MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 440px;
+  background: #FFFFFF;
+  border-radius: 28px;
+  padding: 32px 28px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+}
+
+.modal-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--bg-subtle);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--rose-primary);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
+}
+
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--rose-deep);
+  margin-bottom: 8px;
+}
+
+.modal-price {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--rose-deep);
+  margin: 14px 0 18px;
+}
+
+.modal-price span {
+  font-size: 16px;
+  color: var(--text-faint);
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+.btn-confirm-publish {
+  width: 100%;
+  padding: 14px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-rose);
+  margin-bottom: 12px;
+}
+
+.btn-close-modal {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .builder-nav {
+    padding: 0 14px;
+    height: 58px;
+  }
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    border-radius: 9px;
+  }
+  .brand-text h1 {
+    font-size: 16px;
+  }
+  .brand-text span {
+    font-size: 8px;
+    letter-spacing: 1.2px;
+  }
+  .view-device-toggle {
+    display: none;
+  }
+  .btn-publish {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  .builder-body {
+    height: calc(100vh - 58px);
+  }
+  .editor-sidebar {
+    width: 100%;
+    height: 100%;
+  }
+  .wizard-footer-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 10px 12px calc(10px + var(--safe-bottom));
+    gap: 8px;
+    z-index: 100;
+  }
+  .btn-dock-preview {
+    display: flex;
+    flex: 0 0 auto;
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+  .btn-step-prev {
+    flex: 1;
+    padding: 10px 10px;
+    font-size: 12px;
+    justify-content: center;
+  }
+  .btn-step-next {
+    flex: 1.5;
+    padding: 10px 12px;
+    font-size: 12px;
+    justify-content: center;
+    white-space: nowrap;
+  }
+  .editor-scroll {
+    padding-bottom: calc(85px + var(--safe-bottom)) !important;
+  }
+  .preview-stage {
+    display: none;
+  }
+  .preview-stage.active {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    padding: 0;
+    background: #000;
+  }
+  .preview-stage.active .close-mobile-preview {
+    display: flex;
+    z-index: 2500;
+  }
+  .device-wrapper {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .device-screen {
+    border-radius: 0;
+  }
+  .device-screen iframe {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+  }
+  .mobile-preview-dock {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<header class="builder-nav">
+  <a href="./index.html" class="brand-wrap">
+    <div class="brand-icon">
+      <i class="fa-solid fa-gem"></i>
+    </div>
+    <div class="brand-text">
+      <h1>Vanvi Moments</h1>
+      <span>Rose Wedding Studio</span>
+    </div>
+  </a>
+
+  <div class="nav-actions">
+    <div class="view-device-toggle">
+      <button class="device-btn active" id="btnPhoneView" onclick="setViewMode('phone')">
+        <i class="fa-solid fa-mobile-screen"></i> Phone
+      </button>
+      <button class="device-btn" id="btnTheaterView" onclick="setViewMode('theater')">
+        <i class="fa-solid fa-display"></i> Full View
+      </button>
+    </div>
+
+    <button type="button" class="device-btn" id="btnToggleCover" onclick="togglePreviewCover()" title="Open or Close Invitation Cover Card" style="background:#FFF; border:1px solid var(--border-rose); color:var(--rose-deep); font-weight:800; box-shadow:0 2px 8px rgba(109,27,45,0.08);">
+      <i class="fa-solid fa-envelope-open-text"></i> <span class="hide-mobile-txt">Open / Close</span>
+    </button>
+
+    <button class="btn-publish" onclick="openPublishModal()">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> Publish (₹499)
+    </button>
+  </div>
+</header>
+
+<div class="builder-body">
+  <!-- LEFT PANEL: STEP WIZARD FORM -->
+  <aside class="editor-sidebar">
+    <div class="wizard-header">
+      <div class="wizard-title-row">
+        <span class="wizard-step-label" id="wizardStepTitle">Step 1: Invocation &amp; Cover</span>
+        <span class="wizard-step-count" id="wizardStepCount">1 / 6</span>
+      </div>
+      <div class="wizard-progress-track">
+        <div class="wizard-progress-bar" id="wizardProgressBar"></div>
+      </div>
+      <div class="wizard-tabs">
+        <button type="button" class="step-tab active" data-step="1" onclick="goToStep(1)">1. Blessing</button>
+        <button type="button" class="step-tab" data-step="2" onclick="goToStep(2)">2. Couple</button>
+        <button type="button" class="step-tab" data-step="3" onclick="goToStep(3)">3. Family</button>
+        <button type="button" class="step-tab" data-step="4" onclick="goToStep(4)">4. Events</button>
+        <button type="button" class="step-tab" data-step="5" onclick="goToStep(5)">5. Gallery</button>
+        <button type="button" class="step-tab" data-step="6" onclick="goToStep(6)">6. Notes</button>
+      </div>
+    </div>
+
+    <div class="editor-scroll">
+      <!-- STEP 1: INVOCATION & COVER -->
+      <div class="step-page active" id="stepPage1">
+        <div class="step-card">
+          <div class="step-card-header">
+            <h3 class="step-card-title">Invocation &amp; Opening Blessing</h3>
+            <p class="step-card-subtitle">Choose the auspicious symbol and welcome message for guests.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Auspicious Symbol</label>
+            <select class="form-select" id="inpSymbol" onchange="syncData()">
+              <option value="ganesha">Lord Ganesha</option>
+              <option value="om">Om (ॐ)</option>
+              <option value="sikh">Ik Onkar</option>
+              <option value="buddha">Lord Buddha</option>
+              <option value="jain">Ahimsa Hand (Jain)</option>
+              <option value="none">No Symbol</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tradition / Sacred Blessing</label>
+            <select class="form-select" id="inpReligion" onchange="syncData()">
+              <option value="hindu">Hindu — श्री गणेशाय नमः</option>
+              <option value="sikh">Sikh — ੴ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫ਼ਤਹਿ</option>
+              <option value="muslim">Islamic — بِسْمِ ٱللَّٰهِ</option>
+              <option value="jain">Jain — ॐ अर्हम्</option>
+              <option value="none">Universal — With gratitude and joy</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Introductory Card Text</label>
+            <textarea class="form-textarea" id="inpIntroNote" oninput="syncData()">We cordially invite you to
+grace the auspicious
+occasion of the marriage
+of…</textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: COUPLE NAMES & GRAND DATE -->
+      <div class="step-page" id="stepPage2">
+        <div class="step-card">
+          <div class="step-card-header">
+            <h3 class="step-card-title">The Happy Couple &amp; Date</h3>
+            <p class="step-card-subtitle">Enter Bride &amp; Groom names and grand wedding date.</p>
+          </div>
+          <div class="row-2">
+            <div class="form-group">
+              <label class="form-label">Bride First Name</label>
+              <input type="text" class="form-input" id="inpBride" value="Divya" oninput="syncData()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Groom First Name</label>
+              <input type="text" class="form-input" id="inpGroom" value="Vivan" oninput="syncData()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Grand Wedding Date</label>
+            <input type="date" class="form-input" id="inpWeddingDate" value="2025-12-14" oninput="syncData()">
+            <p class="form-hint">Interactive rose petal brush card reveals this date.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: FAMILY LINEAGE -->
+      <div class="step-page" id="stepPage3">
+        <div class="step-card">
+          <div class="step-card-header">
+            <h3 class="step-card-title">Groom's Family Lineage</h3>
+            <p class="step-card-subtitle">Formal titles, parents, grandparents, and gotra.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Formal Name</label>
+            <input type="text" class="form-input" id="inpGroomFull" value="Chi. Vivan Sharma" oninput="syncData()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Parents' Names</label>
+            <input type="text" class="form-input" id="inpGroomParents" value="Shri Ramesh Chandra Sharma & Smt. Sunita Sharma" oninput="syncData()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Grandparents &amp; Gotra</label>
+            <input type="text" class="form-input" id="inpGroomGrand" value="Late Shri Pandit Brij Mohan Sharma & Late Smt. Kamla Devi Sharma" oninput="syncData()">
+            <input type="text" class="form-input" id="inpGroomGotra" value="Gotra: Bharadwaj" oninput="syncData()" style="margin-top:6px;">
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-card-header">
+            <h3 class="step-card-title">Bride's Family Lineage</h3>
+            <p class="step-card-subtitle">Formal titles, parents, and grandparents.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Formal Name</label>
+            <input type="text" class="form-input" id="inpBrideFull" value="Sau. Ka. Divya Mehta" oninput="syncData()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Parents' Names</label>
+            <input type="text" class="form-input" id="inpBrideParents" value="Shri Vikram Mehta & Smt. Nandini Mehta" oninput="syncData()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Grandparents</label>
+            <input type="text" class="form-input" id="inpBrideGrand" value="Late Shri Hari Prasad Mehta & Pushpa Devi Mehta" oninput="syncData()">
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: CEREMONIES TIMELINE -->
+      <div class="step-page" id="stepPage4">
+        <div class="step-card">
+          <div class="step-card-header">
+            <h3 class="step-card-title">Wedding Ceremonies Deck</h3>
+            <p class="step-card-subtitle">Swipeable 3D ceremony cards with venue and timing details.</p>
+          </div>
+          
+          <!-- Ring Ceremony -->
+          <div style="background:#FFF; border:1px solid var(--border-rose); border-radius:12px; padding:12px; margin-bottom:12px;">
+            <strong style="font-size:13px; color:var(--rose-deep); display:block; margin-bottom:6px;">1. Ring Ceremony</strong>
+            <div class="row-2" style="margin-bottom:6px;">
+              <input type="date" class="form-input" id="c1_date" value="2025-12-12" oninput="syncData()">
+              <input type="time" class="form-input" id="c1_time" value="19:00" oninput="syncData()">
+            </div>
+            <input type="text" class="form-input" id="c1_venue" value="Sharma Residence, Jaipur" oninput="syncData()">
+          </div>
+
+          <!-- Mehendi -->
+          <div style="background:#FFF; border:1px solid var(--border-rose); border-radius:12px; padding:12px; margin-bottom:12px;">
+            <strong style="font-size:13px; color:var(--rose-deep); display:block; margin-bottom:6px;">2. Mehendi</strong>
+            <div class="row-2" style="margin-bottom:6px;">
+              <input type="date" class="form-input" id="c2_date" value="2025-12-13" oninput="syncData()">
+              <input type="time" class="form-input" id="c2_time" value="11:00" oninput="syncData()">
+            </div>
+            <input type="text" class="form-input" id="c2_venue" value="Sharma Residence, Jaipur" oninput="syncData()">
+          </div>
+
+          <!-- Haldi -->
+          <div style="background:#FFF; border:1px solid var(--border-rose); border-radius:12px; padding:12px; margin-bottom:12px;">
+            <strong style="font-size:13px; color:var(--rose-deep); display:block; margin-bottom:6px;">3. Haldi</strong>
+            <div class="row-2" style="margin-bottom:6px;">
+              <input type="date" class="form-input" id="c3_date" value="2025-12-13" oninput="syncData()">
+              <input type="time" class="form-input" id="c3_time" value="16:00" oninput="syncData()">
+            </div>
+            <input type="text" class="form-input" id="c3_venue" value="Sharma Residence, Jaipur" oninput="syncData()">
+          </div>
+
+          <!-- Sangeet -->
+          <div style="background:#FFF; border:1px solid var(--border-rose); border-radius:12px; padding:12px; margin-bottom:12px;">
+            <strong style="font-size:13px; color:var(--rose-deep); display:block; margin-bottom:6px;">4. Sangeet</strong>
+            <div class="row-2" style="margin-bottom:6px;">
+              <input type="date" class="form-input" id="c4_date" value="2025-12-13" oninput="syncData()">
+              <input type="time" class="form-input" id="c4_time" value="19:30" oninput="syncData()">
+            </div>
+            <input type="text" class="form-input" id="c4_venue" value="The Grand Palace, Jaipur" oninput="syncData()">
+          </div>
+
+          <!-- Vivaah -->
+          <div style="background:#FFF; border:1px solid var(--border-rose); border-radius:12px; padding:12px; margin-bottom:12px;">
+            <strong style="font-size:13px; color:var(--rose-deep); display:block; margin-bottom:6px;">5. Vivaah (Main Wedding)</strong>
+            <div class="row-2" style="margin-bottom:6px;">
+              <input type="date" class="form-input" id="c5_date" value="2025-12-14" oninput="syncData()">
+              <input type="time" class="form-input" id="c5_time" value="20:00" oninput="syncData()">
+            </div>
+            <input type="text" class="form-input" id="c5_venue" value="The Grand Palace, Jaipur" oninput="syncData()">
+          </div>
+
+          <!-- Reception -->
+          <div style="background:#FFF; border:1px solid var(--border-rose); border-radius:12px; padding:12px;">
+            <strong style="font-size:13px; color:var(--rose-deep); display:block; margin-bottom:6px;">6. Reception</strong>
+            <div class="row-2" style="margin-bottom:6px;">
+              <input type="date" class="form-input" id="c6_date" value="2025-12-15" oninput="syncData()">
+              <input type="time" class="form-input" id="c6_time" value="20:00" oninput="syncData()">
+            </div>
+            <input type="text" class="form-input" id="c6_venue" value="Royal Banquet Hall, Jaipur" oninput="syncData()">
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: LOVE STORY & GALLERY (IMAGE UPLOADS) -->
+      <div class="step-page" id="stepPage5">
+        <div class="step-card">
+          <div class="step-card-header">
+            <h3 class="step-card-title">Love Story &amp; Photos</h3>
+            <p class="step-card-subtitle">Upload photos from device or enter image links.</p>
+          </div>
+
+          <!-- Photo 1 -->
+          <div class="form-group" style="margin-bottom:16px;">
+            <label class="form-label">Photo 1 (Polaroid #howitstarted)</label>
+            <input type="text" class="form-input" id="gal1_url" placeholder="Paste image link or upload below..." oninput="syncData()">
+            <div class="upload-card">
+              <img id="gal1_prev" class="upload-preview" alt="Preview">
+              <label class="upload-btn-label">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Choose from Phone / Device
+                <input type="file" class="file-hidden" accept="image/*" onchange="handleFileUpload(this, 'gal1_url', 'gal1_prev')">
+              </label>
+            </div>
+          </div>
+
+          <!-- Story Note 1 -->
+          <div class="form-group" style="margin-bottom:16px;">
+            <label class="form-label">Love Story Card</label>
+            <textarea class="form-textarea" id="gal_story1" oninput="syncData()">Some stories begin with grand gestures. Ours started with a simple conversation.</textarea>
+          </div>
+
+          <!-- Photo 2 -->
+          <div class="form-group" style="margin-bottom:16px;">
+            <label class="form-label">Photo 2 (Polaroid #adventures)</label>
+            <input type="text" class="form-input" id="gal2_url" placeholder="Paste image link or upload below..." oninput="syncData()">
+            <div class="upload-card">
+              <img id="gal2_prev" class="upload-preview" alt="Preview">
+              <label class="upload-btn-label">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Choose from Phone / Device
+                <input type="file" class="file-hidden" accept="image/*" onchange="handleFileUpload(this, 'gal2_url', 'gal2_prev')">
+              </label>
+            </div>
+          </div>
+
+          <!-- Photo 3 -->
+          <div class="form-group">
+            <label class="form-label">Photo 3 (Polaroid #thelittlethings)</label>
+            <input type="text" class="form-input" id="gal3_url" placeholder="Paste image link or upload below..." oninput="syncData()">
+            <div class="upload-card">
+              <img id="gal3_prev" class="upload-preview" alt="Preview">
+              <label class="upload-btn-label">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Choose from Phone / Device
+                <input type="file" class="file-hidden" accept="image/*" onchange="handleFileUpload(this, 'gal3_url', 'gal3_prev')">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6: COMPLIMENTS & CLOSING -->
+      <div class="step-page" id="stepPage6">
+        <div class="step-card">
+          <div class="step-card-header">
+            <h3 class="step-card-title">Compliments &amp; Closing Note</h3>
+            <p class="step-card-subtitle">Warm wishes from families and hosts.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Compliments Section Lead</label>
+            <input type="text" class="form-input" id="inpComplimentLead" value="With Best Compliments From:" oninput="syncData()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Family Names (1 per line)</label>
+            <textarea class="form-textarea" id="inpCompliments" rows="4" oninput="syncData()">Shri Suresh Sharma & Family (Chacha-Chachi)
+Shri Manoj Sharma & Family (Tau-Tai)
+Smt. Asha Gupta & Family (Bua)
+Shri Rajendra Mehta & Family (Mama-Mami)</textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Heartfelt Note From Us</label>
+            <textarea class="form-textarea" id="inpNotes" rows="3" oninput="syncData()">We can’t wait to celebrate this special day with you. Thank you for being part of our journey.</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM STEP NAVIGATION CONTROLS -->
+    <div class="wizard-footer-bar">
+      <button type="button" class="btn-dock-preview" onclick="toggleMobilePreview()">
+        <i class="fa-solid fa-eye"></i> Preview
+      </button>
+      <button type="button" class="btn-step-prev" id="btnPrevStep" onclick="prevStep()" disabled>
+        <i class="fa-solid fa-arrow-left"></i> Previous
+      </button>
+      <button type="button" class="btn-step-next" id="btnNextStep" onclick="nextStep()">
+        Next Step <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- RIGHT PANEL: INTERACTIVE PREVIEW -->
+  <main class="preview-stage" id="previewStage">
+    <button class="close-mobile-preview" onclick="toggleMobilePreview()" title="Close Preview">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="device-wrapper">
+      <div class="device-screen">
+        <iframe id="previewFrame" src="./index.html?builder=1"></iframe>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- PUBLISH MODAL -->
+<div class="modal-overlay" id="publishModal">
+  <div class="modal-card">
+    <div class="modal-badge">Vanvi Moments Couture</div>
+    <h3 class="modal-title">Publish Your Invitation</h3>
+    <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">Instantly removes draft watermark overlays, provides permanent link hosting, WhatsApp guest invitation links, and RSVP tracking.</p>
+    
+    <div class="modal-price">₹499 <span>₹2499</span></div>
+
+    <button class="btn-confirm-publish" onclick="completePublish()">
+      <i class="fa-solid fa-lock-open"></i> Unlock &amp; Get Clean Link (₹499)
+    </button>
+    <button type="button" class="btn-clean-preview" onclick="openCleanPreview()" style="width:100%; padding:11px; margin-bottom:12px; background:var(--bg-subtle); border:1px solid var(--border-rose); border-radius:100px; color:var(--rose-deep); font-weight:700; font-size:13px; cursor:pointer;">
+      <i class="fa-solid fa-eye"></i> Test Full Clean Preview
+    </button>
+    <button class="btn-close-modal" onclick="closePublishModal()">Keep Customizing</button>
+  </div>
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 6;
+const stepTitles = [
+  "Step 1: Invocation & Cover",
+  "Step 2: Couple & Grand Date",
+  "Step 3: Family Lineage & Heritage",
+  "Step 4: Ceremonies & Venues",
+  "Step 5: Story & Photo Gallery",
+  "Step 6: Compliments & Notes"
+];
+
+const stepTargets = [
+  '.scene--welcome',    // Step 1: Invocation & Cover
+  '.scene--date',       // Step 2: Couple & Date
+  '.scene--details',    // Step 3: Family Lineage
+  '.scene--ceremonies', // Step 4: Ceremonies & Venues
+  '.scene--gallery',    // Step 5: Love Story Photos
+  '.scene--compliment'  // Step 6: Compliments & Notes
+];
+
+function togglePreviewCover() {
+  const frame = document.getElementById('previewFrame');
+  if (frame && frame.contentWindow) {
+    frame.contentWindow.postMessage({ type: 'rose-toggle-cover' }, '*');
+  }
+}
+
+function goToStep(step) {
+  if (step < 1 || step > totalSteps) return;
+  currentStep = step;
+
+  // Update tabs
+  document.querySelectorAll('.step-tab').forEach((tab, idx) => {
+    const s = idx + 1;
+    tab.classList.toggle('active', s === currentStep);
+    tab.classList.toggle('completed', s < currentStep);
+  });
+
+  // Update pages
+  document.querySelectorAll('.step-page').forEach((page, idx) => {
+    page.classList.toggle('active', (idx + 1) === currentStep);
+  });
+
+  // Update header text & progress bar
+  document.getElementById('wizardStepTitle').textContent = stepTitles[currentStep - 1];
+  document.getElementById('wizardStepCount').textContent = `${currentStep} / ${totalSteps}`;
+  document.getElementById('wizardProgressBar').style.width = `${(currentStep / totalSteps) * 100}%`;
+
+  // Update footer buttons
+  const prevBtn = document.getElementById('btnPrevStep');
+  const nextBtn = document.getElementById('btnNextStep');
+  prevBtn.disabled = (currentStep === 1);
+
+  if (currentStep === totalSteps) {
+    nextBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Publish (₹499)';
+    nextBtn.style.background = 'linear-gradient(135deg, #a63d54, #6d1b2d)';
+  } else {
+    nextBtn.innerHTML = 'Next Step <i class="fa-solid fa-arrow-right"></i>';
+    nextBtn.style.background = 'linear-gradient(135deg, var(--rose-primary), var(--rose-deep))';
+  }
+
+  // Scroll to top of editor panel
+  document.querySelector('.editor-scroll').scrollTop = 0;
+
+  // Auto-scroll the live preview to the active step section
+  const targetSel = stepTargets[currentStep - 1];
+  const frame = document.getElementById('previewFrame');
+  if (frame && frame.contentWindow && targetSel) {
+    frame.contentWindow.postMessage({ type: 'rose-scroll-to', selector: targetSel }, '*');
+  }
+}
+
+function nextStep() {
+  if (currentStep === totalSteps) {
+    openPublishModal();
+  } else {
+    goToStep(currentStep + 1);
+  }
+}
+
+function prevStep() {
+  if (currentStep > 1) {
+    goToStep(currentStep - 1);
+  }
+}
+
+function setViewMode(mode) {
+  const stage = document.getElementById('previewStage');
+  const phoneBtn = document.getElementById('btnPhoneView');
+  const theaterBtn = document.getElementById('btnTheaterView');
+
+  if (mode === 'theater') {
+    stage.classList.add('theater-mode');
+    theaterBtn.classList.add('active');
+    phoneBtn.classList.remove('active');
+  } else {
+    stage.classList.remove('theater-mode');
+    phoneBtn.classList.add('active');
+    theaterBtn.classList.remove('active');
+  }
+}
+
+function handleFileUpload(input, targetInputId, previewImgId) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    const base64 = e.target.result;
+    document.getElementById(targetInputId).value = base64;
+    const prev = document.getElementById(previewImgId);
+    if (prev) {
+      prev.src = base64;
+      prev.style.display = 'block';
+    }
+    syncData();
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function syncData() {
+  const frame = document.getElementById('previewFrame');
+  if (!frame || !frame.contentWindow) return;
+
+  const complimentsLines = document.getElementById('inpCompliments').value
+    .split('\n')
+    .map(l => l.trim())
+    .filter(Boolean);
+
+  const payload = {
+    bride: document.getElementById('inpBride').value,
+    groom: document.getElementById('inpGroom').value,
+    weddingDate: document.getElementById('inpWeddingDate').value,
+    introNote: document.getElementById('inpIntroNote').value,
+    invocation: {
+      symbol: document.getElementById('inpSymbol').value,
+      religion: document.getElementById('inpReligion').value,
+      script: 'devanagari',
+      custom: ''
+    },
+    parents: {
+      cards: [
+        {
+          enabled: true,
+          name: document.getElementById('inpGroomFull').value,
+          childLabel: 'Son of',
+          parentA: document.getElementById('inpGroomParents').value,
+          parentB: '',
+          grandLabel: 'Grandson of',
+          grandA: document.getElementById('inpGroomGrand').value,
+          grandB: '',
+          gotra: document.getElementById('inpGroomGotra').value.replace('Gotra: ', '').trim()
+        },
+        {
+          enabled: true,
+          name: document.getElementById('inpBrideFull').value,
+          childLabel: 'Daughter of',
+          parentA: document.getElementById('inpBrideParents').value,
+          parentB: '',
+          grandLabel: 'Granddaughter of',
+          grandA: document.getElementById('inpBrideGrand').value,
+          grandB: '',
+          gotra: ''
+        }
+      ]
+    },
+    ceremonies: [
+      { id: 'ring', enabled: true, date: document.getElementById('c1_date').value, time: document.getElementById('c1_time').value, venue: document.getElementById('c1_venue').value, mapUrl: '' },
+      { id: 'mehendi', enabled: true, date: document.getElementById('c2_date').value, time: document.getElementById('c2_time').value, venue: document.getElementById('c2_venue').value, mapUrl: '' },
+      { id: 'haldi', enabled: true, date: document.getElementById('c3_date').value, time: document.getElementById('c3_time').value, venue: document.getElementById('c3_venue').value, mapUrl: '' },
+      { id: 'sangeet', enabled: true, date: document.getElementById('c4_date').value, time: document.getElementById('c4_time').value, venue: document.getElementById('c4_venue').value, mapUrl: '' },
+      { id: 'vivaah', enabled: true, date: document.getElementById('c5_date').value, time: document.getElementById('c5_time').value, venue: document.getElementById('c5_venue').value, mapUrl: '' },
+      { id: 'reception', enabled: true, date: document.getElementById('c6_date').value, time: document.getElementById('c6_time').value, venue: document.getElementById('c6_venue').value, mapUrl: '' }
+    ],
+    gallery: {
+      enabled: true,
+      items: [
+        { type: 'photo', image: document.getElementById('gal1_url').value, placeholder: !document.getElementById('gal1_url').value, caption: '#howitstarted' },
+        { type: 'postcard', image: document.getElementById('gal2_url').value, placeholder: !document.getElementById('gal2_url').value, caption: '#adventures' },
+        { type: 'story', text: document.getElementById('gal_story1').value },
+        { type: 'photo', image: document.getElementById('gal3_url').value, placeholder: !document.getElementById('gal3_url').value, caption: '#thelittlethings' }
+      ]
+    },
+    compliments: {
+      enabled: true,
+      lead: document.getElementById('inpComplimentLead').value,
+      lines: complimentsLines
+    },
+    notes: {
+      enabled: true,
+      lead: 'A Note From Us',
+      text: document.getElementById('inpNotes').value
+    }
+  };
+
+  try {
+    localStorage.setItem('vanvi_rose_wedding_data', JSON.stringify(payload));
+  } catch(e) {}
+
+  // Post to iframe
+  frame.contentWindow.postMessage({
+    type: 'rose-preview-data',
+    data: payload
+  }, '*');
+}
+
+function toggleMobilePreview() {
+  const stage = document.getElementById('previewStage');
+  stage.classList.toggle('active');
+}
+
+function openPublishModal() {
+  document.getElementById('publishModal').style.display = 'flex';
+}
+
+function closePublishModal() {
+  document.getElementById('publishModal').style.display = 'none';
+}
+
+function completePublish() {
+  syncData();
+  try {
+    localStorage.setItem('vanvi_rose_published', '1');
+  } catch(e) {}
+  window.location.href = '../../checkout.html?template=rose-invitation-wedding&sku=VM-WED-ROSE-01&price=499';
+}
+
+function openCleanPreview() {
+  syncData();
+  try {
+    localStorage.setItem('vanvi_rose_published', '1');
+  } catch(e) {}
+  window.open('./index.html?published=1', '_blank');
+  closePublishModal();
+}
+
+// Initial sync on frame load
+document.getElementById('previewFrame').addEventListener('load', function() {
+  setTimeout(syncData, 500);
+});
+</script>
+</body>
+</html>

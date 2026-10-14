@@ -546,6 +546,11 @@
       width: 100%;
       min-height: 44px;
     }
+    #gsiButtonContainer > div,
+    #gsiButtonContainer iframe {
+      margin: 0 auto !important;
+      max-width: 100% !important;
+    }
 
     /* Footer Switch Link */
     .clay-footer-link {
@@ -577,6 +582,117 @@
     }
 
     /* Responsive Adaptations */
+    /* ==========================================================================
+       LAPTOP & DESKTOP BOUTIQUE COMPACT LUXURY EXPERIENCE
+       Sleek, small centered jewel card with balanced negative space
+       ========================================================================== */
+    @media (min-width: 601px) {
+      body {
+        padding: 16px;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .clay-mode-switch-wrap {
+        max-width: 345px;
+        margin-bottom: 5px;
+      }
+      .clay-mode-tab {
+        padding: 4px 13px;
+        font-size: 11px;
+      }
+      .clay-phone-card {
+        max-width: 345px;
+        padding: 11px 13px 10px;
+        border-radius: 26px;
+        box-shadow: 0 18px 45px -10px rgba(225, 29, 72, 0.2), 0 4px 14px -2px rgba(245, 158, 11, 0.1), 0 0 0 1.5px rgba(255, 255, 255, 0.95);
+      }
+      .clay-header-top {
+        margin-bottom: 3px;
+      }
+      .clay-avatar-bubble {
+        width: 42px;
+        height: 42px;
+        margin: 0 auto 2px;
+        padding: 2px;
+      }
+      .clay-avatar-badge {
+        font-size: 10px;
+        bottom: -2px;
+        right: -2px;
+      }
+      .clay-main-title {
+        font-size: 18px;
+        gap: 4px;
+      }
+      .clay-sub-text {
+        font-size: 10px;
+        margin-top: 1px;
+      }
+      .clay-gift-bonus-strip {
+        padding: 3px 8px;
+        font-size: 9.5px;
+        margin-bottom: 6px;
+      }
+      .clay-inner-card {
+        padding: 10px 11px 9px;
+        border-radius: 20px;
+      }
+      .clay-field-row {
+        margin-bottom: 5px;
+      }
+      .clay-pill-input-box {
+        min-height: 36px;
+        padding: 2px 5px 2px 4px;
+      }
+      .clay-icon-circle {
+        width: 28px;
+        height: 28px;
+      }
+      .clay-icon-circle svg {
+        width: 12px;
+        height: 12px;
+      }
+      .clay-native-input {
+        font-size: 11.5px;
+        padding: 0 7px;
+      }
+      .clay-native-input::placeholder {
+        font-size: 11px;
+      }
+      .clay-pwd-toggle {
+        font-size: 12.5px;
+        padding: 2px 5px;
+      }
+      .clay-terms-wrap {
+        margin: 4px 2px 6px;
+        font-size: 10px;
+      }
+      .clay-terms-wrap input {
+        width: 12px;
+        height: 12px;
+      }
+      .clay-btn-main {
+        min-height: 36px;
+        font-size: 12.5px;
+        font-weight: 850;
+      }
+      .clay-divider-line {
+        margin: 5px 0 4px;
+        font-size: 9px;
+      }
+      .gsi-mount-wrap {
+        margin: 3px 0 4px;
+        min-height: 36px;
+      }
+      #gsiButtonContainer {
+        min-height: 36px;
+      }
+      .clay-footer-link {
+        font-size: 10.5px;
+        margin-top: 3px;
+      }
+    }
+
     @media (max-width: 860px) {
       .prop-potted-plant,
       .prop-potted-flower {
@@ -772,7 +888,7 @@
       </div>
 
       <div class="gsi-mount-wrap" id="gsiMountWrap">
-        <div id="gsiButtonContainer" class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="continue_with" data-size="large" data-logo_alignment="left" data-width="320"></div>
+        <div id="gsiButtonContainer" class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="continue_with" data-size="large" data-logo_alignment="left" data-width="290"></div>
       </div>
 
       <!-- Bottom Switch Link -->
@@ -1046,7 +1162,7 @@
             size: 'large',
             shape: 'pill',
             text: 'continue_with',
-            width: 320
+            width: 290
           });
         }
       }

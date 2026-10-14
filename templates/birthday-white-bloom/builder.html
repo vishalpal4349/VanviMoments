@@ -95,6 +95,10 @@
           <div class="photo-slot" onclick="triggerUpload(1)"><span style="font-size: 20px;">➕</span><span style="font-size: 11px; margin-top: 4px; font-weight: 700;">Add Photo 2</span></div>
         </div>
         <input type="file" id="hiddenPhotoInput" accept="image/*" style="display: none;">
+        <div style="margin-top: 10px; display: flex; gap: 8px;">
+          <input type="text" id="inpPhotoUrlAdd" class="form-input" placeholder="Or paste image URL (https://...)" style="flex:1;">
+          <button type="button" style="padding: 6px 14px; font-size: 11.5px; white-space: nowrap; font-weight: 700; border-radius: 8px; background: #64748b; color: #fff; border: none; cursor: pointer;" onclick="addPhotoFromUrl()">Add URL</button>
+        </div>
       </div>
 
       <div class="builder-card">
@@ -261,6 +265,27 @@
       currentPhotos.splice(index, 1);
       renderPhotos();
       VanviBuilderCore.set('photos', currentPhotos);
+    }
+
+    function addPhotoFromUrl() {
+      const urlInput = document.getElementById('inpPhotoUrlAdd');
+      const url = urlInput ? urlInput.value.trim() : '';
+      if (!url) {
+        alert('Please enter or paste a valid image URL');
+        return;
+      }
+      if (currentPhotos.length < 2) {
+        currentPhotos.push(url);
+      } else {
+        currentPhotos[0] = url;
+      }
+      urlInput.value = '';
+      renderPhotos();
+      VanviBuilderCore.set('photos', currentPhotos);
+      const previewFrame = document.getElementById('previewFrame');
+      if (previewFrame && previewFrame.contentWindow) {
+        previewFrame.contentWindow.postMessage({ type: 'VANVI_DATA_UPDATE', data: { photos: currentPhotos } }, '*');
+      }
     }
 
     function renderPhotos() {

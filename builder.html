@@ -60,6 +60,17 @@
       if (t) {
         // Alias mapping
         const map = {
+          'cute-sorry': 'templates/sorry-bubu/builder.html',
+          'sorry-bubu': 'templates/sorry-bubu/builder.html',
+          'sorry-bubu-01': 'templates/sorry-bubu/builder.html',
+          'cute-bubu': 'templates/sorry-bubu/builder.html',
+          'sorry': 'templates/sorry-bubu/builder.html',
+          'bubu': 'templates/sorry-bubu/builder.html',
+          'birthday-2-0': 'templates/Birthday 2.0/builder.html',
+          'birthday-2.0': 'templates/Birthday 2.0/builder.html',
+          'birthday 2.0': 'templates/Birthday 2.0/builder.html',
+          'birthday2': 'templates/Birthday 2.0/builder.html',
+          'wish-2': 'templates/Birthday 2.0/builder.html',
           'cute-pastel-birthday': 'templates/cute-pastel-birthday/builder.html',
           'cute-pastel': 'templates/cute-pastel-birthday/builder.html',
           'pastel-birthday': 'templates/cute-pastel-birthday/builder.html',
@@ -108,10 +119,31 @@
           'golden-lake': 'templates/golden-lake-collection/builder.html',
           'lake-palace-sunset': 'templates/golden-lake-collection/builder.html',
           'waterfront-royal': 'templates/golden-lake-collection/builder.html',
-          'wedding': 'templates/temple-royal-wedding/builder.html'
+          'wedding': 'templates/temple-royal-wedding/builder.html',
+          'for-maa': 'templates/For Maa/builder.html',
+          'for-maa-01': 'templates/For Maa/builder.html',
+          'For Maa': 'templates/For Maa/builder.html',
+          'maa': 'templates/For Maa/builder.html',
+          'mother': 'templates/For Maa/builder.html',
+          'mothers-day': 'templates/For Maa/builder.html',
+          'invitation-maker': 'invitation-maker.html',
+          'invitation': 'invitation-maker.html',
+          'invite': 'invitation-maker.html',
+          'card-maker': 'invitation-maker.html',
+          'wedding-card': 'invitation-maker.html'
         };
 
-        const targetBuilder = map[t] || `templates/${encodeURIComponent(t)}/builder.html`;
+        let targetBuilder = map[t];
+        if (!targetBuilder && window.VanviTemplatesData && typeof window.VanviTemplatesData.getById === 'function') {
+          const found = window.VanviTemplatesData.getById(t);
+          if (found && found.builderPath) {
+            targetBuilder = found.builderPath;
+          }
+        }
+        if (!targetBuilder) {
+          targetBuilder = `templates/${encodeURIComponent(t)}/builder.html`;
+        }
+
         window.location.replace(targetBuilder + window.location.search);
       }
     })();

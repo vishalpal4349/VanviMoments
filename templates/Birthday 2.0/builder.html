@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Vanvi Moments — Birthday 2.0 Studio Customizer</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Alex+Brush&display=swap" rel="stylesheet">
+
+  <!-- QRCode Library for Instant Shareable QR Codes -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --bg-studio: #fff7f9;
+      --bg-studio-radial: radial-gradient(120% 120% at 50% 0%, #ffffff 0%, #fff0f4 55%, #ffe6ec 100%);
+      --sidebar-bg: #ffffff;
+      --border-line: rgba(229, 138, 163, 0.28);
+      --border-line-hover: rgba(166, 58, 86, 0.45);
+      
+      --ink-primary: #2a1620;
+      --ink-secondary: #5f3e4e;
+      --ink-muted: #957082;
+      
+      --brand-primary: #e58aa3;
+      --brand-deep: #a63a56;
+      --brand-dark: #680f23;
+      --brand-gold: #cfa144;
+      --brand-gold-soft: #fcf1d8;
+      --brand-success: #10b981;
+      
+      --radius-xs: 6px;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      
+      --font-body: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-serif: "Playfair Display", Georgia, serif;
+      --font-script: "Alex Brush", cursive;
+      
+      --dock-height: 66px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-body);
+      color: var(--ink-primary);
+      background: var(--bg-studio);
+      background-image: var(--bg-studio-radial);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ================= Top Studio Header ================= */
+    .studio-header {
+      height: 60px;
+      padding: 0 clamp(12px, 3vw, 24px);
+      background: rgba(255, 255, 255, 0.96);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 100;
+      flex-shrink: 0;
+      box-shadow: 0 2px 14px rgba(166, 58, 86, 0.04);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .back-btn {
+      color: var(--brand-deep);
+      background: #fff0f3;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-full);
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .back-btn:hover {
+      background: #ffe3e8;
+      border-color: var(--brand-primary);
+      transform: translateY(-1px);
+    }
+
+    .studio-title-wrap {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .studio-title {
+      font-family: var(--font-serif);
+      color: var(--brand-deep);
+      font-size: clamp(15px, 2.5vw, 18px);
+      font-weight: 700;
+      line-height: 1.15;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .studio-tag {
+      font-family: var(--font-body);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+      background: #ffe6ec;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-full);
+      padding: 2px 8px;
+      font-size: 9.5px;
+      font-weight: 800;
+    }
+
+    .studio-subtext {
+      color: var(--ink-muted);
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* Desktop Device Switcher */
+    .desktop-device-switcher {
+      background: #f7eef2;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-full);
+      padding: 3px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .device-btn {
+      font-family: var(--font-body);
+      color: var(--ink-secondary);
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .device-btn:hover {
+      color: var(--brand-deep);
+    }
+
+    .device-btn.active {
+      color: var(--brand-deep);
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(166, 58, 86, 0.16);
+    }
+
+    /* Header Action Buttons */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .action-btn {
+      font-family: var(--font-body);
+      color: var(--ink-secondary);
+      background: #ffffff;
+      border: 1.5px solid var(--border-line);
+      border-radius: var(--radius-full);
+      padding: 7px 15px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .action-btn:hover {
+      border-color: var(--brand-primary);
+      color: var(--brand-deep);
+      background: #fff8fa;
+      transform: translateY(-1px);
+    }
+
+    .publish-free-btn {
+      font-family: var(--font-body);
+      color: #ffffff;
+      background: linear-gradient(135deg, #a63a56 0%, #d93856 100%);
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 16px rgba(166, 58, 86, 0.35);
+      white-space: nowrap;
+    }
+
+    .publish-free-btn:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 6px 22px rgba(166, 58, 86, 0.48);
+    }
+
+    .free-pill-badge {
+      color: #7a4100;
+      background: #ffd700;
+      border-radius: var(--radius-full);
+      padding: 1.5px 7px;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ================= Master Workspace Split ================= */
+    .workspace-split {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Left Sidebar: Form Builder */
+    .builder-sidebar {
+      width: 440px;
+      max-width: 100%;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-line);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 50;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Presets Quick Bar */
+    .presets-bar {
+      padding: 12px 18px;
+      background: #fffbfa;
+      border-bottom: 1px solid var(--border-line);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      flex-shrink: 0;
+    }
+
+    .presets-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .presets-label {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--brand-deep);
+      white-space: nowrap;
+    }
+
+    .preset-chip {
+      font-family: var(--font-body);
+      color: var(--ink-secondary);
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-full);
+      padding: 5px 13px;
+      font-size: 11.5px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .preset-chip:hover {
+      border-color: var(--brand-primary);
+      color: var(--brand-deep);
+      background: #fff0f3;
+      transform: translateY(-1px);
+    }
+
+    /* Accordion Panels */
+    .accordion-section {
+      border-bottom: 1px solid var(--border-line);
+      transition: background 0.2s ease;
+    }
+
+    .accordion-section.open {
+      background: rgba(255, 247, 249, 0.4);
+      border-left: 3.5px solid var(--brand-deep);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      padding: 15px 18px;
+      background: transparent;
+      border: none;
+      font-family: var(--font-body);
+      color: var(--ink-primary);
+      font-size: 13.5px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: background 0.15s ease;
+    }
+
+    .accordion-trigger:hover {
+      background: #fff5f8;
+    }
+
+    .acc-icon {
+      font-size: 11px;
+      color: var(--ink-muted);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .accordion-section.open .acc-icon {
+      transform: rotate(180deg);
+      color: var(--brand-deep);
+    }
+
+    .accordion-body {
+      padding: 0 18px 20px;
+      display: none;
+      animation: 0.25s fadeIn ease;
+    }
+
+    .accordion-section.open .accordion-body {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Form Fields */
+    .field-group {
+      margin-bottom: 15px;
+    }
+
+    .field-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .field-hint {
+      font-size: 11px;
+      color: var(--ink-muted);
+      margin-top: 5px;
+      line-height: 1.4;
+      display: block;
+    }
+
+    .field-input, .field-textarea, .field-select {
+      width: 100%;
+      padding: 10px 13px;
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      color: var(--ink-primary);
+      background: #ffffff;
+      border: 1.5px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field-input:focus, .field-textarea:focus, .field-select:focus {
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(229, 138, 163, 0.25);
+    }
+
+    .field-textarea {
+      resize: vertical;
+      min-height: 95px;
+      line-height: 1.5;
+    }
+
+    .photo-preview-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #fff8fa;
+      border: 1px dashed var(--border-line);
+      border-radius: var(--radius-sm);
+    }
+
+    .photo-preview-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1.5px solid var(--border-line);
+      box-shadow: 0 4px 10px rgba(166, 58, 86, 0.1);
+      flex-shrink: 0;
+    }
+
+    /* Desktop Sidebar Sticky Footer */
+    .sidebar-sticky-dock {
+      margin-top: auto;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.95);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border-line);
+      position: sticky;
+      bottom: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 -4px 16px rgba(166, 58, 86, 0.06);
+    }
+
+    /* Right Canvas: Simulator Area */
+    .preview-canvas-area {
+      flex: 1;
+      background: #eaeef3;
+      background-image: 
+        radial-gradient(#d5dce6 1px, transparent 1px),
+        linear-gradient(180deg, #f0f4f8 0%, #e5eaf1 100%);
+      background-size: 20px 20px, 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preview-device-frame {
+      width: 375px;
+      max-width: 95%;
+      height: min(780px, calc(100vh - 120px));
+      background: #ffffff;
+      border-radius: 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 24px 60px rgba(166, 58, 86, 0.16),
+        0 0 0 10px #1e2024,
+        0 0 0 12px rgba(229, 138, 163, 0.35);
+      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s, border-radius 0.35s;
+    }
+
+    .preview-device-frame.tablet {
+      width: 720px;
+      height: min(850px, calc(100vh - 110px));
+      border-radius: 28px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18), 0 0 0 10px #2a2b30;
+    }
+
+    .preview-device-frame.desktop {
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border-line);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .frame-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 130px;
+      height: 22px;
+      background: #1e2024;
+      border-radius: 0 0 14px 14px;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .preview-device-frame.tablet .frame-notch,
+    .preview-device-frame.desktop .frame-notch {
+      display: none;
+    }
+
+    .preview-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #fff7f9;
+    }
+
+    /* ================= Floating Smart Action Dock (Mobile/Tablet) ================= */
+    .mobile-floating-bar {
+      display: none;
+      position: fixed;
+      bottom: max(14px, env(safe-area-inset-bottom, 14px));
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(calc(100% - 24px), 440px);
+      z-index: 9999;
+      pointer-events: none;
+      animation: dockSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes dockSlideUp {
+      from { transform: translate(-50%, 20px); opacity: 0; }
+      to { transform: translate(-50%, 0); opacity: 1; }
+    }
+
+    .mobile-floating-bar-inner {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 6px 8px;
+      background: rgba(255, 255, 255, 0.95);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      backdrop-filter: blur(24px) saturate(180%);
+      border: 1.5px solid rgba(229, 138, 163, 0.38);
+      border-radius: var(--radius-full);
+      box-shadow: 
+        0 14px 38px rgba(166, 58, 86, 0.22),
+        0 2px 8px rgba(0, 0, 0, 0.05),
+        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      width: 100%;
+    }
+
+    /* Fixed Segmented Pill: NEVER resizes, perfectly balanced */
+    .dock-segmented-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      background: #f7eff3;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-full);
+      padding: 3px;
+      width: 150px;
+      height: 42px;
+      flex-shrink: 0;
+    }
+
+    .dock-tab-btn {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+
+    .dock-tab-btn.active {
+      background: #ffffff;
+      color: var(--brand-deep);
+      box-shadow: 0 2px 8px rgba(166, 58, 86, 0.18);
+    }
+
+    /* Publish Button in Dock: Solid, Never Jumps or Resizes */
+    .dock-publish-btn {
+      flex: 1;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #a63a56 0%, #d93856 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(166, 58, 86, 0.35);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+      padding: 0 16px;
+    }
+
+    .dock-publish-btn:hover, .dock-publish-btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(166, 58, 86, 0.45);
+    }
+
+    /* ================= Modal: Free Instant Publishing ================= */
+    .publish-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(42, 22, 32, 0.65);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .publish-modal-overlay.active {
+      display: flex;
+    }
+
+    .publish-modal-card {
+      width: 100%;
+      max-width: 440px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-lg);
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+      animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+
+    @keyframes modalPop {
+      0% { opacity: 0; transform: scale(0.92) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      border-radius: var(--radius-full);
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .modal-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--brand-deep);
+      margin-bottom: 4px;
+    }
+
+    .modal-sub {
+      font-size: 13px;
+      color: var(--ink-secondary);
+      margin-bottom: 18px;
+      line-height: 1.45;
+    }
+
+    .qr-canvas-holder {
+      display: flex;
+      justify-content: center;
+      width: fit-content;
+      margin: 12px auto;
+      padding: 12px;
+      background: #fff8fa;
+      border: 1.5px dashed var(--brand-primary);
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(166, 58, 86, 0.06);
+    }
+
+    .link-copy-box {
+      display: flex;
+      gap: 6px;
+      margin: 16px 0 12px;
+    }
+
+    .link-input-display {
+      flex: 1;
+      padding: 10px 12px;
+      font-family: monospace;
+      font-size: 12px;
+      background: #f9fafb;
+      border: 1.5px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      color: var(--ink-primary);
+      outline: none;
+      text-overflow: ellipsis;
+    }
+
+    .btn-copy-link {
+      padding: 0 16px;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 700;
+      background: #ffffff;
+      color: var(--brand-deep);
+      border: 1.5px solid var(--brand-deep);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .btn-copy-link:hover {
+      background: var(--brand-deep);
+      color: #ffffff;
+    }
+
+    .btn-copy-link.copied {
+      background: #10b981;
+      border-color: #10b981;
+      color: #ffffff;
+    }
+
+    .modal-actions-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .btn-whatsapp-share {
+      flex: 1;
+      padding: 11px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-body);
+      color: #ffffff;
+      background: #25d366;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-whatsapp-share:hover {
+      background: #1ea952;
+      transform: translateY(-1px);
+    }
+
+    .btn-open-live {
+      flex: 1;
+      padding: 11px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-body);
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--brand-primary), var(--brand-deep));
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(166, 58, 86, 0.3);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-open-live:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-close-modal {
+      margin-top: 16px;
+      padding: 6px 14px;
+      background: transparent;
+      border: none;
+      color: var(--ink-muted);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-close-modal:hover {
+      color: var(--ink-primary);
+    }
+
+    /* ================= Mobile & Responsive Rules (< 900px) ================= */
+    @media (max-width: 900px) {
+      .desktop-device-switcher {
+        display: none !important;
+      }
+
+      .studio-header {
+        height: 56px;
+        padding: 0 14px;
+      }
+
+      .studio-subtext {
+        display: none !important;
+      }
+
+      /* Hide duplicate publish button from top header on mobile */
+      .header-actions .publish-free-btn {
+        display: none !important;
+      }
+
+      .workspace-split {
+        flex-direction: column;
+        height: calc(100% - 56px);
+        overflow: hidden;
+      }
+
+      /* In Edit View on Mobile */
+      body.mobile-view-edit .builder-sidebar {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        padding-bottom: 84px; /* Space for the floating dock */
+      }
+
+      body.mobile-view-edit .preview-canvas-area {
+        display: none !important;
+      }
+
+      /* In Preview View on Mobile */
+      body.mobile-view-preview .builder-sidebar {
+        display: none !important;
+      }
+
+      body.mobile-view-preview .preview-canvas-area {
+        width: 100%;
+        height: 100%;
+        padding: 0 0 84px 0; /* Space for the floating dock */
+        display: flex;
+        background: #fff7f9;
+      }
+
+      body.mobile-view-preview .preview-device-frame {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        aspect-ratio: auto;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+      }
+
+      body.mobile-view-preview .frame-notch {
+        display: none;
+      }
+
+      /* Show the stable, luxury floating action dock */
+      .mobile-floating-bar {
+        display: block;
+      }
+
+      /* Hide sidebar sticky dock on mobile since floating bar handles it */
+      .sidebar-sticky-dock {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="mobile-view-edit">
+
+  <!-- ================= Top Studio Header ================= -->
+  <header class="studio-header">
+    <div class="brand-group">
+      <a href="./index.html" class="back-btn" title="View Default Recipient Experience">‹ Live</a>
+      <div class="studio-title-wrap">
+        <div class="studio-title">
+          <span>Vanvi Moments</span>
+          <span class="studio-tag">Birthday 2.0</span>
+        </div>
+        <span class="studio-subtext">Luxury Experience Customizer</span>
+      </div>
+    </div>
+
+    <!-- Center Device Switcher (Desktop only) -->
+    <div class="desktop-device-switcher" id="desktopDeviceSwitcher">
+      <button type="button" class="device-btn active" data-frame="mobile">📱 Mobile</button>
+      <button type="button" class="device-btn" data-frame="tablet">📟 Tablet</button>
+      <button type="button" class="device-btn" data-frame="desktop">💻 Desktop</button>
+    </div>
+
+    <div class="header-actions">
+      <button type="button" class="action-btn" id="resetDefaultsBtn" title="Reset all fields to defaults">↺ Reset</button>
+      <button type="button" class="publish-free-btn" id="publishFreeBtnTop">
+        <span>🚀 Publish</span>
+        <span class="free-pill-badge">FREE</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= Master Workspace Split ================= -->
+  <div class="workspace-split">
+    
+    <!-- LEFT SIDEBAR: CONFIG ACCORDIONS -->
+    <aside class="builder-sidebar" id="builderSidebar">
+      
+      <!-- Preset Quick Switcher -->
+      <div class="presets-bar">
+        <span class="presets-label">Presets:</span>
+        <button type="button" class="preset-chip" id="presetGirlfriend">💖 Romantic Partner</button>
+        <button type="button" class="preset-chip" id="presetBestFriend">👯 Best Friend</button>
+        <button type="button" class="preset-chip" id="presetSister">🌸 Sister / Family</button>
+      </div>
+
+      <!-- Section 1: Recipient & Theme Palette -->
+      <section class="accordion-section open">
+        <button type="button" class="accordion-trigger">
+          <span>1. Recipient &amp; Theme Palette</span>
+          <span class="acc-icon">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="field-group">
+            <label class="field-label" for="inpRecipient">Birthday Person's Name</label>
+            <input type="text" class="field-input" id="inpRecipient" value="Riya" placeholder="Enter recipient name">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="inpTheme">Color Theme Palette</label>
+            <select class="field-select" id="inpTheme">
+              <option value="blush" selected>Blush Petals (Romantic Pink &amp; Cream)</option>
+              <option value="lavender">Lavender Mist (Ethereal Purple &amp; Gold)</option>
+              <option value="sunset">Tuscan Sunset (Warm Terracotta &amp; Amber)</option>
+              <option value="midnight">Midnight Star (Dark Luxury Velvet &amp; Gold)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="inpIntroHeadline">Intro Greeting Headline</label>
+            <input type="text" class="field-input" id="inpIntroHeadline" value="Happy Birthday, Riya ♡">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="inpIntroSubtitle">Intro Subtitle</label>
+            <input type="text" class="field-input" id="inpIntroSubtitle" value="someone made you something special">
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Hero Greeting & Portrait Photo -->
+      <section class="accordion-section">
+        <button type="button" class="accordion-trigger">
+          <span>2. Hero Greeting &amp; Portrait</span>
+          <span class="acc-icon">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="field-group">
+            <label class="field-label">Portrait Photo (Device Upload + Image URL)</label>
+            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+              <button type="button" class="action-btn" id="btnChooseHeroPhoto" style="font-size: 12px; padding: 7px 14px; background: #fff0f3; border-color: var(--brand-primary); color: var(--brand-deep); font-weight: 700;">
+                <span>📁 Upload Photo</span>
+              </button>
+              <input type="file" id="fileHeroPortrait" accept="image/*" style="display: none;">
+              <span class="field-hint" id="heroPhotoUploadHint">Select from phone or laptop</span>
+            </div>
+            <input type="text" class="field-input" id="inpHeroPortrait" value="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop" placeholder="Or paste photo URL">
+            <div class="photo-preview-wrap">
+              <img id="portraitPreviewThumb" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop" class="photo-preview-thumb" alt="Preview">
+              <span class="field-hint">Used for the 3D wax letter reveal and hero portrait</span>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="inpHeroHeadline">Greeting Title</label>
+            <input type="text" class="field-input" id="inpHeroHeadline" value="Happy Birthday, Sunshine!">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="inpHeroMessage">Heartfelt Greeting Message</label>
+            <textarea class="field-textarea" id="inpHeroMessage">Today is entirely yours. A whole little sanctuary of wishes — for every laugh we’ve shared, every quiet late-night talk, and every reason you make this world softer, warmer, and so much brighter.</textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Dedicated Song (Vinyl Player) -->
+      <section class="accordion-section">
+        <button type="button" class="accordion-trigger">
+          <span>3. Dedicated Song (Vinyl Player)</span>
+          <span class="acc-icon">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="field-group">
+            <label class="field-label" for="inpSongTitle">Song Title</label>
+            <input type="text" class="field-input" id="inpSongTitle" value="A Song for Your Day">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="inpSongArtist">Artist / Dedication Label</label>
+            <input type="text" class="field-input" id="inpSongArtist" value="Handpicked with Love for You">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="inpSongUrl">Audio Stream MP3 URL</label>
+            <input type="text" class="field-input" id="inpSongUrl" value="https://cdn.cutiepage.in/template-seeds/birthday-wish-2/wish2music.mp3">
+            <span class="field-hint">Plays smoothly across all modern mobile browsers</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Pickable Bouquet (3 Hidden Wishes) -->
+      <section class="accordion-section">
+        <button type="button" class="accordion-trigger">
+          <span>4. Pickable Bouquet (3 Hidden Wishes)</span>
+          <span class="acc-icon">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="field-group">
+            <label class="field-label" for="inpWish1Title">Flower 1 Title</label>
+            <input type="text" class="field-input" id="inpWish1Title" value="The Way You Laugh">
+            <label class="field-label" for="inpWish1Body" style="margin-top: 6px;">Flower 1 Secret Wish</label>
+            <textarea class="field-textarea" id="inpWish1Body">Your laugh is pure medicine. Wishing you a year bursting with spontaneous giggles and untamed joy.</textarea>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="inpWish2Title">Flower 2 Title</label>
+            <input type="text" class="field-input" id="inpWish2Title" value="The Way You Care">
+            <label class="field-label" for="inpWish2Body" style="margin-top: 6px;">Flower 2 Secret Wish</label>
+            <textarea class="field-textarea" id="inpWish2Body">You remember the tiny details that nobody else notices. May that same tenderness wrap around your heart every day.</textarea>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="inpWish3Title">Flower 3 Title</label>
+            <input type="text" class="field-input" id="inpWish3Title" value="The Year Ahead">
+            <label class="field-label" for="inpWish3Body" style="margin-top: 6px;">Flower 3 Secret Wish</label>
+            <textarea class="field-textarea" id="inpWish3Body">May this upcoming chapter bring peaceful mornings, delicious dinners, big dreams realized, and boundless love.</textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Handwritten Love Letter -->
+      <section class="accordion-section">
+        <button type="button" class="accordion-trigger">
+          <span>5. Cream Paper Handwritten Letter</span>
+          <span class="acc-icon">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="field-group">
+            <label class="field-label" for="inpLetterGreeting">Salutation</label>
+            <input type="text" class="field-input" id="inpLetterGreeting" value="Dearest Riya,">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="inpLetterBody">Letter Body</label>
+            <textarea class="field-textarea" id="inpLetterBody" style="min-height: 140px;">There is no greeting card in the world large enough to hold everything I’d love to tell you today, so I built this little garden for you instead — with your favorite melody, memories that make me smile, and wishes straight from the heart.
+
+Thank you for the quiet, unseen gestures — the random texts on tough days, the silly inside jokes only we understand, and the effortless way you bring comfort wherever you go. I noticed. I always notice.
+
+I hope that today, you feel deeply cherished. Eat your favorite cake, dance without caring who is watching, and know that you are endlessly loved.
+
+May this new trip around the sun bring you the purest magic.</textarea>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="inpLetterSignature">Signature Signoff</label>
+            <input type="text" class="field-input" id="inpLetterSignature" value="Always Yours ❤️">
+          </div>
+        </div>
+      </section>
+
+      <!-- Desktop Sidebar Bottom Dock -->
+      <div class="sidebar-sticky-dock">
+        <button type="button" class="action-btn" id="sidebarResetBtn" title="Reset all fields">↺ Reset</button>
+        <button type="button" class="publish-free-btn" id="publishFreeBtnSidebar" style="flex: 1; justify-content: center;">
+          <span>🚀 Publish for Free</span>
+          <span class="free-pill-badge">FREE</span>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- RIGHT CANVAS: LIVE INTERACTIVE PREVIEW -->
+    <main class="preview-canvas-area" id="previewCanvasArea">
+      <div class="preview-device-frame" id="deviceFrame">
+        <div class="frame-notch"></div>
+        <iframe class="preview-iframe" id="previewIframe" src="./index.html" title="Live Interactive Preview"></iframe>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ================= Mobile Luxury Bottom Action Dock ================= -->
+  <div class="mobile-floating-bar" id="mobileFloatingBar">
+    <div class="mobile-floating-bar-inner">
+      <!-- Fixed-width Segmented Switch: NEVER shifts button size -->
+      <div class="dock-segmented-switch">
+        <button type="button" class="dock-tab-btn active" id="dockBtnEdit" data-tab="edit">
+          <span>✏️ Edit</span>
+        </button>
+        <button type="button" class="dock-tab-btn" id="dockBtnPreview" data-tab="preview">
+          <span>👁️ Preview</span>
+        </button>
+      </div>
+
+      <!-- Solid, Constant-Size Publish Button -->
+      <button type="button" class="dock-publish-btn" id="publishFreeBtnBottom">
+        <span>🚀 Publish</span>
+        <span class="free-pill-badge">FREE</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= Free Instant Publishing Modal ================= -->
+  <div class="publish-modal-overlay" id="publishModal">
+    <div class="publish-modal-card">
+      <div class="modal-status-badge">
+        <span class="modal-status-dot"></span>
+        <span>Hosted 100% Free · Vanvi Moments</span>
+      </div>
+
+      <h3 class="modal-title">🎉 Your Birthday Page is Published!</h3>
+      <p class="modal-sub">
+        Share this personalized digital surprise with <strong id="modalTargetName" style="color: var(--brand-deep);">Riya</strong>. Valid forever!
+      </p>
+
+      <!-- QR Code Container -->
+      <div class="qr-canvas-holder">
+        <canvas id="qrCanvas"></canvas>
+      </div>
+
+      <!-- Published Link Copy Box -->
+      <div class="link-copy-box">
+        <input type="text" class="link-input-display" id="publishedLinkInput" readonly value="">
+        <button type="button" class="btn-copy-link" id="btnCopyPublishedLink">📋 Copy</button>
+      </div>
+
+      <!-- Action Buttons Row -->
+      <div class="modal-actions-row">
+        <button type="button" class="btn-whatsapp-share" id="btnWhatsappShare">
+          <span>💬 WhatsApp</span>
+        </button>
+        <button type="button" class="btn-open-live" id="btnOpenLivePage">
+          <span>🚀 Open Page ↗</span>
+        </button>
+      </div>
+
+      <div style="margin-top: 14px;">
+        <button type="button" class="action-btn" id="btnDownloadQr" style="width: 100%; justify-content: center; font-size: 12px;">
+          <span>📥 Download QR Image</span>
+        </button>
+      </div>
+
+      <button type="button" class="btn-close-modal" id="btnClosePublishModal">
+        ✕ Close Window
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const iframe = document.getElementById('previewIframe');
+    const deviceFrame = document.getElementById('deviceFrame');
+    const desktopBtns = document.querySelectorAll('.desktop-device-switcher .device-btn');
+    const portraitPreviewThumb = document.getElementById('portraitPreviewThumb');
+    const inpHeroPortrait = document.getElementById('inpHeroPortrait');
+
+    // Accordion interaction
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const sec = trigger.parentElement;
+        sec.classList.toggle('open');
+      });
+    });
+
+    // Desktop Device Mockup Switcher
+    desktopBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        desktopBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const frame = btn.dataset.frame;
+        deviceFrame.className = 'preview-device-frame ' + (frame === 'mobile' ? '' : frame);
+      });
+    });
+
+    // Unified Mobile View Switching (Edit vs Preview tabs - Rock Solid)
+    function setMobileView(view) {
+      const isEdit = view === 'edit';
+      document.body.classList.toggle('mobile-view-edit', isEdit);
+      document.body.classList.toggle('mobile-view-preview', !isEdit);
+      
+      document.querySelectorAll('[data-tab="edit"]').forEach(b => b.classList.toggle('active', isEdit));
+      document.querySelectorAll('[data-tab="preview"]').forEach(b => b.classList.toggle('active', !isEdit));
+
+      if (!isEdit && iframe && iframe.contentWindow) {
+        syncToIframe();
+      }
+    }
+
+    document.querySelectorAll('[data-tab="edit"]').forEach(btn => {
+      btn.addEventListener('click', () => setMobileView('edit'));
+    });
+    document.querySelectorAll('[data-tab="preview"]').forEach(btn => {
+      btn.addEventListener('click', () => setMobileView('preview'));
+    });
+
+    // Thumbnail Preview Sync & Upload Handling
+    inpHeroPortrait?.addEventListener('input', () => {
+      if (portraitPreviewThumb && inpHeroPortrait.value) {
+        portraitPreviewThumb.src = inpHeroPortrait.value;
+      }
+    });
+
+    const btnChooseHeroPhoto = document.getElementById('btnChooseHeroPhoto');
+    const fileHeroPortrait = document.getElementById('fileHeroPortrait');
+    const heroPhotoUploadHint = document.getElementById('heroPhotoUploadHint');
+
+    btnChooseHeroPhoto?.addEventListener('click', () => fileHeroPortrait?.click());
+    fileHeroPortrait?.addEventListener('change', function() {
+      const file = this.files && this.files[0];
+      if (!file) return;
+
+      if (heroPhotoUploadHint) heroPhotoUploadHint.textContent = 'Uploading...';
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const dataUrl = e.target.result;
+        if (portraitPreviewThumb) portraitPreviewThumb.src = dataUrl;
+        if (inpHeroPortrait) {
+          inpHeroPortrait.value = dataUrl;
+          syncToIframe();
+        }
+
+        // Async upload to /api/upload (Cloudinary / Local storage)
+        try {
+          const res = await fetch('/api/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              image: dataUrl,
+              templateId: 'birthday-2-0',
+              originalName: file.name,
+              assetType: 'image'
+            })
+          });
+          const data = await res.json();
+          if (data && data.success && data.url) {
+            if (inpHeroPortrait) {
+              inpHeroPortrait.value = data.url;
+              syncToIframe();
+            }
+            if (heroPhotoUploadHint) heroPhotoUploadHint.textContent = '✓ Uploaded';
+          } else {
+            if (heroPhotoUploadHint) heroPhotoUploadHint.textContent = '✓ Ready';
+          }
+        } catch (err) {
+          if (heroPhotoUploadHint) heroPhotoUploadHint.textContent = '✓ Ready (Local preview)';
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Form Data Collection
+    const inputIds = [
+      'inpRecipient', 'inpTheme', 'inpIntroHeadline', 'inpIntroSubtitle',
+      'inpHeroPortrait', 'inpHeroHeadline', 'inpHeroMessage', 'inpSongTitle',
+      'inpSongArtist', 'inpSongUrl', 'inpWish1Title', 'inpWish1Body',
+      'inpWish2Title', 'inpWish2Body', 'inpWish3Title', 'inpWish3Body',
+      'inpLetterGreeting', 'inpLetterBody', 'inpLetterSignature'
+    ];
+
+    function getFormData() {
+      return {
+        recipientName: document.getElementById('inpRecipient').value.trim() || 'Riya',
+        theme: document.getElementById('inpTheme').value,
+        introHeadline: document.getElementById('inpIntroHeadline').value,
+        introSubtitle: document.getElementById('inpIntroSubtitle').value,
+        heroPortraitUrl: document.getElementById('inpHeroPortrait').value,
+        heroHeadline: document.getElementById('inpHeroHeadline').value,
+        heroMessage: document.getElementById('inpHeroMessage').value,
+        songTitle: document.getElementById('inpSongTitle').value,
+        songArtist: document.getElementById('inpSongArtist').value,
+        songUrl: document.getElementById('inpSongUrl').value,
+        wish1Title: document.getElementById('inpWish1Title').value,
+        wish1Body: document.getElementById('inpWish1Body').value,
+        wish2Title: document.getElementById('inpWish2Title').value,
+        wish2Body: document.getElementById('inpWish2Body').value,
+        wish3Title: document.getElementById('inpWish3Title').value,
+        wish3Body: document.getElementById('inpWish3Body').value,
+        letterGreeting: document.getElementById('inpLetterGreeting').value,
+        letterBody: document.getElementById('inpLetterBody').value,
+        letterSignature: document.getElementById('inpLetterSignature').value
+      };
+    }
+
+    function syncToIframe() {
+      const data = getFormData();
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage({
+          type: 'VANVI_UPDATE_CONFIG',
+          payload: data
+        }, '*');
+      }
+      try {
+        localStorage.setItem('vanvi_wish2_config', JSON.stringify(data));
+      } catch (e) {}
+    }
+
+    inputIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', syncToIframe);
+        el.addEventListener('change', syncToIframe);
+      }
+    });
+
+    // Presets Handlers
+    function applyPreset(recipient, theme, intro, hero, img, greeting, sign) {
+      document.getElementById('inpRecipient').value = recipient;
+      document.getElementById('inpTheme').value = theme;
+      document.getElementById('inpIntroHeadline').value = intro;
+      document.getElementById('inpHeroHeadline').value = hero;
+      document.getElementById('inpHeroPortrait').value = img;
+      if (portraitPreviewThumb) portraitPreviewThumb.src = img;
+      document.getElementById('inpLetterGreeting').value = greeting;
+      document.getElementById('inpLetterSignature').value = sign;
+      syncToIframe();
+    }
+
+    document.getElementById('presetGirlfriend')?.addEventListener('click', () => {
+      applyPreset('Riya', 'blush', 'Happy Birthday, My Love ♡', 'To the Girl Who Stole My Heart', 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop', 'Dearest Riya,', 'Forever Yours ❤️');
+    });
+
+    document.getElementById('presetBestFriend')?.addEventListener('click', () => {
+      applyPreset('Arjun', 'sunset', 'Happy Birthday to my Best Friend! 🍕', 'Another Year of Chaos & Memories', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop', 'Hey Partner in Crime,', 'Your Best Buddy 🤜🤛');
+    });
+
+    document.getElementById('presetSister')?.addEventListener('click', () => {
+      applyPreset('Ananya', 'lavender', 'Happy Birthday, Little Sister! 🌸', 'To My Favorite Human', 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop', 'Dearest Ananya,', 'With Lots of Love & Treats 🎁');
+    });
+
+    function resetToDefaults() {
+      if (confirm('Reset customizer back to default values?')) {
+        document.getElementById('presetGirlfriend').click();
+      }
+    }
+
+    document.getElementById('resetDefaultsBtn')?.addEventListener('click', resetToDefaults);
+    document.getElementById('sidebarResetBtn')?.addEventListener('click', resetToDefaults);
+
+    // ================= Publish for Free Engine =================
+    const publishModal = document.getElementById('publishModal');
+    const modalTargetName = document.getElementById('modalTargetName');
+    const publishedLinkInput = document.getElementById('publishedLinkInput');
+    const btnCopyPublishedLink = document.getElementById('btnCopyPublishedLink');
+    const btnWhatsappShare = document.getElementById('btnWhatsappShare');
+    const btnOpenLivePage = document.getElementById('btnOpenLivePage');
+    const btnDownloadQr = document.getElementById('btnDownloadQr');
+    const btnClosePublishModal = document.getElementById('btnClosePublishModal');
+    const qrCanvas = document.getElementById('qrCanvas');
+
+    let currentPublishedUrl = '';
+
+    function generatePublishedUrl() {
+      const data = getFormData();
+      const jsonStr = JSON.stringify(data);
+      const encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(jsonStr))));
+      
+      const baseUrl = new URL('./index.html', window.location.href);
+      baseUrl.searchParams.set('data', encoded);
+      return baseUrl.href;
+    }
+
+    function openPublishModal() {
+      const data = getFormData();
+      modalTargetName.textContent = data.recipientName;
+      currentPublishedUrl = generatePublishedUrl();
+      publishedLinkInput.value = currentPublishedUrl;
+
+      // Render high-res luxury QR Code
+      if (typeof QRCode !== 'undefined' && qrCanvas) {
+        QRCode.toCanvas(qrCanvas, currentPublishedUrl, {
+          width: 175,
+          margin: 1,
+          color: {
+            dark: '#a63a56',
+            light: '#ffffff'
+          }
+        });
+      }
+
+      publishModal.classList.add('active');
+    }
+
+    // Connect all Publish buttons (Top, Sidebar, and Mobile Dock)
+    document.getElementById('publishFreeBtnTop')?.addEventListener('click', openPublishModal);
+    document.getElementById('publishFreeBtnSidebar')?.addEventListener('click', openPublishModal);
+    document.getElementById('publishFreeBtnBottom')?.addEventListener('click', openPublishModal);
+
+    btnClosePublishModal?.addEventListener('click', () => {
+      publishModal.classList.remove('active');
+    });
+
+    publishModal?.addEventListener('click', (e) => {
+      if (e.target === publishModal) publishModal.classList.remove('active');
+    });
+
+    btnCopyPublishedLink?.addEventListener('click', () => {
+      navigator.clipboard.writeText(currentPublishedUrl).then(() => {
+        btnCopyPublishedLink.textContent = '✓ Copied!';
+        btnCopyPublishedLink.classList.add('copied');
+        setTimeout(() => {
+          btnCopyPublishedLink.textContent = '📋 Copy';
+          btnCopyPublishedLink.classList.remove('copied');
+        }, 2200);
+      }).catch(() => {
+        publishedLinkInput.select();
+        document.execCommand('copy');
+        alert('Link copied to clipboard!');
+      });
+    });
+
+    btnWhatsappShare?.addEventListener('click', () => {
+      const data = getFormData();
+      const text = encodeURIComponent(`🎂 Happy Birthday ${data.recipientName}! I created an exclusive digital keepsake surprise just for you:\n\n${currentPublishedUrl}\n\nOpen it with sound on! ✨`);
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    });
+
+    btnOpenLivePage?.addEventListener('click', () => {
+      window.open(currentPublishedUrl, '_blank');
+    });
+
+    btnDownloadQr?.addEventListener('click', () => {
+      if (!qrCanvas) return;
+      const link = document.createElement('a');
+      link.download = `Vanvi-Birthday-${getFormData().recipientName}-QR.png`;
+      link.href = qrCanvas.toDataURL('image/png');
+      link.click();
+    });
+
+    iframe.addEventListener('load', () => {
+      syncToIframe();
+    });
+
+    // Listen for switch to edit request from preview iframe (e.g., clicking "Make it yours" / "Create Yours")
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'VANVI_SWITCH_TO_EDIT') {
+        setMobileView('edit');
+        const sidebar = document.getElementById('builderSidebar');
+        if (sidebar) sidebar.scrollTo({ top: 0, behavior: 'smooth' });
+        const firstInput = document.getElementById('inpRecipient');
+        if (firstInput) {
+          firstInput.focus();
+        }
+      }
+    });
+  </script>
+</body>
+</html>

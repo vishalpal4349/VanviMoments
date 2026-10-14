@@ -1,0 +1,733 @@
+/* =====================================================================
+   VANVI MOMENTS — FOR MAA (DIGITAL SURPRISE KEEPSAKE)
+   10 Royal Themes, 3D Flip Cards, Calling Atmosphere, Bilingual Typography
+   Pixel-Perfect Responsive Geometry for All Devices & Embed Frames
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap');
+
+:root {
+  --disp: "Baloo 2", system-ui, -apple-system, sans-serif;
+  --body: "Hanken Grotesk", "Tiro Devanagari Hindi", system-ui, sans-serif;
+  --hand: "Tiro Devanagari Hindi", "Baloo 2", serif;
+  --pad: clamp(16px, 4.5vw, 24px);
+  --s0: clamp(0.96rem, 0.92rem + 0.25vw, 1.08rem);
+  --s2: clamp(1.4rem, 1.15rem + 1.2vw, 1.85rem);
+  --s3: clamp(1.75rem, 1.35rem + 2vw, 2.4rem);
+  --r: 20px;
+  --rs: 14px;
+  --tb: 54px;
+  --pop: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 1 . HALDI — her kitchen, mid-morning (default) */
+[data-theme="haldi"] {
+  --void: #FFF8EC; --void2: #FBEBD2; --dot: rgba(122, 72, 20, 0.13);
+  --card: #FFFFFF; --ink: #3B2410; --soft: #8A6A47;
+  --accent: #D97706; --on-accent: #FFF8EC; --warm: #C2410C; --leaf: #4D7C4A;
+  --edge: #3B2410; --well: #F4E2C6;
+}
+
+/* 2 . TULSI — the plant by the door */
+[data-theme="tulsi"] {
+  --void: #F1F6EC; --void2: #DFEAD5; --dot: rgba(38, 66, 32, 0.13);
+  --card: #FFFFFF; --ink: #22331C; --soft: #69805C;
+  --accent: #4D7C3F; --on-accent: #FFFFFF; --warm: #C2683C; --leaf: #7A9E5E;
+  --edge: #22331C; --well: #D7E5C9;
+}
+
+/* 3 . CHANDAN — sandalwood, temple bell, folded saree */
+[data-theme="chandan"] {
+  --void: #F7EFE3; --void2: #EBDCC6; --dot: rgba(90, 40, 40, 0.13);
+  --card: #FFFCF6; --ink: #4A2222; --soft: #8E6B5C;
+  --accent: #9E2B2B; --on-accent: #FFFCF6; --warm: #C08A2E; --leaf: #5C7A55;
+  --edge: #4A2222; --well: #E3D2B8;
+}
+
+/* 4 . ROSE */
+[data-theme="rose"] {
+  --void: #FFF1F3; --void2: #FFE2E8; --dot: rgba(123, 45, 78, 0.12);
+  --card: #FFFFFF; --ink: #4A1D33; --soft: #A57387;
+  --accent: #C4607E; --on-accent: #FFF6EA; --warm: #C08A50; --leaf: #4E9B84;
+  --edge: #7B2D4E; --well: #FFD9E1;
+}
+
+/* 5 . SEPIA */
+[data-theme="sepia"] {
+  --void: #EFE6D5; --void2: #DFD2BA; --dot: rgba(74, 58, 42, 0.13);
+  --card: #FBF6EA; --ink: #3A2E22; --soft: #8A7862;
+  --accent: #8C5E3C; --on-accent: #FBF6EA; --warm: #B08A46; --leaf: #6B7B5A;
+  --edge: #3A2E22; --well: #D8C9AD;
+}
+
+/* 6 . MINT */
+[data-theme="mint"] {
+  --void: #EAF7F0; --void2: #D6EFE2; --dot: rgba(12, 74, 58, 0.12);
+  --card: #FFFFFF; --ink: #123B31; --soft: #5E8C7C;
+  --accent: #127A5E; --on-accent: #FFFFFF; --warm: #C2683C; --leaf: #5B8DEF;
+  --edge: #123B31; --well: #C4E8D8;
+}
+
+/* 7 . MARIGOLD */
+[data-theme="marigold"] {
+  --void: #3B0A1E; --void2: #4E1029; --dot: rgba(255, 214, 102, 0.11);
+  --card: #4E1029; --ink: #FFF1DC; --soft: #C99AAE;
+  --accent: #FFB005; --on-accent: #3B0A1E; --warm: #FF6F3C; --leaf: #3FAE7E;
+  --edge: #20040F; --well: #20040F;
+}
+
+/* 8 . EMBER */
+[data-theme="ember"] {
+  --void: #1A0F0A; --void2: #2A1A11; --dot: rgba(255, 180, 80, 0.1);
+  --card: #2A1A11; --ink: #FFEDD9; --soft: #A88367;
+  --accent: #FF8A3D; --on-accent: #1A0F0A; --warm: #FFD166; --leaf: #7FB069;
+  --edge: #0D0705; --well: #0D0705;
+}
+
+/* 9 . INDIGO */
+[data-theme="indigo"] {
+  --void: #141046; --void2: #1E1960; --dot: rgba(255, 255, 255, 0.08);
+  --card: #1E1960; --ink: #FFF6EA; --soft: #A79DE0;
+  --accent: #FFC53D; --on-accent: #141046; --warm: #FF8FB1; --leaf: #5FC7A8;
+  --edge: #0B0830; --well: #0B0830;
+}
+
+/* 10 . PAPER */
+[data-theme="paper"] {
+  --void: #F5F0E4; --void2: #E8E1CE; --dot: rgba(30, 26, 20, 0.11);
+  --card: #FFFDF7; --ink: #1E1A14; --soft: #7A7264;
+  --accent: #B25A2A; --on-accent: #FFFDF7; --warm: #B8892A; --leaf: #4A7C59;
+  --edge: #1E1A14; --well: #E4DCC6;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  touch-action: manipulation;
+}
+
+body {
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--s0);
+  line-height: 1.58;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--dot) 1.3px, transparent 1.4px);
+  background-size: 24px 24px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+[data-lang="hi"] body, [data-lang="hi"] .hi-face {
+  font-family: "Tiro Devanagari Hindi", serif;
+}
+
+#sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.ic {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.14em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Watermark Ribbon */
+.vanvi-watermark-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 38px;
+  z-index: 99;
+  background: rgba(18, 14, 10, 0.9);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.vanvi-watermark-bar .brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #FFC53D;
+}
+.vanvi-watermark-bar a.btn-unlock {
+  background: #FFC53D;
+  color: #1a0f0a;
+  text-decoration: none;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 0.68rem;
+  transition: transform 0.15s ease;
+}
+.vanvi-watermark-bar a.btn-unlock:hover {
+  transform: scale(1.04);
+}
+body.is-published .vanvi-watermark-bar {
+  display: none !important;
+}
+
+/* Top Controls Bar */
+#topBar {
+  position: fixed;
+  top: 44px;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding: 0 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+body.is-published #topBar {
+  top: calc(8px + env(safe-area-inset-top));
+}
+.top-chip {
+  pointer-events: auto;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 99px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid var(--edge);
+  color: var(--ink);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--card);
+  box-shadow: 0 3px 0 var(--edge);
+  transition: transform 0.1s var(--pop);
+  text-decoration: none;
+}
+.top-chip:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--edge);
+}
+
+/* App Main Viewport Stage */
+#stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 82px var(--pad) 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1;
+  contain: layout paint;
+}
+body.is-published .screen {
+  padding-top: 52px;
+}
+
+.screen.on {
+  display: flex;
+  z-index: 2;
+  animation: enterScreen 0.45s var(--ease) both;
+}
+.screen.out {
+  display: flex;
+  z-index: 1;
+  animation: leaveScreen 0.24s ease both;
+  pointer-events: none;
+}
+
+@keyframes enterScreen {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes leaveScreen {
+  to { opacity: 0; transform: scale(0.97); }
+}
+
+.inner {
+  width: 100%;
+  max-width: 380px;
+  margin: auto;
+}
+
+h1, h2 {
+  font-family: var(--disp);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+.h-big { font-size: var(--s3); }
+.h-mid { font-size: var(--s2); }
+.lbl {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--soft);
+}
+.dim { color: var(--soft); }
+
+/* PERFECT, CONSISTENT BUTTONS (PROPORTIONATE & TACTILE) */
+.b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 99px;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 1rem;
+  border: 2.5px solid var(--edge);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 4px 0 var(--edge);
+  transition: transform 0.12s var(--pop), box-shadow 0.12s ease;
+  text-decoration: none;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.b:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--edge);
+}
+.b--ghost {
+  background: var(--card);
+  color: var(--ink);
+}
+.b--quiet {
+  background: transparent;
+  border-color: var(--soft);
+  color: var(--soft);
+  box-shadow: none;
+}
+.b--wide {
+  width: 100%;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.card {
+  background: var(--card);
+  border: 2.5px solid var(--edge);
+  border-radius: var(--r);
+  box-shadow: 0 5px 0 var(--edge);
+}
+
+/* Art Illustrations */
+.art {
+  display: block;
+  margin: 0 auto;
+}
+.arthalo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: max-content;
+  margin-inline: auto;
+}
+.arthalo::before {
+  content: "";
+  position: absolute;
+  width: 118%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--void2);
+  opacity: 0.85;
+}
+.arthalo .art {
+  position: relative;
+}
+.artpop {
+  animation: artpop 0.5s var(--pop) both;
+}
+@keyframes artpop {
+  from { opacity: 0; transform: scale(0.8); }
+}
+.art--float {
+  animation: bobArt 5s ease-in-out infinite;
+}
+@keyframes bobArt {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(-6px) rotate(1.5deg); }
+}
+
+/* ============ 1 . THE CALL ============ */
+.callcard {
+  max-width: 275px;
+  margin: 0 auto;
+  padding: 22px 18px 20px;
+}
+.avatar {
+  width: 98px;
+  height: 98px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  overflow: hidden;
+  border: 3px solid var(--edge);
+  background: var(--well);
+  display: grid;
+  place-items: center;
+  position: relative;
+  flex-shrink: 0;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.avatar #avFallback {
+  width: 48%;
+  height: 48%;
+  fill: none;
+  stroke: var(--soft);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+}
+.avatar::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  opacity: 0;
+  animation: ringRipple 2s ease-out infinite;
+}
+@keyframes ringRipple {
+  0% { opacity: 0.7; transform: scale(0.94); }
+  100% { opacity: 0; transform: scale(1.18); }
+}
+.callcard .nm {
+  font-family: var(--disp);
+  font-weight: 800;
+  font-size: 1.45rem;
+  line-height: 1.15;
+}
+.callcard .st {
+  color: var(--soft);
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+.answer {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 18px auto 0;
+  background: var(--leaf);
+  color: #fff;
+  border: 2.8px solid var(--edge);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 0 var(--edge);
+  animation: jigShake 1.6s ease-in-out infinite;
+  transition: transform 0.1s var(--pop);
+  flex-shrink: 0;
+}
+.answer:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--edge);
+  animation: none;
+}
+@keyframes jigShake {
+  0%, 100% { transform: rotate(0); }
+  12% { transform: rotate(-10deg); }
+  24% { transform: rotate(10deg); }
+  36% { transform: rotate(-6deg); }
+  48% { transform: rotate(0); }
+}
+.answer .ic {
+  font-size: 1.75rem;
+  stroke-width: 2.3;
+}
+
+/* ============ 2 . THE PHRASES ============ */
+.phrases {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+  perspective: 1000px;
+}
+.pcard {
+  position: relative;
+  min-height: 84px;
+  transform-style: preserve-3d;
+  transition: transform 0.62s var(--ease);
+  cursor: pointer;
+  text-align: left;
+}
+.pcard.flip {
+  transform: rotateX(180deg);
+  cursor: default;
+}
+.pcard .side {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--r);
+  border: 2.2px solid var(--edge);
+  box-shadow: 0 4px 0 var(--edge);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pcard .front {
+  background: var(--card);
+}
+.pcard .front .said {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: 1.08rem;
+  line-height: 1.32;
+}
+.pcard .front .tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--soft);
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+.pcard .back {
+  background: var(--accent);
+  color: var(--on-accent);
+  transform: rotateX(180deg);
+}
+.pcard .back .meant {
+  font-size: 0.96rem;
+  line-height: 1.45;
+}
+.pcard .back .k {
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  opacity: 0.85;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.phint {
+  margin-top: 14px;
+  font-size: 0.88rem;
+}
+
+/* ============ 3 . NEVER SAID ============ */
+.plain {
+  padding: 24px 20px;
+  text-align: left;
+}
+.plain .k {
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--soft);
+  margin-bottom: 10px;
+}
+.plain .t {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.45;
+}
+
+/* ============ 4 . LETTER ============ */
+.note {
+  background: var(--card);
+  border: 2.5px solid var(--edge);
+  border-radius: var(--r);
+  box-shadow: 0 5px 0 var(--edge);
+  padding: 22px 18px;
+  text-align: left;
+  position: relative;
+  max-height: 48vh;
+  overflow-y: auto;
+}
+.note::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 20px;
+  width: 2px;
+  background: var(--accent);
+  opacity: 0.35;
+  border-radius: 2px;
+}
+.note p {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  margin: 0 0 12px 14px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.note p.in {
+  opacity: 1;
+  transform: none;
+}
+.note .sign {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 1.12rem;
+  margin-bottom: 0;
+}
+
+/* ============ 5 . HER ANSWER ============ */
+.replies {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+.reply {
+  text-align: left;
+  padding: 14px 16px;
+  border-radius: var(--r);
+  background: var(--card);
+  border: 2.2px solid var(--edge);
+  box-shadow: 0 3.5px 0 var(--edge);
+  transition: transform 0.12s var(--pop), box-shadow 0.12s ease;
+}
+.reply:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 var(--edge);
+}
+.reply b {
+  display: block;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 1.06rem;
+}
+.reply span {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--soft);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* ============ 6 . CLOSE ============ */
+.closebox {
+  padding: 22px 18px;
+}
+.closebox .r {
+  font-family: var(--disp);
+  font-weight: 800;
+  font-size: var(--s2);
+  line-height: 1.2;
+}
+.closebox .s {
+  color: var(--soft);
+  margin-top: 10px;
+  line-height: 1.55;
+  font-size: 0.92rem;
+}
+
+/* Toast & Petal Confetti */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 10px);
+  z-index: 80;
+  background: var(--card);
+  color: var(--ink);
+  padding: 8px 16px;
+  border-radius: 99px;
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: 0.84rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  border: 2px solid var(--edge);
+  box-shadow: 0 3px 0 var(--edge);
+}
+.toast.on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.bit {
+  position: fixed;
+  top: -20px;
+  z-index: 70;
+  pointer-events: none;
+  border-radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

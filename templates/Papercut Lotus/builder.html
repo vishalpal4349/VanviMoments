@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <title>Papercut Lotus Studio — Vanvi Moments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Sora:wght@300;400;500;600;700;800&family=Tiro+Devanagari+Sanskrit&display=swap">
+  <link rel="stylesheet" href="./builder.css" />
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="studio-header">
+    <div class="brand-cluster">
+      <a href="../index.html" class="back-home-pill" title="Back to Templates" aria-label="Back">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </a>
+      <div class="brand-identity">
+        <div class="brand-badge-pill">
+          <span>✦</span>
+          <span>VANVI MOMENTS</span>
+        </div>
+        <span class="template-crumb">Papercut Lotus — Luxury Wedding Studio</span>
+      </div>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <div class="price-pill-tag">
+        <span class="original-strike">₹499</span>
+        <span class="deal-price">FREE</span>
+        <span class="save-chip">100% OFF</span>
+      </div>
+      <button type="button" class="btn-primary-publish" id="headerPublishBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+        <span>Publish Free</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Segmented View Switcher (<= 920px) -->
+  <div class="mobile-view-tabs" id="mobileViewTabs">
+    <div class="tabs-slider-track">
+      <button type="button" class="view-tab-btn active" id="tabBtnEditor">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+          <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+        <span>Customize</span>
+      </button>
+      <button type="button" class="view-tab-btn" id="tabBtnPreview">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span>Live Preview</span>
+        <span class="preview-live-badge">LIVE</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Dual Workspace -->
+  <main class="studio-workbench">
+
+    <!-- LEFT PANEL: Editor Drawer -->
+    <aside class="editor-drawer" id="editorDrawer">
+
+      <!-- Section Navigation Pills -->
+      <nav class="section-pills-bar">
+        <button type="button" class="pill-nav-item active" data-section="sec-couple">
+          <span>Couple & Cover</span>
+        </button>
+        <button type="button" class="pill-nav-item" data-section="sec-date">
+          <span>Date Reveal</span>
+        </button>
+        <button type="button" class="pill-nav-item" data-section="sec-groom">
+          <span>Groom's Family</span>
+        </button>
+        <button type="button" class="pill-nav-item" data-section="sec-bride">
+          <span>Bride's Family</span>
+        </button>
+        <button type="button" class="pill-nav-item" data-section="sec-ceremonies">
+          <span>Ceremonies</span>
+        </button>
+        <button type="button" class="pill-nav-item" data-section="sec-gallery">
+          <span>Gallery & Notes</span>
+        </button>
+        <button type="button" class="pill-nav-item" data-section="sec-compliments">
+          <span>Compliments & Note</span>
+        </button>
+      </nav>
+
+      <div class="editor-scroll-area">
+
+        <!-- 1. Couple & Opening Invocation -->
+        <section class="config-group-card" id="sec-couple">
+          <div class="config-card-header">
+            <div class="card-title-cluster">
+              <span class="card-step-badge">STEP 1</span>
+              <h2 class="config-card-title">Couple & Opening Cover</h2>
+            </div>
+          </div>
+          <div class="config-card-body">
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label class="field-label" for="inputBrideName">Bride Name</label>
+                <input type="text" class="field-input" id="inputBrideName" placeholder="e.g. Ankita" />
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="inputGroomName">Groom Name</label>
+                <input type="text" class="field-input" id="inputGroomName" placeholder="e.g. Kaushik" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label class="field-label" for="selectSymbol">Opening Sacred Icon</label>
+                <select class="field-select" id="selectSymbol">
+                  <option value="ganesha">Lord Ganesha</option>
+                  <option value="sikh">Ik Onkar (Sikh)</option>
+                  <option value="jain">Ahimsa Hand (Jain)</option>
+                  <option value="buddhist">Dharma Wheel (Buddhist)</option>
+                  <option value="sindhi">Jhulelal (Sindhi)</option>
+                  <option value="christian">Holy Cross (Christian)</option>
+                  <option value="none">None / Plain</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="selectReligion">Invocation Tradition</label>
+                <select class="field-select" id="selectReligion">
+                  <option value="hindu">Hindu (Shri Ganeshaya Namah)</option>
+                  <option value="sikh">Sikh (Ik Onkar)</option>
+                  <option value="jain">Jain (Namo Arihantanam)</option>
+                  <option value="buddhist">Buddhist (Buddham Sharanam)</option>
+                  <option value="sindhi">Sindhi (Jay Jhulelal)</option>
+                  <option value="muslim">Muslim (Bismillah)</option>
+                  <option value="christian">Christian (In the name of...)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="inputIntroNote">Invitation Opening Note</label>
+              <textarea class="field-textarea" id="inputIntroNote" rows="2" placeholder="We cordially invite you to grace the auspicious occasion..."></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Date & Interactive Dials -->
+        <section class="config-group-card" id="sec-date">
+          <div class="config-card-header">
+            <div class="card-title-cluster">
+              <span class="card-step-badge">STEP 2</span>
+              <h2 class="config-card-title">Wedding Date & Reveal Dials</h2>
+            </div>
+          </div>
+          <div class="config-card-body">
+            <div class="form-field">
+              <label class="field-label" for="inputWeddingDate">Wedding Date</label>
+              <input type="date" class="field-input" id="inputWeddingDate" />
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label class="field-label" for="inputRevealBtn">Reveal Button Text</label>
+                <input type="text" class="field-input" id="inputRevealBtn" placeholder="Reveal the Date!" />
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="inputRevealAfter">After Reveal Label</label>
+                <input type="text" class="field-input" id="inputRevealAfter" placeholder="Save the Date!" />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="inputRevealLead">Optional Lead Text Above Dials</label>
+              <input type="text" class="field-input" id="inputRevealLead" placeholder="e.g. Save our special day" />
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Groom's Family Details -->
+        <section class="config-group-card" id="sec-groom">
+          <div class="config-card-header">
+            <div class="card-title-cluster">
+              <span class="card-step-badge">STEP 3</span>
+              <h2 class="config-card-title">Groom's Family Card</h2>
+            </div>
+          </div>
+          <div class="config-card-body">
+            <div class="form-field">
+              <label class="field-label" for="inputGroomFullName">Groom Honorific & Full Name</label>
+              <input type="text" class="field-input" id="inputGroomFullName" placeholder="Chi. Kaushik Sharma" />
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label class="field-label" for="inputGroomParentA">Father's Name</label>
+                <input type="text" class="field-input" id="inputGroomParentA" placeholder="Shri Ramesh Chandra Sharma" />
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="inputGroomParentB">Mother's Name</label>
+                <input type="text" class="field-input" id="inputGroomParentB" placeholder="Smt. Sunita Sharma" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label class="field-label" for="inputGroomGrandA">Grandfather's Name</label>
+                <input type="text" class="field-input" id="inputGroomGrandA" placeholder="Late Shri Pandit Brij Mohan Sharma" />
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="inputGroomGrandB">Grandmother's Name</label>
+                <input type="text" class="field-input" id="inputGroomGrandB" placeholder="Late Smt. Kamla Devi Sharma" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label class="field-label" for="inputGroomGotraLabel">Gotra Label</label>
+                <input type="text" class="field-input" id="inputGroomGotraLabel" placeholder="Gotra" />
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="inputGroomGotra">Gotra Name</label>
+                <input type="text" class="field-input" id="inputGroomGotra" placeholder="Bharadwaj" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Bride's Family Details -->
+        <section class="config-group-card" id="sec-bride">
+          <div class="config-card-header">
+            <div class="card-title-cluster">
+              <span class="card-step-badge">STEP 4</span>
+              <h2 class="config-card-title">Bride's Family Card</h2>
+            </div>
+          </div>
+          <div class="config-card-body">
+            <div class="form-field">
+              <label class="field-label" for="inputBrideFullName">Bride Honorific & Full Name</label>
+              <input type="text" class="field-input" id="inputBrideFullName" placeholder="Kum. Ankita Verma" />
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label class="field-label" for="inputBrideParentA">Father's Name</label>
+                <input type="text" class="field-input" id="inputBrideParentA" placeholder="Shri Rajesh Kumar Verma" />
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="inputBrideParentB">Mother's Name</label>
+                <input type="text" class="field-input" id="inputBrideParentB" placeholder="Smt. Meera Verma" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label class="field-label" for="inputBrideGrandA">Grandfather's Name</label>
+                <input type="text" class="field-input" id="inputBrideGrandA" placeholder="Late Shri Hari Prasad Verma" />
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="inputBrideGrandB">Grandmother's Name</label>
+                <input type="text" class="field-input" id="inputBrideGrandB" placeholder="Late Smt. Shanti Devi Verma" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label class="field-label" for="inputBrideGotraLabel">Gotra Label</label>
+                <input type="text" class="field-input" id="inputBrideGotraLabel" placeholder="Gotra" />
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="inputBrideGotra">Gotra Name</label>
+                <input type="text" class="field-input" id="inputBrideGotra" placeholder="Kashyap" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Ceremonies Schedule -->
+        <section class="config-group-card" id="sec-ceremonies">
+          <div class="config-card-header">
+            <div class="card-title-cluster">
+              <span class="card-step-badge">STEP 5</span>
+              <h2 class="config-card-title">Ceremonies Schedule</h2>
+            </div>
+          </div>
+          <div class="config-card-body">
+            <div id="ceremoniesListContainer" style="display:flex; flex-direction:column; gap:10px;"></div>
+            <button type="button" class="btn-add-dashed" id="btnAddCeremony">＋ Add Another Ceremony</button>
+          </div>
+        </section>
+
+        <!-- 6. Gallery Keepsake Notes -->
+        <section class="config-group-card" id="sec-gallery">
+          <div class="config-card-header">
+            <div class="card-title-cluster">
+              <span class="card-step-badge">STEP 6</span>
+              <h2 class="config-card-title">Pull-Cord Keepsake Notes</h2>
+            </div>
+          </div>
+          <div class="config-card-body">
+            <div class="form-field">
+              <label class="field-label" for="inputGalleryNote1">Note 1</label>
+              <textarea class="field-textarea" id="inputGalleryNote1" rows="2"></textarea>
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="inputGalleryNote2">Note 2</label>
+              <textarea class="field-textarea" id="inputGalleryNote2" rows="2"></textarea>
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="inputGalleryNote3">Note 3</label>
+              <textarea class="field-textarea" id="inputGalleryNote3" rows="2"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Compliments & Note From Us -->
+        <section class="config-group-card" id="sec-compliments">
+          <div class="config-card-header">
+            <div class="card-title-cluster">
+              <span class="card-step-badge">STEP 7</span>
+              <h2 class="config-card-title">Best Compliments & Note</h2>
+            </div>
+          </div>
+          <div class="config-card-body">
+            <div class="form-field">
+              <label class="field-label" for="inputComplimentLead">Compliments Header</label>
+              <input type="text" class="field-input" id="inputComplimentLead" placeholder="With Best Compliments From:" />
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="inputComplimentLines">Family Lines (One per line)</label>
+              <textarea class="field-textarea" id="inputComplimentLines" rows="4" placeholder="Enter family names (one per line)"></textarea>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="inputNoteLead">Personal Note Heading</label>
+              <input type="text" class="field-input" id="inputNoteLead" placeholder="A Note From Us" />
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="inputNoteText">Personal Note Message</label>
+              <textarea class="field-textarea" id="inputNoteText" rows="3" placeholder="We can’t wait to celebrate this special day with you..."></textarea>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </aside>
+
+    <!-- RIGHT PANEL: Live Interactive Preview Stage -->
+    <section class="preview-stage-container" id="previewContainer">
+      <div class="preview-toolbar">
+        <button type="button" class="device-btn-pill active" id="btnDevicePhone">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          <span>Mobile Phone</span>
+        </button>
+        <button type="button" class="device-btn-pill" id="btnDeviceDesktop">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span>Desktop View</span>
+        </button>
+      </div>
+
+      <div class="device-phone-mockup" id="deviceMockup">
+        <div class="mockup-notch"></div>
+        <iframe class="preview-iframe" id="previewIframe" src="./index.html?preview=1" title="Interactive Live Preview"></iframe>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mobile Bottom Floating Action Bar -->
+  <div class="mobile-bottom-dock">
+    <div class="dock-content-row">
+      <button type="button" class="dock-btn-secondary" id="mobileDockPreviewBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span id="dockPreviewBtnLabel">Preview</span>
+      </button>
+      <button type="button" class="dock-btn-primary" id="mobileDockPublishBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+        <span>Publish Free</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 100% Free Publish Modal -->
+  <div class="publish-modal-backdrop" id="publishModal">
+    <div class="publish-modal-card">
+      <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      
+      <!-- Checkout Step -->
+      <div class="modal-step" id="modalStepCheckout">
+        <div class="modal-header-icon">🪷</div>
+        <h2 class="modal-title">Publish Your Wedding Invitation</h2>
+        <p class="modal-subtitle">Generate an ad-free, watermark-free digital invitation with date-reveal & pull-cord gallery that guests can cherish.</p>
+
+        <div class="pricing-card">
+          <div class="price-row">
+            <span>Papercut Lotus Luxury Invitation</span>
+            <span class="strike">₹499</span>
+          </div>
+          <div class="price-row">
+            <span>Vanvi Cloud Lifetime Hosting</span>
+            <span class="free">FREE</span>
+          </div>
+          <div class="price-row">
+            <span>Watermark Removal Included</span>
+            <span class="free">FREE</span>
+          </div>
+          <div class="price-row total">
+            <span>Total Payable:</span>
+            <span class="amount" style="color:#15803D;">FREE</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-pay-now" id="btnPayNow">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          <span>Publish for Free & Get Link</span>
+        </button>
+      </div>
+
+      <!-- Success Step -->
+      <div class="modal-step hidden" id="modalStepSuccess">
+        <div class="modal-header-icon">🎉</div>
+        <h2 class="modal-title">Invitation is Live & Ready!</h2>
+        <p class="modal-subtitle">Watermark has been removed! Share this private link directly with your guests:</p>
+
+        <div class="live-link-box">
+          <input type="text" id="publishedLinkInput" readonly />
+          <button type="button" class="copy-url-btn" id="copyUrlBtn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span id="copyBtnText">Copy</span>
+          </button>
+        </div>
+
+        <div class="modal-share-actions">
+          <button type="button" class="btn-whatsapp-share" id="modalWhatsappBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 2C6.516 2 2.031 6.485 2.031 12c0 1.83.498 3.545 1.365 5.024L2 22l5.127-1.344C8.568 21.493 10.25 22 12.031 22c5.516 0 10-4.485 10-10s-4.484-10-10-10zm5.82 14.285c-.244.686-1.42 1.31-1.957 1.378-.507.065-1.168.103-3.766-.967-3.13-1.288-5.148-4.464-5.305-4.673-.156-.208-1.267-1.688-1.267-3.22 0-1.53.799-2.285 1.085-2.597.285-.312.624-.39.832-.39.208 0 .416.002.598.01.196.01.455-.074.71.538.26.624.884 2.158.962 2.314.078.156.13.338.026.546-.104.208-.156.338-.312.52-.156.182-.338.406-.48.546-.156.156-.32.325-.138.637.182.312.81 1.336 1.737 2.162 1.192 1.062 2.197 1.39 2.509 1.546.312.156.494.13.676-.078.182-.208.78-.91 1.014-1.222.234-.312.468-.26.78-.156.312.104 1.974.93 2.312 1.1.338.17.564.254.646.398.082.143.082.832-.162 1.518z"/></svg>
+            <span>Send on WhatsApp</span>
+          </button>
+          <a href="#" target="_blank" class="btn-open-live" id="modalOpenLiveBtn">
+            <span>View Live Website ↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module" src="./builder.js"></script>
+</body>
+</html>

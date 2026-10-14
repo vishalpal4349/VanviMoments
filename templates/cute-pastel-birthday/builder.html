@@ -1284,6 +1284,12 @@
             <span>🔄 Restore Sample Photos</span>
           </button>
         </div>
+        <div style="margin-top: 10px; display: flex; gap: 8px;">
+          <input type="text" id="inpPhotoUrlAddPastel" class="form-input" placeholder="Or paste image URL (https://...)" style="flex:1;">
+          <button type="button" class="btn-preset-pill" style="background:#ff4d8d; color:#fff; border-color:#ff4d8d; font-weight:700;" onclick="addPastelPhotoFromUrl()">
+            <span>Add URL</span>
+          </button>
+        </div>
       </div>
 
       <!-- Card 4: Heartfelt Royal Envelope Letter -->
@@ -1360,7 +1366,7 @@ Keep shining as radiantly as you always do. Here's to celebrating you today and 
       <!-- Bottom Publish CTA Bar -->
       <div style="margin:20px 0 40px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:12px;">
         <button id="btnPublishBottom" type="button" class="btn-tactile-flow" style="padding:15px 38px !important; font-size:15.5px !important;">
-          <span>Publish &amp; Unlock Keepsake (₹29)</span>
+          <span>Publish &amp; Share Keepsake (₹29)</span>
           <span>✨</span>
         </button>
         <span style="font-size:12px; color:#88627b;">Instant live shareable link • One-time ₹29 launch offer • Lifetime access</span>
@@ -1545,6 +1551,23 @@ Keep shining as radiantly as you always do. Here's to celebrating you today and 
         renderPhotoSlots();
         syncLivePreview();
         showToast('🔄 Sample photos restored');
+      };
+
+      window.addPastelPhotoFromUrl = function() {
+        const inp = document.getElementById('inpPhotoUrlAddPastel');
+        const url = inp ? inp.value.trim() : '';
+        if (!url) {
+          showToast('⚠️ Please enter an image URL');
+          return;
+        }
+        currentPhotos.push({
+          url: url,
+          caption: `Special Memory #${currentPhotos.length + 1}`
+        });
+        inp.value = '';
+        renderPhotoSlots();
+        syncLivePreview();
+        showToast('📸 Photo added from URL!');
       };
 
       // Toast feedback helper

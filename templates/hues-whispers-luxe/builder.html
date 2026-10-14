@@ -458,7 +458,8 @@
       <!-- Device/View Switcher -->
       <div class="smart-toggle-pill">
         <button id="btnViewEdit" class="toggle-pill-btn active" onclick="switchMobileTab('edit')">✏️ Edit</button>
-        <button id="btnViewLive" class="toggle-pill-btn" onclick="switchMobileTab('live')">👁️ Live Preview</button>
+        <button id="btnViewLive" class="toggle-pill-btn" onclick="switchMobileTab('live')">👁️ Preview</button>
+        <button id="btnEnvelopeTest" class="toggle-pill-btn" onclick="toggleEnvelopePreview()" title="Open 3D Wax Seal Envelope Ceremony" style="color:#f7e4b5; font-weight:700;">✉️ Envelope</button>
       </div>
 
       <button onclick="openModal()" class="publish-btn-smart">
@@ -609,6 +610,10 @@
                 <span style="font-size:0.75rem; color:#888;">(JPG, PNG, WebP)</span>
                 <input type="file" id="fileIn1" style="display:none;" accept="image/*" onchange="handleFileSelected(this)">
               </div>
+              <div style="margin-top: 10px; display: flex; gap: 8px;">
+                <input type="text" id="inpPhotoUrlHues" placeholder="Or paste image URL (https://...)" style="flex:1; padding: 8px 12px; border: 1px solid #e0c8b0; border-radius: 8px; font-size: 0.82rem;">
+                <button type="button" style="padding: 8px 14px; background: #6b1426; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;" onclick="setHuesPhotoUrl()">Set URL</button>
+              </div>
             </div>
           </div>
           <div class="field-wrap">
@@ -692,7 +697,7 @@
       const nextBtn = document.getElementById('btnNextAction');
       if (nextBtn) {
         if (curStep === totalSteps) {
-          nextBtn.textContent = 'Publish & Unlock (₹1,499) 👑';
+          nextBtn.textContent = 'Publish & Share (₹1,499) 👑';
           nextBtn.style.background = 'linear-gradient(135deg, #d4a853, #aa8032)';
           nextBtn.style.color = '#1a0509';
         } else {
@@ -787,6 +792,16 @@
       }
     }
 
+    function toggleEnvelopePreview() {
+      if (window.innerWidth <= 860) {
+        switchMobileTab('live');
+      }
+      const frame = document.getElementById('previewFrame');
+      if (frame && frame.contentWindow) {
+        frame.contentWindow.postMessage({ type: 'VANVI_TOGGLE_ENVELOPE' }, '*');
+      }
+    }
+
     function handleFileSelected(input) {
       if (input.files && input.files[0]) {
         const file = input.files[0];
@@ -797,6 +812,18 @@
         };
         reader.readAsDataURL(file);
       }
+    }
+
+    function setHuesPhotoUrl() {
+      const inp = document.getElementById('inpPhotoUrlHues');
+      const url = inp ? inp.value.trim() : '';
+      if (!url) {
+        alert('Please enter an image URL');
+        return;
+      }
+      heroPhotoData = url;
+      syncLive();
+      alert('Photo URL applied!');
     }
 
     function openModal() {

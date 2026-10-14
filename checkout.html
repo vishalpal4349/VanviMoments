@@ -1678,7 +1678,7 @@ function vanviGoBack(fallback) {
     if (initialTemplateObj) {
       templateId = initialTemplateObj.id;
       templateName = initialTemplateObj.name;
-      if (!urlParams.get('price')) {
+      if (!urlParams.get('price') && !urlParams.get('amount')) {
         basePrice = initialTemplateObj.price;
       }
       if (!urlParams.get('occasion')) {

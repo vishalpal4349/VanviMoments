@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rose Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Cormorant Garamond replaces Fraunces as --font-primary. It is a static
+       family, not a variable one, so there is no opsz axis to carry over and the
+       weights are enumerated instead of given as a range. Only the weights the
+       template actually asks for are requested: 300 (--font-light resolves here,
+       Cormorant Garamond having no 200), 400, 600 and 700, with italic at 300,
+       400 and 600. Italic 600 is not optional - .easel__names, .reveal__names
+       and .detail__name all pair --font-italic with --font-semi-bold, and
+       without the real face the browser fakes one by slanting the roman. -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Sora:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <!-- Native scripts for the opening invocation (Hindu/Sikh/Muslim/Jain/Buddhist/
+       Parsi). Devanagari is Tiro Devanagari Sanskrit - a calligraphic serif cut
+       for Sanskrit typesetting, with the modulated strokes and traditional
+       conjunct forms the mantras want; it replaced Noto Sans Devanagari, a UI
+       sans that rendered श्री गणेशाय नमः as plainly as a form label. Only 400 is
+       requested because that is the only weight the family has, and nothing here
+       asks for bold. The template's Latin/Devanagari faces don't cover Tamil,
+       Telugu, Kannada, Malayalam, Gurmukhi, Arabic or Gujarati, so Noto covers
+       those. -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Bengali:wght@400;600&family=Noto+Sans+Tamil:wght@400;600&family=Noto+Sans+Telugu:wght@400;600&family=Noto+Sans+Kannada:wght@400;600&family=Noto+Sans+Malayalam:wght@400;600&family=Noto+Sans+Gurmukhi:wght@400;600&family=Noto+Sans+Oriya:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Gujarati:wght@400;600&display=swap"
+    rel="stylesheet" />
+  <!-- The opening-invocation symbol is the first thing a guest sees, but it is
+       the one above-the-fold visual the preload scanner cannot find: the <span>
+       is empty and render.js supplies the artwork later as an inline
+       mask-image, so the request could not even be issued until the whole
+       config + render chain had executed. This preload starts it during head
+       parsing instead, in parallel with the CSS, so the file is in cache by the
+       time render.js asks for it.
+       as="image" matches the fetch destination of a mask-image; a mismatch
+       makes the browser fetch it twice. Only the DEFAULT symbol is preloaded -
+       a host who picks a different one (or none) simply spends 14 KB that goes
+       unused, which is why this is not repeated for the other seven. -->
+  <link rel="preload" as="image" href="symbols/_ganesha.svg" />
+  <link rel="stylesheet" href="variables.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Shared platform RSVP styling (guest section) -->
+  <link rel="stylesheet" href="_platform/rsvp.css" />
+  <!-- Shared background-music control (toggle + edit-mode upload) -->
+  <link rel="stylesheet" href="_platform/music.css" />
+  <script>
+    var p = new URLSearchParams(location.search);
+    window.__balconyEditMode = p.has('edit') || p.has('preview');
+    if (window.__balconyEditMode) {
+      document.write(
+        '<link rel="stylesheet" href="_platform/toolbar.css">' +
+        '<link rel="stylesheet" href="editor.css">');
+    }
+  </script>
+</head>
+
+<body>
+  <!-- Welcome: the invitation opens on a TAP. The cover sheet slides up behind
+       the side florals, uncovering the couple's names on a backdrop that stays
+       put and zooms. One viewport tall - the staging is gesture-driven now, so
+       the scene no longer needs scroll room to animate in. -->
+  <section class="scene scene--welcome">
+    <div class="screen screen--welcome">
+      <!-- Backdrop - the LCP candidate: eager + high priority, unlike everything below the fold -->
+      <img class="screen__bg" src="media/1-bg.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async" />
+
+      <!-- Names, sitting UNDERNEATH the cover sheet - uncovered as it slides up -->
+      <div class="reveal">
+        <h2 class="reveal__names">
+          <span class="reveal__name">Divya</span>
+          <span class="reveal__amp">and</span>
+          <span class="reveal__name">Vivan</span>
+        </h2>
+      </div>
+
+      <!-- Cover sheet: a hanging invitation card, tap anywhere to open. The
+           .cover layer itself is transparent and full-viewport - it exists only
+           to carry the slide - while the card inside it keeps the standard
+           .invite paper and keylines, at poster size. -->
+      <div class="cover" id="coverSheet">
+        <article class="invite">
+          <!-- The two cords the card hangs from. They rise from its top edge and
+               run well past the top of the screen, so they are still there to be
+               pulled on for the whole of the card's travel. -->
+          <span class="cover__cord cover__cord--left" aria-hidden="true"></span>
+          <span class="cover__cord cover__cord--right" aria-hidden="true"></span>
+
+          <div class="invite__inner">
+            <!-- Opening invocation -->
+            <div class="invite__screen invite__bless">
+              <!-- Opening-invocation symbol - hidden by default; render.js sets its
+                   mask-image (so it takes the invocation line's text colour) and
+                   reveals it when the host picks one (see SYMBOLS). -->
+              <span class="invite__ganesha" aria-hidden="true" hidden></span>
+              <p class="invite__blessing">श्री गणेशाय<br />नमः</p>
+              <img class="invite__divider" src="media/floral-divider.webp" alt="" aria-hidden="true" decoding="async" />
+            </div>
+
+            <!-- Greeting + message, below the invocation on the same sheet -->
+            <div class="invite__screen invite__welcome">
+              <img class="invite__divider" src="media/floral-divider.webp" alt="" aria-hidden="true" decoding="async" />
+              <h1 class="invite__to">Mr. Joshi<br />and Family</h1>
+              <p class="invite__message">
+                We cordially invite you to<br />
+                grace the auspicious<br />
+                occasion of the marriage<br />
+                of&hellip;
+              </p>
+            </div>
+
+            <!-- Tap cue. A real button, so the card opens from the keyboard too;
+                 its click bubbles to .cover, which is what app.js listens on. -->
+            <button class="cover__cue" id="coverCue" type="button">Tap to open</button>
+          </div>
+        </article>
+      </div>
+
+      <!-- Side florals LAST and above the cover: the card is drawn up behind
+           them, so the branches stay exactly where they are. -->
+      <img class="screen__floral screen__floral--left" src="media/1-left.webp" alt="" aria-hidden="true" decoding="async" />
+      <img class="screen__floral screen__floral--right" src="media/1-right.webp" alt="" aria-hidden="true" decoding="async" />
+
+      <!-- Page-coloured fade at the bottom, above the florals and the card.
+           A div, not the old white-gradient.webp: the fade has to track
+           --page-bg, so it is drawn in CSS (see .screen__gradient). -->
+      <div class="screen__gradient" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- Details: family introductions + fountain video -->
+  <section class="scene scene--details">
+    <img class="details__vine details__vine--left" src="media/rosevine-left.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+    <!-- Deliberately the LEFT artwork again: .details__vine--right mirrors it
+         with scaleX(-1). Same file as the vine above, so the browser serves it
+         from cache and rosevine-right.webp (258 KB) is never fetched. -->
+    <img class="details__vine details__vine--right" src="media/rosevine-left.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+
+    <div class="details__cards">
+      <!-- Groom -->
+      <article class="invite invite--detail">
+        <div class="invite__inner">
+          <h3 class="detail__name">Chi. Vivan Sharma</h3>
+
+          <p class="detail__block">
+            <span class="detail__label">Son of</span>
+            <span class="detail__person">Shri Ramesh Chandra Sharma</span>
+            <span class="detail__amp">&amp;</span>
+            <span class="detail__person">Smt. Sunita Sharma</span>
+          </p>
+
+          <p class="detail__block">
+            <span class="detail__label">Grandson of</span>
+            <span class="detail__person">Late Shri Pandit Brij Mohan Sharma</span>
+            <span class="detail__amp">&amp;</span>
+            <span class="detail__person">Late Smt. Kamla Devi Sharma</span>
+          </p>
+
+          <p class="detail__gotra">Gotra: Bharadwaj</p>
+        </div>
+      </article>
+
+      <!-- Bride -->
+      <article class="invite invite--detail">
+        <div class="invite__inner">
+          <h3 class="detail__name">Sau. Ka. Divya Mehta</h3>
+
+          <p class="detail__block">
+            <span class="detail__label">Daughter of</span>
+            <span class="detail__person">Shri Vikram Mehta</span>
+            <span class="detail__amp">&amp;</span>
+            <span class="detail__person">Smt. Nandini Mehta</span>
+          </p>
+
+          <p class="detail__block">
+            <span class="detail__label">Granddaughter of</span>
+            <span class="detail__person">Late Shri Hari Prasad Mehta</span>
+            <span class="detail__amp">&amp;</span>
+            <span class="detail__person">Pushpa Devi Mehta</span>
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <!-- Looping, muted fountain video - no autoplay/preload attributes: app.js starts
+         loading it (and plays it) only once this scene nears the viewport, so a guest
+         who never scrolls this far never downloads 1.8MB of video. -->
+    <video class="details__fountain" id="fountainVideo" data-src="media/fountain.mp4" muted loop playsinline preload="none"></video>
+    <!-- White gradient fading the bottom edge of the video -->
+    <div class="fountain__fade" aria-hidden="true"></div>
+  </section>
+
+  <!-- Date reveal: brush the rose petals aside to uncover the date -->
+  <section class="scene scene--date">
+    <p class="date__hint">Move the petals to reveal<br />the Grand Date!</p>
+
+    <div class="petal-stage" id="petalStage">
+      <!-- The surface hidden beneath the petals -->
+      <div class="date-card" id="dateCard">
+        <h2 class="date__main">14<sup>th</sup> December 2025</h2>
+      </div>
+      <!-- Petals injected here by petals.js -->
+      <div class="petal-layer" id="petalLayer" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- Photo gallery: polaroids hanging from a rope; scroll horizontally to sway them -->
+  <section class="scene scene--gallery">
+    <div class="gallery__scroll" id="galleryScroll">
+      <div class="gallery__track">
+        <!-- The rope the polaroids hang from (CSS bar) -->
+        <div class="gallery__rope" aria-hidden="true"></div>
+
+        <!-- Photo polaroid -->
+        <div class="polaroid" data-hang="118" style="left: 160px;">
+          <img class="polaroid__knot" src="media/gallery-rope-vertical.webp" alt="" aria-hidden="true" />
+          <figure class="polaroid__card polaroid--photo">
+            <div class="polaroid__photo"></div>
+            <figcaption class="polaroid__caption">#howitstarted</figcaption>
+          </figure>
+        </div>
+
+        <!-- Horizontal postcard -->
+        <div class="polaroid" data-hang="150" style="left: 540px;">
+          <img class="polaroid__knot" src="media/gallery-rope-vertical.webp" alt="" aria-hidden="true" />
+          <figure class="polaroid__card polaroid--postcard">
+            <div class="polaroid__photo"></div>
+            <figcaption class="polaroid__caption">#adventures</figcaption>
+          </figure>
+        </div>
+
+        <!-- Story polaroid -->
+        <div class="polaroid" data-hang="86" style="left: 1020px;">
+          <img class="polaroid__knot" src="media/gallery-rope-vertical.webp" alt="" aria-hidden="true" />
+          <div class="polaroid__card polaroid--story">
+            <p>Some stories begin with grand gestures. Ours started with a simple conversation.</p>
+          </div>
+        </div>
+
+        <!-- Photo polaroid -->
+        <div class="polaroid" data-hang="132" style="left: 1400px;">
+          <img class="polaroid__knot" src="media/gallery-rope-vertical.webp" alt="" aria-hidden="true" />
+          <figure class="polaroid__card polaroid--photo">
+            <div class="polaroid__photo"></div>
+            <figcaption class="polaroid__caption">#thelittlethings</figcaption>
+          </figure>
+        </div>
+
+        <!-- Horizontal postcard -->
+        <div class="polaroid" data-hang="100" style="left: 1780px;">
+          <img class="polaroid__knot" src="media/gallery-rope-vertical.webp" alt="" aria-hidden="true" />
+          <figure class="polaroid__card polaroid--postcard">
+            <div class="polaroid__photo"></div>
+            <figcaption class="polaroid__caption">#everyday</figcaption>
+          </figure>
+        </div>
+
+        <!-- Story polaroid -->
+        <div class="polaroid" data-hang="120" style="left: 2260px;">
+          <img class="polaroid__knot" src="media/gallery-rope-vertical.webp" alt="" aria-hidden="true" />
+          <div class="polaroid__card polaroid--story">
+            <p>Friendship grew into something more, and we realized life's best moments were the ones we shared
+              together.</p>
+          </div>
+        </div>
+
+        <!-- Photo polaroid -->
+        <div class="polaroid" data-hang="150" style="left: 2640px;">
+          <img class="polaroid__knot" src="media/gallery-rope-vertical.webp" alt="" aria-hidden="true" />
+          <figure class="polaroid__card polaroid--photo">
+            <div class="polaroid__photo"></div>
+            <figcaption class="polaroid__caption">#foreverbegins</figcaption>
+          </figure>
+        </div>
+
+        <!-- Horizontal postcard -->
+        <div class="polaroid" data-hang="92" style="left: 3020px;">
+          <img class="polaroid__knot" src="media/gallery-rope-vertical.webp" alt="" aria-hidden="true" />
+          <figure class="polaroid__card polaroid--postcard">
+            <div class="polaroid__photo"></div>
+            <figcaption class="polaroid__caption">#usforever</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rose vine draped over the rope's left end. It sits out here as a child
+         of the SECTION, alongside the edge fades and the hint, rather than
+         inside .gallery__track - anything inside the track is part of the
+         horizontally scrolled content and slides away with the polaroids. Out
+         here it is pinned to the section and stays put while the deck scrolls
+         past behind it. render.js no longer emits it either, for the same
+         reason: it rebuilds the track's innerHTML, which would put it back in
+         the scrolling layer. -->
+    <img class="gallery__vine" src="media/gallery-vinewebp.webp" alt="" aria-hidden="true"
+         loading="lazy" decoding="async" />
+
+    <!-- White gradient fading the top & bottom edges -->
+    <div class="gallery__edge gallery__edge--top" aria-hidden="true"></div>
+    <div class="gallery__edge gallery__edge--bottom" aria-hidden="true"></div>
+
+    <!-- Hint that this section scrolls sideways -->
+    <div class="gallery__hint" id="galleryHint" aria-hidden="true">
+      <span class="gallery__hint-arrows"><i></i><i></i><i></i></span>
+      <span class="gallery__hint-arrows"><i></i><i></i><i></i></span>
+    </div>
+  </section>
+
+  <!-- Ceremonies: a swipeable stack of cards -->
+  <section class="scene scene--ceremonies">
+    <h2 class="ceremonies__title">Ceremonies</h2>
+
+    <div class="deck-wrap">
+      <!-- Splash behind the deck; follows whichever card is in front -->
+      <img class="deck__splash" id="deckSplash" src="media/sangeet_splash.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+
+      <div class="deck" id="ceremonyDeck">
+        <!-- Card: Ring Ceremony -->
+        <article class="cere-card" data-splash="media/sangeet_splash.webp">
+          <div class="cere-card__body">
+            <h3 class="cere-card__name">Ring Ceremony</h3>
+            <p class="cere-card__date">Fri, 12 Dec 2025</p>
+            <p class="cere-card__time">7:00 PM</p>
+            <p class="cere-card__venue">
+              <span class="cere-card__pin" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z" />
+                  <circle cx="12" cy="10" r="2.4" />
+                </svg>
+              </span>
+              Sharma Residence, Jaipur
+            </p>
+          </div>
+          <!-- The six cere-card__art images are lazy for the same reason
+               render.js already emits them that way: the deck is far below the
+               fold and its cards are stacked (position:absolute; inset:0), so
+               none of them is needed until the reader reaches it. Without the
+               attribute here the preload scanner reads this static skeleton and
+               fetches all six - about 1.15 MB - before config.js and render.js
+               have even run to replace the markup, so the bytes were spent
+               regardless. Lazy in both places keeps them off the initial load.
+               The art is absolutely positioned, so deferring it shifts nothing. -->
+          <img class="cere-card__art" src="media/ringceremony.webp" alt="" aria-hidden="true"
+               loading="lazy" decoding="async" />
+        </article>
+
+        <!-- Card: Mehendi -->
+        <article class="cere-card" data-splash="media/mehendi_splash.webp">
+          <div class="cere-card__body">
+            <h3 class="cere-card__name">Mehendi</h3>
+            <p class="cere-card__date">Sat, 13 Dec 2025</p>
+            <p class="cere-card__time">11:00 AM</p>
+            <p class="cere-card__venue">
+              <span class="cere-card__pin" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z" />
+                  <circle cx="12" cy="10" r="2.4" />
+                </svg>
+              </span>
+              Sharma Residence, Jaipur
+            </p>
+          </div>
+          <img class="cere-card__art" src="media/mehendi.webp" alt="" aria-hidden="true"
+               loading="lazy" decoding="async" />
+        </article>
+
+        <!-- Card: Haldi -->
+        <article class="cere-card" data-splash="media/haldi_splash.webp">
+          <div class="cere-card__body">
+            <h3 class="cere-card__name">Haldi</h3>
+            <p class="cere-card__date">Sat, 13 Dec 2025</p>
+            <p class="cere-card__time">4:00 PM</p>
+            <p class="cere-card__venue">
+              <span class="cere-card__pin" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z" />
+                  <circle cx="12" cy="10" r="2.4" />
+                </svg>
+              </span>
+              Sharma Residence, Jaipur
+            </p>
+          </div>
+          <img class="cere-card__art" src="media/Haldi.webp" alt="" aria-hidden="true"
+               loading="lazy" decoding="async" />
+        </article>
+
+        <!-- Card: Sangeet -->
+        <article class="cere-card" data-splash="media/sangeet_splash.webp">
+          <div class="cere-card__body">
+            <h3 class="cere-card__name">Sangeet</h3>
+            <p class="cere-card__date">Sat, 13 Dec 2025</p>
+            <p class="cere-card__time">7:30 PM</p>
+            <p class="cere-card__venue">
+              <span class="cere-card__pin" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z" />
+                  <circle cx="12" cy="10" r="2.4" />
+                </svg>
+              </span>
+              Sharma Residence, Jaipur
+            </p>
+          </div>
+          <img class="cere-card__art" src="media/sangeet.webp" alt="" aria-hidden="true"
+               loading="lazy" decoding="async" />
+        </article>
+
+        <!-- Card: Vivaah -->
+        <article class="cere-card" data-splash="media/Varmala_splash.webp">
+          <div class="cere-card__body">
+            <h3 class="cere-card__name">Vivaah</h3>
+            <p class="cere-card__date">Sun, 14 Dec 2025</p>
+            <p class="cere-card__time">8:00 PM</p>
+            <p class="cere-card__venue">
+              <span class="cere-card__pin" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z" />
+                  <circle cx="12" cy="10" r="2.4" />
+                </svg>
+              </span>
+              The Grand Palace, Jaipur
+            </p>
+          </div>
+          <img class="cere-card__art" src="media/vivah.webp" alt="" aria-hidden="true"
+               loading="lazy" decoding="async" />
+        </article>
+
+        <!-- Card: Reception -->
+        <article class="cere-card" data-splash="media/reception_splash.webp">
+          <div class="cere-card__body">
+            <h3 class="cere-card__name">Reception</h3>
+            <p class="cere-card__date">Mon, 15 Dec 2025</p>
+            <p class="cere-card__time">8:00 PM</p>
+            <p class="cere-card__venue">
+              <span class="cere-card__pin" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z" />
+                  <circle cx="12" cy="10" r="2.4" />
+                </svg>
+              </span>
+              The Grand Palace, Jaipur
+            </p>
+          </div>
+          <img class="cere-card__art" src="media/reception.webp" alt="" aria-hidden="true"
+               loading="lazy" decoding="async" />
+        </article>
+      </div>
+    </div>
+
+    <p class="ceremonies__hint">Swipe the card aside</p>
+  </section>
+
+  <!-- Compliment card -->
+  <section class="scene scene--compliment">
+    <div class="compliment-card">
+      <p class="compliment__lead">With Best Compliments From:</p>
+      <p>Shri Suresh Sharma &amp; Family (Chacha-Chachi)</p>
+      <p>Shri Manoj Sharma &amp; Family (Tau-Tai)</p>
+      <p>Smt. Asha Gupta &amp; Family (Bua)</p>
+      <p>Shri Rajendra Mehta &amp; Family (Mama-Mami)</p>
+    </div>
+  </section>
+
+  <!-- Notes card - a free-form extra note from the host -->
+  <section class="scene scene--notes">
+    <div class="notes-card">
+      <p class="notes__lead">A Note From Us</p>
+      <p class="notes__text">We can’t wait to celebrate this special day with you.</p>
+    </div>
+  </section>
+
+  <!-- Social / location links (hrefs added later) -->
+  <section class="scene scene--social">
+    <div class="socials">
+      <button class="social" id="igBtn" type="button" aria-label="Instagram">
+        <img src="media/instagram.webp" alt="Instagram" loading="lazy" decoding="async" />
+      </button>
+      <button class="social" id="locBtn" type="button" aria-label="Locations">
+        <img src="media/location.webp" alt="Locations" loading="lazy" decoding="async" />
+      </button>
+      <button class="social" id="calBtn" type="button" aria-label="Add ceremonies to calendar">
+        <img src="media/calender.webp" alt="Calendar" loading="lazy" decoding="async" />
+      </button>
+    </div>
+  </section>
+
+  <!-- Closing: easel on a garden backdrop -->
+  <section class="scene scene--end">
+    <div class="end__bg" aria-hidden="true"></div>
+    <div class="end__edge end__edge--top" aria-hidden="true"></div>
+    <div class="end__edge end__edge--bottom" aria-hidden="true"></div>
+    <div class="easel">
+      <picture>
+        <source media="(max-width: 700px)" srcset="media/easle-phone.webp" />
+        <img class="easel__img" src="media/easle.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+      </picture>
+      <div class="easel__text">
+        <p class="easel__names">Mr. Joshi and Family</p>
+        <p class="easel__line">Your Presence Means the World to Us</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="scene scene--rsvp">
+    <!-- Shared platform RSVP - the host's RSVP events render here.
+         See /templates/_platform/rsvp.js. -->
+    <div id="balcony-rsvp"></div>
+  </section>
+
+  <!-- Reusable popup (Instagram / Locations) -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal__close" type="button" data-close aria-label="Close">&times;</button>
+      <div class="modal__content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Trial editing (guest / not-yet-purchased) persists to the SERVER, not
+       localStorage. In trial mode only, this synchronously injects the saved
+       draft as window.__balconyTrial BEFORE config.js reads it - same timing
+       localStorage had, so the first render already shows the saved edits. -->
+
+  <!-- Config + renderer run FIRST, ahead of the vendor bundles below.
+       Script execution is strictly ordered, so while gsap + ScrollTrigger +
+       lenis sat above this line, ~125 KB had to download AND execute before
+       render.js could run - and render.js is what writes the invocation
+       symbol's mask-image, so its URL did not exist until then. None of these
+       three files reference gsap, ScrollTrigger or Lenis (the first consumer is
+       app.js, still below the vendor bundles), so moving them up is safe and
+       takes that 125 KB off the path to the first paint of real content. -->
+  <script src="config.js"></script>
+  <!-- Balcony platform bridge: applies the event payload from the mount URL
+       hash before render.js runs; inert when the page is opened directly -->
+  <script src="platform-adapter.js"></script>
+  <script src="render.js"></script>
+  <!-- Self-hosted (was 3 CDN origins - cdnjs + jsdelivr - on the critical path;
+       shared under _platform/vendor so every template pays for one cached copy).
+       Must stay ABOVE app.js, which is the first script to use them. -->
+  <script src="_platform/vendor/gsap.min.js"></script>
+  <script src="_platform/vendor/lenis.min.js"></script>
+  <script src="app.js"></script>
+  <script src="petals.js"></script>
+  <script src="gallery.js"></script>
+  <script src="ceremony.js"></script>
+  <script src="end.js"></script>
+  <!-- Shared platform RSVP -->
+  <script src="_platform/rsvp.js"></script>
+  <script src="social.js"></script>
+  <!-- Shared background-music control -->
+  <script src="_platform/music.js"></script>
+  <script>if (window.BalconyMusic) window.BalconyMusic.mount(window.RoseInvite);</script>
+  <script src="petal-shower.js"></script>
+  <script src="smooth.js"></script>
+
+  <!-- VANVI MOMENTS WATERMARK & USE TEMPLATE CTA -->
+  <div class="vanvi-footer-brand">
+    <div class="vanvi-watermark-pill">
+      <span class="vanvi-sparkle">✦</span>
+      <span class="vanvi-brand-title">VANVI MOMENTS</span>
+      <span class="vanvi-sub-title">Couture Wedding Invitations</span>
+    </div>
+  </div>
+
+  <div class="vanvi-cta-float" id="vanviCtaFloat">
+    <a href="./builder.html" class="vanvi-cta-btn" id="customizeInviteBtn">
+      <span class="cta-glow"></span>
+      <span class="cta-icon">✨</span>
+      <div class="cta-content">
+        <span class="cta-tag">PREVIEWING TEMPLATE</span>
+        <span class="cta-label">Make It Yours • Customize Now</span>
+      </div>
+      <span class="cta-arrow">→</span>
+    </a>
+  </div>
+
+  <style>
+    /* VANVI WATERMARK & CTA STYLING */
+    .vanvi-footer-brand {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 30px 20px calc(80px + env(safe-area-inset-bottom, 20px));
+      background: transparent;
+      user-select: none;
+    }
+    .vanvi-watermark-pill {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      padding: 12px 28px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 137, 151, 0.35);
+      border-radius: 100px;
+      box-shadow: 0 8px 24px rgba(184, 80, 102, 0.08);
+    }
+    .vanvi-sparkle {
+      font-size: 13px;
+      color: #b85066;
+      line-height: 1;
+      animation: vanviPulse 2s infinite ease-in-out;
+    }
+    .vanvi-brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #6d2434;
+      text-transform: uppercase;
+    }
+    .vanvi-sub-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 9.5px;
+      letter-spacing: 1.5px;
+      color: #9c6370;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    @keyframes vanviPulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.25); opacity: 1; }
+    }
+
+    /* FLOATING BOTTOM CTA DOCK */
+    .vanvi-cta-float {
+      position: fixed;
+      bottom: max(16px, env(safe-area-inset-bottom, 16px));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      width: calc(100% - 32px);
+      max-width: 420px;
+      pointer-events: auto;
+    }
+    .vanvi-cta-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #a63d54 0%, #7d263a 100%);
+      color: #FFFFFF;
+      text-decoration: none;
+      border-radius: 100px;
+      box-shadow: 0 10px 30px rgba(125, 38, 58, 0.4), 0 0 0 1px rgba(255,255,255,0.2) inset;
+      transition: all .28s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .vanvi-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 38px rgba(125, 38, 58, 0.52);
+    }
+    .cta-glow {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 65%);
+      pointer-events: none;
+      animation: ctaShimmer 4s infinite linear;
+    }
+    @keyframes ctaShimmer {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .cta-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .cta-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .cta-tag {
+      font-family: 'Sora', sans-serif;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: rgba(255, 230, 235, 0.85);
+    }
+    .cta-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 0.3px;
+    }
+    .cta-arrow {
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform .25s ease;
+      color: #ffdde5;
+    }
+    .vanvi-cta-btn:hover .cta-arrow {
+      transform: translateX(4px);
+    }
+
+    /* When inside iframe in builder: hide the floating CTA */
+    body.is-iframe-mode .vanvi-cta-float {
+      display: none !important;
+    }
+
+    /* CEREMONY DECK NAVIGATION CONTROLS */
+    .deck-nav-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 14px;
+      position: relative;
+      z-index: 10;
+    }
+    .deck-nav-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid rgba(184, 80, 102, 0.25);
+      color: #6d1b2d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(109, 27, 45, 0.12);
+      transition: all .2s ease;
+    }
+    .deck-nav-btn:hover {
+      transform: scale(1.08);
+      background: #FFFFFF;
+      box-shadow: 0 6px 18px rgba(109, 27, 45, 0.2);
+    }
+    .deck-dots-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .deck-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(184, 80, 102, 0.3);
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+    .deck-dot.active {
+      width: 22px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, #a63d54, #6d1b2d);
+      box-shadow: 0 2px 8px rgba(166, 61, 84, 0.35);
+    }
+
+    /* PROTECTIVE UNPUBLISHED DRAFT WATERMARK OVERLAY */
+    .vanvi-draft-watermark {
+      position: fixed;
+      inset: -50px;
+      z-index: 99999;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      overflow: hidden;
+      opacity: 0.14;
+      transform: rotate(-24deg);
+      user-select: none;
+    }
+    .watermark-line {
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 6px;
+      color: #6d1b2d;
+      white-space: nowrap;
+      text-align: center;
+    }
+    body.is-published .vanvi-draft-watermark {
+      display: none !important;
+    }
+
+    /* ELIMINATE EMPTY GAPS & COMPACT MOBILE SPACING */
+    .scene--details {
+      padding: 40px 0 0 !important;
+    }
+    .scene--date {
+      min-height: auto !important;
+      padding: 50px 16px 40px !important;
+    }
+    .scene--gallery {
+      --gallery-h: 620px !important;
+      padding: 20px 0 !important;
+    }
+    .scene--ceremonies {
+      min-height: auto !important;
+      padding: 40px 16px 30px !important;
+      gap: 20px !important;
+    }
+    .ceremonies__title {
+      margin-bottom: 0 !important;
+    }
+    .scene--compliment {
+      padding: 32px 16px !important;
+    }
+    .compliment-card {
+      padding: 38px 26px !important;
+    }
+    .scene--notes {
+      padding: 24px 16px !important;
+    }
+    .notes-card {
+      padding: 38px 26px !important;
+    }
+    .scene--social {
+      padding: 24px 16px 36px !important;
+      gap: 28px !important;
+    }
+    .scene--end {
+      min-height: auto !important;
+      padding: 40px 16px 30px !important;
+    }
+    .scene--rsvp {
+      min-height: auto !important;
+      padding: 40px 16px 30px !important;
+    }
+    .vanvi-footer-brand {
+      padding: 20px 16px calc(65px + env(safe-area-inset-bottom, 16px)) !important;
+    }
+
+    @media (max-width: 700px) {
+      .scene--details {
+        padding: 30px 0 0 !important;
+      }
+      .scene--date {
+        padding: 36px 14px 28px !important;
+      }
+      .scene--gallery {
+        --gallery-h: 560px !important;
+      }
+      .scene--ceremonies {
+        padding: 32px 14px 22px !important;
+        gap: 16px !important;
+      }
+      .deck {
+        width: min(92vw, 380px) !important;
+        height: 380px !important;
+      }
+      .scene--compliment, .scene--notes {
+        padding: 20px 14px !important;
+      }
+      .compliment-card, .notes-card {
+        padding: 30px 18px !important;
+      }
+      .scene--social {
+        padding: 20px 14px !important;
+        gap: 20px !important;
+      }
+      .scene--end, .scene--rsvp {
+        padding: 28px 14px !important;
+      }
+    /* ULTRA-LUXURY PREVIEW WATERMARK SYSTEM (VANVI COUTURE) */
+    .vanvi-luxe-watermark-pill {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99990;
+      pointer-events: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 18px;
+      background: linear-gradient(135deg, rgba(82, 18, 32, 0.94), rgba(150, 46, 68, 0.94));
+      border: 1px solid rgba(223, 192, 138, 0.65);
+      border-radius: 999px;
+      box-shadow: 0 8px 30px rgba(109, 27, 45, 0.45), 0 0 16px rgba(223, 192, 138, 0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      user-select: none;
+      white-space: nowrap;
+      animation: pillFadeIn 0.5s ease;
+    }
+    @keyframes pillFadeIn {
+      from { opacity: 0; transform: translate(-50%, -10px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+    .lwp-crown {
+      font-size: 13px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+    .lwp-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: #fffaf0;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+    .lwp-tag {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 8.5px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #dfc08a, #c49758);
+      color: #380d17;
+      padding: 2px 7px;
+      border-radius: 99px;
+      text-transform: uppercase;
+    }
+
+    /* VINTAGE WAX SEAL CORNER BADGE */
+    .vanvi-wax-seal-badge {
+      position: fixed;
+      bottom: 84px;
+      right: 22px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #b83d5a 0%, #6d1b2d 75%, #420d18 100%);
+      border: 2px solid rgba(223, 192, 138, 0.7);
+      box-shadow: 0 10px 28px rgba(70, 14, 28, 0.55), inset 0 2px 6px rgba(255,255,255,0.3);
+      z-index: 99980;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    .wax-seal-ring {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fdf2d6;
+    }
+    .wax-symbol {
+      font-size: 13px;
+      color: #dfc08a;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .wax-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 7.5px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      line-height: 1.05;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    }
+
+    /* REFINED REPEATING DIAGONAL WATERMARK */
+    .vanvi-draft-watermark {
+      position: fixed;
+      inset: -120px;
+      z-index: 99970;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      overflow: hidden;
+      opacity: 0.085;
+      transform: rotate(-22deg);
+      user-select: none;
+    }
+    .watermark-line {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 10px;
+      color: #962E44;
+      white-space: nowrap;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    /* REMOVE ALL WATERMARKS ONCE PUBLISHED */
+    body.is-published .vanvi-luxe-watermark-pill,
+    body.is-published .vanvi-wax-seal-badge,
+    body.is-published .vanvi-draft-watermark {
+      display: none !important;
+    }
+
+    /* IFRAME / BUILDER MODE OPTIMIZATIONS */
+    body.is-iframe-mode .vanvi-luxe-watermark-pill {
+      top: 8px;
+      transform: translateX(-50%) scale(0.82);
+      transform-origin: top center;
+    }
+    body.is-iframe-mode .vanvi-wax-seal-badge {
+      bottom: 18px;
+      right: 14px;
+      transform: scale(0.75);
+      transform-origin: bottom right;
+    }
+    body.is-iframe-mode .vanvi-cta-float {
+      display: none !important;
+    }
+  </style>
+
+  <!-- LUXURY WATERMARKS (DRAFT / PREVIEW ONLY) -->
+  <div class="vanvi-luxe-watermark-pill" id="vanviLuxePill" aria-hidden="true">
+    <span class="lwp-crown">👑</span>
+    <span class="lwp-title">VANVI COUTURE • ROYAL WEDDING PREVIEW</span>
+    <span class="lwp-tag">PREVIEW</span>
+  </div>
+
+  <div class="vanvi-wax-seal-badge" id="vanviWaxSeal" aria-hidden="true">
+    <div class="wax-seal-ring">
+      <span class="wax-symbol">✦</span>
+      <span class="wax-text">VANVI<br>ATELIER</span>
+    </div>
+  </div>
+
+  <div class="vanvi-draft-watermark" id="vanviDraftWatermark" aria-hidden="true">
+    <div class="watermark-line">VANVI MOMENTS • ROYAL WEDDING PREVIEW • UNPUBLISHED</div>
+    <div class="watermark-line">VANVI MOMENTS • ROYAL WEDDING PREVIEW • UNPUBLISHED</div>
+    <div class="watermark-line">VANVI MOMENTS • ROYAL WEDDING PREVIEW • UNPUBLISHED</div>
+    <div class="watermark-line">VANVI MOMENTS • ROYAL WEDDING PREVIEW • UNPUBLISHED</div>
+    <div class="watermark-line">VANVI MOMENTS • ROYAL WEDDING PREVIEW • UNPUBLISHED</div>
+    <div class="watermark-line">VANVI MOMENTS • ROYAL WEDDING PREVIEW • UNPUBLISHED</div>
+    <div class="watermark-line">VANVI MOMENTS • ROYAL WEDDING PREVIEW • UNPUBLISHED</div>
+    <div class="watermark-line">VANVI MOMENTS • ROYAL WEDDING PREVIEW • UNPUBLISHED</div>
+  </div>
+
+  <!-- FLOATING CTA FOR PREVIEW VISITORS (OPENS BUILDER) -->
+  <div class="vanvi-cta-float" id="vanviCtaFloat">
+    <a href="builder.html" class="vanvi-cta-btn" id="btnCustomizeInvite">
+      <span class="cta-glow"></span>
+      <span class="cta-icon">🌹</span>
+      <div class="cta-content">
+        <span class="cta-tag">VANVI LUXE WEDDING ATELIER</span>
+        <span class="cta-label">Customize &amp; Create Yours</span>
+      </div>
+      <span class="cta-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- UNIVERSAL ANTI-RECURSION TEMPLATE LOCK -->
+  <script src="../../js/vanvi-template-lock.js"></script>
+
+  <!-- LIVE SYNC POSTMESSAGE & GESTURE LISTENER -->
+  <script>
+    (function () {
+      const p = new URLSearchParams(location.search);
+
+      // Check if published
+      if (p.get('published') === '1' || localStorage.getItem('vanvi_rose_published') === '1') {
+        document.body.classList.add('is-published');
+      }
+
+      // Check if opened inside iframe or builder
+      if (window.self !== window.top || p.get('builder') === '1' || p.get('nobtn') === '1') {
+        document.body.classList.add('is-iframe-mode');
+      }
+
+      window.addEventListener('message', function (e) {
+        if (!e.data) return;
+
+        // 1. DATA SYNC FROM BUILDER
+        if (e.data.type === 'rose-preview-data') {
+          var incoming = e.data.data;
+          if (!incoming || !window.RoseInvite) return;
+
+          try {
+            if (incoming.bride) RoseInvite.config.bride = incoming.bride;
+            if (incoming.groom) RoseInvite.config.groom = incoming.groom;
+            if (incoming.weddingDate) RoseInvite.config.weddingDate = incoming.weddingDate;
+            if (incoming.introNote !== undefined) RoseInvite.config.introNote = incoming.introNote;
+            if (incoming.invocation) RoseInvite.config.invocation = incoming.invocation;
+            if (incoming.parents) RoseInvite.config.parents = incoming.parents;
+            if (incoming.ceremonies) RoseInvite.config.ceremonies = incoming.ceremonies;
+            if (incoming.gallery) RoseInvite.config.gallery = incoming.gallery;
+            if (incoming.compliments) RoseInvite.config.compliments = incoming.compliments;
+            if (incoming.notes) RoseInvite.config.notes = incoming.notes;
+
+            // Update title
+            if (incoming.bride && incoming.groom) {
+              document.title = incoming.bride + ' & ' + incoming.groom + ' — Royal Vivah';
+            }
+
+            // Trigger live re-render
+            if (window.RoseInvite.render && window.RoseInvite.render.all) {
+              window.RoseInvite.render.all();
+            }
+
+            // Re-initialize ceremony deck
+            if (window.initCeremonyDeck) {
+              setTimeout(window.initCeremonyDeck, 50);
+            }
+          } catch (err) {
+            console.error('[Live Sync Error]', err);
+          }
+        }
+
+        // 2. TOGGLE / OPEN COVER CARD
+        if (e.data.type === 'rose-toggle-cover') {
+          const screen = document.querySelector('.screen--welcome');
+          if (screen) {
+            screen.classList.toggle('is-open');
+            document.documentElement.classList.toggle('cover-locked', !screen.classList.contains('is-open'));
+          }
+        }
+
+        // 3. AUTO-SCROLL TO SECTION
+        if (e.data.type === 'rose-scroll-to' && e.data.selector) {
+          const target = document.querySelector(e.data.selector);
+          if (target) {
+            // If scrolled past welcome, ensure cover is open
+            if (e.data.selector !== '.scene--welcome') {
+              const sc = document.querySelector('.screen--welcome');
+              if (sc && !sc.classList.contains('is-open')) {
+                sc.classList.add('is-open');
+                document.documentElement.classList.remove('cover-locked');
+              }
+            }
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

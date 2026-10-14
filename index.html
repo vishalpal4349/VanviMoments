@@ -907,8 +907,7 @@ footer .brand{font-size:20px}footer p{font-size:10px;color:#8a7285;margin-top:8p
 .flow-btn{position:relative;overflow:hidden}
 .flow-btn:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 25%,rgba(255,255,255,.38),transparent 70%);transform:translateX(-100%);animation:shimmerSweep 3.2s ease-in-out infinite}
 @keyframes shimmerSweep{0%,50%{transform:translateX(-100%)}75%,100%{transform:translateX(100%)}}
-.locked{position:relative;overflow:hidden}
-.locked:after{content:"🔒 Premium preview";position:absolute;right:9px;top:9px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.72);font-size:8px;font-weight:900;color:#79566e;backdrop-filter:blur(8px)}
+
 .ultra .eyebrow{color:#8f63bd}.ultra strong{font-size:12px}
 .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:18px 0}
 .footer-links a{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.5);font-size:10px;font-weight:800;color:#74586d}
@@ -6484,7 +6483,7 @@ button,
   </div>
   <span class="cat-arrow">→</span>
 </a>
-<a class="category-card glass cat-highlight-cards" data-template-filter="Cards" href="coming-soon.html?type=cards" style="border: 1.5px solid rgba(255, 42, 122, 0.45); background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 235, 245, 0.90)); box-shadow: 0 10px 26px rgba(255, 42, 122, 0.18);">
+<a class="category-card glass cat-highlight-cards" data-template-filter="Cards" href="invitation-maker.html" style="border: 1.5px solid rgba(255, 42, 122, 0.45); background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 235, 245, 0.90)); box-shadow: 0 10px 26px rgba(255, 42, 122, 0.18);">
   <div class="cat-top-row">
     <span class="cat-icon">💌</span>
     <span class="cat-micro-badge" style="background: linear-gradient(135deg, #ff2a7a, #9333ea); color: #fff; font-weight: 850;">✦ Cards &amp; Envelopes</span>
@@ -6688,6 +6687,24 @@ button,
     <h3>🆓 Free Collection</h3>
   </div>
   <div class="horizontal template-slider" id="freeTemplateSlider">
+    <!-- Free 0: Birthday 2.0 (Lead Flagship Free Keepsake) -->
+    <div class="template" data-category="Birthday" data-name="Birthday 2.0" data-id="birthday-2-0" data-price="0" data-tags="free birthday candle wax-seal cake music luxury" data-type="3D Keepsake" onclick="window.location.href='preview.html?template=birthday-2-0'">
+      <div class="thumb">
+        <span class="template-sku-badge">VM-B20</span>
+        <span class="template-tier-badge badge-free">🎁 100% Free Forever</span>
+        <img class="template-real-thumb" src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80" alt="Birthday 2.0" loading="lazy">
+      </div>
+      <div class="template-info">
+        <b>Birthday 2.0</b>
+        <small><span style="font-weight:800; color:#10b981; font-size:11.5px;">₹0</span> · <s style="color:#8b7286; font-size:9.5px;">₹249</s> · Zero Cost</small>
+        <div class="template-rating-pill"><span class="star-gold">★</span> 5.0 <span style="opacity:0.8; font-size:8.5px;">(New ✦)</span></div>
+        <div class="home-tpl-action-row" onclick="event.stopPropagation();">
+          <a href="preview.html?template=birthday-2-0" class="home-btn-explore">✦ Explore</a>
+          <a href="builder.html?template=birthday-2-0&occasion=Birthday" class="home-btn-make-yours">Create ✨</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Free 1: Birthday White Bloom -->
     <div class="template" data-category="Birthday" data-name="Birthday White Bloom" data-id="birthday-white-bloom-001" data-price="0" data-tags="free cute birthday light luxury" data-type="Interactive" onclick="window.location.href='preview.html?template=birthday-white-bloom'">
       <div class="thumb">
@@ -6782,6 +6799,24 @@ button,
     <h3>💎 Premium Collection</h3>
   </div>
   <div class="horizontal template-slider" id="premiumTemplateSlider">
+    <!-- Special Deal: Cute Sorry (Apology Multi-Chapter Experience) -->
+    <div class="template" data-category="Apology" data-name="Cute Sorry" data-id="cute-sorry" data-price="29" data-tags="sorry apology bubu cute game love" data-type="Interactive" onclick="window.location.href='preview.html?template=cute-sorry'">
+      <div class="thumb">
+        <span class="template-sku-badge">VM-S01</span>
+        <span class="template-tier-badge" style="background:linear-gradient(135deg, #f43f5e, #fb7185); color:#fff;">💗 Special ₹29 Deal</span>
+        <img class="template-real-thumb" src="https://cdn.cutiepage.in/template-seeds/cute-apology/intro.gif" alt="Cute Sorry" loading="lazy">
+      </div>
+      <div class="template-info">
+        <b>Cute Sorry</b>
+        <small><span style="font-weight:800; color:#ff2a7a; font-size:12px;">₹29</span> · <s style="color:#8b7286; font-size:9.5px;">₹199</s> · 85% OFF</small>
+        <div class="template-rating-pill"><span class="star-gold">★</span> 5.0 <span style="opacity:0.8; font-size:8.5px;">(New ✦)</span></div>
+        <div class="home-tpl-action-row" onclick="event.stopPropagation();">
+          <a href="preview.html?template=cute-sorry" class="home-btn-explore">✦ Explore</a>
+          <a href="builder.html?template=cute-sorry&occasion=Apology" class="home-btn-make-yours">Create ✨</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Premium 1: Birthday Wish 01 -->
     <div class="template" data-category="Birthday" data-name="Birthday Wish 01" data-id="birthday-wish-1" data-price="149" data-tags="premium birthday candle interactive bestseller" data-type="Interactive" onclick="window.location.href='preview.html?template=birthday-wish-1'">
       <div class="thumb">
@@ -7050,15 +7085,15 @@ button,
       <span class="make-format-arrow">→</span>
     </a>
 
-    <!-- 6. Digital Keepsake Magazines -->
-    <div class="make-format-item" onclick="window.location.href='coming-soon.html?type=magazine'">
-      <div class="make-format-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a); color:#b45309;">📰</div>
+    <!-- 6. Digital Card Studio -->
+    <a href="invitation-maker.html" class="make-format-item">
+      <div class="make-format-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a); color:#b45309;">💌</div>
       <div class="make-format-content">
-        <span class="make-format-title">Magazines</span>
-        <span class="make-format-sub">Vogue Book</span>
+        <span class="make-format-title">Card Studio</span>
+        <span class="make-format-sub">Live 4K E-Card</span>
       </div>
       <span class="make-format-arrow">→</span>
-    </div>
+    </a>
 
     <!-- 7. Bespoke Invitations -->
     <a href="category-anniversary.html" class="make-format-item">
@@ -7082,30 +7117,7 @@ button,
   </div>
 </section>
 
-<!-- Modal for Digital Keepsake Magazine Coming Soon -->
-<div id="magazineModal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(44,18,36,0.65); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:16px;">
-  <div style="background:#ffffff; border-radius:22px; max-width:420px; width:100%; padding:26px 22px; text-align:center; box-shadow:0 24px 60px rgba(0,0,0,0.25); border:1px solid rgba(217,119,6,0.25); position:relative; animation:scaleUp 0.25s ease;">
-    <button type="button" onclick="closeMagazineComingSoonModal()" style="position:absolute; top:14px; right:16px; background:none; border:none; font-size:18px; color:#835c75; cursor:pointer;">✕</button>
-    <div style="width:58px; height:58px; border-radius:18px; background:linear-gradient(135deg, #fef3c7, #fde68a); font-size:30px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px; box-shadow:0 6px 18px rgba(217,119,6,0.18);">📰</div>
-    <span style="font-size:10px; font-weight:850; background:#fef3c7; color:#b45309; padding:3px 10px; border-radius:99px; text-transform:uppercase; letter-spacing:0.5px;">✦ In Active Atelier Development</span>
-    <h4 style="font-family:'Cormorant Garamond', Georgia, serif; font-size:24px; color:#2c1224; margin:10px 0 6px;">Vanvi Keepsake Magazines</h4>
-    <p style="font-size:12.5px; color:#796377; line-height:1.5; margin-bottom:18px;">Turn your relationship milestones, travel stories, or friendship into a luxurious editorial digital magazine with flippable pages, photo essays, and custom soundtracks.</p>
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      <a href="ai-matcher.html?q=magazine" class="primary" style="display:block; text-decoration:none; padding:11px 18px; border-radius:99px; font-size:12.5px; font-weight:800; background:linear-gradient(135deg, #f59e0b, #d97706); color:#fff; box-shadow:0 6px 18px rgba(217,119,6,0.3);">Notify Me &amp; Explore Formats ✨</a>
-      <button type="button" onclick="closeMagazineComingSoonModal()" style="background:none; border:none; font-size:12px; font-weight:700; color:#835c75; cursor:pointer; padding:6px;">Close Preview</button>
-    </div>
-  </div>
-</div>
-<script>
-function showMagazineComingSoonModal() {
-  const m = document.getElementById('magazineModal');
-  if (m) m.style.display = 'flex';
-}
-function closeMagazineComingSoonModal() {
-  const m = document.getElementById('magazineModal');
-  if (m) m.style.display = 'none';
-}
-</script>
+
 </section>
 
 <!-- Panda AI Experience Studio (Linked to Panda AI Matcher) -->
@@ -9503,14 +9515,11 @@ if (window.VanviI18n && typeof window.VanviI18n.setLanguage === 'function') {
         <span style="font-size:22px;">✨</span>
         <div><strong style="display:block; font-size:13px; color:#2c1224;">Anniversary</strong><small style="font-size:11px; color:#78536d;">Golden milestones &amp; reels</small></div>
       </a>
-      <a href="coming-soon.html?type=cards" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:16px; background:#fff7fb; border:1px solid rgba(255,120,175,0.25); transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='#ff2a7a'" onmouseout="this.style.transform='none';this.style.borderColor='rgba(255,120,175,0.25)'">
-        <span style="font-size:22px;">💌</span>
-        <div><strong style="display:block; font-size:13px; color:#2c1224;">Greeting Cards</strong><small style="font-size:11px; color:#ff2a7a; font-weight:700;">Coming Soon · Preview</small></div>
+      <a href="invitation-maker.html" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:16px; background:#fffdf5; border:1px solid rgba(212,175,55,0.35); transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='#d4af37'" onmouseout="this.style.transform='none';this.style.borderColor='rgba(212,175,55,0.35)'">
+        <span style="font-size:22px;">👑</span>
+        <div><strong style="display:block; font-size:13px; color:#92400e;">Royal Invite Studio</strong><small style="font-size:11px; color:#d97706; font-weight:700;">Wedding Cards · Live Studio</small></div>
       </a>
-      <a href="coming-soon.html?type=magazine" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:16px; background:#fff7fb; border:1px solid rgba(255,120,175,0.25); transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='#ff2a7a'" onmouseout="this.style.transform='none';this.style.borderColor='rgba(255,120,175,0.25)'">
-        <span style="font-size:22px;">📖</span>
-        <div><strong style="display:block; font-size:13px; color:#2c1224;">Digital E-Magazine</strong><small style="font-size:11px; color:#ff2a7a; font-weight:700;">Coming Soon · Preview</small></div>
-      </a>
+
       <a href="category-premium.html" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:16px; background:#fffdf5; border:1px solid rgba(217,119,6,0.3); transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='#d97706'" onmouseout="this.style.transform='none';this.style.borderColor='rgba(217,119,6,0.3)'">
         <span style="font-size:22px;">👑</span>
         <div><strong style="display:block; font-size:13px; color:#92400e;">24K Bespoke Atelier</strong><small style="font-size:11px; color:#b45309;">VIP 1-on-1 craft</small></div>

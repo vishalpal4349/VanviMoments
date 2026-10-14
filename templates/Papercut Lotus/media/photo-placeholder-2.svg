@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1266" width="794" height="1266" role="img" aria-label="Placeholder for a photograph">
+  <!-- Gallery placeholder 2 of 3 - see photo-placeholder-1.svg for the geometry
+       rules this canvas obeys (794x1266 to match .frame's aspect-ratio, content
+       kept in the lens-shaped opening's wide middle band). Same drawing on the
+       ivory ground the reveal card uses, so the three read as a set without
+       being identical slides. -->
+  <defs>
+    <radialGradient id="ph2-glow" cx="50%" cy="50%" r="58%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="794" height="1266" fill="#F9EACF"/>
+  <rect width="794" height="1266" fill="url(#ph2-glow)"/>
+
+  <g transform="translate(397 520) scale(8.33) translate(-12 -12)"
+     fill="none" stroke="#094550" stroke-width="1.5"
+     stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
+    <rect x="3" y="3" width="18" height="18" rx="2.5"/>
+    <circle cx="8.5" cy="9" r="1.8"/>
+    <path d="M21 15.5 16 10.5 5 21.5"/>
+  </g>
+
+  <line x1="277" y1="645" x2="517" y2="645" stroke="#094550" stroke-width="2" opacity="0.25"/>
+
+  <text x="397" y="716" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="48"
+        fill="#094550" opacity="0.9">Your photo here</text>
+
+  <text x="397" y="772" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="24"
+        letter-spacing="5" fill="#094550" opacity="0.55">TAP TO REPLACE</text>
+
+  <circle cx="397" cy="862" r="28" fill="#FFD853" opacity="0.85"/>
+  <text x="397" y="874" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="32"
+        fill="#094550">2</text>
+</svg>

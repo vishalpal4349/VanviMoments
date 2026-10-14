@@ -1,0 +1,166 @@
+/* DilSeCraft — scheduled reveal card (builders, edit page, letter studio) and
+   the "sealed until" note. Its own file because the letter studio does not
+   load gifts.css; the colour tokens fall back for that page. */
+.gift-reveal, .gift-reveal-note {
+    --gift-ink: #141046; --gift-ink2: #1E1960; --gift-chalk: #FFF6EA; --gift-haldi: #FFC53D;
+    --gift-tota: #2FD8A6; --gift-rose: #FF3D7F; --gift-violet: #B07CFF; --gift-text: #FFF6EA;
+    --gift-text-muted: #A79DE0; --gift-border: rgba(167, 157, 224, 0.24); --gift-input: rgba(11, 8, 48, 0.55);
+    --gift-radius-sm: 12px; --gift-display: "Gabarito", system-ui, sans-serif;
+    --gift-body: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+    box-sizing: border-box;
+}
+.gift-reveal *, .gift-reveal *::before, .gift-reveal *::after { box-sizing: border-box; }
+/* ── Scheduled reveal (gift-reveal.js) — a paid add-on, so it is meant to stand out ── */
+.gift-reveal {
+    position: relative;
+    margin: 4px 0 20px;
+    padding: 16px 16px 14px;
+    border-radius: 18px;
+    background:
+        linear-gradient(var(--gift-ink2), var(--gift-ink2)) padding-box,
+        linear-gradient(120deg, var(--gift-haldi), var(--gift-rose) 55%, var(--gift-violet)) border-box;
+    border: 1.5px solid transparent;
+    box-shadow: 0 10px 34px -14px rgba(255, 61, 127, 0.55);
+    text-align: left;
+}
+.gift-reveal.is-on { box-shadow: 0 12px 38px -12px rgba(255, 197, 61, 0.55); }
+.gift-reveal__head {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    margin: 0;
+}
+.gift-reveal__ico {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: grid; place-items: center;
+    color: var(--gift-ink);
+    background: linear-gradient(140deg, var(--gift-haldi), #ffb020);
+}
+.gift-reveal__ico svg { width: 20px; height: 20px; }
+.gift-reveal__copy { min-width: 0; }
+.gift-reveal__copy strong {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    font-family: var(--gift-display); font-size: 1rem; color: var(--gift-text);
+}
+.gift-reveal__copy em {
+    font-style: normal; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 99px; color: var(--gift-ink); background: var(--gift-tota);
+}
+.gift-reveal__copy small {
+    display: block; margin-top: 3px; font-size: 0.82rem; line-height: 1.4; color: var(--gift-text-muted);
+}
+.gift-reveal__price { font-family: var(--gift-display); font-weight: 700; color: var(--gift-haldi); white-space: nowrap; }
+
+/* switch */
+.gift-reveal__switch {
+    appearance: none; -webkit-appearance: none; margin: 0;
+    position: relative; width: 44px; height: 26px; border-radius: 99px; flex: 0 0 auto; cursor: pointer;
+    background: rgba(167, 157, 224, 0.28); border: 1px solid var(--gift-border);
+    transition: background 0.2s ease;
+}
+.gift-reveal__switch::after {
+    content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--gift-chalk); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); transition: transform 0.2s ease;
+}
+.gift-reveal__switch:checked { background: var(--gift-rose); border-color: var(--gift-rose); }
+.gift-reveal__switch:checked::after { transform: translateX(18px); }
+.gift-reveal__switch:focus-visible { outline: 2px solid var(--gift-haldi); outline-offset: 2px; }
+
+.gift-reveal__body { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--gift-border); }
+.gift-reveal__row { display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px; }
+.gift-reveal__row label {
+    display: flex; flex-direction: column; gap: 6px; margin: 0;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--gift-text-muted);
+}
+.gift-reveal__row input {
+    width: 100%; min-width: 0; padding: 11px 12px; border-radius: var(--gift-radius-sm);
+    font: 500 0.95rem var(--gift-body); color: var(--gift-text);
+    background: var(--gift-input); border: 1px solid var(--gift-border); color-scheme: dark;
+}
+.gift-reveal__when { margin: 12px 0 0; font-size: 0.86rem; line-height: 1.45; color: var(--gift-text-muted); }
+.gift-reveal__when strong { color: var(--gift-haldi); }
+.gift-reveal__when a { color: var(--gift-text); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+.gift-reveal .gift-error { margin: 10px 0 0; }
+@media (max-width: 380px) {
+    .gift-reveal__head { grid-template-columns: auto 1fr auto; }
+    .gift-reveal__price { grid-column: 2; grid-row: 2; justify-self: start; }
+    .gift-reveal__switch { grid-column: 3; grid-row: 1 / span 2; }
+}
+.gift-reveal-note {
+    margin: 12px 0 0; padding: 12px 14px; border-radius: var(--gift-radius-sm); text-align: left;
+    font-size: 0.9rem; line-height: 1.5; color: var(--gift-text);
+    background: rgba(255, 197, 61, 0.1); border: 1px solid rgba(255, 197, 61, 0.35);
+}
+.gift-reveal-note i { color: var(--gift-haldi); margin-right: 4px; }
+.gift-reveal-note strong { color: var(--gift-haldi); }
+.gift-reveal-note a { color: var(--gift-text); text-decoration: underline; text-underline-offset: 2px; }
+
+/* edit page: change the date or open it now */
+.gift-reveal--manage { margin: 16px 0 20px; }
+.gift-reveal--manage .gift-reveal__head { grid-template-columns: auto 1fr; cursor: default; }
+.gift-reveal--manage .gift-reveal__copy small a { color: var(--gift-text); text-decoration: underline; text-underline-offset: 2px; }
+.gift-reveal__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.gift-reveal__actions button {
+    flex: 1 1 auto; padding: 11px 16px; border-radius: 99px; cursor: pointer;
+    font: 700 0.92rem var(--gift-body); color: var(--gift-text);
+    background: transparent; border: 1px solid var(--gift-border);
+}
+.gift-reveal__actions button:first-child { color: #fff; background: var(--gift-rose); border-color: var(--gift-rose); }
+.gift-reveal__msg { margin: 10px 0 0; font-size: 0.88rem; color: var(--gift-tota); }
+.gift-reveal__msg.is-bad { color: #B42318; font-weight: 600; }
+
+/* "Send it to them" card (gift-notify.js) — same shell as the reveal card */
+.gift-notify__ico { color: #062a20; background: linear-gradient(140deg, var(--gift-tota), #19b98a); }
+.gift-notify__fields { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.gift-notify__fields label {
+    display: flex; flex-direction: column; gap: 6px; margin: 0;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--gift-text-muted);
+}
+.gift-notify__fields label span { font-weight: 500; letter-spacing: 0; opacity: 0.8; }
+.gift-notify__fields input {
+    width: 100%; min-width: 0; padding: 11px 12px; border-radius: var(--gift-radius-sm);
+    font: 500 0.95rem var(--gift-body); color: var(--gift-text);
+    background: var(--gift-input); border: 1px solid var(--gift-border);
+}
+@media (min-width: 560px) { .gift-notify__fields { grid-template-columns: 1fr 1fr; } }
+.gift-notify__check {
+    align-self: flex-start; margin-top: 2px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0;
+    color: var(--gift-tota); text-decoration: underline; text-underline-offset: 2px;
+}
+.gift-notify__check[hidden] { display: none; }
+.gift-notify__note { margin: 12px 0 0; font-size: 0.8rem; line-height: 1.45; color: var(--gift-text-muted); }
+.gift-notify-note__fine { display: inline-block; margin-top: 6px; font-size: 0.8rem; opacity: 0.75; }
+
+/* Change the song from the edit link (gift-song-manage.php) — same shell as the reveal card */
+.gift-song-manage__ico { color: #fff; background: linear-gradient(140deg, var(--gift-rose), var(--gift-violet)); }
+.gift-song-manage__list { display: grid; gap: 8px; max-height: 320px; overflow-y: auto; padding-right: 2px; }
+.gift-song-manage__opt, .gift-song-manage__own {
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; margin: 0;
+    padding: 10px 12px; border-radius: var(--gift-radius-sm); cursor: pointer;
+    background: var(--gift-input); border: 1px solid var(--gift-border);
+}
+.gift-song-manage__opt:has(input:checked) { border-color: var(--gift-haldi); }
+.gift-song-manage__opt input { accent-color: var(--gift-rose); margin: 0; }
+.gift-song-manage__opt strong, .gift-song-manage__own strong { display: block; font-size: 0.92rem; color: var(--gift-text); }
+.gift-song-manage__opt small, .gift-song-manage__own small { display: block; font-size: 0.78rem; color: var(--gift-text-muted); }
+.gift-song-manage__play {
+    width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 0.8rem;
+    color: var(--gift-ink); background: var(--gift-haldi); border: 0;
+}
+.gift-song-manage__own { grid-template-columns: 1fr; margin-top: 10px; border-style: dashed; }
+.gift-song-manage__own input { order: 2; font: 500 0.85rem var(--gift-body); color: var(--gift-text-muted); color-scheme: dark; }
+.gift-song-manage__rights { margin: 10px 0 0; font-size: 0.76rem; color: var(--gift-text-muted); }
+.gift-song-manage__rights a { color: var(--gift-violet); }
+
+/* one-tap midnight picks + a calendar icon people can actually see */
+.gift-reveal__quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.gift-reveal__chip {
+  font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer;
+  padding: 7px 12px; border-radius: 999px;
+  border: 1px solid rgba(232, 79, 128, .35); background: rgba(232, 79, 128, .07); color: inherit;
+}
+.gift-reveal__chip:active { transform: scale(.97); }
+.gift-reveal__row input[type="date"], .gift-reveal__row input[type="time"] { cursor: pointer; }
+.gift-reveal__row input::-webkit-calendar-picker-indicator { opacity: .85; cursor: pointer; width: 20px; height: 20px; }

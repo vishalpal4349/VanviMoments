@@ -1,0 +1,546 @@
+[
+  {
+    "id": "theme",
+    "label": "Theme",
+    "blockType": "hero",
+    "fields": [
+      {
+        "id": "theme",
+        "label": "Colour theme",
+        "type": "theme",
+        "required": true,
+        "helperText": "Twilight is the dark one.",
+        "options": [
+          {
+            "value": "sunshine",
+            "label": "Seaglass",
+            "swatches": [
+              "#14907f",
+              "#ef7a5a",
+              "#e6f4f0"
+            ]
+          },
+          {
+            "value": "meadow",
+            "label": "Terracotta",
+            "swatches": [
+              "#c9603f",
+              "#7d8c4a",
+              "#f4e6d7"
+            ]
+          },
+          {
+            "value": "lilac",
+            "label": "Lilac",
+            "swatches": [
+              "#8b6ad0",
+              "#e07596",
+              "#ece2fb"
+            ]
+          },
+          {
+            "value": "twilight",
+            "label": "Twilight",
+            "swatches": [
+              "#4fd1b5",
+              "#ff8a6b",
+              "#14212c"
+            ]
+          }
+        ],
+        "defaultValue": "sunshine"
+      }
+    ]
+  },
+  {
+    "id": "intro",
+    "label": "Opening envelope",
+    "blockType": "hero",
+    "fields": [
+      {
+        "id": "friendName",
+        "label": "Their name (or nickname)",
+        "type": "text",
+        "required": true,
+        "helperText": "Their name or a nickname.",
+        "defaultValue": "my best friend"
+      },
+      {
+        "id": "introForLabel",
+        "label": "Sticky note (top corner)",
+        "type": "text",
+        "defaultValue": "For My Person :)"
+      },
+      {
+        "id": "introTitle",
+        "label": "Note card — greeting",
+        "type": "text",
+        "required": true,
+        "defaultValue": "Hey You!"
+      },
+      {
+        "id": "introSubtitle",
+        "label": "Note card — message",
+        "type": "textarea",
+        "helperText": "Press Enter for a new line.",
+        "defaultValue": "I made a little something\njust for you..."
+      },
+      {
+        "id": "introNoteLine",
+        "label": "Note card — bottom line",
+        "type": "text",
+        "defaultValue": "happy friendship day ✿"
+      },
+      {
+        "id": "introBalloonTitle",
+        "label": "Balloon heading (big text above the balloon)",
+        "type": "text",
+        "defaultValue": "Happy Friendship Day"
+      },
+      {
+        "id": "introDeliveryLabel",
+        "label": "Balloon delivery line (small text below)",
+        "type": "text",
+        "defaultValue": "a delivery for you…"
+      },
+      {
+        "id": "introStampLabel",
+        "label": "Envelope stamp text",
+        "type": "text",
+        "helperText": "Keep it short. Set in caps.",
+        "maxLength": 26,
+        "defaultValue": "happy friendship day"
+      },
+      {
+        "id": "introMascotUrl",
+        "label": "Opening sticker (optional)",
+        "type": "image",
+        "helperText": "Leave blank to use the built-in sticker.",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/brothers-day/cat.gif"
+      },
+      {
+        "id": "introHint",
+        "label": "Hint line at the bottom",
+        "type": "text",
+        "defaultValue": "TAP ANYWHERE TO BEGIN"
+      }
+    ]
+  },
+  {
+    "id": "hero",
+    "label": "Greeting",
+    "blockType": "hero",
+    "fields": [
+      {
+        "id": "heroEyebrow",
+        "label": "Small line above the headline",
+        "type": "text",
+        "defaultValue": "happy friendship day"
+      },
+      {
+        "id": "heroHeadline",
+        "label": "Big headline",
+        "type": "text",
+        "required": true,
+        "defaultValue": "To My Favourite Person"
+      },
+      {
+        "id": "heroMessage",
+        "label": "Welcome message",
+        "type": "textarea",
+        "required": true,
+        "defaultValue": "Every year this day comes around and I think the same thing: I got so lucky with you. So instead of a text this time, I built you a tiny corner of the internet. Stay a while, there's a bit to see."
+      },
+      {
+        "id": "heroPortraitUrl",
+        "label": "Greeting photo",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery1.jpeg"
+      },
+      {
+        "id": "heroBannerLabel",
+        "label": "Banner ribbon text",
+        "type": "text",
+        "defaultValue": "to the best one ✿"
+      },
+      {
+        "id": "heroButton",
+        "label": "Button label (to the album)",
+        "type": "text",
+        "defaultValue": "see our album →"
+      },
+      {
+        "id": "greetingPhoto1Url",
+        "label": "Greeting photo strip — photo 1",
+        "type": "image",
+        "helperText": "Leave all three blank to use your album photos.",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/greeting1.gif"
+      },
+      {
+        "id": "greetingPhoto2Url",
+        "label": "Greeting photo strip — photo 2",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/greeting2.gif"
+      },
+      {
+        "id": "greetingPhoto3Url",
+        "label": "Greeting photo strip — photo 3",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/greeting3.jpeg"
+      }
+    ]
+  },
+  {
+    "id": "song",
+    "label": "A song for them",
+    "blockType": "media",
+    "fields": [
+      {
+        "id": "songTitle",
+        "label": "Song title",
+        "type": "text",
+        "required": true,
+        "defaultValue": "Our Song"
+      },
+      {
+        "id": "songArtist",
+        "label": "Artist / dedication",
+        "type": "text",
+        "defaultValue": "the one that's ours"
+      },
+      {
+        "id": "songCaption",
+        "label": "Caption under the player",
+        "type": "textarea",
+        "defaultValue": "press play — this one is permanently attached to memories of you."
+      },
+      {
+        "id": "songCoverUrl",
+        "label": "Cover image",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery2.gif"
+      },
+      {
+        "id": "songUrl",
+        "label": "Song file (MP3)",
+        "type": "audio",
+        "helperText": "MP3, max 5 MB.",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/music.mp3"
+      }
+    ]
+  },
+  {
+    "id": "gallery",
+    "label": "Memory wall",
+    "blockType": "gallery",
+    "fields": [
+      {
+        "id": "galleryEyebrow",
+        "label": "Section eyebrow",
+        "type": "text",
+        "defaultValue": "the memory wall"
+      },
+      {
+        "id": "galleryTitle",
+        "label": "Section title",
+        "type": "text",
+        "required": true,
+        "defaultValue": "flip one over"
+      },
+      {
+        "id": "gallerySubtitle",
+        "label": "Section subtitle",
+        "type": "text",
+        "defaultValue": "every photo has something written on the back ✿"
+      },
+      {
+        "id": "galleryFlipHint",
+        "label": "Flip hint line",
+        "type": "text",
+        "defaultValue": "tap a photo to flip it ✿"
+      },
+      {
+        "id": "galleryPhoto1Url",
+        "label": "Photo 1",
+        "type": "image",
+        "required": true,
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery1.jpeg"
+      },
+      {
+        "id": "galleryPhoto1Caption",
+        "label": "Photo 1 — written on the back",
+        "type": "textarea",
+        "defaultValue": "day one energy. we had no idea what was coming."
+      },
+      {
+        "id": "galleryPhoto2Url",
+        "label": "Photo 2",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery2.gif"
+      },
+      {
+        "id": "galleryPhoto2Caption",
+        "label": "Photo 2 — written on the back",
+        "type": "textarea",
+        "defaultValue": "still one of the funniest nights of my life."
+      },
+      {
+        "id": "galleryPhoto3Url",
+        "label": "Photo 3",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery3.jpeg"
+      },
+      {
+        "id": "galleryPhoto3Caption",
+        "label": "Photo 3 — written on the back",
+        "type": "textarea",
+        "defaultValue": "nothing happened this day. that was the best part."
+      },
+      {
+        "id": "galleryPhoto4Url",
+        "label": "Photo 4",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter1.jpeg"
+      },
+      {
+        "id": "galleryPhoto4Caption",
+        "label": "Photo 4 — written on the back",
+        "type": "textarea",
+        "defaultValue": "the trip we planned badly and loved anyway."
+      },
+      {
+        "id": "galleryPhoto5Url",
+        "label": "Photo 5",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter2.jpeg"
+      },
+      {
+        "id": "galleryPhoto5Caption",
+        "label": "Photo 5 — written on the back",
+        "type": "textarea",
+        "defaultValue": "3am, terrible snacks, best conversation."
+      },
+      {
+        "id": "galleryPhoto6Url",
+        "label": "Photo 6",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter3.jpeg"
+      },
+      {
+        "id": "galleryPhoto6Caption",
+        "label": "Photo 6 — written on the back",
+        "type": "textarea",
+        "defaultValue": "proof we clean up alright when we try."
+      },
+      {
+        "id": "galleryButton",
+        "label": "Button label (to the scratch cards)",
+        "type": "text",
+        "defaultValue": "scratch to reveal →"
+      }
+    ]
+  },
+  {
+    "id": "scratch",
+    "label": "Scratch cards",
+    "blockType": "gallery",
+    "fields": [
+      {
+        "id": "scratchEyebrow",
+        "label": "Section eyebrow",
+        "type": "text",
+        "defaultValue": "six little truths"
+      },
+      {
+        "id": "scratchTitle",
+        "label": "Section title",
+        "type": "text",
+        "required": true,
+        "defaultValue": "scratch these open"
+      },
+      {
+        "id": "scratchSubtitle",
+        "label": "Section subtitle",
+        "type": "text",
+        "defaultValue": "rub each one — there's something under it ✿"
+      },
+      {
+        "id": "scratchCoverLabel",
+        "label": "Text on the unscratched cards",
+        "type": "text",
+        "maxLength": 24,
+        "defaultValue": "scratch"
+      },
+      {
+        "id": "scratchCard1Label",
+        "label": "Card 1 — title",
+        "type": "text",
+        "required": true,
+        "defaultValue": "you show up"
+      },
+      {
+        "id": "scratchCard1Body",
+        "label": "Card 1 — message",
+        "type": "textarea",
+        "required": true,
+        "defaultValue": "you notice something's off before I've said a word. that's the whole thing."
+      },
+      {
+        "id": "scratchCard2Label",
+        "label": "Card 2 — title",
+        "type": "text",
+        "defaultValue": "you're funny"
+      },
+      {
+        "id": "scratchCard2Body",
+        "label": "Card 2 — message",
+        "type": "textarea",
+        "defaultValue": "half my best memories are us doing nothing and laughing until it hurt."
+      },
+      {
+        "id": "scratchCard3Label",
+        "label": "Card 3 — title",
+        "type": "text",
+        "defaultValue": "you're stuck"
+      },
+      {
+        "id": "scratchCard3Body",
+        "label": "Card 3 — message",
+        "type": "textarea",
+        "defaultValue": "years in and you still pick up on the first ring. no exit option, sorry."
+      },
+      {
+        "id": "scratchCard4Label",
+        "label": "Card 4 — title",
+        "type": "text",
+        "defaultValue": "you're honest"
+      },
+      {
+        "id": "scratchCard4Body",
+        "label": "Card 4 — message",
+        "type": "textarea",
+        "defaultValue": "you tell me the thing I don't want to hear, kindly. I always need it."
+      },
+      {
+        "id": "scratchCard5Label",
+        "label": "Card 5 — title",
+        "type": "text",
+        "defaultValue": "you remember"
+      },
+      {
+        "id": "scratchCard5Body",
+        "label": "Card 5 — message",
+        "type": "textarea",
+        "defaultValue": "the small stuff — the worry from a Tuesday, the name I mentioned once."
+      },
+      {
+        "id": "scratchCard6Label",
+        "label": "Card 6 — title",
+        "type": "text",
+        "defaultValue": "you're home"
+      },
+      {
+        "id": "scratchCard6Body",
+        "label": "Card 6 — message",
+        "type": "textarea",
+        "defaultValue": "no catching up needed. we just pick it back up exactly where we left it."
+      },
+      {
+        "id": "scratchButton",
+        "label": "Button label (to the letter)",
+        "type": "text",
+        "defaultValue": "read the letter →"
+      }
+    ]
+  },
+  {
+    "id": "letter",
+    "label": "Letter",
+    "blockType": "cta",
+    "description": "Double line breaks separate paragraphs.",
+    "fields": [
+      {
+        "id": "letterEyebrow",
+        "label": "Letter intro line",
+        "type": "text",
+        "defaultValue": "✿ one last thing ✿"
+      },
+      {
+        "id": "letterTitle",
+        "label": "Letter heading",
+        "type": "text",
+        "defaultValue": "A Note For You"
+      },
+      {
+        "id": "letterMascotUrl",
+        "label": "Letter sticker / GIF",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/brothers-day/cat.gif"
+      },
+      {
+        "id": "letterPhoto1Url",
+        "label": "Letter photo strip — photo 1",
+        "type": "image",
+        "helperText": "Leave all three blank to use your album photos.",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter1.jpeg"
+      },
+      {
+        "id": "letterPhoto2Url",
+        "label": "Letter photo strip — photo 2",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter2.jpeg"
+      },
+      {
+        "id": "letterPhoto3Url",
+        "label": "Letter photo strip — photo 3",
+        "type": "image",
+        "defaultValue": "https://cdn.cutiepage.in/template-seeds/girlfriends-day/letter3.jpeg"
+      },
+      {
+        "id": "letterGreeting",
+        "label": "Greeting",
+        "type": "text",
+        "required": true,
+        "defaultValue": "Hey you,"
+      },
+      {
+        "id": "letterBody",
+        "label": "Letter body",
+        "type": "textarea",
+        "required": true,
+        "defaultValue": "I'm not great at saying this stuff out loud, so I made you a page instead — a song, our photos, and a few things I actually mean.\n\nthank you for the years of picking up the phone, for the advice I didn't ask for and definitely needed, and for never once making me explain myself twice. you've seen every version of me and stayed for all of them.\n\nI hope today is a good one. and I hope you know that whatever happens next, you've got a person in your corner permanently. that's me. I'm the person."
+      },
+      {
+        "id": "letterClosing",
+        "label": "Closing line",
+        "type": "text",
+        "defaultValue": "always in your corner,"
+      },
+      {
+        "id": "letterSignature",
+        "label": "Signature",
+        "type": "text",
+        "required": true,
+        "defaultValue": "your friend"
+      },
+      {
+        "id": "letterFromPrefix",
+        "label": "Footer prefix (e.g. 'made with love by')",
+        "type": "text",
+        "defaultValue": "made with love by"
+      },
+      {
+        "id": "fromName",
+        "label": "Your name (footer)",
+        "type": "text",
+        "defaultValue": "me"
+      },
+      {
+        "id": "letterRestartButton",
+        "label": "Restart button label",
+        "type": "text",
+        "defaultValue": "↻ play it again"
+      }
+    ]
+  }
+]

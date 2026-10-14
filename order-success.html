@@ -1873,8 +1873,14 @@
       momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/birthday-3d-candle-surprise/index.html')}?recipient=${encodeURIComponent(recipient)}`;
     } else if (tplKey.includes('wish-2') || tplKey.includes('wish-02')) {
       momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/birthday-wish-02/index.html')}?recipient=${encodeURIComponent(recipient)}`;
+    } else if (tplKey.includes('birthday-box') || tplKey.includes('box')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/Birthday-Box/index.html')}?purchased=true&paid=true&published=1&recipient=${encodeURIComponent(recipient)}`;
+    } else if (tplKey.includes('best-friend') || tplKey.includes('bestfriend') || tplKey.includes('friendship') || tplKey.includes('bestie')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/Best Friend Day 01/index.html')}?purchased=true&paid=true&published=true&recipient=${encodeURIComponent(recipient)}`;
+    } else if (tplKey.includes('anniversary-eternal') || tplKey.includes('eternal')) {
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/Anniversary Eternal ❤️/index.html')}?purchased=true&paid=true&published=true&recipient=${encodeURIComponent(recipient)}`;
     } else if (tplKey.includes('apology') || tplKey.includes('sorry')) {
-      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/apology-dashboard/index.html')}?recipient=${encodeURIComponent(recipient)}`;
+      momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/sorry-bubu/index.html')}?purchased=true&paid=true&published=true&recipient=${encodeURIComponent(recipient)}`;
     } else {
       momentUrl = `${window.location.origin}${window.location.pathname.replace('order-success.html', 'templates/birthday-wish-01/index.html')}?recipient=${encodeURIComponent(recipient)}&occasion=${encodeURIComponent(occasion)}`;
     }

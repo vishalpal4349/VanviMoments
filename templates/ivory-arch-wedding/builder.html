@@ -855,8 +855,21 @@
               <input type="file" accept="image/*" class="upload-input" onchange="handleImageUpload(4, this)">
             </div>
           </div>
+          <div style="margin-top: 15px; background: rgba(212,175,55,0.06); border: 1px dashed rgba(212,175,55,0.3); border-radius: 10px; padding: 12px;">
+            <label style="font-size: 0.72rem; font-weight: 700; color: #5a421b; display: block; margin-bottom: 6px;">🔗 Or Set Image by URL:</label>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <select id="slotSelector" class="form-input" style="max-width: 120px; font-size: 0.75rem; padding: 6px 10px;">
+                <option value="1">Slot 1</option>
+                <option value="2">Slot 2</option>
+                <option value="3">Slot 3</option>
+                <option value="4">Slot 4</option>
+              </select>
+              <input type="text" id="slotUrlInput" class="form-input" placeholder="Paste image URL (https://...)" style="flex: 1; font-size: 0.75rem; padding: 6px 10px;">
+              <button type="button" class="dock-btn btn-primary" style="padding: 6px 14px; font-size: 0.75rem; height: auto;" onclick="applySlotImageUrl()">Set URL</button>
+            </div>
+          </div>
           <p style="font-size: 0.65rem; color: #8F6932; margin-top: 10px; opacity: 0.85;">
-            ⚡ Cloudinary Sync Ready: Images uploaded here instantly render in your live preview simulator.
+            ⚡ Dual Upload Supported: Upload from device or paste image URLs directly.
           </p>
         </div>
 
@@ -1023,6 +1036,20 @@
         card.classList.add('has-image');
       };
       reader.readAsDataURL(file);
+    }
+
+    function applySlotImageUrl() {
+      const slot = document.getElementById('slotSelector').value;
+      const url = document.getElementById('slotUrlInput').value.trim();
+      if (!url) {
+        alert('Please enter an image URL');
+        return;
+      }
+      const card = document.getElementById('slot-' + slot);
+      const prev = document.getElementById('prev-' + slot);
+      if (prev) prev.src = url;
+      if (card) card.classList.add('has-image');
+      document.getElementById('slotUrlInput').value = '';
     }
 
     function setDevice(mode) {

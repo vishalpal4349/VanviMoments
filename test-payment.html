@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Razorpay ₹1 Live Test — Vanvi Moments</title>
+  <title>Razorpay Official Standard Checkout — Vanvi Moments</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+  
   <!-- Razorpay Official Checkout SDK -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <link rel="stylesheet" href="css/vanvi-global-experience.css">
+  
   <style>
     :root {
       --bg: #0f050b;
@@ -33,11 +35,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 24px 16px;
     }
     .test-box {
       width: 100%;
-      max-width: 480px;
+      max-width: 500px;
       background: var(--card-bg);
       border: 1.5px solid var(--card-border);
       backdrop-filter: blur(20px);
@@ -74,14 +76,16 @@
       font-size: 13.5px;
       color: var(--muted);
       line-height: 1.5;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
+
+    /* Amount Selector */
     .amount-display {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 120, 175, 0.3);
       border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 24px;
+      padding: 18px 20px;
+      margin-bottom: 18px;
     }
     .amount-val {
       font-size: 44px;
@@ -102,6 +106,63 @@
       margin-top: 4px;
       letter-spacing: 0.5px;
     }
+
+    /* Preset Amount Pills */
+    .amount-pills {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    .amt-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .amt-pill:hover, .amt-pill.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    /* Credentials Callout */
+    .cred-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 20px;
+      text-align: left;
+      font-size: 12px;
+    }
+    .cred-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .cred-row {
+      display: flex;
+      justify-content: space-between;
+      color: #e2e8f0;
+      margin-bottom: 4px;
+      font-family: monospace;
+      font-size: 11.5px;
+    }
+    .cred-label {
+      color: var(--muted);
+      font-family: var(--font-sans);
+    }
+
+    /* Primary Action Button */
     .btn-pay {
       width: 100%;
       background: linear-gradient(135deg, #ff2a7a, #e11d48);
@@ -128,33 +189,54 @@
       cursor: not-allowed;
       transform: none;
     }
-    .alt-link {
-      margin-top: 18px;
-      display: inline-block;
-      font-size: 12px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .alt-link:hover {
-      color: #fff;
-    }
+
+    /* Log Box */
     .log-box {
-      margin-top: 24px;
-      background: rgba(0, 0, 0, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 14px;
       padding: 14px;
       text-align: left;
       font-family: monospace;
       font-size: 11.5px;
       color: #6ee7b7;
-      max-height: 180px;
+      max-height: 160px;
       overflow-y: auto;
       display: none;
       white-space: pre-wrap;
       word-break: break-all;
     }
+
+    /* Success Card */
+    .success-card {
+      display: none;
+      margin-top: 20px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1.5px solid #10b981;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+    .success-card h3 {
+      color: #10b981;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .success-card p {
+      color: #e2e8f0;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .alt-link {
+      margin-top: 18px;
+      display: inline-block;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .alt-link:hover { color: #fff; }
   </style>
 </head>
 <body class="vanvi-gpu-accel" data-vanvi-theme="night">
@@ -167,34 +249,86 @@
     <div class="breadcrumb-trail">
       <a href="index.html">Home</a>
       <span class="crumb-sep">/</span>
-      <span>₹1 Test</span>
+      <span>Razorpay Official Checkout</span>
     </div>
   </nav>
 
   <div class="test-box">
-    <div class="badge">⚡ LIVE RAZORPAY TEST</div>
-    <h1>Test Payment ₹1.00</h1>
-    <p class="sub">Razorpay Standard Checkout verification test. Click below to launch the payment modal.</p>
+    <div class="badge">⚡ RAZORPAY STANDARD LIVE MODAL</div>
+    <h1>Official Razorpay Checkout</h1>
+    <p class="sub">Click below to open the official Razorpay popup modal on this page.</p>
 
+    <!-- Amount Display & Selector -->
     <div class="amount-display">
       <div class="amount-val">
-        <span class="curr">₹</span>1.00
+        <span class="curr">₹</span><span id="displayAmount">5,000.00</span>
       </div>
-      <div class="amount-sub">100 PAISE · TEST TRANSACTION</div>
+      <div class="amount-sub" id="displayPaise">500,000 PAISE · OFFICIAL TEST ORDER</div>
+
+      <div class="amount-pills">
+        <button type="button" class="amt-pill active" onclick="setAmount(5000, this)">₹5,000</button>
+        <button type="button" class="amt-pill" onclick="setAmount(500, this)">₹500</button>
+        <button type="button" class="amt-pill" onclick="setAmount(100, this)">₹100</button>
+        <button type="button" class="amt-pill" onclick="setAmount(1, this)">₹1</button>
+      </div>
     </div>
 
-    <button id="btnPay" class="btn-pay" onclick="startOneRupeePayment()">
-      <span>🔒</span> <span>Pay ₹1.00 via Razorpay</span> <span>→</span>
+    <!-- Test Credentials Info -->
+    <div class="cred-box">
+      <div class="cred-title">📋 Razorpay Test Credentials (Use in Modal)</div>
+      <div class="cred-row">
+        <span class="cred-label">Test Card:</span>
+        <strong>4100 2800 0000 1007</strong>
+      </div>
+      <div class="cred-row">
+        <span class="cred-label">Expiry / CVV:</span>
+        <strong>12/26 · CVV: 123</strong>
+      </div>
+      <div class="cred-row">
+        <span class="cred-label">Test UPI:</span>
+        <strong>test@razorpay</strong>
+      </div>
+      <div class="cred-row">
+        <span class="cred-label">OTP (if asked):</span>
+        <strong>123456</strong>
+      </div>
+    </div>
+
+    <!-- Action Button (NO AUTO-PAY, ONLY OFFICIAL MODAL) -->
+    <button id="btnPay" class="btn-pay" onclick="launchOfficialRazorpayModal()">
+      <span>🔒</span> <span id="btnPayText">Launch Razorpay Modal (₹5,000.00)</span> <span>→</span>
     </button>
 
+    <!-- Success Feedback -->
+    <div id="successCard" class="success-card">
+      <h3>🎉 Payment Verified Successfully!</h3>
+      <p id="successDetails">Your test transaction has been recorded on your Razorpay Dashboard.</p>
+      <div style="margin-top:12px;">
+        <span style="display:inline-block; background:#10b981; color:#fff; font-size:12px; font-weight:700; padding:4px 12px; border-radius:99px;">✓ Step 3 Complete on Razorpay</span>
+      </div>
+    </div>
+
+    <!-- Live Activity Log -->
     <div id="logBox" class="log-box"></div>
 
     <a href="checkout.html?template=1%20Rupee%20Live%20Test&price=1" class="alt-link">
-      Or Test Full Vanvi Checkout Page (₹1) →
+      Or Test Full Vanvi Checkout Page →
     </a>
   </div>
 
   <script>
+    let currentAmountRupees = 5000;
+
+    function setAmount(rupees, btn) {
+      currentAmountRupees = rupees;
+      document.querySelectorAll('.amt-pill').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      document.getElementById('displayAmount').textContent = Number(rupees).toLocaleString('en-IN', { minimumFractionDigits: 2 });
+      document.getElementById('displayPaise').textContent = `${rupees * 100} PAISE · OFFICIAL TEST ORDER`;
+      document.getElementById('btnPayText').textContent = `Launch Razorpay Modal (₹${Number(rupees).toLocaleString('en-IN')}.00)`;
+    }
+
     function log(msg) {
       const b = document.getElementById('logBox');
       b.style.display = 'block';
@@ -202,73 +336,97 @@
       b.scrollTop = b.scrollHeight;
     }
 
-    async function startOneRupeePayment() {
+    async function launchOfficialRazorpayModal() {
       const btn = document.getElementById('btnPay');
       const originalText = btn.innerHTML;
       btn.disabled = true;
-      btn.innerHTML = '<span>⏳</span> Connecting to Razorpay...';
-      log('1. Initiating order for ₹1.00 (100 paise)...');
+      btn.innerHTML = '<span>⏳</span> Connecting to Razorpay Server...';
+
+      const amountPaise = Math.round(currentAmountRupees * 100);
+      log(`1. Creating order on Razorpay for ₹${currentAmountRupees} (${amountPaise} paise)...`);
 
       try {
-        // Step 1: Create Order on Backend
-        const createRes = await fetch('/api/create-order', {
+        // STEP 1: Create Order on Backend (Hits Razorpay API https://api.razorpay.com/v1/orders)
+        const res = await fetch('/api/create-order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            amount: 100, // 100 paise = ₹1.00
+            amount: amountPaise,
             currency: 'INR',
-            receipt: 'rcpt_1rs_' + Date.now(),
-            notes: { test: '1 Rupee Razorpay Standard Checkout Test' }
+            receipt: 'rcpt_' + Date.now(),
+            notes: {
+              app: 'VanviMoments',
+              purpose: 'Razorpay Dashboard Onboarding Test'
+            }
           })
         });
 
-        const orderData = await createRes.json();
-        if (!createRes.ok || !orderData.order_id) {
-          throw new Error(orderData.error || 'Failed to generate order ID');
+        const data = await res.json();
+        if (!res.ok || !data.order_id) {
+          throw new Error(data.error || 'Failed to create order on Razorpay API.');
         }
 
-        log(`✓ Order Created: ${orderData.order_id}`);
-        log('2. Opening Razorpay modal...');
+        log(`✓ Live Order Created: ${data.order_id}`);
+        log(`✓ Key ID: ${data.key_id}`);
+        log('2. Opening official Razorpay Standard Checkout modal...');
 
-        // Step 2: Open Razorpay Standard Checkout Modal
+        // STEP 2: Open Official Razorpay Checkout Modal
         const options = {
-          key: orderData.key_id,
-          amount: orderData.amount,
-          currency: orderData.currency || 'INR',
+          key: data.key_id,
+          amount: data.amount,
+          currency: data.currency || 'INR',
           name: 'Vanvi Moments',
-          description: '₹1.00 Live Test Payment',
+          description: `Test Celebration Order (₹${currentAmountRupees})`,
           image: 'assets/favicon.svg',
-          order_id: orderData.order_id,
+          order_id: data.order_id,
           prefill: {
-            name: 'Vanvi Tester',
-            email: 'test@vanvimoments.shop',
+            name: 'Vanvi Creator',
+            email: 'creator@vanvimoments.shop',
             contact: '9999999999'
           },
           theme: {
             color: '#ff2a7a'
           },
           handler: async function (response) {
-            log(`✓ Payment Received: ${response.razorpay_payment_id}`);
-            log('3. Verifying signature on server...');
+            log('✓ Razorpay Modal Payment Received!');
+            log(`  Payment ID: ${response.razorpay_payment_id}`);
+            log(`  Order ID: ${response.razorpay_order_id}`);
+            log('3. Verifying HMAC-SHA256 signature on backend...');
 
-            // Step 3: Verify Signature on Backend
-            const verifyRes = await fetch('/api/verify-payment', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature
-              })
-            });
+            // STEP 3: Verify Signature on Backend
+            try {
+              const verifyRes = await fetch('/api/verify-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature
+                })
+              });
 
-            const verifyData = await verifyRes.json();
-            if (verifyRes.ok && verifyData.success) {
-              log('🎉 SIGNATURE VERIFIED! Payment Successful!');
-              btn.innerHTML = '<span>✓</span> <span>Payment Complete!</span>';
-              btn.style.background = '#10b981';
-            } else {
-              log('❌ Signature verification failed: ' + (verifyData.error || 'Mismatch'));
+              const verifyData = await verifyRes.json();
+              if (verifyRes.ok && verifyData.success) {
+                log('🎉 SIGNATURE VERIFIED! Real test payment recorded on Razorpay Dashboard!');
+                btn.innerHTML = '<span>✓</span> <span>Payment Complete!</span>';
+                btn.style.background = '#10b981';
+
+                const card = document.getElementById('successCard');
+                if (card) {
+                  card.style.display = 'block';
+                  document.getElementById('successDetails').innerHTML = `
+                    Payment ID: <code>${response.razorpay_payment_id}</code><br>
+                    Order ID: <code>${response.razorpay_order_id}</code><br>
+                    Amount: <strong>₹${currentAmountRupees}.00</strong>
+                  `;
+                }
+              } else {
+                log('❌ Verification Error: ' + (verifyData.error || 'Signature mismatch'));
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+              }
+            } catch (vErr) {
+              log('❌ Verification network error: ' + vErr.message);
               btn.disabled = false;
               btn.innerHTML = originalText;
             }
@@ -282,21 +440,23 @@
           }
         };
 
-        const rzp = new Razorpay(options);
+        const rzp = new window.Razorpay(options);
+
         rzp.on('payment.failed', function (resp) {
-          log('❌ Payment failed: ' + (resp.error ? resp.error.description : 'Unknown'));
+          log('❌ Razorpay Payment Failed: ' + (resp.error ? resp.error.description : 'Unknown error'));
           btn.disabled = false;
           btn.innerHTML = originalText;
         });
 
         rzp.open();
+
       } catch (err) {
         log('❌ Error: ' + err.message);
         btn.disabled = false;
         btn.innerHTML = originalText;
+        alert('Could not open Razorpay modal: ' + err.message);
       }
     }
   </script>
-  <script src="js/vanvi-navigation.js"></script>
 </body>
 </html>

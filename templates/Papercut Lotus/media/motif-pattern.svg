@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="192" height="384" viewBox="0 0 192 384" fill="none"
+     role="img" aria-label="Papercut flower background pattern">
+  <title>Papercut flower motif - brick repeat unit</title>
+
+  <!--
+    Seamless repeat unit for the background, 192 x 384.
+
+    The unit is two rows tall because the layout is a brick/half-drop: row B is
+    offset half a step from row A, so a single-row tile could not repeat.
+      row A  flower at (96, 96)
+      row B  flowers at (0, 288) and (192, 288) - one flower split across the
+             vertical seam; the two halves meet when the tile repeats.
+    Tiled, that gives flowers every 192px across and a row every 192px down,
+    alternate rows offset by 96px - the rhythm in the reference (spacing is
+    ~1.6x the flower height).
+
+    Flower geometry and the three inset shadows are taken verbatim from
+    flower1.svg. It is placed at scale 0.72973 so the 74-unit petal lands at
+    54px. Note the blurs scale with it (stdDeviation 20 -> 14.6 rendered px);
+    that is intended, an unscaled 20px blur would swallow a 23px-wide petal.
+
+    Render at background-size: 192px 384px for 54px petals. To resize the whole
+    motif, scale both numbers by the same factor.
+  -->
+
+  <defs>
+    <!-- inset 0 4px 40px #083B4F / inset 0 4px 20px rgba(0,0,0,.5) / inset 0 -0.5px 2px #99DBF5 -->
+    <filter id="cut" x="35.7891" y="35.5" width="159.727" height="164.229"
+            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="4"/>
+      <feGaussianBlur stdDeviation="20"/>
+      <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0313726 0 0 0 0 0.231373 0 0 0 0 0.309804 0 0 0 1 0"/>
+      <feBlend mode="normal" in2="shape" result="effect1_innerShadow"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="4"/>
+      <feGaussianBlur stdDeviation="10"/>
+      <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+      <feBlend mode="normal" in2="effect1_innerShadow" result="effect2_innerShadow"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="-0.5"/>
+      <feGaussianBlur stdDeviation="1"/>
+      <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.60046 0 0 0 0 0.858391 0 0 0 0 0.95954 0 0 0 1 0"/>
+      <feBlend mode="normal" in2="effect2_innerShadow" result="effect3_innerShadow"/>
+    </filter>
+
+    <!-- one petal, pointing up from the flower centre at (115.65, 115.87) -->
+    <path id="petal" fill="#083B4F"
+          d="M116.379 38.165C90.5417 59.166 91.0402 59.666 116.379 112.165C140.04 59.166 140.04 59.166 116.379 38.165Z"/>
+
+    <!-- six petals at 60 degrees, filtered as one shape so the centre reads as a single cut -->
+    <g id="flower" filter="url(#cut)">
+      <use xlink:href="#petal"/>
+      <use xlink:href="#petal" transform="translate(158.169 -42.2268) rotate(60)"/>
+      <use xlink:href="#petal" transform="translate(273.823 73.638) rotate(120)"/>
+      <use xlink:href="#petal" transform="translate(231.308 231.73) rotate(-180)"/>
+      <use xlink:href="#petal" transform="translate(73.1389 273.956) rotate(-120)"/>
+      <use xlink:href="#petal" transform="translate(-42.5149 158.092) rotate(-60)"/>
+    </g>
+  </defs>
+
+  <!-- row A -->
+  <g transform="translate(11.606 10.175) scale(0.72973)"><use xlink:href="#flower"/></g>
+  <!-- row B, split across the vertical seam -->
+  <g transform="translate(-84.394 202.175) scale(0.72973)"><use xlink:href="#flower"/></g>
+  <g transform="translate(107.606 202.175) scale(0.72973)"><use xlink:href="#flower"/></g>
+</svg>

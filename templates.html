@@ -861,6 +861,7 @@
         <span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Vanvi Moments✦</span>
       </a>
       <div class="nav-pill-actions">
+        <a href="invitation-maker.html" class="nav-link-item" style="color:#d4af37; font-weight:800; display:inline-flex; align-items:center; gap:4px;" title="Royal Wedding & Event Invitation Studio"><span>👑</span> <span>Invite Studio</span></a>
         <a href="custom-experience.html" class="nav-link-item">Bespoke</a>
         <a href="#catalogSection" class="nav-create-pill" onclick="document.getElementById('catalogSection')?.scrollIntoView({behavior:'smooth'});document.getElementById('searchInput')?.focus();return false;">Choose Template ✦</a>
       </div>
@@ -949,31 +950,26 @@
 
     <!-- Smart Instant Quick Searches (Horizontally scrollable, prevent wrapping, clipping & overflow) -->
     <div class="quick-search-tags-row" id="quickSearchTagsRow">
-      <span class="quick-search-label" style="font-size:10.5px; font-weight:800; color:var(--text-muted); white-space:nowrap; flex-shrink:0;">⚡ Quick Search:</span>
+      <span class="quick-search-label" style="font-size:10.5px; font-weight:800; color:var(--text-muted); white-space:nowrap; flex-shrink:0;">⚡ Quick Filter:</span>
+      <button type="button" class="quick-tag-chip" onclick="applySearchTag('wedding')">💍 Wedding &amp; Vivah</button>
       <button type="button" class="quick-tag-chip" onclick="applySearchTag('birthday')">🎂 Birthday</button>
-      <button type="button" class="quick-tag-chip" onclick="applySearchTag('love')">💌 Love Letter</button>
-      <button type="button" class="quick-tag-chip" onclick="applySearchTag('candle')">🕯️ Candle Cake</button>
-      <button type="button" class="quick-tag-chip" onclick="applySearchTag('magazine')">📖 E-Magazine</button>
-      <button type="button" class="quick-tag-chip" onclick="applySearchTag('anniversary')">💍 Anniversary</button>
-      <button type="button" class="quick-tag-chip" onclick="applySearchTag('vip')">👑 ₹700+ VIP</button>
+      <button type="button" class="quick-tag-chip" onclick="applySearchTag('love')">💖 Love &amp; Anniversary</button>
+      <button type="button" class="quick-tag-chip" onclick="applySearchTag('family')">👨‍👩‍👧 Family &amp; Friends</button>
+      <button type="button" class="quick-tag-chip" onclick="applySearchTag('apology')">💌 Apology</button>
+      <button type="button" class="quick-tag-chip" onclick="applySearchTag('free')">🎁 Free (₹0)</button>
     </div>
 
-    <!-- Smart Unified Occasion & Category Filter Strip (Vibrant & Colorful) -->
+    <!-- Smart Unified Occasion & Category Filter Strip (Clean & Premium) -->
     <div class="atelier-filter-hub">
       <nav class="quick-occasions-strip" id="quickOccasionsStrip" aria-label="Smart Categories">
         <button type="button" id="quick-cat-all" class="quick-cat-pill active" data-cat="all" onclick="selectQuickCategory('all')">✨ All Moments</button>
-        <a href="custom-experience.html" class="quick-cat-pill pill-bespoke" style="text-decoration:none; background:linear-gradient(135deg, #fffbeb, #fef3c7); border-color:#d97706; color:#92400e; font-weight:850; display:inline-flex; align-items:center; gap:4px;">👑 Bespoke Atelier (₹999+)</a>
+        <button type="button" id="quick-cat-wedding" class="quick-cat-pill" data-cat="wedding" onclick="selectQuickCategory('wedding')">💍 Wedding &amp; Vivah (17)</button>
+        <button type="button" id="quick-cat-birthday" class="quick-cat-pill" data-cat="birthday" onclick="selectQuickCategory('birthday')">🎂 Birthday (7)</button>
+        <button type="button" id="quick-cat-love" class="quick-cat-pill" data-cat="love" onclick="selectQuickCategory('love')">💖 Love &amp; Anniversary (3)</button>
+        <button type="button" id="quick-cat-family" class="quick-cat-pill" data-cat="family" onclick="selectQuickCategory('family')">👨‍👩‍👧 Family &amp; Friends (2)</button>
+        <button type="button" id="quick-cat-apology" class="quick-cat-pill" data-cat="apology" onclick="selectQuickCategory('apology')">💌 Apology (1)</button>
         <button type="button" id="quick-cat-free" class="quick-cat-pill pill-free" data-cat="free" onclick="selectQuickCategory('free')">🎁 100% Free</button>
-        <button type="button" id="quick-cat-vip" class="quick-cat-pill pill-vip" data-cat="vip" onclick="selectQuickCategory('vip')">👑 Ultra VIP (₹700+)</button>
-        <button type="button" id="quick-cat-birthday" class="quick-cat-pill" data-cat="birthday" onclick="selectQuickCategory('birthday')">🎂 Birthday</button>
-        <button type="button" id="quick-cat-love" class="quick-cat-pill" data-cat="love" onclick="selectQuickCategory('love')">💖 Love &amp; Romance</button>
-        <button type="button" id="quick-cat-anniversary" class="quick-cat-pill" data-cat="anniversary" onclick="selectQuickCategory('anniversary')">💍 Anniversary</button>
-        <button type="button" id="quick-cat-magazine" class="quick-cat-pill" data-cat="magazine" onclick="selectQuickCategory('magazine')">📖 E-Magazine</button>
-        <button type="button" id="quick-cat-ritual" class="quick-cat-pill" data-cat="ritual" onclick="selectQuickCategory('ritual')">🕯️ 3D Rituals</button>
-        <button type="button" id="quick-cat-letter" class="quick-cat-pill" data-cat="apology" onclick="selectQuickCategory('apology')">💌 Love Letters</button>
-        <button type="button" id="quick-cat-friendship" class="quick-cat-pill" data-cat="friendship" onclick="selectQuickCategory('friendship')">👯 Friendship</button>
-        <button type="button" id="quick-cat-family" class="quick-cat-pill" data-cat="family" onclick="selectQuickCategory('family')">👨‍👩‍👦 Family</button>
-        <button type="button" id="quick-cat-memories" class="quick-cat-pill" data-cat="memories" onclick="selectQuickCategory('memories')">📸 Memories</button>
+        <button type="button" id="quick-cat-vip" class="quick-cat-pill pill-vip" data-cat="vip" onclick="selectQuickCategory('vip')">👑 Palace VIP (₹700+)</button>
       </nav>
     </div>
 
@@ -989,6 +985,19 @@
     
     <!-- 5A. Curated Occasion Rails (Default Discovery View) -->
     <div id="discoveryRailsView">
+      
+      <!-- Royal Invitation Studio Luxe Banner -->
+      <div style="background:linear-gradient(135deg, #2b0b18 0%, #170813 100%); border:1.5px solid rgba(212,175,55,0.4); border-radius:20px; padding: clamp(16px, 3.5vw, 24px); margin-bottom: 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; box-shadow:0 12px 36px rgba(43,11,24,0.35);">
+        <div style="max-width:580px;">
+          <span style="font-size:10.5px; font-weight:850; letter-spacing:1.2px; text-transform:uppercase; color:#d4af37; display:flex; align-items:center; gap:6px;">✦ NEW · VANVI LUXE STUDIO</span>
+          <h2 style="font-family:'Cormorant Garamond', Georgia, serif; font-size:clamp(20px, 3.8vw, 26px); color:#fff; font-weight:750; margin:4px 0 6px;">Royal Indian Wedding &amp; Event Invitation Maker</h2>
+          <p style="font-size:12.5px; color:#d8b8cc; line-height:1.45; margin:0;">Craft bespoke Vivah &amp; celebration cards with live venue QR codes, Sanskrit shlokas, and 4K Ultra-HD downloads. Ready in 60 seconds.</p>
+        </div>
+        <a href="invitation-maker.html" style="background:linear-gradient(135deg, #f7d774 0%, #d4af37 50%, #aa7c11 100%); color:#170d14; text-decoration:none; font-size:12.5px; font-weight:850; padding:10px 22px; border-radius:99px; box-shadow:0 4px 16px rgba(212,175,55,0.35); display:inline-flex; align-items:center; gap:6px; flex-shrink:0;">
+          <span>Launch Studio</span> <span>✦</span>
+        </a>
+      </div>
+
       <!-- Section 1: Featured Moments -->
       <section class="occasion-section">
         <div class="section-header-row">
@@ -1011,9 +1020,18 @@
       <section class="occasion-section">
         <div class="section-header-row">
           <h2 class="section-title">🎂 Birthday Magic</h2>
-          <a href="category-birthday.html" class="section-view-all-pill" id="viewall-birthday">View All (5) →</a>
+          <a href="category-birthday.html" class="section-view-all-pill" id="viewall-birthday">View All (7) →</a>
         </div>
         <div class="cards-rail" id="rail-birthday"></div>
+      </section>
+
+      <!-- Section 3B: Royal Vivah & Wedding Celebrations -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <h2 class="section-title">💍 Royal Vivah &amp; Weddings</h2>
+          <a href="category-wedding.html" class="section-view-all-pill" id="viewall-wedding">View All (17) →</a>
+        </div>
+        <div class="cards-rail" id="rail-wedding"></div>
       </section>
 
       <!-- Section 4: Love & Romance -->
@@ -1068,71 +1086,6 @@
           <a href="category-premium.html" class="section-view-all-pill" id="viewall-premium">View All (2) →</a>
         </div>
         <div class="cards-rail" id="rail-premium"></div>
-      </section>
-
-      <!-- Section 9B: Vanvi Bespoke Private Atelier Showcase -->
-      <section class="occasion-section" style="margin-top:28px;">
-        <div style="background:linear-gradient(135deg, #09090b 0%, #1c1917 50%, #171115 100%); border-radius:24px; padding:24px 20px; border:1px solid rgba(217,119,6,0.35); box-shadow:0 12px 36px rgba(0,0,0,0.25); position:relative; overflow:hidden;">
-          <div style="position:absolute; top:-40px; right:-40px; width:160px; height:160px; background:radial-gradient(circle, rgba(217,119,6,0.2), transparent 70%); border-radius:50%; pointer-events:none;"></div>
-          
-          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
-            <div>
-              <span style="font-size:10px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:#fbbf24; background:rgba(217,119,6,0.18); border:1px solid rgba(251,191,36,0.35); padding:3px 10px; border-radius:99px; display:inline-block; margin-bottom:6px;">✦ Private Commission Atelier</span>
-              <h2 style="font-family:var(--font-serif); font-size:clamp(18px, 4vw, 24px); font-weight:800; color:#fff; margin:0; line-height:1.2;">
-                Locked Bespoke Masterpieces
-              </h2>
-            </div>
-            <a href="custom-experience.html" style="background:linear-gradient(135deg, #d97706, #b45309); color:#fff; font-size:12px; font-weight:800; padding:8px 18px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:6px; box-shadow:0 4px 15px rgba(217,119,6,0.4);">
-              Explore Commission Desk →
-            </a>
-          </div>
-
-          <p style="color:#d4d4d8; font-size:12.5px; line-height:1.5; margin:0 0 18px 0; max-width:680px;">
-            Crafted exclusively for high-touch weddings, royal proposals, and once-in-a-lifetime milestones. Built 1-on-1 with dedicated art directors, custom 3D web animations, and private secure hosting.
-          </p>
-
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:14px;">
-            <!-- Card 1: Custom Wedding Website -->
-            <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:18px; display:flex; flex-direction:column; justify-content:space-between; backdrop-filter:blur(8px);">
-              <div>
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
-                  <span style="font-size:11px; font-weight:800; color:#fbbf24; background:rgba(251,191,36,0.15); padding:2px 8px; border-radius:6px; border:1px solid rgba(251,191,36,0.25);">🔒 Locked VIP Product</span>
-                  <span style="font-size:11px; color:#a1a1aa; font-weight:600;">Full Website</span>
-                </div>
-                <h3 style="font-family:var(--font-serif); font-size:16px; font-weight:750; color:#fff; margin:0 0 6px 0;">Bespoke Wedding Website</h3>
-                <p style="font-size:12px; color:#a1a1aa; margin:0 0 12px 0; line-height:1.4;">Multi-page narrative experience, RSVP manager, gift registry, audio player &amp; optional custom .in domain.</p>
-              </div>
-              <div>
-                <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:12px;">
-                  <span style="font-size:11px; color:#a1a1aa;">Starting at</span>
-                  <span style="font-size:18px; font-weight:850; color:#fbbf24;">₹4,999</span>
-                  <span style="font-size:11px; color:#71717a;">to ₹19,999</span>
-                </div>
-                <a href="custom-experience.html#commissionForm" style="display:block; text-align:center; background:linear-gradient(135deg, #f59e0b, #d97706); color:#18181b; font-weight:800; font-size:12px; padding:9px 14px; border-radius:10px; text-decoration:none;">Commission Website ✦</a>
-              </div>
-            </div>
-
-            <!-- Card 2: Bespoke Custom Template -->
-            <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:18px; display:flex; flex-direction:column; justify-content:space-between; backdrop-filter:blur(8px);">
-              <div>
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
-                  <span style="font-size:11px; font-weight:800; color:#fbbf24; background:rgba(251,191,36,0.15); padding:2px 8px; border-radius:6px; border:1px solid rgba(251,191,36,0.25);">🔒 Locked VIP Product</span>
-                  <span style="font-size:11px; color:#a1a1aa; font-weight:600;">Custom Design</span>
-                </div>
-                <h3 style="font-family:var(--font-serif); font-size:16px; font-weight:750; color:#fff; margin:0 0 6px 0;">Bespoke Custom Template</h3>
-                <p style="font-size:12px; color:#a1a1aa; margin:0 0 12px 0; line-height:1.4;">Completely unique interactive card or ritual engineered from your photos, voice memos, and secret story arc.</p>
-              </div>
-              <div>
-                <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:12px;">
-                  <span style="font-size:11px; color:#a1a1aa;">Starting at</span>
-                  <span style="font-size:18px; font-weight:850; color:#fbbf24;">₹999</span>
-                  <span style="font-size:11px; color:#71717a;">to ₹19,999</span>
-                </div>
-                <a href="custom-experience.html#commissionForm" style="display:block; text-align:center; background:linear-gradient(135deg, #f59e0b, #d97706); color:#18181b; font-weight:800; font-size:12px; padding:9px 14px; border-radius:10px; text-decoration:none;">Commission Template ✦</a>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       <!-- Section 10: You Might Also Like / More Templates Worth A Look -->
@@ -1295,7 +1248,13 @@
         'love-in-clouds': 'assets/templates/vanvi-love-in-clouds.jpg',
         'hues-whispers-luxe': 'assets/templates/hues-whispers-luxe.jpg',
         'vanvi-royal-wedding': 'assets/templates/vanvi-royal-wedding-showcase.jpg',
-        'maa-papa-tribute': 'assets/templates/vanvi-anniversary-gold-luxe.jpg'
+        'maa-papa-tribute': 'assets/templates/vanvi-anniversary-gold-luxe.jpg',
+        'for-maa': 'templates/For Maa/assets/images/card.jpg',
+        'for-maa-01': 'templates/For Maa/assets/images/card.jpg',
+        'For Maa': 'templates/For Maa/assets/images/card.jpg',
+        'best-friend-01': 'assets/templates/vanvi-friendship-showcase.jpg',
+        'birthday-box': 'assets/templates/vanvi-birthday-box.jpg',
+        'anniversary-eternal': 'assets/templates/vanvi-anniversary-eternal.jpg'
       };
 
       // Filter State
@@ -1381,36 +1340,27 @@
         const tagline = getCleanTagline(t);
         const discountText = t.discount || (orig > p ? `${Math.round(((orig - p) / orig) * 100)}% off` : '');
 
-        const isLocked = (typeof window !== 'undefined' && window.VanviVault && typeof window.VanviVault.isUnlocked === 'function')
-          ? !window.VanviVault.isUnlocked(t.id || t.slug)
-          : false;
+        const isLocked = false;
 
         const directPreviewUrl = t.templatePath || (t.id ? `templates/${safeId}/index.html` : `preview.html?template=${safeId}`);
         const directBuilderUrl = t.builderPath || (t.id ? `templates/${safeId}/builder.html` : `builder.html?template=${safeId}&occasion=${safeOccasion}`);
 
         return `
-          <article class="vanvi-card ${isLux ? 'is-luxury' : ''} ${isLocked ? 'is-vault-locked' : ''}" data-cat="${escapeHtml(catSlug)}" id="card-${t.id}" data-vault-locked="${isLocked ? 'true' : 'false'}" data-vault-title="${escapeHtml(t.name)}">
-            <div class="card-art-box" onclick="${isLocked ? `window.VanviVault && window.VanviVault.openModal('${escapeHtml(t.name)}')` : `window.location.href='${directPreviewUrl}'`}" title="${isLocked ? 'Locked in Vault — Coming Soon' : `Experience ${escapeHtml(t.name)}`}">
+          <article class="vanvi-card ${isLux ? 'is-luxury' : ''}" data-cat="${escapeHtml(catSlug)}" id="card-${t.id}">
+            <div class="card-art-box" onclick="window.location.href='${directPreviewUrl}'" title="Experience ${escapeHtml(t.name)}">
               <div class="vanvi-brand-corner-badge" title="Vanvi Moments Original">
                 <img src="assets/vanvi-moments-official-logo.png" alt="Vanvi Moments" class="brand-badge-img" loading="lazy">
               </div>
-              ${isLocked ? `
-                <span class="vault-lock-badge">🔒 VAULT DROP</span>
-              ` : `
-                <span class="card-badge-top-right ${isFree ? 'free' : (isLux ? 'luxury' : 'price')}">
-                  ${isFree ? '🎁 Free' : (isLux ? '✦ Signature' : `₹${p}`)}
-                </span>
-              `}
+              <span class="card-badge-top-right ${isFree ? 'free' : (isLux ? 'luxury' : 'price')}">
+                ${isFree ? '🎁 Free' : (isLux ? '✦ Signature' : `₹${p}`)}
+              </span>
               <img class="card-art-backdrop" src="${thumb}" alt="" aria-hidden="true" loading="lazy">
               <img class="card-art-img" src="${thumb}" alt="${escapeHtml(t.name)}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?w=700&auto=format&fit=crop&q=80';">
-              ${isLocked ? `
-                <div class="vault-overlay-center"><span class="vault-lock-icon">🔒</span></div>
-              ` : ''}
             </div>
 
             <div class="card-body">
               <div class="card-exp-hint">
-                <span class="exp-hint-pill">${isLocked ? '🔒 Private Atelier' : escapeHtml(expHint)}</span>
+                <span class="exp-hint-pill">${escapeHtml(expHint)}</span>
               </div>
               <div class="card-header-meta">
                 <h3 class="card-title" title="${escapeHtml(t.name)}">${escapeHtml(t.name)}</h3>
@@ -1425,23 +1375,17 @@
                 </div>
                 <div class="card-status-subtle">
                   <span class="status-dot">✦</span>
-                  <span class="status-txt">${isLocked ? 'Releasing Soon' : (isFree ? 'Forever Free' : 'Lifetime Access')}</span>
+                  <span class="status-txt">${isFree ? 'Forever Free' : 'Lifetime Access'}</span>
                 </div>
               </div>
 
               <div class="card-actions-grid">
-                ${isLocked ? `
-                  <button type="button" class="btn-vault-locked" onclick="window.VanviVault && window.VanviVault.openModal('${escapeHtml(t.name)}')" title="Unlock Early Access">
-                    <span>🔒 Private Vault — Drop Soon ✦</span>
-                  </button>
-                ` : `
-                  <a href="${directPreviewUrl}" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
-                    <span>Preview</span>
-                  </a>
-                  <a href="${directBuilderUrl}" class="btn-make-yours" title="Create ${escapeHtml(t.name)}">
-                    <span>Create ✦</span>
-                  </a>
-                `}
+                <a href="${directPreviewUrl}" class="btn-take-look" title="Preview ${escapeHtml(t.name)}">
+                  <span>Preview</span>
+                </a>
+                <a href="${directBuilderUrl}" class="btn-make-yours" title="Create ${escapeHtml(t.name)}">
+                  <span>Create ✦</span>
+                </a>
               </div>
             </div>
           </article>
@@ -1479,22 +1423,15 @@
             } else if (state.category === 'premium') {
               if (t.isFree || Number(t.price || 0) === 0) return false;
             } else if (state.category === 'wedding') {
-              const id = (t.id || '').toLowerCase();
-              if (!c.includes('wedding') && !c.includes('vivah') && !c.includes('shaadi') && !c.includes('palace') && !c.includes('mehendi') && !c.includes('temple') && !c.includes('lake') && !c.includes('waterfront') && !id.includes('wedding') && !id.includes('vivah') && !id.includes('mehendi') && !id.includes('temple') && !id.includes('lake')) return false;
+              if (!c.includes('wedding') && !c.includes('vivah') && !c.includes('shaadi') && !c.includes('palace') && !c.includes('mehendi') && !c.includes('temple') && !c.includes('lake')) return false;
+            } else if (state.category === 'birthday') {
+              if (!c.includes('birthday')) return false;
             } else if (state.category === 'love') {
-              if (!c.includes('love') && !c.includes('romance')) return false;
-            } else if (state.category === 'anniversary') {
-              if (!c.includes('anniversary')) return false;
-            } else if (state.category === 'friendship') {
-              if (!c.includes('friend')) return false;
+              if (!c.includes('love') && !c.includes('romance') && !c.includes('anniversary')) return false;
             } else if (state.category === 'family') {
-              if (!c.includes('family') && !c.includes('thank')) return false;
+              if (!c.includes('family') && !c.includes('friend') && !c.includes('thank')) return false;
             } else if (state.category === 'apology') {
               if (!c.includes('apology') && !c.includes('sorry')) return false;
-            } else if (state.category === 'celebration') {
-              if (!c.includes('celebration') && !c.includes('festive') && !c.includes('mehendi') && !c.includes('graduation')) return false;
-            } else if (state.category === 'memories') {
-              if (!c.includes('memor') && !c.includes('timeline') && !c.includes('farewell')) return false;
             } else if (!c.includes(state.category)) {
               return false;
             }
@@ -1597,6 +1534,11 @@
             filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('birthday')
           },
           {
+            railId: 'rail-wedding',
+            viewAllId: 'viewall-wedding',
+            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('wedding')
+          },
+          {
             railId: 'rail-love',
             viewAllId: 'viewall-love',
             filterFn: t => {
@@ -1646,6 +1588,14 @@
           if (!el) return;
 
           const items = all.filter(cfg.filterFn);
+          const sec = el.closest('.occasion-section');
+          if (items.length === 0) {
+            if (sec) sec.style.display = 'none';
+            return;
+          } else {
+            if (sec) sec.style.display = 'block';
+          }
+
           if (viewAllEl) {
             viewAllEl.innerHTML = `View All (${items.length}) →`;
           }
@@ -1774,18 +1724,14 @@
 
         const all = getTemplates();
         const categories = [
-          { id: 'all', label: 'All Categories' },
-          { id: 'wedding', label: '👑 Royal Vivah' },
+          { id: 'all', label: '✨ All Moments' },
+          { id: 'wedding', label: '💍 Wedding & Vivah' },
           { id: 'birthday', label: '🎂 Birthday' },
-          { id: 'love', label: '💖 Love' },
-          { id: 'anniversary', label: '💍 Anniversary' },
-          { id: 'friendship', label: '👯 Friendship' },
-          { id: 'family', label: '👨‍👩‍👦 Family' },
-          { id: 'apology', label: '🕊️ Apology' },
-          { id: 'celebration', label: '🎉 Celebration' },
-          { id: 'memories', label: '📸 Memories' },
+          { id: 'love', label: '💖 Love & Anniversary' },
+          { id: 'family', label: '👨‍👩‍👧 Family & Friends' },
+          { id: 'apology', label: '💌 Apology' },
           { id: 'free', label: '🎁 100% Free' },
-          { id: 'premium', label: '👑 VIP Signature' }
+          { id: 'premium', label: '👑 Palace VIP (₹700+)' }
         ];
 
         let html = '';
@@ -1798,31 +1744,21 @@
           } else if (cat.id === 'premium') {
             count = all.filter(t => !t.isFree && Number(t.price || 0) > 0).length;
           } else if (cat.id === 'wedding') {
-            count = all.filter(t => {
-              const c = (t.categorySlug || t.category || '').toLowerCase();
-              const id = (t.id || '').toLowerCase();
-              return c.includes('wedding') || c.includes('vivah') || c.includes('shaadi') || c.includes('palace') || id.includes('wedding') || id.includes('vivah');
-            }).length;
+            count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes('wedding')).length;
+          } else if (cat.id === 'birthday') {
+            count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes('birthday')).length;
           } else if (cat.id === 'love') {
             count = all.filter(t => {
               const c = (t.categorySlug || t.category || '').toLowerCase();
-              return c.includes('love') || c.includes('romance');
-            }).length;
-          } else if (cat.id === 'anniversary') {
-            count = all.filter(t => {
-              const c = (t.categorySlug || t.category || '').toLowerCase();
-              return c.includes('anniversary');
+              return c.includes('love') || c.includes('anniversary');
             }).length;
           } else if (cat.id === 'family') {
             count = all.filter(t => {
               const c = (t.categorySlug || t.category || '').toLowerCase();
-              return c.includes('family') || c.includes('thank');
+              return c.includes('family') || c.includes('friend');
             }).length;
-          } else if (cat.id === 'memories') {
-            count = all.filter(t => {
-              const c = (t.categorySlug || t.category || '').toLowerCase();
-              return c.includes('memor') || c.includes('timeline') || c.includes('farewell');
-            }).length;
+          } else if (cat.id === 'apology') {
+            count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes('apology')).length;
           } else {
             count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes(cat.id)).length;
           }

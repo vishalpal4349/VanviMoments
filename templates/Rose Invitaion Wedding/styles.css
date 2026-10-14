@@ -1,0 +1,3059 @@
+:root {
+  /* Color styles */
+  --brown: rgba(128, 73, 0, 1);
+  --paper-border: rgba(139, 95, 48, 1);
+
+  /* Page ground. Every scene that used to be flat white now reads this, and so
+     do the edge fades (.screen__gradient / .fountain__fade / .gallery__edge /
+     .end__edge), which fade artwork out into the page. --page-bg-0 must stay
+     the SAME rgb as --page-bg with alpha 0: `transparent` is rgba(0,0,0,0), so
+     interpolating to it greys the middle of every fade. */
+  --page-bg: #ffffff;
+  --page-bg-0: rgba(255, 255, 255, 0);
+  /* Height the fades used to get from white-gradient.webp's 1440x131 intrinsic
+     ratio at width:100%. Kept as a viewport ratio so they scale as before. */
+  --edge-fade-h: calc(100vw * 131 / 1440);
+
+  /* Font families */
+  --font-primary: 'Cormorant Garamond', serif;
+  --font-secondary: 'Sora', sans-serif;
+
+  /* Font-weight styles */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-semi-bold: 600;
+
+  /* Font-style styles */
+  --font-normal: normal;
+  --font-italic: italic;
+
+  /* Text styles - full `font` shorthands: [style] [weight] [size] [family] */
+  --primary--h2-b: var(--font-semi-bold) 52.5px var(--font-primary);
+  --primary--h1-i: var(--font-italic) var(--font-regular) 59.5px var(--font-primary);
+  --primary--h3-b: var(--font-semi-bold) 47.5px var(--font-primary);
+  --primary--h3-i: var(--font-italic) var(--font-regular) 47.5px var(--font-primary);
+  --primary--h3-li: var(--font-italic) var(--font-light) 47.5px var(--font-primary);
+  --primary--b1: var(--font-semi-bold) 47.5px var(--font-primary);
+  --primary--b1-b: var(--font-semi-bold) 38px var(--font-primary);
+  --primary--b1-i: var(--font-italic) var(--font-regular) 38px var(--font-primary);
+  --primary--b2-b: var(--font-semi-bold) 28.5px var(--font-primary);
+  --primary--b3-r: var(--font-regular) 28.5px var(--font-primary);
+  --primary--b3-i: var(--font-italic) var(--font-regular) 28.5px var(--font-primary);
+  --primary--b3-b: var(--font-semi-bold) 28.5px var(--font-primary);
+  --primary--b4-r: var(--font-regular) 24px var(--font-primary);
+  --primary--b5-r: var(--font-regular) 21.5px var(--font-primary);
+  --primary--b6-r: var(--font-regular) 21.5px var(--font-primary);
+  --primary--secondary--b2-r: var(--font-regular) 28px var(--font-secondary);
+  --primary--secondary--b3-r: var(--font-regular) 24px var(--font-secondary);
+  --primary--secondary--b4-r: var(--font-regular) 20px var(--font-secondary);
+
+  /* Effect styles */
+  --invi-card-shadow: 0px 14px 31px rgba(0, 0, 0, 0.1), 0px 56px 56px rgba(0, 0, 0, 0.09), 0px 125px 75px rgba(0, 0, 0, 0.05), 0px 222px 89px rgba(0, 0, 0, 0.01), 0px 347px 97px rgba(0, 0, 0, 0);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure the hidden attribute always wins, even over display:flex/grid rules */
+[hidden] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Lenis smooth-scroll integration */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Sora', sans-serif;
+  color: var(--brown);
+  background: var(--page-bg);
+}
+
+/* ---------- Scene / screen shell ---------- */
+/* Exactly one viewport tall. It used to be 280vh because the blessing →
+   invitation → names staging was scrubbed to the scroll position; the sheet is
+   opened by a tap now, so that scroll room would only be dead space the guest
+   has to drag through after the names appear. */
+.scene--welcome {
+  position: relative;
+  height: 100vh;
+}
+
+/* Nothing scrolls until the cover sheet has been opened, so the sheet cannot be
+   scrolled past before it is tapped. Lenis ignores overflow (see .lenis-stopped
+   above), which is why app.js also calls lenis.stop() - this class is what holds
+   native scrolling, including for reduced-motion visitors, who get no Lenis. */
+html.cover-locked,
+html.cover-locked body {
+  overflow: hidden;
+}
+
+.screen {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen__bg {
+  --bg-scale: 1.12;
+  /* slight overscan; bumped on open for a gentle zoom-in */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  user-select: none;
+  pointer-events: none;
+  /* scale (CSS) is separate from translate (JS parallax), so the open zoom can
+     transition without disturbing the mouse parallax. */
+  scale: var(--bg-scale);
+  transition: scale 0.9s ease-out;
+  will-change: transform, scale;
+}
+
+/* Background zooms in slightly as the names are uncovered */
+.screen--welcome.is-open .screen__bg {
+  --bg-scale: 1.19;
+}
+
+/* Side florals - pinned to their edges, full height, above the card.
+   --floral-shift = per-breakpoint edge slide, --floral-zoom = scroll zoom */
+.screen__floral {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: auto;
+  z-index: 3;
+  user-select: none;
+  pointer-events: none;
+  --floral-shift: 0px;
+  --floral-zoom: 1;
+  transition: transform 0.9s ease-out;
+  /* These two are the largest bitmaps on the page - 830x1896 and 1247x1920,
+     about 15MB of decoded pixels between them - and .is-open transitions
+     --floral-zoom from 1 to 1.16. Without promotion that scale is a repaint of
+     the full bitmap on every frame of the 0.9s transition. The sibling
+     .screen__bg and .screen__gradient were already promoted; this one was
+     missed. */
+  will-change: transform;
+}
+
+/* Florals zoom in a bit more than the background as the sheet opens */
+.screen--welcome.is-open .screen__floral {
+  --floral-zoom: 1.16;
+}
+
+/* White fade strip pinned to the bottom of the bg, above the florals.
+   Scales with the background (transform driven by JS) but stays bottom-aligned. */
+.screen__gradient {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* Was <img src="media/white-gradient.webp">, a 1440x131 white-to-transparent
+     bitmap sized by `height: auto`. It cannot follow --page-bg, so it is now a
+     CSS gradient; the height keeps that file's 131/1440 ratio at full width. */
+  height: var(--edge-fade-h);
+  background: linear-gradient(to top, var(--page-bg), var(--page-bg-0));
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+  transform: scale(1.12);
+  /* matches .screen__bg baseline; JS keeps it in sync */
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
+.screen__floral--left {
+  left: 0;
+  transform-origin: left center;
+  transform: translateX(var(--floral-shift)) scale(var(--floral-zoom));
+}
+
+.screen__floral--right {
+  right: 0;
+  transform-origin: right center;
+  transform: translateX(var(--floral-shift)) scale(var(--floral-zoom));
+}
+
+/* ---------- Invitation paper ---------- */
+.invite {
+  --card-radius: 28px;
+  position: relative;
+  z-index: 2;
+  width: min(46vw, 500px);
+  /* The paper hugs its contents (like .invite--detail does). It used to be
+     height: calc(100vh - 300px) - a viewport-sized box the content had no say
+     in, so on a short screen the blessing simply spilled through the keyline.
+     An explicit height also silently beat the aspect-ratio the ≤900px rule
+     sets, so that never actually took effect either. */
+  height: auto;
+  background-image: url('media/invitation-paper.webp');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: var(--card-radius);
+  /* box-shadow, not filter: drop-shadow().
+     These are the same three layers the filter drew, unchanged, so the card
+     looks identical - the two systems only diverge when an element has a
+     ragged alpha edge, and invitation-paper.webp is opaque (0.1% of sampled
+     pixels transparent) inside a border-radius that clips the corners, so the
+     drop-shadow silhouette WAS the border box.
+
+     The cost is not comparable, though. Each drop-shadow is a gaussian pass
+     over a render surface sized to hold the element plus that layer's offset
+     and blur; box-shadow is an ordinary paint against the border box. It
+     mattered because this element animates - .invite--detail rises on reveal,
+     and the welcome copy used to scale down as it faded - and a scaling
+     FILTERED element cannot stay on the compositor, so the whole chain re-ran
+     every frame. This was the one filter in the stylesheet, and it sat on the only
+     two scenes that felt heavy; everything below the gallery already used
+     box-shadow.
+
+     Removing filter costs no stacking context: position: relative + z-index
+     above already establish one. */
+  box-shadow:
+    0px 14px 31px rgba(0, 0, 0, 0.1),
+    0px 56px 56px rgba(0, 0, 0, 0.09),
+    0px 125px 75px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gold double-keyline border, hugging the rounded card edge */
+.invite::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--paper-border);
+  border-radius: var(--card-radius);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.invite::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139, 95, 48, 0.55);
+  /* --paper-border, softened inner line */
+  border-radius: calc(var(--card-radius) - 4px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.invite__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 12% 14% 14%;
+  text-align: center;
+  display: grid;
+  place-items: center;
+}
+
+/* The invocation and greeting blocks. They used to share one grid cell and
+   crossfade in place; on the cover sheet they are stacked instead (see
+   .cover .invite__inner), so this is just their shared column layout now. */
+.invite__screen {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* No blessing (no invocation line AND no symbol): drop the invocation block
+   rather than leave a gap above the greeting. Toggled by render.js in the final
+   view only, so a host editing can still choose a line or symbol. */
+.screen--welcome.no-bless .invite__bless {
+  display: none;
+}
+
+/* ---------- Cover sheet (the opening screen) ---------- */
+/* A transparent, full-viewport layer whose only job is to carry the slide: the
+   card and its cords ride on it, so one transform moves the lot. Above .reveal
+   (1), below the florals (3), which is the whole point - the card is drawn up
+   BEHIND the branches, so they never move while it goes. */
+.cover {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  will-change: transform;
+}
+
+/* A full viewport height already clears a centred card that is shorter than the
+   viewport (which min-height below guarantees); the extra 15% is headroom for a
+   card grown tall by a long invocation, and costs nothing since it is spent
+   off-screen. Declared as well as animated so the reduced-motion rule below can
+   drop the animation and still land in the right place. */
+.screen--welcome.is-open .cover {
+  transform: translateY(-115%);
+  pointer-events: none;
+  animation: cover-hoist 1.5s forwards;
+}
+
+/* Hoisted, not slid: one bounce - the cords take up their slack, so the card
+   dips, and then it is pulled clear in a single stroke. Per-keyframe easing,
+   because a single curve over the whole thing cannot both drop gently and pull
+   away sharply. */
+@keyframes cover-hoist {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.35, 0, 0.5, 1);
+  }
+
+  /* The dip: slack out, the card sags on its cords */
+  13% {
+    transform: translateY(3%);
+    /* Leaves fast (p1y well above the diagonal) and eases off at the end. A
+       slow-in curve here read as hesitation: a quarter of the way through, the
+       card was still sitting below where it started. */
+    animation-timing-function: cubic-bezier(0.22, 0.62, 0.18, 1);
+  }
+
+  /* …and away in one stroke */
+  100% {
+    transform: translateY(-115%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen--welcome.is-open .cover {
+    animation: none;
+  }
+}
+
+/* The card keeps the standard .invite paper, keylines and shadow - same as the
+   family cards - just at poster size. min-height is what gives it the framed
+   proportions rather than shrinking to hug five lines of text. */
+.cover .invite {
+  width: min(70vw, 760px);
+  min-height: min(74vh, 660px);
+  /* Caps how tall the content can push it. Needed because .invite hugs its
+     contents and its padding is a percentage of WIDTH, so on a short viewport
+     the card was 617px of a 672px screen - near enough the full height, with
+     the cords squeezed out of sight. */
+  max-height: 88vh;
+}
+
+/* The two blocks used to share one grid cell and crossfade; on the card they
+   are simply stacked, both visible from the start, with the cue below them. */
+.cover .invite__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Vertical padding in vh, not the base rule's percentage of the card's width
+     - the card's own height is meant to track the viewport, and ~196px of
+     width-derived padding is what kept it from doing so. Horizontal stays a
+     percentage: there it is the text column's measure that matters. */
+  padding: 6vh 12%;
+}
+
+/* ---------- Hanging cords ---------- */
+/* Rise from the card's top edge (bottom: 100%) and run far enough past the top
+   of the screen that they never run out while the card is being drawn up. */
+.cover__cord {
+  position: absolute;
+  bottom: 100%;
+  width: 6px;
+  height: 200vh;
+  /* Above the keylines (z-index 1) so the join at the card's edge is clean. */
+  z-index: 2;
+  /* Across the cord's width, not along its length: lit on the left, falling into
+     shadow on the right, which is what gives 6px of flat colour the roundness of
+     a cord. This replaces the old top-to-bottom fade - two opaque stops cannot
+     also recede into the pale sky, and reading as solid rope matters more. */
+  background: linear-gradient(to right, #CC9D6B, #442F18);
+  pointer-events: none;
+}
+
+.cover__cord--left {
+  left: 26%;
+}
+
+.cover__cord--right {
+  right: 26%;
+}
+
+.cover .invite__screen {
+  position: static;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Both blocks carry a floral divider - the invocation's below its text, the
+   greeting's above. Stacked, that is two dividers back to back, so the
+   greeting's goes and the invocation's is the single separator between them. */
+.cover .invite__welcome .invite__divider {
+  display: none;
+}
+
+/* …which makes it the gap between the two blocks, not a trailing flourish, so
+   it needs breathing room on both sides (the base rule zeroes its bottom). */
+.cover .invite__bless .invite__divider {
+  margin: 2% 0;
+}
+
+/* ---------- Tap cue ---------- */
+/* In flow at the foot of the card's text column, so it sits on the paper rather
+   than in the fade below the card. It needs no exit rule of its own: it is
+   inside .invite, which fades as the card is drawn up. */
+/* An outlined pill rather than the bare line of text this used to be: at
+   15-20px with no edge it read as a caption, when it is in fact the ONLY
+   control on the screen and the whole cover depends on the guest finding it.
+   Bigger type, a warm tint and a soft lift make the gesture unmistakable,
+   while the brown/serif voice keeps it part of the invitation rather than UI
+   bolted on top.
+
+   The tints are rgba literals of --brown (128 73 0) so they need no
+   color-mix(); the paddings are clamped because this sits in the card's text
+   column, which is narrow on a phone. */
+.cover__cue {
+  /* For the inner rule drawn by ::before. */
+  position: relative;
+  margin-top: 9%;
+  border: 1.5px solid rgba(128, 73, 0, 0.5);
+  border-radius: 999px;
+  /* Roomier than a plain pill needs: the inner rule eats ~5px a side, and the
+     text has to keep clear air inside it. */
+  padding: clamp(13px, 1.7vw, 18px) clamp(27px, 3.7vw, 40px);
+  background: rgba(128, 73, 0, 0.07);
+  color: var(--brown);
+  font: var(--font-regular) clamp(18px, 2.2vw, 26px) var(--font-primary);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(128, 73, 0, 0.15);
+  opacity: 0;
+  /* Deliberately no transform: cue-bob owns that channel, and setting one
+     here (or on :hover) would cancel the bob mid-animation. */
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  animation: cue-in 0.8s ease 1s forwards, cue-bob 1.8s ease-in-out 1.8s infinite;
+}
+
+/* The second, inner hairline - the engraved double rule of classic wedding
+   stationery, which is the whole "fancy" of this border.
+
+   Drawn as a pseudo-element rather than stacked inset box-shadows because the
+   gap between the two lines has to show the button's own translucent tint. An
+   inset ring would have to PAINT that gap in some colour, and there is no
+   right one to pick: the cue sits on textured paper, so any opaque guess shows
+   as a band, and repeating the tint just double-darkens it.
+
+   inset, not width/height, so it tracks the clamped padding at every size. */
+.cover__cue::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(128, 73, 0, 0.32);
+  border-radius: inherit;
+  /* The button itself takes the click; app.js only sees it bubble to .cover. */
+  pointer-events: none;
+  transition: border-color 0.25s ease;
+}
+
+.cover__cue:hover,
+.cover__cue:focus-visible {
+  background: rgba(128, 73, 0, 0.14);
+  border-color: rgba(128, 73, 0, 0.8);
+  box-shadow: 0 9px 24px rgba(128, 73, 0, 0.22);
+}
+
+/* Both rules warm together, so the pair still reads as one object on hover. */
+.cover__cue:hover::before,
+.cover__cue:focus-visible::before {
+  border-color: rgba(128, 73, 0, 0.55);
+}
+
+.invite__ganesha {
+  display: block;
+  width: 80%;
+  max-width: 150px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 0%;
+  user-select: none;
+  /* The single-tone symbol SVG is used as a MASK over a fill in the invocation
+     line's text colour, so the symbol always matches the line. render.js sets
+     the mask-image for the chosen symbol. */
+  background-color: var(--brown);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* The stock invocations arrive with their own face, set inline by render.js from
+   INVOCATIONS (see config.js) - this family only reaches a HOST'S CUSTOM line,
+   which carries no font of its own. It names the same Devanagari serif the
+   Devanagari invocations now use, so a custom line is set in the same voice
+   rather than dropping to the old Yatra One display face.
+   Line-height is looser than the 1.3 that face needed: Tiro's stacked matras and
+   the repha in श्री reach well above the headline. */
+.invite__blessing {
+  font-family: 'Tiro Devanagari Sanskrit', var(--font-primary);
+  font-size: clamp(26px, 4.6vw, 40px);
+  line-height: 1.45;
+  color: var(--brown);
+  margin-bottom: 3%;
+}
+
+.invite__divider {
+  width: 50%;
+  height: auto;
+  margin-bottom: 8%;
+  user-select: none;
+}
+
+/* In the blessing screen the divider sits below the text, not above */
+.invite__bless .invite__divider {
+  margin-bottom: 0;
+  margin-top: 4%;
+}
+
+@keyframes cue-in {
+  to {
+    /* Full strength, not the old 0.9 - it was holding the one control on the
+       screen a shade back from everything around it. */
+    opacity: 1;
+  }
+}
+
+/* Gentle vertical bob while idle */
+@keyframes cue-bob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover__cue {
+    animation: cue-in 0.8s ease 1s forwards;
+  }
+}
+
+.invite__to {
+  font: var(--primary--h3-b);
+  margin-bottom: 4%;
+}
+
+.invite__message {
+  font: var(--primary--b3-r);
+}
+
+/* ---------- Names reveal (uncovered by the card) ---------- */
+/* z-index 1 - under the card, over the backdrop. The card is opaque and larger
+   than the names in both axes, so the reveal IS the uncovering; this short fade
+   only exists so they are not caught sitting there in the first frames, and it
+   runs to completion while the card still covers them. */
+.reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6%;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+  transition: opacity 0.5s ease 0.15s;
+}
+
+.screen--welcome.is-open .reveal {
+  opacity: 1;
+}
+
+.reveal__names {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05em;
+  font: var(--font-semi-bold) 114px var(--font-primary);
+  /* Italic after the shorthand, which resets font-style to normal. Set on the
+     container so both names and the "&" between them slant together - the amp
+     was already italic on its own, which left the names looking upright by
+     comparison. */
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--brown);
+}
+
+/* The connector between the two names. It reads "and" now rather than a single
+   decorative "&", and a WORD set at the names' own size stops being a connector
+   and starts looking like a third name - so it is sized relative to them
+   instead: 0.42em of .reveal__names.
+
+   em rather than px on purpose. .reveal__names restates its font-size at two
+   breakpoints (71.5px, 62px) and this now follows both automatically, which is
+   why those media rules no longer name .reveal__amp. */
+.reveal__amp {
+  font: var(--font-italic) var(--font-regular) 0.42em var(--font-primary);
+}
+
+/* ---------- Details scene (family intro + fountain) ---------- */
+.scene--details {
+  position: relative;
+  background: var(--page-bg);
+  padding: 80px 0 0;
+  overflow: hidden;
+}
+
+/* Both family cards removed: drop the family content (cards + rose vines) but
+   keep the fountain video - it lives in this same section and must survive on
+   its own (see render.js renderDetails). */
+.scene--details.details--no-cards {
+  padding-top: 0;
+}
+
+.scene--details.details--no-cards .details__cards,
+.scene--details.details--no-cards .details__vine {
+  display: none;
+}
+
+/* Rose vines draping down either side of the family cards */
+.details__vine {
+  position: absolute;
+  top: 60px;
+  height: auto;
+  width: min(24vw, 240px);
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+.details__vine--left {
+  left: 0;
+}
+
+.details__vine--right {
+  right: 0;
+  /* This img points at rosevine-left.webp, mirrored here so the two vines are a
+     matched pair. Both source files are 598x2166, so flipping changes nothing
+     about the box it occupies. */
+  transform: scaleX(-1);
+}
+
+.details__cards {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  padding: 0 24px 0px;
+}
+
+/* Detail cards reuse the paper + keyline border, but size to their content */
+.invite--detail {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 660px);
+  height: auto;
+  aspect-ratio: auto;
+}
+
+.invite--detail .invite__inner {
+  padding: 9% 12%;
+  gap: 1.4em;
+}
+
+.detail__name {
+  font: var(--primary--h3-b);
+  /* Must follow the shorthand, which sets font-style back to normal. The token
+     stays h3-b rather than h3-i because h3-i is regular weight and this heading
+     is semi-bold. */
+  font-style: italic;
+  line-height: 1.1;
+  margin-bottom: 0.3em;
+}
+
+.detail__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.detail__label {
+  font: var(--primary--b4-r);
+  opacity: 0.85;
+}
+
+.detail__person {
+  font: var(--primary--b3-b);
+  line-height: 1.2;
+}
+
+.detail__amp {
+  font: var(--font-italic) var(--font-regular) 24px var(--font-primary);
+}
+
+.detail__gotra {
+  font: var(--primary--b5-r);
+  opacity: 0.85;
+  margin-top: 0.4em;
+}
+
+/* Fountain video: fills the full width, height keeps the aspect ratio (no crop,
+   no overflow). */
+.details__fountain {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  pointer-events: none;
+  /* strip any default video border / outline / edge background */
+  border: 0;
+  outline: 0;
+  background: transparent;
+}
+
+/* Page-coloured gradient fading the bottom edge of the video */
+.fountain__fade {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--edge-fade-h);
+  background: linear-gradient(to top, var(--page-bg), var(--page-bg-0));
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* On phones the fountain is otherwise tiny (a landscape clip on a narrow
+   screen). Widen it to 180% and centre it so it spills 40% past each side of
+   the viewport - those edges are clipped by .scene--details' overflow:hidden. */
+@media (max-width: 700px) {
+  .details__fountain {
+    width: 160%;
+    margin-left: -30%;
+  }
+}
+
+/* ---------- Date reveal (brush the petals) ---------- */
+.scene--date {
+  position: relative;
+  min-height: 100vh;
+  background: var(--page-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+.date__hint {
+  font: var(--font-italic) var(--font-regular) 33.5px var(--font-primary);
+  color: var(--brown);
+  text-align: center;
+  line-height: 1.35;
+  transition: opacity 0.8s ease;
+}
+
+.date__hint.is-hidden {
+  opacity: 0;
+}
+
+/* The interactive stage - petals sit on top, the date underneath */
+.petal-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: min(640px, 72vh);
+  touch-action: none;
+  /* let brushing work without scrolling the page */
+}
+
+/* The date sits beneath the petals from the start - brushing reveals glimpses
+   of it, hinting that there's something to uncover. */
+.date-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: min(680px, 86%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35em;
+  color: var(--brown);
+  transform: translate(-50%, -50%);
+}
+
+/* Once fully uncovered, a gentle pop draws the eye to the date */
+.date-card.is-revealed {
+  animation: date-pop 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes date-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(0.97);
+  }
+
+  55% {
+    transform: translate(-50%, -50%) scale(1.035);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.date__main {
+  font: var(--font-semi-bold) 85.5px var(--font-primary);
+  line-height: 1.05;
+}
+
+/* "Save the Date" - sits below the date, click to add to calendar */
+.date__save {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border: 1.5px solid var(--brown);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--brown);
+  font: var(--font-italic) var(--font-regular) 21.5px var(--font-primary);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.date__save:hover,
+.date__save:focus-visible {
+  background: var(--brown);
+  color: #fffdf8;
+}
+
+.date__cal {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+
+.date__main sup {
+  font-size: 0.45em;
+  vertical-align: super;
+}
+
+
+/* Petal layer + individual petals */
+.petal-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.petal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Layer promotion ONLY while the petals can actually move.
+   will-change used to sit on .petal itself, and petals.js builds the whole
+   pile (~414 <img> on desktop, ~190 on a phone) at load - so every one of them
+   held its own compositor layer for the entire life of the page. The layer
+   tree had to be carried through every scrolled frame anywhere on the page,
+   and the raster burst landed just as this section came into range, which is
+   what made the scroll feel heavy approaching the date reveal.
+   petals.js now adds .petals-live to #petalLayer when brushing turns on, and
+   drops it once the blow-away has settled - after that the petals never move
+   again, so promoting them is pure cost. */
+.petals-live .petal {
+  will-change: transform, opacity;
+}
+
+/* Keepers drift into a ring around the date and stay visible */
+.petal.is-flying {
+  transition: transform 1.7s cubic-bezier(0.16, 0.8, 0.3, 1);
+  pointer-events: none;
+}
+
+/* The rest fly off every edge of the screen and fade out */
+.petal.is-gone {
+  transition: transform 1.6s cubic-bezier(0.3, 0.7, 0.25, 1), opacity 1.4s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Ambient petals that keep drifting down past the revealed date */
+.petal--drift {
+  pointer-events: none;
+  transition: none;
+  animation-name: petal-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  /* These keep the hint unconditionally: they are spawned AFTER the blow-away,
+     by which point .petals-live is gone, and they animate forever. There are
+     only 4-5 of them, so promoting them costs nothing worth counting. */
+  will-change: transform, opacity;
+}
+
+@keyframes petal-drift {
+  0% {
+    transform: translate(0, -80px) rotate(0deg);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.9;
+  }
+
+  92% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translate(var(--sway), var(--fall)) rotate(var(--spin));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .date-card {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: none;
+  }
+}
+
+/* ---------- Scroll reveal: rise & fade card + staggered inner content ---------- */
+/* Card lifts and fades in when it scrolls into view (.is-visible added by JS) */
+.invite--detail {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.invite--detail.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Inner lines start lower/hidden, then cascade in after the card settles */
+.invite--detail .invite__inner>* {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.invite--detail.is-visible .invite__inner>* {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.invite--detail.is-visible .invite__inner>*:nth-child(1) {
+  transition-delay: 0.25s;
+}
+
+.invite--detail.is-visible .invite__inner>*:nth-child(2) {
+  transition-delay: 0.37s;
+}
+
+.invite--detail.is-visible .invite__inner>*:nth-child(3) {
+  transition-delay: 0.49s;
+}
+
+.invite--detail.is-visible .invite__inner>*:nth-child(4) {
+  transition-delay: 0.61s;
+}
+
+.invite--detail.is-visible .invite__inner>*:nth-child(5) {
+  transition-delay: 0.73s;
+}
+
+/* The compliment + note cards get the same reveal, on the same timings. They
+   have no .invite__inner wrapper, so the stagger runs on their direct children
+   - which render.js rebuilds: a lead, a divider, then one line per entry for
+   compliments (a host can add or remove those) and the note text.
+   That variable count is why there is a default delay below as well as the
+   per-child ones: with only nth-child rules, a seventh line would fall through
+   to a 0s delay and appear FIRST, ahead of the cascade. The nth-child rules
+   still win over the default wherever they apply, being a class heavier.
+
+   Everything below hangs off .has-reveal, which app.js puts on <html> at the
+   moment it is actually about to observe these cards. Without that class they
+   are simply visible, no animation. That matters because the hidden state is
+   opacity 0 on real CONTENT, not decoration: any path that skips the observer
+   - edit mode returning early, a browser with no IntersectionObserver, a
+   script error earlier in app.js, app.js not running at all - would otherwise
+   leave the two cards permanently invisible with no clue why. Failing to
+   "visible but unanimated" is the only acceptable failure here. */
+.has-reveal .compliment-card,
+.has-reveal .notes-card {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.has-reveal .compliment-card.is-visible,
+.has-reveal .notes-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.has-reveal .compliment-card>*,
+.has-reveal .notes-card>* {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.has-reveal .compliment-card.is-visible>*,
+.has-reveal .notes-card.is-visible>* {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.85s;
+}
+
+.has-reveal .compliment-card.is-visible>*:nth-child(1),
+.has-reveal .notes-card.is-visible>*:nth-child(1) {
+  transition-delay: 0.25s;
+}
+
+.has-reveal .compliment-card.is-visible>*:nth-child(2),
+.has-reveal .notes-card.is-visible>*:nth-child(2) {
+  transition-delay: 0.37s;
+}
+
+.has-reveal .compliment-card.is-visible>*:nth-child(3),
+.has-reveal .notes-card.is-visible>*:nth-child(3) {
+  transition-delay: 0.49s;
+}
+
+.has-reveal .compliment-card.is-visible>*:nth-child(4),
+.has-reveal .notes-card.is-visible>*:nth-child(4) {
+  transition-delay: 0.61s;
+}
+
+.has-reveal .compliment-card.is-visible>*:nth-child(5),
+.has-reveal .notes-card.is-visible>*:nth-child(5) {
+  transition-delay: 0.73s;
+}
+
+/* Respect users who prefer no motion - reveal instantly.
+   The two card selectors carry .has-reveal here as well: without it they would
+   be (0,1,0) against the (0,2,0) hidden rules above and would lose, leaving
+   reduced-motion users staring at invisible cards. */
+@media (prefers-reduced-motion: reduce) {
+
+  .invite--detail,
+  .invite--detail .invite__inner>*,
+  .has-reveal .compliment-card,
+  .has-reveal .notes-card,
+  .has-reveal .compliment-card>*,
+  .has-reveal .notes-card>* {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Responsive: tablet / mobile portrait ---------- */
+@media (max-width: 900px) {
+
+  /* Florals keep their full height, but slide off their side of the screen */
+  .screen__floral--left {
+    --floral-shift: -48%;
+  }
+
+  .screen__floral--right {
+    --floral-shift: 50%;
+  }
+
+  /* The card takes most of the width - it is the poster, not the old 360px
+     paper that had to leave room for the florals either side of it. */
+  .cover .invite {
+    width: min(86vw, 520px);
+    aspect-ratio: auto;
+  }
+
+  /* Detail cards stay wide and content-sized */
+  .invite--detail {
+    width: min(88vw, 560px);
+    aspect-ratio: auto;
+  }
+
+  .invite--detail .detail__name {
+    font-size: 35.5px;
+  }
+
+  .invite--detail .detail__person {
+    font-size: 24px;
+  }
+
+  .invite__divider {
+    width: 100%;
+    margin-bottom: 12%;
+  }
+
+  .invite__to {
+    font-size: 38px;
+  }
+
+  .invite__message {
+    font-size: 24px;
+  }
+
+  /* .reveal__amp dropped from this list: it is 0.42em now and follows this
+     size on its own. */
+  .reveal__names {
+    font-size: 71.5px;
+  }
+
+  .date__main {
+    font-size: 62px;
+  }
+
+  .date__hint,
+  .date__save {
+    font-size: 19px;
+  }
+
+  .date__save {
+    padding: 6px 12px;
+  }
+
+  .date__sub {
+    font-size: 19px;
+  }
+}
+
+/* Tablet: florals sit only 25% off their side of the screen */
+@media (min-width: 450px) and (max-width: 900px) {
+  .screen__floral--left {
+    --floral-shift: -25%;
+  }
+
+  .screen__floral--right {
+    --floral-shift: 25%;
+  }
+}
+
+@media (max-width: 560px) {
+  .cover .invite {
+    width: 88vw;
+  }
+
+  .invite__to {
+    font-size: 33.5px;
+  }
+
+  .invite__message {
+    font-size: 24px;
+  }
+
+  /* Same here - the connector scales from .reveal__names via its 0.42em. */
+  .reveal__names {
+    font-size: 62px;
+  }
+
+  .invite--detail .detail__name {
+    font-size: 31px;
+  }
+
+  .invite--detail .detail__person {
+    font-size: 21.5px;
+  }
+
+  .date__main {
+    font-size: 47.5px;
+  }
+}
+
+/* ---------- Photo gallery (hanging polaroids) ---------- */
+.scene--gallery {
+  --gallery-h: 900px;
+  /* height the hanging polaroids need */
+  position: relative;
+  height: auto;
+  /* hug the contents */
+  background: url('media/gallery-bg.webp') center / cover no-repeat;
+  overflow: hidden;
+}
+
+/* Desktop only: soft fade on the left & right edges so polaroids melt away */
+@media (min-width: 701px) {
+
+  .scene--gallery::before,
+  .scene--gallery::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 320px;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .scene--gallery::before {
+    left: 0;
+    background: linear-gradient(to right, var(--page-bg), var(--page-bg-0));
+  }
+
+  .scene--gallery::after {
+    right: 0;
+    background: linear-gradient(to left, var(--page-bg), var(--page-bg-0));
+  }
+}
+
+/* Horizontal scroller - drag or swipe to move the rope */
+.gallery__scroll {
+  position: relative;
+  width: 100%;
+  height: var(--gallery-h);
+  /* defines the section's height */
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* vertically centre the hanging content within the section */
+  display: flex;
+  align-items: center;
+}
+
+.gallery__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery__scroll.is-dragging {
+  cursor: grabbing;
+}
+
+.gallery__track {
+  position: relative;
+  width: 3500px;
+  height: 750px;
+  /* content height - centred within the taller section */
+  flex: 0 0 auto;
+  /* don't let the flex scroller shrink it */
+  /* rope sits a little below the top */
+  --rope-y: 90px;
+}
+
+/* The rope: a thin full-width bar with a gradient (rod look) + drop shadow */
+.gallery__rope {
+  position: absolute;
+  top: var(--rope-y);
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to bottom, #cc9d6b 0%, #8b5f30 50%, #442f18 100%);
+  box-shadow: 24px 24px 30px 0 rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Rose vine draped over the left end of the rope.
+   Layering: same z-index as the rope but later in the DOM, so it paints over
+   the rope, while the polaroids at z-index 2 pass in front of its trailing
+   tip - the vine hangs on the rope and the cards swing past it.
+   The top offset hangs off --rope-y so it tracks the rope rather than
+   restating 90px. The rose sits in the upper ~third of the artwork, so pulling
+   it up by 40px puts the rope through the flowers instead of below them. */
+.gallery__vine {
+  position: absolute;
+  /* Positioned against .scene--gallery now, not the track, so it does not
+     scroll with the deck. That means --rope-y is no longer usable here: the
+     TRACK declares its own 90px, which is what actually places the rope, while
+     out at section level the variable is undefined at this width and 64px below
+     700px. So the rope's Y is reconstructed from the box model instead:
+       .gallery__scroll is --gallery-h tall and centres the 750px track in it,
+         so the track starts at (--gallery-h - 750px) / 2
+       the rope sits 90px below the track's top
+       lift 40px so the rose lands ON the rope rather than under it
+     At the default --gallery-h of 900px: (900-750)/2 + 90 - 40 = 125px. */
+  top: calc((var(--gallery-h) - 750px) / 2 + 50px);
+  left: 20px;
+  width: 200px;
+  height: auto;
+  /* Any positive value clears the scroller, which has no z-index, so the
+     polaroids now pass BEHIND the vine. Kept below the edge fades (5) and the
+     hint (6) so it still fades with everything else at the section's edge. */
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+}
+
+
+/* Each hanging unit: knot + rope line + card, swinging from the rope */
+.polaroid {
+  position: absolute;
+  top: var(--rope-y);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center;
+  /* pivot on the rope */
+  z-index: 2;
+  will-change: transform;
+}
+
+.polaroid__knot {
+  width: 100px;
+  height: auto;
+  /* The knot blob sits at the very top of the PNG (~12px down at 100px wide);
+     lift the image so the knot rests on top of the horizontal rope, with the
+     vertical rope hanging down from it. */
+  margin-top: -9px;
+  margin-bottom: -6px;
+  z-index: 1;
+  user-select: none;
+  /* The rope sits at ~38% of the PNG's width, not 50% - nudge it to the
+     card's centre (0.5 - 0.382 = 11.8% of the knot's own width). */
+  transform: translateX(11.8%);
+}
+
+/* The polaroid card itself - sits in front of the hanging rope */
+.polaroid__card {
+  position: relative;
+  z-index: 2;
+  background: #fffdf8;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.polaroid--photo {
+  width: 350px;
+  padding: 16px 16px 12px;
+  margin: 0;
+}
+
+.polaroid__photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background:
+    linear-gradient(135deg, #e9e6df, #d9d5cc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* The photo is zoomed with a transform - keep it inside the frame. */
+  overflow: hidden;
+}
+
+/* The host's photo, framed as they left it: render.js writes its
+   object-position, transform-origin and scale inline (RoseInvite.photoStyle).
+   Nothing set is the old centred cover crop. */
+.polaroid__img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* "Your photo here" on a demo gallery card (see galleryItemHtml in render.js) -
+   text rather than a stand-in image so it can never fail to load silently
+   the way a background-image can. Disappears the moment a host adds a real
+   photo, since the polaroid__photo div then holds that image instead and
+   this span is never emitted at all. */
+.polaroid__placeholder {
+  font: var(--font-italic) var(--font-regular) 21.5px var(--font-primary);
+  color: var(--brown);
+  opacity: 0.55;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.polaroid__caption {
+  display: block;
+  margin-top: 14px;
+  text-align: center;
+  /* Bold italic. --font-semi-bold (600) is the template's bold throughout, and
+     Cormorant Garamond italic 600 is a real face in the Google Fonts request,
+     so this is not a browser-synthesised slant. */
+  font: var(--font-italic) var(--font-semi-bold) 27.5px var(--font-primary);
+  color: var(--brown);
+}
+
+.polaroid--story {
+  /* match the photo polaroid's footprint */
+  width: 350px;
+  min-height: 496px;
+  padding: 38px 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url('media/handmade_paper.webp') center / cover no-repeat;
+}
+
+.polaroid--story p {
+  /* Was var(--primary--b5-li), whose "li" is LIGHT italic - the opposite weight
+     from what is wanted here. Spelled out rather than overriding the token's
+     weight afterwards, so the declaration says what it renders. Same 21.5px and
+     family the token gave; only the weight moves, light (200) to semi-bold. */
+  font: var(--font-italic) var(--font-semi-bold) 21.5px var(--font-primary);
+  line-height: 1.7;
+  color: var(--brown);
+}
+
+/* Horizontal postcard - landscape card hanging from the rope */
+.polaroid--postcard {
+  width: 490px;
+  padding: 12px;
+  margin: 0;
+}
+
+.polaroid--postcard .polaroid__photo {
+  aspect-ratio: 3 / 2;
+  /* landscape instead of the portrait 3/4 */
+}
+
+/* Mobile: one polaroid at a time - a full-width scroll-snap carousel */
+@media (max-width: 700px) {
+  .scene--gallery {
+    --rope-y: 64px;
+    --gallery-h: 760px;
+    /* the bigger mobile cards need a touch more room */
+  }
+
+  /* Smaller, so it decorates the first slide rather than crowding it. The top
+     offset shrinks with the width to keep the rope through the flowers.
+     Note --rope-y here is still the track's 90px, not the 64px above: the
+     track declares its own and that shadows the scene's for everything inside
+     it, which is why the rope does not move between breakpoints. */
+  .gallery__vine {
+    /* Here .gallery__track is height:100%, so it fills .gallery__scroll and
+       there is no centring offset to add - the rope's 90px is measured straight
+       from the top of the section. 90 - 40 = 50. */
+    top: 50px;
+    left: 10px;
+    width: 160px;
+  }
+
+  .gallery__scroll {
+    scroll-snap-type: x mandatory;
+  }
+
+  /* Track becomes a row of full-viewport slides */
+  .gallery__track {
+    display: flex;
+    width: max-content;
+    height: 100%;
+  }
+
+  /* Each polaroid is now a centred slide (inline `left` is ignored: static) */
+  .polaroid {
+    position: static;
+    flex: 0 0 100vw;
+    height: 100%;
+    /* match the rope's anchor so the knot lands on it (was a fixed 50px) */
+    padding-top: var(--rope-y);
+    scroll-snap-align: center;
+    transform-origin: center var(--rope-y);
+    /* swing pivots on the rope */
+  }
+
+  .polaroid--photo,
+  .polaroid--story {
+    width: min(80vw, 340px);
+  }
+
+  .polaroid--postcard {
+    width: min(90vw, 420px);
+  }
+
+  /* Match the photo card's overall height (≈1.42 × its width) */
+  .polaroid--story {
+    min-height: calc(min(80vw, 340px) * 1.42);
+    padding: 30px 26px;
+  }
+
+  .polaroid__caption {
+    font-size: 26px;
+  }
+}
+
+/* Page-coloured gradient fading the top & bottom edges of the gallery */
+.gallery__edge {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--edge-fade-h);
+  background: linear-gradient(to top, var(--page-bg), var(--page-bg-0));
+  z-index: 5;
+  pointer-events: none;
+  user-select: none;
+}
+
+.gallery__edge--top {
+  top: 0;
+  transform: scaleY(-1);
+  /* white edge to the top */
+}
+
+.gallery__edge--bottom {
+  bottom: 0;
+  /* white edge already at the bottom */
+}
+
+/* Horizontal-scroll hint pinned to the bottom of the gallery */
+.gallery__hint {
+  position: absolute;
+  left: 50%;
+  bottom: 75px;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(2px);
+  color: var(--brown);
+  font: var(--font-italic) var(--font-regular) 21.5px var(--font-primary);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.gallery__hint.is-hidden {
+  opacity: 0;
+}
+
+/* Flowing chevrons on each side pointing outward */
+.gallery__hint-arrows {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.gallery__hint-arrows:first-child {
+  transform: scaleX(-1);
+  /* left group points left */
+}
+
+.gallery__hint-arrows i {
+  width: 7px;
+  height: 7px;
+  border-top: 2px solid var(--brown);
+  border-right: 2px solid var(--brown);
+  transform: rotate(45deg);
+  opacity: 0.25;
+  animation: hint-chevron 1.4s infinite;
+}
+
+.gallery__hint-arrows i:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.gallery__hint-arrows i:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes hint-chevron {
+
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__hint-arrows i {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* ---------- Ceremonies (swipeable card deck) ---------- */
+.scene--ceremonies {
+  position: relative;
+  min-height: 80vh;
+  background: var(--page-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 44px;
+  padding: 80px 20px;
+  overflow: hidden;
+}
+
+.ceremonies__title {
+  font: var(--font-italic) var(--font-regular) 52.5px var(--font-primary);
+  color: var(--brown);
+  text-align: center;
+  z-index: 1;
+}
+
+/* The stack - cards are absolutely positioned on top of each other */
+/* Wraps the splash + deck so the splash can sit centred behind the cards */
+.deck-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Coloured splash behind the deck - swapped to match the front card */
+.deck__splash {
+  position: absolute;
+  z-index: 0;
+  width: min(120vw, 780px);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  animation: splash-in 0.5s ease;
+}
+
+@keyframes splash-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.deck {
+  position: relative;
+  z-index: 1;
+  width: 460px;
+  height: 400px;
+}
+
+.cere-card {
+  --card-radius: 18px;
+  position: absolute;
+  inset: 0;
+  border-radius: var(--card-radius);
+  background: #FFFDF9 url('media/invitation-paper.webp') center / cover no-repeat;
+  box-shadow: 0 16px 36px rgba(80, 20, 32, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transform-origin: center;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+  cursor: grab;
+  touch-action: pan-y;
+  /* horizontal drag handled by JS, vertical scrolls page */
+  user-select: none;
+  will-change: transform;
+}
+
+.cere-card.is-dragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+/* Gold double-keyline border (same as the family cards) */
+.cere-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--paper-border);
+  border-radius: var(--card-radius);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.cere-card::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139, 95, 48, 0.55);
+  border-radius: calc(var(--card-radius) - 4px);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.cere-card__body {
+  position: relative;
+  z-index: 2;
+  padding: 28px 30px;
+  color: var(--brown);
+}
+
+.cere-card__name {
+  font: var(--font-semi-bold) 35.5px var(--font-primary);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* Rose/floral divider under the ceremony name. */
+.cere-card__divider {
+  display: block;
+  width: min(70%, 250px);
+  height: auto;
+  margin: 0 auto 16px;
+  user-select: none;
+}
+
+.cere-card__date {
+  font: var(--font-semi-bold) 24px var(--font-secondary);
+  margin-bottom: 10px;
+}
+
+.cere-card__time {
+  font: var(--font-regular) 20px var(--font-secondary);
+  margin-bottom: 16px;
+}
+
+.cere-card__venue {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font: var(--font-regular) 19px var(--font-secondary);
+  max-width: 60%;
+  line-height: 1.35;
+}
+
+/* Venue as a tappable map link - opens the couple's Google/Apple Maps pin */
+.cere-card__venue--link {
+  color: var(--brown);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.cere-card__venue--link:hover .cere-card__pin,
+.cere-card__venue--link:focus-visible .cere-card__pin {
+  background: var(--brown);
+  color: #fffdf8;
+}
+
+.cere-card__venue--link .cere-card__go {
+  align-self: center;
+  font-size: 22px;
+  line-height: 1;
+  opacity: 0.55;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cere-card__venue--link:hover .cere-card__go,
+.cere-card__venue--link:focus-visible .cere-card__go {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+.cere-card__pin {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.4px solid var(--paper-border);
+  border-radius: 9px;
+  color: var(--brown);
+}
+
+.cere-card__pin svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Ceremony artwork tucked into the bottom-right corner */
+.cere-card__art {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 78%;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Mobile: portrait cards */
+@media (max-width: 700px) {
+
+  /* Half the scene's vertical breathing room on phones - 80px above and below
+     each of these sections costs a third of a small viewport before any content
+     shows. Horizontal stays at 20px. */
+  .scene--ceremonies {
+    padding: 40px 20px;
+  }
+
+  .ceremonies__title {
+    font-size: 43px;
+    z-index: 1;
+  }
+
+  .deck {
+    width: min(80vw, 310px);
+    height: min(65vh, 415px);
+  }
+
+  .cere-card__venue {
+    max-width: 75%;
+  }
+
+  .cere-card__art {
+    width: 100%;
+  }
+}
+
+.ceremonies__hint {
+  font: var(--font-italic) var(--font-regular) 21.5px var(--font-primary);
+  color: var(--brown);
+  opacity: 0.75;
+}
+
+/* ---------- Compliment card ---------- */
+.scene--compliment {
+  background: var(--page-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.compliment-card {
+  --card-radius: 14px;
+  position: relative;
+  width: min(92vw, 900px);
+  padding: 70px 48px;
+  text-align: center;
+  color: var(--brown);
+  background: url('media/invitation-paper.webp') center / cover no-repeat;
+  border-radius: var(--card-radius);
+  box-shadow: 0 24px 46px rgba(0, 0, 0, 0.1), 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* Gold double-keyline border (same as the ceremony cards) */
+.compliment-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--paper-border);
+  border-radius: var(--card-radius);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.compliment-card::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139, 95, 48, 0.55);
+  border-radius: calc(var(--card-radius) - 4px);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.compliment-card p {
+  font: var(--font-semi-bold) 26px var(--font-primary);
+  line-height: 1.8;
+}
+
+.compliment__lead {
+  margin-bottom: 4px;
+}
+
+/* Both card leads take the family cards' heading type (.detail__name). Sharing
+   the token rather than repeating 47.5px keeps them in step if --primary--h3-b
+   moves. They must be qualified by the card class: `.compliment-card p` is
+   (0,1,1) and would beat a bare `.compliment__lead` at (0,1,0). Upright, not
+   italic - .detail__name slants because it is a person's name, which these are
+   not, and the shorthand resets font-style for us. Matching line-height too,
+   since at this size the compliment lead runs to two lines on a phone. */
+.compliment-card .compliment__lead,
+.notes-card .notes__lead {
+  font: var(--primary--h3-b);
+  line-height: 1.1;
+}
+
+/* The same two steps .detail__name takes, at the same 900/560 breakpoints, so
+   the leads stay the size of the family-card heading at every width. These sit
+   HERE, immediately after the base rule, and not up beside .detail__name: the
+   selectors are the same specificity as the rule above, so the later one in
+   source order wins. Placed in the 900px block up at .detail__name, the base
+   rule below them would have overridden both and nothing would have changed.
+   For the same reason 900 must precede 560. */
+@media (max-width: 900px) {
+
+  .compliment-card .compliment__lead,
+  .notes-card .notes__lead {
+    font-size: 35.5px;
+  }
+}
+
+@media (max-width: 560px) {
+
+  .compliment-card .compliment__lead,
+  .notes-card .notes__lead {
+    font-size: 31px;
+  }
+}
+
+/* Rose/floral divider under the title on the compliment + note cards. */
+.compliment__divider,
+.notes__divider {
+  display: block;
+  width: min(55%, 250px);
+  height: auto;
+  margin: 10px auto 22px;
+  user-select: none;
+}
+
+@media (max-width: 700px) {
+  .scene--compliment {
+    padding: 40px 20px;
+  }
+
+  .compliment-card {
+    padding: 48px 26px;
+  }
+
+  .compliment-card p {
+    font-size: 20px;
+    line-height: 1.7;
+  }
+}
+
+/* ---------- Notes card (mirrors the compliment card) ---------- */
+.scene--notes {
+  background: var(--page-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.notes-card {
+  --card-radius: 14px;
+  position: relative;
+  width: min(92vw, 900px);
+  padding: 70px 48px;
+  text-align: center;
+  color: var(--brown);
+  background: url('media/invitation-paper.webp') center / cover no-repeat;
+  border-radius: var(--card-radius);
+  box-shadow: 0 24px 46px rgba(0, 0, 0, 0.1), 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* Gold double-keyline border (same as the compliment card) */
+.notes-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--paper-border);
+  border-radius: var(--card-radius);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.notes-card::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139, 95, 48, 0.55);
+  border-radius: calc(var(--card-radius) - 4px);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.notes-card p {
+  font: var(--font-semi-bold) 26px var(--font-primary);
+  line-height: 1.8;
+}
+
+.notes__lead {
+  margin-bottom: 10px;
+}
+
+/* The note body reads as prose, so lighter than the bold lead. */
+.notes-card .notes__text {
+  font-weight: var(--font-regular);
+  font-size: 26px;
+  line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+  .scene--notes {
+    padding: 40px 20px;
+  }
+
+  .notes-card {
+    padding: 48px 26px;
+  }
+
+  .notes-card p {
+    font-size: 20px;
+    line-height: 1.7;
+  }
+}
+
+/* ---------- Closing easel ---------- */
+.scene--end {
+  position: relative;
+  min-height: 100vh;
+  background: #f4ece2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 40px;
+}
+
+/* Overscanned backdrop that drifts with the mouse (JS-driven parallax) */
+.end__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url('media/end-bg.webp') center / cover no-repeat;
+  transform: scale(1.1);
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Page-coloured gradient fading the top & bottom edges of the backdrop */
+.end__edge {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--edge-fade-h);
+  background: linear-gradient(to top, var(--page-bg), var(--page-bg-0));
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.end__edge--top {
+  top: 0;
+  transform: scaleY(-1);
+  /* white edge to the top */
+}
+
+.end__edge--bottom {
+  bottom: 0;
+  /* white edge already at the bottom */
+  z-index: 3;
+  /* above the easel (z-index: 2) so it fades over the legs */
+}
+
+.easel {
+  position: relative;
+  z-index: 2;
+  width: min(75vw, 840px);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.easel__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+
+/* Text sitting on the board */
+.easel__text {
+  position: absolute;
+  left: 50.8%;
+  /* board centre in easle.webp, not 50% */
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 42%;
+  text-align: center;
+  color: var(--brown);
+}
+
+.easel__names {
+  font: var(--font-italic) var(--font-semi-bold) clamp(43px, 3.8vw, 47.5px) var(--font-primary);
+  line-height: 1.2;
+  margin-bottom: 0.7em;
+}
+
+.easel__line {
+  font: var(--font-italic) var(--font-regular) clamp(24px, 3.1vw, 35.5px) var(--font-primary);
+  line-height: 1.4;
+}
+
+/* Mobile: portrait easel (easle-phone.webp) - resize + reposition board text */
+@media (max-width: 700px) {
+  .easel {
+    width: min(100vw, 500px);
+  }
+
+  .easel__text {
+    left: 51.6%;
+    /* board centre in easle-phone.webp */
+    top: 45%;
+    width: 55%;
+  }
+
+  .easel__names {
+    font-size: clamp(43px, 6.2vw, 31px);
+  }
+
+  .easel__line {
+    font-size: clamp(28.5px, 5vw, 35.5px);
+  }
+}
+
+/* ---------- RSVP ---------- */
+.scene--rsvp {
+  min-height: 100vh;
+  background: url('media/rose-bg.webp') left top / cover no-repeat, var(--page-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.rsvp {
+  width: min(92vw, 600px);
+}
+
+.rsvp__title {
+  font: var(--font-regular) 16px var(--font-secondary);
+  color: var(--brown);
+  margin-bottom: 8px;
+}
+
+.rsvp__title strong {
+  font-weight: var(--font-semi-bold);
+}
+
+.rsvp__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Choice pills */
+.rsvp__option {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 1.5px solid var(--paper-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.rsvp__radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.rsvp__option-title {
+  font: var(--font-regular) 17px var(--font-secondary);
+  color: var(--brown);
+}
+
+.rsvp__option-sub {
+  font: var(--font-regular) 12px var(--font-secondary);
+  color: rgba(128, 73, 0, 0.7);
+}
+
+/* Selected + keyboard focus states */
+.rsvp__option:has(.rsvp__radio:checked) {
+  background: #fbeed6;
+  border-color: var(--brown);
+}
+
+.rsvp__option:focus-within {
+  outline: 2px solid rgba(128, 73, 0, 0.35);
+  outline-offset: 2px;
+}
+
+/* Message */
+.rsvp__field-label {
+  display: block;
+  margin-top: 12px;
+  font: var(--font-semi-bold) 13px var(--font-secondary);
+  color: var(--brown);
+}
+
+.rsvp__message {
+  width: 100%;
+  min-height: 96px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--paper-border);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--brown);
+  font: var(--font-regular) 14px var(--font-secondary);
+  resize: vertical;
+}
+
+.rsvp__message::placeholder {
+  color: rgba(128, 73, 0, 0.45);
+}
+
+.rsvp__message:focus {
+  outline: none;
+  border-color: var(--brown);
+}
+
+/* Name field (shared-link plan only) */
+.rsvp__name-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--paper-border);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--brown);
+  font: var(--font-regular) 15px var(--font-secondary);
+}
+
+.rsvp__name-input::placeholder {
+  color: rgba(128, 73, 0, 0.45);
+}
+
+.rsvp__name-input:focus {
+  outline: none;
+  border-color: var(--brown);
+}
+
+/* Submit */
+.rsvp__submit {
+  margin-top: 16px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--brown);
+  color: #ffffff;
+  font: var(--font-regular) 15px var(--font-secondary);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.rsvp__submit:hover {
+  background: #6d3f00;
+}
+
+/* Confirmation view (revealed after submit, later) */
+.rsvp__result-lead {
+  font: var(--font-regular) 14px var(--font-secondary);
+  color: rgba(128, 73, 0, 0.75);
+  margin-bottom: 4px;
+}
+
+.rsvp__result-choice {
+  font: var(--font-semi-bold) 35.5px var(--font-primary);
+  color: var(--brown);
+  margin-bottom: 10px;
+}
+
+.rsvp__result-message {
+  font: var(--font-italic) var(--font-regular) 19px var(--font-primary);
+  color: var(--brown);
+  margin-bottom: 20px;
+}
+
+.rsvp__change {
+  padding: 12px 22px;
+  border: 1.5px solid var(--brown);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--brown);
+  font: var(--font-regular) 14px var(--font-secondary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.rsvp__change:hover {
+  background: var(--brown);
+  color: #ffffff;
+}
+
+.rsvp__error {
+  font: var(--font-regular) 13px var(--font-secondary);
+  color: #b5432b;
+  margin-top: 4px;
+}
+
+/* Grouped sections (Attendance / Guests / Wishes) */
+.rsvp__group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.rsvp__legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font: var(--font-semi-bold) 15px var(--font-secondary);
+  color: var(--brown);
+}
+
+/* The Attendance group's heading doubles as the RSVP's main title. */
+.rsvp__legend--main {
+  margin-bottom: 6px;
+  font: var(--font-semi-bold) 33.5px var(--font-primary);
+}
+
+.rsvp__q-sub {
+  max-width: 46ch;
+  margin: 0 0 20px;
+  font: var(--font-regular) 14px var(--font-secondary);
+  color: rgba(128, 73, 0, 0.7);
+  line-height: 1.5;
+}
+
+.rsvp__optional {
+  font: var(--font-regular) 12px var(--font-secondary);
+  color: rgba(128, 73, 0, 0.6);
+}
+
+.rsvp__rule {
+  border: 0;
+  border-top: 1px solid rgba(139, 95, 48, 0.25);
+  margin: 4px 0;
+}
+
+/* Attendance - one card per DATE (may list several ceremonies) */
+.rsvp__cere-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.rsvp-date {
+  padding: 14px;
+  border: 1.5px solid var(--paper-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  text-align: center;
+}
+
+.rsvp-date__date {
+  font: var(--font-semi-bold) 17px var(--font-secondary);
+  color: var(--brown);
+}
+
+.rsvp-date__names {
+  margin: 3px 0 12px;
+  font: var(--font-regular) 13px var(--font-secondary);
+  color: rgba(128, 73, 0, 0.7);
+  line-height: 1.35;
+}
+
+.rsvp-date__opts {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  text-align: left;
+}
+
+.rsvp-date__opt {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+}
+
+.rsvp-date__radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.rsvp-date__mark {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--paper-border);
+  border-radius: 50%;
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+
+.rsvp-date__radio:checked+.rsvp-date__mark {
+  border-color: var(--brown);
+}
+
+.rsvp-date__radio:checked+.rsvp-date__mark::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--brown);
+}
+
+.rsvp-date__radio:focus-visible+.rsvp-date__mark {
+  outline: 2px solid rgba(128, 73, 0, 0.35);
+  outline-offset: 2px;
+}
+
+.rsvp-date__label {
+  font: var(--font-regular) 15px var(--font-secondary);
+  color: var(--brown);
+}
+
+.rsvp-date__radio:checked~.rsvp-date__label {
+  font-weight: var(--font-semi-bold);
+}
+
+.rsvp-date__radio:disabled~.rsvp-date__label,
+.rsvp-date__radio:disabled+.rsvp-date__mark {
+  opacity: 0.65;
+}
+
+/* Guests - headcount stepper */
+.rsvp__sub {
+  margin-bottom: 12px;
+  font: var(--font-regular) 14px var(--font-secondary);
+  color: var(--brown);
+}
+
+.rsvp__stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.rsvp__step {
+  width: 42px;
+  height: 42px;
+  border: 1.5px solid var(--paper-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--brown);
+  font: var(--font-regular) 22px var(--font-secondary);
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.rsvp__step:hover {
+  background: #fbeed6;
+  border-color: var(--brown);
+}
+
+.rsvp__count {
+  width: 52px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  font: var(--font-semi-bold) 31px var(--font-primary);
+  color: var(--brown);
+}
+
+.rsvp__count:focus {
+  outline: none;
+}
+
+.rsvp__hint {
+  margin-top: 8px;
+  text-align: center;
+  font: var(--font-regular) 12px var(--font-secondary);
+  color: rgba(128, 73, 0, 0.6);
+}
+
+/* Dimmed until the guest says Yes/Maybe to at least one date (see rsvp.js). */
+.rsvp__group--guests {
+  transition: opacity 0.2s ease;
+}
+
+.rsvp__group--guests.is-disabled {
+  opacity: 0.45;
+}
+
+.rsvp__group--guests.is-disabled .rsvp__stepper {
+  pointer-events: none;
+}
+
+.rsvp__step:disabled {
+  cursor: not-allowed;
+}
+
+/* Result summary */
+.rsvp__result-list {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rsvp__result-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(139, 95, 48, 0.15);
+}
+
+.rsvp__result-cere {
+  font: var(--font-regular) 14px var(--font-secondary);
+  color: var(--brown);
+}
+
+.rsvp__result-ans {
+  font: var(--font-semi-bold) 14px var(--font-secondary);
+  color: var(--brown);
+}
+
+.rsvp__result-ans--attending {
+  color: #3f7d4f;
+}
+
+.rsvp__result-ans--maybe {
+  color: #b07a1e;
+}
+
+.rsvp__result-ans--not-attending {
+  color: rgba(128, 73, 0, 0.5);
+}
+
+.rsvp__result-guests {
+  border-bottom: 0;
+}
+
+/* ---------- Social / location links ---------- */
+.scene--social {
+  background: var(--page-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 70px 20px 0;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.social {
+  display: inline-flex;
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.social img {
+  width: 90px;
+  height: auto;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Calendar icon is an inline SVG - size/colour it to sit with the image icons */
+.social__svg {
+  width: 66px;
+  height: 66px;
+  display: block;
+  color: var(--brown);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.social:hover img,
+.social:focus-visible img,
+.social:hover .social__svg,
+.social:focus-visible .social__svg {
+  transform: scale(1.18);
+}
+
+/* ---------- Popup / modal ---------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(60, 34, 0, 0.45);
+  backdrop-filter: blur(2px);
+  animation: modal-fade 0.25s ease;
+}
+
+.modal__box {
+  --card-radius: 18px;
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 440px);
+  max-height: 86vh;
+  /* The box itself must NOT scroll - its ::before/::after keyline border is
+     absolutely positioned to this box, so scrolling here would drag the border
+     up into the middle of the list. Instead the box is a fixed frame and the
+     inner .modal__content scrolls (see below). */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: url('media/invitation-paper.webp') center / cover no-repeat, #fdf8ee;
+  border-radius: var(--card-radius);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.28);
+  padding: 30px 28px;
+  animation: modal-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Scrollable region inside the fixed, bordered box. min-height:0 lets this
+   flex child shrink below its content so overflow-y actually scrolls. */
+.modal__content {
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Gold double-keyline border (same as the ceremony cards) */
+.modal__box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--paper-border);
+  border-radius: var(--card-radius);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.modal__box::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(139, 95, 48, 0.55);
+  border-radius: calc(var(--card-radius) - 4px);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: 0;
+  background: none;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--brown);
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.modal__close:hover {
+  opacity: 1;
+}
+
+.modal__title {
+  font: var(--font-semi-bold) 26px var(--font-secondary);
+  color: var(--brown);
+  text-align: center;
+}
+
+.modal__text {
+  font: var(--font-regular) 17px var(--font-secondary);
+  color: var(--brown);
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.modal__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal__btn {
+  flex: 1 1 0;
+  /* both buttons grow to equal width */
+  text-align: center;
+  padding: 11px 22px;
+  border: 1.5px solid var(--brown);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--brown);
+  font: var(--font-regular) 15px var(--font-secondary);
+  margin-top: 24px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.modal__btn:hover {
+  background: var(--brown);
+  color: #fffdf8;
+}
+
+.modal__btn--primary {
+  background: var(--brown);
+  color: #fffdf8;
+  margin-top: 24px;
+}
+
+.modal__btn--primary:hover {
+  background: #6d3f00;
+}
+
+/* Location / calendar list */
+.loc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Calendar popup: ceremonies grouped under a date heading */
+.cal-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cal-group+.cal-group {
+  margin-top: 8px;
+}
+
+.cal-date {
+  font: var(--font-semi-bold) 15px var(--font-secondary);
+  color: var(--brown);
+  opacity: 0.85;
+  padding-left: 2px;
+  margin-bottom: 2px;
+}
+
+.loc {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1.5px solid #dec0a0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--brown);
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.loc:hover,
+.loc:focus-visible {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: var(--brown);
+}
+
+/* Floral divider sits just below the popup title */
+.modal__divider {
+  display: block;
+  width: 70%;
+  max-width: 240px;
+  height: auto;
+  margin: 8px auto 20px;
+  opacity: 0.9;
+  pointer-events: none;
+  user-select: none;
+}
+
+.loc__pin {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brown);
+}
+
+.loc__pin svg {
+  width: 32px;
+  height: auto;
+}
+
+.loc__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.loc__ceremonies {
+  font: var(--font-semi-bold) 16px var(--font-secondary);
+  margin-bottom: 4px;
+}
+
+.loc__venue {
+  font: var(--font-regular) 15px var(--font-secondary);
+}
+
+.loc__addr {
+  font: var(--font-regular) 13px var(--font-secondary);
+  opacity: 0.7;
+}
+
+.loc__go {
+  font-size: 24px;
+  color: var(--brown);
+  opacity: 0.6;
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-pop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .modal__overlay,
+  .modal__box {
+    animation: none;
+  }
+}
+
+/* Background-music toggle styling moved to the shared
+   _platform/music.css (one file for every template now, not a copy per
+   template) - see index.html's <link> for it. */
+
+/* ---------- Rose-petal shower ---------- */
+/* Floating button, pinned just below the music toggle. */
+.petal-toggle {
+  position: fixed;
+  top: 70px;
+  /* below the 44px music button at top:16 (16 + 44 + 10) */
+  right: 16px;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(139, 95, 48, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--brown);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* The preview return-bar pushes the music toggle down; keep this one below it. */
+body.is-previewing .petal-toggle {
+  top: 124px;
+  /* music at 70 → 70 + 44 + 10 */
+}
+
+.petal-toggle:hover {
+  background: rgba(255, 253, 248, 0.92);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+
+.petal-toggle:active {
+  transform: scale(0.94);
+}
+
+.petal-toggle:focus-visible {
+  outline: 2px solid var(--brown);
+  outline-offset: 3px;
+}
+
+.petal-toggle__icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+/* Full-viewport falling-petals overlay (created on click, self-removes). */
+.petal-shower {
+  position: fixed;
+  inset: 0;
+  z-index: 85;
+  /* over the invitation, below the toggle buttons (90) */
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.petal-shower__petal {
+  position: absolute;
+  top: -8vh;
+  height: auto;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation-name: petal-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.95;
+  }
+
+  88% {
+    opacity: 0.95;
+  }
+
+  100% {
+    transform: translate(var(--dx, 0px), 120vh) rotate(var(--rot, 540deg));
+    opacity: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .petal-toggle {
+    top: 62px;
+    /* music at 12, 40px → 12 + 40 + 10 */
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .petal-toggle__icon {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petal-toggle {
+    transition: none;
+  }
+}
+/* ---------- Cover: fitting a SHORT viewport ---------------------------- */
+/* Everything on this card is sized off WIDTH: the symbol's 150px cap, the
+   cue's `margin-top: 9%` (a percentage of the column's width), and vw-based
+   or flat-px type. The CARD, though, is capped against HEIGHT - see
+   `max-height: 88vh` on `.cover .invite`. So on a wide-but-short window (a
+   laptop in landscape, a phone on its side) the card shrank while the content
+   inside it kept its full height, and the surplus simply sat outside the
+   paper: .invite is overflow:visible, so nothing was clipped - the symbol
+   floated above the card's top edge and "Tap to open" below its bottom one.
+
+   Measured at 1050x581 with the Sikh invocation: 667px of content in a 511px
+   card, 78px over each edge. That invocation surfaced it because its line
+   wraps to two, but it was never specific to it - every invocation was within
+   about 40px of the same fault, and the second line crossed the line.
+
+   A height query rather than vh terms on each size: the five costs below have
+   to come down TOGETHER to buy back 156px, and tying each one to its own vh
+   curve would have them shrinking at five different rates on the way there.
+   Below the breakpoint the cover simply breathes less; above it, nothing here
+   applies and the card is exactly as it was. */
+@media (max-height: 800px) {
+
+  /* 6vh top and bottom is 35px each at this height, spent on air. */
+  .cover .invite__inner {
+    padding-block: 2.4vh;
+  }
+
+  /* The single biggest item on the card - a flat 150px that took no notice of
+     the room it had. */
+  .cover .invite__ganesha {
+    max-width: min(150px, 17vh);
+  }
+
+  /* Two lines of Gurmukhi at 40px is 116px of the card on its own. */
+  .cover .invite__blessing {
+    font-size: min(clamp(26px, 4.6vw, 40px), 5vh);
+    margin-bottom: 1.5%;
+  }
+
+  .cover .invite__bless .invite__divider {
+    margin-top: 2%;
+  }
+
+  /* --primary--b3-r is a flat 28.5px, so this one never moved at all. */
+  .cover .invite__message {
+    font-size: min(28.5px, 3.3vh);
+  }
+
+  /* 9% of the column is 50px of blank space above the cue. */
+  .cover .cover__cue {
+    margin-top: min(9%, 4vh);
+    padding-block: clamp(8px, 1.4vh, 18px);
+  }
+}

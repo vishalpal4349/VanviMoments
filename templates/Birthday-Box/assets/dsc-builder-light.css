@@ -1,0 +1,316 @@
+/* DilSeCraft builders — light editorial theme. Loaded after gifts.css and the gift-* sheets.
+   The gift itself previews inside an iframe, so nothing here reaches the recipient's page. */
+
+:root {
+    --gift-ink: #302A2C;
+    --gift-ink2: #3D3537;
+    --gift-ink3: #302A2C;
+    --gift-chalk: #302A2C;
+    --gift-cream: #FFFDF8;
+    --gift-text: #302A2C;
+    --gift-text-muted: #74696B;
+    --gift-haldi: #A87B22;
+    --gift-tota: #4E8A69;
+    --gift-rose: #C98287;
+    --gift-rose-dark: #B7737A;
+    --gift-rose-soft: rgba(201, 130, 135, 0.14);
+    --gift-blush: rgba(243, 217, 215, 0.5);
+    --gift-lavender: rgba(226, 220, 238, 0.7);
+    --gift-card: #FFFEFC;
+    --gift-surface: #FFFEFC;
+    --gift-input: #FFFDF8;
+    --gift-border: #EDE4D8;
+    --gift-shadow: 0 2px 6px rgba(48, 42, 44, 0.05), 0 12px 30px rgba(48, 42, 44, 0.07);
+    --gift-shadow-sm: 0 1px 2px rgba(48, 42, 44, 0.04), 0 4px 14px rgba(48, 42, 44, 0.05);
+    --gift-display: "Cormorant Garamond", Georgia, serif;
+    --gift-body: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --gift-radius: 24px;
+    --gift-radius-sm: 14px;
+    --ink2: #FFFEFC;
+    --chalk: #302A2C;
+    --mist: #74696B;
+    --ink3: #302A2C;
+    --rule-strong: #E3D8C8;
+    color-scheme: light;
+}
+
+/* ── page, header, footer ── */
+.gift-body {
+    color: var(--gift-text);
+    background:
+        radial-gradient(760px 420px at 8% -8%, rgba(243, 217, 215, 0.75), transparent 60%),
+        radial-gradient(640px 380px at 100% 0%, rgba(226, 220, 238, 0.7), transparent 55%),
+        radial-gradient(700px 420px at 50% 100%, rgba(245, 232, 189, 0.35), transparent 60%),
+        #FFFDF8;
+    background-attachment: fixed;
+}
+.gift-glow { opacity: 0.35; }
+.gift-glow-1 { background: rgba(243, 217, 215, 0.9); }
+.gift-glow-2 { background: rgba(226, 220, 238, 0.9); }
+.gift-cane { display: none; }
+.gift-header {
+    background: rgba(255, 253, 248, 0.86);
+    border-bottom: 1px solid #F0E9DE;
+    box-shadow: none;
+}
+.gift-logo-text { font-family: var(--gift-display); font-weight: 600; font-size: 1.45rem; letter-spacing: 0; color: var(--gift-text); }
+.gift-nav-link { color: var(--gift-text-muted); }
+.gift-nav-link:hover, .gift-nav-link.is-active { color: var(--gift-text); }
+.gift-logo-icon { color: #FFFDF8; box-shadow: none; }
+.gift-footer { background: #F8F3EA; border-top: 1px solid #F0E9DE; color: var(--gift-text-muted); }
+.gift-footer a { color: var(--gift-text); }
+.gift-footer-live { display: inline-flex; align-items: center; gap: 7px; font-size: 0.82rem; }
+.gift-footer-live i { width: 7px; height: 7px; border-radius: 50%; background: #C98287; }
+
+/* ── type ── */
+.gift-eyebrow,
+.gift-price,
+.gift-rupee-field > span,
+.gift-btn,
+.gift-spotlight-cta,
+.gift-coupon-row input,
+.gift-coupon-applied-code,
+.gift-song-addon-copy strong { font-family: var(--gift-body); letter-spacing: normal; }
+.gift-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; color: #C98287; }
+.gift-title,
+.gift-section-title,
+.gift-spotlight-copy h2,
+.gift-card-title,
+.gift-step h3,
+.gift-panel-head h2,
+.gift-coupon-title,
+.gift-buy-box h3,
+.gift-manage-h,
+.gift-video-head strong,
+.gift-more-title,
+.gift-more-name { font-weight: 600; letter-spacing: -0.005em; }
+.gift-title { font-size: clamp(2.1rem, 6vw, 3rem); line-height: 1.05; }
+.gift-panel-head h2, .gift-step h3 { font-size: 1.45rem; line-height: 1.15; }
+.gift-more-title { font-size: clamp(1.9rem, 5vw, 2.4rem); }
+.gift-more-name, .gift-card-title { font-size: 1.3rem; }
+.gift-price { font-weight: 700; }
+
+/* ── panels, steps, cards ── */
+.gift-panel { backdrop-filter: none; }
+.gift-panel-head { background: linear-gradient(135deg, rgba(243, 217, 215, 0.55), rgba(245, 232, 189, 0.35)); }
+.gift-step-num { background: #302A2C; color: #FFFDF8; }
+.gift-card:hover,
+.gift-more-card:hover { box-shadow: 0 10px 22px rgba(48, 42, 44, 0.08), 0 24px 50px rgba(48, 42, 44, 0.09); }
+.gift-card--featured { background: linear-gradient(145deg, #FFFEFC, rgba(243, 217, 215, 0.45)); }
+.gift-card-badge, .gift-more-badge, .gift-spotlight-badge { color: #302A2C; background: #DCE6D6; }
+.gift-card-ribbon { color: #302A2C; }
+.gift-more-foot { border-top-color: #F0E9DE; }
+.gift-spotlight {
+    background:
+        radial-gradient(720px 320px at 12% 0%, rgba(243, 217, 215, 0.8), transparent 60%),
+        #FFFEFC;
+}
+.gift-spot-polaroid, .gift-spot-card { box-shadow: 0 12px 24px rgba(48, 42, 44, 0.12); }
+
+/* ── fields ── */
+.gift-field input::placeholder,
+.gift-field textarea::placeholder,
+.gift-coupon-row input::placeholder { color: #A89C98; }
+.gift-field input:focus,
+.gift-field textarea:focus,
+.gift-field select:focus {
+    border-color: #C98287;
+    box-shadow: 0 0 0 3px rgba(201, 130, 135, 0.18);
+    outline: 0;
+}
+.gift-field input[type="date"]::-webkit-calendar-picker-indicator:hover { background: rgba(48, 42, 44, 0.06); }
+.gift-theme-swatch { border-color: #E3D8C8; }
+.gift-upload-progress-bar { background: #F0E9DE; }
+.gift-acc-meta, .gift-acc-row span { background: #F8F3EA; border-color: #F0E9DE; }
+.gift-acc-row { border-top-color: #F0E9DE; }
+.gift-acc[open] { background: #FBF7F0; }
+.gift-acc[open] .gift-acc-ico { color: #FFFDF8; }
+.gift-song-list--compact::-webkit-scrollbar-thumb { background: #E3D8C8; }
+.gift-song-own { border-color: #E3D8C8; }
+.gift-advanced-toggle:hover { background: #F8F3EA; }
+.gift-live-controls,
+.gift-photo-caption,
+.gift-photo-placements,
+.gift-qr-theme { background: #F8F3EA; }
+.gift-qr-theme:hover { border-color: #E3D8C8; }
+.gift-manage-lock-note { background: #F8F3EA; }
+.gift-agreement-box { background: #FFFEFC; }
+.gift-agreement-preview { background: #F8F3EA; }
+.gift-coupon-card { background: linear-gradient(135deg, rgba(245, 232, 189, 0.45), rgba(243, 217, 215, 0.45)); }
+.gift-coupon-card::before,
+.gift-coupon-card::after { background: #FFFDF8; box-shadow: inset 0 0 0 1px #F0E9DE; }
+.gift-coupon-row input { background: #FFFDF8; border-color: #E3D8C8; color: var(--gift-text); }
+.gift-coupon.is-applied .gift-coupon-card { background: linear-gradient(135deg, rgba(217, 226, 209, 0.7), rgba(245, 232, 189, 0.4)); }
+.gift-payflow { background: #F8F3EA; }
+.gift-payflow-step + .gift-payflow-step::before { border-color: #E3D8C8; }
+.gift-paymethod { background: #FFFEFC; }
+.gift-paybar {
+    background: rgba(255, 253, 248, 0.95);
+    border-top: 1px solid #F0E9DE;
+    box-shadow: 0 -8px 30px rgba(48, 42, 44, 0.1);
+}
+.gift-loading { background: rgba(255, 253, 248, 0.82); }
+
+/* ── chips & choices: soft, no hard offset shadows ── */
+.gift-chip.is-active,
+.gift-theme.is-active,
+.gift-variety.is-active {
+    background: #302A2C;
+    color: #FFFDF8;
+    border-color: #302A2C;
+    box-shadow: 0 6px 16px rgba(48, 42, 44, 0.14);
+}
+.gift-variety.is-active small { color: rgba(255, 253, 248, 0.8); }
+.gift-variety.is-active span,
+.gift-variety.is-active i { color: #FFFDF8; }
+.gift-song-addon.is-on .gift-song-addon-check { border-color: #302A2C; background: #302A2C; color: #FFFDF8; }
+
+/* ── buttons ── */
+.gift-btn {
+    font-weight: 600;
+    border: 1px solid transparent;
+    box-shadow: none;
+    transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+}
+.gift-btn:hover { transform: translateY(-1px); }
+.gift-btn:active { transform: translateY(1px); box-shadow: none; }
+.gift-btn--primary {
+    background: #302A2C;
+    color: #FFFDF8;
+    box-shadow: 0 8px 20px rgba(48, 42, 44, 0.16);
+}
+.gift-btn--primary:hover { background: #C98287; color: #FFFDF8; }
+.gift-btn--gold {
+    background: #F5E8BD;
+    color: #302A2C;
+    border-color: #EAD9A0;
+    box-shadow: none;
+}
+.gift-btn--gold:hover { background: #F0DFA6; }
+.gift-btn--gold .gift-price-was { color: rgba(48, 42, 44, 0.55); }
+.gift-btn--ghost { background: transparent; color: #302A2C; border-color: #E3D8C8; }
+.gift-btn--ghost:hover { background: #F8F3EA; color: #302A2C; }
+.gift-btn--whatsapp { color: #fff; }
+.gift-success-icon { box-shadow: 0 8px 20px rgba(48, 42, 44, 0.12); }
+
+/* ── preview stage ── */
+.gift-preview-wrap { background: linear-gradient(180deg, #F8F3EA 0%, #F3ECE0 100%); }
+.gift-preview-hint, .gift-video-live-caption { color: var(--gift-text-muted); }
+.gift-phone { box-shadow: 0 24px 50px rgba(48, 42, 44, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.gift-video-progress { background: #F0E9DE; }
+.gift-video-preview-phone { box-shadow: 0 14px 28px rgba(48, 42, 44, 0.16); }
+
+/* ── voice & signature widgets were already light ── */
+.gift-rec { border-color: #EDE4D8; background: #FFFDF8; }
+
+/* ── manage page ── */
+.gift-manage-photo-remove { background: rgba(48, 42, 44, 0.78); }
+.gift-manage-photo-cap { color: #302A2C; }
+
+/* ── old catalog cards (gift-shop.css) that still render inside builders ── */
+.dsc-card, .tile.dsc-card, .gift-shop .gift-card.dsc-card {
+    background: #FFFEFC;
+    color: #302A2C;
+    border: 1px solid #F0E9DE;
+}
+.dsc-shot { background: #F8F3EA; }
+.dsc-card-title, .dsc-card-now, .gift-shop-hero h1 { color: #302A2C; }
+.dsc-card-desc, .dsc-card-was, .dsc-preview, .gift-shop-kicker, .gift-shop-count,
+.gift-shop-toolbar .gl-sort, .gift-shop .gl-empty, .tile.dsc-card .dsc-card-desc { color: #74696B; }
+.dsc-make { background: #302A2C; color: #FFFDF8; }
+.dsc-make:hover { background: #C98287; color: #FFFDF8; }
+.dsc-preview:hover, .gift-shop-kicker a:hover { color: #302A2C; }
+
+/* ── reveal toggle (gift-reveal.css) ── */
+.gift-reveal, .gift-reveal-note {
+    --gift-ink: #302A2C;
+    --gift-ink2: #FFFEFC;
+    --gift-chalk: #302A2C;
+    --gift-text: #302A2C;
+    --gift-text-muted: #74696B;
+    --gift-border: #EDE4D8;
+    --gift-input: #FFFDF8;
+}
+.gift-reveal__switch { background: #E3D8C8; }
+.gift-reveal__switch::after { box-shadow: 0 2px 6px rgba(48, 42, 44, 0.2); }
+.gift-reveal__actions button:first-child { color: #FFFDF8; background: #302A2C; }
+
+
+/* ── slide-out menu (site-menu.css) ── */
+.dsc-menu-btn { border-color: #E3D8C8; background: #FFFEFC; color: #302A2C; }
+.dsc-menu-dim { background: rgba(48, 42, 44, 0.4); }
+.dsc-menu {
+    background: #FFFDF8;
+    color: #302A2C;
+    border-left: 1px solid #F0E9DE;
+    box-shadow: -18px 0 50px rgba(48, 42, 44, 0.14);
+}
+.dsc-menu-close { border-color: #E3D8C8; color: #302A2C; }
+.dsc-menu-links a, .dsc-menu-eyebrow, .dsc-menu-gift-copy em { color: #74696B; }
+.dsc-menu-links a:hover, .dsc-menu-links a.is-on { background: #F8F3EA; color: #302A2C; }
+.dsc-menu-gift { border-color: #F0E9DE; background: #FFFEFC; color: #302A2C; }
+.dsc-menu-gift-badge { color: #302A2C; }
+
+/* ── Save draft to the account (gift-draft.js) ── */
+.gift-cloud-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    margin: 0 0 16px;
+    padding: 10px 12px 10px 16px;
+    border: 1px dashed var(--gift-border);
+    border-radius: 999px;
+    background: var(--gift-card);
+    font-family: var(--gift-body);
+}
+.gift-cloud-bar p {
+    flex: 1 1 220px;
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.4;
+    color: var(--gift-text-muted);
+    text-align: left;
+}
+.gift-cloud-bar__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 38px;
+    padding: 0 16px;
+    border: 1px solid var(--gift-ink);
+    border-radius: 999px;
+    background: var(--gift-ink);
+    color: #FFFDF8;
+    font: 600 0.84rem/1 var(--gift-body);
+    cursor: pointer;
+}
+.gift-cloud-bar__btn:disabled { opacity: .7; cursor: default; }
+.gift-cloud-bar__link {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--gift-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+@media (max-width: 520px) {
+    .gift-cloud-bar { border-radius: 16px; }
+}
+.gift-cloud-toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    z-index: 10050;
+    max-width: min(92vw, 440px);
+    padding: 12px 18px;
+    border-radius: 14px;
+    background: #302A2C;
+    color: #FFFDF8;
+    font: 500 0.9rem/1.4 var(--gift-body);
+    box-shadow: 0 12px 30px rgba(48, 42, 44, .25);
+    transform: translate(-50%, 20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+}
+.gift-cloud-toast.is-on { opacity: 1; transform: translate(-50%, 0); }

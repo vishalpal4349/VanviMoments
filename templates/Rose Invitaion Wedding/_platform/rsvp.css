@@ -1,0 +1,937 @@
+/* Balcony platform RSVP - shared styling for the guest RSVP section rendered by
+   _platform/rsvp.js. Self-contained (all .brsvp-*), and readable on any template
+   background.
+
+   THEMING. Every colour below is derived from ONE value, --brsvp-accent. The
+   tints (well fills, hairlines, the selected-option wash) are mixed from it with
+   color-mix(), so setting a single hex re-themes the whole section - the purple
+   here is only the default. Three ways in, in increasing specificity:
+
+     1. this file's default;
+     2. --brsvp-accent-set on the mount, which rsvp.js sets from the payload's
+        event.rsvpAccent - the per-invitation colour;
+     3. a template's own stylesheet redeclaring .brsvp { --brsvp-accent: … }.
+
+   Each --brsvp-* token carries a literal fallback for browsers without
+   color-mix() (Safari < 16.2), where the section falls back to the default
+   purple tints rather than to nothing. */
+
+.brsvp {
+  /* (2) beats (1) because .brsvp declares the default itself, and a declaration
+     always outranks an inherited value - so the payload colour has to arrive as
+     a DIFFERENT custom property that this one reads through. */
+  --brsvp-accent: var(--brsvp-accent-set, #6B4E9E);
+  --brsvp-ink: #3E2A63;
+  --brsvp-muted: #8A83A3;
+  --brsvp-surface: #FFFFFF;
+
+  /* Accent tints. Roughly 6% / 10% / 22% / 55% of the accent over white. */
+  --brsvp-wash: color-mix(in srgb, var(--brsvp-accent) 6%, #fff);
+  --brsvp-well: color-mix(in srgb, var(--brsvp-accent) 12%, #fff);
+  --brsvp-line: color-mix(in srgb, var(--brsvp-accent) 16%, #fff);
+  --brsvp-line-strong: color-mix(in srgb, var(--brsvp-accent) 34%, #fff);
+
+  /* The "Maybe" ring is the one colour NOT derived from the accent: it has to
+     stay legible as a distinct middle state whatever the accent becomes. */
+  --brsvp-maybe: #D4A24C;
+  --brsvp-no: #B9B4C6;
+
+  /* Submit gradient: the accent, warming toward a rose at the far end. */
+  --brsvp-grad-from: var(--brsvp-accent);
+  --brsvp-grad-to: color-mix(in srgb, var(--brsvp-accent) 45%, #E08BB0);
+
+  box-sizing: border-box;
+  width: min(94vw, 560px);
+  margin: 0 auto;
+  padding: 28px clamp(16px, 5vw, 34px) 26px;
+  border-radius: 26px;
+  background: var(--brsvp-surface);
+  box-shadow: 0 18px 60px rgba(62, 42, 99, 0.12);
+  color: var(--brsvp-ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  text-align: left;
+}
+
+@supports not (color: color-mix(in srgb, red 50%, blue)) {
+  .brsvp {
+    --brsvp-wash: #F7F4FC;
+    --brsvp-well: #F0EAF9;
+    --brsvp-line: #E7DFF4;
+    --brsvp-line-strong: #C9BAE4;
+    --brsvp-grad-to: #C77DBB;
+  }
+}
+
+.brsvp *,
+.brsvp *::before,
+.brsvp *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Card header ---------- */
+
+.brsvp__head {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.brsvp__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  /* A serif here is the whole character of the header; the rest of the card
+     stays on the system UI face. */
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  /* Sized (and tracked) for a multi-word phrase, not the 4-letter "RSVP" this
+     replaced - that ran 38-54px at 0.06em tracking, which a phrase this long
+     would blow past the card's width on a phone before it ever wrapped. */
+  font-size: clamp(21px, 5.4vw, 30px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--brsvp-accent);
+}
+
+.brsvp__title-text {
+  /* Lets the phrase wrap to a second line and stay centered under itself,
+     instead of overflowing the row past the (fixed-width) flourishes on
+     either side. */
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+}
+
+.brsvp__title-mark {
+  width: 48px;
+  height: 12px;
+  flex: none;
+  color: var(--brsvp-line-strong);
+}
+
+.brsvp__title-mark--flip {
+  transform: scaleX(-1);
+}
+
+.brsvp__lead {
+  margin: 10px 0 0;
+  font-size: 16px;
+  color: var(--brsvp-muted);
+}
+
+.brsvp__head-heart {
+  width: 16px;
+  height: 16px;
+  margin-top: 8px;
+  color: var(--brsvp-line-strong);
+}
+
+/* Flourish rule between the identity block and the schedule. */
+.brsvp-rule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  color: var(--brsvp-line-strong);
+}
+
+.brsvp-rule::before,
+.brsvp-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--brsvp-line);
+}
+
+.brsvp-rule__mark {
+  width: 42px;
+  height: 11px;
+  flex: none;
+}
+
+/* ---------- Icon wells ---------- */
+
+/* A round tinted well in front of every label. Ceremonies no longer have one:
+   theirs was left empty as a slot for the template to fill with per-ceremony
+   artwork, no template ever filled it, and a blank circle in front of every
+   ceremony was all it produced. */
+.brsvp-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  background-color: var(--brsvp-well);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  color: var(--brsvp-accent);
+}
+
+.brsvp-ico__svg {
+  width: 21px;
+  height: 21px;
+}
+
+/* ---------- Fields ---------- */
+
+.brsvp-identity {
+  display: block;
+}
+
+/* No heading: the placeholder carries the label's job (see fieldHtml), so the
+   icon sits BESIDE its control rather than above it. That's two lines saved per
+   field, and the glyphs still form one column down the card. */
+.brsvp-field {
+  margin-bottom: 14px;
+}
+
+.brsvp-field__row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* A textarea grows; keep its icon pinned to the first line rather than drifting
+   to the vertical middle of a long message. */
+.brsvp-field__row:has(textarea) {
+  align-items: flex-start;
+}
+
+.brsvp-input {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--brsvp-line);
+  border-radius: 12px;
+  background: var(--brsvp-surface);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--brsvp-ink);
+}
+
+.brsvp-input::placeholder {
+  color: var(--brsvp-muted);
+  opacity: 0.85;
+}
+
+.brsvp-input:focus {
+  outline: none;
+  border-color: var(--brsvp-line-strong);
+  box-shadow: 0 0 0 3px var(--brsvp-wash);
+}
+
+.brsvp-message__box {
+  resize: vertical;
+  min-height: 88px;
+}
+
+/* Indented past the icon well (44px + the 14px gap) so it reads as belonging to
+   the control above it, not to the row below. */
+.brsvp-field__hint {
+  display: block;
+  margin: 6px 0 0 58px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--brsvp-muted);
+}
+
+@media (max-width: 460px) {
+
+  /* Too narrow to give up 58px to an empty gutter under the field. */
+  .brsvp-field__hint {
+    margin-left: 0;
+  }
+}
+
+/* ---------- Section head ---------- */
+
+.brsvp-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.brsvp-section__title {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--brsvp-ink);
+}
+
+.brsvp-section__sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--brsvp-muted);
+}
+
+/* ---------- Event schedule ---------- */
+
+/* One bordered block, rows divided by hairlines - not separate cards, so a long
+   schedule reads as a single list. */
+.brsvp-events {
+  border: 1px solid var(--brsvp-line);
+  border-radius: 16px;
+  overflow: hidden;
+  /* The form's rhythm, which this block was the only one missing: .brsvp-field
+     and .brsvp-section carry it as margin-bottom too. Without it the message
+     box's top border sat flush against the schedule's bottom border, reading as
+     one merged control. On the block rather than on the field below it, so
+     whatever follows the schedule gets the gap. */
+  margin-bottom: 14px;
+}
+
+.brsvp-event {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 16px;
+  border-top: 1px solid var(--brsvp-line);
+  background: var(--brsvp-surface);
+}
+
+.brsvp-event:first-child {
+  border-top: 0;
+}
+
+.brsvp-event__head {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.brsvp-event__name {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--brsvp-ink);
+}
+
+.brsvp-event__date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  font-size: 14px;
+  color: var(--brsvp-muted);
+}
+
+.brsvp-event__cal {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  color: var(--brsvp-maybe);
+}
+
+/* ---------- Yes / Maybe / No ---------- */
+
+.brsvp-opts {
+  display: flex;
+  gap: 8px;
+  flex: none;
+}
+
+.brsvp-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--brsvp-line);
+  border-radius: 12px;
+  background: var(--brsvp-surface);
+  font-size: 15px;
+  color: var(--brsvp-ink);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+/* Each option owns its ring colour, so Yes / Maybe / No stay tellable apart at
+   a glance even before one is picked. Only Yes follows the accent. */
+.brsvp-opt input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  flex: none;
+  accent-color: var(--brsvp-no);
+}
+
+.brsvp-opt input[value="attending"] {
+  accent-color: var(--brsvp-accent);
+}
+
+.brsvp-opt input[value="maybe"] {
+  accent-color: var(--brsvp-maybe);
+}
+
+.brsvp-opt:has(input:checked) {
+  border-color: var(--brsvp-line-strong);
+  background: var(--brsvp-wash);
+  font-weight: 600;
+}
+
+.brsvp-opt:has(input:focus-visible) {
+  box-shadow: 0 0 0 3px var(--brsvp-wash);
+}
+
+/* Stacked cell - the ceremony on one line, the three options across the line
+   below. Needed at BOTH ends of the range, for the same reason each time: the
+   cell is too narrow to seat a name and three options side by side. On a phone
+   that's the viewport; on desktop it's the two-up grid, where each column is
+   about half of a 920px card. */
+@media (max-width: 560px),
+(min-width: 760px) {
+  .brsvp-event {
+    flex-wrap: wrap;
+  }
+
+  /* Was calc(100% - 58px), leaving room for the 44px icon well + its 14px gap.
+     The well is gone, so the name takes the whole line. */
+  .brsvp-event__head {
+    flex-basis: 100%;
+  }
+
+  .brsvp-opts {
+    width: 100%;
+  }
+
+  .brsvp-opt {
+    flex: 1 1 0;
+    justify-content: center;
+    padding: 10px 6px;
+  }
+}
+
+/* ---------- Desktop: a wider card, two ceremonies to a row ---------- */
+
+@media (min-width: 760px) {
+  .brsvp {
+    width: min(94vw, 920px);
+  }
+
+  /* Still one bordered block, so a long schedule reads as a single list - the
+     hairlines just run both ways now. Each cell draws its own top and left
+     rule; the first row and the first column suppress theirs, which is what
+     keeps the block's own border from doubling up. */
+  .brsvp-events {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .brsvp-event:nth-child(-n+2) {
+    border-top: 0;
+  }
+
+  .brsvp-event:nth-child(even) {
+    border-left: 1px solid var(--brsvp-line);
+  }
+
+  /* An odd ceremony count leaves the last cell alone on its row; let it run the
+     full width rather than sit in a half-empty column. */
+  .brsvp-event:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  /* Name and number side by side - two short inputs stretched across 920px
+     would look like a mistake. auto-fit means the personalized link, which
+     asks only for the number, still gets one full-width field. */
+  .brsvp-identity {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 0 20px;
+  }
+
+  /* A 920px-wide pill reads as a banner, not a button. The schedule is what
+     wanted the extra width; the call to action doesn't. */
+  .brsvp__submit,
+  .brsvp__change {
+    width: min(100%, 420px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- Party size ---------- */
+
+/* One shared head-count for the whole invitation, shown only once at least one
+   event is marked Yes or Maybe. */
+.brsvp-headcount {
+  margin: 20px 0 24px;
+  padding: 16px;
+  border: 1px solid var(--brsvp-line);
+  border-radius: 16px;
+  background: var(--brsvp-wash);
+  text-align: center;
+}
+
+.brsvp-headcount__label {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--brsvp-ink);
+}
+
+/* − / value / + . Tap targets are 44px so a thumb can hit them, and the value
+   stays a real number input so it remains typable. */
+.brsvp-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.brsvp-stepper__btn {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border: 1px solid var(--brsvp-line-strong);
+  border-radius: 12px;
+  background: var(--brsvp-surface);
+  color: var(--brsvp-accent);
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.brsvp-stepper__btn:hover:not(:disabled) {
+  background: var(--brsvp-well);
+}
+
+.brsvp-stepper__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.brsvp-stepper__value {
+  width: 68px;
+  height: 44px;
+  padding: 0 8px;
+  border: 1px solid var(--brsvp-line-strong);
+  border-radius: 12px;
+  background: var(--brsvp-surface);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--brsvp-ink);
+  text-align: center;
+  /* The native spinners duplicate the − / + buttons and crowd the box. */
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.brsvp-stepper__value::-webkit-outer-spin-button,
+.brsvp-stepper__value::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.brsvp-stepper__value:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--brsvp-well);
+}
+
+.brsvp-headcount__hint {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--brsvp-muted);
+}
+
+/* ---------- Submit ---------- */
+
+.brsvp__error {
+  margin: 0 0 12px;
+  color: #C0392B;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Same slot, but informational - the trial preview's "this doesn't send yet". */
+.brsvp__error--note {
+  color: var(--brsvp-muted);
+}
+
+.brsvp__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 6px;
+  padding: 17px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(100deg, var(--brsvp-grad-from), var(--brsvp-grad-to));
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.brsvp__submit:hover {
+  filter: brightness(1.06);
+}
+
+.brsvp__submit-heart {
+  width: 20px;
+  height: 20px;
+  opacity: 0.95;
+}
+
+.brsvp__footnote {
+  margin: 14px 0 0;
+  font-size: 14px;
+  color: var(--brsvp-muted);
+  text-align: center;
+}
+
+.brsvp__change {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid var(--brsvp-line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--brsvp-accent);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- Brand credit ---------- */
+
+/* Self-hosted for the brand credit's URL line - the only thing in this file
+   that isn't Cormorant Garamond or the system UI stack. One weight only
+   (Medium): declaring 600 with nothing but Regular/Medium available would
+   have the browser hunt upward to a heavier face if one ever gets added
+   here, so brsvp__brand-url below asks for 500 to match this exactly. */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../../fonts/satoshi/Satoshi-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+.brsvp__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: 1px solid var(--brsvp-line);
+}
+
+.brsvp__brand-label {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--brsvp-muted);
+}
+
+.brsvp__brand-logo {
+  width: 90px;
+  height: auto;
+  display: block;
+}
+
+.brsvp__brand-url {
+  font-family: "Satoshi", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--brsvp-muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--brsvp-line-strong);
+  padding-bottom: 1px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.brsvp__brand-url:hover,
+.brsvp__brand-url:focus-visible {
+  color: var(--brsvp-accent);
+  border-color: var(--brsvp-accent);
+}
+
+.brsvp__thanks {
+  font-size: 15px;
+  text-align: center;
+}
+
+.brsvp__result-list {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+}
+
+.brsvp__result-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+}
+
+/* Host edit/preview note */
+.brsvp-note__lead {
+  font-size: 13px;
+  opacity: 0.7;
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.brsvp-note__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.brsvp-note__list li {
+  padding: 8px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.brsvp-note__list li span {
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.brsvp-note__empty {
+  font-size: 13px;
+  opacity: 0.6;
+  text-align: center;
+  margin: 0;
+}
+
+/* Host inline "add event" form - shown in edit mode on plans that support RSVP,
+   right where guests see the form. Uses the section's own accent so it belongs. */
+.brsvp-note__add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.brsvp-note__name,
+.brsvp-note__date {
+  padding: 10px 12px;
+  border: 1.5px solid var(--brsvp-line-strong);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--brsvp-ink);
+  background: #fff;
+}
+
+.brsvp-note__name {
+  flex: 1 1 160px;
+  min-width: 0;
+}
+
+.brsvp-note__name:focus,
+.brsvp-note__date:focus {
+  outline: none;
+  border-color: var(--brsvp-accent);
+}
+
+.brsvp-note__btn {
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--brsvp-accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Manage rows: each event with inline Edit / Delete (and an edit form). */
+.brsvp-note__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brsvp-note__list .brsvp-note__evname {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.brsvp-note__evdate {
+  font-size: 13px;
+}
+
+.brsvp-note__list .brsvp-note__badge {
+  opacity: 1;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.brsvp-note__list .brsvp-note__actions {
+  opacity: 1;
+  margin-left: auto;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.brsvp-note__link {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brsvp-accent);
+  cursor: pointer;
+}
+
+.brsvp-note__del {
+  color: #c0392b;
+}
+
+.brsvp-note__edit-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.brsvp-note__edit-form input[type="text"],
+.brsvp-note__edit-form input[type="date"] {
+  font-weight: 400;
+}
+
+.brsvp-note__shown {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* ---- Host editing view: the guest form, mostly disabled, editable name/date ---- */
+.brsvp-host__lead {
+  font-size: 13px;
+  opacity: 0.7;
+  text-align: center;
+  margin: 0 0 16px;
+}
+
+.brsvp-host__head {
+  position: relative;
+  display: block;
+  text-align: center;
+}
+
+.brsvp-host__name,
+.brsvp-host__date {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: 1px dashed var(--brsvp-line-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--brsvp-ink);
+}
+
+.brsvp-host__name {
+  padding: 6px 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.brsvp-host__date {
+  margin-top: 6px;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+
+.brsvp-host__name:focus,
+.brsvp-host__date:focus {
+  outline: none;
+  border-style: solid;
+  border-color: var(--brsvp-accent);
+}
+
+.brsvp-host__del {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #fff;
+  color: #c0392b;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Options and the preview fields read as "not yours to edit". */
+.brsvp-host .brsvp-opts {
+  opacity: 0.6;
+}
+
+.brsvp-host .brsvp-opt {
+  cursor: default;
+}
+
+.brsvp-host__preview {
+  opacity: 0.55;
+}
+
+.brsvp-host__preview input,
+.brsvp-host__preview textarea {
+  cursor: not-allowed;
+}
+
+/* "+" add column - sits in the events row like another event column. */
+.brsvp-host__add {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  border: 1.5px dashed var(--brsvp-line-strong);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--brsvp-accent);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.brsvp-host__add:hover {
+  background: var(--brsvp-wash);
+}
+
+.brsvp-host__plus {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 400;
+}

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1266" width="794" height="1266" role="img" aria-label="Placeholder for a photograph">
+  <!-- Gallery placeholder 1 of 3. Shipped as a DEFAULT in config.js so the
+       template's preview shows a working photo carousel instead of hiding the
+       pager (render.js drops it when there are no photos and nobody is editing).
+       Deliberately reads as a placeholder rather than as artwork: a host who
+       leaves one of these in has plainly not finished, which is the opposite of
+       the ceremony scenes, which ARE the design.
+
+       GEOMETRY - the two rules this file has to obey, both from styles.css:
+       1. 794x1266 exactly matches .frame's aspect-ratio, so object-fit:cover
+          fits it with no crop at all. A landscape canvas gets its sides eaten.
+       2. .frame__slot clips to a LENS, not a rectangle: x 7.8-92%, y 14.4-85.2%,
+          and it pinches to roughly x 33-66% at the very top and bottom. Corners
+          are never visible, so there is no decoration in them; everything that
+          must be read sits in the wide middle band, y 420-880.
+
+       Colours are the template's own - #FAE3CD intro paper, #094550 reveal teal,
+       #FFD853 arch gold. -->
+  <defs>
+    <radialGradient id="ph1-glow" cx="50%" cy="50%" r="58%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="794" height="1266" fill="#FAE3CD"/>
+  <rect width="794" height="1266" fill="url(#ph1-glow)"/>
+
+  <!-- The picture glyph, the same drawing render.js uses for an empty cell
+       (rect + lens + horizon), scaled up from its 24px viewBox to 200px and
+       centred at y 520 - inside the widest part of the opening. -->
+  <g transform="translate(397 520) scale(8.33) translate(-12 -12)"
+     fill="none" stroke="#094550" stroke-width="1.5"
+     stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
+    <rect x="3" y="3" width="18" height="18" rx="2.5"/>
+    <circle cx="8.5" cy="9" r="1.8"/>
+    <path d="M21 15.5 16 10.5 5 21.5"/>
+  </g>
+
+  <line x1="277" y1="645" x2="517" y2="645" stroke="#094550" stroke-width="2" opacity="0.25"/>
+
+  <text x="397" y="716" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="48"
+        fill="#094550" opacity="0.9">Your photo here</text>
+
+  <text x="397" y="772" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="24"
+        letter-spacing="5" fill="#094550" opacity="0.55">TAP TO REPLACE</text>
+
+  <!-- Which of the three this is, so the carousel visibly advances in preview. -->
+  <circle cx="397" cy="862" r="28" fill="#FFD853" opacity="0.85"/>
+  <text x="397" y="874" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="32"
+        fill="#094550">1</text>
+</svg>

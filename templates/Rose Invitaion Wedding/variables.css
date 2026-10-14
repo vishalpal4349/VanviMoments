@@ -1,0 +1,42 @@
+:root {
+  /* Color styles */
+  --brown: rgba(128, 73, 0, 1);
+  --paper-border: rgba(139, 95, 48, 1);
+
+  /* Font families */
+  --font-primary: 'Cormorant Garamond', serif;
+  --font-secondary: 'Sora', sans-serif;
+
+  /* Font-weight styles */
+  --font-light: 200;
+  --font-regular: 400;
+  --font-semi-bold: 600;
+
+  /* Font-style styles */
+  --font-normal: normal;
+  --font-italic: italic;
+
+  /* Text styles - full `font` shorthands: [style] [weight] [size] [family] */
+  --primary--h2-b: var(--font-semi-bold) 52.5px var(--font-primary);
+  --primary--h1-i: var(--font-italic) var(--font-regular) 59.5px var(--font-primary);
+  --primary--h3-b: var(--font-semi-bold) 47.5px var(--font-primary);
+  --primary--h3-i: var(--font-italic) var(--font-regular) 47.5px var(--font-primary);
+  --primary--h3-li: var(--font-italic) var(--font-light) 47.5px var(--font-primary);
+  --primary--b1: var(--font-semi-bold) 47.5px var(--font-primary);
+  --primary--b1-b: var(--font-semi-bold) 38px var(--font-primary);
+  --primary--b1-i: var(--font-italic) var(--font-regular) 38px var(--font-primary);
+  --primary--b2-b: var(--font-semi-bold) 28.5px var(--font-primary);
+  --primary--b3-r: var(--font-regular) 28.5px var(--font-primary);
+  --primary--b3-i: var(--font-italic) var(--font-regular) 28.5px var(--font-primary);
+  --primary--b3-b: var(--font-semi-bold) 28.5px var(--font-primary);
+  --primary--b4-r: var(--font-regular) 24px var(--font-primary);
+  --primary--b5-r: var(--font-regular) 21.5px var(--font-primary);
+  --primary--b5-li: var(--font-italic) var(--font-light) 21.5px var(--font-primary);
+  --primary--b6-r: var(--font-regular) 21.5px var(--font-primary);
+  --primary--secondary--b2-r: var(--font-regular) 28px var(--font-secondary);
+  --primary--secondary--b3-r: var(--font-regular) 24px var(--font-secondary);
+  --primary--secondary--b4-r: var(--font-regular) 20px var(--font-secondary);
+
+  /* Effect styles */
+  --invi-card-shadow: 0px 14px 31px rgba(0, 0, 0, 0.1), 0px 56px 56px rgba(0, 0, 0, 0.09), 0px 125px 75px rgba(0, 0, 0, 0.05), 0px 222px 89px rgba(0, 0, 0, 0.01), 0px 347px 97px rgba(0, 0, 0, 0);
+}

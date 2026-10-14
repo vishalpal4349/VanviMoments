@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="haldi" data-lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>For Maa — Vanvi Moments</title>
+  <link rel="icon" href="./assets/images/art-maa.png">
+  <meta name="theme-color" content="#FFF8EC">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- SVG SPRITE -->
+  <svg id="sprite" aria-hidden="true"><defs>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3h-3A1.5 1.5 0 002 4.6C2 13.6 10.4 22 19.4 22a1.5 1.5 0 001.6-1.5v-3l-4.6-1.6-2.2 2.2a15.6 15.6 0 01-6.3-6.3l2.2-2.2z"/></symbol>
+    <symbol id="i-cam" viewBox="0 0 24 24"><path d="M3 8.5h3.5L8 6h8l1.5 2.5H21v11H3z"/><circle cx="12" cy="14" r="3.6"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M9 6.5C6 7.5 4.5 10 4.5 13v4.5h6V11H7.6c.2-1.6 1-2.6 2.4-3.2zM20 6.5c-3 1-4.5 3.5-4.5 6.5v4.5h6V11h-2.9c.2-1.6 1-2.6 2.4-3.2z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0115 0"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M3 21l3.5-1 12-12-2.5-2.5-12 12z"/><path d="M15.5 5l3.5 3.5"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8.5h8M8 12.5h8M8 16.5h5"/></symbol>
+    <symbol id="i-fwd" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 00-4-4L4 16z"/><path d="M14.5 5.5l4 4"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3.5L10.5 14"/><path d="M21 3.5l-6.7 17.5-3.8-7-7-3.8z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13.5a4.5 4.5 0 006.8.5l2.6-2.6a4.5 4.5 0 00-6.4-6.4L11.5 6.5"/><path d="M14 10.5a4.5 4.5 0 00-6.8-.5l-2.6 2.6a4.5 4.5 0 006.4 6.4l1.5-1.5"/></symbol>
+    <symbol id="i-again" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 11-2.6-6.1"/><path d="M21 3.5V9h-5.5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5l12 7.5-12 7.5z"/></symbol>
+  </defs></svg>
+
+
+
+  <!-- Top Controls Bar -->
+  <div id="topBar">
+    <a href="./builder.html" class="top-chip" id="editBtn" aria-label="Edit">
+      <svg class="ic"><use href="#i-edit"/></svg>
+      <span data-t="edit">EDIT</span>
+    </a>
+    <button class="top-chip" id="langBtn" aria-label="Change language">हिंदी</button>
+  </div>
+
+  <main id="stage">
+
+    <!-- == 1 . THE CALL == -->
+    <section class="screen on" data-s="1">
+      <div class="inner">
+        <div class="card callcard">
+          <div class="avatar" id="avatar">
+            <svg id="avFallback" viewBox="0 0 24 24"><use href="#i-user"/></svg>
+            <img id="avImg" alt="Caller Photo" />
+          </div>
+          <p class="nm" id="callName">Your child</p>
+          <p class="st" data-t="calling">is calling</p>
+          <button class="answer" id="answerBtn" aria-label="Answer Call">
+            <svg class="ic"><use href="#i-phone"/></svg>
+          </button>
+        </div>
+        <p class="lbl" style="margin-top:20px" data-t="pickup">TAP GREEN TO PICK UP</p>
+      </div>
+    </section>
+
+    <!-- == 2 . THE PHRASES == -->
+    <section class="screen" data-s="2">
+      <div class="inner">
+        <div class="arthalo" style="margin-bottom:14px">
+          <img class="art art--float" id="artMaa" alt="Maa Portrait" style="width:115px; border-radius:50%" src="./assets/images/art-maa.png">
+        </div>
+        <p class="lbl" data-t="pLbl">THINGS YOU ALWAYS SAY</p>
+        <h2 class="h-mid" style="margin-top:10px" data-t="pH">I knew what<br>each one meant.</h2>
+        <div class="phrases" id="phrases"></div>
+        <p class="dim phint" id="phint" data-t="pHint">Tap each one to turn it over.</p>
+        <div class="stack" id="pNext" style="display:none">
+          <button class="b" data-go="3"><span data-t="goOn">Go on</span><svg class="ic"><use href="#i-fwd"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- == 3 . NEVER SAID == -->
+    <section class="screen" data-s="3">
+      <div class="inner">
+        <img class="art artpop" id="artHands" alt="Folded Hands" style="width:135px; margin-bottom:14px" src="./assets/images/art-hands.png">
+        <div class="card plain">
+          <p class="k" data-t="nLbl">AND ONE THING I NEVER SAID OUT LOUD</p>
+          <p class="t" id="neverTxt">Thank you. Out loud, properly, once.</p>
+        </div>
+        <div class="stack">
+          <button class="b" data-go="4"><span data-t="goOn">Go on</span><svg class="ic"><use href="#i-fwd"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- == 4 . LETTER == -->
+    <section class="screen" data-s="4">
+      <div class="inner">
+        <div class="note" id="note">
+          <p id="noteHi">Maa,</p>
+          <p id="noteBody">You never once asked me to notice. I noticed anyway.</p>
+          <p class="sign" id="noteSign">&mdash; me</p>
+        </div>
+        <div class="stack">
+          <button class="b" data-go="5" id="noteNext" style="display:none">
+            <span data-t="goOn">Go on</span><svg class="ic"><use href="#i-fwd"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- == 5 . HER ANSWER == -->
+    <section class="screen" data-s="5">
+      <div class="inner">
+        <p class="lbl" data-t="rLbl">NOW YOU SAY SOMETHING</p>
+        <h2 class="h-mid" style="margin-top:12px" data-t="rH">Send it straight<br>back to them.</h2>
+        <div class="replies" id="replies"></div>
+      </div>
+    </section>
+
+    <!-- == 6 . CLOSE == -->
+    <section class="screen" data-s="6">
+      <div class="inner">
+        <img class="art artpop" id="artDoor" alt="Welcome Home Door" style="width:100px; margin-bottom:10px" src="./assets/images/art-door.png">
+        <div class="card closebox">
+          <p class="lbl" id="closeK">THEY'LL GET THIS</p>
+          <p class="r" id="closeR" style="margin-top:12px">I know.</p>
+          <p class="s" id="closeS">She knew all along. She just never said it either.</p>
+        </div>
+        <div class="stack">
+          <button class="b b--wide" id="replyBtn"><svg class="ic"><use href="#i-send"/></svg><span data-t="sendIt">Send it</span></button>
+          <button class="b b--ghost b--wide" id="copyBtn"><svg class="ic"><use href="#i-link"/></svg><span data-t="copy">Copy the link</span></button>
+          <button class="b b--quiet b--wide" id="againBtn"><svg class="ic"><use href="#i-again"/></svg><span data-t="again">Read it again</span></button>
+        </div>
+        <p class="lbl" style="margin-top:22px; line-height:1.9" id="endCredit">MADE WITH LOVE ON VANVI MOMENTS</p>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="./script.js"></script>
+  <script src="../../js/vanvi-template-lock.js"></script>
+</body>
+</html>

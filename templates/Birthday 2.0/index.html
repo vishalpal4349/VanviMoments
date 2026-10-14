@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="blush">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+  <title>Happy Birthday! 🎂 · Vanvi Moments Birthday 2.0 Luxury Keepsake</title>
+  
+  <meta property="og:title" content="A Special Birthday Surprise For You ♡">
+  <meta property="og:description" content="A romantic 3D wax-sealed birthday microsite with songs, memories, and candle wishes crafted with love on Vanvi Moments.">
+  <meta property="og:type" content="website">
+
+  <!-- Confetti Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  
+  <!-- Template CSS -->
+  <script type="module" crossorigin src="/assets/birthday2Index-kpvGYzhg.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-P2Xu9kJm.js">
+  <link rel="stylesheet" crossorigin href="/assets/birthday2Index-CtJh3Mx2.css">
+  <style>
+    /* Vanvi Moments: Birthday 2.0 Mobile Button & Ceremony Responsive Polish */
+    @media (max-width: 480px) {
+      .top-action-bar {
+        width: calc(100% - 20px) !important;
+        padding: 6px 12px !important;
+        top: 10px !important;
+      }
+      .top-action-bar .brand-text {
+        font-size: 10.5px !important;
+        letter-spacing: 0.08em !important;
+      }
+      .top-action-bar .icon-btn {
+        padding: 5px 9px !important;
+        font-size: 11px !important;
+      }
+      .cake-action-buttons {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+        width: 100% !important;
+        max-width: 330px !important;
+        margin: 20px auto 0 !important;
+      }
+      .cake-action-buttons .vanvi-cta-btn,
+      .cake-action-buttons .vanvi-sub-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 10px 8px !important;
+        font-size: 12px !important;
+        white-space: nowrap !important;
+        box-sizing: border-box !important;
+      }
+      .action-buttons-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 22px auto 0 !important;
+      }
+      .action-buttons-grid .share-pill-btn,
+      .action-buttons-grid .vanvi-cta-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 12px 18px !important;
+        font-size: 13.5px !important;
+      }
+      .card-section {
+        padding: 24px 14px !important;
+      }
+      .sec-title {
+        font-size: 1.85rem !important;
+      }
+      .sec-subtitle {
+        font-size: 1.35rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Falling Petals Canvas -->
+  <canvas id="ambientCanvas"></canvas>
+
+  <!-- Background Atmosphere Glows -->
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+
+  <!-- Audio Element (Audio Dedication Stream) -->
+  <audio id="bgAudio" src="https://cdn.cutiepage.in/template-seeds/birthday-wish-2/wish2music.mp3" preload="auto" loop></audio>
+
+  <!-- Sticky Top Floating Brand & Audio Bar -->
+  <nav class="top-action-bar">
+    <a href="./builder.html" class="brand-badge" title="Vanvi Moments">
+      <span class="brand-icon">✨</span>
+      <span class="brand-text">VANVI MOMENTS</span>
+    </a>
+    
+    <div class="bar-controls">
+      <button class="icon-btn" id="topAudioBtn" title="Play Dedicated Song">
+        <span>🎵</span>
+        <span class="btn-text">Play Song</span>
+      </button>
+
+      <a href="./builder.html" class="icon-btn" title="Customize this Template">
+        <span>✏️</span>
+        <span>Customize</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Master Content Wrapper -->
+  <main class="bw2-wrapper">
+
+    <!-- ================= STAGE 1: INTRO GIFT HERO ================= -->
+    <section class="card-section stage-intro" id="introSection">
+      <div class="eyebrow-pill">
+        <span>🎁</span>
+        <span>A gift is waiting</span>
+      </div>
+
+      <h1 class="sec-title" id="introHeadline">Happy Birthday, <span class="recipient-name-bind">Riya</span> ♡</h1>
+      <p class="sec-subtitle" id="introSubtitle">someone made you something special</p>
+
+      <div class="gift-mascot-wrap">
+        <img class="gift-mascot-img" src="https://cdn.cutiepage.in/template-seeds/sorry-petals/pic1.gif" alt="Cute Birthday Mascot" loading="eager">
+      </div>
+
+      <p class="body-lead">
+        Today is all about you. Take a gentle breath, turn up the volume, and unwrap the little moments made just for your smile.
+      </p>
+
+      <button type="button" class="vanvi-cta-btn" id="introOpenBtn">
+        <span>🎂</span>
+        <span>Open Your Gift</span>
+      </button>
+    </section>
+
+    <!-- ================= STAGE 2: 3D INTERACTIVE CAKE, BLOW & CUT CEREMONY ================= -->
+    <section class="card-section" id="cakeSection">
+      <div class="eyebrow-pill">
+        <span>🕯️</span>
+        <span>Make a Wish</span>
+      </div>
+
+      <h2 class="sec-title">The Birthday Cake Ceremony</h2>
+      <p class="sec-subtitle" id="cakeHint">tap the buttons below to light, blow candles &amp; cut your cake 🎂</p>
+
+      <div class="cake-stage-container" id="cakeStageContainer">
+        <!-- 3D Knife Blade for Cutting Animation -->
+        <div class="cake-knife-blade" id="cakeKnifeBlade"></div>
+
+        <div class="cake-ceremony-area">
+          <!-- 3 Interactive Glowing Candles -->
+          <div class="candles-cluster">
+            <div class="candle-item" id="candle1">
+              <div class="candle-flame"></div>
+              <div class="smoke-puff"></div>
+              <div class="candle-stick"></div>
+            </div>
+            <div class="candle-item" id="candle2">
+              <div class="candle-flame"></div>
+              <div class="smoke-puff"></div>
+              <div class="candle-stick"></div>
+            </div>
+            <div class="candle-item" id="candle3">
+              <div class="candle-flame"></div>
+              <div class="smoke-puff"></div>
+              <div class="candle-stick"></div>
+            </div>
+          </div>
+
+          <!-- 3D Layered Birthday Cake with Cut Separation -->
+          <div class="cake-body-3d" id="cakeBody3D">
+            <div class="frosting-drips"></div>
+            <div class="cake-tier-top">
+              <div class="cake-slice-left"></div>
+              <div class="cake-slice-right"></div>
+            </div>
+            <div class="cake-tier-bottom">
+              <div class="cake-slice-left"></div>
+              <div class="cake-slice-right"></div>
+            </div>
+            <div class="cake-cut-slice-line"></div>
+          </div>
+
+          <!-- Cake Platter Stand -->
+          <div class="cake-stand"></div>
+        </div>
+
+        <!-- Interactive Ceremony Action Buttons -->
+        <div class="cake-action-buttons">
+          <button type="button" class="vanvi-cta-btn" id="lightCandlesBtn" style="padding: 10px 18px; font-size: 13px;">
+            <span>🕯️</span>
+            <span>Light Candles</span>
+          </button>
+
+          <button type="button" class="vanvi-cta-btn" id="blowCandlesBtn" style="padding: 10px 18px; font-size: 13px; background: linear-gradient(135deg, #7c9eb2, #476a82);">
+            <span>💨</span>
+            <span>Blow Candles</span>
+          </button>
+
+          <button type="button" class="vanvi-cta-btn" id="cutCakeBtn" style="padding: 10px 18px; font-size: 13px; background: linear-gradient(135deg, #e58aa3, #c73752);">
+            <span>🔪</span>
+            <span>Cut the Cake</span>
+          </button>
+
+          <button type="button" class="vanvi-sub-btn" id="resetCakeBtn">
+            <span>🔄</span>
+            <span>Reset</span>
+          </button>
+        </div>
+
+        <div id="cakeCelebrationAlert" style="display: none; margin-top: 18px;">
+          <p style="font-family: var(--font-script); font-size: 24px; color: var(--accent-deep); font-weight: 700;">
+            🎉 Wish Made! May every single dream of yours come true this year! ❤️
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 3: 3D WAX-SEALED ENVELOPE ================= -->
+    <section class="card-section" id="envelopeSection">
+      <div class="eyebrow-pill">
+        <span>💌</span>
+        <span>A Birthday Surprise</span>
+      </div>
+
+      <h2 class="sec-title">A Little Something for You</h2>
+      <p class="sec-subtitle">tap the wax seal to break &amp; unveil your surprise ✿</p>
+
+      <div class="envelope-stage-container">
+        <div class="envelope-card-3d" id="envelopeCard3D">
+          <!-- Back Interior of Envelope -->
+          <div class="envelope-inner-back"></div>
+
+          <!-- Inside Letter Preview Peeking & Sliding Out -->
+          <div class="envelope-letter-preview" id="envelopeLetterPreview">
+            <div class="preview-envelope-header">
+              <span class="preview-envelope-badge">👑 Specially For You</span>
+              <span class="preview-envelope-sparkle">✨</span>
+            </div>
+            <div class="preview-envelope-inner">
+              <div class="preview-envelope-avatar">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop" alt="Recipient Avatar">
+              </div>
+              <div class="preview-envelope-text">
+                <h3 class="preview-envelope-name">To Dearest <span class="recipient-name-bind">Riya</span>,</h3>
+                <p class="preview-envelope-sub">"For Riya, with all my heart &amp; soul ♡"</p>
+                <div class="preview-envelope-tag">
+                  <span>💌 Sealed with Endless Love</span>
+                </div>
+              </div>
+            </div>
+            <div class="preview-envelope-footer">
+              <button type="button" class="preview-continue-btn" id="envelopeContinueBtn">
+                <span>Open Your Gift &amp; Memories</span>
+                <span>↓</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Realistic Envelope Front Pocket (holds letter inside) -->
+          <div class="envelope-pocket-front"></div>
+
+          <!-- 3D Top Flap -->
+          <div class="envelope-flap-top"></div>
+
+          <!-- Physical 3D Wax Seal Stamp -->
+          <div class="wax-seal-stamp" id="waxSealStamp">
+            <div class="wax-seal-inner">
+              <span class="wax-seal-star">✦</span>
+              <span class="wax-seal-monogram">VM</span>
+              <span class="wax-seal-star">✦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 4: HERO GREETING DEDICATION ================= -->
+    <section class="card-section" id="heroCardSection">
+      <div class="eyebrow-pill">
+        <span>🌸</span>
+        <span>Birthday Dedication</span>
+      </div>
+
+      <div class="hero-portrait-frame">
+        <img class="hero-portrait-img" id="heroPortraitImg" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800&auto=format&fit=crop" alt="Birthday Portrait">
+      </div>
+
+      <h2 class="sec-title" id="heroHeadline">Happy Birthday, Sunshine!</h2>
+      <p class="sec-subtitle">pause for a beat, and let me say this properly</p>
+
+      <p class="body-lead" id="heroMessage">
+        Today is entirely yours. A whole little sanctuary of wishes — for every laugh we’ve shared, every quiet late-night talk, and every reason you make this world softer, warmer, and so much brighter.
+      </p>
+
+      <a href="#songSection" class="vanvi-cta-btn" style="text-decoration: none;">
+        <span>🎵</span>
+        <span>Listen to Your Song →</span>
+      </a>
+    </section>
+
+    <!-- ================= STAGE 5: VINYL RECORD DEDICATED SONG PLAYER ================= -->
+    <section class="card-section" id="songSection">
+      <div class="eyebrow-pill">
+        <span>🎧</span>
+        <span>Song Dedication</span>
+      </div>
+
+      <h2 class="sec-title" id="songTitle">A Song for Your Day</h2>
+      <p class="sec-subtitle">press play — i picked this because it always reminds me of you</p>
+
+      <div class="vinyl-player-card">
+        <div class="vinyl-record-wrap">
+          <div class="vinyl-disc vinyl-spin vinyl-paused" id="vinylDisc">
+            <div class="vinyl-label-center">
+              <img class="vinyl-label-img" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?q=80&w=600&auto=format&fit=crop" alt="Song Album Artwork">
+            </div>
+          </div>
+        </div>
+
+        <div class="player-controls-wrap">
+          <div class="song-meta-box">
+            <div class="song-title">Until I Found You · Dedication</div>
+            <div class="song-artist" id="songArtist">Handpicked with Love for You</div>
+          </div>
+
+          <div class="audio-progress-bar-wrap">
+            <span id="currentTime">0:00</span>
+            <div class="audio-progress-rail" id="audioProgressRail">
+              <div class="audio-progress-fill" id="progressFill"></div>
+            </div>
+            <span id="durationTime">2:45</span>
+          </div>
+
+          <div class="player-btns-row">
+            <button class="play-toggle-btn" id="mainPlayBtn" title="Play / Pause Song">▶</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 6: "WHY YOU ARE SPECIAL" 3D FLIP CARDS ================= -->
+    <section class="card-section" id="reasonsSection">
+      <div class="eyebrow-pill">
+        <span>💖</span>
+        <span>Just for You</span>
+      </div>
+
+      <h2 class="sec-title">Why You Are So Special</h2>
+      <p class="sec-subtitle">tap each card to reveal what I cherish about you ✿</p>
+
+      <div class="reasons-flip-grid">
+        <div class="reason-flip-card">
+          <div class="reason-flip-inner">
+            <div class="reason-flip-front">
+              <div class="reason-card-icon">✨</div>
+              <div class="reason-card-title">Your Warm Heart</div>
+              <div class="reason-card-cue">Tap to Flip ↻</div>
+            </div>
+            <div class="reason-flip-back">
+              <p class="reason-card-secret">You have this rare, effortless gift of making everyone around you feel seen, valued, and safe.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reason-flip-card">
+          <div class="reason-flip-inner">
+            <div class="reason-flip-front">
+              <div class="reason-card-icon">☕</div>
+              <div class="reason-card-title">Our Conversations</div>
+              <div class="reason-card-cue">Tap to Flip ↻</div>
+            </div>
+            <div class="reason-flip-back">
+              <p class="reason-card-secret">Hours feel like minutes when we talk. From life philosophies to silly memes, I never want them to end.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reason-flip-card">
+          <div class="reason-flip-inner">
+            <div class="reason-flip-front">
+              <div class="reason-card-icon">🌟</div>
+              <div class="reason-card-title">Your Resilience</div>
+              <div class="reason-card-cue">Tap to Flip ↻</div>
+            </div>
+            <div class="reason-flip-back">
+              <p class="reason-card-secret">Even on tough days, your grace and strength inspire me. You handle storms like quiet poetry.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reason-flip-card">
+          <div class="reason-flip-inner">
+            <div class="reason-flip-front">
+              <div class="reason-card-icon">💫</div>
+              <div class="reason-card-title">Your Contagious Laugh</div>
+              <div class="reason-card-cue">Tap to Flip ↻</div>
+            </div>
+            <div class="reason-flip-back">
+              <p class="reason-card-secret">When you laugh uncontrollably, the entire world gets brighter. Keep that music playing always.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 7: INTERACTIVE BALLOON POP MINI-GAME ================= -->
+    <section class="card-section" id="balloonsSection">
+      <div class="eyebrow-pill">
+        <span>🎈</span>
+        <span>Pop the Fun</span>
+      </div>
+
+      <h2 class="sec-title">Pop the Birthday Balloons!</h2>
+      <p class="sec-subtitle">tap each balloon to pop it &amp; uncover a hidden wish 💥</p>
+
+      <div class="balloons-field">
+        <div class="balloon-item">
+          <div class="balloon-oval" style="background: #e58aa3;">🎈</div>
+          <div class="balloon-string"></div>
+        </div>
+        <div class="balloon-item">
+          <div class="balloon-oval" style="background: #cfa144;">✨</div>
+          <div class="balloon-string"></div>
+        </div>
+        <div class="balloon-item">
+          <div class="balloon-oval" style="background: #a98ee8;">🎉</div>
+          <div class="balloon-string"></div>
+        </div>
+        <div class="balloon-item">
+          <div class="balloon-oval" style="background: #ff8c94;">💖</div>
+          <div class="balloon-string"></div>
+        </div>
+        <div class="balloon-item">
+          <div class="balloon-oval" style="background: #6bc5d2;">🌟</div>
+          <div class="balloon-string"></div>
+        </div>
+      </div>
+
+      <div class="balloon-pop-message-box" id="balloonPopMsg"></div>
+    </section>
+
+    <!-- ================= STAGE 8: POLAROID MEMORY ALBUM ================= -->
+    <section class="card-section" id="gallerySection">
+      <div class="eyebrow-pill">
+        <span>📷</span>
+        <span>Our Little Album</span>
+      </div>
+
+      <h2 class="sec-title">Moments I Treasure</h2>
+      <p class="sec-subtitle">a few of my absolute favorite memories with you ♡</p>
+
+      <div class="polaroids-grid">
+        <article class="polaroid-card">
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-photo-frame">
+            <img class="polaroid-img" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop" alt="Memory 1">
+          </div>
+          <p class="polaroid-caption">the way your laughter lights up the entire room ✨</p>
+        </article>
+
+        <article class="polaroid-card">
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-photo-frame">
+            <img class="polaroid-img" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800&auto=format&fit=crop" alt="Memory 2">
+          </div>
+          <p class="polaroid-caption">ordinary rainy days with you will always be my favorites ☕</p>
+        </article>
+
+        <article class="polaroid-card">
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-photo-frame">
+            <img class="polaroid-img" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop" alt="Memory 3">
+          </div>
+          <p class="polaroid-caption">thank you for always showing up for me, no matter what ❤️</p>
+        </article>
+
+        <article class="polaroid-card">
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-photo-frame">
+            <img class="polaroid-img" src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?q=80&w=800&auto=format&fit=crop" alt="Memory 4">
+          </div>
+          <p class="polaroid-caption">i am so genuinely lucky to do life alongside you 💫</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 9: PICKABLE WISH BOUQUET ================= -->
+    <section class="card-section" id="bouquetSection">
+      <div class="eyebrow-pill">
+        <span>💐</span>
+        <span>Three Wishes</span>
+      </div>
+
+      <h2 class="sec-title">A Bouquet of Birthday Wishes</h2>
+      <p class="sec-subtitle">pick each flower — there’s a secret wish inside ♡</p>
+
+      <div class="bouquet-flowers-row">
+        <!-- Flower 1: Peony -->
+        <div class="flower-card-item" id="flower1">
+          <div class="flower-svg-wrap">
+            <svg viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="38" fill="#ffd1dc" stroke="#e58aa3" stroke-width="2"/>
+              <circle cx="50" cy="50" r="24" fill="#ffb3c6" stroke="#c73752" stroke-width="1.5"/>
+              <circle cx="50" cy="50" r="12" fill="#fff0b3" stroke="#e6b800" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="flower-hint-text">Tap to Pick ✿</div>
+          <div class="flower-title" id="wish1Title">The Way You Laugh</div>
+          <div class="flower-secret-body" id="wish1Body">
+            Your laugh is pure medicine. Wishing you a year bursting with spontaneous giggles and untamed joy.
+          </div>
+        </div>
+
+        <!-- Flower 2: Wild Rose -->
+        <div class="flower-card-item" id="flower2">
+          <div class="flower-svg-wrap">
+            <svg viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="38" fill="#ffc2d1" stroke="#e58aa3" stroke-width="2"/>
+              <path d="M50 20 Q75 50 50 80 Q25 50 50 20 Z" fill="#e58aa3" opacity="0.6"/>
+              <circle cx="50" cy="50" r="14" fill="#ffe5ec" stroke="#c73752" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="flower-hint-text">Tap to Pick ✿</div>
+          <div class="flower-title" id="wish2Title">The Way You Care</div>
+          <div class="flower-secret-body" id="wish2Body">
+            You remember the tiny details that nobody else notices. May that same tenderness wrap around your heart every day.
+          </div>
+        </div>
+
+        <!-- Flower 3: Gardenia -->
+        <div class="flower-card-item" id="flower3">
+          <div class="flower-svg-wrap">
+            <svg viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="38" fill="#ffe5d9" stroke="#d4af37" stroke-width="2"/>
+              <circle cx="50" cy="50" r="22" fill="#fff1e6" stroke="#cfa144" stroke-width="1.5"/>
+              <circle cx="50" cy="50" r="10" fill="#ffd166"/>
+            </svg>
+          </div>
+          <div class="flower-hint-text">Tap to Pick ✿</div>
+          <div class="flower-title" id="wish3Title">The Year Ahead</div>
+          <div class="flower-secret-body" id="wish3Body">
+            May this upcoming chapter bring peaceful mornings, delicious dinners, big dreams realized, and boundless love.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 10: "OPEN WHEN..." MINI ENVELOPES ================= -->
+    <section class="card-section" id="openWhenSection">
+      <div class="eyebrow-pill">
+        <span>✉️</span>
+        <span>Mini Keepsakes</span>
+      </div>
+
+      <h2 class="sec-title">"Open When..." Letters</h2>
+      <p class="sec-subtitle">tap any envelope when the moment calls for it ✿</p>
+
+      <div class="open-when-grid">
+        <div class="open-when-envelope" data-type="miss">
+          <div class="ow-icon">💌</div>
+          <div class="ow-title">Open When You Miss Me</div>
+          <div class="ow-badge">Tap to Read →</div>
+        </div>
+
+        <div class="open-when-envelope" data-type="smile">
+          <div class="ow-icon">😊</div>
+          <div class="ow-title">Open When You Need a Smile</div>
+          <div class="ow-badge">Tap to Read →</div>
+        </div>
+
+        <div class="open-when-envelope" data-type="sleep">
+          <div class="ow-icon">🌙</div>
+          <div class="ow-title">Open When You Can’t Sleep</div>
+          <div class="ow-badge">Tap to Read →</div>
+        </div>
+
+        <div class="open-when-envelope" data-type="hug">
+          <div class="ow-icon">🫂</div>
+          <div class="ow-title">Open When You Want a Hug</div>
+          <div class="ow-badge">Tap to Read →</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 11: SCRATCH CARD VOUCHER ================= -->
+    <section class="card-section" id="scratchSection">
+      <div class="eyebrow-pill">
+        <span>🎟️</span>
+        <span>A Little Promise</span>
+      </div>
+
+      <h2 class="sec-title">Your Surprise Birthday Ticket</h2>
+      <p class="sec-subtitle">gently scratch off the silver foil with your finger or mouse 🪙</p>
+
+      <div class="scratch-card-box">
+        <div class="scratch-hidden-content">
+          <div class="scratch-voucher-icon">🎟️</div>
+          <div class="scratch-voucher-title">Golden Birthday Pass</div>
+          <div class="scratch-voucher-desc">Good for: 1 Fancy Dinner Date + Unlimited Warm Hugs &amp; Zero Arguments for 24 Hours! ❤️</div>
+        </div>
+        <canvas id="scratchCanvas"></canvas>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 12: HANDWRITTEN CREAM LETTER ================= -->
+    <section class="letter-stationery-card" id="letterSection">
+      <div class="letter-header-row">
+        <div class="letter-wax-crest">🌸 𝓥𝓪𝓷𝓿𝓲</div>
+        <div class="letter-date-stamp">Birthday Edition · Keepsake</div>
+      </div>
+
+      <div class="letter-salutation" id="letterGreeting">Dearest Riya,</div>
+
+      <div class="letter-body-text" id="letterBody">
+There is no greeting card in the world large enough to hold everything I’d love to tell you today, so I built this little garden for you instead — with your favorite melody, memories that make me smile, and wishes straight from the heart.
+
+Thank you for the quiet, unseen gestures — the random texts on tough days, the silly inside jokes only we understand, and the effortless way you bring comfort wherever you go. I noticed. I always notice.
+
+I hope that today, you feel deeply cherished. Eat your favorite cake, dance without caring who is watching, and know that you are endlessly loved.
+
+May this new trip around the sun bring you the purest magic.
+      </div>
+
+      <div class="letter-signoff">
+        <span>With all my love &amp; warmth,</span><br>
+        <strong class="letter-author" id="letterSignature">Always Yours ❤️</strong>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 13: VANVI MOMENTS FINALE ================= -->
+    <section class="finale-action-card">
+      <div class="eyebrow-pill">
+        <span>💖</span>
+        <span>A Vanvi Moments Keepsake</span>
+      </div>
+
+      <h2 class="sec-title" style="font-size: 2.2rem;">Keep This Memory Forever</h2>
+      <p class="body-lead">
+        This private birthday page is valid for a lifetime. Save it in your notes, revisit anytime you need a reminder of how much you are loved.
+      </p>
+
+      <div class="action-buttons-grid">
+        <button class="share-pill-btn" id="copyLinkBtn">
+          <span>🔗</span>
+          <span>Copy Page Link</span>
+        </button>
+
+        <button class="share-pill-btn" id="whatsappShareBtn">
+          <span>💬</span>
+          <span>Share on WhatsApp</span>
+        </button>
+
+        <a href="./builder.html" class="vanvi-cta-btn" id="btnCreateYoursFinale" style="text-decoration: none; padding: 10px 22px; font-size: 13px;">
+          <span>✨</span>
+          <span>Create Yours on Vanvi</span>
+        </a>
+      </div>
+
+      <div class="vanvi-brand-footer">
+        <div class="vanvi-logo-pill">
+          <span>✦</span>
+          <span>VANVI MOMENTS</span>
+          <span>✦</span>
+        </div>
+        <div class="vanvi-tagline">Crafting unforgettable digital keepsakes for life's most precious celebrations.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Polaroid Lightbox Modal -->
+  <div class="vanvi-modal-backdrop" id="polaroidModal">
+    <div class="vanvi-modal-box">
+      <button class="modal-close-btn" id="closeModalBtn">✕</button>
+      <div style="width: 100%; aspect-ratio: 1/1; border-radius: 8px; overflow: hidden; margin-bottom: 14px;">
+        <img id="modalImg" src="" alt="Zoomed Polaroid" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <p id="modalCaption" style="font-family: var(--font-script); font-size: 22px; color: var(--accent-deep);"></p>
+    </div>
+  </div>
+
+  <!-- "Open When..." Note Modal -->
+  <div class="vanvi-modal-backdrop" id="openWhenModal">
+    <div class="vanvi-modal-box" style="text-align: left;">
+      <button class="modal-close-btn" id="closeOpenWhenBtn">✕</button>
+      <h3 id="openWhenModalTitle" style="font-family: var(--font-serif); font-size: 22px; color: var(--accent-deep); margin-bottom: 14px;"></h3>
+      <p id="openWhenModalBody" style="font-family: var(--font-cormorant); font-size: 20px; line-height: 1.7; color: var(--ink-primary); white-space: pre-line;"></p>
+    </div>
+  </div>
+
+  <!-- Universal Template Lock & Smart Builder Interception -->
+  <script src="../../js/vanvi-template-lock.js"></script>
+</body>
+</html>

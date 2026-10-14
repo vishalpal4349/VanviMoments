@@ -24863,10 +24863,31 @@
       "status": "active",
       "signupIp": "::1",
       "signupUa": "Browser Client",
-      "lastLoginIp": "::1",
-      "lastLoginUa": "Browser Client",
-      "loginCount": 1,
+      "lastLoginIp": "127.0.0.1",
+      "lastLoginUa": "Mozilla/5.0 (Linux; Android 16; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+      "loginCount": 4,
       "loginHistory": [
+        {
+          "timestamp": 1791916315047,
+          "ip": "127.0.0.1",
+          "ua": "Mozilla/5.0 (Linux; Android 16; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+          "provider": "google",
+          "status": "success"
+        },
+        {
+          "timestamp": 1791916300255,
+          "ip": "127.0.0.1",
+          "ua": "Mozilla/5.0 (Linux; Android 16; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+          "provider": "google",
+          "status": "success"
+        },
+        {
+          "timestamp": 1791916289953,
+          "ip": "127.0.0.1",
+          "ua": "Mozilla/5.0 (Linux; Android 16; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+          "provider": "google",
+          "status": "success"
+        },
         {
           "timestamp": 1791912011829,
           "ip": "::1",
@@ -24875,9 +24896,9 @@
           "status": "success"
         }
       ],
-      "lastLogin": 1791912011829,
+      "lastLogin": 1791916315047,
       "createdAt": 1791912011829,
-      "updatedAt": 1791912011879
+      "updatedAt": 1791916315047
     },
     {
       "id": "usr_55f2032425bdb034",
@@ -24964,6 +24985,85 @@
       "lastLogin": 1791912355743,
       "createdAt": 1791912355601,
       "updatedAt": 1791912355743
+    },
+    {
+      "id": "usr_729dc7b3512246b0",
+      "name": "Test Vanvi User",
+      "email": "authtest_1791916423610@example.com",
+      "phone": "1916423610",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "a92c9d49b015364de66bc783bce89a88c3618f330b30514c9bca1fd93386e8da23d697589d289490679c1a05f7375ce1896f77a57cde5bf4745662a70fdb2dc7",
+      "salt": "ffc2a4c71e7f7928d7bfc774028a55d9",
+      "role": "user",
+      "tier": "free",
+      "coins": 100,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "Browser Client",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "Browser Client",
+      "loginCount": 2,
+      "loginHistory": [
+        {
+          "timestamp": 1791916424025,
+          "ip": "::1",
+          "ua": "Browser Client",
+          "provider": "local",
+          "status": "success"
+        },
+        {
+          "timestamp": 1791916423714,
+          "ip": "::1",
+          "ua": "Browser Client",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1791916424025,
+      "createdAt": 1791916423714,
+      "updatedAt": 1791916424025
+    },
+    {
+      "id": "usr_ec1845740d7a03a2",
+      "name": "Google Verified User",
+      "email": "g_user_1791916424216@gmail.com",
+      "phone": null,
+      "googleId": "gid_1791916424216",
+      "picture": "https://lh3.googleusercontent.com/a/default",
+      "provider": "google",
+      "passwordHash": "55204336bb001e25e3bff39fa74df465368b0cfc35bf4653d974fb729e0be56726f262cec06c791f67f1b0710ef113a669d7d5b9b6e22b41b97a6343f9e80d85",
+      "salt": "bcfd31a2561e15784a720d6e0d6afbce",
+      "role": "user",
+      "tier": "free",
+      "coins": 100,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "Browser Client",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "Browser Client",
+      "loginCount": 1,
+      "loginHistory": [
+        {
+          "timestamp": 1791916424267,
+          "ip": "::1",
+          "ua": "Browser Client",
+          "provider": "google",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1791916424267,
+      "createdAt": 1791916424267,
+      "updatedAt": 1791916424320
     }
   ],
   "moments": [
@@ -126236,6 +126336,26 @@
       "reason": "Welcome Gift Bonus",
       "refId": "signup",
       "createdAt": 1791912355657
+    },
+    {
+      "id": "ldg_f93c152ba7780098",
+      "userId": "usr_729dc7b3512246b0",
+      "type": "credit",
+      "amount": 100,
+      "balanceAfter": 100,
+      "reason": "Welcome Gift Bonus",
+      "refId": "signup",
+      "createdAt": 1791916423823
+    },
+    {
+      "id": "ldg_10b63dcd341a27d7",
+      "userId": "usr_ec1845740d7a03a2",
+      "type": "credit",
+      "amount": 100,
+      "balanceAfter": 100,
+      "reason": "Welcome Gift Bonus",
+      "refId": "signup",
+      "createdAt": 1791916424373
     }
   ],
   "meta": {
@@ -153454,6 +153574,456 @@
       "ipHash": "69fa70f0b1d026d8",
       "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
       "createdAt": 1791888286401
+    },
+    {
+      "id": "evt_6b483cd1fa38c485",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/login.html",
+        "title": "Login | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791916484033,
+        "path": "login.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791916484043
+    },
+    {
+      "id": "evt_8c8a0e2c9e6d3745",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/forgot-password.html",
+        "title": "Reset Password | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791916497438,
+        "path": "forgot-password.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791916497649
+    },
+    {
+      "id": "evt_1c6a70bd62e21f6e",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/login.html",
+        "title": "Login | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791917125783,
+        "path": "login.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791917125852
+    },
+    {
+      "id": "evt_4cd2b4bbac338cec",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/login.html",
+        "title": "Login | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791917128223,
+        "path": "login.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791917128227
+    },
+    {
+      "id": "evt_fde641821a4bb632",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/login.html",
+        "title": "Login | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791917129767,
+        "path": "login.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791917130770
+    },
+    {
+      "id": "evt_97e0bf95d72771b6",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/signup.html",
+        "title": "Create an Account | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791917429116,
+        "path": "signup.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791917429149
+    },
+    {
+      "id": "evt_a4c2f8f6e2ab04d7",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/plans.html",
+        "title": "Vanvi Moments — Luxury Creator Plans, Celebration Passes & Coin Economy",
+        "referrer": "",
+        "timestamp": 1791919148846,
+        "path": "plans.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791919148980
+    },
+    {
+      "id": "evt_3dbd068711ff3fd8",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/plans.html",
+        "title": "Vanvi Moments — Luxury Creator Plans, Celebration Passes & Coin Economy",
+        "referrer": "",
+        "timestamp": 1791920527392,
+        "path": "plans.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791920527423
+    },
+    {
+      "id": "evt_e44aa761cf301201",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/login.html",
+        "title": "Login | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791920534666,
+        "path": "login.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791920534677
+    },
+    {
+      "id": "evt_4910eb423b919b65",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/login.html",
+        "title": "Login | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791920537365,
+        "path": "login.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791920537371
+    },
+    {
+      "id": "evt_0f3cd45b53309693",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/signup.html",
+        "title": "Create Account | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791920539297,
+        "path": "signup.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791920539701
+    },
+    {
+      "id": "evt_de4a91bd9f88d11f",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/forgot-password.html",
+        "title": "Reset Password | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791920542442,
+        "path": "forgot-password.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791920542853
+    },
+    {
+      "id": "evt_825062fbfc3145a1",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/plans.html",
+        "title": "Vanvi Moments — Luxury Creator Plans, Celebration Passes & Coin Economy",
+        "referrer": "",
+        "timestamp": 1791921871440,
+        "path": "plans.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791921871476
+    },
+    {
+      "id": "evt_0e5d71927e98fcaa",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/login.html",
+        "title": "Login | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791921879041,
+        "path": "login.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791921879047
+    },
+    {
+      "id": "evt_2704f98ea652eb17",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/signup.html",
+        "title": "Create Account | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791921883327,
+        "path": "signup.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791921883479
+    },
+    {
+      "id": "evt_a897453fad98296c",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/forgot-password.html",
+        "title": "Reset Password | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791921886112,
+        "path": "forgot-password.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "createdAt": 1791921886373
+    },
+    {
+      "id": "evt_ea0ebf599e6338ad",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/templates.html",
+        "title": "Curated Keepsake Moments ✨ | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791963259205,
+        "path": "templates.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791963259254
+    },
+    {
+      "id": "evt_2d409cb3901c0997",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/templates.html",
+        "title": "Curated Keepsake Moments ✨ | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791964553186,
+        "path": "templates.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791964553230
+    },
+    {
+      "id": "evt_4a956dc4c99ace77",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/wedding.html",
+        "title": "Royal Wedding Websites & Vivah Keepsakes — Vanvi Moments Atelier",
+        "referrer": "",
+        "timestamp": 1791965627674,
+        "path": "wedding.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791965627722
+    },
+    {
+      "id": "evt_734300c35efd4377",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/templates.html",
+        "title": "Curated Keepsake Moments ✨ | Vanvi Moments",
+        "referrer": "http://localhost:3000/wedding.html",
+        "timestamp": 1791965657645,
+        "path": "templates.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791965657657
+    },
+    {
+      "id": "evt_70507ccff2cabfaa",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/templates.html",
+        "title": "Curated Keepsake Moments ✨ | Vanvi Moments",
+        "referrer": "http://localhost:3000/wedding.html",
+        "timestamp": 1791969586877,
+        "path": "templates.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791969586942
+    },
+    {
+      "id": "evt_3c4e0fad4bc9b6f7",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/templates.html",
+        "title": "Curated Keepsake Moments ✨ | Vanvi Moments",
+        "referrer": "http://localhost:3000/invitation-maker.html",
+        "timestamp": 1791969622721,
+        "path": "templates.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791969622735
+    },
+    {
+      "id": "evt_8418e6f17a4fe83e",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/test-payment.html",
+        "title": "Razorpay ₹1 Live Test — Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791974277780,
+        "path": "test-payment.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791974277811
+    },
+    {
+      "id": "evt_de2d0e253b93eee8",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/order-success.html",
+        "title": "Order Confirmation & Celebration Keepsake — Vanvi Moments",
+        "referrer": "http://localhost:3000/test-payment.html",
+        "timestamp": 1791974282513,
+        "path": "order-success.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791974282535
+    },
+    {
+      "id": "evt_908f90aee9cda39f",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/checkout.html",
+        "title": "Bespoke Checkout & Moment Activation — Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791974316690,
+        "path": "checkout.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791974316711
+    },
+    {
+      "id": "evt_31bedb469a5ffd14",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/checkout.html",
+        "title": "Bespoke Checkout & Moment Activation — Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791974368027,
+        "path": "checkout.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791974368034
+    },
+    {
+      "id": "evt_f158dbac1a6e8605",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/test-payment.html",
+        "title": "Razorpay ₹1 Live Test — Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791976922563,
+        "path": "test-payment.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791976922571
+    },
+    {
+      "id": "evt_29f590a98815550c",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/order-success.html",
+        "title": "Order Confirmation & Celebration Keepsake — Vanvi Moments",
+        "referrer": "http://localhost:3000/test-payment.html",
+        "timestamp": 1791976928212,
+        "path": "order-success.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791976928215
+    },
+    {
+      "id": "evt_dcd01ec5cb0ce981",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/test-payment.html",
+        "title": "Razorpay ₹1 Live Test — Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1791977646358,
+        "path": "test-payment.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791977646404
+    },
+    {
+      "id": "evt_f9f6f7d00faf1689",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/order-success.html",
+        "title": "Order Confirmation & Celebration Keepsake — Vanvi Moments",
+        "referrer": "http://localhost:3000/test-payment.html",
+        "timestamp": 1791977652639,
+        "path": "order-success.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.",
+      "createdAt": 1791977652663
     }
   ],
   "auditLogs": [
@@ -165912,6 +166482,89 @@
         "provider": "local"
       },
       "createdAt": 1791912355771
+    },
+    {
+      "id": "aud_89159b3b65da6f52",
+      "actorUserId": "usr_a506c1bb1a3f22fe",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_a506c1bb1a3f22fe",
+      "metadata": {
+        "ip": "127.0.0.1",
+        "ua": "Mozilla/5.0 (Linux; Android 16; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+        "provider": "google"
+      },
+      "createdAt": 1791916290125
+    },
+    {
+      "id": "aud_015f79d37686add2",
+      "actorUserId": "usr_a506c1bb1a3f22fe",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_a506c1bb1a3f22fe",
+      "metadata": {
+        "ip": "127.0.0.1",
+        "ua": "Mozilla/5.0 (Linux; Android 16; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+        "provider": "google"
+      },
+      "createdAt": 1791916300392
+    },
+    {
+      "id": "aud_316d01fbcdff8527",
+      "actorUserId": "usr_a506c1bb1a3f22fe",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_a506c1bb1a3f22fe",
+      "metadata": {
+        "ip": "127.0.0.1",
+        "ua": "Mozilla/5.0 (Linux; Android 16; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+        "provider": "google"
+      },
+      "createdAt": 1791916315169
+    },
+    {
+      "id": "aud_e0584abe33a89882",
+      "actorUserId": "usr_729dc7b3512246b0",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_729dc7b3512246b0",
+      "metadata": {
+        "name": "Test Vanvi User",
+        "email": "authtest_1791916423610@example.com",
+        "phone": "1916423610",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "Browser Client"
+      },
+      "createdAt": 1791916423883
+    },
+    {
+      "id": "aud_fd717668088dd242",
+      "actorUserId": "usr_729dc7b3512246b0",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_729dc7b3512246b0",
+      "metadata": {
+        "ip": "::1",
+        "ua": "Browser Client",
+        "provider": "local"
+      },
+      "createdAt": 1791916424086
+    },
+    {
+      "id": "aud_e858ec2c96c37d1f",
+      "actorUserId": "usr_ec1845740d7a03a2",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_ec1845740d7a03a2",
+      "metadata": {
+        "email": "g_user_1791916424216@gmail.com",
+        "name": "Google Verified User",
+        "provider": "google",
+        "ip": "::1",
+        "ua": "Browser Client"
+      },
+      "createdAt": 1791916424430
     }
   ],
   "inquiries": [

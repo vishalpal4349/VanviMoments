@@ -119,15 +119,140 @@
     }
   }
 
+  // 6. Smart Builder Link & Make It Yours Protection
+  // Prevents preview iframes from recursively opening builder.html inside themselves.
+  // Instead, switches parent builder to edit mode or navigates top window.
+  function setupSmartBuilderCtaLinks() {
+    const isInIframe = (function() {
+      try { return window.self !== window.top; } catch(e) { return true; }
+    })();
+
+    const builderSelectors = [
+      'a[href*="builder.html"]',
+      'a[href*="builder"]',
+      '.vanvi-btn-cta-builder',
+      '.btn-customize-cta',
+      '#customizeCtaBtn',
+      '#btnCustomizeAgain',
+      '.btn-luxe-studio',
+      '#btnFinaleCustomize',
+      '.top-customize-pill',
+      '.watermark-unlock-btn',
+      '.vanvi-studio-pill',
+      '.vanvi-top-badge',
+      '.brand-watermark',
+      '.brand-badge',
+      '.icon-btn[href*="builder"]'
+    ].join(', ');
+
+    const triggerEditInParent = function(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+      }
+
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'VANVI_SWITCH_TO_EDIT' }, '*');
+        try {
+          if (typeof window.parent.setMobileView === 'function') {
+            window.parent.setMobileView('edit');
+          }
+          if (typeof window.parent.switchMobileTab === 'function') {
+            window.parent.switchMobileTab('form');
+          }
+          if (typeof window.parent.switchTab === 'function') {
+            window.parent.switchTab('edit');
+          }
+          const pSidebar = window.parent.document.querySelector('.builder-sidebar, .builder-form-pane, #builderSidebar');
+          if (pSidebar && typeof pSidebar.scrollTo === 'function') {
+            pSidebar.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        } catch(err) {}
+      }
+    };
+
+    if (isInIframe) {
+      document.querySelectorAll(builderSelectors).forEach(el => {
+        const text = (el.textContent || '').trim();
+        if (text && (text.includes('Make it yours') || text.includes('Create Yours') || text.includes('Customize') || text.includes('Edit in Wedding Builder') || text.includes('Studio Builder') || text.includes('Edit'))) {
+          el.setAttribute('title', 'Return to Studio Edit Panel');
+          const span = el.querySelector('span:not(.vanvi-cta-free-chip)') || el;
+          if (span && !span.dataset.smartUpdated) {
+            span.dataset.smartUpdated = 'true';
+            span.innerHTML = '✏️ Edit This Moment';
+          }
+        }
+        el.addEventListener('click', triggerEditInParent, true);
+      });
+    } else {
+      document.querySelectorAll('a[href*="builder.html"]').forEach(el => {
+        el.setAttribute('target', '_top');
+      });
+    }
+  }
+
+  // Global Capturing Click Interceptor for any builder links inside iframes
+  document.addEventListener('click', function (e) {
+    const target = e.target && e.target.closest('a[href*="builder.html"], a[href*="builder"], .vanvi-btn-cta-builder, #btnCustomizeAgain, #customizeCtaBtn, .btn-customize-cta');
+    if (target) {
+      const isInIframe = (function() {
+        try { return window.self !== window.top; } catch(err) { return true; }
+      })();
+      if (isInIframe) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'VANVI_SWITCH_TO_EDIT' }, '*');
+          try {
+            if (typeof window.parent.setMobileView === 'function') window.parent.setMobileView('edit');
+            if (typeof window.parent.switchMobileTab === 'function') window.parent.switchMobileTab('form');
+            if (typeof window.parent.switchTab === 'function') window.parent.switchTab('edit');
+            const pSidebar = window.parent.document.querySelector('.builder-sidebar, .builder-form-pane, #builderSidebar');
+            if (pSidebar && typeof pSidebar.scrollTo === 'function') {
+              pSidebar.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          } catch(err) {}
+        }
+      }
+    }
+  }, true);
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       lockTemplateStage();
       purgeWatermarksAndPopups();
+      setupSmartBuilderCtaLinks();
     });
   } else {
     lockTemplateStage();
     purgeWatermarksAndPopups();
+    setupSmartBuilderCtaLinks();
   }
+
+  // Builder-side listener: switches builder to edit mode when requested by child preview iframe
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.type === 'VANVI_SWITCH_TO_EDIT') {
+      try {
+        if (typeof window.setMobileView === 'function') window.setMobileView('edit');
+        if (typeof window.switchMobileTab === 'function') window.switchMobileTab('form');
+        if (typeof window.switchTab === 'function') window.switchTab('edit');
+        
+        document.body.classList.remove('show-preview-mode', 'mobile-view-preview', 'tab-preview');
+        document.body.classList.add('show-form-mode', 'mobile-view-edit', 'tab-edit');
+
+        const editBtn = document.querySelector('#tabBtnForm, [data-tab="edit"], [data-tab="form"], #dockBtnEdit, .tab-btn-form');
+        if (editBtn) editBtn.click();
+
+        const sidebar = document.querySelector('.builder-sidebar, .builder-form-pane, #builderSidebar, aside');
+        if (sidebar && typeof sidebar.scrollTo === 'function') {
+          sidebar.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      } catch (err) {}
+    }
+  });
 
   window.addEventListener('resize', lockTemplateStage);
   window.addEventListener('orientationchange', lockTemplateStage);

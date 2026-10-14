@@ -479,5 +479,34 @@
     }
   }
 
+  // Global message listener: when an iframe preview clicks "Make it yours" / "Create Yours" / "Edit"
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.type === 'VANVI_SWITCH_TO_EDIT') {
+      if (typeof window.setMobileView === 'function') {
+        window.setMobileView('edit');
+      }
+      if (typeof window.switchMobileTab === 'function') {
+        window.switchMobileTab('form');
+      }
+      if (typeof window.switchTab === 'function') {
+        window.switchTab('edit');
+      }
+
+      // Also toggle common active class states
+      document.body.classList.remove('show-preview-mode', 'mobile-view-preview', 'tab-preview');
+      document.body.classList.add('show-form-mode', 'mobile-view-edit', 'tab-edit');
+
+      const editBtn = document.querySelector('#tabBtnForm, [data-tab="edit"], [data-tab="form"], #dockBtnEdit');
+      if (editBtn) {
+        editBtn.click();
+      }
+
+      const sidebar = document.querySelector('.builder-sidebar, .builder-form-pane, #builderSidebar, aside');
+      if (sidebar && typeof sidebar.scrollTo === 'function') {
+        sidebar.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  });
+
   window.VanviBuilderCore = new VanviBuilderCore();
 })(window);

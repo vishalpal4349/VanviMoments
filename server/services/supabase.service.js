@@ -119,7 +119,33 @@ class SupabaseService {
     }
 
     // Dynamic resolution from template.json (never guess by folder)
-    const tplPath = path.resolve(__dirname, '../../templates', templateId, 'template.json');
+    let tplPath = path.resolve(__dirname, '../../templates', templateId, 'template.json');
+    if (!fs.existsSync(tplPath)) {
+      const templatesDir = path.resolve(__dirname, '../../templates');
+      if (fs.existsSync(templatesDir)) {
+        const dirs = fs.readdirSync(templatesDir);
+        for (const d of dirs) {
+          const jp = path.join(templatesDir, d, 'template.json');
+          if (fs.existsSync(jp)) {
+            try {
+              const p = JSON.parse(fs.readFileSync(jp, 'utf8'));
+              if (
+                p.id === templateId ||
+                p.slug === templateId ||
+                d.toLowerCase() === templateId.toLowerCase() ||
+                (templateId === 'cute-sorry' && d === 'sorry-bubu') ||
+                (templateId === 'birthday-2-0' && (d === 'Birthday 2.0' || d === 'birthday 2.0')) ||
+                ((templateId === 'for-maa' || templateId === 'for-maa-01') && (d === 'For Maa' || d === 'for-maa'))
+              ) {
+                tplPath = jp;
+                break;
+              }
+            } catch(e) {}
+          }
+        }
+      }
+    }
+
     if (fs.existsSync(tplPath)) {
       try {
         const parsed = JSON.parse(fs.readFileSync(tplPath, 'utf8'));

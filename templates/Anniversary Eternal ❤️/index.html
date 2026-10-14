@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Eternal Anniversary: Our Love Story — Vanvi Moments</title>
+  <link rel="icon" href="./assets/images/sparkle_gold.png" />
+  
+  <link rel="stylesheet" href="./style.css" />
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+</head>
+<body data-palette="ivory">
+
+  <!-- Background Sparkle Atmosphere -->
+  <div class="eternal-atmosphere">
+    <div class="ambient-sparkle ambient-sparkle-1"></div>
+    <div class="ambient-sparkle ambient-sparkle-2"></div>
+  </div>
+
+  <!-- Top Action Button -->
+  <div style="position:fixed; top:16px; right:16px; z-index:9999;">
+    <a href="./builder.html" style="background:linear-gradient(135deg, #ff2a7a, #9333ea); color:#fff; text-decoration:none; padding:6px 14px; border-radius:99px; font-size:11px; font-weight:800; box-shadow:0 4px 12px rgba(255,42,122,0.35); display:inline-flex; align-items:center; gap:4px;">✦ Customize</a>
+  </div>
+
+  <!-- Top Progress Stepper & Audio Pill -->
+  <div class="top-controls-bar">
+    <div class="step-indicator-dots" id="stepDots">
+      <div class="step-dot active" data-step="0" title="Invitation"></div>
+      <div class="step-dot" data-step="1" title="Our Beginning"></div>
+      <div class="step-dot" data-step="2" title="Polaroids"></div>
+      <div class="step-dot" data-step="3" title="Reasons"></div>
+      <div class="step-dot" data-step="4" title="Love Letter"></div>
+      <div class="step-dot" data-step="5" title="Celebration"></div>
+    </div>
+
+    <button class="top-audio-pill" id="btnAudioToggle" aria-label="Toggle Audio">
+      <div class="audio-bars" id="audioBars">
+        <div class="audio-bar"></div>
+        <div class="audio-bar"></div>
+        <div class="audio-bar"></div>
+      </div>
+      <span id="audioTrackName">Our Song</span>
+    </button>
+  </div>
+
+  <!-- Main Viewport -->
+  <main class="eternal-app-viewport">
+
+    <!-- CHAPTER 0: SEALED INVITATION -->
+    <section class="chapter-screen active" id="chapter0">
+      <div class="envelope-card">
+        <div class="envelope-crest">✦</div>
+        <div class="envelope-subbrow">A Sealed Invitation</div>
+        <h1 class="envelope-headline" id="dispHeadline">To My <em>Favourite</em> Person</h1>
+        <div class="envelope-script-note" id="dispOpening">A little celebration of us.</div>
+
+        <div class="days-counter-pill" id="dispCounterPill">
+          <span>⏳</span>
+          <span id="dispDaysCount">3,650 Days of Choosing You</span>
+        </div>
+
+        <div>
+          <button class="btn-open-seal" id="btnOpenInvitation">
+            <span>Break Seal & Open Story</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 1: OUR BEGINNING (Milestones) -->
+    <section class="chapter-screen" id="chapter1">
+      <div class="story-chapter-card">
+        <div class="chapter-badge-header">
+          <span class="chapter-number-pill">Chapter I</span>
+          <h2 class="chapter-main-title">Where It All Began</h2>
+        </div>
+
+        <div class="hero-photo-wrapper">
+          <img id="dispHeroPhoto" src="./assets/images/where_it_began.jpg" alt="Where it began" class="hero-photo-img" />
+          <div class="hero-photo-caption" id="dispFirstCaption">Where it all began ✦</div>
+        </div>
+
+        <div class="milestones-timeline" id="milestonesList">
+          <!-- Populated by script.js -->
+        </div>
+
+        <button class="chapter-nav-btn" data-next="2">
+          <span>Continue to Memories →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CHAPTER 2: POLAROID MEMORY WALL -->
+    <section class="chapter-screen" id="chapter2">
+      <div class="story-chapter-card">
+        <div class="chapter-badge-header">
+          <span class="chapter-number-pill">Chapter II</span>
+          <h2 class="chapter-main-title">Moments Frozen in Time</h2>
+        </div>
+
+        <div class="polaroid-gallery-stack" id="polaroidStack">
+          <!-- 4 Polaroids populated by script.js -->
+        </div>
+
+        <button class="chapter-nav-btn" data-next="3">
+          <span>Read Little Reasons →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CHAPTER 3: REASONS I LOVE YOU -->
+    <section class="chapter-screen" id="chapter3">
+      <div class="story-chapter-card">
+        <div class="chapter-badge-header">
+          <span class="chapter-number-pill">Chapter III</span>
+          <h2 class="chapter-main-title">Reasons I Choose You</h2>
+        </div>
+
+        <div class="reasons-cards-flow" id="reasonsContainer">
+          <!-- Reasons list populated by script.js -->
+        </div>
+
+        <button class="chapter-nav-btn" data-next="4">
+          <span>Open The Love Letter →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CHAPTER 4: WAX-SEALED LOVE LETTER -->
+    <section class="chapter-screen" id="chapter4">
+      <div class="story-chapter-card">
+        <div class="chapter-badge-header">
+          <span class="chapter-number-pill">Chapter IV</span>
+          <h2 class="chapter-main-title">A Letter From My Soul</h2>
+        </div>
+
+        <div class="letter-parchment-sheet">
+          <div class="letter-greeting-line" id="dispLetterGreeting">My love,</div>
+          <div class="letter-body-paragraphs" id="dispLetterBody">
+            <!-- Letter body populated by script.js -->
+          </div>
+          <div class="letter-signature-line" id="dispLetterClosing">With all my love,</div>
+        </div>
+
+        <button class="chapter-nav-btn" data-next="5">
+          <span>The Forever Celebration →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CHAPTER 5: GOLDEN CELEBRATION FINALE -->
+    <section class="chapter-screen" id="chapter5">
+      <div class="finale-celebrate-card">
+        <div class="envelope-crest">🥂</div>
+        <h2 class="finale-statement" id="dispStatement">You. Me. Our little <em>forever.</em></h2>
+        
+        <div class="finale-message-text" id="dispFinaleMessage">
+          If I could make one wish for us, it would be for a thousand more ordinary days together.
+        </div>
+
+        <button class="btn-celebrate-gold" id="btnCelebrate">
+          <span>✨ Celebrate Our Love</span>
+        </button>
+
+        <div class="celebrate-revealed-lines" id="celebrateRevealed">
+          <div class="revealed-line-1" id="dispFinalLine">Somehow, in this huge world, I found you.</div>
+          <div class="revealed-line-2" id="dispFinalMessage">And I'd still choose you.</div>
+        </div>
+
+        <a href="./builder.html" class="btn-customize-cta">
+          <span>✨ Create Your Own Free Anniversary Page →</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="./script.js"></script>
+  <script src="../../js/vanvi-template-lock.js"></script>
+</body>
+</html>

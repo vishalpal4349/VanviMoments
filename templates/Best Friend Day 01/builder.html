@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Bestie Friendship Live Studio Builder — Vanvi Moments</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Razorpay Official Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #0a1118;
+      --bg-sidebar: #0f1922;
+      --bg-card: #15222e;
+      --border-color: rgba(255, 255, 255, 0.09);
+      --primary: #14907f;
+      --primary-hover: #0e6b5e;
+      --accent: #ef7a5a;
+      --gold: #d4af37;
+      --text: #f0f7f6;
+      --text-muted: #829a97;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text);
+      font-family: var(--font-body);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Builder Header */
+    .builder-header {
+      height: 64px;
+      background: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 50;
+      flex-shrink: 0;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-back {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .btn-back:hover { color: var(--primary); }
+
+    .brand-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+    }
+    .brand-sub {
+      font-size: 11px;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Device Toggles */
+    .device-switcher {
+      display: flex;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 3px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      gap: 2px;
+    }
+    .dev-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .dev-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-action {
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text);
+    }
+    .btn-primary {
+      background: var(--primary);
+      border: 1px solid var(--primary);
+      color: #ffffff;
+    }
+
+    /* Builder Workspace */
+    .builder-workspace {
+      display: grid;
+      grid-template-columns: 480px 1fr;
+      flex: 1;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    /* Sidebar Editor */
+    .sidebar-editor {
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .editor-tabs {
+      display: flex;
+      background: rgba(0, 0, 0, 0.25);
+      border-bottom: 1px solid var(--border-color);
+      overflow-x: auto;
+      scrollbar-width: none;
+      flex-shrink: 0;
+    }
+    .editor-tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      padding: 13px 15px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: rgba(20, 144, 127, 0.08);
+    }
+
+    .editor-panels {
+      flex: 1;
+      overflow-y: auto;
+      padding: 22px 20px 80px;
+    }
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .form-helper {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(20, 144, 127, 0.2);
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* Image Upload Box with Local File Reader */
+    .image-upload-box {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .image-preview-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .image-thumb-preview {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #000;
+      border: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+    .image-picker-btn {
+      background: rgba(20, 144, 127, 0.15);
+      border: 1px solid var(--primary);
+      color: #fff;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .image-picker-btn:hover {
+      background: var(--primary);
+    }
+    .image-file-input {
+      display: none;
+    }
+
+    /* Section Header within Panel */
+    .panel-section-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 24px 0 16px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Sticky Bottom Footer for Navigation */
+    .builder-sidebar-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 480px;
+      background: rgba(15, 25, 34, 0.98);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-color);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 40;
+    }
+    .btn-step-nav {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-step-nav:hover:not(:disabled) {
+      border-color: var(--primary);
+    }
+    .btn-step-nav:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .btn-step-next {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .btn-step-next:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+
+    .step-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .step-indicator-text {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .step-indicator-title {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      max-width: 140px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Preview Canvas Area */
+    .preview-canvas {
+      background: #060b10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .preview-bezel {
+      background: #000;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Device sizes */
+    .preview-bezel.mobile-view {
+      width: 390px;
+      height: 800px;
+      border-radius: 44px;
+      border: 10px solid #1c2730;
+    }
+    .preview-bezel.tablet-view {
+      width: 768px;
+      height: 90%;
+      border-radius: 28px;
+      border: 12px solid #1c2730;
+    }
+    .preview-bezel.desktop-view {
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      border: 6px solid #1c2730;
+    }
+
+    .preview-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #ffffff;
+    }
+
+    /* Price Checkout Card in Last Tab */
+    .checkout-box {
+      background: linear-gradient(135deg, rgba(20, 144, 127, 0.15) 0%, rgba(239, 122, 90, 0.15) 100%);
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 24px;
+    }
+    .checkout-price-tag {
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .checkout-price-tag span {
+      text-decoration: line-through;
+      font-size: 16px;
+      opacity: 0.6;
+      margin-right: 8px;
+    }
+    .checkout-btn {
+      width: 100%;
+      margin-top: 14px;
+      padding: 12px;
+      background: #10b981;
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      border-radius: 999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+
+    /* Toast Notification */
+      /* Celebration Modal */
+    .celebration-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .celebration-card {
+      background: #0f1922;
+      border: 2px solid var(--primary);
+      border-radius: 24px;
+      padding: 32px 24px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(20, 144, 127, 0.4);
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .celebration-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid #10b981;
+      color: #34d399;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+    .celebration-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .celebration-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .shortlink-box {
+      display: flex;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 6px 8px;
+      margin-bottom: 20px;
+    }
+    .shortlink-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #38bdf8;
+      font-size: 12.5px;
+      font-family: monospace;
+      padding: 6px 8px;
+      outline: none;
+    }
+    .btn-copy-shortlink {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .celebration-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .btn-celebration-primary {
+      background: linear-gradient(135deg, var(--primary), #0e6b5e);
+      color: #fff;
+      padding: 12px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-celebration-wa {
+      background: #25d366;
+      color: #fff;
+      padding: 12px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-close-modal {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+    .btn-close-modal:hover { color: #fff; }
+
+    /* Mobile Responsive Viewport Breakpoints (360px – 414px) */
+    .mobile-toggle-wrap {
+      display: none;
+    }
+    .mob-toggle-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .mob-toggle-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    @media (max-width: 900px) {
+      .builder-header {
+        height: auto;
+        padding: 8px 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .brand-title-wrap {
+        display: none;
+      }
+      .device-switcher {
+        display: none;
+      }
+      .mobile-toggle-wrap {
+        display: flex;
+        gap: 6px;
+      }
+      .header-actions .btn-action {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+      .builder-workspace {
+        grid-template-columns: 1fr;
+        height: calc(100vh - 96px);
+        position: relative;
+      }
+      .sidebar-editor {
+        width: 100%;
+        display: flex;
+        height: 100%;
+      }
+      .builder-workspace.show-preview .sidebar-editor {
+        display: none;
+      }
+      .builder-workspace.show-preview .preview-canvas {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        padding: 8px;
+      }
+      .preview-canvas {
+        display: none;
+      }
+      .preview-bezel.mobile-view {
+        width: 100%;
+        max-width: 414px;
+        height: 100%;
+        border-radius: 20px;
+        border-width: 4px;
+      }
+      .builder-sidebar-footer {
+        width: 100% !important;
+        left: 0;
+        right: 0;
+        padding: 8px 12px;
+      }
+      .editor-panels {
+        padding: 14px 12px 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Builder Header -->
+  <header class="builder-header">
+    <div class="header-left">
+      <a href="./index.html" class="btn-back">
+        <span>←</span>
+        <span>View Fullsite</span>
+      </a>
+      <div class="brand-title-wrap">
+        <span class="brand-title">Bestie Friendship Studio</span>
+        <span class="brand-sub">Vanvi Moments Live Builder</span>
+      </div>
+    </div>
+
+    <!-- Responsive View Toggles -->
+    <div class="device-switcher">
+      <button class="dev-btn active" data-view="mobile">
+        <span>📱</span>
+        <span>Mobile</span>
+      </button>
+      <button class="dev-btn" data-view="tablet">
+        <span>💻</span>
+        <span>Tablet</span>
+      </button>
+      <button class="dev-btn" data-view="desktop">
+        <span>🖥️</span>
+        <span>Desktop</span>
+      </button>
+    </div>
+
+    <!-- Mobile View Switcher (360px - 414px) -->
+    <div class="mobile-toggle-wrap" id="mobileToggleWrap">
+      <button type="button" class="mob-toggle-btn active" id="mobBtnEditor">✏️ Edit</button>
+      <button type="button" class="mob-toggle-btn" id="mobBtnPreview">👁️ Preview</button>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn-action btn-secondary" id="btnReset">Reset Defaults</button>
+      <button class="btn-action btn-primary" id="btnCopyLink">
+        <span>🔗</span>
+        <span>Share Link</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Split Screen Workspace -->
+  <div class="builder-workspace">
+
+    <!-- Left Sidebar: Form Editor Tabs -->
+    <aside class="sidebar-editor">
+      <div class="editor-tabs">
+        <button class="tab-btn active" data-tab="theme">🎨 Palette</button>
+        <button class="tab-btn" data-tab="balloon">🎈 Balloon</button>
+        <button class="tab-btn" data-tab="greeting">💌 Greeting</button>
+        <button class="tab-btn" data-tab="wrapped">📊 Wrapped</button>
+        <button class="tab-btn" data-tab="music">🎵 Song</button>
+        <button class="tab-btn" data-tab="memory">📸 Polaroids</button>
+        <button class="tab-btn" data-tab="promises">🤙 Promises</button>
+        <button class="tab-btn" data-tab="scratch">✨ Scratch</button>
+        <button class="tab-btn" data-tab="letter">✍️ Note & Pay</button>
+      </div>
+
+      <div class="editor-panels">
+
+        <!-- 1. THEME & TRANSITIONS PANEL -->
+        <div class="tab-panel active" id="tab-theme">
+          <div class="form-group">
+            <label class="form-label">Colour Palette Theme</label>
+            <select class="form-select" id="inpThemeSelect">
+              <option value="sunshine" selected>Seaglass / Sunshine (Teal & Coral)</option>
+              <option value="meadow">Terracotta / Meadow (Warm Clay & Sage)</option>
+              <option value="lilac">Lilac Dream (Soft Lavender & Rose)</option>
+              <option value="twilight">Twilight (Dark Night Luxury)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Step Transition Animation Customization ✨</label>
+            <select class="form-select" id="inpTransitionSelect">
+              <option value="fade-slide" selected>✨ Fade & Slide (Smooth & Elegant)</option>
+              <option value="zoom-pop">💫 Zoom & Pop (Playful & Bouncy 3D)</option>
+              <option value="flip-3d">🎴 3D Perspective Flip (Deep Depth)</option>
+              <option value="petal-sweep">🌸 Petal Sweep (Soft Horizontal Drift)</option>
+              <option value="bounce-spring">🎀 Spring Bounce (Energetic & Dynamic)</option>
+            </select>
+            <p class="form-helper">Customizes how sections glide into view as your bestie scrolls.</p>
+          </div>
+        </div>
+
+        <!-- 2. BALLOON INTRO PANEL -->
+        <div class="tab-panel" id="tab-balloon">
+          <div class="form-group">
+            <label class="form-label">Their Name or Nickname</label>
+            <input type="text" class="form-input" id="inpFriendName" value="my best friend">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Corner Sticky Note Label</label>
+            <input type="text" class="form-input" id="inpStickyLabel" value="For My Person :)">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Note Card — Big Greeting</label>
+            <input type="text" class="form-input" id="inpIntroTitle" value="Hey You!">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Note Card — Message</label>
+            <textarea class="form-textarea" id="inpIntroSubtitle">I made a little something&#10;just for you...</textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Balloon Banner Heading</label>
+            <input type="text" class="form-input" id="inpBalloonTitle" value="Happy Friendship Day">
+          </div>
+        </div>
+
+        <!-- 3. GREETING HERO PANEL -->
+        <div class="tab-panel" id="tab-greeting">
+          <div class="form-group">
+            <label class="form-label">Small Eyebrow Line</label>
+            <input type="text" class="form-input" id="inpHeroEyebrow" value="happy friendship day">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Big Headline</label>
+            <input type="text" class="form-input" id="inpHeroHeadline" value="To My Favourite Person">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Heartfelt Welcome Message</label>
+            <textarea class="form-textarea" id="inpHeroMessage">Every year this day comes around and I think the same thing: I got so lucky with you. So instead of a text this time, I built you a tiny corner of the internet. Stay a while, there's a bit to see.</textarea>
+          </div>
+          
+          <!-- Image Upload Box -->
+          <div class="form-group">
+            <label class="form-label">Hero Photo (URL or Device Upload)</label>
+            <div class="image-upload-box">
+              <div class="image-preview-row">
+                <img class="image-thumb-preview" id="thumbHeroPortrait" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery1.jpeg" alt="Hero">
+                <label class="image-picker-btn">
+                  📁 Upload Photo from Device
+                  <input type="file" class="image-file-input" data-target="inpHeroPortrait" data-thumb="thumbHeroPortrait" accept="image/*">
+                </label>
+              </div>
+              <input type="text" class="form-input" id="inpHeroPortrait" value="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery1.jpeg">
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. WRAPPED METRICS PANEL -->
+        <div class="tab-panel" id="tab-wrapped">
+          <div class="form-group">
+            <label class="form-label">Midnight Calls Count</label>
+            <input type="text" class="form-input" id="inpStatCalls" value="3,420+">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Shared Reels & Memes</label>
+            <input type="text" class="form-input" id="inpStatMemes" value="12.5k">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Late Night Snacks</label>
+            <input type="text" class="form-input" id="inpStatSnacks" value="∞">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Loyalty Guarantee</label>
+            <input type="text" class="form-input" id="inpStatLoyalty" value="100%">
+          </div>
+        </div>
+
+        <!-- 5. SONG PANEL -->
+        <div class="tab-panel" id="tab-music">
+          <div class="form-group">
+            <label class="form-label">Song Title</label>
+            <input type="text" class="form-input" id="inpSongTitle" value="Our Song">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Artist / Dedication</label>
+            <input type="text" class="form-input" id="inpSongArtist" value="the one that's ours">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Audio MP3 URL</label>
+            <input type="text" class="form-input" id="inpSongUrl" value="https://cdn.cutiepage.in/template-seeds/girlfriends-day/music.mp3">
+          </div>
+        </div>
+
+        <!-- 6. MEMORY WALL POLAROIDS PANEL -->
+        <div class="tab-panel" id="tab-memory">
+          <div class="panel-section-title">Polaroid #01</div>
+          <div class="form-group">
+            <div class="image-upload-box">
+              <div class="image-preview-row">
+                <img class="image-thumb-preview" id="thumbPhoto1" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery1.jpeg" alt="P1">
+                <label class="image-picker-btn">
+                  📁 Upload Photo 1
+                  <input type="file" class="image-file-input" data-target="inpPhoto1Url" data-thumb="thumbPhoto1" accept="image/*">
+                </label>
+              </div>
+              <input type="text" class="form-input" id="inpPhoto1Url" value="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery1.jpeg">
+            </div>
+            <textarea class="form-textarea" id="inpPhoto1Caption" style="margin-top: 8px;">day one energy. we had no idea what was coming.</textarea>
+          </div>
+
+          <div class="panel-section-title">Polaroid #02</div>
+          <div class="form-group">
+            <div class="image-upload-box">
+              <div class="image-preview-row">
+                <img class="image-thumb-preview" id="thumbPhoto2" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery2.gif" alt="P2">
+                <label class="image-picker-btn">
+                  📁 Upload Photo 2
+                  <input type="file" class="image-file-input" data-target="inpPhoto2Url" data-thumb="thumbPhoto2" accept="image/*">
+                </label>
+              </div>
+              <input type="text" class="form-input" id="inpPhoto2Url" value="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery2.gif">
+            </div>
+            <textarea class="form-textarea" id="inpPhoto2Caption" style="margin-top: 8px;">still one of the funniest nights of my life.</textarea>
+          </div>
+
+          <div class="panel-section-title">Polaroid #03</div>
+          <div class="form-group">
+            <div class="image-upload-box">
+              <div class="image-preview-row">
+                <img class="image-thumb-preview" id="thumbPhoto3" src="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery3.jpeg" alt="P3">
+                <label class="image-picker-btn">
+                  📁 Upload Photo 3
+                  <input type="file" class="image-file-input" data-target="inpPhoto3Url" data-thumb="thumbPhoto3" accept="image/*">
+                </label>
+              </div>
+              <input type="text" class="form-input" id="inpPhoto3Url" value="https://cdn.cutiepage.in/template-seeds/girlfriends-day/gallery3.jpeg">
+            </div>
+            <textarea class="form-textarea" id="inpPhoto3Caption" style="margin-top: 8px;">nothing happened this day. that was the best part.</textarea>
+          </div>
+        </div>
+
+        <!-- 7. PROMISES PANEL -->
+        <div class="tab-panel" id="tab-promises">
+          <p class="form-helper" style="margin-bottom: 14px;">The 3 sacred pinky promises are interactive cards your bestie taps to pledge in real-time.</p>
+          <div class="form-group">
+            <label class="form-label">Promise 1: Never Drift Apart</label>
+            <input type="text" class="form-input" value="One call and we pick up right where we left off.">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Promise 2: Vault of Secrets</label>
+            <input type="text" class="form-input" value="All our embarrassing stories stay between us forever.">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Promise 3: Unplanned Trips</label>
+            <input type="text" class="form-input" value="At least one chaotic road trip every year until we are old.">
+          </div>
+        </div>
+
+        <!-- 8. SCRATCH CARDS PANEL -->
+        <div class="tab-panel" id="tab-scratch">
+          <div class="panel-section-title">Scratch Card #01</div>
+          <div class="form-group">
+            <input type="text" class="form-input" id="inpScratch1Label" value="you show up">
+            <textarea class="form-textarea" id="inpScratch1Body" style="margin-top: 6px;">you notice something's off before I've said a word. that's the whole thing.</textarea>
+          </div>
+
+          <div class="panel-section-title">Scratch Card #02</div>
+          <div class="form-group">
+            <input type="text" class="form-input" id="inpScratch2Label" value="you're funny">
+            <textarea class="form-textarea" id="inpScratch2Body" style="margin-top: 6px;">half my best memories are us doing nothing and laughing until it hurt.</textarea>
+          </div>
+
+          <div class="panel-section-title">Scratch Card #03</div>
+          <div class="form-group">
+            <input type="text" class="form-input" id="inpScratch3Label" value="you're stuck">
+            <textarea class="form-textarea" id="inpScratch3Body" style="margin-top: 6px;">years in and you still pick up on the first ring. no exit option, sorry.</textarea>
+          </div>
+        </div>
+
+        <!-- 9. FINAL NOTE & 99 INR PAYMENT PANEL -->
+        <div class="tab-panel" id="tab-letter">
+          <div class="form-group">
+            <label class="form-label">Greeting Line</label>
+            <input type="text" class="form-input" id="inpLetterSalutation" value="Hey you,">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Letter Body</label>
+            <textarea class="form-textarea" id="inpLetterBody" rows="7">I'm not great at saying this stuff out loud, so I made you a page instead — a song, our photos, and a few things I actually mean.
+
+thank you for the years of picking up the phone, for the advice I didn't ask for and definitely needed, and for never once making me explain myself twice. you've seen every version of me and stayed for all of them.
+
+I hope today is a good one. and I hope you know that whatever happens next, you've got a person in your corner permanently. that's me. I'm the person.</textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Signature</label>
+            <input type="text" class="form-input" id="inpLetterSignature" value="your friend">
+          </div>
+
+          <!-- Checkout Box with 39 INR -->
+          <div class="checkout-box">
+            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); font-weight: 700;">Vanvi Moments Checkout</div>
+            <div class="checkout-price-tag" style="margin-top: 6px;">
+              <span>₹199</span> ₹39 Only
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+              Customized link for life, high-res photos & WhatsApp gift box delivery
+            </p>
+            <button type="button" class="checkout-btn" id="btnSidebarPay">
+              <span>💳 Pay ₹39 & Lock Customization</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sticky Bottom Navigation Bar -->
+      <footer class="builder-sidebar-footer">
+        <button type="button" id="btnPrevStep" class="btn-step-nav" disabled>← Prev Step</button>
+        <div class="step-indicator">
+          <span class="step-indicator-text" id="stepIndicatorNumber">Step 1 of 9</span>
+          <span class="step-indicator-title" id="stepIndicatorTitle">Palette</span>
+        </div>
+        <button type="button" id="btnNextStep" class="btn-step-nav btn-step-next">Next Step →</button>
+      </footer>
+    </aside>
+
+    <!-- Right Canvas: Real-time Live Simulator -->
+    <main class="preview-canvas">
+      <div class="preview-bezel mobile-view" id="previewBezel">
+        <iframe src="./index.html" class="preview-iframe" id="previewIframe" title="Live Preview Frame"></iframe>
+      </div>
+    </main>
+
+  </div>
+
+  <div class="toast-hub" id="toastHub"></div>
+
+  <!-- Celebration Modal for Payment Success & Unique Link -->
+  <div class="celebration-overlay" id="celebrationModal" style="display: none;">
+    <div class="celebration-card">
+      <div class="celebration-badge">🎉 PAYMENT SUCCESSFUL · ₹39</div>
+      <h2 class="celebration-title">Your Bestie Microsite is LIVE!</h2>
+      <p class="celebration-subtitle">Permanent short-link locked & verified forever.</p>
+      
+      <div class="shortlink-box">
+        <input type="text" readonly id="celebrationShortlinkInput" class="shortlink-input" value="https://vanvimoments.com/f/bestie">
+        <button type="button" class="btn-copy-shortlink" id="btnCopyShortlink">Copy Link</button>
+      </div>
+
+      <div class="celebration-actions">
+        <a href="#" target="_blank" id="celebrationLiveBtn" class="btn-celebration-primary">🚀 Open Live Microsite</a>
+        <a href="#" target="_blank" id="celebrationWaBtn" class="btn-celebration-wa">💬 Send to Bestie on WhatsApp</a>
+      </div>
+
+      <button type="button" class="btn-close-modal" id="btnCloseCelebration">Close & Continue Editing</button>
+    </div>
+  </div>
+
+  <script src="./builder.js"></script>
+</body>
+</html>

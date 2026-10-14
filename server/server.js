@@ -141,6 +141,23 @@ app.use('/api/custom-requests', customRequestRoutes);
 app.post('/api/create-order', paymentsRoutes.createOrderHandler);
 app.post('/api/verify-payment', paymentsRoutes.verifyPaymentHandler);
 app.get('/api/payment-config', paymentsRoutes.getConfigHandler);
+app.post('/api/setup-razorpay', (req, res) => {
+  const { key_id, key_secret } = req.body;
+  if (!key_id || !key_secret) {
+    return res.status(400).json({ success: false, error: 'Key ID and Secret required' });
+  }
+  process.env.RAZORPAY_KEY_ID = key_id.trim();
+  process.env.RAZORPAY_KEY_SECRET = key_secret.trim();
+  try {
+    let env = fs.readFileSync('.env', 'utf8');
+    env = env.replace(/^RAZORPAY_KEY_ID=.*$/m, `RAZORPAY_KEY_ID=${key_id.trim()}`);
+    env = env.replace(/^RAZORPAY_KEY_SECRET=.*$/m, `RAZORPAY_KEY_SECRET=${key_secret.trim()}`);
+    fs.writeFileSync('.env', env, 'utf8');
+  } catch (e) {
+    console.error('Failed to update .env', e);
+  }
+  return res.json({ success: true, message: 'Razorpay API keys saved successfully!', key_id: key_id.trim() });
+});
 
 // Canonical Moment Dynamic Router: /m/:slug (Resolves: slug -> moment -> template_id -> template)
 const supabaseService = require('./services/supabase.service');

@@ -1,0 +1,4139 @@
+/* Papercut Lotus - visual design, ported from the standalone design.html.
+   Guest-facing styles only; edit-mode affordances live in editor.css, which
+   loads after this file and consumes the --edit-accent/--ds-* tokens from
+   the shared platform chrome (../_platform/toolbar.css). */
+
+:root {
+  /* One serif for the whole template: Cormorant Garamond, the face rose already
+     sets everything in. Fraunces is gone - it used to lead --font-serif while
+     --font-cormorant existed to give the cards Cormorant on its own, and with
+     Fraunces removed the two stacks are the same thing.
+
+     --font-serif is kept as an ALIAS of --font-cormorant rather than deleted:
+     25 rules name it, and pointing it at the same value changes them all in one
+     place. New rules should prefer --font-cormorant; the alias exists to avoid
+     a 25-site rename, not as a second choice of face.
+
+     The stack is rose's --font-primary EXACTLY - 'Cormorant Garamond', serif -
+     and deliberately does not name Georgia in the middle. Georgia is a far
+     sturdier face than Cormorant, so on any load where the webfont is slow,
+     blocked or cached badly, a Georgia fallback renders visibly BOLDER than
+     rose, which falls back to the generic serif. Same stack, so the two
+     templates degrade the same way as well as rendering the same way. */
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-serif: var(--font-cormorant);
+
+  /* Display face, used for one thing: the revealed date. Fraunces is a high-
+     contrast wonky serif and reads as signage next to Cormorant, which is why
+     it suits three big numerals and nothing else here. Falls back to the body
+     serif, so a failed webfont still lands on type rather than on Times. */
+  --font-display: "Fraunces", var(--font-cormorant);
+  --font-sans: "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --paper: #09455D;
+  /* page colour the petals are cut from */
+
+  /* Motif repeat unit is 1:2 - two rows, because the layout is a brick
+     offset. Keep the ratio when resizing; anything else stretches the
+     flowers. 192x384 puts the petal at 54px. */
+  --motif-w: 192px;
+  --motif-h: 384px;
+
+  /* The fixed edge bars' own width. Distinct from --bar-w below, which is the
+     clearance sections pad by; this is the strip itself. Kept as a token so the
+     base width and the phone override below stay a single figure. */
+  --bar-strip: 2.85vw;
+
+  --bar-w: 40px;
+  --cream: #FDF3E8;
+
+  /* Every brown/gold TEXT colour in this template is now the one deep teal
+     below. The names are historical - --gold, --intro-olive and the two
+     --intro-ink shades all resolve to the same value, so picking between them
+     no longer changes anything on screen. Rename them when the palette next
+     settles; left as-is here so the change stayed a colour swap.
+
+     Deliberately NOT changed, because they are artwork rather than type:
+     --intro-bg (#FAE3CD paper), the #FFD853 keyline on the edge bars, and
+     #CE9F00 on the gallery pull-rope. The arch SVGs carry #FFD853 of their
+     own, so touching that here would only half-match them. */
+  --gold: #083041;
+
+  /* drop-shadow, not box-shadow: these are transparent PNG/SVG cutouts,
+     and box-shadow would trace the rectangular element box instead of
+     the silhouette. CSS reads the blur radius identically for both, so
+     the values carry over unchanged. */
+  --lift: drop-shadow(0px 8px 30px rgba(0, 0, 0, 0.2));
+
+  /* intro cover */
+  --intro-bg: #FAE3CD;
+  --intro-ink: #083041;
+  --intro-ink-soft: #083041;
+  --intro-olive: #083041;
+
+  /* Shared by the gallery frame and the raised ceremony card, so the
+     two line up down the page. */
+  --frame-max: 500px;
+
+  --ceremony-ink: #09455D;
+  --ceremony-muted: #6B6B73;
+
+  /* The gold sheen from media/tap_to_open.svg, lifted stop for stop off that
+     file's own <linearGradient> so anything edged with it matches the plaque
+     button exactly rather than approximately.
+
+     The SVG runs the gradient right-to-left (x1 350 -> x2 26); this is written
+     left-to-right, in the stop order the design lists, which for a sheen that
+     turns light-dark-light-dark reads the same either way.
+
+     The stops sit in a token of their own because the sheen is now needed on
+     two kinds of surface that run it different ways: ACROSS the border box of
+     a card or dialog, and DOWN the full height of the fixed edge bars. One
+     list, two directions, so the two can never drift apart. */
+  --gold-stops:
+    #8B5F30 0%,
+    #E1C6A8 18%,
+    #8B5F30 53%,
+    #E1C6A8 79%,
+    #8B5F30 100%;
+  --gold-edge: linear-gradient(to right, var(--gold-stops));
+  --gold-edge-down: linear-gradient(to bottom, var(--gold-stops));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* The hidden ATTRIBUTE must actually hide. The UA stylesheet's
+   [hidden] { display: none } lives in the user-agent origin, so ANY author
+   display beats it no matter how weak the selector - .gallery__add's
+   display:block and .gallery__remove's display:grid were doing exactly that,
+   which left the editor-only Add photo / Add note / x controls on screen for
+   guests even though render.js had correctly set el.hidden = true.
+   Restored once, globally, so the same trap cannot be re-sprung by the next
+   control that needs a display. */
+[hidden] {
+  display: none !important;
+}
+
+/* The sideways clip has to be declared on the ROOT, not on body alone.
+
+   body carried `overflow-x: hidden`, and the comment on .page-lotus further
+   down says that is what crops the half-flower hanging off each bottom corner.
+   It isn't. While html's own overflow is `visible` the browser PROPAGATES
+   body's value up to the viewport, and body's used value becomes `visible` -
+   so body clipped nothing, and .page-lotus--right (right:8% plus a 50%
+   translate, i.e. half of a 180px flower past the edge) went on extending the
+   scrollable area. On a 390px phone the document measured 449px wide for its
+   whole length. That is the sideways drag: every section above the RSVP is a
+   full-bleed panel where 59px of pan is hard to notice, and the RSVP is the
+   first white card with a clean left edge to make it obvious.
+
+   `clip`, not `hidden`, on both: `hidden` on one axis forces the other to
+   `auto`, which would turn these into vertical scroll containers and take
+   sticky positioning and the page's own scrolling down with them. `clip`
+   leaves overflow-y genuinely visible, and unlike `hidden` it cannot be
+   scrolled programmatically either, so nothing can pan the page sideways. The
+   flower still reads exactly as designed - a quarter of it, in the corner. */
+html {
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: clip;
+
+  background-color: var(--paper);
+  background-image: url("media/motif-pattern.svg");
+  background-size: var(--motif-w) var(--motif-h);
+  background-repeat: repeat;
+  /* Without this the tile grid anchors at 0 0 (top-left) and repeats
+     rightward, so where a tile boundary lands relative to the page's visual
+     centre shifts with every viewport width - centred here instead, a tile
+     is always centred on the page and the repeat is symmetric left/right
+     regardless of width. */
+  background-position: center top;
+}
+
+/* --- edge bars -------------------------------------------------------- */
+/* Flat paper colour over the motif, so the pattern reads as a panel
+   inset between them. Fixed, so the frame holds while the page scrolls. */
+/* The keyline is a BACKGROUND layer, not a border, because a border cannot take
+   a gradient - border-color is a colour and nothing else. So the bar paints its
+   teal as background-color and lays a 2px-wide strip of the gold sheen over the
+   inner edge on top of it.
+   The strip is --gold-edge-down, not --gold-edge: the card token runs `to right`
+   and squeezed across a 2px width all five stops would collapse into a single
+   muddy brown. Run downward it does what it does on the plaque - turns
+   light-dark-light-dark along the length of the thing it edges. */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: var(--bar-strip);
+  background-color: #083B4F;
+
+  /* A real 2px BORDER now, not a background strip. Width goes on per side
+     below; here we only give every side a style (so a width can take effect)
+     and the colour.
+
+     Two declarations, and the order matters. border-color is the flat gold, and
+     is what actually paints if border-image is unsupported or fails. Where
+     border-image IS supported it wins, and that is what keeps the sheen a
+     border cannot otherwise have: border-color takes a colour and nothing else,
+     so a gradient has to arrive through border-image.
+
+     Slice 1 on a `to bottom` gradient works because the slice is taken from a
+     1px-wide column of the image, and on a vertical gradient that single column
+     already carries the whole ramp - stretched down the edge it reproduces the
+     gradient exactly. --gold-edge (`to right`) would give a flat colour here,
+     which is why the -down variant exists.
+     border-image-width defaults to 1x the border-width, so the 0-width sides
+     draw nothing at all. */
+  border: 0 solid #FFD853;
+  border-image: var(--gold-edge-down) 1;
+
+  box-shadow: 0px 20px 30px 0px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+
+  /* 11 on the SHARED rule, so both halves of the frame stack alike. The right
+     bar used to be left on 10 here while only the left bar was lifted to 11
+     below - and .arch--front is 11, so the arch painted over the right bar and
+     not the left one. The phone block further down was bumping ::after to 11 to
+     paper over exactly that, which only helped under 500px and left the bar
+     hidden at every width between there and the desktop layout. */
+  z-index: 10;
+}
+
+/* Only the INNER edge is keylined - each bar's outer edge is flush with the
+   viewport, where a line would just print down the very edge of the screen.
+   Hence the mirrored background-position: the strip hugs whichever side of the
+   bar faces the page. */
+/* The keyline is on each bar's INNER edge - the side facing the page. Only that
+   side is given a width; the other three stay at the shared rule's 0.
+   box-sizing is border-box template-wide, so these 2px come OUT of the 2.85vw
+   above rather than adding to it: the bar's overall width is unchanged and only
+   its teal fill narrows by 2px. */
+body::before {
+  left: 0;
+  border-right-width: 0.6vw;
+  z-index: 11;
+}
+
+body::after {
+  right: 0;
+  border-left-width: 0.6vw;
+}
+
+/* --- breakpoints ------------------------------------------------------- */
+/* Two, and they mean different things - do not collapse them.
+
+   max-width: 1024px  MOBILE + TABLET. The portrait layout: everything that a
+                      screen narrower than a laptop needs, from the hero
+                      collage to the stacked carousel.
+   max-width: 500px   MOBILE ONLY. The arch artwork, the boxes that position
+                      it, and every collage piece measured against it - sun,
+                      clouds, waves, lotuses. Phones get the portrait *_phone cuts
+                      that frame the whole hero; tablets stay on the landscape
+                      desktop arches, which are a top ornament and must keep
+                      their own aspect ratio. 500 rather than 720 because a
+                      phone in portrait is 360-430 CSS px - anything above
+                      that is a tablet or a narrowed desktop window, and both
+                      of those are wide enough for the landscape drawing.
+
+   The 500px line is duplicated in index.html as <source media> on the three
+   arch <picture> elements. Change one and you must change the other, or the
+   CSS will position an asset the markup did not load. */
+
+/* 80px of frame eats a narrow screen's width, so the bars thin to a hairline.
+   Overriding the token also relaxes the section paddings that key off it. */
+@media (max-width: 1024px) {
+  :root {
+    --bar-w: 14px;
+  }
+}
+
+/* --- hero shell ------------------------------------------------------- */
+/* Deliberately NO z-index: leaving it auto keeps .hero from opening its
+   own stacking context, so the layers below can sit above the fixed edge
+   bars (z-index 1) individually. The cream background is unpositioned, so
+   it still paints beneath all of them. */
+.hero {
+  position: relative;
+
+  min-height: 100vh;
+  background-color: var(--cream);
+  overflow: visible;
+
+  /* MUST stay after the shorthand above - `overflow: visible` resets both axes,
+     so this line placed before it would be silently undone.
+
+     The arch flowers sit ON the legs of the phone arch, at left: 3.85% and
+     96.15% of a full-width box, and are wider than the gap they have to the
+     screen edge - so the right-hand one hung past it and made the DOCUMENT
+     wider than the viewport. A page wider than the screen is what pulls
+     centred content off centre and leaves the right edge looking wrong.
+     clip on the x axis only: `overflow: hidden` here would also clip the wave
+     band and the lotuses, which are MEANT to overhang the hero vertically (see
+     .waves and the collage below). Since .hero is full-bleed, clipping at its
+     own left/right edges clips exactly what is already off screen and nothing
+     that was ever visible. */
+  overflow-x: clip;
+}
+
+/* Shared base for every pasted-on piece. Only width is set per element;
+   height:auto keeps each asset's own aspect ratio. Widths are % of the
+   hero, so the whole collage scales with the viewport. */
+.deco {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --- flat hero artwork (TEMPORARY) -------------------------------------- */
+/* Stands in for the whole sun/cloud/wave/lotus collage while the design is
+   being tried out - see the commented block in index.html. Delete this rule
+   and un-comment that block to go back; nothing below has been changed.
+
+   Two cuts, swapped by <picture> on the same 500px line as the arches:
+   hero_desktop.png is 1548x1016 (landscape, 1.52:1) and hero_phone.png is
+   866x1817 (portrait, 0.48:1). The class sits on the <picture>, which is only
+   a source switch, so the positioning lives here and the <img> fills it -
+   exactly the arrangement .arch uses.
+
+   The image fills the hero rather than keeping its own ratio: the hero is
+   100vh tall at any width, so `contain` would letterbox and `height:auto`
+   would leave the foot bare. `cover` crops instead, and centre-bottom keeps
+   the waterline in frame when the crop bites.
+
+   z-index 1 puts it under everything the collage used to sit under: the names
+   (6), the back arch (7) and the front arch (11) all still paint over it. */
+.hero-art {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+/* --- sky -------------------------------------------------------------- */
+.sun {
+  left: 21.5%;
+  top: 26%;
+  width: 13.5%;
+  z-index: 2;
+  filter: var(--lift);
+}
+
+.cloud {
+  z-index: 3;
+  filter: var(--lift);
+}
+
+.cloud--main {
+  left: 1%;
+  bottom: 6%;
+  width: 57%;
+}
+
+.cloud--right {
+  right: -10%;
+  bottom: 4%;
+  width: 56%;
+  transform: scaleX(-1);
+}
+
+/* --- water ------------------------------------------------------------ */
+/* Wider than the hero so the band is tall enough to read; the artwork is
+   1790x208, so at 100% it would render as a thin ribbon. */
+.waves {
+  left: -24%;
+  bottom: -6%;
+  width: 130%;
+  z-index: 5;
+
+  /* Slow tidal drift: right, then back left, forever. `alternate` plays the
+     return leg rather than snapping home.
+
+     `linear`, deliberately, NOT ease-in-out: an eased cycle brings the band
+     to a dead stop at each end and creeps through the seconds either side of
+     the turn, which reads as an animation that keeps stalling. Linear holds
+     one constant speed the whole way, so there is never a moment where the
+     water looks parked. The trade is that the turn itself is abrupt - with a
+     repeating wave and no landmark to track, the eye does not catch it.
+
+     The travel is a token, and never a percentage: a percentage translate
+     resolves against the ELEMENT's width - 130% of the hero here but 530%
+     on narrow screens (see the 1024px block) - so a single number would move
+     the band four times as far down there. Here the band overhangs the hero
+     by 24% left and 26% right, so 8vw cannot pull an edge into view. Narrow
+     screens re-point the token, because 8vw of a phone is a few pixels. */
+  --wave-travel: 8vw;
+  animation: wave-drift 18s linear infinite alternate;
+  will-change: transform;
+}
+
+/* One set of keyframes for every width - the distance comes from
+   --wave-travel on the element, so a breakpoint retunes the drift by
+   changing one length instead of redeclaring the animation. */
+@keyframes wave-drift {
+  from {
+    transform: translateX(calc(-1 * var(--wave-travel)));
+  }
+
+  to {
+    transform: translateX(var(--wave-travel));
+  }
+}
+
+/* --- lotuses on the water ---------------------------------------------- */
+/* One each side, sitting with its middle exactly on the water line so the
+   lower half laps into the wave band.
+
+   `bottom` puts the element's BOTTOM edge on that line; translateY(50%) then
+   drops it by half its own height, which lands the centre on the line
+   whatever the artwork's proportions are. That is why the two lotuses can be
+   different shapes (540x638 and 268x248) without a per-image offset.
+
+   --water-line is the top edge of the wave band, measured up from the foot of
+   the hero. waves.svg is 1790x208 rendered at 130% of the hero, so the band
+   stands 130% x 208/1790 = 15.106% of the hero's WIDTH tall, less the 75px
+   .waves is pushed below the fold. Retune it whenever .waves' width or bottom
+   moves - the 1024px block already does, because the band widens to 530%
+   there and the line lands somewhere completely different. */
+
+.lotus-float {
+  --water-line: calc(15.106vw - 75px);
+
+  bottom: var(--water-line);
+
+  /* The half-height drop that sits the lotus ON the water line moved from
+     `transform` to `translate` so that `transform` and `rotate` are free for
+     the float below. The three compose (translate, then rotate, then
+     transform), so the resting position is unchanged. */
+  translate: 0 50%;
+
+  /* Floating in place: a slow vertical bob plus a slighter rock, on two
+     DIFFERENT periods (5.5s and 7.3s). Co-prime-ish durations mean the pair
+     never repeats the same combined pose for minutes, so it reads as water
+     rather than a loop. The rock turns about the element's centre, which the
+     translate above has already put exactly on the water line - so the lotus
+     pivots where it meets the surface, not around some point in the air. */
+  animation:
+    lotus-bob 5.5s ease-in-out infinite alternate,
+    lotus-rock 7.3s ease-in-out infinite alternate;
+  will-change: transform, rotate;
+
+  z-index: 6;
+  filter: var(--lift);
+}
+
+/* Separate properties, so the two animations never fight over one value. */
+@keyframes lotus-bob {
+  from {
+    transform: translateY(-3px);
+  }
+
+  to {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes lotus-rock {
+  from {
+    rotate: -1.6deg;
+  }
+
+  to {
+    rotate: 1.6deg;
+  }
+}
+
+.lotus-float--left {
+  left: 5%;
+  width: 23%;
+}
+
+.lotus-float--right {
+  right: 9%;
+  width: 24%;
+
+  /* NEGATIVE delays, so the right lotus starts already part-way through both
+     cycles rather than waiting to begin. Without this the pair bobs in
+     lockstep, which reads as one mechanism instead of two things afloat. */
+  animation-delay: -2.6s, -3.9s;
+}
+
+/* --- names ------------------------------------------------------------ */
+.couple {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  z-index: 6;
+
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1.05;
+
+  /* Keeps the names clear of the screen edges on a narrow phone. padding,
+     not margin: box-sizing is border-box template-wide, so padding-inline
+     comes OUT of this box's own 100% width - margin-inline would instead
+     ADD to it, pushing the box past its container and right back into the
+     overflow fitNameToWidth() (render.js) exists to prevent. This also
+     narrows the space that function measures against, which is correct: a
+     name now shrinks a touch sooner rather than running up to the very
+     edge before this padding. */
+  padding-inline: 24px;
+}
+
+.bride-name,
+.groom-name {
+  display: block;
+  font-size: clamp(34px, 6.4vw, 92px);
+  font-weight: 400;
+  /* Single line by default - this is what makes an oversized name actually
+     OVERFLOW (a measurable scrollWidth > clientWidth) instead of silently
+     wrapping, which is what render.js's fitNameToWidth() checks for to
+     decide whether to shrink. With wrapping allowed here instead, a long
+     name would just wrap to fit and scrollWidth would never exceed
+     clientWidth - the shrink would never fire at all. */
+  white-space: nowrap;
+  overflow-wrap: break-word;
+}
+
+/* Once fitNameToWidth() has shrunk a name to its floor size and it STILL
+   doesn't fit (an extreme case), it adds this class as the actual last
+   resort: allow the line to wrap after all, breaking mid-word if it must,
+   rather than running past the edge of the screen. */
+.bride-name.name-wrap,
+.groom-name.name-wrap {
+  white-space: normal;
+}
+
+/* Hidden until the cover is tapped away (body.is-opened, set in app.js's
+   intro-open script), then fades AND rises in slowly over 1600ms as the
+   cover finishes its own translateY slide-up (.intro.is-open, 900ms) - the
+   300ms delay here starts the reveal partway through that slide rather than
+   only once it's fully clear, so the two read as one continuous reveal
+   rather than two separate beats, even though the rise now runs well past
+   the cover's own 900ms.
+   The extra +24px here is a THIRD offset stacked on top of .couple's own
+   centring transform (-50%, -50%) - written out in full rather than as a
+   custom property added to it, because a plain custom property does not
+   interpolate under `transition` (it swaps instantly, which would make the
+   transform itself jump instead of animate even with transform in the
+   transition list below).
+   Excluded from edit mode entirely (body.is-editing): app.js never opens
+   the cover there - the host scrolls past it as an ordinary panel instead -
+   so is-opened would never arrive and the names would stay invisible while
+   editing if this applied unconditionally. */
+body:not(.is-editing) .couple {
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + 24px));
+  transition: opacity 1600ms ease 300ms, transform 1600ms ease 300ms;
+}
+
+body.is-opened .couple {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.is-editing) .couple {
+    transition: none;
+  }
+}
+
+/* The connector between the two names. It set no weight, so it inherited the
+   <h1> default of 700 while the names either side are an explicit 400 - the
+   one word that should recede was the heaviest thing in the hero. 400 matches
+   both the names and rose-invitation's own .reveal__amp, which is likewise
+   regular against its names. */
+.amp {
+  display: block;
+  font-size: clamp(20px, 3.6vw, 52px);
+  font-weight: 400;
+  margin: 0.12em 0;
+}
+
+/* --- hero wave (moved from the intro cover) ---------------------------- */
+/* Back to being .intro's own child - see index.html for why (it needs to
+   travel with the cover's own slide, not time a separate position against
+   it). Pinned to the FOOT of the panel: a small negative offset lets it
+   overhang the edge slightly rather than sitting flush inside it.
+
+   width:100%, NOT the left+right pinning .arch uses: .arch is a <picture>,
+   a non-replaced box that stretches to fill pinned offsets, where this is
+   the <img> itself - a REPLACED element with width:auto would take its own
+   intrinsic size instead and ignore a `right` offset as over-constrained,
+   hanging off the side of any screen narrower than the artwork. The
+   percentage resolves against .intro's padding box (the full panel):
+   `padding: 0 24px` insets the CONTENT box, not the padding box, so this
+   still reaches both edges regardless of that padding. */
+.intro__wave {
+  position: absolute;
+  left: 0;
+  bottom: -60px;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Mobile and tablet take the wave at DOUBLE width, so the scallop reads as
+   a coarser, deeper wave instead of the fine ripple a full-width artwork
+   squeezed into a phone produces. left:-50% re-centres it (width:200%
+   anchored at left:0 would push the whole second half off the right edge
+   instead). */
+@media (max-width: 1024px) {
+  .intro__wave {
+    width: 200%;
+    left: -50%;
+  }
+}
+
+@media (max-width: 500px) {
+  .intro__wave {
+    width: 250%;
+  }
+}
+
+/* --- arch ------------------------------------------------------------- */
+/* One full arch spans the top of the hero: a single cream/green underlayer
+   (arch2, z-index 7) behind the single green front (arch, z-index 11). Both are
+   the same full-width drawing, centred and pinned to the top; the back shows
+   only where its shape reaches past the front. arch--front is the divider in
+   the stack - only the two side lotuses (12) sit above it; the hero wave (4)
+   and the rest of the collage sit at 9 or below, and the intro cover (10)
+   slides beneath it too. */
+/* The class sits on the <picture>, which is only a source switch and has no
+   box of its own worth styling - the positioning lives here and the <img>
+   inside just fills it. */
+.arch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.arch img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.arch--back {
+  z-index: 7;
+}
+
+.arch--front {
+  z-index: 11;
+}
+
+/* --- arch flowers ------------------------------------------------------ */
+/* A mini-flower sits on each springing point of the arch - the spot where the
+   curve lands on its pillar, at (42.5, 509.5) and (1437.5, 509.5) in arch.svg's
+   1480x641 box. Those are fixed points in the DRAWING, so the anchor box is
+   given the drawing's aspect ratio and the flowers are placed as a % of it:
+   the pair then rides the arch at every width without a media query per size.
+   (Percentage `top` resolves against the hero's height, not its width, so
+   positioning against .hero directly would need vw maths that drifts by the
+   scrollbar's width - hence the wrapper.) Above the front arch at 12. */
+.arch-flowers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 1480 / 641;
+  z-index: 12;
+  pointer-events: none;
+}
+
+.arch-flower {
+  position: absolute;
+  width: clamp(120px, 4.4vw, 78px);
+  height: auto;
+  z-index: 6;
+
+  /* `translate`, not `transform`: app.js writes the scroll rotation to the
+     `rotate` property, and the two compose instead of overwriting one
+     another. Centring the box on the anchor also puts the rotation axis
+     (transform-origin 50% 50%) exactly on the springing point. */
+  translate: -50% -50%;
+  top: 103%;
+  filter: var(--lift);
+  will-change: rotate, transform;
+  user-select: none;
+
+  /* Matches .intro's own 900ms / cubic-bezier exactly, so the flowers turn on
+     the same curve and in the same breath as the cover lifting off them. */
+  transition: transform 900ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.arch-flower--left {
+  left: 0.8%;
+}
+
+.arch-flower--right {
+  left: 99.2%;
+}
+
+/* The turn as the cover goes up. app.js adds .is-opened to <body> the moment
+   .intro starts its lift.
+
+   On `transform`, deliberately - it is the third of this element's three
+   rotation channels and the only one still free. `translate` centres it on the
+   arch's springing point, app.js writes the scroll spin to `rotate`, and the
+   three COMPOSE in that order - so this lays a fixed offset on top of the
+   scroll spin instead of fighting it. Writing `rotate` here would be wiped by
+   the next scroll event, and writing `transform` from app.js is exactly what
+   the comment in that file warns against.
+
+   Opposite signs so both open UPWARD FROM THE INSIDE. A positive CSS angle is
+   clockwise: the left flower's inner edge faces right (3 o'clock) and rises
+   when turned anticlockwise; the right flower's faces left (9 o'clock) and
+   rises when turned clockwise. The same sign on both would swing them the same
+   way round and one would dip instead.
+
+   A full turn: 360deg, so each flower makes one complete revolution and comes
+   back to where it started. The sign still decides which way it goes round,
+   and it is what makes the first part of the sweep read as opening upward from
+   the inside rather than dipping. Landing back on 0 is why the resting artwork
+   is unchanged once the cover has gone. */
+body.is-opened .arch-flower--left {
+  transform: rotate(-360deg);
+}
+
+body.is-opened .arch-flower--right {
+  transform: rotate(360deg);
+}
+
+/* --- media row (Instagram / locations / calendar) ----------------------- */
+/* Three icons on the page's own teal, sitting between the note card and the
+   RSVP. No panel behind them: the motif-patterned body IS the ground here, the
+   same way .scene--reveal leaves its backdrop alone.
+   Side padding clears the fixed edge bars, matching .invite and .scene--reveal
+   so the row stands on the same rails as the cards above it. */
+.scene--social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(40px, 7vw, 90px) max(24px, calc(var(--bar-w) + 16px));
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* 12px floor, down from 22px: the icons are a flat 90px now, so three of them
+     need 270px and a 360px phone leaves about 300px between the edge bars.
+     12px a gap fits inside that; at 22px the third icon wrapped to its own
+     line. flex-wrap stays as the backstop for anything narrower still. */
+  gap: clamp(12px, 5vw, 52px);
+}
+
+.social {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.social img {
+  display: block;
+  /* Flat 90px, rose-invitation's own .social img width, rather than the
+     58-92px fluid range this had - the three icons are now the same size in
+     both templates at every width. See .socials above for the gap floor that
+     keeps three of them on one line on a 360px phone. */
+  width: 90px;
+  height: auto;
+  /* The three PNGs are cutouts, so the lift traces the icon rather than a box -
+     the same reason .card__bud and .reveal-bloom use drop-shadow. */
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.social:hover img,
+.social:focus-visible img {
+  transform: scale(1.12);
+}
+
+.social:focus-visible {
+  outline: 3px solid #FFD853;
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+/* Edit only: the Instagram button's remove chip and its "+ Add Instagram"
+   stand-in (render.js renderSocial). The wrap is the chip's positioning box;
+   it adds no layout of its own, so the row spaces the same with or without it. */
+.social-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.social-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  /* Light, not .card-remove's dark fill: this sits on the page ground rather
+     than on a cream card, where a dark chip would all but disappear. */
+  background: rgba(253, 243, 232, 0.9);
+  color: #083041;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.social-remove:hover,
+.social-remove:focus-visible {
+  background: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+
+  .social img {
+    transition: none;
+  }
+
+  .social:hover img,
+  .social:focus-visible img {
+    transform: none;
+  }
+}
+
+/* --- media-row popup ---------------------------------------------------- */
+/* One box, refilled per button by social.js. Above the fixed edge bars (11) and
+   the arch foot (7), because a dialog that the page frame paints over reads as
+   broken. */
+.pc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pc-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 26, 34, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+/* The box must NOT scroll: its gold keyline is drawn on the border box, and
+   scrolling here would drag that edge up through the content. The box is a
+   fixed frame and .pc-modal__content scrolls inside it instead. */
+.pc-modal__box {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(92vw, 430px);
+  max-height: 86vh;
+  overflow: hidden;
+  padding: clamp(24px, 5vw, 34px) clamp(20px, 4vw, 30px);
+  /* The reveal card's gold edge, built the same way and for the same reason:
+     border-image would ignore the radius and square the corners off. */
+  border: 3px solid transparent;
+  border-radius: 12px;
+  background:
+    linear-gradient(#FDF3E8, #FDF3E8) padding-box,
+    var(--gold-edge) border-box;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  animation: pc-modal-pop 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes pc-modal-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-modal__box {
+    animation: none;
+  }
+}
+
+.pc-modal__content {
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.pc-modal__close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  z-index: 2;
+  border: 0;
+  padding: 4px 8px;
+  background: none;
+  color: #094550;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Sora, not the template's serif. Rose sets every piece of type in these
+   popups in its --font-secondary ('Sora'), titles included - a popup is UI
+   rather than invitation, and the serif belongs to the card. Papercut's
+   --font-sans is the same face, so this is rose's treatment exactly. */
+.pc-modal__title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(21px, 4.4vw, 27px);
+  font-weight: 600;
+  text-align: center;
+  color: #094550;
+}
+
+/* The sprig pair the reveal captions use, as a rule under the title. */
+.pc-modal__divider {
+  display: block;
+  width: 96px;
+  height: 14px;
+  margin: 12px auto 18px;
+  background: url("media/mini-design.svg") center / contain no-repeat;
+  opacity: 0.75;
+}
+
+.pc-modal__text {
+  margin: 0 0 18px;
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3vw, 15px);
+  line-height: 1.6;
+  text-align: center;
+  color: #456E70;
+}
+
+/* Plain text button, not a pill like .pc-modal__btn - "Back to dates" on the
+   calendar's per-day provider screen is a step back, not a commitment on par
+   with "Google Calendar"/"Outlook"/"Apple Calendar & others" above it, and
+   styling it as a fourth equal button would read as one more choice among
+   four rather than an exit from the three. */
+.pc-modal__link {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+  color: #456E70;
+  cursor: pointer;
+}
+
+.pc-modal__link:hover,
+.pc-modal__link:focus-visible {
+  color: #094550;
+}
+
+.pc-modal__empty {
+  margin: 0;
+  padding: 14px 0 6px;
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3vw, 15px);
+  text-align: center;
+  color: #456E70;
+}
+
+.pc-modal__input {
+  display: block;
+  width: 100%;
+  margin: 0 0 18px;
+  padding: 11px 13px;
+  border: 1px solid rgba(9, 69, 80, 0.35);
+  border-radius: 8px;
+  background: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: #094550;
+}
+
+.pc-modal__input:focus-visible {
+  outline: 2px solid #094550;
+  outline-offset: 1px;
+}
+
+.pc-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  /* The calendar popup's date list (.pc-loc-list) butted straight into this
+     row with nothing between them - its own gap:10px only spaces the rows
+     against EACH OTHER, not against what follows. Shared here rather than
+     scoped to just that popup so every pc-modal__actions row (Instagram's,
+     the calendar's) keeps the same breathing room above it. */
+  margin-top: 16px;
+}
+
+/* Below about 350px two buttons sharing a line come out near 119px each, and
+   "Open Instagram" needs roughly 126px even at the 13px floor - so it would
+   wrap to two lines inside the pill. Stacking them keeps them equal-width AND
+   full-width, which is the point of the flex:1 above, rather than letting the
+   row hold two cramped ones. */
+@media (max-width: 350px) {
+  .pc-modal__actions {
+    flex-direction: column;
+  }
+}
+
+.pc-modal__btn {
+  /* Equal widths that together fill the box. The basis is 0, not auto, which is
+     the whole point: with `auto` the two would be sized by their labels first
+     and only share the LEFTOVER space, so "Open Instagram" would come out much
+     wider than "Not now". From 0 they are sized by growth alone, which makes
+     them exactly equal whatever the labels say.
+     The calendar popup gets the same rule for free: its single "Add all dates"
+     button grows to the full width and so lines up flush with the .pc-loc rows
+     above it, instead of sitting inset from them with a gap down either side. */
+  flex: 1 1 0;
+
+  /* An <a> and a <button> both wear this class. inline-flex centring makes the
+     two render identically once they are being stretched - a bare <a> would
+     otherwise take the container's text alignment and sit its label left. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  border: 1px solid rgba(9, 69, 80, 0.4);
+  border-radius: 999px;
+  /* Side padding down from 1.5em: the width is the flex line's to give now, and
+     at 1.5em a stretched "Open Instagram" wrapped to two lines on a 360px
+     phone, where each button is only about 140px wide. */
+  padding: 0.6em 1em;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 3vw, 15px);
+  color: #094550;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.pc-modal__btn:hover,
+.pc-modal__btn:focus-visible {
+  background-color: rgba(9, 69, 80, 0.08);
+}
+
+.pc-modal__btn--primary {
+  border-color: #094550;
+  background: #094550;
+  color: #F9EACF;
+}
+
+.pc-modal__btn--primary:hover,
+.pc-modal__btn--primary:focus-visible {
+  background: #072F36;
+}
+
+/* One row per venue (locations) or per date (calendar) - the same row drawn
+   twice, so the two popups read as one family. */
+.pc-loc-list {
+  display: grid;
+  gap: 10px;
+}
+
+.pc-loc {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(9, 69, 80, 0.22);
+  border-radius: 10px;
+  background: rgba(9, 69, 80, 0.04);
+  font-family: var(--font-sans);
+  text-align: left;
+  text-decoration: none;
+  color: #094550;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+.pc-loc:hover,
+.pc-loc:focus-visible {
+  background: rgba(9, 69, 80, 0.09);
+  border-color: rgba(9, 69, 80, 0.45);
+}
+
+.pc-loc__pin {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  color: #094550;
+}
+
+.pc-loc__pin svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pc-loc__text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* The quiet line: which ceremonies this row covers. */
+.pc-loc__ceremonies {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #456E70;
+}
+
+/* Sora too - rose's .loc__venue is --font-secondary at 400. This was the last
+   serif left in the popups, and one serif line in a Sora list read as a stray. */
+.pc-loc__venue {
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 3.4vw, 17px);
+  line-height: 1.3;
+}
+
+.pc-loc__addr {
+  font-size: 12.5px;
+  color: #456E70;
+}
+
+.pc-loc__go {
+  margin-left: auto;
+  flex: none;
+  font-size: 20px;
+  color: #456E70;
+}
+
+/* --- closing address ------------------------------------------------------ */
+/* Sits between the media row and the RSVP, on the page's own teal - no panel,
+   the same way .scene--social leaves its backdrop alone. Side padding clears
+   the fixed edge bars, matching every other section. */
+.scene--farewell {
+  display: grid;
+  place-items: center;
+  gap: clamp(6px, 1.4vw, 14px);
+  padding: clamp(24px, 5vw, 60px) max(24px, calc(var(--bar-w) + 16px)) clamp(40px, 8vw, 90px);
+  text-align: center;
+}
+
+/* Bold, large and italic, both lines. Cormorant is a light-bodied face, so 600
+   is what actually reads as bold here - 700 exists but at this size it starts
+   to look pressed rather than emphatic.
+   --cream rather than the cards' ink: this sits on the teal page, where #083041
+   would be all but invisible. */
+.farewell__guest,
+.farewell__line {
+  margin: 0;
+  font-family: var(--font-cormorant);
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--cream);
+}
+
+/* The name leads - it is the one part of this addressed to the reader. */
+.farewell__guest {
+  font-size: clamp(30px, 6vw, 56px);
+}
+
+.farewell__line {
+  font-size: clamp(24px, 4.6vw, 44px);
+}
+
+/* --- RSVP ---------------------------------------------------------------- */
+/* The shared platform RSVP mounts into #balcony-rsvp and brings its own card
+   padding, but nothing that holds it in from the page edges - there is no
+   max-width or inline padding anywhere in _platform/rsvp.css. So it ran
+   full-bleed and its cards passed under the fixed edge bars, which are painted
+   over the top at z-index 10/11.
+
+   Same inset every other section of this template uses (.invite,
+   .scene--reveal, .scene--social), so the RSVP stands on the invitation's own
+   rails: --bar-w + 16px clears the bar and leaves a margin beside it.
+
+   Padding rather than margin on purpose for the INLINE spacing above - the
+   platform's cards carry their own backgrounds, and a margin there would
+   pull those backgrounds in with it. Margin is fine below, though: nothing
+   sits under the RSVP card for a background to be pulled away from, this is
+   just clearance before the foot-of-frame band that follows it. */
+#balcony-rsvp {
+  margin-bottom: 100px;
+}
+
+@media (max-width: 1024px) {
+  #balcony-rsvp {
+    padding-inline: max(24px, calc(var(--bar-w) + 16px));
+  }
+
+  /* The padding above cannot contain the card on its own, and on a phone it
+     made things WORSE rather than better. _platform/rsvp.css sizes .brsvp as
+     `width: min(94vw, 560px)` - a VIEWPORT width, which takes no notice of a
+     parent's padding. On a 360px screen that is 338px of card inside a 300px
+     padded box: over-constrained, so `margin: 0 auto` has no free space to
+     split, margin-left resolves to 0, and the whole card starts at the left
+     padding and runs off the right edge. That is a left margin, no right
+     margin, and a page wider than the screen - which is what drags everything
+     else off centre with it.
+
+     Re-pointing the width at the CONTAINER (100%) instead of the viewport lets
+     the padding do its job: the card fills the padded box exactly and the auto
+     margins have nothing left to get wrong. The 560px cap is the platform's
+     own and is kept. */
+  #balcony-rsvp .brsvp {
+    width: min(560px, 100%);
+  }
+}
+
+/* --- foot of the frame ------------------------------------------------- */
+/* The bottom counterpart to the arch, last element in <body>: a band across
+   the foot of the page with the arch's curve inverted into it, so the frame
+   the two fixed edge bars draw down the sides is closed off rather than just
+   running out. Full bleed and NOT padded by --bar-w - the artwork draws its
+   own side pillars and they have to line up with those bars.
+
+   height:auto, so unlike the phone arch this one keeps its ratio and needs no
+   preserveAspectRatio change: it is a thin band, and stretching it to a fixed
+   height would thin or fatten the gold rule along its edge.
+
+   z-index 7 over position:relative to clear the edge bars at 6 - without a
+   stacking position of its own the band would paint under them and the joint
+   at each bottom corner would show. */
+.arch-foot {
+  display: block;
+  position: relative;
+  z-index: 11;
+}
+
+
+/* A lotus in each bottom corner of the page. On <body> rather than inside
+   .arch-foot: body is position:relative, so bottom:0 here is the foot of the
+   DOCUMENT rather than the foot of the band.
+
+   bottom:0 with no vertical pull, deliberately. Centring the flower ON the
+   corner would hang half of it below the page, and the scrollable overflow of
+   an absolutely-positioned box counts toward document height - which is what
+   opened a strip of empty scrolling under the closing arch before. Resting its
+   bottom edge on the page's means the size is now free: nothing below it can
+   grow the page, so this no longer has to be solved against the band's height.
+
+   Horizontally it is still centred on the page edge, so half hangs off the side
+   and body's overflow-x:hidden clips it - a quarter-flower tucked in each
+   corner, which is the arrangement the band version had.
+
+   z-index 1 keeps them behind the closing arch (11) and behind the fixed edge
+   bars (10), so the frame stays in front, while still sitting above the body's
+   own motif background. */
+.page-lotus {
+  position: absolute;
+  /* Zero, and it has to stay >= 0. Every pixel of a negative offset here is a
+     pixel of page below the closing arch: an absolutely-positioned box still
+     contributes its border box to scrollable overflow, so -5px buys 5px of
+     empty scrolling past the end of the invitation.
+
+     CSS has no way to clip one side only - overflow-clip-margin expands the
+     clip box on all four - so a downward bleed cannot be had for free. If the
+     flower needs to run off the bottom edge, crop the artwork instead of
+     offsetting the box: shorten the element and let object-fit:cover with
+     object-position:top trim the bottom, which shows the same thing without
+     the box ever passing the page's foot. */
+  bottom: -8px;
+  z-index: 1;
+  width: clamp(180px, 22vw, 420px);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+
+}
+
+/* Tilted 30deg toward the middle of the page - mirrored, so the left one leans
+   right and the right one leans left, and the pair reads as a matched set
+   rather than as two flowers listing the same way.
+
+   The -19.51% on Y is not a nudge for looks, it is the tilt paying for itself.
+   Rotating a box about its centre makes it TALLER: the new height is
+   H x cos30 + W x sin30, which for this artwork's 411x392 is 1.39 x H. Half of
+   that growth falls below the original bottom edge - 19.51% of H - and at
+   bottom:0 that is 19.51% of scrollable page past the closing arch. Lifting by
+   exactly the same figure puts the lowest petal back on the page's foot.
+   A percentage on `translate` resolves against the element's OWN height, which
+   is what lets one figure hold at every size; `bottom` would have resolved it
+   against the body's height and meant nothing.
+
+   CSS composes translate before rotate, so the flower is placed first and then
+   turns on the spot rather than being swung around the page corner. */
+.page-lotus--left {
+  left: 8%;
+  translate: -50% -19.51%;
+}
+
+.page-lotus--right {
+  right: 8%;
+  translate: 50% -19.51%;
+  /* Mirrored, so the pair is one flower reflected rather than the same one
+     printed twice. On the `scale` PROPERTY rather than in `transform`: CSS
+     composes translate -> rotate -> scale, so the flip is applied to the
+     artwork itself and would survive a rotation being added above it. Put in
+     `transform` it would land last, after any rotate, and mirror the tilt
+     along with the petals. */
+  scale: -1 1;
+}
+
+.arch-foot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --- hero arch, phone only -------------------------------------------- */
+/* MOBILE ONLY (see the breakpoint note up top). Everything in this block
+   positions the portrait *_phone artwork, and that artwork is only loaded
+   below 500px - the <picture> elements swap on the same query. A tablet keeps
+   the landscape desktop arch, which hangs from the top of the hero at its own
+   aspect ratio, so none of these overrides may reach it: stretching a 1480x641
+   top ornament over the full height of the hero would smear it. */
+@media (max-width: 500px) {
+
+  /* Widens both edge bars for phones, independently of the shared
+     body::before/::after rule, so the base width can move without dragging the
+     phone frame with it. The z-index bumps that used to sit here are gone: the
+     shared rule carries 11 for both bars now, at every width. */
+  :root {
+    --bar-strip: 3.5vw;
+  }
+
+  /* The phone cuts (arch1_phone/arch2_phone, swapped in by <picture>) are a
+     full portrait frame rather than a top ornament, so they stretch over the
+     whole hero instead of hanging from its top edge.
+
+     The frame's border is drawn at the very edge of the artwork, so the box
+     has to reach both edges of the screen exactly. It is stretched by pinning
+     left AND right to 0 with width:auto - NOT width:100vw. 100vw counts the
+     vertical scrollbar's gutter, so on any desktop browser with a classic
+     scrollbar (Windows Chrome, ~15px) the box runs wider than the visible
+     area and the right-hand border is pushed off screen - which looks exactly
+     like the arch failing to span the width. Pinning both edges resolves
+     against the hero's real content box, scrollbar or not. */
+  .arch {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Sized by width alone, so the 416x879 drawing keeps its own ratio and
+     object-fit has nothing to correct. Worth knowing if that ever changes:
+     an <img> still obeys the SVG's own preserveAspectRatio, so pinning this
+     to a height that does not match the drawing's ratio will letterbox it -
+     the default xMidYMid meet re-fits the viewBox inside the box it was just
+     given and centres it, leaving dead space top and bottom. Forcing a height
+     therefore needs preserveAspectRatio="none" on both arch*_phone.svg files,
+     which the current cuts do not carry. */
+  .arch img {
+    width: 100%;
+    object-fit: fill;
+  }
+
+  /* On phones the flowers cap the ENDS of the arch - the very bottom tips of
+     the two legs, where the drawing's own stroked pillar lines stop (not the
+     drop-shadow filter's padding around them, which runs a little further).
+     In the CURRENT arch1_phone.svg's 416x879 box those two paths end at
+     roughly (16.7, 842) and (400, 843) - left leg 842/879 = 95.8% down,
+     right leg 843/879 also ~95.9%, so 95.8% covers the pair. x stays the
+     3.85%/96.15% below: the drawing's width (416) hasn't changed, and the
+     legs sit at essentially the same x as before (16/400) - only its HEIGHT
+     grew from an older 740-tall cut, which is what moved the pillars' own
+     end point and is why this whole block needed re-measuring against the
+     file actually in media/, not just the aspect-ratio line.
+
+     The anchor box has to carry the PHONE drawing's ratio, not the hero's
+     height: .arch is height:auto, so it is width x 879/416 and stops well
+     short of the hero's 100vh. An anchor at height:100% would put the
+     flowers well below the leg ends on a tall phone. */
+  .arch-flowers {
+    aspect-ratio: 416 / 879;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: auto;
+  }
+
+  .arch-flower {
+    width: clamp(38px, 24vw, 117px);
+    top: 95.8%;
+  }
+
+  .arch-flower--left {
+    left: 3.85%;
+  }
+
+  .arch-flower--right {
+    left: 96.15%;
+  }
+
+  /* --- collage, phone only ---------------------------------------------
+     These were in the 1024px block and had to come back here: every one of
+     them is tuned to the PORTRAIT arch, which only exists below 500px. Left
+     on the wider query they were applied on top of the LANDSCAPE desktop
+     arch that tablets load - a 530%-wide wave band and half-viewport lotuses
+     drawn against a top ornament, which swamped the hero. The rule of thumb:
+     if a value was measured against the phone frame, it belongs in this
+     block, not the 1024px one. */
+
+  /* Sits behind the arch and is meant to be cropped by it. */
+  .sun {
+    left: 1.5%;
+    top: 22%;
+    width: 25%;
+  }
+
+  .cloud--main {
+    left: 6.5%;
+    bottom: 26.5%;
+    width: 73%;
+  }
+
+  .cloud--right {
+    right: 0%;
+    bottom: 31%;
+    width: 32%;
+  }
+
+  .waves {
+    left: -170%;
+    width: 530%;
+
+    /* The drift was running here all along, just invisibly: 8vw is ~31px on a
+       390px phone, so the band crept at about 3px a second and read as static.
+       A fixed length rather than vw, so the speed matches the desktop's ~13px
+       a second on every narrow screen instead of scaling down with the
+       viewport. The band overhangs by 170% left and 260% right at this width,
+       so 115px comes nowhere near exposing an edge. */
+    --wave-travel: 115px;
+  }
+
+  /* The band is 530% wide here, not 130%, so it stands 530% x 208/1790 =
+     61.586% of the hero's width tall and the water line sits far higher up
+     the hero than it does on desktop. */
+  .lotus-float {
+    --water-line: calc(61.586vw - 75px);
+  }
+
+  .lotus-float--left {
+    left: 3%;
+    width: 50%;
+  }
+
+  .lotus-float--right {
+    right: 6%;
+    width: 40%;
+  }
+}
+
+/* --- hero collage, mobile + tablet ------------------------------------- */
+/* MOBILE + TABLET. A portrait screen is too narrow for the landscape collage,
+   so every pasted-on piece is re-placed rather than scaled. Split out of the
+   block above deliberately: these are the pieces that do NOT depend on which
+   arch artwork is loaded, so they run all the way up to 1024px. */
+@media (max-width: 1024px) {
+
+  /* Names carry the empty middle of the arch, so they run far larger
+     than the desktop ramp would give at this width. */
+  .couple {
+    top: 41%;
+  }
+
+  .bride-name,
+  .groom-name {
+    font-size: clamp(48px, 17vw, 72px);
+  }
+
+  .amp {
+    font-size: clamp(26px, 8.5vw, 38px);
+  }
+}
+
+/* --- intro cover ------------------------------------------------------ */
+/* Fixed rather than absolute so it is exactly the viewport, not the hero,
+   whatever the hero grows to. .hero's overflow:hidden does not clip it -
+   an ancestor only traps a fixed child if it has a transform or filter. */
+.intro {
+  position: fixed;
+
+  /* 95vh, not a full screen. `bottom: auto` is what makes the height govern:
+     inset:0 pins all four sides, and top + height + bottom together over-
+     constrain the box - the browser would resolve that by silently dropping
+     one of them. Releasing `bottom` explicitly says which.
+     The 5vh this gives back shows the top of the hero under the cover, and
+     .intro__wave scallops the join. */
+  inset: 0;
+  bottom: auto;
+  height: 95vh;
+  z-index: 10;
+
+  background-color: var(--intro-bg);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 0 24px;
+  /* No cursor:pointer here any more - app.js's click listener now lives on
+     .intro__open alone, not the whole panel, so a pointer cursor over the
+     rest of the cover would promise something a tap there no longer does. */
+
+  transition: transform 900ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* -100% is the panel's own height, plus the 60px .intro__wave hangs below
+   the panel's own bottom edge (its `bottom: -60px`) - without that extra
+   the wave's own overhang would still peek in at the top of the screen
+   once the slide finishes, since -100% alone only carries the PANEL fully
+   off, not the bit of the wave sitting outside its box. Because .intro is
+   position:fixed, the wave (its child) travels with this same transform.
+   Keep this in sync with .intro__wave's own bottom offset above - it was
+   -10px there before and this drifted out of sync with it. */
+.intro.is-open {
+  transform: translateY(calc(-100% - 60px));
+  pointer-events: none;
+}
+
+.intro__inner {
+  max-width: 520px;
+}
+
+.intro__mantra,
+.intro__guest {
+  margin: 0;
+  font-weight: 700;
+  color: var(--intro-ink);
+  /* Cormorant carries no Devanagari, so the mantra falls to a Devanagari
+     face first and the serif picks up the Latin line below it. */
+  font-family: "Noto Serif Devanagari", "Nirmala UI", var(--font-serif);
+}
+
+/* Sized to match rose-invitation's .invite__blessing exactly - the opening
+   invocation is the same beat in both templates and was noticeably smaller
+   here. */
+/* The stock invocations arrive with their own face, set inline by render.js
+   from INVOCATIONS - this family only ever reaches a HOST'S CUSTOM line, which
+   carries no font of its own (invocationLines returns font: '' for it, and
+   render.js then clears the inline value). Naming Tiro here means a custom
+   Devanagari line is set in the same voice as the stock ones instead of
+   dropping to the Latin serif, which has no Devanagari at all. Exactly what rose does
+   on .invite__blessing.
+   The 1.45 line-height is already the looser figure that face needs: Tiro's
+   stacked matras and the repha in श्री reach well above the headline. */
+.intro__mantra {
+  font-family: 'Tiro Devanagari Sanskrit', var(--font-serif);
+  font-size: clamp(26px, 4.6vw, 40px);
+  line-height: 1.45;
+}
+
+/* Opening-invocation symbol, sitting above the line. Painted as a MASK rather
+   than an <img>, so the artwork takes the cover's ink instead of its own
+   colours - the SVGs in /templates/symbols/ are drawn flat for exactly this,
+   and it means one set of artwork suits every template's palette.
+   render.js sets mask-image and unhides it; with no symbol chosen the element
+   stays [hidden] and the line closes up as if it were never there. */
+.intro__symbol {
+  display: block;
+  /* rose-invitation's .invite__ganesha, expressed the same way: 80% of the
+     column, capped at 150px. Against .intro__inner's 520px that resolves to
+     the 150px cap on any real screen - which is what rose renders too, its
+     own 80% only biting on a card narrower than ~190px. */
+  width: min(80%, 200px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  background-color: var(--intro-ink);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.intro__symbol[hidden] {
+  display: none;
+}
+
+.intro__guest {
+  font-size: clamp(21px, 2.7vw, 33px);
+  margin-top: 0.4em;
+}
+
+/* rose-invitation's .invite__message is a flat 28.5px, dropping to 24px at its
+   two narrow breakpoints; the clamp lands on both of those numbers without
+   duplicating the breakpoints here. This line was by far the biggest mismatch
+   of the three - 17px against rose's 28.5px.
+
+   The top margin is re-expressed because it is in em: 1.6em was ~27px against
+   the old 17px text and would have become ~46px against this one, opening a
+   gap the resize never asked for. 0.95em keeps the space as it was. */
+.intro__note {
+  margin: 0.95em;
+  max-width: 30em;
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 2.6vw, 28.5px);
+  line-height: 1.55;
+  color: var(--intro-ink-soft);
+}
+
+/* The cue is the scalloped plaque in media/tap_to_open.svg, with the words on
+   top of it. The SVG is a background rather than an <img> so the button stays
+   one element with its own accessible name, and contain keeps the artwork's
+   proportions whatever width the column gives it.
+
+   The gap above is NOT in em any more. It was 3.2em, which rode on this
+   font-size - so every resize of the words silently moved the plaque too, and
+   raising the cue to fit the artwork would have opened ~25px of extra space
+   nobody asked for. In vw/px it holds whatever the type does. */
+/* The plaque's BOX lives here, not on the button. The button bobs, and the
+   sprigs either side of it must not - so the box that positions all three is a
+   still wrapper and only the plaque inside it moves. Also gives the sprigs a
+   containing block whose height is the plaque's, which is what lets them be
+   sized as a plain height:100%.
+
+   Pinned to the FOOT of the cover (position:absolute against #intro, its
+   positioned ancestor now that it's a direct child - see index.html) rather
+   than sitting in-flow after the note text: the cue used to land wherever
+   the centred content column happened to end, which moved with however
+   long the host's own note text ran. bottom + left/transform instead put it
+   at a fixed spot on the panel regardless of that. */
+.intro__cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(30px, 1vw, 72px);
+  transform: translateX(-50%);
+  /* 120% of the plaque's old size - .intro__open is width:100% of this box,
+     so scaling the wrapper scales the button. Centring already comes free:
+     left:50% + translateX(-50%) above centres the wrapper itself regardless
+     of how wide it is. */
+  width: calc(min(224px, 78%) * 1.2);
+  aspect-ratio: 300 / 78;
+  z-index: 10;
+}
+
+.intro__open {
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  z-index: 2;
+  bottom: 3vh;
+  background: url("media/tap_to_open.svg") center / contain no-repeat;
+  /* The artwork used to carry its own outer shadow and half its canvas was
+     bleed for it. That shadow is CSS now, which traces the plaque's scalloped
+     silhouette (drop-shadow, not box-shadow) and paints outside the element
+     box without costing any layout. */
+  filter: drop-shadow(0px 12px 35px rgba(0, 0, 0, 0.35));
+  cursor: pointer;
+  font-family: var(--font-serif);
+  /* Scaled to the plaque it now sits on: at 18px the words filled about a
+     third of a ~300px plaque and read as an afterthought on it. */
+  font-size: clamp(18px, 2.4vw, 26px);
+  /* The cover is otherwise completely still, so the one thing a guest has to
+     press did not read as pressable. A slow lift-and-settle says "press me"
+     without shouting. It starts late enough for the cover to arrive first, and
+     keeps the same 1.8s ease-in-out beat as rose-invitation's .cover__cue -
+     though that one still travels DOWN rather than up. */
+  animation: pc-cue-bob 1.8s ease-in-out 1.2s infinite;
+}
+
+/* Shared by both plaques - the cover cue and the date-reveal button. Up, not
+   down: a lift reads as an invitation, a drop reads as the thing sagging. */
+@keyframes pc-cue-bob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Plain 50% now. The artwork fills its box (path y 2 -> 76 of a 78-tall
+   viewBox), so its centre and the box's are the same point. It was 41.9% while
+   the file was 370x148 with the plaque sitting high in a canvas padded for a
+   baked-in shadow.
+
+   Cream, because the plaque is filled #09455D - the same value as --paper -
+   and the dark --intro-olive the cue used to be would vanish into it. */
+.intro__open-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  color: var(--cream);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    transition-duration: 1ms;
+  }
+
+  .intro__open {
+    animation: none;
+  }
+}
+
+/* --- decorative frame ------------------------------------------------- */
+/* <deco-frame> draws concave-cornered rectangles as inline SVG. Every knob
+   below is read from these custom properties at draw time, so nothing here
+   requires touching path data. Sizes are unitless numbers (px). */
+deco-frame {
+  --frame-width: auto;
+  --frame-height: auto;
+
+  --frame-outer-color: #1C374D;
+  --frame-outer-thickness: 20;
+  --frame-outer-scoop: 46;
+
+  --frame-inner-color: #448F91;
+  --frame-inner-thickness: 14;
+  --frame-inner-scoop: 40;
+
+  --frame-inset: 17;
+  --frame-square-size: 24;
+  /* --frame-square-color defaults to the inner colour */
+  /* --frame-fill / --frame-fill-inset / --frame-fill-scoop are optional */
+
+  --frame-shadow-dx: -10;
+  --frame-shadow-dy: 10;
+  --frame-shadow-blur: 10;
+  --frame-shadow-color: rgba(0, 0, 0, 0.75);
+
+  display: block;
+  position: relative;
+  pointer-events: none;
+}
+
+/* The SVG is bigger than the host by the shadow padding and offset back
+   into place, so the frame centreline still lands on the host's box. */
+deco-frame svg {
+  position: absolute;
+  display: block;
+  overflow: visible;
+}
+
+/* --- invitation card --------------------------------------------------- */
+.invite {
+  display: grid;
+  place-items: center;
+  /* With no grid-template-columns, the single implicit column auto-sizes to
+     the widest .card (50vw desktop, 80vw phone/tablet - see .card below),
+     which is narrower than .invite itself. place-items: center only centres
+     each CARD within that column - it says nothing about where the column
+     itself sits in the grid box, and the default there (justify-content:
+     normal, which computes to start) pins it to the left edge and dumps all
+     the leftover width on the right. justify-content: center centres the
+     column itself, so the gap splits evenly on both sides instead. */
+  justify-content: center;
+  /* wide enough to clear the frames' 30px shadow blur between cards */
+  gap: clamp(48px, 8vw, 88px);
+  /* clear the fixed edge bars */
+  padding: clamp(48px, 9vw, 120px) max(24px, calc(var(--bar-w) + 16px));
+}
+
+/* More breathing room between this section and its neighbours on a phone -
+   9vw doesn't clear the 48px floor until roughly 533px wide, so every phone
+   below that was landing on the same flat 48px this raises past. Vertical
+   only; the horizontal padding above still has to clear the edge bars. */
+@media (max-width: 500px) {
+  .invite {
+    padding-block: 64px;
+  }
+}
+
+.card {
+  position: relative;
+  width: 50vw;
+  /* 50vw is measured against the viewport, which ignores .invite's
+     padding for the edge bars - the cap stops it overflowing once the
+     viewport drops below roughly 2x that padding. */
+  max-width: 100%;
+}
+
+/* Narrower than the old 83vw, but not by much - half a narrow screen leaves
+   the elder names wrapping mid-line, which is the floor this can't cross. */
+@media (max-width: 1024px) {
+  .card {
+    width: 80vw;
+  }
+}
+
+/* Spec defaults throughout - navy outer, teal inner, teal corner squares.
+   The only addition is the cream panel, so the text has something to sit
+   on; set --frame-fill: none to leave the interior transparent.
+
+   TWO elements now share this class, .card__frame--outer and --inner (see
+   below), each drawing only its own half of what used to be one combined
+   <deco-frame> - --frame-layer (app.js) is what tells DecoFrame which half.
+   That split is what lets .card__crown's lotus sit BETWEEN the teal and
+   navy in actual paint order (inner/teal frame, then the lotus, then
+   outer/navy frame in the DOM - see index.html) rather than only ever being
+   able to sit entirely in front of or behind one combined frame. */
+.card__frame {
+  position: absolute;
+  inset: 0;
+  --frame-fill: #FDF8EF;
+
+  /* box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.9), translated to these four
+     knobs the way every deco-frame shadow here has been: deco-frame turns
+     them into an SVG drop-shadow() rather than a box-shadow, because
+     box-shadow traces the border box and would draw a square shadow straight
+     across the frame's concave corners - see the note in app.js. CSS reads
+     the blur radius identically for both, and this shadow has 0 spread,
+     which drop-shadow has no equivalent for and does not need.
+
+     app.js sizes the SVG's shadow room from these figures
+     (pad = blur + max(|dx|,|dy|) + 4), so raising or lowering blur/dy here
+     is not something to also chase by hand elsewhere. Shared by both halves,
+     so each casts the SAME shadow off its own silhouette - which is what
+     --frame-shadow-split used to fake inside one element and is now just
+     the natural result of there being two. */
+  --frame-shadow-dx: 0;
+  --frame-shadow-dy: 4;
+  --frame-shadow-blur: 10;
+  --frame-shadow-color: rgba(0, 0, 0, 0.7);
+
+  /* Gold keyline removed - back to the template default of 0
+     (app.js's DecoFrame only draws it when --frame-gold-thickness is > 0),
+     same as every other deco-frame here. */
+}
+
+.card__frame--outer {
+  --frame-layer: outer;
+}
+
+.card__frame--inner {
+  --frame-layer: inner;
+}
+
+/* Narrower bands on mobile/tablet, same 1024px line .card's own width
+   switches at (deco-frame's thickness/scoop/inset/square knobs are all
+   unitless px - see the note atop the `deco-frame` element rule - so unlike
+   the card's own vw width, none of these track a smaller box on their own;
+   left at the desktop figures they read as proportionally MUCH broader
+   once .card itself narrows). Every knob scaled by the same ~0.65 factor,
+   so the frame's own proportions - the ratio between outer/inner bands, how
+   far the scoops cut in - stay the shape they were drawn at, just smaller
+   altogether rather than one piece changing relative to the others. */
+@media (max-width: 1024px) {
+
+  .card__frame {
+    --frame-outer-thickness: 13;
+    --frame-outer-scoop: 30;
+    --frame-inner-thickness: 9;
+    --frame-inner-scoop: 26;
+    --frame-inset: 11;
+    --frame-square-size: 16;
+  }
+}
+
+/* Straddles the frame's bottom-right corner - the negative offsets let
+   the pads hang past the edge so it reads as laid on top rather than
+   tucked inside. Unlike .card__crown, this one is NOT sandwiched between
+   the frame layers - it keeps an explicit z-index and sits in front of
+   both bands, the same as every corner flower before that change. */
+.card__bud {
+  position: absolute;
+  right: -5%;
+  bottom: -3.5%;
+  /* width, not height - same reasoning as .card__crown/.card__stem: .card has
+     no explicit height of its own (only width:50vw/80vw), so a percentage
+     HEIGHT here has nothing reliable to resolve against. 23% reproduces
+     roughly the same on-card size the old height:40% happened to land on at
+     desktop width - may still want a visual nudge once seen live, same as
+     .card__stem's 11%. */
+  width: 23%;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+}
+
+/* Tall lotus bud on a stem (lotus-bud2.webp, 143x614), standing up the
+   BOTTOM-LEFT corner. No transform now - back to the artwork's own upright,
+   bud-up orientation.
+
+   NO z-index, same reasoning as .card__crown: it sits between
+   .card__frame--inner and .card__frame--outer in the DOM (index.html) so
+   the navy band paints in front of it and the teal band behind - an
+   explicit z-index would pull it into its own stacking level, painted
+   after every z-index:auto sibling regardless of where it sits in the
+   DOM, which would put it back on top of both bands again. */
+.card__stem {
+  position: absolute;
+  left: 0%;
+  bottom: -1%;
+  /* width, not height - same reasoning as .card__crown below: .card has no
+     explicit height of its own (only width:50vw/80vw), so a percentage
+     HEIGHT here has nothing reliable to resolve against. Scaling off the
+     card's WIDTH is what actually tracks it at every breakpoint; height:auto
+     keeps the artwork's own ratio. 11% reproduces roughly the same on-card
+     size the old height:60%/42% pair happened to land on, since
+     .invite__inner's own min-height (min(470px, 92vw)) scales with viewport
+     width too - may still want a visual nudge once seen live. */
+  width: 11%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3));
+}
+
+/* Single bloom on the TOP-LEFT corner (paper-lotus_straight.png, 95x78),
+   balancing the bud/stem pair at the bottom. Negative offsets so it hangs
+   over the edge, same as .card__bud - but deliberately NO z-index here,
+   unlike .card__bud/.card__stem's 2. Those two only ever need to sit in
+   front of the whole frame, so an explicit z-index is fine; this one has
+   to land BETWEEN .card__frame--outer and .card__frame--inner, which are
+   both z-index:auto. Giving it any explicit z-index (even a small one)
+   would lift it into its own stacking level, painted after EVERY auto-
+   z-index sibling regardless of DOM position - exactly the "always on top
+   of both bands" result that defeats the point of splitting them. Left at
+   auto, its position among other auto siblings is DOM order, which is what
+   index.html's inner-frame -> crown -> outer-frame sequence relies on: the
+   teal paints first (behind), then the lotus, then the navy paints last
+   (in front). */
+/* TEMPORARILY removed (display:none) - .card__stem now occupies the top-left
+   corner instead. Rule left in place, not deleted, so this is a one-line
+   revert once the crown comes back. */
+.card__crown {
+  display: none;
+  position: absolute;
+  top: 3%;
+  left: 1%;
+  /* width, not height: .card has no explicit height of its own (only
+     width:50vw), so a percentage HEIGHT here has nothing reliable to
+     resolve against and the element ends up sized off other cues instead -
+     scaling with the card's WIDTH is what .card actually promises to
+     respond to at every breakpoint. height:auto keeps the artwork's own
+     ratio. */
+  width: 20%;
+  height: auto;
+  /* Tilted 135deg clockwise from the artwork's own upright orientation. */
+  transform: rotate(135deg);
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3));
+}
+
+/* Phones only (see the breakpoint note above, --bar-w's neighbour): the card
+   is 80vw here, which puts both these height PERCENTAGES against a much wider
+   box than the desktop 50vw card ever produces. That reads oversized on a
+   small screen even though the numbers never changed - the bud and stem
+   visually crowd the family text on a 360-430px phone. Cut back at the same
+   500px line the rest of the phone-only tuning uses, rather than a fresh
+   breakpoint of their own. */
+@media (max-width: 500px) {
+
+  /* width, same reasoning as the base rule above - .card__crown is sized
+     off the card's width, not an unresolvable percentage height. This used
+     to be two separate rules in this block (26% then 18%, the second
+     silently winning and making the first dead code) - merged into the one
+     that was actually taking effect. */
+  .card__crown {
+    width: 30%;
+  }
+
+
+  /* No width override needed here any more - .card__stem's own width:11%
+     already tracks the phone-width card (80vw) the same way it tracks the
+     desktop one, unlike the old height:% pair this replaced. Only the
+     left nudge remains. */
+  .card__stem {
+    width: 15%;
+    left: 2%;
+    bottom: 5%;
+  }
+
+  .card__bud {
+    width: 40%;
+  }
+
+}
+
+/* Content layer. z-index 1 lifts it over .card__frame, which is absolutely
+   positioned behind it. */
+.invite__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 18%;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  gap: 1.4em;
+
+  /* Hold the card square rather than letting the copy alone set the
+     height, but as a minimum so longer names can still push it taller. */
+  min-height: min(470px, 92vw);
+  align-content: center;
+
+  /* Names --font-cormorant explicitly rather than inheriting. It resolves to
+     the same face as --font-serif now that the template has only one serif, so
+     this line no longer CHANGES anything - it states what the card body is set
+     in, which is the thing rose's typography here depends on. Historically it
+     was the fix for the container imposing Fraunces on any child that did not
+     name a face of its own. */
+  font-family: var(--font-cormorant);
+}
+
+/* ---------- Card typography: rose-invitation's, in papercut's ink ----------
+   The family, compliment and note cards take rose's type wholesale - face,
+   sizes, weights, the italic on a person's name, and its two breakpoint steps
+   at 900px and 560px. Only the COLOUR stays papercut's (#083041 on the paper),
+   which is why every size below is a literal rather than a var(): rose's
+   --primary--* tokens live in its own variables.css and pulling them across
+   would mean importing a second, competing scale into this template.
+
+   Rose for reference (rose-invitation/styles.css + variables.css). The weights
+   are rose's --font-regular (400) and --font-semi-bold (600) throughout; rose
+   sets them through its `font:` shorthand tokens, this template writes them as
+   longhand, and the resolved values are identical either way:
+     .detail__name   47.5px / 600 / italic   -> 35.5 at 900, 31 at 560
+     .detail__label  24px   / 400
+     .detail__person 28.5px / 600            -> 24 at 900, 21.5 at 560
+     .detail__amp    24px   / 400 / italic
+     .detail__gotra  21.5px / 400
+     card leads      47.5px / 600 / upright  -> 35.5 at 900, 31 at 560
+     card body       26px   / 600 / 1.8      -> 20 / 1.7 at 700
+     note text       26px   / 400 / 1.7                                     */
+.card__name {
+  margin: 0 0 0.3em;
+  font-family: var(--font-cormorant);
+  font-size: 47.5px;
+  font-weight: 600;
+  /* After the size/weight, since a name is set in italic here as in rose. */
+  font-style: italic;
+  line-height: 1.1;
+  color: #083041;
+}
+
+/* Each relation group (label + two elders + amp) is a tight column - the same
+   rhythm as rose-invitation's .detail__block: 0.25em within the group, and the
+   1.4em .invite__inner gap between the name, the groups and the gotra. */
+.card__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em;
+  margin: 0;
+}
+
+/* One size for every non-heading line; spacing comes from the block/gap above,
+   so the lines carry no margins of their own. */
+.card__rel,
+.card__elder,
+.card__amp,
+.card__gotra {
+  margin: 0;
+  font-family: var(--font-cormorant);
+  font-size: 21.5px;
+  font-weight: 400;
+}
+
+.card__rel {
+  font-family: var(--font-cormorant);
+  font-size: 24px;
+  font-weight: 400;
+  color: #083041;
+  opacity: 0.85;
+}
+
+.card__elder {
+  font-family: var(--font-cormorant);
+  font-size: 28.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #083041;
+}
+
+.card__amp {
+  font-family: var(--font-cormorant);
+  font-size: 24px;
+  font-weight: 400;
+  font-style: italic;
+  color: #083041;
+}
+
+.card__gotra {
+  margin-top: 0.4em;
+  color: #083041;
+  opacity: 0.85;
+}
+
+/* --- invite card type ramp ---------------------------------------------- */
+/* rose-invitation's detail-card sizes exactly, at rose's own breakpoints:
+     .card__name  = .detail__name    47.5 -> 35.5 -> 31    (900, 560)
+     .card__elder = .detail__person  28.5 -> 24   -> 21.5  (900, 560)
+     .card__gotra = .detail__gotra   21.5                  (flat)
+     .card__rel   = .detail__label   24                    (flat, base rule)
+     .card__amp   = .detail__amp     24                    (flat, base rule)
+
+   These were previously an APPROXIMATION of rose - 40/30/26 and 24/20/18, on
+   papercut's 1024/500 breakpoints - which is why the two templates never quite
+   lined up. Both the numbers and the switch points are rose's now.
+
+   Rose takes TWO steps down, not one. This had the second step's values
+   (31/21.5) firing at the FIRST step's breakpoint, so the family cards were a
+   size too small between 560 and 900 and only agreed with rose again below 560.
+   900 now takes the middle size and 560 the small one, which is what rose does
+   in its own (max-width: 900px) and (max-width: 560px) blocks - see
+   .invite--detail .detail__name / .detail__person there.
+
+   Scoped to .invite deliberately: .card__name is reused by the compliment and
+   keepsake-note headings further down the page, and rose sizes THOSE
+   differently again (see the compliment + note ramp below). Same reason rose
+   scopes its own overrides to .invite--detail. */
+.invite .card__name {
+  font-size: 47.5px;
+}
+
+.invite .card__elder {
+  font-size: 28.5px;
+}
+
+.invite .card__gotra {
+  font-size: 21.5px;
+}
+
+@media (max-width: 900px) {
+  .invite .card__name {
+    font-size: 35.5px;
+  }
+
+  .invite .card__elder {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .invite .card__name {
+    font-size: 31px;
+  }
+
+  .invite .card__elder {
+    font-size: 21.5px;
+  }
+}
+
+/* --- scroll-driven lotus ---------------------------------------------- */
+.lotus-spin {
+  display: grid;
+  place-items: center;
+  padding: clamp(32px, 7vw, 90px) max(24px, calc(var(--bar-w) + 16px));
+}
+
+/* The stack box. Keeps the footprint the six-layer version (and the flat
+   lotus-big.webp before that) both had, so the section's rhythm is
+   unchanged; the image is centred inside it and sized against its height. */
+.lotus-spin__stack {
+  position: relative;
+  width: min(600px, 58vw);
+  aspect-ratio: 1;
+}
+
+/* Centred with the `translate` PROPERTY, not transform. app.js writes the
+   scroll angle to `rotate`, and CSS composes translate -> rotate -> transform:
+   with the centring in `transform` it would be applied AFTER the rotation and
+   the image would orbit the box's centre instead of spinning on it.
+   .arch-flower makes the same choice for the same reason.
+
+   height:100% fills the (square) stack box and width:auto follows the
+   image's own near-square ratio (1263x1246) without distorting it.
+
+   filter: var(--lift) - unlike the six SVG rings this replaced (each of
+   which carried its own baked-in drop shadow), big_lotus.png is a flat
+   cutout with none of its own, so it needs the same shadow every other flat
+   deco image in this template gets. */
+.lotus-spin__layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  height: 100%;
+  width: auto;
+  will-change: rotate;
+  filter: var(--lift);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  /* The lotuses stop bobbing, but keep the translate that seats them on the
+     water line - that is layout, not motion. */
+  .lotus-float {
+    animation: none;
+    transform: none;
+    rotate: none;
+  }
+}
+
+/* --- gallery frames ---------------------------------------------------- */
+.gallery {
+  position: relative;
+  padding: clamp(24px, 6vw, 80px) max(24px, calc(var(--bar-w) + 16px)) clamp(64px, 10vw, 140px);
+}
+
+/* Same reasoning as .invite's own phone override above - more room between
+   this section and its neighbours than the 24px/64px floors this section's
+   own clamps land on below ~533-640px wide. */
+@media (max-width: 500px) {
+  .gallery {
+    padding-block: 40px 88px;
+  }
+}
+
+/* The two carousels - always visible, stacked and centred. */
+.gallery__reveal {
+  display: grid;
+  place-items: center;
+  gap: clamp(48px, 8vw, 88px);
+}
+
+/* Beaded pull cord hanging in the frame's top opening (per the reference).
+   Absolutely placed over the frame's top-centre; --pull stretches the rope as
+   the knob is dragged down and springs back on release (app.js then advances
+   to the next slide). Hidden when a carousel has only one item. */
+.gallery__pull {
+  position: absolute;
+  top: 9%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  touch-action: none;
+  user-select: none;
+}
+
+.gallery__pull-rope {
+  width: 3px;
+  height: var(--pull, 6px);
+  background: #DCAC69;
+  border-radius: 2px;
+  transition: height 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* While actively dragging, the rope follows the finger with no easing. */
+.gallery__pull.is-dragging .gallery__pull-rope {
+  transition: none;
+}
+
+/* Guest hint: the rope tugs itself now and then, so the cord reads as
+   something to pull rather than decoration. Stretching the ROPE (rather than
+   nudging the whole control) is what makes it legible - the knob is below it in
+   a flex column, so it rides down and springs back exactly as a real pull
+   looks, and the cord stays anchored to the frame the whole time.
+
+   The long flat stretch at the start of the cycle is deliberate: a continuous
+   wobble reads as an animation playing, a periodic tug reads as an invitation.
+   app.js only adds this for guests, only with somewhere to page to, and takes
+   it off the moment the guest touches the cord - see the pager's update(). */
+@keyframes pc-rope-tug {
+
+  0%,
+  62%,
+  100% {
+    height: 6px;
+  }
+
+  74% {
+    height: 22px;
+  }
+
+  84% {
+    height: 9px;
+  }
+
+  92% {
+    height: 14px;
+  }
+}
+
+.gallery__pull--hint .gallery__pull-rope {
+  animation: pc-rope-tug 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__pull--hint .gallery__pull-rope {
+    animation: none;
+  }
+}
+
+.gallery__pull-knob {
+  display: block;
+  width: 30px;
+  height: auto;
+  cursor: grab;
+}
+
+/* Smaller on a phone - 30px reads oversized against the narrower frame the
+   gallery cards take there. */
+@media (max-width: 500px) {
+  .gallery__pull-knob {
+    width: 20px;
+  }
+}
+
+.gallery__pull.is-dragging .gallery__pull-knob {
+  cursor: grabbing;
+}
+
+/* Instruction note above each frame, between the pull cord and the nav
+   controls. */
+.gallery__hint {
+  margin: 0 auto clamp(10px, 2vw, 18px);
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(13px, 1.7vw, 17px);
+  color: var(--cream);
+  opacity: 0.8;
+}
+
+/* --- compliment & note cards ------------------------------------------- */
+/* Same framed card as the invite cards above: they reuse .card / .card__frame
+   (deco-frame) / .invite__inner / .card__stem / .card__bud. Only the inner
+   layout for the lines + note text and the edit controls are defined here. */
+.scene--compliment,
+.scene--note {
+  display: grid;
+  place-items: center;
+  padding: clamp(48px, 9vw, 120px) max(24px, calc(var(--bar-w) + 16px));
+}
+
+/* Same reasoning as .invite's own phone override further up. */
+@media (max-width: 500px) {
+
+  .scene--compliment,
+  .scene--note {
+    padding-block: 64px;
+  }
+}
+
+/* The compliment and note cards reuse .card__name for their heading, but rose
+   sets those two UPRIGHT: .card__name slants because it is a person's name,
+   and "With Best Compliments From:" is not one. (0,2,0) against the base
+   rule's (0,1,0), so this wins wherever it sits in the file. */
+[data-card="compliments"] .card__name,
+[data-card="note"] .card__name {
+  font-style: normal;
+  line-height: 1.1;
+}
+
+/* Compliment name lines - stacked tight (the .invite__inner gap handles the
+   spacing above/below the group); each name uses the invite .card__elder look. */
+.compliment__lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.compliment__line {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Free-form note body, matching the invite cards' muted serif. */
+/* Prose, so lighter than its lead - rose sets the same 26px/400/1.7. */
+.note__text {
+  margin: 0;
+  white-space: pre-line;
+  font-family: var(--font-cormorant);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #083041;
+}
+
+/* --- compliment + note card type ramp ----------------------------------- */
+/* rose-invitation's compliment and notes cards exactly:
+     lead heading    = .compliment__lead / .notes__lead  47.5 -> 35.5 -> 31
+     compliment line = .compliment-card p                26   (flat, 1.8)
+     note body       = .notes-card .notes__text          26   (flat, 1.7)
+
+   Rose gives the two leads the SAME type as a family-card name (its
+   --primary--h3-b) and only drops the italic - they are not a person's name.
+   These were an approximation before: 22 -> 17, which is less than half of
+   rose's opening size.
+
+   Scoped to .scene--compliment / .scene--note so the two family cards keep
+   their own ramp above - the shared .card__name / .card__elder classes are the
+   only reason these ever took invite-card sizes.
+
+   Breakpoints are rose's own, 900 then 560. */
+.scene--compliment .card__name,
+.scene--note .card__name {
+  font-size: 47.5px;
+}
+
+.compliment__line .card__elder {
+  font-size: 26px;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+
+  .scene--compliment .card__name,
+  .scene--note .card__name {
+    font-size: 35.5px;
+  }
+}
+
+@media (max-width: 560px) {
+
+  .scene--compliment .card__name,
+  .scene--note .card__name {
+    font-size: 31px;
+  }
+}
+
+/* The name lines themselves, which had no ramp at all and sat at 26px right
+   down to a 320px phone - a semi-bold 26px line like "Shri Suresh Sharma &
+   Family (Chacha-Chachi)" is most of a phone's width and wraps three times.
+   Rose drops these to 20px/1.7 at 700px (its `.compliment-card p` rule inside
+   @media (max-width: 700px)), so that is the step and the breakpoint here.
+   700 is rose's own figure and deliberately NOT the 560 above: the lead and the
+   lines step at different widths in rose, because the lead has a size in hand
+   and the lines do not.
+   This block must stay AFTER the base rule - both selectors are (0,2,0), so
+   source order is what decides it. */
+@media (max-width: 700px) {
+  .compliment__line .card__elder {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+}
+
+/* Edit-only controls (rendered only in edit mode). */
+.card-line-x {
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 999px;
+  width: 22px;
+  height: 22px;
+  background: rgba(28, 55, 77, 0.12);
+  color: #083041;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* "x Remove card" - edit only. Pinned inside the card's own frame, top-right,
+   above the deco-frame so the ornament cannot swallow it. The card needs no
+   position of its own: .card is already positioned for its stem/bud artwork. */
+.card-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.35em 0.9em;
+  background: rgba(28, 55, 77, 0.85);
+  color: #fff;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.card-remove:hover,
+.card-remove:focus-visible {
+  background: rgba(28, 55, 77, 1);
+}
+
+/* Stands in for a removed card while editing, so the host can see there is
+   something switched off here rather than a gap - and can put it back. Guests
+   never reach this: render.js only builds it in edit mode. */
+.card-slot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: clamp(16px, 3vw, 28px) auto;
+  max-width: min(92vw, 520px);
+  padding: clamp(14px, 2.5vw, 22px);
+  border: 1px dashed rgba(253, 243, 232, 0.5);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.card-slot__text {
+  color: var(--cream);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.8vw, 16px);
+}
+
+.card-slot__btn {
+  border: 1px solid rgba(253, 243, 232, 0.55);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cream);
+  font-family: var(--font-serif);
+  font-size: clamp(13px, 1.7vw, 15px);
+  padding: 0.45em 1.2em;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.card-slot__btn:hover,
+.card-slot__btn:focus-visible {
+  background-color: rgba(253, 243, 232, 0.14);
+}
+
+.card-add {
+  margin-top: 0.4em;
+  border: 1px solid rgba(138, 75, 42, 0.4);
+  border-radius: 999px;
+  background: transparent;
+  color: #083041;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.8vw, 17px);
+  padding: 0.45em 1.3em;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.card-add:hover,
+.card-add:focus-visible {
+  background-color: rgba(138, 75, 42, 0.08);
+}
+
+.frame {
+  position: relative;
+  width: min(var(--frame-max), 100%);
+  aspect-ratio: 794 / 1266;
+  margin: 0 auto;
+}
+
+/* The PNG goes on top. Its middle is a hole, so whatever sits in
+   .frame__slot shows through the opening. */
+.frame__border {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Clipped to the frame's real opening, traced from the PNG's alpha
+   channel and simplified to 65 points. The area OUTSIDE the frame is
+   transparent too, so without this a photo would spill out around the
+   whole ornament, not just fill the middle. */
+.frame__slot {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  clip-path: polygon(49.94% 14.38%, 49.62% 14.69%, 47.98% 16.11%, 44.46% 18.01%,
+      38.04% 19.43%, 36.40% 21.80%, 33.75% 23.70%, 30.98% 24.64%, 26.57% 25.12%,
+      25.44% 27.01%, 22.92% 28.91%, 20.65% 29.86%, 15.74% 31.28%, 11.96% 33.65%,
+      9.32% 36.49%, 7.93% 39.81%, 7.81% 53.08%, 7.93% 59.72%, 8.31% 61.14%,
+      11.46% 65.40%, 15.99% 68.25%, 20.91% 69.67%, 23.05% 70.62%, 25.06% 72.04%,
+      26.57% 74.41%, 31.23% 74.88%, 33.88% 75.83%, 36.52% 77.73%, 38.04% 80.09%,
+      44.71% 81.52%, 48.11% 83.41%, 49.75% 84.83%, 49.94% 85.15%, 50.13% 84.83%,
+      51.76% 83.41%, 55.16% 81.52%, 61.84% 80.09%, 63.35% 77.73%, 65.99% 75.83%,
+      68.64% 74.88%, 73.30% 74.41%, 74.81% 72.04%, 76.83% 70.62%, 78.97% 69.67%,
+      83.88% 68.25%, 87.28% 66.35%, 89.80% 63.98%, 91.56% 61.14%, 91.94% 59.72%,
+      92.07% 52.61%, 91.94% 39.81%, 90.55% 36.49%, 87.91% 33.65%, 84.13% 31.28%,
+      79.22% 29.86%, 76.95% 28.91%, 74.43% 27.01%, 73.30% 25.12%, 68.89% 24.64%,
+      66.12% 23.70%, 62.97% 21.33%, 61.84% 19.43%, 55.42% 18.01%, 51.89% 16.11%,
+      50.25% 14.69%);
+}
+
+/* The reel is a row of cells that slides horizontally behind the opening; only
+   what's inside the frame changes as it moves. app.js sets the translate. */
+.frame__reel {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: transform 550ms cubic-bezier(0.33, 0.02, 0.2, 1);
+  will-change: transform;
+}
+
+.frame__cell {
+  position: relative;
+  flex: 0 0 100%;
+  height: 100%;
+}
+
+/* photo cells - grey where a photo will go, so empty frames read as a slot. */
+.frame__slot--photo {
+  background-color: #D8D8D8;
+}
+
+.frame__photo-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.frame__photo-btn:disabled {
+  cursor: default;
+}
+
+.frame__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+  display: none;
+}
+
+.frame__photo-btn.has-photo .frame__photo {
+  display: block;
+}
+
+/* Filled cell: the image, positioned/zoomed via its inline object-position +
+   scale. In edit the view is draggable to reposition and scroll-zoomable. */
+.frame__photo-view {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.frame__photo-view .frame__photo {
+  display: block;
+}
+
+.frame__photo-view.is-adjustable {
+  cursor: grab;
+  touch-action: none;
+}
+
+.frame__photo-view.is-adjustable:active {
+  cursor: grabbing;
+}
+
+/* Adjust toolbar over the frame (zoom −/＋, replace) - app.js shows it only for
+   the currently shown, filled photo in edit mode. */
+.frame__adjust {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  gap: 8px;
+}
+
+.frame__ctl {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(28, 55, 77, 0.85);
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.frame__ctl:hover {
+  background: rgba(28, 55, 77, 0.98);
+}
+
+/* Empty-cell placeholder: a picture icon (and, in edit, a prompt) centred on
+   the grey slot. Hidden once a photo is set. */
+.frame__ph {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 0 18%;
+  text-align: center;
+  color: #8F8F8F;
+  pointer-events: none;
+}
+
+.frame__ph-icon {
+  width: clamp(40px, 24%, 88px);
+  height: auto;
+}
+
+.frame__ph-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.frame__photo-btn.has-photo .frame__ph {
+  display: none;
+}
+
+/* text cells */
+.frame__slot--text {
+  background-color: #FAF7F2;
+}
+
+.frame__cell--text {
+  display: grid;
+  place-items: center;
+  /* the opening is a pointed oval, so keep the text column well inside the
+     widest part or lines will run past the curve */
+  padding: 46% 16%;
+  text-align: center;
+}
+
+.frame__text {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.7;
+  color: #083041;
+}
+
+/* Desktop only - above the 1024px line the rest of the phone/tablet tuning in
+   this file uses. Mobile/tablet keep the base 20px. */
+@media (min-width: 1025px) {
+  .frame__text {
+    font-size: 35px;
+  }
+}
+
+/* --- gallery carousels (photos + notes) -------------------------------- */
+/* Each media type is a one-frame-per-view pager with ceremony-style arrows in
+   the side gutters; the host can add up to five and remove down to one. */
+.gallery__pager {
+  position: relative;
+  width: min(calc(var(--frame-max) + 2 * clamp(34px, 7vw, 72px)), 100%);
+}
+
+/* Remove (×) on the frame - edit mode only; targets the currently shown cell. */
+.gallery__remove {
+  position: absolute;
+  top: 3%;
+  right: 7%;
+  z-index: 3;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(28, 55, 77, 0.85);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Reorder the shown frame - edit mode only, mirroring .gallery__remove's
+   placement on the opposite corner so the two read as one set of card
+   controls rather than two unrelated buttons. */
+.gallery__reorder {
+  position: absolute;
+  top: 3%;
+  left: 7%;
+  z-index: 3;
+  display: flex;
+  gap: 6px;
+}
+
+.gallery__reorder button {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(28, 55, 77, 0.85);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* At the first/last card the arrow that cannot go anywhere dims rather than
+   disappearing, so the pair does not jump about as the host pages through. */
+.gallery__reorder button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Add-another button below the pager - edit mode only. */
+.gallery__add {
+  display: block;
+  margin: clamp(14px, 2.5vw, 22px) auto 0;
+  border: 1px solid rgba(253, 243, 232, 0.45);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cream);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.8vw, 18px);
+  padding: 0.5em 1.4em;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.gallery__add:hover,
+.gallery__add:focus-visible {
+  background-color: rgba(253, 243, 232, 0.12);
+}
+
+/* --- ceremonies -------------------------------------------------------- */
+.ceremonies {
+  padding: clamp(40px, 8vw, 100px) max(24px, calc(var(--bar-w) + 20px)) clamp(56px, 10vw, 120px);
+  overflow: visible;
+}
+
+/* Same reasoning as .invite's own phone override further up. */
+@media (max-width: 500px) {
+  .ceremonies {
+    padding-block: 56px 80px;
+  }
+}
+
+/* Desktop drops the section's side padding entirely, handing those 120px back
+   to the carousel window.
+
+   The window is `overflow: hidden`, so wherever it ends is a hard vertical line
+   the cards are sliced along. With this padding on top of .carousel's own
+   arrow gutter the line fell about 128px in from each side - well inside the
+   frame, so ceremony cards were being cut in open space in the middle of the
+   page rather than running out at its edge.
+
+   .carousel's own arrow gutter goes too, so the window spans the full width of
+   the frame and the slice line lands at the screen edge rather than anywhere
+   inside it. Between them the two give the window 256px back: three cards need
+   3 x 463 + 2 x 26 = 1441px, so from about 1441px up the whole row now fits
+   with no cut at all, against roughly 1697px before either came off.
+
+   Two knock-on effects, both deliberate:
+   - The prev/next arrows are positioned at .carousel's left/right edge, and
+     that gutter was the only thing holding them off the cards. With it gone
+     they sit OVER the outer cards. They are z-index 3 and the cards carry no
+     stacking of their own, so they stay on top and remain clickable.
+   - The outer cards now reach the screen edges and pass under the 2.85vw edge
+     bars. The bars are z-index 11 and paint over them, so the row runs behind
+     the frame rather than colliding with it. */
+@media (min-width: 1025px) {
+
+  .ceremonies {
+    padding-inline: 0;
+  }
+
+  .carousel {
+    padding-inline: 0;
+  }
+}
+
+.ceremonies__title {
+  margin: 0 0 clamp(28px, 5vw, 56px);
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(30px, 5vw, 46px);
+  color: var(--cream);
+}
+
+.carousel {
+  position: relative;
+  /* room for the arrows to sit clear of the cards */
+  /* padding-inline: clamp(30px, 6vw, 68px); */
+
+  /* Card width and gap live here so the viewport can be sized from
+     them; the two must agree or the clones show at the edges. */
+  /* The raised centre card renders at exactly the gallery frame width.
+     Scale is a paint-time effect, so the LAYOUT width has to be divided
+     back out - width x scale is what actually lands on screen. */
+  --card-scale: 1.08;
+
+  /* The 34vw cap is sized so at least HALF of each non-active ceremony stays
+     in the window at every non-mobile width. Half a neighbour is visible
+     exactly when the window reaches that neighbour's painted centre, which
+     sits one card-width plus one gap out from the middle - so the window has
+     to be at least 2 x card + 2 x gap. Solving that against the space left by
+     .ceremonies' and .carousel's padding gives a card of about a third of the
+     viewport, hence 34vw. (The 0.86 side-scale drops out of the maths: the
+     painted centre is in the same place whatever the card is scaled to.)
+
+     Worst case is 54% at the 501px stacking line, rising to 66% by 1024px.
+     Above ~1362px the fixed 463px (frame-max / scale) is the smaller of the
+     two and takes over, so the widest screens are untouched.
+
+     min() rather than a media query, so it is continuous rather than jumping
+     at a threshold. Raise the cap and the neighbours get cropped; lower it and
+     the centre card stops reading as the focus. */
+  --card-w: min(calc(var(--frame-max) / var(--card-scale)), 34vw);
+  --card-gap: clamp(10px, 2vw, 26px);
+}
+
+.carousel__track {
+  display: flex;
+  align-items: center;
+  gap: var(--card-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  /* The whole row slides; the script centres the active card by
+     translating this track. Keep the duration in sync with SLIDE_MS. */
+  transition: transform 550ms cubic-bezier(0.33, 0.02, 0.2, 1);
+  will-change: transform;
+}
+
+/* Window the track slides behind. This used to be overflow:hidden, with
+   padding-block:40px giving the raised centre card and its shadow room to
+   spill without being clipped, and an equal negative margin-block pulling
+   that padding back out of the layout height so it stayed purely visual.
+
+   overflow is `visible` now (a later change, for the three-cards-fit-on-
+   desktop fix), so nothing clips any more and that room is not needed - but
+   the padding/negative-margin PAIR was left behind. With nothing clipping,
+   the negative margin no longer just "keeps padding out of the layout", it
+   actively pulls .carousel (and .carousel__dots right after it in the flow)
+   40px UP into the zone the raised card's shadow bleeds into - which is why
+   the dots sat half under the card's bottom edge. Dropping both restores
+   .carousel__dots' own margin-top as real, uneaten space below the card. */
+.carousel__viewport {
+  /* Exactly three cards wide, so the clones stay outside the window
+     instead of peeking in at the edges on wide screens. */
+  width: min(100%, calc(var(--card-w) * 3 + var(--card-gap) * 2));
+  margin-inline: auto;
+
+  overflow: visible;
+}
+
+/* Scale rather than width so the side cards shrink without reflowing the
+   row - the centre card then overlaps them slightly, as in the design. */
+.ceremony {
+  flex: 0 0 auto;
+  width: var(--card-w);
+  transform: scale(0.86);
+  opacity: 0.9;
+  transition: transform 550ms cubic-bezier(0.33, 0.02, 0.2, 1), opacity 550ms;
+}
+
+.ceremony.is-active {
+  position: relative;
+  z-index: 2;
+  transform: scale(var(--card-scale));
+  opacity: 1;
+}
+
+.ceremony__card {
+  background: #FFFFFF;
+  border-radius: 999px 999px 0 0;
+  padding: 12px 12px 20px 12px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.30);
+}
+
+.ceremony.is-active .ceremony__card {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.42);
+}
+
+/* The arch silhouette is baked into each PNG, transparent corners and
+   all, so the card's white shows through around the dome unaided. */
+.ceremony__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* all three artworks are 678x746 - reserving the ratio stops the row
+     reflowing (and the slide maths going stale) as they decode */
+  aspect-ratio: 678 / 746;
+}
+
+.ceremony__name {
+  margin: 20px 0 20px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  /* 2.94vw is 40px scaled by the same ratio the CARD is: --card-w is
+     min(463px, 34vw), so 40 x 0.34 / 463 keeps the title in proportion to the
+     card at every width instead of overflowing it as the card narrows. The
+     20px floor is a readability stop, not a design size - below ~680px the
+     text stops shrinking with the card. */
+  font-size: clamp(20px, 2.94vw, 40px);
+  color: var(--ceremony-ink);
+}
+
+.ceremony__when {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 11px;
+  padding: 0 3px;
+  font-family: var(--font-sans);
+  font-size: clamp(12px, 1.47vw, 20px);
+  color: #09455D;
+}
+
+/* Colour and size now match .ceremony__when directly above - the two are the
+   same kind of thing (secondary detail under the ceremony name, both sans),
+   and the venue line used to be visibly smaller and a flatter grey
+   (--ceremony-muted) than the date/time line it sits right under, which read
+   as an afterthought rather than as the same tier of information. */
+.ceremony__where {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0 3px;
+  font-family: var(--font-sans);
+  font-size: clamp(12px, 1.47vw, 20px);
+  color: #09455D;
+}
+
+/* Venue as a tappable map link, matching rose-invitation. The chevron only
+   exists on this variant - it is the affordance that says the line opens
+   something, so it must not appear on the plain <p> the editor renders. */
+.ceremony__where--link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.ceremony__where--link:hover,
+.ceremony__where--link:focus-visible {
+  color: var(--ceremony-ink);
+}
+
+.ceremony__go {
+  align-self: center;
+  margin-left: auto;
+  padding-left: 6px;
+  font-size: clamp(14px, 1.62vw, 22px);
+  line-height: 1;
+  opacity: 0.55;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.ceremony__where--link:hover .ceremony__go,
+.ceremony__where--link:focus-visible .ceremony__go {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+.ceremony__pin {
+  flex: 0 0 auto;
+  /* CSS wins over the element's width/height attributes. Flat 20px now,
+     not a clamp - a fixed size the user asked for directly. */
+  width: 20px;
+  height: 20px;
+}
+
+.carousel__nav,
+.gallery__nav {
+  position: absolute;
+  top: 90%;
+  transform: translateY(-50%);
+  z-index: 3;
+  border: 0;
+  background: none;
+  padding: 10px;
+  line-height: 0;
+  cursor: pointer;
+  color: var(--cream);
+}
+
+.carousel__nav--prev,
+.gallery__nav--prev {
+  left: 0;
+}
+
+.carousel__nav--next,
+.gallery__nav--next {
+  right: 0;
+}
+
+.carousel__nav svg,
+.gallery__nav svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* The ceremony carousel.s own arrows, made bigger and given real presence -
+   scoped to .carousel__nav only, NOT .gallery__nav (the photo/note pager keeps
+   the plain chevron above). A bare cream stroke with no fill or shadow read as
+   almost nothing against the carousel.s own teal ground - the plaque behind it
+   fixes that.
+
+   The INSET past that first pass turned out wrong: .ceremonies and .carousel
+   both dropped their side padding a few turns back so three ceremony cards
+   could fit without cropping, which means the carousel now spans edge to edge
+   - and clamp(6px, 2vw, 20px) put the button PARTLY UNDER the fixed vertical
+   edge bar (--bar-strip, ~13-55px depending on width) rather than clear of it.
+   Worse, the shared base rule.s z-index:3 sits BELOW the bar.s z-index:10, so
+   the half that did overlap was painted OVER by the bar instead of floating
+   above it - which is the screenshot: a gold ring with its left half eaten by
+   the teal strip.
+
+   Fixed on two axes: z-index 12 clears the bar outright (matching the section-
+   mark/flower precedent elsewhere in this file, safely above 10 AND 11), and
+   the inset is now the template.s STANDARD clearance figure - the same
+   max(24px, calc(var(--bar-w) + 16px)) every other section uses for its own
+   side padding - so the button sits beside the bar the way the rest of the
+   page does, without giving the CAROUSEL its padding back (that would re-crop
+   the cards the earlier fix was for). */
+.carousel__nav {
+  top: 50%;
+  z-index: 12;
+  left: max(24px, calc(var(--bar-w) + 2vw));
+  right: auto;
+  width: clamp(40px, 6vw, 60px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(8, 48, 65, 0.82);
+  border: 2px solid #FFD853;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.carousel__nav--next {
+  left: auto;
+  right: max(24px, calc(var(--bar-w) + 16px));
+}
+
+.carousel__nav svg {
+  width: clamp(18px, 2.6vw, 26px);
+  height: clamp(18px, 2.6vw, 26px);
+}
+
+.carousel__nav:hover,
+.carousel__nav:focus-visible {
+  background: rgba(8, 48, 65, 0.96);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel__nav:focus-visible {
+  outline: 2px solid #FFD853;
+  outline-offset: 3px;
+}
+
+/* [disabled] (an arrow at the end of the deck) fades rather than vanishes -
+   the guest can still see it is there, just spent in that direction. */
+.carousel__nav[disabled] {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__nav {
+    transition: none;
+  }
+
+  .carousel__nav:hover,
+  .carousel__nav:focus-visible {
+    transform: translateY(-50%);
+  }
+}
+
+/* Pagination dots below the carousel - one per real ceremony, built and kept
+   in sync by app.js (renderDots/syncDots in the ceremony-carousel IIFE), never
+   written here as markup: the count changes with what the host has enabled.
+   Hidden entirely at n<=1 by that same script, and in edit mode by the rule
+   above - a host editing sees every card in a wrapped row, with nothing to
+   jump BETWEEN. */
+/* margin-top pulled way down from clamp(16px, 3vw, 28px). .carousel__viewport
+   no longer holds the padding-block/margin-block pair that used to sit
+   between .carousel and this row (removed when it was cancelling itself out
+   in layout while still causing the raised card's shadow to overlap the
+   dots) - but the untransformed layout box .carousel's own height is measured
+   from sits ABOVE the active card's real visual bottom edge by a good margin
+   already (the card grows past that box on its own via scale(1.08), plus its
+   box-shadow's own bleed), so this margin was adding a big SECOND gap on top
+   of space that was already there, rather than being the only source of it.
+   Cut to a thin visual breath instead - just enough that the dots read as
+   their own row, not stacked flush under the card. */
+/* Undoing the last cut - it went too far and the dots went back to sitting
+   under the card's shadow, same complaint as before just from the other
+   direction. My box-model math said the padding/margin pair removed from
+   .carousel__viewport should have been layout-neutral either way, but the
+   real rendered gap clearly does not agree with that math, so this is now
+   tuned generously rather than derived: comfortably past both the active
+   card's own scale(1.08) growth past its layout box and its
+   `box-shadow: 0 16px 40px` bleed, with real room to spare rather than a
+   figure sized to just barely clear them. */
+.carousel__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(8px, 1.6vw, 14px);
+  margin-top: clamp(36px, 4.5vw, 60px);
+}
+
+.carousel__dot {
+  width: clamp(8px, 1.1vw, 11px);
+  height: clamp(8px, 1.1vw, 11px);
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: rgba(253, 243, 232, 0.35);
+  cursor: pointer;
+  transition: background-color 200ms ease, transform 200ms ease;
+}
+
+.carousel__dot:hover {
+  background: rgba(253, 243, 232, 0.6);
+}
+
+/* The active dot is wider than it is tall rather than simply bigger - a pill,
+   not a bigger circle - which is what makes it read as "here" among a row of
+   otherwise identical marks instead of just "slightly larger". */
+.carousel__dot.is-active {
+  width: clamp(20px, 3vw, 28px);
+  border-radius: 999px;
+  background: #FFD853;
+}
+
+.carousel__dot:focus-visible {
+  outline: 2px solid #FFD853;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__dot {
+    transition: none;
+  }
+}
+
+/* Greyed at the ends of a (non-looping) gallery pager. */
+.gallery__nav[disabled] {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* PHONES ONLY drop the carousel: the three cards stack and the page scrolls
+   past them. Everything from 501px up - tablets included - keeps the sliding
+   carousel with its arrows. (This used to stack at 1024px, which took the
+   carousel away from tablets that have room for it.)
+
+   The script still runs and still writes a translateX onto the track at every
+   width, so every rule that would fight it is forced here rather than left to
+   specificity. Nothing in app.js reads a breakpoint, so this query is the only
+   thing deciding stacked vs carousel - no JS change is needed to move it. */
+@media (max-width: 500px) {
+  .carousel {
+    /* No arrows to clear once the track is a column. */
+    padding-inline: 0;
+    --card-w: 80%;
+  }
+
+  /* The clones only exist to feed the slide. Stacked, they would just
+     repeat the three ceremonies twice more. Dots are pagination for a
+     carousel that no longer exists here - every card is already on screen,
+     one below the other, so there's nothing left to jump between. */
+  .ceremony--clone,
+  .carousel__nav,
+  .carousel__dots {
+    display: none;
+  }
+
+  /* Sized by the cards now, not by three-across maths, and no longer
+     clipping - nothing slides out of view to hide. */
+  .carousel__viewport {
+    width: 100%;
+    overflow: visible;
+    padding-block: 0;
+    margin-block: 0;
+  }
+
+  .carousel__track {
+    flex-direction: column;
+    gap: clamp(28px, 12vw, 44px);
+    /* beats the inline transform the script leaves on the element */
+    transform: none !important;
+    transition: none;
+  }
+
+  /* Every card reads as the focused one, so the shrink-and-fade the
+     carousel used to mark its neighbours has to come off. */
+  .ceremony {
+    width: 100%;
+    transform: none !important;
+    opacity: 1;
+  }
+
+  .ceremony__card {
+    padding: 10px 10px 20px;
+  }
+
+  /* Stacked, the card is 80% of the viewport rather than 34vw, so the type
+     tracks a different coefficient: 40 x 0.80 / 463 = 6.9vw, and so on. Without
+     this the base clamp would floor the title at 20px inside a 320px card. */
+  .ceremony__name {
+    font-size: clamp(24px, 6.9vw, 40px);
+  }
+
+  .ceremony__when {
+    font-size: clamp(13px, 5vw, 20px);
+  }
+
+  .ceremony__where {
+    font-size: clamp(12px, 5vw, 18px);
+  }
+
+  .ceremony__go {
+    font-size: clamp(15px, 3.8vw, 22px);
+  }
+
+  .ceremony.is-active .ceremony__card {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.30);
+  }
+}
+
+/* Edit mode: app.js skips the slide (no clones, no track transform) so the
+   host can edit the cards in place - all of them at full size, with the
+   carousel arrows hidden.
+
+   The viewport's three-card width and its overflow:hidden exist to frame the
+   SLIDE: they keep the clones out of sight while the track moves behind the
+   opening. In edit mode nothing moves and there are no clones, so all they did
+   was crop the schedule at the third card - which nothing could then reach,
+   the arrows being hidden. With six ceremonies that meant half of them were
+   unreachable and unedittable.
+
+   So the window comes off and the row wraps instead. Same reasoning the
+   stacking media query above already applies on a phone. */
+body.is-editing .carousel__viewport {
+  width: 100%;
+  overflow: visible;
+  padding-block: 0;
+  margin-block: 0;
+}
+
+body.is-editing .carousel__track {
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: clamp(24px, 4vw, 40px);
+  /* Nothing slides here; both guard against a stale inline transform. */
+  transform: none !important;
+  transition: none;
+}
+
+body.is-editing .ceremony {
+  transform: none !important;
+  opacity: 1;
+}
+
+body.is-editing .carousel__nav {
+  display: none;
+}
+
+body.is-editing .carousel__dots {
+  display: none;
+}
+
+/* ---- Ceremony card: edit controls (edit mode only) ----------------------- */
+
+/* Native date / time / url fields. Deliberately native: the host gets their
+   own platform's calendar and clock, and the value stored is unambiguous
+   rather than whatever they typed. */
+.cere-field {
+  border: 1px solid rgba(28, 55, 77, 0.28);
+  border-radius: 8px;
+  padding: 5px 8px;
+  background: #fff;
+  color: #09455D;
+  font-family: var(--font-serif);
+  font-size: clamp(12px, 1.5vw, 15px);
+  max-width: 100%;
+}
+
+.cere-field:focus-visible {
+  outline: 2px solid rgba(28, 55, 77, 0.5);
+  outline-offset: 1px;
+}
+
+.ceremony__when--edit {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* The maps link sits under the venue it qualifies. */
+.cere-maps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  padding: 0 12px 4px;
+  text-align: left;
+}
+
+.cere-maps__label {
+  color: rgba(9, 69, 93, 0.75);
+  font-family: var(--font-serif);
+  font-size: clamp(11px, 1.3vw, 13px);
+}
+
+/* Include / exclude. Top-left of the card, opposite nothing else, so it never
+   collides with the artwork's dome. */
+.cere-toggle {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 4px 10px 4px 6px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  color: #09455D;
+  font-family: var(--font-serif);
+  font-size: clamp(11px, 1.3vw, 13px);
+  cursor: pointer;
+}
+
+/* .ceremony__card is the positioning context for the toggle. */
+.ceremony__card {
+  position: relative;
+}
+
+/* An excluded ceremony stays on screen for the host - greyed, so it reads as
+   "kept, not shown" rather than deleted. Its controls stay at full strength,
+   since the toggle is what they need to reach to bring it back. */
+.ceremony--off .ceremony__art,
+.ceremony--off .ceremony__name,
+.ceremony--off .ceremony__when,
+.ceremony--off .ceremony__where {
+  opacity: 0.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  /* app.js already bails out on this query, so these are belt and braces -
+     `rotate` too, since that is the property it writes now. */
+  .arch-flower {
+    transform: none !important;
+    rotate: none !important;
+  }
+
+  /* `rotate` is the scroll spin (app.js) and must stop here. */
+  .lotus-spin__layer {
+    rotate: none !important;
+  }
+
+  .waves {
+    animation: none;
+  }
+
+  .ceremony,
+  .carousel__track,
+  .frame__reel,
+  .gallery__pull-rope {
+    transition: none;
+  }
+}
+
+/* ── Date reveal ──────────────────────────────────────────────────────────
+   Three paper dials behind cut windows, under the host's own lotus. Blank
+   until the guest presses the button; date-reveal.js builds and rolls the
+   strips at press time.
+
+   Own namespace (.reveal-*), own colours, appended at the end of the file:
+   nothing above this line is touched by anything below it.
+
+   Palette is the three the design calls for and nothing else - deep teal
+   #094550 as ink and recess, warm ivory #F9EACF as the card, white as the
+   cut edge underneath. Flat fills throughout: the depth is offset paper,
+   not shadow, gloss or gradient. */
+.scene--reveal {
+  --rv-teal: #094550;
+  --rv-ivory: #F9EACF;
+  --rv-white: #FFFFFF;
+
+  display: grid;
+  place-items: center;
+  /* Side padding is now EXACTLY .invite's, because the card inside is now
+     exactly as wide as the family cards and the two have to stand on the same
+     rails down the page. It was clamp(48px, 16vw, 80px), which was generous
+     enough to stop the card ever reaching that width.
+     Still clears the fixed edge bars: --bar-w + 16px is 56px against a 40px
+     bar on desktop and 30px against the 14px bar below 1024px.
+     The blooms no longer need this padding to have teal to hang over - they
+     hang off the card by a percentage OF the card, so a wider card pushes them
+     further out on its own. */
+  padding: clamp(48px, 26vw, 120px) max(24px, calc(var(--bar-w) + 16px));
+
+  /* The blooms are centred ON the card's edges, so half of each hangs outside
+     it - and on a phone, where the card is 80vw, that reaches past the screen.
+     clip, not hidden: `hidden` would make this a scroll container and force
+     overflow-y to auto with it, cutting the blooms' drop-shadow off top and
+     bottom as well. `overflow-x: clip` leaves the vertical axis truly visible
+     and simply stops the overhang counting toward the document's width, so it
+     cannot push the page wider than the screen. */
+  overflow-x: clip;
+
+  /* No background of its own on purpose. The page's own backdrop is already
+     --paper teal carrying media/motif-pattern.svg (see the body rule), which
+     is the ground the reference shows behind the card - painting a flat teal
+     here would only cover the motif up. */
+}
+
+/* The section ships hidden and date-reveal.js unhides it once it knows there
+   is a date to reveal. display:grid above would otherwise beat [hidden]. */
+.scene--reveal[hidden] {
+  display: none;
+}
+
+/* The card: a landscape ivory slab on the teal ground, with a bloom straddling
+   each side. It used to be capped at 540px (600px above 760px), roughly half
+   the width of the family cards in .invite; it now takes their width exactly.
+   The blooms hang off it by a percentage OF it, so at 80vw they reach nearer
+   the screen edge than they used to and tuck under the fixed edge bars, which
+   paint over them at z-index 10. */
+.reveal-card {
+  position: relative;
+
+  /* The same two lines .card carries, so this sits on the family cards' rails
+     exactly. The 540px/600px caps that used to hold it to about half their
+     width are gone. */
+  width: 50vw;
+  max-width: 100%;
+
+  /* Everything INSIDE the card is sized in cqw - 1cqw is 1% of this card's
+     width - so the contents grow with the card rather than with the viewport.
+     That is what keeps the plaques, numerals, captions and button in the
+     proportions they were tuned in now that the card is no longer capped.
+     Note an element cannot query ITSELF: the card's own padding below stays in
+     vw, which is proportional here anyway because the card's own width is a vw
+     figure. Only the children may use cqw. */
+  container-type: inline-size;
+
+  /* 9% of the card each side, down from the 18% it carried at its old 600px
+     cap. The content box is the tighter of the two limits on the plaque row -
+     tighter than .reveal-dials' own max-width - so at 18% the row could not
+     have reached the 82cqw the scaled-up dials ask for and they would have
+     grown taller without growing wider.
+     In vw rather than %, because a percentage padding resolves against the
+     SECTION, not the card. Retuned per breakpoint below, where the card's vw
+     width changes: 4.5vw is 9% of the 50vw card here. */
+  padding: clamp(20px, 2.85vw, 60px) 4.5vw;
+  text-align: center;
+
+  /* Gold-edged. border-image would have been the obvious way to paint a
+     gradient border and is the wrong one here: it ignores border-radius and
+     would square the corners off. Two background layers instead - the ivory
+     clipped to the padding box, the gradient to the border box - which the
+     transparent border then reveals as a 4px edge, radius and all.
+     box-sizing is border-box template-wide, so the 4px comes out of the
+     card's own width; the side padding above is set with that already
+     subtracted. */
+  border: 4px solid transparent;
+  border-radius: 10px;
+  background:
+    linear-gradient(var(--rv-ivory), var(--rv-ivory)) padding-box,
+    var(--gold-edge) border-box;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+/* Follows .card's single breakpoint exactly - half the viewport above 1024px,
+   four fifths of it below - so the two never disagree about how wide a card is.
+   The padding is re-pointed with it: 9% of an 80vw card is 7.2vw, where 9% of
+   the 50vw card above is 4.5vw. Same share of the card, different vw figure,
+   because the card itself changed what fraction of the viewport it takes. */
+@media (max-width: 1024px) {
+
+  .reveal-card {
+    width: 64vw;
+    padding: clamp(20px, 4.5vw, 44px) 7.2vw;
+  }
+}
+
+/* Phones keep the shallow side padding they always had. At this width the card
+   is barely wider than the three plaques standing in it, and 7.2vw either side
+   would leave the year plaque nothing to open into. The blooms need no matching
+   exception any more - being sized off the card's height, they shrink with it
+   here on their own (see .reveal-bloom). */
+@media (max-width: 760px) {
+
+  .reveal-card {
+    padding-inline: clamp(8px, 2vw, 34px);
+  }
+}
+
+/* Centred on the midpoint of the card's left and right edges, at every width.
+   Both axes are done with a transform rather than an offset, which is what
+   makes it hold for ANY card height or artwork ratio:
+     top: 50%                 puts the bloom's TOP edge on the card's midline;
+     translateY(-50%)         lifts it by half its OWN height, landing its
+                              centre on that line whatever the card's height is;
+     left/right: 0 + translateX(±50%)  does the same across the edge, so half
+                              the bloom hangs over the teal and half lies on
+                              the card.
+
+   This replaces a bottom:-14%/-8% anchor and three different overhangs
+   (-15%, -35%, -15%) spread over the 400px and 760px breakpoints. That is why
+   the blooms sat low, and sat differently low at different widths: the anchor
+   was a corner, not a centre, so every change of card height moved them. There
+   is nothing to re-tune per breakpoint now - one rule holds at all of them.
+
+   Still sized by HEIGHT with width:auto, which is what decides whether a bloom
+   reaches the plaque row; the width follows from the artwork's 510x677.
+   drop-shadow rather than box-shadow: these are transparent PNG cutouts, and
+   box-shadow would trace the rectangular element box instead of the petals -
+   the same reason .card__bud uses it. */
+.reveal-bloom {
+  position: absolute;
+  top: 50%;
+  height: 115%;
+  width: auto;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.32));
+
+  /* The horizontal half of the centring. A token rather than a literal so the
+     two sides differ by one value below instead of by a whole transform. */
+  --bloom-x: -55%;
+  transform: translate(var(--bloom-x), -50%);
+}
+
+.reveal-bloom--left {
+  left: 0;
+}
+
+.reveal-bloom--right {
+  right: 0;
+  --bloom-x: 55%;
+}
+
+/* cqw figures throughout this section are the old capped px values divided by
+   600 - the card's previous max-width - so the card renders as it always did at
+   600px wide and scales from there. The px floors are unchanged: they are the
+   phone tuning, and a floor still wins over a small card. */
+.reveal-lead {
+  margin: 0 0 clamp(16px, 4cqw, 48px);
+  font-family: var(--font-sans);
+  font-size: clamp(11px, 2.17cqw, 26px);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--rv-teal);
+}
+
+/* Proportional columns rather than equal ones: two digits, three letters and
+   four digits do not want the same width. --cell-h is read by the strip
+   transform in date-reveal.js, so window and cell can never drift apart. */
+.reveal-dials {
+  --cell-h: clamp(44px, 14cqw, 168px);
+
+  display: grid;
+  /* Not equal columns: three capitals need more room than two digits, and
+     four digits more again. Weighted to what each dial actually holds. */
+  grid-template-columns: 0.8fr 1.05fr 1.15fr;
+  gap: clamp(5px, 2.7cqw, 32px);
+  align-items: end;
+
+  /* The row stops growing before the card does, which is what stops the plaques
+     sprawling to twice the width their numerals need in the band just below the
+     760px switch. Raised from 70cqw with the rest of the 1.35x scale-up; the
+     card's side padding came down to 9% a side to let the row actually reach
+     it, since the content box is the tighter of the two limits. */
+  max-width: 82cqw;
+  margin-inline: auto;
+}
+
+/* Type sizes are per dial for the same reason the columns are: two digits,
+   three capitals and four digits do not fit the same size. The minimums and
+   the vw terms are set by the tightest case - three Cormorant capitals in the
+   month plaque on a 320px phone - and the month is what binds, not the year. */
+/* Sized so the numerals sit IN the opening rather than wall to wall - they
+   run about 63-74% of it, which is roughly where the reference plaque has
+   them. They were at 90-96% before, which is what made them look cramped. */
+.reveal-dial {
+  --cell-fs: clamp(20px, 8.1cqw, 97px);
+
+  min-width: 0;
+}
+
+.reveal-dial[data-dial="month"],
+.reveal-dial[data-dial="year"] {
+  --cell-fs: clamp(17px, 6.75cqw, 81px);
+}
+
+/* A sprig either side of the word, media/mini-design.svg mirrored for the left
+   one so the pair reads as a matched set rather than the same leaf twice.
+   Pseudo-elements rather than markup: they are ornament, and this keeps them
+   out of the accessibility tree without an aria-hidden on every caption.
+
+   Sized in vw with a floor, because the word and both sprigs have to fit the
+   plaque's own column - the day column is the narrowest thing on the card, and
+   at 320px "DATE" plus its pair comes to 46px in a 49px column. Letter-spacing
+   is 0.12em rather than the 0.18em this had when it was text alone; that is
+   where most of the room for the sprigs came from. */
+.reveal-dial__cap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.8px, 1.12cqw, 14px);
+  margin-bottom: max(7px, 1.58cqw);
+  font-family: var(--font-sans);
+  font-size: clamp(8.5px, 2.47cqw, 30px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  /* The flat equivalent of the teal at the 0.75 opacity this used to carry -
+     4.76:1 on ivory, against the 4.5:1 floor for text this size. Flat now
+     because opacity would have faded the sprigs along with the word, and the
+     sprigs are meant to be full-strength pink. */
+  color: #456E70;
+}
+
+.reveal-dial__cap::before,
+.reveal-dial__cap::after {
+  content: "";
+  flex: none;
+  width: clamp(6.5px, 2.93cqw, 35px);
+  aspect-ratio: 1;
+  background: url("media/mini-design.svg") center / contain no-repeat;
+}
+
+.reveal-dial__cap::before {
+  transform: scaleX(-1);
+}
+
+/* The plaque. Sized by its padding: the window inside is exactly one cell
+   tall, and the padding is the margin of teal the numerals sit within, so the
+   frame has room without eating into the numeral. */
+.reveal-plaque {
+  position: relative;
+  /* Never less than the frame's ring (outer + inner band), or the opening
+     would start inside the keyline. The fill panel's inside edge lands at
+     that same figure, so a little over keeps the two overlapping instead of
+     meeting on a seam. */
+  padding: clamp(9px, 2.93cqw, 35px) clamp(8px, 3.15cqw, 38px);
+}
+
+/* Drawn by <deco-frame> (see app.js) - the same element the family cards use,
+   so these read as the same object family rather than as a lookalike.
+   Everything below is a knob that element already exposes.
+
+   Teal body with a thin ivory keyline set just inside it: the outer band and
+   the fill are the same teal, so the keyline is the only line on the plaque,
+   which is what the reference plaque does. No corner squares - the family
+   cards have them, this does not, and that is the difference between a card
+   and a number plate.
+
+   --frame-inset equals --frame-outer-thickness on purpose, so the keyline
+   starts exactly where the outer band stops and no sliver of the ivory card
+   shows between the two. */
+.reveal-plaque__frame {
+  position: absolute;
+  inset: 0;
+
+  --frame-outer-color: #094550;
+  --frame-outer-thickness: 7;
+  --frame-outer-scoop: 11;
+
+  --frame-inner-color: #094550;
+  --frame-inner-thickness: 2;
+  --frame-inner-scoop: 7;
+
+  --frame-inset: 7;
+  --frame-square-size: 0;
+  --frame-fill: #072f36;
+
+  /* Downward and soft, so each plaque sits proud of the ivory card the way
+     the reference has them. Two effects for the price of one: the band is a
+     ring with a transparent middle, so the same filter casts OUTWARD onto the
+     card and blurs INWARD across the opening, which is what makes the window
+     read as cut into the plaque rather than printed on it.
+
+     Darker than the plaque rather than the plaque's own colour - a shadow the
+     same value as the thing casting it reads as a halo. Deepening it costs no
+     legibility: it only darkens teal that already carries ivory numerals at
+     8.94:1. The element's own default is a 30px/0.75 shadow built for the big
+     invitation cards, which at plaque size would be a smudge. */
+  --frame-shadow-dx: 0;
+  --frame-shadow-dy: 4;
+  --frame-shadow-blur: 5;
+  --frame-shadow-color: rgba(5, 33, 40, 0.8);
+}
+
+/* The opening. One cell tall exactly - the strip transform in date-reveal.js
+   steps by --cell-h, so window and cell cannot drift apart. Transparent: the
+   teal behind it is the plaque's own fill. */
+.reveal-window {
+  position: relative;
+  z-index: 1;
+  height: var(--cell-h);
+  overflow: hidden;
+}
+
+/* Narrow screens: the frame is a fixed number of pixels a side, and at three
+   plaques across a 360px phone a 7px band on each edge is most of the room a
+   four-digit year has. Thinner band, same drawing. */
+@media (max-width: 500px) {
+
+  .reveal-plaque__frame {
+    --frame-outer-thickness: 4.5;
+    --frame-outer-scoop: 8;
+    --frame-inner-thickness: 1.5;
+    --frame-inner-scoop: 5;
+    --frame-inset: 4.5;
+
+    /* Scaled with the band. The plaques here are barely 50px across and the
+       gap between them is about 7px - a 9px blur would have neighbouring
+       shadows meeting in the middle of it. */
+    --frame-shadow-dy: 3;
+    --frame-shadow-blur: 3;
+  }
+}
+
+.reveal-strip {
+  will-change: transform;
+}
+
+.reveal-cell {
+  display: grid;
+  place-items: center;
+  height: var(--cell-h);
+  /* The one place --font-display is used - see the token in :root. */
+  font-family: var(--font-display);
+  font-size: var(--cell-fs);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--rv-ivory);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* The knock as a wheel lands - paper does not stop dead. */
+.reveal-dial.is-set {
+  animation: pc-reveal-knock 420ms ease-out 1;
+}
+
+@keyframes pc-reveal-knock {
+  0% {
+    transform: translateY(0);
+  }
+
+  38% {
+    transform: translateY(-3px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* The button is the ornate plaque from media/tap_to_open.svg, laid on as a
+   background the same way .intro__open does it - one artwork, used in the two
+   places this invitation asks the guest to press something.
+
+   The SVG is half shadow bleed: the plaque path runs y 25..99 of a 148-tall
+   viewBox, and x 37..333 of 370. So the rendered box is much taller than the
+   plaque looks, and the negative bottom margin takes that bleed back out of
+   the layout instead of leaving a gap under the card's last element. It is a
+   percentage, which resolves against the CARD's width, so it tracks the
+   button (itself a percentage of the same width) as the card scales. */
+/* Holds the button and the line that takes its place. The button's margins
+   collapse through this box, so its height is exactly the button's - which is
+   what lets .reveal-after use the same 41.9% the button's own label uses and
+   land precisely where that label was. */
+.reveal-action {
+  position: relative;
+}
+
+.reveal-btn {
+  position: relative;
+  display: block;
+  /* The 340px cap is gone: a percentage already resolves against the card's
+     content box, so it scales with the card on its own, and the cap only ever
+     sat there to stop growth the card can now afford. It never bound at the old
+     600px size either - 55% of that card's content box is about 211px. */
+  width: 55%;
+  aspect-ratio: 4 / 1;
+  margin: clamp(12px, 2.33cqw, 28px) auto -6%;
+  border: 0;
+  padding: 0;
+  background: url("media/tap_to_open.svg") center / contain no-repeat;
+  /* The artwork used to carry its own outer shadow, with half the canvas set
+     aside as bleed for it. That shadow is CSS now: drop-shadow traces the
+     plaque's scalloped silhouette (box-shadow would draw a rectangle straight
+     across the scallops) and paints outside the element box, so it costs no
+     layout and needs no bleed. */
+  filter: drop-shadow(0px 12px 35px rgba(0, 0, 0, 0.35));
+  color: var(--rv-ivory);
+  font-family: var(--font-serif);
+  font-size: clamp(13px, 3.67cqw, 44px);
+  cursor: pointer;
+  transition: transform 140ms ease;
+  /* Same cue as the cover plaque: this is the second and last place the
+     invitation asks the guest to press something, and the card around it is
+     still. See .is-pressed below - the press has to switch this off to be
+     seen at all, since an animation outranks a plain transform. */
+  animation: pc-cue-bob 1.8s ease-in-out infinite;
+}
+
+@media (min-width: 760px) {
+
+  .reveal-btn {
+    /* 46%, not 60%. A percentage here resolves against the card's CONTENT box,
+       and that box grew twice over - once when the card took the family cards'
+       width, again when its side padding halved to let the dials spread. At 60%
+       the plaque had gone from about 38% of the card to about 49% of it and was
+       competing with the dials it sits under; 46% of the wider content box puts
+       it back at the ~38% it read as before.
+       Phones keep the 55% in the base rule: their card grew too, so the plaque
+       there is already the same share of it that it always was. */
+    width: 40%;
+    /* margin-BOTTOM only, deliberately - not margin-block. This used to be
+       margin-block: -4.6%, which sets both top AND bottom to the same value,
+       and a NEGATIVE top margin pulls the button up into the dial row above
+       it. That is exactly what put "Save the Date!" overlapping the numeral
+       plaques at this width: the base rule's positive top margin (clamp(6px,
+       2.33cqw, 28px), a real gap) was being clobbered by this -4.6% the
+       moment the card crossed 760px.
+       Scaled with the width, this margin still pulls the SVG's shadow bleed
+       back out of the layout on the BOTTOM only - the bleed is a share of the
+       artwork's HEIGHT, which follows the width through aspect-ratio 4/1.
+       The percentage resolves against the content box, which did not shrink,
+       so left at -6% it would pull back half again as much bleed as there
+       now is. */
+    margin-bottom: -4.6%;
+  }
+}
+
+/* The plaque's optical centre. The artwork is 300x78 with the path running
+   y 2..76, so geometrically that is 50%; 47% lifts the words a hair, which
+   reads better against the scalloped top edge. .reveal-after must carry the
+   same figure or the wording jumps when it swaps. */
+.reveal-btn__face {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+/* animation:none is load-bearing, not tidying: a running animation wins over a
+   declared transform, so without it the plaque would keep bobbing and the
+   press would never show. Dropping the animation also hands the transform back
+   to the 140ms transition above, so it eases down from wherever the bob had
+   reached rather than snapping. */
+.reveal-btn.is-pressed {
+  animation: none;
+  transform: translateY(3px);
+}
+
+.reveal-btn:focus-visible {
+  outline: 3px solid var(--rv-teal);
+  outline-offset: 4px;
+}
+
+.reveal-btn[disabled] {
+  cursor: default;
+}
+
+/* Spent the moment it is pressed. is-revealING, not is-revealed: the press is
+   what uses the button up, so it leaves then rather than lingering through the
+   whole roll and vanishing at the end - by which point the guest is reading the
+   date, not the button.
+
+   The 170ms delay lets .is-pressed play first, so the plaque is seen to be
+   pushed before it goes; without it the fade eats its own press feedback.
+
+   visibility rather than display, and no change of size: the plaque keeps its
+   space so the card holds its height while .reveal-after fades into the same
+   spot afterwards - a swap, not a collapse. */
+.is-revealing .reveal-btn,
+.is-revealed .reveal-btn {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 380ms ease 170ms, visibility 0s linear 550ms;
+}
+
+/* Sits on the button's optical centre - the same figure .reveal-btn__face
+   uses, so the wording changes in place rather than moving. Keep the two in
+   step: they were 41.9% together when the artwork was 370x148 with the plaque
+   sitting high in a shadow-padded canvas, and this one was left behind when
+   the face moved to 47%. */
+.reveal-after {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  white-space: nowrap;
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 5.33cqw, 64px);
+  color: var(--rv-teal);
+  animation: pc-reveal-arrive 620ms ease 200ms both;
+}
+
+@keyframes pc-reveal-arrive {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal-after {
+    animation-duration: 1ms;
+    animation-delay: 0s;
+  }
+}
+
+/* Editing: the host sees the button AND the line that replaces it, one under
+   the other, rather than having to press something to find out what the second
+   one says. Out of the overlay and back into flow to do it, then clear of the
+   plaque's foot - see the margin below. */
+.is-preview .reveal-after {
+  position: static;
+  transform: none;
+  animation: none;
+  /* Cancels .reveal-btn's own -6% bottom margin. That margin dates from when
+     the plaque artwork carried its shadow as bleed and half the SVG box was
+     empty; the shadow is a CSS drop-shadow now (see .reveal-btn), so there is
+     no bleed left to claw back and the -6% simply drags whatever follows the
+     button UP onto it - which in edit mode is this line, printed across the
+     plaque's foot instead of under it.
+
+     6% against 6%, not a pixel figure: both resolve against .reveal-action's
+     inline size, so they cancel exactly at every card width instead of only at
+     the one they were eyeballed on. */
+  margin-top: 6%;
+}
+
+/* The settled date in words, for a guest who cannot see the dials move. Not
+   shown, because on screen the dials already say it - this exists so the
+   aria-live region has something to announce. */
+.reveal-said {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Reduced motion. Nothing rolls, turns or knocks; the three values simply
+   arrive in the same order - date, then month, then year - so the sequence
+   still reads. date-reveal.js takes this path too and skips building the
+   roll at all. */
+.reveal-dial.is-fading {
+  opacity: 0;
+}
+
+.reveal-dial.is-fading.is-shown {
+  opacity: 1;
+  transition: opacity 420ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal-dial.is-set {
+    animation: none;
+  }
+
+  .reveal-btn {
+    transition: none;
+    animation: none;
+  }
+
+  /* Deliberately left alive: it is the whole of the reduced-motion reveal,
+     and a fade travels nowhere. */
+  .reveal-dial.is-fading.is-shown {
+    transition: opacity 420ms ease;
+  }
+}
+
+/* Editing. The host is shown the settled result rather than a blank card, so
+   the button has nothing left to do - but it stays on the card, dimmed, so
+   the host can see the piece guests will actually press. */
+.is-preview .reveal-btn {
+  opacity: 0.45;
+  /* Still, because here it is disabled and shown beside the line that replaces
+     it - a dimmed button beckoning at something the host cannot press would
+     just be movement in the corner of their eye while they edit. */
+  animation: none;
+}

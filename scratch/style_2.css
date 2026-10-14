@@ -1,0 +1,123 @@
+
+  /* Premium Visual Polish & Typography */
+  :root {
+    --gold-gradient: linear-gradient(135deg, #dfba73 0%, #c59b48 50%, #9a7226 100%);
+    --gold-glow: 0 4px 20px rgba(212, 168, 83, 0.28);
+    --card-shadow: 0 16px 40px -12px rgba(90, 20, 30, 0.12), 0 2px 10px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Smooth rendering */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Couple title gold shimmer */
+  .hero-names-title {
+    filter: drop-shadow(0 4px 12px rgba(155, 28, 58, 0.18));
+    animation: gentleShimmer 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes gentleShimmer {
+    0% { filter: drop-shadow(0 4px 12px rgba(155, 28, 58, 0.18)); }
+    100% { filter: drop-shadow(0 6px 18px rgba(212, 168, 83, 0.35)); }
+  }
+
+  /* Royal cards enhanced styling */
+  .floral-section-card, .inv-card, .ec-card {
+    box-shadow: var(--card-shadow) !important;
+    border-radius: 18px !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .ec-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 50px -10px rgba(120, 25, 40, 0.2) !important;
+  }
+
+  /* Image protection against broken icons */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+  img[alt]:after {
+    display: none !important;
+  }
+
+  /* Gold button sheen */
+  .ec-btn--primary, .hero-btn-primary {
+    background: linear-gradient(135deg, #8c1229 0%, #ad1c3a 60%, #700c1e 100%) !important;
+    box-shadow: 0 6px 20px rgba(140, 18, 41, 0.35) !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    border: 1px solid rgba(255, 220, 150, 0.3) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .ec-btn--primary:hover, .hero-btn-primary:hover {
+    box-shadow: 0 8px 25px rgba(173, 28, 58, 0.5) !important;
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Audio player luxury floating pill */
+  .music-player {
+    bottom: 24px !important;
+    right: 24px !important;
+    z-index: 999 !important;
+    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.18));
+  }
+  
+  .music-toggle {
+    background: rgba(255, 253, 247, 0.95) !important;
+    border: 1.5px solid #d4a853 !important;
+    backdrop-filter: blur(10px) !important;
+    color: #721022 !important;
+    padding: 10px 18px !important;
+    border-radius: 50px !important;
+    box-shadow: 0 4px 15px rgba(212, 168, 83, 0.25) !important;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .music-toggle:hover {
+    background: #fff8eb !important;
+    transform: scale(1.05);
+  }
+
+  /* Countdown box premium look */
+  .wedding-countdown--clay .countdown-stage {
+    background: rgba(255, 252, 245, 0.85);
+    border: 1px solid rgba(212, 168, 83, 0.45);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8), 0 8px 24px rgba(114, 16, 34, 0.08);
+    border-radius: 16px;
+    padding: 14px 22px;
+  }
+
+  .countdown-cell {
+    padding: 0 12px;
+  }
+
+  .countdown-value {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 2.2rem !important;
+    color: #721022 !important;
+    font-weight: 700 !important;
+  }
+
+  .countdown-label {
+    color: #9c6c44 !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+  }
+
+  /* Vanvi Moments footer branding */
+  .floral-footer {
+    background: radial-gradient(circle at top, rgba(247, 186, 90, 0.12), transparent 70%);
+    border-top: 1px solid rgba(212, 168, 83, 0.25);
+  }

@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>Papercut Lotus — Vanvi Moments Luxury Invitation</title>
+
+    <!-- Luxury Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Fraunces:opsz,wght@9..144,400..700&family=Sora:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Bengali:wght@400;600&family=Noto+Sans+Tamil:wght@400;600&family=Noto+Sans+Telugu:wght@400;600&family=Noto+Sans+Kannada:wght@400;600&family=Noto+Sans+Malayalam:wght@400;600&family=Noto+Sans+Gurmukhi:wght@400;600&family=Noto+Sans+Oriya:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Gujarati:wght@400;600&display=swap">
+
+    <!-- Preload Ganesha icon & Hero -->
+    <link rel="preload" as="image" href="./symbols/_ganesha.svg">
+    <link rel="stylesheet" href="./papercut_styles.css">
+
+    <style>
+        /* Vanvi Moments Watermark & Top Chrome */
+        .vanvi-watermark-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999999;
+            background: rgba(9, 69, 93, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 216, 83, 0.4);
+            color: #FDF3E8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px;
+            font-family: var(--font-sans, system-ui, sans-serif);
+            font-size: 13px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .vanvi-watermark-bar.hidden {
+            display: none !important;
+        }
+
+        .vanvi-watermark-bar .brand-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            color: #FFD853;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .vanvi-watermark-bar .watermark-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vanvi-watermark-bar .btn-builder {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 216, 83, 0.45);
+            color: #FFD853;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            padding: 5px 12px;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .vanvi-watermark-bar .btn-builder:hover {
+            background: rgba(255, 216, 83, 0.2);
+            border-color: #FFD853;
+        }
+
+        .vanvi-watermark-bar .btn-unlock {
+            background: linear-gradient(135deg, #FFD853 0%, #D4AF37 100%);
+            color: #083041;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            padding: 5px 14px;
+            border-radius: 999px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(255, 216, 83, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .vanvi-watermark-bar .btn-unlock:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 216, 83, 0.5);
+        }
+
+        /* Floating Audio Control */
+        .vanvi-music-toggle {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 99990;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(9, 69, 93, 0.92);
+            border: 1.5px solid #FFD853;
+            color: #FFD853;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
+        }
+
+        .vanvi-music-toggle:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(255, 216, 83, 0.4);
+        }
+
+        .vanvi-music-toggle.is-playing {
+            animation: pulse-music 2.4s infinite ease-in-out;
+        }
+
+        @keyframes pulse-music {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 216, 83, 0.5); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 216, 83, 0); }
+        }
+
+        .vanvi-music-toggle svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        /* Ensure smooth iframe nesting inside builder */
+        body.in-builder-iframe .vanvi-watermark-bar {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Watermark Header -->
+    <div class="vanvi-watermark-bar" id="watermarkBar">
+        <div class="brand-badge">
+            <span>✦</span>
+            <span>VANVI MOMENTS PREVIEW</span>
+        </div>
+        <div class="watermark-actions">
+            <a href="./builder.html" class="btn-builder">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+                <span>Edit Details</span>
+            </a>
+            <a href="./builder.html" class="btn-unlock">Publish Free</a>
+        </div>
+    </div>
+
+    <!-- Floating Background Music Player -->
+    <button class="vanvi-music-toggle" id="musicToggleBtn" type="button" aria-label="Toggle background music">
+        <svg id="musicIconOn" viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+        <svg id="musicIconOff" viewBox="0 0 24 24" style="display:none;">
+            <path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73l4.73 4.73 1.27-1.27L4.27 3zM14 7h4V3h-6v4.73l2 2V7z"/>
+        </svg>
+    </button>
+    <audio id="bgAudio" src="./media/wedding_track.mp3" loop preload="auto"></audio>
+
+    <!-- FIRST in the document: Cover & Tap to open overlay -->
+    <div class="intro" id="intro">
+        <div class="intro__inner">
+            <span class="intro__symbol" id="pcSymbol" aria-hidden="true" style="mask-image: url('./symbols/_ganesha.svg'); -webkit-mask-image: url('./symbols/_ganesha.svg');"></span>
+            <p class="intro__mantra" id="pcInvocation">श्री गणेशाय नमः</p>
+            <p class="intro__guest" id="pcGuestGreeting" hidden></p>
+            <p class="intro__note" id="pcIntroNote">
+                We cordially invite you to grace the auspicious occasion of the marriage of…
+            </p>
+        </div>
+
+        <div class="intro__cue">
+            <button class="intro__open" type="button"><span class="intro__open-label">Tap to open</span></button>
+        </div>
+
+        <img class="intro__wave" src="media/wave.svg" alt="" aria-hidden="true" draggable="false">
+    </div>
+
+    <section class="hero">
+        <picture class="deco hero-art">
+            <source media="(max-width: 500px)" srcset="media/hero_phone.webp">
+            <img src="media/hero_desktop.webp" alt="Wedding Couple Hero" aria-hidden="true">
+        </picture>
+
+        <h1 class="couple">
+            <span class="bride-name" id="pcBrideName">Ankita</span>
+            <span class="amp">and</span>
+            <span class="groom-name" id="pcGroomName">Kaushik</span>
+        </h1>
+
+        <picture class="arch arch--front">
+            <source media="(max-width: 500px)" srcset="media/arch1_phone.svg">
+            <img src="media/arch.svg" alt="" aria-hidden="true">
+        </picture>
+
+        <div class="arch-flowers" aria-hidden="true">
+            <img class="arch-flower arch-flower--left" src="media/mini-flower.svg" alt="" data-spin="0.5">
+            <img class="arch-flower arch-flower--right" src="media/mini-flower.svg" alt="" data-spin="-0.5">
+        </div>
+    </section>
+
+    <section class="invite">
+        <!-- Groom's Family Card -->
+        <article class="card" id="pcGroomCard" data-card="groomFamily">
+            <deco-frame class="card__frame card__frame--inner"></deco-frame>
+            <img class="card__crown" src="media/paper-lotus_straight.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <img class="card__stem" src="media/lotus-bud2.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <deco-frame class="card__frame card__frame--outer"></deco-frame>
+            <img class="card__bud" src="media/lotus-bud.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+
+            <div class="invite__inner">
+                <h2 class="card__name" id="pcGroomCardName">Chi. Kaushik Sharma</h2>
+
+                <p class="card__block">
+                    <span class="card__rel" id="pcGroomRelLabel">Son of</span>
+                    <span class="card__elder" id="pcGroomParentA">Shri Ramesh Chandra Sharma</span>
+                    <span class="card__amp">&amp;</span>
+                    <span class="card__elder" id="pcGroomParentB">Smt. Sunita Sharma</span>
+                </p>
+
+                <p class="card__block">
+                    <span class="card__rel" id="pcGroomGrandLabel">Grandson of</span>
+                    <span class="card__elder" id="pcGroomGrandA">Late Shri Pandit Brij Mohan Sharma</span>
+                    <span class="card__amp">&amp;</span>
+                    <span class="card__elder" id="pcGroomGrandB">Late Smt. Kamla Devi Sharma</span>
+                </p>
+
+                <p class="card__gotra"><span id="pcGroomGotraLabel">Gotra</span>: <span id="pcGroomGotra">Bharadwaj</span></p>
+            </div>
+        </article>
+
+        <!-- Bride's Family Card -->
+        <article class="card" id="pcBrideCard" data-card="brideFamily">
+            <deco-frame class="card__frame card__frame--inner"></deco-frame>
+            <img class="card__crown" src="media/paper-lotus_straight.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <img class="card__stem" src="media/lotus-bud2.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <deco-frame class="card__frame card__frame--outer"></deco-frame>
+            <img class="card__bud" src="media/lotus-bud.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+
+            <div class="invite__inner">
+                <h2 class="card__name" id="pcBrideCardName">Kum. Ankita Verma</h2>
+
+                <p class="card__block">
+                    <span class="card__rel" id="pcBrideRelLabel">Daughter of</span>
+                    <span class="card__elder" id="pcBrideParentA">Shri Rajesh Kumar Verma</span>
+                    <span class="card__amp">&amp;</span>
+                    <span class="card__elder" id="pcBrideParentB">Smt. Meera Verma</span>
+                </p>
+
+                <p class="card__block">
+                    <span class="card__rel" id="pcBrideGrandLabel">Granddaughter of</span>
+                    <span class="card__elder" id="pcBrideGrandA">Late Shri Hari Prasad Verma</span>
+                    <span class="card__amp">&amp;</span>
+                    <span class="card__elder" id="pcBrideGrandB">Late Smt. Shanti Devi Verma</span>
+                </p>
+
+                <p class="card__gotra"><span id="pcBrideGotraLabel">Gotra</span>: <span id="pcBrideGotra">Kashyap</span></p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Rotating Lotus Section -->
+    <section class="lotus-spin">
+        <div class="lotus-spin__stack" id="spinLotus">
+            <img class="lotus-spin__layer" src="media/big_lotus.webp" alt="" aria-hidden="true" data-spin="0.12">
+        </div>
+    </section>
+
+    <!-- Interactive Date Reveal Mechanism -->
+    <section class="scene scene--reveal" id="pcDateReveal">
+        <div class="reveal-card">
+            <img class="reveal-bloom reveal-bloom--left" id="pcRevealBloomLeft" src="media/date_flower_left.webp" alt=""
+                aria-hidden="true" loading="lazy" decoding="async">
+            <img class="reveal-bloom reveal-bloom--right" id="pcRevealBloomRight" src="media/date_flower_right.webp"
+                alt="" aria-hidden="true" loading="lazy" decoding="async">
+
+            <p class="reveal-lead" id="pcRevealLead" hidden></p>
+
+            <div class="reveal-dials" role="group" aria-label="Wedding date">
+                <div class="reveal-dial" data-dial="day">
+                    <span class="reveal-dial__cap">Date</span>
+                    <div class="reveal-plaque">
+                        <deco-frame class="reveal-plaque__frame"></deco-frame>
+                        <div class="reveal-window">
+                            <div class="reveal-strip" data-strip></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-dial reveal-dial--wide" data-dial="month">
+                    <span class="reveal-dial__cap">Month</span>
+                    <div class="reveal-plaque">
+                        <deco-frame class="reveal-plaque__frame"></deco-frame>
+                        <div class="reveal-window">
+                            <div class="reveal-strip" data-strip></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-dial reveal-dial--wide" data-dial="year">
+                    <span class="reveal-dial__cap">Year</span>
+                    <div class="reveal-plaque">
+                        <deco-frame class="reveal-plaque__frame"></deco-frame>
+                        <div class="reveal-window">
+                            <div class="reveal-strip" data-strip></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal-action">
+                <button class="reveal-btn" id="pcRevealBtn" type="button">
+                    <span class="reveal-btn__face" id="pcRevealBtnLabel">Reveal the Date!</span>
+                </button>
+                <p class="reveal-after" id="pcRevealAfter" hidden>Save the Date!</p>
+            </div>
+
+            <p class="reveal-said" id="pcRevealSaid" aria-live="polite"></p>
+        </div>
+    </section>
+
+    <!-- Pull-Cord Gallery (Photos & Keepsake Notes) -->
+    <section class="gallery">
+        <div class="gallery__reveal">
+            <!-- Photo Pager -->
+            <div class="gallery__pager" data-gallery="photos">
+                <div class="gallery__pull">
+                    <span class="gallery__pull-rope"></span>
+                    <img class="gallery__pull-knob" src="media/pull.svg" alt="" draggable="false">
+                </div>
+                <p class="gallery__hint" hidden>Pull the string to see the next photo</p>
+                <button class="gallery__nav gallery__nav--prev" type="button" aria-label="Previous photo" hidden>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <path d="M15 4 7 12l8 8" />
+                    </svg>
+                </button>
+                <figure class="frame">
+                    <div class="frame__slot frame__slot--photo">
+                        <ul class="frame__reel" id="pcGalleryPhotoTrack"></ul>
+                    </div>
+                    <img class="frame__border" src="media/gallery.png" alt="" aria-hidden="true">
+                </figure>
+                <button class="gallery__nav gallery__nav--next" type="button" aria-label="Next photo" hidden>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <path d="M9 4l8 8-8 8" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Notes Pager -->
+            <div class="gallery__pager" data-gallery="notes">
+                <div class="gallery__pull">
+                    <span class="gallery__pull-rope"></span>
+                    <img class="gallery__pull-knob" src="media/pull.svg" alt="" draggable="false">
+                </div>
+                <p class="gallery__hint" hidden>Pull the string to see the next note</p>
+                <button class="gallery__nav gallery__nav--prev" type="button" aria-label="Previous note" hidden>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <path d="M15 4 7 12l8 8" />
+                    </svg>
+                </button>
+                <figure class="frame">
+                    <div class="frame__slot frame__slot--text">
+                        <ul class="frame__reel" id="pcGalleryNoteTrack"></ul>
+                    </div>
+                    <img class="frame__border" src="media/gallery.png" alt="" aria-hidden="true">
+                </figure>
+                <button class="gallery__nav gallery__nav--next" type="button" aria-label="Next note" hidden>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <path d="M9 4l8 8-8 8" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ceremonies Carousel -->
+    <section class="ceremonies">
+        <h2 class="ceremonies__title">Ceremonies</h2>
+
+        <div class="carousel">
+            <button class="carousel__nav carousel__nav--prev" type="button" aria-label="Previous ceremony">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="M15 4 7 12l8 8" />
+                </svg>
+            </button>
+
+            <div class="carousel__viewport">
+                <ul class="carousel__track" id="pcCeremonyTrack"></ul>
+            </div>
+
+            <button class="carousel__nav carousel__nav--next" type="button" aria-label="Next ceremony">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 4l8 8-8 8" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="carousel__dots" role="group" aria-label="Jump to a ceremony"></div>
+    </section>
+
+    <!-- Compliment Card -->
+    <section class="scene scene--compliment">
+        <article class="card" id="pcComplimentCard" data-card="compliments">
+            <deco-frame class="card__frame card__frame--inner"></deco-frame>
+            <img class="card__crown" src="media/paper-lotus_straight.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <img class="card__stem" src="media/lotus-bud2.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <deco-frame class="card__frame card__frame--outer"></deco-frame>
+            <img class="card__bud" src="media/lotus-bud.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <div class="invite__inner">
+                <h3 class="card__name" id="pcComplimentLead">With Best Compliments From:</h3>
+                <div class="compliment__lines" id="pcComplimentLines"></div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Note Card -->
+    <section class="scene scene--note">
+        <article class="card" id="pcNoteCard" data-card="note">
+            <deco-frame class="card__frame card__frame--inner"></deco-frame>
+            <img class="card__crown" src="media/paper-lotus_straight.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <img class="card__stem" src="media/lotus-bud2.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <deco-frame class="card__frame card__frame--outer"></deco-frame>
+            <img class="card__bud" src="media/lotus-bud.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <div class="invite__inner">
+                <h3 class="card__name" id="pcNoteLead">A Note From Us</h3>
+                <p class="note__text" id="pcNoteText"></p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Socials / Affordances: Instagram, Locations, Calendar -->
+    <section class="scene scene--social">
+        <div class="socials">
+            <button class="social" id="pcIgBtn" type="button" aria-label="Instagram">
+                <img src="media/instagram.webp" alt="Instagram" loading="lazy" decoding="async">
+            </button>
+            <button class="social" id="pcLocBtn" type="button" aria-label="Ceremony locations">
+                <img src="media/location.webp" alt="Locations" loading="lazy" decoding="async">
+            </button>
+            <button class="social" id="pcCalBtn" type="button" aria-label="Add ceremonies to calendar">
+                <img src="media/date.webp" alt="Calendar" loading="lazy" decoding="async">
+            </button>
+        </div>
+    </section>
+
+    <!-- Farewell Message -->
+    <section class="scene scene--farewell">
+        <p class="farewell__guest" id="pcFarewellGuest" hidden></p>
+        <p class="farewell__line">Your Presence Means the World to Us</p>
+    </section>
+
+    <!-- Modal for Instagram, Locations, and Calendar -->
+    <div class="pc-modal" id="pcModal" hidden>
+        <div class="pc-modal__overlay" data-pc-close></div>
+        <div class="pc-modal__box" role="dialog" aria-modal="true" aria-labelledby="pcModalTitle">
+            <button class="pc-modal__close" type="button" data-pc-close aria-label="Close">&times;</button>
+            <div class="pc-modal__content" id="pcModalContent"></div>
+        </div>
+    </div>
+
+    <!-- Foot Arch Band -->
+    <picture class="arch-foot">
+        <source media="(max-width: 500px)" srcset="media/arch_bottom_phone.svg">
+        <img src="media/arch_bottom.svg" alt="" aria-hidden="true">
+    </picture>
+
+    <!-- Corner Lotuses -->
+    <img class="page-lotus page-lotus--left" src="media/paper-lotus.webp" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
+    <img class="page-lotus page-lotus--right" src="media/paper-lotus.webp" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
+
+    <!-- Runtime Engine -->
+    <script src="./config.js"></script>
+    <script src="./render.js"></script>
+    <script src="./app.js"></script>
+    <script src="./date-reveal.js"></script>
+    <script src="./social.js"></script>
+
+    <!-- Watermark, Audio, and Live Builder Sync Controller -->
+    <script>
+        (function () {
+            const params = new URLSearchParams(location.search);
+            const isPublished = params.get('published') === 'true' || localStorage.getItem('papercut_published') === '1';
+            const isIframe = window.self !== window.top;
+            const watermark = document.getElementById('watermarkBar');
+
+            if (isIframe) {
+                document.body.classList.add('in-builder-iframe');
+            }
+
+            if (isPublished) {
+                if (watermark) watermark.classList.add('hidden');
+            }
+
+            // Audio player handling
+            const audio = document.getElementById('bgAudio');
+            const toggle = document.getElementById('musicToggleBtn');
+            const iconOn = document.getElementById('musicIconOn');
+            const iconOff = document.getElementById('musicIconOff');
+            let isPlaying = false;
+
+            function updateIcons() {
+                if (isPlaying) {
+                    toggle.classList.add('is-playing');
+                    iconOn.style.display = 'block';
+                    iconOff.style.display = 'none';
+                } else {
+                    toggle.classList.remove('is-playing');
+                    iconOn.style.display = 'none';
+                    iconOff.style.display = 'block';
+                }
+            }
+
+            function playMusic() {
+                if (!audio) return;
+                audio.play().then(() => {
+                    isPlaying = true;
+                    updateIcons();
+                }).catch(() => {
+                    isPlaying = false;
+                    updateIcons();
+                });
+            }
+
+            function pauseMusic() {
+                if (!audio) return;
+                audio.pause();
+                isPlaying = false;
+                updateIcons();
+            }
+
+            if (toggle) {
+                toggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (isPlaying) {
+                        pauseMusic();
+                    } else {
+                        playMusic();
+                    }
+                });
+            }
+
+            // Autoplay on tap to open
+            const openBtn = document.querySelector('.intro__open');
+            if (openBtn) {
+                openBtn.addEventListener('click', () => {
+                    if (!isPlaying) playMusic();
+                });
+            }
+
+            // Live PostMessage listener for real-time builder updates
+            window.addEventListener('message', function (e) {
+                if (!e.data || e.data.type !== 'UPDATE_CONFIG') return;
+                const newCfg = e.data.config;
+                if (!newCfg || !window.Papercut) return;
+
+                // Merge and update Papercut config
+                Object.assign(window.Papercut.config, newCfg);
+                if (window.Papercut.render && window.Papercut.render.all) {
+                    window.Papercut.render.all();
+                }
+                if (window.Papercut.dateReveal && window.Papercut.dateReveal.refresh) {
+                    window.Papercut.dateReveal.refresh();
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

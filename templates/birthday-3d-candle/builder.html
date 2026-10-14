@@ -174,6 +174,10 @@
           </div>
         </div>
         <input type="file" id="hiddenPhotoInput" accept="image/*" style="display: none;">
+        <div style="margin-top: 10px; display: flex; gap: 8px;">
+          <input type="text" id="inpPhotoUrlAdd" class="form-input" placeholder="Or paste image URL (https://...)" style="flex:1;">
+          <button type="button" style="padding: 6px 14px; font-size: 11.5px; white-space: nowrap; font-weight: 700; border-radius: 8px; background: #ff2a7a; color: #fff; border: none; cursor: pointer;" onclick="addPhotoFromUrl()">Add URL</button>
+        </div>
       </div>
 
       <!-- Audio & Soundtrack -->
@@ -405,6 +409,24 @@
     function removePhoto(index, e) {
       if (e) e.stopPropagation();
       currentPhotos.splice(index, 1);
+      renderPhotos();
+      VanviBuilderCore.set('photos', currentPhotos);
+      updateLiveIframe({ photos: currentPhotos });
+    }
+
+    function addPhotoFromUrl() {
+      const urlInput = document.getElementById('inpPhotoUrlAdd');
+      const url = urlInput ? urlInput.value.trim() : '';
+      if (!url) {
+        alert('Please enter or paste a valid image URL');
+        return;
+      }
+      if (currentPhotos.length < 6) {
+        currentPhotos.push(url);
+      } else {
+        currentPhotos[0] = url;
+      }
+      urlInput.value = '';
       renderPhotos();
       VanviBuilderCore.set('photos', currentPhotos);
       updateLiveIframe({ photos: currentPhotos });
