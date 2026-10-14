@@ -973,3 +973,230 @@ input:checked + .switch-slider:before {
   place-items: center;
   font-size: 14px;
 }
+
+/* ==========================================================================
+   ADDITIONAL 4 ROYAL THEMES (PEACOCK, RANI PINK, HALDI, OBSIDIAN)
+   ========================================================================== */
+/* ─── THEME 5: JODHPUR PEACOCK BLUE ─── */
+.vanvi-invitation-card.theme-peacock {
+  background: radial-gradient(circle at 50% 30%, #0e2b4d 0%, #051426 100%);
+  color: #eaf2fb;
+  border: 3px double #e0b457;
+  box-shadow: inset 0 0 45px rgba(0,0,0,0.65);
+}
+.theme-peacock .gold-text {
+  color: #ffd978;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+.theme-peacock .arch-ornament {
+  stroke: #e0b457;
+  fill: none;
+}
+.theme-peacock .card-divider {
+  background: linear-gradient(90deg, transparent, #e0b457, transparent);
+}
+
+/* ─── THEME 6: JAIPUR RANI PINK & GOTA PATTI ─── */
+.vanvi-invitation-card.theme-ranipink {
+  background: radial-gradient(circle at 50% 30%, #8c0c46 0%, #4a0322 100%);
+  color: #fff1f6;
+  border: 3px double #fcd34d;
+  box-shadow: inset 0 0 45px rgba(0,0,0,0.6);
+}
+.theme-ranipink .gold-text {
+  color: #ffe082;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.theme-ranipink .arch-ornament {
+  stroke: #fcd34d;
+  fill: none;
+}
+.theme-ranipink .card-divider {
+  background: linear-gradient(90deg, transparent, #fcd34d, transparent);
+}
+
+/* ─── THEME 7: KASHI MARIGOLD & HALDI CHANDAN ─── */
+.vanvi-invitation-card.theme-haldi {
+  background: radial-gradient(circle at 50% 30%, #7c440d 0%, #421f02 100%);
+  color: #fff8ee;
+  border: 3px double #fbbf24;
+  box-shadow: inset 0 0 45px rgba(0,0,0,0.65);
+}
+.theme-haldi .gold-text {
+  color: #fde047;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+.theme-haldi .arch-ornament {
+  stroke: #fbbf24;
+  fill: none;
+}
+.theme-haldi .card-divider {
+  background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+}
+
+/* ─── THEME 8: MIDNIGHT OBSIDIAN SAPPHIRE ─── */
+.vanvi-invitation-card.theme-obsidian {
+  background: radial-gradient(circle at 50% 30%, #171926 0%, #090a10 100%);
+  color: #f8fafc;
+  border: 3px double #e2b755;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+}
+.theme-obsidian .gold-text {
+  color: #fde68a;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
+.theme-obsidian .arch-ornament {
+  stroke: #e2b755;
+  fill: none;
+}
+.theme-obsidian .card-divider {
+  background: linear-gradient(90deg, transparent, #e2b755, transparent);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY SUITE & FONT UTILITIES
+   ========================================================================== */
+.font-pinyon { font-family: 'Pinyon Script', cursive !important; }
+.font-cinzel-dec { font-family: 'Cinzel Decorative', Georgia, serif !important; letter-spacing: 2px; }
+.font-cormorant { font-family: 'Cormorant Garamond', Georgia, serif !important; }
+.font-alex { font-family: 'Alex Brush', cursive !important; }
+.font-greatvibes { font-family: 'Great Vibes', cursive !important; }
+.font-playfair { font-family: 'Playfair Display', Georgia, serif !important; }
+.font-rozha { font-family: 'Rozha One', serif !important; }
+.font-yatra { font-family: 'Yatra One', cursive !important; }
+
+/* Body Fonts */
+.body-jakarta { font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important; }
+.body-cormorant { font-family: 'Cormorant Garamond', Georgia, serif !important; }
+.body-montserrat { font-family: 'Montserrat', sans-serif !important; letter-spacing: 0.5px; }
+.body-cinzel { font-family: 'Cinzel', Georgia, serif !important; letter-spacing: 1px; }
+
+/* Gold Shimmer Effect */
+.gold-shimmer-active .gold-text {
+  background: linear-gradient(120deg, #f7d774 0%, #ffffff 40%, #d4af37 60%, #f7d774 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldFoilGleam 4s linear infinite;
+}
+
+@keyframes goldFoilGleam {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Border Styles */
+.border-double { border-style: double !important; border-width: 4px !important; }
+.border-silk-clean { border-style: solid !important; border-width: 1.5px !important; }
+.border-jali {
+  border: 1px solid var(--gold-primary) !important;
+  outline: 6px double var(--gold-primary);
+  outline-offset: -12px;
+}
+.border-corner-mandala {
+  border: 2px solid var(--gold-primary) !important;
+  position: relative;
+}
+.border-corner-mandala::before,
+.border-corner-mandala::after {
+  content: "✦";
+  position: absolute;
+  color: var(--gold-primary);
+  font-size: 14px;
+}
+.border-corner-mandala::before { top: 6px; left: 8px; }
+.border-corner-mandala::after { bottom: 6px; right: 8px; }
+
+/* Deity Embellishment Icon Container */
+.deity-badge-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.deity-badge-svg {
+  width: 42px;
+  height: 42px;
+  color: var(--gold-primary);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+  transition: transform 0.3s ease;
+}
+.deity-badge-wrap:hover .deity-badge-svg {
+  transform: scale(1.08);
+}
+
+/* Font Picker Grid in Sidebar */
+.fonts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+.font-card-option {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+.font-card-option:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold-primary);
+}
+.font-card-option.active {
+  background: rgba(212, 175, 55, 0.18);
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 12px var(--gold-glow);
+}
+.font-card-sample {
+  font-size: 18px;
+  color: #fff;
+  display: block;
+  margin-bottom: 4px;
+}
+.font-card-name {
+  font-size: 10.5px;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Audio Player Floating Bar */
+.studio-audio-player {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  background: rgba(23, 13, 20, 0.92);
+  border: 1px solid var(--border-hover);
+  border-radius: 99px;
+  padding: 8px 16px;
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  z-index: 99;
+}
+.btn-music-toggle {
+  background: var(--gold-gradient);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #170d14;
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.music-info {
+  font-size: 11.5px;
+  color: var(--ink-light);
+}
+.music-info span {
+  display: block;
+  font-size: 9.5px;
+  color: var(--gold-primary);
+}

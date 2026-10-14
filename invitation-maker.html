@@ -8,10 +8,10 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <meta name="theme-color" content="#170d14" />
 
-  <!-- Google Typography -->
+  <!-- Google Typography: Royal Serif, Calligraphy Scripts, and Devanagari -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rozha+One&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rozha+One&family=Yatra+One&display=swap" rel="stylesheet" />
 
   <!-- Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
@@ -52,6 +52,9 @@
 
     <!-- Header Actions -->
     <div class="header-actions">
+      <button type="button" class="btn-studio-action btn-studio-ghost" id="btnShareWhatsApp" title="Share via WhatsApp" style="color:#25d366;border-color:rgba(37,211,102,0.35);">
+        <span>📱 WhatsApp</span>
+      </button>
       <button type="button" class="btn-studio-action btn-studio-ghost" id="btnTriggerWebKeepsake" title="Generate Interactive Web Link">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
@@ -84,6 +87,12 @@
         <button type="button" class="studio-tab-btn active" data-tab="themes">
           <span>🎨 Themes</span>
         </button>
+        <button type="button" class="studio-tab-btn" data-tab="fonts">
+          <span>🔤 Fonts</span>
+        </button>
+        <button type="button" class="studio-tab-btn" data-tab="deities">
+          <span>👑 Deities</span>
+        </button>
         <button type="button" class="studio-tab-btn" data-tab="details">
           <span>✍️ Details</span>
         </button>
@@ -100,7 +109,7 @@
         <div class="control-section">
           <div class="section-label">
             <span>Royal Indian Palettes</span>
-            <small style="color:var(--ink-muted);font-weight:600;">4 Presets</small>
+            <small style="color:var(--ink-muted);font-weight:600;">8 Grand Themes</small>
           </div>
           <div class="themes-grid">
             
@@ -109,17 +118,17 @@
               <div class="theme-preview-strip" style="background:#4a0d1e;color:#f7d774;border-color:#d4af37;">
                 Rajwada
               </div>
-              <span class="theme-card-name">Rajwada Royale</span>
-              <span class="theme-card-desc">Maroon velvet with embossed 3D gold foil.</span>
+              <span class="theme-card-name">Rajwada Crimson</span>
+              <span class="theme-card-desc">Royal maroon velvet with 24K gold foil.</span>
             </div>
 
-            <!-- 2. Udaipur Pearl -->
+            <!-- 2. Udaipur Sunset -->
             <div class="theme-card-option" data-theme="theme-udaipur">
               <div class="theme-preview-strip" style="background:#f7efe5;color:#b05c74;border-color:#e0a899;">
                 Udaipur
               </div>
               <span class="theme-card-name">Udaipur Sunset</span>
-              <span class="theme-card-desc">Ivory silk with soft rose gold arches.</span>
+              <span class="theme-card-desc">Ivory raw silk with soft rose gold arches.</span>
             </div>
 
             <!-- 3. Emerald & Brass -->
@@ -127,7 +136,7 @@
               <div class="theme-preview-strip" style="background:#0d3b30;color:#fce196;border-color:#e5b869;">
                 Emerald
               </div>
-              <span class="theme-card-name">Emerald Mehendi</span>
+              <span class="theme-card-name">Emerald Shehnai</span>
               <span class="theme-card-desc">Deep forest green with warm brass trims.</span>
             </div>
 
@@ -137,7 +146,43 @@
                 Champagne
               </div>
               <span class="theme-card-name">Champagne Silk</span>
-              <span class="theme-card-desc">Minimalist cream with royal serif elegance.</span>
+              <span class="theme-card-desc">Minimalist French cream with serif elegance.</span>
+            </div>
+
+            <!-- 5. Jodhpur Peacock -->
+            <div class="theme-card-option" data-theme="theme-peacock">
+              <div class="theme-preview-strip" style="background:#0e2b4d;color:#ffd978;border-color:#e0b457;">
+                Peacock
+              </div>
+              <span class="theme-card-name">Jodhpur Peacock</span>
+              <span class="theme-card-desc">Imperial indigo blue with antique gold crest.</span>
+            </div>
+
+            <!-- 6. Jaipur Rani Pink -->
+            <div class="theme-card-option" data-theme="theme-ranipink">
+              <div class="theme-preview-strip" style="background:#8c0c46;color:#ffe082;border-color:#fcd34d;">
+                Rani Pink
+              </div>
+              <span class="theme-card-name">Jaipur Rani Pink</span>
+              <span class="theme-card-desc">Vibrant Gota Patti pink with glowing gold.</span>
+            </div>
+
+            <!-- 7. Kashi Haldi -->
+            <div class="theme-card-option" data-theme="theme-haldi">
+              <div class="theme-preview-strip" style="background:#7c440d;color:#fde047;border-color:#fbbf24;">
+                Haldi
+              </div>
+              <span class="theme-card-name">Haldi Chandan</span>
+              <span class="theme-card-desc">Turmeric saffron ochre with warm terracotta.</span>
+            </div>
+
+            <!-- 8. Midnight Obsidian -->
+            <div class="theme-card-option" data-theme="theme-obsidian">
+              <div class="theme-preview-strip" style="background:#171926;color:#fde68a;border-color:#e2b755;">
+                Obsidian
+              </div>
+              <span class="theme-card-name">Midnight Obsidian</span>
+              <span class="theme-card-desc">Starry black sapphire with pure gold accents.</span>
             </div>
 
           </div>
@@ -164,12 +209,165 @@
         </div>
       </section>
 
-      <!-- TAB 2: EVENT DETAILS & NAMES -->
+      <!-- TAB 2: TYPOGRAPHY & FONT STYLES -->
+      <section class="tab-panel" id="panel_fonts">
+        <div class="control-section">
+          <div class="section-label">
+            <span>Couple Names Typography</span>
+            <small style="color:var(--ink-muted);font-weight:600;">8 Grand Fonts</small>
+          </div>
+          <div class="fonts-grid" id="coupleFontsGrid">
+            
+            <div class="font-card-option active" data-font="font-pinyon">
+              <span class="font-card-sample" style="font-family:'Pinyon Script',cursive;font-size:24px;">Aditya & Priya</span>
+              <span class="font-card-name">Pinyon Script</span>
+            </div>
+
+            <div class="font-card-option" data-font="font-cinzel-dec">
+              <span class="font-card-sample" style="font-family:'Cinzel Decorative',serif;font-size:16px;">ADITYA & PRIYA</span>
+              <span class="font-card-name">Cinzel Decorative</span>
+            </div>
+
+            <div class="font-card-option" data-font="font-cormorant">
+              <span class="font-card-sample" style="font-family:'Cormorant Garamond',serif;font-size:20px;">Aditya & Priya</span>
+              <span class="font-card-name">Cormorant Garamond</span>
+            </div>
+
+            <div class="font-card-option" data-font="font-alex">
+              <span class="font-card-sample" style="font-family:'Alex Brush',cursive;font-size:22px;">Aditya & Priya</span>
+              <span class="font-card-name">Alex Brush</span>
+            </div>
+
+            <div class="font-card-option" data-font="font-greatvibes">
+              <span class="font-card-sample" style="font-family:'Great Vibes',cursive;font-size:22px;">Aditya & Priya</span>
+              <span class="font-card-name">Great Vibes</span>
+            </div>
+
+            <div class="font-card-option" data-font="font-playfair">
+              <span class="font-card-sample" style="font-family:'Playfair Display',serif;font-size:18px;">Aditya & Priya</span>
+              <span class="font-card-name">Playfair Display</span>
+            </div>
+
+            <div class="font-card-option" data-font="font-rozha">
+              <span class="font-card-sample" style="font-family:'Rozha One',serif;font-size:18px;">आदित्य & प्रिया</span>
+              <span class="font-card-name">Rozha One</span>
+            </div>
+
+            <div class="font-card-option" data-font="font-yatra">
+              <span class="font-card-sample" style="font-family:'Yatra One',cursive;font-size:18px;">आदित्य & प्रिया</span>
+              <span class="font-card-name">Yatra One</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="section-label">
+            <span>Body & Details Font</span>
+          </div>
+          <div class="fonts-grid" id="bodyFontsGrid">
+            <div class="font-card-option active" data-body-font="body-cormorant">
+              <span class="font-card-sample" style="font-family:'Cormorant Garamond',serif;font-size:16px;">The Taj Lake Palace</span>
+              <span class="font-card-name">Cormorant Garamond</span>
+            </div>
+            <div class="font-card-option" data-body-font="body-jakarta">
+              <span class="font-card-sample" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;">The Taj Lake Palace</span>
+              <span class="font-card-name">Jakarta Sans</span>
+            </div>
+            <div class="font-card-option" data-body-font="body-montserrat">
+              <span class="font-card-sample" style="font-family:'Montserrat',sans-serif;font-size:13px;">The Taj Lake Palace</span>
+              <span class="font-card-name">Montserrat</span>
+            </div>
+            <div class="font-card-option" data-body-font="body-cinzel">
+              <span class="font-card-sample" style="font-family:'Cinzel',serif;font-size:13px;">THE TAJ LAKE PALACE</span>
+              <span class="font-card-name">Cinzel Classical</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="section-label">
+            <span>Royal Border & Frame Style</span>
+          </div>
+          <div class="preset-chips-wrap">
+            <button type="button" class="preset-chip active" data-border-style="border-double">Double Royal Line</button>
+            <button type="button" class="preset-chip" data-border-style="border-jali">Mughal Jali Inset</button>
+            <button type="button" class="preset-chip" data-border-style="border-corner-mandala">Corner Mandalas</button>
+            <button type="button" class="preset-chip" data-border-style="border-silk-clean">Minimalist Silk</button>
+          </div>
+
+          <div class="toggle-switch-row" style="margin-top:14px;">
+            <span class="toggle-switch-label">24K Gold Foil Shimmer Animation</span>
+            <label class="switch-control">
+              <input type="checkbox" id="toggleGoldShimmer" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: SACRED CREST & DEITIES -->
+      <section class="tab-panel" id="panel_deities">
+        <div class="control-section">
+          <div class="section-label">
+            <span>Sacred Deity / Royal Emblem</span>
+          </div>
+          <div class="themes-grid" style="grid-template-columns: repeat(3, 1fr);" id="deityOptionsGrid">
+            
+            <div class="theme-card-option active" data-deity="ganesha" style="padding:12px 6px;">
+              <span style="font-size:26px;display:block;margin-bottom:4px;">🐘</span>
+              <span class="theme-card-name" style="font-size:11px;">Lord Ganesha</span>
+            </div>
+
+            <div class="theme-card-option" data-deity="kalash" style="padding:12px 6px;">
+              <span style="font-size:26px;display:block;margin-bottom:4px;">🪔</span>
+              <span class="theme-card-name" style="font-size:11px;">Mangal Kalash</span>
+            </div>
+
+            <div class="theme-card-option" data-deity="radhaKrishna" style="padding:12px 6px;">
+              <span style="font-size:26px;display:block;margin-bottom:4px;">🌸</span>
+              <span class="theme-card-name" style="font-size:11px;">Radha Krishna</span>
+            </div>
+
+            <div class="theme-card-option" data-deity="peacock" style="padding:12px 6px;">
+              <span style="font-size:26px;display:block;margin-bottom:4px;">🦚</span>
+              <span class="theme-card-name" style="font-size:11px;">Royal Peacock</span>
+            </div>
+
+            <div class="theme-card-option" data-deity="crest" style="padding:12px 6px;">
+              <span style="font-size:26px;display:block;margin-bottom:4px;">👑</span>
+              <span class="theme-card-name" style="font-size:11px;">Royal Crest</span>
+            </div>
+
+            <div class="theme-card-option" data-deity="none" style="padding:12px 6px;">
+              <span style="font-size:26px;display:block;margin-bottom:4px;">✨</span>
+              <span class="theme-card-name" style="font-size:11px;">Minimal Clean</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: EVENT DETAILS & NAMES -->
       <section class="tab-panel" id="panel_details">
         
         <div class="control-section">
           <div class="section-label">
-            <span>Event & Ceremony Title</span>
+            <span>Ceremony Quick Switcher</span>
+          </div>
+          <div class="preset-chips-wrap">
+            <button type="button" class="preset-chip active" data-ceremony="vivah">💍 Shubh Vivah</button>
+            <button type="button" class="preset-chip" data-ceremony="sangeet">💃 Sangeet Night</button>
+            <button type="button" class="preset-chip" data-ceremony="haldi">🪔 Haldi Rasam</button>
+            <button type="button" class="preset-chip" data-ceremony="mehendi">🌿 Mehendi Ki Raat</button>
+            <button type="button" class="preset-chip" data-ceremony="roka">✨ Roka / Ring</button>
+            <button type="button" class="preset-chip" data-ceremony="reception">🥂 Reception</button>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <div class="section-label">
+            <span>Ceremony Badge & Host Line</span>
           </div>
           <div class="form-group">
             <label class="form-label" for="inpEventBadge">Ceremony Header</label>
@@ -252,7 +450,7 @@
 
       </section>
 
-      <!-- TAB 3: PHOTO & FRAME -->
+      <!-- TAB 5: PHOTO & FRAME -->
       <section class="tab-panel" id="panel_photo">
         <div class="control-section">
           <div class="section-label">
@@ -278,14 +476,14 @@
         </div>
       </section>
 
-      <!-- TAB 4: SHLOKAS & WORDING PRESETS -->
+      <!-- TAB 6: SHLOKAS & WORDING PRESETS -->
       <section class="tab-panel" id="panel_presets">
         <div class="control-section">
           <div class="section-label">
             <span>Sacred Sanskrit Shlokas</span>
           </div>
           <div class="preset-chips-wrap">
-            <button type="button" class="preset-chip" data-preset-shloka="ganesh">🐘 Ganesh Vandana</button>
+            <button type="button" class="preset-chip active" data-preset-shloka="ganesh">🐘 Ganesh Vandana</button>
             <button type="button" class="preset-chip" data-preset-shloka="vishnu">🪔 Mangalam Bhagwan</button>
             <button type="button" class="preset-chip" data-preset-shloka="radhaKrishna">🌸 Radha Krishna</button>
             <button type="button" class="preset-chip" data-preset-shloka="modern">✨ Modern Love</button>
@@ -322,21 +520,29 @@
       <div class="canvas-device-wrapper ratio-post" id="canvasDeviceWrapper">
         
         <!-- The Live Interactive Card Container -->
-        <article class="vanvi-invitation-card theme-rajwada" id="invitationCard">
+        <article class="vanvi-invitation-card theme-rajwada border-double gold-shimmer-active" id="invitationCard">
           
-          <!-- Top Royal Arch & Mandala SVG Decor -->
+          <!-- Top Royal Arch & Deity Emblem -->
           <div class="card-header-cluster">
+            
+            <div class="deity-badge-wrap" id="dispDeityWrap">
+              <!-- Default Lord Ganesha SVG -->
+              <svg class="deity-badge-svg" viewBox="0 0 64 64" fill="currentColor">
+                <path d="M32 4c-3 0-5 2-6 5-3 0-6 2-7 5-2 3-1 7 1 9-2 2-3 5-3 8 0 6 4 11 10 12v3c-3 1-6 3-8 6-3 3-4 7-4 11h34c0-4-1-8-4-11-2-3-5-5-8-6v-3c6-1 10-6 10-12 0-3-1-6-3-8 2-2 3-6 1-9-1-3-4-5-7-5-1-3-3-5-6-5zm-3 8c1-1 2-1 3-1s2 0 3 1v5h-6v-5zm-7 6c2 0 3 1 4 2v4c-2 0-3-1-4-2-1-1-1-3 0-4zm14 0c1 1 1 3 0 4-1 1-2 2-4 2v-4c1-1 2-2 4-2zm-8 7c2-1 6-1 8 0 2 1 3 3 3 5 0 3-3 6-7 6s-7-3-7-6c0-2 1-4 3-5zm4 17c5 0 9 3 11 7H19c2-4 6-7 11-7z"/>
+              </svg>
+            </div>
+
             <svg class="arch-ornament" width="80" height="20" viewBox="0 0 100 24" aria-hidden="true">
               <path d="M 0 12 Q 25 0 50 12 Q 75 24 100 12" stroke-width="1.2"></path>
               <circle cx="50" cy="12" r="3.5" fill="currentColor"></circle>
             </svg>
             
-            <p class="sacred-shloka gold-text" id="dispShloka" contenteditable="true" title="Click to edit shloka">
+            <p class="sacred-shloka gold-text" id="dispShloka" contenteditable="true" title="Click to edit shloka directly">
               ॥ श्री गणेशाय नमः ॥<br />
               वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
             </p>
 
-            <p class="host-greeting-line" id="dispHostGreeting" contenteditable="true" title="Click to edit greeting">
+            <p class="host-greeting-line" id="dispHostGreeting" contenteditable="true" title="Click to edit greeting directly">
               Together with their families, cordially invite you to celebrate the wedding of
             </p>
           </div>
@@ -348,17 +554,17 @@
 
           <!-- Couple Centerpiece -->
           <div class="card-names-centerpiece">
-            <h1 class="person-name gold-text" id="dispGroom" contenteditable="true" title="Click to edit Groom's Name">Aditya Sharma</h1>
+            <h1 class="person-name gold-text font-pinyon" id="dispGroom" contenteditable="true" title="Click to edit Groom's Name directly">Aditya Sharma</h1>
             <p class="person-parents" id="dispGroomParents" contenteditable="true">S/o Mrs. Sunita &amp; Mr. Rajesh Sharma</p>
             
             <div class="script-ampersand gold-text">&amp;</div>
             
-            <h1 class="person-name gold-text" id="dispBride" contenteditable="true" title="Click to edit Bride's Name">Priya Verma</h1>
+            <h1 class="person-name gold-text font-pinyon" id="dispBride" contenteditable="true" title="Click to edit Bride's Name directly">Priya Verma</h1>
             <p class="person-parents" id="dispBrideParents" contenteditable="true">D/o Mrs. Rekha &amp; Mr. Manoj Verma</p>
           </div>
 
           <!-- Event Details & Schedule -->
-          <div class="card-details-cluster">
+          <div class="card-details-cluster body-cormorant" id="dispDetailsCluster">
             <div class="card-divider" style="height:1px;width:70%;margin:4px auto 8px;"></div>
             
             <div class="card-event-badge gold-text" id="dispEventBadge" contenteditable="true">WEDDING CEREMONY</div>
@@ -400,83 +606,68 @@
 
   </main>
 
-  <!-- Mobile Segmented View Switcher Dock (< 920px) -->
-  <nav class="mobile-segmented-dock" aria-label="Mobile View Controls">
-    <div class="mobile-dock-tabs">
-      <button type="button" class="dock-tab-btn active" id="dockTabEdit">
-        <span>✏️ Customize</span>
-      </button>
-      <button type="button" class="dock-tab-btn" id="dockTabPreview">
-        <span>👁️ Live Card</span>
-      </button>
-    </div>
-    <button type="button" class="dock-quick-download" id="btnDockDownload">
-      <span>Download 4K</span>
+  <!-- Floating Shehnai Audio Player -->
+  <aside class="studio-audio-player" id="studioAudioPlayer">
+    <button type="button" class="btn-music-toggle" id="btnToggleMusic" title="Play / Pause Royal Shehnai Music">
+      <span id="musicPlayIcon">▶</span>
     </button>
-  </nav>
+    <div class="music-info">
+      <strong>Royal Shehnai & Sitar</strong>
+      <span>Celebration Ambiance</span>
+    </div>
+    <audio id="weddingAudio" loop preload="none">
+      <source src="templates/Papercut Lotus/media/wedding_track.mp3" type="audio/mpeg">
+    </audio>
+  </aside>
 
-  <!-- ======================================================================
-       MODAL 1: HIGH-RES 4K DOWNLOAD SUITE
-       ====================================================================== -->
-  <div class="studio-modal-backdrop" id="modalDownload" role="dialog" aria-modal="true" aria-labelledby="modalDownloadTitle">
+  <!-- Mobile Bottom Mode Dock -->
+  <footer class="mobile-mode-dock">
+    <button type="button" class="dock-btn active" id="dockBtnEdit">
+      <span>✏️ Edit Details</span>
+    </button>
+    <button type="button" class="dock-btn" id="dockBtnPreview">
+      <span>👁️ View Card</span>
+    </button>
+  </footer>
+
+  <!-- MODAL: Download 4K -->
+  <div class="studio-modal-backdrop" id="modalDownload">
     <div class="studio-modal-card">
       <div class="modal-header-row">
-        <h3 class="modal-title" id="modalDownloadTitle">✦ Export Your Invitation</h3>
-        <button type="button" class="modal-close-btn" id="btnCloseModal" aria-label="Close">✕</button>
+        <h3 class="modal-title">Export High-Res Invitation</h3>
+        <button type="button" class="modal-close-btn" data-close-modal="modalDownload">&times;</button>
       </div>
-
-      <p style="font-size:12.5px;color:var(--ink-muted);margin-bottom:18px;line-height:1.5;">
-        Your invitation is ready in <strong>300 DPI Ultra-HD print & WhatsApp quality</strong>. Download the crystal-clear PNG image or send directly on WhatsApp.
+      <p style="font-size:13px;color:var(--ink-muted);line-height:1.5;margin-bottom:18px;">
+        Generate print-ready 4K ultra-high resolution image. Perfect for WhatsApp sharing, Instagram stories, and luxury printing.
       </p>
-
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <button type="button" class="btn-studio-action btn-studio-primary" id="btnConfirmDownload" style="width:100%;justify-content:center;height:46px;font-size:13.5px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          <span>Download 4K Card (PNG)</span>
+      
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <button type="button" class="btn-studio-action btn-studio-primary" id="btnDoExportPNG" style="width:100%;justify-content:center;padding:14px;">
+          <span>📸 Download 4K Ultra-HD PNG</span>
         </button>
-
-        <button type="button" class="btn-studio-action btn-studio-ghost" id="btnShareWhatsApp" style="width:100%;justify-content:center;height:44px;background:#25D366;color:#ffffff;border-color:transparent;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
-          </svg>
-          <span>Send Details on WhatsApp</span>
+        <button type="button" class="btn-studio-action btn-studio-ghost" id="btnDoShareWhatsAppDirect" style="width:100%;justify-content:center;padding:14px;color:#25d366;border-color:rgba(37,211,102,0.4);">
+          <span>📲 Share Directly to WhatsApp</span>
         </button>
       </div>
-
-      <p style="font-size:10.5px;color:var(--ink-faint);text-align:center;margin-top:14px;">
-        ✓ 100% Free Forever · No Watermarks · 300 DPI Resolution
-      </p>
     </div>
   </div>
 
-  <!-- ======================================================================
-       MODAL 2: INTERACTIVE WEB KEEPSAKE LINK
-       ====================================================================== -->
-  <div class="studio-modal-backdrop" id="modalWebKeepsake" role="dialog" aria-modal="true" aria-labelledby="modalWebTitle">
+  <!-- MODAL: Web Keepsake -->
+  <div class="studio-modal-backdrop" id="modalWebKeepsake">
     <div class="studio-modal-card">
       <div class="modal-header-row">
-        <h3 class="modal-title" id="modalWebTitle">✦ Interactive Web Keepsake</h3>
-        <button type="button" class="modal-close-btn" id="btnCloseWebModal" aria-label="Close">✕</button>
+        <h3 class="modal-title">Interactive Web Keepsake</h3>
+        <button type="button" class="modal-close-btn" data-close-modal="modalWebKeepsake">&times;</button>
       </div>
-
-      <p style="font-size:12.5px;color:var(--ink-muted);margin-bottom:16px;line-height:1.5;">
-        Send a matching live interactive webpage link to your guests! Features a <strong>3D Wax-Seal Envelope opening ceremony</strong>, background Shehnai/Sitar music, and instant RSVP.
+      <p style="font-size:13.5px;color:var(--ink-muted);line-height:1.5;margin-bottom:16px;">
+        Turn this invitation into a live 3D animated web experience with background Shehnai music, dynamic RSVP tracking, and 1-tap Google Maps navigation for guests.
       </p>
-
-      <div class="form-group" style="margin-bottom:14px;">
-        <label class="form-label" for="inpLiveWebUrl">Your Dedicated Web Keepsake Link</label>
-        <div style="display:flex;gap:8px;">
-          <input type="text" id="inpLiveWebUrl" class="form-input" readonly />
-          <button type="button" id="btnCopyWebUrl" class="btn-studio-action btn-studio-ghost" style="flex-shrink:0;">Copy</button>
-        </div>
+      <div style="background:rgba(212,175,55,0.08);border:1px solid var(--border-hover);border-radius:12px;padding:14px;margin-bottom:18px;">
+        <span style="font-size:11px;font-weight:700;color:var(--gold-primary);text-transform:uppercase;display:block;margin-bottom:4px;">✦ Signature Vanvi Feature</span>
+        <span style="font-size:12.5px;color:#fff;">Personalized short link: <code>vanvimoments.shop/m/aditya-priya</code></span>
       </div>
-
-      <a id="btnOpenWebUrl" href="#" target="_blank" class="btn-studio-action btn-studio-primary" style="width:100%;justify-content:center;height:42px;text-decoration:none;">
-        <span>Open Live Web Preview ↗</span>
+      <a href="checkout.html?templateId=hues-whispers-luxe&recipient=Aditya%20%26%20Priya" class="btn-studio-action btn-studio-primary" style="width:100%;justify-content:center;padding:14px;text-decoration:none;">
+        <span>Publish Web Keepsake (₹1.00 Test) →</span>
       </a>
     </div>
   </div>
