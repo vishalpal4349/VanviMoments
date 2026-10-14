@@ -1257,12 +1257,12 @@
         }
         if (!user) {
           try {
-            user = JSON.parse(localStorage.getItem('vanvi_user_profile') || '{}');
+            user = JSON.parse(localStorage.getItem('vanvi_auth_user') || localStorage.getItem('vanvi_user') || localStorage.getItem('vanvi_user_profile') || 'null');
           } catch(e) {}
         }
 
         const name = user?.name || localStorage.getItem('vanvi_user_name') || 'Vanvi Creator';
-        const email = user?.email || localStorage.getItem('vanvi_user_email') || 'creator@vanvimoments.shop';
+        const email = user?.email || localStorage.getItem('vanvi_user_email') || localStorage.getItem('vanvi_last_email') || 'creator@vanvimoments.shop';
         const phone = user?.phone || localStorage.getItem('vanvi_user_phone') || '';
         const birthday = user?.birthday || localStorage.getItem('vanvi_user_birthday') || '';
         const bio = user?.bio || localStorage.getItem('vanvi_user_bio') || 'Crafting heartfelt digital moments ✨';
@@ -1270,10 +1270,10 @@
         const credits = parseInt(localStorage.getItem('vanvi_template_credits') || '2', 10);
 
         // Calculate Moments count
-        let momentsCount = 3;
+        let momentsCount = 0;
         try {
           const list = JSON.parse(localStorage.getItem('vanvi_user_moments') || '[]');
-          if (list.length > 0) momentsCount = list.length;
+          if (Array.isArray(list)) momentsCount = list.length;
         } catch(e) {}
 
         // Populate DOM
@@ -1312,7 +1312,7 @@
         document.getElementById('editModal').classList.remove('active');
       };
 
-      window.saveProfile = function(e) {
+      window.saveProfile = async function(e) {
         e.preventDefault();
         const name = document.getElementById('inputName').value.trim() || 'Vanvi Creator';
         const email = document.getElementById('inputEmail').value.trim();
@@ -1320,6 +1320,7 @@
         const birthday = document.getElementById('inputBirthday').value;
         const bio = document.getElementById('inputBio').value.trim();
 
+        // Update profile in localStorage
         const profile = { name, email, phone, birthday, bio };
         localStorage.setItem('vanvi_user_profile', JSON.stringify(profile));
         localStorage.setItem('vanvi_user_name', name);
@@ -1328,19 +1329,33 @@
         if (birthday) localStorage.setItem('vanvi_user_birthday', birthday);
         if (bio) localStorage.setItem('vanvi_user_bio', bio);
 
+        try {
+          const authUser = JSON.parse(localStorage.getItem('vanvi_auth_user') || '{}');
+          const merged = { ...authUser, name, email, phone, birthday, bio };
+          localStorage.setItem('vanvi_auth_user', JSON.stringify(merged));
+          localStorage.setItem('vanvi_user', JSON.stringify(merged));
+        } catch(e) {}
+
         closeEditModal();
         loadProfile();
 
         const toast = document.getElementById('profileToast');
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
+        if (toast) {
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 2500);
+        }
       };
 
       window.handleSignOut = function() {
         if (confirm('Are you sure you want to sign out? Your saved moments and coin balance remain safe.')) {
-          if (window.VanviGoogleAuth) window.VanviGoogleAuth.signOut();
+          if (window.VanviAPI && window.VanviAPI.auth) window.VanviAPI.auth.logout();
+          localStorage.removeItem('vanvi_auth_token');
+          localStorage.removeItem('vanvi_auth_user');
+          localStorage.removeItem('vanvi_user');
           localStorage.removeItem('vanvi_session_token');
-          window.location.href = 'index.html';
+          localStorage.removeItem('vanvi_remember_identifier');
+          localStorage.removeItem('vanvi_remember_me');
+          window.location.href = 'login.html';
         }
       };
 

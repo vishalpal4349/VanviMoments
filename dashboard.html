@@ -1956,10 +1956,14 @@
         const btnLogout = document.getElementById('btnLogoutBtn');
         if (btnLogout) {
           btnLogout.addEventListener('click', () => {
-            if (window.VanviAPI) window.VanviAPI.auth.logout();
+            if (window.VanviAPI && window.VanviAPI.auth) window.VanviAPI.auth.logout();
             localStorage.removeItem('vanvi_auth_user');
             localStorage.removeItem('vanvi_auth_token');
-            showToast('Logged out.');
+            localStorage.removeItem('vanvi_user');
+            localStorage.removeItem('vanvi_session_token');
+            localStorage.removeItem('vanvi_remember_identifier');
+            localStorage.removeItem('vanvi_remember_me');
+            showToast('Logged out successfully.');
             updateAuthUI();
             renderMoments();
             updateRewardsState();
