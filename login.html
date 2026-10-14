@@ -19,21 +19,19 @@
 
   <style>
     :root {
-      /* Ultra-Vibrant Twilight Amethyst, Royal Indigo & Radiant Magenta */
-      --clay-bg-grad: radial-gradient(circle at 10% 15%, rgba(139, 92, 246, 0.45) 0%, transparent 45%),
-                      radial-gradient(circle at 90% 12%, rgba(236, 72, 153, 0.4) 0%, transparent 45%),
-                      radial-gradient(circle at 50% 90%, rgba(245, 158, 11, 0.35) 0%, transparent 45%),
-                      radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.4) 0%, transparent 50%),
-                      linear-gradient(135deg, #ede9fe 0%, #fae8ff 35%, #ffe4e6 70%, #fef3c7 100%);
-      --clay-primary: #8b5cf6;
-      --clay-primary-dark: #7c3aed;
-      --clay-primary-grad: linear-gradient(135deg, #8b5cf6 0%, #a855f7 40%, #ec4899 100%);
-      --clay-input-bg: #f8f4ff;
-      --clay-text-dark: #280b45;
-      --clay-text-muted: #6f4c94;
-      --clay-shadow-card: 0 25px 65px -12px rgba(124, 58, 237, 0.28), 0 8px 24px -4px rgba(236, 72, 153, 0.16), 0 0 0 1.5px rgba(255, 255, 255, 0.95), inset 0 2px 2px #ffffff;
-      --clay-shadow-inner: 0 8px 24px rgba(124, 58, 237, 0.08), inset 0 2px 2px #ffffff;
-      --clay-shadow-btn: 0 10px 24px -4px rgba(139, 92, 246, 0.45), 0 3px 0 #6d28d9, inset 0 2px 2px rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(0, 0, 0, 0.16);
+      --clay-bg: #d8c8f8;
+      --clay-bg-grad: radial-gradient(circle at 50% 28%, #f0e6ff 0%, #dfd0fc 48%, #c6b2f4 100%);
+      --clay-card-bg: #ffffff;
+      --clay-primary: #9471e4;
+      --clay-primary-dark: #7a54cf;
+      --clay-primary-glow: rgba(148, 113, 228, 0.4);
+      --clay-badge-bg: #bca6f0;
+      --clay-input-bg: #f5f0fb;
+      --clay-text-dark: #2c1642;
+      --clay-text-muted: #7b6694;
+      --clay-shadow-card: 0 24px 60px rgba(110, 80, 168, 0.22), 0 8px 24px rgba(0, 0, 0, 0.04), inset 0 2px 3px #ffffff;
+      --clay-shadow-inner: 0 14px 34px rgba(120, 90, 180, 0.12), inset 0 2px 2px #ffffff;
+      --clay-shadow-btn: 0 10px 24px rgba(148, 113, 228, 0.42), 0 3px 0 #6e46be, inset 0 2px 2px rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(0, 0, 0, 0.16);
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
 
@@ -43,19 +41,17 @@
       min-height: 100vh;
       min-height: 100dvh;
       background: var(--clay-bg-grad);
-      background-attachment: fixed;
       font-family: var(--font-sans);
       color: var(--clay-text-dark);
       overflow-x: hidden !important;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 16px 12px;
+      padding: 24px 16px 36px;
       position: relative;
     }
 
-    /* Ambient Luxury Glowing Background Props */
+    /* Ambient 3D Studio Clay Background Props */
     .clay-studio-props {
       position: fixed;
       inset: 0;
@@ -63,73 +59,110 @@
       z-index: 0;
       overflow: hidden;
     }
-    .luxe-glow-orb {
+
+    .clay-prop {
       position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 14px 28px rgba(90, 60, 140, 0.18));
       will-change: transform;
     }
-    .luxe-glow-orb-1 {
-      top: -60px;
-      left: -60px;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.42) 0%, rgba(236, 72, 153, 0.18) 60%, transparent 80%);
-      filter: blur(60px);
-      animation: driftGlow1 16s ease-in-out infinite alternate;
-    }
-    .luxe-glow-orb-2 {
-      bottom: -60px;
-      right: -60px;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, rgba(244, 63, 94, 0.38) 0%, rgba(245, 158, 11, 0.25) 60%, transparent 80%);
-      filter: blur(65px);
-      animation: driftGlow2 20s ease-in-out infinite alternate;
-    }
-    .clay-prop-star {
-      position: absolute;
-      font-weight: 900;
-      user-select: none;
-      animation: sparkle 3.5s ease-in-out infinite alternate;
-    }
-    .star-1 { top: 12%; left: 14%; font-size: 24px; color: #a855f7; text-shadow: 0 0 16px rgba(168, 85, 247, 0.6); }
-    .star-2 { top: 16%; right: 15%; font-size: 22px; color: #ec4899; text-shadow: 0 0 16px rgba(236, 72, 153, 0.6); animation-delay: -1.2s; }
-    .star-3 { bottom: 18%; left: 16%; font-size: 26px; color: #f59e0b; text-shadow: 0 0 16px rgba(245, 158, 11, 0.6); animation-delay: -2s; }
-    .star-4 { bottom: 15%; right: 18%; font-size: 20px; color: #8b5cf6; text-shadow: 0 0 16px rgba(139, 92, 246, 0.6); animation-delay: -0.7s; }
 
-    @keyframes driftGlow1 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(30px, 40px) scale(1.12); }
+    .prop-cloud-1 {
+      top: 6%;
+      left: 6%;
+      font-size: 42px;
+      animation: floatCloud 16s ease-in-out infinite alternate;
+      opacity: 0.85;
     }
-    @keyframes driftGlow2 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-35px, -30px) scale(1.1); }
+    .prop-cloud-2 {
+      top: 12%;
+      right: 7%;
+      font-size: 48px;
+      animation: floatCloud 20s ease-in-out infinite alternate -6s;
+      opacity: 0.85;
     }
-    @keyframes sparkle {
-      0% { opacity: 0.45; transform: scale(0.9) rotate(0deg); }
-      50% { opacity: 1; transform: scale(1.15) rotate(15deg); }
-      100% { opacity: 0.45; transform: scale(0.9) rotate(0deg); }
+    .prop-heart-float {
+      top: 30%;
+      left: 8%;
+      font-size: 26px;
+      animation: floatHeart 12s ease-in-out infinite alternate;
+    }
+    .prop-star-float {
+      top: 26%;
+      right: 9%;
+      font-size: 24px;
+      animation: floatHeart 14s ease-in-out infinite alternate -4s;
+    }
+
+    .prop-potted-plant {
+      bottom: 24px;
+      left: max(20px, calc(50% - 390px));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .prop-plant-leaves {
+      font-size: 64px;
+      line-height: 1;
+      transform: translateY(12px);
+      filter: drop-shadow(0 6px 12px rgba(46, 125, 50, 0.25));
+    }
+    .prop-plant-pot {
+      width: 58px;
+      height: 48px;
+      background: linear-gradient(180deg, #ecd8be 0%, #d8be98 100%);
+      border-radius: 6px 6px 18px 18px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), inset 0 2px 2px #fff;
+    }
+
+    .prop-potted-flower {
+      bottom: 24px;
+      right: max(20px, calc(50% - 390px));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .prop-flower-bloom {
+      font-size: 58px;
+      line-height: 1;
+      transform: translateY(10px);
+      filter: drop-shadow(0 6px 12px rgba(233, 30, 99, 0.25));
+    }
+    .prop-flower-pot {
+      width: 54px;
+      height: 44px;
+      background: linear-gradient(180deg, #f8bbd0 0%, #f48fb1 100%);
+      border-radius: 6px 6px 18px 18px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), inset 0 2px 2px #fff;
+    }
+
+    @keyframes floatCloud {
+      0% { transform: translateY(0) translateX(0); }
+      100% { transform: translateY(-12px) translateX(16px); }
+    }
+    @keyframes floatHeart {
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      100% { transform: translateY(-16px) rotate(12deg) scale(1.08); }
     }
 
     /* Fixed Back Button */
     .clay-nav-back {
       position: fixed;
-      top: 16px;
-      left: 18px;
+      top: 18px;
+      left: 20px;
       z-index: 1000;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 7px 16px;
-      min-height: 38px;
+      gap: 7px;
+      padding: 8px 18px;
+      min-height: 40px;
       border-radius: 999px;
       background: #ffffff;
       border: 1.5px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.14), inset 0 2px 2px #ffffff;
-      color: #280b45;
+      box-shadow: 0 8px 24px rgba(90, 60, 140, 0.15), inset 0 2px 2px #ffffff;
+      color: #3b1b54;
       font-family: var(--font-sans);
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 850;
       text-decoration: none;
       cursor: pointer;
@@ -138,10 +171,10 @@
     .clay-nav-back:hover {
       transform: translateX(-3px) scale(1.03);
       color: var(--clay-primary);
-      box-shadow: 0 12px 28px rgba(124, 58, 237, 0.25);
+      box-shadow: 0 12px 28px rgba(90, 60, 140, 0.25);
     }
     .clay-nav-back .back-arrow {
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1;
       font-weight: 900;
     }
@@ -149,76 +182,72 @@
     /* Top Mode Switcher Bar */
     .clay-mode-switch-wrap {
       width: 100%;
-      max-width: 395px;
+      max-width: 420px;
       display: flex;
       justify-content: center;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       position: relative;
       z-index: 10;
     }
     .clay-mode-switch {
       display: inline-flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       padding: 4px;
       border-radius: 999px;
-      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.1), inset 0 1px 2px #fff;
-      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 6px 18px rgba(110, 80, 160, 0.1), inset 0 1px 2px #fff;
+      border: 1px solid rgba(255, 255, 255, 0.9);
       gap: 4px;
     }
     .clay-mode-tab {
-      padding: 6px 16px;
+      padding: 7px 18px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 800;
       color: var(--clay-text-muted);
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.22s ease;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
     .clay-mode-tab.active {
       background: var(--clay-primary);
-      background-image: var(--clay-primary-grad);
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.35);
+      box-shadow: 0 4px 12px rgba(148, 113, 228, 0.35);
     }
     .clay-coins-tag {
-      font-size: 9px;
+      font-size: 9.5px;
       padding: 1.5px 6px;
       border-radius: 99px;
       background: #f59e0b;
       color: #fff;
       font-weight: 900;
-      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
     }
 
-    /* Master Floating Center Card (~395px compact on laptop & mobile) */
+    /* Master Compact Phone Card (~420px wide centered on desktop & mobile) */
     .clay-phone-card {
       position: relative;
       z-index: 10;
       width: 100%;
-      max-width: 395px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
-      border-radius: 32px;
+      max-width: 420px;
+      background: #ffffff;
+      border-radius: 38px;
       box-shadow: var(--clay-shadow-card);
-      border: 1.5px solid rgba(255, 255, 255, 0.95);
-      padding: 16px 14px 14px;
+      padding: 22px 18px 20px;
       margin: 0 auto;
       text-align: center;
       overflow: hidden;
-      animation: cardPopEnter 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+      transform: translateZ(0);
+      animation: authCardEnter 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    @keyframes cardPopEnter {
+    @keyframes authCardEnter {
       from {
         opacity: 0;
-        transform: translateY(14px) scale(0.96);
+        transform: translateY(18px) scale(0.97);
       }
       to {
         opacity: 1;
@@ -226,59 +255,62 @@
       }
     }
 
-    /* Top Greeting Section with Compact Luxury Avatar */
+    /* Top Greeting Section */
     .clay-header-top {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 2px;
     }
-    .clay-avatar-bubble {
-      position: relative;
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 5px;
-      border-radius: 50%;
-      padding: 2.5px;
-      background: var(--clay-primary-grad);
-      box-shadow: 0 8px 20px rgba(124, 58, 237, 0.28), 0 0 0 2px rgba(255, 255, 255, 0.95);
-      animation: avatarFloat 4s ease-in-out infinite alternate;
-    }
-    @keyframes avatarFloat {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-3px); }
-    }
-    .clay-avatar-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-      background: #ffffff;
-    }
-    .clay-avatar-sparkle {
-      position: absolute;
-      bottom: -2px;
-      right: -2px;
-      font-size: 13px;
+    .clay-heart-emblem {
+      font-size: 22px;
       line-height: 1;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      margin-bottom: 4px;
+      animation: heartBreathe 3s ease-in-out infinite alternate;
+    }
+    @keyframes heartBreathe {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
     }
     .clay-main-title {
-      font-size: 21px;
+      font-size: 26px;
       font-weight: 900;
-      color: var(--clay-text-dark);
-      letter-spacing: -0.3px;
+      color: #5c3b99;
+      letter-spacing: -0.5px;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      margin: 0;
+      gap: 6px;
+    }
+    .clay-rays {
+      font-size: 16px;
+      color: #f59e0b;
     }
     .clay-sub-text {
-      font-size: 11.5px;
+      font-size: 12.5px;
       color: var(--clay-text-muted);
-      margin-top: 2px;
+      margin-top: 3px;
       font-weight: 600;
+    }
+
+    /* 3D Cute Clay Character */
+    .clay-girl-stage {
+      position: relative;
+      width: 100%;
+      max-width: 170px;
+      margin: 0 auto -22px;
+      z-index: 2;
+    }
+    .clay-girl-photo {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      border-radius: 36px 36px 0 0;
+      filter: drop-shadow(0 12px 20px rgba(110, 80, 168, 0.2));
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .clay-girl-stage:hover .clay-girl-photo {
+      transform: scale(1.03) translateY(-2px);
     }
 
     /* Inner Elevated White Clay Form Card */
@@ -286,49 +318,49 @@
       position: relative;
       z-index: 4;
       background: #ffffff;
-      border-radius: 26px;
-      padding: 14px 14px 12px;
+      border-radius: 32px;
+      padding: 22px 18px 18px;
       box-shadow: var(--clay-shadow-inner);
-      border: 1.5px solid rgba(243, 232, 255, 0.95);
+      border: 1.5px solid rgba(240, 235, 250, 0.9);
     }
 
-    /* Inset Input Rows */
+    /* Clay Pill Inset Input Fields */
     .clay-field-row {
-      margin-bottom: 9px;
+      margin-bottom: 12px;
       position: relative;
       text-align: left;
     }
     .clay-pill-input-box {
       width: 100%;
-      min-height: 44px;
+      min-height: 50px;
       background: var(--clay-input-bg);
       border-radius: 999px;
-      box-shadow: inset 0 2px 4px rgba(124, 58, 237, 0.08), inset 0 1px 2px rgba(0,0,0,0.03);
+      box-shadow: inset 0 2.5px 5px rgba(100, 70, 150, 0.08), inset 0 1px 2px rgba(0,0,0,0.04);
       display: flex;
       align-items: center;
-      padding: 3px 6px 3px 5px;
+      padding: 4px 8px 4px 6px;
       transition: all 0.2s ease;
       border: 1.5px solid transparent;
     }
     .clay-pill-input-box:focus-within {
       background: #ffffff;
       border-color: var(--clay-primary);
-      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.22), inset 0 1px 2px #fff;
+      box-shadow: 0 0 0 3px rgba(148, 113, 228, 0.25), inset 0 1px 2px #fff;
     }
     .clay-icon-circle {
-      width: 34px;
-      height: 34px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+      background: linear-gradient(135deg, #bca6f0 0%, #a284e6 100%);
       color: #ffffff;
       display: grid;
       place-items: center;
       flex-shrink: 0;
-      box-shadow: 0 3px 8px rgba(124, 58, 237, 0.3), inset 0 1px 2px rgba(255,255,255,0.7);
+      box-shadow: 0 4px 10px rgba(148, 113, 228, 0.35), inset 0 1px 2px rgba(255,255,255,0.7);
     }
     .clay-icon-circle svg {
-      width: 15px;
-      height: 15px;
+      width: 17px;
+      height: 17px;
     }
     .clay-native-input {
       flex: 1;
@@ -336,25 +368,24 @@
       border: none;
       outline: none;
       background: transparent;
-      padding: 0 10px;
+      padding: 0 12px;
       font-family: var(--font-sans);
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 600;
       color: var(--clay-text-dark);
       min-width: 0;
     }
     .clay-native-input::placeholder {
-      color: #9f86bb;
+      color: #a494bc;
       font-weight: 500;
-      font-size: 12.5px;
     }
     .clay-pwd-toggle {
       background: transparent;
       border: none;
-      font-size: 15px;
-      color: #8c71aa;
+      font-size: 17px;
+      color: #927fb0;
       cursor: pointer;
-      padding: 4px 8px;
+      padding: 6px 10px;
       transition: transform 0.2s ease, color 0.2s ease;
       display: flex;
       align-items: center;
@@ -366,13 +397,13 @@
       color: var(--clay-primary);
     }
 
-    /* Auxiliary Links Row */
+    /* Auxiliary Row */
     .clay-aux-links {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 8px 4px 12px;
-      font-size: 11.5px;
+      margin: 10px 4px 14px;
+      font-size: 12px;
     }
     .clay-remember-wrap {
       display: inline-flex;
@@ -385,8 +416,8 @@
     }
     .clay-remember-wrap input {
       accent-color: var(--clay-primary);
-      width: 14px;
-      height: 14px;
+      width: 15px;
+      height: 15px;
       cursor: pointer;
     }
     .clay-forgot-link {
@@ -403,30 +434,31 @@
     /* Primary Action Button */
     .clay-btn-main {
       width: 100%;
-      min-height: 44px;
+      min-height: 50px;
       border-radius: 999px;
-      background: var(--clay-primary-grad);
+      background: linear-gradient(180deg, #aa8ced 0%, #8c67df 100%);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.6);
       font-family: var(--font-sans);
-      font-size: 14.5px;
+      font-size: 15.5px;
       font-weight: 850;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.3px;
       cursor: pointer;
       box-shadow: var(--clay-shadow-btn);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
       transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
     }
     .clay-btn-main:hover {
       transform: translateY(-2px) scale(1.015);
-      box-shadow: 0 12px 26px rgba(139, 92, 246, 0.5), 0 4px 0 #6d28d9;
+      box-shadow: 0 14px 28px rgba(148, 113, 228, 0.55), 0 4px 0 #6e46be;
     }
     .clay-btn-main:active {
       transform: translateY(2px) scale(0.985);
-      box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3), 0 1px 0 #6d28d9;
+      box-shadow: 0 4px 12px rgba(148, 113, 228, 0.3), 0 1px 0 #6e46be;
     }
     .clay-btn-main:disabled {
       opacity: 0.75;
@@ -437,9 +469,9 @@
 
     /* Loading Spinner */
     .btn-spinner {
-      width: 16px;
-      height: 16px;
-      border: 2px solid rgba(255, 255, 255, 0.35);
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
       border-top-color: #ffffff;
       border-radius: 50%;
       animation: spin 0.75s linear infinite;
@@ -452,15 +484,14 @@
 
     /* Status Alert Message */
     .form-status {
-      margin-top: 8px;
-      font-size: 11.5px;
+      margin-top: 10px;
+      font-size: 12px;
       font-weight: 700;
-      min-height: 16px;
+      min-height: 18px;
       color: var(--clay-text-muted);
-      padding: 5px 8px;
+      padding: 4px 8px;
       border-radius: 8px;
       transition: all 0.2s ease;
-      text-align: center;
     }
     .form-status.error {
       color: #dc2626;
@@ -478,9 +509,9 @@
       display: flex;
       align-items: center;
       text-align: center;
-      margin: 10px 0;
-      color: #9f86bb;
-      font-size: 10px;
+      margin: 16px 0 14px;
+      color: #a494bc;
+      font-size: 11px;
       font-weight: 750;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -492,34 +523,54 @@
       border-bottom: 1.5px solid #eae2f5;
     }
     .clay-divider-line span {
-      padding: 0 8px;
+      padding: 0 10px;
     }
 
-    /* Official Google Mount Container (Single Pristine Official GSI Button) */
-    .gsi-mount-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 6px 0 10px;
-      min-height: 44px;
+    /* Official Prominent Google Sign-In Button */
+    .btn-google-official {
       width: 100%;
+      min-height: 48px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1.5px solid #e2d9f3;
+      box-shadow: 0 4px 14px rgba(110, 80, 160, 0.08), inset 0 1px 1px #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 750;
+      color: #374151;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      margin-bottom: 14px;
     }
+    .btn-google-official:hover {
+      transform: translateY(-2px);
+      border-color: #4285F4;
+      box-shadow: 0 8px 20px rgba(66, 133, 244, 0.18), inset 0 1px 1px #fff;
+      color: #1f2937;
+    }
+    .btn-google-official:active {
+      transform: translateY(1px);
+    }
+    .google-g-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* GIS Real Button Container */
     #gsiButtonContainer {
       display: flex;
       justify-content: center;
-      align-items: center;
-      width: 100%;
-      min-height: 44px;
-    }
-    #gsiButtonContainer > div,
-    #gsiButtonContainer iframe {
-      margin: 0 auto !important;
-      max-width: 100% !important;
+      margin-bottom: 14px;
     }
 
     /* Footer Switch Link */
     .clay-footer-link {
-      font-size: 12px;
+      font-size: 12.5px;
       color: var(--clay-text-muted);
       font-weight: 600;
     }
@@ -546,112 +597,6 @@
       100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(var(--dr)); }
     }
 
-    /* ==========================================================================
-       LAPTOP & DESKTOP BOUTIQUE COMPACT LUXURY EXPERIENCE
-       Sleek, small centered jewel card with balanced negative space
-       ========================================================================== */
-    @media (min-width: 601px) {
-      body {
-        padding: 20px 16px;
-        justify-content: center;
-        min-height: 100vh;
-      }
-      .clay-mode-switch-wrap {
-        max-width: 340px;
-        margin-bottom: 6px;
-      }
-      .clay-mode-tab {
-        padding: 4px 13px;
-        font-size: 11px;
-      }
-      .clay-phone-card {
-        max-width: 340px;
-        padding: 12px 14px 11px;
-        border-radius: 26px;
-        box-shadow: 0 18px 45px -10px rgba(124, 58, 237, 0.2), 0 4px 14px -2px rgba(236, 72, 153, 0.1), 0 0 0 1.5px rgba(255, 255, 255, 0.95);
-      }
-      .clay-header-top {
-        margin-bottom: 4px;
-      }
-      .clay-avatar-bubble {
-        width: 44px;
-        height: 44px;
-        margin: 0 auto 3px;
-        padding: 2px;
-      }
-      .clay-avatar-sparkle {
-        font-size: 11px;
-        bottom: -2px;
-        right: -2px;
-      }
-      .clay-main-title {
-        font-size: 18px;
-        gap: 4px;
-      }
-      .clay-sub-text {
-        font-size: 10.5px;
-        margin-top: 1px;
-      }
-      .clay-inner-card {
-        padding: 11px 12px 10px;
-        border-radius: 20px;
-      }
-      .clay-field-row {
-        margin-bottom: 6px;
-      }
-      .clay-pill-input-box {
-        min-height: 38px;
-        padding: 2px 6px 2px 4px;
-      }
-      .clay-icon-circle {
-        width: 30px;
-        height: 30px;
-      }
-      .clay-icon-circle svg {
-        width: 13px;
-        height: 13px;
-      }
-      .clay-native-input {
-        font-size: 12px;
-        padding: 0 8px;
-      }
-      .clay-native-input::placeholder {
-        font-size: 11px;
-      }
-      .clay-pwd-toggle {
-        font-size: 13px;
-        padding: 2px 6px;
-      }
-      .clay-aux-links {
-        margin: 5px 3px 6px;
-        font-size: 10.5px;
-      }
-      .clay-remember-wrap input {
-        width: 13px;
-        height: 13px;
-      }
-      .clay-btn-main {
-        min-height: 37px;
-        font-size: 13px;
-        font-weight: 850;
-      }
-      .clay-divider-line {
-        margin: 6px 0 5px;
-        font-size: 9.5px;
-      }
-      .gsi-mount-wrap {
-        margin: 3px 0 5px;
-        min-height: 38px;
-      }
-      #gsiButtonContainer {
-        min-height: 38px;
-      }
-      .clay-footer-link {
-        font-size: 10.5px;
-        margin-top: 3px;
-      }
-    }
-
     /* Responsive Adaptations */
     @media (max-width: 860px) {
       .prop-potted-plant,
@@ -660,32 +605,155 @@
       }
     }
 
+    /* =========================================================
+       SUPERIOR LAPTOP & MOBILE RESPONSIVE ENGINE (ZERO SCROLL FIT)
+       ========================================================= */
+    @media (max-width: 768px) {
+      .prop-potted-plant,
+      .prop-potted-flower,
+      .floating-clay-star,
+      .ambient-glow-orb {
+        display: none !important;
+      }
+      .clay-stage-canvas {
+        padding: 10px 8px;
+      }
+    }
+
     @media (max-width: 480px) {
       body {
-        padding: 50px 10px 20px;
-        justify-content: flex-start;
+        padding: clamp(8px, 2vh, 16px) 10px;
+        min-height: 100vh;
+        min-height: 100dvh;
+        justify-content: center;
       }
       .clay-nav-back {
         top: 10px;
         left: 10px;
         padding: 5px 12px;
-        min-height: 34px;
+        min-height: 32px;
+        font-size: 11.5px;
+      }
+      .clay-mode-switch-wrap {
+        margin-bottom: 6px;
+      }
+      .clay-mode-switch {
+        padding: 3px;
+        gap: 3px;
+      }
+      .clay-mode-tab {
+        padding: 5px 13px;
         font-size: 11.5px;
       }
       .clay-phone-card {
-        padding: 16px 12px 14px;
+        max-width: 380px;
+        width: 100%;
+        padding: clamp(12px, 3.5vw, 18px) clamp(10px, 3vw, 16px) clamp(10px, 3vw, 14px);
         border-radius: 28px;
       }
-      .clay-main-title {
-        font-size: 21px;
-      }
       .clay-girl-stage {
-        max-width: 115px;
-        margin-bottom: -16px;
+        max-width: clamp(95px, 22vw, 130px) !important;
+        margin: 0 auto -16px !important;
+      }
+      .clay-girl-photo {
+        border-radius: 26px 26px 0 0;
+      }
+      .clay-main-title {
+        font-size: clamp(19px, 4.8vw, 22px);
+        margin-bottom: 2px;
+      }
+      .clay-sub-text {
+        font-size: 11.5px;
+        margin-bottom: 8px;
       }
       .clay-inner-card {
-        padding: 16px 12px 12px;
+        padding: clamp(12px, 3vw, 16px) clamp(10px, 2.5vw, 14px) clamp(10px, 2.5vw, 12px);
+        border-radius: 22px;
+      }
+      .clay-field-row {
+        margin-bottom: 10px;
+      }
+      .clay-pill-input-box {
+        height: 42px;
+        border-radius: 12px;
+      }
+      .clay-icon-circle {
+        width: 28px;
+        height: 28px;
+        margin-left: 8px;
+      }
+      .clay-native-input {
+        font-size: 13.5px;
+        padding: 0 10px 0 6px;
+      }
+      .clay-submit-btn {
+        height: 44px;
+        font-size: 13.5px;
+        border-radius: 14px;
+        margin-top: 6px;
+      }
+      .btn-google-official {
+        height: 42px;
+        font-size: 13px;
+        border-radius: 14px;
+      }
+      .clay-form-divider {
+        margin: 10px 0;
+      }
+      .clay-bottom-links {
+        margin-top: 10px;
+        font-size: 11.5px;
+      }
+    }
+
+    /* Shorter phone screens (e.g. iPhone SE, compact Androids, landscape) */
+    @media (max-height: 740px) and (max-width: 480px) {
+      body {
+        padding: 6px 8px;
+      }
+      .clay-mode-switch-wrap {
+        margin-bottom: 4px;
+      }
+      .clay-phone-card {
+        padding: 10px 10px 8px;
         border-radius: 24px;
+      }
+      .clay-girl-stage {
+        max-width: 85px !important;
+        margin: 0 auto -12px !important;
+      }
+      .clay-main-title {
+        font-size: 18px;
+        margin-bottom: 0px;
+      }
+      .clay-sub-text {
+        font-size: 11px;
+        margin-bottom: 6px;
+      }
+      .clay-inner-card {
+        padding: 10px 10px 8px;
+        border-radius: 18px;
+      }
+      .clay-field-row {
+        margin-bottom: 8px;
+      }
+      .clay-pill-input-box {
+        height: 38px;
+      }
+      .clay-submit-btn {
+        height: 40px;
+        font-size: 13px;
+        margin-top: 4px;
+      }
+      .btn-google-official {
+        height: 38px;
+        font-size: 12.5px;
+      }
+      .clay-form-divider {
+        margin: 8px 0;
+      }
+      .clay-bottom-links {
+        margin-top: 8px;
       }
     }
 
@@ -701,14 +769,24 @@
 
 <body class="vanvi-auth-body" id="authBody">
 
-  <!-- Ambient 3D Luxury Cosmic Aurora Glowing Props -->
+  <!-- Ambient 3D Studio Clay Background Props -->
   <div class="clay-studio-props" aria-hidden="true">
-    <div class="luxe-glow-orb luxe-glow-orb-1"></div>
-    <div class="luxe-glow-orb luxe-glow-orb-2"></div>
-    <div class="clay-prop-star star-1">✦</div>
-    <div class="clay-prop-star star-2">✨</div>
-    <div class="clay-prop-star star-3">⭐</div>
-    <div class="clay-prop-star star-4">✦</div>
+    <div class="clay-prop prop-cloud-1">☁️</div>
+    <div class="clay-prop prop-cloud-2">☁️</div>
+    <div class="clay-prop prop-heart-float">💖</div>
+    <div class="clay-prop prop-star-float">✨</div>
+
+    <!-- Potted Plant on Left (Desktop) -->
+    <div class="clay-prop prop-potted-plant">
+      <div class="prop-plant-leaves">🪴</div>
+      <div class="prop-plant-pot"></div>
+    </div>
+
+    <!-- Potted Flower on Right (Desktop) -->
+    <div class="clay-prop prop-potted-flower">
+      <div class="prop-flower-bloom">🌸</div>
+      <div class="prop-flower-pot"></div>
+    </div>
   </div>
 
   <!-- Smart Fixed Back Button -->
@@ -727,24 +805,29 @@
       <a href="signup.html" class="clay-mode-tab">
         <span>✨</span>
         <span>Sign Up</span>
+        <span class="clay-coins-tag">+100 🪙</span>
       </a>
     </nav>
   </div>
 
-  <!-- Master Floating Center Card (~395px wide centered on desktop & mobile) -->
+  <!-- Master Compact Phone Card (~420px wide centered) -->
   <main class="clay-phone-card" id="authStage" role="main">
 
-    <!-- Top Greeting Section with Compact Luxury Avatar -->
+    <!-- Top Greeting Section -->
     <header class="clay-header-top">
-      <div class="clay-avatar-bubble" aria-hidden="true">
-        <img src="assets/vanvi-clay-girl-login.jpg" alt="Vanvi Moments" class="clay-avatar-img" />
-        <span class="clay-avatar-sparkle">✨</span>
-      </div>
+      <div class="clay-heart-emblem" aria-hidden="true">💖</div>
       <h1 class="clay-main-title" id="loginTitle">
+        <span class="clay-rays">🔆</span>
         <span>Welcome Back</span>
+        <span class="clay-rays">🔆</span>
       </h1>
-      <p class="clay-sub-text">Sign in to continue celebrating</p>
+      <p class="clay-sub-text">Login to continue your celebration journey</p>
     </header>
+
+    <!-- 3D Cute Clay Character -->
+    <div class="clay-girl-stage" aria-hidden="true">
+      <img src="assets/vanvi-clay-girl-login.jpg" alt="Cute Vanvi Moments 3D Girl" class="clay-girl-photo" loading="eager" />
+    </div>
 
     <!-- Elevated Inner White Clay Form Card -->
     <section class="clay-inner-card" aria-label="Sign in credentials">
@@ -787,25 +870,34 @@
         <!-- Tactile 3D Clay Login Button -->
         <button class="clay-btn-main" type="submit" id="btnLoginSubmit">
           <span class="btn-spinner" id="loginSpinner" style="display:none;" aria-hidden="true"></span>
-          <span id="loginBtnText">Sign In ✨</span>
+          <span id="loginBtnText">Sign In</span>
         </button>
 
         <!-- Status Alert Message -->
         <p id="loginStatus" class="form-status" role="status" aria-live="polite" style="display:none;"></p>
       </form>
 
-      <!-- Single Official Google Sign-In Section -->
+      <!-- Divider -->
       <div class="clay-divider-line">
-        <span>or continue with</span>
+        <span>or sign in with</span>
       </div>
 
-      <div class="gsi-mount-wrap" id="gsiMountWrap">
-        <div id="gsiButtonContainer" class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="continue_with" data-size="large" data-logo_alignment="left" data-width="290"></div>
-      </div>
+      <!-- Real Official Google Sign-In Button -->
+      <div id="gsiButtonContainer" style="display:none;"></div>
+
+      <button type="button" class="btn-google-official" id="googleLoginBtn" title="Continue with Google" aria-label="Sign in with Google">
+        <svg class="google-g-icon" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        <span>Continue with Google</span>
+      </button>
 
       <!-- Bottom Switch Link -->
       <p class="clay-footer-link">
-        Don't have an account? <a href="signup.html">Sign Up</a>
+        Don't have an account? <a href="signup.html">Sign Up (+100 🪙 free)</a>
       </p>
     </section>
   </main>
@@ -830,6 +922,7 @@
 
       const form = document.getElementById('loginForm');
       const status = document.getElementById('loginStatus');
+      const googleBtn = document.getElementById('googleLoginBtn');
       const authStage = document.getElementById('authStage');
       const btnTogglePwd = document.getElementById('btnTogglePwd');
       const pwdInput = document.getElementById('loginPassword');
@@ -940,6 +1033,7 @@
         try {
           const result = await window.VanviAPI.auth.login({ identifier, password });
           if (result.success) {
+            // Remember identifier if checked
             if (rememberCheckbox && rememberCheckbox.checked) {
               localStorage.setItem('vanvi_remember_identifier', identifier);
               localStorage.setItem('vanvi_remember_me', 'true');
@@ -962,24 +1056,34 @@
         }
       });
 
-      // Mount official Google Identity Services button into #gsiButtonContainer
-      function mountGoogleBtn() {
+      // Google Sign-In Action
+      googleBtn?.addEventListener('click', function () {
+        if (window.VanviGoogleAuth) {
+          window.VanviGoogleAuth.signIn({
+            onSuccess: (res) => {
+              showStatus(`Signed in as ${res.user.name}! Opening dashboard... ✨`, 'success');
+              const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
+              window.triggerAuthSuccessCelebration(redirectUrl);
+            },
+            onError: (err) => {
+              showStatus(err.message || 'Google sign-in could not be completed.', 'error');
+            }
+          });
+        }
+      });
+
+      // Attempt GIS button rendering into #gsiButtonContainer if supported
+      window.addEventListener('load', () => {
         if (window.VanviGoogleAuth && window.VanviGoogleAuth.renderButton) {
           window.VanviGoogleAuth.renderButton('gsiButtonContainer', {
             theme: 'outline',
             size: 'large',
             shape: 'pill',
-            text: 'continue_with',
-            width: 290
+            text: 'signin_with',
+            width: 340
           });
         }
-      }
-      if (document.readyState === 'loading') {
-        window.addEventListener('DOMContentLoaded', mountGoogleBtn);
-      } else {
-        mountGoogleBtn();
-      }
-      window.addEventListener('load', mountGoogleBtn);
+      });
 
     })();
   </script>
