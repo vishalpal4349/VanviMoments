@@ -23,6 +23,30 @@
       badge: '🎂 Birthday Magic',
       ambientType: 'confetti'
     },
+    anniversary: {
+      accent: '#d97706',
+      gradient: 'linear-gradient(135deg, #451a03 0%, #1c0a00 100%)',
+      glow: 'rgba(217, 119, 6, 0.35)',
+      light: '#fffdf5',
+      badge: '🥂 Anniversary & Milestones',
+      ambientType: 'sparkles'
+    },
+    love: {
+      accent: '#ec4899',
+      gradient: 'linear-gradient(135deg, #500724 0%, #2e0817 100%)',
+      glow: 'rgba(236, 72, 153, 0.32)',
+      light: '#fff5f8',
+      badge: '💖 Love & Romance',
+      ambientType: 'floating-hearts'
+    },
+    friendship: {
+      accent: '#8b5cf6',
+      gradient: 'linear-gradient(135deg, #2e1065 0%, #170733 100%)',
+      glow: 'rgba(139, 92, 246, 0.32)',
+      light: '#faf5ff',
+      badge: '👯 Friendship & Besties',
+      ambientType: 'stars'
+    },
     family: {
       accent: '#f97316',
       gradient: 'linear-gradient(135deg, #ea580c 0%, #fb923c 100%)',
@@ -38,16 +62,27 @@
       light: '#f8fafc',
       badge: '💌 Sincere Apology',
       ambientType: 'rain'
+    },
+    memories: {
+      accent: '#a855f7',
+      gradient: 'linear-gradient(135deg, #3b0764 0%, #1e0538 100%)',
+      glow: 'rgba(168, 85, 247, 0.32)',
+      light: '#faf5ff',
+      badge: '📸 Cherished Memories',
+      ambientType: 'polaroids'
     }
   };
 
   const VANVI_CATEGORIES = [
-    { id: 'all', name: 'All Moments', icon: '✨', count: 16 },
-    { id: 'wedding', name: 'Wedding', icon: '💍', count: 9 },
-    { id: 'birthday', name: 'Birthday', icon: '🎂', count: 5 },
+    { id: 'all', name: 'All Moments', icon: '✨', count: 24 },
+    { id: 'wedding', name: 'Wedding', icon: '💍', count: 11 },
+    { id: 'birthday', name: 'Birthday', icon: '🎂', count: 6 },
+    { id: 'anniversary', name: 'Anniversary', icon: '🥂', count: 2 },
+    { id: 'love', name: 'Love & Romance', icon: '❤️', count: 2 },
+    { id: 'friendship', name: 'Friendship', icon: '👯', count: 1 },
     { id: 'family', name: 'Family & Friends', icon: '👨‍👩‍👧', count: 1 },
     { id: 'apology', name: 'Apology', icon: '💌', count: 1 },
-    { id: 'free', name: 'Free (₹0)', icon: '🎁', count: 8 }
+    { id: 'free', name: 'Free (₹0)', icon: '🎁', count: 9 }
   ];
 
 
@@ -833,7 +868,7 @@
     "badge": "🎁 Free Luxury Keepsake",
     "type": "3D Wax Seal Keepsake Experience",
     "icon": "🎂",
-    "thumbnail": "https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=800&auto=format&fit=crop",
+    "thumbnail": "assets/templates/vanvi-birthday-bold-luxe.jpg",
     "soundtrack": "A Song for Your Day",
     "tags": [
       "free",
@@ -1244,7 +1279,7 @@
     "badge": "💗 Romantic Apology",
     "type": "Interactive Multi-Chapter Love Microsite",
     "icon": "💌",
-    "thumbnail": "https://cdn.cutiepage.in/template-seeds/cute-apology/intro.gif",
+    "thumbnail": "assets/templates/vanvi-apology-luxe.jpg",
     "soundtrack": "I Love You (Acoustic)",
     "tags": [
       "sorry",
@@ -1296,6 +1331,525 @@
     "tagline": "A wax-sealed envelope opening with soft music and pickable wishes.",
     "rating": "4.7",
     "reviewsCount": 523
+  },
+  {
+    "id": "anniversary-eternal",
+    "slug": "anniversary-eternal",
+    "sku": "VNV-ANV-01",
+    "name": "Anniversary Eternal — Interactive Milestones & Love Story",
+    "aliases": [
+      "anniversary-eternal",
+      "Anniversary Eternal ❤️",
+      "anniversary-love"
+    ],
+    "category": "Anniversary",
+    "categorySlug": "anniversary",
+    "categoryName": "Anniversary & Milestones",
+    "price": 199,
+    "originalPrice": 499,
+    "isFree": false,
+    "tier": "Signature",
+    "badge": "🥂 Milestones / Love Story",
+    "type": "Interactive Milestones & Love Story Timeline Keepsake",
+    "icon": "🥂",
+    "thumbnail": "assets/templates/vanvi-anniversary-eternal.jpg",
+    "soundtrack": "Golden Vows & Piano Strings Symphony",
+    "tags": [
+      "anniversary",
+      "milestones",
+      "love",
+      "timeline",
+      "memories",
+      "romantic",
+      "bestseller"
+    ],
+    "description": "Celebrate every year written together with interactive milestone markers, then-and-now memory flipbook, wax-sealed love letter, and golden champagne sparkle effects.",
+    "features": [
+      "Then-and-Now Interactive Photo Slider",
+      "Year-by-Year Memory Timeline with Photo Moments",
+      "Romantic Background Soundtrack with Floating Player",
+      "3D Wax-Sealed Anniversary Letter Reveal",
+      "Live Relationship Counter (Days, Hours, Minutes Together)",
+      "Instant WhatsApp & Social Share with QR Code"
+    ],
+    "templatePath": "templates/Anniversary Eternal ❤️/index.html",
+    "previewPath": "templates/Anniversary Eternal ❤️/index.html",
+    "builderPath": "templates/Anniversary Eternal ❤️/builder.html",
+    "themeConfig": {
+      "accent": "#d97706",
+      "gradient": "linear-gradient(135deg, #451a03 0%, #1c0a00 100%)",
+      "glow": "rgba(217, 119, 6, 0.35)",
+      "light": "#fffdf5",
+      "badge": "🥂 Anniversary & Milestones",
+      "ambientType": "sparkles"
+    },
+    "experienceType": "timeline",
+    "customizerProfile": "anniversary",
+    "discount": "60% off",
+    "isLuxury": true,
+    "tagline": "A golden romantic journey celebrating every milestone together with photos, music, and love letter.",
+    "rating": "4.9",
+    "reviewsCount": 612
+  },
+  {
+    "id": "golden-anniversary",
+    "slug": "golden-anniversary",
+    "sku": "VNV-ANV-02",
+    "name": "Golden Anniversary — Royal Jubilee & Memories Odyssey",
+    "aliases": [
+      "golden-anniversary",
+      "golden-anniversary-walk"
+    ],
+    "category": "Anniversary",
+    "categorySlug": "anniversary",
+    "categoryName": "Anniversary Celebrations",
+    "price": 299,
+    "originalPrice": 699,
+    "isFree": false,
+    "tier": "Signature",
+    "badge": "👑 Royal Jubilee Edition",
+    "type": "Luxury Royal Anniversary & Vows Keepsake",
+    "icon": "💍",
+    "thumbnail": "assets/templates/vanvi-anniversary-gold-luxe.jpg",
+    "soundtrack": "Royal Symphony of Love",
+    "tags": [
+      "anniversary",
+      "golden",
+      "jubilee",
+      "luxury",
+      "vows",
+      "parents",
+      "royal"
+    ],
+    "description": "A tribute to lasting love. Crafted with 24K gold foil accents, full-screen archival memory cinema, heartfelt family audio notes, and permanent VIP keepsake hosting.",
+    "features": [
+      "24K Gold Foil Particle Aura & Luxury Typography",
+      "Full-Screen Archival Memory Cinema & Photo Reel",
+      "Audio Dedication Player for Voice Wishes",
+      "Custom Monogram Crest with Couple Initials",
+      "Permanent Lifetime Keepsake URL with QR Access"
+    ],
+    "templatePath": "templates/golden-anniversary/index.html",
+    "previewPath": "templates/golden-anniversary/index.html",
+    "builderPath": "templates/golden-anniversary/builder.html",
+    "themeConfig": {
+      "accent": "#d4af37",
+      "gradient": "linear-gradient(135deg, #2b1800 0%, #170d00 100%)",
+      "glow": "rgba(212, 175, 55, 0.35)",
+      "light": "#fffdf5",
+      "badge": "💍 Golden Jubilee",
+      "ambientType": "gold-dust"
+    },
+    "experienceType": "cinematic",
+    "customizerProfile": "anniversary",
+    "discount": "57% off",
+    "isLuxury": true,
+    "tagline": "Regal 24K gold tribute celebrating enduring love with cinematic memory reels and voice wishes.",
+    "rating": "5.0",
+    "reviewsCount": 428
+  },
+  {
+    "id": "love-in-clouds",
+    "slug": "love-in-clouds",
+    "sku": "VNV-LOVE-01",
+    "name": "Love in Clouds — Dreamy Sky Romance & Floating Confessions",
+    "aliases": [
+      "love-in-clouds",
+      "love-clouds"
+    ],
+    "category": "Love & Romance",
+    "categorySlug": "love",
+    "categoryName": "Love & Romance",
+    "price": 0,
+    "originalPrice": 199,
+    "isFree": true,
+    "tier": "100% Free Forever",
+    "badge": "🎁 Free Romantic Keepsake",
+    "type": "Dreamy Sky Romance & Floating Hearts Experience",
+    "icon": "☁️",
+    "thumbnail": "assets/templates/vanvi-love-in-clouds.jpg",
+    "soundtrack": "Cloud Nine Melody",
+    "tags": [
+      "love",
+      "romance",
+      "clouds",
+      "free",
+      "couple",
+      "confession",
+      "sweet"
+    ],
+    "description": "Floating clouds, pastel sunsets, and fluttering love letters. A dreamy interactive sanctuary to confess your feelings or celebrate couple dates.",
+    "features": [
+      "Interactive Floating Cloud Animation & Starfall",
+      "Tap-to-Open Flying Envelope with Love Note",
+      "Custom Couple Photo Polaroid Gallery",
+      "Soft Lo-Fi Romance Soundtrack",
+      "100% Free Forever with Instant Sharing"
+    ],
+    "templatePath": "templates/love-in-clouds/index.html",
+    "previewPath": "templates/love-in-clouds/index.html",
+    "builderPath": "templates/love-in-clouds/builder.html",
+    "themeConfig": {
+      "accent": "#ec4899",
+      "gradient": "linear-gradient(135deg, #500724 0%, #2e0817 100%)",
+      "glow": "rgba(236, 72, 153, 0.32)",
+      "light": "#fff5f8",
+      "badge": "💖 Love & Romance",
+      "ambientType": "floating-hearts"
+    },
+    "experienceType": "letter",
+    "customizerProfile": "love",
+    "discount": "100% off",
+    "isLuxury": false,
+    "tagline": "Drift into a dreamy pastel sky with floating clouds, romantic confessions, and couple polaroids.",
+    "rating": "4.8",
+    "reviewsCount": 890
+  },
+  {
+    "id": "constellation-love",
+    "slug": "constellation-love",
+    "sku": "VNV-LOVE-02",
+    "name": "Constellation Love — Written in the Stars Keepsake",
+    "aliases": [
+      "constellation-love",
+      "star-love"
+    ],
+    "category": "Love & Romance",
+    "categorySlug": "love",
+    "categoryName": "Love & Romance",
+    "price": 149,
+    "originalPrice": 399,
+    "isFree": false,
+    "tier": "Signature",
+    "badge": "✨ Cosmic Romance",
+    "type": "Interactive Star Map & Celestial Love Story",
+    "icon": "✨",
+    "thumbnail": "assets/templates/vanvi-love-romance-showcase.jpg",
+    "soundtrack": "Starlight Romance Acoustic",
+    "tags": [
+      "love",
+      "romance",
+      "stars",
+      "constellation",
+      "zodiac",
+      "celestial",
+      "valentines"
+    ],
+    "description": "An astronomical romance keepsake connecting the exact alignment of stars on the day you first met, with glowing zodiac trails and tap-to-reveal secret notes.",
+    "features": [
+      "Interactive 3D Celestial Star Sphere with Tap Controls",
+      "Custom Anniversary Date Star Map Projection",
+      "Glowing Constellation Love Path with Your Names",
+      "Hidden Cosmic Message Cryptogram",
+      "Direct WhatsApp & Instagram Share"
+    ],
+    "templatePath": "templates/constellation-love/index.html",
+    "previewPath": "templates/constellation-love/index.html",
+    "builderPath": "templates/constellation-love/builder.html",
+    "themeConfig": {
+      "accent": "#a855f7",
+      "gradient": "linear-gradient(135deg, #2e0854 0%, #15022a 100%)",
+      "glow": "rgba(168, 85, 247, 0.32)",
+      "light": "#faf5ff",
+      "badge": "✨ Celestial Love",
+      "ambientType": "stars"
+    },
+    "experienceType": "interactive",
+    "customizerProfile": "love",
+    "discount": "62% off",
+    "isLuxury": true,
+    "tagline": "Gaze into a 3D celestial star sphere mapping the exact night sky when you fell in love.",
+    "rating": "4.9",
+    "reviewsCount": 744
+  },
+  {
+    "id": "best-friend-day-01",
+    "slug": "best-friend-day-01",
+    "sku": "VNV-FRND-01",
+    "name": "Best Friend Day — Chaos, Laughs & Lifelong Memories",
+    "aliases": [
+      "best-friend-day-01",
+      "Best Friend Day 01",
+      "bestie-friendship"
+    ],
+    "category": "Friendship",
+    "categorySlug": "friendship",
+    "categoryName": "Friendship & Besties",
+    "price": 0,
+    "originalPrice": 199,
+    "isFree": true,
+    "tier": "100% Free Forever",
+    "badge": "🎁 Free Bestie Keepsake",
+    "type": "Playful Best Friend Memory Book & Roasts",
+    "icon": "👯",
+    "thumbnail": "assets/templates/vanvi-friendship-showcase.jpg",
+    "soundtrack": "Upbeat Indie Bestie Anthem",
+    "tags": [
+      "friendship",
+      "bestie",
+      "free",
+      "fun",
+      "photos",
+      "roast",
+      "memories",
+      "bestseller"
+    ],
+    "description": "Celebrate your unshakeable friendship! Packed with funny superlatives, inside jokes vault, candid photo grid, friendship contract, and celebration confetti.",
+    "features": [
+      "Playful Inside Jokes & Nicknames Generator",
+      "Funny Friendship Superlatives Awards Board",
+      "Candid Photobooth Grid with Fun Stickers",
+      "Official Best Friend For Life Digital Contract",
+      "1-Click WhatsApp Delivery to your Bestie"
+    ],
+    "templatePath": "templates/Best Friend Day 01/index.html",
+    "previewPath": "templates/Best Friend Day 01/index.html",
+    "builderPath": "templates/Best Friend Day 01/builder.html",
+    "themeConfig": {
+      "accent": "#8b5cf6",
+      "gradient": "linear-gradient(135deg, #2e1065 0%, #170733 100%)",
+      "glow": "rgba(139, 92, 246, 0.32)",
+      "light": "#faf5ff",
+      "badge": "👯 Friendship & Besties",
+      "ambientType": "confetti"
+    },
+    "experienceType": "interactive",
+    "customizerProfile": "friendship",
+    "discount": "100% off",
+    "isLuxury": false,
+    "tagline": "Superlative awards, inside joke vault, and candid photobooth celebrate your crazy bestie bond.",
+    "rating": "4.9",
+    "reviewsCount": 1120
+  },
+  {
+    "id": "birthday-retro-polaroid",
+    "slug": "birthday-retro-polaroid",
+    "sku": "VNV-BDAY-06",
+    "name": "Retro Polaroid Wall — Vintage Film Memories & Wishes",
+    "aliases": [
+      "birthday-retro-polaroid",
+      "retro-polaroid-wall"
+    ],
+    "category": "Birthday",
+    "categorySlug": "birthday",
+    "categoryName": "Birthday Magic",
+    "price": 0,
+    "originalPrice": 199,
+    "isFree": true,
+    "tier": "100% Free Forever",
+    "badge": "🎁 Free Polaroid Wall",
+    "type": "Tactile Vintage Polaroid Photo Wall & Audio Tape",
+    "icon": "📸",
+    "thumbnail": "assets/templates/vanvi-retro-polaroid-luxe.jpg",
+    "soundtrack": "Vintage Cassette Lo-Fi Melody",
+    "tags": [
+      "free",
+      "birthday",
+      "polaroid",
+      "retro",
+      "vintage",
+      "photos",
+      "cassette"
+    ],
+    "description": "A nostalgic celebration wall with pin-up polaroids, vintage cassette tape player, tap-to-shake photo development effect, and heartfelt birthday wishes.",
+    "features": [
+      "Tactile 3D Pin-Up Polaroids with Shake-to-Develop Effect",
+      "Playable Retro Cassette Tape Audio Player",
+      "Custom Handwritten Sticky Notes on Corkboard",
+      "Flickering Fairy Lights & Vintage Ambient Glow",
+      "Instant 100% Free Sharing with Live Link"
+    ],
+    "templatePath": "templates/birthday-retro-polaroid/index.html",
+    "previewPath": "templates/birthday-retro-polaroid/index.html",
+    "builderPath": "templates/birthday-retro-polaroid/builder.html",
+    "themeConfig": {
+      "accent": "#f59e0b",
+      "gradient": "linear-gradient(135deg, #451a03 0%, #1c0a00 100%)",
+      "glow": "rgba(245, 158, 11, 0.3)",
+      "light": "#fffdf5",
+      "badge": "📸 Retro Polaroid",
+      "ambientType": "sparkles"
+    },
+    "experienceType": "photo",
+    "customizerProfile": "birthday",
+    "discount": "100% off",
+    "isLuxury": false,
+    "tagline": "Pin polaroid memories to a corkboard wall with a playable retro cassette tape player.",
+    "rating": "4.8",
+    "reviewsCount": 680
+  },
+  {
+    "id": "golden-lake-collection",
+    "slug": "golden-lake-collection",
+    "sku": "VNV-WED-10",
+    "name": "Golden Lake Collection — Udaipur Waterfront Vivah Suite",
+    "aliases": [
+      "golden-lake-collection",
+      "royal-udaivilas-baithak"
+    ],
+    "category": "Wedding",
+    "categorySlug": "wedding",
+    "categoryName": "Wedding Celebrations",
+    "price": 699,
+    "originalPrice": 1499,
+    "isFree": false,
+    "tier": "Signature",
+    "badge": "👑 Lake Palace Luxury",
+    "type": "Ultra-Luxury Waterfront Palace Vivah Keepsake",
+    "icon": "🏰",
+    "thumbnail": "assets/templates/golden-lake-collection.jpg",
+    "soundtrack": "Lakeside Sitar & Royal Jal Tarang",
+    "tags": [
+      "wedding",
+      "udaipur",
+      "lake-palace",
+      "luxury",
+      "gold",
+      "signature",
+      "royal"
+    ],
+    "description": "Inspired by Pichola's glowing waters and royal heritage palaces. Features rippling water reflections, candlelit boat reveal, royal invitations, and 4K venue map.",
+    "features": [
+      "Interactive Lakeside Twilight Palace Parallax",
+      "Candlelit Floating Diya Wish Ceremony",
+      "5-Day Heritage Wedding Itinerary with Google Maps Navigation",
+      "Royal Guest Greeting Card Generator with Sanskrit Shlokas",
+      "VIP Watermark-Free Lifetime Invitation Suite"
+    ],
+    "templatePath": "templates/golden-lake-collection/index.html",
+    "previewPath": "templates/golden-lake-collection/index.html",
+    "builderPath": "templates/golden-lake-collection/builder.html",
+    "themeConfig": {
+      "accent": "#d4af37",
+      "gradient": "linear-gradient(135deg, #2b0b18 0%, #170813 100%)",
+      "glow": "rgba(212, 175, 55, 0.35)",
+      "light": "#fffaf5",
+      "badge": "👑 Lake Palace Edition",
+      "ambientType": "gold-dust"
+    },
+    "experienceType": "cinematic",
+    "customizerProfile": "wedding",
+    "discount": "53% off",
+    "isLuxury": true,
+    "tagline": "Rippling palace waters, candlelit floating diyas, and royal heritage wedding invitations.",
+    "rating": "5.0",
+    "reviewsCount": 840
+  },
+  {
+    "id": "sacred-temple-edition",
+    "slug": "sacred-temple-edition",
+    "sku": "VNV-WED-11",
+    "name": "Sacred Temple Edition — Auspicious Vedic Shubh Vivah",
+    "aliases": [
+      "sacred-temple-edition",
+      "temple-royal-wedding"
+    ],
+    "category": "Wedding",
+    "categorySlug": "wedding",
+    "categoryName": "Wedding Celebrations",
+    "price": 549,
+    "originalPrice": 1199,
+    "isFree": false,
+    "tier": "Signature",
+    "badge": "🛕 Vedic Tradition",
+    "type": "Auspicious Traditional Vedic Vivah Keepsake",
+    "icon": "🛕",
+    "thumbnail": "assets/templates/sacred-temple-edition.jpg",
+    "soundtrack": "Temple Bells, Conches & Auspicious Vedic Chants",
+    "tags": [
+      "wedding",
+      "temple",
+      "vedic",
+      "traditional",
+      "auspicious",
+      "shubh-vivah",
+      "gold"
+    ],
+    "description": "Deeply spiritual and heritage Vedic vivah invitation with brass bells sound, swinging floral garland entrance, Saptapadi vows story, and holy mantra blessings.",
+    "features": [
+      "Interactive Swirling Agni Kund & Saptapadi 7 Vows Scroll",
+      "Real Auspicious Temple Bell Resonance Sound FX",
+      "Traditional Sanskrit Shloka Calligraphy & Mangalashtak",
+      "Complete Muhurat & Ritual Timeline with Venue Directions",
+      "Elder Ashirwad Guestbook with WhatsApp Audio Delivery"
+    ],
+    "templatePath": "templates/sacred-temple-edition/index.html",
+    "previewPath": "templates/sacred-temple-edition/index.html",
+    "builderPath": "templates/sacred-temple-edition/builder.html",
+    "themeConfig": {
+      "accent": "#d4af37",
+      "gradient": "linear-gradient(135deg, #3b1300 0%, #1c0900 100%)",
+      "glow": "rgba(212, 175, 55, 0.35)",
+      "light": "#fffaf5",
+      "badge": "🛕 Vedic Shubh Vivah",
+      "ambientType": "gold-dust"
+    },
+    "experienceType": "vows",
+    "customizerProfile": "wedding",
+    "discount": "54% off",
+    "isLuxury": true,
+    "tagline": "Sacred Vedic vivah with temple bell acoustics, Saptapadi 7 vows scroll, and elder ashirwad.",
+    "rating": "4.9",
+    "reviewsCount": 670
+  },
+  {
+    "id": "retro-polaroid-wall",
+    "slug": "retro-polaroid-wall",
+    "sku": "VNV-MEM-01",
+    "name": "Polaroid Memory Wall — Timeless Film Keepsake",
+    "aliases": [
+      "retro-polaroid-wall",
+      "polaroid-wall",
+      "polaroid-memories"
+    ],
+    "category": "Memories",
+    "categorySlug": "memories",
+    "categoryName": "Cherished Memories",
+    "price": 0,
+    "originalPrice": 199,
+    "isFree": true,
+    "tier": "100% Free Forever",
+    "badge": "🎁 Free Polaroid Wall",
+    "type": "Interactive Vintage Polaroid Memory Wall & Cassette",
+    "icon": "📸",
+    "thumbnail": "assets/templates/vanvi-retro-polaroid-showcase.jpg",
+    "soundtrack": "Vintage Nostalgia Tape",
+    "tags": [
+      "memories",
+      "polaroid",
+      "timeline",
+      "photos",
+      "vintage",
+      "free",
+      "family",
+      "bestseller"
+    ],
+    "description": "Pin up your dearest photographs on a tactile corkboard wall with shake-to-develop animations, handwritten notes, and vintage cassette soundtrack.",
+    "features": [
+      "Interactive 3D Pin-Up Polaroids with Photo Shake Effect",
+      "Playable Vintage Cassette Tape Sound Player",
+      "Custom Handwritten Sticky Notes",
+      "Flickering Fairy Lights & Polaroid Aura",
+      "100% Free Forever with Live Instant Link"
+    ],
+    "templatePath": "templates/retro-polaroid-wall/index.html",
+    "previewPath": "templates/retro-polaroid-wall/index.html",
+    "builderPath": "templates/retro-polaroid-wall/builder.html",
+    "themeConfig": {
+      "accent": "#a855f7",
+      "gradient": "linear-gradient(135deg, #3b0764 0%, #1e0538 100%)",
+      "glow": "rgba(168, 85, 247, 0.32)",
+      "light": "#faf5ff",
+      "badge": "📸 Cherished Memories",
+      "ambientType": "polaroids"
+    },
+    "experienceType": "photo",
+    "customizerProfile": "memories",
+    "discount": "100% off",
+    "isLuxury": false,
+    "tagline": "Pin tactile vintage polaroid photos to a corkboard wall with shake effects and cassette tunes.",
+    "rating": "4.9",
+    "reviewsCount": 810
   }
 ];
 ;
@@ -1322,6 +1876,38 @@
       if (categorySlug === 'ultra-premium') return VANVI_TEMPLATES.filter(t => Number(t.price || 0) > 700 || t.isLuxury);
       if (categorySlug === 'premium') return VANVI_TEMPLATES.filter(t => !t.isFree && Number(t.price || 0) > 0);
       const lower = categorySlug.toLowerCase();
+      if (lower === 'celebration' || lower === 'celebrations') {
+        return VANVI_TEMPLATES.filter(t => 
+          (t.categorySlug && (t.categorySlug === 'celebration' || t.categorySlug === 'wedding' || t.categorySlug === 'birthday')) ||
+          (t.category && t.category.toLowerCase().includes('celebrat')) ||
+          (t.tags && (t.tags.includes('celebration') || t.tags.includes('festive') || t.tags.includes('bestseller')))
+        );
+      }
+      if (lower === 'memories' || lower === 'memory') {
+        return VANVI_TEMPLATES.filter(t => 
+          (t.categorySlug && (t.categorySlug === 'memories' || t.categorySlug === 'family')) ||
+          (t.category && t.category.toLowerCase().includes('memor')) ||
+          (t.tags && (t.tags.includes('memories') || t.tags.includes('polaroid') || t.tags.includes('timeline')))
+        );
+      }
+      if (lower === 'love' || lower === 'romance') {
+        return VANVI_TEMPLATES.filter(t => 
+          (t.categorySlug && (t.categorySlug === 'love' || t.categorySlug === 'romance')) || 
+          (t.category && (t.category.toLowerCase().includes('love') || t.category.toLowerCase().includes('romance')))
+        );
+      }
+      if (lower === 'anniversary') {
+        return VANVI_TEMPLATES.filter(t => 
+          (t.categorySlug && t.categorySlug === 'anniversary') || 
+          (t.category && t.category.toLowerCase().includes('anniversary'))
+        );
+      }
+      if (lower === 'friendship' || lower === 'friends' || lower === 'friend') {
+        return VANVI_TEMPLATES.filter(t => 
+          (t.categorySlug && t.categorySlug === 'friendship') || 
+          (t.category && t.category.toLowerCase().includes('friend'))
+        );
+      }
       return VANVI_TEMPLATES.filter(t => 
         (t.categorySlug && t.categorySlug.toLowerCase() === lower) || 
         (t.category && t.category.toLowerCase().includes(lower))
@@ -1338,8 +1924,19 @@
       ) || null;
     },
 
+    escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    },
+
     // Unified Luxury Card Renderer (2-Column Mobile & Multi-Column Desktop)
     renderCard(t) {
+      const escapeHtml = this.escapeHtml;
       if (!t) return '';
       const p = Number(t.price || 0);
       const orig = Number(t.originalPrice || (p > 0 ? Math.round(p * 2.8 / 10) * 10 - 1 : 0));

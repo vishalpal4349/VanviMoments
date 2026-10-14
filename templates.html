@@ -953,6 +953,9 @@
       <span class="quick-search-label" style="font-size:10.5px; font-weight:800; color:var(--text-muted); white-space:nowrap; flex-shrink:0;">⚡ Quick Filter:</span>
       <button type="button" class="quick-tag-chip" onclick="applySearchTag('wedding')">💍 Wedding</button>
       <button type="button" class="quick-tag-chip" onclick="applySearchTag('birthday')">🎂 Birthday</button>
+      <button type="button" class="quick-tag-chip" onclick="applySearchTag('anniversary')">🥂 Anniversary</button>
+      <button type="button" class="quick-tag-chip" onclick="applySearchTag('love')">❤️ Love</button>
+      <button type="button" class="quick-tag-chip" onclick="applySearchTag('friendship')">👯 Friendship</button>
       <button type="button" class="quick-tag-chip" onclick="applySearchTag('family')">👨‍👩‍👧 Family</button>
       <button type="button" class="quick-tag-chip" onclick="applySearchTag('apology')">💌 Apology</button>
       <button type="button" class="quick-tag-chip" onclick="applySearchTag('free')">🎁 Free (₹0)</button>
@@ -961,12 +964,15 @@
     <!-- Smart Unified Occasion & Category Filter Strip (Clean & Premium) -->
     <div class="atelier-filter-hub">
       <nav class="quick-occasions-strip" id="quickOccasionsStrip" aria-label="Smart Categories">
-        <button type="button" id="quick-cat-all" class="quick-cat-pill active" data-cat="all" onclick="selectQuickCategory('all')">✨ All Moments (16)</button>
-        <button type="button" id="quick-cat-wedding" class="quick-cat-pill" data-cat="wedding" onclick="selectQuickCategory('wedding')">💍 Wedding (9)</button>
-        <button type="button" id="quick-cat-birthday" class="quick-cat-pill" data-cat="birthday" onclick="selectQuickCategory('birthday')">🎂 Birthday (5)</button>
+        <button type="button" id="quick-cat-all" class="quick-cat-pill active" data-cat="all" onclick="selectQuickCategory('all')">✨ All Moments (24)</button>
+        <button type="button" id="quick-cat-wedding" class="quick-cat-pill" data-cat="wedding" onclick="selectQuickCategory('wedding')">💍 Wedding (11)</button>
+        <button type="button" id="quick-cat-birthday" class="quick-cat-pill" data-cat="birthday" onclick="selectQuickCategory('birthday')">🎂 Birthday (6)</button>
+        <button type="button" id="quick-cat-anniversary" class="quick-cat-pill" data-cat="anniversary" onclick="selectQuickCategory('anniversary')">🥂 Anniversary (2)</button>
+        <button type="button" id="quick-cat-love" class="quick-cat-pill" data-cat="love" onclick="selectQuickCategory('love')">❤️ Love (2)</button>
+        <button type="button" id="quick-cat-friendship" class="quick-cat-pill" data-cat="friendship" onclick="selectQuickCategory('friendship')">👯 Friendship (1)</button>
         <button type="button" id="quick-cat-family" class="quick-cat-pill" data-cat="family" onclick="selectQuickCategory('family')">👨‍👩‍👧 Family (1)</button>
         <button type="button" id="quick-cat-apology" class="quick-cat-pill" data-cat="apology" onclick="selectQuickCategory('apology')">💌 Apology (1)</button>
-        <button type="button" id="quick-cat-free" class="quick-cat-pill pill-free" data-cat="free" onclick="selectQuickCategory('free')">🎁 100% Free (8)</button>
+        <button type="button" id="quick-cat-free" class="quick-cat-pill pill-free" data-cat="free" onclick="selectQuickCategory('free')">🎁 100% Free (11)</button>
       </nav>
     </div>
 
@@ -1029,9 +1035,36 @@
       <section class="occasion-section">
         <div class="section-header-row">
           <h2 class="section-title">🎂 Birthday Magic</h2>
-          <a href="templates.html?category=birthday" class="section-view-all-pill" id="viewall-birthday">View All (5) →</a>
+          <a href="templates.html?category=birthday" class="section-view-all-pill" id="viewall-birthday">View All (6) →</a>
         </div>
         <div class="cards-rail" id="rail-birthday"></div>
+      </section>
+
+      <!-- Section 5: Anniversary & Milestones -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <h2 class="section-title">🥂 Anniversary &amp; Milestones</h2>
+          <a href="category-anniversary.html" class="section-view-all-pill" id="viewall-anniversary">View All (2) →</a>
+        </div>
+        <div class="cards-rail" id="rail-anniversary"></div>
+      </section>
+
+      <!-- Section 6: Love & Romance -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <h2 class="section-title">❤️ Love &amp; Romance</h2>
+          <a href="category-love.html" class="section-view-all-pill" id="viewall-love">View All (2) →</a>
+        </div>
+        <div class="cards-rail" id="rail-love"></div>
+      </section>
+
+      <!-- Section 7: Friendship & Besties -->
+      <section class="occasion-section">
+        <div class="section-header-row">
+          <h2 class="section-title">👯 Friendship &amp; Besties</h2>
+          <a href="category-friendship.html" class="section-view-all-pill" id="viewall-friendship">View All (1) →</a>
+        </div>
+        <div class="cards-rail" id="rail-friendship"></div>
       </section>
 
       <!-- Section 5: Family & Gratitude -->
@@ -1217,9 +1250,16 @@
         'for-maa': 'templates/For Maa/assets/images/card.jpg',
         'for-maa-01': 'templates/For Maa/assets/images/card.jpg',
         'For Maa': 'templates/For Maa/assets/images/card.jpg',
-        'best-friend-01': 'assets/templates/vanvi-friendship-showcase.jpg',
         'birthday-box': 'assets/templates/vanvi-birthday-box.jpg',
+        'birthday-2-0': 'assets/templates/vanvi-birthday-bold-luxe.jpg',
+        'Birthday 2.0': 'assets/templates/vanvi-birthday-bold-luxe.jpg',
         'anniversary-eternal': 'assets/templates/vanvi-anniversary-eternal.jpg',
+        'Anniversary Eternal ❤️': 'assets/templates/vanvi-anniversary-eternal.jpg',
+        'constellation-love': 'assets/templates/vanvi-love-romance-showcase.jpg',
+        'best-friend-day-01': 'assets/templates/vanvi-friendship-showcase.jpg',
+        'Best Friend Day 01': 'assets/templates/vanvi-friendship-showcase.jpg',
+        'cute-sorry': 'assets/templates/vanvi-apology-luxe.jpg',
+        'sorry-bubu': 'assets/templates/vanvi-apology-luxe.jpg',
         'hey-birthday': 'templates/Hey Birthday/assets/photo1.jpg',
         'Hey Birthday': 'templates/Hey Birthday/assets/photo1.jpg'
       };
@@ -1393,10 +1433,14 @@
               if (!c.includes('wedding') && !c.includes('vivah') && !c.includes('shaadi') && !c.includes('palace') && !c.includes('mehendi') && !c.includes('temple') && !c.includes('lake')) return false;
             } else if (state.category === 'birthday') {
               if (!c.includes('birthday')) return false;
+            } else if (state.category === 'anniversary') {
+              if (!c.includes('anniversary')) return false;
             } else if (state.category === 'love') {
-              if (!c.includes('love') && !c.includes('romance') && !c.includes('anniversary')) return false;
+              if (!c.includes('love') && !c.includes('romance')) return false;
+            } else if (state.category === 'friendship') {
+              if (!c.includes('friend')) return false;
             } else if (state.category === 'family') {
-              if (!c.includes('family') && !c.includes('friend') && !c.includes('thank')) return false;
+              if (!c.includes('family') && !(t.id || '').includes('maa') && !c.includes('thank')) return false;
             } else if (state.category === 'apology') {
               if (!c.includes('apology') && !c.includes('sorry')) return false;
             } else if (!c.includes(state.category)) {
@@ -1496,11 +1540,6 @@
             filterFn: t => t.badge || t.isFree || (t.tags && (t.tags.includes('trending') || t.tags.includes('popular')))
           },
           {
-            railId: 'rail-birthday',
-            viewAllId: 'viewall-birthday',
-            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('birthday')
-          },
-          {
             railId: 'rail-wedding',
             viewAllId: 'viewall-wedding',
             filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('wedding')
@@ -1509,6 +1548,21 @@
             railId: 'rail-birthday',
             viewAllId: 'viewall-birthday',
             filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('birthday')
+          },
+          {
+            railId: 'rail-anniversary',
+            viewAllId: 'viewall-anniversary',
+            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('anniversary')
+          },
+          {
+            railId: 'rail-love',
+            viewAllId: 'viewall-love',
+            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('love') || (t.categorySlug || t.category || '').toLowerCase().includes('romance')
+          },
+          {
+            railId: 'rail-friendship',
+            viewAllId: 'viewall-friendship',
+            filterFn: t => (t.categorySlug || t.category || '').toLowerCase().includes('friend')
           },
           {
             railId: 'rail-family',
@@ -1668,12 +1722,14 @@
           { id: 'all', label: '✨ All Moments' },
           { id: 'wedding', label: '💍 Wedding' },
           { id: 'birthday', label: '🎂 Birthday' },
+          { id: 'anniversary', label: '🥂 Anniversary' },
+          { id: 'love', label: '❤️ Love & Romance' },
+          { id: 'friendship', label: '👯 Friendship' },
           { id: 'family', label: '👨‍👩‍👧 Family & Friends' },
           { id: 'apology', label: '💌 Apology' },
           { id: 'free', label: '🎁 100% Free' },
           { id: 'premium', label: '👑 VIP Premium' }
         ];
-
 
         let html = '';
         categories.forEach(cat => {
@@ -1688,18 +1744,22 @@
             count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes('wedding')).length;
           } else if (cat.id === 'birthday') {
             count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes('birthday')).length;
+          } else if (cat.id === 'anniversary') {
+            count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes('anniversary')).length;
           } else if (cat.id === 'love') {
             count = all.filter(t => {
               const c = (t.categorySlug || t.category || '').toLowerCase();
-              return c.includes('love') || c.includes('anniversary');
+              return c.includes('love') || c.includes('romance');
             }).length;
+          } else if (cat.id === 'friendship') {
+            count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes('friend')).length;
           } else if (cat.id === 'family') {
             count = all.filter(t => {
               const c = (t.categorySlug || t.category || '').toLowerCase();
-              return c.includes('family') || c.includes('friend');
+              return c.includes('family') || (t.id || '').includes('maa');
             }).length;
           } else if (cat.id === 'apology') {
-            count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes('apology')).length;
+            count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes('apology') || (t.id || '').includes('sorry')).length;
           } else {
             count = all.filter(t => (t.categorySlug || t.category || '').toLowerCase().includes(cat.id)).length;
           }

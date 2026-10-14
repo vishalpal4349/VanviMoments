@@ -72,15 +72,18 @@
 }
 
 .vanvi-cards-grid.is-magazine-view .card-art-box {
-  aspect-ratio: 16 / 9.5;
-  padding: 16px;
+  aspect-ratio: 16 / 10 !important;
+  padding: 0 !important;
 }
 
 .vanvi-cards-grid.is-magazine-view .card-art-img {
-  max-width: 88%;
-  max-height: 88%;
-  border-radius: 14px;
-  box-shadow: 0 12px 28px -4px rgba(44, 18, 36, 0.22);
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 18px 18px 0 0 !important;
+  box-shadow: none !important;
 }
 
 .vanvi-cards-grid.is-magazine-view .card-body {
@@ -128,7 +131,6 @@
 }
 
 /* Sleek unboxed layout for internal card parts (no nested puffy bubbles) */
-.vanvi-card .card-art-box,
 .vanvi-card .card-body,
 .vanvi-card .card-exp-hint,
 .vanvi-card .card-header-meta,
@@ -174,51 +176,50 @@
     inset 0 2px 3px #ffffff;
 }
 
-/* ─── OPTICAL CENTERED ARTWORK SHOWCASE (COMPACT & UNCLUTTERED) ─── */
+/* ─── FULL EDGE-TO-EDGE ARTWORK SHOWCASE (NO SHRINKING, 100% BLEED) ─── */
 .vanvi-card .card-art-box {
-  width: 100%;
-  aspect-ratio: 16 / 9.2 !important; /* Compact, balanced showcase ratio */
-  background: radial-gradient(circle at 50% 45%, #fff7fb 0%, #faedf5 100%) !important;
-  border-radius: 19px 19px 0 0 !important;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 10px !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 10 !important; /* Elegant widescreen luxury ratio */
+  background: #170813 !important;
+  border-radius: 18px 18px 0 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-/* Ambient blurred aura behind image - spreads rich occasion colors naturally */
+/* Ambient blurred aura hidden — full bleed image seamlessly occupies entire box */
 .vanvi-card .card-art-backdrop {
-  position: absolute;
-  inset: -20px;
-  width: calc(100% + 40px);
-  height: calc(100% + 40px);
-  object-fit: cover;
-  filter: blur(24px) saturate(1.4) opacity(0.32);
-  transform: scale(1.15);
-  pointer-events: none;
-  z-index: 0;
+  display: none !important;
 }
 
-/* The hero template image: optical centered, uncropped, floating */
+/* The hero template image: 100% FULL SECTION COVERAGE (Zero shrinking, crisp full cover) */
 .vanvi-card .card-art-img {
-  position: relative;
-  z-index: 1;
-  max-width: 90%;
-  max-height: 90%;
-  width: auto;
-  height: auto;
-  object-fit: contain; /* 100% ZERO CROPPING! Perfectly centered */
-  border-radius: 9px;
-  box-shadow: 0 8px 18px -4px rgba(44, 18, 36, 0.16), 0 2px 6px rgba(0, 0, 0, 0.04);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  position: absolute !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: 18px 18px 0 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+  z-index: 1 !important;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .vanvi-card:hover .card-art-img {
-  transform: scale(1.05) translateY(-3px);
-  box-shadow: 0 14px 28px -4px rgba(255, 42, 122, 0.28), 0 4px 10px rgba(44, 18, 36, 0.08);
+  transform: scale(1.05) !important;
 }
 
 /* Authentic Official Vanvi Moments Brand Badge on Top Corner (Elevates thumbnails, covers external marks) */
