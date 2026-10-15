@@ -1473,7 +1473,7 @@ function vanviGoBack(fallback) {
     if (found) {
       templateName = found.name;
       templateId = found.id;
-      if (rawPrice === null && typeof found.price === 'number') basePrice = found.price;
+      if (typeof found.price === 'number') basePrice = found.price;
       if (!urlParams.get('occasion') && (found.previewOccasion || found.category)) occasion = found.previewOccasion || found.category;
     }
   }
@@ -1680,15 +1680,17 @@ function vanviGoBack(fallback) {
     if (initialTemplateObj) {
       templateId = initialTemplateObj.id;
       templateName = initialTemplateObj.name;
-      if (!urlParams.get('price') && !urlParams.get('amount')) {
-        basePrice = initialTemplateObj.price;
-      }
+      basePrice = initialTemplateObj.price;
       if (!urlParams.get('occasion')) {
         occasion = initialTemplateObj.category || 'Birthday';
       }
     }
   }
   applyTemplateTheme(initialTemplateObj);
+  const originalPriceEl = document.getElementById('orderItemOrigPrice');
+  if (originalPriceEl && initialTemplateObj && initialTemplateObj.originalPrice) {
+    originalPriceEl.textContent = `₹${initialTemplateObj.originalPrice}`;
+  }
   initTemplateSwitcher();
 
   // 5. Business Rules Configuration
@@ -1700,7 +1702,7 @@ function vanviGoBack(fallback) {
   };
 
   // User Coin & Pass Balance
-  let userCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '120', 10);
+  let userCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
   let userCredits = parseInt(localStorage.getItem('vanvi_template_credits') || '0', 10);
 
   // 5b. Customer Account & Google Identity Sync
@@ -1713,6 +1715,25 @@ function vanviGoBack(fallback) {
   const checkoutProviderBadge = document.getElementById('checkoutProviderBadge');
   const btnCheckoutGoogleAuth = document.getElementById('btnCheckoutGoogleAuth');
   const btnCheckoutSwitchUser = document.getElementById('btnCheckoutSwitchUser');
+  let googleIsConfigured = false;
+  if (window.VanviGoogleAuth && typeof window.VanviGoogleAuth.isConfigured === 'function') {
+    googleIsConfigured = window.VanviGoogleAuth.isConfigured();
+  } else {
+    try {
+      googleIsConfigured = Boolean(
+        window.VANVI_GOOGLE_CLIENT_ID || localStorage.getItem('vanvi_google_client_id')
+      );
+    } catch (err) {
+      googleIsConfigured = Boolean(window.VANVI_GOOGLE_CLIENT_ID);
+    }
+  }
+  if (btnCheckoutGoogleAuth && !googleIsConfigured) {
+    if (loggedOutBox) loggedOutBox.hidden = true;
+    if (!currentUser) {
+      const accountCard = document.getElementById('customerAccountCard');
+      if (accountCard) accountCard.hidden = true;
+    }
+  }
 
   function syncUserAccountUI() {
     currentUser = (window.VanviGoogleAuth && window.VanviGoogleAuth.getCurrentUser()) || null;

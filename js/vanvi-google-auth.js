@@ -180,6 +180,10 @@
 
   // Public Vanvi Google Auth API
   window.VanviGoogleAuth = {
+    isConfigured() {
+      return Boolean(GOOGLE_CLIENT_ID);
+    },
+
     init() {
       loadGoogleIdentityScript();
     },

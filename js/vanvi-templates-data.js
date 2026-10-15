@@ -2372,12 +2372,21 @@
 
     getById(id) {
       if (!id) return null;
-      return VANVI_TEMPLATES.find(t => 
-        t.id === id || 
-        t.slug === id || 
-        (t.aliases && t.aliases.includes(id)) ||
-        (id === 'soft-birthday' && t.id === 'birthday-white-bloom-001')
-      ) || null;
+      const cleanId = String(id).trim().toLowerCase();
+      const alt1 = cleanId.replace(/-0(\d+)/g, '-$1');
+      const alt2 = cleanId.replace(/-(\d)(?!\d)/g, '-0$1');
+      return VANVI_TEMPLATES.find(t => {
+        const tid = (t.id || '').toLowerCase();
+        const tslug = (t.slug || '').toLowerCase();
+        if (tid === cleanId || tslug === cleanId || tid === alt1 || tid === alt2) return true;
+        if (t.aliases && Array.isArray(t.aliases)) {
+          return t.aliases.some(a => {
+            const al = String(a).toLowerCase();
+            return al === cleanId || al === alt1 || al === alt2;
+          });
+        }
+        return false;
+      }) || (cleanId === 'soft-birthday' ? this.getById('birthday-white-bloom') : null);
     },
 
     escapeHtml(str) {

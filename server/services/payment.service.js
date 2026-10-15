@@ -22,7 +22,15 @@ const CASHFREE_API_VERSION = process.env.CASHFREE_API_VERSION || '2023-08-01';
 
 const isRazorpayConfigured = !!(RAZORPAY_KEY_ID && RAZORPAY_KEY_SECRET);
 const isCashfreeConfigured = !!(CASHFREE_APP_ID && CASHFREE_SECRET_KEY);
-const isLiveGatewayConfigured = isRazorpayConfigured || isCashfreeConfigured;
+const isRazorpayLiveConfigured = isRazorpayConfigured && !/^rzp_test_/i.test(RAZORPAY_KEY_ID);
+const isCashfreeLiveConfigured = isCashfreeConfigured && !/^test/i.test(CASHFREE_APP_ID);
+const isLiveGatewayConfigured = isRazorpayLiveConfigured || isCashfreeLiveConfigured;
+
+if (process.env.NODE_ENV === 'production' && !isRazorpayLiveConfigured && !isCashfreeLiveConfigured) {
+  const err = new Error('A live payment gateway (Razorpay or Cashfree) is required in production.');
+  err.statusCode = 503;
+  throw err;
+}
 
 let razorpayClient = null;
 function getRazorpayClient() {
@@ -107,6 +115,8 @@ function verifyRazorpaySignature({ order_id, payment_id, razorpay_signature }) {
     return process.env.NODE_ENV !== 'production';
   }
 
+  if (process.env.NODE_ENV === 'production' && !isRazorpayLiveConfigured) return false;
+
   const keySecret = process.env.RAZORPAY_KEY_SECRET || RAZORPAY_KEY_SECRET;
   if (!keySecret) {
     const err = new Error('RAZORPAY_KEY_SECRET is not configured on server');
@@ -133,7 +143,10 @@ async function createGatewayOrder({ orderId, amountINR, currency = 'INR', custom
   const amountPaisa = Math.round(amountINR * 100);
 
   // 1. Live Cashfree Order if selected & configured
-  if (gateway === 'cashfree' && isCashfreeConfigured) {
+  if (
+    gateway === 'cashfree' &&
+    (process.env.NODE_ENV === 'production' ? isCashfreeLiveConfigured : isCashfreeConfigured)
+  ) {
     try {
       const isProd = process.env.NODE_ENV === 'production';
       const endpoint = isProd ? 'https://api.cashfree.com/pg/orders' : 'https://sandbox.cashfree.com/pg/orders';
@@ -180,7 +193,7 @@ async function createGatewayOrder({ orderId, amountINR, currency = 'INR', custom
   }
 
   // 2. Live Razorpay Order if configured
-  if (isRazorpayConfigured) {
+  if (process.env.NODE_ENV === 'production' ? isRazorpayLiveConfigured : isRazorpayConfigured) {
     try {
       const authHeader = 'Basic ' + Buffer.from(`${RAZORPAY_KEY_ID}:${RAZORPAY_KEY_SECRET}`).toString('base64');
       const response = await fetch('https://api.razorpay.com/v1/orders', {
@@ -253,7 +266,7 @@ function verifyPaymentSignature({ gatewayOrderId, paymentId, signature }) {
     return process.env.NODE_ENV !== 'production';
   }
 
-  if (!isRazorpayConfigured) {
+  if (!isRazorpayConfigured || (process.env.NODE_ENV === 'production' && !isRazorpayLiveConfigured)) {
     return false;
   }
 
@@ -273,7 +286,11 @@ function verifyPaymentSignature({ gatewayOrderId, paymentId, signature }) {
  * Verify Razorpay webhook HMAC signature
  */
 function verifyWebhookSignature(rawBody, signatureHeader) {
-  if (!RAZORPAY_WEBHOOK_SECRET || !signatureHeader) return false;
+  if (
+    !RAZORPAY_WEBHOOK_SECRET ||
+    !signatureHeader ||
+    (process.env.NODE_ENV === 'production' && !isRazorpayLiveConfigured)
+  ) return false;
 
   const bodyString = typeof rawBody === 'string' ? rawBody : (Buffer.isBuffer(rawBody) ? rawBody.toString('utf8') : JSON.stringify(rawBody));
   const expectedSig = crypto
@@ -292,7 +309,12 @@ function verifyWebhookSignature(rawBody, signatureHeader) {
  * Verify Cashfree webhook signature
  */
 function verifyCashfreeWebhookSignature({ timestamp, rawBody, signatureHeader }) {
-  if (!CASHFREE_SECRET_KEY || !signatureHeader || !timestamp) return false;
+  if (
+    !CASHFREE_SECRET_KEY ||
+    !signatureHeader ||
+    !timestamp ||
+    (process.env.NODE_ENV === 'production' && !isCashfreeLiveConfigured)
+  ) return false;
 
   const bodyString = typeof rawBody === 'string' ? rawBody : (Buffer.isBuffer(rawBody) ? rawBody.toString('utf8') : JSON.stringify(rawBody));
   const payload = `${timestamp}${bodyString}`;

@@ -2114,11 +2114,129 @@
     });
   }
 
+  // ─── 21. MASTER ADMIN AUTH & SESSION CONTROLLER ───
+  window.checkOrOpenAdminAuth = function() {
+    const token = localStorage.getItem('vanvi_auth_token') || sessionStorage.getItem('vanvi_auth_token');
+    if (token) {
+      if (confirm('You are logged in with active Admin session. Do you want to sign out?')) {
+        localStorage.removeItem('vanvi_auth_token');
+        sessionStorage.removeItem('vanvi_auth_token');
+        updateAdminAuthBadge(false);
+        showToast('Signed out of admin session');
+        refreshAdminData();
+      }
+    } else {
+      openAdminAuthModal();
+    }
+  };
+
+  window.openAdminAuthModal = function() {
+    const modal = document.getElementById('adminAuthModal');
+    if (modal) modal.classList.add('active');
+  };
+
+  window.closeAdminAuthModal = function() {
+    const modal = document.getElementById('adminAuthModal');
+    if (modal) modal.classList.remove('active');
+  };
+
+  window.submitAdminLogin = async function() {
+    const email = document.getElementById('adminInputEmail')?.value.trim();
+    const password = document.getElementById('adminInputPassword')?.value.trim();
+    const status = document.getElementById('adminAuthStatus');
+    const btn = document.getElementById('btnAdminSubmitLogin');
+
+    if (!email || !password) return;
+
+    if (btn) btn.disabled = true;
+    if (status) {
+      status.style.display = 'block';
+      status.style.color = 'var(--text-muted)';
+      status.textContent = 'Verifying credentials...';
+    }
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (data && data.success && data.token) {
+        localStorage.setItem('vanvi_auth_token', data.token);
+        if (data.user) localStorage.setItem('vanvi_user', JSON.stringify(data.user));
+        if (status) {
+          status.style.color = '#059669';
+          status.textContent = '✓ Welcome Master Admin!';
+        }
+        showToast('✓ Verified Master Admin Session Active!');
+        updateAdminAuthBadge(true, data.user?.name || 'Master Admin');
+        setTimeout(() => {
+          closeAdminAuthModal();
+          refreshAdminData();
+        }, 600);
+      } else {
+        if (status) {
+          status.style.color = '#dc2626';
+          status.textContent = data.error || 'Invalid admin credentials.';
+        }
+      }
+    } catch (e) {
+      if (status) {
+        status.style.color = '#dc2626';
+        status.textContent = 'Network error. Try again.';
+      }
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  };
+
+  function updateAdminAuthBadge(isActive, name = 'Master Admin') {
+    const dot = document.getElementById('adminAuthDot');
+    const txt = document.getElementById('adminAuthText');
+    const badge = document.getElementById('adminAuthBadge');
+    if (!badge || !dot || !txt) return;
+
+    if (isActive) {
+      badge.style.background = 'rgba(5, 150, 105, 0.12)';
+      badge.style.borderColor = 'rgba(5, 150, 105, 0.35)';
+      badge.style.color = '#059669';
+      dot.style.color = '#059669';
+      txt.textContent = '🟢 ' + name;
+    } else {
+      badge.style.background = 'rgba(217, 119, 6, 0.12)';
+      badge.style.borderColor = 'rgba(217, 119, 6, 0.35)';
+      badge.style.color = '#d97706';
+      dot.style.color = '#d97706';
+      txt.textContent = '🔑 Admin Sign In';
+    }
+  }
+
+  function verifyAdminSession() {
+    const token = localStorage.getItem('vanvi_auth_token') || sessionStorage.getItem('vanvi_auth_token');
+    if (!token) {
+      updateAdminAuthBadge(false);
+      return;
+    }
+    fetch('/api/admin/overview', { headers: getAdminAuthHeaders() })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.success) {
+          updateAdminAuthBadge(true);
+        } else {
+          updateAdminAuthBadge(false);
+        }
+      })
+      .catch(() => updateAdminAuthBadge(false));
+  }
+
   // Initial load
   document.addEventListener('DOMContentLoaded', () => {
+    verifyAdminSession();
     refreshAdminData();
     loadStorefrontSettings();
   });
+  verifyAdminSession();
   refreshAdminData();
   loadStorefrontSettings();
 

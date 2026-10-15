@@ -74,6 +74,18 @@ const envConfig = {
 function validateEnv() {
   const isProd = envConfig.NODE_ENV === 'production';
   const warnings = [];
+  const hasConfiguredGateway = Boolean(
+    (envConfig.RAZORPAY_KEY_ID && envConfig.RAZORPAY_KEY_SECRET) ||
+    (envConfig.CASHFREE_APP_ID && envConfig.CASHFREE_SECRET_KEY)
+  );
+  const hasLiveGateway = Boolean(
+    (envConfig.RAZORPAY_KEY_ID &&
+      envConfig.RAZORPAY_KEY_SECRET &&
+      !/^rzp_test_/i.test(envConfig.RAZORPAY_KEY_ID)) ||
+    (envConfig.CASHFREE_APP_ID &&
+      envConfig.CASHFREE_SECRET_KEY &&
+      !/^test/i.test(envConfig.CASHFREE_APP_ID))
+  );
 
   if (isProd) {
     if (envConfig.JWT_SECRET.includes('development_only')) {
@@ -82,15 +94,17 @@ function validateEnv() {
     if (!envConfig.DATABASE_URL) {
       warnings.push('NOTICE: DATABASE_URL not set. Running on local transactional JSON store.');
     }
-    if (!envConfig.RAZORPAY_KEY_ID && !envConfig.CASHFREE_APP_ID) {
+    if (!hasLiveGateway) {
       warnings.push('CRITICAL: No live payment gateway is configured. Checkout is disabled.');
     }
   }
 
   const integrationStatus = {
     database: envConfig.DATABASE_URL ? 'PostgreSQL / Supabase (Connected)' : 'Transactional JSON Store (Active)',
-    payments: (envConfig.RAZORPAY_KEY_ID || envConfig.CASHFREE_APP_ID)
-      ? 'Live Gateway Configured'
+    payments: hasLiveGateway
+      ? (isProd ? 'Live Gateway Configured' : 'Gateway Configured (non-production)')
+      : hasConfiguredGateway
+        ? 'Test Gateway Configured'
       : (isProd ? 'Unavailable (checkout disabled)' : 'Development Simulation'),
     storage: (envConfig.CLOUDINARY_CLOUD_NAME || envConfig.CLOUDINARY_URL || envConfig.AWS_S3_BUCKET) ? 'Cloud Storage Active' : 'Local Storage with Magic-Byte Validation',
     ai: (envConfig.GEMINI_API_KEY ? 'Google Gemini' : envConfig.OPENAI_API_KEY ? 'OpenAI GPT' : envConfig.ANTHROPIC_API_KEY ? 'Anthropic Claude' : 'Vanvi Emotional Poetry Engine'),

@@ -33,8 +33,8 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || '';
 const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY || '';
 const NVIDIA_BASE_URL = process.env.NVIDIA_BASE_URL || 'https://integrate.api.nvidia.com/v1';
 
-const GEMINI_MODELS = ['gemini-flash-lite-latest'];
-const API_TIMEOUT_MS = 2500; // Ultra-fast 2.5-second timeout for snappy sub-3s real-time assistant responses
+const GEMINI_MODELS = ['gemini-3.1-flash-lite'];
+const API_TIMEOUT_MS = 20000;
 
 // Fallback dynamic generator with Indian emotional aesthetics
 function generateEmotionalFallback({ prompt = '', occasion = 'Birthday', recipient = 'You', style = 'deep' }) {
@@ -1280,4 +1280,3 @@ module.exports = {
   chatWithVanviAssistant,
   generateAssistantHumanReply
 };
-
