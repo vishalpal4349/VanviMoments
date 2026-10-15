@@ -6300,7 +6300,7 @@ button,
 <a class="drawer-link" href="category-apology.html">💌 Apology &amp; Sorry</a>
 <a class="drawer-link" href="category-family.html">🏡 Family &amp; Parents</a>
 <a class="drawer-link" href="category-celebration.html">✦ Milestones &amp; Festivals</a>
-<a class="drawer-link" href="products.html">🎁 Physical Gift Store <span style="font-size:10px; background:#fef3c7; color:#92400e; font-weight:800; padding:2px 7px; border-radius:99px; margin-left:6px; border:1px solid #fde68a;">Coming Soon</span></a>
+<a class="drawer-link" href="javascript:void(0)" onclick="openPhysicalGiftsComingSoon(event)">🎁 Physical Gift Store <span class="vanvi-premium-tag-soon" style="margin-left:6px;">👑 Coming Soon</span></a>
 <a class="drawer-link" href="plans.html">🪙 Coins &amp; Wallet</a>
 <a class="drawer-link" href="about.html">✨ About Vanvi Moments</a>
 <a class="drawer-link" href="contact.html">💬 Contact &amp; Support</a>
@@ -6334,6 +6334,31 @@ button,
   0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(255,42,122,0.55)); }
   50% { transform: scale(1.2); filter: drop-shadow(0 0 12px rgba(255,42,122,0.95)); }
 }
+.vanvi-premium-tag-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+  color: #92400e;
+  border: 1px solid #f59e0b;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.22), inset 0 1px 1px #ffffff;
+  padding: 2.5px 8px;
+  border-radius: 99px;
+  font-size: 9.5px;
+  font-weight: 850;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  animation: tagShimmerGlow 2.5s infinite ease-in-out;
+  vertical-align: middle;
+}
+@keyframes tagShimmerGlow {
+  0%, 100% { box-shadow: 0 2px 8px rgba(245, 158, 11, 0.22); transform: scale(1); }
+  50% { box-shadow: 0 4px 14px rgba(245, 158, 11, 0.45); border-color: #d97706; transform: scale(1.03); }
+}
+@keyframes modalPopIn {
+  0% { opacity: 0; transform: scale(0.92) translateY(14px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
 </style>
 <a href="index.html" class="brand brand-luxury-polish" title="Vanvi Moments" style="display:inline-flex; align-items:center; text-decoration:none; white-space:nowrap; flex-shrink:0;">
   <span class="brand-text-main" style="font-family:'Playfair Display',Georgia,serif; font-size:18.5px; font-weight:900; letter-spacing:0.6px; background:linear-gradient(135deg, #ff1361 0%, #ff4b8b 28%, #8b5cf6 68%, #f59e0b 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 1px 2px rgba(255,42,122,0.2)); text-transform:uppercase;">VANVI <span class="brand-heart" style="-webkit-text-fill-color:#ff2a7a; color:#ff2a7a; display:inline-block; font-size:16px; margin:0 1px; animation:brandHeartGlow 2.4s infinite ease-in-out;">♡</span> MOMENTS</span>
@@ -6343,7 +6368,7 @@ button,
   <span class="theme-dot"></span>
   <span id="themeToggleLabel">🎨 Aesthetics</span>
 </button>
-<a href="templates.html">Explore</a><a href="products.html">🎁 Gifts <span style="font-size:9.5px; background:#fef3c7; color:#92400e; font-weight:850; padding:1px 6px; border-radius:99px; vertical-align:middle; border:1px solid #fde68a;">Soon</span></a><a href="dashboard.html">My Moments</a><a href="javascript:void(0)" onclick="openVanviAiHub(); return false;" data-open-ai-hub="true" title="Vanvi AI Atelier · Choose Experience">AI ✦</a>
+<a href="templates.html">Explore</a><a href="javascript:void(0)" onclick="openPhysicalGiftsComingSoon(event)">🎁 Gifts <span class="vanvi-premium-tag-soon" style="font-size:9px; padding:1.5px 6px;">👑 Soon</span></a><a href="dashboard.html">My Moments</a><a href="javascript:void(0)" onclick="openVanviAiHub(); return false;" data-open-ai-hub="true" title="Vanvi AI Atelier · Choose Experience">AI ✦</a>
 <button aria-label="⌕" class="header-desktop-added global-search-btn" title="Search Templates">⌕</button><a aria-label="💎 Premium" class="header-desktop-added premium-mini" href="plans.html">💎 Premium</a><a href="profile.html" class="header-desktop-added desktop-profile-btn" id="desktopProfileBtn" title="My Profile &amp; Account"><span>👤</span> <span>Profile</span></a><button type="button" class="header-desktop-added desktop-menu-btn" id="desktopMenuBtn" aria-label="Open Navigation Menu" title="All Navigation, Wallet &amp; Categories"><span class="hamburger-bars"><span></span><span></span><span></span></span><span>Menu</span></button><a class="secondary" id="loginBtnDesktop" href="login.html">Login</a><button class="primary" onclick="window.location.href='ai-matcher.html'">Create Moment</button>
 </nav>
 <div class="header-mobile-actions">
@@ -7444,7 +7469,7 @@ button,
 <div class="quick-row">
 <a href="category-free.html" class="quick glass" style="text-decoration:none; color:inherit;"><div class="icon">🆓</div><strong>Free</strong><small>₹0 · Start creating</small></a>
 <a href="templates.html" class="quick glass" style="text-decoration:none; color:inherit;"><div class="icon">💌</div><strong>Cards</strong><small>From ₹4</small></a>
-<a href="products.html" class="quick glass" style="text-decoration:none; color:inherit;"><div class="icon">🎁</div><strong>Gifts</strong><small style="color:#d97706; font-weight:800;">Coming Soon ⏳</small></a>
+<a href="javascript:void(0)" onclick="openPhysicalGiftsComingSoon(event)" class="quick glass" style="text-decoration:none; color:inherit; cursor:pointer;"><div class="icon">🎁</div><strong>Gifts</strong><small class="vanvi-premium-tag-soon">👑 Soon</small></a>
 <a href="plans.html" class="quick glass" style="text-decoration:none; color:inherit;"><div class="icon">👑</div><strong>Membership</strong><small>Credits & perks</small></a>
 </div></section>
 <section class="section scroll-animate">
@@ -7452,13 +7477,13 @@ button,
   <div style="flex: 1; min-width: 250px;">
     <div class="eyebrow" style="display:flex; align-items:center; gap:8px;">
       <span>Curated Keepsakes</span>
-      <span style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; font-size: 10px; font-weight: 850; padding: 2px 8px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.5px;">Coming Soon ⏳</span>
+      <span class="vanvi-premium-tag-soon">👑 Coming Soon · Premium</span>
     </div>
     <h3 style="margin: 2px 0 6px;">🎁 Physical Gift Store · Coming Soon</h3>
     <p style="margin: 0;">Handcrafted celebration treasures, personalized keepsakes &amp; cute hampers are launching soon! Pair real gifts with your digital moments.</p>
   </div>
   <div style="flex-shrink: 0;">
-    <button class="secondary" onclick="window.location.href='products.html'" style="white-space: nowrap; padding: 9px 20px; font-size: 12px; border-radius: 99px; background: #fffbeb; border-color: #fde68a; color: #b45309; font-weight: 800;">Coming Soon ⏳</button>
+    <button class="secondary" onclick="openPhysicalGiftsComingSoon(event)" style="white-space: nowrap; padding: 10px 22px; font-size: 12.5px; border-radius: 99px; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1.5px solid #f59e0b; color: #92400e; font-weight: 850; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.22); cursor: pointer; transition: all 0.2s ease;">👑 Coming Soon · Premium ✨</button>
   </div>
 </div>
 </section>
@@ -9653,7 +9678,92 @@ function toggleCategoriesMenu() {
     m.style.display = isShowing ? 'none' : 'flex';
   }
 }
+
+function openPhysicalGiftsComingSoon(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  const m = document.getElementById('vanviPhysicalGiftsComingSoonModal');
+  if (m) {
+    m.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closePhysicalGiftsComingSoon() {
+  const m = document.getElementById('vanviPhysicalGiftsComingSoonModal');
+  if (m) {
+    m.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePhysicalGiftsComingSoon();
+});
 </script>
+
+<!-- Ultra-Luxury Physical Gifts Coming Soon Modal -->
+<div id="vanviPhysicalGiftsComingSoonModal" style="display:none; position:fixed; inset:0; z-index:999999; background:rgba(22, 6, 18, 0.76); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); align-items:center; justify-content:center; padding:16px;" onclick="if (event.target === this) closePhysicalGiftsComingSoon();">
+  <div class="coming-soon-modal-card" style="background:linear-gradient(145deg, #ffffff 0%, #fff8fb 55%, #fff2f8 100%); border-radius:28px; max-width:470px; width:100%; padding:30px 22px 26px; box-shadow:0 28px 75px rgba(60,14,44,0.36), 0 0 0 1.5px rgba(255,120,175,0.35), inset 0 2px 3px #ffffff; position:relative; text-align:center; animation:modalPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);">
+    
+    <!-- Close Button -->
+    <button type="button" onclick="closePhysicalGiftsComingSoon()" aria-label="Close" style="position:absolute; top:15px; right:15px; width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,120,175,0.35); background:#ffffff; color:#78536d; font-size:16px; font-weight:bold; cursor:pointer; display:grid; place-items:center; box-shadow:0 2px 8px rgba(0,0,0,0.06); transition:all 0.2s;">✕</button>
+
+    <!-- Top Luxury Kicker Badge -->
+    <div style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border:1px solid #f59e0b; color:#92400e; font-size:11px; font-weight:850; letter-spacing:0.8px; text-transform:uppercase; padding:4px 14px; border-radius:99px; margin-bottom:14px; box-shadow:0 2px 8px rgba(217,119,6,0.18);">
+      <span>👑</span> <span>VANVI ATELIER EXCLUSIVE</span>
+    </div>
+
+    <!-- 3D Gift Icon Badge -->
+    <div style="width:72px; height:72px; margin:0 auto 12px; background:radial-gradient(circle at 40% 35%, #ffffff 0%, #ffe4ee 55%, #fce7f3 100%); border:2px solid rgba(255,42,122,0.32); border-radius:22px; display:grid; place-items:center; font-size:36px; box-shadow:0 12px 28px rgba(255,42,122,0.22), inset 0 2px 2px #ffffff;">
+      🎁
+    </div>
+
+    <!-- Heading -->
+    <h3 style="font-family:'Cormorant Garamond', Georgia, serif; font-size:28px; color:#2c1224; font-weight:800; line-height:1.2; margin:0 0 6px;">
+      Physical Gift Boutique
+    </h3>
+    <div style="margin-bottom:12px;">
+      <span class="vanvi-premium-tag-soon" style="font-size:11px; padding:3px 12px; letter-spacing:0.6px;">👑 Coming Soon · Premium Edition ✨</span>
+    </div>
+
+    <!-- Subtitle -->
+    <p style="font-size:13.5px; color:#78526d; line-height:1.55; margin:0 0 16px;">
+      Hamari curated physical gifts &amp; keepsakes collection (handmade scrapbooks, memory plaques, luxury plushies &amp; celebration hampers) jald hi live aa rahi hai!
+    </p>
+
+    <!-- Highlights Card -->
+    <div style="background:#ffffff; border:1px solid rgba(255,120,175,0.25); border-radius:18px; padding:12px 14px; margin-bottom:18px; text-align:left; display:flex; flex-direction:column; gap:8px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+      <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:#2c1224; font-weight:750;">
+        <span style="color:#059669; font-size:14px;">✓</span>
+        <span><strong>38+ Handpicked Trending Keepsakes</strong> (Direct 1-Tap Delivery)</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:#2c1224; font-weight:750;">
+        <span style="color:#059669; font-size:14px;">✓</span>
+        <span><strong>Pairs with Digital Moments</strong> (Scan keepsake to open surprise)</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:#2c1224; font-weight:750;">
+        <span style="color:#059669; font-size:14px;">✓</span>
+        <span><strong>VIP Coin Discounts</strong> on every celebration hamper</span>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div style="display:flex; flex-direction:column; gap:9px;">
+      <a href="https://api.whatsapp.com/send?phone=917631442934&text=Hi%20Vanvi%20Team!%20I%20want%20VIP%20Early%20Access%20to%20the%20Physical%20Gift%20Store%20when%20it%20launches%20%E2%9C%A8" target="_blank" style="padding:12px 20px; border-radius:99px; background:linear-gradient(135deg, #ff2a7a 0%, #d97706 100%); color:#ffffff; font-size:13px; font-weight:850; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 8px 20px rgba(255,42,122,0.3); transition:all 0.2s;">
+        <span>💬</span> <span>Join VIP Early Access (WhatsApp)</span>
+      </a>
+      <div style="display:flex; gap:8px;">
+        <a href="templates.html" style="flex:1; padding:9px 14px; border-radius:99px; background:#ffffff; border:1.5px solid rgba(255,120,175,0.4); color:#ff2a7a; font-size:12px; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px;">
+          <span>💌</span> <span>Explore Digital Cards</span>
+        </a>
+        <button type="button" onclick="closePhysicalGiftsComingSoon()" style="padding:9px 18px; border-radius:99px; background:#fff0f6; border:1px solid rgba(255,120,175,0.25); color:#78526d; font-size:12px; font-weight:800; cursor:pointer;">
+          Okay, Got It
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 </body>
 </html>
