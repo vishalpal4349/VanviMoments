@@ -997,6 +997,33 @@
     </div>
   </div>
 
+  <!-- Cute Luxury Upcoming Physical Gifts Modal -->
+  <div class="qv-modal-overlay" id="physicalUpcomingModal" role="dialog" aria-modal="true" style="display:none; align-items:center; justify-content:center; padding:16px;" onclick="if (event.target === this) closePhysicalComingSoonModal();">
+    <div class="qv-modal-card" style="max-width:440px; padding:28px 22px; text-align:center; border-radius:26px; border:1.5px solid rgba(255,120,175,0.4); box-shadow:0 24px 60px rgba(74,22,58,0.25); background:linear-gradient(145deg, #ffffff 0%, #fff8fb 55%, #fff2f8 100%);">
+      <button type="button" class="qv-modal-close" onclick="closePhysicalComingSoonModal()" aria-label="Close modal" style="top:12px; right:14px;">✕</button>
+      <div style="width:68px; height:68px; margin:0 auto 12px; background:radial-gradient(circle at 40% 35%, #ffffff 0%, #ffe4ee 55%, #fce7f3 100%); border:2px solid rgba(255,42,122,0.3); border-radius:20px; display:grid; place-items:center; font-size:32px; box-shadow:0 8px 24px rgba(255,42,122,0.18);">
+        🎁
+      </div>
+      <div style="display:inline-block; background:#fffbeb; color:#92400e; border:1px solid #fde68a; font-size:11px; font-weight:850; padding:3px 12px; border-radius:99px; margin-bottom:8px;">
+        👑 UPCOMING FEATURE
+      </div>
+      <h3 style="font-family:var(--font-serif); font-size:24px; color:var(--text-dark); margin-bottom:8px;" id="upcomingProductTitle">Handcrafted Keepsake</h3>
+      <p style="font-size:13.5px; color:#78526d; line-height:1.6; margin-bottom:18px;">
+        ✨ <strong>This feature is upcoming soon!</strong> Our creative artisans are handcrafting luxury physical celebration keepsakes & hampers to pair with your digital memories. 
+        <br/><br/>
+        <strong>Thank you so much for your love & patience! 💖</strong>
+      </p>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <a href="https://api.whatsapp.com/send?phone=917631442934&text=Namaste%20Vanvi%20Moments!%20I%20want%20VIP%20early%20access%20to%20Physical%20Gifts%20when%20they%20launch%20%E2%9C%A8" target="_blank" rel="noopener" style="padding:11px 18px; border-radius:99px; background:linear-gradient(135deg, #ff2a7a 0%, #d97706 100%); color:#fff; font-size:12.5px; font-weight:850; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:6px;">
+          <span>💬</span> <span>Join VIP Early Access on WhatsApp</span>
+        </a>
+        <button type="button" onclick="closePhysicalComingSoonModal()" style="padding:9px 16px; border-radius:99px; background:#fff0f6; border:1px solid rgba(255,120,175,0.3); color:#78526d; font-size:12px; font-weight:800; cursor:pointer;">
+          Okay, Thank You! ✨
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="vanvi-toast" id="vanviToast">Toast notification</div>
 
   <!-- Global Footer -->
@@ -1032,6 +1059,20 @@
         toast.textContent = msg;
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2600);
+      };
+
+      window.openPhysicalComingSoonModal = function(e, title) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (e && e.stopPropagation) e.stopPropagation();
+        const m = document.getElementById('physicalUpcomingModal');
+        const t = document.getElementById('upcomingProductTitle');
+        if (t && title) t.textContent = title;
+        if (m) m.style.display = 'flex';
+      };
+
+      window.closePhysicalComingSoonModal = function() {
+        const m = document.getElementById('physicalUpcomingModal');
+        if (m) m.style.display = 'none';
       };
 
       // 1. Render Category Filter Tabs
@@ -1072,11 +1113,11 @@
         }
 
         productsGrid.innerHTML = items.map(product => `
-            <article class="boutique-card" data-pid="${product.id}">
+            <article class="boutique-card" data-pid="${product.id}" onclick="openPhysicalComingSoonModal(event, '${product.name.replace(/'/g, "\\'")}')">
               <div class="card-img-pod">
                 ${product.image ? `<img src="${product.image}" alt="${product.name}" class="card-img" loading="lazy"/>` : '<div class="product-image-placeholder" aria-hidden="true"><span>🎁</span><small>Cute Gift Photo</small></div>'}
                 <span class="card-floating-badge">${product.badge || 'Cute Pick 🌸'}</span>
-                <span class="card-store-badge">${product.primaryStoreBadge}</span>
+                <span class="card-store-badge">👑 Upcoming</span>
               </div>
 
               <div class="card-body">
@@ -1092,18 +1133,14 @@
                   <span class="save-tag">${Math.round((1 - product.price / product.originalPrice) * 100)}% OFF</span>
                 </div>
 
-                <div class="card-actions-grid">
-                  <a href="${product.primaryAffiliateLink}" target="_blank" rel="noopener noreferrer sponsored" class="btn-buy-partner" aria-label="Buy ${product.name} on Meesho" onclick="window.showToast('Opening official Meesho storefront... 🛍️')">
-                    <span>🛍️</span> <span>Meesho</span>
-                  </a>
-                  <button type="button" class="btn-card-details btn-open-details" data-pid="${product.id}" aria-label="View details ${product.name}">
-                    <span>👁️</span> <span>Details</span>
+                <div class="card-actions-grid" style="grid-template-columns: 1fr;">
+                  <button type="button" class="btn-buy-partner" style="width:100%; background:linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border:1.5px solid #f59e0b; color:#92400e; font-weight:850; padding:10px 14px; border-radius:99px; box-shadow:0 4px 12px rgba(245, 158, 11, 0.15); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openPhysicalComingSoonModal(event, '${product.name.replace(/'/g, "\\'")}')">
+                    <span>👑</span> <span>Upcoming Soon · Thank You ✨</span>
                   </button>
                 </div>
 
-                <div class="card-platforms-bar">
-                  <span class="platform-mini-tag meesho">🛍️ Meesho Resell</span>
-                  <span style="font-size:10px;color:var(--text-muted);font-weight:700;">★ ${product.rating || '4.9'} (${product.reviewCount || '250+'})</span>
+                <div class="card-platforms-bar" style="justify-content:center;">
+                  <span class="platform-mini-tag meesho" style="background:#fffbeb; color:#92400e; border:1px solid #fde68a;">⏳ Handcrafted Keepsake · Coming Soon</span>
                 </div>
               </div>
             </article>
