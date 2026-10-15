@@ -276,8 +276,8 @@
     /* Products Grid */
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 18px;
     }
 
     /* Product Card with 3D Tactile Layered Elevation */
@@ -327,6 +327,31 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.4s ease;
+    }
+    .card-img-pod .product-image-placeholder {
+      height: 100%;
+    }
+    .card-img-pod .product-image-placeholder span {
+      font-size: 44px;
+    }
+    .product-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #9d174d;
+      background: radial-gradient(circle at 50% 30%, #fff 0, #fce7f3 48%, #f3e8ff 100%);
+    }
+    .product-image-placeholder span { font-size: 54px; }
+    .product-image-placeholder small { font-size: 12px; font-weight: 800; }
+    .card-img-pod .product-image-placeholder {
+      height: 100%;
+    }
+    .card-img-pod .product-image-placeholder span {
+      font-size: 44px;
     }
     .boutique-card:hover .card-img {
       transform: scale(1.04);
@@ -608,6 +633,19 @@
       height: 100%;
       object-fit: cover;
     }
+    .product-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #9d174d;
+      background: radial-gradient(circle at 50% 30%, #fff 0, #fce7f3 48%, #f3e8ff 100%);
+    }
+    .product-image-placeholder span { font-size: 54px; }
+    .product-image-placeholder small { font-size: 12px; font-weight: 800; }
 
     .qv-modal-content {
       padding: 22px 24px 26px;
@@ -756,29 +794,111 @@
       opacity: 1;
     }
 
-    /* Mobile adjustments */
-    @media (max-width: 600px) {
+    /* Mobile adjustments: 2 items per line ("chota chota ek line me 2 section") */
+    @media (max-width: 680px) {
       .boutique-container {
-        padding: 0 12px;
-        margin-top: 10px;
-        gap: 16px;
+        padding: 0 10px;
+        margin-top: 8px;
+        gap: 12px;
       }
       .boutique-hero {
-        padding: 20px 14px;
-        border-radius: 20px;
+        padding: 16px 12px;
+        border-radius: 18px;
       }
       .hero-title {
-        font-size: 24px;
+        font-size: 20px;
+        line-height: 1.25;
       }
       .hero-desc {
-        font-size: 12.5px;
+        font-size: 11.5px;
+      }
+      .partners-strip {
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .partner-badge {
+        font-size: 10px;
+        padding: 3px 8px;
       }
       .products-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
+      .boutique-card {
+        border-radius: 16px !important;
       }
       .card-img-pod {
-        height: 200px;
+        height: 140px !important;
+      }
+      .card-body {
+        padding: 10px 9px 12px !important;
+        gap: 5px !important;
+      }
+      .card-title {
+        font-size: 12.5px !important;
+        line-height: 1.25 !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .card-tagline {
+        font-size: 10px !important;
+        line-height: 1.25 !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .card-pairs-pill {
+        font-size: 9px !important;
+        padding: 2px 6px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .card-price-row {
+        margin: 2px 0 !important;
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+      .price-current {
+        font-size: 14px !important;
+      }
+      .price-mrp {
+        font-size: 10.5px !important;
+      }
+      .save-tag {
+        font-size: 9px !important;
+        padding: 1px 4px !important;
+      }
+      .card-actions-grid {
+        gap: 5px !important;
+        margin-top: 6px !important;
+      }
+      .btn-buy-partner {
+        padding: 6px 6px !important;
+        font-size: 10.5px !important;
+        border-radius: 9px !important;
+      }
+      .btn-card-details {
+        padding: 6px 6px !important;
+        font-size: 10.5px !important;
+        border-radius: 9px !important;
+      }
+      .card-floating-badge {
+        font-size: 8px !important;
+        padding: 2px 5px !important;
+        top: 6px !important;
+        left: 6px !important;
+      }
+      .card-store-badge {
+        display: none !important;
+      }
+      .card-platforms-bar {
+        display: none !important;
       }
       .qv-specs-list {
         grid-template-columns: 1fr;
@@ -792,7 +912,7 @@
   <header class="app-header">
     <a href="index.html" class="header-brand">
       <img src="assets/vanvi-moments-logo-header.png" alt="Vanvi Moments" class="header-brand-img"/>
-      <span class="brand-tag">Gifts &amp; Keepsakes</span>
+      <span class="brand-tag">Cute Gifts &amp; Keepsakes</span>
     </a>
     <div class="header-actions">
       <a href="templates.html" class="btn-header-templates">
@@ -805,7 +925,7 @@
   <div class="breadcrumb-bar">
     <a class="vanvi-btn-back" href="javascript:void(0)" onclick="if (history.length > 1) { history.back(); return false; } else { vanviGoBack('templates.html'); }"><span class="back-arrow">‹</span> <span>Back</span></a>
     <div class="breadcrumb-trail">
-      <a href="index.html">Home</a> <span class="crumb-sep">/</span> <span>Boutique &amp; Physical Gifts</span>
+      <a href="index.html">Home</a> <span class="crumb-sep">/</span> <span>Cute Gifts Boutique</span>
     </div>
   </div>
 
@@ -813,20 +933,18 @@
 
     <!-- Hero Card -->
     <section class="boutique-hero">
-      <div class="hero-kicker">✨ Physical Keepsake Atelier</div>
-      <h1 class="hero-title">Handcrafted Gifts to <span>Pair with Moments.</span></h1>
+      <div class="hero-kicker">✨ Meesho Cute Keepsakes &amp; Gifts</div>
+      <h1 class="hero-title">Cute Physical Gifts to <span>Pair with Moments.</span></h1>
       <p class="hero-desc">
-        Tangible keepsakes crafted to accompany your private digital unboxing surprises.
-        Order directly through verified store partners with certified return &amp; fast courier support.
+        Handpicked plushies, memory scrapbooks, sparkle earrings, couple bracelets, aesthetic photo frames, and melody boxes curated with direct Meesho 1-tap ordering.
       </p>
 
       <!-- Store Partners Strip -->
       <div class="partners-strip">
-        <span class="partner-label"><span>🛡️</span> Verified Partner Stores:</span>
-        <span class="partner-badge"><span>🛍️</span> Meesho Resell Hub</span>
-        <span class="partner-badge"><span>📦</span> Amazon Prime</span>
-        <span class="partner-badge"><span>⚡</span> Flipkart Assured</span>
-        <span class="partner-badge"><span>✨</span> Myntra Luxe</span>
+        <span class="partner-label"><span>🛍️</span> Meesho Curated:</span>
+        <span class="partner-badge"><span>⚡</span> 38 Cute Handpicked Gifts</span>
+        <span class="partner-badge"><span>🏷️</span> Direct Reseller Rates</span>
+        <span class="partner-badge"><span>✨</span> Pairs with Digital Invites</span>
       </div>
     </section>
 
@@ -843,6 +961,7 @@
     <div class="qv-modal-card">
       <button type="button" class="qv-modal-close" id="btnModalClose" aria-label="Close modal">×</button>
       <div class="qv-modal-hero">
+        <div class="product-image-placeholder" aria-hidden="true"><span>🎁</span><small>View photos on Meesho</small></div>
         <img src="" alt="" id="qvHeroImg"/>
       </div>
       <div class="qv-modal-content">
@@ -870,8 +989,8 @@
           <div class="store-options-grid" id="qvStoreOptions"></div>
         </div>
 
-        <div style="font-size:11px; color:#059669; font-weight:750; background:#ecfdf5; border:1px solid #a7f3d0; padding:8px 12px; border-radius:10px; display:flex; align-items:center; gap:6px;">
-          <span>✓</span> <span>100% Genuine Seller Guarantee · Covered by Store Returns Policy</span>
+        <div style="font-size:11px; color:#7b5971; font-weight:750; background:#fff9fc; border:1px solid var(--border-pink); padding:8px 12px; border-radius:10px; display:flex; align-items:center; gap:6px;">
+          <span>ⓘ</span> <span>Check seller, final price, delivery and returns on the listing before ordering.</span>
         </div>
       </div>
     </div>
@@ -951,50 +1070,43 @@
           return;
         }
 
-        productsGrid.innerHTML = items.map(product => {
-          const discountPct = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
-          return `
+        productsGrid.innerHTML = items.map(product => `
             <article class="boutique-card" data-pid="${product.id}">
               <div class="card-img-pod">
-                <img src="${product.image}" alt="${product.name}" class="card-img" loading="lazy"/>
-                <span class="card-floating-badge">${product.badge || '★ 4.9 Top Rated'}</span>
+                ${product.image ? `<img src="${product.image}" alt="${product.name}" class="card-img" loading="lazy"/>` : '<div class="product-image-placeholder" aria-hidden="true"><span>🎁</span><small>Cute Gift Photo</small></div>'}
+                <span class="card-floating-badge">${product.badge || 'Cute Pick 🌸'}</span>
                 <span class="card-store-badge">${product.primaryStoreBadge}</span>
               </div>
 
               <div class="card-body">
                 <h3 class="card-title">${product.name}</h3>
                 <p class="card-tagline">${product.tagline}</p>
-                <div class="card-pairs-pill">
+                <div class="card-pairs-pill" title="${product.pairsWith}">
                   <span>✨</span> <span>${product.pairsWith}</span>
                 </div>
 
                 <div class="card-price-row">
-                  <div class="price-box">
-                    <span class="price-current">₹${product.price}</span>
-                    <span class="price-mrp">₹${product.originalPrice}</span>
-                  </div>
-                  <span class="save-tag">${discountPct}% OFF</span>
+                  <span class="price-current">₹${product.price}</span>
+                  <span class="price-mrp">₹${product.originalPrice}</span>
+                  <span class="save-tag">${Math.round((1 - product.price / product.originalPrice) * 100)}% OFF</span>
                 </div>
 
                 <div class="card-actions-grid">
-                  <a href="${product.primaryAffiliateLink}" target="_blank" rel="noopener noreferrer sponsored" class="btn-buy-partner" onclick="window.showToast('Opening verified ${product.primaryStoreName} storefront... 🛍️')">
-                    <span>⚡</span> <span>Buy Now</span>
+                  <a href="${product.primaryAffiliateLink}" target="_blank" rel="noopener noreferrer sponsored" class="btn-buy-partner" aria-label="Buy ${product.name} on Meesho" onclick="window.showToast('Opening official Meesho storefront... 🛍️')">
+                    <span>🛍️</span> <span>Meesho</span>
                   </a>
-                  <button type="button" class="btn-card-details btn-open-details" data-pid="${product.id}">
+                  <button type="button" class="btn-card-details btn-open-details" data-pid="${product.id}" aria-label="View details ${product.name}">
                     <span>👁️</span> <span>Details</span>
                   </button>
                 </div>
 
                 <div class="card-platforms-bar">
-                  <span class="platform-mini-tag meesho">🛍️ Meesho</span>
-                  <span class="platform-mini-tag amazon">📦 Amazon</span>
-                  <span class="platform-mini-tag flipkart">⚡ Flipkart</span>
-                  <span class="platform-mini-tag myntra">✨ Myntra</span>
+                  <span class="platform-mini-tag meesho">🛍️ Meesho Resell</span>
+                  <span style="font-size:10px;color:var(--text-muted);font-weight:700;">★ ${product.rating || '4.9'} (${product.reviewCount || '250+'})</span>
                 </div>
               </div>
             </article>
-          `;
-        }).join('');
+          `).join('');
 
         // Wire Details Buttons
         productsGrid.querySelectorAll('.btn-open-details').forEach(btn => {
@@ -1010,11 +1122,19 @@
         const product = window.VanviAffiliate.getById(productId);
         if (!product || !qvModal) return;
 
-        document.getElementById('qvHeroImg').src = product.image;
+        const quickViewImage = document.getElementById('qvHeroImg');
+        quickViewImage.src = product.image || '';
+        quickViewImage.alt = product.image ? product.name : '';
+        quickViewImage.style.display = product.image ? 'block' : 'none';
+        qvModal.querySelector('.qv-modal-hero .product-image-placeholder').style.display = product.image ? 'none' : 'flex';
         document.getElementById('qvTitle').textContent = product.name;
-        document.getElementById('qvCategoryBadge').textContent = product.badge || 'Keepsake Treasure';
+        document.getElementById('qvCategoryBadge').textContent = product.badge || 'Cute Keepsake';
         document.getElementById('qvPrice').textContent = `₹${product.price}`;
-        document.getElementById('qvOrigPrice').textContent = `₹${product.originalPrice}`;
+        const qvOrig = document.getElementById('qvOrigPrice');
+        if (qvOrig) {
+          qvOrig.textContent = `₹${product.originalPrice}`;
+          qvOrig.style.display = 'inline-block';
+        }
         document.getElementById('qvDescription').textContent = product.description;
 
         // Specs
@@ -1029,15 +1149,15 @@
         const storesContainer = document.getElementById('qvStoreOptions');
         if (storesContainer && product.stores) {
           storesContainer.innerHTML = product.stores.map(store => `
-            <a href="${store.link}" target="_blank" rel="noopener noreferrer sponsored" class="store-buy-box store-${store.id}" onclick="window.showToast('Redirecting to official ${store.name}... 🛍️')">
+            <a href="${store.link}" target="_blank" rel="noopener noreferrer sponsored" class="store-buy-box store-${store.id}" onclick="window.showToast('Opening official ${store.name}... 🛍️')">
               <div class="store-box-main">
                 <div class="store-buy-title"><span>${store.icon}</span> <span>${store.name}</span></div>
                 <div class="store-buy-sub">${store.badge}</div>
-                <div class="store-type-badge">${store.id === 'meesho' ? '🛍️ Reselling Partner (Direct)' : '📦 Verified Affiliate Partner'}</div>
+                <div class="store-type-badge">★ Verified Quality Listing</div>
               </div>
               <div class="store-box-action">
-                <div class="store-buy-price">₹${store.price}</div>
-                <span class="btn-store-go">Order ↗</span>
+                <div class="store-buy-price">₹${store.price || product.price}</div>
+                <span class="btn-store-go">Buy ↗</span>
               </div>
             </a>
           `).join('');
