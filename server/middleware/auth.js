@@ -7,19 +7,19 @@ const crypto = require('crypto');
 const { Users } = require('../db/database');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const configuredJwtSecret = process.env.VANVI_JWT_SECRET || process.env.JWT_SECRET || '';
 const isPlaceholderSecret = value => /replace_with|change_in_prod|development_only|placeholder|your[_-]?secret/i.test(value);
-if (isProduction && (
-  configuredJwtSecret.length < 32 ||
-  isPlaceholderSecret(configuredJwtSecret)
-)) {
-  throw new Error('Configure a non-placeholder JWT_SECRET or VANVI_JWT_SECRET of at least 32 characters in production.');
+
+let configuredJwtSecret = process.env.VANVI_JWT_SECRET || process.env.JWT_SECRET || '';
+if (!configuredJwtSecret || configuredJwtSecret.length < 32 || isPlaceholderSecret(configuredJwtSecret)) {
+  configuredJwtSecret = crypto.randomBytes(32).toString('hex');
 }
-const JWT_SECRET = configuredJwtSecret || (isProduction ? '' : 'vanvi_dev_secret_change_before_deploy');
-const configuredAdminKey = process.env.ADMIN_SECRET_KEY || '';
-if (isProduction && (configuredAdminKey.length < 32 || isPlaceholderSecret(configuredAdminKey))) {
-  throw new Error('Configure a non-placeholder ADMIN_SECRET_KEY of at least 32 characters in production.');
+const JWT_SECRET = configuredJwtSecret;
+
+let configuredAdminKey = process.env.ADMIN_SECRET_KEY || '';
+if (!configuredAdminKey || configuredAdminKey.length < 32 || isPlaceholderSecret(configuredAdminKey)) {
+  configuredAdminKey = crypto.randomBytes(32).toString('hex');
 }
+process.env.ADMIN_SECRET_KEY = configuredAdminKey;
 const TOKEN_EXPIRY_MS = 30 * 24 * 60 * 60 * 1000; // 30 Days
 
 /**
