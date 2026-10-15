@@ -2,16 +2,12 @@ services:
   - type: web
     name: vanvimoments
     runtime: node
-    plan: standard
+    plan: free
     region: singapore
     buildCommand: npm install --omit=dev
     startCommand: npm start
     healthCheckPath: /api/health
     autoDeployTrigger: commit
-    disk:
-      name: vanvimoments-data
-      mountPath: /opt/render/project/src/server/data
-      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
