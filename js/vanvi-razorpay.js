@@ -110,6 +110,7 @@
     async openCheckout(options = {}) {
       const {
         amountPaise,
+        gatewayOrder,
         currency = 'INR',
         name = 'Vanvi Moments',
         description = 'Luxury Digital Celebration',
@@ -125,13 +126,30 @@
       // 1. Ensure SDK loaded
       await this.ensureScriptLoaded();
 
-      // 2. Create Order on Backend
-      const orderData = await this.createOrder({
-        amountPaise,
-        currency,
-        receipt,
-        notes
-      });
+      // Checkout pages can pass an application order already created by the
+      // server; other callers retain the direct create-order flow.
+      const orderData = gatewayOrder
+        ? {
+            order_id: gatewayOrder.gatewayOrderId,
+            amount: gatewayOrder.amountInPaisa,
+            currency: gatewayOrder.currency || currency,
+            key_id: gatewayOrder.keyId
+          }
+        : await this.createOrder({
+            amountPaise,
+            currency,
+            receipt,
+            notes
+          });
+
+      if (!orderData.order_id || !orderData.amount || !orderData.key_id) {
+        throw new Error('The payment order is incomplete. Please try again.');
+      }
+
+      const expectedKeyId = document.querySelector('meta[name="razorpay-key-id"]')?.content;
+      if (expectedKeyId && orderData.key_id !== expectedKeyId) {
+        throw new Error('The server Razorpay Key ID does not match this checkout configuration.');
+      }
 
       // 3. Configure Razorpay Standard Modal
       const modalOptions = {

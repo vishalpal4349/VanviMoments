@@ -42,15 +42,6 @@ router.post('/verify', ordersRateLimiter, optionalAuth, async (req, res) => {
         shareUrl: existingMoment ? `moment.html?id=${existingMoment.slug}` : 'dashboard.html'
       });
     }
-    if (applicationOrder.userId && (!req.user || req.user.id !== applicationOrder.userId)) {
-      return res.status(req.user ? 403 : 401).json({
-        success: false,
-        error: req.user
-          ? 'You are not authorized to create a payment for this order.'
-          : 'Sign in to create a payment for this order.'
-      });
-    }
-
     // Verify signature timing-safely
     const isValid = verifyPaymentSignature({
       gatewayOrderId: order.gatewayOrderId,

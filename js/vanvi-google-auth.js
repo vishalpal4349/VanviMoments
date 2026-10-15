@@ -6,9 +6,16 @@
 (function(window) {
   'use strict';
 
-  const DEFAULT_GOOGLE_CLIENT_ID = window.VANVI_GOOGLE_CLIENT_ID ||
+  const GOOGLE_CLIENT_ID = window.VANVI_GOOGLE_CLIENT_ID ||
     localStorage.getItem('vanvi_google_client_id') ||
-    '1084293847291-exampleclientid.apps.googleusercontent.com';
+    '';
+
+  function showGoogleUnavailable() {
+    const container = document.getElementById('gsiButtonContainer');
+    if (!container) return;
+    container.textContent = 'Google sign-in is unavailable until configured.';
+    container.setAttribute('role', 'status');
+  }
 
   // Decode JWT payload safely
   function parseJwt(token) {
@@ -114,6 +121,10 @@
 
   // Load Google Identity Services script
   function loadGoogleIdentityScript() {
+    if (!GOOGLE_CLIENT_ID) {
+      showGoogleUnavailable();
+      return;
+    }
     if (document.getElementById('google-jssdk')) {
       initGoogleOneTap();
       return;
@@ -135,10 +146,14 @@
   }
 
   function initGoogleOneTap() {
+    if (!GOOGLE_CLIENT_ID) {
+      showGoogleUnavailable();
+      return;
+    }
     if (!window.google || !window.google.accounts || !window.google.accounts.id) return;
     try {
       window.google.accounts.id.initialize({
-        client_id: DEFAULT_GOOGLE_CLIENT_ID,
+        client_id: GOOGLE_CLIENT_ID,
         callback: async (response) => {
           if (response && response.credential) {
             try {
@@ -170,6 +185,10 @@
     },
 
     renderButton(targetElementId, options = {}) {
+      if (!GOOGLE_CLIENT_ID) {
+        showGoogleUnavailable();
+        return;
+      }
       if (!window.google || !window.google.accounts || !window.google.accounts.id) {
         setTimeout(() => this.renderButton(targetElementId, options), 300);
         return;
@@ -194,6 +213,12 @@
     },
 
     signIn(options = {}) {
+      if (!GOOGLE_CLIENT_ID) {
+        if (options.onError) {
+          options.onError(new Error('Google sign-in is not configured yet.'));
+        }
+        return;
+      }
       if (window.google && window.google.accounts && window.google.accounts.id) {
         try {
           window.google.accounts.id.prompt((notification) => {

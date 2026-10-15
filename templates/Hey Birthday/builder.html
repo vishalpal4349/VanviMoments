@@ -253,24 +253,29 @@ Happy Birthday, once again. 🎂❤️</textarea>
 
         <!-- STEP 6: SHARE LINK -->
         <section class="wizard-step" id="step-6" style="display:none;">
-          <p class="wizard-eyebrow">surprise is ready</p>
-          <h1 class="wizard-title">Your link is ready! 💌</h1>
-          <p class="wizard-intro">Your customized birthday surprise portal is ready to share.</p>
+          <p class="wizard-eyebrow">made with love · ready to share</p>
+          <h1 class="wizard-title">A little birthday magic, ready to send ✨</h1>
+          <p class="wizard-intro">Your personal surprise is ready. Copy the link or share it directly with them.</p>
 
           <div class="link-box">
+            <div class="share-ready-mark" aria-hidden="true">💌</div>
             <div class="link-box-title" id="linkBoxTitle">For Emma 🎂</div>
-            <div class="link-box-sub">Send this link to them when the birthday moment arrives:</div>
+            <div class="link-box-sub">Their name, your notes and letter travel with this link. Uploaded photos stay on this device. Anyone with the link can open the surprise.</div>
             
             <div class="link-row">
               <input type="text" class="input link-input" id="finalShareUrl" readonly>
               <button type="button" class="aw-btn aw-btn-primary" id="btnCopyShareLink">Copy Link</button>
             </div>
+            <p class="share-feedback" id="shareFeedback" role="status" aria-live="polite"></p>
 
             <div class="share-row">
               <a href="#" class="share-btn share-whatsapp" id="btnShareWa" target="_blank" rel="noopener">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M12.031 2C6.5 2 2 6.5 2 12.031c0 1.954.563 3.782 1.532 5.344L2 22l4.781-1.5c1.5 1 3.282 1.532 5.25 1.532 5.531 0 10.031-4.5 10.031-10.031S17.562 2 12.031 2zm0 18.063c-1.782 0-3.407-.5-4.782-1.375l-.344-.219-2.844.906.938-2.75-.219-.344C3.844 14.938 3.375 13.5 3.375 12c0-4.781 3.875-8.656 8.656-8.656 4.781 0 8.656 3.875 8.656 8.656 0 4.782-3.875 8.063-8.656 8.063z"/></svg>
                 <span>Share via WhatsApp</span>
               </a>
+              <button type="button" class="share-btn share-native" id="btnShareNative">
+                <span>✦ Share link</span>
+              </button>
               <button type="button" class="share-btn" id="btnModalOpenPreview">
                 <span>👁️ Open Live Experience</span>
               </button>

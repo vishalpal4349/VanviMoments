@@ -587,66 +587,86 @@
 /* Rail Carousel (Smooth Horizontal Swipe with Subtle Peek & Edge Mask) */
     .cards-rail {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      padding: 4px 2px 12px;
+      padding: 4px 2px 14px;
       scrollbar-width: none;
-      mask-image: linear-gradient(to right, black 90%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+      mask-image: linear-gradient(to right, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, black 92%, transparent 100%);
     }
     .cards-rail::-webkit-scrollbar {
       display: none;
     }
     @media (min-width: 768px) {
       .cards-rail {
-        gap: 20px;
+        gap: 15px;
         mask-image: linear-gradient(to right, black 96%, transparent 100%);
         -webkit-mask-image: linear-gradient(to right, black 96%, transparent 100%);
       }
     }
+    /* Mobile: Grand, prominent, luxuriously sized cards (Not tiny/compact) */
     .rail-card-wrapper {
-      flex: 0 0 clamp(240px, 78vw, 270px);
-      width: clamp(240px, 78vw, 270px);
+      flex: 0 0 clamp(290px, 84vw, 340px);
+      width: clamp(290px, 84vw, 340px);
       scroll-snap-align: start;
     }
     @media (min-width: 640px) {
       .rail-card-wrapper {
-        flex: 0 0 260px;
-        width: 260px;
+        flex: 0 0 250px;
+        width: 250px;
       }
     }
+    /* Laptop: Slender ("Patla"), boutique cards close together (Not stretched wide or far apart) */
     @media (min-width: 900px) {
       .rail-card-wrapper {
-        flex: 0 0 270px;
-        width: 270px;
-      }
-    }
-
-    /* Filter Grid Mode (Shown when searching/filtering) */
-    .filter-results-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      padding-bottom: 36px;
-    }
-    @media (min-width: 640px) {
-      .filter-results-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-    }
-    @media (min-width: 900px) {
-      .filter-results-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+        flex: 0 0 236px;
+        width: 236px;
       }
     }
     @media (min-width: 1200px) {
+      .rail-card-wrapper {
+        flex: 0 0 232px;
+        width: 232px;
+      }
+    }
+
+    /* Filter Grid Mode (Slender & closely-knit boutique columns on laptop) */
+    .filter-results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding-bottom: 36px;
+    }
+    @media (max-width: 480px) {
       .filter-results-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 26px;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+    @media (min-width: 481px) and (max-width: 767px) {
+      .filter-results-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .filter-results-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 15px;
+      }
+    }
+    @media (min-width: 1025px) and (max-width: 1280px) {
+      .filter-results-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+    }
+    @media (min-width: 1281px) {
+      .filter-results-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 16px;
       }
     }
 

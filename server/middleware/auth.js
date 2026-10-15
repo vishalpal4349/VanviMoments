@@ -34,10 +34,22 @@ function hashPassword(password) {
 /**
  * Verify a plain password against stored salt and hash
  */
+function safeTimingEqual(a, b) {
+  if (!a || !b) return false;
+  const bufferA = Buffer.isBuffer(a) ? a : Buffer.from(a);
+  const bufferB = Buffer.isBuffer(b) ? b : Buffer.from(b);
+  if (bufferA.length !== bufferB.length) return false;
+  try {
+    return crypto.timingSafeEqual(bufferA, bufferB);
+  } catch (err) {
+    return false;
+  }
+}
+
 function verifyPassword(password, salt, hash) {
   if (!password || !salt || !hash) return false;
   const testHash = crypto.scryptSync(password, salt, 64).toString('hex');
-  return crypto.timingSafeEqual(Buffer.from(testHash, 'hex'), Buffer.from(hash, 'hex'));
+  return safeTimingEqual(Buffer.from(testHash, 'hex'), Buffer.from(hash, 'hex'));
 }
 
 /**
@@ -54,7 +66,7 @@ function hashPin(pin) {
 function verifyPin(pin, hashedPin) {
   if (!pin || !hashedPin) return false;
   const testHash = crypto.createHmac('sha256', JWT_SECRET).update(String(pin).trim()).digest('hex');
-  return crypto.timingSafeEqual(Buffer.from(testHash), Buffer.from(hashedPin));
+  return safeTimingEqual(Buffer.from(testHash), Buffer.from(hashedPin));
 }
 
 /**

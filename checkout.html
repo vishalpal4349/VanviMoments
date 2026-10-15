@@ -8,6 +8,7 @@
 <title>Bespoke Checkout &amp; Moment Activation — Vanvi Moments</title>
 <meta content="Secure luxury checkout for all Vanvi Moments celebration templates. Dynamic theme adaptation, 1-tap Celebration Pass credits, and instant Vanvi Coins discount redemption." name="description"/>
 <meta content="#fff5f8" name="theme-color"/>
+<meta name="razorpay-key-id" content="rzp_test_TnmlkvouoFZcRV"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
@@ -1000,8 +1001,9 @@ footer {
 footer a { color: var(--text-muted); text-decoration: none; margin: 0 6px; }
 footer a:hover { color: var(--rose-primary); }
 </style>
+<link rel="stylesheet" href="css/vanvi-premium-pages.css"/>
 </head>
-<body>
+<body class="checkout-page">
 
 <header>
   <a href="index.html" class="brand-link" title="Vanvi Moments Home">
@@ -2397,8 +2399,39 @@ function vanviGoBack(fallback) {
       const currentUser = (window.VanviAPI && window.VanviAPI.auth && window.VanviAPI.auth.getUser()) || null;
 
       try {
+        if (physicalSubtotal > 0 || couponDiscount > 0) {
+          throw new Error('Physical items and coupon discounts are not yet supported by server-authoritative payment pricing. Remove them and try again.');
+        }
+
+        if (!window.VanviAPI || !window.VanviAPI.orders) {
+          throw new Error('The secure order service is unavailable. Please try again later.');
+        }
+
+        const applicationOrderResult = await window.VanviAPI.orders.create({
+          templateName,
+          templateId,
+          applyCoins: appliedCoins > 0,
+          applyPassCredits: appliedCredits > 0
+        });
+        if (!applicationOrderResult.success || !applicationOrderResult.order) {
+          throw new Error(applicationOrderResult.error || 'Could not create a secure payment order.');
+        }
+        const applicationOrder = applicationOrderResult.order;
+        if (
+          applicationOrder.paymentMode !== 'live' ||
+          applicationOrder.paymentGateway !== 'razorpay' ||
+          !applicationOrder.gatewayOrderId ||
+          !applicationOrder.keyId
+        ) {
+          throw new Error('Live Razorpay Test Mode is not configured on the backend. Configure the matching Test Key Secret and try again.');
+        }
+        if (Math.round(finalAmount * 100) !== applicationOrder.amountInPaisa) {
+          throw new Error('The checkout total changed during secure verification. Refresh the page and review your order before paying.');
+        }
+
         await window.VanviRazorpay.openCheckout({
-          amountPaise,
+          gatewayOrder: applicationOrder,
+          amountPaise: applicationOrder.amountInPaisa,
           currency: 'INR',
           name: 'Vanvi Moments',
           description: physicalSubtotal > 0 ? `${templateName} + Physical Keepsakes` : `${templateName} — For ${recipient}`,
@@ -2421,7 +2454,11 @@ function vanviGoBack(fallback) {
           },
           themeColor: '#ff2a7a',
           onSuccess: (paymentResult) => {
-            openSuccessReceipt(momentUrl, paymentResult.razorpay_payment_id, paymentResult.razorpay_order_id);
+            openSuccessReceipt(
+              momentUrl,
+              paymentResult.razorpay_payment_id,
+              paymentResult.orderId || applicationOrder.id
+            );
           },
           onDismiss: () => {
             btnCompletePayment.disabled = false;

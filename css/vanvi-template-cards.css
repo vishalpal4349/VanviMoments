@@ -27,34 +27,48 @@
   --vm-font-price: 'Outfit', sans-serif;
 }
 
-/* ─── 1. RESPONSIVE CARD GRID WITH LUXURY BREATHING ROOM ─── */
+/* ─── 1. RESPONSIVE CARD GRID (SLENDER BOUTIQUE ON LAPTOP, GRAND ON MOBILE) ─── */
 .vanvi-cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px; /* Generous breathing space between cards */
+  gap: 12px;
   width: 100%;
   margin: 0 auto;
-  padding: 10px 4px 32px;
+  padding: 8px 4px 32px;
 }
 
-@media (min-width: 640px) {
+@media (max-width: 480px) {
+  .vanvi-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
   .vanvi-cards-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 14px;
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .vanvi-cards-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1025px) and (max-width: 1280px) {
   .vanvi-cards-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 26px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1281px) {
+  .vanvi-cards-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
   }
 }
 
@@ -190,6 +204,13 @@
   margin: 0 !important;
 }
 
+@media (max-width: 640px) {
+  .vanvi-card .card-art-box {
+    aspect-ratio: 16 / 10.5 !important;
+    min-height: 175px !important;
+  }
+}
+
 /* Ambient blurred aura hidden — full bleed image seamlessly occupies entire box */
 .vanvi-card .card-art-backdrop {
   display: none !important;
@@ -303,24 +324,24 @@
   box-shadow: 0 2px 10px rgba(217, 119, 6, 0.4);
 }
 
-/* Card Body */
+/* Card Body — Slender on desktop, spacious on mobile */
 .vanvi-card .card-body {
-  padding: 10px 12px 12px;
+  padding: 10px 11px 12px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-@media (min-width: 640px) {
+@media (max-width: 640px) {
   .vanvi-card .card-body {
-    padding: 10px 12px 12px;
+    padding: 13px 14px 15px;
   }
 }
 
 /* Cormorant Garamond Editorial Title */
 .vanvi-card .card-title {
   font-family: var(--vm-font-serif);
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
   color: var(--vm-text-dark);
   margin-bottom: 2px;
@@ -331,9 +352,10 @@
   letter-spacing: -0.01em;
 }
 
-@media (min-width: 640px) {
+@media (max-width: 640px) {
   .vanvi-card .card-title {
-    font-size: 15.5px;
+    font-size: 16.5px;
+    font-weight: 750;
   }
 }
 
@@ -352,10 +374,11 @@
   max-height: 29px;
 }
 
-@media (min-width: 640px) {
+@media (max-width: 640px) {
   .vanvi-card .card-tagline {
-    font-size: 11px;
-    max-height: 30px;
+    font-size: 11.5px;
+    line-height: 1.4;
+    max-height: 33px;
   }
 }
 
@@ -567,6 +590,14 @@
   transform: translateY(1.5px) scale(0.965) !important;
   box-shadow: 0 2px 5px rgba(255, 42, 122, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
   opacity: 0.95;
+}
+
+@media (max-width: 640px) {
+  .vanvi-card .btn-take-look,
+  .vanvi-card .btn-make-yours {
+    height: 35px !important;
+    font-size: 12px !important;
+  }
 }
 
 @keyframes clueButtonFlow {

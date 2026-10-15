@@ -25,8 +25,110 @@
 <link rel="stylesheet" href="vanvi-navigation.css"/>
 <link rel="stylesheet" href="css/vanvi-template-cards.css"/>
 <link rel="stylesheet" href="css/vanvi-global-experience.css"/>
+<script src="js/vanvi-templates-data.js" defer></script>
+<script src="js/vanvi-home-collections.js" defer></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+.home-live-template .home-live-thumb {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.home-live-template .home-live-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home-collection-empty {
+  width: 100%;
+  padding: 22px;
+  border: 1px solid rgba(179, 135, 80, 0.2);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #6b5262;
+  text-align: center;
+  font-size: 13px;
+}
+#freeTemplateSlider:not([data-ready]) > .template,
+#premiumTemplateSlider:not([data-ready]) > .template {
+  display: none !important;
+}
+.home-collection-loading {
+  width: 100%;
+  padding: 22px;
+  color: #806c80;
+  text-align: center;
+  font-size: 13px;
+}
+.home-collection-section {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 24px clamp(14px, 4vw, 32px);
+}
+.home-collection-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.home-collection-heading h2 {
+  color: #3f2638;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1.1;
+}
+.home-collection-heading p {
+  margin-top: 4px;
+  color: #806c80;
+  font-size: 12px;
+}
+.home-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+.home-collection-grid > .template {
+  min-width: 0 !important;
+  max-width: none !important;
+  width: 100%;
+}
+#freeTemplateSlider.home-collection-grid > .template,
+#premiumTemplateSlider.home-collection-grid > .template {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  flex: initial !important;
+}
+.home-collection-all {
+  display: flex;
+  width: fit-content;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  margin: 16px auto 0;
+  padding: 0 20px;
+  border: 1px solid rgba(205, 130, 167, 0.4);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #8f3b68;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(100, 50, 90, 0.08);
+}
+@media (min-width: 760px) {
+  .home-collection-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+@media (max-width: 359px) {
+  .home-collection-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 :root {
   --pink: #ff78a8;
   --rose: #ff4f91;
