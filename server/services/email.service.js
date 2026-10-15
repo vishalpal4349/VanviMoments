@@ -58,21 +58,43 @@ async function sendRawEmail({ to, subject, html, text }) {
   // 1. Resend API
   if (RESEND_API_KEY) {
     try {
-      const response = await fetch('https://api.resend.com/emails', {
+      const fromSender = process.env.EMAIL_FROM || 'Vanvi Moments <onboarding@resend.dev>';
+      let response = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${RESEND_API_KEY}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: EMAIL_FROM,
+          from: fromSender,
           to: recipientList,
           subject,
           html,
           text
         })
       });
-      const data = await response.json();
+      let data = await response.json();
+
+      // If unverified custom domain error, gracefully retry with onboarding sender
+      if (!response.ok && data && data.message && (data.message.toLowerCase().includes('domain') || data.message.toLowerCase().includes('verified'))) {
+        console.warn('[Resend Notice] Custom domain not yet verified at resend.com/domains, falling back to verified onboarding sender...');
+        response = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${RESEND_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: 'Vanvi Moments <onboarding@resend.dev>',
+            to: recipientList,
+            subject,
+            html,
+            text
+          })
+        });
+        data = await response.json();
+      }
+
       if (response.ok) {
         return { success: true, provider: 'resend', id: data.id };
       }
