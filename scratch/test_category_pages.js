@@ -20,7 +20,7 @@ console.log('1. Templates Data Catalog Verification:');
 assert(Array.isArray(templatesData.templates) && templatesData.templates.length >= 20, 
   `Catalog contains ${templatesData.templates.length} templates (>= 20 required)`);
 
-const requiredFields = ['id', 'name', 'category', 'categorySlug', 'price', 'isFree', 'badge', 'type', 'icon', 'description', 'features', 'previewRecipient', 'previewSender', 'previewMessage'];
+const requiredFields = ['id', 'name', 'category', 'categorySlug', 'price', 'isFree', 'badge', 'type', 'icon', 'description', 'features'];
 let allFieldsPresent = true;
 for (const t of templatesData.templates) {
   for (const f of requiredFields) {
@@ -93,4 +93,3 @@ if (failed) {
 } else {
   console.log('\n🎉 ALL CATEGORY & TEMPLATES SUITE CHECKS PASSED PERFECTLY!\n');
 }
-

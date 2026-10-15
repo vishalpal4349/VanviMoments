@@ -14,6 +14,20 @@
 			"command": "node scratch/test_checkout.js",
 			"isBackground": false,
 			"problemMatcher": []
+		},
+		{
+			"label": "Run Auth Defaults Regression Test",
+			"type": "shell",
+			"command": "node scratch/test_auth_account_defaults.js",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run Full Ecosystem Regression Tests",
+			"type": "shell",
+			"command": "npm test",
+			"isBackground": false,
+			"problemMatcher": []
 		}
 	]
 }

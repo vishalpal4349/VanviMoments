@@ -175,15 +175,6 @@ const Users = {
     store.users.push(user);
     saveStore();
 
-    // Record welcome bonus in ledger
-    await CoinLedger.create({
-      userId: id,
-      type: 'credit',
-      amount: userData.coins || 100,
-      reason: 'Welcome Gift Bonus',
-      refId: 'signup'
-    });
-
     return await Users.findById(id);
   },
 

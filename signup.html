@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0, user-scalable=yes" />
   <title>Create an Account | Vanvi Moments</title>
-  <meta name="description" content="Join Vanvi Moments to craft bespoke, handcrafted celebration invitations and collect 100 bonus celebration coins." />
+  <meta name="description" content="Join Vanvi Moments to craft and manage handcrafted celebration invitations." />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,9 +13,6 @@
   <link rel="stylesheet" href="vanvi-inner-light.css" />
   <link rel="stylesheet" href="vanvi-navigation.css" />
   <link rel="stylesheet" href="css/vanvi-global-experience.css" />
-
-  <!-- Google Identity Services Official Client -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <style>
     :root {
@@ -438,6 +435,32 @@
       font-size: 16px;
       animation: confettiBurst 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
     }
+    .clay-phone-card,
+    .clay-mode-switch-wrap { max-width: 400px; }
+    .clay-phone-card { width: min(100%, 400px); }
+    .clay-inner-card { padding: 16px; }
+    .clay-field-row { margin-bottom: 10px; }
+    .clay-pill-input-box { height: 44px; min-width: 0; }
+    .clay-pwd-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    .clay-pwd-grid > .clay-pill-input-box { min-width: 0; }
+    .clay-btn-main { height: 46px; font-size: 14px; }
+    #gsiButtonContainer.google-signin-status {
+      width: min(100%, 320px);
+      min-height: 0;
+      margin: 0 auto;
+      padding: 8px 10px;
+      border: 1px solid #e9d5ff;
+      border-radius: 12px;
+      background: #faf5ff;
+      color: #6b4f85;
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.45;
+      text-align: center;
+    }
+    @media (max-height: 700px) {
+      body { justify-content: flex-start; padding-top: 46px; padding-bottom: 24px; }
+    }
   </style>
 </head>
 
@@ -467,7 +490,7 @@
       <a href="signup.html" class="clay-mode-tab active" aria-current="page">
         <span>✨</span>
         <span>Sign Up</span>
-        <span class="clay-coins-tag">+100 🪙</span>
+        <span class="clay-coins-tag">Free account</span>
       </a>
     </nav>
   </div>
@@ -480,7 +503,7 @@
       <h1 class="clay-main-title" id="signupTitle">
         <span>Join Vanvi Moments</span>
       </h1>
-      <p class="clay-sub-text">Create account &amp; get +100 bonus coins ✨</p>
+      <p class="clay-sub-text">Create your free Vanvi Moments account ✨</p>
     </header>
 
     <!-- 3D Cute Clay Character -->
@@ -546,7 +569,7 @@
         <!-- Primary Submit Button -->
         <button class="clay-btn-main" type="submit" id="btnSignupSubmit">
           <span class="btn-spinner" id="signupSpinner" style="display:none;" aria-hidden="true"></span>
-          <span id="signupBtnText">Create Account (+100 🪙) ✨</span>
+          <span id="signupBtnText">Create Account ✨</span>
         </button>
 
         <!-- Status Alert Message -->
@@ -571,8 +594,8 @@
   </main>
 
   <!-- Central Client API, Google Auth & Navigation Scripts -->
-  <script src="js/vanvi-api.js"></script>
-  <script src="js/vanvi-google-auth.js"></script>
+  <script src="js/vanvi-api.js?v=auth-zero-coins"></script>
+  <script src="js/vanvi-google-auth.js?v=google-public-config"></script>
   <script src="js/vanvi-i18n.js"></script>
 
   <script>
@@ -615,7 +638,7 @@
       function setLoading(isLoading) {
         if (btnSubmit) btnSubmit.disabled = isLoading;
         if (spinner) spinner.style.display = isLoading ? 'inline-block' : 'none';
-        if (btnText) btnText.textContent = isLoading ? 'Creating Account...' : 'Create Account (+100 🪙) ✨';
+        if (btnText) btnText.textContent = isLoading ? 'Creating Account...' : 'Create Account ✨';
       }
 
       window.triggerAuthSuccessCelebration = function (redirectUrl) {
@@ -697,7 +720,7 @@
           });
 
           if (result.success) {
-            showStatus('Welcome! +100 Coins added! Opening dashboard... 🌸', 'success');
+            showStatus('Welcome to Vanvi Moments! Opening dashboard... 🌸', 'success');
             const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
             window.triggerAuthSuccessCelebration(redirectUrl);
             return;

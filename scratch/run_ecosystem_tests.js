@@ -16,7 +16,8 @@ const suites = [
   { name: 'Template #1 Birthday White Bloom Standalone & Ecosystem Suite', script: 'scratch/test_birthday_white_bloom.js' },
   { name: 'Final Pre-Launch Hardening, Security, Gateways & E2E QA', script: 'scratch/test_prelaunch_hardening.js' },
   { name: 'Vanvi AI Assistant (vanvi-assistant.html) Backend Integration', script: 'scratch/test_assistant.js' },
-  { name: 'Global UX Rules, Games Cap, 4-Step Referral & Devanagari Hindi System', script: 'scratch/test_ux_games_referral_i18n.js' }
+  { name: 'Global UX Rules, Games Cap, 4-Step Referral & Devanagari Hindi System', script: 'scratch/test_ux_games_referral_i18n.js' },
+  { name: 'Authentication Account Defaults & Recovery Delivery', script: 'scratch/test_auth_account_defaults.js' }
 ];
 
 console.log('====================================================');
@@ -32,7 +33,11 @@ suites.forEach((suite, idx) => {
     console.log('✅ 100% PASS');
   } catch (err) {
     console.log('❌ FAILED');
-    console.error(err.stdout ? err.stdout.toString() : err.message);
+    const output = [err.stdout, err.stderr]
+      .map((stream) => stream && stream.toString().trim())
+      .filter(Boolean)
+      .join('\n');
+    console.error(output || err.message);
     allPassed = false;
   }
 });
@@ -44,4 +49,3 @@ if (allPassed) {
   console.log('⚠️ SOME SUITES EXPERIENCED ISSUES');
 }
 console.log('====================================================\n');
-

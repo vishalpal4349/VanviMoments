@@ -132,6 +132,13 @@ app.get('/api/health', async (req, res) => {
   });
 });
 
+app.get('/api/config/public', (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  res.json({
+    googleClientId: process.env.GOOGLE_CLIENT_ID || ''
+  });
+});
+
 // Mount API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/moments', momentsRoutes);

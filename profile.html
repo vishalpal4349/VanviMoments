@@ -1261,13 +1261,14 @@
           } catch(e) {}
         }
 
-        const name = user?.name || localStorage.getItem('vanvi_user_name') || 'Vanvi Creator';
-        const email = user?.email || localStorage.getItem('vanvi_user_email') || localStorage.getItem('vanvi_last_email') || 'creator@vanvimoments.shop';
-        const phone = user?.phone || localStorage.getItem('vanvi_user_phone') || '';
-        const birthday = user?.birthday || localStorage.getItem('vanvi_user_birthday') || '';
-        const bio = user?.bio || localStorage.getItem('vanvi_user_bio') || 'Crafting heartfelt digital moments ✨';
-        const coins = user?.coins !== undefined ? user.coins : parseInt(localStorage.getItem('vanvi_user_coins') || '150', 10);
-        const credits = parseInt(localStorage.getItem('vanvi_template_credits') || '2', 10);
+        const isGuest = !user;
+        const name = user?.name || (isGuest ? 'Guest User' : 'Vanvi Creator');
+        const email = user?.email || (isGuest ? 'Not signed in' : '');
+        const phone = user?.phone || '';
+        const birthday = user?.birthday || '';
+        const bio = user?.bio || (isGuest ? 'Sign in to access your invitations, wallet coins, and exclusive atelier passes.' : 'Crafting heartfelt digital moments ✨');
+        const coins = user?.coins !== undefined ? user.coins : 0;
+        const credits = user?.templateCredits !== undefined ? user.templateCredits : 0;
 
         // Calculate Moments count
         let momentsCount = 0;
@@ -1279,7 +1280,7 @@
         // Populate DOM
         document.getElementById('profileName').textContent = name;
         document.getElementById('profileBio').textContent = bio;
-        document.getElementById('profileEmail').textContent = `✉️ ${email}`;
+        document.getElementById('profileEmail').textContent = isGuest ? '✉️ Sign in to view account' : `✉️ ${email}`;
         document.getElementById('profilePhone').textContent = phone ? `📱 ${phone}` : '📱 Add WhatsApp Number';
         document.getElementById('profileBirthday').textContent = birthday ? `🎂 ${birthday}` : '🎂 Add Birthday';
         
@@ -1288,7 +1289,7 @@
         if (user?.picture) {
           avatarEl.innerHTML = `<img src="${user.picture}" alt="${name}">`;
         } else {
-          avatarEl.textContent = (name || 'V').charAt(0).toUpperCase();
+          avatarEl.textContent = isGuest ? '👤' : (name || 'V').charAt(0).toUpperCase();
         }
 
         // Stats
@@ -1297,11 +1298,11 @@
         document.getElementById('statCredits').textContent = credits;
 
         // Form Fields
-        document.getElementById('inputName').value = name;
-        document.getElementById('inputEmail').value = email;
+        document.getElementById('inputName').value = isGuest ? '' : name;
+        document.getElementById('inputEmail').value = isGuest ? '' : email;
         document.getElementById('inputPhone').value = phone;
         document.getElementById('inputBirthday').value = birthday;
-        document.getElementById('inputBio').value = bio;
+        document.getElementById('inputBio').value = isGuest ? '' : bio;
       }
 
       window.openEditModal = function() {

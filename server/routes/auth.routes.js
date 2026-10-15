@@ -5,7 +5,11 @@ const https = require('https');
 const { Users, CoinLedger, AuditLogs } = require('../db/database');
 const { hashPassword, verifyPassword, createToken, requireAuth } = require('../middleware/auth');
 const { authRateLimiter } = require('../middleware/security');
-const { sendWelcomeEmail, sendPasswordResetOtp } = require('../services/email.service');
+const {
+  sendWelcomeEmail,
+  sendPasswordResetOtp,
+  isEmailConfigured
+} = require('../services/email.service');
 
 // In-Memory Password Reset OTP Vault (15-min TTL)
 const resetOtpVault = new Map();
@@ -139,12 +143,11 @@ router.post('/signup', authRateLimiter, async (req, res) => {
 
     const token = createToken(user);
 
-    // Send automated welcome email with +100 bonus coins
+    // Send a welcome email without implying an uncredited coin bonus.
     if (user.email && user.email.includes('@') && !user.email.includes('@mobile.')) {
       sendWelcomeEmail({
         toEmail: user.email,
-        customerName: user.name,
-        coins: user.coins || 100
+        customerName: user.name
       }).catch(err => console.warn('[Welcome Email Notice]', err.message));
     }
 
@@ -159,6 +162,9 @@ router.post('/signup', authRateLimiter, async (req, res) => {
         role: user.role,
         tier: user.tier,
         coins: user.coins,
+        templateCredits: user.templateCredits || 0,
+        activePass: user.activePass || null,
+        passExpiry: user.passExpiry || null,
         status: user.status || 'active',
         provider: user.provider || 'local'
       }
@@ -230,6 +236,9 @@ router.post('/login', authRateLimiter, async (req, res) => {
         role: user.role,
         tier: user.tier,
         coins: user.coins,
+        templateCredits: user.templateCredits || 0,
+        activePass: user.activePass || null,
+        passExpiry: user.passExpiry || null,
         status: user.status || 'active',
         provider: user.provider || 'local',
         lastLogin: Date.now()
@@ -259,6 +268,7 @@ router.get('/me', requireAuth, async (req, res) => {
         coins: user.coins,
         templateCredits: user.templateCredits || 0,
         activePass: user.activePass || null,
+        passExpiry: user.passExpiry || null,
         status: user.status || 'active',
         provider: user.provider || 'local',
         lastLogin: user.lastLogin
@@ -317,7 +327,7 @@ router.post('/google', authRateLimiter, async (req, res) => {
         salt: salt,
         role: 'user',
         tier: 'free',
-        coins: 100,
+        coins: 0,
         status: 'active',
         signupIp: ip,
         signupUa: ua,
@@ -370,8 +380,7 @@ router.post('/google', authRateLimiter, async (req, res) => {
     if (isNewUser && user.email && user.email.includes('@')) {
       sendWelcomeEmail({
         toEmail: user.email,
-        customerName: user.name,
-        coins: user.coins || 100
+        customerName: user.name
       }).catch(err => console.warn('[Google Welcome Email Notice]', err.message));
     }
 
@@ -390,6 +399,9 @@ router.post('/google', authRateLimiter, async (req, res) => {
         role: user.role,
         tier: user.tier,
         coins: user.coins,
+        templateCredits: user.templateCredits || 0,
+        activePass: user.activePass || null,
+        passExpiry: user.passExpiry || null,
         status: user.status || 'active',
         lastLogin: Date.now()
       }
@@ -431,7 +443,7 @@ router.post('/whatsapp', authRateLimiter, async (req, res) => {
         salt: salt,
         role: 'user',
         tier: 'free',
-        coins: 100
+        coins: 0
       });
     }
 
@@ -448,7 +460,10 @@ router.post('/whatsapp', authRateLimiter, async (req, res) => {
         phone: user.phone,
         role: user.role,
         tier: user.tier,
-        coins: user.coins
+        coins: user.coins,
+        templateCredits: user.templateCredits || 0,
+        activePass: user.activePass || null,
+        passExpiry: user.passExpiry || null
       }
     });
   } catch (err) {
@@ -468,15 +483,25 @@ router.post('/forgot-password', authRateLimiter, async (req, res) => {
       return res.status(400).json({ success: false, error: 'Please enter your registered email or phone number.' });
     }
 
+    if (!isEmailConfigured()) {
+      return res.status(503).json({
+        success: false,
+        error: 'Password reset email is not configured yet. Please contact support or try again later.'
+      });
+    }
+
     const user = await Users.findByIdentifier(rawId);
     if (!user) {
-      // Safe enumeration prevention: always return generic success message
-      const safeRef = 'VNV-' + crypto.randomBytes(4).toString('hex').toUpperCase();
       return res.json({
         success: true,
-        message: 'If an account matches this identifier, a 6-digit verification code has been dispatched.',
-        resetRef: safeRef,
-        otpSent: true
+        message: 'If an account matches this identifier, a verification code will be sent to its registered email.'
+      });
+    }
+
+    if (!user.email || /@(mobile|whatsapp)\.vanvimoments\.(shop|com)$/i.test(user.email)) {
+      return res.status(400).json({
+        success: false,
+        error: 'This account has no recovery email. Please contact support to reset its password.'
       });
     }
 
@@ -505,11 +530,10 @@ router.post('/forgot-password', authRateLimiter, async (req, res) => {
     }
 
     const resetRef = 'VNV-' + crypto.randomBytes(4).toString('hex').toUpperCase();
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otp = crypto.randomInt(100000, 1000000).toString();
     const currentRequestCount = (existingEntry && now < existingEntry.expiresAt) ? (existingEntry.requestCount || 1) + 1 : 1;
 
-    // Store in vault (15-min TTL)
-    resetOtpVault.set(emailKey, {
+    const resetEntry = {
       otp,
       userId: user.id,
       resetRef,
@@ -517,25 +541,25 @@ router.post('/forgot-password', authRateLimiter, async (req, res) => {
       lastRequestedAt: now,
       requestCount: currentRequestCount,
       attempts: 0
-    });
+    };
 
-    // Dispatch real-time OTP email
-    if (user.email && user.email.includes('@') && !user.email.includes('@mobile.')) {
-      sendPasswordResetOtp({
-        toEmail: user.email,
-        customerName: user.name,
-        otp,
-        resetRef
-      }).catch(err => console.warn('[OTP Email Notice]', err.message));
+    const delivery = await sendPasswordResetOtp({
+      toEmail: user.email,
+      customerName: user.name,
+      otp,
+      resetRef
+    });
+    if (!delivery || !delivery.success || delivery.provider === 'simulation') {
+      return res.status(503).json({
+        success: false,
+        error: 'We could not deliver the reset code. Please try again later or contact support.'
+      });
     }
 
+    resetOtpVault.set(emailKey, resetEntry);
     return res.json({
       success: true,
-      message: `A 6-digit security code has been dispatched to ${user.email}. Reference: #${resetRef}.`,
-      resetRef,
-      email: user.email,
-      name: user.name,
-      otpSent: true
+      message: 'If an account matches this identifier, a verification code will be sent to its registered email.'
     });
   } catch (err) {
     console.error('Forgot password error:', err);
@@ -549,27 +573,29 @@ router.post('/forgot-password', authRateLimiter, async (req, res) => {
  */
 router.post('/verify-reset-otp', authRateLimiter, async (req, res) => {
   try {
-    const email = (req.body.email || req.body.identifier || '').trim().toLowerCase();
+    const identifier = (req.body.email || req.body.identifier || '').trim();
     const otp = (req.body.otp || '').trim();
 
-    if (!email || !otp) {
-      return res.status(400).json({ success: false, error: 'Email and 6-digit OTP code are required.' });
+    if (!identifier || !otp) {
+      return res.status(400).json({ success: false, error: 'Email or mobile number and 6-digit OTP code are required.' });
     }
 
-    const entry = resetOtpVault.get(email);
+    const user = await Users.findByIdentifier(identifier);
+    const emailKey = user && user.email ? user.email.toLowerCase() : identifier.toLowerCase();
+    const entry = resetOtpVault.get(emailKey);
     if (!entry) {
       return res.status(400).json({ success: false, error: 'No active OTP found. Please request a new code.' });
     }
 
     if (Date.now() > entry.expiresAt) {
-      resetOtpVault.delete(email);
+      resetOtpVault.delete(emailKey);
       return res.status(400).json({ success: false, error: 'OTP has expired. Please request a new code.' });
     }
 
     if (entry.otp !== otp) {
       entry.attempts = (entry.attempts || 0) + 1;
       if (entry.attempts >= 5) {
-        resetOtpVault.delete(email);
+        resetOtpVault.delete(emailKey);
         return res.status(429).json({ success: false, error: 'Too many incorrect attempts. Please request a new code.' });
       }
       return res.status(400).json({ success: false, error: 'Incorrect 6-digit code. Please check your inbox.' });
@@ -588,33 +614,34 @@ router.post('/verify-reset-otp', authRateLimiter, async (req, res) => {
  */
 router.post('/reset-password', authRateLimiter, async (req, res) => {
   try {
-    const email = (req.body.email || req.body.identifier || '').trim().toLowerCase();
+    const identifier = (req.body.email || req.body.identifier || '').trim();
     const otp = (req.body.otp || '').trim();
     const newPassword = (req.body.newPassword || req.body.password || '').trim();
 
-    if (!email || !otp || !newPassword) {
-      return res.status(400).json({ success: false, error: 'Email, OTP, and new password are required.' });
+    if (!identifier || !otp || !newPassword) {
+      return res.status(400).json({ success: false, error: 'Email or mobile number, OTP, and new password are required.' });
     }
 
     if (newPassword.length < 6) {
       return res.status(400).json({ success: false, error: 'New password must be at least 6 characters long.' });
     }
 
-    const entry = resetOtpVault.get(email);
-    if (!entry || entry.otp !== otp || Date.now() > entry.expiresAt) {
+    const user = await Users.findByIdentifier(identifier);
+    const emailKey = user && user.email ? user.email.toLowerCase() : identifier.toLowerCase();
+    const entry = resetOtpVault.get(emailKey);
+    if (!entry || !entry.verified || entry.otp !== otp || Date.now() > entry.expiresAt) {
       return res.status(400).json({ success: false, error: 'Invalid or expired OTP code. Please request a new code.' });
     }
 
-    const user = await Users.findByEmail(email);
     if (!user) {
-      return res.status(404).json({ success: false, error: 'User account not found.' });
+      return res.status(400).json({ success: false, error: 'Invalid or expired OTP code. Please request a new code.' });
     }
 
     const { salt, hash } = hashPassword(newPassword);
     await Users.update(user.id, { passwordHash: hash, salt });
 
     // Invalidate used OTP
-    resetOtpVault.delete(email);
+    resetOtpVault.delete(emailKey);
 
     return res.json({
       success: true,
@@ -635,4 +662,3 @@ router.post('/logout', (req, res) => {
 
 module.exports = router;
 module.exports.verifyGoogleIdToken = verifyGoogleIdToken;
-

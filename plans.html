@@ -2123,7 +2123,7 @@
         <span class="wallet-icon">🪙</span>
         <div class="wallet-info">
           <span class="wallet-label">Vanvi Coins</span>
-          <span class="wallet-val"><strong id="currentUserCoinBalance">120</strong> <small>(10 C = ₹1)</small></span>
+          <span class="wallet-val"><strong id="currentUserCoinBalance">0</strong> <small>(10 C = ₹1)</small></span>
         </div>
       </div>
 
@@ -2175,7 +2175,7 @@
               <button type="button" class="conv-stepper-btn" onclick="adjustCoinAmount(50)" title="Add 50 coins">+</button>
             </div>
             <div class="conv-stage-foot">
-              <span class="conv-wallet-hint">Your Wallet: <strong id="convUserLiveBalance">120</strong> 🪙</span>
+              <span class="conv-wallet-hint">Your Wallet: <strong id="convUserLiveBalance">0</strong> 🪙</span>
               <button type="button" class="conv-mini-max-btn" onclick="autoDeductAllCoins()">Max</button>
             </div>
           </div>
@@ -2240,7 +2240,7 @@
           <div class="auto-deduct-pref-content">
             <span class="auto-deduct-pref-badge">✨ Smart Checkout Automation</span>
             <div class="auto-deduct-pref-title">Auto-Deduct Coins at Checkout</div>
-            <p class="auto-deduct-pref-sub">Jab bhi koi celebration template buy karoge, system automatically eligible max discount (up to 40%–60%) deduct kar dega — bina manual calculations ke.</p>
+            <p class="auto-deduct-pref-sub">Eligible checkout par Free Creator ko up to 20% aur Club/VIP members ko up to 40% discount mil sakta hai, ₹500 cap aur minimum order rules ke saath.</p>
           </div>
           <label class="switch-toggle-luxe" title="Toggle Auto-Deduct Coins at Checkout">
             <input type="checkbox" id="toggleAutoDeductCheckout" onchange="toggleAutoDeductSetting(this.checked)" checked/>
@@ -2318,7 +2318,7 @@
         <div>
           <span class="stage-badge badge-slate">🎟️ STAGE 01 · 1-TIME PASSES (CREDITS)</span>
           <h2 class="stage-h2">Celebration Passes With 1:1 Prepaid Credits</h2>
-          <p class="stage-p">1 Credit = ₹1 Template Value · 6 months rollover · Pay up to 60% with Coins</p>
+          <p class="stage-p">1 Credit = ₹1 Template Value · 6 months validity · Coin discounts: up to 20% (Free) or 40% (Club/VIP), capped at ₹500</p>
         </div>
         <div class="slider-nav-arrows">
           <button type="button" class="btn-slider-arrow" onclick="scrollTrack('passesTrack', -1)" aria-label="Slide Left">‹</button>
@@ -2351,7 +2351,7 @@
               </div>
 
               <div class="coin-usage-pill budget-60">
-                <span>🪙 Pay up to <strong>60% with Coins</strong> (Only ₹100 cash)</span>
+                <span>🪙 Eligible checkout discount: up to <strong>20% (Free) / 40% (Club or VIP)</strong></span>
               </div>
 
               <ul class="features-list-compact">
@@ -2391,7 +2391,7 @@
               </div>
 
               <div class="coin-usage-pill mid-50">
-                <span>🪙 Pay up to <strong>50% with Coins</strong> (Only ₹250 cash)</span>
+                <span>🪙 Eligible checkout discount: up to <strong>20% (Free) / 40% (Club or VIP)</strong></span>
               </div>
 
               <ul class="features-list-compact">
@@ -2460,7 +2460,7 @@
         <div>
           <span class="stage-badge badge-gold">🪙 STAGE 02 · VANVI COINS VAULT</span>
           <h2 class="stage-h2">Instant Coin Packs For Checkout Discounts</h2>
-          <p class="stage-p">10 Coins = ₹1 Discount · Coins never expire · Knock up to 60% off template prices</p>
+          <p class="stage-p">10 Coins = ₹1 discount · Coins never expire · Eligible orders start at ₹150; tier limits and the ₹500 cap apply</p>
         </div>
         <div class="slider-nav-arrows">
           <button type="button" class="btn-slider-arrow" onclick="scrollTrack('coinsTrack', -1)" aria-label="Slide Left">‹</button>
@@ -2494,7 +2494,7 @@
 
               <ul class="features-list-compact">
                 <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span><strong>250 Instant Vanvi Coins</strong></span></li>
-                <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span>Redeemable immediately on all templates</span></li>
+                <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span>Redeemable on eligible paid orders (₹150 minimum; tier limits apply)</span></li>
                 <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span><strong>Coins never expire</strong></span></li>
               </ul>
             </div>
@@ -2530,7 +2530,7 @@
 
               <ul class="features-list-compact">
                 <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span><strong>600 Instant Coins</strong> (500 + 100 Bonus)</span></li>
-                <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span>Save up to 60% at moment checkout</span></li>
+                <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span>Discounts follow your tier: up to 20% (Free) or 40% (Club/VIP)</span></li>
                 <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span><strong>Zero expiry date</strong></span></li>
               </ul>
             </div>
@@ -2566,7 +2566,7 @@
 
               <ul class="features-list-compact">
                 <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span><strong>1,500 Instant Coins</strong> (1,000 + 500 Bonus)</span></li>
-                <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span>50% free bonus discount power</span></li>
+                <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span>50% bonus coins included in this pack</span></li>
                 <li class="feature-item-compact"><span class="feature-check-compact">✓</span> <span><strong>Zero expiry date</strong></span></li>
               </ul>
             </div>
@@ -2614,7 +2614,7 @@
               </div>
 
               <div class="coin-usage-pill budget-60">
-                <span>🪙 Pay up to <strong>60% with Coins</strong> on budget items</span>
+                <span>🪙 Eligible checkout discount: up to <strong>20% (Free) / 40% (Club or VIP)</strong></span>
               </div>
 
               <ul class="features-list-compact">
@@ -2748,19 +2748,19 @@
       <div class="schedule-grid">
         <div class="schedule-item schedule-item-welcome">
           <div style="font-size:24px; margin-bottom:8px;">🎁</div>
-          <strong style="font-size:14px; color:var(--text-headings); display:block; margin-bottom:2px;">+100 Welcome Gift</strong>
-          <span style="font-size:12px; color:var(--text-muted); line-height:1.45; display:block;">Instantly credited on creating your account or signing in with Google.</span>
+          <strong style="font-size:14px; color:var(--text-headings); display:block; margin-bottom:2px;">0 Welcome Coins</strong>
+          <span style="font-size:12px; color:var(--text-muted); line-height:1.45; display:block;">New accounts start at zero. Earn coins through available rewards after signing in.</span>
         </div>
         <div class="schedule-item schedule-item-spin">
           <div style="font-size:24px; margin-bottom:8px;">🎡</div>
-          <strong style="font-size:14px; color:var(--text-headings); display:block; margin-bottom:2px;">+5 to +80 Daily Spin</strong>
-          <span style="font-size:12px; color:var(--text-muted); line-height:1.45; display:block;">Claim 1 free lucky wheel spin every 24 hours.</span>
+          <strong style="font-size:14px; color:var(--text-headings); display:block; margin-bottom:2px;">0 to +80 Daily Spin</strong>
+          <span style="font-size:12px; color:var(--text-muted); line-height:1.45; display:block;">Claim one weighted wheel spin every 24 hours; some spins award zero coins.</span>
           <a href="rewards.html#wheel" class="btn-spin-wheel-link" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:12px; font-weight:850; color:#b45309; text-decoration:none; padding:4px 12px; border-radius:99px; background:rgba(245, 158, 11, 0.2); border:1px solid #f59e0b;">Spin Wheel 🎡 →</a>
         </div>
         <div class="schedule-item schedule-item-cashback">
           <div style="font-size:24px; margin-bottom:8px;">💳</div>
-          <strong style="font-size:14px; color:var(--text-headings); display:block; margin-bottom:2px;">10% Order Cashback</strong>
-          <span style="font-size:12px; color:var(--text-muted); line-height:1.45; display:block;">Get 10% of every paid celebration order credited back in coins.</span>
+          <strong style="font-size:14px; color:var(--text-headings); display:block; margin-bottom:2px;">Verified Coin Rewards</strong>
+          <span style="font-size:12px; color:var(--text-muted); line-height:1.45; display:block;">Coins are added only by confirmed reward actions or verified eligible offers; automatic order cashback is not active.</span>
         </div>
         <div class="schedule-item schedule-item-referral">
           <div style="font-size:24px; margin-bottom:8px;">👥</div>
@@ -2780,7 +2780,10 @@
           See How Much You Save With Vanvi Coins
         </h2>
         <p style="font-size:13.5px; color:var(--text-muted); line-height:1.5;">
-          Every 10 Coins = ₹1.00 store discount. Test your savings safely with server-enforced safety rules.
+          Every 10 Coins = ₹1.00 store discount. Free accounts can use up to 20%; Club/VIP accounts up to 40%, with a ₹500 cap and a ₹150 minimum order.
+        </p>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.55; background:#fffdfa; border:1px solid var(--border-gold); border-radius:12px; padding:12px 14px; margin-top:12px;">
+          <strong>₹1,000 template example:</strong> with enough coins, Free Creator can save up to ₹200 (2,000 coins); Club/VIP can save up to ₹400 (4,000 coins).
         </p>
       </div>
 
@@ -2803,16 +2806,16 @@
         <div class="calc-box">
           <div class="calc-box-title">
             <span>2. Choose Creator Tier</span>
-            <span id="tierLabel" style="color:var(--gold-primary);">👑 Club / VIP (40%)</span>
+            <span id="tierLabel" style="color:var(--gold-primary);">👑 Club / VIP (40% cap)</span>
           </div>
           <div class="tier-toggle-pill">
-            <button type="button" class="btn-tier-select" data-tier="free">Free Creator (25% Cap)</button>
-            <button type="button" class="btn-tier-select active" data-tier="member">👑 Club / VIP (40%)</button>
+            <button type="button" class="btn-tier-select" data-tier="free">Free Creator (20% cap)</button>
+            <button type="button" class="btn-tier-select active" data-tier="member">👑 Club / VIP (40% cap)</button>
           </div>
           <div style="margin-top:12px; font-size:11.5px; color:var(--text-muted); line-height:1.5;">
-            • <strong>Budget Creations (≤ ₹299):</strong> Redeem up to <strong style="color:var(--emerald);">60% with Coins</strong>!<br/>
-            • <strong>Mid-Tier (₹300 – ₹599):</strong> Redeem up to <strong>50% with Coins</strong>.<br/>
-            • <strong>Luxury (₹600+):</strong> Redeem up to <strong>40% with Coins</strong> (Capped at ₹500 discount).
+            • Coin discounts require an order of at least ₹150.<br/>
+            • Free Creator: up to <strong>20%</strong>; Club/VIP: up to <strong>40%</strong>.<br/>
+            • Maximum coin discount is <strong>₹500</strong>; your available balance also applies.
           </div>
         </div>
       </div>
@@ -2895,10 +2898,10 @@
         </tr>
         <tr>
           <td><strong>Coin Redemption Power</strong></td>
-          <td>Up to 25% discount</td>
-          <td><strong>Up to 60% discount</strong></td>
-          <td><strong>Up to 60% discount</strong></td>
-          <td><strong>Up to 60% discount</strong></td>
+          <td>Up to 20% discount</td>
+          <td><strong>Up to 40% discount</strong></td>
+          <td><strong>Up to 40% discount</strong></td>
+          <td><strong>Up to 40% discount</strong></td>
         </tr>
         <tr>
           <td><strong>Priority Support</strong></td>
@@ -2951,7 +2954,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-question"><span>❓</span> How do Vanvi Coins work at checkout?</div>
-        <div class="faq-answer">10 Coins equal ₹1.00 store discount. On budget creations (up to ₹299), creators can redeem up to <strong>60% of the price with coins</strong>, while mid-tier templates support up to 50%, and luxury templates support up to <strong>40%</strong> (capped safely at ₹500 discount). Unspent coins never expire.</div>
+        <div class="faq-answer">10 Coins equal ₹1.00 store discount. Free Creator accounts can redeem up to <strong>20%</strong>; Club/VIP accounts can redeem up to <strong>40%</strong>. Coin redemption requires an order of at least ₹150, is capped at ₹500, and also depends on your available balance. Unspent coins never expire.</div>
       </div>
       <div class="faq-item">
         <div class="faq-question"><span>❓</span> Can I cancel my Vanvi Club subscription anytime?</div>
@@ -2979,7 +2982,7 @@
       <button type="button" class="modal-close" onclick="closeSubModal()" aria-label="Close modal">×</button>
       <div class="modal-icon" id="modalPlanIcon">💎</div>
       <h3 class="modal-title" id="modalPlanTitle">Vanvi Club</h3>
-      <p class="modal-sub" id="modalPlanSub">Unlock premium templates, 60% coin redemption power, and 2GB cloud vault.</p>
+      <p class="modal-sub" id="modalPlanSub">Unlock premium templates, up to 40% coin redemption on eligible orders, and 2GB cloud vault.</p>
       <div class="modal-price-pill" id="modalPlanPrice">₹99 / month</div>
       <button type="button" class="btn-modal-confirm" id="btnConfirmSubscribe">
         Confirm &amp; Activate Now →
@@ -3002,7 +3005,7 @@
         <div class="explainer-item-card" style="border-left: 3px solid var(--gold-bright);">
           <strong style="color:var(--text-headings); font-size:13px; display:block;">🪙 Vanvi Coins (Discounts)</strong>
           <span style="font-size:12px; color:var(--text-muted); line-height:1.4; display:block; margin-top:2px;">
-            10 Coins = ₹1.00 checkout discount. Earned free daily or topped up in micro-packs. Knock up to 60% off template prices.
+            10 Coins = ₹1.00 checkout discount. Earned through available rewards. Free Creator: up to 20%; Club/VIP: up to 40%, subject to balance, minimum order, and ₹500 cap.
           </span>
         </div>
         <div class="explainer-item-card" style="border-left: 3px solid var(--obsidian-dark);">
@@ -3264,9 +3267,11 @@
     /* Auto-Deduct: 1-click select maximum convertible balance */
     function autoDeductAllCoins() {
       const user = window.VanviAPI?.auth?.getUser();
-      const currentCoins = (user && typeof user.coins === 'number')
-        ? user.coins 
-        : parseInt(localStorage.getItem('vanvi_user_coins') || '120', 10);
+      if (!window.VanviAPI?.auth?.isAuthenticated() || !user) {
+        showToast('Please sign in to use your coin wallet.');
+        return;
+      }
+      const currentCoins = Number.isFinite(Number(user.coins)) ? Math.max(0, Number(user.coins)) : 0;
 
       if (currentCoins < 10) {
         showToast('⚠️ You need at least 10 Vanvi Coins to convert.');
@@ -3293,11 +3298,19 @@
       showToast(enabled ? '✓ Auto-Deduct Active: Best coin discounts will apply automatically at checkout!' : 'Auto-Deduct Disabled: You can manually apply coins at checkout.');
     }
 
-    /* Execute Conversion with backend API + Local Fallback */
+    /* Execute conversion only against the authenticated account ledger. */
     async function executeCoinCreditConversion() {
       const coinInput = document.getElementById('convertCoinInput');
       const btn = document.getElementById('btnExecuteConvert');
       if (!coinInput) return;
+      if (!window.VanviAPI?.auth?.isAuthenticated()) {
+        showToast('Please sign in to convert coins from your account.');
+        return;
+      }
+      if (!window.VanviAPI?.coins?.convertToCredits) {
+        showToast('Coin conversion is temporarily unavailable.');
+        return;
+      }
 
       const coinsToConvert = parseInt(coinInput.value, 10);
       if (isNaN(coinsToConvert) || coinsToConvert < 10) {
@@ -3309,51 +3322,21 @@
       if (btn) { btn.innerHTML = 'Converting...'; btn.disabled = true; }
 
       try {
-        const isAuth = window.VanviAPI?.auth?.isAuthenticated();
-        if (isAuth && window.VanviAPI?.coins?.convertToCredits) {
-          const res = await window.VanviAPI.coins.convertToCredits(coinsToConvert);
-          if (res.success) {
-            const coinBal = document.getElementById('currentUserCoinBalance');
-            const liveBal = document.getElementById('convUserLiveBalance');
-            const creditBal = document.getElementById('currentUserCreditBalance');
-            if (res.newCoins !== undefined) {
-              if (coinBal) coinBal.textContent = res.newCoins.toLocaleString('en-IN');
-              if (liveBal) liveBal.textContent = res.newCoins.toLocaleString('en-IN');
-            }
-            if (creditBal && res.newCredits !== undefined) creditBal.textContent = res.newCredits.toLocaleString('en-IN');
-            showToast(`🎉 Converted ${res.coinsDeducted || coinsToConvert} Coins into +${res.creditsGained} Template Credits!`);
-            return;
-          } else {
-            showToast(res.error || 'Failed to convert coins.');
-            return;
-          }
-        }
-
-        // Guest / Local Storage Fallback
-        const currentCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '120', 10);
-        if (currentCoins < coinsToConvert) {
-          showToast(`⚠️ Insufficient coins! You have ${currentCoins.toLocaleString('en-IN')} coins.`);
-          switchHubTab('coins');
+        const res = await window.VanviAPI.coins.convertToCredits(coinsToConvert);
+        if (!res.success) {
+          showToast(res.error || 'Failed to convert coins.');
           return;
         }
-
-        const creditsGained = Math.floor(coinsToConvert / 10);
-        const actualDeducted = creditsGained * 10;
-        const remainingCoins = currentCoins - actualDeducted;
-        localStorage.setItem('vanvi_user_coins', remainingCoins);
-
-        const currentCredits = parseInt(localStorage.getItem('vanvi_template_credits') || '0', 10);
-        const newCredits = currentCredits + creditsGained;
-        localStorage.setItem('vanvi_template_credits', newCredits);
 
         const coinBal = document.getElementById('currentUserCoinBalance');
         const liveBal = document.getElementById('convUserLiveBalance');
         const creditBal = document.getElementById('currentUserCreditBalance');
-        if (coinBal) coinBal.textContent = remainingCoins.toLocaleString('en-IN');
-        if (liveBal) liveBal.textContent = remainingCoins.toLocaleString('en-IN');
-        if (creditBal) creditBal.textContent = newCredits.toLocaleString('en-IN');
-
-        showToast(`🎉 Converted ${actualDeducted} Coins into +${creditsGained} Template Credits!`);
+        if (res.newCoins !== undefined) {
+          if (coinBal) coinBal.textContent = res.newCoins.toLocaleString('en-IN');
+          if (liveBal) liveBal.textContent = res.newCoins.toLocaleString('en-IN');
+        }
+        if (creditBal && res.newCredits !== undefined) creditBal.textContent = res.newCredits.toLocaleString('en-IN');
+        showToast(`🎉 Converted ${res.coinsDeducted || coinsToConvert} Coins into +${res.creditsGained} Template Credits!`);
       } catch (err) {
         console.error('Conversion error:', err);
         showToast('⚠️ Error converting coins.');
@@ -3411,39 +3394,36 @@
 
       if (priceLabel) priceLabel.textContent = `₹${currentTemplatePrice.toLocaleString('en-IN')}`;
 
-      let baseCoinMax = 0.40;
-      let tierName = '👑 Luxury High-Ticket (40% Max Coins)';
-      if (currentTemplatePrice <= 299) {
-        baseCoinMax = 0.60;
-        tierName = '🌸 Budget Sasta Tier (60% Max Coins!)';
-      } else if (currentTemplatePrice <= 599) {
-        baseCoinMax = 0.50;
-        tierName = '✨ Popular Mid Tier (50% Max Coins)';
-      }
-
       const isClub = currentCalculatorTier === 'member';
-      const effectiveMaxPercent = isClub ? baseCoinMax : Math.min(baseCoinMax, 0.25);
+      const effectiveMaxPercent = isClub ? 0.40 : 0.20;
+      const tierName = isClub ? '👑 Club / VIP (40% Max)' : 'Free Creator (20% Max)';
 
       if (tierLabel) {
-        tierLabel.textContent = isClub ? tierName : 'Free Creator (25% Cap)';
+        tierLabel.textContent = tierName;
       }
 
-      const percentLimitINR = Math.floor(currentTemplatePrice * effectiveMaxPercent);
+      const percentLimitINR = Math.floor(currentTemplatePrice * effectiveMaxPercent * 100) / 100;
       const fixedRupeeCap = 500;
-      let eligibleDiscount = Math.min(percentLimitINR, fixedRupeeCap);
+      const eligibleDiscount = currentTemplatePrice >= 150
+        ? Math.min(percentLimitINR, fixedRupeeCap, Math.max(0, currentTemplatePrice - 49))
+        : 0;
 
-      const coinsNeeded = eligibleDiscount * 10;
-      const finalPayable = Math.max(0, currentTemplatePrice - eligibleDiscount);
+      const coinsNeeded = Math.floor(eligibleDiscount * 10);
+      const finalPayable = Math.max(0, Math.round((currentTemplatePrice - eligibleDiscount) * 100) / 100);
 
       if (discountEl) discountEl.textContent = `- ₹${eligibleDiscount.toLocaleString('en-IN')}.00`;
       if (coinsNeededEl) coinsNeededEl.textContent = `Requires ${coinsNeeded.toLocaleString('en-IN')} Coins`;
       if (finalPayableEl) finalPayableEl.textContent = `₹${finalPayable.toLocaleString('en-IN')}.00`;
 
-      const effectivePercent = Math.round((eligibleDiscount / currentTemplatePrice) * 100);
+      const effectivePercent = currentTemplatePrice > 0
+        ? Math.round((eligibleDiscount / currentTemplatePrice) * 100)
+        : 0;
       if (percentBadgeEl) percentBadgeEl.textContent = `${effectivePercent}% Coin Savings Applied`;
 
       if (capNoticeEl) {
-        capNoticeEl.textContent = (percentLimitINR > fixedRupeeCap) ? `Capped at ₹${fixedRupeeCap} Max` : `Within ₹500 Protection Cap`;
+        capNoticeEl.textContent = currentTemplatePrice < 150
+          ? 'Orders below ₹150 are not eligible'
+          : (percentLimitINR > fixedRupeeCap ? `Capped at ₹${fixedRupeeCap} Max` : 'Within ₹500 Protection Cap');
       }
     }
 
@@ -3457,15 +3437,15 @@
     let activeCoinPackSelection = null;
 
     const PLANS_META = {
-      monthly: { name: 'Vanvi Club Monthly', price: '₹99 / month', icon: '💎', sub: 'Instant access to full premium catalog, 60% coin discount, and 2GB Cloud Vault.' },
+      monthly: { name: 'Vanvi Club Monthly', price: '₹99 / month', icon: '💎', sub: 'Instant access to the premium catalog, up to 40% coin discounts on eligible orders, and 2GB Cloud Vault.' },
       annual: { name: 'Vanvi Club Annual VIP', price: '₹799 / year', icon: '👑', sub: 'Best value! Includes everything in Club plus +500 Bonus Coins and VIP badge.' },
       lifetime: { name: 'Lifetime Patron', price: '₹2,499 (One-Time)', icon: '🌟', sub: 'Pay once, enjoy lifetime Club privileges, 10GB vault, and 1,000 bonus coins.' }
     };
 
     const PASSES_META = {
-      mini: { name: 'Mini Celebration Pass', price: '₹249 (Prepaid)', icon: '🌸', credits: 320, sub: 'Instant 320 Template Credits (₹320 Value). Pay up to 60% with Coins. Valid 6 months.' },
-      creator: { name: 'Creator Festival Pass', price: '₹499 (Prepaid)', icon: '👑', credits: 700, sub: 'Instant 700 Template Credits (₹700 Value). Pay up to 50% with Coins. Save 28% instantly.' },
-      vip: { name: 'VIP Luxury All-Access Pass', price: '₹999 (Prepaid)', icon: '💎', credits: 1500, sub: 'Instant 1,500 Template Credits (₹1,500 Value). Pay up to 40% with Coins. Save 33% instantly.' }
+      mini: { name: 'Mini Celebration Pass', price: '₹249 (Prepaid)', icon: '🌸', credits: 320, sub: '320 Template Credits (₹320 value), valid for 6 months. Coin discounts follow your account tier.' },
+      creator: { name: 'Creator Festival Pass', price: '₹499 (Prepaid)', icon: '👑', credits: 700, sub: '700 Template Credits (₹700 value), valid for 6 months. Coin discounts follow your account tier.' },
+      vip: { name: 'VIP Luxury All-Access Pass', price: '₹999 (Prepaid)', icon: '💎', credits: 1500, sub: '1,500 Template Credits (₹1,500 value), valid for 6 months. Coin discounts follow your account tier.' }
     };
 
     const COIN_PACKS_META = {
@@ -3529,33 +3509,35 @@
 
       try {
         if (activeCoinPackSelection) {
-          const pack = COIN_PACKS_META[activeCoinPackSelection];
-          if (window.VanviAPI?.coins?.add) {
-            await window.VanviAPI.coins.add(pack.coins, 'Coin Pack Top-up');
-          }
-          const curCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '120', 10);
-          const newCoins = curCoins + pack.coins;
-          localStorage.setItem('vanvi_user_coins', newCoins);
-          const coinBalEl = document.getElementById('currentUserCoinBalance');
-          if (coinBalEl) coinBalEl.textContent = newCoins.toLocaleString('en-IN');
-          closeSubModal();
-          showToast(`🎉 +${pack.coins} Coins added to your Vanvi Wallet!`);
+          showToast('Coin-pack checkout is not available yet. No payment was taken and no coins were added.');
           return;
         }
 
         if (activePassSelection) {
-          const pass = PASSES_META[activePassSelection];
-          if (window.VanviAPI?.membership?.buyPass) {
-            await window.VanviAPI.membership.buyPass(activePassSelection);
+          if (!window.VanviAPI?.auth?.isAuthenticated()) {
+            showToast('Please sign in to purchase a Celebration Pass.');
+            setTimeout(() => {
+              window.location.href = `login.html?redirect=plans.html&pass=${activePassSelection}`;
+            }, 1200);
+            return;
           }
-          const curCredits = parseInt(localStorage.getItem('vanvi_template_credits') || '0', 10);
-          const newCredits = curCredits + pass.credits;
-          localStorage.setItem('vanvi_template_credits', newCredits);
-          localStorage.setItem('vanvi_active_pass', pass.name);
+          const res = await window.VanviAPI.membership.buyPass(activePassSelection);
+          if (!res.success) {
+            showToast(res.error || 'Pass purchase could not be started.');
+            return;
+          }
+          if (res.pending) {
+            showToast('Payment is not verified yet; no pass credits are active.');
+            return;
+          }
           const creditBal = document.getElementById('currentUserCreditBalance');
-          if (creditBal) creditBal.textContent = newCredits.toLocaleString('en-IN');
+          if (creditBal && res.totalCredits !== undefined) {
+            creditBal.textContent = Number(res.totalCredits).toLocaleString('en-IN');
+          }
           closeSubModal();
-          showToast(`🎉 Received ${pass.credits} Credits for ${pass.name}!`);
+          showToast(res.gatewayOrder?.mode === 'simulation'
+            ? 'Test mode only: no real payment was taken; pass activation is simulated.'
+            : `🎉 ${res.pass?.name || 'Celebration Pass'} activated.`);
           return;
         }
 
@@ -3569,17 +3551,23 @@
             return;
           }
           const res = await window.VanviAPI.membership.subscribe(activePlanSelection);
-          if (res.success) {
-            closeSubModal();
-            showToast(`🎉 Successfully upgraded to ${res.plan?.name || 'Vanvi Club'}!`);
-            setTimeout(() => { window.location.href = 'dashboard.html'; }, 1200);
+          if (!res.success) {
+            showToast(res.error || 'Membership purchase could not be started.');
+          } else if (res.pending) {
+            showToast('Payment is not verified yet; membership benefits are not active.');
           } else {
-            showToast(res.error || 'Failed to process subscription.');
+            closeSubModal();
+            showToast(res.gatewayOrder?.mode === 'simulation'
+              ? 'Test mode only: no real payment was taken; membership activation is simulated.'
+              : `🎉 Successfully upgraded to ${res.plan?.name || 'Vanvi Club'}!`);
+            if (res.gatewayOrder?.mode !== 'simulation') {
+              setTimeout(() => { window.location.href = 'dashboard.html'; }, 1200);
+            }
           }
         }
       } catch (e) {
-        showToast('Purchase completed successfully!');
-        closeSubModal();
+        console.error('Plan purchase failed:', e);
+        showToast('Purchase could not be completed. No credits or membership were confirmed.');
       } finally {
         btn.textContent = origText;
         btn.disabled = false;
@@ -3633,12 +3621,11 @@
         if (coinBal) coinBal.textContent = userCoins;
         if (liveBal) liveBal.textContent = userCoins;
       } else {
-        const localCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '120', 10);
-        if (coinBal) coinBal.textContent = localCoins.toLocaleString('en-IN');
-        if (liveBal) liveBal.textContent = localCoins.toLocaleString('en-IN');
+        if (coinBal) coinBal.textContent = '0';
+        if (liveBal) liveBal.textContent = '0';
       }
-      const localCredits = parseInt(localStorage.getItem('vanvi_template_credits') || (user?.templateCredits || 0), 10);
-      if (creditBal) creditBal.textContent = localCredits.toLocaleString('en-IN');
+        const userCredits = Math.max(0, Number(user?.templateCredits) || 0);
+        if (creditBal) creditBal.textContent = userCredits.toLocaleString('en-IN');
 
       // Initialize Gold Economy Converter
       updateLiveConverter();

@@ -1138,20 +1138,10 @@
       const adminNameEl = document.getElementById('adminProfileName');
       if (adminNameEl) adminNameEl.textContent = user.name || 'Super Admin';
     } else {
-      // Auto fallback to authorized dev admin session for smooth experience
-      const defaultAdmin = {
-        id: 'usr_admin_default',
-        name: 'Vanvi Administrator',
-        email: 'admin@vanvimoments.shop',
-        role: 'admin',
-        tier: 'vip',
-        coins: 10000
-      };
-      localStorage.setItem('vanvi_auth_user', JSON.stringify(defaultAdmin));
-      localStorage.setItem('vanvi_auth_token', 'dev_admin_token');
-      if (modal) modal.classList.remove('active');
+      // Require authentic admin sign-in; never pollute visitor localStorage session
+      if (modal) modal.classList.add('active');
       const adminNameEl = document.getElementById('adminProfileName');
-      if (adminNameEl) adminNameEl.textContent = defaultAdmin.name;
+      if (adminNameEl) adminNameEl.textContent = 'Admin Sign-In Required';
     }
   }
 

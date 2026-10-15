@@ -188,7 +188,7 @@ async function runPlansAndCoinsTests() {
     const html = fs.readFileSync(plansHtmlPath, 'utf8');
     assert(html.includes('viewport') && html.includes('width=device-width'), 'plans.html has responsive viewport meta');
     assert(html.includes('overflow-x: hidden !important'), 'plans.html enforces overflow-x: hidden');
-    assert(html.includes('Choose How Much') && html.includes('Vanvi Magic'), 'Headline communicates "Choose how much Vanvi magic you want"');
+    assert(html.includes('Curated Celebration Passes') && html.includes('VIP Memberships'), 'Plans page explains its passes and memberships');
     
     // The 4 plans
     assert(html.includes('Free Creator') && (html.includes('₹0') || html.includes('>0<')), 'Free Creator (₹0) plan present');
@@ -197,20 +197,21 @@ async function runPlansAndCoinsTests() {
     assert(html.includes('Lifetime Patron') && html.includes('2,499'), 'Lifetime Patron (₹2,499) plan present');
 
     // Comparison section
-    const comparisonCategories = ['Creation', 'AI', 'Templates', 'Customization', 'Storage', 'Sharing', 'Coins', 'Coin Redemption', 'Effects', 'Support', 'Early Access', 'Membership Benefits'];
-    const hasAllCategories = comparisonCategories.every(cat => html.includes(cat));
-    assert(hasAllCategories, 'Comparison section contains all 12 requested categories');
+    assert(html.includes('Detailed Feature Comparison') && html.includes('Creation &amp; AI Studio') && html.includes('Catalog &amp; Customization'), 'Comparison section describes the current plan features');
     assert(html.includes('desktop-comp-table'), 'Comparison includes desktop layout table');
     assert(html.includes('mobile-comp-cards') && html.includes('comp-accordion-item'), 'Comparison includes responsive mobile-first accordion cards');
 
     // Smart Coin Calculator & Examples
     assert(html.includes('coins-calculator-card'), 'Interactive smart coin calculator present');
-    assert(html.includes('₹1,000 Template Comparison') || html.includes('₹1,000 Template'), 'Explicit ₹1,000 template comparison example displayed');
-    assert(html.includes('Requires 4,000 Coins') || html.includes('40%'), '40% club discount and coin math reflected in UI');
+    assert(html.includes('₹1,000 template example') && html.includes('2,000 coins') && html.includes('4,000 coins'), '₹1,000 example matches free and Club/VIP coin math');
+    assert(html.includes('up to 20%') && html.includes('up to 40%') && html.includes('₹500 cap') && html.includes('₹150 minimum order'), 'Displayed coin limits match server eligibility rules');
+    assert(!/up to 60%|up to 50%|25% Cap|100 Welcome Gift|10% Order Cashback/i.test(html), 'Plans page does not advertise unconfigured rewards or excessive discounts');
     assert(html.includes('js/vanvi-api.js'), 'Loads VanviAPI SDK');
-
-    // Disclaimers
-    assert(html.includes('Individual third-party') || html.includes('individual paid templates') || html.includes('specialized third-party'), 'Clearly mentions individual third-party/paid products may carry their own prices');
+    assert(html.includes('Coin-pack checkout is not available yet'), 'Unavailable coin-pack purchases do not claim success or add local coins');
+    assert(html.includes('Test mode only: no real payment was taken'), 'Simulated pass and membership activations are clearly labeled');
+    assert(html.includes('id="currentUserCoinBalance">0</strong>'), 'Unauthenticated wallet shows zero coins');
+    assert(html.includes('id="convUserLiveBalance">0</strong>'), 'Unauthenticated converter shows zero coins');
+    assert(!html.includes('120 Coins'), 'Plans page does not invent a guest coin balance');
 
   } catch (err) {
     console.error('Test execution error:', err);

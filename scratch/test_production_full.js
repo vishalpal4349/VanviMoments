@@ -229,7 +229,7 @@ async function runTests() {
       }
     });
     assert(adjustRes.status === 200 && adjustRes.data.success, 'Admin can credit coins to user account');
-    assert(adjustRes.data.user.coins >= 350, 'User balance reflects admin credited coins');
+    assert(adjustRes.data.user.coins >= 250, 'User balance reflects admin credited coins');
 
     // Admin moments moderation
     const moment = await Moments.create({

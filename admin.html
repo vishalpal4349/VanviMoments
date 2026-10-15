@@ -2449,11 +2449,11 @@
       <form id="adminAuthForm" onsubmit="event.preventDefault(); submitAdminLogin();" style="text-align:left;">
         <div class="field-group">
           <label class="field-caption">Admin Email</label>
-          <input type="email" class="text-input" id="adminInputEmail" value="admin@vanvimoments.shop" required />
+          <input type="email" class="text-input" id="adminInputEmail" placeholder="admin@vanvimoments.shop" autocomplete="username" required />
         </div>
         <div class="field-group">
           <label class="field-caption">Password</label>
-          <input type="password" class="text-input" id="adminInputPassword" value="admin123" required />
+          <input type="password" class="text-input" id="adminInputPassword" placeholder="••••••••" autocomplete="current-password" required />
         </div>
         <div id="adminAuthStatus" style="font-size:11.5px; margin-bottom:10px; font-weight:700; display:none;"></div>
         <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:18px;">

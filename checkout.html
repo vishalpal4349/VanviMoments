@@ -2439,12 +2439,29 @@ function vanviGoBack(fallback) {
         }
         const applicationOrder = applicationOrderResult.order;
         if (
-          applicationOrder.paymentMode !== 'live' ||
+          applicationOrder.paymentMode !== 'live' &&
+          applicationOrder.paymentMode !== 'simulation'
+        ) {
+          throw new Error('Payment service is temporarily unavailable. Please try again later.');
+        }
+
+        if (applicationOrder.paymentMode === 'simulation') {
+          // Test Mode: Simulate successful test payment activation
+          const simPaymentId = 'pay_sim_' + Date.now();
+          openSuccessReceipt(
+            momentUrl,
+            simPaymentId,
+            applicationOrder.id || applicationOrder.gatewayOrderId
+          );
+          return;
+        }
+
+        if (
           applicationOrder.paymentGateway !== 'razorpay' ||
           !applicationOrder.gatewayOrderId ||
           !applicationOrder.keyId
         ) {
-          throw new Error('Live Razorpay Test Mode is not configured on the backend. Configure the matching Test Key Secret and try again.');
+          throw new Error('Live Razorpay gateway configuration is missing on the server. Please check credentials.');
         }
         if (Math.round(finalAmount * 100) !== applicationOrder.amountInPaisa) {
           throw new Error('The checkout total changed during secure verification. Refresh the page and review your order before paying.');

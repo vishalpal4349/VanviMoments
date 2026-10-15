@@ -3,7 +3,7 @@
  * Handles:
  * 1. Customer Order Confirmation & Interactive Keepsake Delivery
  * 2. Real-Time Owner Alerts to vanvimoments@gmail.com (Paid Orders, Bespoke Requests, Contact Inquiries, Bug Reports)
- * 3. Customer Welcome Emails with +100 Bonus Coins & CELEBRATE20 discount coupon on Sign-Up
+ * 3. Customer Welcome Emails on Sign-Up
  * 4. Secure 6-Digit Password Reset OTPs & Magic Recovery Links
  * 5. Bespoke Luxury Atelier Commission Alerts & Client Confirmation
  * 6. Customer Support / Inquiry Reception & Courtesy Acknowledgment
@@ -98,7 +98,15 @@ async function sendRawEmail({ to, subject, html, text }) {
     }
   }
 
-  // 3. Fallback / Development Simulation Logger (Full Transparency)
+  if (isEmailConfigured) {
+    return {
+      success: false,
+      provider: 'unavailable',
+      error: 'Configured email provider could not deliver the message.'
+    };
+  }
+
+  // 3. Development-only simulation logger (not a delivered email).
   console.log('\n======================================================');
   console.log('   💌 VANVI MOMENTS — SMART EMAIL NOTIFICATION');
   console.log('======================================================');
@@ -399,12 +407,12 @@ async function sendContactCustomerAcknowledgment({ customerName, customerEmail, 
 }
 
 /**
- * 5. Customer Welcome Email on Sign-Up (+100 Bonus Coins & CELEBRATE20 Coupon)
+ * 5. Customer Welcome Email on Sign-Up
  */
-async function sendWelcomeEmail({ toEmail, customerName, coins = 100 }) {
+async function sendWelcomeEmail({ toEmail, customerName }) {
   if (!toEmail) return { success: false };
 
-  const subject = `✨ Welcome to Vanvi Moments! +${coins} Free Coins & 20% OFF Inside 🪙`;
+  const subject = '✨ Welcome to Vanvi Moments!';
   const html = `
 <!DOCTYPE html>
 <html>
@@ -420,28 +428,6 @@ async function sendWelcomeEmail({ toEmail, customerName, coins = 100 }) {
       <td style="font-size:15px; color:#2c1224; line-height:1.6; padding-top:20px;">
         Hello <strong>${customerName || 'Celebrator'}</strong>,<br/><br/>
         Welcome to India’s most heartfelt emotional surprise celebration studio! We are overjoyed to welcome you to our community of creators, lovers, and memory makers.
-      </td>
-    </tr>
-    <tr>
-      <td style="padding:16px 0;">
-        <table width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td style="background:#fffbeb; border:1px solid #fde68a; border-radius:16px; padding:18px; text-align:center;">
-              <span style="font-size:32px;">🪙</span><br/>
-              <strong style="color:#b45309; font-size:18px;">+${coins} Vanvi Coins Added!</strong>
-              <p style="margin:6px 0 0 0; font-size:13px; color:#78526d;">Redeemable for up to 40% instant discount on any interactive celebration experience.</p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td style="padding-bottom:16px;">
-        <div style="background:#fdf2f8; border:1.5px dashed #f472b6; border-radius:16px; padding:16px; text-align:center;">
-          <span style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#9d174d; font-weight:800;">Exclusive Welcome Gift Voucher</span><br/>
-          <strong style="color:#be185d; font-size:22px; letter-spacing:2px; font-family:monospace;">CELEBRATE20</strong>
-          <p style="margin:4px 0 0 0; font-size:12.5px; color:#831843;">Apply at checkout for <strong>20% OFF</strong> on any celebration template!</p>
-        </div>
       </td>
     </tr>
     <tr>
@@ -462,7 +448,7 @@ async function sendWelcomeEmail({ toEmail, customerName, coins = 100 }) {
 </html>
   `.trim();
 
-  const text = `Welcome to Vanvi Moments, ${customerName}!\n\nWe have credited +${coins} Vanvi Coins to your account.\nPlus, use promo code CELEBRATE20 at checkout for 20% OFF on any celebration template!\nExplore templates: ${PUBLIC_SITE_URL}/templates.html\n\nWarm regards,\nVanvi Moments Studio`;
+  const text = `Welcome to Vanvi Moments, ${customerName}!\n\nYour account is ready. Explore templates: ${PUBLIC_SITE_URL}/templates.html\n\nWarm regards,\nVanvi Moments Studio`;
 
   return await sendRawEmail({ to: toEmail, subject, html, text });
 }
@@ -472,6 +458,13 @@ async function sendWelcomeEmail({ toEmail, customerName, coins = 100 }) {
  */
 async function sendPasswordResetOtp({ toEmail, customerName, otp, resetRef }) {
   if (!toEmail) return { success: false, error: 'Recipient email required' };
+  if (!isEmailConfigured) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(`[AUTH-DEV] Password Reset OTP for ${toEmail}: ${otp} (Ref: ${resetRef})`);
+      return { success: true, provider: 'simulation', devOtp: otp };
+    }
+    return { success: false, provider: 'unconfigured', error: 'Password reset email delivery is not configured.' };
+  }
 
   const subject = `🔐 Your Vanvi Moments Password Reset Code: ${otp}`;
   const html = `

@@ -95,7 +95,7 @@ check('templates.html has clean navigation without unwanted back button', !templ
 
 const plansHtml = fs.readFileSync('plans.html', 'utf8');
 check('plans.html includes vanvi-i18n.js', plansHtml.includes('src="js/vanvi-i18n.js"'));
-check('plans.html has smart back button', plansHtml.includes('if (history.length > 1) { history.back(); return false; }'));
+check('plans.html has smart back button', plansHtml.includes('class="vanvi-btn-back"') && plansHtml.includes('onclick="safeGoBack()"'));
 
 const builderHtml = fs.readFileSync('builder.html', 'utf8');
 check('builder.html includes vanvi-i18n.js', builderHtml.includes('src="js/vanvi-i18n.js"'));
@@ -163,4 +163,3 @@ async function runServerTests() {
 }
 
 runServerTests();
-

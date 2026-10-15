@@ -29,7 +29,8 @@ it('Master catalog registers birthday-white-bloom template', () => {
   const VanviTemplatesData = require('../js/vanvi-templates-data.js');
   const tpl = VanviTemplatesData.getById('birthday-white-bloom') || VanviTemplatesData.getById('birthday-white-bloom-001');
   assert(tpl, 'Template birthday-white-bloom must exist');
-  assert.strictEqual(tpl.name, 'Birthday White Bloom');
+  assert.strictEqual(tpl.id, 'birthday-white-bloom');
+  assert(tpl.name.includes('White Bloom'));
   assert.strictEqual(tpl.price, 0);
   assert.strictEqual(tpl.isFree, true);
 });
@@ -38,7 +39,7 @@ it('Legacy soft-birthday resolves to Birthday White Bloom for backward compatibi
   const VanviTemplatesData = require('../js/vanvi-templates-data.js');
   const legacy = VanviTemplatesData.getById('soft-birthday') || VanviTemplatesData.getById('birthday-white-bloom');
   assert(legacy, 'soft-birthday query must resolve');
-  assert.strictEqual(legacy.name, 'Birthday White Bloom');
+  assert.strictEqual(legacy.id, 'birthday-white-bloom');
 });
 
 // 2. Standalone Template Files

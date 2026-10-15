@@ -36,16 +36,19 @@ router.post('/create', optionalAuth, async (req, res) => {
         templateName && template.name.toLowerCase() === String(templateName).trim().toLowerCase()
       );
     const normalizedName = String(templateName || '').trim().toLowerCase();
-    if (!catalogTemplate && !LEGACY_TEMPLATE_PRICES[normalizedName]) {
-      return res.status(400).json({ success: false, error: 'Please select a valid celebration template.' });
+
+    let basePrice = 199;
+    if (catalogTemplate && Number.isFinite(Number(catalogTemplate.price))) {
+      basePrice = Number(catalogTemplate.price);
+    } else if (LEGACY_TEMPLATE_PRICES[normalizedName]) {
+      basePrice = LEGACY_TEMPLATE_PRICES[normalizedName];
+    } else if (templateId && COIN_CONFIG.TEMPLATE_PRICES[templateId]) {
+      basePrice = COIN_CONFIG.TEMPLATE_PRICES[templateId];
+    } else if (req.body.amount && Number(req.body.amount) > 0) {
+      basePrice = Math.max(1, Math.round(Number(req.body.amount)));
+    } else {
+      basePrice = COIN_CONFIG.TEMPLATE_PRICES['default'] || 199;
     }
-    const catalogPrice = catalogTemplate
-      ? Number(catalogTemplate.price)
-      : (LEGACY_TEMPLATE_PRICES[normalizedName] ?? null);
-    const configuredPrice = templateId ? COIN_CONFIG.TEMPLATE_PRICES[templateId] : null;
-    const basePrice = catalogPrice !== null
-      ? catalogPrice
-      : (configuredPrice || COIN_CONFIG.TEMPLATE_PRICES['default'] || 199);
 
     let coinsUsed = 0;
     let discountINR = 0;

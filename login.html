@@ -14,9 +14,6 @@
   <link rel="stylesheet" href="vanvi-navigation.css" />
   <link rel="stylesheet" href="css/vanvi-global-experience.css" />
 
-  <!-- Google Identity Services Official Client -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-
   <style>
     :root {
       --clay-bg-grad: radial-gradient(circle at 50% 25%, #f3ebff 0%, #e2d4fd 50%, #ccb8f6 100%);
@@ -439,6 +436,30 @@
       font-size: 16px;
       animation: confettiBurst 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
     }
+    .clay-phone-card,
+    .clay-mode-switch-wrap { max-width: 400px; }
+    .clay-phone-card { width: min(100%, 400px); }
+    .clay-inner-card { padding: 16px; }
+    .clay-field-row { margin-bottom: 10px; }
+    .clay-pill-input-box { height: 44px; min-width: 0; }
+    .clay-btn-main { height: 46px; font-size: 14px; }
+    #gsiButtonContainer.google-signin-status {
+      width: min(100%, 320px);
+      min-height: 0;
+      margin: 0 auto;
+      padding: 8px 10px;
+      border: 1px solid #e9d5ff;
+      border-radius: 12px;
+      background: #faf5ff;
+      color: #6b4f85;
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.45;
+      text-align: center;
+    }
+    @media (max-height: 700px) {
+      body { justify-content: flex-start; padding-top: 46px; padding-bottom: 24px; }
+    }
     @keyframes confettiBurst {
       0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
       100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2) rotate(var(--dr)); }
@@ -472,7 +493,7 @@
       <a href="signup.html" class="clay-mode-tab">
         <span>✨</span>
         <span>Sign Up</span>
-        <span class="clay-coins-tag">+100 🪙</span>
+        <span class="clay-coins-tag">Free account</span>
       </a>
     </nav>
   </div>
@@ -526,7 +547,7 @@
         <!-- Auxiliary Links: Remember me & Forgot Password -->
         <div class="clay-aux-links">
           <label class="clay-remember-wrap">
-            <input type="checkbox" id="rememberMe" checked />
+            <input type="checkbox" id="rememberMe" />
             <span>Remember</span>
           </label>
           <a class="clay-forgot-link" href="forgot-password.html">Forgot Password?</a>
@@ -554,14 +575,14 @@
 
       <!-- Bottom Switch Link -->
       <p class="clay-footer-link">
-        Don't have an account? <a href="signup.html">Sign Up (+100 🪙)</a>
+        Don't have an account? <a href="signup.html">Create an account</a>
       </p>
     </section>
   </main>
 
   <!-- Central Client API, Google Auth & Navigation Scripts -->
-  <script src="js/vanvi-api.js"></script>
-  <script src="js/vanvi-google-auth.js"></script>
+  <script src="js/vanvi-api.js?v=auth-zero-coins"></script>
+  <script src="js/vanvi-google-auth.js?v=google-public-config"></script>
   <script src="js/vanvi-i18n.js"></script>
 
   <script>
@@ -588,11 +609,16 @@
       const btnText = document.getElementById('loginBtnText');
 
       try {
-        const remembered = localStorage.getItem('vanvi_remember_identifier') || localStorage.getItem('vanvi_last_email');
-        if (remembered) {
+        const remembered = localStorage.getItem('vanvi_remember_identifier');
+        const shouldRemember = localStorage.getItem('vanvi_remember_me') === 'true';
+        if (remembered && shouldRemember) {
           emailInput.value = remembered;
           if (rememberCheckbox) rememberCheckbox.checked = true;
+        } else {
+          localStorage.removeItem('vanvi_remember_identifier');
+          localStorage.removeItem('vanvi_remember_me');
         }
+        localStorage.removeItem('vanvi_last_email');
       } catch (e) {}
 
       const urlParams = new URLSearchParams(window.location.search);

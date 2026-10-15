@@ -283,13 +283,13 @@ const { testConnection } = require('../server/db/database');
     email: testEmail,
     passwordHash: 'hash_test',
     salt: 'salt_test',
-    coins: 100
+    coins: 0
   });
   assert.ok(user.id, 'User must be created with unique ID');
 
   // Step B: Verify Coin Ledger
   const balance = await CoinLedger.getBalance(user.id);
-  assert.strictEqual(balance, 100, 'Welcome bonus must be 100 coins');
+  assert.strictEqual(balance, 0, 'New users must start with zero coins');
 
   // Step C: Create Draft Moment
   const draft = await Moments.create({
@@ -310,6 +310,15 @@ const { testConnection } = require('../server/db/database');
   assert.strictEqual(draft.status, 'draft', 'Initial moment status must be draft');
 
   // Step D: Checkout Order Creation with Coin Redemption
+  // Grant test-earned coins explicitly before exercising coin redemption.
+  await CoinLedger.create({
+    userId: user.id,
+    type: 'credit',
+    amount: 100,
+    reason: 'QA fixture: earned coins for checkout test',
+    refId: `qa-earned-${Date.now()}`
+  });
+
   // 100 coins = ₹10 discount on ₹199 template -> ₹189
   const order = await Orders.create({
     userId: user.id,
@@ -362,8 +371,18 @@ const { testConnection } = require('../server/db/database');
     // 1. Check viewport meta tag
     assert.ok(htmlContent.includes('<meta content="width=device-width') || htmlContent.includes('<meta name="viewport" content="width=device-width'), `${file} must include responsive viewport meta`);
 
-    // 2. Check overflow-x hidden
-    assert.ok(htmlContent.includes('overflow-x: hidden'), `${file} must enforce overflow-x: hidden`);
+    // 2. Check inline and linked styles for horizontal overflow containment.
+    const cssContents = [...htmlContent.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)]
+      .map(match => match[1]);
+    cssContents.push(...[...htmlContent.matchAll(/\bstyle=["']([^"']*)["']/gi)].map(match => match[1]));
+    const stylesheetLinks = [...htmlContent.matchAll(/<link\b[^>]*href=["']([^"']+\.css(?:\?[^"']*)?)["'][^>]*>/gi)]
+      .map(match => match[1])
+      .filter(href => !/^https?:\/\//i.test(href));
+    stylesheetLinks.forEach(href => {
+      const cssPath = path.resolve(projectRoot, href.replace(/^[/\\]+/, '').split('?')[0]);
+      if (fs.existsSync(cssPath)) cssContents.push(fs.readFileSync(cssPath, 'utf8'));
+    });
+    assert.ok(cssContents.some(css => /overflow-x\s*:\s*(hidden|clip)\b/i.test(css)), `${file} must enforce horizontal overflow containment`);
 
     passedPages++;
   });

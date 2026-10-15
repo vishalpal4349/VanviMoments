@@ -72,8 +72,8 @@ const COIN_CONFIG = {
     { title: "Positive Vibes ✨", message: "May your day be filled with laughter, love, and sweet celebration memories! 🌸" }
   ],
 
-  // Welcome bonus for new signups
-  WELCOME_BONUS_COINS: 100,
+  // New accounts start at zero; coins are earned through explicit rewards.
+  WELCOME_BONUS_COINS: 0,
 
   // Standard template prices (INR)
   TEMPLATE_PRICES: {
@@ -242,4 +242,3 @@ module.exports = {
   pickRandomLuckyMomentReward,
   getRandomZeroCoinMessage
 };
-

@@ -57,6 +57,15 @@
     });
   }
 
+  function syncWalletCache(user) {
+    localStorage.setItem('vanvi_user_coins', Math.max(0, Number(user && user.coins) || 0));
+    localStorage.setItem('vanvi_template_credits', Math.max(0, Number(user && user.templateCredits) || 0));
+    if (user && user.activePass) localStorage.setItem('vanvi_active_pass', user.activePass);
+    else localStorage.removeItem('vanvi_active_pass');
+    if (user && user.passExpiry) localStorage.setItem('vanvi_pass_expiry', user.passExpiry);
+    else localStorage.removeItem('vanvi_pass_expiry');
+  }
+
   async function request(endpoint, options = {}) {
     let url = `${API_BASE}${endpoint}`;
     const headers = {
@@ -161,9 +170,7 @@
           cachedUser = res.user;
           localStorage.setItem(STORAGE_KEY_TOKEN, res.token);
           localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(res.user));
-          if (res.user.coins) {
-            localStorage.setItem('vanvi_user_coins', res.user.coins);
-          }
+          syncWalletCache(res.user);
           notifyAuth();
         }
         return res;
@@ -181,9 +188,7 @@
           cachedUser = res.user;
           localStorage.setItem(STORAGE_KEY_TOKEN, res.token);
           localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(res.user));
-          if (res.user.coins) {
-            localStorage.setItem('vanvi_user_coins', res.user.coins);
-          }
+          syncWalletCache(res.user);
           notifyAuth();
         }
         return res;
@@ -200,9 +205,7 @@
           cachedUser = res.user;
           localStorage.setItem(STORAGE_KEY_TOKEN, res.token);
           localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(res.user));
-          if (res.user.coins) {
-            localStorage.setItem('vanvi_user_coins', res.user.coins);
-          }
+          syncWalletCache(res.user);
           notifyAuth();
         }
         return res;
@@ -238,6 +241,10 @@
         cachedUser = null;
         localStorage.removeItem(STORAGE_KEY_TOKEN);
         localStorage.removeItem(STORAGE_KEY_USER);
+        localStorage.removeItem('vanvi_user_coins');
+        localStorage.removeItem('vanvi_template_credits');
+        localStorage.removeItem('vanvi_active_pass');
+        localStorage.removeItem('vanvi_pass_expiry');
         notifyAuth();
         return { success: true };
       }
@@ -326,14 +333,16 @@
           return res;
         }
 
-        // Fallback
-        const coins = parseInt(localStorage.getItem('vanvi_user_coins') || '120', 10);
+        const cachedCoins = Number(cachedUser && cachedUser.coins);
+        const coins = Number.isFinite(cachedCoins) ? Math.max(0, cachedCoins) : 0;
         return {
-          success: true,
+          success: false,
+          offline: true,
+          error: res.error || 'Unable to refresh your coin balance.',
           coins,
           rupeeValue: (coins / 10).toFixed(2),
-          canSpin: true,
-          nextSpinInHours: 0,
+          canSpin: false,
+          nextSpinInHours: null,
           ledger: []
         };
       },
@@ -839,4 +848,3 @@
   window.VanviAPI = VanviAPI;
 
 })(window);
-

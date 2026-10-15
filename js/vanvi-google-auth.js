@@ -6,15 +6,42 @@
 (function(window) {
   'use strict';
 
-  const GOOGLE_CLIENT_ID = window.VANVI_GOOGLE_CLIENT_ID ||
+  const fallbackGoogleClientId = window.VANVI_GOOGLE_CLIENT_ID ||
     localStorage.getItem('vanvi_google_client_id') ||
     '';
+  let GOOGLE_CLIENT_ID = '';
+  let googleClientIdPromise = null;
+  let googleScriptPromise = null;
+  let googleInitialized = false;
 
-  function showGoogleUnavailable() {
+  function showGoogleUnavailable(message = 'Google sign-in is not configured. Add GOOGLE_CLIENT_ID in server settings to enable it.') {
     const container = document.getElementById('gsiButtonContainer');
     if (!container) return;
-    container.textContent = 'Google sign-in is unavailable until configured.';
+    container.textContent = message;
     container.setAttribute('role', 'status');
+    container.classList.add('google-signin-status');
+  }
+
+  async function resolveGoogleClientId() {
+    if (GOOGLE_CLIENT_ID) return GOOGLE_CLIENT_ID;
+    if (!googleClientIdPromise) {
+      googleClientIdPromise = fetch('/api/config/public', { cache: 'no-store' })
+        .then(response => {
+          if (!response.ok) throw new Error(`Public config returned ${response.status}`);
+          return response.json();
+        })
+        .then(config => {
+          const serverClientId = typeof config.googleClientId === 'string' ? config.googleClientId.trim() : '';
+          GOOGLE_CLIENT_ID = serverClientId || fallbackGoogleClientId;
+          return GOOGLE_CLIENT_ID;
+        })
+        .catch(error => {
+          console.warn('[Google Auth] Could not load public OAuth configuration:', error.message);
+          GOOGLE_CLIENT_ID = fallbackGoogleClientId;
+          return fallbackGoogleClientId;
+        });
+    }
+    return googleClientIdPromise;
   }
 
   // Decode JWT payload safely
@@ -120,37 +147,40 @@
   }
 
   // Load Google Identity Services script
-  function loadGoogleIdentityScript() {
-    if (!GOOGLE_CLIENT_ID) {
+  async function loadGoogleIdentityScript() {
+    if (!await resolveGoogleClientId()) {
       showGoogleUnavailable();
-      return;
+      return false;
     }
-    if (document.getElementById('google-jssdk')) {
+
+    if (window.google?.accounts?.id) {
       initGoogleOneTap();
-      return;
+      return true;
     }
-    const script = document.createElement('script');
-    script.id = 'google-jssdk';
-    script.src = 'https://accounts.google.com/gsi/client';
-    script.async = true;
-    script.defer = true;
-    script.onload = () => {
-      initGoogleOneTap();
-      // Auto mount into container if present
-      const container = document.getElementById('gsiButtonContainer');
-      if (container) {
-        window.VanviGoogleAuth.renderButton('gsiButtonContainer');
-      }
-    };
-    document.head.appendChild(script);
+
+    if (!googleScriptPromise) {
+      googleScriptPromise = new Promise(resolve => {
+        const script = document.createElement('script');
+        script.id = 'google-jssdk';
+        script.src = 'https://accounts.google.com/gsi/client';
+        script.async = true;
+        script.defer = true;
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.head.appendChild(script);
+      });
+    }
+    const loaded = await googleScriptPromise;
+    if (!loaded || !window.google?.accounts?.id) {
+      showGoogleUnavailable('Google sign-in could not load. Check the connection and OAuth configuration.');
+      return false;
+    }
+    initGoogleOneTap();
+    return true;
   }
 
   function initGoogleOneTap() {
-    if (!GOOGLE_CLIENT_ID) {
-      showGoogleUnavailable();
-      return;
-    }
-    if (!window.google || !window.google.accounts || !window.google.accounts.id) return;
+    if (!GOOGLE_CLIENT_ID || !window.google?.accounts?.id || googleInitialized) return;
     try {
       window.google.accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
@@ -173,6 +203,7 @@
         auto_select: false,
         cancel_on_tap_outside: true
       });
+      googleInitialized = true;
     } catch (e) {
       console.warn('Google Identity initialization notice:', e.message);
     }
@@ -184,19 +215,12 @@
       return Boolean(GOOGLE_CLIENT_ID);
     },
 
-    init() {
-      loadGoogleIdentityScript();
+    async init() {
+      await loadGoogleIdentityScript();
     },
 
-    renderButton(targetElementId, options = {}) {
-      if (!GOOGLE_CLIENT_ID) {
-        showGoogleUnavailable();
-        return;
-      }
-      if (!window.google || !window.google.accounts || !window.google.accounts.id) {
-        setTimeout(() => this.renderButton(targetElementId, options), 300);
-        return;
-      }
+    async renderButton(targetElementId, options = {}) {
+      if (!await loadGoogleIdentityScript()) return;
       const el = document.getElementById(targetElementId);
       if (!el) return;
 
@@ -216,11 +240,9 @@
       }
     },
 
-    signIn(options = {}) {
-      if (!GOOGLE_CLIENT_ID) {
-        if (options.onError) {
-          options.onError(new Error('Google sign-in is not configured yet.'));
-        }
+    async signIn(options = {}) {
+      if (!await loadGoogleIdentityScript()) {
+        if (options.onError) options.onError(new Error('Google sign-in is not configured yet.'));
         return;
       }
       if (window.google && window.google.accounts && window.google.accounts.id) {

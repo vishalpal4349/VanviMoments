@@ -54,7 +54,7 @@ server.listen(PORT, async () => {
       body: { name: 'Rahul Sharma', email: testEmail, password: 'securePassword2026' }
     });
     check('Successful user signup (201)', signup.status === 201 && signup.data.success);
-    check('Received JWT token and 100 welcome coins', signup.data.token && signup.data.user.coins === 100);
+    check('Received JWT token and zero welcome coins', signup.data.token && signup.data.user.coins === 0);
 
     const token = signup.data.token;
 
@@ -84,7 +84,7 @@ server.listen(PORT, async () => {
 
     // 7. Coin Balance & Fortune Wheel Spin
     const coinBal = await api('/api/coins/balance', { token });
-    check('Coin balance endpoint returns 100 coins', coinBal.status === 200 && coinBal.data.coins === 100);
+    check('Coin balance endpoint returns zero coins for a new user', coinBal.status === 200 && coinBal.data.coins === 0);
 
     const spin = await api('/api/coins/spin', { method: 'POST', token });
     check('Daily spin awards bonus coins', spin.status === 200 && spin.data.wonCoins >= 0);
@@ -140,7 +140,7 @@ server.listen(PORT, async () => {
       method: 'POST',
       token,
       body: {
-        templateName: 'Midnight Wish 3D',
+        templateName: 'Midnight Wish 3D Cinema',
         applyCoins: true
       }
     });
@@ -188,4 +188,3 @@ server.listen(PORT, async () => {
     server.close(() => process.exit(1));
   }
 });
-

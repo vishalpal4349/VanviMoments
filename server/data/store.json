@@ -51,10 +51,36 @@
       "coins": 10500,
       "lastSpinTime": 0,
       "createdAt": 1789677477492,
-      "updatedAt": 1791883516967,
-      "lastLogin": 1791883516967,
+      "updatedAt": 1792079760622,
+      "lastLogin": 1792079760621,
       "googleId": "g_1791883516652",
-      "provider": "google"
+      "provider": "google",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 3,
+      "loginHistory": [
+        {
+          "timestamp": 1792079760621,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "google",
+          "status": "success"
+        },
+        {
+          "timestamp": 1792079542965,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "google",
+          "status": "success"
+        },
+        {
+          "timestamp": 1792079310480,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "google",
+          "status": "success"
+        }
+      ]
     },
     {
       "id": "usr_d83345e459a83e4a",
@@ -25064,6 +25090,671 @@
       "lastLogin": 1791916424267,
       "createdAt": 1791916424267,
       "updatedAt": 1791916424320
+    },
+    {
+      "id": "usr_46917e96c92e9f47",
+      "name": "Audit User",
+      "email": "test_audit_1792078505247@gmail.com",
+      "phone": "2078505247",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "df8c78822cd1e2a45796ff788995fea81a13cfaf69449819eef020ce7791cf7073ad49f8750b20fef57cdd32fff7df61728586cf19ed783a29fba21353440ee5",
+      "salt": "f7fb77b2be073179ef65306d8009b4de",
+      "role": "user",
+      "tier": "free",
+      "coins": 100,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "127.0.0.1",
+      "signupUa": "Browser Client",
+      "lastLoginIp": "127.0.0.1",
+      "lastLoginUa": "Browser Client",
+      "loginCount": 2,
+      "loginHistory": [
+        {
+          "timestamp": 1792078506828,
+          "ip": "127.0.0.1",
+          "ua": "Browser Client",
+          "provider": "local",
+          "status": "success"
+        },
+        {
+          "timestamp": 1792078505693,
+          "ip": "127.0.0.1",
+          "ua": "Browser Client",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792078506828,
+      "createdAt": 1792078505699,
+      "updatedAt": 1792078506828
+    },
+    {
+      "id": "usr_6fc7472013a11eed",
+      "name": "Rahul Sharma",
+      "email": "test_1792079290658@vanvimoments.com",
+      "phone": "2079290658",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "e01e02c747c3df686032c2eaa85ce9410fef6f21a9b5c32e4f05ed8fb2567a00f22511cb2152aae8db777bcbf6454f6c75a9ff9484a3b95e7fd2e4c5c882a789",
+      "salt": "6573dd5518ade47c29a1e38aff54654a",
+      "role": "user",
+      "tier": "free",
+      "coins": 0,
+      "lastSpinTime": 1792079291000,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "node",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 2,
+      "loginHistory": [
+        {
+          "timestamp": 1792079290874,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        },
+        {
+          "timestamp": 1792079290719,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079290874,
+      "createdAt": 1792079290719,
+      "updatedAt": 1792079291198
+    },
+    {
+      "id": "usr_e36065b2f7b3b08c",
+      "name": "Priya Sharma",
+      "email": "xss_test_1792079298640@vanvimoments.com",
+      "phone": "2079298640",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "636d1e4cd1de08cc8cb82930e53f20739ff26f2b26fd3ecce558c696fbc6336c454803e9ea29a472e52ca070e9a555b90f97357016927d5ea1de0f73d1eccfee",
+      "salt": "23b73eef70f095e31e8783685a21858f",
+      "role": "user",
+      "tier": "member",
+      "coins": 400,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "node",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 1,
+      "loginHistory": [
+        {
+          "timestamp": 1792079298688,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079298688,
+      "createdAt": 1792079298688,
+      "updatedAt": 1792079310844
+    },
+    {
+      "id": "usr_2f8af4bf0896a456",
+      "name": "Pooja Sharma",
+      "email": "plantest_1792079316172@vanvimoments.com",
+      "phone": "2079316172",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "4263661ea88ae452beb9ed566840bed06f94c3d31f2739cff8b1d9a8e3364a232cbb55e42bfc9679062c416043702af69feb02af97adba8ecbe072c1845264b3",
+      "salt": "cffe48e15d3a3ddccb031cd7c8f826bf",
+      "role": "user",
+      "tier": "member",
+      "coins": 500,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "node",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 1,
+      "loginHistory": [
+        {
+          "timestamp": 1792079316209,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079316209,
+      "createdAt": 1792079316209,
+      "updatedAt": 1792079326488
+    },
+    {
+      "id": "usr_457cb3161e358d31",
+      "name": "Vanvi Roy",
+      "email": "e2e_user_1792079357050@vanvimoments.com",
+      "phone": null,
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "hash_test",
+      "salt": "salt_test",
+      "role": "user",
+      "tier": "free",
+      "coins": 0,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": null,
+      "signupUa": null,
+      "lastLoginIp": null,
+      "lastLoginUa": null,
+      "loginCount": 1,
+      "loginHistory": [],
+      "lastLogin": 1792079357051,
+      "createdAt": 1792079357051,
+      "updatedAt": 1792079357587
+    },
+    {
+      "id": "usr_9aa5929cc367d813",
+      "name": "Rahul Sharma",
+      "email": "test_1792079499767@vanvimoments.com",
+      "phone": "2079499767",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "a2588945d8205420b4646677b3f254d30f5acd8828000b5e44b75ac22abc8ef366cabcafb71b35a2b094e5a7d1bd35c9331e66d00f6c3b0bf44351eaf61f812f",
+      "salt": "8f4e12790d4c0e987fff541d2ba74be6",
+      "role": "user",
+      "tier": "free",
+      "coins": 0,
+      "lastSpinTime": 1792079500369,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "node",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 2,
+      "loginHistory": [
+        {
+          "timestamp": 1792079500144,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        },
+        {
+          "timestamp": 1792079499822,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079500144,
+      "createdAt": 1792079499822,
+      "updatedAt": 1792079511245
+    },
+    {
+      "id": "usr_d0476e78c01cdc90",
+      "name": "Priya Sharma",
+      "email": "xss_test_1792079512831@vanvimoments.com",
+      "phone": "2079512831",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "decc01f5f6de611f3899ae9981924cbe912fe017d40749ad48855c5796def5f321d575578338d4ed940d422782acf75fd699a3ebc3b5c15a32ce7cce53be3ced",
+      "salt": "ea07dfff312b77cc2405fd0f2edbf94e",
+      "role": "user",
+      "tier": "member",
+      "coins": 400,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "node",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 1,
+      "loginHistory": [
+        {
+          "timestamp": 1792079512890,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079512891,
+      "createdAt": 1792079512891,
+      "updatedAt": 1792079544230
+    },
+    {
+      "id": "usr_fd6e613efc688c10",
+      "name": "Pooja Sharma",
+      "email": "plantest_1792079555410@vanvimoments.com",
+      "phone": "2079555410",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "66f8b2558584d4c7c9fa757aa4bbcb9adf4e27e1efc4d44db4e80d6c008c9a3fab00604b4592126cf4945f524727865c8b69659f0e912f26edb24b087e5a66b4",
+      "salt": "09a85becc1709a9cc39a818239f71a03",
+      "role": "user",
+      "tier": "member",
+      "coins": 500,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "node",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 1,
+      "loginHistory": [
+        {
+          "timestamp": 1792079555452,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079555453,
+      "createdAt": 1792079555453,
+      "updatedAt": 1792079559612
+    },
+    {
+      "id": "usr_20fefa3f225051f6",
+      "name": "Vanvi Roy",
+      "email": "e2e_user_1792079612124@vanvimoments.com",
+      "phone": null,
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "hash_test",
+      "salt": "salt_test",
+      "role": "user",
+      "tier": "free",
+      "coins": 0,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": null,
+      "signupUa": null,
+      "lastLoginIp": null,
+      "lastLoginUa": null,
+      "loginCount": 1,
+      "loginHistory": [],
+      "lastLogin": 1792079612125,
+      "createdAt": 1792079612125,
+      "updatedAt": 1792079613720
+    },
+    {
+      "id": "usr_883eab8863f586f0",
+      "name": "Rahul Sharma",
+      "email": "test_1792079707993@vanvimoments.com",
+      "phone": "2079707993",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "eba57268b481376ec0ab0ea7e1f13a77e32ac3eb03909bc7e4c3870f9bf05c86ca6233cc504a59075cd4281dc214d86414deafd361b6da26adbc07bbe94381a3",
+      "salt": "f3a6ec6512bccad0d9a34f895091ffee",
+      "role": "user",
+      "tier": "free",
+      "coins": 0,
+      "lastSpinTime": 1792079708585,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "node",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 2,
+      "loginHistory": [
+        {
+          "timestamp": 1792079708342,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        },
+        {
+          "timestamp": 1792079708044,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079708342,
+      "createdAt": 1792079708044,
+      "updatedAt": 1792079715920
+    },
+    {
+      "id": "usr_80336b36fb683a96",
+      "name": "Priya Sharma",
+      "email": "xss_test_1792079717087@vanvimoments.com",
+      "phone": "2079717087",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "535722f84e129594f037ceb639ac43faafb7ed4aca85d92d4f8880ed917b263c35d803938049f40dc903a96134983c440f946e8b465f5a9461f48a0ff9df27b8",
+      "salt": "478a08e7082a99b26ac855d35e74a919",
+      "role": "user",
+      "tier": "member",
+      "coins": 400,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "node",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 1,
+      "loginHistory": [
+        {
+          "timestamp": 1792079717148,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079717149,
+      "createdAt": 1792079717149,
+      "updatedAt": 1792079761781
+    },
+    {
+      "id": "usr_319cbc9f26255f1f",
+      "name": "Pooja Sharma",
+      "email": "plantest_1792079763616@vanvimoments.com",
+      "phone": "2079763616",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "baab16880638a2326ee44739ac2c272f6ac0f051fffa4bdbe74d6fe6282afd935e2305d3e98727982fd1c26bcc0fe728c7e7dccd608318b8bfd8ba55f9f1e4cc",
+      "salt": "d1c346415b5ddb352008935cb662522c",
+      "role": "user",
+      "tier": "member",
+      "coins": 500,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "node",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 1,
+      "loginHistory": [
+        {
+          "timestamp": 1792079763660,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079763661,
+      "createdAt": 1792079763661,
+      "updatedAt": 1792079764518
+    },
+    {
+      "id": "usr_dd7d64c3d18f1333",
+      "name": "Vanvi Roy",
+      "email": "e2e_user_1792079834985@vanvimoments.com",
+      "phone": null,
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "hash_test",
+      "salt": "salt_test",
+      "role": "user",
+      "tier": "free",
+      "coins": 0,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": null,
+      "signupUa": null,
+      "lastLoginIp": null,
+      "lastLoginUa": null,
+      "loginCount": 1,
+      "loginHistory": [],
+      "lastLogin": 1792079834986,
+      "createdAt": 1792079834986,
+      "updatedAt": 1792079836123
+    },
+    {
+      "id": "usr_8e0116bef4419e26",
+      "name": "Audit User",
+      "email": "test_audit_1792079957755@gmail.com",
+      "phone": "2079957755",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "d371867d6a95a791e4c35debf2ecd7e78903114204c94491e9fc5cf8817e2afe5d9609992b7a3ce6e28bda6e561e95256aa2256dc92367ac76f1d80aa7f42879",
+      "salt": "76255a4d5788d6193ef1700ea57b78df",
+      "role": "user",
+      "tier": "free",
+      "coins": 0,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "127.0.0.1",
+      "signupUa": "Browser Client",
+      "lastLoginIp": "127.0.0.1",
+      "lastLoginUa": "Browser Client",
+      "loginCount": 2,
+      "loginHistory": [
+        {
+          "timestamp": 1792079958211,
+          "ip": "127.0.0.1",
+          "ua": "Browser Client",
+          "provider": "local",
+          "status": "success"
+        },
+        {
+          "timestamp": 1792079957871,
+          "ip": "127.0.0.1",
+          "ua": "Browser Client",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079958211,
+      "createdAt": 1792079957871,
+      "updatedAt": 1792079958212
+    },
+    {
+      "id": "usr_7bc58d3b7a4ceffe",
+      "name": "Pooja Sharma",
+      "email": "plantest_1792079959539@vanvimoments.com",
+      "phone": "2079959539",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "bb5146f25e1d4498ffe61bb59fe4326c97da3b89e7264023458b1a5d35184bb0dbab7aff11f39bf5bf31c802754c96a45d2cf6383f09a02e6a49a63e63dfd41d",
+      "salt": "051c706d08324e562f0edf8f0b95a3aa",
+      "role": "user",
+      "tier": "member",
+      "coins": 500,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "::1",
+      "signupUa": "node",
+      "lastLoginIp": "::1",
+      "lastLoginUa": "node",
+      "loginCount": 1,
+      "loginHistory": [
+        {
+          "timestamp": 1792079959581,
+          "ip": "::1",
+          "ua": "node",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792079959581,
+      "createdAt": 1792079959581,
+      "updatedAt": 1792079960949
+    },
+    {
+      "id": "usr_ee64de8e340bb9a7",
+      "name": "Vanvi Roy",
+      "email": "e2e_user_1792080021824@vanvimoments.com",
+      "phone": null,
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "hash_test",
+      "salt": "salt_test",
+      "role": "user",
+      "tier": "free",
+      "coins": 0,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": null,
+      "signupUa": null,
+      "lastLoginIp": null,
+      "lastLoginUa": null,
+      "loginCount": 1,
+      "loginHistory": [],
+      "lastLogin": 1792080021825,
+      "createdAt": 1792080021825,
+      "updatedAt": 1792080022121
+    },
+    {
+      "id": "usr_c9741c7515871a4e",
+      "name": "Audit User",
+      "email": "test_audit_1792080049091@gmail.com",
+      "phone": "2080049091",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "698e360688923b1e8987a2a444c72944c337d0755fbe3c04314909d20a264cbc7fd06ed290cbe95014d1a211b353964e08b50ab0bfecfd453b9fc28feeefbc8b",
+      "salt": "d37a8c580be25b3b7c3f12686161b5bc",
+      "role": "user",
+      "tier": "free",
+      "coins": 0,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "127.0.0.1",
+      "signupUa": "Browser Client",
+      "lastLoginIp": "127.0.0.1",
+      "lastLoginUa": "Browser Client",
+      "loginCount": 2,
+      "loginHistory": [
+        {
+          "timestamp": 1792080049802,
+          "ip": "127.0.0.1",
+          "ua": "Browser Client",
+          "provider": "local",
+          "status": "success"
+        },
+        {
+          "timestamp": 1792080049288,
+          "ip": "127.0.0.1",
+          "ua": "Browser Client",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792080049802,
+      "createdAt": 1792080049294,
+      "updatedAt": 1792080049803
+    },
+    {
+      "id": "usr_3e19146c679b785a",
+      "name": "Audit User",
+      "email": "test_audit_1792080189669@gmail.com",
+      "phone": "2080189669",
+      "googleId": null,
+      "picture": null,
+      "provider": "local",
+      "passwordHash": "22030b18cd7754b181bcaf3f0c989397601d1432c43446a89430a8867b8aca5955900061ee2eaf3a1725a9013523fb1ec785320d96cf7c1bdbc4f1593499ec61",
+      "salt": "a16ba3a242ebaa837316ec1edea06d23",
+      "role": "user",
+      "tier": "free",
+      "coins": 0,
+      "lastSpinTime": 0,
+      "templateCredits": 0,
+      "activePass": null,
+      "passExpiry": null,
+      "status": "active",
+      "signupIp": "127.0.0.1",
+      "signupUa": "Browser Client",
+      "lastLoginIp": "127.0.0.1",
+      "lastLoginUa": "Browser Client",
+      "loginCount": 2,
+      "loginHistory": [
+        {
+          "timestamp": 1792080190222,
+          "ip": "127.0.0.1",
+          "ua": "Browser Client",
+          "provider": "local",
+          "status": "success"
+        },
+        {
+          "timestamp": 1792080189821,
+          "ip": "127.0.0.1",
+          "ua": "Browser Client",
+          "provider": "local",
+          "status": "success"
+        }
+      ],
+      "lastLogin": 1792080190222,
+      "createdAt": 1792080189822,
+      "updatedAt": 1792080190223
     }
   ],
   "moments": [
@@ -70339,6 +71030,325 @@
       "hearts": 0,
       "createdAt": 1791818119762,
       "updatedAt": 1791818119762
+    },
+    {
+      "id": "vm_befacc24e8673d6d",
+      "slug": "m_60672a08eb89",
+      "userId": "usr_6fc7472013a11eed",
+      "title": "Secret Birthday Surprise",
+      "recipient": "Vanvi",
+      "sender": "Rahul",
+      "occasion": "Birthday",
+      "message": "This is the private letter only visible after PIN entry!",
+      "photos": [
+        "https://example.com/photo1.jpg"
+      ],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "pin",
+      "pinHash": "b2078a54edd28f43e91de8084830d6857f225cd3f533e16ce2cbd347d4caafcc",
+      "pinHint": "Our special year",
+      "theme": "Velvet Rose",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "draft",
+      "views": 1,
+      "hearts": 1,
+      "createdAt": 1792079291272,
+      "updatedAt": 1792079291272
+    },
+    {
+      "id": "vm_4cfb5aee2444ad8f",
+      "slug": "m_2fc492717b23",
+      "userId": "usr_6fc7472013a11eed",
+      "title": "Midnight Wish 3D Cinema",
+      "recipient": "Sneha",
+      "sender": "Karan",
+      "occasion": "Love",
+      "message": "Forever and always.",
+      "photos": [],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "envelope",
+      "pinHash": null,
+      "pinHint": "",
+      "theme": "Velvet Rose",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "published",
+      "views": 0,
+      "hearts": 0,
+      "createdAt": 1792079298051,
+      "updatedAt": 1792079298051
+    },
+    {
+      "id": "vm_538e92cc510f5686",
+      "slug": "m_695e3ba420f4",
+      "userId": "usr_e36065b2f7b3b08c",
+      "title": "Admin Moderation Test Moment",
+      "recipient": "Rohan",
+      "sender": "Priya",
+      "occasion": "Anniversary",
+      "message": "Happy anniversary!",
+      "photos": [],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "envelope",
+      "pinHash": null,
+      "pinHint": "",
+      "theme": "Velvet Rose",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "revoked",
+      "views": 0,
+      "hearts": 0,
+      "createdAt": 1792079310711,
+      "updatedAt": 1792079310711,
+      "revokedAt": 1792079310743,
+      "revokedBy": "usr_admin_71c38392"
+    },
+    {
+      "id": "vm_d52da6b6632b5876",
+      "slug": "m_7642ad53a57b",
+      "userId": "usr_457cb3161e358d31",
+      "title": "Vanvi & Kabir Anniversary",
+      "recipient": "Kabir",
+      "sender": "Vanvi",
+      "occasion": "Anniversary",
+      "message": "Happy 5 years together! To forever and beyond.",
+      "photos": [
+        "/uploads/image_acb266321f6e0d9b075c9436560c871f.jpg"
+      ],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "pin",
+      "pinHash": "0bebfdeb6ac5ee71197da1e7ab9d231671f9e92fd314332bd7935fbf92e2fbec",
+      "pinHint": "Our special year",
+      "theme": "Golden Champagne",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "published",
+      "views": 0,
+      "hearts": 0,
+      "createdAt": 1792079357192,
+      "updatedAt": 1792079357499
+    },
+    {
+      "id": "vm_b3a5f05c1a278b85",
+      "slug": "m_6a8b3610903b",
+      "userId": "usr_9aa5929cc367d813",
+      "title": "Secret Birthday Surprise",
+      "recipient": "Vanvi",
+      "sender": "Rahul",
+      "occasion": "Birthday",
+      "message": "This is the private letter only visible after PIN entry!",
+      "photos": [
+        "https://example.com/photo1.jpg"
+      ],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "pin",
+      "pinHash": "b2078a54edd28f43e91de8084830d6857f225cd3f533e16ce2cbd347d4caafcc",
+      "pinHint": "Our special year",
+      "theme": "Velvet Rose",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "draft",
+      "views": 1,
+      "hearts": 1,
+      "createdAt": 1792079500538,
+      "updatedAt": 1792079500538
+    },
+    {
+      "id": "vm_e1711b8d68677bb2",
+      "slug": "m_2e798f1d3e28",
+      "userId": "usr_9aa5929cc367d813",
+      "title": "Midnight Wish 3D Cinema",
+      "recipient": "Sneha",
+      "sender": "Karan",
+      "occasion": "Love",
+      "message": "Forever and always.",
+      "photos": [],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "envelope",
+      "pinHash": null,
+      "pinHint": "",
+      "theme": "Velvet Rose",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "published",
+      "views": 0,
+      "hearts": 0,
+      "createdAt": 1792079511488,
+      "updatedAt": 1792079511488
+    },
+    {
+      "id": "vm_245d314b7a960743",
+      "slug": "m_76b7a9d1338b",
+      "userId": "usr_d0476e78c01cdc90",
+      "title": "Admin Moderation Test Moment",
+      "recipient": "Rohan",
+      "sender": "Priya",
+      "occasion": "Anniversary",
+      "message": "Happy anniversary!",
+      "photos": [],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "envelope",
+      "pinHash": null,
+      "pinHint": "",
+      "theme": "Velvet Rose",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "revoked",
+      "views": 0,
+      "hearts": 0,
+      "createdAt": 1792079543894,
+      "updatedAt": 1792079543894,
+      "revokedAt": 1792079544012,
+      "revokedBy": "usr_admin_71c38392"
+    },
+    {
+      "id": "vm_323536039569f309",
+      "slug": "m_1e5477238bea",
+      "userId": "usr_20fefa3f225051f6",
+      "title": "Vanvi & Kabir Anniversary",
+      "recipient": "Kabir",
+      "sender": "Vanvi",
+      "occasion": "Anniversary",
+      "message": "Happy 5 years together! To forever and beyond.",
+      "photos": [
+        "/uploads/image_550b0175df7d5f05f0856968c9c63766.jpg"
+      ],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "pin",
+      "pinHash": "0bebfdeb6ac5ee71197da1e7ab9d231671f9e92fd314332bd7935fbf92e2fbec",
+      "pinHint": "Our special year",
+      "theme": "Golden Champagne",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "published",
+      "views": 0,
+      "hearts": 0,
+      "createdAt": 1792079612458,
+      "updatedAt": 1792079613563
+    },
+    {
+      "id": "vm_3c22aeb5e6824c43",
+      "slug": "m_78f92adb38cb",
+      "userId": "usr_883eab8863f586f0",
+      "title": "Secret Birthday Surprise",
+      "recipient": "Vanvi",
+      "sender": "Rahul",
+      "occasion": "Birthday",
+      "message": "This is the private letter only visible after PIN entry!",
+      "photos": [
+        "https://example.com/photo1.jpg"
+      ],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "pin",
+      "pinHash": "b2078a54edd28f43e91de8084830d6857f225cd3f533e16ce2cbd347d4caafcc",
+      "pinHint": "Our special year",
+      "theme": "Velvet Rose",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "draft",
+      "views": 1,
+      "hearts": 1,
+      "createdAt": 1792079708953,
+      "updatedAt": 1792079708953
+    },
+    {
+      "id": "vm_557718663d165d02",
+      "slug": "m_e910f4b6c67e",
+      "userId": "usr_883eab8863f586f0",
+      "title": "Midnight Wish 3D Cinema",
+      "recipient": "Sneha",
+      "sender": "Karan",
+      "occasion": "Love",
+      "message": "Forever and always.",
+      "photos": [],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "envelope",
+      "pinHash": null,
+      "pinHint": "",
+      "theme": "Velvet Rose",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "published",
+      "views": 0,
+      "hearts": 0,
+      "createdAt": 1792079716120,
+      "updatedAt": 1792079716120
+    },
+    {
+      "id": "vm_ca516c0dfcec6484",
+      "slug": "m_86b4f2db70a2",
+      "userId": "usr_80336b36fb683a96",
+      "title": "Admin Moderation Test Moment",
+      "recipient": "Rohan",
+      "sender": "Priya",
+      "occasion": "Anniversary",
+      "message": "Happy anniversary!",
+      "photos": [],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "envelope",
+      "pinHash": null,
+      "pinHint": "",
+      "theme": "Velvet Rose",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "revoked",
+      "views": 0,
+      "hearts": 0,
+      "createdAt": 1792079761300,
+      "updatedAt": 1792079761300,
+      "revokedAt": 1792079761469,
+      "revokedBy": "usr_admin_71c38392"
+    },
+    {
+      "id": "vm_1c2d87cc2f3af2f6",
+      "slug": "m_01c96466d23c",
+      "userId": "usr_dd7d64c3d18f1333",
+      "title": "Vanvi & Kabir Anniversary",
+      "recipient": "Kabir",
+      "sender": "Vanvi",
+      "occasion": "Anniversary",
+      "message": "Happy 5 years together! To forever and beyond.",
+      "photos": [
+        "/uploads/image_13ac33796e3718d1639ee6402f9f7600.jpg"
+      ],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "pin",
+      "pinHash": "0bebfdeb6ac5ee71197da1e7ab9d231671f9e92fd314332bd7935fbf92e2fbec",
+      "pinHint": "Our special year",
+      "theme": "Golden Champagne",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "published",
+      "views": 0,
+      "hearts": 0,
+      "createdAt": 1792079835202,
+      "updatedAt": 1792079835887
+    },
+    {
+      "id": "vm_befd8ad989b9434a",
+      "slug": "m_d9f1a072dedf",
+      "userId": "usr_ee64de8e340bb9a7",
+      "title": "Vanvi & Kabir Anniversary",
+      "recipient": "Kabir",
+      "sender": "Vanvi",
+      "occasion": "Anniversary",
+      "message": "Happy 5 years together! To forever and beyond.",
+      "photos": [
+        "/uploads/image_8f44cae5c5783588f69d56ae8864b50f.jpg"
+      ],
+      "musicTrack": "acoustic-piano",
+      "lockMode": "pin",
+      "pinHash": "0bebfdeb6ac5ee71197da1e7ab9d231671f9e92fd314332bd7935fbf92e2fbec",
+      "pinHint": "Our special year",
+      "theme": "Golden Champagne",
+      "templateId": "birthday-3d-candle",
+      "custom_data": {},
+      "status": "published",
+      "views": 0,
+      "hearts": 0,
+      "createdAt": 1792080021900,
+      "updatedAt": 1792080022087
     }
   ],
   "orders": [
@@ -93673,6 +94683,289 @@
       "paymentDetails": {
         "paymentId": "pay_e2e_1791809134841",
         "paidAt": 1791809134841
+      }
+    },
+    {
+      "id": "ord_9c4f6e157bef80b9",
+      "userId": "usr_6fc7472013a11eed",
+      "momentId": "vm_4cfb5aee2444ad8f",
+      "templateName": "Midnight Wish 3D Cinema",
+      "basePrice": 1000,
+      "coinsUsed": 0,
+      "discountINR": 0,
+      "finalAmountINR": 1000,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_aafca25b5262c900",
+      "status": "paid",
+      "createdAt": 1792079291462,
+      "paidAt": 1792079298023,
+      "updatedAt": 1792079298075,
+      "paymentDetails": {
+        "paymentId": "pay_test_123",
+        "paidAt": 1792079298023
+      }
+    },
+    {
+      "id": "ord_fe4fd849a651791b",
+      "userId": "usr_e36065b2f7b3b08c",
+      "momentId": "vm_538e92cc510f5686",
+      "templateName": "Love Letter Experience",
+      "basePrice": 199,
+      "coinsUsed": 150,
+      "discountINR": 0,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_23c9d5ed975f",
+      "status": "refunded",
+      "createdAt": 1792079310811,
+      "paidAt": null,
+      "refundedAt": 1792079310844,
+      "refundReason": "Customer test cancellation"
+    },
+    {
+      "id": "ord_374156597e7472ff",
+      "userId": "usr_2f8af4bf0896a456",
+      "momentId": null,
+      "templateName": "Midnight Wish 3D Cinema",
+      "basePrice": 1000,
+      "coinsUsed": 500,
+      "discountINR": 50,
+      "finalAmountINR": 950,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_9d1ce463ca57e6c9",
+      "status": "pending",
+      "createdAt": 1792079326554,
+      "paidAt": null,
+      "updatedAt": 1792079327395
+    },
+    {
+      "id": "ord_5d37c9005d80ea0c",
+      "userId": "usr_457cb3161e358d31",
+      "momentId": "vm_d52da6b6632b5876",
+      "templateName": "Golden Champagne Celebration",
+      "basePrice": 199,
+      "coinsUsed": 100,
+      "discountINR": 10,
+      "finalAmountINR": 189,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_23ef88200145",
+      "status": "paid",
+      "createdAt": 1792079357356,
+      "paidAt": 1792079357403,
+      "paymentDetails": {
+        "paymentId": "pay_e2e_1792079357401",
+        "paidAt": 1792079357402
+      }
+    },
+    {
+      "id": "ord_a1385af341082934",
+      "userId": "usr_9aa5929cc367d813",
+      "momentId": "vm_e1711b8d68677bb2",
+      "templateName": "Midnight Wish 3D Cinema",
+      "basePrice": 1000,
+      "coinsUsed": 9,
+      "discountINR": 0.9,
+      "finalAmountINR": 999.1,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_cf54788af070a97a",
+      "status": "paid",
+      "createdAt": 1792079500765,
+      "paidAt": 1792079511106,
+      "updatedAt": 1792079511670,
+      "paymentDetails": {
+        "paymentId": "pay_test_123",
+        "paidAt": 1792079511104
+      }
+    },
+    {
+      "id": "ord_b376af4a6105b54a",
+      "userId": "usr_d0476e78c01cdc90",
+      "momentId": "vm_245d314b7a960743",
+      "templateName": "Love Letter Experience",
+      "basePrice": 199,
+      "coinsUsed": 150,
+      "discountINR": 0,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_63e38bad67f6",
+      "status": "refunded",
+      "createdAt": 1792079544146,
+      "paidAt": null,
+      "refundedAt": 1792079544230,
+      "refundReason": "Customer test cancellation"
+    },
+    {
+      "id": "ord_bc99c7aa573b8557",
+      "userId": "usr_fd6e613efc688c10",
+      "momentId": null,
+      "templateName": "Midnight Wish 3D Cinema",
+      "basePrice": 1000,
+      "coinsUsed": 500,
+      "discountINR": 50,
+      "finalAmountINR": 950,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_8653960419941b03",
+      "status": "pending",
+      "createdAt": 1792079559989,
+      "paidAt": null,
+      "updatedAt": 1792079561601
+    },
+    {
+      "id": "ord_7e59f202f62f3a81",
+      "userId": "usr_20fefa3f225051f6",
+      "momentId": "vm_323536039569f309",
+      "templateName": "Golden Champagne Celebration",
+      "basePrice": 199,
+      "coinsUsed": 100,
+      "discountINR": 10,
+      "finalAmountINR": 189,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_3241a61830a6",
+      "status": "paid",
+      "createdAt": 1792079613139,
+      "paidAt": 1792079613339,
+      "paymentDetails": {
+        "paymentId": "pay_e2e_1792079613327",
+        "paidAt": 1792079613328
+      }
+    },
+    {
+      "id": "ord_f66d73c303753548",
+      "userId": "usr_883eab8863f586f0",
+      "momentId": "vm_557718663d165d02",
+      "templateName": "Midnight Wish 3D Cinema",
+      "basePrice": 1000,
+      "coinsUsed": 15,
+      "discountINR": 1.5,
+      "finalAmountINR": 998.5,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_23e9b0095c9a03dd",
+      "status": "paid",
+      "createdAt": 1792079709385,
+      "paidAt": 1792079715767,
+      "updatedAt": 1792079716232,
+      "paymentDetails": {
+        "paymentId": "pay_test_123",
+        "paidAt": 1792079715766
+      }
+    },
+    {
+      "id": "ord_c4b29191626e1188",
+      "userId": "usr_80336b36fb683a96",
+      "momentId": "vm_ca516c0dfcec6484",
+      "templateName": "Love Letter Experience",
+      "basePrice": 199,
+      "coinsUsed": 150,
+      "discountINR": 0,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_89268fa1fd13",
+      "status": "refunded",
+      "createdAt": 1792079761703,
+      "paidAt": null,
+      "refundedAt": 1792079761781,
+      "refundReason": "Customer test cancellation"
+    },
+    {
+      "id": "ord_83b8faf778bebcc4",
+      "userId": "usr_319cbc9f26255f1f",
+      "momentId": null,
+      "templateName": "Midnight Wish 3D Cinema",
+      "basePrice": 1000,
+      "coinsUsed": 500,
+      "discountINR": 50,
+      "finalAmountINR": 950,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_5f014345d1dd0482",
+      "status": "pending",
+      "createdAt": 1792079764621,
+      "paidAt": null,
+      "updatedAt": 1792079764798
+    },
+    {
+      "id": "ord_34639062df2f784b",
+      "userId": "usr_dd7d64c3d18f1333",
+      "momentId": "vm_1c2d87cc2f3af2f6",
+      "templateName": "Golden Champagne Celebration",
+      "basePrice": 199,
+      "coinsUsed": 100,
+      "discountINR": 10,
+      "finalAmountINR": 189,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_dc6247f960cc",
+      "status": "paid",
+      "createdAt": 1792079835590,
+      "paidAt": 1792079835740,
+      "paymentDetails": {
+        "paymentId": "pay_e2e_1792079835737",
+        "paidAt": 1792079835737
+      }
+    },
+    {
+      "id": "ord_aa48ae968c1cd839",
+      "userId": "usr_7bc58d3b7a4ceffe",
+      "momentId": null,
+      "templateName": "Midnight Wish 3D Cinema",
+      "basePrice": 1000,
+      "coinsUsed": 500,
+      "discountINR": 50,
+      "finalAmountINR": 950,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_01150ec169fa84f5",
+      "status": "pending",
+      "createdAt": 1792079961036,
+      "paidAt": null,
+      "updatedAt": 1792079961179
+    },
+    {
+      "id": "ord_43410edc55a9513a",
+      "userId": "usr_ee64de8e340bb9a7",
+      "momentId": "vm_befd8ad989b9434a",
+      "templateName": "Golden Champagne Celebration",
+      "basePrice": 199,
+      "coinsUsed": 100,
+      "discountINR": 10,
+      "finalAmountINR": 189,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_df0485701402",
+      "status": "paid",
+      "createdAt": 1792080022014,
+      "paidAt": 1792080022057,
+      "paymentDetails": {
+        "paymentId": "pay_e2e_1792080022056",
+        "paidAt": 1792080022056
+      }
+    },
+    {
+      "id": "ord_0498ddd3d09d6fbf",
+      "userId": null,
+      "momentId": null,
+      "templateName": "Bespoke Celebration",
+      "basePrice": 199,
+      "coinsUsed": 0,
+      "discountINR": 0,
+      "finalAmountINR": 199,
+      "currency": "INR",
+      "gateway": "razorpay",
+      "gatewayOrderId": "order_sim_2baadb946ffb2d0e",
+      "status": "paid",
+      "createdAt": 1792080202766,
+      "paidAt": 1792080204418,
+      "updatedAt": 1792080204352,
+      "paymentDetails": {
+        "paymentId": "pay_sim_1792080204421",
+        "paidAt": 1792080204418
       }
     }
   ],
@@ -126356,6 +127649,246 @@
       "reason": "Welcome Gift Bonus",
       "refId": "signup",
       "createdAt": 1791916424373
+    },
+    {
+      "id": "ldg_ce214c4c6ec2fec5",
+      "userId": "usr_46917e96c92e9f47",
+      "type": "credit",
+      "amount": 100,
+      "balanceAfter": 100,
+      "reason": "Welcome Gift Bonus",
+      "refId": "signup",
+      "createdAt": 1792078506039
+    },
+    {
+      "id": "ldg_032ef16bfbd3d519",
+      "userId": "usr_6fc7472013a11eed",
+      "type": "zero_spin",
+      "amount": 0,
+      "balanceAfter": 0,
+      "reason": "Daily Fortune Spin - Have a Good Day 😊",
+      "refId": "spin_1792079291000",
+      "createdAt": 1792079291069
+    },
+    {
+      "id": "ldg_f6690ef189b5181d",
+      "userId": "usr_e36065b2f7b3b08c",
+      "type": "credit",
+      "amount": 250,
+      "balanceAfter": 250,
+      "reason": "Automated test reward",
+      "refId": "admin_usr_admin_71c38392",
+      "createdAt": 1792079310646
+    },
+    {
+      "id": "ldg_3f66ff84b167777d",
+      "userId": "usr_e36065b2f7b3b08c",
+      "type": "refund",
+      "amount": 150,
+      "balanceAfter": 400,
+      "reason": "Refund for order ord_fe4fd849a651791b: Customer test cancellation",
+      "refId": "ord_fe4fd849a651791b",
+      "createdAt": 1792079310873
+    },
+    {
+      "id": "ldg_71d9cc8dd8e6cf7f",
+      "userId": "usr_2f8af4bf0896a456",
+      "type": "credit",
+      "amount": 500,
+      "balanceAfter": 500,
+      "reason": "Vanvi Club Annual Welcome Reward (+500 Coins)",
+      "refId": "bonus_mem_fc363ade9826b043",
+      "createdAt": 1792079326512
+    },
+    {
+      "id": "ldg_34d5185b89c9e3bd",
+      "userId": "usr_457cb3161e358d31",
+      "type": "credit",
+      "amount": 100,
+      "balanceAfter": 100,
+      "reason": "QA fixture: earned coins for checkout test",
+      "refId": "qa-earned-1792079357254",
+      "createdAt": 1792079357291
+    },
+    {
+      "id": "ldg_2f8d29c048bc5fed",
+      "userId": "usr_457cb3161e358d31",
+      "type": "debit",
+      "amount": 100,
+      "balanceAfter": 0,
+      "reason": "Checkout discount on Golden Champagne Celebration",
+      "refId": "ord_5d37c9005d80ea0c",
+      "createdAt": 1792079357652
+    },
+    {
+      "id": "ldg_b9d356a099502d23",
+      "userId": "usr_9aa5929cc367d813",
+      "type": "credit",
+      "amount": 9,
+      "balanceAfter": 9,
+      "reason": "Daily Fortune Wheel Spin",
+      "refId": "spin_1792079500369",
+      "createdAt": 1792079500429
+    },
+    {
+      "id": "ldg_5dc55cbb2f7d8cba",
+      "userId": "usr_9aa5929cc367d813",
+      "type": "debit",
+      "amount": 9,
+      "balanceAfter": 0,
+      "reason": "Checkout discount on Midnight Wish 3D Cinema",
+      "refId": "ord_a1385af341082934",
+      "createdAt": 1792079511363
+    },
+    {
+      "id": "ldg_04513091ae03094d",
+      "userId": "usr_d0476e78c01cdc90",
+      "type": "credit",
+      "amount": 250,
+      "balanceAfter": 250,
+      "reason": "Automated test reward",
+      "refId": "admin_usr_admin_71c38392",
+      "createdAt": 1792079543577
+    },
+    {
+      "id": "ldg_308ea4878aeba5f8",
+      "userId": "usr_d0476e78c01cdc90",
+      "type": "refund",
+      "amount": 150,
+      "balanceAfter": 400,
+      "reason": "Refund for order ord_b376af4a6105b54a: Customer test cancellation",
+      "refId": "ord_b376af4a6105b54a",
+      "createdAt": 1792079544305
+    },
+    {
+      "id": "ldg_b7d10bb61861967c",
+      "userId": "usr_fd6e613efc688c10",
+      "type": "credit",
+      "amount": 500,
+      "balanceAfter": 500,
+      "reason": "Vanvi Club Annual Welcome Reward (+500 Coins)",
+      "refId": "bonus_mem_a7dc9365b7db8a5b",
+      "createdAt": 1792079559815
+    },
+    {
+      "id": "ldg_b2db0db40e9cc866",
+      "userId": "usr_20fefa3f225051f6",
+      "type": "credit",
+      "amount": 100,
+      "balanceAfter": 100,
+      "reason": "QA fixture: earned coins for checkout test",
+      "refId": "qa-earned-1792079612705",
+      "createdAt": 1792079612901
+    },
+    {
+      "id": "ldg_80e73914f5dfea1c",
+      "userId": "usr_20fefa3f225051f6",
+      "type": "debit",
+      "amount": 100,
+      "balanceAfter": 0,
+      "reason": "Checkout discount on Golden Champagne Celebration",
+      "refId": "ord_7e59f202f62f3a81",
+      "createdAt": 1792079613896
+    },
+    {
+      "id": "ldg_391f12403d40fc32",
+      "userId": "usr_883eab8863f586f0",
+      "type": "credit",
+      "amount": 15,
+      "balanceAfter": 15,
+      "reason": "Daily Fortune Wheel Spin",
+      "refId": "spin_1792079708585",
+      "createdAt": 1792079708691
+    },
+    {
+      "id": "ldg_6e194c2bb5e7497c",
+      "userId": "usr_883eab8863f586f0",
+      "type": "debit",
+      "amount": 15,
+      "balanceAfter": 0,
+      "reason": "Checkout discount on Midnight Wish 3D Cinema",
+      "refId": "ord_f66d73c303753548",
+      "createdAt": 1792079716046
+    },
+    {
+      "id": "ldg_36568a01f4b9f966",
+      "userId": "usr_80336b36fb683a96",
+      "type": "credit",
+      "amount": 250,
+      "balanceAfter": 250,
+      "reason": "Automated test reward",
+      "refId": "admin_usr_admin_71c38392",
+      "createdAt": 1792079761053
+    },
+    {
+      "id": "ldg_e427a5f7e17a467b",
+      "userId": "usr_80336b36fb683a96",
+      "type": "refund",
+      "amount": 150,
+      "balanceAfter": 400,
+      "reason": "Refund for order ord_c4b29191626e1188: Customer test cancellation",
+      "refId": "ord_c4b29191626e1188",
+      "createdAt": 1792079761885
+    },
+    {
+      "id": "ldg_77c0795c5359d8ee",
+      "userId": "usr_319cbc9f26255f1f",
+      "type": "credit",
+      "amount": 500,
+      "balanceAfter": 500,
+      "reason": "Vanvi Club Annual Welcome Reward (+500 Coins)",
+      "refId": "bonus_mem_cc5ddc5d1fb03a1e",
+      "createdAt": 1792079764562
+    },
+    {
+      "id": "ldg_7a9e332d30c42bdc",
+      "userId": "usr_dd7d64c3d18f1333",
+      "type": "credit",
+      "amount": 100,
+      "balanceAfter": 100,
+      "reason": "QA fixture: earned coins for checkout test",
+      "refId": "qa-earned-1792079835324",
+      "createdAt": 1792079835465
+    },
+    {
+      "id": "ldg_14ce1fcbf4466e79",
+      "userId": "usr_dd7d64c3d18f1333",
+      "type": "debit",
+      "amount": 100,
+      "balanceAfter": 0,
+      "reason": "Checkout discount on Golden Champagne Celebration",
+      "refId": "ord_34639062df2f784b",
+      "createdAt": 1792079836239
+    },
+    {
+      "id": "ldg_af7fb762af7075f7",
+      "userId": "usr_7bc58d3b7a4ceffe",
+      "type": "credit",
+      "amount": 500,
+      "balanceAfter": 500,
+      "reason": "Vanvi Club Annual Welcome Reward (+500 Coins)",
+      "refId": "bonus_mem_b9dea0117947a285",
+      "createdAt": 1792079960988
+    },
+    {
+      "id": "ldg_bd6e6e5468bda2fd",
+      "userId": "usr_ee64de8e340bb9a7",
+      "type": "credit",
+      "amount": 100,
+      "balanceAfter": 100,
+      "reason": "QA fixture: earned coins for checkout test",
+      "refId": "qa-earned-1792080021937",
+      "createdAt": 1792080021972
+    },
+    {
+      "id": "ldg_3d8e544e74f32567",
+      "userId": "usr_ee64de8e340bb9a7",
+      "type": "debit",
+      "amount": 100,
+      "balanceAfter": 0,
+      "reason": "Checkout discount on Golden Champagne Celebration",
+      "refId": "ord_43410edc55a9513a",
+      "createdAt": 1792080022152
     }
   ],
   "meta": {
@@ -131235,6 +132768,83 @@
       "autoRenew": true,
       "gatewaySubId": "order_sim_3bd33eeea825cc6e",
       "createdAt": 1791809085865
+    },
+    {
+      "id": "mem_a6f669a5db3170eb",
+      "userId": "usr_e36065b2f7b3b08c",
+      "planId": "monthly",
+      "status": "active",
+      "startDate": 1792079310259,
+      "endDate": 1794671310259,
+      "autoRenew": true,
+      "gatewaySubId": "order_sim_ac163acc29a7150a",
+      "createdAt": 1792079310259
+    },
+    {
+      "id": "mem_fc363ade9826b043",
+      "userId": "usr_2f8af4bf0896a456",
+      "planId": "annual",
+      "status": "active",
+      "startDate": 1792079326406,
+      "endDate": 1823615326406,
+      "autoRenew": true,
+      "gatewaySubId": "order_sim_c8f68c03142d905a",
+      "createdAt": 1792079326406
+    },
+    {
+      "id": "mem_325cc3eb0b238079",
+      "userId": "usr_d0476e78c01cdc90",
+      "planId": "monthly",
+      "status": "active",
+      "startDate": 1792079542205,
+      "endDate": 1794671542205,
+      "autoRenew": true,
+      "gatewaySubId": "order_sim_1b31867b46b27527",
+      "createdAt": 1792079542205
+    },
+    {
+      "id": "mem_a7dc9365b7db8a5b",
+      "userId": "usr_fd6e613efc688c10",
+      "planId": "annual",
+      "status": "active",
+      "startDate": 1792079559350,
+      "endDate": 1823615559350,
+      "autoRenew": true,
+      "gatewaySubId": "order_sim_71dff660c1b7fa0c",
+      "createdAt": 1792079559350
+    },
+    {
+      "id": "mem_8173a0fe6ac7f9b6",
+      "userId": "usr_80336b36fb683a96",
+      "planId": "monthly",
+      "status": "active",
+      "startDate": 1792079760097,
+      "endDate": 1794671760097,
+      "autoRenew": true,
+      "gatewaySubId": "order_sim_32c1b1ae1b8f48aa",
+      "createdAt": 1792079760097
+    },
+    {
+      "id": "mem_cc5ddc5d1fb03a1e",
+      "userId": "usr_319cbc9f26255f1f",
+      "planId": "annual",
+      "status": "active",
+      "startDate": 1792079764370,
+      "endDate": 1823615764370,
+      "autoRenew": true,
+      "gatewaySubId": "order_sim_8d12adf69ce2bf85",
+      "createdAt": 1792079764370
+    },
+    {
+      "id": "mem_b9dea0117947a285",
+      "userId": "usr_7bc58d3b7a4ceffe",
+      "planId": "annual",
+      "status": "active",
+      "startDate": 1792079960874,
+      "endDate": 1823615960874,
+      "autoRenew": true,
+      "gatewaySubId": "order_sim_e105435ca0b806fe",
+      "createdAt": 1792079960874
     }
   ],
   "templates": [
@@ -154189,6 +155799,87 @@
       "ipHash": "69fa70f0b1d026d8",
       "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.141.2 Chrome/150.0.7871.250 Elec",
       "createdAt": 1792072934230
+    },
+    {
+      "id": "evt_6920e423745bbe34",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/login.html",
+        "title": "Login | Vanvi Moments",
+        "referrer": "",
+        "timestamp": 1792076857664,
+        "path": "login.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.141.2 Chrome/150.0.7871.250 Elec",
+      "createdAt": 1792076857689
+    },
+    {
+      "id": "evt_889d7c35744017dc",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/signup.html",
+        "title": "Create an Account | Vanvi Moments",
+        "referrer": "http://localhost:3000/login.html?authCheck=2026",
+        "timestamp": 1792076876487,
+        "path": "signup.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.141.2 Chrome/150.0.7871.250 Elec",
+      "createdAt": 1792076876490
+    },
+    {
+      "id": "evt_193e2ba71792199b",
+      "userId": null,
+      "eventName": "pageview",
+      "properties": {
+        "page": "/signup.html",
+        "title": "Create an Account | Vanvi Moments",
+        "referrer": "http://localhost:3000/login.html?authCheck=2026",
+        "timestamp": 1792076884494,
+        "path": "signup.html"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.141.2 Chrome/150.0.7871.250 Elec",
+      "createdAt": 1792076884501
+    },
+    {
+      "id": "evt_b053e54841e5903f",
+      "userId": "usr_e36065b2f7b3b08c",
+      "eventName": "test_moment_shared",
+      "properties": {
+        "template": "celestial-galaxy",
+        "platform": "whatsapp"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "node",
+      "createdAt": 1792079310389
+    },
+    {
+      "id": "evt_d97d63d6fbb457eb",
+      "userId": "usr_d0476e78c01cdc90",
+      "eventName": "test_moment_shared",
+      "properties": {
+        "template": "celestial-galaxy",
+        "platform": "whatsapp"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "node",
+      "createdAt": 1792079542530
+    },
+    {
+      "id": "evt_34102b009f28a300",
+      "userId": "usr_80336b36fb683a96",
+      "eventName": "test_moment_shared",
+      "properties": {
+        "template": "celestial-galaxy",
+        "platform": "whatsapp"
+      },
+      "ipHash": "69fa70f0b1d026d8",
+      "userAgent": "node",
+      "createdAt": 1792079760367
     }
   ],
   "auditLogs": [
@@ -166730,6 +168421,462 @@
         "ua": "Browser Client"
       },
       "createdAt": 1791916424430
+    },
+    {
+      "id": "aud_3e222afb66ffc672",
+      "actorUserId": "usr_46917e96c92e9f47",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_46917e96c92e9f47",
+      "metadata": {
+        "name": "Audit User",
+        "email": "test_audit_1792078505247@gmail.com",
+        "phone": "2078505247",
+        "provider": "local",
+        "ip": "127.0.0.1",
+        "ua": "Browser Client"
+      },
+      "createdAt": 1792078506211
+    },
+    {
+      "id": "aud_825fc5daaf8ee31a",
+      "actorUserId": "usr_46917e96c92e9f47",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_46917e96c92e9f47",
+      "metadata": {
+        "ip": "127.0.0.1",
+        "ua": "Browser Client",
+        "provider": "local"
+      },
+      "createdAt": 1792078507061
+    },
+    {
+      "id": "aud_2bee1a4c26b367cc",
+      "actorUserId": "usr_6fc7472013a11eed",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_6fc7472013a11eed",
+      "metadata": {
+        "name": "Rahul Sharma",
+        "email": "test_1792079290658@vanvimoments.com",
+        "phone": "2079290658",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "node"
+      },
+      "createdAt": 1792079290749
+    },
+    {
+      "id": "aud_7cee00147c13dbf6",
+      "actorUserId": "usr_6fc7472013a11eed",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_6fc7472013a11eed",
+      "metadata": {
+        "ip": "::1",
+        "ua": "node",
+        "provider": "local"
+      },
+      "createdAt": 1792079290911
+    },
+    {
+      "id": "aud_3878d13743d50a94",
+      "actorUserId": "usr_e36065b2f7b3b08c",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_e36065b2f7b3b08c",
+      "metadata": {
+        "name": "Priya Sharma",
+        "email": "xss_test_1792079298640@vanvimoments.com",
+        "phone": "2079298640",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "node"
+      },
+      "createdAt": 1792079298715
+    },
+    {
+      "id": "aud_14f5656fc59b8906",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_admin_71c38392",
+      "metadata": {
+        "ip": "::1",
+        "ua": "node",
+        "provider": "google"
+      },
+      "createdAt": 1792079310514
+    },
+    {
+      "id": "aud_9456370cd943123f",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "coins.adjusted",
+      "targetEntity": "user",
+      "targetId": "usr_e36065b2f7b3b08c",
+      "metadata": {
+        "amount": 250,
+        "type": "credit",
+        "reason": "Automated test reward"
+      },
+      "createdAt": 1792079310682
+    },
+    {
+      "id": "aud_b71710da96ee4fe4",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "moment.revoked",
+      "targetEntity": "moment",
+      "targetId": "vm_538e92cc510f5686",
+      "metadata": {},
+      "createdAt": 1792079310772
+    },
+    {
+      "id": "aud_cc8a0c992067e34a",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "order.refunded",
+      "targetEntity": "order",
+      "targetId": "ord_fe4fd849a651791b",
+      "metadata": {
+        "reason": "Customer test cancellation",
+        "coinsRestored": 150
+      },
+      "createdAt": 1792079310929
+    },
+    {
+      "id": "aud_5d90d16e61c0df90",
+      "actorUserId": "usr_2f8af4bf0896a456",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_2f8af4bf0896a456",
+      "metadata": {
+        "name": "Pooja Sharma",
+        "email": "plantest_1792079316172@vanvimoments.com",
+        "phone": "2079316172",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "node"
+      },
+      "createdAt": 1792079316237
+    },
+    {
+      "id": "aud_8a4867c986babbe6",
+      "actorUserId": "usr_9aa5929cc367d813",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_9aa5929cc367d813",
+      "metadata": {
+        "name": "Rahul Sharma",
+        "email": "test_1792079499767@vanvimoments.com",
+        "phone": "2079499767",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "node"
+      },
+      "createdAt": 1792079499854
+    },
+    {
+      "id": "aud_139c870e876c6275",
+      "actorUserId": "usr_9aa5929cc367d813",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_9aa5929cc367d813",
+      "metadata": {
+        "ip": "::1",
+        "ua": "node",
+        "provider": "local"
+      },
+      "createdAt": 1792079500241
+    },
+    {
+      "id": "aud_520c64f1d263dfd6",
+      "actorUserId": "usr_d0476e78c01cdc90",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_d0476e78c01cdc90",
+      "metadata": {
+        "name": "Priya Sharma",
+        "email": "xss_test_1792079512831@vanvimoments.com",
+        "phone": "2079512831",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "node"
+      },
+      "createdAt": 1792079512925
+    },
+    {
+      "id": "aud_b4aac31e2dfaaf3c",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_admin_71c38392",
+      "metadata": {
+        "ip": "::1",
+        "ua": "node",
+        "provider": "google"
+      },
+      "createdAt": 1792079543107
+    },
+    {
+      "id": "aud_6444aefb57415c6f",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "coins.adjusted",
+      "targetEntity": "user",
+      "targetId": "usr_d0476e78c01cdc90",
+      "metadata": {
+        "amount": 250,
+        "type": "credit",
+        "reason": "Automated test reward"
+      },
+      "createdAt": 1792079543709
+    },
+    {
+      "id": "aud_fc88fba5538c73b5",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "moment.revoked",
+      "targetEntity": "moment",
+      "targetId": "vm_245d314b7a960743",
+      "metadata": {},
+      "createdAt": 1792079544075
+    },
+    {
+      "id": "aud_c57376410609c9fc",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "order.refunded",
+      "targetEntity": "order",
+      "targetId": "ord_b376af4a6105b54a",
+      "metadata": {
+        "reason": "Customer test cancellation",
+        "coinsRestored": 150
+      },
+      "createdAt": 1792079544471
+    },
+    {
+      "id": "aud_e963f9a14c3d7b6c",
+      "actorUserId": "usr_fd6e613efc688c10",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_fd6e613efc688c10",
+      "metadata": {
+        "name": "Pooja Sharma",
+        "email": "plantest_1792079555410@vanvimoments.com",
+        "phone": "2079555410",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "node"
+      },
+      "createdAt": 1792079555486
+    },
+    {
+      "id": "aud_ec6257eec56c13b4",
+      "actorUserId": "usr_883eab8863f586f0",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_883eab8863f586f0",
+      "metadata": {
+        "name": "Rahul Sharma",
+        "email": "test_1792079707993@vanvimoments.com",
+        "phone": "2079707993",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "node"
+      },
+      "createdAt": 1792079708081
+    },
+    {
+      "id": "aud_209d470fd10fffd7",
+      "actorUserId": "usr_883eab8863f586f0",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_883eab8863f586f0",
+      "metadata": {
+        "ip": "::1",
+        "ua": "node",
+        "provider": "local"
+      },
+      "createdAt": 1792079708428
+    },
+    {
+      "id": "aud_d19f8796d8c29aae",
+      "actorUserId": "usr_80336b36fb683a96",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_80336b36fb683a96",
+      "metadata": {
+        "name": "Priya Sharma",
+        "email": "xss_test_1792079717087@vanvimoments.com",
+        "phone": "2079717087",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "node"
+      },
+      "createdAt": 1792079717176
+    },
+    {
+      "id": "aud_06b05c07f6bf92fe",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_admin_71c38392",
+      "metadata": {
+        "ip": "::1",
+        "ua": "node",
+        "provider": "google"
+      },
+      "createdAt": 1792079760736
+    },
+    {
+      "id": "aud_5e4e77c82d354988",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "coins.adjusted",
+      "targetEntity": "user",
+      "targetId": "usr_80336b36fb683a96",
+      "metadata": {
+        "amount": 250,
+        "type": "credit",
+        "reason": "Automated test reward"
+      },
+      "createdAt": 1792079761181
+    },
+    {
+      "id": "aud_40e51f35a9270262",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "moment.revoked",
+      "targetEntity": "moment",
+      "targetId": "vm_ca516c0dfcec6484",
+      "metadata": {},
+      "createdAt": 1792079761582
+    },
+    {
+      "id": "aud_c99935b5eaf7f7de",
+      "actorUserId": "usr_admin_71c38392",
+      "action": "order.refunded",
+      "targetEntity": "order",
+      "targetId": "ord_c4b29191626e1188",
+      "metadata": {
+        "reason": "Customer test cancellation",
+        "coinsRestored": 150
+      },
+      "createdAt": 1792079762113
+    },
+    {
+      "id": "aud_352ccbc53a3cd2f7",
+      "actorUserId": "usr_319cbc9f26255f1f",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_319cbc9f26255f1f",
+      "metadata": {
+        "name": "Pooja Sharma",
+        "email": "plantest_1792079763616@vanvimoments.com",
+        "phone": "2079763616",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "node"
+      },
+      "createdAt": 1792079763686
+    },
+    {
+      "id": "aud_21a37dbd5efee20b",
+      "actorUserId": "usr_8e0116bef4419e26",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_8e0116bef4419e26",
+      "metadata": {
+        "name": "Audit User",
+        "email": "test_audit_1792079957755@gmail.com",
+        "phone": "2079957755",
+        "provider": "local",
+        "ip": "127.0.0.1",
+        "ua": "Browser Client"
+      },
+      "createdAt": 1792079958027
+    },
+    {
+      "id": "aud_8bc514d3cf3a0e15",
+      "actorUserId": "usr_8e0116bef4419e26",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_8e0116bef4419e26",
+      "metadata": {
+        "ip": "127.0.0.1",
+        "ua": "Browser Client",
+        "provider": "local"
+      },
+      "createdAt": 1792079958297
+    },
+    {
+      "id": "aud_807e0c54dacc9bc2",
+      "actorUserId": "usr_7bc58d3b7a4ceffe",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_7bc58d3b7a4ceffe",
+      "metadata": {
+        "name": "Pooja Sharma",
+        "email": "plantest_1792079959539@vanvimoments.com",
+        "phone": "2079959539",
+        "provider": "local",
+        "ip": "::1",
+        "ua": "node"
+      },
+      "createdAt": 1792079959618
+    },
+    {
+      "id": "aud_cd9867685a70a79e",
+      "actorUserId": "usr_c9741c7515871a4e",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_c9741c7515871a4e",
+      "metadata": {
+        "name": "Audit User",
+        "email": "test_audit_1792080049091@gmail.com",
+        "phone": "2080049091",
+        "provider": "local",
+        "ip": "127.0.0.1",
+        "ua": "Browser Client"
+      },
+      "createdAt": 1792080049486
+    },
+    {
+      "id": "aud_4bde1728c3ad46c5",
+      "actorUserId": "usr_c9741c7515871a4e",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_c9741c7515871a4e",
+      "metadata": {
+        "ip": "127.0.0.1",
+        "ua": "Browser Client",
+        "provider": "local"
+      },
+      "createdAt": 1792080049928
+    },
+    {
+      "id": "aud_805724e701bdc7eb",
+      "actorUserId": "usr_3e19146c679b785a",
+      "action": "user.signup",
+      "targetEntity": "user",
+      "targetId": "usr_3e19146c679b785a",
+      "metadata": {
+        "name": "Audit User",
+        "email": "test_audit_1792080189669@gmail.com",
+        "phone": "2080189669",
+        "provider": "local",
+        "ip": "127.0.0.1",
+        "ua": "Browser Client"
+      },
+      "createdAt": 1792080189918
+    },
+    {
+      "id": "aud_a48f80eb9a110e21",
+      "actorUserId": "usr_3e19146c679b785a",
+      "action": "user.login",
+      "targetEntity": "user",
+      "targetId": "usr_3e19146c679b785a",
+      "metadata": {
+        "ip": "127.0.0.1",
+        "ua": "Browser Client",
+        "provider": "local"
+      },
+      "createdAt": 1792080190356
     }
   ],
   "inquiries": [
