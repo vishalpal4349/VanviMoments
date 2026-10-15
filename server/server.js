@@ -135,7 +135,8 @@ app.get('/api/health', async (req, res) => {
 app.get('/api/config/public', (req, res) => {
   res.set('Cache-Control', 'no-store');
   res.json({
-    googleClientId: process.env.GOOGLE_CLIENT_ID || ''
+    googleClientId: process.env.GOOGLE_CLIENT_ID || '',
+    razorpayKeyId: process.env.RAZORPAY_KEY_ID || ''
   });
 });
 
