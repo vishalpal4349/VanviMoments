@@ -266,7 +266,6 @@ button:disabled,
   transition: transform 0.28s var(--ease-smooth),
               box-shadow 0.28s var(--ease-smooth),
               border-color 0.24s ease !important;
-  will-change: transform, box-shadow;
 }
 
 /* Subtle Specular Top Highlight Line */
@@ -297,7 +296,6 @@ div[class*="thumb"] {
 .card-thumb img,
 .card-image-wrap img {
   transition: transform 0.4s var(--ease-smooth), filter 0.3s ease !important;
-  will-change: transform;
 }
 .vanvi-card:hover .card-art-img,
 .card:hover .card-thumb img,
@@ -353,6 +351,14 @@ select:focus {
   -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
   box-shadow: 0 10px 30px rgba(44, 18, 36, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
   z-index: 9999 !important;
+}
+
+@media (max-width: 767px) {
+  .vanvi-bottom-dock,
+  .bottom {
+    backdrop-filter: blur(10px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(140%) !important;
+  }
 }
 
 /* Body clearance so bottom dock never overlaps footer content (except pages with no dock like AI Assistant/Builder) */

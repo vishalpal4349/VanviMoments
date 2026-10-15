@@ -6,9 +6,6 @@
 (function(window) {
   'use strict';
 
-  const fallbackGoogleClientId = window.VANVI_GOOGLE_CLIENT_ID ||
-    localStorage.getItem('vanvi_google_client_id') ||
-    '';
   let GOOGLE_CLIENT_ID = '';
   let googleClientIdPromise = null;
   let googleScriptPromise = null;
@@ -32,13 +29,13 @@
         })
         .then(config => {
           const serverClientId = typeof config.googleClientId === 'string' ? config.googleClientId.trim() : '';
-          GOOGLE_CLIENT_ID = serverClientId || fallbackGoogleClientId;
+          GOOGLE_CLIENT_ID = serverClientId;
           return GOOGLE_CLIENT_ID;
         })
         .catch(error => {
           console.warn('[Google Auth] Could not load public OAuth configuration:', error.message);
-          GOOGLE_CLIENT_ID = fallbackGoogleClientId;
-          return fallbackGoogleClientId;
+          GOOGLE_CLIENT_ID = '';
+          return '';
         });
     }
     return googleClientIdPromise;
@@ -188,7 +185,10 @@
           if (response && response.credential) {
             try {
               const res = await handleGoogleCredential(response.credential);
-              const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
+              const requestedRedirect = new URLSearchParams(location.search).get('redirect');
+              const redirectUrl = window.vanviSafeRedirect
+                ? window.vanviSafeRedirect(requestedRedirect)
+                : 'dashboard.html';
               if (typeof window.triggerAuthSuccessCelebration === 'function') {
                 window.triggerAuthSuccessCelebration(redirectUrl);
               } else {

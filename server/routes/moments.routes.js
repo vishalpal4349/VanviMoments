@@ -3,6 +3,10 @@ const router = express.Router();
 const { Moments } = require('../db/database');
 const { optionalAuth, requireAuth, hashPin, verifyPin } = require('../middleware/auth');
 
+function isPaidMoment(moment) {
+  return Boolean(moment.paid || moment.isPurchased || moment.status === 'published');
+}
+
 // In-memory rate limiting map for PIN attempts: { [key: string]: { count: number, resetAt: number } }
 const pinAttempts = new Map();
 
@@ -122,8 +126,7 @@ router.get('/public/:slug', async (req, res) => {
       return res.status(404).json({ success: false, error: 'Moment not found or link has expired.' });
     }
 
-    const isPaid = Boolean(moment.paid || moment.isPurchased || moment.status === 'published');
-    if (!isPaid) {
+    if (!isPaidMoment(moment)) {
       return res.status(402).json({
         success: false,
         error: 'This celebration moment is awaiting payment activation.',
@@ -190,6 +193,14 @@ router.post('/public/:slug/verify-pin', async (req, res) => {
     if (!moment) {
       return res.status(404).json({ success: false, error: 'Moment not found.' });
     }
+    if (!isPaidMoment(moment)) {
+      return res.status(402).json({
+        success: false,
+        error: 'This celebration moment is awaiting payment activation.',
+        requiresPayment: true,
+        paid: false
+      });
+    }
 
     if (moment.lockMode !== 'pin') {
       return res.json({
@@ -225,6 +236,14 @@ router.post('/public/:slug/react', async (req, res) => {
     const { slug } = req.params;
     const moment = await Moments.findBySlug(slug);
     if (!moment) return res.status(404).json({ success: false, error: 'Moment not found.' });
+    if (!isPaidMoment(moment)) {
+      return res.status(402).json({
+        success: false,
+        error: 'This celebration moment is awaiting payment activation.',
+        requiresPayment: true,
+        paid: false
+      });
+    }
 
     await Moments.incrementStats(moment.id, { hearts: 1 });
     return res.json({ success: true, hearts: (moment.hearts || 0) + 1 });
@@ -250,4 +269,3 @@ router.delete('/:id', requireAuth, async (req, res) => {
 });
 
 module.exports = router;
-

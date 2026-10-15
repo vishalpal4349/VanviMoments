@@ -666,7 +666,7 @@
         }
 
         setTimeout(() => {
-          window.location.href = redirectUrl || 'dashboard.html';
+          window.location.href = window.vanviSafeRedirect(redirectUrl);
         }, 700);
       };
 
@@ -721,7 +721,7 @@
 
           if (result.success) {
             showStatus('Welcome to Vanvi Moments! Opening dashboard... 🌸', 'success');
-            const redirectUrl = new URLSearchParams(location.search).get('redirect') || 'dashboard.html';
+            const redirectUrl = window.vanviSafeRedirect(new URLSearchParams(location.search).get('redirect'));
             window.triggerAuthSuccessCelebration(redirectUrl);
             return;
           }

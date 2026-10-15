@@ -25,7 +25,7 @@
 .scroll-animate {
   opacity: 0;
   transform: translate3d(0, 40px, 0);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .scroll-animate.animate-in {
@@ -34,15 +34,15 @@
 }
 
 /* Staggered animation delay utilities */
-.scroll-stagger-2 { transition-delay: 0.1s !important; }
-.scroll-stagger-3 { transition-delay: 0.2s !important; }
-.scroll-stagger-4 { transition-delay: 0.3s !important; }
-.scroll-stagger-5 { transition-delay: 0.4s !important; }
-.scroll-stagger-6 { transition-delay: 0.5s !important; }
-.scroll-stagger-7 { transition-delay: 0.6s !important; }
-.scroll-stagger-8 { transition-delay: 0.7s !important; }
-.scroll-stagger-9 { transition-delay: 0.8s !important; }
-.scroll-stagger-10 { transition-delay: 0.9s !important; }
+.scroll-stagger-2 { transition-delay: 0.05s !important; }
+.scroll-stagger-3 { transition-delay: 0.1s !important; }
+.scroll-stagger-4 { transition-delay: 0.15s !important; }
+.scroll-stagger-5 { transition-delay: 0.2s !important; }
+.scroll-stagger-6 { transition-delay: 0.25s !important; }
+.scroll-stagger-7 { transition-delay: 0.3s !important; }
+.scroll-stagger-8 { transition-delay: 0.35s !important; }
+.scroll-stagger-9 { transition-delay: 0.4s !important; }
+.scroll-stagger-10 { transition-delay: 0.45s !important; }
 
 /* 3D Depth/Parallax Layers */
 .parallax-layer {
@@ -69,7 +69,7 @@
 /* Blur-to-Sharp Transition */
 .blur-sharp {
   filter: blur(8px);
-  transition: filter 0.8s ease, opacity 0.8s ease;
+  transition: filter 0.4s ease, opacity 0.4s ease;
 }
 
 .blur-sharp.animate-in {
@@ -143,11 +143,12 @@
 /* Responsive adjustments for mobile */
 @media (max-width: 768px) {
   .scroll-animate {
-    transition-duration: 0.6s;
+    transition-duration: 0.3s;
   }
   
   .blur-sharp {
-    transition-duration: 0.6s;
+    filter: blur(4px);
+    transition-duration: 0.3s;
   }
   
   .floating-particles::before,
