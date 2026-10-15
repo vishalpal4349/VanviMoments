@@ -836,8 +836,86 @@
     }
   }, true);
 
+  // ─── BUTTERY SMOOTH PAGE TRANSITIONS & PREFETCH ENGINE ("MAKHAN" MODE) ───
+  const prefetchedUrls = new Set();
+
+  function prefetchUrl(url) {
+    if (!url || prefetchedUrls.has(url)) return;
+    try {
+      const u = new URL(url, window.location.href);
+      if (u.origin !== window.location.origin) return;
+      if (!u.pathname.endsWith('.html') && u.pathname !== '/' && !u.pathname.endsWith('/')) return;
+      prefetchedUrls.add(url);
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = u.href;
+      link.as = 'document';
+      document.head.appendChild(link);
+    } catch(e) {}
+  }
+
+  function ensureProgressBar() {
+    let bar = document.getElementById('vanvi-global-page-progress');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.id = 'vanvi-global-page-progress';
+      document.body.appendChild(bar);
+    }
+    return bar;
+  }
+
+  function startPageTransition(targetUrl) {
+    const bar = ensureProgressBar();
+    bar.classList.add('active');
+    bar.style.width = '25%';
+    setTimeout(() => { if (bar) bar.style.width = '78%'; }, 40);
+    if (document.body) document.body.classList.add('vanvi-page-exit');
+    setTimeout(() => {
+      if (bar) bar.style.width = '100%';
+      window.location.href = targetUrl;
+    }, 130);
+  }
+
+  // Pre-fetch on hover / touchstart for instant instant loading
+  document.addEventListener('pointerover', function(e) {
+    const a = e.target && e.target.closest('a[href]');
+    if (a && a.href && !a.target && !a.href.startsWith('javascript:')) {
+      prefetchUrl(a.href);
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchstart', function(e) {
+    const a = e.target && e.target.closest('a[href]');
+    if (a && a.href && !a.target && !a.href.startsWith('javascript:')) {
+      prefetchUrl(a.href);
+    }
+  }, { passive: true });
+
+  // Smooth page switch on click
+  document.addEventListener('click', function(e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target && e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('tel:') || href.startsWith('mailto:')) return;
+    if (a.target === '_blank' || a.hasAttribute('download')) return;
+
+    try {
+      const targetUrl = new URL(a.href, window.location.href);
+      if (targetUrl.origin !== window.location.origin) return;
+      if (targetUrl.pathname === window.location.pathname && targetUrl.search === window.location.search) return;
+
+      e.preventDefault();
+      startPageTransition(a.href);
+    } catch(err) {}
+  }, true);
+
   // Initialize on DOM ready
   function initAll() {
+    if (document.body) {
+      document.body.classList.add('vanvi-page-enter');
+    }
+    ensureProgressBar();
     mountGlobalNav();
     initCookieConsent();
     setTimeout(() => {

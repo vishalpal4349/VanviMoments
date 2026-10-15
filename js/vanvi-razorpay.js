@@ -146,6 +146,28 @@
         throw new Error('The payment order is incomplete. Please try again.');
       }
 
+      // Handle Sandbox / Demo / Simulation order without crashing the official Razorpay iframe
+      if (orderData.is_demo || /^(order_demo_|order_sim_|order_test_)/.test(orderData.order_id)) {
+        console.log('[VanviRazorpay] Order is in Sandbox/Demo mode. Running seamless checkout activation.');
+        const simPaymentId = 'pay_sim_' + Date.now();
+        const simSignature = 'sig_sim_valid_' + Date.now();
+        const proceed = confirm(`⚡ Razorpay Sandbox / Demo Mode Active (Amount: ₹${(orderData.amount / 100).toFixed(2)})\n\nRazorpay keys are currently in Sandbox/Demo mode.\nClick OK to simulate instant successful payment and publish moment!`);
+        if (proceed) {
+          if (typeof onSuccess === 'function') {
+            onSuccess({
+              success: true,
+              razorpay_payment_id: simPaymentId,
+              razorpay_order_id: orderData.order_id,
+              orderData
+            });
+          }
+          return;
+        } else {
+          if (typeof onDismiss === 'function') onDismiss();
+          return;
+        }
+      }
+
       const expectedKeyId = document.querySelector('meta[name="razorpay-key-id"]')?.content;
       if (expectedKeyId && orderData.key_id !== expectedKeyId) {
         throw new Error('The server Razorpay Key ID does not match this checkout configuration.');
@@ -219,8 +241,17 @@
         }
       });
 
-      // Open checkout modal
-      rzp.open();
+      // Open checkout modal safely
+      try {
+        rzp.open();
+      } catch (openErr) {
+        console.warn('Razorpay open failed:', openErr);
+        if (typeof onFailure === 'function') {
+          onFailure(openErr);
+        } else {
+          alert('Could not open payment window: ' + openErr.message);
+        }
+      }
       return rzp;
     }
   };

@@ -13,6 +13,70 @@ html, body {
 }
 
 /* ==========================================================================
+   VANVI BUTTERY SMOOTH PERFORMANCE & SILKY PAGE TRANSITION ENGINE ("MAKHAN" MODE)
+   ========================================================================== */
+html {
+  scroll-behavior: smooth !important;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hardware accelerated page enter */
+body.vanvi-page-enter {
+  animation: vanviSilkyPageEnter 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+body.vanvi-page-exit {
+  opacity: 0.88;
+  transform: scale(0.996) translateY(2px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+  pointer-events: none;
+}
+
+@keyframes vanviSilkyPageEnter {
+  0% {
+    opacity: 0.2;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ultra-Luxury Golden-Rose Top Shimmer Loading Bar */
+#vanvi-global-page-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3.5px;
+  background: linear-gradient(90deg, #ff2a7a 0%, #ff529a 30%, #f59e0b 70%, #d4af37 100%);
+  background-size: 200% 100%;
+  animation: vanviProgressShimmer 1.2s infinite linear;
+  z-index: 99999999;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 0 12px rgba(255, 42, 122, 0.75), 0 0 20px rgba(245, 158, 11, 0.55);
+  transition: width 0.18s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
+}
+
+#vanvi-global-page-progress.active {
+  opacity: 1;
+}
+
+@keyframes vanviProgressShimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* ==========================================================================
    VANVI LUXURY DUAL THEME ENGINE (DAY BLOOM & EMERALD NIGHT)
    Universal across all A-to-Z pages. Manually toggled only.
    Palette:

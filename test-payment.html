@@ -366,8 +366,35 @@
           throw new Error(data.error || 'Failed to create order on Razorpay API.');
         }
 
-        log(`✓ Live Order Created: ${data.order_id}`);
+        log(`✓ Order ID Created: ${data.order_id}`);
         log(`✓ Key ID: ${data.key_id}`);
+
+        if (data.is_demo || data.order_id.startsWith('order_demo_') || data.order_id.startsWith('order_sim_')) {
+          log('⚠️ Razorpay server returned a Sandbox Demo Order.');
+          log('👉 To open the official live payment popup, configure valid Live/Test Keys from dashboard.razorpay.com.');
+          const proceedSim = confirm(`⚡ Razorpay Sandbox Simulation (₹${currentAmountRupees})\n\nRazorpay keys on server are currently in demo mode.\nClick OK to simulate instant verification and test moment publishing!`);
+          if (proceedSim) {
+            log('3. Verifying simulated signature on backend...');
+            const verifyRes = await fetch('/api/verify-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_order_id: data.order_id,
+                razorpay_payment_id: 'pay_sim_' + Date.now(),
+                razorpay_signature: 'sig_sim_valid'
+              })
+            });
+            const vData = await verifyRes.json();
+            if (vData.success) {
+              log('✓ Simulation verified successfully!');
+              document.getElementById('successCard').style.display = 'block';
+            }
+          }
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+          return;
+        }
+
         log('2. Opening official Razorpay Standard Checkout modal...');
 
         // STEP 2: Open Official Razorpay Checkout Modal
