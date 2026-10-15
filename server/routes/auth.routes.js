@@ -483,10 +483,11 @@ router.post('/forgot-password', authRateLimiter, async (req, res) => {
       return res.status(400).json({ success: false, error: 'Please enter your registered email or phone number.' });
     }
 
-    if (!isEmailConfigured()) {
+    const emailReady = isEmailConfigured();
+    if (!emailReady && process.env.NODE_ENV === 'production') {
       return res.status(503).json({
         success: false,
-        error: 'Password reset email is not configured yet. Please contact support or try again later.'
+        error: 'Email recovery is temporarily offline. Please login with Google or message our WhatsApp Concierge (+91 76314 42934).'
       });
     }
 
@@ -549,7 +550,7 @@ router.post('/forgot-password', authRateLimiter, async (req, res) => {
       otp,
       resetRef
     });
-    if (!delivery || !delivery.success || delivery.provider === 'simulation') {
+    if (!delivery || !delivery.success) {
       return res.status(503).json({
         success: false,
         error: 'We could not deliver the reset code. Please try again later or contact support.'
@@ -557,6 +558,16 @@ router.post('/forgot-password', authRateLimiter, async (req, res) => {
     }
 
     resetOtpVault.set(emailKey, resetEntry);
+
+    if (delivery.provider === 'simulation') {
+      console.log(`[DEV OTP] Generated password reset code for ${user.email}: ${otp}`);
+      return res.json({
+        success: true,
+        message: `Verification code generated! (Dev mode OTP: ${otp})`,
+        devOtp: otp
+      });
+    }
+
     return res.json({
       success: true,
       message: 'If an account matches this identifier, a verification code will be sent to its registered email.'
