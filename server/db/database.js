@@ -309,7 +309,10 @@ const Moments = {
 
   async create(momentData) {
     const id = momentData.id || ('vm_' + crypto.randomBytes(8).toString('hex'));
-    const slug = momentData.slug || ('m_' + crypto.randomBytes(6).toString('hex')); // unguessable 12-char slug
+    let slug = momentData.slug ? momentData.slug.toLowerCase().trim().replace(/[^a-z0-9_-]/g, '-') : ('m_' + crypto.randomBytes(6).toString('hex'));
+    while (store.moments.some(m => m.slug === slug)) {
+      slug = `${slug}-${crypto.randomBytes(2).toString('hex')}`;
+    }
     const moment = {
       id,
       slug,

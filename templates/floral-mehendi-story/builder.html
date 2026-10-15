@@ -1205,7 +1205,7 @@
             </p>
 
             <ul class="launch-features-list">
-              <li><span>✦</span> <strong>Permanent Live Link:</strong> <span style="color:#1e3d2c;">vanvimoments.com/<span id="cardSlugPreview">priya-arjun</span></span></li>
+              <li><span>✦</span> <strong>Permanent Live Link:</strong> <span style="display:inline-flex; align-items:center; gap:5px; background:rgba(212,175,55,0.18); color:#7d5c19; font-weight:700; padding:3px 9px; border-radius:12px; font-size:0.75rem;"><i class="fa-solid fa-lock"></i> Unlocks Instantly Upon Payment</span></li>
               <li><span>✦</span> <strong>VIP Guest Links:</strong> Unlimited personalized invitations (?guest=Name)</li>
               <li><span>✦</span> <strong>Interactive Ashirwad Box:</strong> Instant WhatsApp delivery & blessings wall</li>
               <li><span>✦</span> <strong>Music Soundscape:</strong> Royal Shehnai & Sitar acoustic soundtrack included</li>
@@ -1273,8 +1273,8 @@
             <strong style="color:#1e3d2c;"><span id="mCoupleDisplay">Priya & Arjun</span></strong>
           </div>
           <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;">
-            <span style="color:#6B4E5D;">Live URL:</span>
-            <strong style="color:#1e3d2c; font-family:monospace;">vanvimoments.com/<span id="mSlugDisplay">priya-arjun</span></strong>
+            <span style="color:#6B4E5D;">Website Link:</span>
+            <strong style="color:#7d5c19; font-size:12px;"><i class="fa-solid fa-lock"></i> Unlocks after payment verification</strong>
           </div>
           <div style="display:flex; justify-content:space-between; font-size:14px; border-top:1px dashed rgba(200,155,60,0.5); padding-top:8px; margin-top:8px;">
             <span style="color:#6B4E5D;">Launch Total:</span>
@@ -1583,14 +1583,24 @@
       }
     }
 
+    let vanviGeneratedLiveUrl = '';
+
     async function handleFloralPaymentSuccess(paymentId, orderId, signature) {
       const data = getFloralFormData();
-      const liveUrl = `https://vanvimoments.com/${data.slug}`;
+      // Intelligent collision-proof slug: e.g. priya-arjun-7k9m
+      const uniqueSuffix = Math.random().toString(36).substring(2, 6);
+      const uniqueSlug = `${data.slug}-${uniqueSuffix}`;
+      
+      const origin = window.location.origin;
+      const path = window.location.pathname.replace('builder.html', 'index.html');
+      vanviGeneratedLiveUrl = `${origin}${path}?id=${uniqueSlug}&bride=${encodeURIComponent(data.bride)}&groom=${encodeURIComponent(data.groom)}`;
+      const liveUrl = vanviGeneratedLiveUrl;
 
       // Save to local storage for persistence
       try {
-        localStorage.setItem(`vanvi_published_${data.slug}`, JSON.stringify({
+        localStorage.setItem(`vanvi_published_${uniqueSlug}`, JSON.stringify({
           template: 'floral-mehendi-story',
+          slug: uniqueSlug,
           bride: data.bride,
           groom: data.groom,
           paymentId: paymentId,
@@ -1608,15 +1618,16 @@
             body: JSON.stringify({
               razorpay_order_id: orderId,
               razorpay_payment_id: paymentId,
-              razorpay_signature: signature
+              razorpay_signature: signature,
+              slug: uniqueSlug
             })
           }).catch(() => {});
         } catch (e) {}
       }
 
-      // Populate Success Screen
+      // Populate Success Screen ONLY after payment
       document.getElementById('livePublishedUrlText').textContent = liveUrl;
-      document.getElementById('btnOpenPublishedSite').href = `./index.html?bride=${encodeURIComponent(data.bride)}&groom=${encodeURIComponent(data.groom)}`;
+      document.getElementById('btnOpenPublishedSite').href = liveUrl;
 
       const shareMsg = encodeURIComponent(`🌸 Namaste! We invite you to our wedding celebration! View our bespoke Floral Mehendi Story invitation here:\n${liveUrl}`);
       document.getElementById('btnShareWaPublishedSite').href = `https://wa.me/?text=${shareMsg}`;
@@ -1625,12 +1636,12 @@
       document.getElementById('floralModalCheckoutView').style.display = 'none';
       document.getElementById('floralModalSuccessView').style.display = 'block';
 
-      showToast(`🎉 Payment of ₹499 verified! Site is LIVE at: ${liveUrl}`);
+      showToast(`🎉 Payment of ₹499 verified! Site is LIVE!`);
     }
 
     function copyLivePublishedUrl() {
-      const data = getFloralFormData();
-      const liveUrl = `https://vanvimoments.com/${data.slug}`;
+      const liveUrl = vanviGeneratedLiveUrl || document.getElementById('livePublishedUrlText')?.textContent;
+      if (!liveUrl) return;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(liveUrl).then(() => {
           showToast(`📋 Live link copied: ${liveUrl}`);

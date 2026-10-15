@@ -122,6 +122,16 @@ router.get('/public/:slug', async (req, res) => {
       return res.status(404).json({ success: false, error: 'Moment not found or link has expired.' });
     }
 
+    const isPaid = Boolean(moment.paid || moment.isPurchased || moment.status === 'published');
+    if (!isPaid) {
+      return res.status(402).json({
+        success: false,
+        error: 'This celebration moment is awaiting payment activation.',
+        requiresPayment: true,
+        paid: false
+      });
+    }
+
     // Increment view count
     await Moments.incrementStats(moment.id, { views: 1 });
 
