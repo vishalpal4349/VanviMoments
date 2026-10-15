@@ -315,15 +315,17 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Export app for testing, start if executed directly
-if (require.main === module) {
+// Export app for testing, start if executed directly or via root index.js
+if (require.main === module || !module.parent || (require.main && require.main.filename && require.main.filename.endsWith('index.js'))) {
   const envStatus = validateEnv();
 
-  app.listen(PORT, () => {
-    console.log(`\n======================================================`);
-    console.log(`✨ VANVI MOMENTS — PRODUCTION BACKEND LAUNCHED`);
-    console.log(`======================================================`);
-    console.log(`🌐 Server URL:   http://localhost:${PORT}`);
+  if (!app._isListening) {
+    app._isListening = true;
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`\n======================================================`);
+      console.log(`✨ VANVI MOMENTS — PRODUCTION BACKEND LAUNCHED`);
+      console.log(`======================================================`);
+      console.log(`🌐 Server URL:   http://0.0.0.0:${PORT}`);
     console.log(`📁 Static UI:    http://localhost:${PORT}/index.html`);
     console.log(`🔒 API Health:   http://localhost:${PORT}/api/health`);
     console.log(`⚡ Environment:  ${process.env.NODE_ENV || 'development'}`);
@@ -334,7 +336,8 @@ if (require.main === module) {
     console.log(`🤖 AI Engine:   ${envStatus.integrations.ai}`);
     console.log(`📧 Email Desk:  ${envStatus.integrations.email}`);
     console.log(`======================================================\n`);
-  });
+    });
+  }
 }
 
 module.exports = app;
