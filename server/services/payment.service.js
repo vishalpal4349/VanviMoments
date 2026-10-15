@@ -87,7 +87,7 @@ async function createRazorpayOrder({ amount, currency = 'INR', receipt, notes = 
         order_id: 'order_demo_' + crypto.randomBytes(8).toString('hex'),
         amount: Math.round(numericAmount),
         currency: currency || 'INR',
-        key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_TlVNL5jlAkOovF',
+        key_id: process.env.RAZORPAY_KEY_ID || 'rzp_live_TnxqOG4GfR4ZXi',
         is_demo: true
       };
     }

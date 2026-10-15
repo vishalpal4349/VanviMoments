@@ -563,8 +563,8 @@
     <div class="tb-right">
       <button type="button" class="btn-preset-load" onclick="loadSamplePreset()">✨ Sample</button>
       <button type="button" class="btn-preset-load" onclick="openLiveCustomizedPreview()" style="background:rgba(255,255,255,0.1); color:#fff; border-color:rgba(255,255,255,0.2);">👁️ Fullscreen</button>
-      <a href="javascript:void(0)" onclick="copyOrShareLiveLink()" class="btn-unlock-gold" style="background:linear-gradient(135deg, #d4af37, #996515); color:#fff;">
-        ✦ Save &amp; Share
+      <a href="javascript:void(0)" onclick="copyOrShareLiveLink()" class="btn-unlock-gold" style="background:linear-gradient(135deg, #d4af37, #996515); color:#fff; text-decoration:none;">
+        ✦ Pay ₹699 &amp; Publish
       </a>
     </div>
   </header>
@@ -915,13 +915,10 @@ Mrs. Sunita Singhania</textarea>
     }
 
     function copyOrShareLiveLink() {
-      const url = new URL(getLiveUrl(), window.location.href).href;
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(url);
-        alert('🎉 Royal Invitation Link copied to clipboard!\n\nShare it directly on WhatsApp with your family & guests:\n' + url);
-      } else {
-        prompt('Copy your Royal Invitation Link:', url);
-      }
+      const bride = document.getElementById('inpBride')?.value.trim() || 'Tanya';
+      const groom = document.getElementById('inpGroom')?.value.trim() || 'Rohan';
+      const title = encodeURIComponent(`${bride} & ${groom} - Royal Udaivilas Baithak`);
+      window.location.href = `../../checkout.html?templateId=royal-udaivilas-baithak&amount=699&name=${title}&bride=${encodeURIComponent(bride)}&groom=${encodeURIComponent(groom)}&occasion=Wedding`;
     }
   </script>
 </body>

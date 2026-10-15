@@ -687,8 +687,8 @@ Smt. Lakshmi Radhakrishnan</textarea>
             <strong style="color:var(--gold-light);"><span id="mGroom">Kishan</span> &amp; <span id="mBride">Divya</span></strong>
           </div>
           <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;">
-            <span>Live URL:</span>
-            <strong style="color:#25d366;">vanvimoments.com/<span id="mSlug">kishan-divya</span></strong>
+            <span>Website Link:</span>
+            <strong style="color:var(--gold-light); font-size:12px;">🔒 Unlocks after payment verification</strong>
           </div>
           <div style="display:flex; justify-content:space-between; font-size:14px; border-top:1px dashed var(--border-gold); padding-top:8px; margin-top:8px;">
             <span>Launch Total:</span>
@@ -833,15 +833,19 @@ Smt. Lakshmi Radhakrishnan</textarea>
     }
 
     function executeAutoPublish(method) {
-      const slug = document.getElementById('liveSlugInp').value || 'kishan-divya';
-      const fullUrl = `https://vanvimoments.com/${slug}`;
-      const localUrl = `./index.html?slug=${slug}`;
+      const groom = document.getElementById('inpGroom')?.value || 'Kishan';
+      const bride = document.getElementById('inpBride')?.value || 'Divya';
+      const baseSlug = (document.getElementById('liveSlugInp')?.value || `${groom}-${bride}`).toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
+      const uniqueSuffix = Math.random().toString(36).substring(2, 6);
+      const uniqueSlug = `${baseSlug}-${uniqueSuffix}`;
+      
+      const origin = window.location.origin;
+      const path = window.location.pathname.replace('builder.html', 'index.html');
+      const fullUrl = `${origin}${path}?id=${uniqueSlug}&groom=${encodeURIComponent(groom)}&bride=${encodeURIComponent(bride)}`;
 
       document.getElementById('publishedLiveUrl').textContent = fullUrl;
-      document.getElementById('btnOpenPublished').href = localUrl;
+      document.getElementById('btnOpenPublished').href = fullUrl;
 
-      const groom = document.getElementById('inpGroom').value || 'Kishan';
-      const bride = document.getElementById('inpBride').value || 'Divya';
       const shareMsg = encodeURIComponent(`🪷 We are delighted to announce our wedding! Here is our sacred temple digital invitation: ${fullUrl}`);
       document.getElementById('btnShareWaPublished').href = `https://wa.me/?text=${shareMsg}`;
 

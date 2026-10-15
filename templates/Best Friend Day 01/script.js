@@ -516,7 +516,7 @@
       console.warn("Backend order creation notice:", err);
     }
 
-    const keyId = (orderData && orderData.key_id) || "rzp_test_TlVNL5jlAkOovF";
+    const keyId = (orderData && orderData.key_id) || "rzp_live_TnxqOG4GfR4ZXi";
     const orderId = (orderData && orderData.order_id) || "order_sim_" + Date.now();
 
     if (typeof Razorpay !== "undefined") {
