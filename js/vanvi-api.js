@@ -132,6 +132,16 @@
     }
   }
 
+  window.vanviSafeRedirect = function(candidate, fallback = 'dashboard.html') {
+    try {
+      const destination = new URL(candidate || fallback, window.location.href);
+      if (destination.origin !== window.location.origin) return fallback;
+      return `${destination.pathname}${destination.search}${destination.hash}`;
+    } catch (error) {
+      return fallback;
+    }
+  };
+
   const VanviAPI = {
     // 1. Health & Status
     async isOnline() {
@@ -378,10 +388,10 @@
 
     // 5. Orders & Payments
     orders: {
-      async create({ momentId, templateName, templatePrice, templateId, applyCoins, applyPassCredits }) {
+      async create({ momentId, templateName, templatePrice, templateId, applyCoins, applyPassCredits, couponCode, customAmount, userCoins, userTier, userCredits }) {
         return await request('/api/orders/create', {
           method: 'POST',
-          body: { momentId, templateName, templatePrice, templateId, applyCoins, applyPassCredits }
+          body: { momentId, templateName, templatePrice, templateId, applyCoins, applyPassCredits, couponCode, customAmount, userCoins, userTier, userCredits }
         });
       },
 

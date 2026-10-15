@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Rewards &amp; Offers — Spin, Games &amp; Discounts · Vanvi Moments</title>
-  <meta name="description" content="Earn Vanvi Coins with daily fortune spins, micro-games, active discount coupons, and referral bonuses. Redeem coins for up to 40% off celebration moments.">
+  <meta name="description" content="Earn Vanvi Coins with daily fortune spins, micro-games, active discount coupons, and referral bonuses. Redeem coins for up to 50% off celebration moments (30% Free, 50% VIP).">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1423,7 +1423,7 @@
       </div>
       <div class="coin-tagline">“Spin daily, play micro-games &amp; unlock real celebration discounts.”</div>
       <div>
-        <span class="coin-rate-pill">Exchange Value: 10 Coins = ₹1.00 · Up to 40% Off Any Template</span>
+        <span class="coin-rate-pill">Exchange Value: 10 Coins = ₹1.00 · Up to 50% Off (30% Free, 50% VIP)</span>
       </div>
       <div class="hero-btn-row">
         <button type="button" class="hero-cta-btn" onclick="switchRewardTab('wheel', true)">🎡 Spin Wheel Now</button>
@@ -1451,7 +1451,7 @@
         <span class="hub-pill-icon">🏷️</span>
         <div class="hub-pill-text">
           <strong>Discounts</strong>
-          <small>40% OFF</small>
+          <small>Up to 30% OFF</small>
         </div>
       </div>
       <div class="quick-hub-pill" onclick="switchRewardTab('referral')">
@@ -1695,7 +1695,7 @@
         <h3><span>📜</span> How Vanvi Coins &amp; Rewards Work</h3>
         <ul class="rules-list">
           <li><strong>Loyalty Credits:</strong> Vanvi Coins are promotional loyalty rewards earned through daily spins, micro-games, and friend referrals.</li>
-          <li><strong>Conversion Value:</strong> 10 Coins = ₹1.00 instant store credit at checkout. You can redeem coins for up to 40% discount on any template or VIP experience.</li>
+          <li><strong>Conversion Value:</strong> 10 Coins = ₹1.00 instant store credit at checkout. You can redeem coins for up to 30% discount as a Free creator, or up to 50% discount as a Club/VIP member.</li>
           <li><strong>Instant 1-Click Coupons:</strong> Promo coupons can be combined with coin balance for maximum savings on anniversary, birthday, and celebration designs.</li>
           <li><strong>Fair Play &amp; Reset Times:</strong> Daily spins reset every 24 hours. The Lucky Moment unlocks every 14 days. Scripting or tampering will automatically reset unverified coins.</li>
         </ul>
@@ -2233,10 +2233,11 @@
       function renderCoupons() {
         if (!couponContainer) return;
         const coupons = [
-          { code: 'MOMENT40', pct: '40%', title: 'Ultra Celebration Deal', desc: '40% OFF on bespoke celebrations & digital cards' },
-          { code: 'VANVI100', pct: '₹100', title: 'Atelier Experience Voucher', desc: 'Flat ₹100 discount on 24K premium moments' },
-          { code: 'LOVE25', pct: '25%', title: 'Romantic & Anniversary Special', desc: '25% discount on all love & romance templates' },
-          { code: 'CELEBRATE', pct: '20%', title: 'Birthday Bash Moment', desc: '20% OFF on all party, cake & birthday cards' }
+          { code: 'WELCOME30', pct: '30%', title: '🎁 High Welcome Bonus Voucher', desc: '30% OFF exclusive welcome reward for all new creators & celebrations' },
+          { code: 'LOVE25', pct: '25%', title: '💖 Romantic & Anniversary Special', desc: '25% discount on all love & romance celebration moments' },
+          { code: 'SPECIAL25', pct: '25%', title: '✨ Festive & Grand Celebrations', desc: '25% discount on weddings, festivals & party templates' },
+          { code: 'VANVI20', pct: '20%', title: '👑 Creator Appreciation Voucher', desc: '20% OFF on all digital celebration cards & moments' },
+          { code: 'CELEBRATE20', pct: '20%', title: '🎉 Birthday Celebration Bash', desc: '20% OFF on all party, cake & birthday moments' }
         ];
 
         couponContainer.innerHTML = coupons.map(c => `
@@ -2293,7 +2294,7 @@
           modalKicker.textContent = isLucky ? '14-Day Lucky Moment' : 'Your Little Surprise';
           modalTitle.textContent = isLucky ? 'Lucky Celebration Bonus!' : 'Congratulations!';
           modalCoinAmount.textContent = `+${wonCoins} Coins`;
-          modalMessage.textContent = 'Added to your Vanvi wallet! Redeemable for up to 40% discount on celebration moments.';
+          modalMessage.textContent = 'Added to your Vanvi wallet! Redeemable for up to 50% discount on celebration moments (30% Free, 50% VIP).';
           playWinFanfare();
         }
         modalBackdrop.classList.add('active');

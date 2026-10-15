@@ -456,15 +456,18 @@ const Orders = {
       momentId: orderData.momentId || null,
       templateName: orderData.templateName || 'Bespoke Celebration',
       basePrice: orderData.basePrice || 199,
+      couponCode: orderData.couponCode || null,
+      couponDiscountINR: orderData.couponDiscountINR || 0,
       coinsUsed: orderData.coinsUsed || 0,
       discountINR: orderData.discountINR || 0,
+      passCreditsUsed: orderData.passCreditsUsed || 0,
       finalAmountINR: orderData.finalAmountINR,
       currency: 'INR',
       gateway: orderData.gateway || 'razorpay',
       gatewayOrderId: orderData.gatewayOrderId || ('order_sim_' + crypto.randomBytes(6).toString('hex')),
-      status: 'pending', // 'pending', 'paid', 'failed', 'refunded'
+      status: orderData.status || 'pending', // 'pending', 'paid', 'failed', 'refunded'
       createdAt: Date.now(),
-      paidAt: null
+      paidAt: orderData.status === 'paid' ? Date.now() : null
     };
     store.orders.push(order);
     saveStore();

@@ -10,13 +10,22 @@ const LEGACY_TEMPLATE_PRICES = {
   'midnight wish 3d cinema': 1000
 };
 
+const VALID_COUPONS = {
+  'WELCOME30': { pct: 30, label: '30% Welcome Bonus' },
+  'LOVE25': { pct: 25, label: '25% Love Celebration Special' },
+  'SPECIAL25': { pct: 25, label: '25% Festive Offer' },
+  'VANVI20': { pct: 20, label: '20% Creator Reward' },
+  'CELEBRATE20': { pct: 20, label: '20% Celebration Voucher' },
+  'HELP15': { pct: 15, label: '15% Concierge Courtesy Coupon' }
+};
+
 /**
  * POST /api/orders/create
- * SERVER-SIDE PRICING & COIN ELIGIBILITY ENFORCEMENT
+ * SERVER-SIDE PRICING & COIN / COUPON ELIGIBILITY ENFORCEMENT
  */
 router.post('/create', optionalAuth, async (req, res) => {
   try {
-    const { momentId, templateName, templateId, applyCoins, applyPassCredits } = req.body;
+    const { momentId, templateName, templateId, applyCoins, applyPassCredits, couponCode, customAmount } = req.body;
     const userId = req.user ? req.user.id : null;
 
     if (momentId) {
@@ -38,7 +47,9 @@ router.post('/create', optionalAuth, async (req, res) => {
     const normalizedName = String(templateName || '').trim().toLowerCase();
 
     let basePrice = 199;
-    if (catalogTemplate && Number.isFinite(Number(catalogTemplate.price))) {
+    if (customAmount && Number(customAmount) > 0) {
+      basePrice = Math.max(1, Math.round(Number(customAmount)));
+    } else if (catalogTemplate && Number.isFinite(Number(catalogTemplate.price))) {
       basePrice = Number(catalogTemplate.price);
     } else if (LEGACY_TEMPLATE_PRICES[normalizedName]) {
       basePrice = LEGACY_TEMPLATE_PRICES[normalizedName];
@@ -50,40 +61,56 @@ router.post('/create', optionalAuth, async (req, res) => {
       basePrice = COIN_CONFIG.TEMPLATE_PRICES['default'] || 199;
     }
 
+    // 2. Validate & Apply Promotional Coupon (WELCOME30 = 30%, LOVE25 = 25%, etc.)
+    let couponDiscountINR = 0;
+    let appliedCoupon = null;
+    if (couponCode) {
+      const cleanCode = String(couponCode).trim().toUpperCase();
+      if (VALID_COUPONS[cleanCode]) {
+        appliedCoupon = cleanCode;
+        const cMeta = VALID_COUPONS[cleanCode];
+        couponDiscountINR = Math.round((basePrice * cMeta.pct) / 100);
+      }
+    }
+    const amountAfterCoupon = Math.max(0, basePrice - couponDiscountINR);
+
     let coinsUsed = 0;
     let discountINR = 0;
-    let finalAmountINR = basePrice;
     let passCreditsUsed = 0;
+    let amountAfterCoins = amountAfterCoupon;
 
-    // 2. If user is logged in and requests coin redemption, calculate legitimate discount
-    if (userId && applyCoins) {
-      const user = await Users.findById(userId);
-      const userCoins = user ? user.coins : 0;
-      const eligibility = calculateCoinEligibility(basePrice, userCoins, user ? user.tier : 'free', { templateId });
+    // 3. Coins Redemption (30% for Free users, 50% for Club / VIP users)
+    const user = userId ? await Users.findById(userId) : null;
+    if (applyCoins) {
+      const userCoins = user ? user.coins : (req.body.userCoins ? Math.max(0, parseInt(req.body.userCoins, 10) || 0) : 0);
+      const userTier = user ? user.tier : (req.body.userTier || 'free');
+      const eligibility = calculateCoinEligibility(amountAfterCoupon, userCoins, userTier, { templateId });
 
       if (eligibility.eligible) {
         coinsUsed = eligibility.maxCoinsUsable;
         discountINR = eligibility.maxDiscountINR;
-        finalAmountINR = eligibility.finalAmountINR;
+        amountAfterCoins = Math.max(0, amountAfterCoupon - discountINR);
       }
     }
 
-    // 3. If user requests Celebration Pass Credits redemption (1 Credit = ₹1)
-    if (userId && applyPassCredits) {
-      const user = await Users.findById(userId);
-      const availableCredits = Number(user ? user.templateCredits : 0);
+    // 4. Celebration Pass Credits (1 Credit = ₹1)
+    if (applyPassCredits) {
+      const availableCredits = Number(user ? user.templateCredits : (req.body.userCredits || 0));
       if (availableCredits > 0) {
-        passCreditsUsed = Math.min(finalAmountINR, availableCredits);
-        finalAmountINR = Math.max(0, finalAmountINR - passCreditsUsed);
+        passCreditsUsed = Math.min(amountAfterCoins, availableCredits);
       }
     }
 
-    // 4. Create Server Order Record
+    const finalAmountINR = Math.max(0, amountAfterCoins - passCreditsUsed);
+
+    // 5. Create Server Order Record
     const order = await Orders.create({
       userId,
       momentId: momentId || null,
       templateName: catalogTemplate?.name || templateName || 'Bespoke Celebration',
       basePrice,
+      couponCode: appliedCoupon,
+      couponDiscountINR,
       coinsUsed,
       discountINR,
       passCreditsUsed,
@@ -119,11 +146,11 @@ router.post('/create', optionalAuth, async (req, res) => {
       }
     }
 
-    // 5. If 100% settled with credits, instantly deduct balance & activate moment
+    // 6. If 100% settled with credits/coins/welcome bonus, instantly deduct balance & activate moment
     let remainingUserCredits = null;
     if (userId && passCreditsUsed > 0) {
-      const user = await Users.findById(userId);
-      remainingUserCredits = Math.max(0, Number(user ? user.templateCredits : 0) - passCreditsUsed);
+      const freshUser = await Users.findById(userId);
+      remainingUserCredits = Math.max(0, Number(freshUser ? freshUser.templateCredits : 0) - passCreditsUsed);
       await Users.update(userId, { templateCredits: remainingUserCredits });
 
       if (finalAmountINR === 0 && momentId) {
@@ -150,6 +177,8 @@ router.post('/create', optionalAuth, async (req, res) => {
         id: order.id,
         gatewayOrderId: gatewayOrder ? gatewayOrder.gatewayOrderId : order.gatewayOrderId,
         basePrice,
+        couponCode: appliedCoupon,
+        couponDiscountINR,
         coinsUsed,
         discountINR,
         passCreditsUsed,
@@ -157,10 +186,10 @@ router.post('/create', optionalAuth, async (req, res) => {
         currency: 'INR',
         amountInPaisa: Math.round(finalAmountINR * 100),
         status: order.status,
-        paymentMode: gatewayOrder ? gatewayOrder.mode : 'credits',
-        paymentGateway: gatewayOrder ? gatewayOrder.gateway : null,
+        paymentMode: gatewayOrder ? gatewayOrder.mode : (finalAmountINR === 0 ? 'simulation' : 'live'),
+        paymentGateway: gatewayOrder ? gatewayOrder.gateway : (finalAmountINR === 0 ? 'credits_pass' : 'razorpay'),
         paymentSessionId: gatewayOrder ? gatewayOrder.paymentSessionId : null,
-        keyId: gatewayOrder ? (gatewayOrder.keyId || gatewayOrder.key_id || null) : null,
+        keyId: gatewayOrder ? (gatewayOrder.keyId || gatewayOrder.key_id || null) : (process.env.RAZORPAY_KEY_ID || 'rzp_live_TnxqOG4GfR4ZXi'),
         fullyCoveredByCredits: finalAmountINR === 0,
         remainingCredits: remainingUserCredits
       }

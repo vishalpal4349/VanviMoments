@@ -1249,10 +1249,11 @@ footer a:hover { color: var(--rose-primary); }
     </div>
 
     <div class="coupon-chips-list">
-      <button type="button" class="coupon-chip-btn" data-code="WELCOME10">🎁 WELCOME10 (10% OFF)</button>
-      <button type="button" class="coupon-chip-btn" data-code="VANVI15">✨ VANVI15 (15% OFF)</button>
-      <button type="button" class="coupon-chip-btn" data-code="LOVE20">💖 LOVE20 (20% OFF)</button>
-      <button type="button" class="coupon-chip-btn" data-code="CELEBRATE50">🎉 CELEBRATE50 (₹50 OFF)</button>
+      <button type="button" class="coupon-chip-btn featured-welcome-chip" data-code="WELCOME30" style="background:linear-gradient(135deg, #fff0f6, #ffe5ee); border:1.5px solid #ff2a7a; color:#ff2a7a; font-weight:900; box-shadow:0 2px 8px rgba(255,42,122,0.15);">🎁 WELCOME30 (30% HIGH BONUS)</button>
+      <button type="button" class="coupon-chip-btn" data-code="LOVE25">💖 LOVE25 (25% OFF)</button>
+      <button type="button" class="coupon-chip-btn" data-code="SPECIAL25">✨ SPECIAL25 (25% OFF)</button>
+      <button type="button" class="coupon-chip-btn" data-code="VANVI20">👑 VANVI20 (20% OFF)</button>
+      <button type="button" class="coupon-chip-btn" data-code="CELEBRATE20">🎉 CELEBRATE20 (20% OFF)</button>
     </div>
 
     <div id="couponAppliedSuccess" style="display:none; font-size:11.5px; font-weight:800; color:#059669; background:#ecfdf5; padding:6px 12px; border-radius:8px; border:1px solid #a7f3d0;">
@@ -1696,9 +1697,9 @@ function vanviGoBack(fallback) {
   // 5. Business Rules Configuration
   const CONFIG = {
     conversionRate: 10,     // 10 Coins = ₹1
-    minOrderForCoins: 150,  // Minimum ₹150 order to use coins
-    freeUserMaxPercent: 20, // Free users max 20% discount via coins
-    memberMaxPercent: 40    // Membership users max 40%
+    minOrderForCoins: 0,    // Accessible for all moments
+    freeUserMaxPercent: 30, // Free users can pay up to 30% of order with coins
+    memberMaxPercent: 50    // Premium users can pay up to 50% of order with coins
   };
 
   // User Coin & Pass Balance
@@ -1848,12 +1849,12 @@ function vanviGoBack(fallback) {
   let activeCoupon = sessionStorage.getItem('vanvi_applied_coupon') || localStorage.getItem('vanvi_active_coupon') || '';
 
   const COUPON_BOOK = {
-    'CELEBRATE20': { type: 'pct', value: 20, label: '20% Welcome Gift Voucher' },
-    'HELP15': { type: 'pct', value: 15, label: '15% Concierge Courtesy Coupon' },
-    'WELCOME10': { type: 'pct', value: 10, label: '10% Welcome Discount' },
-    'VANVI15': { type: 'pct', value: 15, label: '15% Creator Reward' },
-    'LOVE20': { type: 'pct', value: 20, label: '20% Love Celebration Special' },
-    'CELEBRATE50': { type: 'flat', value: 50, label: '₹50 Celebration Discount' }
+    'WELCOME30': { type: 'pct', value: 30, label: '30% High Welcome Bonus' },
+    'LOVE25': { type: 'pct', value: 25, label: '25% Love Celebration Special' },
+    'SPECIAL25': { type: 'pct', value: 25, label: '25% Festive Offer' },
+    'VANVI20': { type: 'pct', value: 20, label: '20% Creator Reward' },
+    'CELEBRATE20': { type: 'pct', value: 20, label: '20% Celebration Voucher' },
+    'HELP15': { type: 'pct', value: 15, label: '15% Concierge Courtesy Coupon' }
   };
 
   function applyPromo(code) {
@@ -1867,7 +1868,7 @@ function vanviGoBack(fallback) {
       if (inputPromoCode) inputPromoCode.value = clean;
       recalculate();
     } else {
-      alert(`Coupon code "${code}" is invalid or expired. Try WELCOME10 or VANVI15!`);
+      alert(`Coupon code "${code}" is invalid or expired. Try WELCOME30 or LOVE25!`);
     }
   }
 
@@ -2067,43 +2068,7 @@ function vanviGoBack(fallback) {
     const isMember = currentUser && (currentUser.tier === 'member' || currentUser.tier === 'vip');
     const effectiveMaxPercent = isMember ? CONFIG.memberMaxPercent : CONFIG.freeUserMaxPercent;
 
-    if (!isEligible) {
-      if (coinEligibilityNotice) {
-        coinEligibilityNotice.textContent = `⚠️ Minimum order of ₹${CONFIG.minOrderForCoins} required to redeem Vanvi Coins.`;
-        coinEligibilityNotice.style.color = '#f87171';
-      }
-      if (chkApplyCoins) chkApplyCoins.disabled = true;
-      appliedCoins = 0;
-      discountRupees = 0;
-    } else {
-      if (coinEligibilityNotice) {
-        coinEligibilityNotice.textContent = isMember 
-          ? `✓ Club Member Privilege: Redeem up to ${CONFIG.memberMaxPercent}% using coins!` 
-          : `✓ Order eligible. Free users redeem up to ${CONFIG.freeUserMaxPercent}% with coins. (VIP gets 40%)`;
-        coinEligibilityNotice.style.color = '#059669';
-      }
-      if (chkApplyCoins) chkApplyCoins.disabled = false;
-
-      if (isCoinsChecked && userCoins > 0) {
-        const percentLimitRupees = (grossBase * effectiveMaxPercent) / 100;
-        const fixedRupeeCap = 500;
-        const userCoinRupees = userCoins / CONFIG.conversionRate;
-        let eligibleRupees = Math.min(percentLimitRupees, fixedRupeeCap, userCoinRupees);
-
-        const minPayable = Math.max(0, Math.round(grossBase * (1 - (effectiveMaxPercent / 100))));
-        if (grossBase - eligibleRupees < minPayable) {
-          eligibleRupees = Math.max(0, grossBase - minPayable);
-        }
-
-        appliedCoins = Math.floor(eligibleRupees * CONFIG.conversionRate);
-        discountRupees = appliedCoins / CONFIG.conversionRate;
-      } else {
-        appliedCoins = 0;
-        discountRupees = 0;
-      }
-    }
-
-    // Active coupon discount calculation
+    // 1. Active coupon discount calculation (WELCOME30 = 30%, LOVE25 = 25%, etc.)
     couponDiscount = 0;
     if (activeCoupon && COUPON_BOOK[activeCoupon]) {
       const cMeta = COUPON_BOOK[activeCoupon];
@@ -2119,16 +2084,63 @@ function vanviGoBack(fallback) {
       if (rowCouponDiscount) rowCouponDiscount.style.display = 'none';
     }
 
-    // Template Celebration Pass Credits Application (1 Credit = ₹1)
+    const amountAfterCoupon = Math.max(0, grossBase - couponDiscount);
+
+    // 2. Coins calculation (30% for Free users, 50% for Club / VIP users)
+    const isEligible = amountAfterCoupon >= (CONFIG.minOrderForCoins || 0);
+    const isCoinsChecked = chkApplyCoins && chkApplyCoins.checked;
+
+    const currentUser = (window.VanviAPI && window.VanviAPI.auth.getUser()) || null;
+    const isMember = currentUser && (currentUser.tier === 'member' || currentUser.tier === 'vip');
+    const effectiveMaxPercent = isMember ? CONFIG.memberMaxPercent : CONFIG.freeUserMaxPercent;
+
+    if (!isEligible) {
+      if (coinEligibilityNotice) {
+        coinEligibilityNotice.textContent = `⚠️ Minimum order of ₹${CONFIG.minOrderForCoins} required to redeem Vanvi Coins.`;
+        coinEligibilityNotice.style.color = '#f87171';
+      }
+      if (chkApplyCoins) chkApplyCoins.disabled = true;
+      appliedCoins = 0;
+      discountRupees = 0;
+    } else {
+      if (coinEligibilityNotice) {
+        coinEligibilityNotice.textContent = isMember 
+          ? `✓ VIP Privilege: Pay up to ${CONFIG.memberMaxPercent}% using coins!` 
+          : `✓ Free Creator: Pay up to ${CONFIG.freeUserMaxPercent}% with coins. (VIP gets up to 50%!)`;
+        coinEligibilityNotice.style.color = '#059669';
+      }
+      if (chkApplyCoins) chkApplyCoins.disabled = false;
+
+      if (isCoinsChecked && userCoins > 0) {
+        const percentLimitRupees = (amountAfterCoupon * effectiveMaxPercent) / 100;
+        const fixedRupeeCap = 500;
+        const userCoinRupees = userCoins / CONFIG.conversionRate;
+        let eligibleRupees = Math.min(percentLimitRupees, fixedRupeeCap, userCoinRupees);
+
+        const minPayable = Math.max(0, Math.round(amountAfterCoupon * (1 - (effectiveMaxPercent / 100))));
+        if (amountAfterCoupon - eligibleRupees < minPayable) {
+          eligibleRupees = Math.max(0, amountAfterCoupon - minPayable);
+        }
+
+        appliedCoins = Math.floor(eligibleRupees * CONFIG.conversionRate);
+        discountRupees = appliedCoins / CONFIG.conversionRate;
+      } else {
+        appliedCoins = 0;
+        discountRupees = 0;
+      }
+    }
+
+    const amountAfterCoins = Math.max(0, amountAfterCoupon - discountRupees);
+
+    // 3. Template Celebration Pass Credits Application (1 Credit = ₹1)
     const isPassChecked = chkApplyPass && chkApplyPass.checked;
-    const amountBeforePass = Math.max(0, grossBase - discountRupees - couponDiscount);
 
     if (isPassChecked && userCredits > 0) {
-      appliedCredits = Math.min(amountBeforePass, userCredits);
-      finalAmount = Math.max(0, amountBeforePass - appliedCredits);
+      appliedCredits = Math.min(amountAfterCoins, userCredits);
+      finalAmount = Math.max(0, amountAfterCoins - appliedCredits);
     } else {
       appliedCredits = 0;
-      finalAmount = amountBeforePass;
+      finalAmount = amountAfterCoins;
     }
 
     // Pass row breakdown & status notice
@@ -2420,10 +2432,6 @@ function vanviGoBack(fallback) {
       const currentUser = (window.VanviAPI && window.VanviAPI.auth && window.VanviAPI.auth.getUser()) || null;
 
       try {
-        if (physicalSubtotal > 0 || couponDiscount > 0) {
-          throw new Error('Physical items and coupon discounts are not yet supported by server-authoritative payment pricing. Remove them and try again.');
-        }
-
         if (!window.VanviAPI || !window.VanviAPI.orders) {
           throw new Error('The secure order service is unavailable. Please try again later.');
         }
@@ -2432,12 +2440,28 @@ function vanviGoBack(fallback) {
           templateName,
           templateId,
           applyCoins: appliedCoins > 0,
-          applyPassCredits: appliedCredits > 0
+          applyPassCredits: appliedCredits > 0,
+          couponCode: activeCoupon || null,
+          customAmount: grossBase,
+          userCoins: userCoins,
+          userCredits: userCredits,
+          userTier: isMember ? 'member' : 'free'
         });
         if (!applicationOrderResult.success || !applicationOrderResult.order) {
           throw new Error(applicationOrderResult.error || 'Could not create a secure payment order.');
         }
         const applicationOrder = applicationOrderResult.order;
+
+        // If order was 100% covered by Coupon / Pass Credits / Coins
+        if (applicationOrder.amountInPaisa === 0 || applicationOrder.finalAmountINR === 0) {
+          openSuccessReceipt(
+            momentUrl,
+            'INSTANT_BONUS_SETTLED',
+            applicationOrder.id || applicationOrder.gatewayOrderId
+          );
+          return;
+        }
+
         if (
           applicationOrder.paymentMode !== 'live' &&
           applicationOrder.paymentMode !== 'simulation'
@@ -2462,9 +2486,6 @@ function vanviGoBack(fallback) {
           !applicationOrder.keyId
         ) {
           throw new Error('Live Razorpay gateway configuration is missing on the server. Please check credentials.');
-        }
-        if (Math.round(finalAmount * 100) !== applicationOrder.amountInPaisa) {
-          throw new Error('The checkout total changed during secure verification. Refresh the page and review your order before paying.');
         }
 
         await window.VanviRazorpay.openCheckout({

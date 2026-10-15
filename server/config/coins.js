@@ -7,22 +7,22 @@ const COIN_CONFIG = {
   // Exchange Rate: 10 coins = ₹1.00
   COINS_PER_RUPEE: 10,
 
-  // Minimum order amount required to be eligible for coin redemption
-  MIN_ORDER_FOR_DISCOUNT_INR: 150,
+  // Minimum order amount required to be eligible for coin redemption (0 = all moments eligible)
+  MIN_ORDER_FOR_DISCOUNT_INR: 0,
 
   // Absolute minimum cash amount that must be paid in INR
-  MIN_PAYABLE_AMOUNT_INR: 49,
+  MIN_PAYABLE_AMOUNT_INR: 0,
 
   // Maximum fixed rupee discount cap for standard templates (can be overridden per template)
   MAX_FIXED_DISCOUNT_CAP_INR: 500,
 
   // Maximum percentage discount allowed via coins based on tier
-  // FREE: 20% max
-  // CLUB / ANNUAL / LIFETIME: 40% max
+  // FREE: 30% max
+  // CLUB / VIP / PREMIUM: 50% max
   MAX_DISCOUNT_TIERS: {
-    free: 0.20,       // Free users: max 20% discount (e.g., up to ₹200 on ₹1,000)
-    member: 0.40,     // Club / Annual: max 40% discount (e.g., up to ₹400 on ₹1,000)
-    vip: 0.40         // Lifetime Patron: max 40% discount
+    free: 0.30,       // Free users: max 30% discount via coins
+    member: 0.50,     // Club / Annual: max 50% discount via coins
+    vip: 0.50         // Lifetime / VIP Patron: max 50% discount via coins
   },
 
   // Daily Fortune Wheel rules (Significantly reduced, non-predictable, weighted economy)
