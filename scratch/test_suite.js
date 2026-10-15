@@ -1,4 +1,5 @@
 const fs = require('fs');
+const assert = require('assert');
 const html = fs.readFileSync('index.html', 'utf8');
 
 console.log('=== VANVI MOMENTS COMPREHENSIVE TEST SUITE ===\n');
@@ -87,3 +88,7 @@ const overflowHidden = html.includes('overflow-x: hidden !important');
 const noButtonTilt = html.includes('/* Stop button physical tilt/jump while keeping glowing ambient flow */');
 console.log(' - Overflow-x locked: ' + (overflowHidden ? 'PASS' : 'FAIL'));
 console.log(' - Button float shaking removed: ' + (noButtonTilt ? 'PASS' : 'FAIL'));
+
+// New accounts start with zero coins; do not advertise a signup coin bonus.
+assert.doesNotMatch(html, /50\s+welcome\s+coins|claim\s+50\s+free\s+coins\s+on\s+signup|instant credit to use on/i);
+console.log(' - Homepage avoids the obsolete signup coin-credit claim: PASS');

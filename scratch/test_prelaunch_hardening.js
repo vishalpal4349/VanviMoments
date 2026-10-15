@@ -3,6 +3,16 @@
  * Comprehensive verification of all 13 production readiness priorities.
  */
 
+process.env.NODE_ENV = 'test';
+[
+  'RAZORPAY_KEY_ID',
+  'RAZORPAY_KEY_SECRET',
+  'RAZORPAY_WEBHOOK_SECRET',
+  'CASHFREE_APP_ID',
+  'CASHFREE_SECRET_KEY',
+  'CASHFREE_API_VERSION'
+].forEach((key) => delete process.env[key]);
+
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
@@ -218,26 +228,36 @@ const { testConnection } = require('../server/db/database');
   // 6. Transactional Email & Notifications
   // --------------------------------------------------------------------------
   console.log('\n📧 6. Testing Email & Notification Service...');
+  const emailEnvKeys = ['RESEND_API_KEY', 'SMTP_HOST', 'SMTP_PORT', 'SMTP_SECURE', 'SMTP_USER', 'SMTP_PASS', 'GMAIL_USER', 'GMAIL_APP_PASS'];
+  const originalEmailEnv = Object.fromEntries(emailEnvKeys.map(key => [key, process.env[key]]));
+  emailEnvKeys.forEach(key => { delete process.env[key]; });
   const { sendOrderConfirmation, sendContactNotification } = require('../server/services/email.service');
 
-  const emailRes = await sendOrderConfirmation({
-    toEmail: 'customer@example.com',
-    customerName: 'Kavya Sharma',
-    orderId: 'ORD_EMAIL_TEST',
-    templateName: 'Velvet Rose Cinema',
-    amountINR: 199,
-    momentUrl: 'http://localhost:3000/moment.html?id=velvet-rose-test',
-    momentPin: '1234'
-  });
-  assert.strictEqual(emailRes.success, true, 'Order confirmation email dispatch must succeed');
+  try {
+    const emailRes = await sendOrderConfirmation({
+      toEmail: 'customer@example.com',
+      customerName: 'Kavya Sharma',
+      orderId: 'ORD_EMAIL_TEST',
+      templateName: 'Velvet Rose Cinema',
+      amountINR: 199,
+      momentUrl: 'http://localhost:3000/moment.html?id=velvet-rose-test',
+      momentPin: '1234'
+    });
+    assert.strictEqual(emailRes.success, true, 'Order confirmation email dispatch must succeed');
 
-  const contactEmailRes = await sendContactNotification({
-    fromName: 'Rohan Verma',
-    fromEmail: 'rohan@example.com',
-    subject: 'Custom music question',
-    message: 'Can I upload custom audio?'
-  });
-  assert.strictEqual(contactEmailRes.success, true, 'Contact email notification must succeed');
+    const contactEmailRes = await sendContactNotification({
+      fromName: 'Rohan Verma',
+      fromEmail: 'rohan@example.com',
+      subject: 'Custom music question',
+      message: 'Can I upload custom audio?'
+    });
+    assert.strictEqual(contactEmailRes.success, true, 'Contact email notification must succeed');
+  } finally {
+    emailEnvKeys.forEach(key => {
+      if (originalEmailEnv[key] === undefined) delete process.env[key];
+      else process.env[key] = originalEmailEnv[key];
+    });
+  }
   console.log('  ✅ Order confirmation and contact inquiry dispatch verified.');
 
   // --------------------------------------------------------------------------

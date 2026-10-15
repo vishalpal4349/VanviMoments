@@ -1,3 +1,13 @@
+process.env.NODE_ENV = 'test';
+[
+  'RAZORPAY_KEY_ID',
+  'RAZORPAY_KEY_SECRET',
+  'RAZORPAY_WEBHOOK_SECRET',
+  'CASHFREE_APP_ID',
+  'CASHFREE_SECRET_KEY',
+  'CASHFREE_API_VERSION'
+].forEach((key) => delete process.env[key]);
+
 const http = require('http');
 const app = require('../server/server');
 
@@ -111,35 +121,25 @@ server.listen(PORT, async () => {
     check('Moment draft created with unique slug', momentDraft.status === 201 && momentDraft.data.moment.slug);
     const slug = momentDraft.data.moment.slug;
 
-    // 9. Public Moment Fetch (Security: Message hidden!)
-    const publicMoment = await api(`/api/moments/public/${slug}`);
-    check('Public fetch succeeds', publicMoment.status === 200);
-    check('Sensitive message is NOT exposed before unlock', publicMoment.data.moment.message === undefined);
-    check('Photos are NOT exposed before unlock', publicMoment.data.moment.photos === undefined);
-    check('Lock mode reports locked: true', publicMoment.data.moment.locked === true);
+    // 9. Unpaid moments must not disclose content or allow visitor actions.
+    const unpaidPublic = await api(`/api/moments/public/${slug}`);
+    check('Unpaid moment content is blocked (402)', unpaidPublic.status === 402 && unpaidPublic.data.requiresPayment);
 
-    // 10. Server-Side PIN Verification
-    const wrongPin = await api(`/api/moments/public/${slug}/verify-pin`, {
-      method: 'POST',
-      body: { pin: '9999' }
-    });
-    check('Wrong PIN rejected (401)', wrongPin.status === 401);
-
-    const correctPin = await api(`/api/moments/public/${slug}/verify-pin`, {
+    const unpaidPin = await api(`/api/moments/public/${slug}/verify-pin`, {
       method: 'POST',
       body: { pin: '1234' }
     });
-    check('Correct PIN unlocks secret message & photos', correctPin.status === 200 && correctPin.data.message.includes('private letter'));
+    check('Unpaid moment PIN cannot unlock content (402)', unpaidPin.status === 402 && unpaidPin.data.requiresPayment);
 
-    // 11. Reaction Heart Tap
-    const react = await api(`/api/moments/public/${slug}/react`, { method: 'POST' });
-    check('Heart reaction increments counter', react.status === 200 && react.data.hearts >= 1);
+    const unpaidReaction = await api(`/api/moments/public/${slug}/react`, { method: 'POST' });
+    check('Unpaid moment reactions are blocked (402)', unpaidReaction.status === 402 && unpaidReaction.data.requiresPayment);
 
-    // 12. Server-Side Order & Coin Eligibility Calculation
+    // 10. Server-Side Order & Coin Eligibility Calculation
     const orderCreate = await api('/api/orders/create', {
       method: 'POST',
       token,
       body: {
+        momentId: momentDraft.data.moment.id,
         templateName: 'Midnight Wish 3D Cinema',
         applyCoins: true
       }
@@ -148,7 +148,7 @@ server.listen(PORT, async () => {
     check('Coin discount correctly capped at 20%', orderCreate.data.order.discountINR <= 39.80);
     check('Final payable verified on server', orderCreate.data.order.finalAmountINR === orderCreate.data.order.basePrice - orderCreate.data.order.discountINR);
 
-    // 13. Payment Verification & Moment Publish
+    // 11. Payment Verification & Moment Publish
     const orderId = orderCreate.data.order.id;
     const testSecret = process.env.RAZORPAY_KEY_SECRET;
     const testSig = testSecret
@@ -161,18 +161,35 @@ server.listen(PORT, async () => {
       body: {
         orderId,
         paymentId: 'pay_test_123',
-        signature: testSig,
-        momentData: {
-          recipient: 'Sneha',
-          sender: 'Karan',
-          occasion: 'Love',
-          message: 'Forever and always.',
-          lockMode: 'envelope'
-        }
+        signature: testSig
       }
     });
     check('Payment verified and moment published', paymentVerify.status === 200 && paymentVerify.data.momentSlug);
     check('Share URL generated with unguessable slug', paymentVerify.data.shareUrl.includes('id=m_'));
+
+    // 12. Public PIN-locked moment fetch (message and photos remain hidden)
+    const publicMoment = await api(`/api/moments/public/${slug}`);
+    check('Paid public fetch succeeds', publicMoment.status === 200);
+    check('Sensitive message is NOT exposed before unlock', publicMoment.data.moment.message === undefined);
+    check('Photos are NOT exposed before unlock', publicMoment.data.moment.photos === undefined);
+    check('Lock mode reports locked: true', publicMoment.data.moment.locked === true);
+
+    // 13. Server-Side PIN Verification
+    const wrongPin = await api(`/api/moments/public/${slug}/verify-pin`, {
+      method: 'POST',
+      body: { pin: '9999' }
+    });
+    check('Wrong PIN rejected (401)', wrongPin.status === 401);
+
+    const correctPin = await api(`/api/moments/public/${slug}/verify-pin`, {
+      method: 'POST',
+      body: { pin: '1234' }
+    });
+    check('Correct PIN unlocks secret message & photos', correctPin.status === 200 && correctPin.data.message.includes('private letter'));
+
+    // 14. Reaction Heart Tap
+    const react = await api(`/api/moments/public/${slug}/react`, { method: 'POST' });
+    check('Heart reaction increments counter', react.status === 200 && react.data.hearts >= 1);
 
     console.log(`\nResults: ${passed} / ${total} tests passed.`);
     if (passed === total) {

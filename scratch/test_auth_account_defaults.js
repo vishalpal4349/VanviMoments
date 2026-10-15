@@ -2,6 +2,7 @@ const assert = require('assert');
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
+const vm = require('vm');
 const app = require('../server/server');
 const { Users, getStore, saveStore } = require('../server/db/database');
 const emailService = require('../server/services/email.service');
@@ -129,7 +130,12 @@ async function run() {
   const loginHtml = fs.readFileSync(path.join(__dirname, '..', 'login.html'), 'utf8');
   const signupHtml = fs.readFileSync(path.join(__dirname, '..', 'signup.html'), 'utf8');
   const clientApi = fs.readFileSync(path.join(__dirname, '..', 'js', 'vanvi-api.js'), 'utf8');
+  const googleAuth = fs.readFileSync(path.join(__dirname, '..', 'js', 'vanvi-google-auth.js'), 'utf8');
   const googleAuthSection = (clientApi.split('async googleAuth')[1] || '').split('async forgotPassword')[0];
+  const redirectHelper = clientApi.match(/window\.vanviSafeRedirect = function\(candidate, fallback = 'dashboard\.html'\) \{[\s\S]*?\n  \};/);
+  assert(redirectHelper, 'Shared same-origin redirect helper must be present.');
+  const redirectWindow = { location: { href: 'https://vanvimoments.shop/login.html', origin: 'https://vanvimoments.shop' } };
+  vm.runInNewContext(redirectHelper[0], { window: redirectWindow, URL });
   assert(!loginHtml.includes('|| localStorage.getItem(\'vanvi_last_email\')'), 'Login must not autofill an unconsented legacy email.');
   assert(loginHtml.includes('id="rememberMe" />'), 'Remember-me must be opt-in by default.');
   assert(!signupHtml.includes('+100'), 'Signup must not advertise an uncredited coin bonus.');
@@ -138,6 +144,14 @@ async function run() {
   assert(clientApi.includes("localStorage.removeItem('vanvi_active_pass')"), "Logout must clear another account's cached pass.");
   assert(clientApi.includes("localStorage.removeItem('vanvi_pass_expiry')"), "Logout must clear another account's cached pass expiry.");
   assert(googleAuthSection.includes('syncWalletCache(res.user)'), 'Google sign-in must replace stale wallet and pass data with the signed-in account values.');
+  assert(clientApi.includes('window.vanviSafeRedirect'), 'Auth pages must expose same-origin post-login redirect validation.');
+  assert(loginHtml.includes('window.vanviSafeRedirect(new URLSearchParams(location.search).get(\'redirect\'))'), 'Login must reject external post-auth redirects.');
+  assert(signupHtml.includes('window.vanviSafeRedirect(new URLSearchParams(location.search).get(\'redirect\'))'), 'Signup must reject external post-auth redirects.');
+  assert(!googleAuth.includes('localStorage.getItem(\'vanvi_google_client_id\')'), 'Google sign-in must use the server-verified OAuth client ID, not stale browser state.');
+  assert.strictEqual(redirectWindow.vanviSafeRedirect('/dashboard.html?welcome=1#top'), '/dashboard.html?welcome=1#top', 'Safe redirect preserves same-origin destinations.');
+  assert.strictEqual(redirectWindow.vanviSafeRedirect('https://attacker.example/collect'), 'dashboard.html', 'Safe redirect blocks external destinations.');
+  assert.strictEqual(redirectWindow.vanviSafeRedirect('//attacker.example/collect'), 'dashboard.html', 'Safe redirect blocks protocol-relative destinations.');
+  assert.strictEqual(redirectWindow.vanviSafeRedirect('javascript:alert(1)'), 'dashboard.html', 'Safe redirect blocks script URLs.');
 
   console.log('Auth signup/login/recovery regressions passed.');
 }
