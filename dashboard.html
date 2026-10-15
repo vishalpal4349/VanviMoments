@@ -90,7 +90,7 @@
       if (hubTxt) hubTxt.textContent = 'SPIN';
 
       localStorage.setItem('vanvi_last_spin_time', Date.now());
-      const curCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '120', 10);
+      const curCoins = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
       const newCoins = curCoins + wonCoins;
       localStorage.setItem('vanvi_user_coins', newCoins);
 
@@ -1375,80 +1375,18 @@
 (function() {
   'use strict';
 
-  // 1. Initial Sample Moments (Seed if empty)
-  const SEED_MOMENTS = [
-    {
-      id: 'vm_seed_1',
-      templateId: 'birthday-3d-candle-surprise',
-      title: 'Midnight Birthday Surprise',
-      recipient: 'Vanvi',
-      sender: 'Rahul',
-      occasion: 'Birthday',
-      message: 'Happy Birthday to the most radiant soul! May this year bring you endless laughter, warmth, and all your dreams fulfilled.',
-      photos: [
-        'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&auto=format&fit=crop&q=80'
-      ],
-      musicTrack: 'acoustic-piano',
-      lockMode: 'envelope',
-      pin: '',
-      status: 'Opened',
-      views: 7,
-      hearts: 24,
-      created: Date.now() - (2 * 3600 * 1000),
-      lastOpened: '2 hours ago'
-    },
-    {
-      id: 'vm_seed_2',
-      templateId: 'constellation-love',
-      title: 'Forever Us · Romance Cinema',
-      recipient: 'Sneha',
-      sender: 'Karan',
-      occasion: 'Love',
-      message: 'Every ordinary day feels like poetry when I am with you. Here is to all our unspoken smiles and infinite tomorrows.',
-      photos: [
-        'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&auto=format&fit=crop&q=80'
-      ],
-      musicTrack: 'lofi-heartbeat',
-      lockMode: 'pin',
-      pin: '1402',
-      status: 'Active',
-      views: 5,
-      hearts: 14,
-      created: Date.now() - (28 * 3600 * 1000),
-      lastOpened: '1 day ago'
-    },
-    {
-      id: 'vm_seed_3',
-      templateId: 'golden-anniversary',
-      title: 'Anniversary Memories Letter',
-      recipient: 'Priya & Arjun',
-      sender: 'Family',
-      occasion: 'Anniversary',
-      message: 'Happy 5th Anniversary! You two make love look so effortless and joyful.',
-      photos: [],
-      musicTrack: 'acoustic-piano',
-      lockMode: 'envelope',
-      pin: '',
-      status: 'Draft',
-      views: 0,
-      hearts: 0,
-      created: Date.now() - (3 * 86400 * 1000),
-      lastOpened: 'Not shared yet'
-    }
-  ];
+  // 1. User Moments Store
+  const SEED_MOMENTS = [];
 
-  // 2. Load and Sync Moments
+  // 2. Load and Sync Moments (User-Isolated)
   function getMoments() {
     try {
       const raw = localStorage.getItem('vanvi_user_moments');
-      if (!raw) {
-        localStorage.setItem('vanvi_user_moments', JSON.stringify(SEED_MOMENTS));
-        return SEED_MOMENTS;
-      }
-      return JSON.parse(raw);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
     } catch(e) {
-      return SEED_MOMENTS;
+      return [];
     }
   }
 
@@ -1485,10 +1423,16 @@
     setTimeout(() => vanviToast.classList.remove('show'), 2500);
   }
 
-  // 5. Update Coins & Spin Status
+  // 5. Update Coins & Spin Status (User-Isolated)
   function updateRewardsState() {
-    const coins = parseInt(localStorage.getItem('vanvi_user_coins') || '120', 10);
-    if (dashCoinBalance) dashCoinBalance.textContent = coins;
+    const user = (window.VanviAPI && window.VanviAPI.auth) ? window.VanviAPI.auth.getUser() : null;
+    let coins = 0;
+    if (user && typeof user.coins === 'number') {
+      coins = user.coins;
+    } else {
+      coins = parseInt(localStorage.getItem('vanvi_user_coins') || '0', 10);
+    }
+    if (dashCoinBalance) dashCoinBalance.textContent = coins.toLocaleString('en-IN');
     if (dashCoinValue) dashCoinValue.textContent = `= ₹${(coins / 10).toFixed(2)} savings`;
 
     const lastSpin = parseInt(localStorage.getItem('vanvi_last_spin_time') || localStorage.getItem('vanvi_spin_last_date') || '0', 10);
