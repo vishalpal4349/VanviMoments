@@ -11,6 +11,9 @@ const {
   isEmailConfigured
 } = require('../services/email.service');
 
+// DEBUG flag (include stack traces in responses when not in production)
+const DEBUG = process.env.NODE_ENV !== 'production';
+
 // In-Memory Password Reset OTP Vault (15-min TTL)
 const resetOtpVault = new Map();
 
@@ -23,7 +26,10 @@ function verifyGoogleIdToken(token) {
     if (!token || typeof token !== 'string') return resolve(null);
 
     const googleClientId = process.env.GOOGLE_CLIENT_ID;
-    if (!googleClientId) return resolve(null);
+    if (!googleClientId) {
+      console.warn('[Google Auth] GOOGLE_CLIENT_ID missing from env');
+      return resolve(null);
+    }
 
     // Verify token with Google public tokeninfo endpoint
     const url = `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(token)}`;
@@ -170,7 +176,10 @@ router.post('/signup', authRateLimiter, async (req, res) => {
       }
     });
   } catch (err) {
-    console.error('Signup error:', err);
+    console.error('[AUTH ERROR]', err && err.stack ? err.stack : err);
+    if (DEBUG) {
+      return res.status(500).json({ success: false, error: err.message || 'Internal server error during registration.', stack: err.stack || null });
+    }
     return res.status(500).json({ success: false, error: 'Internal server error during registration.' });
   }
 });
@@ -245,7 +254,10 @@ router.post('/login', authRateLimiter, async (req, res) => {
       }
     });
   } catch (err) {
-    console.error('Login error:', err);
+    console.error('[AUTH ERROR]', err && err.stack ? err.stack : err);
+    if (DEBUG) {
+      return res.status(500).json({ success: false, error: err.message || 'Internal server error during login.', stack: err.stack || null });
+    }
     return res.status(500).json({ success: false, error: 'Internal server error during login.' });
   }
 });
@@ -275,6 +287,10 @@ router.get('/me', requireAuth, async (req, res) => {
       }
     });
   } catch (err) {
+    console.error('[AUTH ERROR]', err && err.stack ? err.stack : err);
+    if (DEBUG) {
+      return res.status(500).json({ success: false, error: err.message || 'Failed to retrieve profile.', stack: err.stack || null });
+    }
     return res.status(500).json({ success: false, error: 'Failed to retrieve profile.' });
   }
 });
@@ -285,6 +301,12 @@ router.get('/me', requireAuth, async (req, res) => {
  */
 router.post('/google', authRateLimiter, async (req, res) => {
   try {
+    // Defensive env check
+    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+      console.error('[AUTH ERROR] Missing Google OAuth config: GOOGLE_CLIENT_ID or GOOGLE_CLIENT_SECRET');
+      return res.status(500).json({ success: false, error: 'Server misconfiguration: Google OAuth is not configured.' });
+    }
+
     let { email, name, googleId, picture, credential, id_token } = req.body;
     const { ip, ua } = getClientMeta(req);
 
@@ -407,7 +429,10 @@ router.post('/google', authRateLimiter, async (req, res) => {
       }
     });
   } catch (err) {
-    console.error('Google auth error:', err);
+    console.error('[AUTH ERROR]', err && err.stack ? err.stack : err);
+    if (DEBUG) {
+      return res.status(500).json({ success: false, error: err.message || 'Failed to process Google sign-in.', stack: err.stack || null });
+    }
     return res.status(500).json({ success: false, error: 'Failed to process Google sign-in.' });
   }
 });
@@ -467,7 +492,10 @@ router.post('/whatsapp', authRateLimiter, async (req, res) => {
       }
     });
   } catch (err) {
-    console.error('WhatsApp auth error:', err);
+    console.error('[AUTH ERROR]', err && err.stack ? err.stack : err);
+    if (DEBUG) {
+      return res.status(500).json({ success: false, error: err.message || 'Failed to process WhatsApp sign-in.', stack: err.stack || null });
+    }
     return res.status(500).json({ success: false, error: 'Failed to process WhatsApp sign-in.' });
   }
 });
@@ -573,7 +601,10 @@ router.post('/forgot-password', authRateLimiter, async (req, res) => {
       message: 'If an account matches this identifier, a verification code will be sent to its registered email.'
     });
   } catch (err) {
-    console.error('Forgot password error:', err);
+    console.error('[AUTH ERROR]', err && err.stack ? err.stack : err);
+    if (DEBUG) {
+      return res.status(500).json({ success: false, error: err.message || 'Failed to process password recovery request.', stack: err.stack || null });
+    }
     return res.status(500).json({ success: false, error: 'Failed to process password recovery request.' });
   }
 });
@@ -615,6 +646,10 @@ router.post('/verify-reset-otp', authRateLimiter, async (req, res) => {
     entry.verified = true;
     return res.json({ success: true, message: 'OTP verified successfully! You may now set a new password.' });
   } catch (err) {
+    console.error('[AUTH ERROR]', err && err.stack ? err.stack : err);
+    if (DEBUG) {
+      return res.status(500).json({ success: false, error: err.message || 'OTP verification failed.', stack: err.stack || null });
+    }
     return res.status(500).json({ success: false, error: 'OTP verification failed.' });
   }
 });
@@ -659,7 +694,10 @@ router.post('/reset-password', authRateLimiter, async (req, res) => {
       message: 'Password successfully updated! You can now sign in with your new password.'
     });
   } catch (err) {
-    console.error('Password reset error:', err);
+    console.error('[AUTH ERROR]', err && err.stack ? err.stack : err);
+    if (DEBUG) {
+      return res.status(500).json({ success: false, error: err.message || 'Failed to update password.', stack: err.stack || null });
+    }
     return res.status(500).json({ success: false, error: 'Failed to update password.' });
   }
 });
